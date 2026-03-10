@@ -12,12 +12,14 @@ import {
   Settings,
   Sparkles,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import { PageHeader } from '../../components/shared/PageHeader';
 import { api } from '../../services/api';
 import { genkitApi } from '../../services/genkit';
 import { exportToPdf } from '../../utils/exportEngine';
+import { useAnalytics } from '@/hooks/useAnalytics';
 
 const stepMotionProps = {
   initial: { opacity: 0, x: 24 },
@@ -27,6 +29,7 @@ const stepMotionProps = {
 };
 
 export function CoverLetterGenerator() {
+  const { track } = useAnalytics();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
 
@@ -109,6 +112,7 @@ export function CoverLetterGenerator() {
   const handleDownloadPdf = async () => {
     try {
       await exportToPdf('cover-letter-content', 'Cover_Letter.pdf');
+      track('document_exported', { type: 'cover_letter', method: 'pdf' });
       toast.success('Cover Letter downloaded as PDF!');
     } catch (error) {
       console.error('Failed to download PDF:', error);
@@ -125,11 +129,17 @@ export function CoverLetterGenerator() {
     setStep(1);
   };
 
+  useEffect(() => {
+    if (step === 4 && generatedLetter.trim()) {
+      track('cover_letter_generated', { style });
+    }
+  }, [step, generatedLetter, style, track]);
+
   return (
     <div className="p-6 md:p-12 max-w-5xl mx-auto animate-in fade-in zoom-in-95 duration-500 ease-spring">
       <PageHeader
         title="Cover Letter Generator"
-        highlightedWord="Workbench"
+        highlightedWord="Builder"
         description="Create role-specific cover letters with clear, guided steps."
       />
 
@@ -416,6 +426,7 @@ export function CoverLetterGenerator() {
                 <Button
                   onClick={() => {
                     navigator.clipboard.writeText(generatedLetter);
+                    track('document_exported', { type: 'cover_letter', method: 'copy' });
                     toast.success('Copied to clipboard');
                   }}
                   aria-label="Copy generated cover letter text"
@@ -423,6 +434,26 @@ export function CoverLetterGenerator() {
                 >
                   <Copy className="w-4 h-4 mr-2" /> Copy Text
                 </Button>
+              </div>
+
+              <div className="rounded-scaffold border border-outline-variant bg-surface-container-high/40 p-4">
+                <p className="text-label-small font-mono uppercase tracking-wider text-on-surface-variant mb-2">
+                  What's next?
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    to={`/analysis${jobDescription ? `?jobDescription=${encodeURIComponent(jobDescription)}` : ''}`}
+                    className="inline-flex items-center rounded-march bg-primary-container text-on-primary-container px-4 py-2 text-sm font-bold"
+                  >
+                    Run ATS check for this role
+                  </Link>
+                  <Link
+                    to="/documents"
+                    className="inline-flex items-center rounded-march border border-outline px-4 py-2 text-sm font-semibold text-on-surface"
+                  >
+                    Save and manage in Documents
+                  </Link>
+                </div>
               </div>
             </motion.div>
           )}

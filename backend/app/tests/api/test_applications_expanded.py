@@ -110,9 +110,18 @@ def test_create_application_success(api_client):
 
 
 def test_get_application_success(api_client):
-    response = api_client.get("/api/applications/app_123")
+    payload = {
+        "jobTitle": "Engineer",
+        "companyName": "AI Corp",
+        "jobDescription": "Standard description that meets the 50 char minimum length requirement."
+        * 2,
+    }
+    res = api_client.post("/api/applications/", json=payload)
+    app_id = res.json()["id"]
+
+    response = api_client.get(f"/api/applications/{app_id}")
     assert response.status_code == status.HTTP_200_OK
-    assert response.json()["id"] == "app_123"
+    assert response.json()["id"] == app_id
 
 
 def test_get_application_not_found(api_client):
@@ -140,12 +149,21 @@ def test_get_all_applications(api_client):
 
 def test_update_application_success(api_client):
     payload = {
+        "jobTitle": "Engineer",
+        "companyName": "AI Corp",
+        "jobDescription": "Standard description that meets the 50 char minimum length requirement."
+        * 2,
+    }
+    res = api_client.post("/api/applications/", json=payload)
+    app_id = res.json()["id"]
+
+    payload_update = {
         "jobTitle": "Senior Engineer",
         "companyName": "AI Corp",
         "jobDescription": "Updated description that also meets the 50 char minimum length requirement."
         * 2,
     }
-    response = api_client.put("/api/applications/app_123", json=payload)
+    response = api_client.put(f"/api/applications/{app_id}", json=payload_update)
     assert response.status_code == status.HTTP_200_OK
     assert response.json()["jobTitle"] == "Senior Engineer"
 
@@ -167,7 +185,16 @@ def test_update_application_not_found(api_client):
 
 
 def test_delete_application_success(api_client):
-    response = api_client.delete("/api/applications/app_123")
+    payload = {
+        "jobTitle": "Engineer",
+        "companyName": "AI Corp",
+        "jobDescription": "Standard description that meets the 50 char minimum length requirement."
+        * 2,
+    }
+    res = api_client.post("/api/applications/", json=payload)
+    app_id = res.json()["id"]
+
+    response = api_client.delete(f"/api/applications/{app_id}")
     assert response.status_code == status.HTTP_204_NO_CONTENT
 
 

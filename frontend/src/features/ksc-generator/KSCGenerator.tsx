@@ -9,6 +9,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PageHeader } from '../../components/shared/PageHeader';
@@ -16,8 +17,10 @@ import { api } from '../../services/api';
 import { genkitApi } from '../../services/genkit';
 import { exportToPdf } from '../../utils/exportEngine';
 import { KrDarkSpring, staggerContainer } from '../../design/tokens/motion-presets';
+import { useAnalytics } from '@/hooks/useAnalytics';
 
 export function KSCGenerator() {
+  const { track } = useAnalytics();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
@@ -67,6 +70,12 @@ export function KSCGenerator() {
     };
     saveDraft();
   }, [criteria, star, step, isInitialLoading]);
+
+  useEffect(() => {
+    if (step === 3 && response.trim()) {
+      track('ksc_generated', { criteria_length: criteria.length });
+    }
+  }, [step, response, criteria, track]);
 
   const handleNext = () => setStep((prev) => prev + 1);
   const handleBack = () => setStep((prev) => prev - 1);
@@ -130,6 +139,7 @@ export function KSCGenerator() {
   const handleDownloadPdf = async () => {
     try {
       await exportToPdf('ksc-response-content', 'KSC_Response.pdf');
+      track('document_exported', { type: 'ksc', method: 'pdf' });
       toast.success('KSC Response downloaded as PDF!');
     } catch (error) {
       console.error('Failed to download PDF:', error);
@@ -163,7 +173,7 @@ export function KSCGenerator() {
     >
       <PageHeader
         title="Key Selection Criteria"
-        highlightedWord="Workbench"
+        highlightedWord="Builder"
         description="Draft structured KSC responses using the STAR method."
       />
 
@@ -423,6 +433,7 @@ export function KSCGenerator() {
                 <Button
                   onClick={() => {
                     navigator.clipboard.writeText(response);
+                    track('document_exported', { type: 'ksc', method: 'copy' });
                     toast.success('Copied to clipboard');
                   }}
                   aria-label="Copy generated KSC response"
@@ -430,6 +441,26 @@ export function KSCGenerator() {
                 >
                   <Copy className="w-4 h-4" /> Copy to Clipboard
                 </Button>
+              </div>
+
+              <div className="rounded-scaffold border border-outline-variant bg-surface-container-high/40 p-4">
+                <p className="text-label-small font-mono uppercase tracking-wider text-on-surface-variant mb-2">
+                  What's next?
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    to="/documents"
+                    className="inline-flex items-center rounded-march bg-primary-container text-on-primary-container px-4 py-2 text-sm font-bold"
+                  >
+                    Save this to Documents
+                  </Link>
+                  <Link
+                    to="/analysis"
+                    className="inline-flex items-center rounded-march border border-outline px-4 py-2 text-sm font-semibold text-on-surface"
+                  >
+                    Run ATS check next
+                  </Link>
+                </div>
               </div>
             </motion.div>
           )}

@@ -3,11 +3,14 @@ import { ApplicationForm } from '@/components/ApplicationForm';
 import { ValidationDashboard } from '@/features/onboarding/components/ValidationDashboard';
 import { OnboardingProgress } from '@/features/onboarding/OnboardingProgress';
 import { useCareerIngestion } from '@/hooks/useCareerIngestion';
+import { useAnalytics } from '@/hooks/useAnalytics';
+import { useUserStore } from '@/stores/userStore';
 import { CareerDatabase } from '@/types/api';
 import { m3Toast } from '@/utils/toast';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CheckCircle, FileText, Fingerprint, Microscope } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // KrDark Assets
 const solidarityTexture =
@@ -32,7 +35,11 @@ type UploadStage = 'idle' | 'uploading' | 'extracting' | 'processing' | 'embeddi
  * ✓ Clinical palette restricted to Charcoal/Paper White/Ink
  */
 export const IngestionPage: React.FC = () => {
+  const navigate = useNavigate();
+  const { track } = useAnalytics();
   const { submitDocuments, updateCareerDatabase, isLoading, error } = useCareerIngestion();
+  const setHasMaster = useUserStore((state) => state.setHasMaster);
+  const setHasCompletedIngestion = useUserStore((state) => state.setHasCompletedIngestion);
   const [careerData, setCareerData] = useState<CareerDatabase | null>(null);
   const [heroData, setHeroData] = useState<{
     layers: any[];
@@ -83,6 +90,7 @@ export const IngestionPage: React.FC = () => {
     if (selectedFiles.length === 0) return;
 
     try {
+      track('resume_ingestion_started', { file_count: selectedFiles.length });
       setUploadStage('uploading');
       setProgress(20);
       await new Promise((resolve) => setTimeout(resolve, 500));
@@ -103,12 +111,17 @@ export const IngestionPage: React.FC = () => {
       setUploadStage('complete');
       setProgress(100);
       setCareerData(result);
+      setHasMaster(true);
+      setHasCompletedIngestion(true);
+      localStorage.setItem('cc_master_status', 'true');
+      localStorage.removeItem('cc_ingestion_skipped');
+      track('resume_ingestion_completed', { file_count: selectedFiles.length });
       m3Toast.success('Ingestion Complete', 'Professional data archived successfully.');
     } catch (err) {
       console.error('Upload failed:', err);
       setUploadStage('idle');
       setProgress(0);
-      m3Toast.error('Ingestion Failed', 'A system fault occurred during extraction.');
+      m3Toast.error('Upload failed', 'We could not process your file. Please try again.');
     }
   };
 
@@ -133,15 +146,15 @@ export const IngestionPage: React.FC = () => {
   const getStageMessage = (): string => {
     switch (uploadStage) {
       case 'uploading':
-        return 'Depositing Payloads...';
+        return 'Uploading file...';
       case 'extracting':
-        return 'Extracting Semantic Identity...';
+        return 'Extracting text...';
       case 'processing':
-        return 'Analyzing Professional Profile...';
+        return 'Analyzing resume...';
       case 'embedding':
-        return 'Mapping Career Vector...';
+        return 'Building profile context...';
       case 'complete':
-        return 'Archive Complete.';
+        return 'Upload complete.';
       default:
         return '';
     }
@@ -187,9 +200,9 @@ export const IngestionPage: React.FC = () => {
         <header className="text-center mb-12">
           <div className="mb-8">
             <OnboardingProgress
-              currentStep={2}
-              totalSteps={3}
-              steps={['Choose field', 'Upload resume', 'Review']}
+              currentStep={4}
+              totalSteps={4}
+              steps={['Welcome', 'Choose field', 'Choose your situation', 'Upload resume']}
             />
           </div>
           <div className="w-24 h-24 bg-ink-gold/5 rounded-megaphone flex items-center justify-center mx-auto mb-6 border border-ink-gold/10 relative">
@@ -197,10 +210,10 @@ export const IngestionPage: React.FC = () => {
             <Microscope className="w-12 h-12 text-ink-gold" />
           </div>
           <h1 className="text-5xl font-display font-bold text-paper-white tracking-tighter uppercase">
-            Deposit Identity
+            Upload Master Resume
           </h1>
           <p className="font-mono text-xs text-concrete-grey-dark mt-3 tracking-[0.3em] uppercase opacity-60">
-            [ PHASE.01: SEMANTIC_ARCHIVAL ]
+            [ STEP 4 OF 4 ]
           </p>
         </header>
 
@@ -211,7 +224,7 @@ export const IngestionPage: React.FC = () => {
             variant="tonal"
             className="mb-8 border-l-4"
           >
-            <span className="font-mono uppercase text-[10px] mr-2">Core Fault:</span> {error}
+            <span className="font-mono uppercase text-[10px] mr-2">Upload issue:</span> {error}
           </Signal>
         )}
 
@@ -234,18 +247,26 @@ export const IngestionPage: React.FC = () => {
           size="lg"
           className="w-full h-20 text-xl font-black rounded-megaphone"
         >
-          {isLoading ? getStageMessage() : 'Initialize Archival'}
+          {isLoading ? getStageMessage() : 'Start Resume Upload'}
         </Pebble>
+        <button
+          onClick={() => {
+            setHasCompletedIngestion(false);
+            navigate('/dashboard');
+          }}
+          className="mt-4 w-full text-xs uppercase tracking-[0.24em] font-mono text-concrete-grey hover:text-ink-gold transition-colors"
+        >
+          I don't have my resume ready — skip for now
+        </button>
 
         {/* KrDark Technical Audit */}
         <div className="mt-12 p-6 bg-asphalt-black/40 rounded-megaphone border border-concrete-grey/10 flex gap-5">
           <Microscope className="w-8 h-8 text-ink-gold/40 shrink-0" />
           <p className="font-primary text-[11px] text-paper-white/50 leading-relaxed italic">
             <strong className="text-paper-white font-mono uppercase tracking-wider not-italic">
-              Compliance Audit:
+              Note:
             </strong>{' '}
-            Professional vectors are extracted via industrial-grade LLM processing. This process
-            mandates time for secure identity archival. Do not terminate session during synthesis.
+            Resume extraction can take up to a minute. Keep this tab open until processing finishes.
           </p>
         </div>
       </Stone>

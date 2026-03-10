@@ -20,9 +20,9 @@ const mainNavItems = [
   { path: '/documents', icon: FileText, label: 'My Documents' },
   { path: '/analysis', icon: BarChart3, label: 'ATS Score & Optimise' },
   { path: '/opportunities', icon: Briefcase, label: 'Job Scout' },
-  { path: '/cover-letter-generator', icon: Sparkles, label: 'Cover Letter Genius' },
-  { path: '/ksc-generator', icon: Inbox, label: 'KSC Generator' },
-  { path: '/asset-library', icon: FolderOpen, label: 'Asset Library' },
+  { path: '/cover-letter-generator', icon: Sparkles, label: 'Cover Letter Workbench' },
+  { path: '/ksc-generator', icon: Inbox, label: 'Key Selection Criteria (KSC)' },
+  { path: '/asset-library', icon: FolderOpen, label: 'Templates' },
 ];
 
 export function Sidebar() {

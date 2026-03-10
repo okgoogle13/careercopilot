@@ -5,16 +5,15 @@ Handles one-shot ingestion of career documents using Genkit flows.
 """
 
 import logging
+from datetime import datetime
 
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
-from sqlalchemy.orm import Session
 
 from app.api.endpoints._shared import collect_uploaded_text, run_endpoint_operation
-from app.core.database import get_db
 from app.core.dependencies import get_current_user
+from app.core.firebase import get_firestore
 from app.genkit_flows.ingestion_flow import ingest_career_history
 from app.models import User
-from app.models.database import MasterVersion
 from app.schemas.career_master import CareerDatabase
 from app.services.profile_persistence import persist_user_profile_snapshot
 
@@ -27,7 +26,6 @@ router = APIRouter()
 async def ingest_career_documents(
     files: list[UploadFile] = File(...),
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db),
 ):
     """Upload career documents and extract a master career database."""
 
@@ -42,27 +40,38 @@ async def ingest_career_documents(
         career_db = ingest_career_history(full_text)
 
         # Persist a versioned master snapshot for fast "has master" checks and quick-apply retrieval.
-        latest_version = (
-            db.query(MasterVersion)
-            .filter(MasterVersion.user_id == current_user.id)
-            .order_by(MasterVersion.version_number.desc())
-            .first()
-        )
-        next_version = (latest_version.version_number + 1) if latest_version else 1
+        firestore_db = get_firestore()
+        col = firestore_db.collection("master_versions")
 
-        db.query(MasterVersion).filter(MasterVersion.user_id == current_user.id).update(
-            {MasterVersion.is_active: False}, synchronize_session=False
+        # In Firestore we manually find the latest and active
+        docs = col.where("user_id", "==", current_user.id).stream()
+        latest_version = 0
+        active_doc_ids = []
+        for doc in docs:
+            d = doc.to_dict()
+            v = d.get("version_number", 0)
+            if v > latest_version:
+                latest_version = v
+            if d.get("is_active"):
+                active_doc_ids.append(doc.id)
+
+        next_version = latest_version + 1
+
+        for doc_id in active_doc_ids:
+            col.document(doc_id).update({"is_active": False})
+
+        new_doc_ref = col.document()
+        new_doc_ref.set(
+            {
+                "id": new_doc_ref.id,
+                "user_id": current_user.id,
+                "version_number": next_version,
+                "is_active": True,
+                "source": "career_ingestion",
+                "content_snapshot": career_db.model_dump(by_alias=True),
+                "updated_at": datetime.utcnow().isoformat(),
+            }
         )
-        db.add(
-            MasterVersion(
-                user_id=current_user.id,
-                version_number=next_version,
-                is_active=True,
-                source="career_ingestion",
-                content_snapshot=career_db.model_dump(by_alias=True),
-            )
-        )
-        db.commit()
 
         await persist_user_profile_snapshot(
             db=None,

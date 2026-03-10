@@ -14,8 +14,7 @@ export interface ApplicationFormProps {
 /**
  * ApplicationForm
  *
- * The "Deposition" station for user history.
- * Features blueprint motifs and gravity-based physics.
+ * Resume upload dropzone.
  */
 export const ApplicationForm: React.FC<ApplicationFormProps> = ({
   onUpload,
@@ -41,7 +40,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
       <div className="absolute inset-0 opacity-[0.06] pointer-events-none bg-[url('/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-018--v1.svg')] z-0" />
 
       <h1 className="text-display-lg font-solidarity-900 text-ink-gold uppercase mb-12 relative z-10">
-        DEPOSIT HISTORY
+        Upload Resume
       </h1>
 
       <motion.div
@@ -61,7 +60,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
           'group cursor-pointer'
         )}
         role="region"
-        aria-label="Document Deposition"
+        aria-label="Resume Upload"
       >
         <AnimatePresence>
           {isVerifying ? (
@@ -73,7 +72,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
             >
               <div className="w-12 h-12 border-4 border-ink-gold border-t-transparent rounded-march animate-spin" />
               <span className="font-jetbrains-mono text-xs uppercase text-ink-gold">
-                Verifying Integrity...
+                Processing file...
               </span>
             </motion.div>
           ) : isSuccess ? (
@@ -83,10 +82,10 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
               className="flex flex-col items-center gap-4"
             >
               <div className="px-6 py-2 border-4 border-smoke-green text-smoke-green font-bold text-2xl uppercase tracking-tighter">
-                VERIFIED
+                READY
               </div>
               <span className="font-mono text-[10px] uppercase tracking-widest text-paper-white/60">
-                History confirmed.
+                File uploaded.
               </span>
             </motion.div>
           ) : (
@@ -106,7 +105,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
               </svg>
               <div className="space-y-2">
                 <p className="font-jetbrains-mono text-sm text-paper-white uppercase tracking-widest">
-                  DROP PDF HERE FOR ANALYSIS
+                  Drop your resume here
                 </p>
                 <p className="text-xs text-blueprint-grey">
                   Accepted: {acceptedFormats.join(', ')}
@@ -122,7 +121,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
                 htmlFor="file-upload"
                 className="mt-4 px-8 py-3 bg-blueprint-grey/20 text-paper-white font-bold uppercase rounded-seed hover:bg-blueprint-grey/40 cursor-pointer transition-colors"
               >
-                CHOOSE FILE
+                Choose file
               </label>
             </div>
           )}
@@ -131,7 +130,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
 
       <div className="mt-12 flex justify-between items-end relative z-10">
         <div className="text-[10px] font-jetbrains-mono text-blueprint-grey/40 uppercase tracking-[0.3em]">
-          Station: Collective_V01
+          Supported formats: PDF, DOC, DOCX
         </div>
         <div className="w-32 h-1 bg-solidarity-red/20 overflow-hidden">
           <motion.div

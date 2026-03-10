@@ -26,6 +26,8 @@ export const API_ENDPOINTS = {
 
   // User Profile (placeholder)
   profile: `${API_BASE_URL}/api/profile`,
+  masterStatus: `${API_BASE_URL}/api/user/master-status`,
+  analyzeJobFromUrl: `${API_BASE_URL}/api/flows/analyze-job-from-url`,
 
   // Health Check
   health: `${API_BASE_URL}/health`,

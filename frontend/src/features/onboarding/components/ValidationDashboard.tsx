@@ -146,7 +146,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
     setLocalData(updated);
     onUpdate(updated);
     addToHistory(updated);
-    m3Toast.success('Refinement Complete', `Applied ${appliedCount} AI conceptual improvements.`);
+    m3Toast.success('Suggestions applied', `Applied ${appliedCount} AI improvements.`);
   };
 
   const handleDownloadJSON = () => {
@@ -155,12 +155,12 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
     const url = URL.createObjectURL(dataBlob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `professional-vector-${new Date().toISOString().split('T')[0]}.json`;
+    link.download = `career-profile-${new Date().toISOString().split('T')[0]}.json`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-    m3Toast.success('Export Secure', 'Your professional vector has been downloaded.');
+    m3Toast.success('Export complete', 'Your career profile has been downloaded.');
   };
 
   return (
@@ -170,11 +170,10 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
         <header className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
           <div>
             <h1 className="text-display font-black text-[var(--sys-color-paperWhite-base)] tracking-tight uppercase">
-              Professional Vector{' '}
-              <span className="text-[var(--sys-color-inkGold-base)]">Audit</span>
+              Career Profile <span className="text-[var(--sys-color-inkGold-base)]">Review</span>
             </h1>
             <p className="text-xl text-[var(--sys-color-concreteGrey-steps-3)] mt-2">
-              Refine and validate the tactical components of your professional DNA.
+              Review and refine extracted resume details before using them.
             </p>
           </div>
 
@@ -258,7 +257,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                 {flaggedAchievements.length + flaggedKSCs.length}
               </span>
               <span className="text-[10px] uppercase tracking-widest text-[var(--sys-color-concreteGrey-steps-3)]">
-                Audit Flags
+                Review Flags
               </span>
             </div>
           </Stone>
@@ -273,12 +272,12 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
           >
             <div className="flex flex-col gap-1">
               <span className="font-bold">
-                Attention Required: {flaggedAchievements.length + flaggedKSCs.length} Tactical
-                Weaknesses Identified.
+                Attention required: {flaggedAchievements.length + flaggedKSCs.length} items need
+                updates.
               </span>
               <span className="text-sm opacity-80">
-                AI auditing has identified entries with insufficient metrics or vague situational
-                context. Refinement is recommended before production use.
+                We found entries with missing metrics or unclear context. Update these before using
+                them in applications.
               </span>
             </div>
           </Signal>
@@ -294,7 +293,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
               <EditableField
-                label="Full Legal Name"
+                label="Full Name"
                 value={localData.Personal_Information.FullName}
                 onSave={(val: string) => {
                   const updated = {
@@ -307,7 +306,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                 }}
               />
               <EditableField
-                label="Strategic Communication Channel (Email)"
+                label="Email Address"
                 value={localData.Personal_Information.Email}
                 onSave={(val: string) => {
                   const updated = {
@@ -339,14 +338,14 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
 
                     <div className="flex justify-between items-center mb-6">
                       <span className="text-[10px] text-[var(--sys-color-concreteGrey-steps-3)] uppercase tracking-widest">
-                        Evidence Node {idx + 1}
+                        Achievement {idx + 1}
                       </span>
                       <StatusChip needsReview={achievement.Needs_Review_Flag} />
                     </div>
 
                     <div className="grid grid-cols-1 gap-4">
                       <EditableField
-                        label="Harvested Raw Evidence"
+                        label="Original Achievement Text"
                         value={achievement.Original_Text}
                         multiline
                         onSave={(val: string) =>
@@ -356,7 +355,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <EditableField
-                          label="Precision Action Verb"
+                          label="Action Verb"
                           value={achievement.Action_Verb}
                           suggestion={achievement.Improvement_Suggestions?.Action_Verb}
                           onSave={(val: string) =>
@@ -364,7 +363,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                           }
                         />
                         <EditableField
-                          label="Quantifiable Metric"
+                          label="Metric"
                           value={achievement.Metric}
                           suggestion={achievement.Improvement_Suggestions?.Metric}
                           onSave={(val: string) =>
@@ -374,7 +373,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                       </div>
 
                       <EditableField
-                        label="Strategic Outcome"
+                        label="Outcome"
                         value={achievement.Outcome}
                         suggestion={achievement.Improvement_Suggestions?.Outcome}
                         multiline
@@ -404,7 +403,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                     <div className="flex justify-between items-start mb-8">
                       <div className="flex-1 mr-4">
                         <span className="text-[10px] text-[var(--sys-color-inkGold-base)] uppercase tracking-widest block mb-2">
-                          Module {idx + 1} Prompt
+                          Criterion {idx + 1}
                         </span>
                         <h4 className="text-lg text-[var(--sys-color-paperWhite-base)] italic">
                           "{ksc.KSC_Prompt}"
@@ -418,7 +417,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                         <BrainCircuit className="w-5 h-5 text-[var(--sys-color-inkGold-base)] shrink-0" />
                         <div className="text-xs text-[var(--sys-color-paperWhite-base)]/80 leading-relaxed">
                           <span className="font-bold text-[var(--sys-color-inkGold-base)] uppercase tracking-tighter block mb-1">
-                            AI Tactical Feedback
+                            AI Feedback
                           </span>
                           {ksc.STAR_Feedback}
                         </div>
@@ -427,7 +426,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
 
                     <div className="space-y-6">
                       <EditableField
-                        label="Situational Architecture (S/T)"
+                        label="Situation and Task (S/T)"
                         value={ksc.Situation}
                         suggestion={ksc.Improvement_Suggestions.Situation}
                         multiline
@@ -435,7 +434,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                       />
 
                       <EditableField
-                        label="Tactical Result (R)"
+                        label="Result (R)"
                         value={ksc.Result}
                         suggestion={ksc.Improvement_Suggestions.Result}
                         multiline
@@ -453,7 +452,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
         <footer className="mt-20 pt-10 border-t border-white/5 flex justify-center pb-20">
           <div className="flex items-center gap-3 px-6 py-3 bg-[var(--sys-color-concreteGrey-base)]/10 text-[var(--sys-color-concreteGrey-base)] rounded-march text-xs uppercase tracking-[0.2em] border border-[var(--sys-color-concreteGrey-base)]/20 shadow-lg">
             <ShieldCheck className="w-4 h-4" />
-            Professional Vector Validated and Production Ready
+            Profile review complete
           </div>
         </footer>
       </div>

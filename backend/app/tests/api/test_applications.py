@@ -11,7 +11,9 @@ def auth_client(client):
     from app.core.dependencies import get_current_user
 
     # Using integer ID as Application model likely expects it for user_id
-    mock_user = SimpleNamespace(id=1, uid="test_uid", email="test@example.com", name="Test User")
+    mock_user = SimpleNamespace(
+        id="test_uid", uid="test_uid", email="test@example.com", name="Test User"
+    )
     client.app.dependency_overrides[get_current_user] = lambda: mock_user
     yield client
 

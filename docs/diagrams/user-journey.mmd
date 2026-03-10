@@ -4,30 +4,36 @@ flowchart TD
     subgraph AUTH["Auth & Onboarding"]
         LANDING[Landing Page /] -->|"Register CTA"| REGISTER[Register /register\nName · Email · Password]
         LANDING -->|"Existing user"| LOGIN[Login /login\nEmail · Password]
-        LOGIN -->|"Auth success"| ONBOARDING
-        REGISTER -->|"Auth success"| ONBOARDING
+        LOGIN -->|"Auth success"| DASH_DECISION
+        REGISTER -->|"Auth success"| WELCOME
+        WELCOME["Welcome /welcome\nValue proposition + Get Started"] --> ONBOARDING
 
-        ONBOARDING["OnboardingPage /onboarding\n'Choosing the Soil'\n9 Domain cards"]
-        ONBOARDING -->|"Domain selected\n→ Fertilize Selection"| INGEST
+        ONBOARDING["OnboardingPage /onboarding\nChoose focus area\n9 Domain cards"]
+        ONBOARDING -->|"Domain selected"| INGEST
+        DASH_DECISION{hasMaster?} -->|No| DASHBOARD
+        DASH_DECISION -->|Yes| DASHBOARD
     end
 
     subgraph INTAKE["Profile & Data Intake"]
-        INGEST["IngestionPage /career/ingest\n'Deposit Identity'\nPDF / DOCX upload"]
+        INGEST["IngestionPage /career/ingest\nBuild Master Resume\nPDF / DOCX upload"]
         INGEST --> STAGE_UP{Upload stage}
         STAGE_UP -->|"uploading → extracting\n→ processing → embedding"| STAGE_COMP
         STAGE_UP -->|"Error / unsupported file"| INGEST_ERR[Error toast\nRetry prompt]
         INGEST_ERR --> INGEST
+        INGEST -->|"Skip for now"| DASHBOARD
         STAGE_COMP["Stage: complete\nValidationDashboard\nReview extracted profile"]
-        STAGE_COMP -->|"Confirm data"| DASHBOARD
+        STAGE_COMP -->|"Confirm data\nset hasMaster=true"| DASHBOARD
         STAGE_COMP -->|"Edit extracted fields"| STAGE_COMP
     end
 
     subgraph HUB["Dashboard Hub"]
-        DASHBOARD["Dashboard /dashboard\n'Solidarity Hub'\nMetrics · Recent Synthesis grid\n3 global action CTAs"]
+        DASHBOARD["Dashboard /dashboard\n'Solidarity Hub'\nBranches on hasMaster status"]
+        DASHBOARD -->|"No master\n🚀 Build Master Resume"| INGEST2[IngestionPage\n/career/ingest]
+        DASHBOARD -->|"Has master\n🎯 Apply Now"| APPLY_QUICK
         DASHBOARD -->|"Deposit KrMotif"| INGEST2[IngestionPage\n/career/ingest]
         DASHBOARD -->|"View Archive"| DOCS
         DASHBOARD -->|"Automated Synthesis"| OPPS
-        DASHBOARD -->|"Generate Artifacts →\n(card CTA)"| ANALYSIS
+        DASHBOARD -->|"Update Master"| INGEST2
     end
 
     subgraph CORE["AI Generation & Iteration"]
@@ -51,6 +57,10 @@ flowchart TD
         KSC --> KSC_S1 --> KSC_S2 --> KSC_S3
 
         OPPS["Opportunities /opportunities\nJob Scout\nAutonomous agent"]
+        APPLY_QUICK["Apply Quick /apply/quick\nURL/JD → analyzeJobFromUrl"]
+        APPLY_QUICK --> FLOW_API[POST /api/flows/analyze-job-from-url\nScrape + chunk match + ATS preview]
+        FLOW_API --> PACK[Export pack\nResume + Cover + KSC]
+        PACK --> TRACKER
         DOCS["Documents /documents\nResumes · Letters · KSC"]
         TRACKER["Application Tracker /tracker\nJob pipeline management"]
         PROFILE["Profile /profile\nUser details · Resume"]
@@ -67,7 +77,7 @@ flowchart TD
     end
 
     subgraph NAV["Sidebar Navigation (always available)"]
-        SIDEBAR["Sidebar\nDashboard · Applications · Documents\nAnalysis · Opportunities\nCover Letter Genius · KSC Generator\nAsset Library · Settings · Profile"]
+        SIDEBAR["Sidebar\nDashboard · Applications · My Documents\nATS Score & Optimise · Job Scout\nCover Letter Workbench · Key Selection Criteria (KSC)\nTemplates · Settings · Profile"]
     end
 
     DASHBOARD --> SIDEBAR
