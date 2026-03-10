@@ -43,7 +43,7 @@ export function AssetLibrary() {
           >
             {/* Icon */}
             <div className="flex items-center justify-center mb-6">
-              <div className="w-16 h-16 rounded-[var(--radius-pebble)] bg-ink-gold/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+              <div className="w-16 h-16 rounded-[var(--radius-march-open)] bg-ink-gold/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
                 <FileText className="w-8 h-8 text-ink-gold" />
               </div>
             </div>

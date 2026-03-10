@@ -39,5 +39,5 @@
 
 - **Context**: Page 6 (Match Badges).
 - **Spec**: Small, [DEPRECATED_STYLE] shape for badges.
-- **Current State**: Uses `radius-pebble` or `rounded-full`.
+- **Current State**: Uses `radius-marchOpen` or `rounded-full`.
 - **Action**: Verify if `radius-seed` exists (it seems to be in `tokens.json` as `8px 4px 10px 6px` - need to verify usage).

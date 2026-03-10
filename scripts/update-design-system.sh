@@ -1,14 +1,13 @@
 #!/bin/bash
 
-# This script validates and builds the design token system.
-# It should be run after the 'design-token-generator' skill
-# has updated 'design-system/tokens.json'.
+# This script validates and builds the Kerala Rage design token system.
+# Source of truth: frontend/src/design/tokens/tokens.json
 #
 # Usage: ./scripts/update-design-system.sh
 
 set -e
 
-echo "🚀 Starting Design System update..."
+echo "🚀 Starting Kerala Rage Design System update..."
 
 # Ensure python3 is available
 if ! command -v python3 &> /dev/null
@@ -25,10 +24,10 @@ then
 fi
 
 
-# Step 1: Validate the new tokens
+# Step 1: Validate the Kerala Rage tokens
 echo ""
-echo "[Step 1/2] Validating design tokens..."
-python3 scripts/validate-design-tokens.py
+echo "[Step 1/2] Validating Kerala Rage tokens..."
+python3 scripts/design-validation/validate-tokens.py
 
 # Check if validation passed
 if [ $? -ne 0 ]; then
@@ -38,15 +37,15 @@ if [ $? -ne 0 ]; then
 fi
 echo "✅ Token validation successful."
 
-# Step 2: Build the frontend assets
+# Step 2: Build the frontend assets using the M3 builder
 echo ""
 echo "[Step 2/2] Building frontend token assets..."
-python3 scripts/build-design-tokens.py
+python3 scripts/build-m3-tokens.py
 
 echo ""
-echo "✨ Design System update complete."
-echo "New assets created:"
-echo "  - frontend/src/styles/design-tokens.css"
-echo "  - design-system/tailwind-token-patch.js"
+echo "✨ Kerala Rage Design System update complete."
+echo "New assets generated:"
+echo "  - frontend/src/design/styles/design-tokens.css"
+echo "  - frontend/tailwind-m3-patch.ts"
 echo ""
-echo "Remember to import 'design-tokens.css' in your app and merge the patch into 'tailwind.config.js'."
+echo "Note: The designer canonical source is: frontend/src/design/tokens/tokens.json"

@@ -273,8 +273,8 @@ CSS:
 .button-primary {
   background-color: var(--sys-color-solidarityRed-base);
   color: var(--sys-color-worker-ash-base);
-  box-shadow: var(--sys-shadow-elevation2Stone);
-  border-radius: var(--sys-shape-radius-pebble);
+  box-shadow: var(--sys-shadow-elevation2Placard);
+  border-radius: var(--sys-shape-radius-marchOpen);
 }
 ```
 

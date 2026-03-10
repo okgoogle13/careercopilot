@@ -131,7 +131,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
                       : 'bg-[var(--sys-color-concreteGrey)]/10 border border-[var(--sys-color-concreteGrey)]'
                   )}
                   style={{
-                    borderRadius: mode === 'KrDark' ? 'var(--shape-pebbleSurge01)' : '2px',
+                    borderRadius: mode === 'KrDark' ? 'var(--shape-marchSurge01)' : '2px',
                   }}
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 25 }}

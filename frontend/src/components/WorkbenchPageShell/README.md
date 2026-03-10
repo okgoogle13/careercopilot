@@ -54,7 +54,7 @@ export interface WorkbenchPageShellProps {
 
 - Color tokens: `--sys-color-charcoalBackground-base`, `--sys-color-inkGold-base`, `--sys-color-paperWhite`, `--sys-color-worker-ash-base`
 - Typography tokens: `--sys-type-font-fraunces`, `--sys-type-font-work-sans`
-- Shape tokens: `--sys-shape-blockRiot03`, `--sys-shape-scaffoldSlab01`, `--sys-shape-substrateTile02`
+- Shape tokens: `--sys-shape-blockRiot03`, `--sys-shape-scaffoldFrame01`, `--sys-shape-substrateTile02`
 - Z layers: `Z-0`, `Z-1`, `Z-2`, `Z-3`
 - Asset slots (present): `auto_kr_solid_005`, `auto_kr_solid_012`, `auto_kr_solid_027`, `auto_kr_solid_022`, `auto_kr_ui_001`, `auto_kr_ui_015`, `auto_kr_ui_027`, `auto_kr_ui_038`, `auto_kr_solid_046`
 

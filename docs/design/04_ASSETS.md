@@ -77,7 +77,7 @@ Shape tokens used as decorative visual elements (not structural UI). All belong 
 | :--- | :--- | :--- | :--- |
 | `shape.blob01` | `--sys-shape-blob01` | Hero frame backgrounds, ambient animation masks | Substrate |
 | `shape.blob02` | `--sys-shape-blob02` | Avatar mask frames, atmospheric background shapes | Substrate |
-| `shape.stone01` | `--sys-shape-stone01` | Large hero canvas shapes, Megaphone backing frame | Core UI |
+| `shape.megaphoneBase01` | `--sys-shape-megaphoneBase01` | Large hero canvas shapes, Megaphone backing frame | Core UI |
 | `sentryAvatar` | `--sys-shape-sentryAvatar` | All user avatars (98%, never 50%) | Utility |
 | `tornEdgeClipPath` | `--sys-shape-tornEdge` | Wheat-paste section breaks, poster bleeds | Decorative |
 

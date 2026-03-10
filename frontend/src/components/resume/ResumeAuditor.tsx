@@ -44,7 +44,7 @@ export const ResumeAuditor: React.FC = () => {
             <button
               key={mode}
               onClick={() => setStrictness(mode)}
-              className={`btn-pebble text-xs px-sm py-xs ${
+              className={`btn-strike text-xs px-sm py-xs ${
                 strictnessMode === mode
                   ? 'bg-ink-gold text-asphalt-black'
                   : 'bg-asphalt-black-light text-concrete-grey-light'
@@ -94,7 +94,7 @@ export const ResumeAuditor: React.FC = () => {
       <button
         onClick={handleAudit}
         disabled={loading || resumeText.length < 100}
-        className={`btn-pebble w-full py-md text-body-bold ${
+        className={`btn-strike w-full py-md text-body-bold ${
           loading || resumeText.length < 100
             ? 'bg-concrete-grey-dark text-concrete-grey cursor-not-allowed'
             : 'bg-ink-gold text-asphalt-black hover:bg-ink-gold-light'

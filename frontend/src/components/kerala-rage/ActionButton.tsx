@@ -79,7 +79,7 @@ export const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProp
         type="button"
         style={{
           fontFamily: 'var(--sys-type-font-work-sans, "Work Sans", sans-serif)',
-          borderRadius: 'var(--shape-pebbleSurge01)', // March archetype asymmetric radius
+          borderRadius: 'var(--shape-marchSurge01)', // March archetype asymmetric radius
           ...variantStyles[variant],
         }}
         className={cn(

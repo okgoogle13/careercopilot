@@ -57,7 +57,7 @@ export interface JarProps {
  *
  * Replaced by March in KR Solidarity v6.0.
  * Archetype was: Jar (simple frame container). Now: March (sequential selection).
- * Shape: shape.block01 (base) → shape.pebble01 (open/active morph)
+ * Shape: shape.block01 (base) → shape.marchOpen01 (open/active morph)
  */
 export function Jar({
   label,

@@ -14,15 +14,15 @@ export interface ManifestoSlabProps extends HTMLMotionProps<'div'> {
 }
 
 /**
- * ManifestoSlab (Cabinet Archetype)
+ * ManifestoSlab (Scaffold Archetype)
  *
- * Kerala Rage kr-solidarity hero section component implementing the Cabinet archetype.
+ * Kerala Rage kr-solidarity hero section component implementing the Scaffold archetype.
  * Structural primitive for high-impact headlines and manifestos.
  *
  * Design Principles:
  * 1. Uses --sys-color-* semantic tokens (never hardcoded colors)
  * 2. Fraunces display typography with variable font axes
- * 3. Minimal border radius (Cabinet archetype is structural)
+ * 3. Minimal border radius (Scaffold archetype is structural)
  * 4. Spring physics with viscous-breeze easing
  * 5. Extreme contrast typography (M3 Expressive standard)
  */
@@ -51,7 +51,7 @@ export const ManifestoSlab: React.FC<ManifestoSlabProps> = ({
       style={{
         backgroundColor: 'var(--sys-color-charcoalBackground-base)',
         borderLeft: '6px solid var(--sys-color-solidarityRed-steps-2)',
-        borderRadius: 'var(--shape-scaffoldSlab01)', // Cabinet archetype minimal structural radius
+        borderRadius: 'var(--shape-scaffoldFrame01)', // Scaffold archetype minimal structural radius
         boxShadow: '0 12px 32px rgba(0, 0, 0, 0.35)',
       }}
       className={cn('p-10 md:p-16 relative overflow-hidden z-20', className)}

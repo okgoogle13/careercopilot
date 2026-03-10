@@ -29,15 +29,15 @@ export const SHAPE_TOKENS = [
   // Core UI — Pill March series (March)
   'pillMarch01',
   'pillMarch01-pressed',
-  // Core UI — Pebble Surge series (March open)
-  'pebbleSurge01',
-  'pebbleSurge01-expanded',
+  // Core UI — March Surge series (March open)
+  'marchSurge01',
+  'marchSurge01-expanded',
   // Core UI — Alert Shard (Strike error/selected)
   'alertShard01',
   'alertShard01-pressed',
-  // Core UI — Scaffold Slab (Scaffold — immutable)
-  'scaffoldSlab01',
-  'scaffoldSlab01-focus',
+  // Core UI — Scaffold Frame (Scaffold — immutable)
+  'scaffoldFrame01',
+  'scaffoldFrame01-focus',
   // Core UI — Megaphone Cut (Megaphone modal)
   'megaphoneCut01',
   'megaphoneCut01-loading',
@@ -82,8 +82,8 @@ export const archetypes = {
     shapes: {
       base: 'pillMarch01', // 9999px full pill (closed)
       pressed: 'pillMarch01-pressed', // pill w/ side notch
-      open: 'pebbleSurge01', // 20px 8px 12px 32px open
-      expanded: 'pebbleSurge01-expanded', // 32px 12px 8px 48px fully open
+      open: 'marchSurge01', // 20px 8px 12px 32px open
+      expanded: 'marchSurge01-expanded', // 32px 12px 8px 48px fully open
     },
     motion: 'dragSettle',
     motionDuration: '800ms',
@@ -108,8 +108,8 @@ export const archetypes = {
   },
   Scaffold: {
     shapes: {
-      base: 'scaffoldSlab01', // 8px 2px 8px 2px — IMMUTABLE
-      focus: 'scaffoldSlab01-focus', // Unchanged — Scaffold invariance
+      base: 'scaffoldFrame01', // 8px 2px 8px 2px — IMMUTABLE
+      focus: 'scaffoldFrame01-focus', // Unchanged — Scaffold invariance
     },
     motion: 'none',
     motionDuration: '0ms',
@@ -165,9 +165,9 @@ export const motionOf = (archetype: ArchetypeName): string => archetypes[archety
  * | blockRiot02        | Strike     | March      | Core UI    |
  * | blockRiot03        | Strike     | —          | Core UI    |
  * | pillMarch01        | March      | Strike     | Core UI    |
- * | pebbleSurge01      | March      | —          | Core UI    |
+ * | marchSurge01       | March      | —          | Core UI    |
  * | alertShard01       | Strike     | Signal     | Core UI    |
- * | scaffoldSlab01     | Scaffold   | —          | Core UI    |
+ * | scaffoldFrame01    | Scaffold   | —          | Core UI    |
  * | megaphoneCut01     | Megaphone  | —          | Core UI    |
  * | placardTorn01      | Placard    | —          | Core UI    |
  * | substrateTile01    | Substrate  | Megaphone  | Decorative |
@@ -187,9 +187,9 @@ export const SHAPE_ARCHETYPE_MAP: Record<
   blockRiot02: { primary: 'Strike', secondary: 'March', tier: 'Core UI' },
   blockRiot03: { primary: 'Strike', tier: 'Core UI' },
   pillMarch01: { primary: 'March', secondary: 'Strike', tier: 'Core UI' },
-  pebbleSurge01: { primary: 'March', tier: 'Core UI' },
+  marchSurge01: { primary: 'March', tier: 'Core UI' },
   alertShard01: { primary: 'Strike', secondary: 'Signal', tier: 'Core UI' },
-  scaffoldSlab01: { primary: 'Scaffold', tier: 'Core UI' },
+  scaffoldFrame01: { primary: 'Scaffold', tier: 'Core UI' },
   megaphoneCut01: { primary: 'Megaphone', tier: 'Core UI' },
   placardTorn01: { primary: 'Placard', tier: 'Core UI' },
   substrateTile01: { primary: 'Substrate', secondary: 'Megaphone', tier: 'Decorative' },

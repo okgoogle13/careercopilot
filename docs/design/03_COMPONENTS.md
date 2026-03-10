@@ -34,7 +34,7 @@ Shape: `shape.blockRiot03` (32px 2px 2px 2px) base → `shape.blockRiot02` (20px
 - **Archetype:** `Placard` — `--shape-placardTorn01` (`48% 52% 58% 42% / 55% 45% 60% 40%`)
 - **Shape Morph:** selected/focused → `--shape-blockRiot02` (`dragSettle` 800ms)
 - **Surface:** `charcoalBackground` with layered grit texture.
-- **Shadow:** Sharp, high-contrast elevation (`--sys-shadow-elevation2Stone`).
+- **Shadow:** Sharp, high-contrast elevation (`--sys-shadow-elevation2Placard`).
 - **Usage:** Opportunity feed, Skill analysis, Kanban items, content framing.
 - **Component files:** `Placard.tsx` (canonical), `SolidarityCard.tsx`, `Stone.tsx` (@deprecated)
 
@@ -61,7 +61,7 @@ Shape: `shape.blockRiot03` (32px 2px 2px 2px) base → `shape.blockRiot02` (20px
 - **Component files:** `ScaffoldInput.tsx` (canonical), `Lens.tsx` (@deprecated)
 
 ### `March` Select (formerly Jar)
-- **Archetype:** `March` — `--shape-blockRiot01` closed → `--shape-pebbleSurge01` open
+- **Archetype:** `March` — `--shape-blockRiot01` closed → `--shape-marchSurge01` open
 - **Shape Morph:** closed `8px 2px 8px 2px` → open `20px 8px 12px 32px` (`dragSettle` 800ms)
 - **Component files:** `March.tsx` (canonical), `Jar.tsx` (@deprecated)
 

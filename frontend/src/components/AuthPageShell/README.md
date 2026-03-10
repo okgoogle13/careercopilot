@@ -58,7 +58,7 @@ export interface AuthPageShellProps {
 
 - Color tokens: `--sys-color-charcoalBackground-base`, `--sys-color-concreteGrey`, `--sys-color-inkGold-base`, `--sys-color-paperWhite`, `--sys-color-signalGreen`, `--sys-color-worker-ash-base`
 - Typography tokens: `--sys-type-font-fraunces`, `--sys-type-font-work-sans`
-- Shape tokens: `--sys-shape-blockRiot01`, `--sys-shape-blockRiot03`, `--sys-shape-placardTorn01`, `--sys-shape-scaffoldSlab01`
+- Shape tokens: `--sys-shape-blockRiot01`, `--sys-shape-blockRiot03`, `--sys-shape-placardTorn01`, `--sys-shape-scaffoldFrame01`
 - Z layers: `Z-0`, `Z-1`, `Z-2`, `Z-3`
 - Asset slots (present): `background`, `background_accent`, `google_icon`, `apple_icon`, `auto_kr_solid_003`, `auto_kr_solid_037`, `auto_kr_ui_009`, `auto_kr_ui_022`, `auto_kr_ui_008`, `auto_kr_solid_031`, `auto_kr_ui_032`, `auto_kr_icon_002`
 

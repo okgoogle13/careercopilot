@@ -57,7 +57,7 @@ export interface SettingsPageShellProps {
 
 - Color tokens: `--sys-color-charcoalBackground-base`, `--sys-color-inkGold-base`, `--sys-color-paperWhite`, `--sys-color-worker-ash-base`
 - Typography tokens: `--sys-type-font-fraunces`, `--sys-type-font-work-sans`
-- Shape tokens: `--sys-shape-blockRiot01`, `--sys-shape-blockRiot03`, `--sys-shape-scaffoldSlab01`
+- Shape tokens: `--sys-shape-blockRiot01`, `--sys-shape-blockRiot03`, `--sys-shape-scaffoldFrame01`
 - Z layers: `Z-1`, `Z-2`, `Z-3`
 - Asset slots (present): `auto_kr_solid_007`, `auto_kr_solid_014`, `auto_kr_solid_029`, `auto_kr_solid_034`, `auto_kr_ui_003`, `auto_kr_ui_019`, `auto_kr_ui_029`, `auto_kr_solid_042`
 

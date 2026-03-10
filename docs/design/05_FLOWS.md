@@ -47,7 +47,7 @@ Key screens annotated with dominant archetype and shape transitions as users mov
 | :--- | :--- | :--- |
 | **Landing / Onboarding** | Substrate (bg) + Strike (CTA) | Substrate `blob02` drift → Strike `block03` slam on tap |
 | **Job Search** | Scaffold (input) + March (filter) | ScaffoldInput static → March morph on open |
-| **Opportunity Feed** | Placard (cards) + Strike (apply) | Placard `slab01` → Strike `block03` on card CTA |
+| **Opportunity Feed** | Placard (cards) + Strike (apply) | Placard `placardBase01` → Strike `block03` on card CTA |
 | **Job Apply Flow** | Strike (submit) → Megaphone (confirm) | Strike `block03` → loading `pill01` → Megaphone slam |
 | **Resume Builder** | Scaffold (inputs) + Placard (sections) | All Scaffold immutable; Placard active morph to `block02` |
 | **Analysis Results** | Placard (tiles) + Strike (actions) | Placard swaps to `block02` on selected state |

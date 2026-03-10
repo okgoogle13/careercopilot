@@ -56,7 +56,7 @@ export interface AnalysisResultsShellProps {
 
 - Color tokens: `--sys-color-charcoalBackground-base`, `--sys-color-inkGold-base`, `--sys-color-paperWhite`, `--sys-color-worker-ash-base`
 - Typography tokens: `--sys-type-font-fraunces`, `--sys-type-font-mono`, `--sys-type-font-work-sans`
-- Shape tokens: `--sys-shape-blockRiot01`, `--sys-shape-blockRiot03`, `--sys-shape-placardTorn01`, `--sys-shape-scaffoldSlab01`
+- Shape tokens: `--sys-shape-blockRiot01`, `--sys-shape-blockRiot03`, `--sys-shape-placardTorn01`, `--sys-shape-scaffoldFrame01`
 - Z layers: `Z-0`, `Z-1`, `Z-2`, `Z-3`
 - Asset slots (present): `auto_kr_solid_002`, `auto_kr_solid_009`, `auto_kr_solid_024`, `auto_kr_solid_006`, `auto_kr_solid_040`, `auto_kr_ui_012`, `auto_kr_ui_011`, `auto_kr_ui_024`, `auto_kr_ui_035`, `auto_kr_solid_043`
 

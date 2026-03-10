@@ -96,7 +96,7 @@ const config: Config = {
         // Replace rounded-2xl → rounded-placard, rounded-xl → rounded-strike, etc.
         strike: 'var(--shape-archetype-strike)', // = blockRiot03: 32px 2px 2px 2px
         march: 'var(--shape-archetype-march)', // = pillMarch01:  9999px
-        scaffold: 'var(--shape-archetype-scaffold)', // = scaffoldSlab01: 8px 2px 8px 2px
+        scaffold: 'var(--shape-archetype-scaffold)', // = scaffoldFrame01: 8px 2px 8px 2px
         placard: 'var(--shape-archetype-placard)', // = placardTorn01: 48% 52% 58% organic
         megaphone: 'var(--shape-archetype-megaphone)', // = megaphoneCut01: 42% 58% 45% organic
         substrate: 'var(--shape-archetype-substrate)', // = substrateTile02: 40% 60% 70%
@@ -105,11 +105,11 @@ const config: Config = {
         sentry: 'var(--shape-sentryAvatar)', // 98% — avatar imperfect circle
         full: '9999px',
         // ─── DEPRECATED (v6.0 compat — use archetype aliases above) ─────
-        pebble: 'var(--shape-pebbleSurge01)',
-        stone: 'var(--shape-megaphoneCut01)',
-        slab: 'var(--shape-placardTorn01)',
+        pebble: 'var(--shape-marchSurge01)',
+        stone: 'var(--shape-megaphoneBase01)',
+        slab: 'var(--shape-placardBase01)',
         tech: 'var(--shape-placardTorn01)',
-        gem: 'var(--shape-pebbleSurge01)',
+        gem: 'var(--shape-marchSurge01)',
       },
       boxShadow: {
         rest: 'var(--shadow-rest)',

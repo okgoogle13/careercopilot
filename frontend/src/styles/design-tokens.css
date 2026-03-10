@@ -19,118 +19,14 @@
   --sys-color-stencilYellow-base: #f6e748;
   --sys-color-worker-ash-base: #daf6b3;
 
-  /* ================================================================
-   * KR Solidarity v6.1 — Shape Token Custom Properties
-   * All shape tokens emit as --shape-{name}
-   * Use shapeVar() / shapeOf() from archetypes.ts in React.
-   * NO circles. NO 50%. NO uniform 4-corner radius.
-   * ================================================================ */
-
-  /* Radius Scale */
-  --shape-radius-none: 0;
-  --shape-radius-xs: 2px;
-  --shape-radius-sm: 4px;
-  --shape-radius-md: 8px;
-  --shape-radius-lg: 12px;
-  --shape-radius-xl: 20px;
-  --shape-radius-xxl: 32px;
-  --shape-radius-xxxl: 48px;
-  --shape-radius-full: 9999px;
-
-  /* Block Riot Series — Strike + Scaffold */
-  --shape-blockRiot01: 8px 2px 8px 2px;
-  --shape-blockRiot01-pressed: 12px 0 8px 20px;
-  --shape-blockRiot02: 20px 4px 12px 2px;
-  --shape-blockRiot03: 32px 2px 2px 2px;
-  --shape-blockRiot03-pressed: 20px 4px 12px 2px;
-  --shape-blockRiot03-loading: 9999px;
-
-  /* Pill March Series — March + Strike pill */
-  --shape-pillMarch01: 9999px;
-  --shape-pillMarch01-pressed: 9999px 8px 9999px 8px;
-
-  /* Pebble Surge Series — March open morph */
-  --shape-pebbleSurge01: 20px 8px 12px 32px;
-  --shape-pebbleSurge01-expanded: 32px 12px 8px 48px;
-
-  /* Alert Shard Series — Strike error/selected */
-  --shape-alertShard01: 32px 2px 2px 32px;
-  --shape-alertShard01-pressed: 20px 2px 2px 20px;
-
-  /* Scaffold Slab Series — Scaffold (immutable) */
-  --shape-scaffoldSlab01: 8px 2px 8px 2px;
-  --shape-scaffoldSlab01-focus: 8px 2px 8px 2px;
-
-  /* Megaphone Cut Series — Megaphone modal */
-  --shape-megaphoneCut01: 42% 58% 45% 55% / 48% 62% 38% 52%;
-  --shape-megaphoneCut01-loading: 48% 52% 58% 42% / 55% 45% 60% 40%;
-
-  /* Placard Torn Series — Placard content containers */
-  --shape-placardTorn01: 48% 52% 58% 42% / 55% 45% 60% 40%;
-  --shape-placardTorn01-selected: 20px 4px 12px 2px;
-
-  /* Substrate Tile Series — Substrate/hero only (DECORATIVE) */
-  --shape-substrateTile01: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  --shape-substrateTile01-hover: 70% 30% 40% 60% / 50% 60% 40% 50%;
-  --shape-substrateTile02: 40% 60% 70% 30% / 40% 50% 60% 50%;
-
-  /* Tension Shapes (selective/high-drama) */
-  --shape-tearBanner01: 0 48px 0 0;
-  --shape-brickWall01: 0;
-
-  /* Utility Shapes */
-  --shape-sentryAvatar: 98%;
-  --shape-tornEdgeClipPath: polygon(
-    0% 10px,
-    5% 0px,
-    10% 8px,
-    15% 2px,
-    20% 6px,
-    25% 0px,
-    30% 8px,
-    35% 2px,
-    40% 6px,
-    45% 0px,
-    50% 8px,
-    55% 2px,
-    60% 6px,
-    65% 0px,
-    70% 8px,
-    75% 2px,
-    80% 6px,
-    85% 0px,
-    90% 8px,
-    95% 2px,
-    100% 6px,
-    100% 100%,
-    0% 100%
-  );
-
-  /* ================================================================
-   * Archetype Tailwind aliases — referenced in tailwind.config.js
-   * borderRadius: { strike, march, scaffold, placard, megaphone, substrate }
-   * ================================================================ */
-  --shape-archetype-strike: var(--shape-blockRiot03);
-  --shape-archetype-march: var(--shape-pillMarch01);
-  --shape-archetype-scaffold: var(--shape-scaffoldSlab01);
-  --shape-archetype-placard: var(--shape-placardTorn01);
-  --shape-archetype-megaphone: var(--shape-megaphoneCut01);
-  --shape-archetype-substrate: var(--shape-substrateTile02);
-
-  /* ================================================================
-   * DEPRECATED — DO NOT USE IN NEW CODE
-   * v6.0 sys.shape.block* / pill* / blob* compat
-   * ================================================================ */
-  --sys-shape-block01: var(--shape-blockRiot01);
-  --sys-shape-block02: var(--shape-blockRiot02);
-  --sys-shape-block03: var(--shape-blockRiot03);
-  --sys-shape-pill01: var(--shape-pillMarch01);
-  --sys-shape-pebble01: var(--shape-pebbleSurge01);
-  --sys-shape-stone01: var(--shape-megaphoneCut01);
-  --sys-shape-slab01: var(--shape-placardTorn01);
-  --sys-shape-blob01: var(--shape-substrateTile01);
-  --sys-shape-blob02: var(--shape-substrateTile02);
-  --radius-stone: var(--shape-megaphoneCut01);
-  --radius-slab: var(--shape-placardTorn01);
-  --radius-pebble: var(--shape-pebbleSurge01);
+  /* One-release legacy archetype aliases */
+  --shape-pebbleSurge01: var(--shape-marchSurge01);
+  --shape-pebbleSurge01-expanded: var(--shape-marchSurge01-expanded);
+  --shape-scaffoldSlab01: var(--shape-scaffoldFrame01);
+  --shape-scaffoldSlab01-focus: var(--shape-scaffoldFrame01-focus);
+  --radius-pebble: var(--shape-radius-marchOpen);
+  --radius-stone: var(--shape-radius-megaphoneBase);
+  --radius-slab: var(--shape-radius-placardBase);
+  --sys-shadow-elevation1Pebble: var(--sys-shadow-elevation1Strike);
+  --sys-shadow-elevation2Stone: var(--sys-shadow-elevation2Placard);
 }

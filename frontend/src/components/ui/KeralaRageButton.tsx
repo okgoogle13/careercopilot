@@ -16,7 +16,7 @@ export interface KeralaRageButtonProps extends Omit<HTMLMotionProps<'button'>, '
  * KeralaRageButton - Production-ready button for Kerala Rage kr-solidarity.
  *
  * Compliant with SOLIDARITY_SPEC_V5.md:
- * - Uses --sys-shape-radius-pebble
+ * - Uses --sys-shape-radius-marchOpen
  * - Uses --sys-color-* tokens
  * - Mandatory dark-substrate alignment
  * - M3 Expressive motion spring
@@ -53,14 +53,14 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
         text: 'text-[var(--sys-color-charcoalBackground-base)]',
         hover: 'hover:opacity-90',
         shadow:
-          'shadow-[var(--sys-shadow-elevation1Pebble)] hover:shadow-[var(--sys-shadow-elevation3HoverLift)]',
+          'shadow-[var(--sys-shadow-elevation1Strike)] hover:shadow-[var(--sys-shadow-elevation3HoverLift)]',
         border: 'border-none',
       },
       secondary: {
         background: 'bg-[var(--sys-color-charcoalBackground-steps-2)]',
         text: 'text-[var(--sys-color-worker-ash-base)]',
         hover: 'hover:bg-[var(--sys-color-charcoalBackground-steps-3)]',
-        shadow: 'shadow-[var(--sys-shadow-elevation1Pebble)]',
+        shadow: 'shadow-[var(--sys-shadow-elevation1Strike)]',
         border: 'border border-[var(--sys-color-worker-ash-base)]/20',
       },
       tertiary: {
@@ -92,7 +92,7 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
 
           // Size/Radius
           sizeClasses[size],
-          'rounded-[var(--sys-shape-radius-pebble)]',
+          'rounded-[var(--sys-shape-radius-marchOpen)]',
 
           // Variant colors
           styles.background,

@@ -20,7 +20,7 @@ export const Vessel: React.FC<VesselProps> = ({
 
   return (
     <div
-      className={`border border-[var(--sys-color-concreteGrey-base)]/20 rounded-[var(--radius-pebble)] overflow-hidden mb-4 bg-white/5 transition-all duration-300 ${className}`}
+      className={`border border-[var(--sys-color-concreteGrey-base)]/20 rounded-[var(--radius-march-open)] overflow-hidden mb-4 bg-white/5 transition-all duration-300 ${className}`}
     >
       <button
         onClick={() => setIsExpanded(!isExpanded)}
