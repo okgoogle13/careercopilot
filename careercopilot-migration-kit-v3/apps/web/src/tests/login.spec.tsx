@@ -12,10 +12,10 @@ describe('LoginScreen', () => {
     );
 
     expect(
-      screen.getByRole('heading', { name: /step back into the worker portal/i }),
+      screen.getByRole('heading', { name: /return to the collective portal/i }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('button', { name: /open registration/i }),
+      screen.getByRole('button', { name: /create account \(step 1 of 2\)/i }),
     ).toBeInTheDocument();
   });
 
@@ -28,10 +28,10 @@ describe('LoginScreen', () => {
       </MemoryRouter>,
     );
 
-    await user.click(screen.getByRole('button', { name: /enter the workspace/i }));
+    await user.click(screen.getByRole('button', { name: /login → access dashboard/i }));
 
     expect(screen.getByRole('status')).toHaveTextContent(
-      /add both email and password to continue/i,
+      /add your email and password to move forward/i,
     );
   });
 });

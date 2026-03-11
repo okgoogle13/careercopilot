@@ -1,0 +1,36 @@
+{
+  "benchmarkId": "profile-benchmark-v1",
+  "benchmarkClass": "profile_screen",
+  "route": "/profile",
+  "sourceFile": "apps/web/src/screens/ProfileScreen.tsx",
+  "wireframeArtifact": "docs/design-system/wireframes/profile.json",
+  "screenshots": [
+    "frontend/docs/design/generated/previews/run-2026-03-11_05-07-58-311/profile.png",
+    "frontend/docs/design/generated/previews/run-2026-03-11_05-07-58-311/profile-error.png"
+  ],
+  "derivedFrom": [
+    "frontend/src/features/style-guide/StyleGuide.tsx",
+    "frontend/src/features/style-guide/M3ExpressiveComponents.tsx",
+    "docs/design-system/benchmarks/style-guide-rubric-v1/rubric.md"
+  ],
+  "expectedScore": {
+    "overallMin": 90,
+    "dimensionFloors": {
+      "typography": 10,
+      "shapes": 10,
+      "colour": 10,
+      "motion": 6,
+      "m3_expressive": 10,
+      "asset_usage": 12,
+      "proportions": 8,
+      "anti_slop": 6,
+      "ux_copy": 8
+    }
+  },
+  "notes": [
+    "Profile benchmark calibrates migration-audit for the first profile-oriented migrated route.",
+    "The benchmark inherits shared expectations from the style-guide rubric and the existing auth/dashboard migration shell.",
+    "Visual evidence was captured on March 11, 2026 before final migration-audit.",
+    "Local evidence capture uses the runtime feature-flag override path, for example `/profile?ff=profile`."
+  ]
+}

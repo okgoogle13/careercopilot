@@ -7,6 +7,7 @@
 - Generated output must not include hardcoded hex, rgb, or hsl color literals
 - Generated output must not include banned legacy aliases or deprecated archetype names
 - The generator refuses to overwrite existing screens such as `DashboardScreen.tsx`
+- Generated output is `draft-generated` only and is not audit-ready or user-review-ready until benchmark and copy gates are complete
 
 ## Correct Manual Verification
 
@@ -50,3 +51,4 @@ This collision check remains valid even after dashboard migration:
 - Do not expect feature-complete dashboard generation in this sprint
 - Do not expect `@careercopilot/design-tokens` or `@careercopilot/ui` imports in generated files
 - Do not use `npm run dev` as proof that a new generated route is active unless routing has been explicitly wired for that route
+- Do not use a generated screen as screenshot or benchmark evidence until its copy has been cleared and its route benchmark has been assigned

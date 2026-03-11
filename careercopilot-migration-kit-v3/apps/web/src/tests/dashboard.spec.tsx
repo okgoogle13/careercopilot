@@ -12,7 +12,7 @@ describe('DashboardScreen', () => {
     );
 
     expect(
-      screen.getByRole('heading', { name: /hold the full search in one view/i }),
+      screen.getByRole('heading', { name: /hold the movement in one view/i }),
     ).toBeInTheDocument();
     expect(screen.getByText(/applications in motion/i)).toBeInTheDocument();
     expect(
@@ -32,7 +32,7 @@ describe('DashboardScreen', () => {
     await user.click(screen.getByRole('button', { name: /open draft queue/i }));
 
     expect(screen.getByRole('status')).toHaveTextContent(
-      /secondary dashboard workflow placeholder acknowledged/i,
+      /draft queue opened\. revision-ready materials are now in focus/i,
     );
   });
 });

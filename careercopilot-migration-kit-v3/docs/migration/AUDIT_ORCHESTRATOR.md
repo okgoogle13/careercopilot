@@ -13,6 +13,8 @@ It distinguishes:
 - asset correctness
 - UX copy quality
 
+This audit is the final gate, not the first place quality issues should surface. Benchmark definition, route copy clearance, and screenshot readiness should already be complete before a route enters full audit.
+
 ## Benchmark
 
 - Benchmark id: `auth-benchmark-v1`
@@ -21,6 +23,8 @@ It distinguishes:
 - Benchmark id: `dashboard-benchmark-v1`
 - Benchmark class: dashboard screen
 - Intended use: `/dashboard` quality comparison
+
+Benchmarks may include a `derivedFrom` field to show which style-guide sources informed the benchmark rubric. This documents benchmark provenance without treating the style guide page itself as the audit target.
 
 The benchmark is the gold standard for:
 - shapes
@@ -56,6 +60,19 @@ asset_context?: object
 route_context?: object
 copy_context?: object
 ```
+
+## Pre-Audit Gates
+
+Before running full audit for a route, confirm:
+1. `benchmark-defined`
+2. `copy-cleared`
+3. `visual-ready`
+
+If these are missing, resolve them before treating audit output as release-readiness evidence.
+
+The `copy-cleared` gate is enforced proactively through:
+- `npm run audit:copy`
+- route-specific copy guides
 
 ## Screenshot Acquisition
 
@@ -122,6 +139,8 @@ For `/dashboard` specifically:
 When multiple targets are being audited, use `sprint-coordinator` as the control plane.
 
 Parallel child tasks:
+- benchmark and wireframe verification
+- route copy review
 - route resolution
 - screenshot acquisition
 - migration audit

@@ -1,0 +1,55 @@
+{
+  "migration_visual_audit": {
+    "target": "/profile",
+    "status": "pass",
+    "score": 90,
+    "benchmark_id": "profile-benchmark-v1",
+    "benchmark_score": 90,
+    "dimension_scores": {
+      "typography": 10,
+      "shapes": 10,
+      "colour": 10,
+      "motion": 6,
+      "m3_expressive": 10,
+      "asset_usage": 12,
+      "proportions": 8,
+      "anti_slop": 6,
+      "ux_copy": 8
+    },
+    "dimension_deltas": {
+      "typography": 0,
+      "shapes": 0,
+      "colour": 0,
+      "motion": 0,
+      "m3_expressive": 0,
+      "asset_usage": 0,
+      "proportions": 0,
+      "anti_slop": 0,
+      "ux_copy": 0
+    },
+    "below_benchmark_reasons": [],
+    "evidence_acquisition": {
+      "mode": "provided",
+      "playwright_spec": "frontend/tests/e2e/visual/visual-audit.spec.ts",
+      "base_url": "migration-kit-local",
+      "run_directory": "frontend/docs/design/generated/previews/run-2026-03-11_05-07-58-311",
+      "captured_targets": [
+        "profile",
+        "profile-error"
+      ]
+    },
+    "violations": [],
+    "summary": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "recommendations": [
+      "Profile benchmark calibrates migration-audit for the first profile-oriented migrated route.",
+      "The benchmark inherits shared expectations from the style-guide rubric and the existing auth/dashboard migration shell.",
+      "Visual evidence was captured on March 11, 2026 before final migration-audit.",
+      "Local evidence capture uses the runtime feature-flag override path, for example `/profile?ff=profile`."
+    ]
+  }
+}

@@ -12,10 +12,10 @@ describe('RegisterScreen', () => {
     );
 
     expect(
-      screen.getByRole('heading', { name: /claim your worker portal/i }),
+      screen.getByRole('heading', { name: /claim your collective portal/i }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('button', { name: /back to sign in/i }),
+      screen.getByRole('button', { name: /back to login/i }),
     ).toBeInTheDocument();
   });
 
@@ -28,7 +28,7 @@ describe('RegisterScreen', () => {
       </MemoryRouter>,
     );
 
-    await user.click(screen.getByRole('button', { name: /create the worker account/i }));
+    await user.click(screen.getByRole('button', { name: /create account \(step 1 of 2\)/i }));
 
     expect(screen.getByRole('status')).toHaveTextContent(
       /complete every field to create your account/i,
