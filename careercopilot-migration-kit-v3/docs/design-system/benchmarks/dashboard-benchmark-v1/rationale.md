@@ -2,6 +2,12 @@
 
 This benchmark defines the current gold standard for the migrated `/dashboard` route.
 
+## Derived From
+
+- `frontend/src/features/style-guide/StyleGuide.tsx`
+- `frontend/src/features/style-guide/M3ExpressiveComponents.tsx`
+- `docs/design-system/benchmarks/style-guide-rubric-v1/rubric.md`
+
 ## Why it passes
 
 - Typography: the strike, placard title, and card values create a clear three-tier hierarchy without drifting into generic UI styling.

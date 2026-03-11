@@ -149,16 +149,22 @@ test("copy audit excludes legacy feature files", () => {
   assert.equal(legacyScanned.length, 0, "Legacy files should not be scanned for copy violations");
 });
 
-// Test that ProfileScreen (generator placeholder) is excluded
-test("copy audit excludes generated placeholder screens", () => {
+// Regression: migrated ProfileScreen is scanned and remains clean
+test("regression: ProfileScreen passes all copy rules", () => {
   const kitRoot = path.resolve(__dirname, "..");
   const report = runAudit({ rootDir: kitRoot, mode: "copy" });
 
-  const profileScanned = report.results.filter(
+  const profileResults = report.results.filter(
     (r) => r.filePath.includes("ProfileScreen.tsx") && r.scanned
   );
+  const profileViolations = profileResults.flatMap((r) => r.violations);
 
-  assert.equal(profileScanned.length, 0, "Generated placeholder screens should be excluded from copy audit");
+  assert.equal(profileResults.length, 1, "ProfileScreen should be scanned by copy audit");
+  assert.equal(
+    profileViolations.length,
+    0,
+    `ProfileScreen should have 0 violations, found: ${JSON.stringify(profileViolations, null, 2)}`
+  );
 });
 
 // Test audit mode coverage

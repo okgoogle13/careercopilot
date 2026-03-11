@@ -1,446 +1,458 @@
-# Component Migration Handover Strategy for Gemini 3 Pro (Antigravity IDE)
-
-**Prepared:** 2026-01-28
-**Token Budget:** Optimized for MCP server coordination
-**Target Execution:** Gemini 3 Pro via Antigravity IDE
-
----
-
-## 1. PRE-HANDOVER SETUP (Claude Code)
-
-### Context Preservation (Minimal Token Footprint)
-Create a single consolidated task file instead of verbose documentation:
-
-**File:** `.claude/tasks/component-migration.json`
-```json
-{
-  "task_id": "component-migration-2026q1",
-  "migration_status": {
-    "total_components": 46,
-    "migrated": 8,
-    "legacy": 9,
-    "unaddressed": 29,
-    "completion_pct": 17
-  },
-  "critical_path": [
-    {
-      "priority": 1,
-      "component": "Lens",
-      "old_name": "M3TextField",
-      "new_name": "TextField",
-      "blocking": "form adoption",
-      "files": ["frontend/src/components/inputs/Lens.tsx"],
-      "dependencies": ["Pebble (button)", "token-system"]
-    },
-    {
-      "priority": 2,
-      "component": "Mark",
-      "old_name": "M3Checkbox",
-      "new_name": "Checkbox",
-      "blocking": "KeywordTagGroup, bulk actions",
-      "files": ["frontend/src/components/inputs/Mark.tsx"],
-      "dependencies": ["Pebble"]
-    },
-    {
-      "priority": 3,
-      "component": "Jar",
-      "old_name": "M3Select",
-      "new_name": "Select",
-      "blocking": "form flows",
-      "files": ["frontend/src/components/inputs/Jar.tsx"],
-      "dependencies": ["token-system"]
-    },
-    {
-      "priority": 4,
-      "component": "Valve",
-      "old_name": "M3Switch",
-      "new_name": "Switch",
-      "blocking": "settings/toggles",
-      "files": ["frontend/src/components/inputs/Valve.tsx"],
-      "dependencies": ["token-system"]
-    },
-    {
-      "priority": 5,
-      "component": "Signal",
-      "old_name": "M3Alert",
-      "new_name": "Alert",
-      "blocking": "error states",
-      "files": ["frontend/src/components/feedback/Signal.tsx"],
-      "dependencies": ["token-system"]
-    },
-    {
-      "priority": 6,
-      "component": "Cabinet",
-      "old_name": "M3Modal",
-      "new_name": "Modal",
-      "blocking": "document review workflow",
-      "files": ["frontend/src/components/containers/Cabinet.tsx"],
-      "dependencies": ["Stone (card)"]
-    }
-  ],
-  "cleanup_tasks": [
-    {
-      "task": "delete_duplicates",
-      "files": [
-        "frontend/src/components/core/Pebble 2.tsx",
-        "frontend/src/components/core/Stone 2.tsx",
-        "frontend/src/components/inputs/Jar 2.tsx",
-        "frontend/src/components/inputs/Mark 2.tsx",
-        "frontend/src/components/inputs/Valve 2.tsx",
-        "frontend/src/components/inputs/Lens 2.tsx",
-        "frontend/src/components/feedback/Signal 2.tsx",
-        "frontend/src/components/content/Seed 2.tsx",
-        "frontend/src/components/containers/Cabinet 2.tsx",
-        "frontend/src/components/containers/Vessel 2.tsx"
-      ],
-      "count": 10,
-      "priority": "phase_1"
-    },
-    {
-      "task": "consolidate_core_ui",
-      "description": "Consolidate Pebble and Stone (core vs ui folders)",
-      "decision_needed": "which folder is canonical",
-      "priority": "phase_1"
-    }
-  ],
-  "token_system_reference": {
-    "location": "frontend/src/design-tokens/kerala-rage-tokens.ts",
-    "required_imports": [
-      "ncFontDisplay",
-      "ncFontBody",
-      "ncColorBotanical",
-      "ncShapeOrganic"
-    ],
-    "migration_checklist": [
-      "Replace M3 semantic colors with [DEPRECATED_STYLE] palette",
-      "Replace Inter/Roboto with kerala-rage typography stack",
-      "Apply [DEPRECATED_STYLE] border-radius (asymmetric)",
-      "Remove Material 3 elevation system, use kerala-rage shadow tokens"
-    ]
-  },
-  "handover_receiver": {
-    "agent": "gemini-3-pro",
-    "ide": "antigravity",
-    "transport": "mcp-server",
-    "expected_flow": "autonomous-execution"
-  }
-}
-```
-
----
-
-## 2. MCP SERVER SETUP
-
-### A. Filesystem MCP Configuration
-**Purpose:** Gemini 3 Pro can read component files directly without repeated context
-
-**Query Pattern (Efficient):**
-```
-GET /workspace/frontend/src/components/<category>/<Component>.tsx
-→ Returns file content only (no verbose paths)
-```
-
-**Benefit:** 1 request = full component context (vs. multiple grep/cat calls)
-
----
-
-### B. Git MCP Configuration
-**Purpose:** Track which files changed, which are safe to edit
-
-**Query Pattern:**
-```
-GET /git/status --components-only
-GET /git/diff frontend/src/components/
-→ Returns only modified component files
-```
-
-**Benefit:** Gemini knows what's staged vs. dirty; avoids conflicting edits
-
----
-
-### C. Testing MCP Configuration
-**Purpose:** Validate migrations don't break existing tests
-
-**Query Pattern:**
-```
-POST /test/run --components --filter=<ComponentName>
-→ Returns PASS/FAIL only (no verbose output)
-```
-
-**Benefit:** Fast feedback loop; Gemini can iterate on fix
-
----
-
-## 3. HANDOVER MANIFEST (Paste to Gemini 3 Pro)
-
-**Format:** Single structured prompt (token-efficient)
-
-```markdown
-# Component Migration Autonomous Task - Gemini 3 Pro
-
-## Context (Read from .claude/tasks/component-migration.json)
-- 46 total frontend components
-- 17% migrated (8/46)
-- 20% explicit Material 3 legacy (9/46)
-- 63% unaddressed (29/46)
-
-## Your Task
-Execute component migrations in sequence. Stop and report blockers.
-
-### PHASE 1: CLEANUP (2 tasks, ~30 min)
-1. Delete 10 duplicate *2.tsx files (use git rm)
-2. Consolidate Pebble/Stone (decide: keep /core, delete /ui versions)
-
-**Success Criteria:** Git diff shows 10 deletions, 0 duplicates remain
-
-### PHASE 2: CRITICAL INPUTS (6 components, ~2 hours)
-Migrate in order: Lens → Mark → Jar → Valve → Signal → Cabinet
-
-**For Each Component:**
-1. Read current file (Filesystem MCP)
-2. Extract Material 3 patterns:
-   - M3 color tokens (e.g., `colors.blue.500`)
-   - M3 typography (e.g., `fontFamily: 'Roboto'`)
-   - M3 elevation (e.g., `boxShadow: elevation[4]`)
-3. Replace with kerala-rage:
-   - [DEPRECATED_STYLE] colors (from `ncColorBotanical`)
-   - Typography stack (Lora, Crimson Text, Fraunces)
-   - [DEPRECATED_STYLE] shapes (asymmetric border-radius)
-4. Run component tests (Testing MCP)
-5. Commit with message: `refactor(components): migrate <Name> to kerala-rage`
-
-**Success Criteria:** Each component passes tests, git history shows clean commits
-
-### PHASE 3: AUDIT & REPORT
-1. Run `npm run lint` on migrated components
-2. Run full test suite: `npm test frontend/src/components/`
-3. Report back with:
-   - ✅ Components migrated
-   - ❌ Components blocked (with reason)
-   - 🔄 Components in progress
-   - 📊 New completion percentage
-
-## Execution Mode
-- **Autonomous:** Execute without asking permission
-- **Error Handling:** If test fails, auto-revert commit and report reason
-- **Blockers:** If blocked, halt phase and report to Claude Code
-- **Checkpoints:** After each phase, commit and report status
-
-## Success Definition
-- All 6 critical components migrated
-- All tests passing
-- No duplicate files
-- No broken imports
-- Git history is clean (one commit per component)
-
-## Failure Recovery
-If blocked:
-1. Document exact error (test name, file location, error message)
-2. Revert changes: `git revert <commit>`
-3. Report to Claude Code with:
-   - Component name
-   - Error type (test failure, import error, token missing)
-   - Last successful commit
-```
-
----
-
-## 4. TOKEN EFFICIENCY STRATEGIES
-
-### Strategy A: Query Batching (Reduce MCP Calls)
-Instead of:
-```
-GET /file/Lens.tsx
-GET /file/Mark.tsx
-GET /file/Jar.tsx
-```
-
-Use single query:
-```
-GET /files?paths=["Lens.tsx", "Mark.tsx", "Jar.tsx"]
-→ Returns all 3 in one call
-```
-
-**Savings:** 3 requests → 1 request (66% reduction)
-
----
-
-### Strategy B: Incremental Commits (Reduce Context Bloat)
-After each component migration:
-```bash
-git commit -m "refactor(components): migrate <Name> to kerala-rage"
-```
-
-This allows Gemini 3 Pro to:
-- Clear working directory after each step
-- Reference only previous commit (smaller diff context)
-- Avoid accumulating file state in memory
-
-**Savings:** No context accumulation across 6 components
-
----
-
-### Strategy C: Direct File References (Not Grep)
-Instead of searching:
-```bash
-grep -r "M3Color" frontend/src/components/
-```
-
-Use direct paths from task manifest:
-```
-frontend/src/components/inputs/Lens.tsx
-frontend/src/components/inputs/Mark.tsx
-...
-```
-
-**Savings:** 0 search overhead, direct file reads
-
----
-
-### Strategy D: Structured Test Output
-Configure test runner to output JSON:
-```bash
-npm test -- --json --outputFile=test-results.json
-# Gemini reads JSON, not verbose terminal output
-```
-
-**Savings:** Structured data < verbose text (80% reduction per test)
-
----
-
-## 5. MCP SERVER ENDPOINT CONFIGURATION
-
-Add to `claude-code.config.json`:
-
-```json
-{
-  "mcp_servers": {
-    "filesystem": {
-      "command": "node",
-      "args": ["mcp-servers/filesystem.js"],
-      "env": {
-        "ROOT_PATH": "/Users/okgoogle13/Projects/careercopilot",
-        "BATCH_READS": true,
-        "RESPONSE_FORMAT": "compact"
-      }
-    },
-    "git": {
-      "command": "node",
-      "args": ["mcp-servers/git.js"],
-      "env": {
-        "REPO_PATH": "/Users/okgoogle13/Projects/careercopilot",
-        "FILTER": "components-only",
-        "DIFF_FORMAT": "compact"
-      }
-    },
-    "testing": {
-      "command": "node",
-      "args": ["mcp-servers/testing.js"],
-      "env": {
-        "REPO_PATH": "/Users/okgoogle13/Projects/careercopilot",
-        "OUTPUT_FORMAT": "json",
-        "VERBOSE": false
-      }
-    }
-  }
-}
-```
-
----
-
-## 6. HANDOVER CHECKLIST
-
-**Before Handing Off to Gemini 3 Pro:**
-
-- [ ] Task manifest saved: `.claude/tasks/component-migration.json`
-- [ ] MCP server endpoints configured
-- [ ] Git is clean (no dirty working directory)
-- [ ] All tests passing before migration
-- [ ] Backup branch created: `git checkout -b backup/main`
-- [ ] Token system documentation accessible to Gemini
-- [ ] Gemini has read access to:
-  - `frontend/src/components/*`
-  - `frontend/src/design-tokens/*`
-  - `.claude/tasks/component-migration.json`
-
----
-
-## 7. MONITORING & HANDBACK
-
-### Real-Time Monitoring
-```bash
-# Watch Gemini's progress
-git log --oneline | head -20
-
-# Check test status
-npm test frontend/src/components/ --watch
-```
-
-### Handback Trigger
-When Gemini reports:
-- ✅ Phase 1 cleanup complete
-- ✅ Phase 2 all 6 components migrated
-- ✅ Phase 3 tests passing
-
-Then:
-1. Pull latest changes
-2. Run full test suite locally
-3. Run linting
-4. Create PR with Gemini's commits
-5. Deploy to staging for visual audit (via `kerala-rage-visual-audit`)
-
----
-
-## 8. POST-MIGRATION (Back to Claude Code)
-
-After Gemini 3 Pro completes phases 1-3:
-
-**Phase 4 (Visual Validation via Claude Code):**
-```bash
-# Take screenshots of migrated components
-# Run kerala-rage-visual-audit on each
-# Check typography, colors, spacing against standards
-```
-
-**Phase 5 (Shared Components):**
-- Audit remaining 11 shared/legacy components
-- Prioritize by usage (most-used first)
-- Repeat migration cycle
-
----
-
-## 9. ROLLBACK PLAN
-
-If migration fails mid-way:
-
-```bash
-# Option 1: Revert to backup branch
-git checkout backup/main
-
-# Option 2: Revert to specific commit
-git revert <commit-sha>
-
-# Report to Gemini: restart from last successful phase
-```
-
----
-
-## Token Efficiency Summary
-
-| Strategy | Savings |
-|----------|---------|
-| Batch MCP queries | 66% fewer requests |
-| Incremental commits | No context bloat |
-| Direct file references | 0 search overhead |
-| JSON test output | 80% smaller output |
-| Task manifest (vs docs) | 90% smaller context |
-| **Total Estimated Savings** | **~70% token reduction** |
-
-Expected token cost for 6-component migration:
-- Claude Code (planning): ~10K tokens
-- Gemini 3 Pro (execution): ~15K tokens (vs. 50K without optimization)
-- **Total: ~25K tokens** (vs. 60K unoptimized)
-
----
-
-**Ready to handoff.** Paste the "Handover Manifest" directly to Gemini 3 Pro in Antigravity IDE.
+# Component Migration Handover Strategy
+
+  Use `/project-manager` as the top-
+  level orchestration frame, `/
+  sprint-coordinator` for the next
+  sprint board, and the migration-kit
+  workflow docs as the source of
+  truth.
+
+  Project: `careercopilot-migration-
+  kit-v3`
+  Objective: continue the phased `/
+  features` -> `/screens` migration
+  with benchmark-first, copy-cleared,
+  visual-ready gates. Do not treat
+  reactive audit as the primary
+  discovery mechanism anymore.
+
+  Executive Summary
+  - The migration kit is stable and
+  passing.
+  - Current migrated routes in the
+  kit:
+    - `/login`
+    - `/register`
+    - `/dashboard`
+  - All three are:
+    - `benchmark-defined`
+    - `copy-cleared`
+    - `visual-ready`
+    - `migrated-ready`
+  - All three still preserve legacy
+  fallback through `RouteGate` with
+  default flags set to `false`.
+  - A proactive copy gate now exists
+  and is wired into `verify`:
+    - `npm run audit:copy`
+  - The migration process has been
+  hardened so generated scaffolds are
+  not route-ready until they pass
+  benchmark and copy gates.
+
+  Source of truth
+  - Tracker:
+    - `careercopilot-migration-kit-
+  v3/docs/migration/
+  MIGRATION_TRACKER.md`
+  - Plan:
+    - `careercopilot-migration-kit-
+  v3/docs/migration/PR_PLAN.md`
+  - Guardrails:
+    - `careercopilot-migration-kit-
+  v3/docs/migration/
+  MIGRATION_GUARDRAILS.md`
+  - Audit flow:
+    - `careercopilot-migration-kit-
+  v3/docs/migration/
+  AUDIT_ORCHESTRATOR.md`
+
+  Current route-processing map
+
+  A. Routes already processed in
+  migration kit
+  These are the only routed
+  migration-kit slices currently
+  implemented and audit-ready.
+
+  1. `/login`
+  - Parent app route:
+    - `frontend/src/App.tsx` -> `/
+  login` -> `Login`
+  - Migration-kit route:
+    - `careercopilot-migration-kit-
+  v3/apps/web/src/router/
+  ScreensRouter.tsx`
+  - Legacy fallback:
+    - `careercopilot-migration-kit-
+  v3/apps/web/src/features/
+  LoginLegacy.tsx`
+  - Migrated screen:
+    - `careercopilot-migration-kit-
+  v3/apps/web/src/screens/
+  LoginScreen.tsx`
+  - Benchmark:
+    - `auth-benchmark-v1`
+  - State:
+    - fully processed in kit
+    - copy-cleared
+    - audit-ready
+
+  2. `/register`
+  - Parent app route:
+    - `frontend/src/App.tsx` -> `/
+  register` -> `Register`
+  - Migration-kit route:
+    - `careercopilot-migration-kit-
+  v3/apps/web/src/router/
+  ScreensRouter.tsx`
+  - Legacy fallback:
+    - `careercopilot-migration-kit-
+  v3/apps/web/src/features/
+  RegisterLegacy.tsx`
+  - Migrated screen:
+    - `careercopilot-migration-kit-
+  v3/apps/web/src/screens/
+  RegisterScreen.tsx`
+  - Benchmark:
+    - `auth-benchmark-v1`
+  - State:
+    - fully processed in kit
+    - copy-cleared
+    - audit-ready
+
+  3. `/dashboard`
+  - Parent app route:
+    - `frontend/src/App.tsx` -> `/
+  dashboard` -> `Dashboard`
+  - Migration-kit route:
+    - `careercopilot-migration-kit-
+  v3/apps/web/src/router/
+  ScreensRouter.tsx`
+  - Legacy fallback:
+    - `careercopilot-migration-kit-
+  v3/apps/web/src/features/
+  DashboardLegacy.tsx`
+  - Migrated screen:
+    - `careercopilot-migration-kit-
+  v3/apps/web/src/screens/
+  DashboardScreen.tsx`
+  - Benchmark:
+    - `dashboard-benchmark-v1`
+  - State:
+    - fully processed in kit
+    - copy-cleared
+    - audit-ready
+
+  B. Route draft already present in
+  kit but NOT processed
+  4. `/profile`
+  - Parent app route:
+    - `frontend/src/App.tsx` -> `/
+  profile` -> `ProfileView`
+  - Migration-kit screen draft:
+    - `careercopilot-migration-kit-
+  v3/apps/web/src/screens/
+  ProfileScreen.tsx`
+  - Current state:
+    - draft-generated only
+    - not routed in kit
+    - not benchmark-defined
+    - not copy-cleared
+    - not visual-ready
+    - intentionally excluded from the
+  new proactive copy gate as a
+  generated draft
+  - This is the strongest candidate
+  for the next real route migration
+  if you want to extend the kit.
+
+  C. Parent-app public routes not yet
+  modeled in migration kit
+  These exist in `frontend/src/
+  App.tsx` but have no migration-kit
+  routing or benchmark bundle yet.
+
+  5. `/`
+  - parent app uses `LandingPage`
+  - kit currently redirects `/` -> `/
+  login`
+  - decision needed: keep as
+  redirect-only in kit, or eventually
+  model landing migration
+
+  6. `/design-sidekick`
+  - utility/design route
+  - probably out of first-wave
+  migration scope unless the kit
+  expands into design tools
+
+  7. `/style-guide`
+  - style-guide route
+  - not a migration target itself; it
+  is rubric source material
+
+  8. `/kr/landing`
+  9. `/kr/auth`
+  10. `/kr/onboarding`
+  11. `/kr/analysis`
+  12. `/kr/dashboard`
+  - KR showcase/demo routes
+  - likely reference surfaces, not
+  immediate migration-kit production
+  route targets
+  - should not be scheduled ahead of
+  product routes unless you
+  explicitly want a KR showcase
+  sprint
+
+  D. Parent-app protected routes not
+  yet modeled in migration kit
+  These are the remaining product
+  routes that would need migration-
+  kit processing if the kit expands
+  beyond auth + dashboard.
+
+  13. `/onboarding`
+  14. `/welcome`
+  15. `/tracker`
+  16. `/documents`
+  17. `/analysis`
+  18. `/opportunities`
+  19. `/ksc-generator`
+  20. `/cover-letter-generator`
+  21. `/settings`
+  22. `/profile`
+  23. `/asset-library`
+  24. `/career/ingest`
+  25. `/job-queue`
+  26. `/apply/quick`
+  27. `/test-tokens`
+
+  Current recommended migration queue
+  Use `/project-manager` to frame
+  these as phases, not as one flat
+  backlog.
+
+  Phase 1: quality hardening on
+  already-processed routes
+  - `/login`
+  - `/register`
+  - `/dashboard`
+  Goal:
+  - strengthen typography, asset
+  posture, visual polish, and
+  screenshot evidence
+  Reason:
+  - these three are the benchmark-
+  bearing routes and should define
+  the migration standard before
+  scaling out
+
+  Phase 2: first new route promotion
+  from draft to real migration
+  - `/profile`
+  Goal:
+  - promote from `draft-generated`
+  to:
+    - `benchmark-defined`
+    - `copy-cleared`
+    - `visual-ready`
+    - then routed behind `RouteGate`
+  Reason:
+  - a draft already exists, so it is
+  the lowest-friction next real route
+
+  Phase 3: core protected workflow
+  routes
+  Recommended order:
+  1. `/onboarding`
+  2. `/welcome`
+  3. `/documents`
+  4. `/analysis`
+  5. `/tracker`
+  6. `/career/ingest`
+  7. `/job-queue`
+  Reason:
+  - these routes sit closest to the
+  auth/dashboard path and core user
+  workflow
+
+  Phase 4: specialist productivity
+  routes
+  Recommended order:
+  1. `/ksc-generator`
+  2. `/cover-letter-generator`
+  3. `/opportunities`
+  4. `/apply/quick`
+  Reason:
+  - these are feature-heavy and
+  should inherit stabilized migration
+  patterns from earlier workflow
+  routes
+
+  Phase 5: secondary/support routes
+  Recommended order:
+  1. `/settings`
+  2. `/asset-library`
+  3. `/test-tokens`
+  Reason:
+  - lower-priority or support
+  surfaces
+  - should not lead the migration
+  cadence
+
+  Phase 6: non-product or reference
+  routes
+  - `/design-sidekick`
+  - `/style-guide`
+  - `/kr/landing`
+  - `/kr/auth`
+  - `/kr/onboarding`
+  - `/kr/analysis`
+  - `/kr/dashboard`
+  Reason:
+  - treat as a separate decision, not
+  as part of the main product
+  migration queue
+
+  Current migration-kit workflow
+  rules
+  Every new route must move through:
+  1. `draft-generated`
+  2. `benchmark-defined`
+  3. `copy-cleared`
+  4. `visual-ready`
+  5. `migrated-ready`
+
+  Do not skip these gates.
+  Do not treat generated screens as
+  review-ready.
+  Do not use reactive audit as the
+  first place to discover copy or
+  tone problems.
+
+  Current benchmarks
+  - Auth routes:
+    - `careercopilot-migration-kit-
+  v3/docs/design-system/benchmarks/
+  auth-benchmark-v1/benchmark.json`
+  - Dashboard route:
+    - `careercopilot-migration-kit-
+  v3/docs/design-system/benchmarks/
+  dashboard-benchmark-v1/
+  benchmark.json`
+  - Shared rubric:
+    - `careercopilot-migration-kit-
+  v3/docs/design-system/benchmarks/
+  style-guide-rubric-v1/rubric.md`
+
+  Current proactive gates
+  - `npm run audit:copy`
+  - `npm run audit:legacy`
+  - `npm run design-audit`
+  - `npm run verify`
+
+  Recommended next sprint using `/
+  sprint-coordinator`
+  Sprint objective:
+  - lock visual quality on the three
+  processed routes
+  - decide and prepare the next real
+  route promotion
+
+  Milestone A: benchmark and visual
+  hardening
+  Targets:
+  - `/login`
+  - `/register`
+  - `/dashboard`
+  Tasks:
+  - run `asset-placement-strategy`
+  - run `kerala-rage-typography-
+  strategy`
+  - run `m3-visual-audit`
+  - refresh screenshots if visuals
+  change
+  Exit criteria:
+  - all three routes remain
+  benchmark-valid and visually
+  stronger than current baseline
+
+  Milestone B: next-route promotion
+  planning
+  Primary candidate:
+  - `/profile`
+  Tasks:
+  - define benchmark id
+  - create copy guide
+  - decide whether `/profile`
+  deserves immediate migration or
+  should be deferred behind `/
+  onboarding`
+  Exit criteria:
+  - one clear next route selected
+  with benchmark-first plan
+
+  Milestone C: route backlog mapping
+  Tasks:
+  - categorize the remaining parent-
+  app routes into:
+    - core workflow
+    - specialist productivity
+    - support
+    - reference/demo
+  - produce a migration sequence and
+  dependency map
+  Exit criteria:
+  - no ambiguity about which route
+  comes after the next selected
+  candidate
+
+  Default recommendation
+  - First: visual hardening on `/
+  login`, `/register`, `/dashboard`
+  - Second: decide between `/profile`
+  and `/onboarding` as the next real
+  migration target
+  - Recommended default: `/profile`
+  if the goal is extending the
+  migration pattern cheaply
+  - Recommended default: `/
+  onboarding` if the goal is moving
+  deeper into core user journey
+
+  Commands and signals
+  From `careercopilot-migration-kit-
+  v3`:
+  - `npm run lint`
+  - `npm run type-check`
+  - `npm run test`
+  - `npm run audit:copy -- --json`
+  - `npm run audit:legacy -- --json`
+  - `npm run design-audit -- --json`
+  - `npm run verify`
+
+  Current status signal
+  - `npm run verify` passes
+  - `npm run audit:copy` passes
+  - `npm run audit:legacy` passes
+  - only non-blocking issue remains
+  the React Router v7 future-flag
+  warnings during Vitest
+
+  What I want from you
+  Using `/project-manager`:
+  - produce a project snapshot that
+  explicitly maps all 27 parent-app
+  routes into:
+    - already processed in kit
+    - draft in kit
+    - queued for migration
+    - reference/demo/out of current
+  scope
+
+  Using `/sprint-coordinator`:
+  - produce a sprint board for the
+  next sprint with:
+    - Milestone A: visual hardening
+    - Milestone B: next-route
+  promotion decision
+    - Milestone C: backlog mapping
+  - include owners, dependencies,
+  readiness scoring, and blocker
+  handling
+
+  Then recommend the next
+  implementation packet with a single
+  primary target route.

@@ -48,7 +48,7 @@ describe('RouteGate', () => {
     );
 
     expect(
-      screen.getByRole('heading', { name: /claim your worker portal/i }),
+      screen.getByRole('heading', { name: /claim your collective portal/i }),
     ).toBeInTheDocument();
   });
 
@@ -70,7 +70,73 @@ describe('RouteGate', () => {
     );
 
     expect(
-      screen.getByRole('heading', { name: /hold the full search in one view/i }),
+      screen.getByRole('heading', { name: /hold the movement in one view/i }),
+    ).toBeInTheDocument();
+  });
+
+  it('keeps /profile on the legacy implementation by default', () => {
+    render(
+      <MemoryRouter initialEntries={['/profile']}>
+        <AppRoutes />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByText(/profile legacy placeholder/i)).toBeInTheDocument();
+  });
+
+  it('switches /profile to the migrated screen when the flag is enabled', () => {
+    render(
+      <MemoryRouter initialEntries={['/profile']}>
+        <AppRoutes initialFlags={{ profile: true }} />
+      </MemoryRouter>,
+    );
+
+    expect(
+      screen.getByRole('heading', { name: /shape your movement profile/i }),
+    ).toBeInTheDocument();
+  });
+
+  it('keeps /onboarding on the legacy implementation by default', () => {
+    render(
+      <MemoryRouter initialEntries={['/onboarding']}>
+        <AppRoutes />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByText(/onboarding legacy placeholder/i)).toBeInTheDocument();
+  });
+
+  it('switches /onboarding to the migrated screen when the flag is enabled', () => {
+    render(
+      <MemoryRouter initialEntries={['/onboarding']}>
+        <AppRoutes initialFlags={{ onboarding: true }} />
+      </MemoryRouter>,
+    );
+
+    expect(
+      screen.getByRole('heading', { name: /choose the route pressure point/i }),
+    ).toBeInTheDocument();
+  });
+
+  it('keeps /welcome on the legacy implementation by default', () => {
+    render(
+      <MemoryRouter initialEntries={['/welcome']}>
+        <AppRoutes />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByText(/welcome legacy placeholder/i)).toBeInTheDocument();
+  });
+
+  it('switches /welcome to the migrated screen when the flag is enabled', () => {
+    render(
+      <MemoryRouter initialEntries={['/welcome']}>
+        <AppRoutes initialFlags={{ welcome: true }} />
+      </MemoryRouter>,
+    );
+
+    expect(
+      screen.getByRole('heading', { name: /bring your application into view/i }),
     ).toBeInTheDocument();
   });
 });

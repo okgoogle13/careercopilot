@@ -40,7 +40,8 @@
 }
 
 .login-panel,
-.placeholder-screen {
+.placeholder-screen,
+.journey-screen {
   display: grid;
   gap: var(--sys-spacing-lg);
   max-width: 48rem;
@@ -115,7 +116,8 @@
 }
 
 .strike__copy,
-.placeholder-screen p {
+.placeholder-screen p,
+.journey-screen p {
   color: var(--sys-color-worker-ash-base);
   font-size: var(--sys-type-scale-subhead);
   line-height: 1.2;
@@ -182,7 +184,8 @@
 }
 
 .placard__title,
-.placeholder-screen h1 {
+.placeholder-screen h1,
+.journey-screen h1 {
   color: var(--sys-color-paperWhite-base);
   font-family: var(--sys-type-fontFamilies-display);
   font-size: clamp(var(--sys-type-scale-headline), 5vw, var(--sys-type-scale-display));
@@ -467,7 +470,8 @@
 
   .auth-strike .strike__copy,
   .placard__title,
-  .placeholder-screen h1 {
+  .placeholder-screen h1,
+  .journey-screen h1 {
     max-width: none;
   }
 

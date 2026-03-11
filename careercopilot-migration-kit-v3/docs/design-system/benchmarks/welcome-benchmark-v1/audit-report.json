@@ -1,0 +1,32 @@
+{
+  "migration_visual_audit": {
+    "target": "/welcome",
+    "status": "visual-ready",
+    "score": null,
+    "benchmark_id": "welcome-benchmark-v1",
+    "benchmark_score": null,
+    "dimension_scores": {},
+    "dimension_deltas": {},
+    "below_benchmark_reasons": [],
+    "evidence_acquisition": {
+      "mode": "playwright-captured",
+      "playwright_spec": "frontend/tests/e2e/visual/visual-audit.spec.ts",
+      "base_url": "migration-kit-local",
+      "run_directory": "frontend/docs/design/generated/previews/run-2026-03-11_07-02-27-280",
+      "captured_targets": [
+        "welcome",
+        "welcome-action"
+      ]
+    },
+    "violations": [],
+    "summary": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "recommendations": [
+      "Run migration-audit against the completed benchmark bundle to determine whether /welcome can advance from visual-ready to migrated-ready."
+    ]
+  }
+}

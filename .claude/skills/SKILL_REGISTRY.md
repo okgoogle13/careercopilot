@@ -5,37 +5,37 @@ _Last updated: 2026-03-10_
 ## Design System Audits
 
 ### /migration-audit
-**Skill**: `migration-audit`  
-**Purpose**: Run complete migration-kit quality audit with benchmarked follow-ons.  
-**Usage**: `/migration-audit /login [--audit-mode full|code_only|visual_only|benchmark_only]`  
+**Skill**: `migration-audit`
+**Purpose**: Run complete migration-kit quality audit with benchmarked follow-ons.
+**Usage**: `/migration-audit /login [--audit-mode full|code_only|visual_only|benchmark_only]`
 **Aliases**: `/audit-migration`, `/ma`
 
 ### /visual-audit
-**Skill**: `m3-visual-audit`  
-**Purpose**: Audit UI screenshots against KR Solidarity M3 Expressive standards.  
-**Usage**: `/visual-audit screenshot.png [--component ComponentName]`  
+**Skill**: `m3-visual-audit`
+**Purpose**: Audit UI screenshots against KR Solidarity M3 Expressive standards.
+**Usage**: `/visual-audit screenshot.png [--component ComponentName]`
 **Aliases**: `/m3-audit`, `/audit-visual`
 
 ### /brand-check
-**Skill**: `kerala-rage-brand-enforcer`  
-**Purpose**: Enforce KR Solidarity brand compliance across code and design artifacts.  
-**Usage**: `/brand-check frontend/src [--min-score 95]`  
+**Skill**: `kerala-rage-brand-enforcer`
+**Purpose**: Enforce KR Solidarity brand compliance across code and design artifacts.
+**Usage**: `/brand-check frontend/src [--min-score 95]`
 **Aliases**: `/enforce-brand`, `/kr-check`
 
 ### /typo-check
-**Skill**: `kerala-rage-typography-strategy`  
-**Purpose**: Audit typography implementation and KR Solidarity stack usage.  
-**Usage**: `/typo-check LoginScreen.tsx`  
+**Skill**: `kerala-rage-typography-strategy`
+**Purpose**: Audit typography implementation and KR Solidarity stack usage.
+**Usage**: `/typo-check LoginScreen.tsx`
 **Aliases**: `/typography-audit`, `/font-check`
 
 ### /copy-review
-**Skill**: `ux-copy-writer`  
-**Purpose**: Generate or review UX microcopy for clarity, tone, and accessibility.  
-**Usage**: `/copy-review LoginButton.tsx` or `/copy-review --generate "Error message..."`  
+**Skill**: `ux-copy-writer`
+**Purpose**: Generate or review UX microcopy for clarity, tone, and accessibility.
+**Usage**: `/copy-review LoginButton.tsx` or `/copy-review --generate "Error message..."`
 **Aliases**: `/audit-copy`, `/ux-copy`
 
 ## Summary
-- Active skills: **71** (promoted migration-audit as canonical; kept migration-audit-orchestrator as a compatibility wrapper)
+- Active skills: **73** (promoted migration-audit as canonical; kept migration-audit-orchestrator as a compatibility wrapper)
 - Manifest v6.0.0 — 87 assets (PNG + SVG), all validated via KR Solidarity Canon ✅
 - Backend Coverage: **Module-Saturation Approach** — 10 modules (95% target), 53+ test specs ready
 - Design Docs: **Streamlined to 5 Core Docs** for faster iteration and AI-driven implementation
@@ -163,6 +163,12 @@ node scripts/kr/generate-hero-registry.mjs # → public/assets/...hero-registry.
 |---|---|---|
 | migration-audit | .claude/skills/migration-audit | Canonical audit entrypoint for migration-kit routes. Orchestrates code, token, asset, visual, typography, anti-slop, and UX-copy audits with benchmark scoring and executable follow-ons. |
 | migration-audit-orchestrator | .claude/skills/migration-audit-orchestrator | Internal compatibility wrapper that redirects older references to `migration-audit`. |
+
+### Process Skills
+| Skill | Directory | Description |
+|---|---|---|
+| executing-plans | .claude/skills/executing-plans | Execute an existing implementation plan with explicit review, verification, and blocker escalation. |
+| writing-plans | .claude/skills/writing-plans | Turn an approved spec into a detailed, executable implementation plan before coding starts. |
 
 ### Design System & Asset Skills
 | Skill | Directory | Description |

@@ -1,5 +1,6 @@
 import {
   auditFile,
+  auditCopyFile,
   auditLegacyFile,
   collectAuditTargets,
   DEFAULT_EXCLUDE_GLOBS,
@@ -60,7 +61,11 @@ export function runAudit(partialOptions: Partial<AuditOptions>): AuditReport {
 
   const targets = collectAuditTargets(options);
   const results = targets.map((filePath: string) =>
-    options.mode === 'legacy' ? auditLegacyFile(filePath) : auditFile(filePath),
+    options.mode === 'legacy'
+      ? auditLegacyFile(filePath)
+      : options.mode === 'copy'
+        ? auditCopyFile(filePath)
+        : auditFile(filePath),
   );
 
   return {
@@ -75,6 +80,12 @@ export function runAudit(partialOptions: Partial<AuditOptions>): AuditReport {
 }
 
 export { formatHumanReport, formatJsonReport } from './reporter.js';
+export {
+  MIGRATION_DIMENSIONS,
+  resolveBenchmark,
+  runMigrationAudit,
+  writeMigrationAuditReport,
+} from './migrationAudit.js';
 export type {
   AuditOptions,
   AuditReport,

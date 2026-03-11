@@ -1,0 +1,297 @@
+{
+  "config": {
+    "configFile": "/Users/okgoogle13/Projects/careercopilot/careercopilot-migration-kit-v3/playwright.config.ts",
+    "rootDir": "/Users/okgoogle13/Projects/careercopilot/careercopilot-migration-kit-v3/frontend/tests/e2e",
+    "forbidOnly": true,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/okgoogle13/Projects/careercopilot/careercopilot-migration-kit-v3/frontend/docs/design/generated/playwright-output",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/okgoogle13/Projects/careercopilot/careercopilot-migration-kit-v3/frontend/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "./frontend/docs/design/generated/playwright-report"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "./frontend/docs/design/generated/playwright-results.json"
+        }
+      ],
+      [
+        "list",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "visual/visual-audit.spec.ts",
+      "file": "visual/visual-audit.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "/onboarding – onboarding-benchmark-v1 evidence",
+          "file": "visual/visual-audit.spec.ts",
+          "line": 174,
+          "column": 6,
+          "specs": [
+            {
+              "title": "captures default state screenshot",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 479,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "📸 onboarding default → /Users/okgoogle13/Projects/careercopilot/careercopilot-migration-kit-v3/frontend/docs/design/generated/previews/run-2026-03-11_07-02-27-280/onboarding.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-11T07:02:27.297Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/okgoogle13/Projects/careercopilot/careercopilot-migration-kit-v3/frontend/docs/design/generated/playwright-output/visual-visual-audit--onboa-73b2e-es-default-state-screenshot-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f9e87d62aa9c4552afa4-ae5a8c79cf5a12300d55",
+              "file": "visual/visual-audit.spec.ts",
+              "line": 175,
+              "column": 7
+            },
+            {
+              "title": "captures selected pathway state screenshot",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 611,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "📸 onboarding selected → /Users/okgoogle13/Projects/careercopilot/careercopilot-migration-kit-v3/frontend/docs/design/generated/previews/run-2026-03-11_07-02-27-280/onboarding-selected.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-11T07:02:29.919Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/okgoogle13/Projects/careercopilot/careercopilot-migration-kit-v3/frontend/docs/design/generated/playwright-output/visual-visual-audit--onboa-6a457-ed-pathway-state-screenshot-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f9e87d62aa9c4552afa4-8ba84ea0792308df7c45",
+              "file": "visual/visual-audit.spec.ts",
+              "line": 182,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "/welcome – welcome-benchmark-v1 evidence",
+          "file": "visual/visual-audit.spec.ts",
+          "line": 196,
+          "column": 6,
+          "specs": [
+            {
+              "title": "captures default state screenshot",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 288,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "📸 welcome default → /Users/okgoogle13/Projects/careercopilot/careercopilot-migration-kit-v3/frontend/docs/design/generated/previews/run-2026-03-11_07-02-27-280/welcome.png\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-11T07:02:30.543Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/okgoogle13/Projects/careercopilot/careercopilot-migration-kit-v3/frontend/docs/design/generated/playwright-output/visual-visual-audit--welco-ef9ef-es-default-state-screenshot-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f9e87d62aa9c4552afa4-a5b3ce1d2480f36cf2fc",
+              "file": "visual/visual-audit.spec.ts",
+              "line": 197,
+              "column": 7
+            },
+            {
+              "title": "captures action state screenshot",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 402,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "📸 welcome action → /Users/okgoogle13/Projects/careercopilot/careercopilot-migration-kit-v3/frontend/docs/design/generated/previews/run-2026-03-11_07-02-27-280/welcome-action.png\n"
+                        },
+                        {
+                          "text": "\n───────────────────────────────────────────────────────────────\n"
+                        },
+                        {
+                          "text": "📂 Screenshot evidence captured to:\n"
+                        },
+                        {
+                          "text": "   /Users/okgoogle13/Projects/careercopilot/careercopilot-migration-kit-v3/frontend/docs/design/generated/previews/run-2026-03-11_07-02-27-280\n"
+                        },
+                        {
+                          "text": "\n   Update benchmark.json screenshots[] with the run directory:\n"
+                        },
+                        {
+                          "text": "   frontend/docs/design/generated/previews/run-2026-03-11_07-02-27-280/\n"
+                        },
+                        {
+                          "text": "───────────────────────────────────────────────────────────────\n\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-11T07:02:30.841Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/okgoogle13/Projects/careercopilot/careercopilot-migration-kit-v3/frontend/docs/design/generated/playwright-output/visual-visual-audit--welco-4c51b-res-action-state-screenshot-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "f9e87d62aa9c4552afa4-6383c35eef1dceeef507",
+              "file": "visual/visual-audit.spec.ts",
+              "line": 204,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-03-11T07:02:25.957Z",
+    "duration": 5368.8330000000005,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

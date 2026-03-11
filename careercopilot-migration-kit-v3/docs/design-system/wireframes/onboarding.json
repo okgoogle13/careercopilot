@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "route": "/onboarding",
+  "screenName": "OnboardingScreen",
+  "sourceFile": "apps/web/src/screens/OnboardingScreen.tsx",
+  "title": "Choose The Route Pressure Point",
+  "eyebrow": "Onboarding Route",
+  "layout": {
+    "rootElement": "section",
+    "archetype": "Slab",
+    "components": [
+      "March",
+      "Placard",
+      "Strike"
+    ],
+    "classNames": [
+      "journey-screen onboarding-screen",
+      "dashboard-strike",
+      "dashboard-grid",
+      "dashboard-actions",
+      "primary-action",
+      "secondary-action"
+    ],
+    "testIds": [
+      "onboarding-screen"
+    ]
+  },
+  "tokenPolicy": {
+    "semanticOnly": true,
+    "allowedPrefixes": [
+      "--sys-color-",
+      "--sys-shape-",
+      "--sys-type-"
+    ],
+    "zeroFlora": true,
+    "bannedTokens": [
+      "labWrenMetalBlue",
+      "GumLeafGreen",
+      "WattleGold",
+      "inkGreen"
+    ],
+    "bannedArchetypes": [
+      "Jar",
+      "Cabinet",
+      "Seed",
+      "Leaf"
+    ]
+  },
+  "notes": [
+    "Derived from the current migration-kit onboarding screen source.",
+    "Semantic tokens only. No hardcoded hex, rgb, or hsl values allowed in migrated screen code.",
+    "Legacy route fallback remains the committed default until the feature flag flips.",
+    "Screen includes pathway selection and status-state interactions."
+  ]
+}

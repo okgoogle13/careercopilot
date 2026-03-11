@@ -7,6 +7,33 @@
 - Implement the design-audit package and CLI
 - Lock audit include and exclude globs plus boundary-check semantics
 
+## Route Workflow
+
+Every new migrated route must follow this lifecycle:
+
+1. Benchmark defined
+- assign a benchmark id
+- create or confirm the benchmark bundle
+- confirm the wireframe artifact exists
+
+2. Copy cleared
+- rewrite user-facing copy to match route tone and KR vocabulary rules
+- remove developer meta-language and placeholder phrasing
+- confirm auth and onboarding routes include journey-aware CTA language where relevant
+- run `npm run audit:copy`
+
+3. Implementation wired
+- implement or refine the migrated screen
+- keep legacy fallback active by default through `RouteGate`
+
+4. Visual ready
+- capture or refresh screenshots
+- confirm the route is stable enough for visual review
+
+5. Audit and readiness
+- run `migration-audit`
+- only mark the route `migrated-ready` after benchmark, copy, visual, and regression gates pass
+
 ## PR-2: Routing + Flags + /login
 
 - Add `featureFlags.ts`, `RouteGate.tsx`, `FeaturesRouter.tsx`, `ScreensRouter.tsx`, `App.tsx`, and `routes.tsx`
@@ -33,6 +60,7 @@
 - Keep generation neutral and token-safe; do not invent feature-specific business UI
 - Fail safely when target screens already exist
 - Queue `audit:legacy` and `generate:wireframe` for later sprints
+- Treat generated shells as `draft-generated`, not audit-ready, until route copy and benchmark gates are complete
 
 ## PR-6: Factory Sprint 2 - `audit:legacy`
 
@@ -41,6 +69,13 @@
 - Add `npm run audit:legacy`
 - Scan for legacy aliases and style markers such as `pebbleSurge01`, `scaffoldSlab01`, `#1A1714`, `Inter`, and `Roboto`
 - Keep `generate:wireframe` deferred until its output contract is defined
+
+## PR-6b: Copy Hygiene Gate
+
+- Add `tools/design-audit/bin/audit-copy.ts`
+- Add `npm run audit:copy`
+- Fail migrated screens that expose developer meta-language, placeholder workflow text, or deprecated bureaucratic auth framing
+- Wire `audit:copy` into `npm run verify`
 
 ## PR-7: Factory Sprint 3 - `generate:wireframe`
 
@@ -64,6 +99,7 @@
 - Lock in the current `migrate:screen` contract: neutral placeholder output and refusal to overwrite existing screens like `DashboardScreen.tsx`
 - Validate generated output for local UI imports, renamed screen exports, semantic-token-safe structure, and absence of banned legacy terms or hardcoded color literals
 - Keep the manual verification recipe aligned to current kit behavior rather than rich dashboard generation assumptions
+- Explicitly distinguish factory correctness from route readiness; passing factory tests alone must not imply benchmarked UI quality
 
 ## PR-10: Routing + Flags + /dashboard
 

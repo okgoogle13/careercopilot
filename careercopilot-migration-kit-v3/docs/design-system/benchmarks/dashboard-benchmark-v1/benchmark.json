@@ -8,6 +8,11 @@
     "frontend/docs/design/generated/previews/dashboard.png",
     "frontend/docs/design/generated/previews/run-2026-03-10_13-22-12/dashboard.png"
   ],
+  "derivedFrom": [
+    "frontend/src/features/style-guide/StyleGuide.tsx",
+    "frontend/src/features/style-guide/M3ExpressiveComponents.tsx",
+    "docs/design-system/benchmarks/style-guide-rubric-v1/rubric.md"
+  ],
   "expectedScore": {
     "overallMin": 90,
     "dimensionFloors": {

@@ -8,9 +8,15 @@
 
 Current migrated shell:
 
-- eyebrow: `Worker Access`
-- title: `Step Back Into The Worker Portal`
-- primary action: `Enter The Workspace`
-- secondary action: `Open Registration`
+- eyebrow: `Collective Access`
+- title: `Return To The Collective Portal`
+- primary action: `Login → Access Dashboard`
+- secondary action: `Create Account (Step 1 Of 2)`
+
+Copy posture:
+
+- keep movement and collective framing
+- remove developer meta-language and placeholder wording
+- keep the CTA journey-aware and specific
 
 The migrated screen preserves the route URL and login interaction surface while replacing presentation with canonical semantic tokens and the newer expressive auth shell.

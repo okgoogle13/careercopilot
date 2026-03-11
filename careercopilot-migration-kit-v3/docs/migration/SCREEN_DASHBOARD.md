@@ -14,3 +14,16 @@ Current expectations:
 - preserve legacy fallback until explicit flag flip
 - keep the migrated dashboard in the same expressive visual family as `/login` and `/register`
 - audit `/dashboard` against `dashboard-benchmark-v1`
+
+Current migrated shell:
+
+- eyebrow: `Movement Overview`
+- title: `Hold The Movement In One View`
+- primary action: `Review Active Roles`
+- secondary action: `Open Draft Queue`
+
+Copy posture:
+
+- keep user-facing status updates concrete and task-oriented
+- remove rollout, rollback, migration, and placeholder language from rendered strings
+- keep the dashboard framed as a coordinated movement overview rather than an administrative board
