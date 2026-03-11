@@ -47,6 +47,9 @@ build/
 *.bak.*
 claude-artifact-runner/
 
+# Git worktrees
+.worktrees/
+
 # Jules Delegation Protocol Output Reports
 /.ai_reports/
 .archive_legacy/
