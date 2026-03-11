@@ -2,7 +2,11 @@ export type AuditRuleId =
   | 'no-hardcoded-styles'
   | 'no-banned-design-terms'
   | 'boundary-reference-check'
-  | 'no-legacy-migration-patterns';
+  | 'no-legacy-migration-patterns'
+  | 'no-user-facing-meta-language'
+  | 'no-apologetic-tone'
+  | 'no-deprecated-doc006-vocabulary'
+  | 'no-generic-cta-without-context';
 
 export type AuditSeverity = 'error' | 'warning';
 
@@ -46,5 +50,5 @@ export interface AuditOptions {
   includeGlobs: string[];
   excludeGlobs: string[];
   boundaryCheck: boolean;
-  mode?: 'compliance' | 'legacy';
+  mode?: 'compliance' | 'legacy' | 'copy';
 }

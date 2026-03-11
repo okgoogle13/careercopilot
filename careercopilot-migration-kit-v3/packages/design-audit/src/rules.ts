@@ -73,6 +73,39 @@ const LEGACY_PATTERNS: Array<{ pattern: RegExp; message: string }> = [
   },
 ];
 
+const COPY_META_PATTERNS: Array<{ pattern: RegExp; message: string }> = [
+  {
+    pattern: /\b(?:Worker Portal|Workspace|Worker Access|Worker Account|Worker Overview)\b/g,
+    message:
+      'Bureaucratic or deprecated route copy detected. Use collective or movement framing instead.',
+  },
+  {
+    pattern: /\b(?:migration|feature flag|legacy route|rollback|fallback|placeholder)\b/gi,
+    message:
+      'Developer meta-language detected in user-facing copy. Remove implementation-facing wording from rendered strings.',
+  },
+  {
+    pattern: /\bcheckpoint cleared\b/gi,
+    message:
+      'Placeholder workflow language detected in user-facing copy. Replace with concrete user-facing status messaging.',
+  },
+  {
+    pattern: /\b(?:Please|Sorry|Oops|We apologize|Unfortunately|Sorry for|excuse|forgive|regret)\b/gi,
+    message:
+      'Apologetic tone detected (BR-COPY-004). KR Solidarity voice is confrontational and direct, not apologetic. Use declarative language.',
+  },
+  {
+    pattern: /\b(?:specimen|cabinet|jar|discovery|expedition|ledger|archive vault|collection|station|keychain)\b/gi,
+    message:
+      'Deprecated DOC-006 vocabulary detected (BR-COPY-005). Use current KR Solidarity v6.1 terms: Collective, Movement Space, Solidarity Base.',
+  },
+  {
+    pattern: /\b(?:Click here|Submit|Continue|Proceed|Enter|Next|Go)\b(?!\s+(?:to|for|and|with|your|\w+\s+to))/g,
+    message:
+      'Generic CTA without context detected (BR-COPY-003). CTAs must state clear outcomes or next steps (e.g., "LOGIN → ACCESS DASHBOARD", not just "Continue").',
+  },
+];
+
 const CANONICAL_EXCLUDE_PATTERNS = [
   'frontend/src/design/tokens/tokens.json',
   'frontend/src/design/styles/design-tokens.css',
@@ -279,6 +312,54 @@ export function auditLegacyFile(filePath: string): AuditFileResult {
         matcher.pattern,
         () => matcher.message,
         'no-legacy-migration-patterns',
+      ),
+    );
+  }
+
+  return {
+    filePath,
+    scanned: true,
+    violations,
+  };
+}
+
+export function auditCopyFile(filePath: string): AuditFileResult {
+  if (
+    filePath.includes(`${path.sep}tests${path.sep}`) ||
+    filePath.includes('.spec.') ||
+    filePath.includes('.test.') ||
+    !filePath.includes(`${path.sep}screens${path.sep}`)
+  ) {
+    return {
+      filePath,
+      scanned: false,
+      violations: [],
+    };
+  }
+
+  const content = fs.readFileSync(filePath, 'utf8');
+
+  if (
+    content.includes('This screen was generated from the LoginScreen migration pattern.') ||
+    content.includes('Generated placeholder for the /')
+  ) {
+    return {
+      filePath,
+      scanned: false,
+      violations: [],
+    };
+  }
+
+  const violations: AuditViolation[] = [];
+
+  for (const matcher of COPY_META_PATTERNS) {
+    violations.push(
+      ...collectMatches(
+        filePath,
+        content,
+        matcher.pattern,
+        () => matcher.message,
+        'no-user-facing-meta-language',
       ),
     );
   }
