@@ -8,7 +8,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - NO PREAMBLE: Skip all introductory phrases, conversational fillers, and verbose status updates. Lead with direct action verbs.
 - NO UNNECESSARY REPORTS: DO NOT generate comprehensive markdown reports summarizing your tasks unless explicitly instructed by the user. Status updates must be kept strictly under 2 sentences.
 - TOKEN GUARDIAN ACTIVE: You must adhere to the rules in `.claude/TOKEN_GUARDIAN.md`. Track token usage and mandate sidekick routing if usage exceeds 80%.
-- SAVE FILES IN PROJECT: Always save generated plans, reports, and documentation strictly within the local project repository (e.g., `.claude/plans/`, `.claude/reports/`). NEVER save files to the global user home folder.
+- PLAN LOCATION: **ALWAYS** save implementation plans to `/Users/okgoogle13/Projects/careercopilot/.claude/plans/`. NEVER save plans to worktree directories or global user home folder.
+- REPORT LOCATION: Save reports and documentation to `.claude/reports/` within the project repository.
 </output_constraints>
 
 ---
