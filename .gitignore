@@ -116,6 +116,7 @@ tools/scripts/workflow/run_northcote_workflow.py
 .backups/
 .temp_artifact_build/
 .claude*/
+!.claude/skills/
 .codex/
 .windsurf/
 .idx/
