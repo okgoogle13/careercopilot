@@ -1,0 +1,344 @@
+{
+  "artifact": "frontend_capability_gap_matrix",
+  "generated_at": "2026-03-12",
+  "purpose": "Machine-readable synthesis of live frontend structure, backend API capability coverage, and missing or duplicate UI surfaces to inform target-state planning.",
+  "sources": {
+    "frontend_routes": "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx",
+    "frontend_architecture_report": "/Users/okgoogle13/Projects/careercopilot/frontend/analysis/frontend-architecture-report.json",
+    "frontend_architecture_markdown": "/Users/okgoogle13/Projects/careercopilot/docs/analysis/frontend-architecture-current-state.md",
+    "backend_main": "/Users/okgoogle13/Projects/careercopilot/backend/app/main.py",
+    "backend_router": "/Users/okgoogle13/Projects/careercopilot/backend/app/api/router.py",
+    "backend_endpoints_dir": "/Users/okgoogle13/Projects/careercopilot/backend/app/api/endpoints"
+  },
+  "current_frontend_state": {
+    "live_routes": 27,
+    "route_families": 13,
+    "likely_surfaces": 17,
+    "routed_likely_surfaces": 10,
+    "unrouted_likely_surfaces": 7,
+    "prototype_kr_routes": 5,
+    "bucket_distribution": {
+      "screens": {
+        "files": 11,
+        "exported_components": 22,
+        "likely_pages_or_screens": 22
+      },
+      "features": {
+        "files": 52,
+        "exported_components": 74,
+        "likely_pages_or_screens": 0
+      },
+      "pages": {
+        "files": 6,
+        "exported_components": 10,
+        "likely_pages_or_screens": 10
+      },
+      "components": {
+        "files": 89,
+        "exported_components": 110,
+        "likely_pages_or_screens": 0
+      }
+    },
+    "primary_smells": [
+      "duplicate_route_layers",
+      "prototype_routes_still_live",
+      "unrouted_screen_candidates",
+      "mock_backed_live_routes",
+      "god_components",
+      "backend_contract_drift"
+    ]
+  },
+  "route_families": [
+    "landing",
+    "auth-onboarding",
+    "dashboard",
+    "analysis",
+    "documents",
+    "applications",
+    "jobs",
+    "generation",
+    "account",
+    "ingestion",
+    "internal-tools",
+    "landing-prototype",
+    "fallback"
+  ],
+  "unrouted_screen_candidates": [
+    {
+      "component": "ResumeAuditPage",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/ResumeAuditPage.tsx",
+      "bucket": "pages"
+    },
+    {
+      "component": "IngestionFlow",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/04_ingestion/IngestionFlow.tsx",
+      "bucket": "screens"
+    },
+    {
+      "component": "LookoutDiscovery",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
+      "bucket": "screens"
+    },
+    {
+      "component": "KanbanTracker",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/07_kanban/KanbanTracker.tsx",
+      "bucket": "screens"
+    },
+    {
+      "component": "DocumentWorkbench",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/08_workbench/DocumentWorkbench.tsx",
+      "bucket": "screens"
+    },
+    {
+      "component": "ApplicationFinalization",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/09_finalization/ApplicationFinalization.tsx",
+      "bucket": "screens"
+    },
+    {
+      "component": "SettingsControl",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/10_settings/SettingsControl.tsx",
+      "bucket": "screens"
+    }
+  ],
+  "capability_matrix": [
+    {
+      "id": "applications_crud",
+      "product_domain": "applications",
+      "backend_status": "mounted_active",
+      "frontend_coverage": "mock_only",
+      "target_state_signal": "strong_missing_surface",
+      "recommendation": "keep_and_build_ui",
+      "importance": "high",
+      "backend_endpoints": [
+        "POST /api/applications/",
+        "GET /api/applications/",
+        "GET /api/applications/{application_id}",
+        "PUT /api/applications/{application_id}",
+        "DELETE /api/applications/{application_id}"
+      ],
+      "frontend_evidence": [
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/applications/ApplicationTracker.tsx",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/api/applicationService.ts"
+      ],
+      "missing_surfaces": [
+        "application_detail_view",
+        "application_edit_actions",
+        "status_transition_controls",
+        "delete_or_archive_action"
+      ]
+    },
+    {
+      "id": "documents_redline",
+      "product_domain": "documents",
+      "backend_status": "mounted_active",
+      "frontend_coverage": "no_live_owner",
+      "target_state_signal": "strong_missing_surface",
+      "recommendation": "keep_and_build_ui",
+      "importance": "medium",
+      "backend_endpoints": [
+        "POST /api/documents/process/redline"
+      ],
+      "frontend_evidence": [
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/documents/Documents.tsx"
+      ],
+      "missing_surfaces": [
+        "document_review_workspace",
+        "tracked_changes_editor",
+        "redline_upload_action"
+      ]
+    },
+    {
+      "id": "smart_ingestion_asset_pipeline",
+      "product_domain": "ingestion",
+      "backend_status": "mounted_active",
+      "frontend_coverage": "partially_wired",
+      "target_state_signal": "strong_missing_surface",
+      "recommendation": "keep_and_build_ui",
+      "importance": "high",
+      "backend_endpoints": [
+        "POST /api/smart-ingestion/upload-and-tag",
+        "POST /api/smart-ingestion/extract-and-save",
+        "GET /api/smart-ingestion/health"
+      ],
+      "frontend_evidence": [
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/api/smartIngestionService.ts",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/AssetLibrary.tsx"
+      ],
+      "missing_surfaces": [
+        "smart_ingestion_upload_step",
+        "tag_confirmation_step",
+        "save_to_asset_library_step"
+      ]
+    },
+    {
+      "id": "voice_profile_capture",
+      "product_domain": "profile",
+      "backend_status": "mounted_active",
+      "frontend_coverage": "no_live_owner",
+      "target_state_signal": "strong_missing_surface",
+      "recommendation": "keep_and_build_ui",
+      "importance": "high",
+      "backend_endpoints": [
+        "POST /api/auth/voice-profile"
+      ],
+      "frontend_evidence": [
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/profile/components/ProfileView.tsx",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/settings/Settings.tsx",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/api/smartIngestionService.ts"
+      ],
+      "missing_surfaces": [
+        "voice_profile_creation_ui",
+        "voice_sample_or_writing_sample_submission",
+        "voice_profile_status_card",
+        "voice_profile_management_in_profile_or_settings"
+      ],
+      "notes": "Voice should be retained as target-state capability. Backend also supports voice as a smart-ingestion document type."
+    },
+    {
+      "id": "resume_audit",
+      "product_domain": "analysis",
+      "backend_status": "mounted_active",
+      "frontend_coverage": "partially_wired",
+      "target_state_signal": "strong_missing_surface",
+      "recommendation": "needs_backend_completion_before_ui",
+      "importance": "medium",
+      "backend_endpoints": [
+        "POST /api/resume-audit/evaluate"
+      ],
+      "frontend_evidence": [
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/services/resumeAuditService.ts",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/ResumeAuditPage.tsx"
+      ],
+      "missing_surfaces": [
+        "audit_history_list"
+      ],
+      "contract_gaps": [
+        "frontend expects GET /resume-audit/history but backend does not expose it"
+      ]
+    },
+    {
+      "id": "job_listings_workbench",
+      "product_domain": "jobs",
+      "backend_status": "mounted_active",
+      "frontend_coverage": "no_live_owner",
+      "target_state_signal": "likely_retire_or_defer",
+      "recommendation": "retire_or_quarantine",
+      "importance": "medium",
+      "backend_endpoints": [
+        "POST /api/job-listings/extract-from-text",
+        "POST /api/job-listings/extract-from-url",
+        "POST /api/job-listings/advanced-analysis"
+      ],
+      "frontend_evidence": [
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/api/jobService.ts",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/ApplyQuick.tsx"
+      ],
+      "missing_surfaces": [
+        "job_parsing_workbench",
+        "extract_from_text_ui",
+        "advanced_analysis_ui"
+      ],
+      "notes": "Current live frontend prefers /api/flows/analyze-job-from-url and /api/genkit/job/analyze-url."
+    },
+    {
+      "id": "workflow_orchestration",
+      "product_domain": "applications",
+      "backend_status": "mounted_placeholder",
+      "frontend_coverage": "partially_wired",
+      "target_state_signal": "likely_retire_or_defer",
+      "recommendation": "needs_backend_completion_before_ui",
+      "importance": "medium",
+      "backend_endpoints": [
+        "POST /api/workflows/generate-application",
+        "POST /api/workflows/scan-email-opportunities",
+        "GET /api/workflows/health",
+        "GET /api/workflows/status/{workflow_id}"
+      ],
+      "frontend_evidence": [
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/api/workflowService.ts",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/api/aiServices.ts"
+      ],
+      "missing_surfaces": [
+        "workflow_progress_screen",
+        "workflow_status_ui",
+        "email_scan_results_screen"
+      ],
+      "notes": "Backend currently returns 503 or 501 for key workflow operations."
+    },
+    {
+      "id": "artifact_upload_contract",
+      "product_domain": "ingestion",
+      "backend_status": "exists_unmounted",
+      "frontend_coverage": "partially_wired",
+      "target_state_signal": "contract_consolidation_needed",
+      "recommendation": "keep_and_consolidate_contract",
+      "importance": "high",
+      "backend_endpoints": [
+        "POST /api/ingest/artifacts/upload"
+      ],
+      "frontend_evidence": [
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/ingestion/components/EvidenceUploader.tsx",
+        "/Users/okgoogle13/Projects/careercopilot/backend/app/api/endpoints/ingest.py"
+      ],
+      "notes": "Endpoint exists on disk but is not mounted by the live API."
+    },
+    {
+      "id": "duplicate_ingestion_contracts",
+      "product_domain": "ingestion",
+      "backend_status": "mounted_active_plus_unmounted_overlap",
+      "frontend_coverage": "partially_wired",
+      "target_state_signal": "contract_consolidation_needed",
+      "recommendation": "keep_and_consolidate_contract",
+      "importance": "high",
+      "backend_endpoints": [
+        "POST /api/v1/ingest",
+        "POST /api/career/ingest",
+        "POST /api/ingest/artifacts/upload"
+      ],
+      "frontend_evidence": [
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/hooks/useCareerIngestion.ts",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/profile/components/ResumeUploader.tsx",
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/ingestion/components/EvidenceUploader.tsx"
+      ],
+      "notes": "Three overlapping ingestion paths currently represent similar intake behavior."
+    }
+  ],
+  "target_state_candidates": {
+    "route_families_to_keep_as_runtime_truth": [
+      "landing",
+      "auth-onboarding",
+      "dashboard",
+      "analysis",
+      "documents",
+      "applications",
+      "jobs",
+      "generation",
+      "account",
+      "ingestion"
+    ],
+    "prototype_families_to_quarantine_or_replace": [
+      "landing-prototype",
+      "kr-analysis",
+      "kr-dashboard",
+      "kr-auth",
+      "kr-onboarding"
+    ],
+    "priority_surfaces_to_add_or_complete": [
+      "application_detail_management",
+      "smart_ingestion_flow",
+      "voice_profile_management",
+      "document_redline_workspace",
+      "resume_audit_history"
+    ],
+    "contracts_to_consolidate": [
+      "ingestion_contracts"
+    ]
+  },
+  "decision_prompts_for_next_step_ai": [
+    "Which existing live route should own voice profile creation: /profile, /settings, or /asset-library?",
+    "Should smart ingestion and voice ingestion be one combined asset intake flow?",
+    "Should /documents absorb redline editing, or should a dedicated workbench route be introduced?",
+    "Which single ingestion contract should remain canonical?",
+    "Which unrouted screen candidates should be promoted versus deleted?"
+  ]
+}
