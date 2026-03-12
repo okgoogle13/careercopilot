@@ -285,14 +285,19 @@
       "phase": "phase_4_cleanup",
       "canonical_owner": "/kr/landing",
       "runtime_routes": [
-        "/kr/landing"
+        "/kr/landing",
+        "/kr/auth",
+        "/kr/onboarding",
+        "/kr/analysis",
+        "/kr/dashboard"
       ],
       "design_references": [
         "frontend/src/screens/01_landing/HeroLanding.tsx"
       ],
       "capability_dependencies": [],
       "notes": [
-        "Prototype route should not remain in product truth."
+        "All 5 /kr/* prototype routes must be retired as a batch.",
+        "Keep screen components as design-reference material only."
       ]
     },
     {
