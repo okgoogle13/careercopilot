@@ -156,6 +156,20 @@ design-system/
 └── tokens.json                    # kerala-rage kr-solidarity design tokens (colors, typography, spacing)
 ```
 
+## Layer Authority
+
+The frontend migration and audit model depends on four explicit layers of authority:
+
+- **Design truth**: `frontend/src/screens/**/*.wireframe.xml` plus paired `frontend/src/screens/**/*.tsx`
+- **Runtime truth**: `frontend/src/features/**` and `frontend/src/pages/**` that are reachable from `frontend/src/App.tsx`
+- **Capability truth**: mounted backend endpoints and workflow contracts that represent real product capability
+- **Derived artifacts**: migration-kit JSON wireframes and similar reduced outputs
+
+Rules:
+- Do not treat derived artifacts as the primary authority when they disagree with design, runtime, or capability truth.
+- Prefer runtime truth for current product behavior, design truth for layout/token intent, and capability truth for deciding whether a missing screen or workflow still belongs in target state.
+- Prototype `/kr/*` routes and duplicate batch surfaces are not canonical product truth unless explicitly promoted.
+
 ## Standards & Patterns
 
 ### Do
