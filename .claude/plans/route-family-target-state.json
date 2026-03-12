@@ -188,7 +188,10 @@
         {
           "component": "ResumeAuditPage",
           "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/ResumeAuditPage.tsx",
-          "status": "unrouted_candidate"
+          "status": "unrouted_candidate",
+          "promotion_decision": "promote",
+          "target_route": "/analysis/audit",
+          "condition": "backend exposes GET /resume-audit/history"
         }
       ],
       "backend_capability_support": [
@@ -445,7 +448,10 @@
         {
           "component": "IngestionFlow",
           "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/04_ingestion/IngestionFlow.tsx",
-          "status": "unrouted_candidate"
+          "status": "unrouted_candidate",
+          "promotion_decision": "promote",
+          "target_route": "/career/ingest",
+          "condition": "after canonical contract"
         }
       ],
       "backend_capability_support": [
@@ -556,7 +562,9 @@
   "cross_family_decisions": [
     {
       "topic": "voice_ownership",
-      "decision": "default_to_account_family",
+      "decision": "locked",
+      "locked_runtime_owner": "/profile",
+      "rationale": "Final owner for voice profile mgmt. No reopening.",
       "preferred_runtime_owner": "/profile",
       "alternate_owner_candidates": [
         "/settings",

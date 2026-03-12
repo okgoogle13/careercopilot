@@ -214,7 +214,12 @@
       ],
       "contract_gaps": [
         "frontend expects GET /resume-audit/history but backend does not expose it"
-      ]
+      ],
+      "backend_readiness_gate": {
+        "status": "blocked",
+        "reason": "Missing GET /resume-audit/history",
+        "unblocked_by": "backend 200 in staging"
+      }
     },
     {
       "id": "job_listings_workbench",
@@ -238,7 +243,28 @@
         "extract_from_text_ui",
         "advanced_analysis_ui"
       ],
-      "notes": "Current live frontend prefers /api/flows/analyze-job-from-url and /api/genkit/job/analyze-url."
+      "notes": "Current live frontend prefers /api/flows/analyze-job-from-url and /api/genkit/job/analyze-url. Live frontend uses /api/flows/analyze-job-from-url & /api/genkit/job/analyze-url → map to jobs family before retire."
+    },
+    {
+      "id": "genkit_job_analysis",
+      "product_domain": "jobs",
+      "backend_status": "mounted_active",
+      "frontend_coverage": "partially_wired",
+      "target_state_signal": "keep_and_confirm_owner",
+      "recommendation": "assign_to_jobs_family",
+      "importance": "high",
+      "backend_endpoints": [
+        "GET /api/flows/analyze-job-from-url",
+        "GET /api/genkit/job/analyze-url"
+      ],
+      "frontend_evidence": [
+        "frontend/src/pages/ApplyQuick.tsx"
+      ],
+      "missing_surfaces": [
+        "route ownership in jobs",
+        "analysis result view"
+      ],
+      "notes": "Live-preferred path. Assign before workbench retire."
     },
     {
       "id": "workflow_orchestration",
@@ -263,7 +289,12 @@
         "workflow_status_ui",
         "email_scan_results_screen"
       ],
-      "notes": "Backend currently returns 503 or 501 for key workflow operations."
+      "notes": "Backend currently returns 503 or 501 for key workflow operations.",
+      "backend_readiness_gate": {
+        "status": "blocked",
+        "reason": "503/501 on POST /api/workflows/generate-application",
+        "unblocked_by": "backend 200 in staging"
+      }
     },
     {
       "id": "artifact_upload_contract",
