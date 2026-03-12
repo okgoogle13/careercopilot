@@ -1,1 +1,102 @@
-../../../ai/config/ai_config.json
+{
+  "models": {
+    "gemini-3.1-pro": {
+      "name": "gemini-3.1-pro",
+      "provider": "google_ai",
+      "model_type": "text_generation",
+      "model_id": "gemini-3.1-pro-preview",
+      "max_tokens": 65536,
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "timeout_seconds": 120,
+      "retry_attempts": 3,
+      "cost_per_1k_tokens": {
+        "input": 0.00125,
+        "output": 0.005
+      },
+      "rate_limit": {
+        "requests_per_minute": 360,
+        "tokens_per_minute": 120000
+      },
+      "context_window": 2000000,
+      "supports_streaming": true,
+      "supports_function_calling": true
+    },
+    "gemini-3.1-flash": {
+      "name": "gemini-3.1-flash",
+      "provider": "google_ai",
+      "model_type": "text_generation",
+      "model_id": "gemini-3.1-flash-preview",
+      "max_tokens": 32768,
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "timeout_seconds": 60,
+      "retry_attempts": 3,
+      "cost_per_1k_tokens": {
+        "input": 0.0003,
+        "output": 0.00125
+      },
+      "rate_limit": {
+        "requests_per_minute": 2000,
+        "tokens_per_minute": 1000000
+      },
+      "context_window": 1000000,
+      "supports_streaming": true,
+      "supports_function_calling": true
+    },
+    "gemini-3.1-flash-lite": {
+      "name": "gemini-3.1-flash-lite",
+      "provider": "google_ai",
+      "model_type": "text_generation",
+      "model_id": "gemini-3.1-flash-lite-preview",
+      "max_tokens": 16384,
+      "temperature": 0.7,
+      "top_p": 1.0,
+      "timeout_seconds": 30,
+      "retry_attempts": 3,
+      "cost_per_1k_tokens": {
+        "input": 0.0001,
+        "output": 0.0004
+      },
+      "rate_limit": {
+        "requests_per_minute": 4000,
+        "tokens_per_minute": 2000000
+      },
+      "context_window": 1000000,
+      "supports_streaming": true,
+      "supports_function_calling": true
+    }
+  },
+  "services": {
+    "resume_analysis": {
+      "service_name": "resume_analysis",
+      "primary_model": "gemini-3.1-flash",
+      "fallback_models": ["gemini-3.1-flash-lite"],
+      "enabled": true,
+      "cache_enabled": true,
+      "custom_settings": {
+        "max_document_length": 100000,
+        "skill_extraction": true
+      }
+    },
+    "job_analysis": {
+      "service_name": "job_analysis",
+      "primary_model": "gemini-3.1-flash",
+      "fallback_models": ["gemini-3.1-flash-lite"],
+      "enabled": true
+    },
+    "ats_scoring": {
+      "service_name": "ats_scoring",
+      "primary_model": "gemini-3.1-pro",
+      "fallback_models": ["gemini-3.1-flash"],
+      "enabled": true
+    }
+  },
+  "credentials": {
+    "google_ai": {
+      "provider": "google_ai",
+      "api_key": null,
+      "project_id": null
+    }
+  }
+}

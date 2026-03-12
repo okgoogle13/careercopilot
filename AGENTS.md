@@ -177,7 +177,7 @@ Rules:
 - ✅ Use Firebase client config from `frontend/src/config/firebase.ts` for auth/storage
 - ✅ Use backend auth helpers in `backend/app/core/auth.py` and `backend/app/core/dependencies.py`
 - ✅ Use Genkit flow decorators from `app.genkit_flows.flow_decorator` (`@genkit_flow`, `@async_genkit_flow`) and verify the `app.genkit_flows` import path resolves in your environment
-- ✅ Route high-volume tasks to Gemini Flash (runtime default: 3.0; service config in `ai/config/ai_config.json`)
+- ✅ Route high-volume tasks to Gemini Flash (runtime default: 3.0; service config in `backend/config/ai_config.json`)
 - ✅ Route complex reasoning to Gemini Pro (3.0/2.5 per service config)
 - ✅ Use `IngestionService` for document parsing (pdfminer.six/python-docx) and `VectorStore` for embeddings
 - ✅ Implement standardized I/O for all AI flows (Pydantic output schemas)
@@ -522,8 +522,8 @@ Key document requirements:
 
 - **Naming convention**: `@genkit_flow` / `@async_genkit_flow` from `app.genkit_flows.flow_decorator`
 - **Input validation**: Always validate input_data schema first
-- **Model selection**: Default to Gemini Flash; escalate to Pro for complex reasoning (see `ai/config/ai_config.json`)
-- **Temperature config**: Use service defaults from `ai/config/ai_config.json` unless a flow requires overrides
+- **Model selection**: Default to Gemini Flash; escalate to Pro for complex reasoning (see `backend/config/ai_config.json`)
+- **Temperature config**: Use service defaults from `backend/config/ai_config.json` unless a flow requires overrides
 - **Response format**: Prefer Pydantic output schemas for structured responses
 
 ### Firebase & Security
@@ -633,9 +633,9 @@ Use these before deploy or when debugging build issues:
 | ---------------- | -------------------------------------------------- | ------------------------------------------ |
 | Gemini 3.0 Flash | Default runtime model in Genkit init               | Fast, general-purpose generation           |
 | Gemini 3.0 Pro   | Complex reasoning (company research, gap analysis) | Slower, highest reasoning quality          |
-| Gemini 2.5 Flash | Service defaults in `ai/config/ai_config.json`     | High-volume tasks and ATS scoring          |
+| Gemini 2.5 Flash | Service defaults in `backend/config/ai_config.json` | High-volume tasks and ATS scoring          |
 | Gemini 2.5 Pro   | High-quality services (ATS, cover letters)         | Higher quality with higher cost            |
-| Gemini 1.5 *     | Fallbacks in `ai/config/ai_config.json`            | Legacy compatibility fallback              |
+| Gemini 1.5 *     | Fallbacks in `backend/config/ai_config.json`       | Legacy compatibility fallback              |
 
 **Rule of thumb**: Default to Flash. Escalate to Pro only for complex reasoning or multi-step workflows.
 
