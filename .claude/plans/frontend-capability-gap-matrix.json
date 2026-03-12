@@ -3,12 +3,12 @@
   "generated_at": "2026-03-12",
   "purpose": "Machine-readable synthesis of live frontend structure, backend API capability coverage, and missing or duplicate UI surfaces to inform target-state planning.",
   "sources": {
-    "frontend_routes": "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx",
-    "frontend_architecture_report": "/Users/okgoogle13/Projects/careercopilot/frontend/analysis/frontend-architecture-report.json",
-    "frontend_architecture_markdown": "/Users/okgoogle13/Projects/careercopilot/docs/analysis/frontend-architecture-current-state.md",
-    "backend_main": "/Users/okgoogle13/Projects/careercopilot/backend/app/main.py",
-    "backend_router": "/Users/okgoogle13/Projects/careercopilot/backend/app/api/router.py",
-    "backend_endpoints_dir": "/Users/okgoogle13/Projects/careercopilot/backend/app/api/endpoints"
+    "frontend_routes": "frontend/src/App.tsx",
+    "frontend_architecture_report": "frontend/analysis/frontend-architecture-report.json",
+    "frontend_architecture_markdown": "docs/analysis/frontend-architecture-current-state.md",
+    "backend_main": "backend/app/main.py",
+    "backend_router": "backend/app/api/router.py",
+    "backend_endpoints_dir": "backend/app/api/endpoints"
   },
   "current_frontend_state": {
     "live_routes": 27,
@@ -66,37 +66,37 @@
   "unrouted_screen_candidates": [
     {
       "component": "ResumeAuditPage",
-      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/ResumeAuditPage.tsx",
+      "path": "frontend/src/pages/ResumeAuditPage.tsx",
       "bucket": "pages"
     },
     {
       "component": "IngestionFlow",
-      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/04_ingestion/IngestionFlow.tsx",
+      "path": "frontend/src/screens/04_ingestion/IngestionFlow.tsx",
       "bucket": "screens"
     },
     {
       "component": "LookoutDiscovery",
-      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
+      "path": "frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
       "bucket": "screens"
     },
     {
       "component": "KanbanTracker",
-      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/07_kanban/KanbanTracker.tsx",
+      "path": "frontend/src/screens/07_kanban/KanbanTracker.tsx",
       "bucket": "screens"
     },
     {
       "component": "DocumentWorkbench",
-      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/08_workbench/DocumentWorkbench.tsx",
+      "path": "frontend/src/screens/08_workbench/DocumentWorkbench.tsx",
       "bucket": "screens"
     },
     {
       "component": "ApplicationFinalization",
-      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/09_finalization/ApplicationFinalization.tsx",
+      "path": "frontend/src/screens/09_finalization/ApplicationFinalization.tsx",
       "bucket": "screens"
     },
     {
       "component": "SettingsControl",
-      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/10_settings/SettingsControl.tsx",
+      "path": "frontend/src/screens/10_settings/SettingsControl.tsx",
       "bucket": "screens"
     }
   ],
@@ -109,6 +109,8 @@
       "target_state_signal": "strong_missing_surface",
       "recommendation": "keep_and_build_ui",
       "importance": "high",
+      "resolution_status": "unresolved",
+      "blocked_by": "Frontend /tracker uses mock data despite real backend CRUD at /api/applications/. Missing: detail view, edit actions, status transitions, delete/archive.",
       "backend_endpoints": [
         "POST /api/applications/",
         "GET /api/applications/",
@@ -117,8 +119,8 @@
         "DELETE /api/applications/{application_id}"
       ],
       "frontend_evidence": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/applications/ApplicationTracker.tsx",
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/api/applicationService.ts"
+        "frontend/src/features/applications/ApplicationTracker.tsx",
+        "frontend/src/api/applicationService.ts"
       ],
       "missing_surfaces": [
         "application_detail_view",
@@ -135,11 +137,13 @@
       "target_state_signal": "strong_missing_surface",
       "recommendation": "keep_and_build_ui",
       "importance": "medium",
+      "resolution_status": "unresolved",
+      "blocked_by": "Backend POST /api/documents/process/redline exists but has zero frontend UI. Documents.tsx does not surface redline functionality.",
       "backend_endpoints": [
         "POST /api/documents/process/redline"
       ],
       "frontend_evidence": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/documents/Documents.tsx"
+        "frontend/src/features/documents/Documents.tsx"
       ],
       "missing_surfaces": [
         "document_review_workspace",
@@ -155,14 +159,16 @@
       "target_state_signal": "strong_missing_surface",
       "recommendation": "keep_and_build_ui",
       "importance": "high",
+      "resolution_status": "unresolved",
+      "blocked_by": "Smart ingestion backend is active but frontend only has partial wiring via AssetLibrary. Missing dedicated upload-tag-save flow steps.",
       "backend_endpoints": [
         "POST /api/smart-ingestion/upload-and-tag",
         "POST /api/smart-ingestion/extract-and-save",
         "GET /api/smart-ingestion/health"
       ],
       "frontend_evidence": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/api/smartIngestionService.ts",
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/AssetLibrary.tsx"
+        "frontend/src/api/smartIngestionService.ts",
+        "frontend/src/features/analysis/AssetLibrary.tsx"
       ],
       "missing_surfaces": [
         "smart_ingestion_upload_step",
@@ -178,13 +184,15 @@
       "target_state_signal": "strong_missing_surface",
       "recommendation": "keep_and_build_ui",
       "importance": "high",
+      "resolution_status": "unresolved",
+      "blocked_by": "Backend POST /api/auth/voice-profile exists and calls voiceProfileExtractorFlow, but ProfileView.tsx has zero voice UI. Governance declares /profile as owner but no component implements the capability.",
       "backend_endpoints": [
         "POST /api/auth/voice-profile"
       ],
       "frontend_evidence": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/profile/components/ProfileView.tsx",
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/settings/Settings.tsx",
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/api/smartIngestionService.ts"
+        "frontend/src/features/profile/components/ProfileView.tsx",
+        "frontend/src/features/settings/Settings.tsx",
+        "frontend/src/api/smartIngestionService.ts"
       ],
       "missing_surfaces": [
         "voice_profile_creation_ui",
@@ -202,18 +210,21 @@
       "target_state_signal": "strong_missing_surface",
       "recommendation": "needs_backend_completion_before_ui",
       "importance": "medium",
+      "resolution_status": "unresolved",
+      "blocked_by": "Backend POST /api/resume-audit/evaluate works (calls resumeAuditRKL Genkit flow), but frontend ResumeAuditPage.tsx is NOT routed in App.tsx. Also: frontend expects GET /resume-audit/history which backend does not expose.",
       "backend_endpoints": [
         "POST /api/resume-audit/evaluate"
       ],
       "frontend_evidence": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/services/resumeAuditService.ts",
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/ResumeAuditPage.tsx"
+        "frontend/src/services/resumeAuditService.ts",
+        "frontend/src/pages/ResumeAuditPage.tsx"
       ],
       "missing_surfaces": [
         "audit_history_list"
       ],
       "contract_gaps": [
-        "frontend expects GET /resume-audit/history but backend does not expose it"
+        "frontend expects GET /resume-audit/history but backend does not expose it",
+        "ResumeAuditPage.tsx exists but is not routed in App.tsx"
       ]
     },
     {
@@ -224,14 +235,17 @@
       "target_state_signal": "likely_retire_or_defer",
       "recommendation": "retire_or_quarantine",
       "importance": "medium",
+      "resolution_status": "resolved_defer",
+      "resolved_at": "2026-03-12",
+      "resolution_notes": "Deferred — frontend prefers Genkit-based /api/flows/analyze-job-from-url and /api/genkit/job/analyze-url over raw job-listings endpoints. Existing job_analyzer.py and unified_job_analyzer.py Genkit flows serve this domain.",
       "backend_endpoints": [
         "POST /api/job-listings/extract-from-text",
         "POST /api/job-listings/extract-from-url",
         "POST /api/job-listings/advanced-analysis"
       ],
       "frontend_evidence": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/api/jobService.ts",
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/ApplyQuick.tsx"
+        "frontend/src/api/jobService.ts",
+        "frontend/src/pages/ApplyQuick.tsx"
       ],
       "missing_surfaces": [
         "job_parsing_workbench",
@@ -248,6 +262,8 @@
       "target_state_signal": "likely_retire_or_defer",
       "recommendation": "needs_backend_completion_before_ui",
       "importance": "medium",
+      "resolution_status": "unresolved",
+      "blocked_by": "Backend endpoints return 503 SERVICE_UNAVAILABLE ('Currently unavailable during Genkit 0.4.0 migration'). No real workflow execution exists. Frontend wiring is premature until backend moves beyond placeholder.",
       "backend_endpoints": [
         "POST /api/workflows/generate-application",
         "POST /api/workflows/scan-email-opportunities",
@@ -255,8 +271,8 @@
         "GET /api/workflows/status/{workflow_id}"
       ],
       "frontend_evidence": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/api/workflowService.ts",
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/api/aiServices.ts"
+        "frontend/src/api/workflowService.ts",
+        "frontend/src/api/aiServices.ts"
       ],
       "missing_surfaces": [
         "workflow_progress_screen",
@@ -273,12 +289,14 @@
       "target_state_signal": "contract_consolidation_needed",
       "recommendation": "keep_and_consolidate_contract",
       "importance": "high",
+      "resolution_status": "unresolved",
+      "blocked_by": "Endpoint file exists at backend/app/api/endpoints/ingest.py but is NOT mounted in backend/app/main.py live router. Canonical ingestion resolved to /api/v1/ingest — this endpoint must be either mounted or retired.",
       "backend_endpoints": [
         "POST /api/ingest/artifacts/upload"
       ],
       "frontend_evidence": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/ingestion/components/EvidenceUploader.tsx",
-        "/Users/okgoogle13/Projects/careercopilot/backend/app/api/endpoints/ingest.py"
+        "frontend/src/features/ingestion/components/EvidenceUploader.tsx",
+        "backend/app/api/endpoints/ingest.py"
       ],
       "notes": "Endpoint exists on disk but is not mounted by the live API."
     },
@@ -290,17 +308,21 @@
       "target_state_signal": "contract_consolidation_needed",
       "recommendation": "keep_and_consolidate_contract",
       "importance": "high",
+      "resolution_status": "partially_resolved",
+      "resolved_at": "2026-03-12",
+      "resolution_notes": "Canonical contract resolved to /api/v1/ingest in route-family-map.json and route-family-target-state.json. /api/career/ingest is deprecated. /api/ingest/artifacts/upload is unmounted. Frontend migration to single contract not yet executed.",
+      "blocked_by": "Frontend still references multiple ingestion paths (useCareerIngestion.ts, ResumeUploader.tsx, EvidenceUploader.tsx). Frontend code must converge on canonical /api/v1/ingest.",
       "backend_endpoints": [
         "POST /api/v1/ingest",
         "POST /api/career/ingest",
         "POST /api/ingest/artifacts/upload"
       ],
       "frontend_evidence": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/hooks/useCareerIngestion.ts",
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/profile/components/ResumeUploader.tsx",
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/ingestion/components/EvidenceUploader.tsx"
+        "frontend/src/hooks/useCareerIngestion.ts",
+        "frontend/src/features/profile/components/ResumeUploader.tsx",
+        "frontend/src/features/ingestion/components/EvidenceUploader.tsx"
       ],
-      "notes": "Three overlapping ingestion paths currently represent similar intake behavior."
+      "notes": "Three overlapping ingestion paths currently represent similar intake behavior. Canonical contract chosen but frontend migration pending."
     }
   ],
   "target_state_candidates": {
