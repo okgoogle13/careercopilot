@@ -598,8 +598,6 @@ Add these lightweight scripts:
   Flag routed surfaces still relying on hardcoded mock data.
 - `frontend/scripts/find-unowned-capabilities.mjs`
   Read backend endpoint inventory plus route-family map and list product-relevant capabilities without runtime ownership.
-- `frontend/scripts/validate-governance-artifacts.mjs`
-  Validate `.claude/route-family-map.json`, `.claude/plans/frontend-capability-gap-matrix.json`, and `.claude/plans/route-family-target-state.json` together.
 
 ### Suggested New Skills
 
