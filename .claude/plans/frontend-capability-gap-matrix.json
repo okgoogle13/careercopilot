@@ -237,6 +237,7 @@
       "importance": "medium",
       "resolution_status": "resolved_defer",
       "resolved_at": "2026-03-12",
+      "resolved_commit": "d9543561",
       "resolution_notes": "Deferred — frontend prefers Genkit-based /api/flows/analyze-job-from-url and /api/genkit/job/analyze-url over raw job-listings endpoints. Existing job_analyzer.py and unified_job_analyzer.py Genkit flows serve this domain.",
       "backend_endpoints": [
         "POST /api/job-listings/extract-from-text",
@@ -310,6 +311,7 @@
       "importance": "high",
       "resolution_status": "partially_resolved",
       "resolved_at": "2026-03-12",
+      "resolved_commit": "d9543561",
       "resolution_notes": "Canonical contract resolved to /api/v1/ingest in route-family-map.json and route-family-target-state.json. /api/career/ingest is deprecated. /api/ingest/artifacts/upload is unmounted. Frontend migration to single contract not yet executed.",
       "blocked_by": "Frontend still references multiple ingestion paths (useCareerIngestion.ts, ResumeUploader.tsx, EvidenceUploader.tsx). Frontend code must converge on canonical /api/v1/ingest.",
       "backend_endpoints": [

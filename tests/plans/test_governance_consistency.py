@@ -116,6 +116,18 @@ def test_unresolved_capabilities_have_blocked_by():
             )
 
 
+def test_resolved_capabilities_have_resolved_commit():
+    """Resolved or partially-resolved capabilities must have a resolved_commit field."""
+    cgm = load_artifact("capability-gap-matrix")
+    needs_commit = {"resolved", "resolved_defer", "partially_resolved"}
+    for cap in cgm["capability_matrix"]:
+        if cap.get("resolution_status") in needs_commit:
+            assert "resolved_commit" in cap and len(cap["resolved_commit"]) > 0, (
+                f"Capability {cap['id']} (status={cap['resolution_status']}) "
+                f"missing resolved_commit field"
+            )
+
+
 def test_ingestion_contract_sync_across_all_artifacts():
     """Ingestion canonical contract must be consistent across all three artifacts."""
     rfm = load_artifact("route-family-map")
