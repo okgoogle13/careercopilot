@@ -135,4 +135,5 @@ def test_no_absolute_paths_in_gap_matrix():
     """Capability gap matrix must not contain machine-specific absolute paths."""
     text = Path(".claude/plans/frontend-capability-gap-matrix.json").read_text()
     assert "/Users/" not in text, "Gap matrix contains absolute /Users/ paths"
-    assert "C:\\" not in text, "Gap matrix contains absolute Windows paths"
+    assert r"C:\\" not in text, "Gap matrix contains absolute Windows paths"
+    assert "/home/" not in text, "Gap matrix contains absolute /home/ paths"
