@@ -2,8 +2,8 @@
 
 > **Role:** Kerala Rage Engineer
 > **Branch:** `feat/frontend-source-of-truth-migration`
-> **Reference Commit:** 48ba8014 (post-Gemini fixes) — **NOT FOUND IN GIT HISTORY**
-> **Date:** 2026-03-12
+> **Methodology:** File-state-only analysis. No commit anchors.
+> **Date:** 2026-03-12 (revised)
 > **Artifacts Analysed:**
 > - `.claude/plans/frontend-capability-gap-matrix.json`
 > - `.claude/plans/route-family-target-state.json`
@@ -14,29 +14,42 @@
 > - `frontend/scripts/validate-governance-artifacts.mjs`
 > - `tests/plans/test_route_family_map.py`
 > - `tests/plans/test_layer_authority_docs.py`
+> - `tests/plans/test_governance_consistency.py`
+> - `backend/app/api/router.py`
+> - `backend/app/api/endpoints/resume_audit.py`
+> - `backend/app/api/endpoints/workflows.py`
+> - `backend/app/api/endpoints/auth.py`
+> - `backend/app/genkit_flows/` (job-related flows)
+> - `scripts/` (duplicate script search)
 
 ---
 
-## CRITICAL FINDING: Phantom Commit
+## METHODOLOGY: Disk-State-Only Verification
 
-Commit `48ba8014` does not exist in git history. The shallow clone contains 30+ commits and none match. The "CONFIRMED CHANGES" listed against this commit cannot be verified against an actual diff. This is either:
-
-1. A commit that was squashed, force-pushed, or exists on a different branch
-2. A hallucinated reference from a previous AI session
-
-**Impact:** Every claim below about "confirmed changes" must be independently verified against actual file state, not commit attribution.
+This critique uses **file state on disk as the single source of truth**. The reference commit `48ba8014` (post-Gemini fixes) is treated as narrative context only — it does not exist in the available git history (shallow/grafted clone). All "confirmed changes" from the original prompt are treated as **claims to verify**, not guaranteed facts. Each claim is verified against current file contents with exact file:line evidence.
 
 ---
 
 ## 1. COMPLETENESS — Score: 5/10
 
-**Did commit 48ba8014 fully resolve the backend gates and unrouted issues?**
+**Claim-by-claim verification against current file state:**
 
-- **Backend gates (workflow/resume-audit):** ✅ VERIFIED. `resume_audit.py` is mounted at `/api/resume-audit` via `api_router`. `workflows.py` is mounted at `/api/workflows`. Both routers confirmed in `backend/app/api/router.py`. However, `workflows.py` returns 503/501 for key operations — this is a placeholder gate, not a functional one.
-- **Voice locked to /profile:** ✅ PARTIALLY. `route-family-map.json` sets `account` canonical_owner to `/profile`. `route-family-target-state.json` cross_family_decisions declares `preferred_runtime_owner: "/profile"`. However, no actual UI for voice profile exists at `/profile` in `App.tsx` — `ProfileView.tsx` has no voice capture component.
-- **ResumeAuditPage/IngestionFlow promoted:** ❌ NOT PROMOTED. Neither `ResumeAuditPage` nor `IngestionFlow` appears in `App.tsx` route definitions. `ResumeAuditPage` is listed as a design reference in `route-family-map.json` but has no `<Route>` entry. `IngestionFlow` (from `screens/04_ingestion/`) is likewise unrouted. Only `IngestionPage` (from `pages/`) is routed at `/career/ingest`.
-- **genkit_job_analysis introduced:** ❌ NO SPECIFIC FLOW. No file named `genkit_job_analysis.py` exists. Related flows exist: `job_listing_extractor.py`, `job_analyzer.py`, `unified_job_analyzer.py`, `advanced_job_matching.py`. The function `advanced_job_analysis_flow` exists in `job_listing_extractor.py`. The claim is imprecise at best.
-- **Duplicate validation script removed:** ✅ VERIFIED. No `validate-duplicate*` or `duplicate_validation*` scripts found in `scripts/`.
+- **CLAIM: "Backend gates added (workflow/resume-audit)"** — ✅ VERIFIED.
+  - `resume_audit.py` is mounted at `/api/resume-audit` via `api_router` (`backend/app/api/router.py:47`). Contains real functionality: `@router.post("/evaluate")` calls `resumeAuditRKL()` Genkit flow.
+  - `workflows.py` is mounted at `/api/workflows` (`backend/app/api/router.py:38`). However, endpoints return **503 SERVICE_UNAVAILABLE** with message "Currently unavailable during Genkit 0.4.0 migration." This is a placeholder gate, not a functional backend.
+- **CLAIM: "Voice locked to /profile"** — ✅ VERIFIED (governance only; no frontend UI).
+  - `route-family-map.json`: `account` family `canonical_owner: "/profile"`, capability-led addition `voice_profile_management.owner_route: "/profile"`.
+  - `route-family-target-state.json`: `voice_ownership.preferred_runtime_owner: "/profile"`.
+  - `App.tsx:282-284`: `/profile` route renders `<ProfileView />`.
+  - `backend/app/api/endpoints/auth.py:81`: `@router.post("/voice-profile")` endpoint exists with real `voiceProfileExtractorFlow`.
+  - ❌ **Gap:** `ProfileView.tsx` contains zero voice-related UI elements. The governance decision is recorded but the frontend surface does not exist.
+- **CLAIM: "ResumeAuditPage/IngestionFlow promoted"** — ❌ NOT VERIFIED.
+  - `frontend/src/pages/ResumeAuditPage.tsx` exists (1225 bytes) but has **no route in `App.tsx`** — not imported, not rendered.
+  - `frontend/src/screens/04_ingestion/IngestionFlow.tsx` exists but has **no route in `App.tsx`**. What IS routed is `IngestionPage` (from `pages/IngestionPage.tsx`) at `/career/ingest` (`App.tsx:290-291`). `IngestionPage` and `IngestionFlow` are different components — promotion of the screen-level `IngestionFlow` has not occurred.
+- **CLAIM: "genkit_job_analysis introduced"** — ❌ NOT VERIFIED.
+  - No file named `genkit_job_analysis.py` exists anywhere in `backend/`. Related flows exist: `job_analyzer.py` (defines `analyze_job_description()`), `unified_job_analyzer.py` (defines `analyze_job_from_url()`), `job_listing_extractor.py` (defines `advanced_job_analysis_flow()`), `advanced_job_matching.py`, `extract_job_requirements.py`. The specific flow name claimed does not match any existing file or function.
+- **CLAIM: "Duplicate validation script removed"** — ❌ NOT VERIFIED.
+  - `scripts/consolidate-duplicate-dirs.sh` exists (6447 bytes, executable). Additional duplicate-related scripts exist in `archive/scripts/` and `tools/scripts/`. The claim that duplicate validation scripts were removed is factually incorrect against the current file state.
 
 **Remaining capability gaps:**
 - `resume_audit` frontend expects `GET /resume-audit/history` but backend does not expose it
