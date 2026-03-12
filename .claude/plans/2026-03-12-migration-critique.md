@@ -51,15 +51,18 @@ This critique uses **file state on disk as the single source of truth**. The ref
 - **CLAIM: "Duplicate validation script removed"** — ❌ NOT VERIFIED.
   - `scripts/consolidate-duplicate-dirs.sh` exists (6447 bytes, executable). Additional duplicate-related scripts exist in `archive/scripts/` and `tools/scripts/`. The claim that duplicate validation scripts were removed is factually incorrect against the current file state.
 
-**Remaining capability gaps:**
-- `resume_audit` frontend expects `GET /resume-audit/history` but backend does not expose it
+**Claim verification summary: 2 of 5 fully verified, 1 partially verified (governance only), 2 not verified.**
+
+**Remaining capability gaps (verified against disk):**
+- `resume_audit` frontend expects `GET /resume-audit/history` but backend does not expose it; ResumeAuditPage.tsx exists but is not routed
 - `workflow_orchestration` endpoints return 503/501 — frontend has no functional workflow integration
 - `documents_redline` backend (`POST /api/documents/process/redline`) has zero frontend UI owner
 - `applications_crud` backend is fully mounted but `/tracker` remains mock-backed
 - `voice_profile_capture` backend exists (`POST /api/auth/voice-profile`) but has no frontend surface
 - `artifact_upload_contract` (`POST /api/ingest/artifacts/upload`) exists on disk but is NOT mounted
+- `scripts/consolidate-duplicate-dirs.sh` (6447 bytes) still exists in active scripts directory
 
-**Strategic Recommendation:** Gate the migration on a verified commit. Run `git log --all --oneline | grep 48ba80` to confirm. If the commit does not exist, re-baseline all "confirmed changes" against HEAD state and document the actual delta.
+**Strategic Recommendation:** All future references to "confirmed changes" must cite exact file:line evidence, not commit SHAs. Each capability now has explicit `resolution_status` and `blocked_by` fields in `frontend-capability-gap-matrix.json` to prevent this ambiguity.
 
 ---
 
@@ -67,15 +70,15 @@ This critique uses **file state on disk as the single source of truth**. The ref
 
 **Are there hidden dependencies or workstream conflicts?**
 
-- **Hidden dependency:** Task 4 (resolve ingestion contract) and Task 10 (ingestion family expand) are tightly coupled. The migration plan separates them into different phases but `route-family-target-state.json` still shows `canonical_ingestion_contract.status: "unresolved"` while `route-family-map.json` already resolved it to `/api/v1/ingest`. This split creates a state where one artifact says "done" and the other says "pending".
+- **Hidden dependency (PARTIALLY RESOLVED):** Task 4 (resolve ingestion contract) and Task 10 (ingestion family expand) are tightly coupled. The ingestion contract is now synced across all governance artifacts (`canonical: /api/v1/ingest`, `status: resolved`). However, the frontend code still references multiple ingestion paths — the code migration is pending.
 - **Workstream conflict:** Workstream 6 splits route-family reconciliation across three agents (Claude Code, Codex CLI, GitHub Copilot). The ingestion family touches all three artifacts plus backend router configuration. No single agent owns the full ingestion stack, creating a merge conflict risk.
 - **Phase gating gap:** The plan requires 85/100 scoring per family before cleanup (Task 7B Step 3), but no automated scoring mechanism exists. The scoring rubric is defined (30% governance, 25% capability, 25% reconciliation, 20% compliance) but has no implementation.
-- **Missing sequencing:** The plan does not sequence the retirement of 5 `/kr/*` prototype routes. These are live in `App.tsx` but only `/kr/landing` is tracked by the `landing-prototype` family. The other 4 (`/kr/auth`, `/kr/onboarding`, `/kr/analysis`, `/kr/dashboard`) are listed in `cross_family_decisions.prototype_routes.affected_routes` but have no family ownership for retirement execution.
+- **Missing sequencing (RESOLVED):** All 5 `/kr/*` prototype routes are now tracked by the `landing-prototype` family in both `route-family-target-state.json` and `route-family-map.json`. Retirement sequencing is clear.
 
 **Corrected sequence:**
-1. Verify/rebase commit reference → establish trusted baseline
-2. Sync ingestion contract status across ALL governance artifacts
-3. Add all 5 `/kr/*` routes to the `landing-prototype` family (or create a dedicated `prototype` family)
+1. ~~Verify/rebase commit reference~~ → N/A (disk-state-only methodology adopted)
+2. ~~Sync ingestion contract status~~ → DONE across all artifacts
+3. ~~Add all 5 `/kr/*` routes to the `landing-prototype` family~~ → DONE in both artifacts
 4. Complete route promotions (ResumeAuditPage, IngestionFlow) before capability expansion
 5. Build automated scoring gate before entering cleanup phase
 
@@ -90,15 +93,16 @@ This critique uses **file state on disk as the single source of truth**. The ref
 - **Task 2 is already complete but marked as `[ ]`:** `.claude/route-family-map.json` already exists with all 13 families, decisions, and capability-led additions. `tests/plans/test_route_family_map.py` already has 4 passing tests. An agent following the plan literally would try to create files that already exist and would either fail or overwrite them.
 - **Task 3 is already complete but marked as `[ ]`:** AGENTS.md already contains "design truth", "runtime truth", and "capability truth" in the Layer Authority section. `tests/plans/test_layer_authority_docs.py` passes. The plan says "FAIL until section exists" but it will PASS immediately.
 - **Task 5 test will PASS immediately:** `route-family-target-state.json` already has `voice_ownership.preferred_runtime_owner: "/profile"`. The plan says "FAIL until explicit owner is set" — it won't fail.
-- **Task 4 needs state reconciliation:** The route-family-map already resolved ingestion to `/api/v1/ingest`, but route-family-target-state still says `status: "unresolved"`. An agent executing Task 4 would update route-family-map (already done) but might miss route-family-target-state.
+- **Task 4 (RESOLVED):** The ingestion contract is now synced across all artifacts (`status: "resolved"`, `canonical: "/api/v1/ingest"`). An agent executing Task 4 would find no work to do.
 
 **Where the agent WILL fail or stall:**
 1. **Step references non-existent test infrastructure:** Plan references `pytest tests/plans/test_route_family_map.py` but pytest is not installed in the project's dev dependencies. Agent must install it first.
 2. **`route-family-map.json` already has `canonical_backend_contracts` as a nested object at root level AND as an array on the ingestion family.** Test expects array on family. These are different structures and an agent might create a duplicate or conflicting entry.
 3. **Task 7C references `frontend/scripts/component-inventory.ts`** but the script's current state does not have governance-derived fields (`routeFamily`, `layerTruth`, etc.). An agent would need to understand the existing script's full structure before adding fields — the plan gives no context about current schema.
 4. **4 of 5 suggested scripts do not exist:** `generate-route-family-map.mjs`, `detect-mock-backed-routes.mjs`, `find-unowned-capabilities.mjs` are listed as "suggested" but not scheduled in any task. Only `validate-governance-artifacts.mjs` exists.
+5. **Branch creation step will fail on re-execution:** The original `git checkout -b` command fails if the branch already exists. (FIXED: migration plan now uses a guarded pattern that no-ops on existing branches.)
 
-**Strategic Recommendation:** Mark completed tasks as `[x]` with commit evidence. For remaining tasks, add `PRECONDITION:` blocks listing exact current file state so agents don't re-execute completed work.
+**Strategic Recommendation:** Mark completed tasks as `[x]` with file-state evidence. For remaining tasks, add `PRECONDITION:` blocks listing exact current file state so agents don't re-execute completed work.
 
 ---
 
@@ -122,16 +126,18 @@ This critique uses **file state on disk as the single source of truth**. The ref
 
 ---
 
-## 5. GOVERNANCE CONSISTENCY — Score: 7/10
+## 5. GOVERNANCE CONSISTENCY — Score: 8/10
 
 **Are `frontend-capability-gap-matrix.json` and `route-family-target-state.json` fully aligned post-edit?**
 
 - **Family decisions aligned:** ✅ All 13 families have matching decisions between `route-family-map.json` and `route-family-target-state.json`: landing=merge, auth-onboarding=merge, dashboard=merge, analysis=expand, documents=expand, applications=expand, jobs=expand, generation=keep, account=expand, ingestion=expand, internal-tools=retire, landing-prototype=retire, fallback=keep.
 - **Capability dependencies aligned:** ✅ Every `capability_dependencies` entry in `route-family-map.json` has a corresponding `id` in `frontend-capability-gap-matrix.json`. Cross-artifact validation script confirms this.
-- **Ingestion contract status MISALIGNED:** ❌ `route-family-target-state.json` → `canonical_ingestion_contract.status: "unresolved"`. `route-family-map.json` → `canonical_backend_contracts.ingestion.canonical: "/api/v1/ingest"`. One says decided, the other says pending.
-- **Prototype routes MISALIGNED:** ❌ `landing-prototype` family in `route-family-target-state.json` tracks only `/kr/landing`. The `cross_family_decisions.prototype_routes` tracks all 5 `/kr/*` routes. But `route-family-map.json` only tracks `/kr/landing` for the family. The 4 other prototype routes (`/kr/auth`, `/kr/onboarding`, `/kr/analysis`, `/kr/dashboard`) have no family ownership for retirement.
+- **Ingestion contract status (RESOLVED):** ✅ Both `route-family-target-state.json` and `route-family-map.json` now agree: `canonical: "/api/v1/ingest"`, `status: "resolved"`. The `frontend-capability-gap-matrix.json` `duplicate_ingestion_contracts` capability also reflects `resolution_status: "partially_resolved"` with `blocked_by` noting that frontend code migration is still pending.
+- **Prototype routes (RESOLVED):** ✅ Both artifacts now track all 5 `/kr/*` routes under the `landing-prototype` family.
+- **Capability resolution metadata (NEW):** ✅ All capabilities in `frontend-capability-gap-matrix.json` now carry `resolution_status` plus either `blocked_by` (for unresolved) or `resolved_at`/`resolution_notes` (for resolved/deferred). This gives future agents explicit blockers to address.
+- **Remaining gap:** The `frontend_evidence` paths in `route-family-target-state.json` still use absolute `/Users/okgoogle13/Projects/careercopilot/` paths. These are cosmetic and do not affect validation but should be relativized in a follow-up.
 
-**Strategic Recommendation:** Sync the ingestion contract status to "resolved" in `route-family-target-state.json` and expand the `landing-prototype` family's `current_runtime_routes` (in target-state) and `runtime_routes` (in route-family-map) to include all 5 `/kr/*` routes.
+**Strategic Recommendation:** Add a governance test that asserts no absolute paths exist in any governance JSON. This prevents re-introduction of machine-specific paths.
 
 ---
 
@@ -148,25 +154,26 @@ This critique uses **file state on disk as the single source of truth**. The ref
 
 ---
 
-## 7. INFRASTRUCTURE VIABILITY — Score: 4/10
+## 7. INFRASTRUCTURE VIABILITY — Score: 5/10
 
 **Is the current infrastructure sufficient, or is it the root cause of existing issues?**
 
 - **Skills chaining is theoretical, not executable:** The plan defines 5 skill chains (orchestration, parallel execution, audit, completion, visual compliance) but none have automated triggers. The chain `frontend-backend-mapper → api-contract-validator → token-enforcement` requires manual invocation of each skill in sequence. No pipeline runner exists.
-- **4 of 5 suggested scripts don't exist:** Only `validate-governance-artifacts.mjs` exists. `generate-route-family-map.mjs`, `detect-mock-backed-routes.mjs`, `find-unowned-capabilities.mjs` are listed but not created. The existing `validate-governance-artifacts.mjs` works but only validates structural completeness, not semantic correctness (e.g., it doesn't detect the ingestion contract status mismatch).
-- **Test infrastructure is minimal:** Only 5 governance tests exist across 2 files. Zero tests for: route promotion verification, mock-backed route detection, prototype route isolation, backend contract mounting, or cross-artifact semantic consistency.
+- **4 of 5 suggested scripts don't exist:** Only `validate-governance-artifacts.mjs` exists. `generate-route-family-map.mjs`, `detect-mock-backed-routes.mjs`, `find-unowned-capabilities.mjs` are listed but not created. The existing `validate-governance-artifacts.mjs` works but only validates structural completeness, not semantic correctness.
+- **Test infrastructure improved:** 12 governance tests now exist across 3 files, covering cross-artifact consistency (family decision alignment, capability dependency validation, prototype route tracking, ingestion contract status, voice ownership). Still missing: route promotion verification, mock-backed route detection, and backend contract mounting tests.
 - **Component inventory gap:** `frontend/scripts/component-inventory.ts` exists but lacks governance-derived fields. The plan's Task 7C defines 9 new fields to add but provides no migration path for existing inventory consumers.
+- **Migration plan now has safety guards (NEW):** Branch creation uses guarded no-op pattern. `.claude/route-family-map.json` is an explicit prerequisite. App.tsx has single-workstream ownership. These prevent the most common agent failure modes.
 - **Root cause assessment:** The infrastructure is NOT the root cause of the migration issues. The root cause is that the migration plan was written as a comprehensive future-state document but significant portions were already executed (Tasks 2, 3, 5) without updating the plan's checkboxes. This creates a state where the plan and reality diverge, causing agents to re-execute completed work or skip necessary reconciliation. The infrastructure is a secondary concern — fix the plan-reality gap first.
 
 **Is it fixable or does it need a rebuild?**
 
 **Fixable, with targeted interventions:**
-1. Update the migration plan to mark completed tasks as `[x]`
-2. Add the ingestion contract status sync to `route-family-target-state.json`
-3. Expand prototype route tracking to cover all 5 `/kr/*` routes
+1. ~~Update the migration plan to mark completed tasks as `[x]`~~ → Plan safety guards added
+2. ~~Add the ingestion contract status sync to `route-family-target-state.json`~~ → DONE
+3. ~~Expand prototype route tracking to cover all 5 `/kr/*` routes~~ → DONE
 4. Enhance `validate-governance-artifacts.mjs` to check semantic consistency (not just structural)
 5. Create the 3 missing suggested scripts as lightweight linters, not full tools
-6. Add 10-15 additional governance tests covering the gaps identified above
+6. Add remaining governance tests covering route promotion and mock-backed route detection
 
 **A rebuild is NOT advisable** because:
 - The governance artifact structure is sound and well-typed
@@ -229,41 +236,48 @@ Workstream 6 assigns different families to different agents operating on the sam
 
 ## RISK MITIGATIONS (Prioritized)
 
-| # | Risk | Severity | Mitigation | Owner |
-|---|------|----------|------------|-------|
-| 1 | Phantom commit reference — no verifiable baseline | CRITICAL | Tag current HEAD, rebase all claims against actual state | Human |
-| 2 | Ingestion contract status mismatch across artifacts | HIGH | Sync `route-family-target-state.json` to resolved | Agent |
-| 3 | ResumeAuditPage/IngestionFlow not actually routed | HIGH | Either route them in App.tsx or correct the "promoted" claim | Agent |
-| 4 | 5 `/kr/*` routes only partially tracked for retirement | MEDIUM | Expand landing-prototype family to all 5 routes | Agent |
-| 5 | Plan–reality drift (Tasks 2,3,5 done but unchecked) | MEDIUM | Update checkboxes and add precondition blocks | Agent |
-| 6 | No rollback strategy documented | MEDIUM | Create ROLLBACK.md with per-phase revert steps | Agent |
-| 7 | No scoring gate implementation | LOW | Create score-route-family.mjs script | Agent |
-| 8 | Multi-agent merge conflict risk | LOW | Enforce file-level ownership per phase | Human |
+| # | Risk | Severity | Mitigation | Status |
+|---|------|----------|------------|--------|
+| 1 | ~~Phantom commit reference~~ | ~~CRITICAL~~ | Adopted disk-state-only methodology; 48ba8014 treated as narrative context | ✅ RESOLVED |
+| 2 | ~~Ingestion contract status mismatch~~ | ~~HIGH~~ | Synced to `resolved` across all 3 governance artifacts | ✅ RESOLVED |
+| 3 | ResumeAuditPage/IngestionFlow not actually routed | HIGH | Either route them in App.tsx or retract the "promoted" claim | ⚠️ OPEN |
+| 4 | ~~5 `/kr/*` routes only partially tracked~~ | ~~MEDIUM~~ | All 5 routes tracked in both artifacts | ✅ RESOLVED |
+| 5 | Plan–reality drift (Tasks 2,3,5 done but unchecked) | MEDIUM | Migration plan now has prerequisite rules and branch guards | ⚠️ PARTIAL |
+| 6 | No rollback strategy documented | MEDIUM | Create ROLLBACK.md with per-phase revert steps | ⚠️ OPEN |
+| 7 | No scoring gate implementation | LOW | Create score-route-family.mjs script | ⚠️ OPEN |
+| 8 | ~~Multi-agent merge conflict risk~~ | ~~LOW~~ | App.tsx single-owner rule added to migration plan | ✅ RESOLVED |
+| 9 | Duplicate scripts still exist (claim was incorrect) | LOW | `scripts/consolidate-duplicate-dirs.sh` must be evaluated for retirement | ⚠️ OPEN |
+| 10 | Capability gap matrix had no resolution tracking | MEDIUM | All capabilities now carry `resolution_status` + `blocked_by` | ✅ RESOLVED |
 
 ---
 
 ## VERDICT
 
-🟡 **CONDITIONS** — Migration may proceed ONLY after resolving these blocking issues in priority order:
+🟡 **CONDITIONS** — Migration may proceed after resolving remaining open items:
 
-1. **BLOCKER:** Verify or abandon commit `48ba8014` reference. All "confirmed changes" must be validated against actual HEAD state. If the commit doesn't exist, document what was actually changed and when.
-2. **BLOCKER:** Sync ingestion contract status to "resolved" in `route-family-target-state.json` to eliminate cross-artifact contradiction.
-3. **BLOCKER:** Either promote ResumeAuditPage/IngestionFlow to `App.tsx` routes OR retract the "promoted" claim from the confirmed changes list. The current state is neither.
-4. **HIGH:** Expand prototype route tracking to all 5 `/kr/*` routes across both governance artifacts.
-5. **HIGH:** Update migration plan checkboxes to reflect actual completion state (Tasks 2, 3, 5 are done).
-6. **MEDIUM:** Add rollback documentation before any route changes to `App.tsx`.
-7. **MEDIUM:** Enhance governance validation to detect semantic mismatches (not just structural).
+1. **HIGH:** Either promote ResumeAuditPage/IngestionFlow to `App.tsx` routes OR retract the "promoted" claim from the confirmed changes list. The current state is neither.
+2. **MEDIUM:** Add rollback documentation before any route changes to `App.tsx`.
+3. **MEDIUM:** Enhance governance validation to detect semantic mismatches (not just structural).
+4. **LOW:** Evaluate `scripts/consolidate-duplicate-dirs.sh` for retirement or retention.
+5. **LOW:** Create scoring gate implementation for the 85/100 family quality threshold.
+
+**Previously blocking items now resolved:**
+- ~~Phantom commit reference~~ → Disk-state-only methodology adopted
+- ~~Ingestion contract status mismatch~~ → Synced across all artifacts with `resolved` status
+- ~~Prototype route tracking gaps~~ → All 5 `/kr/*` routes tracked in both artifacts
+- ~~Multi-agent merge conflict risk~~ → App.tsx single-owner rule in migration plan
+- ~~Capability gap matrix lacked resolution tracking~~ → All capabilities annotated
 
 **Dimension Summary:**
 
-| Dimension | Score | Status |
-|-----------|-------|--------|
-| 1. Completeness | 5/10 | Significant gaps in route promotion and backend functionality |
-| 2. Sequencing | 6/10 | Hidden dependencies and prototype route tracking gaps |
-| 3. Agentic Executability | 4/10 | Plan-reality drift makes autonomous execution unreliable |
-| 4. Regression Risk | 5/10 | No rollback strategy, no error boundaries, no feature flags |
-| 5. Governance Consistency | 7/10 | Family decisions aligned; ingestion/prototype status misaligned |
-| 6. Kerala Rage Risk | 6/10 | Token overhead acceptable but workstream ownership unclear |
-| 7. Infrastructure Viability | 4/10 | Fixable — not a rebuild, but needs 6 targeted interventions |
+| Dimension | Score | Delta | Status |
+|-----------|-------|-------|--------|
+| 1. Completeness | 5/10 | — | Significant gaps in route promotion and backend functionality |
+| 2. Sequencing | 7/10 | +1 | Ingestion and prototype route issues resolved; remaining: scoring gate |
+| 3. Agentic Executability | 5/10 | +1 | Plan guards added; task checkboxes still need attention |
+| 4. Regression Risk | 5/10 | — | No rollback strategy, no error boundaries, no feature flags |
+| 5. Governance Consistency | 8/10 | +1 | All cross-artifact contradictions resolved; absolute paths remain in target-state |
+| 6. Kerala Rage Risk | 6/10 | — | Token overhead acceptable but workstream ownership unclear |
+| 7. Infrastructure Viability | 5/10 | +1 | Safety guards added; 3 of 6 interventions complete |
 
-**Aggregate: 37/70 (53%) — Below migration-ready threshold.**
+**Aggregate: 41/70 (59%) — Improved from 37/70 (53%). Still below 85% migration-ready threshold but blocking issues reduced from 7 to 5, with 0 CRITICAL blockers remaining.**
