@@ -63,6 +63,8 @@ Arguments:
 - repo dependencies are installed so `npm run lint`, `npm run test`, and the audit CLIs are available
 - the benchmark bundle and wireframe artifacts exist for the target, or can be generated during the workflow
 - if full-confidence visual scoring is required, the migration-kit app can be served locally for Playwright screenshot capture
+- **a benchmark must exist for the target route before running this skill** — `auth-benchmark-v1` applies only to `/login` and `/register`; all other routes require a named benchmark defined before the audit begins; do not run this skill against a non-auth route using the default benchmark
+- if the route is governed by canonical XML wireframes, `scripts/validate-wireframe-workflow.py` must pass or be reviewed before trusting wireframe-derived audit inputs
 
 ## Best Practices
 
@@ -77,14 +79,15 @@ Arguments:
 Run these specialist skills in order and treat their output as evidence:
 
 1. `token-enforcement`
-2. `asset-placement-strategy`
-3. `manifest-reconciler`
-4. `component-visual-audit`
-5. `m3-visual-audit`
-6. `kerala-rage-typography-strategy`
-7. `m3-anti-slop-validator`
-8. `ux-copy-writer`
-9. `kerala-rage-brand-enforcer` when policy ambiguity remains
+2. `scripts/validate-wireframe-workflow.py` for canonical wireframe-backed routes
+3. `asset-placement-strategy`
+4. `manifest-reconciler`
+5. `component-visual-audit`
+6. `m3-visual-audit`
+7. `kerala-rage-typography-strategy`
+8. `m3-anti-slop-validator`
+9. `ux-copy-writer`
+10. `kerala-rage-brand-enforcer` when policy ambiguity remains
 
 If the target is still a wireframe or mockup rather than implemented code, use `ui-design-evaluator` before visual scoring.
 

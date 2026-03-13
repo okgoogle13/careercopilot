@@ -11,6 +11,34 @@
 
 Convert the migration plan into a feature-first, component-aware backlog that can be implemented without re-deciding route ownership, component ownership, or backend capability mapping.
 
+## Recommended Task Assignment
+
+Use these default assignments when splitting backlog work across agents:
+
+| Priority | Action | Backlog anchor | Recommended agent |
+| --- | --- | --- | --- |
+| `P0` | complete the skills/scripts review before feature milestones begin | `MIG-003`, `MIG-004` | `Claude` |
+| `P0` | confirm `/api/v1/ingest` remains mounted and use that verification in ingestion cleanup | `MIG-103` | `Codex` |
+| `P1` | define and lock the token-enforcement check | `MIG-005` | `Claude` |
+| `P1` | close the `/tracker` build-contract approval gate | `MIG-007A`, `MIG-007B`, `MIG-007C` | `Claude` |
+| `P1` | extend the approved build-contract pattern to `/profile` and `/career/ingest` | `MIG-007D`, `MIG-007E` | `Claude` |
+| `P1` | add or maintain `M1` parallel execution guidance | `M1` | `Codex` |
+| `P1` | add or maintain contract-validation steps before build-heavy component work | `MIG-101`, `MIG-102`, `MIG-201` | `Codex` |
+| `P2` | add or maintain route-matrix implementation-status tracking | route matrix MD + JSON | `Codex` |
+| `P3` | expand Phase 3 backlog items from the route matrix when route-family execution starts | `M4`, `M5` | `Gemini` |
+
+Human oversight remains required before any `P0` item closes and before `M5` cleanup retires routes or components permanently.
+
+## Current Review Snapshot
+
+- Current phase: late `Phase 1` / early `Phase 3` readiness
+- `/tracker` build contract status: `in_review`
+- `/tracker` gate result: `blocked`
+- Highest-priority blocker: unresolved `KanbanColumn` ownership and missing deterministic source artifacts for the new CRUD support components
+- Immediate parallel work that should continue while Claude closes the `/tracker` gate:
+  - `MIG-103`
+  - `MIG-005`
+
 ## Milestones
 
 ### M1: Phase 1 and Phase 1A - Planning Inputs and Migration Support Review
@@ -33,6 +61,7 @@ Acceptance:
 - `genkit_job_analysis` has normalized capability metadata
 - custom skills and migration-support scripts are reviewed and classified as fit for purpose before they are used as execution infrastructure
 - token-enforcement expectations are defined for any route touched by migration work
+- wireframe workflow documentation and validation exist for canonical XML wireframes before Phase 3 execution starts
 
 Backlog items:
 
@@ -60,6 +89,7 @@ Backlog items:
 
 #### MIG-003: Review migration skills for fit-for-purpose
 - Plan phase reference: `Phase 1A`
+- Status: `completed` on `2026-03-14`
 - Area: planning integrity
 - Type: process/tooling review
 - Depends on: none
@@ -72,6 +102,7 @@ Backlog items:
 
 #### MIG-004: Review migration scripts for fit-for-purpose
 - Plan phase reference: `Phase 1A`
+- Status: `completed` on `2026-03-14`
 - Area: planning integrity
 - Type: tooling review
 - Depends on: none
@@ -94,6 +125,125 @@ Backlog items:
   - identify which review steps enforce token compliance during migration
 - Completion evidence:
   - milestone closure includes the grep result for touched route files and any justified exceptions
+
+#### MIG-006: Document and validate the wireframe workflow
+- Plan phase reference: `Phase 1`
+- Status: `completed` on `2026-03-14`
+- Area: wireframe workflow
+- Type: planning/tooling
+- Depends on: none
+- Deliverables:
+  - record prior wireframe-process learnings, reuse guidance, and workflow `do` / `don't` rules in the tracked migration docs
+  - add a deterministic validator for canonical XML wireframes and planning-artifact consistency
+  - validate wireframes against the route matrix, component gap map, and asset-integrity warnings before Phase 3 execution
+- Completion evidence:
+  - `scripts/validate-wireframe-workflow.py` runs against the repo and emits a structured report
+  - tracked migration docs capture the prior-failure analysis and the current workflow sequence
+  - the workflow explicitly separates validated wireframes, build contracts, tokens-first gap-fill planning, and later implementation-spec work
+
+#### MIG-007: Generate route-level wireframe build contracts from canonical XML
+- Plan phase reference: `Phase 3`
+- Area: wireframe workflow
+- Type: planning/spec generation
+- Depends on: `MIG-006`
+- Status: **in progress** (`2026-03-14`, review-blocked)
+- Deliverables:
+  - add the tracked build-contract prompt artifact to the migration docs — **done** (`2026-03-14-wireframe-build-contract-prompt.md`)
+  - use the exact prompt to generate deterministic build contracts for priority routes — **partially done** (`2026-03-14-build-contract-tracker.xml` exists for `/tracker` but is not yet approved)
+  - ensure each build contract reconciles canonical XML wireframes with the route matrix and backend-feature component gap map — **partially done** (the `/tracker` contract reconciles `07_kanban.wireframe.xml`, the `tracker` route row, and the `applications_crud` gap entry, but still contains blocking gaps)
+  - record blocking `contract_gap` findings instead of inferring missing ownership or components — **done** (2 blocking gaps: KanbanColumn ownership, missing wireframe elements for new_components; 4 non-blocking gaps)
+- Completion evidence:
+  - at least one priority-route build contract is **approved**, not merely generated
+  - the approved output uses the required XML contract schema, contains no code generation, and leaves no build-critical ownership decisions unresolved
+
+#### MIG-008: Derive tokens-first gap-fill plans before component build work
+- Plan phase reference: `Phase 3`
+- Area: wireframe workflow
+- Type: planning/spec generation
+- Depends on: `MIG-007`
+- Status: `in progress`
+- Deliverables:
+  - add a tracked tokens-first gap-fill workflow artifact to the migration docs
+  - add a deterministic planner that compares route ownership, component gaps, approved build-contract inputs, and existing runtime TSX files
+  - classify each target component as `reuse_as_is`, `keep_behavior_rewrite_styling`, `keep_behavior_extend_tokens`, `reference_only`, `build_new`, or `blocked`
+  - prevent token-dirty runtime presentation from being reused as canonical implementation without rewrite
+- Completion evidence:
+  - `scripts/derive-gap-fill-plan.py` generates a route-level JSON plan
+  - the tracked docs explain the tokens-first reuse formula and thresholds
+  - route-level implementation specs can distinguish behavior reuse from presentation reuse
+
+#### MIG-007A: Resolve `KanbanColumn` ownership for `/tracker`
+- Plan phase reference: `Phase 3`
+- Area: wireframe workflow
+- Type: contract-gap resolution
+- Depends on: `MIG-007`
+- Owner route: `/tracker`
+- Canonical surface: `ApplicationTracker`
+- Owner: `Claude`
+- Status: `pending`
+- Deliverables:
+  - classify `KanbanColumn` as either a route-owned `support_component` or a shared UI primitive outside route ownership
+  - update the build-contract mapping so all `/tracker` wireframe elements use allowed ownership roles only
+- Completion evidence:
+  - no `/tracker` build-contract mapping entry uses `ownership_role=unresolved`
+
+#### MIG-007B: Add deterministic source artifacts for `/tracker` CRUD support components
+- Plan phase reference: `Phase 3`
+- Area: wireframe workflow
+- Type: contract-gap resolution
+- Depends on: `MIG-007`
+- Owner route: `/tracker`
+- Canonical surface: `ApplicationTracker`
+- Owner: `Claude`
+- Status: `pending`
+- Deliverables:
+  - provide a deterministic source for `ApplicationDetailPanel`, `ApplicationEditForm`, `ApplicationStatusActions`, and `ApplicationArchiveAction`
+  - use either canonical wireframe elements or tracked supplementary component briefs
+- Completion evidence:
+  - each new CRUD support component is backed by a tracked source artifact instead of inferred manifest content
+
+#### MIG-007C: Regenerate and resubmit the `/tracker` build contract
+- Plan phase reference: `Phase 3`
+- Area: wireframe workflow
+- Type: contract approval
+- Depends on: `MIG-007A`, `MIG-007B`
+- Owner route: `/tracker`
+- Canonical surface: `ApplicationTracker`
+- Owner: `Claude`
+- Status: `pending`
+- Deliverables:
+  - regenerate `2026-03-14-build-contract-tracker.xml` after the blocking gaps are resolved
+  - remove build-critical ownership and wireframe-data gaps from the `/tracker` contract
+- Completion evidence:
+  - the `/tracker` contract is reviewable as `approved`, not `draft` or `in_review`
+
+#### MIG-007D: Extend the approved build-contract pattern to `/profile`
+- Plan phase reference: `Phase 3`
+- Area: wireframe workflow
+- Type: planning/spec generation
+- Depends on: `MIG-007C`
+- Owner route: `/profile`
+- Canonical surface: `ProfileView`
+- Owner: `Claude`
+- Status: `blocked`
+- Deliverables:
+  - generate a route-level build contract for `/profile` using the approved `/tracker` review pattern
+- Completion evidence:
+  - `/profile` build contract exists and is ready for the same approval rubric used for `/tracker`
+
+#### MIG-007E: Extend the approved build-contract pattern to `/career/ingest`
+- Plan phase reference: `Phase 3`
+- Area: wireframe workflow
+- Type: planning/spec generation
+- Depends on: `MIG-007C`
+- Owner route: `/career/ingest`
+- Canonical surface: `IngestionPage`
+- Owner: `Claude`
+- Status: `blocked`
+- Deliverables:
+  - generate a route-level build contract for `/career/ingest` using the approved `/tracker` review pattern
+- Completion evidence:
+  - `/career/ingest` build contract exists and is ready for the same approval rubric used for `/tracker`
 
 ### M2: Phase 2.1 and Phase 2.2 - Applications and Smart Ingestion
 

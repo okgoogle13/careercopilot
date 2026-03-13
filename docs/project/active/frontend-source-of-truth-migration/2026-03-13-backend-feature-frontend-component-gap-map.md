@@ -30,13 +30,14 @@ For each feature, it answers:
   - `ApplicationTracker`
   - `KanbanTracker` as reference-only source for interaction patterns
 - New components to build:
+  - `KanbanColumn` (kanban stage column — drag-drop target, card container)
   - `ApplicationDetailPanel`
   - `ApplicationEditForm`
   - `ApplicationStatusActions`
   - `ApplicationArchiveAction`
 - Component status:
   - canonical: `ApplicationTracker`
-  - support: new detail, edit, status, and archive components
+  - support: kanban column, detail, edit, status, and archive components
   - reference-only: `KanbanTracker`
 - Notes:
   - This is the highest-priority product gap because the backend is already real and the current route is still effectively mock-backed.
@@ -187,6 +188,7 @@ For each feature, it answers:
 
 ### New canonical support components still required
 
+- `KanbanColumn`
 - `ApplicationDetailPanel`
 - `ApplicationEditForm`
 - `ApplicationStatusActions`

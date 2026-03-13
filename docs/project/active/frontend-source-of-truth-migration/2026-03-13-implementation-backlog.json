@@ -20,7 +20,8 @@
         "validate-governance-artifacts.mjs enforces the same minimum invariants as the Python tests",
         "genkit_job_analysis has normalized capability metadata",
         "custom skills and migration-support scripts are reviewed and classified as fit for purpose before they are used as execution infrastructure",
-        "token-enforcement expectations are defined for any route touched by migration work"
+        "token-enforcement expectations are defined for any route touched by migration work",
+        "wireframe workflow documentation and validation exist for canonical XML wireframes before Phase 3 execution starts"
       ],
       "items": [
         {
@@ -58,6 +59,7 @@
         {
           "id": "MIG-003",
           "title": "Review migration skills for fit-for-purpose",
+          "status": "completed",
           "plan_phase_ref": "Phase 1A",
           "area": "planning_integrity",
           "owner_route": null,
@@ -74,6 +76,7 @@
         {
           "id": "MIG-004",
           "title": "Review migration scripts for fit-for-purpose",
+          "status": "completed",
           "plan_phase_ref": "Phase 1A",
           "area": "planning_integrity",
           "owner_route": null,
@@ -104,6 +107,87 @@
           ],
           "completion_evidence": [
             "milestone closure includes the grep result for touched route files and any justified exceptions"
+          ]
+        },
+        {
+          "id": "MIG-006",
+          "title": "Document and validate the wireframe workflow",
+          "status": "completed",
+          "plan_phase_ref": "Phase 1",
+          "area": "wireframe_workflow",
+          "owner_route": null,
+          "owner_surface": null,
+          "type": "planning_tooling",
+          "depends_on": [],
+          "new_components": [],
+          "deliverables": [
+            "record prior wireframe-process learnings, reuse guidance, and workflow do/don't rules in the tracked migration docs",
+            "add a deterministic validator for canonical XML wireframes and planning-artifact consistency",
+            "validate wireframes against the route matrix, component gap map, and asset-integrity warnings before Phase 3 execution"
+          ],
+          "completion_evidence": [
+            "scripts/validate-wireframe-workflow.py runs against the repo and emits a structured report",
+            "tracked migration docs capture the prior-failure analysis and the current workflow sequence",
+            "the workflow explicitly separates validated wireframes, build contracts, tokens-first gap-fill planning, and later implementation-spec work"
+          ]
+        },
+        {
+          "id": "MIG-007",
+          "title": "Generate route-level wireframe build contracts from canonical XML",
+          "plan_phase_ref": "Phase 3",
+          "area": "wireframe_workflow",
+          "owner_route": null,
+          "owner_surface": null,
+          "type": "planning_spec_generation",
+          "status": "in_progress",
+          "depends_on": [
+            "MIG-006"
+          ],
+          "new_components": [],
+          "deliverables": [
+            "add the tracked build-contract prompt artifact to the migration docs",
+            "use the exact prompt to generate deterministic build contracts for priority routes",
+            "ensure each build contract reconciles canonical XML wireframes with the route matrix and backend-feature component gap map",
+            "record blocking contract_gap findings instead of inferring missing ownership or components"
+          ],
+          "completion_evidence": [
+            "at least one priority-route build contract is approved, not merely generated",
+            "the approved output uses the required XML contract schema, contains no code generation, and leaves no build-critical ownership decisions unresolved"
+          ],
+          "completion_artifacts": [
+            "docs/project/active/frontend-source-of-truth-migration/2026-03-14-wireframe-build-contract-prompt.md",
+            "docs/project/active/frontend-source-of-truth-migration/2026-03-14-build-contract-tracker.xml"
+          ],
+          "blocking_contract_gaps": 2,
+          "non_blocking_contract_gaps": 4
+        },
+        {
+          "id": "MIG-008",
+          "title": "Derive tokens-first gap-fill plans before component build work",
+          "plan_phase_ref": "Phase 3",
+          "area": "wireframe_workflow",
+          "owner_route": null,
+          "owner_surface": null,
+          "type": "planning_spec_generation",
+          "status": "in_progress",
+          "depends_on": [
+            "MIG-007"
+          ],
+          "new_components": [],
+          "deliverables": [
+            "add a tracked tokens-first gap-fill workflow artifact to the migration docs",
+            "add a deterministic planner that compares route ownership, component gaps, approved build-contract inputs, and existing runtime TSX files",
+            "classify each target component as reuse_as_is, keep_behavior_rewrite_styling, keep_behavior_extend_tokens, reference_only, build_new, or blocked",
+            "prevent token-dirty runtime presentation from being reused as canonical implementation without rewrite"
+          ],
+          "completion_evidence": [
+            "scripts/derive-gap-fill-plan.py generates a route-level JSON plan",
+            "the tracked docs explain the tokens-first reuse formula and thresholds",
+            "route-level implementation specs can distinguish behavior reuse from presentation reuse"
+          ],
+          "completion_artifacts": [
+            "docs/project/active/frontend-source-of-truth-migration/2026-03-14-tokens-first-gap-fill-workflow.md",
+            "scripts/derive-gap-fill-plan.py"
           ]
         }
       ]
