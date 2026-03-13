@@ -76,8 +76,10 @@ interface ComponentInfo {
   layerTruth?: 'design' | 'runtime' | 'capability_adjacent' | 'derived' | 'unknown';
   canonicalStatus?:
     | 'canonical'
+    | 'support'
     | 'reference'
     | 'prototype'
+    | 'deferred'
     | 'deprecated_candidate'
     | 'deadcode_candidate'
     | 'unknown';
@@ -114,38 +116,35 @@ interface InventoryReport {
   };
 }
 
-interface RouteFamilyEntry {
+interface RouteMatrixRow {
+  current_route: string;
+  target_route: string;
   family: string;
-  decision: 'keep' | 'expand' | 'merge' | 'replace' | 'retire';
-  runtime_routes: string[];
-  design_references: string[];
-  capability_dependencies: string[];
-  phase: string;
+  status: 'keep' | 'expand' | 'merge' | 'replace' | 'retire';
+  current_runtime_owner?: string;
+  target_runtime_owner?: string;
+  screen_reference?: string | null;
+  paired_runtime_surface?: string | null;
+  target_component_surfaces?: string[];
+  backend_capabilities?: string[];
 }
 
-interface RouteFamilyMap {
-  families: RouteFamilyEntry[];
-  capability_led_additions?: Array<{ id: string; owner_family: string; status: string }>;
+interface RouteMatrix {
+  rows: RouteMatrixRow[];
 }
 
-interface CapabilityEntry {
-  id: string;
-  frontend_coverage?: string;
-  recommendation?: string;
-  importance?: string;
+interface BackendFeatureGap {
+  feature_id: string;
+  owner_route: string;
+  owner_surface: string;
+  frontend_status?: string;
+  reference_components?: string[];
+  new_components?: string[];
+  deferred_components?: string[];
 }
 
-interface CapabilityGapMatrix {
-  capability_matrix: CapabilityEntry[];
-}
-
-interface RouteFamilyTargetStateFamily {
-  family: string;
-  decision: 'keep' | 'expand' | 'merge' | 'replace' | 'retire';
-}
-
-interface RouteFamilyTargetState {
-  families: RouteFamilyTargetStateFamily[];
+interface BackendFeatureComponentGapMap {
+  features: BackendFeatureGap[];
 }
 
 const ROUTE_FAMILY_HINTS: Record<string, string[]> = {
@@ -176,17 +175,21 @@ const COMPONENT_ROOTS = [
   UI_PACKAGE_DIR,
 ];
 
-const GOVERNANCE_ROOT = path.join(FRONTEND_DIR, '..', '.claude');
-const ROUTE_FAMILY_MAP_PATH = path.join(GOVERNANCE_ROOT, 'route-family-map.json');
-const CAPABILITY_GAP_MATRIX_PATH = path.join(
-  GOVERNANCE_ROOT,
-  'plans',
-  'frontend-capability-gap-matrix.json'
+const REPO_ROOT = path.join(FRONTEND_DIR, '..');
+const TRACKED_MIGRATION_ROOT = path.join(
+  REPO_ROOT,
+  'docs',
+  'project',
+  'active',
+  'frontend-source-of-truth-migration'
 );
-const ROUTE_FAMILY_TARGET_STATE_PATH = path.join(
-  GOVERNANCE_ROOT,
-  'plans',
-  'route-family-target-state.json'
+const ROUTE_MATRIX_PATH = path.join(
+  TRACKED_MIGRATION_ROOT,
+  '2026-03-13-target-state-route-matrix.json'
+);
+const COMPONENT_GAP_MAP_PATH = path.join(
+  TRACKED_MIGRATION_ROOT,
+  '2026-03-13-backend-feature-frontend-component-gap-map.json'
 );
 
 function normalizePath(value: string): string {
@@ -267,29 +270,57 @@ function normalizeRepoPath(p: string): string {
 }
 
 function getGovernanceContext() {
-  const routeFamilyMap = readJsonIfExists<RouteFamilyMap>(ROUTE_FAMILY_MAP_PATH);
-  const capabilityGapMatrix = readJsonIfExists<CapabilityGapMatrix>(CAPABILITY_GAP_MATRIX_PATH);
-  const routeFamilyTargetState = readJsonIfExists<RouteFamilyTargetState>(
-    ROUTE_FAMILY_TARGET_STATE_PATH
-  );
-
-  const familyByDecision = new Map<string, RouteFamilyTargetStateFamily['decision']>();
-  routeFamilyTargetState?.families?.forEach((entry) =>
-    familyByDecision.set(entry.family, entry.decision)
-  );
-
-  const routeEntries = routeFamilyMap?.families ?? [];
+  const routeMatrix = readJsonIfExists<RouteMatrix>(ROUTE_MATRIX_PATH);
+  const componentGapMap = readJsonIfExists<BackendFeatureComponentGapMap>(COMPONENT_GAP_MAP_PATH);
+  const routeRows = routeMatrix?.rows ?? [];
+  const featureGaps = componentGapMap?.features ?? [];
 
   return {
-    routeEntries,
-    familyByDecision,
-    unresolvedCapabilityGaps: (capabilityGapMatrix?.capability_matrix ?? [])
+    routeRows,
+    featureGaps,
+    unresolvedCapabilityGaps: featureGaps
       .filter(
         (entry) =>
-          entry.frontend_coverage === 'no_live_owner' || entry.frontend_coverage === 'mock_only'
+          entry.frontend_status === 'no_live_owner' ||
+          entry.frontend_status === 'mock_only' ||
+          entry.frontend_status === 'partially_wired'
       )
-      .map((entry) => entry.id),
+      .map((entry) => entry.feature_id),
   };
+}
+
+function scoreRouteRowMatch(
+  row: RouteMatrixRow,
+  normalizedRelativePath: string,
+  normalizedComponentName: string
+): number {
+  let score = 0;
+  const screenReference = normalizePath(row.screen_reference ?? '').toLowerCase();
+  const runtimeSurface = normalizePath(row.paired_runtime_surface ?? '').toLowerCase();
+  const targetOwner = (row.target_runtime_owner ?? '').toLowerCase();
+  const currentOwner = (row.current_runtime_owner ?? '').toLowerCase();
+  const familyHints = ROUTE_FAMILY_HINTS[row.family] ?? [];
+
+  if (screenReference && screenReference.endsWith(normalizedRelativePath)) score += 8;
+  if (runtimeSurface && runtimeSurface.endsWith(normalizedRelativePath)) score += 8;
+  if (targetOwner && targetOwner === normalizedComponentName) score += 8;
+  if (currentOwner && currentOwner === normalizedComponentName) score += 6;
+  if (
+    (row.target_component_surfaces ?? []).some(
+      (surface) => surface.toLowerCase() === normalizedComponentName
+    )
+  ) {
+    score += 5;
+  }
+  if (
+    familyHints.some(
+      (hint) => normalizedRelativePath.includes(hint) || normalizedComponentName.includes(hint)
+    )
+  ) {
+    score += 2;
+  }
+
+  return score;
 }
 
 function getGovernanceMetadata(
@@ -299,6 +330,9 @@ function getGovernanceMetadata(
 ) {
   const normalizedRelativePath = normalizePath(relativePath).toLowerCase();
   const normalizedComponentName = componentName.toLowerCase();
+  const normalizedRepoRelativePath = normalizePath(
+    path.join('frontend', relativePath)
+  ).toLowerCase();
   let routeFamily: string | undefined;
   let targetStateDecision: ComponentInfo['targetStateDecision'] = 'unknown';
   let capabilityDependencies: string[] = [];
@@ -306,35 +340,61 @@ function getGovernanceMetadata(
   let prototypeStatus: ComponentInfo['prototypeStatus'] = 'none';
   let canonicalStatus: ComponentInfo['canonicalStatus'] = 'unknown';
 
-  for (const entry of governance.routeEntries) {
-    const hasDesignRef = entry.design_references.some((ref) =>
-      normalizePath(ref).toLowerCase().endsWith(normalizedRelativePath)
-    );
-    const routeTokens = entry.runtime_routes
-      .map((route) => route.replace(/\W+/g, '').toLowerCase())
-      .filter((token) => token.length > 0);
-    const hintTokens = ROUTE_FAMILY_HINTS[entry.family] ?? [];
-    const runtimeMatch =
-      routeTokens.some(
-        (token) => normalizedComponentName.includes(token) || normalizedRelativePath.includes(token)
-      ) ||
-      hintTokens.some(
-        (token) => normalizedComponentName.includes(token) || normalizedRelativePath.includes(token)
-      );
+  const matchedRoute = governance.routeRows
+    .map((row) => ({
+      row,
+      score: scoreRouteRowMatch(row, normalizedRepoRelativePath, normalizedComponentName),
+    }))
+    .filter((entry) => entry.score > 0)
+    .sort((a, b) => b.score - a.score)[0]?.row;
 
-    if (hasDesignRef || runtimeMatch) {
-      routeFamily = entry.family;
-      targetStateDecision = governance.familyByDecision.get(entry.family) ?? entry.decision;
-      capabilityDependencies = entry.capability_dependencies ?? [];
-      migrationPhase = entry.phase;
-      break;
-    }
+  if (matchedRoute) {
+    routeFamily = matchedRoute.family;
+    targetStateDecision = matchedRoute.status;
+    capabilityDependencies = matchedRoute.backend_capabilities ?? [];
   }
+
+  const matchedFeature = governance.featureGaps.find(
+    (feature) =>
+      feature.owner_surface.toLowerCase() === normalizedComponentName ||
+      (feature.reference_components ?? []).some(
+        (component) => component.toLowerCase() === normalizedComponentName
+      ) ||
+      (feature.new_components ?? []).some(
+        (component) => component.toLowerCase() === normalizedComponentName
+      ) ||
+      (feature.deferred_components ?? []).some(
+        (component) => component.toLowerCase() === normalizedComponentName
+      )
+  );
 
   if (relativePath.startsWith('src/screens/')) {
     canonicalStatus = 'reference';
   } else if (relativePath.includes('phase3-batch') || relativePath.includes('/debug/')) {
     canonicalStatus = 'deprecated_candidate';
+  } else if (
+    matchedFeature?.deferred_components?.some((component) => component === componentName)
+  ) {
+    canonicalStatus = 'deferred';
+  } else if (
+    matchedFeature?.reference_components?.some((component) => component === componentName)
+  ) {
+    canonicalStatus = 'reference';
+  } else if (
+    matchedFeature?.owner_surface === componentName ||
+    matchedRoute?.target_runtime_owner === componentName
+  ) {
+    canonicalStatus = 'canonical';
+  } else if (
+    matchedRoute?.target_component_surfaces?.some((surface) => surface === componentName) ||
+    matchedFeature?.new_components?.some((component) => component === componentName)
+  ) {
+    canonicalStatus = 'support';
+  } else if (
+    relativePath.startsWith('src/layouts/') ||
+    relativePath.startsWith('src/components/')
+  ) {
+    canonicalStatus = 'support';
   } else if (relativePath.startsWith('src/features/') || relativePath.startsWith('src/pages/')) {
     canonicalStatus = 'canonical';
   }
@@ -349,23 +409,27 @@ function getGovernanceMetadata(
     prototypeStatus = 'runtime';
   }
 
-  const lowerName = componentName.toLowerCase();
-  const mockBacked =
-    lowerName.includes('tracker') ||
-    lowerName.includes('documents') ||
-    lowerName.includes('jobqueue') ||
-    lowerName.includes('opportunities');
+  const mockBacked = Boolean(
+    matchedFeature &&
+    ['mock_only', 'no_live_owner', 'partially_wired'].includes(
+      matchedFeature.frontend_status ?? ''
+    ) &&
+    (relativePath.startsWith('src/features/') || relativePath.startsWith('src/pages/'))
+  );
 
   const deadCodeCandidate =
-    canonicalStatus === 'deprecated_candidate' || prototypeStatus === 'unrouted_candidate';
+    canonicalStatus === 'deprecated_candidate' ||
+    (prototypeStatus === 'unrouted_candidate' && targetStateDecision === 'retire');
 
   const layerTruth: ComponentInfo['layerTruth'] = relativePath.startsWith('src/screens/')
     ? 'design'
     : relativePath.startsWith('src/features/') || relativePath.startsWith('src/pages/')
       ? 'runtime'
-      : relativePath.includes('phase3-batch')
-        ? 'derived'
-        : 'unknown';
+      : matchedFeature
+        ? 'capability_adjacent'
+        : relativePath.includes('phase3-batch')
+          ? 'derived'
+          : 'unknown';
 
   return {
     routeFamily,

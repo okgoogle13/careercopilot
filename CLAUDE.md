@@ -23,6 +23,32 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ---
 
+## Active Initiative: Frontend Source-of-Truth Migration
+
+**Phase**: M1 (Planning Gates) — no implementation started
+**Plan**: `docs/project/active/frontend-source-of-truth-migration/`
+
+### Locked Route Decisions
+- **expand**: `/tracker` (mock→CRUD), `/career/ingest`, `/profile`, `/documents`, `/analysis`, `/opportunities`, `/apply/quick`
+- **retire**: `/kr/*` (5 prototype routes), `/design-sidekick`, `/style-guide`, `/test-tokens`
+
+### M1 Gates (must clear before M2)
+- MIG-001: Fix capability matrix (`resolution_status`, `blocked_by`, `resolved_commit`)
+- MIG-002: Align `validate-governance-artifacts.mjs` with Python tests (blocks on MIG-001)
+- MIG-003: Approve 5 migration skills (sprint-coordinator, frontend-backend-mapper, api-contract-validator, migration-audit, verification-before-completion)
+- MIG-004: Approve scripts review (component-inventory.ts `approved_with_limits`; mjs `not_fit_for_purpose`)
+- MIG-005: Define token-enforcement gate (regex scan hardcoded colors on touched routes)
+
+### Tool Limits (until human upgrades to `approved`)
+- All migration skills: `approved_with_limits` — cannot override route matrix or decide product truth
+- `validate-governance-artifacts.mjs`: `not_fit_for_purpose` — ad hoc inspection only, NOT a gate
+
+### Critical Blockers
+- `workflow_orchestration` backend placeholder-only (defers workflow UI to M5)
+- Ingestion callers fragmented across 4 API paths (canonicalized in MIG-103)
+
+---
+
 ## Task Delegation (Token Conservation) ⚡
 
 **RULE: Default to delegation via the task-router MCP, NOT local execution.**

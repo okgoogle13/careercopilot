@@ -88,6 +88,93 @@ Current known facts from the existing review work:
 
 This means the current app is not just "behind the wireframes." It is split across multiple overlapping frontend realities.
 
+## Wireframe Workflow and Prior Learnings
+
+The previous `.claude/wireframes` migration pass produced some useful material, but it is not a trustworthy completion record.
+
+What can be reused:
+- the motion taxonomy and spring-contract shape from `.claude/wireframes/MOTION_UPDATE_SPRING_PHYSICS.md`
+- the asset-slot resolution data and rationale in `.claude/wireframes/placement_report.json`
+- the basic pipeline ordering in `.claude/wireframes/SUMMARY.md`: wireframe -> asset placement -> spec -> build -> tests
+
+What failed in the prior process:
+- completion was asserted from summary documents, not proven against canonical files
+- motion updates were documented as complete across all 11 wireframes, but actual XML coverage remained partial
+- placement success was reported even when asset file-path integrity still failed
+- `.claude/wireframes/*` artifacts were treated as if they were execution truth, instead of reference material
+- there was no deterministic gate reconciling canonical wireframes with the route matrix, component gap map, and asset integrity checks
+
+### Wireframe workflow
+
+Use this sequence for wireframe-led migration work:
+
+1. `wireframe-annotator`
+   - generate or refresh wireframe intent only
+2. `scripts/validate-wireframe-workflow.py`
+   - validate canonical XML wireframes against schema quality, route coverage, component planning, and legacy drift
+3. `2026-03-14-wireframe-build-contract-prompt.md`
+   - generate a deterministic build contract from one route-matrix row, one canonical wireframe XML, and one component-gap entry when applicable
+4. `scripts/derive-gap-fill-plan.py`
+   - generate a tokens-first reuse plan from the route matrix, component gap map, existing TSX files, and an approved build contract when present
+   - classify each target component as `reuse_as_is`, `keep_behavior_rewrite_styling`, `keep_behavior_extend_tokens`, `reference_only`, `build_new`, or `blocked`
+5. `asset-placement-strategy`
+   - resolve asset slots only after the wireframe is structurally valid
+6. `manifest-reconciler`
+   - prove file, manifest, and hero-registry integrity after asset references or placement output change
+7. `component-spec-generator`
+   - generate implementation specs only after the wireframe passes validation, the build contract locks component ownership and decomposition, and the gap-fill plan isolates true new-build work from runtime reuse work
+8. `token-enforcement`
+   - enforce token and banned-term rules on implementation code
+9. `kerala-rage-brand-enforcer`
+   - run deterministic brand-policy checks on the resulting design or code artifacts
+
+The build-contract prompt is the missing bridge between validated XML wireframes and TSX implementation planning.
+It must reconcile:
+- `2026-03-13-target-state-route-matrix.json`
+- `2026-03-13-backend-feature-frontend-component-gap-map.json`
+- one canonical `frontend/src/screens/**/*.wireframe.xml`
+
+### Current build-contract gate status
+
+The first route-level build contract exists for `/tracker`, but it should be treated as a draft under review, not an approved implementation contract.
+
+Current status:
+- route: `/tracker`
+- artifact: `2026-03-14-build-contract-tracker.xml`
+- review state: `in_review`
+- gate result: `blocked`
+
+Blocking issues that must close before broad `Phase 3` execution starts:
+- `KanbanColumn` ownership is still unresolved between route-owned support component and shared UI primitive
+- `ApplicationDetailPanel`, `ApplicationEditForm`, `ApplicationStatusActions`, and `ApplicationArchiveAction` still lack a deterministic source artifact in the canonical wireframe or a tracked supplementary brief
+
+Next sequence:
+1. close the `/tracker` build-contract blockers
+2. approve `/tracker` using the tracked review rubric
+3. reuse the approved pattern for `/profile` and `/career/ingest`
+4. expand broader `Phase 3` route work only after the first approved build contract exists
+
+### Do
+
+- use `frontend/src/screens/**/*.wireframe.xml` as the canonical wireframe source
+- validate wireframes against `2026-03-13-target-state-route-matrix.json` before calling them migration-ready
+- validate wireframes against `2026-03-13-backend-feature-frontend-component-gap-map.json` before spec generation
+- use the tracked build-contract prompt to produce route-level implementation contracts before `component-spec-generator` work begins
+- use the tokens-first gap-fill planner to decide whether an existing runtime component should be reused for behavior only, reused with token cleanup, treated as reference-only, or replaced
+- treat motion, asset placement, and brand polish as downstream enrichments after schema and planning consistency
+- run `manifest-reconciler` whenever asset-bearing wireframes or placement outputs change
+- allow shared-family wireframes only when the route matrix explicitly marks them as shared coverage
+
+### Don't
+
+- do not treat `.claude/wireframes/SUMMARY.md` or spring-physics summaries as proof that canonical files are complete
+- do not mark asset placement as successful if manifest or file-path integrity still fails
+- do not treat `asset-placement-strategy` as a substitute for wireframe schema validation
+- do not use archived brand-enforcer instructions when the current KR Solidarity enforcer exists
+- do not generate component specs from wireframes that are missing route ownership or component-planning alignment
+- do not reuse existing `features/` presentation wholesale unless the candidate file is already token-clean
+- do not prioritize motion embellishment ahead of structural wireframe quality
+
 ## The Recovery Strategy
 
 The work should run in four phases. The first phase is a planning cleanup phase; the next three are execution-driven.

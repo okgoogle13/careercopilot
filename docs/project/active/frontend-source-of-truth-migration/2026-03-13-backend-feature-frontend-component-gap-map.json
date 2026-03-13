@@ -17,6 +17,7 @@
         "KanbanTracker"
       ],
       "new_components": [
+        "KanbanColumn",
         "ApplicationDetailPanel",
         "ApplicationEditForm",
         "ApplicationStatusActions",

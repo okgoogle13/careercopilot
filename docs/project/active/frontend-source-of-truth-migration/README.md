@@ -18,4 +18,15 @@ Implementation backlog:
 Skills and scripts review:
 - `2026-03-13-skills-and-scripts-fit-for-purpose-review.md`
 
+Wireframe workflow validation:
+- `2026-03-14-wireframe-workflow-findings.md`
+- `2026-03-14-wireframe-build-contract-prompt.md`
+- `2026-03-14-tokens-first-gap-fill-workflow.md`
+- `../../../../scripts/validate-wireframe-workflow.py`
+- `../../../../scripts/derive-gap-fill-plan.py`
+
+Build contracts (MIG-007):
+- `2026-03-14-build-contract-tracker.xml` — `/tracker` route (applications_crud)
+- `2026-03-14-tracker-supplementary-component-briefs.xml` — detailed contracts for KanbanColumn, ApplicationDetailPanel, ApplicationEditForm, ApplicationStatusActions, ApplicationArchiveAction
+
 This folder is the tracked, shareable location for the active migration plan and related execution artifacts.
