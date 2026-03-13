@@ -108,6 +108,67 @@ def build_contract_component_gaps(build_contract_path: Path | None) -> dict[str,
     return gaps
 
 
+# ---------------------------------------------------------------------------
+# Gap 2: Token extraction from wireframe XML
+# ---------------------------------------------------------------------------
+
+
+def extract_wireframe_tokens(wireframe_path: Path | None) -> list[str]:
+    """Extract all token refs declared in <tokens> blocks within a wireframe XML.
+
+    Returns a sorted, deduplicated list of CSS token variable names (e.g. --sys-color-inkGold-base).
+    Wireframe token declarations are the canonical source of truth for which
+    tokens a route's components should use — the build contract's dependency_contract
+    should be a superset of this list.
+    """
+    if wireframe_path is None or not wireframe_path.exists():
+        return []
+    try:
+        root = ET.parse(wireframe_path).getroot()
+    except ET.ParseError:
+        return []
+
+    tokens: set[str] = set()
+    # <tokens> blocks may appear under elements, layout, or at root level
+    for token_node in root.findall(".//token"):
+        ref = token_node.attrib.get("ref", "").strip()
+        if ref.startswith("--sys-"):
+            tokens.add(ref)
+        value = (token_node.text or "").strip()
+        if value.startswith("--sys-"):
+            tokens.add(value)
+    # Also check for inline token attribute on elements (some wireframes use token=)
+    for element in root.findall(".//element"):
+        for attr in ("shape_token", "color_token", "type_token", "motion_token"):
+            val = element.attrib.get(attr, "").strip()
+            if val.startswith("--sys-"):
+                tokens.add(val)
+
+    return sorted(tokens)
+
+
+def contract_token_diff(
+    wireframe_tokens: list[str],
+    build_contract_path: Path | None,
+) -> list[str]:
+    """Find tokens declared in the wireframe but absent from the build contract.
+
+    Returns a list of token ref strings that should be reviewed and added to
+    the build contract's dependency_contract blocks if applicable.
+    """
+    if build_contract_path is None or not build_contract_path.exists():
+        return wireframe_tokens
+
+    try:
+        contract_text = build_contract_path.read_text(encoding="utf-8")
+    except OSError:
+        return wireframe_tokens
+
+    return [token for token in wireframe_tokens if token not in contract_text]
+
+
+
+
 def find_route_row(route_id: str, route_matrix: dict[str, Any]) -> dict[str, Any]:
     for row in route_matrix["rows"]:
         if row["route_id"] == route_id or row["current_route"] == route_id:
@@ -349,6 +410,12 @@ def derive_plan(route_id: str, build_contract_path: Path | None) -> dict[str, An
     contract_gaps = build_contract_component_gaps(build_contract_path)
     index = index_tsx_files()
 
+    # Gap 2: extract tokens from wireframe and diff against build contract
+    wireframe_path_str = row.get("xml_wireframe_path")
+    wireframe_path = Path(wireframe_path_str) if wireframe_path_str else None
+    wireframe_tokens = extract_wireframe_tokens(wireframe_path)
+    token_drift = contract_token_diff(wireframe_tokens, build_contract_path)
+
     component_order: list[str] = []
     for name in [
         row.get("target_runtime_owner"),
@@ -382,6 +449,13 @@ def derive_plan(route_id: str, build_contract_path: Path | None) -> dict[str, An
             "screen_reference": row.get("screen_reference"),
             "paired_runtime_surface": row.get("paired_runtime_surface"),
             "token_rule": "reuse behavior and ownership from runtime; reuse presentation only if token-clean; otherwise rewrite styling to semantic tokens",
+        },
+        # Gap 2: token extraction — candidate list from wireframe; drift = in wireframe, not in contract
+        "candidate_token_list": wireframe_tokens,
+        "candidate_token_drift": {
+            "description": "Tokens declared in wireframe XML but absent from build contract dependency_contract blocks. Review and add if applicable.",
+            "tokens": token_drift,
+            "count": len(token_drift),
         },
         "components": [asdict(plan) for plan in plans],
     }

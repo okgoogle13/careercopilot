@@ -57,6 +57,15 @@
       <test description="Shows inkGold highlight during drag-over" />
       <test description="Archived variant renders collapsed by default with expand toggle" />
     </test_contract>
+
+    <storybook_contract>
+      <!-- Gap 3: PSM output contract — deterministic Storybook stories for visual compliance gate -->
+      <story name="Default" args="stage=applied, label='Applied', count=3, applications=[...3 mock apps]" />
+      <story name="DragOver" args="stage=applied, isDragOver=true, count=3" />
+      <story name="EmptyColumn" args="stage=offered, count=0, applications=[]" />
+      <story name="ArchivedCollapsed" args="stage=archived, variant=archived, isCollapsed=true, count=7" />
+      <story name="ArchivedExpanded" args="stage=archived, variant=archived, isCollapsed=false, count=7" />
+    </storybook_contract>
   </brief>
 
   <brief component_name="ApplicationDetailPanel">
@@ -129,6 +138,16 @@
       <test description="Renders ApplicationArchiveAction at bottom right" />
       <test description="Focus trapped within modal" />
     </test_contract>
+
+    <storybook_contract>
+      <!-- Gap 3: PSM output contract — deterministic Storybook stories for visual compliance gate -->
+      <story name="Loading" args="applicationId='app-1', isOpen=true" description="Shows skeleton while fetching" />
+      <story name="TimelineTab" args="applicationId='app-1', isOpen=true, activeTab=timeline" />
+      <story name="NotesTab" args="applicationId='app-1', isOpen=true, activeTab=notes" />
+      <story name="DetailsTab" args="applicationId='app-1', isOpen=true, activeTab=details" />
+      <story name="ErrorState" args="applicationId='bad-id', isOpen=true" description="Shows error when fetch fails" />
+      <story name="Closed" args="isOpen=false" description="Modal not rendered" />
+    </storybook_contract>
   </brief>
 
   <brief component_name="ApplicationEditForm">
@@ -185,6 +204,15 @@
       <test description="Cancel resets form to initialData" />
       <test description="Disables submit button while mutation is in flight" />
     </test_contract>
+
+    <storybook_contract>
+      <!-- Gap 3: PSM output contract — deterministic Storybook stories for visual compliance gate -->
+      <story name="Empty" args="applicationId='app-1'" description="No initial data, all fields blank" />
+      <story name="Prepopulated" args="applicationId='app-1', initialData={notes:'Strong fit', salary_offered:'$120k', contact_name:'Jane', next_steps:'Send portfolio'}" />
+      <story name="Dirty" args="applicationId='app-1', isDirty=true" description="Form with unsaved changes, save button enabled" />
+      <story name="ValidationErrors" args="applicationId='app-1', fieldErrors={notes:'Required'}" />
+      <story name="Saving" args="applicationId='app-1', isPending=true" description="Submit button disabled during mutation" />
+    </storybook_contract>
   </brief>
 
   <brief component_name="ApplicationStatusActions">
@@ -247,6 +275,16 @@
       <test description="Cancel confirmation resets to default state" />
       <test description="Keyboard navigation between action buttons works" />
     </test_contract>
+
+    <storybook_contract>
+      <!-- Gap 3: PSM output contract — deterministic Storybook stories for visual compliance gate -->
+      <story name="StatusApplied" args="applicationId='app-1', currentStatus=applied" description="Shows valid transitions from applied stage" />
+      <story name="StatusInterviewing" args="applicationId='app-1', currentStatus=interviewing" />
+      <story name="StatusOffered" args="applicationId='app-1', currentStatus=offered" />
+      <story name="StatusRejected" args="applicationId='app-1', currentStatus=rejected" description="Only Reopen action shown" />
+      <story name="ConfirmingAction" args="applicationId='app-1', currentStatus=applied, confirmingAction=interviewing" />
+      <story name="MutationInFlight" args="applicationId='app-1', currentStatus=applied, pendingMutation=interviewing" />
+    </storybook_contract>
   </brief>
 
   <brief component_name="ApplicationArchiveAction">
@@ -296,6 +334,15 @@
       <test description="Shows loading state during mutation" />
       <test description="Shows error state on mutation failure" />
     </test_contract>
+
+    <storybook_contract>
+      <!-- Gap 3: PSM output contract — deterministic Storybook stories for visual compliance gate -->
+      <story name="ArchiveDefault" args="applicationId='app-1', isArchived=false" description="Button reads Archive Application" />
+      <story name="RestoreDefault" args="applicationId='app-1', isArchived=true" description="Button reads Restore Application" />
+      <story name="ConfirmingArchive" args="applicationId='app-1', isArchived=false, isConfirming=true" />
+      <story name="ConfirmingRestore" args="applicationId='app-1', isArchived=true, isConfirming=true" />
+      <story name="Pending" args="applicationId='app-1', isArchived=false, isPending=true" description="Button disabled during mutation" />
+    </storybook_contract>
   </brief>
 
 </supplementary_component_briefs>

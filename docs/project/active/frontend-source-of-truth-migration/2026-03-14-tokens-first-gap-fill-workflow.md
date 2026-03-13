@@ -89,6 +89,53 @@ Token-dirty components may still be reused for behavior, but only with:
 - `keep_behavior_rewrite_styling`, or
 - `keep_behavior_extend_tokens`
 
+## Elevation Gate (Gap 4)
+
+A component file is **eligible for presentation reuse** (`reuse_as_is` mode) if and only if it passes all of these checks deterministically:
+
+### Required: Zero hardcoded color/shape literals
+
+```bash
+# Must return exit code 1 (no matches) within component scope:
+grep -nE '#[0-9A-Fa-f]{3,8}\b|rgba?\(|hsla?\(' <file>
+```
+
+A file is **ineligible** for presentation reuse if this grep returns **any match**.
+
+### Required: No banned deprecated tokens
+
+```bash
+grep -n 'labWrenMetalBlue\|GumLeafGreen\|WattleGold\|inkGreen' <file>
+```
+
+A match on any banned token name = ineligible.
+
+### Required: No forbidden font families
+
+```bash
+grep -n '\b(Inter|Roboto|Arial|Plus Jakarta Sans|Sora)\b' <file>
+```
+
+A match = ineligible.
+
+### Required: No deprecated archetype names
+
+```bash
+grep -n '\b(Jar|Cabinet|Seed|Leaf)\b' <file>
+```
+
+A match in new migration code = ineligible.
+
+### Enforced by
+
+- `scripts/derive-gap-fill-plan.py` — `analyze_tokens()` function applies all four checks and sets `token_state = "dirty"` if any match is found, applying a `-25` drift penalty
+- `scripts/validate-wireframe-workflow.py` — `COLOR_LITERAL_RE` check on wireframe XML source
+- **Pre-presentation-reuse gate:** before assigning `reuse_as_is`, the planner verifies `token_state == "clean"` AND `total_score >= 80`; any dirty file is downgraded to at minimum `keep_behavior_rewrite_styling`
+
+> **Rule**: "Token-clean" is not a judgment call. It is a deterministic grep result. A file with a single `rgba(0,0,0,0.5)` is dirty, regardless of how well-structured the rest of the file is.
+
+
+
 ## Workflow sequence
 
 Use this route-level sequence:

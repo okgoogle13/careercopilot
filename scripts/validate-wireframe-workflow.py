@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
-"""Validate canonical wireframes against migration planning artifacts."""
+"""Validate canonical wireframes against migration planning artifacts.
+
+Also validates build contract XML files against docs/schema/build_contract.xsd
+when --build-contracts is supplied (Gap 1: MDA PIM schema enforcement).
+"""
 
 from __future__ import annotations
 
 import argparse
 import json
 import re
-import sys
+import shutil
+import subprocess
 import xml.etree.ElementTree as ET
 from collections import defaultdict
 from pathlib import Path
@@ -21,6 +26,10 @@ DEFAULT_GAP_MAP = Path(
 DEFAULT_SCREENS_ROOT = Path("frontend/src/screens")
 DEFAULT_PLACEMENT_REPORT = Path(".claude/wireframes/placement_report.json")
 DEFAULT_JSON_OUT = Path("tmp/wireframe-workflow-report.json")
+DEFAULT_BUILD_CONTRACT_SCHEMA = Path("docs/schema/build_contract.xsd")
+DEFAULT_BUILD_CONTRACTS_GLOB = Path(
+    "docs/project/active/frontend-source-of-truth-migration"
+)
 
 COLOR_LITERAL_RE = re.compile(
     r"#[0-9A-Fa-f]{3,8}\b|rgba?\(|hsla?\(",
@@ -34,6 +43,65 @@ def load_json(path: Path) -> dict[str, Any]:
 
 def add_issue(bucket: list[dict[str, Any]], issue_type: str, **data: Any) -> None:
     bucket.append({"type": issue_type, **data})
+
+
+# ---------------------------------------------------------------------------
+# Gap 1: Build Contract XSD Validation
+# ---------------------------------------------------------------------------
+
+def validate_build_contract_xsd(
+    contract_paths: list[Path],
+    schema_path: Path,
+) -> list[dict[str, Any]]:
+    """Validate each build contract XML file against build_contract.xsd.
+
+    Requires xmllint (libxml2) on PATH. If xmllint is unavailable the check
+    is skipped with a warning rather than failing hard, to keep CI stable on
+    environments where xmllint is not installed.
+
+    Returns a list of issue dicts (empty = all pass).
+    """
+    issues: list[dict[str, Any]] = []
+
+    if not schema_path.exists():
+        issues.append({
+            "type": "xsd_schema_missing",
+            "schema_path": str(schema_path),
+            "recommendation": "Run scripts/validate-wireframe-workflow.py from repo root",
+        })
+        return issues
+
+    xmllint = shutil.which("xmllint")
+    if xmllint is None:
+        issues.append({
+            "type": "xsd_validator_unavailable",
+            "message": "xmllint not found on PATH — skipping build contract schema validation",
+            "recommendation": "Install libxml2 (brew install libxml2)",
+        })
+        return issues
+
+    for contract_path in contract_paths:
+        if not contract_path.exists():
+            issues.append({
+                "type": "build_contract_not_found",
+                "contract_path": str(contract_path),
+            })
+            continue
+        result = subprocess.run(
+            [xmllint, "--schema", str(schema_path), str(contract_path), "--noout"],
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode != 0:
+            issues.append({
+                "type": "build_contract_xsd_failure",
+                "contract_path": str(contract_path),
+                "errors": result.stderr.strip().splitlines(),
+            })
+
+    return issues
+
+
 
 
 def validate_xml_file(path: Path) -> dict[str, Any]:
@@ -352,6 +420,21 @@ def main() -> int:
     parser.add_argument("--placement-report", type=Path, default=DEFAULT_PLACEMENT_REPORT)
     parser.add_argument("--json-out", type=Path, default=DEFAULT_JSON_OUT)
     parser.add_argument("--strict", action="store_true", help="exit non-zero on warnings")
+    # Gap 1: build contract XSD validation
+    parser.add_argument(
+        "--build-contracts",
+        type=Path,
+        nargs="*",
+        default=None,
+        help="One or more build contract XML files to validate against the XSD schema. "
+             "If omitted, all *-build-contract-*.xml files under the default contracts dir are checked.",
+    )
+    parser.add_argument(
+        "--xsd",
+        type=Path,
+        default=DEFAULT_BUILD_CONTRACT_SCHEMA,
+        help=f"Path to build contract XSD schema (default: {DEFAULT_BUILD_CONTRACT_SCHEMA})",
+    )
     args = parser.parse_args()
 
     matrix = load_json(args.matrix)
@@ -369,11 +452,21 @@ def main() -> int:
         args.placement_report,
     )
 
+    # Gap 1: XSD validation of build contracts
+    if args.build_contracts is not None:
+        contract_paths = args.build_contracts
+    else:
+        contracts_dir = DEFAULT_BUILD_CONTRACTS_GLOB
+        contract_paths = sorted(contracts_dir.glob("*-build-contract-*.xml")) if contracts_dir.exists() else []
+    xsd_issues = validate_build_contract_xsd(contract_paths, args.xsd)
+    xsd_failures = [i for i in xsd_issues if i["type"] in ("build_contract_xsd_failure", "build_contract_not_found", "xsd_schema_missing")]
+    xsd_warnings = [i for i in xsd_issues if i["type"] not in ("build_contract_xsd_failure", "build_contract_not_found", "xsd_schema_missing")]
+
     schema_failures = with_file_context(file_results, "failures")
     schema_warnings = with_file_context(file_results, "warnings")
 
-    failures = schema_failures + route_failures + component_failures + legacy_failures
-    warnings = schema_warnings + route_warnings + component_warnings + legacy_warnings
+    failures = schema_failures + route_failures + component_failures + legacy_failures + xsd_failures
+    warnings = schema_warnings + route_warnings + component_warnings + legacy_warnings + xsd_warnings
     status = determine_status(failures, warnings)
 
     report = {
@@ -407,6 +500,12 @@ def main() -> int:
             "summary": legacy_summary,
             "warnings": legacy_warnings,
         },
+        # Gap 1: build contract XSD validation results
+        "build_contract_xsd_summary": {
+            "contracts_checked": len(contract_paths),
+            "failures": xsd_failures,
+            "warnings": xsd_warnings,
+        },
         "schema_failures": schema_failures,
         "schema_warnings": schema_warnings,
         "file_results": file_results,
@@ -419,6 +518,7 @@ def main() -> int:
     print(f"Canonical wireframes: {len(file_results)}")
     print(f"Schema failures: {len(schema_failures)}")
     print(f"Schema warnings: {len(schema_warnings)}")
+    print(f"Build contract XSD checks: {len(contract_paths)} file(s) — {len(xsd_failures)} failure(s)")
     print(
         "Route coverage gaps: "
         + ", ".join(report["route_coverage_summary"]["missing_wireframes"])
@@ -433,6 +533,12 @@ def main() -> int:
     if status == "warn" and args.strict:
         return 1
     return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+
 
 
 if __name__ == "__main__":
