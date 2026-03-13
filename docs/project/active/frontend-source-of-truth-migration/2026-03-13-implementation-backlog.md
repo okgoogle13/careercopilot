@@ -445,6 +445,7 @@ Plan phase references:
 Acceptance:
 - `/kr/*` routes are no longer part of product truth
 - reference-only components are clearly distinguished from canonical route-owned components
+- touched route families have bounded folder/subfolder cleanup aligned to the route matrix without a repo-wide reorg
 
 Backlog items:
 
@@ -480,6 +481,22 @@ Backlog items:
 - Completion evidence:
   - cleanup closes with no token regressions and no new dependency breakage in touched areas
 
+#### MIG-404: Sanitize frontend structure after route-family migration
+- Plan phase reference: `Phase 4`
+- Area: frontend structure cleanup
+- Type: bounded refactor cleanup
+- Depends on: `M2`, `M3`, `M4`
+- Deliverables:
+  - align touched runtime route-family code to `features/<family>/**`
+  - keep `pages/**` as route entrypoints or thin route shells only
+  - keep `screens/**` as design/reference TSX plus wireframe XML only
+  - retire or clearly mark `phase3-batch*` and other duplicate/reference-only surfaces once the relevant route-family workflow is stable
+  - update imports and component inventory where cleanup changes ownership clarity
+- Completion evidence:
+  - no touched product area has competing live-looking runtime homes without explicit reference-only labeling
+  - folder ownership for touched route families matches the route matrix
+  - cleanup stays bounded and does not become a repo-wide frontend reorganization
+
 ## Dependency Map
 
 - `MIG-001 + MIG-003 + MIG-004 + MIG-005 -> MIG-002`
@@ -507,6 +524,7 @@ Backlog items:
 15. `MIG-401` (`Phase 4`)
 16. `MIG-402` (`Phase 4`)
 17. `MIG-403` (`Phase 4`)
+18. `MIG-404` (`Phase 4`)
 
 ## Readiness Score
 
@@ -525,3 +543,4 @@ Backlog items:
 - `frontend/scripts/validate-governance-artifacts.mjs` is still not fit for use as a migration gate until parity work lands
 - ingestion callers are still fragmented across canonical, transitional, and deprecated contracts until `MIG-103`
 - incremental dependency drift remains a risk until cleanup verification is in place
+- structural cleanup must stay bounded to route-family alignment and duplicate/reference-only surfaces, or it risks expanding into a high-churn refactor

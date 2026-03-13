@@ -364,6 +364,11 @@ Purpose:
 Actions:
 - remove `/kr/*` routes from the live router after any useful ideas are backported
 - clean up duplicate or abandoned screen candidates only after live ownership decisions are made
+- sanitize `frontend/src` folder ownership after route-family workflow stabilization:
+  - keep route-family runtime code in `features/<family>/**`
+  - keep `pages/**` as route entrypoints or thin route shells only
+  - keep `screens/**` as design/reference TSX plus wireframe XML only
+  - retire or clearly mark `phase3-batch*` and other duplicate/reference-only surfaces
 - update inventory and reporting scripts so they show:
   - live routed owner
   - paired screen reference
@@ -374,6 +379,7 @@ Actions:
 Acceptance for Phase 4:
 - cleanup happens after replacement, not before
 - no useful product surface is deleted before a real owner exists
+- runtime folder ownership aligns with the route matrix for touched route families without a repo-wide reorg
 
 ## Route-Level Priority Table
 
@@ -442,6 +448,7 @@ Key risks:
 - the team may keep adding governance layers instead of shipping routed feature ownership
 - token drift may be introduced when screen-reference patterns are merged into live routes without semantic token checks
 - monorepo dependency drift across frontend, shared tooling, or validation scripts may break incremental route work unless touched areas are re-verified after cleanup
+- cleanup may balloon into a broad frontend reorg unless it is explicitly bounded to route-family alignment and duplicate/reference-only surfaces
 
 Allowed deferrals:
 - backend-blocked flows can be deferred only if the blocker is explicit and recorded
