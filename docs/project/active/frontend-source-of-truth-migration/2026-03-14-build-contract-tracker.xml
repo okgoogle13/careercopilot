@@ -738,7 +738,7 @@
       <completion_state_owner>ApplicationTracker (card moves to/from archived column)</completion_state_owner>
     </transition>
 
-    <transition id="ST-006" flow_step="4">
+    <transition id="ST-006" flow_step="6">
       <event_source>Edit save from ApplicationEditForm</event_source>
       <state_owner_component>ApplicationEditForm</state_owner_component>
       <hook_responsibility>useMutation for applications_crud — PATCH application metadata</hook_responsibility>
