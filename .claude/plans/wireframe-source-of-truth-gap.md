@@ -3,7 +3,7 @@
 This document is no longer the active planning document for the migration.
 
 Use:
-- `.claude/plans/2026-03-13-proposed-final-migration-plna.md`
+- `docs/project/active/frontend-source-of-truth-migration/2026-03-13-proposed-final-migration-plan.md`
 
 Reason for supersession:
 - its core findings were preserved in the consolidated migration plan

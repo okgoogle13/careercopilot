@@ -65,11 +65,56 @@
       "context_window": 1000000,
       "supports_streaming": true,
       "supports_function_calling": true
+    },
+    "gemini-3.0-pro": {
+      "name": "gemini-3.0-pro",
+      "provider": "google_ai",
+      "model_type": "text_generation",
+      "model_id": "gemini-3.1-pro-preview",
+      "max_tokens": 65536,
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "timeout_seconds": 120,
+      "retry_attempts": 3,
+      "cost_per_1k_tokens": {
+        "input": 0.00125,
+        "output": 0.005
+      },
+      "rate_limit": {
+        "requests_per_minute": 360,
+        "tokens_per_minute": 120000
+      },
+      "context_window": 2000000,
+      "supports_streaming": true,
+      "supports_function_calling": true
+    },
+    "gemini-3.0-flash": {
+      "name": "gemini-3.0-flash",
+      "provider": "google_ai",
+      "model_type": "text_generation",
+      "model_id": "gemini-3.1-flash-preview",
+      "max_tokens": 32768,
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "timeout_seconds": 60,
+      "retry_attempts": 3,
+      "cost_per_1k_tokens": {
+        "input": 0.0003,
+        "output": 0.00125
+      },
+      "rate_limit": {
+        "requests_per_minute": 2000,
+        "tokens_per_minute": 1000000
+      },
+      "context_window": 1000000,
+      "supports_streaming": true,
+      "supports_function_calling": true
     }
   },
   "services": {
     "resume_analysis": {
       "service_name": "resume_analysis",
+      "description": "Analyze resumes for skills, experience, and recommendations",
       "primary_model": "gemini-3.1-flash",
       "fallback_models": ["gemini-3.1-flash-lite"],
       "enabled": true,
@@ -81,12 +126,14 @@
     },
     "job_analysis": {
       "service_name": "job_analysis",
+      "description": "Analyze job descriptions and extract requirements",
       "primary_model": "gemini-3.1-flash",
       "fallback_models": ["gemini-3.1-flash-lite"],
       "enabled": true
     },
     "ats_scoring": {
       "service_name": "ats_scoring",
+      "description": "Score resume compatibility with job descriptions",
       "primary_model": "gemini-3.1-pro",
       "fallback_models": ["gemini-3.1-flash"],
       "enabled": true
