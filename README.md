@@ -10,7 +10,7 @@ CareerCopilot is an AI-powered career management platform designed to automate j
 
 - **Frontend**: Vite-based React application with modern UI components.
 - **Backend API**: Python FastAPI service for AI analysis and data processing.
-- **AI Engine**: Powered by Gemini Pro 2.0 (and Flash) for high-performance job analysis.
+- **AI Engine**: Powered by Gemini 3.0 Pro (and 3.0 Flash) for high-performance job analysis.
 - **Infrastructure**: Fully containerized with Docker and modular architecture.
 
 ## 🚀 Quickstart

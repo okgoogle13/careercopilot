@@ -1,0 +1,155 @@
+{
+  "artifact": "backend_feature_frontend_component_gap_map",
+  "generated_at": "2026-03-13",
+  "canonical_plan": "docs/project/active/frontend-source-of-truth-migration/2026-03-13-proposed-final-migration-plan.md",
+  "canonical_route_matrix": "docs/project/active/frontend-source-of-truth-migration/2026-03-13-target-state-route-matrix.json",
+  "features": [
+    {
+      "feature_id": "applications_crud",
+      "owner_route": "/tracker",
+      "owner_surface": "ApplicationTracker",
+      "backend_status": "mounted_active",
+      "frontend_status": "mock_only",
+      "reuse_components": [
+        "ApplicationTracker"
+      ],
+      "reference_components": [
+        "KanbanTracker"
+      ],
+      "new_components": [
+        "ApplicationDetailPanel",
+        "ApplicationEditForm",
+        "ApplicationStatusActions",
+        "ApplicationArchiveAction"
+      ],
+      "deferred_components": [],
+      "notes": "Highest-priority product gap because the backend is real and the route is already canonical."
+    },
+    {
+      "feature_id": "documents_redline",
+      "owner_route": "/documents",
+      "owner_surface": "Documents",
+      "backend_status": "mounted_active",
+      "frontend_status": "no_live_owner",
+      "reuse_components": [
+        "Documents"
+      ],
+      "reference_components": [
+        "DocumentWorkbench"
+      ],
+      "new_components": [
+        "DocumentRedlineUploadPanel",
+        "TrackedChangesWorkspace",
+        "RedlineActionBar"
+      ],
+      "deferred_components": [],
+      "notes": "Route stays the same; missing work lives inside the documents feature."
+    },
+    {
+      "feature_id": "smart_ingestion_asset_pipeline",
+      "owner_route": "/career/ingest",
+      "owner_surface": "IngestionPage",
+      "backend_status": "mounted_active",
+      "frontend_status": "partially_wired",
+      "reuse_components": [
+        "IngestionPage",
+        "AssetLibrary"
+      ],
+      "reference_components": [
+        "IngestionFlow"
+      ],
+      "new_components": [
+        "SmartIngestionUploadStep",
+        "SmartIngestionTagConfirmStep",
+        "SmartIngestionSaveStep"
+      ],
+      "deferred_components": [],
+      "notes": "Must converge on /api/v1/ingest as the canonical contract."
+    },
+    {
+      "feature_id": "voice_profile_capture",
+      "owner_route": "/profile",
+      "owner_surface": "ProfileView",
+      "backend_status": "mounted_active",
+      "frontend_status": "no_live_owner",
+      "reuse_components": [
+        "ProfileView",
+        "Settings"
+      ],
+      "reference_components": [
+        "SettingsControl"
+      ],
+      "new_components": [
+        "VoiceProfileCreationPanel",
+        "VoiceSampleSubmissionForm",
+        "VoiceProfileStatusCard",
+        "VoiceProfileManagementSection"
+      ],
+      "deferred_components": [],
+      "notes": "Voice ownership is locked to /profile for planning purposes."
+    },
+    {
+      "feature_id": "resume_audit",
+      "owner_route": "/analysis",
+      "owner_surface": "AnalysisPage",
+      "backend_status": "mounted_active_partial",
+      "frontend_status": "partially_wired",
+      "reuse_components": [
+        "AnalysisPage",
+        "ResumeAuditPage"
+      ],
+      "reference_components": [
+        "AnalysisWorkbench"
+      ],
+      "new_components": [
+        "ResumeAuditEntryPoint",
+        "ResumeAuditResultsPanel"
+      ],
+      "deferred_components": [
+        "ResumeAuditHistoryList"
+      ],
+      "notes": "Minimum viable target state is routed evaluation support; history remains deferred."
+    },
+    {
+      "feature_id": "genkit_job_analysis",
+      "owner_route": "/apply/quick",
+      "owner_surface": "ApplyQuick",
+      "backend_status": "mounted_active",
+      "frontend_status": "partially_wired",
+      "reuse_components": [
+        "ApplyQuick",
+        "Opportunities"
+      ],
+      "reference_components": [
+        "LookoutDiscovery"
+      ],
+      "new_components": [
+        "JobAnalysisResultsPanel"
+      ],
+      "deferred_components": [
+        "JobParsingWorkbench",
+        "ExtractFromTextPanel",
+        "AdvancedJobAnalysisPanel"
+      ],
+      "notes": "Planning remains partially blocked because governance metadata for this capability is incomplete."
+    },
+    {
+      "feature_id": "workflow_orchestration",
+      "owner_route": "/apply/quick",
+      "owner_surface": "ApplyQuick",
+      "backend_status": "mounted_placeholder",
+      "frontend_status": "partially_wired",
+      "reuse_components": [
+        "ApplyQuick"
+      ],
+      "reference_components": [],
+      "new_components": [],
+      "deferred_components": [
+        "WorkflowProgressScreen",
+        "WorkflowStatusPanel",
+        "EmailScanResultsView"
+      ],
+      "notes": "Blocked until backend moves beyond placeholder responses."
+    }
+  ]
+}

@@ -1,0 +1,426 @@
+{
+  "artifact": "frontend_source_of_truth_migration_implementation_backlog",
+  "generated_at": "2026-03-13",
+  "canonical_plan": "docs/project/active/frontend-source-of-truth-migration/2026-03-13-proposed-final-migration-plan.md",
+  "milestones": [
+    {
+      "milestone_id": "M1",
+      "name": "Phase 1 and Phase 1A - Planning Inputs and Migration Support Review",
+      "plan_phase_refs": [
+        "Phase 1",
+        "Phase 1A"
+      ],
+      "parallel_execution_guidance": [
+        "run MIG-001, MIG-003, MIG-004, and MIG-005 in parallel",
+        "start MIG-002 only after MIG-001 closes",
+        "do not block skill or script review behind governance-data cleanup"
+      ],
+      "acceptance": [
+        "pytest tests/plans -q passes",
+        "validate-governance-artifacts.mjs enforces the same minimum invariants as the Python tests",
+        "genkit_job_analysis has normalized capability metadata",
+        "custom skills and migration-support scripts are reviewed and classified as fit for purpose before they are used as execution infrastructure",
+        "token-enforcement expectations are defined for any route touched by migration work"
+      ],
+      "items": [
+        {
+          "id": "MIG-001",
+          "title": "Fix capability matrix completeness",
+          "plan_phase_ref": "Phase 1",
+          "area": "planning_integrity",
+          "owner_route": null,
+          "owner_surface": null,
+          "type": "docs_or_governance_data",
+          "depends_on": [],
+          "new_components": [],
+          "deliverables": [
+            "add missing resolution_status values",
+            "add missing blocked_by and resolved_commit metadata where required"
+          ]
+        },
+        {
+          "id": "MIG-002",
+          "title": "Align governance validator with tests",
+          "plan_phase_ref": "Phase 1",
+          "area": "planning_integrity",
+          "owner_route": null,
+          "owner_surface": null,
+          "type": "tooling",
+          "depends_on": [
+            "MIG-001"
+          ],
+          "new_components": [],
+          "deliverables": [
+            "validator checks capability status fields, not just ids",
+            "validator agrees with Python plan tests on pass/fail"
+          ]
+        },
+        {
+          "id": "MIG-003",
+          "title": "Review migration skills for fit-for-purpose",
+          "plan_phase_ref": "Phase 1A",
+          "area": "planning_integrity",
+          "owner_route": null,
+          "owner_surface": null,
+          "type": "process_tooling_review",
+          "depends_on": [],
+          "new_components": [],
+          "deliverables": [
+            "review sprint-coordinator, frontend-backend-mapper, api-contract-validator, migration-audit, and verification-before-completion",
+            "classify each as approved, approved_with_limits, or not_fit_for_purpose",
+            "record exact allowed use and known limits"
+          ]
+        },
+        {
+          "id": "MIG-004",
+          "title": "Review migration scripts for fit-for-purpose",
+          "plan_phase_ref": "Phase 1A",
+          "area": "planning_integrity",
+          "owner_route": null,
+          "owner_surface": null,
+          "type": "tooling_review",
+          "depends_on": [],
+          "new_components": [],
+          "deliverables": [
+            "review validate-governance-artifacts.mjs and component-inventory.ts",
+            "confirm whether outputs match the route matrix and component gap map",
+            "identify any script that must be corrected before it can be treated as a gate"
+          ]
+        },
+        {
+          "id": "MIG-005",
+          "title": "Define token-enforcement gate for touched routes",
+          "plan_phase_ref": "Phase 1",
+          "area": "planning_integrity",
+          "owner_route": null,
+          "owner_surface": null,
+          "type": "design_system_guardrail",
+          "depends_on": [],
+          "new_components": [],
+          "deliverables": [
+            "define the default token-enforcement grep for touched route files: rg --type-add 'tsx:*.tsx' --type-add 'ts:*.ts' '#[0-9A-Fa-f]{3,6}|rgb\\(' frontend/src/pages frontend/src/features frontend/src/layouts",
+            "require migration work to explain any allowed exceptions, such as style-guide or test fixtures",
+            "identify which review steps enforce token compliance during migration"
+          ],
+          "completion_evidence": [
+            "milestone closure includes the grep result for touched route files and any justified exceptions"
+          ]
+        }
+      ]
+    },
+    {
+      "milestone_id": "M2",
+      "name": "Phase 2.1 and Phase 2.2 - Applications and Smart Ingestion",
+      "plan_phase_refs": [
+        "Phase 2.1",
+        "Phase 2.2"
+      ],
+      "acceptance": [
+        "/tracker uses real CRUD-backed behavior",
+        "/career/ingest owns one canonical upload-to-save flow on /api/v1/ingest"
+      ],
+      "items": [
+        {
+          "id": "MIG-101",
+          "title": "Replace mock-backed applications flow in /tracker",
+          "plan_phase_ref": "Phase 2.1",
+          "area": "applications",
+          "owner_route": "/tracker",
+          "owner_surface": "ApplicationTracker",
+          "type": "feature_integration",
+          "depends_on": [
+            "M1"
+          ],
+          "new_components": [],
+          "deliverables": [
+            "confirm mounted applications CRUD endpoints and the frontend API client match the intended tracker data flow before replacing mocks",
+            "wire list view to real application data",
+            "remove mock-only path from main tracker flow"
+          ],
+          "completion_evidence": [
+            "tracker reads real backend data in the normal flow",
+            "the contract check against mounted backend endpoints is recorded"
+          ]
+        },
+        {
+          "id": "MIG-102",
+          "title": "Add application detail, edit, and status flows",
+          "plan_phase_ref": "Phase 2.1",
+          "area": "applications",
+          "owner_route": "/tracker",
+          "owner_surface": "ApplicationTracker",
+          "type": "component_build",
+          "depends_on": [
+            "MIG-101"
+          ],
+          "preconditions": [
+            "MIG-101 has confirmed request and response shape for detail, edit, archive, and status actions"
+          ],
+          "new_components": [
+            "ApplicationDetailPanel",
+            "ApplicationEditForm",
+            "ApplicationStatusActions",
+            "ApplicationArchiveAction"
+          ],
+          "deliverables": [
+            "support detail, edit, status transition, and archive behavior in tracker"
+          ]
+        },
+        {
+          "id": "MIG-103",
+          "title": "Converge ingestion on /api/v1/ingest",
+          "plan_phase_ref": "Phase 2.2",
+          "area": "ingestion",
+          "owner_route": "/career/ingest",
+          "owner_surface": "IngestionPage",
+          "type": "contract_cleanup",
+          "depends_on": [
+            "M1"
+          ],
+          "new_components": [],
+          "deliverables": [
+            "confirm /api/v1/ingest remains mounted in backend/app/main.py",
+            "inventory current ingestion callers across /api/v1/ingest, /api/career/ingest, /api/ingest/artifacts/upload, and /api/ingestion/*",
+            "classify each caller as canonical, transitional, or deprecated",
+            "route active ingestion behavior through /api/v1/ingest",
+            "stop treating overlapping ingestion paths as canonical"
+          ],
+          "completion_evidence": [
+            "active ingestion path uses the canonical contract",
+            "the caller inventory and canonical/deprecated classification are recorded"
+          ]
+        },
+        {
+          "id": "MIG-104",
+          "title": "Build the routed smart-ingestion flow",
+          "plan_phase_ref": "Phase 2.2",
+          "area": "ingestion",
+          "owner_route": "/career/ingest",
+          "owner_surface": "IngestionPage",
+          "type": "component_build",
+          "depends_on": [
+            "MIG-103"
+          ],
+          "new_components": [
+            "SmartIngestionUploadStep",
+            "SmartIngestionTagConfirmStep",
+            "SmartIngestionSaveStep"
+          ],
+          "deliverables": [
+            "support upload, tag confirm, and save as one routed flow"
+          ]
+        }
+      ]
+    },
+    {
+      "milestone_id": "M3",
+      "name": "Phase 2.3 and Phase 2.4 - Voice Profile and Documents Redline",
+      "plan_phase_refs": [
+        "Phase 2.3",
+        "Phase 2.4"
+      ],
+      "acceptance": [
+        "/documents owns redline workflow",
+        "/profile owns voice profile workflow"
+      ],
+      "items": [
+        {
+          "id": "MIG-201",
+          "title": "Add redline workflow ownership to /documents",
+          "plan_phase_ref": "Phase 2.4",
+          "area": "documents",
+          "owner_route": "/documents",
+          "owner_surface": "Documents",
+          "type": "feature_integration",
+          "depends_on": [
+            "M1"
+          ],
+          "new_components": [
+            "DocumentRedlineUploadPanel",
+            "TrackedChangesWorkspace",
+            "RedlineActionBar"
+          ],
+          "deliverables": [
+            "confirm the mounted document redline and review contracts before building route-owned UI",
+            "expose redline and review workflow inside documents route"
+          ],
+          "completion_evidence": [
+            "documents route exposes redline and review workflow without creating a new top-level route",
+            "the document redline contract check is recorded"
+          ]
+        },
+        {
+          "id": "MIG-202",
+          "title": "Add voice profile management to /profile",
+          "plan_phase_ref": "Phase 2.3",
+          "area": "account_profile",
+          "owner_route": "/profile",
+          "owner_surface": "ProfileView",
+          "type": "feature_integration",
+          "depends_on": [
+            "M1"
+          ],
+          "new_components": [
+            "VoiceProfileCreationPanel",
+            "VoiceSampleSubmissionForm",
+            "VoiceProfileStatusCard",
+            "VoiceProfileManagementSection"
+          ],
+          "deliverables": [
+            "make profile route the visible owner of voice profile management"
+          ]
+        }
+      ]
+    },
+    {
+      "milestone_id": "M4",
+      "name": "Phase 2.5 and Phase 3 Support - Resume Audit, Jobs, and Explicit Deferrals",
+      "plan_phase_refs": [
+        "Phase 2.5",
+        "Phase 3"
+      ],
+      "phase_3_backlog_expansion_note": "before broad Phase 3 route migration starts, expand this milestone from the route matrix so each affected product area has its own implementation or deferral item",
+      "acceptance": [
+        "/analysis supports minimum viable resume audit flow",
+        "jobs family has a clear place for job analysis results",
+        "blocked capabilities remain deferred rather than half-built"
+      ],
+      "items": [
+        {
+          "id": "MIG-301",
+          "title": "Decide and wire the minimum viable resume audit flow",
+          "plan_phase_ref": "Phase 2.5",
+          "area": "analysis",
+          "owner_route": "/analysis",
+          "owner_surface": "AnalysisPage",
+          "type": "feature_integration",
+          "depends_on": [
+            "M1"
+          ],
+          "new_components": [
+            "ResumeAuditEntryPoint",
+            "ResumeAuditResultsPanel"
+          ],
+          "deferred_components": [
+            "ResumeAuditHistoryList"
+          ],
+          "deliverables": [
+            "launch and display audit evaluation results from analysis route"
+          ]
+        },
+        {
+          "id": "MIG-302",
+          "title": "Add the canonical job analysis results surface",
+          "plan_phase_ref": "Phase 3",
+          "area": "jobs",
+          "owner_route": "/apply/quick",
+          "owner_surface": "ApplyQuick",
+          "type": "feature_integration",
+          "depends_on": [
+            "M1"
+          ],
+          "new_components": [
+            "JobAnalysisResultsPanel"
+          ],
+          "deferred_components": [
+            "JobParsingWorkbench",
+            "ExtractFromTextPanel",
+            "AdvancedJobAnalysisPanel"
+          ],
+          "deliverables": [
+            "provide one canonical result surface for current job analysis flows"
+          ]
+        },
+        {
+          "id": "MIG-303",
+          "title": "Keep workflow orchestration explicitly deferred",
+          "plan_phase_ref": "Phase 2.5",
+          "area": "applications_workflows",
+          "owner_route": "/apply/quick",
+          "owner_surface": "ApplyQuick",
+          "type": "blocked_item",
+          "depends_on": [],
+          "new_components": [],
+          "deferred_components": [
+            "WorkflowProgressScreen",
+            "WorkflowStatusPanel",
+            "EmailScanResultsView"
+          ],
+          "deliverables": [
+            "mark orchestration UI as blocked on backend readiness"
+          ]
+        }
+      ]
+    },
+    {
+      "milestone_id": "M5",
+      "name": "Phase 3 and Phase 4 - Route and Component-Library Cleanup",
+      "plan_phase_refs": [
+        "Phase 3",
+        "Phase 4"
+      ],
+      "acceptance": [
+        "/kr/* routes are no longer part of product truth",
+        "reference-only components are clearly distinguished from canonical route-owned components"
+      ],
+      "items": [
+        {
+          "id": "MIG-401",
+          "title": "Retire prototype /kr/* routes from live product routing",
+          "plan_phase_ref": "Phase 4",
+          "area": "route_cleanup",
+          "owner_route": null,
+          "owner_surface": null,
+          "type": "route_cleanup",
+          "depends_on": [
+            "M2",
+            "M3",
+            "M4"
+          ],
+          "new_components": [],
+          "deliverables": [
+            "remove /kr/* routes from product truth",
+            "preserve useful patterns only by merging them into canonical routes"
+          ]
+        },
+        {
+          "id": "MIG-402",
+          "title": "Mark reference-only components and cleanup candidates",
+          "plan_phase_ref": "Phase 4",
+          "area": "component_library_cleanup",
+          "owner_route": null,
+          "owner_surface": null,
+          "type": "inventory_and_cleanup",
+          "depends_on": [
+            "M2",
+            "M3",
+            "M4"
+          ],
+          "new_components": [],
+          "deliverables": [
+            "mark reference-only and cleanup candidates in component inventory"
+          ]
+        },
+        {
+          "id": "MIG-403",
+          "title": "Verify token and dependency integrity after route cleanup",
+          "plan_phase_ref": "Phase 4",
+          "area": "component_library_cleanup",
+          "owner_route": null,
+          "owner_surface": null,
+          "type": "verification",
+          "depends_on": [
+            "M2",
+            "M3",
+            "M4"
+          ],
+          "new_components": [],
+          "deliverables": [
+            "verify touched routes remain token-compliant after cleanup work",
+            "verify no dependency drift was introduced by incremental route or component changes"
+          ]
+        }
+      ]
+    }
+  ]
+}

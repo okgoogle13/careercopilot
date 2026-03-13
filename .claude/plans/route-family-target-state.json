@@ -5,8 +5,7 @@
   "sources": {
     "frontend_architecture_report": "/Users/okgoogle13/Projects/careercopilot/frontend/analysis/frontend-architecture-report.json",
     "frontend_capability_gap_matrix": "/Users/okgoogle13/Projects/careercopilot/.claude/plans/frontend-capability-gap-matrix.json",
-    "source_of_truth_gap_plan": "/Users/okgoogle13/Projects/careercopilot/.claude/plans/wireframe-source-of-truth-gap.md",
-    "corrective_workflow_spec": "/Users/okgoogle13/Projects/careercopilot/docs/superpowers/specs/2026-03-12-production-readiness-corrective-workflow-design.md"
+    "canonical_migration_plan": "/Users/okgoogle13/Projects/careercopilot/docs/project/active/frontend-source-of-truth-migration/2026-03-13-proposed-final-migration-plan.md"
   },
   "decision_legend": {
     "keep": "Current runtime route family remains canonical with only normal cleanup.",
