@@ -17,7 +17,7 @@ import argparse
 import json
 import re
 from dataclasses import dataclass, asdict
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 import xml.etree.ElementTree as ET
@@ -437,7 +437,7 @@ def derive_plan(route_id: str, build_contract_path: Path | None) -> dict[str, An
     normalized_build_contract = build_contract_path.resolve() if build_contract_path else None
     return {
         "artifact": "tokens_first_gap_fill_plan",
-        "generated_at": datetime.now(UTC).isoformat(),
+        "generated_at": datetime.now(timezone.utc).isoformat(),
         "route_id": row["route_id"],
         "target_route": row["target_route"],
         "family": row["family"],
