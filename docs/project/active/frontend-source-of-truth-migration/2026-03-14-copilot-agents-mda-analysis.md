@@ -14,8 +14,34 @@ Relies on strict Python scripting, `xmllint` XSD validation, and structural XML 
 **Copilot Custom Agents Approach (LLM-Driven):**
 Relies on probabilistic generation, context window assembly, and tool use. Custom agents excel at semantic understanding, pattern matching across complex codebases, and gap-filling logic.
 
-**Verdict on Viability:**
-Replacing the *entire* PR 126 workflow with a Copilot Custom Agent is **not viable** due to the loss of determinism. However, integrating Copilot Custom Agents into specific phases of the pipeline is **highly effective** and creates a best-in-class hybrid workflow. The scripts must act as the rigid guardrails (validating the models), while the Agents act as the execution engine (translating the validated models into implementation).
+**Verdict on Viability & The "Execution Engine" Candidate Comparison:**
+Replacing the *entire* PR 126 workflow with any AI Agent is **not viable** due to the loss of determinism. However, integrating Agents into specific phases creates a best-in-class hybrid workflow: scripts act as the rigid guardrails (validating models), while Agents act as the execution engine (translating validated models into implementation).
+
+When selecting the Agent platform for this **Execution Engine**, we evaluated three primary candidates:
+
+#### 1. GitHub Copilot Custom Agents
+- **Pros:** Deep, native IDE integration. Excellent at inline, file-by-file generation. Lowest friction for developers already working within VS Code.
+- **Cons:** Limited autonomous execution loops (cannot easily run a build, read the terminal error, and fix itself iteratively). Context windows can be constrained compared to standalone LLMs.
+
+#### 2. Claude Code Custom Subagents
+- **Pros:** Massive context window (200k+ tokens) allowing ingestion of the entire design canon, token registry, and XML contracts simultaneously. Highly autonomous—can autonomously invoke terminal commands (e.g., `yarn type-check`, `yarn test`), read the output, and self-correct hallucinations before presenting the code. Superior architectural reasoning.
+- **Cons:** Runs in the terminal/external environment rather than natively inline within the IDE text editor.
+
+#### 3. Codex Subagents
+- **Pros:** Optimized specifically for syntactic mapping and code generation. Good at strict instruction following for well-defined bounded tasks.
+- **Cons:** Less capable at complex, multi-step orchestration or deep semantic reasoning across disparate documentation files compared to Claude, and lacks the native IDE UX of Copilot.
+
+**Recommendation:**
+Use **Claude Code Custom Subagents** for heavy, multi-file gap-filling and complex component generation where terminal feedback (testing/linting) is crucial. Use **GitHub Copilot** with repository-level instructions for localized, inline refinements within the IDE.
+
+### Risk Mitigation Strategy (Preventing Hallucination)
+
+Regardless of the chosen agent, LLMs are probabilistic and will hallucinate. To mitigate this in the MDA workflow:
+
+1.  **Deterministic Scaffolding First:** Never ask the agent to invent the file structure or interfaces. Always run `scaffold-from-contract.py` to generate the strict TypeScript interfaces and hook stubs. The agent's job is strictly to map the stubbed data to the UI.
+2.  **Narrow Bounding:** Pass *only* the specific `<brief>` XML node for the target component into the agent's context, not the entire PIM.
+3.  **Test-Driven Enforcement:** The scaffold script generates `__tests__` stubs based on the PSM. The agent must implement the component such that it passes these tests. If a Claude Code subagent is used, mandate that it runs `yarn test` and achieves a passing state before exiting.
+4.  **Token Elevation Re-validation:** After the agent completes the code, the PR 126 Elevation Gate `grep` rules must be re-run over the generated code to instantly detect hallucinated hex codes or banned archetypes.
 
 ---
 
