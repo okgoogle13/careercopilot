@@ -39,9 +39,10 @@ logging.basicConfig(
 )
 logger = logging.getLogger("TestCoverageSprint")
 
-if os.getenv("SENTRY_DSN"):
+sentry_dsn = os.getenv("SENTRY_DSN")
+if sentry_dsn and sentry_dsn.startswith("http") and not sentry_dsn.startswith("${"):
     sentry_sdk.init(
-        dsn=os.getenv("SENTRY_DSN"),
+        dsn=sentry_dsn,
         send_default_pii=True,
         traces_sample_rate=1.0,
         environment=os.getenv("ENV", "development"),
