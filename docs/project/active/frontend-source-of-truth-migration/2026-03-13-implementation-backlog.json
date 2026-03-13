@@ -445,7 +445,8 @@
       ],
       "acceptance": [
         "/kr/* routes are no longer part of product truth",
-        "reference-only components are clearly distinguished from canonical route-owned components"
+        "reference-only components are clearly distinguished from canonical route-owned components",
+        "touched route families have bounded folder/subfolder cleanup aligned to the route matrix without a repo-wide reorg"
       ],
       "items": [
         {
@@ -502,6 +503,33 @@
           "deliverables": [
             "verify touched routes remain token-compliant after cleanup work",
             "verify no dependency drift was introduced by incremental route or component changes"
+          ]
+        },
+        {
+          "id": "MIG-404",
+          "title": "Sanitize frontend structure after route-family migration",
+          "plan_phase_ref": "Phase 4",
+          "area": "frontend structure cleanup",
+          "owner_route": null,
+          "owner_surface": null,
+          "type": "bounded_refactor_cleanup",
+          "depends_on": [
+            "M2",
+            "M3",
+            "M4"
+          ],
+          "new_components": [],
+          "deliverables": [
+            "align touched runtime route-family code to features/<family>/**",
+            "keep pages/** as route entrypoints or thin route shells only",
+            "keep screens/** as design/reference TSX plus wireframe XML only",
+            "retire or clearly mark phase3-batch* and other duplicate/reference-only surfaces once the relevant route-family workflow is stable",
+            "update imports and component inventory where cleanup changes ownership clarity"
+          ],
+          "completion_evidence": [
+            "no touched product area has competing live-looking runtime homes without explicit reference-only labeling",
+            "folder ownership for touched route families matches the route matrix",
+            "cleanup stays bounded and does not become a repo-wide frontend reorganization"
           ]
         }
       ]
