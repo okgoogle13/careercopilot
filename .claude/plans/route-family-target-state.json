@@ -516,13 +516,41 @@
       "decision": "retire",
       "priority": "medium",
       "current_runtime_routes": [
-        "/kr/landing"
+        "/kr/landing",
+        "/kr/auth",
+        "/kr/onboarding",
+        "/kr/analysis",
+        "/kr/dashboard"
       ],
       "current_runtime_owners": [
         {
           "route": "/kr/landing",
           "component": "HeroLanding",
           "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch2/HeroLanding.tsx",
+          "bucket": "components"
+        },
+        {
+          "route": "/kr/auth",
+          "component": "AuthModal",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch2/AuthModal.tsx",
+          "bucket": "components"
+        },
+        {
+          "route": "/kr/onboarding",
+          "component": "OnboardFlow",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch2/OnboardFlow.tsx",
+          "bucket": "components"
+        },
+        {
+          "route": "/kr/analysis",
+          "component": "AnalysisWorkbench",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch3/AnalysisWorkbench.tsx",
+          "bucket": "components"
+        },
+        {
+          "route": "/kr/dashboard",
+          "component": "DashboardOverview",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch3/DashboardOverview.tsx",
           "bucket": "components"
         }
       ],
@@ -533,9 +561,9 @@
         }
       ],
       "backend_capability_support": [],
-      "target_state_action": "Remove from product route planning and keep only as design-reference material if still needed.",
+      "target_state_action": "Remove all 5 /kr/* prototype routes from product route planning. Keep screen components as design-reference material only.",
       "key_gaps": [
-        "prototype route remains live"
+        "5 prototype routes remain live in App.tsx and must be retired as a batch"
       ]
     },
     {
@@ -573,13 +601,15 @@
     },
     {
       "topic": "canonical_ingestion_contract",
-      "decision": "must_choose_one",
-      "candidate_paths": [
-        "/api/v1/ingest",
-        "/api/career/ingest",
+      "decision": "resolved",
+      "canonical": "/api/v1/ingest",
+      "deprecated": [
+        "/api/career/ingest"
+      ],
+      "invalid_or_unmounted": [
         "/api/ingest/artifacts/upload"
       ],
-      "status": "unresolved"
+      "status": "resolved"
     },
     {
       "topic": "prototype_routes",
