@@ -77,16 +77,23 @@ Expected:
 - current branch name is identified
 - dirty state is understood before cloning work
 
-- [ ] **Step 2: Create a new feature branch from the current branch tip**
+- [ ] **Step 2: Create a new feature branch (guarded — no-ops if it already exists)**
 
 Run:
 ```bash
-git checkout -b feat/frontend-source-of-truth-migration
+BRANCH="feat/frontend-source-of-truth-migration"
+if git show-ref --verify --quiet "refs/heads/$BRANCH"; then
+  echo "Branch $BRANCH already exists — switching to it."
+  git checkout "$BRANCH"
+else
+  echo "Creating branch $BRANCH from current tip."
+  git checkout -b "$BRANCH"
+fi
 ```
 
 Expected:
-- new branch created from current branch HEAD
-- no rebasing or history rewriting
+- If the branch already exists: switch to it without error.
+- If new: branch created from current HEAD with no rebasing or history rewriting.
 
 - [ ] **Step 3: Verify branch**
 
@@ -108,6 +115,14 @@ git commit -m "feat(governance): add route family migration baseline"
 ---
 
 ## Governance and Decision Artifacts
+
+### Prerequisites
+
+> **RULE — route-family-map.json prerequisite:**
+> `.claude/route-family-map.json` MUST exist and pass `node frontend/scripts/validate-governance-artifacts.mjs` before any task in this plan that reads it (Tasks 4, 5, 6, 7, 7A, 7B, 7C). If the file does not yet exist, execute Task 2 first — do not skip ahead.
+
+> **RULE — App.tsx single-owner:**
+> `frontend/src/App.tsx` is owned exclusively by **Workstream 6** (route-family reconciliation). All other workstreams treat `App.tsx` as **read-only**. If a task outside Workstream 6 requires an App.tsx change, it must file the change as a request to Workstream 6, not edit the file directly. This prevents multi-agent merge conflicts on the most critical file in the frontend.
 
 ### Task 2: Establish Canonical Governance Files
 
