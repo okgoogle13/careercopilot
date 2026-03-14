@@ -29,4 +29,9 @@ Build contracts (MIG-007):
 - `2026-03-14-build-contract-tracker.xml` — `/tracker` route (applications_crud)
 - `2026-03-14-tracker-supplementary-component-briefs.xml` — detailed contracts for KanbanColumn, ApplicationDetailPanel, ApplicationEditForm, ApplicationStatusActions, ApplicationArchiveAction
 
+Agent and subagent analysis:
+- `2026-03-14-copilot-agents-mda-analysis.md` — original copilot agents MDA analysis
+- `2026-03-14-pr126-consolidated-review.md` — **consolidated PR review and independent analysis** (resolves disjointed thread; includes critical defect triage, MDA strategy critique, Copilot vs Claude subagent comparison)
+
 This folder is the tracked, shareable location for the active migration plan and related execution artifacts.
+
