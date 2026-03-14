@@ -13,8 +13,8 @@ and the generated output layer by making scaffold deterministic and repeatable.
 
 Usage:
     python3 scripts/scaffold-from-contract.py \\
-        --build-contract docs/project/active/frontend-source-of-truth-migration/2026-03-14-build-contract-tracker.xml \\
-        [--supplementary-briefs docs/project/active/frontend-source-of-truth-migration/2026-03-14-tracker-supplementary-component-briefs.xml] \\
+        --build-contract docs/project/active/frontend-source-of-truth-migration/contracts/build-contract-tracker.xml \\
+        [--supplementary-briefs docs/project/active/frontend-source-of-truth-migration/contracts/tracker-supplementary-component-briefs.xml] \\
         [--dry-run] \\
         [--force]
 """
@@ -22,6 +22,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import re
 import textwrap
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
@@ -106,6 +107,10 @@ def _attr(node: ET.Element, attr: str, default: str = "") -> str:
     return node.attrib.get(attr, default).strip() or default
 
 
+def _fallback_element(node: ET.Element | None) -> ET.Element:
+    return node if node is not None else ET.Element("_")
+
+
 def _parse_props(parent: ET.Element, tag: str = "prop") -> list[PropSpec]:
     specs: list[PropSpec] = []
     for prop_node in parent.findall(tag):
@@ -166,10 +171,10 @@ def _parse_tests(parent: ET.Element) -> list[TestSpec]:
 
 def _parse_design_tokens(parent: ET.Element) -> list[str]:
     return [
-        f"{_attr(node, 'ref')} /* {_attr(node, 'usage')} */"
+        f"{_attr(node, 'ref')} - {_attr(node, 'usage')}"
         for node in parent.findall("token")
     ] + [
-        f"{_attr(node, 'ref')} /* {_attr(node, 'usage')} */"
+        f"{_attr(node, 'ref')} - {_attr(node, 'usage')}"
         for node in parent.findall(".//dependency[@type='design_token']")
     ]
 
@@ -200,17 +205,17 @@ def parse_contract(contract_path: Path) -> dict[str, Any]:
         components[name]["role"] = _text(comp_node.find("role"), "support_component")
         components[name]["description"] = ""
         components[name]["required_props"] = _parse_props(
-            comp_node.find("required_props") or ET.Element("_"), "prop"
+            _fallback_element(comp_node.find("required_props")), "prop"
         )
         components[name]["optional_props"] = _parse_props(
-            comp_node.find("optional_props") or ET.Element("_"), "prop"
+            _fallback_element(comp_node.find("optional_props")), "prop"
         )
         components[name]["local_state"] = _parse_state(
-            comp_node.find("local_state") or ET.Element("_"), "state"
+            _fallback_element(comp_node.find("local_state")), "state"
         )
         comp_children = comp_node.find("child_components")
         components[name]["child_components"] = [
-            child.text.strip() for child in (comp_children or []) if child.text
+            child.text.strip() for child in (list(comp_children) if comp_children is not None else []) if child.text
         ]
 
     return components
@@ -225,16 +230,17 @@ def parse_supplementary_briefs(briefs_path: Path | None) -> dict[str, Any]:
     for brief in root.findall("brief"):
         name = _attr(brief, "component_name")
         desc_node = brief.find("description")
+        prop_specs = _parse_props(_fallback_element(brief.find("prop_contract")))
         result[name] = {
             "description": _text(desc_node),
             "file_path": _text(brief.find("file_path")),
-            "required_props": _parse_props(brief.find("prop_contract") or ET.Element("_")),
-            "optional_props": [],
-            "local_state": _parse_state(brief.find("state_contract") or ET.Element("_")),
-            "queries": _parse_queries(brief.find("data_fetching") or ET.Element("_")),
-            "mutations": _parse_mutations(brief.find("data_mutation") or ET.Element("_")),
-            "tests": _parse_tests(brief.find("test_contract") or ET.Element("_")),
-            "design_tokens": _parse_design_tokens(brief.find("design_tokens") or ET.Element("_")),
+            "required_props": [prop for prop in prop_specs if prop.required],
+            "optional_props": [prop for prop in prop_specs if not prop.required],
+            "local_state": _parse_state(_fallback_element(brief.find("state_contract"))),
+            "queries": _parse_queries(_fallback_element(brief.find("data_fetching"))),
+            "mutations": _parse_mutations(_fallback_element(brief.find("data_mutation"))),
+            "tests": _parse_tests(_fallback_element(brief.find("test_contract"))),
+            "design_tokens": _parse_design_tokens(_fallback_element(brief.find("design_tokens"))),
         }
     return result
 
@@ -278,20 +284,51 @@ def merge_specs(
 
 def _props_to_interface(spec: ComponentSpec) -> str:
     lines = [f"export interface {spec.name}Props {{"]
+    seen_props: set[str] = set()
     for prop in spec.required_props:
+        if prop.name in seen_props:
+            continue
+        seen_props.add(prop.name)
         comment = f"  // {prop.description}" if prop.description else ""
         lines.append(f"  {prop.name}: {prop.ts_type};{comment}")
     for prop in spec.optional_props:
+        if prop.name in seen_props:
+            continue
+        seen_props.add(prop.name)
         default_comment = f" // default: {prop.default}" if prop.default else ""
         lines.append(f"  {prop.name}?: {prop.ts_type};{default_comment}")
     lines.append("}")
     return "\n".join(lines)
 
 
+def _state_default_expression(state: StateSpec) -> str:
+    if state.default is None:
+        return "null"
+
+    default = state.default.strip()
+    if not default:
+        return "null"
+    if default in {"true", "false", "null"}:
+        return default
+    if re.fullmatch(r"-?\d+(\.\d+)?", default):
+        return default
+    if default in {"{}", "[]"}:
+        return default
+    if " or " in default.lower():
+        return "null"
+    if default.startswith("{") or default.startswith("["):
+        return default
+    if default.startswith(("'", '"')) and default.endswith(("'", '"')):
+        return default
+    if "'" in state.ts_type or "string" in state.ts_type.lower():
+        return repr(default)
+    return "null"
+
+
 def _state_to_declarations(spec: ComponentSpec) -> list[str]:
     decls: list[str] = []
     for state in spec.local_state:
-        default = state.default if state.default is not None else "null"
+        default = _state_default_expression(state)
         decls.append(f"  const [{state.name}, set{state.name[0].upper()}{state.name[1:]}] = React.useState<{state.ts_type}>({default});")
     return decls
 
@@ -304,7 +341,7 @@ def _query_stubs(spec: ComponentSpec) -> list[str]:
         stubs.append(
             f"  const {{ data: {q.name}, isLoading: {q.name}Loading, error: {q.name}Error }} = {q.hook}({{\n"
             f"    queryKey: {key_repr},\n"
-            f"    queryFn: () => fetch('{q.endpoint}').then(r => r.json()),{enabled_clause}\n"
+            f"    queryFn: async () => {{ /* TODO: use {q.endpoint} service fn */ throw new Error('Not implemented'); }}{enabled_clause}\n"
             f"  }});"
         )
     return stubs
@@ -316,7 +353,7 @@ def _mutation_stubs(spec: ComponentSpec) -> list[str]:
         payload_type = m.payload or "Record<string, unknown>"
         stubs.append(
             f"  const {m.name} = {m.hook}<{payload_type}>({{ // endpoint: {m.endpoint}\n"
-            f"    mutationFn: (payload) => fetch('{m.endpoint}', {{ method: 'POST', body: JSON.stringify(payload) }}).then(r => r.json()),\n"
+            f"    mutationFn: async (payload) => {{ /* TODO: use {m.endpoint} service fn */ throw new Error('Not implemented'); }},\n"
             f"    onSuccess: () => {{ /* {m.on_success} */ }},\n"
             f"    onError: () => {{ /* {m.on_error} */ }},\n"
             f"  }});"
@@ -334,6 +371,29 @@ def _token_comment(spec: ComponentSpec) -> str:
     return "\n".join(lines)
 
 
+def _collect_placeholder_types(spec: ComponentSpec) -> list[str]:
+    builtins = {
+        "string", "number", "boolean", "null", "undefined", "void", "unknown", "any",
+        "record", "array", "promise", "react", "reactelement", "error",
+    }
+    found: set[str] = set()
+    type_sources = [prop.ts_type for prop in spec.required_props + spec.optional_props]
+    type_sources.extend(state.ts_type for state in spec.local_state)
+    type_sources.extend(m.payload for m in spec.mutations if m.payload)
+
+    for type_source in type_sources:
+        for token in re.findall(r"\b[A-Za-z_][A-Za-z0-9_]*\b", type_source):
+            if token.lower() in builtins:
+                continue
+            if token in {"React", "Record", "Promise"}:
+                continue
+            if not token[0].isupper():
+                continue
+            found.add(token)
+
+    return sorted(found)
+
+
 def generate_component_tsx(spec: ComponentSpec) -> str:
     props_interface = _props_to_interface(spec)
     state_decls = _state_to_declarations(spec)
@@ -344,6 +404,12 @@ def generate_component_tsx(spec: ComponentSpec) -> str:
     child_imports = "\n".join(
         f"// import {{ {child} }} from './{child}';"
         for child in spec.child_components
+        if re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", child)
+    )
+    placeholder_types = _collect_placeholder_types(spec)
+    placeholder_type_block = "\n".join(
+        f"type {type_name} = unknown;"
+        for type_name in placeholder_types
     )
 
     state_block = "\n".join(state_decls) if state_decls else "  // no local state"
@@ -351,6 +417,20 @@ def generate_component_tsx(spec: ComponentSpec) -> str:
     mutation_block = "\n".join(mutation_stubs) if mutation_stubs else "  // no mutations"
 
     description_comment = f"/**\n * {spec.description}\n *\n * Scaffold generated from build contract. Implement according to contract spec.\n * @see docs/schema/build_contract.xsd\n */" if spec.description else "/** Scaffold generated from build contract. Implement according to contract spec. */"
+
+    # Generate TanStack Query imports if queries or mutations are present
+    tanstack_import = ""
+    if spec.queries or spec.mutations:
+        imports = ["useQuery"] if spec.queries else []
+        if spec.mutations:
+            imports.append("useMutation")
+        tanstack_import = f"import {{ {', '.join(imports)} }} from '@tanstack/react-query';"
+
+    prop_names: list[str] = []
+    for prop in spec.required_props + spec.optional_props:
+        if prop.name not in prop_names:
+            prop_names.append(prop.name)
+    destructured_props = ", ".join(prop_names) or "props"
 
     return textwrap.dedent(f"""\
         /**
@@ -361,13 +441,15 @@ def generate_component_tsx(spec: ComponentSpec) -> str:
          *             Zero hardcoded hex, rgba(), hsla() values permitted.
          */
         import React from 'react';
+        {tanstack_import}
         {child_imports}
 
         {description_comment}
+        {placeholder_type_block}
         {props_interface}
 
         {token_comment}
-        export const {spec.name} = ({{{', '.join(p.name for p in spec.required_props + spec.optional_props) or 'props'}}}: {spec.name}Props): React.ReactElement => {{
+        export const {spec.name} = ({{{destructured_props}}}: {spec.name}Props): React.ReactElement => {{
         {state_block}
 
         {query_block}
@@ -437,6 +519,8 @@ def write_scaffold(
         if dry_run:
             results.append(f"DRY-RUN: would write {target.relative_to(repo_root)}")
         else:
+            if target.exists():
+                print(f"  WARNING: overwriting {target.relative_to(repo_root)}")
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(content, encoding="utf-8")
             results.append(f"WRITTEN: {target.relative_to(repo_root)}")

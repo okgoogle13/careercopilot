@@ -159,13 +159,13 @@ def test_update_application_success(api_client):
 
     payload_update = {
         "jobTitle": "Senior Engineer",
-        "companyName": "AI Corp",
-        "jobDescription": "Updated description that also meets the 50 char minimum length requirement."
-        * 2,
+        "status": "offer",
+        "notes": "Onsite interview complete",
     }
     response = api_client.put(f"/api/applications/{app_id}", json=payload_update)
     assert response.status_code == status.HTTP_200_OK
     assert response.json()["jobTitle"] == "Senior Engineer"
+    assert response.json()["status"] == "offer"
 
 
 def test_update_application_not_found(api_client):

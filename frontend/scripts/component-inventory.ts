@@ -183,14 +183,8 @@ const TRACKED_MIGRATION_ROOT = path.join(
   'active',
   'frontend-source-of-truth-migration'
 );
-const ROUTE_MATRIX_PATH = path.join(
-  TRACKED_MIGRATION_ROOT,
-  '2026-03-13-target-state-route-matrix.json'
-);
-const COMPONENT_GAP_MAP_PATH = path.join(
-  TRACKED_MIGRATION_ROOT,
-  '2026-03-13-backend-feature-frontend-component-gap-map.json'
-);
+const ROUTE_MATRIX_PATH = path.join(TRACKED_MIGRATION_ROOT, 'control', 'route-matrix.json');
+const COMPONENT_GAP_MAP_PATH = path.join(TRACKED_MIGRATION_ROOT, 'control', 'gap-map.json');
 
 function normalizePath(value: string): string {
   return value.split(path.sep).join('/');
@@ -209,6 +203,7 @@ function categorizeComponent(filePath: string): ComponentInfo['category'] {
   if (relativePath.startsWith('src/layouts/')) return 'layout';
   if (relativePath.startsWith('src/pages/')) return 'pages';
   if (relativePath.startsWith('src/features/')) return 'features';
+  if (relativePath.startsWith('src/context/')) return 'core';
   if (relativePath.startsWith('src/components/ui/')) return 'ui';
   if (relativePath.startsWith('src/components/shared/')) return 'shared';
   if (relativePath.startsWith('src/components/core/')) return 'core';
@@ -456,7 +451,30 @@ function analyzeComponents(): InventoryReport {
     project.addSourceFilesAtPaths(path.join(UI_PACKAGE_DIR, '**/*.tsx'));
   }
 
-  console.log('Analyzing components...');
+  console.log('Crawling reachable AST graph from App.tsx and main.tsx...');
+
+  const reachableFiles = new Set<string>();
+  const queue = [path.join(SRC_DIR, 'main.tsx'), path.join(SRC_DIR, 'App.tsx')];
+
+  while (queue.length > 0) {
+    const currentPath = queue.shift()!;
+    if (reachableFiles.has(currentPath)) continue;
+
+    const sf = project.getSourceFile(currentPath);
+    if (!sf) continue;
+
+    reachableFiles.add(currentPath);
+
+    sf.getImportDeclarations().forEach((imp) => {
+      const resolvedSf = imp.getModuleSpecifierSourceFile();
+      if (resolvedSf) {
+        const resolvedPath = resolvedSf.getFilePath();
+        if (isWithinRoot(resolvedPath, SRC_DIR) && !resolvedPath.includes('node_modules')) {
+          queue.push(resolvedPath);
+        }
+      }
+    });
+  }
 
   const componentFiles = project.getSourceFiles().filter((sf) => {
     const filePath = sf.getFilePath();
@@ -466,7 +484,7 @@ function analyzeComponents(): InventoryReport {
       !filePath.includes('.stories.') &&
       !filePath.includes('node_modules') &&
       !filePath.includes('/Figma UI Files/') &&
-      COMPONENT_ROOTS.some((root) => isWithinRoot(filePath, root))
+      reachableFiles.has(filePath)
     );
   });
 
@@ -535,8 +553,10 @@ function analyzeComponents(): InventoryReport {
       }) ||
       /\bM3[A-Z]/.test(text);
 
+    // Match explicit KR identifiers only. Avoid generic substrings like "stone"
+    // triggering false positives for unrelated words such as "keystone".
     const KrSolidarityTokenPattern =
-      /(wattle|[DEPRECATED_STYLE]|kr-leaf|flannel|paper-white|kr-motif|pebble|stone|KeralaRage|KrSolidarity|kr-flower|bottlebrush|gum|fern|sentry|KrDark|KrDark|slate)/i;
+      /\b(?:KeralaRage|KrSolidarity|KrDark|Pebble|Stone|Slab|ManifestoSlab|Signal|Lens|HaloPulses)\b|(?:\bkr-(?:leaf|flower|motif)\b)|\bpaper-white\b/i;
     const usesDesignTokens =
       KrSolidarityTokenPattern.test(text) ||
       /--(radius|elevation|duration|motion|surface|color)-/i.test(text);
@@ -895,6 +915,20 @@ function analyzeComponents(): InventoryReport {
     },
   };
 
+  if (process.argv.includes('--raw')) {
+    const rawInventory = components.map((c) => ({
+      name: c.name,
+      absolutePath: c.path,
+      relativePath: c.relativePath,
+      category: c.category,
+    }));
+    fs.writeFileSync(
+      path.join(FRONTEND_DIR, 'tmp_raw_inventory.json'),
+      JSON.stringify(rawInventory, null, 2)
+    );
+    console.log(`✅ Raw reachable inventory generated with ${rawInventory.length} components.`);
+  }
+
   return report;
 }
 
@@ -908,7 +942,9 @@ function main() {
       ? process.argv[process.argv.indexOf('--output') + 1]
       : path.join(FRONTEND_DIR, 'component-inventory.json');
 
-    fs.writeFileSync(outputPath, JSON.stringify(report, null, 2));
+    if (!process.argv.includes('--raw')) {
+      fs.writeFileSync(outputPath, JSON.stringify(report, null, 2));
+    }
 
     console.log('\n=== Summary ===');
     console.log(`Total Components: ${report.totalComponents}`);

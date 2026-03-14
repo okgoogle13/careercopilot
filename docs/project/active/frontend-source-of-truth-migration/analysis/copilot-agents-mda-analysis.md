@@ -49,9 +49,9 @@ Regardless of the chosen agent, LLMs are probabilistic and will hallucinate. To 
 
 | PR 126 Workflow Dimension | Current Script-Based Approach | Copilot Custom Agent Approach | Efficacy Comparison |
 | :--- | :--- | :--- | :--- |
-| **PIM Validation**<br/>*(Gap 1: XSD Validation)* | Evaluates XML against strict `build_contract.xsd` via `xmllint`. Fails instantly on schema drift. | Prompts the LLM to "check if the XML is valid." | **Scripts Win.** LLMs hallucinate schema compliance and struggle with strict structural validation. Scripts are O(1) deterministic. |
+| **PIM Validation**<br/>*(Gap 1: XSD Validation)* | Evaluates XML against strict `build_contract.xsd` via `xmllint`. Fails instantly on schema drift. | Prompts the LLM to "check if the XML is valid." | **Scripts Win.** LLMs hallucinate schema compliance and struggle with strict structural validation. Scripts are deterministic, and runtime scales with file and schema size. |
 | **Token Extraction & Diffing**<br/>*(Gap 2)* | Parses XML trees to extract `--sys-*` strings and diffs arrays. | Asks agent to compare wireframe tokens against contract tokens. | **Scripts Win.** AST parsing is faster and perfectly accurate for basic data extraction. |
-| **Elevation Gate**<br/>*(Gap 4: Token Cleanliness)* | Uses bash `grep` to flag hardcoded `#hex`, `rgba()`, and legacy archetypes. | Agent reviews a file for "design system compliance." | **Scripts Win.** The hard boundary of the Elevation Gate requires zero false-negatives. `grep` is infallible here. |
+| **Elevation Gate**<br/>*(Gap 4: Token Cleanliness)* | Uses bash `grep` to flag hardcoded `#hex`, `rgba()`, and legacy archetypes. | Agent reviews a file for "design system compliance." | **Scripts Win.** The hard boundary of the Elevation Gate still belongs to deterministic pattern checks. `grep` is reliable for the patterns it knows about, but the pattern set must be maintained and should be backed by parser or lint checks if false-negatives become a risk. |
 | **Output Scaffolding**<br/>*(Gap 6: Stub Generation)* | `scaffold-from-contract.py` outputs boilerplate `.tsx` sequentially. | Agent generates components dynamically. | **Tie.** Scripts guarantee the filesystem matches the PSM exactly. However, agents can output *more* than just a stub. |
 | **Implementation Gap-Fill**<br/>*(Writing actual React logic)* | **Not covered.** Scripts only generate stubs and interfaces. | Agent reads the PIM/PSM and writes the fully functional React component, `useQuery` hooks, and Tailwind CSS. | **Agents Win (Flawless Victory).** This is where Copilot Agents shine. Scripts cannot write bespoke UI logic; Agents can. |
 
@@ -79,7 +79,7 @@ When `derive-gap-fill-plan.py` flags a file as `token-dirty`, automatically orch
 #### Enhancement 3: Automated PSM Specification Generation
 **Opportunity:** Writing the `<supplementary_component_briefs.xml>` by hand is an intensive, error-prone manual task mapping the PIM to the PSM.
 **Simplification:**
-Use a Copilot Custom Agent to read the higher-level wireframe XML (CIM) alongside the Build Contract (PIM), and generate the detailed PSM XML dynamically prior to scaffolding.
+Use a Copilot Custom Agent to read the higher-level wireframe XML (CIM) alongside the Build Contract (PIM), and generate the detailed PSM XML dynamically before scaffolding.
 **Execution:** Define an Agent prompt: *"Analyze `build-contract-tracker.xml`. For the `ApplicationDetailPanel` component, generate the `<brief>` block conforming to our PSM standards. Include `prop_contract`, `state_contract`, and generate 5 deterministic `<storybook_contract>` stories representing its visual states to pass Gap 3 verification."*
 
 ---

@@ -2,7 +2,7 @@
 
 **Date:** 2026-03-13
 **Status:** Proposed consolidated plan
-**Canonical location:** `docs/project/active/frontend-source-of-truth-migration/2026-03-13-proposed-final-migration-plan.md`
+**Canonical location:** `docs/project/active/frontend-source-of-truth-migration/control/plan.md`
 **Supersedes for active planning:**
 - `.claude/plans/2026-03-12-production-readiness-corrective-workflow-design.md`
 - `.claude/plans/2026-03-12-frontend-source-of-truth-migration.md`
@@ -112,7 +112,7 @@ Use this sequence for wireframe-led migration work:
    - generate or refresh wireframe intent only
 2. `scripts/validate-wireframe-workflow.py`
    - validate canonical XML wireframes against schema quality, route coverage, component planning, and legacy drift
-3. `2026-03-14-wireframe-build-contract-prompt.md`
+3. `contracts/wireframe-build-contract-prompt.md`
    - generate a deterministic build contract from one route-matrix row, one canonical wireframe XML, and one component-gap entry when applicable
 4. `scripts/derive-gap-fill-plan.py`
    - generate a tokens-first reuse plan from the route matrix, component gap map, existing TSX files, and an approved build contract when present
@@ -130,8 +130,8 @@ Use this sequence for wireframe-led migration work:
 
 The build-contract prompt is the missing bridge between validated XML wireframes and TSX implementation planning.
 It must reconcile:
-- `2026-03-13-target-state-route-matrix.json`
-- `2026-03-13-backend-feature-frontend-component-gap-map.json`
+- `control/route-matrix.json`
+- `control/gap-map.json`
 - one canonical `frontend/src/screens/**/*.wireframe.xml`
 
 ### Current build-contract gate status
@@ -140,7 +140,7 @@ The first route-level build contract exists for `/tracker`, but it should be tre
 
 Current status:
 - route: `/tracker`
-- artifact: `2026-03-14-build-contract-tracker.xml`
+- artifact: `contracts/build-contract-tracker.xml`
 - review state: `in_review`
 - gate result: `blocked`
 
@@ -157,8 +157,8 @@ Next sequence:
 ### Do
 
 - use `frontend/src/screens/**/*.wireframe.xml` as the canonical wireframe source
-- validate wireframes against `2026-03-13-target-state-route-matrix.json` before calling them migration-ready
-- validate wireframes against `2026-03-13-backend-feature-frontend-component-gap-map.json` before spec generation
+- validate wireframes against `control/route-matrix.json` before calling them migration-ready
+- validate wireframes against `control/gap-map.json` before spec generation
 - use the tracked build-contract prompt to produce route-level implementation contracts before `component-spec-generator` work begins
 - use the tokens-first gap-fill planner to decide whether an existing runtime component should be reused for behavior only, reused with token cleanup, treated as reference-only, or replaced
 - treat motion, asset placement, and brand polish as downstream enrichments after schema and planning consistency

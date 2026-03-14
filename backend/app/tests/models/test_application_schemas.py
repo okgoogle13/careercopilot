@@ -7,6 +7,7 @@ from app.models.application_schemas import (
     ApplicationCreate,
     ApplicationResponse,
     ApplicationStatus,
+    ApplicationUpdate,
     Contact,
     DocumentReferences,
     InterviewSchedule,
@@ -86,3 +87,13 @@ class TestApplicationSchemas:
         assert app_resp.user_id == "user1"
         assert app_resp.status == ApplicationStatus.DRAFT
         assert app_resp.created_at == now
+
+    def test_application_update_partial(self):
+        app_update = ApplicationUpdate(
+            status=ApplicationStatus.INTERVIEWING,
+            notes="Follow-up booked",
+            rating=4,
+        )
+        assert app_update.status == ApplicationStatus.INTERVIEWING
+        assert app_update.notes == "Follow-up booked"
+        assert app_update.rating == 4

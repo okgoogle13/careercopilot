@@ -22,6 +22,7 @@ except ImportError:  # pragma: no cover - optional dependency in test/CI
 
 logger = logging.getLogger(__name__)
 
+
 class DocumentIntelligenceService:
     """
     Core service for advanced document manipulation:
@@ -33,7 +34,13 @@ class DocumentIntelligenceService:
         self.working_dir = Path(working_dir)
         self.working_dir.mkdir(parents=True, exist_ok=True)
 
-    def apply_redlines_to_docx(self, input_path: str, output_path: str, edits: list[dict[str, str]], author: str = "CareerCopilot") -> bool:
+    def apply_redlines_to_docx(
+        self,
+        input_path: str,
+        output_path: str,
+        edits: list[dict[str, str]],
+        author: str = "CareerCopilot",
+    ) -> bool:
         """
         Applies a list of text replacements as native Word Tracked Changes.
         edits format: [{'original': 'text to find', 'replacement': 'new text'}]
@@ -105,12 +112,12 @@ class DocumentIntelligenceService:
                 if field_name in fields:
                     field_type = fields[field_name].get("/FT")
 
-                    if field_type == "/Btn": # Checkbox
+                    if field_type == "/Btn":  # Checkbox
                         if isinstance(value, bool):
                             updates[field_name] = "/Yes" if value else "/Off"
                         else:
                             updates[field_name] = value
-                    else: # Text
+                    else:  # Text
                         updates[field_name] = str(value)
 
             for page in writer.pages:
@@ -123,8 +130,10 @@ class DocumentIntelligenceService:
             logger.error(f"PDF Filling failed: {e!s}")
             return False
 
+
 class _DocxXmlEditor:
     """Internal Helper for XML manipulation"""
+
     def __init__(self, xml_path: Path, author: str):
         self.xml_path = xml_path
         self.author = author
@@ -140,7 +149,8 @@ class _DocxXmlEditor:
 
     def apply_tracked_change(self, run_node, original_text: str, new_text: str):
         paragraph = run_node.parentNode
-        if paragraph.nodeName != "w:p": return
+        if paragraph.nodeName != "w:p":
+            return
 
         timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         rsid = str(random.randint(100000, 999999))

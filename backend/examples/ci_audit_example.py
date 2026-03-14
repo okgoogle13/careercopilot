@@ -21,16 +21,13 @@ from genkit.types import GenerateRequest
 from genkit_plugin_google_genai import google_genai
 
 # CareerCopilot CI Auditor
-from app.core.prompts import CIAuditorPrompts, CodeAuditRequest, CIAuditResponse
+from app.core.prompts import CIAuditorPrompts, CIAuditResponse, CodeAuditRequest
 
 # Initialize Genkit with Gemini 3.0 Flash
 genkit.configure(plugins=[google_genai()], log_level="info")
 
 # Define the audit flow
-audit_flow = genkit.define_flow(
-    name="code_audit_flow",
-    fn=lambda request: perform_audit(request)
-)
+audit_flow = genkit.define_flow(name="code_audit_flow", fn=lambda request: perform_audit(request))
 
 
 async def perform_audit(request: CodeAuditRequest) -> CIAuditResponse:
@@ -73,7 +70,7 @@ async def perform_audit(request: CodeAuditRequest) -> CIAuditResponse:
             "max_output_tokens": 4096,
             "system_instruction": system_prompt,
         },
-        output_schema=CIAuditResponse.model_json_schema()  # Enforce JSON schema
+        output_schema=CIAuditResponse.model_json_schema(),  # Enforce JSON schema
     )
 
     # Step 4: Parse and validate response
@@ -91,7 +88,7 @@ async def audit_pull_request(pr_files: List[str]):
         file_paths=pr_files,
         tech_stack="React 18 / Python FastAPI / Google Cloud",
         deployment_target="Cloud Run + Firebase Hosting",
-        focus_area="Deployment safety and build integrity"
+        focus_area="Deployment safety and build integrity",
     )
 
     result = await perform_audit(request)
@@ -113,8 +110,7 @@ async def audit_pull_request(pr_files: List[str]):
 async def quick_scan_staged_files(staged_files: List[str]):
     """Fast triage scan for pre-commit hook (target: <30s execution)."""
     quick_prompt = CIAuditorPrompts.build_quick_scan_prompt(
-        file_count=len(staged_files),
-        tech_stack="TypeScript React"
+        file_count=len(staged_files), tech_stack="TypeScript React"
     )
 
     # Append file contents
@@ -129,11 +125,12 @@ async def quick_scan_staged_files(staged_files: List[str]):
         config={
             "temperature": 0,
             "max_output_tokens": 1024,  # Keep response small
-        }
+        },
     )
 
     # Parse lightweight response
     import json
+
     issues = json.loads(response.text)
 
     for issue in issues:
@@ -143,7 +140,7 @@ async def quick_scan_staged_files(staged_files: List[str]):
         print(f"   Fix: {issue['fix']}\n")
 
     # Block commit if blockers found
-    has_blockers = any(i['severity'] == 'BLOCKER' for i in issues)
+    has_blockers = any(i["severity"] == "BLOCKER" for i in issues)
     if has_blockers:
         print("❌ Commit blocked due to critical issues. Fix blockers and try again.")
         exit(1)
@@ -166,7 +163,7 @@ async def weekly_codebase_audit():
         file_paths=critical_files,
         tech_stack="Full-stack React + FastAPI",
         deployment_target="GCP Cloud Run",
-        focus_area="CI/CD pipeline and dependency management"
+        focus_area="CI/CD pipeline and dependency management",
     )
 
     result = await perform_audit(request)
@@ -248,7 +245,7 @@ if __name__ == "__main__":
     request = CodeAuditRequest(
         file_paths=files_to_audit,
         tech_stack="React 18 / Python FastAPI",
-        deployment_target="Google Cloud Run"
+        deployment_target="Google Cloud Run",
     )
 
     result = asyncio.run(perform_audit(request))

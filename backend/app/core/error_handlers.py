@@ -23,30 +23,29 @@ class ErrorHandler:
     def handle_value_error(error: ValueError, context: str = "") -> HTTPException:
         """
         Handle ValueError and convert to appropriate HTTP response.
-        
+
         Args:
             error: The ValueError to handle
             context: Additional context about where the error occurred
-            
+
         Returns:
             HTTPException with 400 status code
         """
         error_msg = str(error)
         logger.warning(f"ValueError in {context}: {error_msg}")
         return HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Invalid request: {error_msg}"
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Invalid request: {error_msg}"
         )
 
     @staticmethod
     def handle_not_found(resource_type: str, resource_id: Any = None) -> HTTPException:
         """
         Handle resource not found errors.
-        
+
         Args:
             resource_type: Type of resource (e.g., "User", "Document", "Application")
             resource_id: Optional ID of the resource
-            
+
         Returns:
             HTTPException with 404 status code
         """
@@ -54,20 +53,17 @@ class ErrorHandler:
         if resource_id:
             detail += f" (ID: {resource_id})"
         logger.info(f"Resource not found: {detail}")
-        return HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=detail
-        )
+        return HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=detail)
 
     @staticmethod
     def handle_database_error(error: Exception, context: str = "") -> HTTPException:
         """
         Handle database errors (SQLAlchemy exceptions).
-        
+
         Args:
             error: The database error
             context: Additional context about the operation
-            
+
         Returns:
             HTTPException with appropriate status code
         """
@@ -75,24 +71,24 @@ class ErrorHandler:
             logger.warning(f"Database integrity error in {context}: {error}")
             return HTTPException(
                 status_code=status.HTTP_409_CONFLICT,
-                detail="Database constraint violation. The resource may already exist."
+                detail="Database constraint violation. The resource may already exist.",
             )
-        
+
         logger.error(f"Database error in {context}: {error}", exc_info=True)
         return HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Database operation failed. Please try again later."
+            detail="Database operation failed. Please try again later.",
         )
 
     @staticmethod
     def handle_generic_error(error: Exception, context: str = "") -> HTTPException:
         """
         Handle unexpected errors.
-        
+
         Args:
             error: The exception to handle
             context: Additional context about where the error occurred
-            
+
         Returns:
             HTTPException with 500 status code
         """
@@ -100,24 +96,25 @@ class ErrorHandler:
         logger.error(f"Unexpected error in {context}: {error_msg}", exc_info=True)
         return HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"An unexpected error occurred: {error_msg}"
+            detail=f"An unexpected error occurred: {error_msg}",
         )
 
 
 def with_error_handling(context: str = ""):
     """
     Decorator for endpoints to handle common error patterns.
-    
+
     Usage:
         @router.post("/endpoint")
         @with_error_handling("create_resource")
         async def create_resource(...):
             # Your endpoint logic
             pass
-    
+
     Args:
         context: Description of the operation for logging
     """
+
     def decorator(func: Callable[..., T]) -> Callable[..., T]:
         async def wrapper(*args, **kwargs) -> T:
             try:
@@ -131,27 +128,30 @@ def with_error_handling(context: str = ""):
                 raise
             except Exception as e:
                 raise ErrorHandler.handle_generic_error(e, context)
-        
+
         wrapper.__name__ = func.__name__
         wrapper.__doc__ = func.__doc__
         return wrapper
+
     return decorator
 
 
-def safe_operation(operation: Callable[[], T], context: str = "", default: T | None = None) -> T | None:
+def safe_operation(
+    operation: Callable[[], T], context: str = "", default: T | None = None
+) -> T | None:
     """
     Execute an operation with automatic error handling.
-    
+
     Useful for non-critical operations where you want to log errors but continue execution.
-    
+
     Args:
         operation: The function to execute
         context: Description of the operation
         default: Default value to return on error
-        
+
     Returns:
         Result of the operation or default value on error
-        
+
     Example:
         result = safe_operation(
             lambda: expensive_computation(),

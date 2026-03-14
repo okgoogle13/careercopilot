@@ -6,27 +6,27 @@ from pydantic import BaseModel, Field
 
 class CodeAuditRequest(BaseModel):
     """Structure for passing context to the AI Auditor."""
-    file_paths: list[str] = Field(
-        description="List of file paths to audit (relative or absolute)"
-    )
+
+    file_paths: list[str] = Field(description="List of file paths to audit (relative or absolute)")
     tech_stack: str = Field(
         default="React 18 / Python FastAPI",
-        description="Primary technology stack of the application"
+        description="Primary technology stack of the application",
     )
     deployment_target: str = Field(
         default="Google Cloud Run",
-        description="Target deployment platform (e.g., Cloud Run, Vercel, AWS Lambda)"
+        description="Target deployment platform (e.g., Cloud Run, Vercel, AWS Lambda)",
     )
     focus_area: str | None = Field(
         default=None,
-        description="Specific audit focus (e.g., 'security', 'performance', 'DRY violations')"
+        description="Specific audit focus (e.g., 'security', 'performance', 'DRY violations')",
     )
+
 
 class CIAuditorPrompts:
     """
     Centralized prompt logic for Pre-Deployment Code Reviews.
     Used by ApplicationAgent to critique user portfolios or internal PRs.
-    
+
     Design Philosophy:
     - Production-oriented: Prioritize stability over innovation
     - Actionable: Provide specific line numbers and refactoring steps
@@ -43,23 +43,19 @@ class CIAuditorPrompts:
             "You are a Principal DevOps Engineer and Lead Solutions Architect with 15+ years "
             "of experience in production systems at scale. Your code reviews are legendary for "
             "catching subtle bugs before they reach production.\n\n"
-
             "**Mission**: Perform ruthless pre-flight code audits focused on deployment readiness, "
             "production stability, security, and long-term maintainability.\n\n"
-
             "**Rules**:\n"
             "1. Be specific: Provide exact line numbers, file paths, and code examples\n"
             "2. Be actionable: Offer concrete refactoring suggestions, not generic advice\n"
             "3. Prioritize safety: Any issue that could break production is CRITICAL\n"
             "4. Think compounding debt: Flag patterns that will multiply as the codebase grows\n"
             "5. Challenge assumptions: Question hardcoded values, missing error handling, and implicit dependencies\n\n"
-
             "**What NOT to do**:\n"
             "- Do NOT provide superficial 'looks good' assessments\n"
             "- Do NOT ignore issues because 'it currently works'\n"
             "- Do NOT skip security issues, even if they seem unlikely to be exploited\n"
             "- Do NOT accept 'we'll fix it later' technical debt without flagging it\n\n"
-
             "Your output should be structured JSON that categorizes findings by severity."
         )
 
@@ -67,10 +63,10 @@ class CIAuditorPrompts:
     def build_review_prompt(context: CodeAuditRequest) -> str:
         """
         Generates the main audit prompt with contextual parameters.
-        
+
         Args:
             context: CodeAuditRequest with file paths and deployment context
-            
+
         Returns:
             Formatted prompt string ready for LLM consumption
         """
@@ -265,11 +261,11 @@ Now **perform the audit** on the provided files and return structured JSON follo
         """
         Generates a lighter-weight prompt for quick triage scans.
         Useful for pre-commit hooks or CI gate checks that need <30s execution.
-        
+
         Args:
             file_count: Number of files being scanned
             tech_stack: Primary technology (React, Python, etc.)
-            
+
         Returns:
             Streamlined prompt focusing on critical blockers only
         """
@@ -298,6 +294,7 @@ Now **perform the audit** on the provided files and return structured JSON follo
 
 **Time limit**: 30 seconds. If you find >3 blockers, stop and return those.
 """
+
 
 # ------------------------------------------------------------------------------
 # Usage Example for ApplicationAgent / Jules Integration:

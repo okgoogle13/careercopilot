@@ -60,10 +60,10 @@ class AsyncMockResponse:
         if isinstance(self._data, Exception):
             raise self._data
         return self._data
-    
+
     async def output_async(self):
         return self.output()
-    
+
     def __await__(self):
         return self.output_async().__await__()
 
@@ -332,7 +332,7 @@ MOCK_INTELLIGENCE_REPORT_RESPONSE = ResumeIntelligenceReport(
     ninety_day_strategic_plan=["Get certification"],
     success_metrics=["More calls"],
     industry_fit_analysis={"Technology": 95},
-    role_recommendations=["Senior Software Engineer"]
+    role_recommendations=["Senior Software Engineer"],
 )
 
 MOCK_SKILLS_GAP = SkillsGapAnalysis(
@@ -420,6 +420,7 @@ def mock_gemini():
                     if hasattr(self._data, "model_dump_json"):
                         return self._data.model_dump_json()
                     import json
+
                     return json.dumps(self.dict(), default=str)
 
                 def __eq__(self, other):
@@ -642,8 +643,8 @@ def setup_mocks(
 ):
     """Set up mocks for the resume intelligence pipeline"""
     # Import the module first to ensure it's in sys.modules
-    from app.genkit_flows import resume_intelligence_pipeline as rip
     from app.core import genkit_init
+    from app.genkit_flows import resume_intelligence_pipeline as rip
 
     # Mock get_model to return our mock_gemini
     monkeypatch.setattr(rip, "get_model", lambda: mock_gemini)

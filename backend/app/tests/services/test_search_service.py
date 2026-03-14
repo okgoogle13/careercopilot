@@ -76,9 +76,7 @@ def test_research_company_returns_content_on_success(monkeypatch):
     """Successful Perplexity responses should return the first choice content."""
     response = MagicMock()
     response.raise_for_status.return_value = None
-    response.json.return_value = {
-        "choices": [{"message": {"content": "Detailed company summary"}}]
-    }
+    response.json.return_value = {"choices": [{"message": {"content": "Detailed company summary"}}]}
     fake_client = _FakeAsyncClient(response=response)
     monkeypatch.setattr(
         search_service_module.httpx,

@@ -93,7 +93,9 @@
       "Bash(venv/bin/pip install:*)",
       "Bash(brew install:*)",
       "Bash(python scripts/validate_palette_mcp.py:*)",
-      "Bash(python scripts/audit_tailwind.py:*)"
+      "Bash(python scripts/audit_tailwind.py:*)",
+      "Bash(gh auth:*)",
+      "Bash(gh pr:*)"
     ],
     "deny": [],
     "ask": []

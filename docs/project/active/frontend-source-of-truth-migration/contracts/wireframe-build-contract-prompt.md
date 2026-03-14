@@ -9,7 +9,7 @@
 Use this prompt after:
 
 1. canonical XML wireframes have been validated with `scripts/validate-wireframe-workflow.py`
-2. the target route is identified in `2026-03-13-target-state-route-matrix.json`
+2. the target route is identified in `control/route-matrix.json`
 3. the matching backend-feature component gap entry is available when the route owns backend-backed feature work
 
 Use it before:
@@ -96,7 +96,7 @@ Use it before:
   <required_inputs>
     <route_matrix_row>
       A single JSON object copied from:
-      docs/project/active/frontend-source-of-truth-migration/2026-03-13-target-state-route-matrix.json
+      docs/project/active/frontend-source-of-truth-migration/control/route-matrix.json
     </route_matrix_row>
 
     <wireframe_xml>
@@ -108,7 +108,7 @@ Use it before:
   <optional_inputs>
     <component_gap_entry>
       A single JSON object copied from:
-      docs/project/active/frontend-source-of-truth-migration/2026-03-13-backend-feature-frontend-component-gap-map.json
+      docs/project/active/frontend-source-of-truth-migration/control/gap-map.json
       Only include when route_matrix_row.backend_capabilities is non-empty or the route owns backend-backed feature work.
     </component_gap_entry>
 

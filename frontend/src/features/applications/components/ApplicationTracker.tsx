@@ -101,7 +101,7 @@ export function ApplicationTracker() {
                     'text-[var(--color-text-tertiary)] bg-[var(--color-surface-container)] opacity-60';
 
                   if (isCurrent) {
-                    variant = 'primary'; // KeralaRage primary (Leaf)
+                    variant = 'primary'; // Primary state treatment
                     className = 'font-bold shadow-sm scale-105 border-[var(--color-leaf-base)]';
                   } else if (isCompleted) {
                     variant = 'secondary'; // KeralaRage secondary (Ink) for completed

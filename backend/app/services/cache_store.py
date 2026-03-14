@@ -1,4 +1,3 @@
-
 import json
 import logging
 from datetime import datetime, timedelta, timezone
@@ -9,6 +8,7 @@ from sqlalchemy.orm import Session
 from app.models.database import Cache
 
 logger = logging.getLogger(__name__)
+
 
 class SQLAlchemyCacheStore:
     """
@@ -66,13 +66,15 @@ class SQLAlchemyCacheStore:
         value: Any,
         operation_type: str = "general",
         ttl_seconds: int = 3600,
-        user_id: str | None = None
+        user_id: str | None = None,
     ) -> bool:
         """
         Store a value in the cache.
         """
         try:
-            expires_at = (datetime.now(timezone.utc) + timedelta(seconds=ttl_seconds)).replace(tzinfo=None)
+            expires_at = (datetime.now(timezone.utc) + timedelta(seconds=ttl_seconds)).replace(
+                tzinfo=None
+            )
 
             # Serialize value
             if not isinstance(value, str):
@@ -96,7 +98,7 @@ class SQLAlchemyCacheStore:
                     expires_at=expires_at,
                     operation_type=operation_type,
                     user_id=user_id,
-                    size_bytes=len(value_str)
+                    size_bytes=len(value_str),
                 )
                 self.db.add(cache_entry)
 
@@ -131,7 +133,11 @@ class SQLAlchemyCacheStore:
         """
         try:
             # Use bulk delete instead of iterating - fixes N+1 query problem
-            count = self.db.query(Cache).filter(Cache.key.like(f"{pattern}%")).delete(synchronize_session=False)
+            count = (
+                self.db.query(Cache)
+                .filter(Cache.key.like(f"{pattern}%"))
+                .delete(synchronize_session=False)
+            )
             self.db.commit()
             if count > 0:
                 logger.info(f"[Cache] Cleared {count} entries matching pattern '{pattern}'")

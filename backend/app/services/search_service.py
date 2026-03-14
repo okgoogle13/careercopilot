@@ -7,9 +7,11 @@ from pydantic import BaseModel
 
 load_dotenv()
 
+
 class SearchResult(BaseModel):
     content: str
     citations: list[str] = []
+
 
 class SearchService:
     """
@@ -24,7 +26,9 @@ class SearchService:
         self.logger = logging.getLogger(__name__)
 
         if not self.api_key:
-            self.logger.warning("PERPLEXITY_API_KEY is not set. Search capabilities will be disabled.")
+            self.logger.warning(
+                "PERPLEXITY_API_KEY is not set. Search capabilities will be disabled."
+            )
 
     async def research_company(self, company_name: str) -> str | None:
         """
@@ -63,20 +67,14 @@ class SearchService:
             "max_tokens": 1000,
         }
 
-        headers = {
-            "Authorization": f"Bearer {self.api_key}",
-            "Content-Type": "application/json"
-        }
+        headers = {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
 
         try:
             self.logger.info(f"Sending Perplexity request for: {company_name}")
             # Use async httpx client instead of synchronous requests for better performance
             async with httpx.AsyncClient() as client:
                 response = await client.post(
-                    self.base_url, 
-                    json=payload, 
-                    headers=headers, 
-                    timeout=60.0
+                    self.base_url, json=payload, headers=headers, timeout=60.0
                 )
                 response.raise_for_status()
 
@@ -89,5 +87,5 @@ class SearchService:
             self.logger.error(f"Perplexity API request failed for {company_name}: {e!s}")
             return None
         except (KeyError, IndexError) as e:
-             self.logger.error(f"Failed to parse Perplexity response: {e!s}")
-             return None
+            self.logger.error(f"Failed to parse Perplexity response: {e!s}")
+            return None

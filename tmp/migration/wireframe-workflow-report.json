@@ -1,0 +1,840 @@
+{
+  "status": "fail",
+  "canonical_wireframe_count": 11,
+  "matrix_row_count": 27,
+  "schema_summary": {
+    "failed_files": 4,
+    "warn_files": 6,
+    "files_with_upgraded_schema": 1
+  },
+  "route_coverage_summary": {
+    "missing_wireframes": [
+      "/ksc-generator",
+      "/cover-letter-generator"
+    ],
+    "failures": [
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/",
+        "xml_wireframe_path": "frontend/src/screens/01_landing/01_landing.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/",
+        "screen_reference": "frontend/src/screens/01_landing/HeroLanding.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/login",
+        "xml_wireframe_path": "frontend/src/screens/02_auth/02_auth.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/login",
+        "screen_reference": "frontend/src/screens/02_auth/AuthModal.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/register",
+        "xml_wireframe_path": "frontend/src/screens/02_auth/02_auth.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/register",
+        "screen_reference": "frontend/src/screens/02_auth/AuthModal.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/onboarding",
+        "xml_wireframe_path": "frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/onboarding",
+        "screen_reference": "frontend/src/screens/03_onboarding/OnboardFlow.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/welcome",
+        "xml_wireframe_path": "frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/welcome",
+        "screen_reference": "frontend/src/screens/03_onboarding/OnboardFlow.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/dashboard",
+        "xml_wireframe_path": "frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/dashboard",
+        "screen_reference": "frontend/src/screens/11_dashboard/DashboardOverview.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/analysis",
+        "xml_wireframe_path": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/analysis",
+        "screen_reference": "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/asset-library",
+        "xml_wireframe_path": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/asset-library",
+        "screen_reference": "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/documents",
+        "xml_wireframe_path": "frontend/src/screens/08_workbench/08_workbench.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/documents",
+        "screen_reference": "frontend/src/screens/08_workbench/DocumentWorkbench.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/tracker",
+        "xml_wireframe_path": "frontend/src/screens/07_kanban/07_kanban.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/tracker",
+        "screen_reference": "frontend/src/screens/07_kanban/KanbanTracker.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/apply/quick",
+        "xml_wireframe_path": "frontend/src/screens/09_finalization/09_finalization.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/apply/quick",
+        "screen_reference": "frontend/src/screens/09_finalization/ApplicationFinalization.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/opportunities",
+        "xml_wireframe_path": "frontend/src/screens/06_lookout/06_lookout.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/opportunities",
+        "screen_reference": "frontend/src/screens/06_lookout/LookoutDiscovery.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/job-queue",
+        "xml_wireframe_path": "frontend/src/screens/06_lookout/06_lookout.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/job-queue",
+        "screen_reference": "frontend/src/screens/06_lookout/LookoutDiscovery.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/profile",
+        "xml_wireframe_path": "frontend/src/screens/10_settings/10_settings.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/profile",
+        "screen_reference": "frontend/src/screens/10_settings/SettingsControl.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/settings",
+        "xml_wireframe_path": "frontend/src/screens/10_settings/10_settings.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/settings",
+        "screen_reference": "frontend/src/screens/10_settings/SettingsControl.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/career/ingest",
+        "xml_wireframe_path": "frontend/src/screens/04_ingestion/04_ingestion.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/career/ingest",
+        "screen_reference": "frontend/src/screens/04_ingestion/IngestionFlow.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/kr/landing",
+        "xml_wireframe_path": "frontend/src/screens/01_landing/01_landing.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/kr/landing",
+        "screen_reference": "frontend/src/screens/01_landing/HeroLanding.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/kr/auth",
+        "xml_wireframe_path": "frontend/src/screens/02_auth/02_auth.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/kr/auth",
+        "screen_reference": "frontend/src/screens/02_auth/AuthModal.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/kr/onboarding",
+        "xml_wireframe_path": "frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/kr/onboarding",
+        "screen_reference": "frontend/src/screens/03_onboarding/OnboardFlow.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/kr/analysis",
+        "xml_wireframe_path": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/kr/analysis",
+        "screen_reference": "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx"
+      },
+      {
+        "type": "wireframe_path_not_found",
+        "route": "/kr/dashboard",
+        "xml_wireframe_path": "frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml"
+      },
+      {
+        "type": "screen_reference_not_found",
+        "route": "/kr/dashboard",
+        "screen_reference": "frontend/src/screens/11_dashboard/DashboardOverview.tsx"
+      }
+    ],
+    "warnings": [
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/01_landing/01_landing.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/02_auth/02_auth.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/04_ingestion/04_ingestion.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/05_analysis/05_analysis.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/06_lookout/06_lookout.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/07_kanban/07_kanban.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/08_workbench/08_workbench.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/09_finalization/09_finalization.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/10_settings/10_settings.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml"
+      }
+    ]
+  },
+  "component_alignment_summary": {
+    "failures": [],
+    "warnings": []
+  },
+  "asset_integrity_summary": {
+    "placement_report_path": "/Users/okgoogle13/Projects/careercopilot/.claude/wireframes/placement_report.json",
+    "aggregate_score": 94.0,
+    "pass": true,
+    "invalid_asset_file_paths_count": 84
+  },
+  "legacy_artifact_findings": {
+    "summary": {
+      "canonical_wireframes_with_spring": 1,
+      "canonical_wireframe_count": 11,
+      "placement_report": {
+        "placement_report_path": "/Users/okgoogle13/Projects/careercopilot/.claude/wireframes/placement_report.json",
+        "aggregate_score": 94.0,
+        "pass": true,
+        "invalid_asset_file_paths_count": 84
+      }
+    },
+    "warnings": [
+      {
+        "type": "legacy_spring_completion_claim_mismatch",
+        "documented_file": "/Users/okgoogle13/Projects/careercopilot/.claude/wireframes/SPRING_PHYSICS_SUMMARY.md",
+        "canonical_wireframes_with_spring": 1,
+        "canonical_wireframe_count": 11
+      },
+      {
+        "type": "legacy_summary_claim_mismatch",
+        "documented_file": "/Users/okgoogle13/Projects/careercopilot/.claude/wireframes/SUMMARY.md",
+        "canonical_files_missing_upgraded_schema": 10
+      },
+      {
+        "type": "placement_report_integrity_warning",
+        "placement_report": "/Users/okgoogle13/Projects/careercopilot/.claude/wireframes/placement_report.json",
+        "invalid_asset_file_paths_count": 84,
+        "recommendation": "run manifest-reconciler before trusting placement success"
+      },
+      {
+        "type": "placement_report_pass_despite_integrity_issues",
+        "placement_report": "/Users/okgoogle13/Projects/careercopilot/.claude/wireframes/placement_report.json"
+      }
+    ]
+  },
+  "build_contract_xsd_summary": {
+    "contracts_checked": 1,
+    "failures": [],
+    "warnings": []
+  },
+  "schema_failures": [
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/05_analysis/05_analysis.wireframe.xml",
+      "type": "xml_parse_error",
+      "message": "not well-formed (invalid token): line 61, column 53"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/09_finalization/09_finalization.wireframe.xml",
+      "type": "xml_parse_error",
+      "message": "not well-formed (invalid token): line 4, column 37"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/10_settings/10_settings.wireframe.xml",
+      "type": "xml_parse_error",
+      "message": "not well-formed (invalid token): line 4, column 21"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml",
+      "type": "component_mapping_coverage_mismatch",
+      "element_count": 10,
+      "mapped_elements": 8
+    }
+  ],
+  "schema_warnings": [
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/01_landing/01_landing.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/01_landing/01_landing.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/01_landing/01_landing.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/02_auth/02_auth.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/02_auth/02_auth.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/02_auth/02_auth.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/04_ingestion/04_ingestion.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/04_ingestion/04_ingestion.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/04_ingestion/04_ingestion.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
+      "type": "accessibility_coverage_incomplete",
+      "element_count": 7,
+      "accessible_elements": 0
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/08_workbench/08_workbench.wireframe.xml",
+      "type": "accessibility_coverage_incomplete",
+      "element_count": 5,
+      "accessible_elements": 0
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/08_workbench/08_workbench.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/08_workbench/08_workbench.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/08_workbench/08_workbench.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml",
+      "type": "accessibility_coverage_incomplete",
+      "element_count": 10,
+      "accessible_elements": 1
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml",
+      "type": "missing_responsive_rules"
+    }
+  ],
+  "file_results": [
+    {
+      "wireframe_id": "01_landing",
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/01_landing/01_landing.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 7,
+      "component_mapping_count": 7,
+      "elements_with_component_mapping": 7,
+      "accessibility_count": 7,
+      "elements_with_accessibility": 7,
+      "motion_contract_count": 2,
+      "spring_motion_contract_count": 2,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "Placard",
+        "Strike",
+        "Typography"
+      ]
+    },
+    {
+      "wireframe_id": "02_auth",
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/02_auth/02_auth.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 10,
+      "component_mapping_count": 10,
+      "elements_with_component_mapping": 10,
+      "accessibility_count": 10,
+      "elements_with_accessibility": 10,
+      "motion_contract_count": 6,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 6,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "Divider",
+        "Link",
+        "Placard",
+        "ScaffoldInput",
+        "Strike",
+        "Typography"
+      ]
+    },
+    {
+      "wireframe_id": "03_onboarding",
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 10,
+      "component_mapping_count": 10,
+      "elements_with_component_mapping": 10,
+      "accessibility_count": 10,
+      "elements_with_accessibility": 10,
+      "motion_contract_count": 7,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 7,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "ChipGroup",
+        "Link",
+        "March",
+        "ProgressBar",
+        "ScaffoldArea",
+        "ScaffoldInput",
+        "Strike",
+        "Typography"
+      ]
+    },
+    {
+      "wireframe_id": "04_ingestion",
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/04_ingestion/04_ingestion.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 5,
+      "component_mapping_count": 5,
+      "elements_with_component_mapping": 5,
+      "accessibility_count": 5,
+      "elements_with_accessibility": 5,
+      "motion_contract_count": 2,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 2,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "DataSection",
+        "StatusIndicator",
+        "Strike",
+        "Typography",
+        "UploadDropZone"
+      ]
+    },
+    {
+      "wireframe_id": "05_analysis",
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/05_analysis/05_analysis.wireframe.xml",
+      "status": "fail",
+      "missing_blocks": [],
+      "warnings": [],
+      "failures": [
+        {
+          "type": "xml_parse_error",
+          "message": "not well-formed (invalid token): line 61, column 53"
+        }
+      ],
+      "element_count": 0,
+      "component_mapping_count": 0,
+      "elements_with_component_mapping": 0,
+      "accessibility_count": 0,
+      "elements_with_accessibility": 0,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": []
+    },
+    {
+      "wireframe_id": "06_lookout",
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "accessibility_coverage_incomplete",
+          "element_count": 7,
+          "accessible_elements": 0
+        },
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 7,
+      "component_mapping_count": 7,
+      "elements_with_component_mapping": 7,
+      "accessibility_count": 0,
+      "elements_with_accessibility": 0,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "March",
+        "Pagination",
+        "Placard",
+        "Strike"
+      ]
+    },
+    {
+      "wireframe_id": "07_kanban",
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/07_kanban/07_kanban.wireframe.xml",
+      "status": "pass",
+      "missing_blocks": [],
+      "warnings": [],
+      "failures": [],
+      "element_count": 13,
+      "component_mapping_count": 13,
+      "elements_with_component_mapping": 13,
+      "accessibility_count": 13,
+      "elements_with_accessibility": 13,
+      "motion_contract_count": 9,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 9,
+      "token_hygiene_pass": true,
+      "has_layout_structure": true,
+      "has_layout_binding": true,
+      "has_responsive_rules": true,
+      "code_components": [
+        "ApplicationArchiveAction",
+        "ApplicationDetailPanel",
+        "ApplicationEditForm",
+        "ApplicationStatusActions",
+        "KanbanColumn",
+        "Placard",
+        "TopNav"
+      ]
+    },
+    {
+      "wireframe_id": "08_workbench",
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/08_workbench/08_workbench.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "accessibility_coverage_incomplete",
+          "element_count": 5,
+          "accessible_elements": 0
+        },
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 5,
+      "component_mapping_count": 5,
+      "elements_with_component_mapping": 5,
+      "accessibility_count": 0,
+      "elements_with_accessibility": 0,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "ButtonGroup",
+        "DocumentPreview",
+        "ScaffoldArea",
+        "Toolbar",
+        "Typography"
+      ]
+    },
+    {
+      "wireframe_id": "09_finalization",
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/09_finalization/09_finalization.wireframe.xml",
+      "status": "fail",
+      "missing_blocks": [],
+      "warnings": [],
+      "failures": [
+        {
+          "type": "xml_parse_error",
+          "message": "not well-formed (invalid token): line 4, column 37"
+        }
+      ],
+      "element_count": 0,
+      "component_mapping_count": 0,
+      "elements_with_component_mapping": 0,
+      "accessibility_count": 0,
+      "elements_with_accessibility": 0,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": []
+    },
+    {
+      "wireframe_id": "10_settings",
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/10_settings/10_settings.wireframe.xml",
+      "status": "fail",
+      "missing_blocks": [],
+      "warnings": [],
+      "failures": [
+        {
+          "type": "xml_parse_error",
+          "message": "not well-formed (invalid token): line 4, column 21"
+        }
+      ],
+      "element_count": 0,
+      "component_mapping_count": 0,
+      "elements_with_component_mapping": 0,
+      "accessibility_count": 0,
+      "elements_with_accessibility": 0,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": []
+    },
+    {
+      "wireframe_id": "11_dashboard",
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml",
+      "status": "fail",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "accessibility_coverage_incomplete",
+          "element_count": 10,
+          "accessible_elements": 1
+        },
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [
+        {
+          "type": "component_mapping_coverage_mismatch",
+          "element_count": 10,
+          "mapped_elements": 8
+        }
+      ],
+      "element_count": 10,
+      "component_mapping_count": 8,
+      "elements_with_component_mapping": 8,
+      "accessibility_count": 1,
+      "elements_with_accessibility": 1,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "Placard",
+        "Strike",
+        "Timeline",
+        "Typography"
+      ]
+    }
+  ]
+}

@@ -30,8 +30,14 @@ def fake_personal_config():
 
 def test_builder_initializes_career_context(monkeypatch, fake_personal_config):
     """The builder should flatten the personal config into prompt-safe strings."""
-    monkeypatch.setattr(ai_prompt_builder_module, "get_personal_config", MagicMock(return_value=fake_personal_config))
-    monkeypatch.setattr(ai_prompt_builder_module, "get_personal_cache", MagicMock(return_value="cache"))
+    monkeypatch.setattr(
+        ai_prompt_builder_module,
+        "get_personal_config",
+        MagicMock(return_value=fake_personal_config),
+    )
+    monkeypatch.setattr(
+        ai_prompt_builder_module, "get_personal_cache", MagicMock(return_value="cache")
+    )
 
     builder = AIPromptBuilder()
 
@@ -48,10 +54,18 @@ def test_builder_initializes_career_context(monkeypatch, fake_personal_config):
 
 
 @pytest.mark.asyncio
-async def test_generate_ai_response_builds_request_with_optional_context(monkeypatch, fake_personal_config):
+async def test_generate_ai_response_builds_request_with_optional_context(
+    monkeypatch, fake_personal_config
+):
     """The generated Genkit request should include all supported context layers."""
-    monkeypatch.setattr(ai_prompt_builder_module, "get_personal_config", MagicMock(return_value=fake_personal_config))
-    monkeypatch.setattr(ai_prompt_builder_module, "get_personal_cache", MagicMock(return_value="cache"))
+    monkeypatch.setattr(
+        ai_prompt_builder_module,
+        "get_personal_config",
+        MagicMock(return_value=fake_personal_config),
+    )
+    monkeypatch.setattr(
+        ai_prompt_builder_module, "get_personal_cache", MagicMock(return_value="cache")
+    )
     flow = AsyncMock(return_value=SimpleNamespace(content="Generated response"))
     monkeypatch.setattr(ai_prompt_builder_module, "careerIntelligenceFlow", flow)
     builder = AIPromptBuilder()
@@ -78,10 +92,18 @@ async def test_generate_ai_response_builds_request_with_optional_context(monkeyp
 
 
 @pytest.mark.asyncio
-async def test_generate_ai_response_returns_error_string_on_failure(monkeypatch, fake_personal_config):
+async def test_generate_ai_response_returns_error_string_on_failure(
+    monkeypatch, fake_personal_config
+):
     """Unexpected Genkit failures should be surfaced as a stable error string."""
-    monkeypatch.setattr(ai_prompt_builder_module, "get_personal_config", MagicMock(return_value=fake_personal_config))
-    monkeypatch.setattr(ai_prompt_builder_module, "get_personal_cache", MagicMock(return_value="cache"))
+    monkeypatch.setattr(
+        ai_prompt_builder_module,
+        "get_personal_config",
+        MagicMock(return_value=fake_personal_config),
+    )
+    monkeypatch.setattr(
+        ai_prompt_builder_module, "get_personal_cache", MagicMock(return_value="cache")
+    )
     monkeypatch.setattr(
         ai_prompt_builder_module,
         "careerIntelligenceFlow",
@@ -102,7 +124,9 @@ def test_get_ai_prompt_builder_returns_singleton(monkeypatch):
     instance = MagicMock(spec=AIPromptBuilder)
 
     monkeypatch.setattr(ai_prompt_builder_module, "_ai_prompt_builder", None)
-    monkeypatch.setattr(ai_prompt_builder_module, "AIPromptBuilder", MagicMock(return_value=instance))
+    monkeypatch.setattr(
+        ai_prompt_builder_module, "AIPromptBuilder", MagicMock(return_value=instance)
+    )
 
     first = get_ai_prompt_builder()
     second = get_ai_prompt_builder()
@@ -110,4 +134,3 @@ def test_get_ai_prompt_builder_returns_singleton(monkeypatch):
     assert first is instance
     assert second is instance
     ai_prompt_builder_module.AIPromptBuilder.assert_called_once()
-
