@@ -68,11 +68,14 @@ name: genkit-migration
 description: Reusable workflow to apply Genkit migrations programmatically.
 ---
 # Genkit Migration Skill
-This skill identifies synchronous code segments not utilizing `app.genkit_flows` properly and applies predefined AST transformations to convert them to `async_genkit_flow` decorated endpoints.
+This skill identifies AI/LLM logic embedded directly in FastAPI endpoint handlers and extracts it into properly structured Genkit flows in `backend/app/genkit_flows/`.
 
-1. Walk the `backend/app/api/endpoints/` tree.
-2. Flag any synchronous FastAPI endpoints missing Genkit decorators.
-3. Automatically wrap them.
+**Architecture rule**: `@async_genkit_flow` decorators must only be applied to functions in `backend/app/genkit_flows/`. FastAPI endpoints in `backend/app/api/endpoints/` handle transport concerns (routing, auth, request validation, response formatting) and must not be decorated with Genkit flow decorators — doing so would break route signatures, dependency injection, and response handling.
+
+1. Walk the `backend/app/genkit_flows/` tree (and `ai/flows/backend/` for flow sources).
+2. Flag any synchronous Python functions that perform AI/LLM operations without using `@async_genkit_flow` from `app.genkit_flows.flow_decorator`.
+3. Refactor flagged functions into properly async Genkit flows with Pydantic output schemas.
+4. Update the corresponding FastAPI endpoint to call the new Genkit flow rather than performing AI logic inline.
 ```
 
 ## 4. Agent Hooks Configuration
