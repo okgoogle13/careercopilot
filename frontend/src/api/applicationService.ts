@@ -10,28 +10,25 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/
 export type ApplicationStatus =
   | 'draft'
   | 'applied'
-  | 'interview'
+  | 'interviewing'
   | 'offer'
   | 'rejected'
-  | 'accepted'
+  | 'withdrawn'
   | 'archived';
 
 export interface Contact {
   name: string;
-  title?: string;
   email?: string;
   phone?: string;
-  linkedIn?: string;
+  linkedinUrl?: string;
+  role?: string;
 }
 
 export interface InterviewSchedule {
-  id: string;
-  type: 'phone' | 'video' | 'in-person' | 'written';
-  scheduledDate?: string;
-  duration?: number; // minutes
+  interviewDate: string;
+  interviewType: 'phone' | 'video' | 'onsite' | 'take-home';
+  interviewerNames?: string[];
   notes?: string;
-  status: 'scheduled' | 'completed' | 'cancelled';
-  feedback?: string;
 }
 
 export interface Application {
@@ -64,6 +61,7 @@ export interface Application {
     emailThreadId?: string;
   };
   metadata?: Record<string, any>;
+  applicationMetadata?: Record<string, any>;
   createdAt: string;
   updatedAt: string;
 }
@@ -131,7 +129,7 @@ export const applicationService = {
       const response = await apiClient.get('/', {
         params: { userId, ...filters },
       });
-      return response.data.applications;
+      return response.data;
     } catch (error) {
       console.error('List applications error:', error);
       throw error;

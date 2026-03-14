@@ -10,12 +10,16 @@ class EntryType(str, Enum):
     CERTIFICATION = "Certification"
     VOLUNTEER = "Volunteer"
 
+
 class ImprovementSuggestions(BaseModel):
     action_verb: str | None = Field(None, description="Stronger power verb suggestion")
     noun_task: str | None = Field(None, description="Clarified task/responsibility")
-    metric: str | None = Field(None, description="Suggested metric placeholder (e.g. 'reduced by X%')")
+    metric: str | None = Field(
+        None, description="Suggested metric placeholder (e.g. 'reduced by X%')"
+    )
     strategy: str | None = Field(None, description="Methodology or tool to mention")
     outcome: str | None = Field(None, description="Sharper outcome definition")
+
 
 class StructuredAchievement(BaseModel):
     achievement_id: str = Field(..., description="Unique ID, e.g., 'ach-1'")
@@ -28,8 +32,11 @@ class StructuredAchievement(BaseModel):
     outcome: str
     skills_used: list[str] = []
     subtype_tags: list[str] = []
-    needs_review_flag: bool = Field(False, description="True if metric is missing or language is vague")
+    needs_review_flag: bool = Field(
+        False, description="True if metric is missing or language is vague"
+    )
     improvement_suggestions: ImprovementSuggestions | None = None
+
 
 class CareerEntry(BaseModel):
     entry_id: str
@@ -42,12 +49,14 @@ class CareerEntry(BaseModel):
     core_responsibilities: str
     subtype_tags: list[str] = []
 
+
 class PersonalInfo(BaseModel):
     full_name: str
     email: str
     phone: str | None = None
     location: str | None = None
     links: list[str] = []
+
 
 class CareerDatabase(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True)

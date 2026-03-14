@@ -3,8 +3,8 @@
 **Date:** 2026-03-13
 **Status:** Proposed route-level target-state matrix
 **Canonical companion artifacts:**
-- `docs/project/active/frontend-source-of-truth-migration/2026-03-13-proposed-final-migration-plan.md`
-- `docs/project/active/frontend-source-of-truth-migration/2026-03-13-target-state-route-matrix.json`
+- `docs/project/active/frontend-source-of-truth-migration/control/plan.md`
+- `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.json`
 
 ## Purpose
 

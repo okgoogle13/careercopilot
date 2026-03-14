@@ -10,7 +10,6 @@ This schema is designed for:
 - Comprehensive career data representation
 """
 
-
 from pydantic import BaseModel, EmailStr, Field, HttpUrl
 
 
@@ -28,9 +27,7 @@ class PersonalInfo(BaseModel):
         ...,
         description="A 2-4 sentence professional summary or objective highlighting key experience and goals",
     )
-    linkedin: HttpUrl | None = Field(
-        None, description="URL of the LinkedIn profile, if available"
-    )
+    linkedin: HttpUrl | None = Field(None, description="URL of the LinkedIn profile, if available")
     portfolio: HttpUrl | None = Field(
         None, description="URL of a personal portfolio or website, if available"
     )

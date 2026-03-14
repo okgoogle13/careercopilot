@@ -65,8 +65,7 @@ function ModeSync() {
   return null; // Logic-only component
 }
 
-// Protected Layout with animations
-const ProtectedLayout = () => {
+const RequireAuth = () => {
   const { user, loading } = useAuth();
   const location = useLocation();
 
@@ -92,6 +91,13 @@ const ProtectedLayout = () => {
     );
   }
 
+  return <Outlet />;
+};
+
+// Protected Layout with legacy sidebar shell
+const ProtectedLayout = () => {
+  const location = useLocation();
+
   return (
     <Layout>
       <AnimatePresence>
@@ -110,6 +116,31 @@ const ProtectedLayout = () => {
         </motion.div>
       </AnimatePresence>
     </Layout>
+  );
+};
+
+// Thin authenticated shell for migrated routes that must not inherit the legacy sidebar.
+const MigratedRouteLayout = () => {
+  const location = useLocation();
+
+  return (
+    <div className="min-h-screen bg-surface text-on-surface">
+      <AnimatePresence>
+        <motion.div
+          key={location.pathname}
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            duration: 0.35,
+            ease: [0.175, 0.885, 0.32, 1.1],
+          }}
+          className="min-h-screen"
+        >
+          <Outlet />
+        </motion.div>
+      </AnimatePresence>
+    </div>
   );
 };
 
@@ -237,71 +268,76 @@ export default function App() {
         </Route>
 
         {/* Protected Routes */}
-        <Route element={<ProtectedLayout />}>
-          <Route
-            path="/dashboard"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/onboarding"
-            element={<OnboardingRoute />}
-          />
-          <Route
-            path="/welcome"
-            element={<WelcomeScreen />}
-          />
-          <Route
-            path="/tracker"
-            element={<ApplicationTracker />}
-          />
-          <Route
-            path="/documents"
-            element={<Documents />}
-          />
-          <Route
-            path="/analysis"
-            element={<AnalysisPage />}
-          />
-          <Route
-            path="/opportunities"
-            element={<Opportunities />}
-          />
-          <Route
-            path="/ksc-generator"
-            element={<KSCGenerator />}
-          />
-          <Route
-            path="/cover-letter-generator"
-            element={<CoverLetterGenerator />}
-          />
-          <Route
-            path="/settings"
-            element={<Settings />}
-          />
-          <Route
-            path="/profile"
-            element={<ProfileView />}
-          />
-          <Route
-            path="/asset-library"
-            element={<AssetLibrary />}
-          />
-          <Route
-            path="/career/ingest"
-            element={<IngestionPage />}
-          />
-          <Route
-            path="/job-queue"
-            element={<JobQueue />}
-          />
-          <Route
-            path="/apply/quick"
-            element={<ApplyQuick />}
-          />
-          <Route
-            path="/test-tokens"
-            element={<TokenTest />}
-          />
+        <Route element={<RequireAuth />}>
+          <Route element={<MigratedRouteLayout />}>
+            <Route
+              path="/tracker"
+              element={<ApplicationTracker />}
+            />
+          </Route>
+
+          <Route element={<ProtectedLayout />}>
+            <Route
+              path="/dashboard"
+              element={<Dashboard />}
+            />
+            <Route
+              path="/onboarding"
+              element={<OnboardingRoute />}
+            />
+            <Route
+              path="/welcome"
+              element={<WelcomeScreen />}
+            />
+            <Route
+              path="/documents"
+              element={<Documents />}
+            />
+            <Route
+              path="/analysis"
+              element={<AnalysisPage />}
+            />
+            <Route
+              path="/opportunities"
+              element={<Opportunities />}
+            />
+            <Route
+              path="/ksc-generator"
+              element={<KSCGenerator />}
+            />
+            <Route
+              path="/cover-letter-generator"
+              element={<CoverLetterGenerator />}
+            />
+            <Route
+              path="/settings"
+              element={<Settings />}
+            />
+            <Route
+              path="/profile"
+              element={<ProfileView />}
+            />
+            <Route
+              path="/asset-library"
+              element={<AssetLibrary />}
+            />
+            <Route
+              path="/career/ingest"
+              element={<IngestionPage />}
+            />
+            <Route
+              path="/job-queue"
+              element={<JobQueue />}
+            />
+            <Route
+              path="/apply/quick"
+              element={<ApplyQuick />}
+            />
+            <Route
+              path="/test-tokens"
+              element={<TokenTest />}
+            />
+          </Route>
         </Route>
       </Routes>
     </Router>

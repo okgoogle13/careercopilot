@@ -1,178 +1,93 @@
 ---
 name: api-contract-validator
-description: 'Validates type contracts between TypeScript interfaces and Pydantic
-  models. Detects field mismatches and type inconsistencies. Related: frontend-backend-mapper
-  for endpoint discovery.'
+description: Validate request and response contract alignment between frontend API callers and backend FastAPI/Pydantic models.
+chainable: true
+gate_type: contract-alignment
+lifecycle_stage: M1-M2
 metadata:
-  legacy_frontmatter:
-    version: 1.0.0
-    tags: []
+  version: 1.2.0
+  tags:
+    - migration
+    - contract
+    - api
+    - enforcement
 ---
+
+# API Contract Validator
 
 ## Purpose
 
-Ensures type safety and consistency between frontend TypeScript interfaces and backend Pydantic models by detecting field name differences, type mismatches, and missing fields.
+Check that retained frontend API contracts still match the mounted backend endpoints used by this repository.
 
-## When to Use
+For the frontend source-of-truth migration, this skill is primarily for validating retained route owners such as `/career/ingest`, `/tracker`, `/documents`, and `/profile` after route ownership is already decided.
 
-- When validating API contracts before a release.
-- When identifying breaking changes in data models between frontend and backend.
-- When standardizing property casing (camelCase vs snake_case) across the stack.
+## Allowed Use
 
-## Process
+- compare frontend API callers in `frontend/src/api/` and related hooks/services against mounted backend endpoints
+- identify request/response field mismatches, optionality drift, and path drift
+- validate retained contracts before route implementation or migration closure
 
-1. **Scan TypeScript interfaces:**
-   - Read frontend API service files (`frontend/src/api/*.ts`)
-   - Extract TypeScript interfaces for requests/responses
-   - Parse field types, optional fields, arrays, enums
-   - Build TypeScript type inventory
+## Blocked Use
 
-2. **Scan Pydantic models:**
-   - Read backend model files (`backend/app/models/*_schemas.py`)
-   - Extract Pydantic BaseModel definitions
-   - Parse field types, Optional types, Lists, Enums
-   - Build Python type inventory
+- do not use this skill to decide canonical ownership or planning truth
+- do not treat deprecated or transitional frontend callers as canonical simply because they still exist
+- do not scan unrelated schema files and call that migration evidence
 
-3. **Match and compare contracts:**
-   - Match TypeScript interfaces to Pydantic models by name
-   - Compare field names (check for camelCase vs snake_case)
-   - Compare field types (string vs str, number vs int/float)
-   - Check required vs optional field consistency
-   - Validate enum values match
+## Primary Sources
 
-4. **Detect mismatches:**
-   - **Field name differences**: `userId` vs `user_id`
-   - **Type mismatches**: `string` vs `int`
-   - **Missing fields**: Field in frontend but not backend (or vice versa)
-   - **Optional inconsistencies**: Required in one but optional in another
-   - **Enum value differences**: Different allowed values
+- frontend callers:
+  - `frontend/src/api/`
+  - route-local hooks/services when they bypass shared callers
+- backend contracts:
+  - `backend/app/api/endpoints/`
+  - request/response models used by those endpoints
 
-5. **Generate validation report:**
-   - Create `docs/API_CONTRACT_VALIDATION.md` with:
-     - Contract health score
-     - List of all validated contracts
-     - Detailed mismatch reports
-     - Recommended fixes (with code examples)
-     - Breaking vs non-breaking changes
+## Workflow
 
-6. **Provide fix suggestions:**
-   - Show exact code changes needed
-   - Generate conversion utilities if needed
-   - Suggest API versioning for breaking changes
+1. Identify the canonical route owner from `control/route-matrix.json`.
+2. Identify the retained capability owner from `control/gap-map.json` when relevant.
+3. Trace the active frontend caller for the route.
+4. Trace the mounted backend endpoint and its request/response models.
+5. Report:
+   - path mismatches
+   - field mismatches
+   - required/optional mismatches
+   - enum drift
+   - stale non-canonical callers still present in active code
 
-## Validation Report Structure
+## Multi-Caller Deduplication (MIG-103)
 
-````markdown
-# API Contract Validation Report
+When multiple frontend callers are found for the same route, apply the following:
 
-Generated: 2025-01-06T12:00:00Z
+1. **Identify the active caller**: the one imported by the live route component in `frontend/src/App.tsx` or the route's primary screen
+2. **Flag stale callers**: all others — mark for removal, do not treat as canonical
+3. **Flag the route in output**: set `multi_caller_note.flagged: true` with caller count
+4. **Do not choose canonical ownership**: that is a planning decision, not a contract validation decision
 
-## Summary
+**Known fragmented routes (as of M1):**
 
-- Total Contracts Validated: 28
-- ✅ Matching Contracts: 22 (78.6%)
-- ⚠️ Mismatches Found: 6 (21.4%)
-- 🔴 Breaking Issues: 2
-- 🟡 Non-Breaking Issues: 4
+| Route | Issue |
+|-------|-------|
+| `/career/ingest` | 4 API paths (MIG-103) — fragmented callers, not yet canonicalized |
+| `/tracker` | Shared api/ + local hooks — verify active caller before validating |
 
-## Contract Health Score: 79/100
+## Output Expectations
 
-### ✅ VALID CONTRACTS (22)
+Return a machine-readable JSON report per `references/JSON_CONTRACT.md`:
 
-| Contract Name     | Frontend          | Backend             | Status           |
-| ----------------- | ----------------- | ------------------- | ---------------- |
-| `ATSScoreRequest` | aiServices.ts     | analysis_schemas.py | ✅ Perfect match |
-| `UserProfile`     | profileService.ts | schemas.py          | ✅ Perfect match |
-| ...               |
+- `gate_result`: `pass` | `fail` | `needs_review`
+- `contract_checked.frontend_callers`: all located callers
+- `contract_checked.canonical_caller`: the active one (or `null` if undetermined)
+- `contract_checked.stale_callers`: those to remove
+- `breaking_mismatches[]`: field/path mismatches that break the contract
+- `non_breaking_mismatches[]`: optionality drift, type widening
+- `multi_caller_note`: flagged when caller count > 1
+- `recommended_canonical_caller`: file path
 
-### 🔴 BREAKING MISMATCHES (2)
+## Notes
 
-#### 1. NotificationPreferences
-
-**Location:** `notificationService.ts` ↔ `notification_schemas.py`
-
-**Issues:**
-
-- Field type mismatch: `frequency` is `string` in TS but `int` in Python
-- Missing required field: `user_id` required in backend but not sent from frontend
-
-**Impact:** 🔴 API calls will fail with 422 validation errors
-
-**Fix (Frontend):**
-
-```typescript
-// notificationService.ts
-interface NotificationPreferences {
-  frequency: number; // Change from string to number
-  user_id: string; // Add missing field
-  // ... other fields
-}
-```
-````
-
-**Fix (Backend - Alternative):**
-
-```python
-# notification_schemas.py
-class NotificationPreferencesRequest(BaseModel):
-    frequency: str  # Change from int to str
-    # Remove user_id from request, get from auth instead
-```
-
-### 🟡 NON-BREAKING WARNINGS (4)
-
-#### 1. Casing Inconsistency
-
-**Issue:** Frontend uses camelCase, backend uses snake_case
-**Affected:** 15 contracts
-**Impact:** 🟡 Works but inconsistent (Pydantic auto-converts)
-**Recommendation:** Standardize on one casing style
-
-**Example:**
-
-```typescript
-// Frontend (camelCase)
-interface JobListing {
-  jobTitle: string;
-  companyName: string;
-}
-
-// Backend (snake_case)
-class JobListingResponse(BaseModel):
-    job_title: str
-    company_name: str
-```
-
-**Recommendation:** Add Pydantic alias config:
-
-```python
-class JobListingResponse(BaseModel):
-    job_title: str = Field(alias="jobTitle")
-    company_name: str = Field(alias="companyName")
-
-    class Config:
-        populate_by_name = True
-```
-
-## Type Mapping Reference
-
-| TypeScript  | Python (Pydantic) | Compatible             |
-| ----------- | ----------------- | ---------------------- |
-| `string`    | `str`             | ✅                     |
-| `number`    | `int`, `float`    | ✅                     |
-| `boolean`   | `bool`            | ✅                     |
-| `string[]`  | `List[str]`       | ✅                     |
-| `Date`      | `datetime`        | ⚠️ Needs serialization |
-| `any`       | `Any`             | ⚠️ Avoid if possible   |
-| `T \| null` | `Optional[T]`     | ✅                     |
-
-```
-
-## Usage Tips
-
-- Run validator before major releases
-- Integrate into CI/CD pipeline
-- Fix breaking issues immediately
-- Schedule non-breaking fixes for next sprint
-- Use validator output for API documentation
-```
+- prefer mounted endpoint truth over old planning prose
+- for migration work, keep the report route-specific and actionable
+- if multiple callers exist, explicitly identify which one is active and which are legacy
+- see `references/JSON_CONTRACT.md` for full schema
+- see `scripts/run-api-contract-validator.sh` for automation

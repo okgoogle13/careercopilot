@@ -10,11 +10,13 @@ class EntryType(str, Enum):
     CERTIFICATION = "Certification"
     VOLUNTEER = "Volunteer"
 
+
 class WorkType(str, Enum):
     REMOTE = "Remote"
     HYBRID = "Hybrid"
     ONSITE = "On-site"
     ANY = "Any"
+
 
 class SkillProficiency(str, Enum):
     NOVICE = "Novice"
@@ -23,12 +25,14 @@ class SkillProficiency(str, Enum):
     EXPERT = "Expert"
     MASTER = "Master"
 
+
 class AchievementSuggestions(BaseModel):
     action_verb: str | None = Field(None, alias="Action_Verb")
     noun_task: str | None = Field(None, alias="Noun_Task")
     metric: str | None = Field(None, alias="Metric")
     strategy: str | None = Field(None, alias="Strategy")
     outcome: str | None = Field(None, alias="Outcome")
+
 
 class StructuredAchievement(BaseModel):
     achievement_id: str = Field(..., alias="Achievement_ID")
@@ -43,9 +47,12 @@ class StructuredAchievement(BaseModel):
     tools_used: list[str] = Field(default_factory=list, alias="Tools_Used")
     subtype_tags: list[str] = Field(default_factory=list, alias="Subtype_Tags")
     needs_review_flag: bool = Field(..., alias="Needs_Review_Flag")
-    improvement_suggestions: AchievementSuggestions | None = Field(None, alias="Improvement_Suggestions")
+    improvement_suggestions: AchievementSuggestions | None = Field(
+        None, alias="Improvement_Suggestions"
+    )
     # Vector embedding for RAG
     embedding: list[float] | None = None
+
 
 class CareerEntry(BaseModel):
     entry_id: str = Field(..., alias="Entry_ID")
@@ -58,11 +65,13 @@ class CareerEntry(BaseModel):
     core_responsibilities_scope: str = Field(..., alias="Core_Responsibilities_Scope")
     subtype_tags: list[str] = Field(default_factory=list, alias="Subtype_Tags")
 
+
 class KSCImprovementSuggestions(BaseModel):
     situation: str | None = Field(None, alias="Situation")
     task: str | None = Field(None, alias="Task")
     action: str | None = Field(None, alias="Action")
     result: str | None = Field(None, alias="Result")
+
 
 class KSCResponse(BaseModel):
     ksc_id: str = Field(..., alias="KSC_ID")
@@ -77,8 +86,11 @@ class KSCResponse(BaseModel):
     needs_review_flag: bool = Field(..., alias="Needs_Review_Flag")
     star_feedback: str = Field(..., alias="STAR_Feedback")
     linked_entry_id: str | None = Field(None, alias="Linked_Entry_ID")
-    improvement_suggestions: KSCImprovementSuggestions | None = Field(None, alias="Improvement_Suggestions")
+    improvement_suggestions: KSCImprovementSuggestions | None = Field(
+        None, alias="Improvement_Suggestions"
+    )
     embedding: list[float] | None = None
+
 
 class PersonalInformation(BaseModel):
     full_name: str = Field(..., alias="FullName")
@@ -87,9 +99,11 @@ class PersonalInformation(BaseModel):
     location: str = Field(..., alias="Location")
     portfolio_urls: list[str] = Field(default_factory=list, alias="Portfolio_Website_URLs")
 
+
 class CareerProfile(BaseModel):
     target_titles: list[str] = Field(default_factory=list, alias="Target_Titles")
     master_summary_points: list[str] = Field(default_factory=list, alias="Master_Summary_Points")
+
 
 class MasterSkill(BaseModel):
     skill_name: str = Field(..., alias="Skill_Name")
@@ -98,10 +112,15 @@ class MasterSkill(BaseModel):
     proficiency: SkillProficiency | None = Field(None, alias="Proficiency")
     years_experience: float | None = Field(None, alias="Years_Experience")
 
+
 class CareerDatabase(BaseModel):
     personal_information: PersonalInformation = Field(..., alias="Personal_Information")
     career_profile: CareerProfile = Field(..., alias="Career_Profile")
-    master_skills_inventory: list[MasterSkill] = Field(default_factory=list, alias="Master_Skills_Inventory")
+    master_skills_inventory: list[MasterSkill] = Field(
+        default_factory=list, alias="Master_Skills_Inventory"
+    )
     career_entries: list[CareerEntry] = Field(default_factory=list, alias="Career_Entries")
-    structured_achievements: list[StructuredAchievement] = Field(default_factory=list, alias="Structured_Achievements")
+    structured_achievements: list[StructuredAchievement] = Field(
+        default_factory=list, alias="Structured_Achievements"
+    )
     ksc_responses: list[KSCResponse] = Field(default_factory=list, alias="KSC_Responses")

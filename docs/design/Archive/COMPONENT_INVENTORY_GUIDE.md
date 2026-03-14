@@ -1,31 +1,32 @@
 # Component Inventory Guide
 
-This guide describes how to check the target state of the component library and run the inventory tool to see what's currently built.
+> [!WARNING]
+> This legacy documentation and the `simple-component-inventory.sh` script are **deprecated**.
+> The source of truth for migration remains the route matrix and active migration blueprint.
+> The automated AST crawler in `frontend/scripts/component-inventory.ts` is a support tool only.
+> The layered mapping snapshot is located at:
+> `docs/design/layered-component-blueprint.json` (categorized by L1-L4 taxonomy).
+
+This guide describes how to check the target state of the component library and run the modern inventory tool.
 
 ## 🎯 Checking Target State
 
-The target state for the current batch of components is defined in:
-[component-batch-plan.yaml](file:///Users/okgoogle13/Projects/careercopilot/docs/design/component-batch-plan.yaml)
-
-This file lists components and whether they should be `new` or `migrate`.
+The target state snapshot for the components is defined in the auto-generated AST layered blueprint:
+../layered-component-blueprint.json
 
 ## 📊 Running Component Inventory
 
-To see the current state of your components, run the following script:
+To see the current state of your components, run the modern AST crawler:
 
 ```bash
-./scripts/simple-component-inventory.sh
+cd frontend
+npx tsx scripts/component-inventory.ts
 ```
 
-### What the script does:
-- Counts total components, tests, and stories.
-- Categorizes components by directory and size.
-- Identifies potential duplicate components.
-- Flags hardcoded colors and spacing that should be migrated to tokens.
+To generate the full layered blueprint (L1-L4 taxonomy):
 
-## 🔄 Comparing State
-
-After running the inventory, compare the list of components in `src/components` with the `component-batch-plan.yaml`.
-
-- **New**: Components in the plan not yet in `src/components`.
-- **Migrate**: Components in `src/components` that still have "Hardcoded Values Detected" in the inventory report.
+```bash
+cd frontend
+npx tsx scripts/component-inventory.ts --raw
+npx tsx scripts/generate-layered-blueprint.ts
+```

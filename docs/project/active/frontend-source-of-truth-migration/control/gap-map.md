@@ -3,9 +3,9 @@
 **Date:** 2026-03-13
 **Status:** Proposed component gap map
 **Canonical companion artifacts:**
-- `docs/project/active/frontend-source-of-truth-migration/2026-03-13-proposed-final-migration-plan.md`
-- `docs/project/active/frontend-source-of-truth-migration/2026-03-13-target-state-route-matrix.md`
-- `docs/project/active/frontend-source-of-truth-migration/2026-03-13-backend-feature-frontend-component-gap-map.json`
+- `docs/project/active/frontend-source-of-truth-migration/control/plan.md`
+- `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.md`
+- `docs/project/active/frontend-source-of-truth-migration/control/gap-map.json`
 
 ## Purpose
 

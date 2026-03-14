@@ -120,6 +120,3 @@ def test_protected_endpoints():
     )
     response = client.get("/api/users/me", headers={"Authorization": f"Bearer {expired_token}"})
     assert response.status_code == status.HTTP_401_UNAUTHORIZED
-
-
-

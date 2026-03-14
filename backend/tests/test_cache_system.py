@@ -4,12 +4,12 @@ Tests for the AI operations caching system using the new cache implementation.
 
 import asyncio
 from datetime import datetime, timezone
-from unittest.mock import AsyncMock, patch
 from typing import Any, Dict
+from unittest.mock import AsyncMock, patch
 
 import pytest
 
-from app.core.cache_decorators import cached_ai_operation, CacheContext
+from app.core.cache_decorators import CacheContext, cached_ai_operation
 from app.core.personal_cache import get_ai_cache
 
 
@@ -112,6 +112,7 @@ class TestAICache:
     @pytest.fixture
     def ai_cache(self):
         import asyncio
+
         cache_obj = get_ai_cache()
         # Ensure we clean it up synchronously
         try:
@@ -119,7 +120,7 @@ class TestAICache:
         except RuntimeError:
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
-            
+
         if loop.is_running():
             # Special handling for already running loop (like in some pytest-asyncio modes)
             # but usually, we can just call it in an async test

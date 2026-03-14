@@ -4,21 +4,17 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const repoRoot = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..', '..');
+const controlRoot = path.join(
+  repoRoot,
+  'docs',
+  'project',
+  'active',
+  'frontend-source-of-truth-migration',
+  'control'
+);
 
-const artifacts = [
-  {
-    name: 'route-family-map',
-    file: path.join(repoRoot, '.claude', 'route-family-map.json'),
-  },
-  {
-    name: 'frontend-capability-gap-matrix',
-    file: path.join(repoRoot, '.claude', 'plans', 'frontend-capability-gap-matrix.json'),
-  },
-  {
-    name: 'route-family-target-state',
-    file: path.join(repoRoot, '.claude', 'plans', 'route-family-target-state.json'),
-  },
-];
+const routeMatrixPath = path.join(controlRoot, 'route-matrix.json');
+const gapMapPath = path.join(controlRoot, 'gap-map.json');
 
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -30,94 +26,115 @@ function assert(condition, message) {
   }
 }
 
-function validateRouteFamilyMap(data) {
-  assert(Array.isArray(data.families), 'route-family-map.json must contain a families array');
+function validateRouteMatrix(data) {
+  assert(data.artifact === 'target_state_route_matrix', 'route-matrix artifact name mismatch');
   assert(
-    Array.isArray(data.capability_led_additions),
-    'route-family-map.json must contain capability_led_additions'
+    typeof data.generated_at === 'string' && data.generated_at.length > 0,
+    'route-matrix missing generated_at'
   );
-
-  const allowedDecisions = new Set(['keep', 'expand', 'merge', 'replace', 'retire']);
-  data.families.forEach((family) => {
-    assert(typeof family.family === 'string' && family.family.length > 0, 'family name missing');
-    assert(allowedDecisions.has(family.decision), `invalid decision for family ${family.family}`);
-    assert(Array.isArray(family.runtime_routes), `runtime_routes missing for ${family.family}`);
-  });
-}
-
-function validateCapabilityGapMatrix(data) {
   assert(
-    Array.isArray(data.capability_matrix),
-    'frontend-capability-gap-matrix.json must contain capability_matrix'
+    data.canonical_plan ===
+      'docs/project/active/frontend-source-of-truth-migration/control/blueprint.md',
+    `route-matrix canonical_plan must point to control/blueprint.md, found ${data.canonical_plan}`
   );
+  assert(Number.isInteger(data.schema_version), 'route-matrix missing integer schema_version');
+  assert(Array.isArray(data.rows), 'route-matrix must contain a rows array');
+  assert(data.row_count === data.rows.length, 'route-matrix row_count must match rows length');
 
-  data.capability_matrix.forEach((entry) => {
-    assert(typeof entry.id === 'string' && entry.id.length > 0, 'capability id missing');
-  });
-}
-
-function validateRouteFamilyTargetState(data) {
-  assert(Array.isArray(data.families), 'route-family-target-state.json must contain families');
-  assert(
-    Array.isArray(data.cross_family_decisions),
-    'route-family-target-state.json must contain cross_family_decisions'
-  );
-}
-
-function validateCrossArtifactConsistency(
-  routeFamilyMap,
-  capabilityGapMatrix,
-  routeFamilyTargetState
-) {
-  const routeFamilies = new Set(routeFamilyMap.families.map((family) => family.family));
-  const targetFamilies = new Set(routeFamilyTargetState.families.map((family) => family.family));
-  const capabilities = new Set(capabilityGapMatrix.capability_matrix.map((entry) => entry.id));
-
-  routeFamilies.forEach((family) => {
-    assert(targetFamilies.has(family), `target-state artifact missing family ${family}`);
-  });
-
-  routeFamilyMap.families.forEach((family) => {
-    for (const capability of family.capability_dependencies ?? []) {
+  const allowedStatuses = new Set(['keep', 'expand', 'merge', 'replace', 'retire']);
+  data.rows.forEach((row) => {
+    assert(
+      typeof row.route_id === 'string' && row.route_id.length > 0,
+      'route-matrix row missing route_id'
+    );
+    assert(
+      allowedStatuses.has(row.status),
+      `route ${row.route_id} has invalid status ${row.status}`
+    );
+    if (row.route_class === 'product') {
       assert(
-        capabilities.has(capability),
-        `unknown capability dependency ${capability} on ${family.family}`
+        typeof row.target_route === 'string' && row.target_route.length > 0,
+        `route ${row.route_id} missing target_route`
       );
     }
   });
+}
 
-  routeFamilyMap.capability_led_additions.forEach((addition) => {
+function validateGapMap(data, routeMatrix) {
+  assert(
+    data.artifact === 'backend_feature_frontend_component_gap_map',
+    'gap-map artifact name mismatch'
+  );
+  assert(
+    typeof data.generated_at === 'string' && data.generated_at.length > 0,
+    'gap-map missing generated_at'
+  );
+  assert(
+    data.canonical_plan ===
+      'docs/project/active/frontend-source-of-truth-migration/control/blueprint.md',
+    `gap-map canonical_plan must point to control/blueprint.md, found ${data.canonical_plan}`
+  );
+  assert(
+    data.canonical_route_matrix ===
+      'docs/project/active/frontend-source-of-truth-migration/control/route-matrix.json',
+    `gap-map canonical_route_matrix must point to control/route-matrix.json, found ${data.canonical_route_matrix}`
+  );
+  assert(Array.isArray(data.features), 'gap-map must contain a features array');
+
+  const productRoutes = new Set(
+    routeMatrix.rows.filter((row) => row.route_class === 'product').map((row) => row.target_route)
+  );
+
+  data.features.forEach((feature) => {
     assert(
-      routeFamilies.has(addition.owner_family),
-      `unknown owner_family ${addition.owner_family}`
+      typeof feature.feature_id === 'string' && feature.feature_id.length > 0,
+      'gap-map feature missing feature_id'
+    );
+    assert(
+      typeof feature.owner_route === 'string' && feature.owner_route.length > 0,
+      `gap-map feature ${feature.feature_id} missing owner_route`
+    );
+    assert(
+      typeof feature.owner_surface === 'string' && feature.owner_surface.length > 0,
+      `gap-map feature ${feature.feature_id} missing owner_surface`
+    );
+    assert(
+      typeof feature.backend_status === 'string' && feature.backend_status.length > 0,
+      `gap-map feature ${feature.feature_id} missing backend_status`
+    );
+    assert(
+      typeof feature.frontend_status === 'string' && feature.frontend_status.length > 0,
+      `gap-map feature ${feature.feature_id} missing frontend_status`
+    );
+    assert(
+      productRoutes.has(feature.owner_route),
+      `gap-map feature ${feature.feature_id} references non-product owner_route ${feature.owner_route}`
     );
   });
 }
 
 function main() {
-  const loaded = Object.fromEntries(
-    artifacts.map(({ name, file }) => {
-      if (!fs.existsSync(file)) {
-        throw new Error(`missing artifact: ${file}`);
-      }
-      return [name, readJson(file)];
-    })
-  );
+  [routeMatrixPath, gapMapPath].forEach((file) => {
+    if (!fs.existsSync(file)) {
+      throw new Error(`missing canonical artifact: ${file}`);
+    }
+  });
 
-  validateRouteFamilyMap(loaded['route-family-map']);
-  validateCapabilityGapMatrix(loaded['frontend-capability-gap-matrix']);
-  validateRouteFamilyTargetState(loaded['route-family-target-state']);
-  validateCrossArtifactConsistency(
-    loaded['route-family-map'],
-    loaded['frontend-capability-gap-matrix'],
-    loaded['route-family-target-state']
-  );
+  const routeMatrix = readJson(routeMatrixPath);
+  const gapMap = readJson(gapMapPath);
+
+  validateRouteMatrix(routeMatrix);
+  validateGapMap(gapMap, routeMatrix);
 
   console.log(
     JSON.stringify(
       {
         ok: true,
-        validated: artifacts.map((artifact) => artifact.name),
+        validated: ['route-matrix', 'gap-map'],
+        artifacts: {
+          route_matrix: routeMatrixPath,
+          gap_map: gapMapPath,
+        },
       },
       null,
       2
@@ -125,4 +142,9 @@ function main() {
   );
 }
 
-main();
+try {
+  main();
+} catch (error) {
+  console.error(error instanceof Error ? error.message : String(error));
+  process.exit(1);
+}
