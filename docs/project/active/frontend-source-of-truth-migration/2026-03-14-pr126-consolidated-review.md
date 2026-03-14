@@ -13,9 +13,49 @@ PR #126 accumulated feedback from Gemini Code Assist, CodeRabbit, OpenAI Codex, 
 
 This document consolidates that review into a single, structured assessment. It does not aim to replicate every individual comment; it distils them into actionable finding groups, adds independent analysis, and provides a clear view of what is resolved, what remains open, and what the strategy implications are.
 
-### Note on Base Branch
+---
 
-PR #126 currently targets `develop`. The author has indicated they are not ready to land this on `develop`. The sub-PRs stacked on top of PR #126 (#127, #128, #129) correctly target `feat/frontend-source-of-truth-migration` rather than `develop`, so the guard is already in place for incremental stack work. To prevent an accidental early merge of PR #126 itself, it should be [converted to a draft](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request) in the GitHub UI until the team is ready to promote it.
+## Why Are There Now 4 PRs? (PR Stack Explained)
+
+Short answer: PR #127, #128, and #129 were created automatically by GitHub Copilot's coding agent as a direct result of the `@copilot` review requests in the PR #126 thread. They are not separate projects — they are amendments to the `feat/frontend-source-of-truth-migration` branch that PR #126 owns.
+
+### How this happened
+
+| PR | Author | Created | Head branch | Base branch | Purpose |
+|---|---|---|---|---|---|
+| #126 | okgoogle13 | 2026-03-13 17:22 | `feat/frontend-source-of-truth-migration` | `develop` | The original migration planning PR |
+| #127 | Copilot | 2026-03-13 18:20 | `copilot/sub-pr-126` | `feat/frontend-source-of-truth-migration` | 6 bug fixes from review (Python compat, Node portability, ai_config.json, governance CI, doc links, capability schema) |
+| #128 | Copilot | 2026-03-14 01:24 | `copilot/sub-pr-126-again` | `feat/frontend-source-of-truth-migration` | Fix incorrect Genkit decorator placement in PLAN.md |
+| #129 | Copilot | 2026-03-14 01:28 | `copilot/sub-pr-126-another-one` | `feat/frontend-source-of-truth-migration` | Governance tests CI job + this consolidated review document |
+
+### Why Copilot opens new PRs instead of pushing to existing branches
+
+When you tag `@copilot` in a PR comment, the GitHub Copilot coding agent cannot commit to a branch it does not own — it cannot push directly to `feat/frontend-source-of-truth-migration`. Instead, it:
+
+1. Creates a new branch forked from `feat/frontend-source-of-truth-migration`
+2. Implements the requested changes on that branch
+3. Opens a new PR targeting `feat/frontend-source-of-truth-migration`
+
+This is the normal operating model for the Copilot coding agent. Each invocation of `@copilot` (or each task session) creates one new PR. In this case, there were three separate Copilot sessions, yielding three sub-PRs.
+
+### What this means in practice
+
+The three sub-PRs are **parallel amendments** to `feat/frontend-source-of-truth-migration`, not stacked on each other. They modify mostly non-overlapping files:
+
+- **PR #127** touches: `frontend-capability-gap-matrix.json`, `wireframe-source-of-truth-gap.md`, `ci.yml`, `ai_config.json`, `validate-governance-artifacts.mjs`, `derive-gap-fill-plan.py`
+- **PR #128** touches: `PLAN.md`
+- **PR #129** (this PR) touches: `.github/workflows/ci.yml`, `docs/project/active/frontend-source-of-truth-migration/` (review document + README)
+
+### Recommended merge order
+
+1. Merge **PR #127** into `feat/frontend-source-of-truth-migration` (the foundational bug fixes)
+2. Merge **PR #128** into `feat/frontend-source-of-truth-migration` (PLAN.md correction)
+3. Merge **PR #129** into `feat/frontend-source-of-truth-migration` (CI + this document)
+4. When ready to land on `develop`, merge **PR #126** — it is the `feat/frontend-source-of-truth-migration` → `develop` PR and will include all of the above
+
+### Note on PR #126's base branch
+
+PR #126 currently targets `develop`. The author has indicated they are not ready to land this on `develop`. The sub-PRs (#127, #128, #129) correctly target `feat/frontend-source-of-truth-migration`, so merging them will not touch `develop`. To prevent an accidental early merge of PR #126 itself, it should be [converted to a draft](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/changing-the-stage-of-a-pull-request) in the GitHub UI. The base branch of PR #126 cannot be changed by Copilot (it requires a human action in the GitHub UI via the PR's "Edit" button → change base branch from `develop` to `feat/frontend-source-of-truth-migration`... but note this would make it a self-referential PR — the branch **is** `feat/frontend-source-of-truth-migration`). The correct action is to **convert it to a draft** to make the merge protection explicit.
 
 ---
 
