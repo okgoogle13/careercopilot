@@ -71,7 +71,7 @@ class ComponentPlan:
 
 
 def read_json(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text())
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def component_name_from_path(path_value: str | None) -> str | None:
