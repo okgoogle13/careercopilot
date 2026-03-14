@@ -201,7 +201,7 @@ def classify_layer(path: Path) -> str:
 
 
 def analyze_tokens(path: Path) -> tuple[str, list[str]]:
-    text = path.read_text()
+    text = path.read_text(encoding="utf-8")
     actions: list[str] = []
     violations = False
     has_tokens = any(prefix in text for prefix in ALLOWED_TOKEN_PREFIXES)
