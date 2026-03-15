@@ -1,44 +1,89 @@
-# AGENTS.md — Frontend Source-of-Truth Migration (PR126)
+# AGENTS.md — PR126 Frontend Source-of-Truth Migration
 
-This file is the migration-specific agent guide. It complements the repo-root `AGENTS.md` and only applies to PR126 migration work.
+This file is the migration-specific agent guide. It complements the repo-root `AGENTS.md` and applies only to work under `docs/project/active/frontend-source-of-truth-migration/`.
 
-## Execution Truth
+## Execution Truth (Read First)
 
-- `control/blueprint.md`
-- `control/workflow.md`
-- `control/status.md` (status only, not execution authority)
+- `control/blueprint.md` (execution authority)
+- `control/workflow.md` (gate order + definitions)
+- `control/plan.md` (working plan; explains why)
+- `control/status.md` (status only; never overrides blueprint/workflow)
+- `control/pm/dashboard.md` (visibility + delegation support; not authority)
 
-## Authority Layers
+## Authority Layers (In Order)
 
-- **Design truth**: `frontend/src/screens/**/*.wireframe.xml` plus paired `frontend/src/screens/**/*.tsx`
-- **Runtime truth**: `frontend/src/features/**` and `frontend/src/pages/**` reachable from `frontend/src/App.tsx`
-- **Capability truth**: mounted backend endpoints (`backend/app/api/endpoints/`) and build contracts in `contracts/`
-- **Derived artifacts**: route-matrix and gap-map JSON, migration-kit wireframes (support-only)
+- **Runtime truth**: `frontend/src/App.tsx` (what users can reach today)
+- **Design truth**: `frontend/src/screens/**/*.wireframe.xml` + paired `frontend/src/screens/**/*.tsx`
+- **Capability truth**: mounted endpoints in `backend/app/api/endpoints/`
+- **Contracts (route-level execution locks)**: `contracts/*.xml`
+- **Support artifacts**: `control/route-matrix.json`, `control/gap-map.json`, manifests, migration-kit outputs
 
-## Canonical Inputs
+Rule: support artifacts may inform decisions but must never override runtime/design/capability truth.
 
-- `control/route-matrix.json`
-- `control/gap-map.json`
-- `contracts/*.xml`
-- `frontend/src/screens/**/*.wireframe.xml`
-- `frontend/src/App.tsx`
-- `backend/app/api/endpoints/`
+## Canonical Inputs (Route-Level Work)
 
-## Gates & Validation (Follow `control/workflow.md` for order)
+- `control/route-matrix.json` (route classification + owner)
+- `control/gap-map.json` (component state + backlog)
+- `contracts/*.xml` (build contracts + supplementary briefs)
+- `frontend/src/App.tsx` (route reachability)
+- `frontend/src/screens/**` (wireframe + paired TSX truth)
+- `backend/app/api/endpoints/` (real backend capability)
 
-- `pytest tests/plans -q`
-- `node frontend/scripts/validate-governance-artifacts.mjs`
-- `python3 scripts/validate-wireframe-workflow.py`
-- `bash .claude/skills/token-enforcement/scripts/run-token-enforcement.sh <route>`
-- `bash .claude/skills/migration-audit/scripts/run-migration-audit.sh <route>`
+## Evidence Manifests (Discovery Outputs)
 
-## Advisory Protocols
+These are evidence inputs only (useful for drift detection, not authority):
 
-Gemini-updated skills and orchestration notes are **advisory only**. They do not override authority layers or gate ownership. Human direction is required for migration decisions.
+- `docs/manifests/routes.json` (runtime scan)
+- `docs/manifests/screens.json` (design scan)
+- `docs/manifests/frontend-api-usage.json` (frontend capability usage)
+- `docs/manifests/backend-endpoints.json` (backend capability inventory)
+- `docs/manifests/orphans.json` (cross-truth drift)
 
-## Working Rules
+## Working Method (One Route at a Time)
 
-- Treat `control/` as canonical unless a file explicitly says otherwise.
-- Treat `analysis/` as reference input only.
-- Do not let derived artifacts override runtime, design, or capability truth.
-- Keep validator output in `tmp/migration/`.
+1. Pick a route from `control/route-matrix.json` and confirm it is reachable in `frontend/src/App.tsx`.
+2. Confirm the intended design surface exists under `frontend/src/screens/` (or record it as missing).
+3. Confirm backend capability exists (mounted endpoint + any required auth expectations).
+4. If wireframes are in scope: validate first, then lock execution with a build contract in `contracts/`.
+5. Implement in runtime truth (`frontend/src/features/**` + `frontend/src/pages/**`) while preserving the authority order.
+6. Run route-local gates (`token-enforcement`, and `migration-audit` when the workflow requires it).
+7. Update `control/status.md` with what changed, what’s blocked, and the next executable step.
+
+## Gates & Validation (Order Matters)
+
+Repo-level planning/gov gates:
+
+```bash
+pytest tests/plans -q
+node frontend/scripts/validate-governance-artifacts.mjs
+```
+
+Wireframe workflow gates (when XML wireframes are in scope):
+
+```bash
+python3 scripts/validate-wireframe-workflow.py
+```
+
+Route-local gates (run for every touched route):
+
+```bash
+bash .claude/skills/token-enforcement/scripts/run-token-enforcement.sh <route>
+```
+
+Optional/conditional route-local audit gate (only when `control/workflow.md` says so):
+
+```bash
+bash .claude/skills/migration-audit/scripts/run-migration-audit.sh <route>
+```
+
+Output location for validators: `tmp/migration/` (do not commit).
+
+## Advisory-Only Protocol Notes
+
+Gemini-updated skills, protocol writeups, and orchestration notes are **advisory only**. They may improve logistics (sequencing, delegation, checklists), but they do not change the authority order or gate ownership. Human direction is required for any migration decision.
+
+## Docs Hygiene
+
+- Keep all execution changes reflected in `control/` (not in `analysis/`).
+- Prefer small, PR-sized edits to control docs that preserve a single source of truth.
+- If a doc disagrees with runtime/design/capability truth, record the discrepancy in `control/status.md` and fix the root cause.

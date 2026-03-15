@@ -35,8 +35,8 @@ inputs:
 outputs:
   - name: xml_wireframes
     type: string
-  - name: compliance_score
-    type: number
+  - name: compliance_checklist
+    type: string
   - name: summary
     type: string
 ---
@@ -68,8 +68,8 @@ Consume high-level feature briefs or the **Annotated Wireframe Protocol** (from 
 4. **Generate ASCII Layout**: Visual text representation using `[ ]`, `| |`, `+--+` notation with archetype labels
 5. **Build Element Nodes**: For each element, emit an `<element>` node with all required child blocks
 6. **Fill Screen Blocks**: Populate `<user_flow>`, `<states>`, `<assets>`, `<breakpoints>`, `<accessibility_overview>`, `<storybook>`
-7. **Enforce Token Rules**: Use only canonical v6 `--sys-color-*`, `--sys-type-*`, `--sys-shape-*`; never hex; never deprecated aliases
-8. **Score Compliance**: Compute 0–400 KR Solidarity compliance_score with detailed rubric breakdown
+7. **Enforce Token Rules**: Use only canonical tokens. Colors must be `--sys-color-*-base`, typography must be `--sys-type-fontFamilies-*`, and shapes must be `--sys-shape-*`. Never hex. Never deprecated aliases.
+8. **Compliance Checklist**: Emit a non-authoritative compliance checklist and notes. Only emit a numeric score if a real validator/rubric is explicitly provided.
 9. **Output XML**: Produce well-formed XML wireframe(s) with required blocks per screen
 
 ---
@@ -84,7 +84,7 @@ Every element in the wireframe MUST be assigned one of the six semantic action a
 | **March** | Sequential selection, flow elements | Collective momentum | Select/dropdown, progress bar, breadcrumb, step indicator | `--sys-shape-blockRiot01` |
 | **Megaphone** | Announcement, focal interruption | Urgency, voice | Modal dialog, drawer, high-priority alert | `--sys-shape-megaphoneCut01` |
 | **Placard** | Content container, framing | Solidarity structure | Card, panel, feed item, list item, accordion | `--sys-shape-placardTorn01` |
-| **Scaffold** | Layout structure, form input | Neutral, load-bearing | Text input, textarea, divider, sidebar, header bar, data table | `--sys-shape-scaffoldSlab01` |
+| **Scaffold** | Layout structure, form input | Neutral, load-bearing | Text input, textarea, divider, sidebar, header bar, data table | `--sys-shape-scaffoldFrame01` |
 | **Substrate** | Decorative background, atmospheric | Organic, environmental | Background canvas, hero texture, ambient overlay, avatar mask | `--sys-shape-substrateTile02` |
 
 **Decision Logic:**
@@ -105,31 +105,31 @@ Every element in the wireframe MUST be assigned one of the six semantic action a
 
 ```
 --sys-color-charcoalBackground-base  → Global floor, dark backgrounds
---sys-color-paperWhite               → Text on dark
+--sys-color-paperWhite-base          → High-contrast poster/text on dark
 --sys-color-inkGold-base             → Primary brand accent, CTAs
 --sys-color-solidarityRed-base       → Secondary brand, urgent actions
---sys-color-kr-activistSmokeGreen    → Natural/elite accent, map routes
---sys-color-signalGreen              → Small accents, links
+--sys-color-kr-activistSmokeGreen-base → Natural/elite accent, map routes
+--sys-color-signalGreen-base         → Small accents, links
 --sys-color-inkGold-base             → Halo/saint disks, celebratory
 --sys-color-stencilYellow-base       → Large poster words, warnings
 --sys-color-worker-ash-base          → Primary readable ink on dark
---sys-color-solidaritySmokeOrange    → Portrait warmth, earth layers
+--sys-color-solidaritySmokeOrange-base → Portrait warmth, earth layers
 --sys-color-protestMetalBlue-base    → Ripples, quiet tech accents
---sys-color-concreteGrey             → Neutral, disabled
---sys-color-kr-charcoalRed           → Error state, destructive
+--sys-color-concreteGrey-base        → Neutral, disabled
+--sys-color-kr-charcoalRed-base      → Error state, destructive
 ```
 
 **Never use:** Hardcoded hex, deprecated aliases (e.g., `kr-ink-gold`, `waratahRed`, `asphaltBlack`, `gumLeafGreen`).
 
-### Typography (`--sys-type-*`)
+### Typography (Font families)
 
 ```
---sys-type-font-fraunces         → Headlines, hero (wght 700–900, SOFT, WONK)
---sys-type-font-work-sans        → Body, UI labels (wght 400–600)
---sys-type-font-libre-bodoni     → Proclamation, authoritative
---sys-type-font-mono             → Code, data (JetBrains Mono, wght 400–600)
---sys-type-font-caveat           → Handwritten accents, curator notes
---sys-type-font-nabla            → RESTRICTED: Icon-scale hero hits only
+--sys-type-fontFamilies-display        → Headlines, hero (Fraunces)
+--sys-type-fontFamilies-primary        → Body, UI labels (Work Sans)
+--sys-type-fontFamilies-proclamation   → Proclamation, authoritative (Libre Bodoni)
+--sys-type-fontFamilies-mono           → Code, data (JetBrains Mono)
+--sys-type-fontFamilies-curator        → Handwritten accents, curator notes (Caveat)
+--sys-type-fontFamilies-colorAccent    → RESTRICTED: icon-scale hero hits only (Nabla)
 ```
 
 ### Shape Tokens (`--sys-shape-*`)
@@ -139,7 +139,7 @@ Every element in the wireframe MUST be assigned one of the six semantic action a
 --sys-shape-blockRiot01          → March archetype (selects, progress)
 --sys-shape-megaphoneCut01       → Megaphone archetype (modals, alerts)
 --sys-shape-placardTorn01        → Placard archetype (cards, panels)
---sys-shape-scaffoldSlab01       → Scaffold archetype (inputs, dividers)
+--sys-shape-scaffoldFrame01      → Scaffold archetype (inputs, dividers)
 --sys-shape-substrateTile02      → Substrate archetype (backgrounds)
 ```
 
@@ -241,381 +241,12 @@ MUST output well-formed XML. One `<wireframe>` per screen.
 
 ---
 
-### `<element>` Schema
+### Detailed Schema & Examples
 
-Each UI element becomes an `<element>` child of `<elements>`.
+To keep this skill concise and reduce token drift, the full schema and long-form examples live under `references/`:
 
-#### Attributes
-
-- `id` – stable identifier.
-- `element_type` – e.g. text, input, button, card, list, modal.
-- `archetype` – Strike | March | Megaphone | Placard | Scaffold | Substrate.
-- `role` – ARIA / semantic role (button, heading, textbox, list, dialog, etc.).
-- `layout_role` – e.g. screen-title, form-field, primary-cta, secondary-cta.
-- `x`, `y`, `width`, `height` – wireframe coordinates.
-
-#### Child Blocks (per element)
-
-```xml
-<element
-  id="submit-cta"
-  element_type="button"
-  archetype="Strike"
-  role="button"
-  layout_role="primary-cta"
-  x="72" y="640" width="200" height="48"
->
-
-  <component_mapping
-    design_system_component="KR/Button/Primary"
-    code_component="KRButton"
-    props_interface="KRButtonProps"
-    variant="filled"
-    size="lg"
-  />
-
-  <content
-    content_type="static"
-    label="Submit application"
-    sample_text="Submit application"
-    i18n_label_key="apply.form.submit.label"
-    domain_model_field="Application.submit"
-  />
-
-  <functionality
-    intent="Primary CTA to submit the application."
-    action="Validate form, POST /applications, navigate to confirmation."
-    data_source="POST /applications"
-    success_state_description="Show success banner and redirect to /applications/success."
-    error_handling="Show inline error banner and keep form values."
-  >
-    <validation_rules>
-      <rule>form_valid</rule>
-    </validation_rules>
-    <error_messages>
-      <error key="server">Something went wrong. Please try again.</error>
-    </error_messages>
-  </functionality>
-
-  <interaction
-    patterns="click,keyboard-activate"
-    states="default,hover,focus,pressed,disabled,loading"
-    on_click="Trigger form submit."
-    transitions="loading:opacity+label-change 150ms ease-out"
-  />
-
-  <layout_details
-    responsive_behavior="left-aligned-on-lg, full-width-on-xs"
-    constraints="top,left"
-    margin_top="24"
-    alignment="start"
-  />
-
-  <tokens
-    color_token="--sys-color-inkGold-base"
-    typography_token="--sys-type-font-work-sans"
-    shape_token="--sys-shape-blockRiot03"
-    z_layer="Z-3"
-  />
-
-  <accessibility
-    label_source="visible-text"
-    keyboard_shortcut="Enter"
-  />
-
-  <test_ids primary="cta-submit-application" />
-
-  <motion_contract
-    trigger="click"
-    duration_ms="150"
-    easing="cubic-bezier(0.34,1.56,0.64,1)"
-    properties="scale,shadow"
-  />
-
-  <ux_rationale>
-    Single clear primary action with strong loading feedback to reduce anxiety.
-  </ux_rationale>
-
-</element>
-```
-
-**Element child blocks summary:**
-
-- `<component_mapping>`: design_system_component, code_component, props_interface, variant, size.
-- `<content>`: content_type, sample_text, label, placeholder, helper_text, i18n_key / i18n_label_key, domain_model_field.
-- `<functionality>`: intent, action, data_source, validation_rules, error_messages, success_state_description, error_handling.
-- `<interaction>`: patterns, states, on_focus, on_error, on_click, transitions.
-- `<layout_details>`: responsive_behavior, constraints, margin_top/right/bottom/left, alignment.
-- `<tokens>`: color_token, typography_token, shape_token, z_layer. (**Use only canonical v6 `--sys-color-*`, `--sys-type-*`, `--sys-shape-*`; no hex; no deprecated aliases.**)
-- `<accessibility>`: label_source, heading_level (for headings), aria_describedby_ids, keyboard_shortcut, tab_order_override.
-- `<test_ids>`: primary data-testid.
-- `<motion_contract>`: trigger, duration_ms, easing, properties.
-- `<ux_rationale>`: 1–3 sentences, why this pattern/archetype/token.
-
-**Interactive elements must have:** `archetype`, `role`, `<tokens>`, `<test_ids>`, and `states` including at least `default` and `focus`.
-
----
-
-## Example Wireframe Output (v6)
-
-```xml
-<wireframe
-  version="6.0.0"
-  screen_id="landing-hero"
-  design_system="kr-solidarity"
-  mode="solidarity-only"
->
-
-<meta>
-  <title>Landing Page Hero</title>
-  <description>Primary marketing hero with layered KR asset composition, dual CTAs, and feature strip.</description>
-  <user_story>As a visitor, I immediately understand CareerCopilot's value proposition and can start or learn more.</user_story>
-  <viewport base_width="1440" base_height="900" />
-  <breakpoints values="xs,sm,md,lg" />
-</meta>
-
-<layout>
-<![CDATA[
-+------------------------------------------------------------------+
-| [SCAFFOLD: TopNav divider]                                       |
-|  [STRIKE: Logo]        [MARCH: Nav links]  [STRIKE: CTA Button] |
-+------------------------------------------------------------------+
-|                                                                  |
-|  [SCAFFOLD: Hero Grid — 2 col]                                  |
-|  +----------------------------+  +---------------------------+  |
-|  | [PLACARD: Hero Content]    |  | [SUBSTRATE: Hero Visual]  |  |
-|  |                            |  |                           |  |
-|  |  [MARCH: Eyebrow label]    |  |  KR asset hero (Z-0)      |  |
-|  |  [STRIKE: H1 Headline]     |  |  Atmospheric overlay(Z-1) |  |
-|  |  [MARCH: Subhead]          |  |  UI accent (Z-3)          |  |
-|  |                            |  |                           |  |
-|  |  [STRIKE: Primary CTA]     |  |                           |  |
-|  |  [STRIKE: Secondary CTA]   |  |                           |  |
-|  +----------------------------+  +---------------------------+  |
-|                                                                  |
-+------------------------------------------------------------------+
-| [PLACARD: Feature strip — 3 cols]                               |
-|  [PLACARD: Feature 1]  [PLACARD: Feature 2]  [PLACARD: Feat 3]  |
-+------------------------------------------------------------------+
-]]>
-</layout>
-
-<elements>
-
-  <!-- Primary CTA Button -->
-  <element
-    id="cta-primary"
-    element_type="button"
-    archetype="Strike"
-    role="button"
-    layout_role="primary-cta"
-    x="80" y="520" width="180" height="48"
-  >
-    <component_mapping
-      design_system_component="KR/Button/Primary"
-      code_component="KRButton"
-      props_interface="KRButtonProps"
-      variant="filled"
-      size="lg"
-    />
-    <content
-      content_type="static"
-      label="Get Started"
-      sample_text="Get Started"
-      i18n_label_key="landing.hero.cta.primary"
-    />
-    <tokens
-      color_token="--sys-color-inkGold-base"
-      typography_token="--sys-type-font-work-sans"
-      shape_token="--sys-shape-blockRiot03"
-      z_layer="Z-3"
-    />
-    <interaction
-      patterns="click,keyboard-activate"
-      states="default,hover,focus,pressed"
-      on_click="Navigate to /register"
-      transitions="hover:scale+shadow 200ms cubic-bezier(0.34,1.56,0.64,1)"
-    />
-    <accessibility
-      label_source="visible-text"
-      keyboard_shortcut="Enter"
-    />
-    <test_ids primary="landing-cta-primary" />
-    <motion_contract
-      trigger="hover"
-      duration_ms="200"
-      easing="cubic-bezier(0.34,1.56,0.64,1)"
-      properties="scale,box-shadow"
-    />
-    <ux_rationale>
-      Primary Strike archetype with high-contrast inkGold on charcoal creates immediate focal hierarchy. M3 Expressive spring physics on hover reinforces action confidence.
-    </ux_rationale>
-  </element>
-
-  <!-- H1 Headline -->
-  <element
-    id="hero-headline"
-    element_type="text"
-    archetype="Strike"
-    role="heading"
-    layout_role="screen-title"
-    x="80" y="320" width="600" height="120"
-  >
-    <content
-      content_type="static"
-      sample_text="Career Applications, Perfected"
-      i18n_label_key="landing.hero.headline"
-    />
-    <tokens
-      color_token="--sys-color-paperWhite"
-      typography_token="--sys-type-font-fraunces"
-      z_layer="Z-3"
-    />
-    <accessibility
-      label_source="visible-text"
-      heading_level="1"
-    />
-    <ux_rationale>
-      Fraunces variable font (wght 900, SOFT 80, WONK 1) creates extreme M3 Expressive contrast. Strike archetype for hero statement.
-    </ux_rationale>
-  </element>
-
-</elements>
-
-<user_flow>
-  <primary_path><![CDATA[
-**Step 1: Land on page**
-- User sees hero headline + subheadline above fold
-- Primary CTA "Get Started" visible without scrolling
-- Substrate texture + atmospheric overlay create immediate brand impression
-
-**Step 2: Engage with CTA**
-- Click "Get Started" → navigate to `/register`
-- Click "Learn More" → smooth-scroll to feature section or navigate to `/about`
-
-**Step 3: Footer navigation**
-- Keyboard Tab users reach footer links after CTAs
-- Footer links: Privacy · Terms · Contact · About
-  ]]></primary_path>
-
-  <edge_cases><![CDATA[
-**Hero asset timeout (>3s):**
-- Fallback trigger in composeHero()
-- Apply charcoal background (--sys-color-charcoalBackground-base)
-- Show error banner: "Asset load failed. Refresh to retry."
-- CTAs remain functional — page is not blocked
-
-**No JS / SSR initial render:**
-- Hero panel renders with charcoal background (CSS-only fallback)
-- CTAs are standard `<a>` elements — navigable without JS
-  ]]></edge_cases>
-</user_flow>
-
-<states>
-  <loading><![CDATA[
-- H1 replaced with Fraunces skeleton (pulsing --sys-color-primary-40)
-- CTA buttons show spinner, disabled state (opacity: 0.4)
-- Feature cards show grey skeleton blocks
-  ]]></loading>
-
-  <empty><![CDATA[
-N/A for Landing — static content
-  ]]></empty>
-
-  <error><![CDATA[
-- If hero asset fails to load: fallback to --sys-color-charcoalBackground-base
-- If nav data fails: show cached nav links
-- MEGAPHONE error banner: "Asset load failed. Refresh to retry."
-  ]]></error>
-
-  <disabled><![CDATA[
-- CTA buttons: opacity 0.4, cursor: not-allowed
-- color: --sys-color-concreteGrey
-  ]]></disabled>
-</states>
-
-<assets>
-  <slot name="hero_background" z_layer="Z-0" token="--sys-color-charcoalBackground-base">
-    TODO[asset] Select from KR-SOLID-021 to KR-SOLID-030 (devotional/16:9)
-  </slot>
-
-  <slot name="hero_overlay" z_layer="Z-1" token="--sys-color-primary-40">
-    TODO[asset] Abstract motif overlay (opacity: 0.6)
-  </slot>
-
-  <slot name="hero_accent" z_layer="Z-3" token="--sys-color-inkGold-base">
-    KR-UI-016 (corner accent SVG, top-right placement)
-  </slot>
-</assets>
-
-<breakpoints>
-  <mobile max_width="767"><![CDATA[
-- Hero panel: full-width, stacked layout
-- CTA buttons: stack vertically, full-width
-- H1 font-size: 36px
-- Padding: 16px
-- CSS: .hero-content-panel { width: 100%; padding: 24px 16px; }
-  ]]></mobile>
-
-  <tablet min_width="768" max_width="1023"><![CDATA[
-- Hero panel: max-width 600px, centered
-- CTA buttons: side-by-side
-- H1 font-size: 48px
-- Padding: 24px
-- CSS: @media (min-width: 768px) { .hero-content-panel { max-width: 600px; padding: 32px 24px; } }
-  ]]></tablet>
-
-  <desktop min_width="1024"><![CDATA[
-- Hero panel: max-width 720px, centered
-- CTA buttons: side-by-side
-- H1 font-size: 56px
-- Padding: 48px
-- CSS: @media (min-width: 1024px) { .hero-content-panel { max-width: 720px; padding: 48px; } }
-  ]]></desktop>
-</breakpoints>
-
-<accessibility_overview>
-  <focus_order><![CDATA[
-1. Logo (skip-to-content link)
-2. Nav links (Tab through)
-3. Primary CTA
-4. Secondary CTA
-5. Feature cards (Tab through, Enter to activate)
-
-Keyboard shortcuts:
-- Tab: moves focus forward
-- Shift+Tab: moves focus backward
-- Enter/Space: activates buttons
-- Esc: dismisses any Lens (modal/popover)
-  ]]></focus_order>
-
-  <landmarks><![CDATA[
-role="banner" → TopNav
-role="main" → Hero + Feature sections
-aria-label="Primary navigation" → Nav links
-aria-label="Get started with CareerCopilot" → Primary CTA
-  ]]></landmarks>
-</accessibility_overview>
-
-<storybook>
-  <stories>
-    <story name="LandingHero/Default" />
-    <story name="LandingHero/Loading" />
-    <story name="LandingHero/AssetLoadError" />
-  </stories>
-  <controls><![CDATA[isLoading, assetLoadError, headlineText]]></controls>
-</storybook>
-
-</wireframe>
-
-<!-- Compliance Score Summary (append after wireframe XML) -->
-**Compliance Score: 390/400 (97.5%)** — Grade A · ✅ PASS (≥360 threshold)
-
-**Deductions:**
-- Fraunces variable settings partially specified (-5pt)
-- Typographic scale less expressive than 144px hero max (-5pt)
-
-```
+- `references/xml-schema.md` (full `<element>` schema)
+- `references/example-wireframes.md` (example screens)
 
 ---
 

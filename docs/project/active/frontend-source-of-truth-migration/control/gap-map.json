@@ -51,7 +51,7 @@
       "owner_route": "/career/ingest",
       "owner_surface": "IngestionPage",
       "backend_status": "mounted_active",
-      "frontend_status": "partially_wired",
+      "frontend_status": "live_canonical",
       "reuse_components": [
         "IngestionPage",
         "AssetLibrary"
@@ -117,6 +117,14 @@
       "owner_surface": "ApplyQuick",
       "backend_status": "mounted_active",
       "frontend_status": "partially_wired",
+      "route_ownership": {
+        "primary_execution_owner": "/apply/quick",
+        "secondary_reference": "/opportunities",
+        "ownership_note": "Opportunities links to apply/quick for execution; it does not own the analysis capability. ApplyQuick is the single execution surface."
+      },
+      "resolution_status": "in_progress",
+      "blocked_by": "JobAnalysisResultsPanel not yet extracted as standalone component; build contract not yet generated",
+      "resolved_commit": null,
       "reuse_components": [
         "ApplyQuick",
         "Opportunities"
@@ -132,7 +140,14 @@
         "ExtractFromTextPanel",
         "AdvancedJobAnalysisPanel"
       ],
-      "notes": "Planning remains partially blocked because governance metadata for this capability is incomplete."
+      "api_contract": {
+        "endpoint": "POST /api/flows/analyze-job-from-url",
+        "auth": "get_current_user (Bearer token)",
+        "request": { "url": "string | null", "job_description": "string | null" },
+        "response": "AnalyzeJobFromUrlResponse (job_title, company_name, normalized_job_description, chunk_matches, ats_preview, artifacts, export_pack)",
+        "contract_alignment": "synchronized — frontend types in src/types/masterResume.ts match backend schemas exactly"
+      },
+      "notes": "Governance metadata normalized 2026-03-15. ApplyQuick is live and functional; results are currently inlined. Remaining work: extract JobAnalysisResultsPanel + generate build contract. workflow_orchestration capability on this route remains deferred (backend placeholder-only)."
     },
     {
       "feature_id": "workflow_orchestration",

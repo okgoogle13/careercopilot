@@ -235,12 +235,12 @@ Human approval is now recorded. Step 3 execution may begin.
 
 ### Tasks
 
-- [ ] **3b.1** Audit current frontend ingestion paths. Identify all active calls not using `/api/v1/ingest`. Mark them for retirement.
-- [ ] **3b.2** Build: upload step (file select, drag-drop), extraction/preview step, tag/confirm step, save step.
-- [ ] **3b.3** Wire all steps to `/api/v1/ingest` only. Remove or quarantine any non-canonical ingestion calls from active frontend code.
-- [ ] **3b.4** Handle error states: upload failure, extraction failure, save failure. Show recovery paths.
-- [ ] **3b.5** Write tests covering: successful flow, upload failure, extraction preview, tag-and-save.
-- [ ] **3b.6** Run `token-enforcement` and `kerala-rage-brand-enforcer`. 0 violations.
+- [x] **3b.1** Audit current frontend ingestion paths. Identify all active calls not using `/api/v1/ingest`. Mark them for retirement.
+- [x] **3b.2** Build: upload step (file select, drag-drop), extraction/preview step, tag/confirm step, save step.
+- [x] **3b.3** Wire all steps to `/api/v1/ingest` only. Remove or quarantine any non-canonical ingestion calls from active frontend code.
+- [x] **3b.4** Handle error states: upload failure, extraction failure, save failure. Show recovery paths.
+- [x] **3b.5** Write tests covering: successful flow, upload failure, extraction preview, tag-and-save.
+- [x] **3b.6** Run `token-enforcement` and `kerala-rage-brand-enforcer`. 0 violations.
 
 ### Acceptance
 
@@ -428,7 +428,7 @@ The orphan report (`docs/manifests/orphans.json`) identified 11 non-feature rout
 - [ ] **6.5 Analysis & Apply Quick**: Move `./pages/AnalysisPage` (pair with `05_analysis`) and `./pages/ApplyQuick` to canonical `features/`.
 - [ ] **6.6 Resolve UNKNOWN**: Fix `/onboarding` route (currently pointing to UNKNOWN source, likely needs pairing with `03_onboarding`).
 - [ ] **6.7 Retire Prototypes**: Safely delete or consolidate `/kr/landing`, `/kr/auth`, `/kr/onboarding`, `/kr/analysis`, `/kr/dashboard`, and `/test-tokens`.
-- [ ] **6.8 Gate Check**: 
+- [ ] **6.8 Gate Check**:
   // turbo
   Run `pre-ship-solidarity-gate` for all UI-touching changes to ensure Visual Compliance ≥ 90, Zero-Flora, and semantic tokens only.
 
@@ -550,7 +550,7 @@ tasks:
 | 1 — Fix planning inputs | `fix/planning-inputs` | ✅ Execution ready | — | — |
 | 2 — Tracker build contract | `fix/tracker-build-contract` | ✅ Execution ready | — | — |
 | 3a — Applications CRUD | `feat/tracker-real-crud` | 🟢 Ready to start | — | — |
-| 3b — Smart ingestion | `feat/ingest-upload-to-save` | ⬜ Waiting on Step 2 | — | — |
+| 3b — Smart ingestion | `feat/ingest-upload-to-save` | ✅ COMPLETE | PR126 | — |
 | 3c — Voice profile | `feat/profile-voice-capture` | ⬜ Waiting on Step 2 | — | — |
 | 3d — Documents redline | `feat/documents-redline-workspace` | ⬜ Waiting on Step 2 | — | — |
 | 4 — Wireframe workflow | `fix/wireframe-workflow` | ⬜ Waiting on Step 3 execution progress | — | — |

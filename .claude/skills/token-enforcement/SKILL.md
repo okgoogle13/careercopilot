@@ -1,15 +1,18 @@
----
 name: token-enforcement
-description: Atomic enforcement gate for KR Solidarity token and copy hygiene in this repository.
-chainable: true
-gate_type: enforcement
-lifecycle_stage: copy-cleared
-depends_on: []
-triggers: [visual-ready-gate]
-json_io: true
+description: Atomic enforcement gate to verify KR Solidarity token and copy hygiene in migrated frontend code.
 ---
 
 # Token Enforcement
+
+## Skill Metadata
+<!-- For documentation only — not parsed by Claude Code skill loader -->
+- **Version**: 1.5.0
+- **Gate type**: enforcement
+- **Lifecycle stage**: copy-cleared
+- **Triggers**: [visual-ready-gate]
+- **JSON I/O**: true
+- **Chainable**: true
+- **Aliases**: `/ma-token`
 
 ## Purpose
 
@@ -45,21 +48,12 @@ Fail on:
   - `WattleGold`
   - `inkGreen`
 - banned archetype names in new migration code:
-  - `Jar`
-  - `Cabinet`
-  - `Seed`
-  - `Leaf`
+  - `Jar`, `Cabinet`, `Seed`, `Leaf` (Regex: `<(Jar|Cabinet|Seed|Leaf)[ />]`)
 - forbidden font drift such as `Inter`, `Roboto`, or `Arial`
 - screen-level styling that bypasses:
   - `--sys-color-*`
   - `--sys-shape-*`
   - `--sys-type-*`
-
-Allow:
-
-- canonical token source files themselves
-- generated/build output excluded from review scope
-- migration docs that reference tokens descriptively without implementing styles
 
 ## Suggested Scope
 
@@ -68,25 +62,91 @@ Typical targets:
 - `frontend/src/features/**/*.tsx`
 - `frontend/src/pages/**/*.tsx`
 - `frontend/src/components/**/*.tsx`
-- route-specific styles touched during migration
 
-## Operator Workflow
+> [!NOTE]
+> The audit is intelligently route-scoped. When a valid route is provided, it targets only the runtime surface and associated components defined in `route-matrix.json`.
 
-1. Identify the changed frontend files for the route or component.
-2. Check them against the canonical token sources above.
-3. Run the relevant repo-root verification commands already used by the team.
-4. Return pass/fail with violating file paths and exact banned terms or literals found.
+## Prerequisites
+
+- `run-token-enforcement.sh` must be executable (`chmod +x .claude/skills/token-enforcement/scripts/run-token-enforcement.sh`).
+- Route must be registered in `route-matrix.json` for **Intelligent Scoping**.
+- Node.js and Python 3 environment for JSON reporting.
+
+## Usage
+
+```bash
+# Aliases: /ma-token /ma-tokens
+
+# 1. Intelligent Check (Specific Route)
+# Use this when working on a specific migrated route.
+/ma-token /tracker
+
+# 2. Bulk Check (Fallback)
+# If route_id is omitted, logic scans all frontend/src/features/**/*.tsx
+# NOTE: Results will be broad and may flag legacy code.
+/ma-token
+```
+
+## Maintenance Guide
+
+To update the enforcement logic (e.g., new banned archetypes or tokens):
+
+1. **Edit Script**: Modify `scripts/run-token-enforcement.sh`.
+2. **Update Patterns**: Adjust the `run_grep` calls for `BANNED_ARCHETYPES` or `DEPRECATED_TOKENS`.
+3. **Verify**: Run the script against a known violation to confirm the new pattern fires.
+
+## Integration
+
+### migration-audit
+This skill is a primary blocking gate for `migration-audit`.
+- **Failure Condition**: If token-enforcement returns `status: fail`.
+- **Downstream Logic**: `migration-audit` sets its top-level status to `needs_refinement`.
+- **Operator Action**: Violations must be resolved before the route can achieve a `pass` status.
 
 ## Output Expectations
 
-Return:
+Returns a JSON payload with the following structure:
 
-- status: `pass` or `fail`
-- files checked
-- violations
-- re-check command
+### Sample Pass
+```json
+{
+  "gate": "token-enforcement",
+  "status": "pass",
+  "truncated": false,
+  "violation_count": 0,
+  "recheck_command": ".claude/skills/token-enforcement/scripts/run-token-enforcement.sh /tracker"
+}
+```
 
-## Notes
+### Sample Fail
+```json
+{
+  "gate": "token-enforcement",
+  "status": "fail",
+  "truncated": true,
+  "violation_count": 200,
+  "violations": [
+    {
+      "rule": "BR-TOKEN-001",
+      "type": "hardcoded-color",
+      "severity": "critical",
+      "file": "frontend/src/features/Tracker/index.tsx:24",
+      "value": "color: '#1A1714'",
+      "remediation": "Replace with canonical --sys-color-* token"
+    }
+  ],
+  "recheck_command": ".claude/skills/token-enforcement/scripts/run-token-enforcement.sh /tracker"
+}
+```
 
-- pair this with `migration-audit` when route readiness matters
-- keep the result narrow and mechanical; this is a structural gate, not a design critique
+## Troubleshooting
+
+- **Audit Noise**: If canonical source files are being flagged, verify the scan scope excludes those files.
+- **False Positives**: Check `references/FAILURE_MODES.md` for common blocking states.
+- **Missing Script**: Ensure `scripts/run-token-enforcement.sh` has executable permissions (`chmod +x`).
+
+## Related Documentation
+
+- [Enforcement Rules](references/ENFORCEMENT_RULES.md)
+- [Failure Modes](references/FAILURE_MODES.md)
+- [JSON Contract](references/JSON_CONTRACT.md)

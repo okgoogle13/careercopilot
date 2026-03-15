@@ -7,50 +7,54 @@
       ],
       "description": "Gemini 2.5 Pro/Flash for token-efficient code analysis, docs, batch ops"
     },
-    "playwright": {
-      "command": "npx",
+    "design-system-sidekick": {
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
       "args": [
-        "-y",
-        "@modelcontextprotocol/server-playwright"
+        "/Users/okgoogle13/Projects/careercopilot/servers/design_system_sidekick.py"
       ],
-      "env": {
-        "PLAYWRIGHT_BROWSERS_PATH": "0"
-      }
+      "description": "KR Solidarity design validation + asset packaging"
     },
-    "github": {
-      "command": "/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/npx",
+    "vision-scorer-mcp": {
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
       "args": [
-        "-y",
-        "@modelcontextprotocol/server-github"
+        "/Users/okgoogle13/Projects/careercopilot/servers/vision_scorer_mcp.py"
       ],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "[REDACTED]"
-      }
+      "description": "Programmatic M3 Expressive visual scoring"
+    },
+    "perplexity": {
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
+      "args": [
+        "/Users/okgoogle13/Projects/careercopilot/servers/perplexity_server.py"
+      ],
+      "description": "Perplexity web research via custom FastMCP server"
+    },
+    "task-router": {
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
+      "args": [
+        "/Users/okgoogle13/Projects/careercopilot/servers/task_router_mcp.py"
+      ],
+      "description": "Local task queue MCP"
+    },
+    "filesystem": {
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
+      "args": [
+        "/Users/okgoogle13/Projects/careercopilot/servers/filesystem_mcp.py"
+      ],
+      "description": "Workspace-scoped filesystem tools (Python fallback)"
     },
     "git": {
-      "command": "npx",
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
       "args": [
-        "-y",
-        "@modelcontextprotocol/server-git"
-      ]
-    },
-    "docker": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "mcp-server-docker"
-      ]
-    },
-    "perplexity-ask": {
-      "command": "/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/npx",
-      "args": [
-        "-y",
-        "@jschuller/perplexity-mcp"
+        "/Users/okgoogle13/Projects/careercopilot/servers/git_mcp.py"
       ],
-      "env": {
-        "PERPLEXITY_API_KEY": "${PERPLEXITY_API_KEY}"
-      },
-      "description": "Perplexity AI for alternative web research"
+      "description": "Git tools (Python fallback)"
+    },
+    "github": {
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
+      "args": [
+        "/Users/okgoogle13/Projects/careercopilot/servers/github_mcp.py"
+      ],
+      "description": "GitHub REST + GraphQL (Python fallback)"
     },
     "genkit": {
       "command": "/usr/bin/env",

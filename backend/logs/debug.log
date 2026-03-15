@@ -15,3 +15,67 @@
 2026-03-05 23:15:50 | INFO     | d79b49d4-0a07-446e-9542-f72eb922b1c9 | REST Response: 400 in 0.004s
 2026-03-05 23:16:21 | INFO     | f41f9f2e-21cf-4f89-8d74-b796a3f23126 | REST Request: POST /api/smart-ingestion/upload-and-tag
 2026-03-05 23:16:21 | INFO     | f41f9f2e-21cf-4f89-8d74-b796a3f23126 | REST Response: 200 in 0.005s
+2026-03-15 21:12:41 | INFO     | - | Starting CareerCopilot API application
+2026-03-15 21:12:41 | INFO     | - | Database initialized successfully
+2026-03-15 21:12:41 | INFO     | - | Genkit AI framework initialized successfully
+2026-03-15 21:13:56 | INFO     | 55d79468-bd29-40dc-9c81-6e4e23a98035 | REST Request: GET /openapi.json
+2026-03-15 21:13:56 | INFO     | 55d79468-bd29-40dc-9c81-6e4e23a98035 | REST Response: 200 in 0.289s
+2026-03-15 21:55:32 | INFO     | - | Starting CareerCopilot API application
+2026-03-15 21:55:32 | INFO     | - | Database initialized successfully
+2026-03-15 21:55:32 | INFO     | - | Genkit AI framework initialized successfully
+2026-03-15 21:56:12 | INFO     | 0a25810a-290b-483e-b25f-d967214d78a8 | REST Request: GET /applications/
+2026-03-15 21:56:12 | INFO     | 0a25810a-290b-483e-b25f-d967214d78a8 | REST Response: 404 in 0.263s
+2026-03-15 22:43:17 | INFO     | 2be339f8-4500-4ab9-884e-e96f56b2886e | REST Request: GET /applications/
+2026-03-15 22:43:22 | INFO     | 2be339f8-4500-4ab9-884e-e96f56b2886e | REST Response: 404 in 5.207s
+2026-03-15 22:43:23 | INFO     | 2e56a02e-7369-437b-8815-f34856ca690d | REST Request: GET /applications/
+2026-03-15 22:43:23 | INFO     | 2e56a02e-7369-437b-8815-f34856ca690d | REST Response: 404 in 0.010s
+2026-03-15 22:43:25 | INFO     | b330090b-948f-4a4b-bf41-b469794e439b | REST Request: GET /applications/
+2026-03-15 22:43:25 | INFO     | b330090b-948f-4a4b-bf41-b469794e439b | REST Response: 404 in 0.003s
+2026-03-15 22:43:30 | INFO     | a7a6d8e5-9368-4c73-8350-769eb08035d6 | REST Request: GET /applications/
+2026-03-15 22:43:30 | INFO     | a7a6d8e5-9368-4c73-8350-769eb08035d6 | REST Response: 404 in 0.036s
+2026-03-15 22:45:48 | INFO     | d72ab33f-c07f-4b7c-9ffe-3d449ff697a0 | REST Request: GET /openapi.json
+2026-03-15 22:45:48 | INFO     | d72ab33f-c07f-4b7c-9ffe-3d449ff697a0 | REST Response: 200 in 0.229s
+2026-03-15 22:53:33 | INFO     | 942b7fe1-08a0-4c1e-ae23-29aac0b3df84 | REST Request: GET /applications/
+2026-03-15 22:53:33 | INFO     | 942b7fe1-08a0-4c1e-ae23-29aac0b3df84 | REST Response: 404 in 0.175s
+2026-03-15 22:53:34 | INFO     | 5a091158-5120-40d9-bf8e-4e1c72ae00c9 | REST Request: GET /applications/
+2026-03-15 22:53:34 | INFO     | 5a091158-5120-40d9-bf8e-4e1c72ae00c9 | REST Response: 404 in 0.006s
+2026-03-15 22:53:36 | INFO     | 819e5e0c-a370-4da5-b7a5-35e55e69b3d7 | REST Request: GET /applications/
+2026-03-15 22:53:36 | INFO     | 819e5e0c-a370-4da5-b7a5-35e55e69b3d7 | REST Response: 404 in 0.005s
+2026-03-15 22:53:41 | INFO     | ef005e35-9036-4edd-97cd-cbf2f03a7fbe | REST Request: GET /applications/
+2026-03-15 22:53:41 | INFO     | ef005e35-9036-4edd-97cd-cbf2f03a7fbe | REST Response: 404 in 0.046s
+2026-03-15 22:54:36 | INFO     | e80fd7e9-6439-4e9a-9eb3-20beb4034926 | REST Request: GET /applications/
+2026-03-15 22:54:36 | INFO     | e80fd7e9-6439-4e9a-9eb3-20beb4034926 | REST Response: 404 in 0.180s
+2026-03-15 22:54:38 | INFO     | ba3f9ec0-7cdf-4397-9da1-741235518715 | REST Request: GET /applications/
+2026-03-15 22:54:38 | INFO     | ba3f9ec0-7cdf-4397-9da1-741235518715 | REST Response: 404 in 0.005s
+2026-03-15 22:54:40 | INFO     | b865f847-ec23-4fa1-a039-4f351edf4454 | REST Request: GET /applications/
+2026-03-15 22:54:40 | INFO     | b865f847-ec23-4fa1-a039-4f351edf4454 | REST Response: 404 in 0.024s
+2026-03-15 22:54:44 | INFO     | f43aaa7a-0c6a-422c-9dcc-22686a97a678 | REST Request: GET /applications/
+2026-03-15 22:54:44 | INFO     | f43aaa7a-0c6a-422c-9dcc-22686a97a678 | REST Response: 404 in 0.015s
+2026-03-15 22:55:53 | INFO     | ad56d24e-f4f9-4d03-ba95-10d694a33485 | REST Request: GET /applications/
+2026-03-15 22:55:54 | INFO     | ad56d24e-f4f9-4d03-ba95-10d694a33485 | REST Response: 404 in 0.156s
+2026-03-15 22:55:55 | INFO     | f55ff9ef-b9bb-4560-83d0-c23f2e61cca0 | REST Request: GET /applications/
+2026-03-15 22:55:55 | INFO     | f55ff9ef-b9bb-4560-83d0-c23f2e61cca0 | REST Response: 404 in 0.024s
+2026-03-15 22:55:57 | INFO     | 77234794-3528-4356-b3d4-f0a97d73f5bc | REST Request: GET /applications/
+2026-03-15 22:55:57 | INFO     | 77234794-3528-4356-b3d4-f0a97d73f5bc | REST Response: 404 in 0.006s
+2026-03-15 22:56:01 | INFO     | a0390924-8a25-4bb3-b1e7-92ad50ed2f37 | REST Request: GET /applications/
+2026-03-15 22:56:01 | INFO     | a0390924-8a25-4bb3-b1e7-92ad50ed2f37 | REST Response: 404 in 0.092s
+2026-03-15 22:57:47 | INFO     | 6d85052b-9987-4714-bc34-e737cf8fb227 | REST Request: GET /openapi.json
+2026-03-15 22:57:48 | INFO     | 6d85052b-9987-4714-bc34-e737cf8fb227 | REST Response: 200 in 1.155s
+2026-03-15 22:58:30 | INFO     | 3c7b2105-f2e1-4e5a-8669-b9ac33b1a429 | REST Request: GET /api/applications
+2026-03-15 22:58:30 | INFO     | 3c7b2105-f2e1-4e5a-8669-b9ac33b1a429 | REST Response: 307 in 0.014s
+2026-03-15 22:58:30 | INFO     | 06bcf1a1-3439-455c-896b-c2417844a0ce | REST Request: GET /api/applications/
+2026-03-15 22:58:30 | INFO     | 06bcf1a1-3439-455c-896b-c2417844a0ce | REST Response: 401 in 0.110s
+2026-03-15 22:58:30 | INFO     | c98e4fff-a18b-48f8-9c24-cbb3a6b6e3f9 | REST Request: GET /api/genkit/health
+2026-03-15 22:58:30 | INFO     | c98e4fff-a18b-48f8-9c24-cbb3a6b6e3f9 | REST Response: 404 in 0.006s
+2026-03-16 00:04:20 | INFO     | 5d2383cb-8f31-4df6-95a8-f47f7f9a9844 | REST Request: GET /applications/
+2026-03-16 00:04:24 | INFO     | 5d2383cb-8f31-4df6-95a8-f47f7f9a9844 | REST Response: 404 in 4.294s
+2026-03-16 00:04:27 | INFO     | 66202dae-17d1-4392-b1ab-e5d21a0c04b7 | REST Request: GET /applications/
+2026-03-16 00:04:27 | INFO     | 66202dae-17d1-4392-b1ab-e5d21a0c04b7 | REST Response: 404 in 0.338s
+2026-03-16 00:04:31 | INFO     | c3a1d1ec-eda2-47ed-aa3d-e1fb25e99d86 | REST Request: GET /applications/
+2026-03-16 00:04:31 | INFO     | c3a1d1ec-eda2-47ed-aa3d-e1fb25e99d86 | REST Response: 404 in 0.005s
+2026-03-16 03:42:30 | INFO     | 3f53d518-7553-4920-a469-c3d6b13504a7 | REST Request: GET /applications/
+2026-03-16 03:42:31 | INFO     | 3f53d518-7553-4920-a469-c3d6b13504a7 | REST Response: 404 in 1.105s
+2026-03-16 03:42:33 | INFO     | 4825b4bf-8085-466f-9c81-ecb6cd54b757 | REST Request: GET /applications/
+2026-03-16 03:42:33 | INFO     | 4825b4bf-8085-466f-9c81-ecb6cd54b757 | REST Response: 404 in 0.302s
+2026-03-16 03:42:37 | INFO     | 04ff5498-f8e8-4c01-95c4-f6a807b55053 | REST Request: GET /applications/
+2026-03-16 03:42:37 | INFO     | 04ff5498-f8e8-4c01-95c4-f6a807b55053 | REST Response: 404 in 0.003s

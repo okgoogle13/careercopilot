@@ -113,10 +113,10 @@ function returnsJsxFromExpression(node: Node | undefined): boolean {
     return returnsJsxFromExpression(node.getExpression());
   }
 
-  if (isMemoOrForwardRefCall(node)) {
+  if (isMemoOrForwardRefCall(node) && Node.isCallExpression(node)) {
     const firstArg = node.getArguments()[0];
     if (firstArg && (Node.isArrowFunction(firstArg) || Node.isFunctionExpression(firstArg))) {
-      return functionReturnsJsx(firstArg);
+      return functionReturnsJsx(firstArg as FunctionLikeComponent);
     }
   }
 
@@ -145,10 +145,10 @@ function getFunctionLikeFromVariableDeclaration(
     return initializer;
   }
 
-  if (isMemoOrForwardRefCall(initializer)) {
+  if (isMemoOrForwardRefCall(initializer) && Node.isCallExpression(initializer)) {
     const firstArg = initializer.getArguments()[0];
     if (firstArg && (Node.isArrowFunction(firstArg) || Node.isFunctionExpression(firstArg))) {
-      return firstArg;
+      return firstArg as FunctionLikeComponent;
     }
   }
 
