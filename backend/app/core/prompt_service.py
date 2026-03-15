@@ -182,11 +182,13 @@ class PromptService:
         """Get configuration for a specific category"""
         categories = self._config.get("categories", {})
         from typing import cast as _cast
+
         return _cast(dict[str, Any], categories.get(category, {}))
 
     def get_length_instruction(self, length_type: str) -> str:
         """Get length instruction text for a specific type"""
         from typing import cast as _cast
+
         length_instructions = _cast(dict[str, str], self._config.get("length_instructions", {}))
         return length_instructions.get(length_type, length_instructions.get("standard", ""))
 

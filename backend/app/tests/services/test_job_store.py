@@ -2,8 +2,7 @@
 
 import asyncio
 import sys
-from types import SimpleNamespace
-from types import ModuleType
+from types import ModuleType, SimpleNamespace
 from unittest.mock import MagicMock
 
 import pytest
@@ -90,10 +89,10 @@ def test_add_job_requires_user_id(job_store):
 def test_add_job_populates_defaults_and_persists(job_store, mock_db):
     """New jobs should be mapped to the model, committed, and refreshed."""
     job_data = {
-            "user_id": "user-1",
-            "metadata": {"source": "seek"},
-            "posted_date": "2026-03-01T12:00:00",
-        }
+        "user_id": "user-1",
+        "metadata": {"source": "seek"},
+        "posted_date": "2026-03-01T12:00:00",
+    }
     job_id = asyncio.run(job_store.add_job(job_data))
 
     created_job = mock_db.add.call_args.args[0]

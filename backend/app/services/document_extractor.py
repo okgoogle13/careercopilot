@@ -22,6 +22,7 @@ logger = logging.getLogger(__name__)
 # PDF extraction
 try:
     from pypdf import PdfReader
+
     PYPDF_AVAILABLE = True
 except ImportError:
     PYPDF_AVAILABLE = False
@@ -29,6 +30,7 @@ except ImportError:
 
 try:
     from pdfminer.high_level import extract_text as pdfminer_extract
+
     PDFMINER_AVAILABLE = True
 except ImportError:
     PDFMINER_AVAILABLE = False
@@ -37,6 +39,7 @@ except ImportError:
 # Word document extraction
 try:
     from docx import Document
+
     DOCX_AVAILABLE = True
 except ImportError:
     DOCX_AVAILABLE = False
@@ -160,9 +163,11 @@ def download_document(url: str, timeout: int = 30) -> bytes:
         Document content as bytes
     """
     try:
-        response = requests.get(url, timeout=timeout, headers={
-            "User-Agent": "Mozilla/5.0 (compatible; JobAnalyzer/1.0)"
-        })
+        response = requests.get(
+            url,
+            timeout=timeout,
+            headers={"User-Agent": "Mozilla/5.0 (compatible; JobAnalyzer/1.0)"},
+        )
         response.raise_for_status()
         return response.content
     except Exception as e:

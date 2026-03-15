@@ -1,8 +1,9 @@
 import json
 from pathlib import Path
-from typing import Dict, Any, List, Optional
+from typing import Any, Dict, List, Optional
 
 from app.core.ats_rules import validate_template_schema
+
 
 class TemplateRepo:
     def __init__(self, root: Optional[Path] = None):
@@ -32,14 +33,15 @@ class TemplateRepo:
             path = self.root / doc_type / f"{template_id}.json"
             if not path.exists():
                 raise FileNotFoundError(f"Template not found at {path}")
-            
+
             with path.open(encoding="utf-8") as f:
                 raw = json.load(f)
-                
+
             validate_template_schema(raw, doc_type)
             self._cache[key] = raw
-            
+
         return self._cache[key]
+
 
 # Global instance for easy access
 template_repo = TemplateRepo()

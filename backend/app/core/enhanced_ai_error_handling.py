@@ -7,11 +7,11 @@ for individual AI service operations within complex flows.
 
 import asyncio
 import logging
+from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Callable, Awaitable, AsyncIterator
-from contextlib import asynccontextmanager
+from typing import Any, AsyncIterator, Awaitable, Callable
 
 from .ai_error_handling import AIError, AIErrorType, AIOperationHandler, RetryConfig
 

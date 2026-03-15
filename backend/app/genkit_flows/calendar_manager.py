@@ -70,7 +70,11 @@ async def createCalendarEvent(user_id: str, opportunity_data: dict) -> str:
             application = db.query(Application).filter(Application.id == opportunity_id).first()
             if application:
                 # Store in metadata for now as we don't have a dedicated column for calendar_event_id
-                meta = application.application_metadata.copy() if application.application_metadata else {}
+                meta = (
+                    application.application_metadata.copy()
+                    if application.application_metadata
+                    else {}
+                )
                 meta["calendar_event_id"] = created_event.get("id")
                 application.application_metadata = meta
                 db.commit()

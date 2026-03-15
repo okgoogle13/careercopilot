@@ -67,7 +67,9 @@ def test_flash_sidekick_service_sets_default_server_config():
 
 def test_extract_links_from_search_results_parses_json_response(monkeypatch):
     """Valid JSON responses should be parsed into a URL list."""
-    result = SimpleNamespace(content=[SimpleNamespace(text='```json\n["https://a.example/job"]\n```')])
+    result = SimpleNamespace(
+        content=[SimpleNamespace(text='```json\n["https://a.example/job"]\n```')]
+    )
     session = _FakeClientSession("read", "write", result=result)
 
     def fake_require_mcp_client():
@@ -129,7 +131,9 @@ def test_extract_links_from_search_results_returns_empty_on_session_failure(monk
         ),
     )
 
-    assert asyncio.run(FlashSidekickService().extract_links_from_search_results("<html></html>")) == []
+    assert (
+        asyncio.run(FlashSidekickService().extract_links_from_search_results("<html></html>")) == []
+    )
 
 
 def test_extract_links_sync_uses_asyncio_run(monkeypatch):

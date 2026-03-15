@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class GovernanceOverride(BaseModel):
     """Override a specific governance violation/warning."""
+
     violation_id: str = Field(..., description="ID of violation/warning to override")
     decision: str = Field(..., description="accept, reject, modify")
     justification: str = Field(..., description="Why override this rule")
@@ -19,11 +20,16 @@ class GovernanceOverride(BaseModel):
 
 class AssetReviewSubmission(BaseModel):
     """Submit review for a single asset."""
+
     asset_id: str = Field(..., description="KR-SOLID-XXX")
-    overall_decision: str = Field(..., description="approved, conditional-approval, needs-revision, rejected")
+    overall_decision: str = Field(
+        ..., description="approved, conditional-approval, needs-revision, rejected"
+    )
     cultural_feedback: str = Field(..., description="Feedback on cultural appropriateness")
     aesthetic_notes: str | None = Field(None, description="Notes on visual quality")
-    overrides: list[GovernanceOverride] = Field(default_factory=list, description="Governance flag overrides")
+    overrides: list[GovernanceOverride] = Field(
+        default_factory=list, description="Governance flag overrides"
+    )
     reviewed_by: str = Field(..., description="Reviewer identity")
     review_timestamp: datetime = Field(default_factory=datetime.utcnow)
     confidence: float = Field(..., ge=0.0, le=1.0, description="Reviewer confidence in decision")
@@ -31,6 +37,7 @@ class AssetReviewSubmission(BaseModel):
 
 class BulkAssetReviewSubmission(BaseModel):
     """Bulk submit reviews for multiple assets."""
+
     asset_ids: list[str] = Field(..., description="List of KR-SOLID-XXX IDs")
     bulk_decision: str = Field(..., description="approved, conditional-approval, rejected")
     reason: str = Field(..., description="Bulk decision justification")
@@ -40,6 +47,7 @@ class BulkAssetReviewSubmission(BaseModel):
 
 class AssetReviewResponse(BaseModel):
     """Response from asset review submission."""
+
     success: bool
     asset_id: str
     decision: str
@@ -49,6 +57,7 @@ class AssetReviewResponse(BaseModel):
 
 class ReviewDashboardAsset(BaseModel):
     """Asset data for review dashboard."""
+
     asset_id: str
     name: str
     category: str
@@ -66,6 +75,7 @@ class ReviewDashboardAsset(BaseModel):
 
 class ReviewDashboardStats(BaseModel):
     """Dashboard statistics."""
+
     total_assets_pending: int
     assets_approved: int
     assets_rejected: int

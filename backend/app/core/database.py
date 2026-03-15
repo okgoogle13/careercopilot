@@ -17,7 +17,6 @@ from app.models.database import Base
 logger = logging.getLogger(__name__)
 
 
-
 class DatabaseConfig:
     """Database configuration management"""
 
@@ -148,9 +147,7 @@ def check_database_health() -> dict:
             return {
                 "status": "healthy",
                 "database_type": "sqlite" if db_config.is_sqlite else "postgresql",
-                "url": (
-                    "***"  # Mask URL for security in logs/responses
-                ),
+                "url": ("***"),  # Mask URL for security in logs/responses
             }
     except Exception as e:
         return {

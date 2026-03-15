@@ -193,12 +193,18 @@ class ATSScoreResponse(BaseModel):
     """
 
     overall_score: int = Field(..., alias="score", description="The composite ATS score (0-100).")
-    categories: list[CategoryScore] = Field(..., alias="breakdown", description="A breakdown of scores by category.")
+    categories: list[CategoryScore] = Field(
+        ..., alias="breakdown", description="A breakdown of scores by category."
+    )
     matched_keywords: list[str] = Field(
-        ..., alias="matchedKeywords", description="Keywords found in both the resume and job description."
+        ...,
+        alias="matchedKeywords",
+        description="Keywords found in both the resume and job description.",
     )
     missing_keywords: list[str] = Field(
-        ..., alias="missingKeywords", description="Keywords found in the job description but not the resume."
+        ...,
+        alias="missingKeywords",
+        description="Keywords found in the job description but not the resume.",
     )
 
     class Config:
@@ -311,7 +317,6 @@ class JobListingDetails(BaseModel):
         None,
         description="The complete, unprocessed job description text for use with AI features.",
     )
-
 
 
 class JobListingTextRequest(BaseModel):
