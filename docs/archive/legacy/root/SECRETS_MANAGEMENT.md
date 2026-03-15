@@ -344,7 +344,7 @@ git grep -i "sk-\|aiza\|gocsp" -- :!*.md :!*.txt
 
 #### 1. "Permission denied" accessing secrets
 
-**Cause**: Service account lacks proper permissions  
+**Cause**: Service account lacks proper permissions
 **Solution**:
 
 ```bash
@@ -356,7 +356,7 @@ gcloud secrets add-iam-policy-binding SECRET_NAME \
 
 #### 2. "Secret not found" in GitHub Actions
 
-**Cause**: Secret not set at correct environment level  
+**Cause**: Secret not set at correct environment level
 **Solution**:
 
 ```bash
@@ -369,7 +369,7 @@ gh secret list --repo okgoogle13/careercopilot --env staging
 
 #### 3. AWS SES email not sending
 
-**Cause**: Gmail not verified or sandbox mode  
+**Cause**: Gmail not verified or sandbox mode
 **Solution**:
 
 ```bash
@@ -382,7 +382,7 @@ aws ses request-production-access
 
 #### 4. "Invalid credentials" error
 
-**Cause**: Expired or rotated API keys  
+**Cause**: Expired or rotated API keys
 **Solution**:
 
 ```bash
@@ -446,6 +446,6 @@ python3 scripts/test-configuration.py
 
 ---
 
-**Last Updated**: 2025-01-29  
-**Maintained By**: CareerCopilot DevOps Team  
+**Last Updated**: 2025-01-29
+**Maintained By**: CareerCopilot DevOps Team
 **Version**: 2.0 (Consolidated)

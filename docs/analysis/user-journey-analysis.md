@@ -1,7 +1,7 @@
 # CareerCopilot — User Journey Analysis
 
-> **Generated:** 2026-03-09  
-> **Scope:** Onboarding, core resume/cover-letter/ATS flows, export  
+> **Generated:** 2026-03-09
+> **Scope:** Onboarding, core resume/cover-letter/ATS flows, export
 > **Diagram:** [`docs/diagrams/user-journey.mmd`](../diagrams/user-journey.mmd)
 
 ---
@@ -77,38 +77,38 @@
 ### 2.2 Identified Onboarding Weaknesses
 
 #### W1 — No value proposition before or during registration
-**Code location:** `Register.tsx`, `OnboardingPage.tsx`  
-**Diagram node:** `REGISTER`, `ONBOARDING`  
+**Code location:** `Register.tsx`, `OnboardingPage.tsx`
+**Diagram node:** `REGISTER`, `ONBOARDING`
 A new user who arrives at `/register` sees a form immediately but receives no explanation of *what CareerCopilot does*, *who it is for*, or *what they will achieve* by registering. The landing page has a hero, but after clicking "Register" the context vanishes entirely. The onboarding page title ("Choosing the Soil") and domain card labels use domain-specific metaphors that may confuse users unfamiliar with the Kerala Rage design vocabulary.
 
 #### W2 — No onboarding progress indicator
-**Code location:** `OnboardingPage.tsx`, `IngestionPage.tsx`, `Dashboard.tsx`  
-**Diagram nodes:** `ONBOARDING` → `INGEST` → `STAGE_COMP` → `DASHBOARD`  
+**Code location:** `OnboardingPage.tsx`, `IngestionPage.tsx`, `Dashboard.tsx`
+**Diagram nodes:** `ONBOARDING` → `INGEST` → `STAGE_COMP` → `DASHBOARD`
 There is no "Step 2 of 3" or progress stepper shown across the onboarding sequence. A user completing domain selection has no signal that uploading a resume is next, and someone on the ingestion page has no awareness of how many more steps remain before they reach the hub.
 
 #### W3 — IngestionPage has no fallback for skipping
-**Code location:** `IngestionPage.tsx`, routing in `App.tsx`  
-**Diagram nodes:** `INGEST`, `STAGE_COMP`  
+**Code location:** `IngestionPage.tsx`, routing in `App.tsx`
+**Diagram nodes:** `INGEST`, `STAGE_COMP`
 There is no "Skip for now" or "I'll add my resume later" option. If a user does not have a file available, they are blocked from reaching the Dashboard. The compliance note at the bottom of the page does not substitute for an escape hatch.
 
 #### W4 — Dashboard empty/cold-start state is not differentiated from active state
-**Code location:** `Dashboard.tsx` (Recent Synthesis grid, Metric bar)  
-**Diagram node:** `DASHBOARD`  
+**Code location:** `Dashboard.tsx` (Recent Synthesis grid, Metric bar)
+**Diagram node:** `DASHBOARD`
 The Dashboard renders mock/static data (calibration scores of 92, 85, 78, 88; "2m ago" timestamps) regardless of whether the user has any real data. A brand-new user who has just ingested their first resume sees the same layout as an experienced user. There is no empty state that explains the grid, no first-run checklist to guide the user to their first "aha moment", and no CTA pointing them specifically towards the most impactful next action.
 
 #### W5 — Sidebar navigation labels use internal jargon
-**Code location:** `frontend/src/layouts/Sidebar.tsx`  
-**Diagram node:** `SIDEBAR`  
+**Code location:** `frontend/src/layouts/Sidebar.tsx`
+**Diagram node:** `SIDEBAR`
 Navigation items such as "Opportunities" and "Asset Library" are not self-explanatory to a new user. The label "Analysis" does not communicate "ATS Score your resume against a job ad". First-time users have to explore to discover features.
 
 #### W6 — Cover letter and KSC generators are discovery-dead-ends
-**Code location:** `CoverLetterGenerator.tsx`, `KSCGenerator.tsx`  
-**Diagram nodes:** `CL`, `KSC`  
+**Code location:** `CoverLetterGenerator.tsx`, `KSCGenerator.tsx`
+**Diagram nodes:** `CL`, `KSC`
 Users reach the generators via the sidebar, but after generating a document there is no prompt to "Now run your ATS analysis" or "Save this to your Documents". Each tool is a standalone island with no suggested next step contextualising how the tools relate to each other.
 
 #### W7 — No analytics or funnel visibility
-**Code location:** `main.tsx` (Sentry only), no Segment/GA/Mixpanel events  
-**Diagram:** No telemetry nodes represented  
+**Code location:** `main.tsx` (Sentry only), no Segment/GA/Mixpanel events
+**Diagram:** No telemetry nodes represented
 Only Sentry error tracking is implemented. There are no custom analytics events for key activation milestones (domain selected, first resume uploaded, first ATS score run, first cover letter generated). Product teams cannot measure funnel drop-off or optimise the onboarding journey.
 
 ---
@@ -128,10 +128,10 @@ Only Sentry error tracking is implemented. There are no custom analytics events 
 
 ### 🔴 HIGH — H1: Welcome / Value-Proposition Screen
 
-**Area:** Onboarding flow  
-**Priority:** High  
-**Description:**  
-Insert a full-screen or modal welcome step immediately after the user completes registration (between `Register.tsx` and `OnboardingPage.tsx`) or embed it as the first card of `OnboardingPage.tsx`.  
+**Area:** Onboarding flow
+**Priority:** High
+**Description:**
+Insert a full-screen or modal welcome step immediately after the user completes registration (between `Register.tsx` and `OnboardingPage.tsx`) or embed it as the first card of `OnboardingPage.tsx`.
 
 Content:
 - Headline: *"Land the job you actually want."*
@@ -152,9 +152,9 @@ Content:
 
 ### 🔴 HIGH — H2: Onboarding Progress Stepper
 
-**Area:** Onboarding flow  
-**Priority:** High  
-**Description:**  
+**Area:** Onboarding flow
+**Priority:** High
+**Description:**
 Add a visible step indicator across the 3–4 onboarding screens (Welcome → Domain Selection → Resume Upload → Dashboard).
 
 Example copy:
@@ -173,9 +173,9 @@ Example copy:
 
 ### 🔴 HIGH — H3: Dashboard First-Run Checklist / Activation Checklist
 
-**Area:** Dashboard empty state / activation  
-**Priority:** High  
-**Description:**  
+**Area:** Dashboard empty state / activation
+**Priority:** High
+**Description:**
 Replace the static mock data grid on a new user's first visit with an activation checklist. After the user completes each item, mark it as done and surface the next action.
 
 Checklist items:
@@ -198,9 +198,9 @@ Show completion percentage (e.g. "2 of 4 complete").
 
 ### 🟡 MEDIUM — M1: IngestionPage "Skip for now" Escape Hatch
 
-**Area:** Onboarding flow  
-**Priority:** Medium  
-**Description:**  
+**Area:** Onboarding flow
+**Priority:** Medium
+**Description:**
 Add a secondary action beneath the upload form: *"I don't have my resume ready — skip for now →"*. Navigates directly to `/dashboard`. Persist a reminder banner on the dashboard prompting the user to complete ingestion.
 
 **Rationale:** Blocking users from reaching the dashboard until they upload a file creates a hard drop-off point. Some users may want to explore the tool before committing to the upload.
@@ -214,9 +214,9 @@ Add a secondary action beneath the upload form: *"I don't have my resume ready �
 
 ### 🟡 MEDIUM — M2: Helpful Empty States in Documents, Analysis, Applications
 
-**Area:** Empty states across feature pages  
-**Priority:** Medium  
-**Description:**  
+**Area:** Empty states across feature pages
+**Priority:** Medium
+**Description:**
 Each feature page (`/documents`, `/analysis`, `/tracker`) should show a purpose-built empty state when no data exists, rather than a blank page or generic "No items found" message.
 
 Examples:
@@ -234,9 +234,9 @@ Examples:
 
 ### 🟡 MEDIUM — M3: Contextual "Next Step" Prompts After AI Generation
 
-**Area:** AI Generation & Iteration → Export  
-**Priority:** Medium  
-**Description:**  
+**Area:** AI Generation & Iteration → Export
+**Priority:** Medium
+**Description:**
 After a user successfully generates a cover letter or KSC response, show a "What's next?" prompt linking to related actions:
 - After cover letter: *"Run an ATS check on your resume for this role →"* (links to `/analysis` pre-filled with the same job description).
 - After ATS analysis: *"Now generate a tailored cover letter →"* (links to `/cover-letter-generator` with job URL pre-filled).
@@ -252,9 +252,9 @@ After a user successfully generates a cover letter or KSC response, show a "What
 
 ### 🟡 MEDIUM — M4: Improved Sidebar Labels
 
-**Area:** Navigation  
-**Priority:** Medium  
-**Description:**  
+**Area:** Navigation
+**Priority:** Medium
+**Description:**
 Update sidebar navigation labels to plain-language descriptions:
 
 | Current | Proposed |
@@ -274,9 +274,9 @@ Update sidebar navigation labels to plain-language descriptions:
 
 ### 🟢 LOW — L1: Role / JTBD Self-Segmentation in Onboarding
 
-**Area:** Onboarding flow  
-**Priority:** Low  
-**Description:**  
+**Area:** Onboarding flow
+**Priority:** Low
+**Description:**
 Extend the domain selection step with a secondary segmentation question: *"What best describes your situation?"*
 - 🎓 Recent graduate entering the workforce
 - 🔄 Changing careers or sectors
@@ -296,9 +296,9 @@ Use the response to personalise dashboard copy, example job descriptions, and su
 
 ### 🟢 LOW — L2: Analytics Event Instrumentation
 
-**Area:** Telemetry  
-**Priority:** Low  
-**Description:**  
+**Area:** Telemetry
+**Priority:** Low
+**Description:**
 Add custom analytics events at key activation milestones. Minimum recommended events:
 
 | Event | Trigger |

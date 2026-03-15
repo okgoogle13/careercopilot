@@ -108,24 +108,24 @@ for commit_hash in $BACKEND_COMMITS; do
     commit_msg=$(git log -1 --format="%s" "$commit_hash")
     commit_date=$(git log -1 --format="%ci" "$commit_hash" | cut -d' ' -f1)
     commit_author=$(git log -1 --format="%an" "$commit_hash")
-    
+
     # Count backend files in this commit
     backend_files=$(git diff-tree --no-commit-id --name-only -r "$commit_hash" | grep -c "^backend/" || echo "0")
     total_files=$(git diff-tree --no-commit-id --name-only -r "$commit_hash" | wc -l)
-    
+
     # Store details
     commit_details[$commit_index]="$commit_hash|$commit_msg|$backend_files|$total_files"
-    
+
     # Display
     if [ "$backend_files" -eq "$total_files" ]; then
         indicator="🟢"  # Pure backend commit
     else
         indicator="🟡"  # Mixed commit
     fi
-    
+
     echo -e "$indicator ${CYAN}[$commit_index]${NC} ${commit_hash:0:8} - $commit_msg"
     echo -e "    📅 $commit_date | 👤 $commit_author | 📁 $backend_files/$total_files backend files"
-    
+
     commit_index=$((commit_index + 1))
 done
 
@@ -142,17 +142,17 @@ echo -e "${YELLOW}⏳ Generating patch files...${NC}"
 patch_index=1
 for commit_hash in $BACKEND_COMMITS; do
     patch_file="$PATCH_DIR/$(printf "%04d" $patch_index)-${commit_hash:0:8}.patch"
-    
+
     # Generate patch for backend files only from this commit
     git diff-tree -p "$commit_hash" -- backend/ > "$patch_file"
-    
+
     if [ -s "$patch_file" ]; then
         echo -e "  ✓ Created patch $patch_index: ${patch_file##*/}"
     else
         # Empty patch, remove it
         rm -f "$patch_file"
     fi
-    
+
     patch_index=$((patch_index + 1))
 done
 
@@ -185,11 +185,11 @@ for patch_file in "$PATCH_DIR"/*.patch; do
     if [ ! -f "$patch_file" ]; then
         continue
     fi
-    
+
     patch_name=$(basename "$patch_file")
     patch_num=$(echo "$patch_name" | cut -d'-' -f1)
     commit_short=$(echo "$patch_name" | cut -d'-' -f2 | cut -d'.' -f1)
-    
+
     # Find the original commit info
     commit_info=""
     for idx in "${!commit_details[@]}"; do
@@ -200,20 +200,20 @@ for patch_file in "$PATCH_DIR"/*.patch; do
             break
         fi
     done
-    
+
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo -e "${YELLOW}Patch #$patch_num: $commit_short${NC}"
     echo -e "Message: $commit_info"
     echo ""
     echo -e "Preview of changes:"
     echo -e "${BLUE}────────────────────────────────────────────────────────────────${NC}"
-    
+
     # Show a preview
     git apply --stat "$patch_file" 2>/dev/null || echo "  (Unable to generate stats)"
-    
+
     echo -e "${BLUE}────────────────────────────────────────────────────────────────${NC}"
     echo ""
-    
+
     # Ask user
     echo -e "Actions:"
     echo -e "  ${GREEN}[a]${NC} Apply this patch"
@@ -224,7 +224,7 @@ for patch_file in "$PATCH_DIR"/*.patch; do
     read -p "Choose action [a/s/v/q]: " -n 1 -r action
     echo
     echo
-    
+
     case "$action" in
         a|A)
             # Try to apply
@@ -285,7 +285,7 @@ for patch_file in "$PATCH_DIR"/*.patch; do
             echo "SKIPPED: $patch_name - $commit_info" >> "$LOG_FILE"
             ;;
     esac
-    
+
     echo ""
 done
 

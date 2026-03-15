@@ -144,7 +144,7 @@ If you prefer a global configuration:
    ```bash
    # macOS/Linux
    mkdir -p ~/.config/codex
-   
+
    # Windows
    mkdir %APPDATA%\codex
    ```
@@ -154,7 +154,7 @@ If you prefer a global configuration:
    ```bash
    # macOS/Linux
    cp .codex/config.toml ~/.config/codex/config.toml
-   
+
    # Windows
    copy .codex\config.toml %APPDATA%\codex\config.toml
    ```
@@ -322,6 +322,6 @@ If you prefer not to use the GitHub MCP or want to explore other options, note t
 
 ---
 
-**Last Updated**: 2026-02-14  
-**Issue Reference**: Persistent config issue re: codex cli mcp config  
+**Last Updated**: 2026-02-14
+**Issue Reference**: Persistent config issue re: codex cli mcp config
 **Status**: ✅ Ready for use

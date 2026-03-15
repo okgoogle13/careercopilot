@@ -39,7 +39,7 @@ read -p "Enter your GCP Project ID (or press Enter to skip): " GCP_PROJECT_ID
 if [ ! -z "$GCP_PROJECT_ID" ]; then
     echo "$GCP_PROJECT_ID" | gh secret set GCP_PROJECT_ID -R $REPO
     echo -e "${GREEN}✓ GCP_PROJECT_ID set${NC}"
-    
+
     echo ""
     echo -e "${YELLOW}Now we need the GCP Service Account Key (JSON)${NC}"
     echo "You can:"
@@ -47,7 +47,7 @@ if [ ! -z "$GCP_PROJECT_ID" ]; then
     echo "2. Grant 'Storage Admin' role for Container Registry access"
     echo ""
     read -p "Enter path to service account JSON file: " SA_KEY_PATH
-    
+
     if [ -f "$SA_KEY_PATH" ]; then
         gh secret set GCP_SA_KEY -R $REPO < "$SA_KEY_PATH"
         echo -e "${GREEN}✓ GCP_SA_KEY set${NC}"
@@ -69,14 +69,14 @@ read -p "Enter your Docker Hub username (or press Enter to skip): " DOCKERHUB_US
 if [ ! -z "$DOCKERHUB_USERNAME" ]; then
     echo "$DOCKERHUB_USERNAME" | gh secret set DOCKERHUB_USERNAME -R $REPO
     echo -e "${GREEN}✓ DOCKERHUB_USERNAME set${NC}"
-    
+
     echo ""
     echo -e "${YELLOW}Create a Docker Hub access token at:${NC}"
     echo "https://hub.docker.com/settings/security"
     echo ""
     read -s -p "Enter Docker Hub access token: " DOCKERHUB_TOKEN
     echo ""
-    
+
     if [ ! -z "$DOCKERHUB_TOKEN" ]; then
         echo "$DOCKERHUB_TOKEN" | gh secret set DOCKERHUB_TOKEN -R $REPO
         echo -e "${GREEN}✓ DOCKERHUB_TOKEN set${NC}"

@@ -39,7 +39,7 @@ I've moved all your servers to the **global configuration**:
 
 Now contains:
 - ✅ flash-sidekick
-- ✅ playwright  
+- ✅ playwright
 - ✅ docker
 - ✅ github + 5 GitHub HTTP servers
 

@@ -13,26 +13,26 @@ echo "🔄 Updating imports and component names..."
 update_file() {
   local file=$1
   local temp_file="${file}.tmp"
-  
+
   # Create a backup
   cp "$file" "${file}.bak"
-  
+
   # Process the file
   perl -p0e '
     # Update import paths
     s|@/components/(ui|electric)/|@/components/design-system/|g;
-    
+
     # Update import statements (remove Electric prefix)
     s/import \{ (\s*)Electric([A-Z][a-zA-Z0-9]*)(\s*)(,|\})/import { \1\2\3\4/g;
     s/import \{ (\s*)Electric([A-Z][a-zA-Z0-9]*)(\s+as\s+[^,}]+)(,|\})/import { \1\2\3\4/g;
-    
+
     # Update type imports
     s/import type \{ (\s*)Electric([A-Z][a-zA-Z0-9]*)(\s*)(,|\})/import type { \1\2\3\4/g;
-    
+
     # Update JSX tags
     s/<(\/?)Electric([A-Z][a-zA-Z0-9]*)(\s|>)/<\1\2\3/g;
   ' "$file" > "$temp_file"
-  
+
   # Only update if changes were made
   if ! cmp -s "$file" "$temp_file"; then
     mv "$temp_file" "$file"

@@ -30,8 +30,8 @@ export function IconBadge({
   return (
     <div
       className={`
-      ${sizeClasses[size]} ${background} 
-      rounded-full flex items-center justify-center 
+      ${sizeClasses[size]} ${background}
+      rounded-full flex items-center justify-center
       flex-shrink-0
       ${className}
     `}

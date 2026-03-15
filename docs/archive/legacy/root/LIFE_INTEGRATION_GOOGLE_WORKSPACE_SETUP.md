@@ -47,14 +47,14 @@ if not self.creds:
 async def process_job_clip(payload: JobClipRequest):
     # 1. Add job to queue (existing logic)
     job_queue.append(job_item)
-    
+
     # 2. Create Google Task (NEW)
     gw = GoogleWorkspaceService()
     await gw.create_task(
         title=f"Apply: New Opportunity via {payload.source}",
         notes=f"URL: {payload.url}\n\nUser Notes: {payload.notes}"
     )
-    
+
     # 3. Schedule Deep Work block (NEW)
     await gw.schedule_deep_work(
         summary=f"Application Prep: {payload.url[:50]}...",
@@ -186,15 +186,15 @@ curl -X POST http://localhost:8000/api/ingest/clip \
 ## Troubleshooting
 
 ### Issue: "Permission denied" error
-**Cause**: Service account doesn't have calendar access  
+**Cause**: Service account doesn't have calendar access
 **Fix**: Re-do Step 6 (Share calendar with service account email)
 
 ### Issue: Tasks not appearing
-**Expected**: Tasks are created under the service account, not your personal account  
+**Expected**: Tasks are created under the service account, not your personal account
 **Solution**: Use Google Tasks API to query service account tasks, or switch to OAuth for personal tasks
 
 ### Issue: "credentials.json not found" warning persists
-**Cause**: File not in project root  
+**Cause**: File not in project root
 **Fix**:
 ```bash
 cd /home/njd/careercopilot/careercopilot-1
@@ -203,7 +203,7 @@ ls credentials.json  # Should exist
 ```
 
 ### Issue: Calendar events in wrong timezone
-**Cause**: Server timezone mismatch  
+**Cause**: Server timezone mismatch
 **Fix**: Update `schedule_deep_work()` to use explicit timezone:
 ```python
 from zoneinfo import ZoneInfo
@@ -393,7 +393,7 @@ await gw.create_calendar_reminder(
 - ✅ **Non-Blocking**: Google API failures don't prevent job clipping
 - ✅ **Production Ready**: Exception handling and logging in place
 
-**Status**: ✅ **LIFE INTEGRATION MODULE ACTIVATED**  
+**Status**: ✅ **LIFE INTEGRATION MODULE ACTIVATED**
 **Credentials**: ⏳ **PENDING USER SETUP** (optional but recommended)
 
 ---
@@ -434,6 +434,6 @@ tail -f backend/logs/*.log | grep "Google"
 
 ---
 
-**Implementation Time**: ~20 minutes  
-**User Setup Time**: ~30 minutes (Google Cloud + credentials)  
+**Implementation Time**: ~20 minutes
+**User Setup Time**: ~30 minutes (Google Cloud + credentials)
 **Total Value**: Infinite (automation is priceless!) 🚀

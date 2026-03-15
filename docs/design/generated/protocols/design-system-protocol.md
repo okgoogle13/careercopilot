@@ -1,5 +1,5 @@
 # Design System Protocol
-    
+
 ## Source
 Based on: docs/design/KERALA_RAGE_BRAND_BRIEF.md
 

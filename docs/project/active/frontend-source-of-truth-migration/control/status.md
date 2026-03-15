@@ -14,6 +14,7 @@
   - `pytest tests/plans -q`
   - `node frontend/scripts/validate-governance-artifacts.mjs`
 - Gemini-style orchestration is adopted as a management overlay only: status, risks, sequencing, and escalation.
+- Blueprint updated on 2026-03-15 with a Target State Snapshot and an advisory-only protocol decision log entry (authority order unchanged).
 - Execution truth remains `control/blueprint.md` plus `control/workflow.md`.
 - `/tracker` now uses the canonical `applicationService` path instead of a mock-backed primary route owner.
 - Route-local migration gates now pass for `/tracker`:

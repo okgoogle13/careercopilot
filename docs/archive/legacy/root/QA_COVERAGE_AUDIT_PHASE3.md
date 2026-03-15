@@ -1,8 +1,8 @@
 # QA Coverage & Automation Audit Report
 ## One-Click Job Ingestion Feature (Phase 3)
 
-**Date**: 2026-01-01  
-**Lead QA Engineer**: Coverage Analysis  
+**Date**: 2026-01-01
+**Lead QA Engineer**: Coverage Analysis
 **Feature**: Job Clipping & Queue Visualization
 
 ---
@@ -163,7 +163,7 @@ test('should display job queue page', async ({ page }) => {
 // Scenario 2: External Link Click
 test('should open job URL in new tab', async ({ page }) => {
   // ... mock API ...
-  
+
   const [newPage] = await Promise.all([
     context.waitForEvent('page'),
     page.locator('a[target="_blank"]').first().click()
@@ -319,13 +319,13 @@ npx playwright test e2e/job_queue.spec.ts --headed
 cd backend
 ../.venv/bin/pytest --cov=app.api --cov-report=html
 
-# Frontend  
+# Frontend
 cd frontend
 npx vitest run --coverage --reporter=  html
 ```
 
 ---
 
-**Report Generated**: 2026-01-01T12:10:00+10:00  
-**QA Engineer**: Automated Coverage Analysis  
+**Report Generated**: 2026-01-01T12:10:00+10:00
+**QA Engineer**: Automated Coverage Analysis
 **Next Review**: After Phase 4 (JobScout Integration)

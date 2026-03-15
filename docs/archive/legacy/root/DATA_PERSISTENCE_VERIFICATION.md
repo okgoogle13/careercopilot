@@ -20,13 +20,13 @@ cd backend
 ### 2. Files Exist
 ```bash
 ls -lh backend/app/core/firebase_config.py
-ls -lh backend/app/services/job_store.py  
+ls -lh backend/app/services/job_store.py
 ls -lh backend/app/api/ingest.py
 ```
 **Expected:** All files exist
 
 - [ ] `firebase_config.py` exists
-- [ ] `job_store.py` exists  
+- [ ] `job_store.py` exists
 - [ ] `ingest.py` modified with Firestore
 
 ---

@@ -54,15 +54,15 @@ export function Sidebar() {
           bg-[var(--surface-container-low)] flex flex-col z-40
           transition-all duration-300 ease-in-out
           rounded-tr-[28px] rounded-br-[28px]
-          
+
           /* Mobile: Modal drawer */
           fixed inset-y-0 left-0
           ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
           w-[280px]
-          
+
           /* Tablet: Navigation Rail */
           md:relative md:translate-x-0 md:w-[72px]
-          
+
           /* Desktop: Standard Drawer */
           lg:w-[280px]
         `}

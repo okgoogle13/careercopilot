@@ -1,6 +1,6 @@
 # CRITICAL BUG FIXES - Navigation & Design
 
-**Date**: January 6, 2026 08:37 UTC+11  
+**Date**: January 6, 2026 08:37 UTC+11
 **Status**: ✅ FIXED
 
 ---
@@ -129,12 +129,12 @@ className="bg-primary-container text-on-primary-container"  // Sage button
   --color-surface-container-high: var(--sys-color-surface-container-high);
   --color-surface-container-highest: var(--sys-color-surface-container-highest);
   --color-surface-container-lowest: var(--sys-color-surface-container-lowest);
-  
+
   --color-error: var(--sys-color-error);
   --color-error-container: var(--sys-color-error-container);
   --color-on-error: var(--sys-color-on-error);
   --color-on-error-container: var(--sys-color-on-error-container);
-  
+
   --color-warning: var(--sys-color-warning);
   --color-warning-container: var(--sys-color-warning-container);
   --color-on-warning: var(--sys-color-on-warning);
@@ -209,10 +209,10 @@ className="bg-primary-container text-on-primary-container"  // Sage button
 ## 🚀 **HOW TO TEST**
 
 1. **Open browser**: `http://localhost:5173/dashboard?demo=true`
-2. **Check sidebar**: 
+2. **Check sidebar**:
    - ✅ Sage green pill on "Dashboard"
    - ✅ All nav items visible
-3. **Check hero**: 
+3. **Check hero**:
    - ✅ "NISHANT" is lavender/purple
    - ✅ Plant background visible
 4. **Check buttons**:

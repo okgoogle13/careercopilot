@@ -24,4 +24,3 @@
 “Review Genkit migration queue and confirm schema coverage. Use filesystem MCP to read:
 `docs/development/GENKIT_MIGRATION_QUEUE.md` and sample files in `backend/app/core/ai/`.
 Return: missing schemas + proposed flow targets.”
-

@@ -31,7 +31,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     ANTIGRAVITY_CONFIG_DIR="$HOME/Library/Application Support/Google/Antigravity"
     # Antigravity sometimes uses this fallback on Mac
     ANTIGRAVITY_FALLBACK="$HOME/.gemini/antigravity"
-    
+
     CURSOR_CONFIG="$HOME/Library/Application Support/Cursor/User/globalStorage/cursor.mcp/mcp_config.json"
 else
     # Linux / Chromebook Paths
@@ -202,7 +202,7 @@ if __name__ == "__main__":
             line = sys.stdin.readline()
             if not line: break
             resp = handle_request(server, line)
-            if resp: 
+            if resp:
                 print(json.dumps(resp))
                 sys.stdout.flush()
         except: break

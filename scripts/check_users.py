@@ -17,14 +17,14 @@ def check_users():
     print("=" * 60)
     print("Checking for existing users...")
     print("=" * 60)
-    
+
     try:
         # Create session
         db: Session = db_config.SessionLocal()
-        
+
         # Query all users
         users = db.query(User).all()
-        
+
         if not users:
             print("\n❌ No users found in database")
             print("\nYou need to register a new account:")
@@ -39,27 +39,21 @@ def check_users():
                 print(f"  ID: {user.id}")
                 print(f"  Created: {getattr(user, 'created_at', 'N/A')}")
                 print()
-            
+
             print("\n💡 Note: The backend currently accepts ANY password for existing users")
             print("   (temporary development bypass)")
             print("\nYou can login with:")
             print(f"  Email: {users[0].email}")
             print("  Password: (any password will work)")
-        
+
         db.close()
-        
+
     except Exception as e:
         print(f"\n❌ Error checking database: {e}")
         print("\nDatabase might not be initialized. Try running the backend first.")
         return False
-    
+
     return True
 
 if __name__ == "__main__":
     check_users()
-
-
-
-
-
-

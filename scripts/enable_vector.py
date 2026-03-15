@@ -12,10 +12,10 @@ def enable_vector_extension():
     if not db_url:
         print("Error: DATABASE_URL not found in .env")
         sys.exit(1)
-        
+
     print(f"Connecting to database...")
     engine = create_engine(db_url)
-    
+
     try:
         with engine.connect() as connection:
             print("Enabling pgvector extension...")

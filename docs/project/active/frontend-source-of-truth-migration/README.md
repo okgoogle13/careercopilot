@@ -3,9 +3,11 @@
 This folder is the canonical home for the active PR126 migration control system.
 
 Start here:
+- `AGENTS.md` — migration-specific agent guide (PR126 execution rules)
 - `control/blueprint.md` — execution blueprint and dependency graph
 - `control/status.md` — current phase, active blockers, next actions
 - `control/workflow.md` — deterministic script and gate sequence
+- `control/pm/dashboard.md` — executive snapshot (phase, gates, blockers, next steps)
 - `control/tracker-step-3a-execution-packet.md` — first `/tracker` stub-generation packet
 - `control/route-matrix.json` — route ownership truth for migration work
 - `control/gap-map.json` — backend capability to frontend surface mapping
