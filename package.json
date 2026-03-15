@@ -74,7 +74,16 @@
     "docs": "jsdoc -c jsdoc.config.json",
     "docs:serve": "serve docs/api",
     "docs:clean": "rimraf docs/api",
-    "docs:build": "yarn docs:clean && yarn docs"
+    "docs:build": "yarn docs:clean && yarn docs",
+    "scan:routes": "npx tsx tools/scripts/scan-routes.ts",
+    "scan:screens": "npx tsx tools/scripts/scan-screens.ts",
+    "scan:api": "npx tsx tools/scripts/scan-api-usage.ts",
+    "scan:endpoints": "python3 tools/scripts/scan-endpoints.py",
+    "scan:all": "npm run scan:routes && npm run scan:screens && npm run scan:api && npm run scan:endpoints && npx tsx tools/scripts/detect-orphans.ts",
+    "truth:orphans": "npx tsx tools/scripts/detect-orphans.ts",
+    "truth:check": "npx tsx tools/ci/check-all.ts",
+    "truth:routes": "npx tsx tools/ci/check-route-integrity.ts",
+    "truth:screens": "npx tsx tools/ci/check-screen-pairs.ts"
   },
   "config": {
     "commitizen": {
