@@ -99,21 +99,24 @@ cd frontend && yarn test:e2e
   - **STRICT ZERO-FLORA LOCKDOWN**: No flora, no Australian endemic species, no gum leaves
   - No bureaucratic motifs (passports, borders, visas, government seals)
   - No perfect geometry (`border-radius: 50%` banned); use KR Solidarity archetypes and `shape.*` tokens only
-- **Components** (reference implementations):
-  - `Strike` (primary action archetype; formerly KeralaRageButton / Pebble)
-  - `Placard` (content container; formerly ActionCard / Stone)
-  - `Scaffold` (layout panels; formerly Slab / Cabinet)
-  - `ScaffoldInput` (form inputs; formerly Lens)
-  - `March` (select / flow elements; formerly Jar)
+- **Components** (reference implementations; canonical names):
+  - `Strike` (primary action)
+  - `Placard` (content container)
+  - `Scaffold` (layout panels)
+  - `ScaffoldInput` (form inputs)
+  - `March` (select / flow elements)
   - `Megaphone` (modal / announcement)
   - `NativeAnchor` (symbolic anchor)
-  - **Deprecated/Legacy (do not use):** `Pebble`, `Stone`, `Slab`, `Jar`, `Cabinet`, `Lens`, `Signal`, `HaloPulses`
+- **Deprecated Names / Compat Aliases (do not use in new code)**:
+  - Component names: `Pebble`, `Stone`, `Slab`, `Jar`, `Cabinet`, `Lens`, `Signal`, `HaloPulses`
+  - Shape aliases (still present in `frontend/src/design/styles/design-tokens.css` for compat): `--sys-shape-pebble01`, `--sys-shape-stone01`, `--sys-shape-slab01`, `--sys-shape-pebbleSurge01`, `--sys-shape-scaffoldSlab01`
+  - Shape library compat aliases: see the `=== DEPRECATED v6.0 COMPAT ALIASES ===` block in `frontend/src/design/styles/design-tokens.css`
 
 ## Key Technologies
 
 | Layer                  | Tech                                                          | Rationale                                                  |
 | ---------------------- | ------------------------------------------------------------- | ---------------------------------------------------------- |
-| AI Orchestration       | Google Genkit + `app.core.genkit_init`                         | Standardized flow wiring with fallback to google-generativeai |
+| AI Orchestration       | Google Genkit + `app.core.genkit_init`                         | Standardized flow wiring via Genkit GoogleAI plugin (treat google-generativeai fallback as disabled/unreliable) |
 | LLM – High Volume      | Gemini Flash (runtime-configured; no fallback)                 | Fast generation and ATS tasks                              |
 | LLM – Complex Analysis | Gemini Pro (runtime-configured; no fallback)                   | Deep reasoning and analysis                                |
 | Document Parsing       | pdfminer.six + python-docx (`IngestionService`)                | PDF/DOCX ingestion and chunking                            |
@@ -440,7 +443,7 @@ firebase emulators:start
 
 ### Mocking & Offline Testing
 
-- Many Python tests mock Genkit or `gemini_pro`. When adding tests, mock external Genkit calls (see tests under `backend/app/tests/genkit_flows/`).
+- Many Python tests mock Genkit model clients/providers. When adding tests, mock external Genkit calls (see tests under `backend/app/tests/genkit_flows/`).
 - Use `cached_ai_operations.py` helpers in tests where Genkit is unavailable to avoid hitting live APIs.
 
 ## Performance Targets

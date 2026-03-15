@@ -24,7 +24,7 @@
     {
       "milestone_id": "M4",
       "name": "Ingestion Route Owns Smart Ingestion Pipeline",
-      "status": "PENDING",
+      "status": "COMPLETE",
       "assigned_to": "frontend",
       "dependencies": ["M2"]
     },
@@ -41,6 +41,13 @@
       "status": "PENDING",
       "assigned_to": "orchestrator",
       "dependencies": ["M3", "M4", "M5"]
+    },
+    {
+      "milestone_id": "M7",
+      "name": "Step 6 cleanup pairing (Workbenches and Finalization screens)",
+      "status": "IN_PROGRESS",
+      "assigned_to": "frontend",
+      "dependencies": ["M3"]
     }
   ]
 }

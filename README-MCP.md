@@ -10,7 +10,7 @@
 | Requirement | Notes |
 |---|---|
 | Python 3.10+ | Used by all custom servers |
-| Node.js 18+ | Used by npm-based servers (`filesystem`, `git`, `github`) |
+| Node.js 18+ | Optional: used by npm-based servers (`filesystem`, `git`, `github`) if enabled |
 | Project virtualenv | `pip install -r servers/requirements.txt` |
 | Environment variables | See section 2 |
 
@@ -85,9 +85,9 @@ Expected output:
 | `vision-scorer-mcp` | M3 Expressive visual scoring |
 | `perplexity` | Real-time web research (4 tools) |
 | `task-router` | Multi-agent task queue |
-| `filesystem` | Project file read/write |
-| `git` | Git operations |
-| `github` | GitHub API |
+| `filesystem` | Project file read/write (Python fallback; npm optional) |
+| `git` | Git operations (Python fallback; npm optional) |
+| `github` | GitHub API (Python fallback; npm optional) |
 
 Full tool catalog: `docs/MCP_SERVER_REGISTRY.md`
 

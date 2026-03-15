@@ -1,9 +1,13 @@
-import { Calendar, Download, FileText, Search } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Calendar, Download, FileText, Search, X } from 'lucide-react';
 import { useState } from 'react';
 
 import { PageHeader } from '../../components/shared/PageHeader';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { exportToPdf } from '../../utils/exportEngine';
+import { DocumentWorkbench } from '../../screens/08_workbench/DocumentWorkbench';
+import { DocumentRedlineUploadPanel } from './components/DocumentRedlineUploadPanel';
+import { TrackedChangesWorkspace } from './components/TrackedChangesWorkspace';
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -20,6 +24,11 @@ export interface Document {
 }
 
 export type DocumentTab = 'all' | 'resumes' | 'covers' | 'ksc';
+
+interface RedlineResult {
+  blob: Blob;
+  filename: string;
+}
 
 // ============================================================================
 // MOCK DATA - Replace with API calls
@@ -106,12 +115,22 @@ function filterDocuments(documents: Document[], tab: DocumentTab): Document[] {
 
 export function Documents() {
   const [activeTab, setActiveTab] = useState<DocumentTab>('all');
+  const [redlineTarget, setRedlineTarget] = useState<Document | null>(null);
+  const [redlineResult, setRedlineResult] = useState<RedlineResult | null>(null);
+
   const filteredDocs = filterDocuments(DOCUMENTS, activeTab);
+
+  const handleRedlineSuccess = (blob: Blob, filename: string) => {
+    setRedlineResult({ blob, filename });
+  };
+
+  const handleOverlayClose = () => {
+    setRedlineTarget(null);
+    setRedlineResult(null);
+  };
 
   return (
     <div className="p-6 md:p-12 max-w-7xl relative animate-in fade-in zoom-in-95 duration-500 ease-spring">
-      {/* KeralaRage Motif Decoration - Bottom Right Corner */}
-
       <div className="relative z-10">
         {/* Header */}
         <PageHeader
@@ -161,6 +180,7 @@ export function Documents() {
               <DocumentCard
                 key={doc.id}
                 document={doc}
+                onRedline={() => setRedlineTarget(doc)}
               />
             ))}
           </div>
@@ -174,6 +194,72 @@ export function Documents() {
           />
         )}
       </div>
+
+      {/* Redline Overlay */}
+      <AnimatePresence>
+        {redlineTarget && (
+          <motion.div
+            key="redline-overlay"
+            data-testid="redline-overlay"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 16 }}
+            transition={{ type: 'spring', stiffness: 420, damping: 30 }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 50,
+              backgroundColor: 'var(--sys-color-charcoalBackground-base)',
+              opacity: 0.95,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '1.5rem',
+            }}
+          >
+            <div style={{ width: '100%', maxWidth: '720px', maxHeight: '90vh', overflowY: 'auto' }}>
+              <DocumentWorkbench
+                title="Redline Workspace"
+                subtitle={redlineTarget.name}
+              >
+                {/* Close button */}
+                <button
+                  aria-label="Close redline panel"
+                  onClick={handleOverlayClose}
+                  style={{
+                    position: 'absolute',
+                    top: '1rem',
+                    right: '1rem',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: 'var(--sys-color-worker-ash-base)',
+                    zIndex: 20,
+                  }}
+                  data-testid="redline-close-btn"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+
+                {redlineResult ? (
+                  <TrackedChangesWorkspace
+                    blob={redlineResult.blob}
+                    filename={redlineResult.filename}
+                    onReset={() => setRedlineResult(null)}
+                  />
+                ) : (
+                  <DocumentRedlineUploadPanel
+                    documentId={redlineTarget.id}
+                    documentName={redlineTarget.name}
+                    onCancel={handleOverlayClose}
+                    onSuccess={handleRedlineSuccess}
+                  />
+                )}
+              </DocumentWorkbench>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -204,19 +290,24 @@ function TabButton({ label, isActive, onClick }: TabButtonProps) {
 
 interface DocumentCardProps {
   document: Document;
+  onRedline: () => void;
 }
 
-function DocumentCard({ document }: DocumentCardProps) {
+function DocumentCard({ document, onRedline }: DocumentCardProps) {
   const handleDownload = async (e: React.MouseEvent) => {
     e.stopPropagation();
     try {
-      // Generate unique ID for the document card
       const elementId = `document-card-${document.id}`;
       const fileName = `${document.name.replace(/\s+/g, '_')}.pdf`;
       await exportToPdf(elementId, fileName);
     } catch (error) {
       console.error('Failed to download PDF:', error);
     }
+  };
+
+  const handleRedlineClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onRedline();
   };
 
   return (
@@ -235,13 +326,28 @@ function DocumentCard({ document }: DocumentCardProps) {
             {document.date}
           </span>
         </div>
-        <button
-          onClick={handleDownload}
-          className="p-2 rounded-pebble bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary transition-all opacity-0 group-hover:opacity-100"
-          title="Download as PDF"
-        >
-          <Download className="w-4 h-4" />
-        </button>
+        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          <button
+            onClick={handleRedlineClick}
+            className="px-2 py-1 rounded-pebble text-xs font-medium transition-all"
+            style={{
+              backgroundColor: 'var(--sys-color-charcoalBackground-steps-3)',
+              color: 'var(--sys-color-inkGold-base)',
+              border: '1px solid var(--sys-color-inkGold-base)',
+            }}
+            title="Open Redline Workspace"
+            data-testid={`redline-btn-${document.id}`}
+          >
+            Redline
+          </button>
+          <button
+            onClick={handleDownload}
+            className="p-2 rounded-pebble bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary transition-all"
+            title="Download as PDF"
+          >
+            <Download className="w-4 h-4" />
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import {
   Navigate,
   Outlet,
@@ -7,17 +7,18 @@ import {
   BrowserRouter as Router,
   Routes,
   useLocation,
+  useNavigate,
 } from 'react-router-dom';
 import { Toaster } from 'sonner';
 const texturePattern =
   '/assets/kr-solidarity/texture/kr-solidarity__substrate__landmark--melbourne-laneway--v1.png';
 import './design/styles/design-tokens.css';
-import { TokenTest } from './components/debug/TokenTest';
+import { KrDarkDock } from './layouts/KrDarkShell/components/KrDarkDock';
 import { getModeForRoute } from './config/routeModeMap';
 import { useAuth } from './context/AuthContext';
 import { AssetLibrary } from './features/analysis/AssetLibrary';
-import { ApplicationTracker } from './features/applications/ApplicationTracker';
 import { CoverLetterGenerator } from './features/applications/CoverLetterGenerator';
+import { KanbanTracker } from './screens/07_kanban/KanbanTracker';
 import { Login } from './features/auth/Login';
 import { Register } from './features/auth/Register';
 import { Dashboard } from './features/dashboard/Dashboard';
@@ -30,20 +31,13 @@ import { WelcomeScreen } from './features/onboarding/WelcomeScreen';
 import { Opportunities } from './features/opportunities/Opportunities';
 import { ProfileView } from './features/profile/components/ProfileView';
 import { Settings } from './features/settings/Settings';
-import { StyleGuide } from './features/style-guide/StyleGuide';
 import { Layout } from './layouts/Layout';
 import { AnalysisPage } from './pages/AnalysisPage';
-import { IngestionPage } from './pages/IngestionPage';
-import { JobQueue } from './pages/JobQueue';
+const SmartIngestion = lazy(() => import('./features/ingestion/SmartIngestion'));
+import { JobQueue } from './features/jobs/JobQueue';
 import { ApplyQuick } from './pages/ApplyQuick';
-import { AuthModal } from './components/phase3-batch2/AuthModal';
-import { HeroLanding } from './components/phase3-batch2/HeroLanding';
-import { OnboardFlow } from './components/phase3-batch2/OnboardFlow';
-import { AnalysisWorkbench } from './components/phase3-batch3/AnalysisWorkbench';
-import { DashboardOverview } from './components/phase3-batch3/DashboardOverview';
 import { useModeStore } from './stores/useModeStore';
 import { useUserStore } from './stores/userStore';
-import DesignSidekick from './features/design-sidekick/DesignSidekick';
 
 /**
  * ModeSync Component
@@ -120,12 +114,42 @@ const ProtectedLayout = () => {
 };
 
 // Thin authenticated shell for migrated routes that must not inherit the legacy sidebar.
+// Includes the KrDarkDock for navigation.
 const MigratedRouteLayout = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleViewChange = (view: string) => {
+    // Basic view-to-route mapper for the dock
+    const viewMap: Record<string, string> = {
+      'KrDark-landing': '/',
+      auth: '/login',
+      'KrDark-kanban': '/tracker',
+      'lab-dashboard': '/dashboard',
+      'lab-analysis': '/analysis',
+      'KrDark-ingestion': '/career/ingest',
+    };
+    const route = viewMap[view] || '/dashboard';
+    navigate(route);
+  };
+
+  // Determine current view from pathname
+  const getCurrentView = () => {
+    if (location.pathname === '/tracker') return 'KrDark-kanban';
+    if (location.pathname === '/career/ingest') return 'KrDark-ingestion';
+    if (location.pathname.startsWith('/analysis')) return 'lab-analysis';
+    if (location.pathname === '/dashboard') return 'lab-dashboard';
+    if (location.pathname === '/') return 'KrDark-landing';
+    return 'lab-dashboard';
+  };
 
   return (
-    <div className="min-h-screen bg-surface text-on-surface">
-      <AnimatePresence>
+    <div className="min-h-screen bg-surface text-on-surface relative">
+      <KrDarkDock
+        currentView={getCurrentView()}
+        onViewChange={handleViewChange}
+      />
+      <AnimatePresence mode="wait">
         <motion.div
           key={location.pathname}
           initial={{ opacity: 0, y: 24 }}
@@ -234,34 +258,6 @@ export default function App() {
             element={<Register />}
           />
           <Route
-            path="/design-sidekick"
-            element={<DesignSidekick />}
-          />
-          <Route
-            path="/style-guide"
-            element={<StyleGuide />}
-          />
-          <Route
-            path="/kr/landing"
-            element={<HeroLanding className="m-6" />}
-          />
-          <Route
-            path="/kr/auth"
-            element={<AuthModal className="m-6" />}
-          />
-          <Route
-            path="/kr/onboarding"
-            element={<OnboardFlow className="m-6" />}
-          />
-          <Route
-            path="/kr/analysis"
-            element={<AnalysisWorkbench className="m-6" />}
-          />
-          <Route
-            path="/kr/dashboard"
-            element={<DashboardOverview className="m-6" />}
-          />
-          <Route
             path="*"
             element={<NotFound />}
           />
@@ -272,7 +268,7 @@ export default function App() {
           <Route element={<MigratedRouteLayout />}>
             <Route
               path="/tracker"
-              element={<ApplicationTracker />}
+              element={<KanbanTracker />}
             />
           </Route>
 
@@ -323,7 +319,7 @@ export default function App() {
             />
             <Route
               path="/career/ingest"
-              element={<IngestionPage />}
+              element={<SmartIngestion />}
             />
             <Route
               path="/job-queue"
@@ -332,10 +328,6 @@ export default function App() {
             <Route
               path="/apply/quick"
               element={<ApplyQuick />}
-            />
-            <Route
-              path="/test-tokens"
-              element={<TokenTest />}
             />
           </Route>
         </Route>

@@ -73,20 +73,29 @@ fi
 INCLUDE_EXTS=(--include="*.tsx" --include="*.ts" --include="*.css" --include="*.scss")
 
 # --- Run grep scans ---
+ANY_TRUNCATED=false
 run_grep() {
   local pattern="$1"
-  grep -rn -E "$pattern" "${SCAN_DIRS[@]}" "${INCLUDE_EXTS[@]}" 2>/dev/null | head -100 || true
+  local output
+  # Fetch 201 lines to detect if truncation occurred
+  output=$(grep -rn -E "$pattern" "${SCAN_DIRS[@]}" "${INCLUDE_EXTS[@]}" 2>/dev/null | head -201 || true)
+  if [[ $(echo "$output" | grep -c "^") -gt 200 ]]; then
+    ANY_TRUNCATED=true
+    echo "$output" | head -200
+  else
+    echo "$output"
+  fi
 }
 
 HARDCODED_COLORS=$(run_grep '#[0-9a-fA-F]{3,8}\b|rgb\s*\(|rgba\s*\(|hsl\s*\(|hsla\s*\(')
 DEPRECATED_TOKENS=$(run_grep 'labWrenMetalBlue|GumLeafGreen|WattleGold|inkGreen')
-BANNED_ARCHETYPES=$(run_grep '\b(Jar|Cabinet|Seed|Leaf)\b')
-FORBIDDEN_FONTS=$(run_grep "font-family\s*:\s*['\"]?(Inter|Roboto|Arial)['\"]?")
+BANNED_ARCHETYPES=$(run_grep '<(Jar|Cabinet|Seed|Leaf)[ />]|className=["'\''][^"\'']*\b(Jar|Cabinet|Seed|Leaf)\b')
+FORBIDDEN_FONTS=$(run_grep "font-family\s*:\s*['\"]?(Inter|Roboto|Arial)['\"]?|font-(inter|roboto|arial)\b")
 SCAN_DIRS_STR=$(IFS='|'; echo "${SCAN_DIRS[*]}")
 
 # Export for Python subprocess
 export HARDCODED_COLORS DEPRECATED_TOKENS BANNED_ARCHETYPES FORBIDDEN_FONTS
-export TARGET TIMESTAMP SCAN_DIRS_STR
+export TARGET TIMESTAMP SCAN_DIRS_STR ANY_TRUNCATED
 
 # --- Parse hits into JSON violations and emit report ---
 python3 - <<'PYEOF'
@@ -121,12 +130,14 @@ status = "fail" if violations else "pass"
 route = os.environ.get("TARGET", "")
 timestamp = os.environ.get("TIMESTAMP", "")
 scan_dirs = [d for d in os.environ.get("SCAN_DIRS_STR", "").split("|") if d]
+truncated = os.environ.get("ANY_TRUNCATED", "false") == "true"
 
 result = {
     "gate": "token-enforcement",
     "route": route,
     "timestamp": timestamp,
     "status": status,
+    "truncated": truncated,
     "files_scanned": scan_dirs,
     "violation_count": len(violations),
     "violations": violations,

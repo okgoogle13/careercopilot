@@ -97,8 +97,9 @@ def probe_server(server_name: str, server_def: dict, timeout: int = 8) -> tuple[
     if not command:
         return False, "No command specified"
 
-    # Resolve ${workspaceFolder} tokens in args
+    # Resolve ${workspaceFolder} tokens in command/args
     root = _project_root()
+    command = command.replace("${workspaceFolder}", str(root))
     resolved_args = [a.replace("${workspaceFolder}", str(root)) for a in args]
 
     # Build environment: inherit current env, apply overrides
@@ -107,6 +108,12 @@ def probe_server(server_name: str, server_def: dict, timeout: int = 8) -> tuple[
         resolved = re.sub(r"\$\{(\w+)\}", lambda m: os.environ.get(m.group(1), ""), val)
         if resolved:
             env[key] = resolved
+
+    # npx-based servers often take longer on first run (package download / cache warmup).
+    cmd_name = Path(command).name
+    effective_timeout = timeout
+    if cmd_name == "npx":
+        effective_timeout = max(timeout, 30)
 
     # MCP initialize request
     init_msg = (
@@ -145,7 +152,7 @@ def probe_server(server_name: str, server_def: dict, timeout: int = 8) -> tuple[
 
             reader = threading.Thread(target=_read_line, daemon=True)
             reader.start()
-            reader.join(timeout=timeout)
+            reader.join(timeout=effective_timeout)
         finally:
             proc.kill()
             proc.wait()
