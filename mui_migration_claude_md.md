@@ -49,8 +49,8 @@ const createSemanticPalette = (mode: 'light' | 'dark') => ({
     dark: designTokens.colors.action.secondaryHover
   },
   background: {
-    default: mode === 'light' 
-      ? designTokens.colors.bg.canvas 
+    default: mode === 'light'
+      ? designTokens.colors.bg.canvas
       : designTokens.colors.bg.canvasDark,
     paper: mode === 'light'
       ? designTokens.colors.bg.surface
@@ -86,7 +86,7 @@ const typography: ThemeOptions['typography'] = {
 
 const spacing = (factor: number) => designTokens.spacing.base * factor;
 
-export const createCareerCopilotTheme = (mode: 'light' | 'dark') => 
+export const createCareerCopilotTheme = (mode: 'light' | 'dark') =>
   createTheme({
     palette: {
       mode,
@@ -136,7 +136,7 @@ import { useFeatureFlag } from './hooks/useFeatureFlag';
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const isMuiEnabled = useFeatureFlag('mui-migration');
-  
+
   const theme = darkMode ? darkTheme : lightTheme;
 
   return (
@@ -209,10 +209,10 @@ function App() {
 import { AppBar, Toolbar, IconButton, Box } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 
-<AppBar 
-  position="static" 
+<AppBar
+  position="static"
   elevation={1}
-  sx={{ 
+  sx={{
     bgcolor: 'background.paper',
     borderBottom: 1,
     borderColor: 'divider'
@@ -237,7 +237,7 @@ import { Menu as MenuIcon } from '@mui/icons-material';
 ```typescript
 // Before: Tailwind form
 <div className="space-y-4">
-  <input 
+  <input
     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
     placeholder="Enter text"
   />
@@ -279,7 +279,7 @@ import { ThemeProvider } from '@mui/material';
 import { lightTheme } from '../../theme/theme';
 import { Navbar } from '../Navbar';
 
-const renderWithTheme = (component: React.ReactElement) => 
+const renderWithTheme = (component: React.ReactElement) =>
   render(
     <ThemeProvider theme={lightTheme}>
       {component}
@@ -289,7 +289,7 @@ const renderWithTheme = (component: React.ReactElement) =>
 describe('Navbar Component', () => {
   it('renders menu button with correct accessibility attributes', () => {
     renderWithTheme(<Navbar />);
-    
+
     const menuButton = screen.getByTestId('nav-menu-button');
     expect(menuButton).toBeInTheDocument();
     expect(menuButton).toHaveAttribute('aria-label', 'menu');
@@ -297,7 +297,7 @@ describe('Navbar Component', () => {
 
   it('applies theme colors correctly', () => {
     renderWithTheme(<Navbar />);
-    
+
     const appBar = screen.getByRole('banner');
     expect(appBar).toHaveStyle({
       backgroundColor: lightTheme.palette.background.paper
@@ -354,7 +354,7 @@ npm run test:a11y
 
 # Manual testing checklist:
 # • Keyboard navigation works for all interactive elements
-# • Screen reader announces component states correctly  
+# • Screen reader announces component states correctly
 # • Color contrast meets WCAG AA standards (4.5:1)
 # • Focus indicators are visible and clear
 # • Form labels are properly associated
@@ -369,7 +369,7 @@ npm run lint:fix
 npm run type-check
 npm run test:unit
 
-# Post-migration validation  
+# Post-migration validation
 npm run build
 npm run test:e2e
 npm run bundle:analyze
@@ -382,7 +382,7 @@ export const useFeatureFlag = (flag: string): boolean => {
   const flags = {
     'mui-migration': process.env.REACT_APP_ENABLE_MUI === 'true'
   };
-  
+
   return flags[flag] ?? false;
 };
 
@@ -390,7 +390,7 @@ export const useFeatureFlag = (flag: string): boolean => {
 // .env.development
 REACT_APP_ENABLE_MUI=true
 
-// .env.production  
+// .env.production
 REACT_APP_ENABLE_MUI=false
 ```
 

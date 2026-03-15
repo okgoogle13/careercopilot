@@ -41,7 +41,7 @@ def create_skill_package(skill_dir: Path, output_dir: Path):
                             # Exclude hidden files
                             if file.startswith('.'):
                                 continue
-                            
+
                             file_path = Path(root) / file
                             archive_path = file_path.relative_to(skill_dir)
                             skill_zip.write(file_path, arcname=archive_path)

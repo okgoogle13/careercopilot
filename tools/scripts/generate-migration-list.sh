@@ -24,10 +24,10 @@ find "$COMPONENTS_DIR" -name "*.tsx" \
 
   # Get relative path from components directory
   rel_path="${file#$COMPONENTS_DIR/}"
-  
+
   # Count lines
   lines=$(wc -l < "$file")
-  
+
   # Categorize by size
   if [ "$lines" -lt 100 ]; then
     echo "$rel_path" >> "$OUTPUT_SIMPLE"

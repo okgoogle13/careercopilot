@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import List
 
-# We import the canonical MasterCareerProfile as CareerProfile 
+# We import the canonical MasterCareerProfile as CareerProfile
 # from the core application models to unify both front and back end Genkit flows.
 from app.schemas.career_master import CareerProfile, CareerDatabase
 

@@ -473,4 +473,3 @@ pip install google-generativeai Pillow
 **Output:** Manifest-ready JSON + integration documentation
 
 **Next:** Run `python orchestrate_kr_solidarity_workflow.py [image/dir/zip]`
-

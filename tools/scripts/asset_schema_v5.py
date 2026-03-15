@@ -57,11 +57,11 @@ LAYER_DEFINITIONS = {
 def detect_aspect_ratio(filename: str, category: str = None) -> str:
     """
     Detect aspect ratio from filename or infer from category.
-    
+
     Returns: "1:1", "3:4", "16:9", or "2:1"
     """
     lower = filename.lower()
-    
+
     # Explicit markers in filename
     if "paint-splash" in lower or "banner" in lower:
         return "2:1"
@@ -69,7 +69,7 @@ def detect_aspect_ratio(filename: str, category: str = None) -> str:
         return "16:9"
     if "portrait" in lower and "3-4" not in lower:
         return "3:4"
-    
+
     # Category-based inference
     if category:
         if category == "portrait":
@@ -78,7 +78,7 @@ def detect_aspect_ratio(filename: str, category: str = None) -> str:
             return "16:9"
         elif category in ["devotional", "symbol", "street"]:
             return "1:1"
-    
+
     # Default: square
     return "1:1"
 
@@ -90,14 +90,14 @@ def detect_aspect_ratio(filename: str, category: str = None) -> str:
 def get_semantic_mapping(category: str, filename: str = "") -> Dict[str, str]:
     """
     Get functional_role, semantic_weight, and layering_role for a category.
-    
+
     Returns dict with:
         - functional_role: icon-anchor, editorial-hero, background-texture, etc.
         - semantic_weight: mythic, heroic, iconic, atmospheric, material
         - layering_role: foreground-dominant, foreground, mid-layer, overlay, background-base
     """
     lower = filename.lower()
-    
+
     # Shiva assets (devotional + shiva)
     if category == "devotional" and "shiva" in lower:
         return {
@@ -105,7 +105,7 @@ def get_semantic_mapping(category: str, filename: str = "") -> Dict[str, str]:
             "semantic_weight": "mythic",
             "layering_role": "foreground-dominant",
         }
-    
+
     # Devotional (non-Shiva)
     if category == "devotional":
         return {
@@ -113,7 +113,7 @@ def get_semantic_mapping(category: str, filename: str = "") -> Dict[str, str]:
             "semantic_weight": "mythic",
             "layering_role": "foreground-dominant",
         }
-    
+
     # Portraits
     if category == "portrait":
         return {
@@ -121,7 +121,7 @@ def get_semantic_mapping(category: str, filename: str = "") -> Dict[str, str]:
             "semantic_weight": "heroic",
             "layering_role": "foreground",
         }
-    
+
     # Symbols - Elephant
     if category == "symbol" and "elephant" in lower:
         return {
@@ -129,7 +129,7 @@ def get_semantic_mapping(category: str, filename: str = "") -> Dict[str, str]:
             "semantic_weight": "iconic",
             "layering_role": "mid-layer",
         }
-    
+
     # Symbols - Landscape
     if category == "symbol" and "landscape" in lower:
         return {
@@ -137,7 +137,7 @@ def get_semantic_mapping(category: str, filename: str = "") -> Dict[str, str]:
             "semantic_weight": "grounded",
             "layering_role": "mid-layer",
         }
-    
+
     # Symbols - Generic
     if category == "symbol":
         return {
@@ -145,7 +145,7 @@ def get_semantic_mapping(category: str, filename: str = "") -> Dict[str, str]:
             "semantic_weight": "iconic",
             "layering_role": "mid-layer",
         }
-    
+
     # Street art
     if category == "street":
         return {
@@ -153,7 +153,7 @@ def get_semantic_mapping(category: str, filename: str = "") -> Dict[str, str]:
             "semantic_weight": "activist",
             "layering_role": "mid-layer",
         }
-    
+
     # Texture
     if category == "texture":
         return {
@@ -161,7 +161,7 @@ def get_semantic_mapping(category: str, filename: str = "") -> Dict[str, str]:
             "semantic_weight": "material",
             "layering_role": "background-base",
         }
-    
+
     # Abstract - Paint splash
     if category == "abstract" and "paint" in lower and "splash" in lower:
         return {
@@ -169,7 +169,7 @@ def get_semantic_mapping(category: str, filename: str = "") -> Dict[str, str]:
             "semantic_weight": "expressive",
             "layering_role": "overlay",
         }
-    
+
     # Abstract - Generic
     if category == "abstract":
         return {
@@ -177,7 +177,7 @@ def get_semantic_mapping(category: str, filename: str = "") -> Dict[str, str]:
             "semantic_weight": "atmospheric",
             "layering_role": "overlay",
         }
-    
+
     # Fallback
     return {
         "functional_role": "background-texture",
@@ -216,7 +216,7 @@ def get_usage_rules(layering_role: str) -> Dict:
             "small_ui_safe": False,
         },
     }
-    
+
     return rules_map.get(layering_role, {
         "scale_suitability": ["hero", "section"],
         "small_ui_safe": True,
@@ -253,7 +253,7 @@ def get_layering_compatibility(layer: str) -> Dict[str, List[str]]:
             "cannot_overlay_with": ["substrate"],
         },
     }
-    
+
     return compatibility_map.get(layer, {
         "can_overlay_with": ["substrate"],
         "cannot_overlay_with": [],
@@ -284,7 +284,7 @@ def build_v5_asset_entry(
 ) -> Dict:
     """
     Build a complete v5.0.0 manifest entry from basic asset metadata.
-    
+
     Args:
         asset_id: Asset ID (e.g., KR-SOLID-001)
         name: Human-readable name
@@ -292,7 +292,7 @@ def build_v5_asset_entry(
         file_path: Path to asset file
         priority: CRITICAL or HIGH
         filename: Original filename for detection heuristics
-    
+
     Returns:
         Complete v5.0.0 manifest entry dict
     """
@@ -301,7 +301,7 @@ def build_v5_asset_entry(
     semantics = get_semantic_mapping(category, filename or file_path)
     usage_rules = get_usage_rules(semantics["layering_role"])
     layering_compatibility = get_layering_compatibility(layer)
-    
+
     return {
         "id": asset_id,
         "name": name,
@@ -319,11 +319,11 @@ def build_v5_asset_entry(
 if __name__ == "__main__":
     # Demo
     print("=== V5.0.0 Schema Utilities ===\n")
-    
+
     print("Category → Layer Mappings:")
     for cat, layer in CATEGORY_TO_LAYER.items():
         print(f"  {cat:12} → {layer}")
-    
+
     print("\nExample: Build v5 entry for Bhagat Singh portrait")
     entry = build_v5_asset_entry(
         asset_id="KR-SOLID-005",
@@ -333,6 +333,6 @@ if __name__ == "__main__":
         priority="CRITICAL",
         filename="bhagat-singh.png",
     )
-    
+
     import json
     print(json.dumps(entry, indent=2))

@@ -14,7 +14,7 @@
   },
 
   "packaging_strategy": "production-deploy",
-  
+
   "files_deployed": {
     "primary": {
       "name": "kr-solidarity__abstract__abstract---solidarity__v1.png",

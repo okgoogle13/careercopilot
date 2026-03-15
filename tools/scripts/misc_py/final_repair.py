@@ -10,14 +10,14 @@ def final_repair(path):
         content = f.read()
 
     original = content
-    
+
     # 1. Fix mode type definition collisions
     content = content.replace("'KrDark' | 'KrDark'", "'KrDark' | 'KrLight'")
-    
+
     # 2. Fix duplicate keys in objects project-wide
     lines = content.splitlines()
     new_lines = []
-    
+
     # Match strings like 'KrDark': or kr-dark: or KrDarkSpring = ...
     patterns = [
         r"['\"]?KrDark['\"]?\s*:",
@@ -25,14 +25,14 @@ def final_repair(path):
         r"export\s+const\s+KrDarkSpring\s*=",
         r"KrDarkSpring:\s*"
     ]
-    
+
     # Keep track of counts for various terms to fix duplicates
     counts = {
         "KrDark": 0,
         "kr-dark": 0,
         "KrDarkSpring": 0
     }
-    
+
     for line in lines:
         for term, count in counts.items():
             if term == "KrDarkSpring" and re.search(r"\bKrDarkSpring\b", line):
@@ -50,7 +50,7 @@ def final_repair(path):
                         line = re.sub(regex, lambda m: m.group(0).replace(term, replacement), line)
                         print(f"Fixed duplicate key {term} in {path}")
         new_lines.append(line)
-    
+
     content = "\n".join(new_lines)
 
     # 3. Fix specific isKrDarkMode collisions

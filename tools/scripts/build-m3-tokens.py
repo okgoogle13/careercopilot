@@ -61,7 +61,7 @@ def generate_css_variables(tokens):
     ]
 
     flat_tokens = flatten_dict(tokens)
-    
+
     for key, value in flat_tokens.items():
         # Skip array values for CSS variables (unless we join them, but usually individual tokens are preferred)
         if isinstance(value, list):
@@ -74,13 +74,13 @@ def generate_css_variables(tokens):
             content.append(f"  {var_name}: {value};\n")
 
     content.append("}\n")
-    
+
     # Add utility classes for common references if structure allows
     # (Optional: Add specific utilities based on known keys like 'color-charcoalBackground-base')
-    
+
     with open(CSS_OUTPUT_FILE, 'w') as f:
         f.writelines(content)
-        
+
     print(f"✅ Generated {len(content)} lines of CSS variables")
     return True
 
@@ -91,7 +91,7 @@ def generate_tailwind_patch(tokens):
 
     # Prepare Tailwind Theme Object
     # We map semantic token groups to Tailwind theme sections
-    
+
     tw_theme = {
         'colors': {},
         'fontFamily': {},
@@ -111,10 +111,10 @@ def generate_tailwind_patch(tokens):
                 color_def = {}
                 if 'base' in value:
                      color_def['DEFAULT'] = value['base'] # var(--md-sys-color-name-base)
-                     # Instead of hardcoding value, use CSS var reference? 
+                     # Instead of hardcoding value, use CSS var reference?
                      # For seamless handover, let's use the CSS var for live updates.
                      color_def['DEFAULT'] = f"var(--sys-color-{name}-base)"
-                
+
                 if 'steps' in value and isinstance(value['steps'], list):
                     for i, step in enumerate(value['steps']):
                         color_def[str(i)] = f"var(--sys-color-{name}-steps-{i})"
@@ -129,7 +129,7 @@ def generate_tailwind_patch(tokens):
         if 'fontFamilies' in tokens['type']:
             for name, val in tokens['type']['fontFamilies'].items():
                 tw_theme['fontFamily'][name] = [f"var(--sys-type-fontFamilies-{name})"]
-        
+
         # Scale (Font Sizes)
         if 'scale' in tokens['type']:
              for name, val in tokens['type']['scale'].items():
@@ -174,7 +174,7 @@ module.exports = {{
 """
     with open(TAILWIND_CONFIG_PATCH, 'w') as f:
         f.write(patch_content)
-    
+
     print("✅ Tailwind config patch generated")
     return True
 
@@ -192,11 +192,11 @@ def main():
     if 'sys' in root:
         print("ℹ️  Unwrapping 'sys' token group.")
         root = root['sys']
-    
+
     # Resolve $value references
     print("RESOLVING DTCG values...")
     tokens = resolve_values(root)
-    
+
     if not tokens:
         print("❌ No tokens found after resolution")
         sys.exit(1)

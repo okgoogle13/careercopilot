@@ -8,7 +8,7 @@ class PlacementEngine:
     Parses 06b-asset-placement.md and provides programmatic placement rules.
     Part of the Hybrid Strategy: Deterministic Script + Agentic Skill.
     """
-    
+
     def __init__(self, placement_guide_path: str):
         self.guide_path = Path(placement_guide_path)
         self.rules = self._parse_guide()
@@ -17,7 +17,7 @@ class PlacementEngine:
         """Extremely basic parser to extract page allowances and motifs."""
         if not self.guide_path.exists():
             return {}
-        
+
         content = self.guide_path.read_text()
         rules = {
             "page_allowances": {},
@@ -32,7 +32,7 @@ class PlacementEngine:
                 "grit": 3
             }
         }
-        
+
         # Extract the "Page-Specific Allowances" table
         allowances_match = re.search(r"### Page-Specific Allowances\n\n(.*?)\n\n", content, re.DOTALL)
         if allowances_match:
@@ -48,7 +48,7 @@ class PlacementEngine:
                         "allowed": allowed,
                         "preferred_motifs": motifs
                     }
-        
+
         return rules
 
     def get_recommendation(self, asset_category: str, asset_motifs: List[str], target_page: str) -> Dict[str, Any]:
@@ -57,13 +57,13 @@ class PlacementEngine:
         """
         page_key = target_page.lower().replace("page ", "")
         allowance = self.rules["page_allowances"].get(page_key, {"allowed": False, "preferred_motifs": "N/A"})
-        
+
         # Check cultural safety (e.g. Shiva on Protest)
         # This is where the "Brawn" (Script) enforces the rules parsed from the "Canon" (MD)
         safety_status = "safe"
         if "shiva" in [m.lower() for m in asset_motifs] and "protest" in target_page.lower():
             safety_status = "violation: cultural anchor mismatch"
-            
+
         return {
             "is_allowed": allowance["allowed"],
             "safety_status": safety_status,

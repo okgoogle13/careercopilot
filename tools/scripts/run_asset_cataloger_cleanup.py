@@ -18,11 +18,11 @@ SCREENSHOT_PATTERN = re.compile(r"Screenshot .*")
 def normalize_name(filename, index):
     """Generate a rigorous, standardized name for triage."""
     ext = filename.suffix.lower()
-    
+
     # If already compliant, keep it
     if filename.name.startswith("kerala-rage-"):
         return filename.name
-        
+
     # Classify based on probable source
     prefix = "kerala-rage-triage"
     if GEN_IMG_PATTERN.match(filename.stem):
@@ -31,7 +31,7 @@ def normalize_name(filename, index):
         prefix = "kerala-rage-ref-screen"
     elif filename.stem.startswith("file-"):
         prefix = "kerala-rage-upload"
-        
+
     return f"{prefix}-{datetime.now().strftime('%Y%m%d')}-{index:03d}{ext}"
 
 def main():
@@ -40,18 +40,18 @@ def main():
         return
 
     files = sorted([f for f in SOURCE_DIR.iterdir() if f.is_file() and not f.name.startswith('.')])
-    
+
     actions = []
     renaming_map = {}
-    
+
     print(f"Found {len(files)} files in {SOURCE_DIR}")
-    
+
     # 1. Plan Renames
     for i, file_curr in enumerate(files):
         new_name = normalize_name(file_curr, i+1)
         if new_name != file_curr.name:
             renaming_map[file_curr] = SOURCE_DIR / new_name
-            
+
             actions.append({
                 "status": "RENAME_FOR_TRIAGE",
                 "original": file_curr.name,
@@ -80,11 +80,11 @@ def main():
         "total_processed": len(files),
         "actions": actions
     }
-    
+
     TARGET_JSON.parent.mkdir(parents=True, exist_ok=True)
     with open(TARGET_JSON, 'w') as f:
         json.dump(report, f, indent=2)
-        
+
     print(f"\n📃 Triage plan generated at: {TARGET_JSON}")
     print("Run visual inspection on 'kerala-rage-triage-*' files to assign final categories.")
 

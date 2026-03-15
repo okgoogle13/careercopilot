@@ -26,4 +26,3 @@ Use with opacity 0.65-0.85 for [DEPRECATED_MODE], 0.05-0.20 for [DEPRECATED_MODE
 
 **Overall**: 75/100
 **Decision**: REGENERATE ⚠️
-

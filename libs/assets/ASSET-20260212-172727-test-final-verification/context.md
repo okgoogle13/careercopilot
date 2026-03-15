@@ -25,4 +25,3 @@ Use with opacity 0.65-0.85 (Solidarity Mode standard).
 
 **Overall**: 75/100
 **Decision**: REGENERATE ⚠️
-

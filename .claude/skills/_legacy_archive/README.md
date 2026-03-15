@@ -68,7 +68,7 @@ During the MCP cleanup, we simplified the MCP architecture from 6 planned custom
 
 **Removed/Never Built:**
 1. ❌ ConfigurationRegistry - Caching issues, npm exec errors
-2. ❌ CodebaseDocumentation - Stale cache problems  
+2. ❌ CodebaseDocumentation - Stale cache problems
 3. ❌ GenKitFlowRegistry - Never implemented
 4. ❌ APIContractValidator - Never implemented
 5. ❌ DesignSystemServer - Never implemented
@@ -147,7 +147,7 @@ mv .claude/skills/_legacy_archive/SKILL_NAME .claude/skills/
 
 ---
 
-**Archive Maintainer:** Antigravity  
-**Archive Date:** 2025-12-29T11:30:00+10:00  
-**Skills Archived:** 4 (all MCP-related)  
+**Archive Maintainer:** Antigravity
+**Archive Date:** 2025-12-29T11:30:00+10:00
+**Skills Archived:** 4 (all MCP-related)
 **Impact:** Removed confusion about non-existent infrastructure

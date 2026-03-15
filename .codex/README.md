@@ -68,6 +68,6 @@ env = { ENV_VAR = "value" }
 
 ## Status
 
-✅ Ready to use - Template configuration provided  
-📖 Comprehensive documentation available  
+✅ Ready to use - Template configuration provided
+📖 Comprehensive documentation available
 🔧 Automated setup script included

@@ -241,14 +241,14 @@ def process_single_asset(
             if relocate:
                 import shutil
                 import os
-                
+
                 # Determine triage destination based on approval status
                 if score.approval_status in ['approved', 'conditional-approval']:
                     # SUCCESS: Move to production location
                     rel_path = package.file_path.lstrip("/")
                     target_path = Path("frontend/public") / rel_path
                     target_path.parent.mkdir(parents=True, exist_ok=True)
-                    
+
                     # Use resize_image if dimensions are specified, otherwise copy
                     if package.target_width or package.target_height:
                         if verbose:
@@ -256,31 +256,31 @@ def process_single_asset(
                         resize_image(image_path, str(target_path), package.target_width, package.target_height)
                     else:
                         shutil.copy2(image_path, target_path)
-                    
+
                     # Delete from TBC
                     if 'TBC' in image_path:
                         os.remove(image_path)
                         if verbose:
                             print(f"  🗑️  Deleted from TBC: {Path(image_path).name}")
-                    
+
                     if verbose:
                         print(f"✅ Asset relocated to: {target_path}")
-                
+
                 else:
                     # NEEDS REVIEW: Move to uncategorised folder
                     uncategorised_dir = Path("frontend/TBC/uncategorised")
                     uncategorised_dir.mkdir(parents=True, exist_ok=True)
-                    
+
                     # Use the packaged canonical name
                     canonical_filename = Path(package.file_path).name
                     target_path = uncategorised_dir / canonical_filename
-                    
+
                     shutil.move(image_path, target_path)
-                    
+
                     if verbose:
                         print(f"  ⚠️  Moved to uncategorised (needs review): {target_path}")
                         print(f"     Reason: {score.approval_status}")
-        
+
         except Exception as e:
             warnings.append(f"Triage warning: {str(e)}")
             if verbose:
@@ -460,9 +460,9 @@ def process_batch(
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         futures = {
             executor.submit(
-                process_single_asset, 
-                img, 
-                verbose=verbose, 
+                process_single_asset,
+                img,
+                verbose=verbose,
                 relocate=relocate,
                 asset_id=f"KR-SOLID-{(existing_count + i + 1):03d}",
                 catalog_data=catalog_map.get(Path(img).name)
@@ -618,18 +618,18 @@ if __name__ == "__main__":
         print(f"\n🔍 RUNNING ASSET CURATION (Triaging {source_path})...")
         curator = AssetCurator(manifest_path)
         curation_report = curator.curate_batch(source_path)
-        
+
         # Print Triage Summary
         print(f"\n📊 CURATION SUMMARY")
         for status, items in curation_report.items():
             if items:
                 print(f"  {status}: {len(items)} assets identified")
-        
+
         # If no new candidates or matches, we might want to stop early
         if not curation_report["MANIFEST_MATCH"] and not curation_report["NEW_CANDIDATE"]:
             print("\n✅ Curation complete: No new assets to process. (Only duplicates/discard found)")
             sys.exit(0)
-        
+
         print(f"\n🚀 Proceeding with analysis pipeline for identified candidates...")
 
     # Run workflow
