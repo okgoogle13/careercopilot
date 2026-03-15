@@ -24,19 +24,19 @@ const questionCategories = [
     id: 'behavioral',
     title: 'Behavioral Questions',
     description: 'Questions about past experiences and how you handled situations',
-    color: 'var(--color-leaf-base)', // #60A5FA
+    color: 'var(--color-leaf-base)',
   },
   {
     id: 'situational',
     title: 'Situational Questions',
     description: 'Hypothetical scenarios to assess problem-solving skills',
-    color: 'var(--color-ink-base)', // #86EFAC
+    color: 'var(--color-ink-base)',
   },
   {
     id: 'technical',
     title: 'Technical Questions',
     description: 'Role-specific questions about skills and knowledge',
-    color: 'var(--color-flower-base)', // #F472B6
+    color: 'var(--color-flower-base)',
   },
 ];
 
