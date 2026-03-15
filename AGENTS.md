@@ -3,6 +3,7 @@
 Career Copilot is an AI-powered job application assistant built with React, FastAPI, Google Genkit, and Postgres (Firebase/Cloud Run hosted). This document guides AI models and coding agents on project conventions, workflows, dependencies, code style, testing, security, and boundaries.
 
 **Note**: This file complements README.md by providing detailed context for AI agents and coding assistants across multiple platforms (GitHub Copilot, OpenAI Codex, Claude, etc.).
+For PR126 migration work, also read `docs/project/active/frontend-source-of-truth-migration/AGENTS.md`.
 
 ## Quick Commands
 
@@ -97,20 +98,24 @@ cd frontend && yarn test:e2e
   - Screenprint manifesto + street-art wheat-paste + Kerala diaspora identity
   - **STRICT ZERO-FLORA LOCKDOWN**: No flora, no Australian endemic species, no gum leaves
   - No bureaucratic motifs (passports, borders, visas, government seals)
-  - No perfect geometry (`border-radius: 50%` banned); use Pebble / Stone / Slab archetypes
+  - No perfect geometry (`border-radius: 50%` banned); use KR Solidarity archetypes and `shape.*` tokens only
 - **Components** (reference implementations):
-  - `KeralaRageButton` (`Pebble` archetype)
-  - `SolidarityCard` (`Slab` archetype — **not** Jar)
-  - `NativeAnchor` (`Stone` archetype, symbolic anchor with Halo/Grit/Blueprint)
-  - `ManifestoSlab`, `Lens`, `Signal`, `HaloPulses`
+  - `Strike` (primary action archetype; formerly KeralaRageButton / Pebble)
+  - `Placard` (content container; formerly ActionCard / Stone)
+  - `Scaffold` (layout panels; formerly Slab / Cabinet)
+  - `ScaffoldInput` (form inputs; formerly Lens)
+  - `March` (select / flow elements; formerly Jar)
+  - `Megaphone` (modal / announcement)
+  - `NativeAnchor` (symbolic anchor)
+  - **Deprecated/Legacy (do not use):** `Pebble`, `Stone`, `Slab`, `Jar`, `Cabinet`, `Lens`, `Signal`, `HaloPulses`
 
 ## Key Technologies
 
 | Layer                  | Tech                                                          | Rationale                                                  |
 | ---------------------- | ------------------------------------------------------------- | ---------------------------------------------------------- |
 | AI Orchestration       | Google Genkit + `app.core.genkit_init`                         | Standardized flow wiring with fallback to google-generativeai |
-| LLM – High Volume      | Gemini 3.0 Flash (runtime) / Gemini 2.5 Flash (service config) | Fast generation and ATS tasks                              |
-| LLM – Complex Analysis | Gemini 3.0 Pro / Gemini 2.5 Pro                                | Deep reasoning and analysis                                |
+| LLM – High Volume      | Gemini Flash (runtime-configured; no fallback)                 | Fast generation and ATS tasks                              |
+| LLM – Complex Analysis | Gemini Pro (runtime-configured; no fallback)                   | Deep reasoning and analysis                                |
 | Document Parsing       | pdfminer.six + python-docx (`IngestionService`)                | PDF/DOCX ingestion and chunking                            |
 | Backend API            | FastAPI                                                       | Type safety, async-first, auto OpenAPI docs                |
 | Frontend               | React 18 + TS                                                  | Component-driven, strict typing, kerala-rage design tokens  |
@@ -130,27 +135,35 @@ backend/
 │   ├── main.py                    # FastAPI setup, middleware, routes
 │   ├── api/endpoints/             # API route handlers (analysis, documents, workflows, genkit, job_scout, ingest)
 │   ├── core/                      # Auth, database, Genkit init, config
-│   ├── services/                  # Ingestion, vector_store
+│   ├── ai_operations/             # Cached AI ops + orchestration helpers
+│   ├── genkit_flows/              # Genkit flow implementations
+│   ├── services/                  # Ingestion, vector_store, business logic
+│   ├── models/                    # SQLAlchemy models
+│   ├── schemas/                   # Pydantic schemas
 │   ├── agents/                    # Job scout agent
-│   ├── genkit_flows/              # Import namespace for Genkit flows (must resolve for `app.genkit_flows.*` imports)
-│   └── tests/                     # Unit & integration tests
+│   ├── tests/                     # Unit & integration tests
+│   └── workers/                   # Async/background workers
 
 ai/
 └── flows/backend/                 # Genkit flows (ATS, cover letters, resume optimizer, job analyzer, etc.)
 
 frontend/
 ├── src/
-│   ├── components/                # React components (kerala-rage kr-solidarity compliant)
+│   ├── components/                # React components (KR Solidarity compliant)
 │   │   ├── kerala-rage/            # Design system components
 │   │   └── ui/                    # Shared UI primitives
-│   ├── pages/                     # AnalysisPage, IngestionPage, JobQueue
+│   ├── features/                  # Feature modules (runtime truth)
+│   ├── pages/                     # Routed pages
+│   ├── screens/                   # Canonical wireframes + paired screens
+│   ├── layouts/                   # Layout shells
 │   ├── api/                       # API services + axios client
-│   ├── services/                  # Genkit/AI helpers, mock data
+│   ├── services/                  # AI helpers, mock data
 │   ├── context/                   # AuthContext (Firebase)
 │   ├── hooks/                     # Custom hooks
 │   └── design/                    # Token styles + presets
 
-chrome-extension/
+docs/
+└── project/active/                # Active program control docs (incl. PR126 migration)
 
 design-system/
 └── tokens.json                    # kerala-rage kr-solidarity design tokens (colors, typography, spacing)
@@ -162,8 +175,8 @@ The frontend migration and audit model depends on four explicit layers of author
 
 - **Design truth**: `frontend/src/screens/**/*.wireframe.xml` plus paired `frontend/src/screens/**/*.tsx`
 - **Runtime truth**: `frontend/src/features/**` and `frontend/src/pages/**` that are reachable from `frontend/src/App.tsx`
-- **Capability truth**: mounted backend endpoints and workflow contracts that represent real product capability
-- **Derived artifacts**: migration-kit JSON wireframes and similar reduced outputs
+- **Capability truth**: mounted backend endpoints (`backend/app/api/endpoints/`) and build contracts under `docs/project/active/frontend-source-of-truth-migration/contracts/`
+- **Derived artifacts**: route-matrix/gap-map JSON and migration-kit wireframes (support-only)
 
 Rules:
 - Do not treat derived artifacts as the primary authority when they disagree with design, runtime, or capability truth.
@@ -177,14 +190,14 @@ Rules:
 - ✅ Use Firebase client config from `frontend/src/config/firebase.ts` for auth/storage
 - ✅ Use backend auth helpers in `backend/app/core/auth.py` and `backend/app/core/dependencies.py`
 - ✅ Use Genkit flow decorators from `app.genkit_flows.flow_decorator` (`@genkit_flow`, `@async_genkit_flow`) and verify the `app.genkit_flows` import path resolves in your environment
-- ✅ Route high-volume tasks to Gemini Flash (runtime default: 3.0; service config in `backend/config/ai_config.json`)
-- ✅ Route complex reasoning to Gemini Pro (3.0/2.5 per service config)
+- ✅ Route high-volume tasks to Gemini Flash as configured in `backend/config/ai_config.json` (no fallback models)
+- ✅ Route complex reasoning to Gemini Pro as configured in `backend/config/ai_config.json` (no fallback models)
 - ✅ Use `IngestionService` for document parsing (pdfminer.six/python-docx) and `VectorStore` for embeddings
 - ✅ Implement standardized I/O for all AI flows (Pydantic output schemas)
 - ✅ Include confidence scores where the response schema supports it
 - ✅ Use async/await in FastAPI endpoints and Genkit flows
 - ✅ Use TypeScript strict mode (`tsconfig.json: "strict": true`)
-- ✅ Apply KR Solidarity v6.0 design tokens for all UI (no hardcoded colors, **zero-flora**, Pebble/Stone/Slab archetypes only)
+- ✅ Apply KR Solidarity v6.0 design tokens for all UI (no hardcoded colors, **zero-flora**, Strike/March/Megaphone/Placard/Scaffold/Substrate archetypes only)
 - ✅ Validate all AI agent inputs before processing
 - ✅ Test AI agents with sample user data before deployment
 - ✅ Use environment variables for API keys, model configs, and secrets
@@ -204,7 +217,7 @@ Rules:
 - ❌ Do NOT use Inter, Roboto, Arial, Sora, or Plus Jakarta Sans (use only: Work Sans, Fraunces, JetBrains Mono, Libre Bodoni, Caveat, Nabla)
 - ❌ Do NOT use Australian flora/fauna motifs (STRICT ZERO-FLORA LOCKDOWN per `docs/design/01_CANON.md`)
 - ❌ Do NOT use `labWrenMetalBlue` token — deprecated; use `protestMetalBlue`
-- ❌ Do NOT use `Jar` or `Cabinet` archetype names in new components — use `Pebble`, `Stone`, `Slab`
+- ❌ Do NOT use legacy archetype/component names in new components (`Pebble`, `Stone`, `Slab`, `Jar`, `Cabinet`, `Lens`, `Signal`, `HaloPulses`) — use current archetypes instead
 
 ## Git Workflow & Safety Boundaries
 
@@ -260,7 +273,6 @@ Start each session by checking server availability (`list_mcp_resources` / `list
 
 - **flash-sidekick**: fast analysis over large code/data, batching, and search grounding.
 - **design-system-sidekick**: kerala-rage kr-solidarity design validation, token extraction, and visual compliance checks.
-- **docker** (when enabled): containerized checks or reproductions that must run in Docker.
 - **playwright** (when enabled): UI verification and browser-based checks.
 
 If a task is both large and visual (e.g., "audit multiple UI screens and check token compliance"), **split**: use flash-sidekick for bulk file/context extraction and design-system-sidekick for visual validation.
@@ -310,7 +322,6 @@ If the task involves **code-only styling changes** (e.g., Tailwind classes, toke
 | Visual compliance or asset validation     | design-system-sidekick       | local token/style inspection                     |
 | Token extraction from imagery             | design-system-sidekick       | manual token mapping from design artifacts       |
 | UI regression screenshots or flows        | playwright (if configured)   | local Playwright runs                            |
-| Container-only reproduction               | docker (if configured)       | local runtime reproduction without Docker        |
 
 ### MCP Failure Handling
 
@@ -522,7 +533,7 @@ Key document requirements:
 
 - **Naming convention**: `@genkit_flow` / `@async_genkit_flow` from `app.genkit_flows.flow_decorator`
 - **Input validation**: Always validate input_data schema first
-- **Model selection**: Default to Gemini Flash; escalate to Pro for complex reasoning (see `backend/config/ai_config.json`)
+- **Model selection**: Runtime-configured in `backend/config/ai_config.json` (no fallback models). Valid identifiers live in `tools/config/gemini_models_list.json`.
 - **Temperature config**: Use service defaults from `backend/config/ai_config.json` unless a flow requires overrides
 - **Response format**: Prefer Pydantic output schemas for structured responses
 
@@ -629,15 +640,7 @@ Use these before deploy or when debugging build issues:
 
 ## Genkit Model Selection
 
-| Model            | Use Case                                           | Notes                                      |
-| ---------------- | -------------------------------------------------- | ------------------------------------------ |
-| Gemini 3.0 Flash | Default runtime model in Genkit init               | Fast, general-purpose generation           |
-| Gemini 3.0 Pro   | Complex reasoning (company research, gap analysis) | Slower, highest reasoning quality          |
-| Gemini 2.5 Flash | Service defaults in `backend/config/ai_config.json` | High-volume tasks and ATS scoring          |
-| Gemini 2.5 Pro   | High-quality services (ATS, cover letters)         | Higher quality with higher cost            |
-| Gemini 1.5 *     | Fallbacks in `backend/config/ai_config.json`       | Legacy compatibility fallback              |
-
-**Rule of thumb**: Default to Flash. Escalate to Pro only for complex reasoning or multi-step workflows.
+Model selection is **runtime-configured** in `backend/config/ai_config.json`. Do **not** rely on fallback models — they are disabled/unreliable. Use `tools/config/gemini_models_list.json` for the authoritative model inventory and only reference models that are explicitly supported there.
 
 ## Environment Variables (Development)
 

@@ -56,7 +56,7 @@ find_by_name "*.md" in .claude/
 # List available agents
 list_dir /home/njd/careercopilot/careercopilot-1/.claude/agents/
 
-# List available skills  
+# List available skills
 list_dir /home/njd/careercopilot/careercopilot-1/.claude/skills/
 ```
 
@@ -151,7 +151,7 @@ For actual MCP capabilities, use:
 
 **Token Savings Claim**: "90-95% per request"
 
-**Reality**: 
+**Reality**:
 - Native file reading is fast (\<100ms)
 - No cache invalidation complexity
 - Always shows current content
@@ -172,6 +172,6 @@ For actual MCP capabilities, use:
 
 ---
 
-**Last Updated**: 2025-12-28  
-**Deprecated**: 2025-12-27  
+**Last Updated**: 2025-12-28
+**Deprecated**: 2025-12-27
 **Replacement**: Native file system tools (view_file, grep_search, list_dir, find_by_name)

@@ -12,7 +12,7 @@ python3 run_copilot.py
 
 ## Workflow (5 Seconds)
 1. **Clip** → Save job URL
-2. **Analyze** → Click "Analyze with JobScout"  
+2. **Analyze** → Click "Analyze with JobScout"
 3. **Draft** → Click "Draft Application"
 4. **Apply** → Copy and customize
 

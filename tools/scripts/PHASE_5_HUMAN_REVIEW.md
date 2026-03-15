@@ -636,4 +636,3 @@ frontend/src/features/AssetReview/
 - Export controls
 
 **Ready to:** Review and approve assets before production deployment
-

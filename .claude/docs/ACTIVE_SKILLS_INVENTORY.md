@@ -1,7 +1,7 @@
 # Active Skills Inventory
 
-**Last Updated:** 2025-12-29  
-**Total Active Skills:** 25 directories (26 including _legacy_archive)  
+**Last Updated:** 2025-12-29
+**Total Active Skills:** 25 directories (26 including _legacy_archive)
 **Legacy Archived:** 4 skills
 
 ---
@@ -241,7 +241,7 @@ These skills provide exceptional value and should be maintained:
 # List all active skills
 ls -1 .claude/skills/ | grep -v _legacy_archive
 
-# Count active skills  
+# Count active skills
 ls -1 .claude/skills/ | grep -v _legacy_archive | wc -l
 
 # List legacy skills
@@ -256,7 +256,7 @@ grep -r "keyword" .claude/skills/ --include="SKILL.md"
 
 ---
 
-**Maintained by:** Antigravity  
-**Last Audit:** 2025-12-29  
-**Next Scheduled Audit:** 2026-03-29 (Quarterly)  
+**Maintained by:** Antigravity
+**Last Audit:** 2025-12-29
+**Next Scheduled Audit:** 2026-03-29 (Quarterly)
 **Contact:** See `.claude/docs/SKILLS_COMPREHENSIVE_AUDIT_2025-12-29.md` for details

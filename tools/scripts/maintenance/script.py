@@ -26,9 +26,9 @@ schema = {
                     "type": "object",
                     "required": ["m3Type"],
                     "properties": {
-                        "m3Type": { 
-                            "type": "string", 
-                            "enum": ["Surface", "Container", "Scaffold", "Column", "Row", "Grid"] 
+                        "m3Type": {
+                            "type": "string",
+                            "enum": ["Surface", "Container", "Scaffold", "Column", "Row", "Grid"]
                         },
                         "props": { "type": "object" }
                     }
@@ -40,7 +40,7 @@ schema = {
                         "required": ["id", "m3Type"],
                         "properties": {
                             "id": { "type": "string" },
-                            "m3Type": { 
+                            "m3Type": {
                                 "type": "string",
                                 "enum": [
                                     "TopAppBar", "NavigationBar", "NavigationRail", "NavigationDrawer",

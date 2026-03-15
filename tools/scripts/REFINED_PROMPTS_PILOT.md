@@ -1,7 +1,7 @@
 # REFINED ASSET PROMPTS — Pilot Test
 
-**Generated**: 2026-02-11  
-**Source**: 2 quarantined assets from manifest  
+**Generated**: 2026-02-11
+**Source**: 2 quarantined assets from manifest
 **Method**: Prompt-composer + Pattern learnings
 
 ---

@@ -4,7 +4,7 @@ description: Clean up root-level documentation and configuration files
 
 # Protocol 001: Root Clutter Cleanup
 
-**Created**: 2026-01-21  
+**Created**: 2026-01-21
 **Purpose**: Organize root-level files to improve repository navigation and maintainability
 
 ## Assessment

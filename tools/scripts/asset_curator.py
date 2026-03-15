@@ -11,7 +11,7 @@ class AssetCurator:
     Triage and curation engine for kr-solidarity assets.
     Inherits and enhances logic from the legacy Northcote Cataloger.
     """
-    
+
     def __init__(self, manifest_path: str):
         self.manifest_path = Path(manifest_path)
         self.manifest = self._load_manifest()
@@ -54,16 +54,16 @@ class AssetCurator:
             "NEW_CANDIDATE": [],
             "DISCARD": []
         }
-        
+
         # Identify "Missing" gaps in manifest
         gaps = [a for a in self.manifest.get("assets", []) if a.get("status") == "Missing"]
-        
+
         for img_path in source_path.rglob("*"):
             if img_path.suffix.lower() not in [".png", ".jpg", ".jpeg", ".webp"]:
                 continue
-                
+
             file_hash = self._get_file_hash(img_path)
-            
+
             # 1. Check for Exact Duplicates
             if file_hash in self.content_hashes:
                 existing_id = self.content_hashes[file_hash]
@@ -81,7 +81,7 @@ class AssetCurator:
                 if gap.get("name", "").lower() in img_path.name.lower():
                     matched_gap = gap
                     break
-            
+
             if matched_gap:
                 results["MANIFEST_MATCH"].append({
                     "path": str(img_path),
@@ -104,7 +104,7 @@ if __name__ == "__main__":
     if len(sys.argv) < 3:
         print("Usage: python asset_curator.py <manifest_path> <source_dir>")
         sys.exit(1)
-        
+
     curator = AssetCurator(sys.argv[1])
     report = curator.curate_batch(sys.argv[2])
     print(json.dumps(report, indent=2))

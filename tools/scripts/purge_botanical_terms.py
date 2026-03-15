@@ -59,11 +59,11 @@ def purge_in_file(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
-        
+
         new_content = content
         for pattern, replacement in MAPPINGS.items():
             new_content = re.sub(pattern, replacement, new_content)
-        
+
         if new_content != content:
             with open(file_path, 'w', encoding='utf-8') as f:
                 f.write(new_content)

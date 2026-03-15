@@ -777,4 +777,3 @@ scripts/
 - Rollback procedures
 
 **Ready to:** Deploy assets to production and monitor performance
-

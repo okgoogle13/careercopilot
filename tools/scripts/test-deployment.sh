@@ -41,10 +41,10 @@ TOTAL_TESTS=0
 run_test() {
     local test_name="$1"
     local test_command="$2"
-    
+
     TOTAL_TESTS=$((TOTAL_TESTS + 1))
     log_info "Running test: $test_name"
-    
+
     if eval "$test_command" > /dev/null 2>&1; then
         log_success "✓ $test_name"
         return 0
@@ -59,39 +59,39 @@ run_test() {
 main() {
     log_info "Starting deployment readiness validation..."
     echo
-    
+
     # Change to root directory
     cd "$ROOT_DIR"
-    
+
     # 1. TypeScript compilation
     run_test "TypeScript compilation" "yarn build"
-    
+
     # 2. Linting
     run_test "Linting check" "yarn lint"
-    
+
     # 3. Frontend tests
     run_test "Frontend tests" "yarn test --passWithNoTests"
-    
+
     # 4. Backend tests
     run_test "Backend tests" "pytest backend/app/tests/ -v"
-    
+
     # 5. Production secrets validation
     run_test "Production secrets" "python3 scripts/production-secrets-validator.py"
-    
+
     # 6. Configuration validation
     run_test "Configuration validation" "python3 scripts/test-configuration.py"
-    
+
     # 7. Firebase configuration
     run_test "Firebase configuration" "python3 scripts/setup-firebase-config.py --validate"
-    
+
     # 8. Genkit verification
     run_test "Genkit integration" "python3 verify_genkit.py"
-    
+
     echo
     log_info "Test Results:"
     log_info "Total tests: $TOTAL_TESTS"
     log_info "Failed tests: $FAILED_TESTS"
-    
+
     if [ $FAILED_TESTS -eq 0 ]; then
         log_success "✓ All tests passed! Deployment is ready."
         exit 0

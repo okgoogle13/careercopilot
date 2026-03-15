@@ -16,7 +16,7 @@
 
 ## Color
 - **Substrate**: `bg-asphalt-black`.
-- **Metrics**: 
+- **Metrics**:
   - Neutral: `paper-white`
   - Warning/Alignment: `ink-gold`
   - Ready/Mission: `solidarity-red`
@@ -31,7 +31,7 @@
 ## Motion
 - **Metric Stagger**: Cards enter with `y: 10` -> `y: 0` and a `0.1s` stagger delay using a calibrated spring.
 - **Value Reveal**: Metric values animate from `0` to target.
-- **Substrate Pulse**: Subtle radial glows behind high-priority metrics. 
+- **Substrate Pulse**: Subtle radial glows behind high-priority metrics.
     - *Constraint*: Glow must not obscure text and should remain at very low opacity (≤ 10%).
 
 ## Accessibility & Reduced Motion

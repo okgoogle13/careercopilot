@@ -87,7 +87,7 @@ If using color palette, add to design tokens:
 ## Support
 
 For questions about this asset's cultural significance or governance status, refer to:
-- Analysis Notes: Analysis failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. 
+- Analysis Notes: Analysis failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit.
 * Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3-flash
 Please retry in 36.202518522s. [links {
   description: "Learn more about Gemini API quotas"

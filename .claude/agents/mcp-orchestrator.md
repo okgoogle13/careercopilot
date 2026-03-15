@@ -102,12 +102,12 @@ CareerCopilot uses **4 production MCP servers**:
 
 The following servers were **removed during MCP cleanup** (Dec 2025):
 
-❌ **ConfigurationRegistry** - Use native file tools instead  
-❌ **CodebaseDocumentation** - Use view_file/grep_search instead  
-❌ **GenKitFlowRegistry** - Never implemented, use backend APIs  
-❌ **APIContractValidator** - Never implemented  
-❌ **DesignSystemServer** - Never implemented  
-❌ **FirestoreDataAccessServer** - Never implemented  
+❌ **ConfigurationRegistry** - Use native file tools instead
+❌ **CodebaseDocumentation** - Use view_file/grep_search instead
+❌ **GenKitFlowRegistry** - Never implemented, use backend APIs
+❌ **APIContractValidator** - Never implemented
+❌ **DesignSystemServer** - Never implemented
+❌ **FirestoreDataAccessServer** - Never implemented
 
 **Why Removed:**
 1. Caching issues leading to stale data
@@ -146,7 +146,7 @@ The following servers were **removed during MCP cleanup** (Dec 2025):
 
 ### For Documentation Tasks
 
-**Don't use:** Deprecated documentation MCP  
+**Don't use:** Deprecated documentation MCP
 **Do use:** Native file reading
 ```typescript
 view_file("/path/to/doc.md")
@@ -304,11 +304,11 @@ source .venv/bin/activate
 
 ## Success Metrics
 
-✅ **4 servers operational** (Flash Sidekick, GitHub, Playwright, Docker)  
-✅ **\<2s total startup time**  
-✅ **No npm exec errors** (using absolute paths)  
-✅ **Single source of truth** (no stale caches)  
-✅ **Zero custom server maintenance** (except Flash Sidekick)  
+✅ **4 servers operational** (Flash Sidekick, GitHub, Playwright, Docker)
+✅ **\<2s total startup time**
+✅ **No npm exec errors** (using absolute paths)
+✅ **Single source of truth** (no stale caches)
+✅ **Zero custom server maintenance** (except Flash Sidekick)
 
 ---
 
@@ -333,5 +333,5 @@ Works with:
 - Archived servers: `_legacy_archive/`
 - Cleanup conversation: `0b3a6c3f-6c7e-4743-bc7c-a34b3bbe08e3`
 
-**Last Updated:** 2025-12-28  
+**Last Updated:** 2025-12-28
 **Architecture:** Simplified MCP (4 servers)

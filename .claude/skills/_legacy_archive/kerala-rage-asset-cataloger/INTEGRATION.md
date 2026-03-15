@@ -103,7 +103,7 @@ const validated = catalog.filter(a => a.confidence === 'high')
 
 ```bash
 User: "What about asset 14 (paper-white)?"
-Claude: "Medium confidence - could be kr-dark-paper-white but needs 
+Claude: "Medium confidence - could be kr-dark-paper-white but needs
 visual check. Should I validate with auto-validator first?"
 ```
 

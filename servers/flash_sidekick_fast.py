@@ -43,7 +43,7 @@ def _load_genai():
                     os_inner.dup2(old_stderr, 2)
                     os_inner.close(null_fd)
                     os_inner.close(old_stderr)
-            
+
             with suppress_stderr():
                 import google.generativeai as genai_module
             _genai = genai_module
@@ -102,7 +102,7 @@ class FlashSidekickServer:
     def call_tool(self, name, args):
         """Execute a tool - lazy loads model on first call"""
         model = self._ensure_model()
-        
+
         if not model:
             return [{"type": "text", "text": "Error: API not configured"}]
 
@@ -126,7 +126,7 @@ def handle_request(server, line):
         req = json.loads(line)
         method = req.get("method")
         req_id = req.get("id")
-        
+
         if method == "initialize":
             # Fast response - no API calls
             return {
@@ -146,7 +146,7 @@ def handle_request(server, line):
             params = req.get("params", {})
             result = server.call_tool(params.get("name"), params.get("arguments", {}))
             return {"jsonrpc": "2.0", "id": req_id, "result": {"content": result}}
-        
+
         return {}
     except Exception as e:
         logger.error(f"Request handling error: {e}")
@@ -155,13 +155,13 @@ def handle_request(server, line):
 if __name__ == "__main__":
     logger.info("Flash Sidekick starting (fast mode)")
     server = FlashSidekickServer()
-    
+
     while True:
         try:
             line = sys.stdin.readline()
             if not line:
                 break
-            
+
             resp = handle_request(server, line)
             if resp:
                 print(json.dumps(resp))
@@ -171,5 +171,5 @@ if __name__ == "__main__":
         except Exception as e:
             logger.error(f"Main loop error: {e}")
             break
-    
+
     logger.info("Flash Sidekick stopped")
