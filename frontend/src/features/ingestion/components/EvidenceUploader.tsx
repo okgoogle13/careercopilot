@@ -1,4 +1,4 @@
-import { Jar, Pebble, Stone } from '@/components/ui';
+import { March, Placard, Strike } from '@/components/ui';
 import { m3Toast } from '@/utils/toast';
 import { validateFile } from '@/utils/fileValidation';
 import { FileText, UploadCloud } from 'lucide-react';
@@ -56,16 +56,16 @@ export const EvidenceUploader: React.FC = () => {
   ];
 
   return (
-    <Stone className="p-0 border-2 border-dashed border-[var(--color-concrete-grey-base)]/30 bg-transparent overflow-hidden">
+    <Placard className="p-0 border-2 border-dashed border-[var(--sys-color-concreteGrey-base)]/30 bg-transparent overflow-hidden">
       <div className="p-6 flex items-center gap-4">
-        <div className="w-12 h-12 rounded-march bg-[var(--color-ink-gold)]/10 flex items-center justify-center">
-          <UploadCloud className="w-6 h-6 text-[var(--color-ink-gold)]" />
+        <div className="w-12 h-12 rounded-march bg-[var(--sys-color-inkGold-base)]/10 flex items-center justify-center">
+          <UploadCloud className="w-6 h-6 text-[var(--sys-color-inkGold-base)]" />
         </div>
         <div className="flex-grow">
-          <h3 className="font-display text-lg font-bold text-[var(--color-paper-white)]">
+          <h3 className="font-display text-lg font-bold text-[var(--sys-color-paperWhite-base)]">
             Strategic Evidence Uploader
           </h3>
-          <p className="font-primary text-sm text-[var(--color-concrete-grey-dark)]">
+          <p className="font-primary text-sm text-[var(--sys-color-concreteGrey-steps-3)]">
             Upload historical artifacts to enrich your professional vector.
           </p>
         </div>
@@ -73,7 +73,7 @@ export const EvidenceUploader: React.FC = () => {
 
       <div className="px-6 pb-6 flex gap-4 items-center flex-wrap">
         <div className="min-w-[220px]">
-          <Jar
+          <March
             options={documentOptions}
             value={selectedType}
             onChange={(val: string) => setSelectedType(val as SourceType)}
@@ -91,7 +91,7 @@ export const EvidenceUploader: React.FC = () => {
         />
 
         <label htmlFor="file-upload">
-          <Pebble
+          <Strike
             variant="secondary"
             onClick={() => {}} // Controlled by label/input
             disabled={isUploading}
@@ -100,9 +100,9 @@ export const EvidenceUploader: React.FC = () => {
             className="h-[56px] px-8"
           >
             {isUploading ? 'Synthesizing...' : 'Seed Intelligence'}
-          </Pebble>
+          </Strike>
         </label>
       </div>
-    </Stone>
+    </Placard>
   );
 };

@@ -12,7 +12,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PageHeader } from '../../components/shared/PageHeader';
+import { DocumentWorkbench } from '../../screens/08_workbench/DocumentWorkbench';
 import { api } from '../../services/api';
 import { genkitApi } from '../../services/genkit';
 import { exportToPdf } from '../../utils/exportEngine';
@@ -165,18 +165,11 @@ export function KSCGenerator() {
   }
 
   return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={staggerContainer}
-      className="p-6 md:p-12 max-w-5xl mx-auto"
+    <DocumentWorkbench
+      className="max-w-5xl mx-auto"
+      title="Key Selection Criteria"
+      subtitle="Draft structured KSC responses using the STAR method."
     >
-      <PageHeader
-        title="Key Selection Criteria"
-        highlightedWord="Builder"
-        description="Draft structured KSC responses using the STAR method."
-      />
-
       {/* Progress Stepper */}
       <motion.div
         transition={KrDarkSpring}
@@ -466,7 +459,7 @@ export function KSCGenerator() {
           )}
         </AnimatePresence>
       </motion.div>
-    </motion.div>
+    </DocumentWorkbench>
   );
 }
 

@@ -6,49 +6,47 @@
         "/Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py"
       ]
     },
+    "design-system-sidekick": {
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
+      "args": [
+        "/Users/okgoogle13/Projects/careercopilot/servers/design_system_sidekick.py"
+      ]
+    },
+    "vision-scorer-mcp": {
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
+      "args": [
+        "/Users/okgoogle13/Projects/careercopilot/servers/vision_scorer_mcp.py"
+      ]
+    },
+    "perplexity": {
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
+      "args": [
+        "/Users/okgoogle13/Projects/careercopilot/servers/perplexity_server.py"
+      ]
+    },
+    "task-router": {
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
+      "args": [
+        "/Users/okgoogle13/Projects/careercopilot/servers/task_router_mcp.py"
+      ]
+    },
+    "filesystem": {
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
+      "args": [
+        "/Users/okgoogle13/Projects/careercopilot/servers/filesystem_mcp.py"
+      ]
+    },
+    "git": {
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
+      "args": [
+        "/Users/okgoogle13/Projects/careercopilot/servers/git_mcp.py"
+      ]
+    },
     "github": {
-      "command": "npx",
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
       "args": [
-        "-y",
-        "@modelcontextprotocol/server-github"
-      ],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "[REDACTED]"
-      }
-    },
-    "playwright": {
-      "command": "/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/npx",
-      "args": [
-        "-y",
-        "@playwright/mcp"
+        "/Users/okgoogle13/Projects/careercopilot/servers/github_mcp.py"
       ]
-    },
-    "docker": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "mcp-server-docker"
-      ]
-    },
-    "supabase-mcp-server": {
-      "command": "/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/npx",
-      "args": [
-        "-y",
-        "@supabase/mcp-server-supabase"
-      ],
-      "env": {
-        "SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}"
-      }
-    },
-    "perplexity-ask": {
-      "command": "/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/npx",
-      "args": [
-        "-y",
-        "@jschuller/perplexity-mcp"
-      ],
-      "env": {
-        "PERPLEXITY_API_KEY": "${PERPLEXITY_API_KEY}"
-      }
     },
     "cloud-ops": {
       "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",

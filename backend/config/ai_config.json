@@ -71,7 +71,7 @@
     "resume_analysis": {
       "service_name": "resume_analysis",
       "primary_model": "gemini-3.1-flash",
-      "fallback_models": ["gemini-3.1-flash-lite"],
+      "fallback_models": [],
       "enabled": true,
       "cache_enabled": true,
       "custom_settings": {
@@ -82,13 +82,13 @@
     "job_analysis": {
       "service_name": "job_analysis",
       "primary_model": "gemini-3.1-flash",
-      "fallback_models": ["gemini-3.1-flash-lite"],
+      "fallback_models": [],
       "enabled": true
     },
     "ats_scoring": {
       "service_name": "ats_scoring",
       "primary_model": "gemini-3.1-pro",
-      "fallback_models": ["gemini-3.1-flash"],
+      "fallback_models": [],
       "enabled": true
     }
   },

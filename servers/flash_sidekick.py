@@ -38,8 +38,8 @@ try:
     # Explicitly load .env from project root
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
-    env_path = os.path.join(project_root, '.env')
-    load_dotenv(env_path, override=True)
+    for env_name in ('.env.mcp', '.env'):
+        load_dotenv(os.path.join(project_root, env_name), override=True)
 except ImportError:
     pass
 

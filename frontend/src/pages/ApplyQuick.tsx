@@ -2,8 +2,9 @@ import { Button, Input, Textarea } from '@careercopilot/ui';
 import { API_ENDPOINTS } from '@/config/api';
 import { auth } from '@/config/firebase';
 import type { AnalyzeJobFromUrlResponse } from '@/types/masterResume';
+import { JobAnalysisResultsPanel } from '@/features/applications/components/JobAnalysisResultsPanel';
 import { motion } from 'framer-motion';
-import { ArrowRight, Link2, Loader2 } from 'lucide-react';
+import { ArrowRight, Loader2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -137,66 +138,10 @@ export function ApplyQuick() {
         </div>
 
         {result && (
-          <section className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="rounded-placard border border-ink-gold/22 bg-asphalt-black/50 p-5">
-                <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-ink-gold/80">
-                  ATS Preview
-                </p>
-                <p className="text-5xl font-black text-paper-white mt-2 tabular-nums">
-                  {result.ats_preview.score}
-                </p>
-              </div>
-              <div className="rounded-placard border border-concrete-grey/20 bg-asphalt-black/50 p-5 md:col-span-2">
-                <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-concrete-grey">
-                  Target
-                </p>
-                <p className="font-display text-2xl text-paper-white">{result.job_title}</p>
-                <p className="font-primary text-concrete-grey">{result.company_name}</p>
-              </div>
-            </div>
-
-            <div className="rounded-placard border border-concrete-grey/18 bg-asphalt-black/55 p-6">
-              <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-ink-gold mb-4">
-                Chunk Match Visualization
-              </p>
-              <div className="space-y-3">
-                {result.chunk_matches.map((match) => (
-                  <div
-                    key={match.chunk_id}
-                    className="border border-concrete-grey/15 rounded-megaphone p-4"
-                  >
-                    <div className="flex items-center justify-between gap-3">
-                      <p className="font-primary text-paper-white font-semibold">{match.label}</p>
-                      <span className="font-mono text-xs text-ink-gold tabular-nums">
-                        {(match.score * 100).toFixed(0)}%
-                      </span>
-                    </div>
-                    <p className="font-mono text-[11px] text-concrete-grey mt-2">
-                      terms: {match.matched_terms.join(', ') || 'none'}
-                    </p>
-                    <p className="font-primary text-sm text-paper-white/75 mt-2">{match.snippet}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-placard border border-ink-gold/20 bg-asphalt-black/55 p-6 space-y-3">
-              <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-ink-gold">
-                Export Pack
-              </p>
-              <p className="font-primary text-concrete-grey text-sm">
-                Resume, cover letter, and KSC artifacts are generated for this role. Continue to
-                tracker to manage your application stage.
-              </p>
-              <Button
-                onClick={() => navigate('/tracker')}
-                className="rounded-strike font-bold uppercase tracking-wide"
-              >
-                Go To Tracker <Link2 className="w-4 h-4 ml-2" />
-              </Button>
-            </div>
-          </section>
+          <JobAnalysisResultsPanel
+            result={result}
+            onNavigateToTracker={() => navigate('/tracker')}
+          />
         )}
       </div>
     </div>

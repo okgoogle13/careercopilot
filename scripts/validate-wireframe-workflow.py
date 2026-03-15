@@ -430,13 +430,32 @@ def main() -> int:
         default=DEFAULT_BUILD_CONTRACT_SCHEMA,
         help=f"Path to build contract XSD schema (default: {DEFAULT_BUILD_CONTRACT_SCHEMA})",
     )
+    parser.add_argument(
+        "--route-id",
+        type=str,
+        default=None,
+        help="Filter validation to a specific route_id from the matrix",
+    )
     args = parser.parse_args()
 
     matrix = load_json(args.matrix)
     gap_map = load_json(args.gap_map)
     rows = matrix.get("rows", [])
+    if args.route_id:
+        rows = [row for row in rows if row.get("route_id") == args.route_id]
+        if not rows:
+            print(f"Warning: route_id '{args.route_id}' not found in matrix.")
+
     features = gap_map.get("features", [])
     canonical_xmls = sorted(args.screens_root.rglob("*.wireframe.xml"))
+
+    if args.route_id and rows:
+        # Filter XMLs to only those mentioned in the filtered rows
+        relevant_wf_paths = {row.get("xml_wireframe_path") for row in rows if row.get("xml_wireframe_path")}
+        canonical_xmls = [
+            p for p in canonical_xmls
+            if any(str(p).endswith(wf) for wf in relevant_wf_paths)
+        ]
 
     file_results = [validate_xml_file(path) for path in canonical_xmls]
     route_failures, route_warnings, _expected_paths = evaluate_route_coverage(rows, args.screens_root)

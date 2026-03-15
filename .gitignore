@@ -179,3 +179,7 @@ coverage.xml
 .DS_Store
 Thumbs.db
 careercopilot-migration-kit-v3/.yarn/install-state.gz
+
+# Large Figma artifacts
+frontend/KR SOLIDAIRTY FROM FIGMA.make
+frontend/KR Solidarity CAREERCOPILOT.zip

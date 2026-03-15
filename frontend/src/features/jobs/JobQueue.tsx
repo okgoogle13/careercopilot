@@ -3,13 +3,13 @@ import { KanbanCard } from '@/components/KanbanCard';
 import { m3Toast } from '@/utils/toast';
 import { CheckCircle, Clock, Copy, ExternalLink, FileText, Play, Sparkles } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { KrErrorAlert } from '../components/shared/KrErrorAlert';
-import { PageHeader } from '../components/shared/PageHeader';
-import { API_ENDPOINTS } from '../config/api';
-import { LayeredHero } from '../components/kerala-rage/LayeredHero';
-import { loadHeroRegistry } from '../design/hero/heroRegistry';
-import { composeHero } from '../lib/composeHero';
-import type { SolidarityManifest } from '../design/hero/heroTypes';
+import { KrErrorAlert } from '@/components/shared/KrErrorAlert';
+import { PageHeader } from '@/components/shared/PageHeader';
+import { API_ENDPOINTS } from '@/config/api';
+import { LayeredHero } from '@/components/kerala-rage/LayeredHero';
+import { loadHeroRegistry } from '@/design/hero/heroRegistry';
+import { composeHero } from '@/lib/composeHero';
+import type { SolidarityManifest } from '@/design/hero/heroTypes';
 
 interface JobQueueItem {
   id: string;
