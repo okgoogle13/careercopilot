@@ -18,7 +18,7 @@ for link in "$SKILLS_DIR"/*; do
             echo "🔧 Fixing $link"
             echo "   Old: $target"
             echo "   New: $new_target"
-            
+
             if [ -d "$new_target" ]; then
                 rm "$link"
                 ln -s "$new_target" "$link"

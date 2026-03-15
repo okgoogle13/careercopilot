@@ -16,4 +16,3 @@
 ## Rollback
 
 - Revert tag if needed: `git tag -d vX.Y.Z` (local) and delete remote tag if required.
-

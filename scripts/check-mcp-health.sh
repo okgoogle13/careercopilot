@@ -24,7 +24,7 @@ else
 fi
 echo ""
 
-# Global Configuration  
+# Global Configuration
 echo "🌐 Global Configuration (~/.config/Code/User/mcp.json):"
 if [ -f "$HOME/.config/Code/User/mcp.json" ]; then
     echo "  ✅ Global config exists"

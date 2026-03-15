@@ -1,7 +1,7 @@
 # Flash-Sidekick Timeout Issue - RESOLVED ✅
 
-**Date:** 2025-12-27T02:13:52+11:00  
-**Error:** `context deadline exceeded`  
+**Date:** 2025-12-27T02:13:52+11:00
+**Error:** `context deadline exceeded`
 **Status:** ✅ FIXED
 
 ## 🔍 Problem Analysis
@@ -28,7 +28,7 @@ MCP clients typically have **very short timeouts** (often 500ms or less) for the
 
 **Key Optimizations:**
 1. **Lazy Import:** Don't import `google.generativeai` until first tool call
-2. **Lazy Initialization:** Don't configure API until first tool call  
+2. **Lazy Initialization:** Don't configure API until first tool call
 3. **Minimal Startup:** Only load essential modules (json, os, sys, logging)
 4. **Fast Responses:** Return tool list without any API calls
 
@@ -210,13 +210,13 @@ if method == "initialize":
 
 ## ✅ Summary
 
-**Problem:** MCP timeout (context deadline exceeded)  
-**Root Cause:** Slow initialization (~850ms)  
-**Solution:** Lazy loading architecture  
-**Result:** Ultra-fast startup (340ms) ✅  
+**Problem:** MCP timeout (context deadline exceeded)
+**Root Cause:** Slow initialization (~850ms)
+**Solution:** Lazy loading architecture
+**Result:** Ultra-fast startup (340ms) ✅
 **Status:** Ready for Antigravity restart
 
 ---
 
-**The flash-sidekick MCP server now responds in 340ms - well within the timeout limit!**  
+**The flash-sidekick MCP server now responds in 340ms - well within the timeout limit!**
 **Just restart Antigravity and it should connect successfully.** 🚀

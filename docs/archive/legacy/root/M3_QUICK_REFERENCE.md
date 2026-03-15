@@ -1,6 +1,6 @@
 # M3 Design System - Quick Reference
 
-**Last Updated**: 2026-01-03  
+**Last Updated**: 2026-01-03
 **Overall Compliance**: 74%
 
 ---
@@ -40,7 +40,7 @@
 
 **Legend**:
 - ✅ Fully compliant
-- ⚠️ Partial compliance  
+- ⚠️ Partial compliance
 - ❌ Non-compliant
 - N/A Not applicable
 
@@ -204,7 +204,7 @@ frontend/src/components/
 - [ ] JobQueue refactored
 - [ ] 90%+ overall compliance
 
-**Current Progress**: 4/9 (44%)  
+**Current Progress**: 4/9 (44%)
 **Target Date**: 2026-01-10
 
 ---

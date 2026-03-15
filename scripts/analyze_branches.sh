@@ -81,21 +81,21 @@ for branch in $(git branch -r | grep -v 'HEAD' | sed 's/origin\///'); do
     if [ "$branch" = "$DEFAULT_BRANCH" ]; then
         continue
     fi
-    
+
     full_branch="origin/$branch"
-    
+
     # Get branch metrics
     last_date=$(get_last_commit_date "$full_branch")
     last_msg=$(get_last_commit_message "$full_branch")
     commits_ahead=$(get_commits_ahead "$full_branch")
-    
+
     # Count file changes
     backend_files=$(count_files "$full_branch" "^backend/")
     frontend_files=$(count_files "$full_branch" "^frontend/")
     genkit_files=$(count_files "$full_branch" "genkit_flows")
     api_files=$(count_files "$full_branch" "backend/app/api")
     core_files=$(count_files "$full_branch" "backend/app/core")
-    
+
     # Store data for sorting (date|branch|data)
     branch_data+=("$last_date|$branch|$commits_ahead|$backend_files|$frontend_files|$genkit_files|$api_files|$core_files|$last_msg")
 done
@@ -110,10 +110,10 @@ unset IFS
 
 for data in "${sorted_branches[@]}"; do
     IFS='|' read -r date branch commits backend frontend genkit api core msg <<< "$data"
-    
+
     # Format date (take just the date part)
     short_date=$(echo "$date" | cut -d' ' -f1)
-    
+
     # Color code based on backend/frontend ratio
     if [ "$backend" -gt "$frontend" ]; then
         color=$GREEN
@@ -125,10 +125,10 @@ for data in "${sorted_branches[@]}"; do
         color=$RED
         indicator="🔴"
     fi
-    
+
     # Truncate branch name if too long
     short_branch=$(echo "$branch" | cut -c 1-38)
-    
+
     printf "${color}%-40s %-12s %-8s %-8s %-8s${NC} %s\n" \
         "$short_branch" "$short_date" "$commits" "$backend" "$frontend" "$indicator"
 done
@@ -143,7 +143,7 @@ echo ""
 
 for data in "${sorted_branches[@]}"; do
     IFS='|' read -r date branch commits backend frontend genkit api core msg <<< "$data"
-    
+
     # Only show branches with backend changes
     if [ "$backend" -gt 0 ]; then
         echo -e "${YELLOW}Branch: ${GREEN}$branch${NC}"
@@ -156,19 +156,19 @@ for data in "${sorted_branches[@]}"; do
         echo -e "     - Genkit flows: $genkit files"
         echo -e "     - API endpoints: $api files"
         echo -e "     - Core logic: $core files"
-        
+
         # List specific backend files changed
         echo -e "  📝 Backend files modified:"
         git diff --name-only "$DEFAULT_BRANCH...origin/$branch" 2>/dev/null | \
             grep "^backend/" | \
             head -10 | \
             sed 's/^/     - /'
-        
+
         total_backend_files=$(git diff --name-only "$DEFAULT_BRANCH...origin/$branch" 2>/dev/null | grep -c "^backend/" || echo "0")
         if [ "$total_backend_files" -gt 10 ]; then
             echo -e "     ${YELLOW}... and $((total_backend_files - 10)) more files${NC}"
         fi
-        
+
         echo ""
     fi
 done

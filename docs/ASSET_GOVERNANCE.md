@@ -1,7 +1,7 @@
 # Kerala Rage Asset Governance
 
-**Version:** 3.0.0  
-**Last Updated:** 2026-02-11  
+**Version:** 3.0.0
+**Last Updated:** 2026-02-11
 **Status:** Active
 
 ---
@@ -43,17 +43,17 @@ Each asset in the KR Solidarity collection has a specific cultural or political 
 
 ### 3. First Nations In-Situ Restriction
 
-**Asset:** `KR-SOLID-009` (First Nations Placard)  
+**Asset:** `KR-SOLID-009` (First Nations Placard)
 **Text:** "ALWAYS WAS ALWAYS WILL BE"
 
 This asset is **strictly restricted** to:
 - ✅ `LandingPage` component (Acknowledgement of Country section only)
 - ✅ `Attributions.md` documentation reference
 
-**Rationale:**  
+**Rationale:**
 First Nations imagery must not be used decoratively or outside the context of explicit acknowledgement. This is a cultural respect protocol, not a design preference.
 
-**Enforcement:**  
+**Enforcement:**
 The runtime guard will log a **CRITICAL** error in development if this asset is requested by any other component.
 
 ---
@@ -94,7 +94,7 @@ import { useKRAsset } from '@/utils/assetGuards';
 ```tsx
 function ManifestoCard() {
   const shivaStatue = useKRAsset('KR-SOLID-001', 'ManifestoCard', 'background motif');
-  
+
   return (
     <div style={{ backgroundImage: `url(${shivaStatue})` }}>
       {/* content */}
@@ -304,7 +304,7 @@ Planned test suite:
 The `AssetLibrary` component (`features/analysis/AssetLibrary.tsx`) serves as a **reference gallery and developer tool** for browsing KR Solidarity assets.
 
 > [!IMPORTANT]
-> **AssetLibrary is for inspection and exploration ONLY.**  
+> **AssetLibrary is for inspection and exploration ONLY.**
 > It is NOT the source of truth for governance rules. The registry (`krSolidarityAssets.ts`) is the canonical authority.
 
 **Role in governance:**
@@ -351,6 +351,6 @@ If you encounter:
 
 ---
 
-**Governance system version:** 3.0.0  
-**Enforced via:** Code-level runtime guards  
+**Governance system version:** 3.0.0
+**Enforced via:** Code-level runtime guards
 **Status:** Active and enforced in development mode

@@ -21,4 +21,3 @@
 
 - This file is a lightweight handoff artifact, not a full git log.
 - Use `git status -sb` and `git log --oneline` for canonical history.
-

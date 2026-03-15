@@ -21,4 +21,3 @@ Date: 2026-02-08 00:13:31
 3. **Motion:** Check animations. Legacy linear easings may still exist.
 4. **CSS Variables:** Verify `kerala-rage.css` contains the new root variables.
 5. **Shadows:** Check `tokens.json` for new shadow definitions.
-

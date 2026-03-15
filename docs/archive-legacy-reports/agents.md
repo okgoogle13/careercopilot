@@ -179,7 +179,7 @@ This file defines the expected format, tone, and scoring rules for autonomous au
 
 ### 1.1 GOLDEN EXAMPLE: TECHNICAL DEBT FINDING
 
-**File:** `backend/src/controllers/user_auth.py`  
+**File:** `backend/src/controllers/user_auth.py`
 **Snippet:**
 
 ```python

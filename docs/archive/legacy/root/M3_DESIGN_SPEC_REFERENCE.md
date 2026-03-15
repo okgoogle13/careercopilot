@@ -1,6 +1,6 @@
 # M3 Design Spec Reference
 
-**Material Design 3 Expressive Design System**  
+**Material Design 3 Expressive Design System**
 **Complete token reference for CareerCopilot components**
 
 ---
@@ -234,5 +234,5 @@
 
 ---
 
-**Last Updated:** 2025-01-XX  
+**Last Updated:** 2025-01-XX
 **Version:** M3 Expressive Design System v1.0

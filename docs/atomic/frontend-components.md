@@ -24,4 +24,3 @@
 “Review component migration queue and missing tests/stories. Use filesystem MCP to read:
 `docs/development/FRONTEND_MIGRATION_QUEUE.md` and `docs/development/FRONTEND_MIGRATION_STATUS.md`.
 Return: prioritized actions + missing coverage list.”
-

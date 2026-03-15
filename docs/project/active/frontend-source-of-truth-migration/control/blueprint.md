@@ -15,6 +15,16 @@ Wire all P0 and P1 backend capabilities into the live routed product, repair the
 
 ---
 
+## Target State Snapshot
+
+- All live routes map to a single canonical owner in the route matrix, with zero `/kr/*` prototype routes in product truth.
+- Each routed surface has a canonical wireframe (`frontend/src/screens/**/*.wireframe.xml`) paired with its runtime screen file and KR Solidarity token compliance.
+- Backend capabilities are mapped to routed owners; mock-backed routes are retired or explicitly deferred.
+- Wireframe workflow is repaired and verifiable: validator passes, build contracts tracked, and gap-map alignment enforced before spec generation.
+- Governance gates for touched routes are green: token-enforcement, migration-audit (when required), and brand compliance checks.
+- Execution truth remains `control/blueprint.md` + `control/workflow.md`; analysis and protocol notes are advisory only.
+
+---
 ## Architecture & Authority Layers
 
 | Layer | Authority | Canonical location |
@@ -28,6 +38,11 @@ Wire all P0 and P1 backend capabilities into the live routed product, repair the
 
 ---
 
+## Decision Log
+
+- 2026-03-15 — Added Gemini protocol review (`/Users/okgoogle13/.gemini/antigravity/brain/30a372bc-8284-40a6-8082-71b1f8d7298d/skill_review.md.resolved`) as advisory-only logistics guidance. It does not change authority order or gate ownership; human direction remains required for migration decisions.
+
+---
 ## Blocker Semantics
 
 - `technical_blocked`: required implementation inputs are still incomplete

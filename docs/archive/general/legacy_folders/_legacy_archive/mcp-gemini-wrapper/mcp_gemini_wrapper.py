@@ -50,10 +50,10 @@ class GeminiMCPServer:
         if GENAI_AVAILABLE and self.api_key and self.api_key.startswith("AIza"):
             try:
                 genai.configure(api_key=self.api_key)
-                
+
                 # Try primary model first
                 models_to_try = [self.model_name] + self.fallback_models
-                
+
                 for model_name in models_to_try:
                     try:
                         self.model = genai.GenerativeModel(model_name)
@@ -67,10 +67,10 @@ class GeminiMCPServer:
                     except Exception as e:
                         logger.warning(f"Failed to initialize {model_name}: {e}")
                         continue
-                
+
                 if not self.initialized:
                     raise Exception("All models failed to initialize")
-                    
+
             except Exception as e:
                 logger.warning(f"Gemini initialization failed, using demo mode: {e}")
                 self.initialized = False
@@ -145,21 +145,21 @@ class GeminiMCPServer:
 
         # Fallback: conservative estimate (4 chars = 1 token for English)
         return len(text) // 4
-        
+
     # --- NEW METHOD FOR CONTEXT SAVING ---
     def generate_interface_definition(self) -> str:
         """
-        Generates a minimal Python interface file (IDF) containing only method 
-        signatures and docstrings. This file should be referenced in CLAUDE.md 
+        Generates a minimal Python interface file (IDF) containing only method
+        signatures and docstrings. This file should be referenced in CLAUDE.md
         instead of the full implementation to save context tokens.
         """
         methods = [
-            self.explain_text, self.analyze_code, self.summarize, 
-            self.brainstorm, self.architecture_analysis, 
-            self.refactoring_suggestions, self.error_diagnosis, 
+            self.explain_text, self.analyze_code, self.summarize,
+            self.brainstorm, self.architecture_analysis,
+            self.refactoring_suggestions, self.error_diagnosis,
             self.documentation_insights, self.optimization_analysis, self.health_check
         ]
-        
+
         output = [
             '# Minimal Interface Definition File (IDF) for mcp-gemini-wrapper.',
             '# Use this file for Claude context instead of the full implementation.',
@@ -167,12 +167,12 @@ class GeminiMCPServer:
             '',
             'class GeminiMCPServerInterface:',
         ]
-        
+
         for method in methods:
             try:
                 sig = inspect.signature(method)
                 doc = inspect.getdoc(method)
-                
+
                 # Format signature (e.g., 'def analyze_code(self, code: str, language: str = "python") -> Dict[str, Any]:')
                 signature_str = f"    def {method.__name__}{sig}:"
 
@@ -210,7 +210,7 @@ class GeminiMCPServer:
         """Analyze and explain code."""
         system_prompt = f"You are an expert {language} code reviewer. Analyze the following code and provide insights."
         return self.delegate_to_gemini(code, system_prompt)
-        
+
     def summarize(self, text: str) -> Dict[str, Any]:
         """Create a concise summary of text."""
         system_prompt = "You are an expert summarizer. Provide a concise summary in 2-3 sentences."

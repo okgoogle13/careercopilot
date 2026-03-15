@@ -12,7 +12,7 @@ def check_empty_packages():
     for pkg_dir in packages_dir.iterdir():
         if not pkg_dir.is_dir():
             continue
-        
+
         entry_file = pkg_dir / 'manifest-entry.json'
         if entry_file.exists():
             with open(entry_file, 'r') as f:
@@ -25,7 +25,7 @@ def check_empty_packages():
                             empty_packages.append(pkg_dir.name)
                 except:
                     pass
-                    
+
     print(f"Empty Packages: {len(empty_packages)}")
     for pkg in sorted(empty_packages):
         print(f"  {pkg}")

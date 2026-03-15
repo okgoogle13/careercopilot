@@ -559,4 +559,3 @@ All components follow **Material Design 3 Expressive** motion principles:
 **Tested:** Unit tests passing, Storybook verified
 **Documented:** Complete JSDoc + Storybook stories
 **Performance:** 60fps animations validated
-

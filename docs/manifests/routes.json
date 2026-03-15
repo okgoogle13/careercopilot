@@ -1,0 +1,195 @@
+{
+  "generatedAt": "2026-03-15T03:27:35.216Z",
+  "count": 27,
+  "routes": [
+    {
+      "path": "/",
+      "component": "LandingPage",
+      "importSource": "./features/landing/LandingPage",
+      "auth": false,
+      "layout": "public"
+    },
+    {
+      "path": "/login",
+      "component": "Login",
+      "importSource": "./features/auth/Login",
+      "auth": false,
+      "layout": "public"
+    },
+    {
+      "path": "/register",
+      "component": "Register",
+      "importSource": "./features/auth/Register",
+      "auth": false,
+      "layout": "public"
+    },
+    {
+      "path": "/design-sidekick",
+      "component": "DesignSidekick",
+      "importSource": "./features/design-sidekick/DesignSidekick",
+      "auth": false,
+      "layout": "public"
+    },
+    {
+      "path": "/style-guide",
+      "component": "StyleGuide",
+      "importSource": "./features/style-guide/StyleGuide",
+      "auth": false,
+      "layout": "public"
+    },
+    {
+      "path": "/kr/landing",
+      "component": "HeroLanding",
+      "importSource": "./components/phase3-batch2/HeroLanding",
+      "auth": false,
+      "layout": "public"
+    },
+    {
+      "path": "/kr/auth",
+      "component": "AuthModal",
+      "importSource": "./components/phase3-batch2/AuthModal",
+      "auth": false,
+      "layout": "public"
+    },
+    {
+      "path": "/kr/onboarding",
+      "component": "OnboardFlow",
+      "importSource": "./components/phase3-batch2/OnboardFlow",
+      "auth": false,
+      "layout": "public"
+    },
+    {
+      "path": "/kr/analysis",
+      "component": "AnalysisWorkbench",
+      "importSource": "./components/phase3-batch3/AnalysisWorkbench",
+      "auth": false,
+      "layout": "public"
+    },
+    {
+      "path": "/kr/dashboard",
+      "component": "DashboardOverview",
+      "importSource": "./components/phase3-batch3/DashboardOverview",
+      "auth": false,
+      "layout": "public"
+    },
+    {
+      "path": "*",
+      "component": "NotFound",
+      "importSource": "./features/not-found/NotFound",
+      "auth": false,
+      "layout": "public"
+    },
+    {
+      "path": "/tracker",
+      "component": "ApplicationTracker",
+      "importSource": "./features/applications/ApplicationTracker",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/dashboard",
+      "component": "Dashboard",
+      "importSource": "./features/dashboard/Dashboard",
+      "auth": true,
+      "layout": "protected"
+    },
+    {
+      "path": "/onboarding",
+      "component": "OnboardingRoute",
+      "importSource": "UNKNOWN",
+      "auth": true,
+      "layout": "protected"
+    },
+    {
+      "path": "/welcome",
+      "component": "WelcomeScreen",
+      "importSource": "./features/onboarding/WelcomeScreen",
+      "auth": true,
+      "layout": "protected"
+    },
+    {
+      "path": "/documents",
+      "component": "Documents",
+      "importSource": "./features/documents/Documents",
+      "auth": true,
+      "layout": "protected"
+    },
+    {
+      "path": "/analysis",
+      "component": "AnalysisPage",
+      "importSource": "./pages/AnalysisPage",
+      "auth": true,
+      "layout": "protected"
+    },
+    {
+      "path": "/opportunities",
+      "component": "Opportunities",
+      "importSource": "./features/opportunities/Opportunities",
+      "auth": true,
+      "layout": "protected"
+    },
+    {
+      "path": "/ksc-generator",
+      "component": "KSCGenerator",
+      "importSource": "./features/ksc-generator/KSCGenerator",
+      "auth": true,
+      "layout": "protected"
+    },
+    {
+      "path": "/cover-letter-generator",
+      "component": "CoverLetterGenerator",
+      "importSource": "./features/applications/CoverLetterGenerator",
+      "auth": true,
+      "layout": "protected"
+    },
+    {
+      "path": "/settings",
+      "component": "Settings",
+      "importSource": "./features/settings/Settings",
+      "auth": true,
+      "layout": "protected"
+    },
+    {
+      "path": "/profile",
+      "component": "ProfileView",
+      "importSource": "./features/profile/components/ProfileView",
+      "auth": true,
+      "layout": "protected"
+    },
+    {
+      "path": "/asset-library",
+      "component": "AssetLibrary",
+      "importSource": "./features/analysis/AssetLibrary",
+      "auth": true,
+      "layout": "protected"
+    },
+    {
+      "path": "/career/ingest",
+      "component": "IngestionPage",
+      "importSource": "./pages/IngestionPage",
+      "auth": true,
+      "layout": "protected"
+    },
+    {
+      "path": "/job-queue",
+      "component": "JobQueue",
+      "importSource": "./pages/JobQueue",
+      "auth": true,
+      "layout": "protected"
+    },
+    {
+      "path": "/apply/quick",
+      "component": "ApplyQuick",
+      "importSource": "./pages/ApplyQuick",
+      "auth": true,
+      "layout": "protected"
+    },
+    {
+      "path": "/test-tokens",
+      "component": "TokenTest",
+      "importSource": "./components/debug/TokenTest",
+      "auth": true,
+      "layout": "protected"
+    }
+  ]
+}

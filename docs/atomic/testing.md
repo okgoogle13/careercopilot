@@ -22,4 +22,3 @@
 
 - Prefer `pnpm -C frontend` commands to keep workspace aligned.
 - Use Playwright MCP for UI regression checks.
-
