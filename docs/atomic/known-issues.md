@@ -22,4 +22,3 @@
 
 - Legacy AI logic still exists in `backend/app/core` and `backend/app/services`.
   - Migration queue: `docs/development/GENKIT_MIGRATION_QUEUE.md`.
-

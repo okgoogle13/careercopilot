@@ -179,7 +179,7 @@ frontend/src/components/main/__tests__
 frontend/src/components/style-guide
 
 --- 3. Component Files ( Grouped by Directory ) ---
-Check for: 
+Check for:
   - Components defined outside of their domain folders
   - Duplicate naming (e.g., UserProfile.tsx vs UserProfileCard.tsx)
   - Mixed file extensions (.js mixed with .tsx)
@@ -1063,7 +1063,7 @@ frontend/src/_legacy/components/career/__tests__/JobSearch.test.tsx:  // TODO: A
 frontend/src/_legacy/components/career/__tests__/JobSearch.test.tsx:  // TODO: Add accessibility tes
 frontend/src/_legacy/components/career/__tests__/JobSearch.test.tsx:  // TODO: Add edge case tests
 frontend/src/_legacy/components/career/__tests__/TimelineView.test.tsx:  // TODO: Add visual tests
-frontend/src/_legacy/components/career/__tests__/TimelineView.test.tsx:  // TODO: Add accessibility 
+frontend/src/_legacy/components/career/__tests__/TimelineView.test.tsx:  // TODO: Add accessibility
 frontend/src/_legacy/components/career/__tests__/TimelineView.test.tsx:  // TODO: Add edge case test
 frontend/src/_legacy/components/SkeletonLoader/__tests__/SkeletonLoader.test.tsx:  // TODO: Add anim
 frontend/src/_legacy/components/SkeletonLoader/__tests__/SkeletonLoader.test.tsx:  // TODO: Add acce
@@ -1078,7 +1078,7 @@ frontend/src/_legacy/components/layout/__tests__/PageHeader.test.tsx:  // TODO: 
 frontend/src/_legacy/components/layout/__tests__/PageHeader.test.tsx:  // TODO: Add responsive tests
 frontend/src/_legacy/components/layout/__tests__/PageHeader.test.tsx:  // TODO: Add edge case tests
 frontend/src/_legacy/components/layout/__tests__/Navbar.test.tsx:  // TODO: Add mobile drawer tests
-frontend/src/_legacy/components/layout/__tests__/Navbar.test.tsx:  // TODO: Add keyboard navigation 
+frontend/src/_legacy/components/layout/__tests__/Navbar.test.tsx:  // TODO: Add keyboard navigation
 frontend/src/_legacy/components/layout/__tests__/Navbar.test.tsx:  // TODO: Add edge case tests
 frontend/src/_legacy/components/layout/__tests__/AppShell.test.tsx:  // TODO: Add mobile drawer test
 frontend/src/_legacy/components/layout/__tests__/AppShell.test.tsx:  // TODO: Add responsive tests
@@ -1089,9 +1089,9 @@ frontend/src/_legacy/components/features/opportunities/__tests__/FeatureCard.tes
 frontend/src/_legacy/components/features/dashboard/dashboard/__tests__/DashboardHeader.test.tsx:  //
 frontend/src/_legacy/components/features/dashboard/dashboard/__tests__/DashboardHeader.test.tsx:  //
 frontend/src/_legacy/components/features/dashboard/dashboard/__tests__/DashboardHeader.test.tsx:  //
-frontend/src/_legacy/components/features/dashboard/dashboard/__tests__/DashboardStats.test.tsx:  // 
-frontend/src/_legacy/components/features/dashboard/dashboard/__tests__/DashboardStats.test.tsx:  // 
-frontend/src/_legacy/components/features/dashboard/dashboard/__tests__/DashboardStats.test.tsx:  // 
+frontend/src/_legacy/components/features/dashboard/dashboard/__tests__/DashboardStats.test.tsx:  //
+frontend/src/_legacy/components/features/dashboard/dashboard/__tests__/DashboardStats.test.tsx:  //
+frontend/src/_legacy/components/features/dashboard/dashboard/__tests__/DashboardStats.test.tsx:  //
 frontend/src/_legacy/components/features/dashboard/__tests__/Settings.test.tsx:  // TODO: Add switch
 frontend/src/_legacy/components/features/dashboard/__tests__/Settings.test.tsx:  // TODO: Add form s
 frontend/src/_legacy/components/features/dashboard/__tests__/Settings.test.tsx:  // TODO: Add valida
@@ -1106,11 +1106,11 @@ frontend/src/_legacy/components/library/__tests__/ProfileVariationCard.test.tsx:
 frontend/src/_legacy/components/library/__tests__/KeywordTag.test.tsx:  // TODO: Add variant tests
 frontend/src/_legacy/components/library/__tests__/KeywordTag.test.tsx:  // TODO: Add accessibility t
 frontend/src/_legacy/components/library/__tests__/KeywordTag.test.tsx:  // TODO: Add edge case tests
-frontend/src/_legacy/components/SmartUploadModal/__tests__/SmartUploadModal.test.tsx:  // TODO: Add 
-frontend/src/_legacy/components/SmartUploadModal/__tests__/SmartUploadModal.test.tsx:  // TODO: Add 
-frontend/src/_legacy/components/NotificationCenter/__tests__/NotificationCenter.test.tsx:  // TODO: 
-frontend/src/_legacy/components/NotificationCenter/__tests__/NotificationCenter.test.tsx:  // TODO: 
-frontend/src/_legacy/components/NotificationCenter/__tests__/NotificationCenter.test.tsx:  // TODO: 
+frontend/src/_legacy/components/SmartUploadModal/__tests__/SmartUploadModal.test.tsx:  // TODO: Add
+frontend/src/_legacy/components/SmartUploadModal/__tests__/SmartUploadModal.test.tsx:  // TODO: Add
+frontend/src/_legacy/components/NotificationCenter/__tests__/NotificationCenter.test.tsx:  // TODO:
+frontend/src/_legacy/components/NotificationCenter/__tests__/NotificationCenter.test.tsx:  // TODO:
+frontend/src/_legacy/components/NotificationCenter/__tests__/NotificationCenter.test.tsx:  // TODO:
 frontend/src/_legacy/components/profiles/__tests__/CreateProfileCard.test.tsx:  // TODO: Add styling
 frontend/src/_legacy/components/profiles/__tests__/CreateProfileCard.test.tsx:  // TODO: Add accessi
 frontend/src/_legacy/components/profiles/__tests__/ProfileCard.test.tsx:  // TODO: Add visual tests
@@ -1126,7 +1126,7 @@ frontend/src/_legacy/components/main/__tests__/JobSearchStatus.test.tsx:  // TOD
 frontend/src/_legacy/components/main/__tests__/ActionCard.test.tsx:  // TODO: Add variant tests
 frontend/src/_legacy/components/main/__tests__/ActionCard.test.tsx:  // TODO: Add accessibility test
 frontend/src/_legacy/components/main/__tests__/ActionCard.test.tsx:  // TODO: Add edge case tests
-frontend/src/_legacy/components/main/__tests__/FeatureHighlights.test.tsx:  // TODO: Add responsive 
+frontend/src/_legacy/components/main/__tests__/FeatureHighlights.test.tsx:  // TODO: Add responsive
 
 ========================================================
 Audit Complete.

@@ -11,14 +11,14 @@
 1. **Navigation Check**:
    - Target: `https://www.google.com`
    - Result: ✅ Success (200 OK)
-   
+
 2. **Action Check (Screenshot)**:
    - Target: Full Page
    - Result: ✅ Success
    - Output: `Downloads/google_smoke_test-*.png`
 
 ### Connection Details
-The agent successfully communicated with the Playwright MCP server via `stdio`. 
+The agent successfully communicated with the Playwright MCP server via `stdio`.
 This confirms that:
 1. Node.js environment is correctly configured.
 2. The `@executeautomation/playwright-mcp-server` package is installed and runnable.

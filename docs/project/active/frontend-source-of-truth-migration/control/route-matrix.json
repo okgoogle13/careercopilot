@@ -1,7 +1,7 @@
 {
   "artifact": "target_state_route_matrix",
   "generated_at": "2026-03-13",
-  "canonical_plan": "docs/project/active/frontend-source-of-truth-migration/2026-03-13-proposed-final-migration-plan.md",
+  "canonical_plan": "docs/project/active/frontend-source-of-truth-migration/control/blueprint.md",
   "schema_version": 3,
   "row_count": 27,
   "decision_rules": [

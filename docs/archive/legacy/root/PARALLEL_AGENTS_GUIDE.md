@@ -1,6 +1,6 @@
 # Parallel Agents and Tasks Guide
 
-**Last Updated:** 2025-11-24  
+**Last Updated:** 2025-11-24
 **Audience:** Developers working with multi-agent systems in CareerCopilot
 
 This guide explains how to set up multiple agents and tasks working in parallel, covering both Python backend orchestration and Claude/Jules delegation patterns.

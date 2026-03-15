@@ -1,6 +1,6 @@
 # MCP Server Registry
 
-**Last Updated:** 2026-03-03  
+**Last Updated:** 2026-03-03
 **Source of Truth Config:** `.vscode/mcp.json`
 
 ---

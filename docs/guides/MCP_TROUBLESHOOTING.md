@@ -1,6 +1,6 @@
 # MCP Server Troubleshooting Guide
 
-**Last Updated:** 2026-03-03  
+**Last Updated:** 2026-03-03
 **Config file:** `.vscode/mcp.json` (single source of truth)
 
 ---
@@ -223,7 +223,7 @@ However, Antigravity didn't have access to this environment variable when launch
 ### ❌ What Was Failing
 **API Key Validation:** Server logs showed:
 ```
-2025-12-27 01:41:07,366 - [Sidekick] - WARNING - Failed to init fast model gemini-1.5-flash: 
+2025-12-27 01:41:07,366 - [Sidekick] - WARNING - Failed to init fast model gemini-1.5-flash:
 400 API key not valid. Please pass a valid API key.
 [reason: "API_KEY_INVALID"]
 ```
@@ -382,7 +382,7 @@ print('API Key Valid:', bool(response.text))
 
 ## ✅ Summary
 
-**Problem:** API key not being passed to MCP server  
-**Solution:** Hardcoded API key in MCP configuration  
-**Status:** Ready for testing after Antigravity restart  
+**Problem:** API key not being passed to MCP server
+**Solution:** Hardcoded API key in MCP configuration
+**Status:** Ready for testing after Antigravity restart
 **Next Action:** Restart Antigravity and verify flash-sidekick appears in MCP servers list

@@ -20,24 +20,24 @@ async def main():
     Run the Test Automation Specialist Agent to generate and validate tests.
     """
     logger.info("🚀 Starting Test Automation Specialist Agent...")
-    
+
     agent = TestAutomationSpecialistAgent()
-    
+
     # Context can be populated with specific targets if needed
     context = {
         "target_scope": "all",
         "focus_area": "m3_compliance"
     }
-    
+
     try:
         results = await agent.execute(context)
         logger.info("✅ Test Automation Specialist completed successfully.")
         logger.info(f"Results: {results}")
-        
+
         # In a real scenario, we might want to fail the build if tests failed
         # or if coverage didn't improve enough, but for now we just exit 0.
         sys.exit(0)
-        
+
     except Exception as e:
         logger.error(f"❌ Agent execution failed: {e}")
         sys.exit(1)

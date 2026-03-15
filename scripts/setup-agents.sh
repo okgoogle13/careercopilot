@@ -29,7 +29,7 @@ create_file() {
   local dir="$1"
   local file="$2"
   local content="$3"
-  
+
   mkdir -p "$dir"
   if [ ! -f "$dir/$file" ]; then
     echo -e "$content" > "$dir/$file"

@@ -415,7 +415,7 @@ import { MetricCard, StatCard, PageHeader } from './shared';
 
 ---
 
-**Status:** ✅ **PRODUCTION READY**  
-**Last Updated:** December 2025  
-**Version:** 1.0.0  
+**Status:** ✅ **PRODUCTION READY**
+**Last Updated:** December 2025
+**Version:** 1.0.0
 **License:** Career Copilot Internal

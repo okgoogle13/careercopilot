@@ -17,19 +17,14 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
-DEFAULT_MATRIX = Path(
-    "docs/project/active/frontend-source-of-truth-migration/2026-03-13-target-state-route-matrix.json"
-)
-DEFAULT_GAP_MAP = Path(
-    "docs/project/active/frontend-source-of-truth-migration/2026-03-13-backend-feature-frontend-component-gap-map.json"
-)
-DEFAULT_SCREENS_ROOT = Path("frontend/src/screens")
-DEFAULT_PLACEMENT_REPORT = Path(".claude/wireframes/placement_report.json")
-DEFAULT_JSON_OUT = Path("tmp/wireframe-workflow-report.json")
-DEFAULT_BUILD_CONTRACT_SCHEMA = Path("docs/schema/build_contract.xsd")
-DEFAULT_BUILD_CONTRACTS_GLOB = Path(
-    "docs/project/active/frontend-source-of-truth-migration"
-)
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+DEFAULT_MATRIX = _REPO_ROOT / "docs/project/active/frontend-source-of-truth-migration/control/route-matrix.json"
+DEFAULT_GAP_MAP = _REPO_ROOT / "docs/project/active/frontend-source-of-truth-migration/control/gap-map.json"
+DEFAULT_SCREENS_ROOT = _REPO_ROOT / "frontend/src/screens"
+DEFAULT_PLACEMENT_REPORT = _REPO_ROOT / ".claude/wireframes/placement_report.json"
+DEFAULT_JSON_OUT = _REPO_ROOT / "tmp/migration/wireframe-workflow-report.json"
+DEFAULT_BUILD_CONTRACT_SCHEMA = _REPO_ROOT / "docs/schema/build_contract.xsd"
+DEFAULT_BUILD_CONTRACTS_GLOB = _REPO_ROOT / "docs/project/active/frontend-source-of-truth-migration/contracts"
 
 COLOR_LITERAL_RE = re.compile(
     r"#[0-9A-Fa-f]{3,8}\b|rgba?\(|hsla?\(",
@@ -447,7 +442,7 @@ def main() -> int:
     route_failures, route_warnings, _expected_paths = evaluate_route_coverage(rows, args.screens_root)
     component_failures, component_warnings = evaluate_component_alignment(rows, features)
     legacy_failures, legacy_warnings, legacy_summary = evaluate_legacy_artifacts(
-        Path(".claude/wireframes"),
+        _REPO_ROOT / ".claude/wireframes",
         file_results,
         args.placement_report,
     )
@@ -457,7 +452,7 @@ def main() -> int:
         contract_paths = args.build_contracts
     else:
         contracts_dir = DEFAULT_BUILD_CONTRACTS_GLOB
-        contract_paths = sorted(contracts_dir.glob("*-build-contract-*.xml")) if contracts_dir.exists() else []
+        contract_paths = sorted(contracts_dir.glob("*build-contract*.xml")) if contracts_dir.exists() else []
     xsd_issues = validate_build_contract_xsd(contract_paths, args.xsd)
     xsd_failures = [i for i in xsd_issues if i["type"] in ("build_contract_xsd_failure", "build_contract_not_found", "xsd_schema_missing")]
     xsd_warnings = [i for i in xsd_issues if i["type"] not in ("build_contract_xsd_failure", "build_contract_not_found", "xsd_schema_missing")]
@@ -533,12 +528,6 @@ def main() -> int:
     if status == "warn" and args.strict:
         return 1
     return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())
-
-
 
 
 if __name__ == "__main__":

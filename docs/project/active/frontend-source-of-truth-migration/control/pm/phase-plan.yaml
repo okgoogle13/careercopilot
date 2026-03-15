@@ -1,0 +1,46 @@
+project: "PR126 Frontend Source-of-Truth Migration"
+status: IN_PROGRESS
+
+phases:
+  - id: phase-1-planning-inputs
+    name: "Phase 1: Planning Inputs + Parity"
+    status: COMPLETE
+    gates_required:
+      - "pytest tests/plans -q == PASS"
+      - "node frontend/scripts/validate-governance-artifacts.mjs == PASS"
+    exit_criteria:
+      - "control/route-matrix.json and control/gap-map.json are canonical and validated"
+
+  - id: phase-2-contract-gates
+    name: "Phase 2: Build-Contract Gates"
+    status: COMPLETE
+    gates_required:
+      - "contracts/build-contract-tracker.xml approved"
+    exit_criteria:
+      - "At least one route contract approved and reusable pattern documented"
+
+  - id: phase-3-route-execution
+    name: "Phase 3: Route Execution (Parallel-Safe)"
+    status: IN_PROGRESS
+    gates_required:
+      - "route has route-matrix row"
+      - "token-enforcement passes on touched files"
+    exit_criteria:
+      - "P0/P1 backend capabilities have routed owners and no mock-backed primary paths"
+
+  - id: phase-4-wireframe-workflow
+    name: "Phase 4: Wireframe Workflow Repair + Enforcement"
+    status: IN_PROGRESS
+    gates_required:
+      - "python3 scripts/validate-wireframe-workflow.py produces report"
+      - "wireframe-build-contract prompt used for route contracts where applicable"
+    exit_criteria:
+      - "wireframe -> contract -> gap-fill -> spec sequence is deterministic and followed"
+
+  - id: phase-5-cleanup
+    name: "Phase 5: Cleanup + Prototype Retirement"
+    status: PENDING
+    gates_required:
+      - "route-matrix: /kr/* routes classified as retire"
+    exit_criteria:
+      - "0 /kr/* prototype routes in product truth"

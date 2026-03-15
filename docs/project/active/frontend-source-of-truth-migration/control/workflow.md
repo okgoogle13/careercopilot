@@ -38,7 +38,7 @@ These are reference inputs, not execution truth.
 
 1. Generate or refresh wireframe intent with `wireframe-annotator`.
 2. Validate canonical wireframes with `scripts/validate-wireframe-workflow.py`.
-3. Generate a route-level build contract with `2026-03-14-wireframe-build-contract-prompt.md`.
+3. Generate a route-level build contract with `contracts/wireframe-build-contract-prompt.md`.
 4. Run `scripts/derive-gap-fill-plan.py` to determine whether each target component should reuse runtime behavior, rewrite styling to semantic tokens, remain reference-only, or be built fresh.
 5. Resolve asset slots with `asset-placement-strategy`.
 6. Reconcile asset integrity with `manifest-reconciler` when asset references changed.
@@ -90,4 +90,4 @@ The first run of `scripts/validate-wireframe-workflow.py` found:
 - asset-integrity warning:
   - `placement_report.json` passes placement while still reporting invalid asset file paths
 
-Use the JSON report at `tmp/wireframe-workflow-report.json` as the current evidence source, not summary prose.
+Use the JSON report at `tmp/migration/wireframe-workflow-report.json` as the current evidence source, not summary prose.

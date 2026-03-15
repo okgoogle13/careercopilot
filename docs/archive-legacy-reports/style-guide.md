@@ -76,10 +76,10 @@ This card represents an object embedded in the rock wall, not floating above it.
 export const StoneCard = ({ children }) => (
   <div
     className="
-    bg-stone 
-    rounded-lg 
-    border-t border-white/10 
-    border-x border-white/5 
+    bg-stone
+    rounded-lg
+    border-t border-white/10
+    border-x border-white/5
     border-b border-black/40
     shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]
     p-6
@@ -103,16 +103,16 @@ export const MagmaButton = ({ label, onClick }) => (
   <button
     onClick={onClick}
     className="
-      bg-magma 
-      text-bedrock 
-      font-sans 
-      font-bold 
+      bg-magma
+      text-bedrock
+      font-sans
+      font-bold
       tracking-wide
-      px-8 py-3 
-      rounded-full 
-      hover:bg-magma-glow 
-      hover:shadow-[0_0_20px_rgba(255,158,125,0.4)] 
-      transition-all 
+      px-8 py-3
+      rounded-full
+      hover:bg-magma-glow
+      hover:shadow-[0_0_20px_rgba(255,158,125,0.4)]
+      transition-all
       duration-300
       active:scale-95
     "

@@ -16,4 +16,3 @@
 
 - All internal payloads must use Pydantic V2.
 - Avoid raw dicts for internal APIs.
-

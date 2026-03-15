@@ -41,7 +41,7 @@ safe_move() {
   src=$1
   dest=$2
   name=$(basename "$src")
-  
+
   if [ -d "$src" ]; then
     if [ -d "$dest/$name" ]; then
       echo "⚠️  Conflict: $dest/$name already exists. Please merge manually."

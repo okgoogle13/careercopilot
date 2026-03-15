@@ -254,7 +254,7 @@ def main():
     for key in required_keys:
         if key not in tokens:
             errors.append(f"  [FAIL] Missing top-level key: '{key}'")
-    
+
     if not errors: print("  [PASS] Schema valid.")
 
     print("\n2. Checking Color Contrast...")
@@ -268,7 +268,7 @@ def main():
     if errors:
         print("\n❌ Validation Failed.", file=sys.stderr)
         sys.exit(1)
-    
+
     print("\n✅ All validations passed.")
 
 if __name__ == "__main__":

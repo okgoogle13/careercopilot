@@ -1,0 +1,76 @@
+{
+  "generatedAt": "2026-03-15T03:30:36.553Z",
+  "orphanedFeatures": [
+    "KrDark",
+    "editor",
+    "gallery",
+    "ingestion",
+    "jobs",
+    "sandbox"
+  ],
+  "orphanedPages": [
+    "Dashboard.tsx",
+    "ResumeAuditPage.tsx"
+  ],
+  "unroutedScreens": [
+    "04_ingestion",
+    "06_lookout",
+    "07_kanban",
+    "08_workbench",
+    "09_finalization",
+    "10_settings"
+  ],
+  "nonFeatureRoutes": [
+    {
+      "path": "/kr/landing",
+      "source": "./components/phase3-batch2/HeroLanding"
+    },
+    {
+      "path": "/kr/auth",
+      "source": "./components/phase3-batch2/AuthModal"
+    },
+    {
+      "path": "/kr/onboarding",
+      "source": "./components/phase3-batch2/OnboardFlow"
+    },
+    {
+      "path": "/kr/analysis",
+      "source": "./components/phase3-batch3/AnalysisWorkbench"
+    },
+    {
+      "path": "/kr/dashboard",
+      "source": "./components/phase3-batch3/DashboardOverview"
+    },
+    {
+      "path": "/onboarding",
+      "source": "UNKNOWN"
+    },
+    {
+      "path": "/analysis",
+      "source": "./pages/AnalysisPage"
+    },
+    {
+      "path": "/career/ingest",
+      "source": "./pages/IngestionPage"
+    },
+    {
+      "path": "/job-queue",
+      "source": "./pages/JobQueue"
+    },
+    {
+      "path": "/apply/quick",
+      "source": "./pages/ApplyQuick"
+    },
+    {
+      "path": "/test-tokens",
+      "source": "./components/debug/TokenTest"
+    }
+  ],
+  "summary": {
+    "totalOrphans": 25,
+    "featureOrphans": 6,
+    "pageOrphans": 2,
+    "screenOrphans": 6,
+    "nonFeatureRoutes": 11
+  }
+}

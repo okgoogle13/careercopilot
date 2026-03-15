@@ -50,12 +50,12 @@ className="shadow-elevation-1 hover:shadow-elevation-2"
 #### After: M3 Layered Shadows
 ```css
 .shadow-elevation-1 {
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3),
               0 1px 3px 1px rgba(0, 0, 0, 0.15);
 }
 
 .shadow-elevation-2 {
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3),
               0 2px 6px 2px rgba(0, 0, 0, 0.15);
 }
 ```
@@ -124,7 +124,7 @@ export function ApplicationCard({ ... }: ApplicationCardProps) {
 ```tsx
 /**
  * ApplicationCard - M3 Compliant Job Application Tracker Card
- * 
+ *
  * **M3 Design Token Usage:**
  * - Shape: `--sys-shape-pebble` (20px 20px 32px 32px)
  * - Elevation: `--sys-elevation-level1` → `--sys-elevation-level2`
@@ -163,7 +163,7 @@ export function ApplicationCard({ ... }: ApplicationCardProps) {
 ### 3. **Color States** 🔍
 Review each story variant:
 - **Applied (Primary):** Indigo container (#4F00D3 tint)
-- **Screening (Secondary):** Teal container (#00897B tint)  
+- **Screening (Secondary):** Teal container (#00897B tint)
 - **Interview (Secondary):** Teal container
 - **Offer (Tertiary):** Hot pink container (#F50057 tint) - celebration mode!
 
@@ -255,11 +255,11 @@ className="rounded-{archetype}"
 **Solution:** Hard refresh browser (Cmd+Shift+R / Ctrl+Shift+R) to clear CSS cache
 
 ### "Shadow not visible"
-**Cause:** Dark mode background may hide subtle shadows  
+**Cause:** Dark mode background may hide subtle shadows
 **Solution:** Check elevated state on hover, or adjust `--sys-elevation-level1` values
 
 ### "Animation feels too slow/fast"
-**Adjust:** Change `--sys-motion-duration-medium-1` in design-tokens.css  
+**Adjust:** Change `--sys-motion-duration-medium-1` in design-tokens.css
 **Note:** 250ms is M3 standard for medium interactions
 
 ### "TypeScript errors in Storybook"
@@ -278,6 +278,6 @@ className="rounded-{archetype}"
 
 ---
 
-**Status:** ✅ Ready for visual review in Storybook  
-**Compliance:** 🎯 100% M3 Electric Alchemist  
+**Status:** ✅ Ready for visual review in Storybook
+**Compliance:** 🎯 100% M3 Electric Alchemist
 **Production Ready:** 🚀 Yes

@@ -32,8 +32,8 @@ export function StatCard({
         mass: 1,
       }}
       className={`
-        bg-[var(--surface-container)] rounded-[28px] p-8 
-        flex flex-col items-center justify-center 
+        bg-[var(--surface-container)] rounded-[28px] p-8
+        flex flex-col items-center justify-center
         relative overflow-hidden
         shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),inset_0_-1px_0_0_rgba(0,0,0,0.2),0_4px_24px_-1px_rgba(0,0,0,0.2)]
         ${className}

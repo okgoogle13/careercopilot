@@ -107,13 +107,13 @@ Our automated analysis uses weighted scoring:
    ```bash
    # Fetch all branches
    git fetch --all
-   
+
    # Run bash analysis for quick overview
    ./scripts/analyze_branches.sh
-   
+
    # Run Python analysis for detailed scoring
    python3 scripts/extract_backend_features.py
-   
+
    # Review the generated report
    cat branch_analysis.json | jq '.branches[] | select(.value_category == "HIGH")'
    ```
@@ -162,11 +162,11 @@ Our automated analysis uses weighted scoring:
    # Option A: Merge entire branch (if mostly backend)
    git checkout consolidation/backend-features
    git merge --no-ff origin/branch-name
-   
+
    # Resolve conflicts if any
    git status
    git diff --name-only --diff-filter=U
-   
+
    # After resolving conflicts
    git add .
    git commit -m "Merge branch-name: [description]"
@@ -175,21 +175,21 @@ Our automated analysis uses weighted scoring:
    ```bash
    # Option B: Cherry-pick backend commits only (if mixed)
    ./scripts/cherry_pick_backend.sh branch-name
-   
+
    # Review and apply suggested commits
    # Follow interactive prompts
    ```
 
 2. **After Each Merge:**
-   
+
    ```bash
    # Run tests
    cd backend
    pytest tests/ -v
-   
+
    # Check for import errors
    python3 -m py_compile app/**/*.py
-   
+
    # Verify Genkit flows if applicable
    ENABLE_GENKIT_FLOWS=true python3 verify_genkit.py
    ```
@@ -224,7 +224,7 @@ Our automated analysis uses weighted scoring:
    ```bash
    # Use the cherry-pick helper
    ./scripts/cherry_pick_backend.sh branch-name
-   
+
    # This will:
    # - Show backend-only commits
    # - Create patch files for review
@@ -278,14 +278,14 @@ git checkout origin/branch-name -- backend/app/api/endpoints/new_endpoint.py
    # Backend tests
    cd backend
    pytest tests/ -v --cov=app --cov-report=html
-   
+
    # Frontend tests (if any UI was integrated)
    cd ../frontend
    yarn test
-   
+
    # Integration tests
    yarn test:e2e
-   
+
    # Smoke tests
    ./scripts/smoke_test_sidekick.py
    ```
@@ -297,10 +297,10 @@ git checkout origin/branch-name -- backend/app/api/endpoints/new_endpoint.py
    cd backend
    ruff check .
    mypy app/
-   
+
    # Format check
    black --check app/
-   
+
    # Security scan
    bandit -r app/
    ```
@@ -312,17 +312,17 @@ git checkout origin/branch-name -- backend/app/api/endpoints/new_endpoint.py
    git checkout consolidation/backend-features
    git fetch origin develop
    git merge origin/develop
-   
+
    # Resolve any conflicts
    # Run full test suite
-   
+
    # Create PR
    gh pr create \
      --title "Branch Consolidation: Backend & AI Features" \
      --body-file consolidation_summary.md \
      --base develop \
      --head consolidation/backend-features
-   
+
    # After PR review and approval
    gh pr merge --squash
    ```
@@ -336,10 +336,10 @@ git checkout origin/branch-name -- backend/app/api/endpoints/new_endpoint.py
      git tag archive/$branch origin/$branch
      echo "Tagged $branch for archival"
    done
-   
+
    # Push tags
    git push origin --tags
-   
+
    # After verification period (2 weeks), delete remote branches
    # Only if absolutely sure!
    for branch in $(cat processed_branches.txt); do
@@ -381,7 +381,7 @@ git checkout origin/branch-name -- backend/app/api/endpoints/new_endpoint.py
    ```bash
    # Cherry-pick specific commits
    git cherry-pick <commit-hash>
-   
+
    # If conflicts occur
    git status
    # Resolve conflicts in backend files only
@@ -393,10 +393,10 @@ git checkout origin/branch-name -- backend/app/api/endpoints/new_endpoint.py
    ```bash
    # Create a patch file
    git format-patch -1 <commit-hash> -o /tmp/patches/
-   
+
    # Review patch
    less /tmp/patches/0001-*.patch
-   
+
    # Apply patch
    git am /tmp/patches/0001-*.patch
    ```
@@ -673,7 +673,7 @@ ENABLE_GENKIT_FLOWS=true python3 verify_genkit.py
    ```bash
    # Rollback to last good state
    git reset --hard <last-good-commit>
-   
+
    # Or rollback entire consolidation
    git checkout develop
    git reset --hard pre-consolidation-backup

@@ -1,0 +1,23 @@
+{
+  "project_name": "PR126 Frontend Source-of-Truth Migration",
+  "start_date": "2026-03-13",
+  "target_end_date": "2026-03-31",
+  "status": "IN_PROGRESS",
+  "owners": {
+    "orchestrator": "TBD",
+    "frontend": "TBD",
+    "backend": "TBD",
+    "design": "TBD"
+  },
+  "execution_truth": [
+    "docs/project/active/frontend-source-of-truth-migration/control/blueprint.md",
+    "docs/project/active/frontend-source-of-truth-migration/control/workflow.md"
+  ],
+  "evidence_inputs": [
+    "docs/manifests/routes.json",
+    "docs/manifests/screens.json",
+    "docs/manifests/frontend-api-usage.json",
+    "docs/manifests/backend-endpoints.json",
+    "docs/manifests/orphans.json"
+  ]
+}

@@ -42,7 +42,7 @@ def prune_manifest():
     print(f"Original Assets: {original_count}")
     print(f"Remaining Assets: {len(remaining_assets)}")
     print(f"Purged Assets: {len(purged_ids)}")
-    
+
     # Optionally clean up asset-packages
     # But let's just do the manifest for now as requested.
 

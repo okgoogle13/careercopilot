@@ -17,7 +17,7 @@ packages.forEach(pkg => {
 
   const metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
   const entry = fs.existsSync(entryPath) ? JSON.parse(fs.readFileSync(entryPath, 'utf8')) : {};
-  
+
   // Find matching entry in global manifest for additional context
   const globalEntry = globalManifest.assets.find(a => a.id === pkg);
 
@@ -33,13 +33,13 @@ packages.forEach(pkg => {
 
     source: {
       original_path: metadata.source || "unknown",
-      file_size_bytes: 0, 
+      file_size_bytes: 0,
       dimensions: "unknown",
       format: metadata.format || "PNG"
     },
 
     packaging_strategy: "production-deploy",
-    
+
     files_deployed: {
       primary: {
         name: primaryFile,
