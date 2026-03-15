@@ -35,7 +35,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     layout: 'public',
     mode: 'KrDark',
     screenId: '02_auth',
-    apiDeps: ['Authentication'],
+    apiDeps: ['authService'],
   },
   {
     path: '/register',
@@ -44,7 +44,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     layout: 'public',
     mode: 'KrDark',
     screenId: '02_auth',
-    apiDeps: ['Authentication'],
+    apiDeps: ['authService'],
   },
   {
     path: '/design-sidekick',
@@ -113,7 +113,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     layout: 'migrated',
     mode: 'KrDark',
     screenId: '07_kanban',
-    apiDeps: ['Applications'],
+    apiDeps: ['applicationService'],
   },
 
   // ── Protected Routes (legacy sidebar shell) ─────────────────────
@@ -124,7 +124,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     layout: 'protected',
     mode: 'KrDark',
     screenId: '11_dashboard',
-    apiDeps: ['Analysis', 'Applications'],
+    apiDeps: ['analysisService', 'applicationService'],
   },
   {
     path: '/onboarding',
@@ -133,7 +133,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     layout: 'protected',
     mode: 'KrDark',
     screenId: '03_onboarding',
-    apiDeps: ['User'],
+    apiDeps: ['profileService'],
   },
   {
     path: '/welcome',
@@ -149,7 +149,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     auth: true,
     layout: 'protected',
     mode: 'KrDark',
-    apiDeps: ['Documents'],
+    apiDeps: ['documentService'],
   },
   {
     path: '/analysis',
@@ -158,7 +158,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     layout: 'protected',
     mode: 'KrDark',
     screenId: '05_analysis',
-    apiDeps: ['Analysis', 'Genkit AI'],
+    apiDeps: ['analysisService', 'aiServices'],
   },
   {
     path: '/opportunities',
@@ -167,7 +167,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     layout: 'protected',
     mode: 'KrDark',
     screenId: '06_lookout',
-    apiDeps: ['Opportunities', 'Job Listings'],
+    apiDeps: ['jobService'],
   },
   {
     path: '/ksc-generator',
@@ -176,7 +176,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     layout: 'protected',
     mode: 'KrDark',
     screenId: '08_workbench',
-    apiDeps: ['Genkit AI', 'Workflows'],
+    apiDeps: ['aiServices', 'workflowService'],
   },
   {
     path: '/cover-letter-generator',
@@ -185,7 +185,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     layout: 'protected',
     mode: 'KrDark',
     screenId: '09_finalization',
-    apiDeps: ['Genkit AI', 'Workflows'],
+    apiDeps: ['aiServices', 'workflowService'],
   },
   {
     path: '/settings',
@@ -194,7 +194,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     layout: 'protected',
     mode: 'KrDark',
     screenId: '10_settings',
-    apiDeps: ['User', 'Configuration'],
+    apiDeps: ['profileService', 'settingsService'],
   },
   {
     path: '/profile',
@@ -202,7 +202,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     auth: true,
     layout: 'protected',
     mode: 'KrDark',
-    apiDeps: ['User'],
+    apiDeps: ['profileService'],
   },
   {
     path: '/asset-library',
@@ -210,7 +210,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     auth: true,
     layout: 'protected',
     mode: 'KrDark',
-    apiDeps: ['Documents', 'Analysis'],
+    apiDeps: ['documentService', 'analysisService'],
   },
   {
     path: '/career/ingest',
@@ -219,7 +219,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     layout: 'protected',
     mode: 'KrDark',
     screenId: '04_ingestion',
-    apiDeps: ['Career Ingestion', 'Ingestion'],
+    apiDeps: ['ingestion.service', 'smartIngestionService'],
   },
   {
     path: '/job-queue',
@@ -227,7 +227,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     auth: true,
     layout: 'protected',
     mode: 'KrDark',
-    apiDeps: ['Job Listings', 'Job Scout'],
+    apiDeps: ['jobService', 'aiServices'],
   },
   {
     path: '/apply/quick',
@@ -235,7 +235,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     auth: true,
     layout: 'protected',
     mode: 'KrDark',
-    apiDeps: ['Applications', 'Genkit AI'],
+    apiDeps: ['applicationService', 'aiServices'],
   },
   {
     path: '/test-tokens',
