@@ -11,6 +11,31 @@ import type { AppMode } from '../stores/useModeStore';
 export type RouteLayout = 'public' | 'protected' | 'migrated';
 
 /**
+ * Capability IDs based on actual file names in frontend/src/api/
+ * This provides local type safety and allows the CI scanner to
+ * verify files exist.
+ */
+export type CapabilityId =
+  | 'aiServices'
+  | 'analysisService'
+  | 'analyticsService'
+  | 'applicationService'
+  | 'authService'
+  | 'calendarService'
+  | 'documentCRUDService'
+  | 'documentService'
+  | 'emailService'
+  | 'ingestion.service'
+  | 'jobService'
+  | 'notificationService'
+  | 'profileService'
+  | 'settingsService'
+  | 'smartIngestionService'
+  | 'storageService'
+  | 'templateService'
+  | 'workflowService';
+
+/**
  * A single route entry in the canonical registry.
  * Add `screenId` to link a route to its frontend/src/screens/ directory.
  * Add `apiDeps` to list the backend endpoint tag groups this route depends on.
@@ -37,7 +62,7 @@ export interface RouteEntry {
    * Used by the contract-drift check to validate the frontend has
    * corresponding backend support.
    */
-  apiDeps?: string[];
+  apiDeps?: CapabilityId[];
   /**
    * Whether this is a prototype/staging route not intended for production.
    * Prototype routes are excluded from the orphan check.
