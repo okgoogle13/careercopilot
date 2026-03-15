@@ -2,7 +2,7 @@
 
 **Program:** PR126 frontend source-of-truth migration
 **Status:** Active
-**Current phase:** Step 3a `/tracker` implementation in progress
+**Current phase:** Step 3a `/tracker` implementation (finalizing) + Step 3b `/career/ingest` COMPLETE
 **Execution truth:** `control/blueprint.md`
 
 ## Current state
@@ -34,13 +34,23 @@
 
 - Step 1 — Planning inputs: `execution_ready`
 - Step 2 — `/tracker` build contract: `execution_ready`
-- Step 3a — `/tracker` CRUD implementation: `in_progress`
-- Step 3b/3c/3d: waiting on `/tracker` execution priority, not on additional planning work
-- Step 6 — Migration Cleanup (Orphans & Legacy Routes): `execution_ready`
+- Step 3a — `/tracker` CRUD implementation: `in_progress` (hero brand fix applied 2026-03-15; pending live-verify)
+- Step 3b — `/career/ingest` Ingestion implementation: `COMPLETE`
+- Step 3c — `/profile` voice_profile_capture: `COMPLETE` (2026-03-15)
+- Step 3d — `/documents` Redline Workspace: `COMPLETE` (2026-03-15; build contract generated)
+- Step 3e — `/analysis` resume_audit: `COMPLETE` (2026-03-15)
+- Step 3f — `/apply/quick` genkit_job_analysis: `in_progress` (governance normalized; JobAnalysisResultsPanel extraction pending)
+- Step 6 — Migration Cleanup (Orphans & Legacy Routes): `COMPLETE` (2026-03-15; 8 routes retired)
 
 ## Recorded approvals
 
 - `/tracker` build contract human approval recorded on `2026-03-14`
+- `/career/ingest` migration (M4) completed on `2026-03-15`
+- Approval basis for M4:
+  - Canonical `/api/v1/ingest` contract enforcement complete
+  - KR Solidarity v6.0 token compliance verified
+  - Zero-flora asset audit passed
+  - Routing promoted to `SmartIngestion` feature owner in `App.tsx`
 - Approval basis:
   - technical gaps resolved in `contracts/build-contract-tracker.xml`
   - supplementary briefs present in `contracts/tracker-supplementary-component-briefs.xml`
@@ -51,5 +61,5 @@
 1. Restore the local backend environment so `/tracker` can be exercised against the real applications API.
 2. Replace the `/tracker` hero mapping with a compliant brand treatment and rerun screenshot capture.
 3. Re-run live-session verification against the backend so Step 3a can move from `in_progress` to complete.
-4. Treat non-auth benchmark creation as deferred until `migration-audit` is explicitly needed as a route gate.
+4. Execute Step 3d: `/documents` Redline Workspace implementation.
 5. Execute Step 6: systematically migrate the 11 legacy routes and 6 orphaned screens.

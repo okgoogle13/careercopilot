@@ -27,7 +27,8 @@ try:
     from dotenv import load_dotenv
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
-    load_dotenv(os.path.join(project_root, '.env'), override=True)
+    for env_name in ('.env.mcp', '.env'):
+        load_dotenv(os.path.join(project_root, env_name), override=True)
 except ImportError:
     pass
 

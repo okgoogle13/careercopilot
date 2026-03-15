@@ -4,6 +4,16 @@ import httpx
 from mcp.server.fastmcp import FastMCP
 from typing import Optional, List, Literal
 
+# Load env from repo root if present (supports GUI-launched MCP clients).
+try:
+    from dotenv import load_dotenv
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(script_dir)
+    for env_name in ('.env.mcp', '.env'):
+        load_dotenv(os.path.join(project_root, env_name), override=True)
+except ImportError:
+    pass
+
 # Initialize FastMCP for Perplexity
 mcp = FastMCP("perplexity_fixed")
 

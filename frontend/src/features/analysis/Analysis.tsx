@@ -13,6 +13,8 @@ import {
   BookOpen,
   AlertCircle,
 } from 'lucide-react';
+import { ResumeAuditEntryPoint } from './components/ResumeAuditEntryPoint';
+import { ResumeAuditResultsPanel } from './components/ResumeAuditResultsPanel';
 import {
   LineChart,
   Line,
@@ -134,6 +136,8 @@ export function Analysis() {
   const [urlError, setUrlError] = useState('');
   const [showInputs, setShowInputs] = useState(true);
   const [loadingJobUrl, setLoadingJobUrl] = useState(false);
+  const [auditResults, setAuditResults] = useState<any>(null);
+  const [showAuditResults, setShowAuditResults] = useState(false);
 
   const validateUrl = (url: string) => {
     try {
@@ -333,6 +337,29 @@ export function Analysis() {
                 {analyzing ? 'Analyzing...' : 'Analyze with AI'}
               </Button>
             </div>
+          </div>
+        )}
+
+        {/* Resume Audit Section */}
+        <div className="mb-8">
+          <ResumeAuditEntryPoint
+            resumeText={documentText}
+            jobDescription={jobDescription}
+            onAuditComplete={(results) => {
+              setAuditResults(results);
+              setShowAuditResults(true);
+            }}
+            disabled={!documentText}
+          />
+        </div>
+
+        {/* Resume Audit Results */}
+        {showAuditResults && auditResults && (
+          <div className="mb-8">
+            <ResumeAuditResultsPanel
+              data={auditResults}
+              onDismiss={() => setShowAuditResults(false)}
+            />
           </div>
         )}
 

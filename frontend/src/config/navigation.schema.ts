@@ -39,6 +39,12 @@ export const NAVIGATION_SCHEMA: NavigationItem[] = [
     modeAvailability: 'KrDark',
   },
   {
+    id: 'KrDark-ingestion',
+    label: 'Ingest',
+    route: '/career/ingest',
+    modeAvailability: 'KrDark',
+  },
+  {
     id: 'overview',
     label: 'Overview',
     route: '/overview',

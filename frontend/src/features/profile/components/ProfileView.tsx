@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import ResumeUploader from '@/features/profile/components/ResumeUploader';
+import { VoiceProfileManagementSection } from '@/features/profile/components/VoiceProfileManagementSection';
 
 // Assets
 const starfishCage =
@@ -193,6 +194,8 @@ export function ProfileView() {
                 />
               </div>
             </Stone>
+
+            <VoiceProfileManagementSection />
 
             <div className="p-6 border border-concrete-grey/5 rounded-placard bg-ink-gold/5 flex flex-col items-center text-center">
               <Archive className="w-8 h-8 text-ink-gold mb-4 opacity-40" />

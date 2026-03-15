@@ -95,7 +95,11 @@
       "Bash(python scripts/validate_palette_mcp.py:*)",
       "Bash(python scripts/audit_tailwind.py:*)",
       "Bash(gh auth:*)",
-      "Bash(gh pr:*)"
+      "Bash(gh pr:*)",
+      "Bash(git submodule:*)",
+      "Bash(NODE_OPTIONS='--experimental-vm-modules' jest --config=jest.config.mjs src/features/documents/__tests__/DocumentsRedline.test.tsx --runInBand --no-coverage)",
+      "Bash(NODE_OPTIONS='--experimental-vm-modules' yarn test src/features/documents/__tests__/DocumentsRedline.test.tsx --runInBand --no-coverage)",
+      "Bash(npx tsx:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,0 +1,3 @@
+[submodule ".claude/skills/browserbase-skills"]
+	path = .claude/skills/browserbase-skills
+	url = https://github.com/browserbase/skills.git

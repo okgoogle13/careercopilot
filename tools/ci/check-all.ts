@@ -15,8 +15,9 @@ interface CheckDef {
 }
 
 const CHECKS: CheckDef[] = [
-  { name: 'Route Integrity',  cmd: 'npx tsx tools/ci/check-route-integrity.ts' },
-  { name: 'Screen Pairs',     cmd: 'npx tsx tools/ci/check-screen-pairs.ts' },
+  { name: 'Route Integrity',     cmd: 'npx tsx tools/ci/check-route-integrity.ts' },
+  { name: 'Screen Pairs',        cmd: 'npx tsx tools/ci/check-screen-pairs.ts' },
+  { name: 'Capability Alignment', cmd: 'npx tsx tools/ci/check-capability-alignment.ts' },
 ];
 
 function main() {

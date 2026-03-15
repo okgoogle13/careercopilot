@@ -1,24 +1,25 @@
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { JobQueue } from '../JobQueue';
 import React from 'react';
 
 // Mock fetch globally
-global.fetch = jest.fn();
+global.fetch = vi.fn();
 
 // Mock m3Toast
-jest.mock('@/utils/toast', () => ({
+vi.mock('@/utils/toast', () => ({
   m3Toast: {
-    success: jest.fn(),
-    error: jest.fn(),
-    warning: jest.fn(),
-    info: jest.fn(),
+    success: vi.fn(),
+    error: vi.fn(),
+    warning: vi.fn(),
+    info: vi.fn(),
   },
 }));
 
 // Mock child components
-jest.mock('@/components/ui', () => ({
-  Cabinet: ({ children, open, title, onClose }: any) =>
+vi.mock('@/components/ui', () => ({
+  Megaphone: ({ children, open, title, onClose }: any) =>
     open ? (
       <div
         data-testid="cabinet"
@@ -29,7 +30,7 @@ jest.mock('@/components/ui', () => ({
         {children}
       </div>
     ) : null,
-  Pebble: ({ children, onClick, isLoading, disabled }: any) => (
+  Strike: ({ children, onClick, isLoading, disabled }: any) => (
     <button
       onClick={onClick}
       disabled={disabled || isLoading}
@@ -38,10 +39,10 @@ jest.mock('@/components/ui', () => ({
     </button>
   ),
   StatusBadge: ({ children }: any) => <div data-testid="status-badge">{children}</div>,
-  Stone: ({ children, className }: any) => <div className={className}>{children}</div>,
+  Placard: ({ children, className }: any) => <div className={className}>{children}</div>,
 }));
 
-jest.mock('@/components/KanbanCard', () => ({
+vi.mock('@/components/KanbanCard', () => ({
   KanbanCard: ({ title, onSelect, status }: any) => (
     <div data-testid="kanban-card">
       <h3>{title}</h3>
@@ -51,8 +52,8 @@ jest.mock('@/components/KanbanCard', () => ({
   ),
 }));
 
-jest.mock('../../components/shared/M3ErrorAlert', () => ({
-  M3ErrorAlert: ({ message, onRetry }: any) => (
+vi.mock('@/components/shared/KrErrorAlert', () => ({
+  KrErrorAlert: ({ message, onRetry }: any) => (
     <div data-testid="error-alert">
       {message}
       <button onClick={onRetry}>Retry</button>
@@ -60,19 +61,19 @@ jest.mock('../../components/shared/M3ErrorAlert', () => ({
   ),
 }));
 
-jest.mock('../../components/shared/PageHeader', () => ({
+vi.mock('@/components/shared/PageHeader', () => ({
   PageHeader: ({ title }: any) => <h1>{title}</h1>,
 }));
 
-jest.mock('../../components/kerala-rage/LayeredHero', () => ({
+vi.mock('@/components/kerala-rage/LayeredHero', () => ({
   LayeredHero: () => <div data-testid="layered-hero" />,
 }));
 
 // Mock all of lucide-react
-jest.mock('lucide-react', () => {
-  const original = jest.requireActual('lucide-react');
+vi.mock('lucide-react', async () => {
+  const original = await vi.importActual('lucide-react');
   return {
-    ...original,
+    ...(original as any),
     Clock: () => <div data-testid="icon-clock" />,
     CheckCircle: () => <div data-testid="icon-check" />,
     Sparkles: () => <div data-testid="icon-sparkles" />,
@@ -83,13 +84,13 @@ jest.mock('lucide-react', () => {
 });
 
 // Mock hero registry
-jest.mock('../../design/hero/heroRegistry', () => ({
-  loadHeroRegistry: jest.fn().mockResolvedValue({}),
+vi.mock('@/design/hero/heroRegistry', () => ({
+  loadHeroRegistry: vi.fn().mockResolvedValue({}),
 }));
 
 // Mock composeHero
-jest.mock('../../lib/composeHero', () => ({
-  composeHero: jest.fn().mockReturnValue({
+vi.mock('@/lib/composeHero', () => ({
+  composeHero: vi.fn().mockReturnValue({
     valid: true,
     resolvedLayers: [],
     typography: {},
@@ -125,7 +126,7 @@ const renderWithRouter = (component: React.ReactElement) => {
 
 describe('JobQueue', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     (global.fetch as any).mockImplementation((url: string) => {
       if (url.includes('manifest.json')) {
         return Promise.resolve({

@@ -19,37 +19,55 @@ def resolve_python_command(root_dir: Path) -> str:
             return str(candidate)
     return "python3"
 
-
 def build_mcp_config(root_dir: Path) -> dict:
     python_cmd = resolve_python_command(root_dir)
-    flash_server = root_dir / "servers" / "flash_sidekick.py"
     return {
         "mcpServers": {
             "flash-sidekick": {
                 "command": python_cmd,
-                "args": [str(flash_server)],
-                "env": {
-                    "GEMINI_MODEL": "models/gemini-2.5-flash-lite",
-                    "GEMINI_PRO_MODEL": "models/gemini-2.5-pro",
-                },
+                "args": [str(root_dir / "servers" / "flash_sidekick.py")],
                 "disabled": False,
                 "autoApprove": [],
             },
-            "playwright": {
-                "command": "npx",
-                "args": [
-                    "-y",
-                    "@executeautomation/playwright-mcp-server",
-                ],
+            "design-system-sidekick": {
+                "command": python_cmd,
+                "args": [str(root_dir / "servers" / "design_system_sidekick.py")],
                 "disabled": False,
                 "autoApprove": [],
             },
-            "docker": {
-                "command": "npx",
-                "args": [
-                    "-y",
-                    "@0xshariq/docker-mcp-server",
-                ],
+            "vision-scorer-mcp": {
+                "command": python_cmd,
+                "args": [str(root_dir / "servers" / "vision_scorer_mcp.py")],
+                "disabled": False,
+                "autoApprove": [],
+            },
+            "perplexity": {
+                "command": python_cmd,
+                "args": [str(root_dir / "servers" / "perplexity_server.py")],
+                "disabled": False,
+                "autoApprove": [],
+            },
+            "task-router": {
+                "command": python_cmd,
+                "args": [str(root_dir / "servers" / "task_router_mcp.py")],
+                "disabled": False,
+                "autoApprove": [],
+            },
+            "filesystem": {
+                "command": python_cmd,
+                "args": [str(root_dir / "servers" / "filesystem_mcp.py")],
+                "disabled": False,
+                "autoApprove": [],
+            },
+            "git": {
+                "command": python_cmd,
+                "args": [str(root_dir / "servers" / "git_mcp.py")],
+                "disabled": False,
+                "autoApprove": [],
+            },
+            "github": {
+                "command": python_cmd,
+                "args": [str(root_dir / "servers" / "github_mcp.py")],
                 "disabled": False,
                 "autoApprove": [],
             },
