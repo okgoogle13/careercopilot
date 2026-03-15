@@ -95,7 +95,7 @@ if [ "$FORCE" = false ]; then
   echo ""
   read -p "Do you want to proceed? (y/N): " -n 1 -r
   echo
-  
+
   if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     echo -e "${BLUE}Aborted.${NC}"
     exit 0

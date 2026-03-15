@@ -34,9 +34,9 @@ create_secret() {
     local SECRET_NAME=$1
     local SECRET_VALUE=$2
     local DESCRIPTION=$3
-    
+
     echo "Creating secret: $SECRET_NAME"
-    
+
     # Check if secret exists
     if gcloud secrets describe $SECRET_NAME --project=$PROJECT_ID &>/dev/null; then
         echo "  ✓ Secret $SECRET_NAME already exists, adding new version..."
@@ -50,7 +50,7 @@ create_secret() {
             --replication-policy="automatic" \
             --project=$PROJECT_ID \
             --labels="app=careercopilot,environment=production"
-        
+
         # Grant access to App Engine service account
         echo "  → Granting access to App Engine service account..."
         gcloud secrets add-iam-policy-binding $SECRET_NAME \
@@ -58,7 +58,7 @@ create_secret() {
             --role="roles/secretmanager.secretAccessor" \
             --project=$PROJECT_ID
     fi
-    
+
     echo "  ✅ $SECRET_NAME configured"
 }
 
@@ -91,7 +91,7 @@ echo ""
 read -p "Do you have a GEMINI_API_KEY to add? (y/n): " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    read -p "Enter GEMINI_API_KEY: " GEMINI_KEY 
+    read -p "Enter GEMINI_API_KEY: " GEMINI_KEY
     create_secret "GEMINI_API_KEY" "$GEMINI_KEY" "Gemini API key for AI services"
 else
     echo "ℹ️  Skipping GEMINI_API_KEY (will use Vertex AI default credentials)"
@@ -110,4 +110,3 @@ echo "gcloud secrets list --project=$PROJECT_ID --filter='labels.app=careercopil
 echo ""
 echo "🔑 To access a secret value:"
 echo "gcloud secrets versions access latest --secret=JWT_SECRET_KEY --project=$PROJECT_ID"
-

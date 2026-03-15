@@ -107,7 +107,7 @@ async def analyze_job_from_url(url: str) -> UnifiedJobAnalysis:
     try:
         logger.info(f"Unified analysis starting for: {url}")
         job_details = extract_job_listing_details_flow({"url": url})
-        
+
         company_context = None
         if job_details.company_name and job_details.full_description:
             try:

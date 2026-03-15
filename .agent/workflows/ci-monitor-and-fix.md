@@ -180,9 +180,9 @@ Based on the root cause identified, generate specific fix recommendations:
 ### For Playwright Flaky Tests:
 ```typescript
 // Example fix: Add explicit waits
-await page.waitForSelector('[data-testid="career-form"]', { 
+await page.waitForSelector('[data-testid="career-form"]', {
   state: 'visible',
-  timeout: 10000 
+  timeout: 10000
 });
 
 // Use waitForLoadState for better reliability

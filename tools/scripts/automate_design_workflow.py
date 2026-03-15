@@ -1,7 +1,7 @@
 """
 ⚠️  IMPORTANT: THIS SCRIPT IS A WORKFLOW COORDINATOR
 
-This script scaffolds the design-to-code workflow but DOES NOT directly execute 
+This script scaffolds the design-to-code workflow but DOES NOT directly execute
 the LLM-based logic (skills). It coordinates the artifacts and sequence.
 
 HOW TO USE WITH CLAUDE CODE:
@@ -53,17 +53,17 @@ def run_skill(skill_name: str, *args: str) -> bool:
         # Fallback for simulation/development if actual skill files are missing
         print(f"⚠️  Skill '{skill_name}' not found at {skill_path}. Running mock execution.")
         return True # Mock success
-    
-    # In a real scenario, this would likely be an LLM call or a script execution. 
-    # Since these are directory paths to skills (markdown mainly), we simulate the 'action' 
+
+    # In a real scenario, this would likely be an LLM call or a script execution.
+    # Since these are directory paths to skills (markdown mainly), we simulate the 'action'
     # they would perform or assume there's an executable entry point.
     # For this automation, we will assume we are coordinating AGENTIC actions.
-    # But as a python script, we can't directly invoke the LLM. 
-    # So this script primarily acts as a SCAFFOLDER and GUIDE, creating necessary files 
+    # But as a python script, we can't directly invoke the LLM.
+    # So this script primarily acts as a SCAFFOLDER and GUIDE, creating necessary files
     # to facilitate the agent's work, or printing exact commands for the user/agent.
 
     print(f"🤖 Invoking skill: {skill_name} with args: {args}")
-    # Here we would normally subprocess.run if they were executable scripts. 
+    # Here we would normally subprocess.run if they were executable scripts.
     # For now, we print the intended action.
     return True
 
@@ -105,9 +105,9 @@ def run_structure_stage(component_name: str, brief_path: Path, auto_approve: boo
     Steps: Protocol -> Wireframe -> Spec
     """
     print(f"\n🏗️  Running STAGE 1: STRUCTURE for '{component_name}'\n")
-    
+
     paths = get_file_paths(component_name)
-    
+
     # 1. Design System Protocol
     print(f"1️⃣  Generating Design System Protocol from {brief_path.name}...")
     run_skill("design_system_doc_generator", "--brief", str(brief_path), "--out", str(paths["protocol"]))
@@ -127,7 +127,7 @@ def run_structure_stage(component_name: str, brief_path: Path, auto_approve: boo
     print(f"\n4️⃣  [QUALITY GATE] Running M3 Expressive validation on wireframe...")
     print(f"   📊 Score target: ≥ 320/400 (Check {paths['wireframe']})")
     run_skill("m3_expressive_ui_evaluator", "--wireframe", str(paths["wireframe"]), "--mode", "validate")
-    
+
     if auto_approve:
         print(f"   ⏩ Auto-approving gate for batch mode.")
     else:
@@ -175,7 +175,7 @@ def run_visuals_stage(component_name: str, mode: str):
         print(f"2️⃣  Refactoring EXISTING Component '{component_name}' via Transformer...")
         run_skill("component_transformer", "--component-dir", str(paths["component_dir"]), "--spec", str(paths["spec"]), "--protocol", str(paths["protocol"]))
         print(f"   ℹ️  Transformer logic would apply here to {paths['component_dir']}")
-        
+
         # 3. Post-Migration Validation
         print(f"3️⃣  Validating migrated component against M3 Expressive standards...")
         run_skill("m3_expressive_ui_evaluator", "--component", str(paths["component_dir"]), "--out-report", str(paths["validation_report"]))
@@ -189,14 +189,14 @@ def run_screen_visuals_stage(screen_name: str):
     Goal: Transform structural React files into Hi-Fi implementations using hifi-notes.
     """
     print(f"\n🎨 Running STAGE 2: VISUALS for Screen '{screen_name}'\n")
-    
+
     view_path = REPO_ROOT / "frontend" / "src" / "layouts" / "KrDarkShell" / "views" / f"KrDark{screen_name}.tsx"
     hifi_notes = DOCS_DESIGN_DIR / "hifi" / f"{screen_name}-hifi.md"
-    
+
     if not view_path.exists():
         print(f"❌ Error: Missing structural view at {view_path}. Run Stage 1/Scaffolding first.")
         return
-        
+
     if not hifi_notes.exists():
         print(f"❌ Error: Missing Hi-Fi notes at {hifi_notes}. Generate them first.")
         return
@@ -204,7 +204,7 @@ def run_screen_visuals_stage(screen_name: str):
     print(f"1️⃣  Transforming {view_path.name} using Hi-Fi notes from {hifi_notes.name}...")
     # This invokes the transformer logic on the screen file
     run_skill("component_transformer", "--file", str(view_path), "--hifi-notes", str(hifi_notes))
-    
+
     print(f"✅ Screen transformation initiated for {screen_name}.")
 
 def run_screens_stage(screen_name: str, brief_path: Path):
@@ -213,7 +213,7 @@ def run_screens_stage(screen_name: str, brief_path: Path):
     Goal: Define full-page layout and discover component/asset needs.
     """
     print(f"\n📱 Running STAGE: SCREENS for '{screen_name}'\n")
-    
+
     # 1. Screen Protocol (Ensures we have a shared protocol for the screen)
     protocol_path = PROTOCOLS_DIR / "kerala-rage-protocol.md"
     print(f"1️⃣  Ensuring Kerala Rage Protocol exists...")
@@ -226,7 +226,7 @@ def run_screens_stage(screen_name: str, brief_path: Path):
     out_path = WIREFRAMES_DIR / f"{screen_name.lower()}-screen.md"
     print(f"2️⃣  Generating Lo-Fi Screen Wireframe...")
     run_skill("wireframe_annotator", "--protocol", str(protocol_path), "--screen", screen_name, "--out", str(out_path))
-    
+
     mock_content = f"""# Wireframe: {screen_name} (Screen)
 
 <layout>
@@ -293,21 +293,21 @@ def regenerate_discovery_summary():
     Scans all generated screen wireframes and consolidates components/assets into a summary.
     """
     print(f"\n📊 Regenerating Discovery Summary...")
-    
+
     import re
     from collections import Counter
-    
+
     summary_path = GENERATED_DIR / "lofi-discovery-summary.md"
     screens = sorted(WIREFRAMES_DIR.glob("*-screen.md"))
-    
+
     all_components = Counter()
     all_assets = set()
     component_details = {} # Name -> {type, assets}
-    
+
     for screen in screens:
         with open(screen, 'r') as f:
             content = f.read()
-            
+
             # Extract Components
             comp_match = re.search(r"<components>(.*?)</components>", content, re.DOTALL)
             if comp_match:
@@ -347,7 +347,7 @@ def regenerate_discovery_summary():
         "| Screen | Wireframe | Status |",
         "| :--- | :--- | :--- |"
     ]
-    
+
     for screen in screens:
         name = screen.name.replace("-screen.md", "").capitalize()
         rel_path = f"generated/wireframes/{screen.name}"
@@ -369,43 +369,43 @@ def regenerate_discovery_summary():
     md.append("\n## 📋 Next Mission: High-Fidelity Promotion")
     md.append("1. Select components from the backlog above for Spec/Mockup generation.")
     md.append("2. Commission image assets identified above.")
-    
+
     with open(summary_path, 'w') as f:
         f.write("\n".join(md))
-    
+
     print(f"✅ Discovery summary updated: {summary_path}")
 
 # --- Main CLI ---
 
 def main():
     parser = argparse.ArgumentParser(description="Automate Design Workflow (Two-Stage + Screens)")
-    
+
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--component", help="PascalCase name of the component")
     group.add_argument("--screen", help="PascalCase name of the screen")
     group.add_argument("--plan", help="Path to screen-plan.yaml for batch processing")
-    
+
     parser.add_argument("--brief", help="Path to design brief")
     parser.add_argument("--stage", choices=["structure", "visuals", "full", "screens"], default="full", help="Workflow stage")
     parser.add_argument("--mode", choices=["new", "migrate", "auto"], default="auto", help="Implementation mode")
     parser.add_argument("--auto-approve", action="store_true", help="Skip interactive approval gates")
 
     args = parser.parse_args()
-    
+
     ensure_dirs()
-    
+
     # Handle Screens
     if args.screen:
         if args.stage != "screens":
              print(f"⚠️  For screens, stage is forced to 'screens'.")
-        
+
         # Determine brief path for screen
         brief_path = Path(args.brief) if args.brief else DOCS_DESIGN_DIR / "briefs" / f"{args.screen.lower()}.md"
         if not brief_path.exists():
             # Fallback to default if specific brief missing
             print(f"⚠️  Specific brief not found at {brief_path}. Using default.")
             brief_path = DEFAULT_BRIEF_PATH
-            
+
         run_screens_stage(args.screen, brief_path)
         sys.exit(0)
 
@@ -423,7 +423,7 @@ def main():
         else:
             mode = "new"
             print(f"🔍 No existing component found: Switching to 'new' mode.")
-    
+
     # Execute Stages
     if args.screen:
         # Determine brief path for screen
@@ -432,7 +432,7 @@ def main():
             # Fallback to default if specific brief missing
             print(f"⚠️  Specific brief not found at {brief_path}. Using default.")
             brief_path = DEFAULT_BRIEF_PATH
-            
+
         run_screens_stage(args.screen, brief_path)
         regenerate_discovery_summary()
         sys.exit(0)
@@ -456,7 +456,7 @@ def main():
                         batch_ran = True
                     else:
                         print(f"✅ Screen '{name}' already exists. Skipping.")
-        
+
         # Always regenerate summary if plan is provided, or specifically if steps were taken
         regenerate_discovery_summary()
         sys.exit(0)
@@ -467,7 +467,7 @@ def main():
 
     if args.stage in ["structure", "full"]:
         run_structure_stage(args.component, brief_path, auto_approve=args.auto_approve)
-    
+
     if args.stage in ["visuals", "full"]:
         run_visuals_stage(args.component, mode)
 

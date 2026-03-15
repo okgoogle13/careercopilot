@@ -55,7 +55,7 @@ case $BUILD_MODE in
         echo -e "${GREEN}✓ Local build complete!${NC}"
         echo -e "${GREEN}Run: docker-compose up -d${NC}"
         ;;
-    
+
     intel)
         echo -e "${YELLOW}Building for Intel iMac (linux/amd64)...${NC}"
         docker buildx build \
@@ -66,7 +66,7 @@ case $BUILD_MODE in
             .
         echo -e "${GREEN}✓ Intel iMac build complete!${NC}"
         ;;
-    
+
     multi)
         echo -e "${YELLOW}Building for multiple platforms (amd64 + arm64)...${NC}"
         docker buildx build \
@@ -76,7 +76,7 @@ case $BUILD_MODE in
             .
         echo -e "${GREEN}✓ Multi-platform build complete!${NC}"
         ;;
-    
+
     push)
         # Check if DOCKER_REGISTRY is set
         REGISTRY=${DOCKER_REGISTRY:-""}
@@ -86,7 +86,7 @@ case $BUILD_MODE in
             echo -e "${YELLOW}Or:      export DOCKER_REGISTRY=yourusername/careercopilot${NC}"
             exit 1
         fi
-        
+
         echo -e "${YELLOW}Building and pushing to $REGISTRY...${NC}"
         docker buildx build \
             --platform linux/amd64,linux/arm64 \
@@ -97,7 +97,7 @@ case $BUILD_MODE in
         echo -e "${GREEN}✓ Images pushed to registry!${NC}"
         echo -e "${GREEN}Pull with: docker pull $REGISTRY:latest${NC}"
         ;;
-    
+
     *)
         echo -e "${RED}Unknown build mode: $BUILD_MODE${NC}"
         echo ""

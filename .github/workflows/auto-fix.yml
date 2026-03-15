@@ -66,29 +66,29 @@ jobs:
           GIT_CONFIG_SYSTEM: ""
         run: |
           set +e  # Don't exit on error, we'll handle retries
-          
+
           echo "🔧 Configuring git..."
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "GitHub Actions Auto-Fix Bot"
-          
+
           echo "📦 Staging changes..."
           git add .
-          
+
           echo "💾 Committing changes..."
           git commit -m "style(auto): Apply Electric Alchemist auto-fixes [skip ci]" \
             -m "Applied standard formatting and linting for TS, Python, and CSS."
-          
+
           # Retry logic for git push with exponential backoff
           MAX_RETRIES=5
           RETRY_COUNT=0
           RETRY_DELAY=2
-          
+
           while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
             echo "🚀 Attempting to push (attempt $((RETRY_COUNT + 1))/$MAX_RETRIES)..."
-            
+
             # Clean up any stale locks before push
             rm -f .git/index.lock .git/HEAD.lock 2>/dev/null || true
-            
+
             # Try to push
             if git push; then
               echo "✅ Push successful!"
@@ -100,7 +100,7 @@ jobs:
                 sleep $RETRY_DELAY
                 # Exponential backoff
                 RETRY_DELAY=$((RETRY_DELAY * 2))
-                
+
                 # Try to pull and rebase in case of conflicts
                 echo "🔄 Pulling latest changes..."
                 git pull --rebase origin ${{ github.head_ref || github.ref_name }} || true
@@ -125,7 +125,7 @@ jobs:
             const missingStories = parseInt('${{ steps.storybook-check.outputs.missing_count }}' || '0');
 
             let body = '🤖 **Auto-fix Workflow Summary**\n\n';
-            
+
             if (changes) {
               body += '✅ **Applied Fixed:** Standardized code formatting and linting.\n';
             }

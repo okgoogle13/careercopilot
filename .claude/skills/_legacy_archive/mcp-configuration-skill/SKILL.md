@@ -70,7 +70,7 @@ Instead of using the MCP server:
 # Development
 cat .env.development
 
-# Staging  
+# Staging
 cat .env.staging
 
 # Production
@@ -116,6 +116,6 @@ For actual MCP capabilities, use:
 
 ---
 
-**Last Updated**: 2025-12-28  
-**Deprecated**: 2025-12-27  
+**Last Updated**: 2025-12-28
+**Deprecated**: 2025-12-27
 **Replacement**: Native file system tools + flash-sidekick MCP

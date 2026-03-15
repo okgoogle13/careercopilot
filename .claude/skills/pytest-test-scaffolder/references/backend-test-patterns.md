@@ -98,22 +98,22 @@ def test_transfer_points_transaction(mock_firestore_transaction):
 def mock_get_current_user(monkeypatch):
     """Mock get_current_user dependency."""
     from app.models.database import User
-    
+
     user = User(
         id="test-user-123",
         email="test@example.com",
         name="Test User"
     )
-    
+
     async def mock_return(*args, **kwargs):
         return user
-        
+
     monkeypatch.setattr("app.core.auth.get_current_user", mock_return)
     return user
 
 def test_endpoint_with_auth(client, mock_get_current_user):
     """Test endpoint with authentication."""
-    # When mocking the dependency directly, the header isn't strictly needed 
+    # When mocking the dependency directly, the header isn't strictly needed
     # but good for realism if middleware checks it
     headers = {"Authorization": "Bearer test-token"}
     response = client.get("/api/profile", headers=headers)

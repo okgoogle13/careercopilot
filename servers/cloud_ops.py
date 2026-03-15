@@ -61,9 +61,9 @@ def handle_request(server, line):
         req = json.loads(line)
         method = req.get("method")
         req_id = req.get("id")
-        
+
         resp = {"jsonrpc": "2.0", "id": req_id}
-        
+
         if method == "initialize":
             resp["result"] = {
                 "protocolVersion": "2024-11-05",
@@ -76,7 +76,7 @@ def handle_request(server, line):
             resp["result"] = {"content": server.call_tool(req["params"]["name"], req["params"]["arguments"])}
         else:
             return None
-            
+
         return resp
     except: return None
 
@@ -87,7 +87,7 @@ if __name__ == "__main__":
             line = sys.stdin.readline()
             if not line: break
             resp = handle_request(server, line)
-            if resp: 
+            if resp:
                 print(json.dumps(resp))
                 sys.stdout.flush()
         except: break

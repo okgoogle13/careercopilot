@@ -26,7 +26,7 @@ async def analyze_job_description(job_description: str) -> str:
     Analyzes a job description to extract key information using Genkit.
     """
     logger.info("Running analyze_job_description flow")
-    
+
     # Use the centralized prompt service
     prompt = format_prompt("job_description_analysis", job_description=job_description)
 

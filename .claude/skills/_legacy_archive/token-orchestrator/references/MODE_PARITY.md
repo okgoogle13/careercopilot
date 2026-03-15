@@ -40,14 +40,14 @@ For each semantic token in kr-dark, a kr-dark equivalent must exist with:
   "color": {
     "surface": {
       "kr-dark": {
-        "kr-leafSmoke": { 
+        "kr-leafSmoke": {
           "$value": "#2C2723",
           "$type": "color",
           "$description": "Primary card surface (warm)"
         }
       },
       "kr-dark": {
-        "slateSmoke": { 
+        "slateSmoke": {
           "$value": "#252230",
           "$type": "color",
           "$description": "Primary card surface (cool)"

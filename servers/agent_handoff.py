@@ -24,7 +24,7 @@ def task_publish(task_id: str, title: str, objective: str, priority: str = "medi
     """
     ensure_dirs()
     task_file = os.path.join(PENDING, f"{task_id}.json")
-    
+
     data = {
         "task_id": task_id,
         "title": title,
@@ -34,10 +34,10 @@ def task_publish(task_id: str, title: str, objective: str, priority: str = "medi
         "timestamp_created": datetime.now().isoformat(),
         "payload": payload or {}
     }
-    
+
     with open(task_file, "w") as f:
         json.dump(data, f, indent=2)
-    
+
     return f"Task '{task_id}' published to pending queue."
 
 @mcp.tool()
@@ -48,20 +48,20 @@ def task_claim(task_id: str):
     ensure_dirs()
     src = os.path.join(PENDING, f"{task_id}.json")
     dst = os.path.join(IN_PROGRESS, f"{task_id}.json")
-    
+
     if not os.path.exists(src):
         return f"Error: Task '{task_id}' not found in pending queue."
-    
+
     # Update status in JSON
     with open(src, "r") as f:
         data = json.load(f)
-    
+
     data["status"] = "in-progress"
     data["timestamp_claimed"] = datetime.now().isoformat()
-    
+
     with open(src, "w") as f:
         json.dump(data, f, indent=2)
-        
+
     shutil.move(src, dst)
     return f"Task '{task_id}' claimed and moved to in-progress."
 
@@ -73,21 +73,21 @@ def task_complete(task_id: str, summary: str = ""):
     ensure_dirs()
     src = os.path.join(IN_PROGRESS, f"{task_id}.json")
     dst = os.path.join(COMPLETE, f"{task_id}.json")
-    
+
     if not os.path.exists(src):
         return f"Error: Task '{task_id}' not found in in-progress queue."
-    
+
     # Update status and summary in JSON
     with open(src, "r") as f:
         data = json.load(f)
-    
+
     data["status"] = "complete"
     data["timestamp_completed"] = datetime.now().isoformat()
     data["completion_summary"] = summary
-    
+
     with open(src, "w") as f:
         json.dump(data, f, indent=2)
-        
+
     shutil.move(src, dst)
     return f"Task '{task_id}' marked as complete."
 
@@ -98,14 +98,14 @@ def task_list():
     """
     ensure_dirs()
     report = {"pending": [], "in-progress": [], "complete": []}
-    
+
     for category, path in [("pending", PENDING), ("in-progress", IN_PROGRESS), ("complete", COMPLETE)]:
         if os.path.exists(path):
             files = [f for f in os.listdir(path) if f.endswith(".json")]
             for f in files:
                 with open(os.path.join(path, f), "r") as tf:
                     report[category].append(json.load(tf))
-                    
+
     return report
 
 if __name__ == "__main__":

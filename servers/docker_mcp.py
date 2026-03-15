@@ -24,7 +24,7 @@ def docker_list_containers(all: bool = False) -> str:
     """
     if not client:
         return "Error: Docker client not initialized. Is Docker running?"
-    
+
     try:
         containers = client.containers.list(all=all)
         return json.dumps([
@@ -66,7 +66,7 @@ def docker_logs(container_id: str, tail: int = 100) -> str:
     """
     if not client:
         return "Error: Docker client not initialized."
-    
+
     try:
         container = client.containers.get(container_id)
         logs = container.logs(tail=tail).decode('utf-8')

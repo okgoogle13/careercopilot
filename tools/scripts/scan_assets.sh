@@ -20,13 +20,13 @@ while read -r asset_path; do
         classification="candidate-delete"
         reason="no references found in frontend/src strings"
     fi
-    
+
     # Determine type
     extension="${filename##*.}"
     type="other"
     if [[ "$extension" == "png" || "$extension" == "jpg" || "$extension" == "jpeg" || "$extension" == "svg" || "$extension" == "gif" ]]; then
         type="image"
     fi
-    
+
     echo "| \`$asset_path\` | $ref_status | $type | $classification | $reason |" >> $REPORT
 done < "$ASSET_LIST"

@@ -17,10 +17,10 @@ interface UnifiedColumnProps {
 
 /**
  * UnifiedColumn
- * 
+ *
  * A "Stone" category container for vertical content organization.
  * Used in Kanban boards, dashboards, and feeds.
- * 
+ *
  * Features:
  * - Viscous shadow depth.
  * - Subtle border definition.

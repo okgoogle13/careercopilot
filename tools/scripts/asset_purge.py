@@ -15,19 +15,19 @@ def purge():
         data = json.load(f)
 
     actions = data.get("triage_actions", [])
-    
+
     for action in actions:
         category = action.get("category")
         rel_path = action.get("file")
-        
+
         if category in ["discard", "legacy"]:
             src = os.path.join(SOURCE_ROOT, rel_path)
             dst = os.path.join(ARCHIVE_ROOT, rel_path)
-            
+
             if os.path.exists(src):
                 # Ensure destination directory exists
                 os.makedirs(os.path.dirname(dst), exist_ok=True)
-                
+
                 print(f"Moving {rel_path} ({category}) to archive...")
                 try:
                     subprocess.run(["git", "mv", src, dst], check=True)

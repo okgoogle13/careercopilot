@@ -67,10 +67,10 @@ while IFS= read -r css_file; do
     if [ -f "$css_file" ]; then
         filename=$(basename "$css_file")
         modified=false
-        
+
         # Create backup
         cp "$css_file" "${css_file}.bak"
-        
+
         # Replace each spacing value
         for px_value in "${!SPACING_MAP[@]}"; do
             token="${SPACING_MAP[$px_value]}"
@@ -83,7 +83,7 @@ while IFS= read -r css_file; do
                 FIXED_COUNT=$((FIXED_COUNT + 1))
             fi
         done
-        
+
         if [ "$modified" = true ]; then
             FILES_MODIFIED=$((FILES_MODIFIED + 1))
             print_success "Fixed spacing in $filename"
@@ -105,4 +105,3 @@ if [ "$FILES_MODIFIED" -gt 0 ]; then
     print_info "Backups created with .bak extension"
     print_info "Review changes and remove .bak files when satisfied"
 fi
-

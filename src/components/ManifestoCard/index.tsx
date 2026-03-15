@@ -25,7 +25,7 @@ export interface ManifestoCardProps {
 
 /**
  * ManifestoCard
- * 
+ *
  * A high-impact Solidarity mode component enforcing M3 Expressive principles.
  * Features Kerala Rage morphology (torn edges, viscous shadows).
  */

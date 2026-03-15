@@ -58,7 +58,7 @@ total=${#COMP_ARRAY[@]}
 echo -e "Found ${GREEN}$total${NC} components in batch."
 
 # Iterate and Simulate Batch Processing
-# In a real agentic environment, this script would invoke the agent or the automate_design_workflow.py 
+# In a real agentic environment, this script would invoke the agent or the automate_design_workflow.py
 # in parallel or via a job queue. Here, we sequence them to demonstrate the flow the agent would manage.
 
 echo -e "\n${BLUE}--- Starting Stage 1: Structure (Parallel Execution Simulated) ---${NC}"
@@ -67,7 +67,7 @@ for i in "${!COMP_ARRAY[@]}"; do
     comp="${COMP_ARRAY[$i]}"
     mode="${MODE_ARRAY[$i]}"
     echo -e "Queueing structure gen for: ${GREEN}$comp${NC} ($mode)"
-    
+
     # Call the python workflow coordinator in structure mode
     # Note: We use 'scripts/automate_design_workflow.py' which we saw earlier
     python3 scripts/automate_design_workflow.py --component "$comp" --stage structure --mode "$mode" --auto-approve &
@@ -76,7 +76,7 @@ done
 # Wait for background jobs (Parallel simulation)
 wait
 
-echo -e "\n${BLUE}--- Aggregated Gate 1: Batch Validation ---${NC}" 
+echo -e "\n${BLUE}--- Aggregated Gate 1: Batch Validation ---${NC}"
 echo -e "${GREEN}All components have completed Stage 1.${NC}"
 read -p "Approved to proceed with Stage 2 (Visuals & Build)? (y/n) " -n 1 -r
 echo
@@ -91,7 +91,7 @@ for i in "${!COMP_ARRAY[@]}"; do
     comp="${COMP_ARRAY[$i]}"
     mode="${MODE_ARRAY[$i]}"
     echo -e "Queueing visuals/build for: ${GREEN}$comp${NC} ($mode)"
-    
+
     python3 scripts/automate_design_workflow.py --component "$comp" --stage visuals --mode "$mode" &
 done
 

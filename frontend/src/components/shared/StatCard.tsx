@@ -31,8 +31,8 @@ export function StatCard({
         damping: 20,
       }}
       className={`
-        bg-surface-container rounded-tech p-8 
-        flex flex-col items-center justify-center 
+        bg-surface-container rounded-tech p-8
+        flex flex-col items-center justify-center
         relative overflow-hidden
         shadow-elevation-1 border border-outline-variant
         ${className}
