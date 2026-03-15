@@ -33,7 +33,7 @@ The generator will:
 The engine enforces several rules from the `06b-asset-placement.md` guide:
 - **Substrate Requirement**: Every hero must have a Z-0 substrate.
 - **Z-Index Controls**: Assets are placed in logical layers (background, motif, UI overlays).
-- **Cultural Safety**: 
+- **Cultural Safety**:
     - No multiple devotional layers.
     - No street-art motifs directly above devotional motifs.
     - Opacity and blend modes are tuned for "Solidarity Mode" legibility.

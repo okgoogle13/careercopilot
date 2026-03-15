@@ -40,43 +40,43 @@ is_protected() {
     local file="$1"
     local absolute_path="$(realpath "$file")"
     local project_root_abs="$(realpath "$PROJECT_ROOT")"
-    
+
     # Protect docs directory
     if [[ "$absolute_path" == "$project_root_abs/docs/"* ]]; then
         return 0  # Protected
     fi
-    
+
     # Protect README.md
     if [[ "$absolute_path" == "$project_root_abs/README.md" ]]; then
         return 0  # Protected
     fi
-    
+
     # Protect the script itself
     if [[ "$absolute_path" == "$(realpath "${BASH_SOURCE[0]}")" ]]; then
         return 0  # Protected
     fi
-    
+
     return 1  # Not protected
 }
 
 # Check if file should be deleted based on age
 should_delete() {
     local file="$1"
-    
+
     # Check if file exists
     if [[ ! -f "$file" ]]; then
         return 1  # Don't delete
     fi
-    
+
     # Check if protected
     if is_protected "$file"; then
         return 1  # Don't delete
     fi
-    
+
     # Check file age
     local file_age
     file_age=$(find "$file" -mtime +$DAYS_THRESHOLD -print 2>/dev/null || true)
-    
+
     if [[ -n "$file_age" ]]; then
         return 0  # Should delete
     else
@@ -89,21 +89,21 @@ cleanup_directory() {
     local target_dir="$1"
     local pattern="$2"
     local description="$3"
-    
+
     if [[ ! -d "$target_dir" ]]; then
         log "Directory $target_dir does not exist, skipping"
         return 0
     fi
-    
+
     log "Scanning $description in: $target_dir"
-    
+
     local files_found=0
     local files_deleted=0
     local files_protected=0
-    
+
     while IFS= read -r -d '' file; do
         ((files_found++))
-        
+
         if should_delete "$file"; then
             log "Deleting old file: $file"
             rm -f "$file"
@@ -112,13 +112,13 @@ cleanup_directory() {
             ((files_protected++))
         fi
     done < <(find "$target_dir" -type f $pattern -print0 2>/dev/null || true)
-    
+
     if [[ $files_found -eq 0 ]]; then
         log "No files found matching pattern: $pattern"
     else
         success "Found $files_found files, deleted $files_deleted, protected $files_protected"
     fi
-    
+
     echo ""
 }
 
@@ -126,34 +126,34 @@ cleanup_directory() {
 main() {
     log "Starting cleanup of old reports (older than $DAYS_THRESHOLD days)"
     log "Project root: $PROJECT_ROOT"
-    
+
     # Verify we're in a git repository
     if ! git -C "$PROJECT_ROOT" rev-parse --git-dir >/dev/null 2>&1; then
         error "Not in a git repository. Aborting for safety."
         exit 1
     fi
-    
+
     local total_deleted=0
-    
+
     # Cleanup .ai_reports/ directory (all files)
     echo "=========================================="
     cleanup_directory "$PROJECT_ROOT/.ai_reports" "" "AI Reports Directory"
-    
-    # Cleanup backups/ directory (all files)  
+
+    # Cleanup backups/ directory (all files)
     echo "=========================================="
     cleanup_directory "$PROJECT_ROOT/backups" "" "Backups Directory"
-    
+
     # Cleanup coverage/ directory (.log and .md files)
     echo "=========================================="
     cleanup_directory "$PROJECT_ROOT/coverage" "-name '*.log' -o -name '*.md'" "Coverage Directory (logs and reports)"
-    
+
     # Summary
     echo "=========================================="
     success "Cleanup completed!"
     log "Scanned directories: .ai_reports/, backups/, coverage/"
     log "Age threshold: $DAYS_THRESHOLD days"
     log "Protected: ./docs/ and README.md"
-    
+
     # Show disk space saved (if possible)
     if command -v du >/dev/null 2>&1; then
         log "Disk usage summary:"
@@ -168,7 +168,7 @@ Cleanup Old Reports Script
 
 Scans for and deletes files older than 30 days in:
 - .ai_reports/ (all files)
-- backups/ (all files)  
+- backups/ (all files)
 - coverage/ (*.log and *.md files only)
 
 Protected files (NEVER deleted):
@@ -186,7 +186,7 @@ Options:
 
 Examples:
     $0                  # Delete files older than 30 days
-    $0 -d 7            # Delete files older than 7 days  
+    $0 -d 7            # Delete files older than 7 days
     $0 --dry-run       # Show what would be deleted
 EOF
 }
@@ -224,7 +224,7 @@ done
 # Override delete function for dry run
 if [[ "$DRY_RUN" == "true" ]]; then
     log "DRY RUN MODE - No files will actually be deleted"
-    
+
     # Override rm command
     rm() {
         local file="$1"

@@ -42,10 +42,10 @@ def main():
     if len(sys.argv) < 3:
         print("Usage: flash_batch.py MANIFEST_PATH IMAGE1 [IMAGE2 ...]")
         sys.exit(1)
-    
+
     manifest_path = sys.argv[1]
     image_paths = sys.argv[2:]
-    
+
     if should_use_flash_sidekick(len(image_paths)):
         print(f"📤 Routing {len(image_paths)} images to Flash Sidekick MCP")
         payload = prepare_batch_payload(image_paths, manifest_path)

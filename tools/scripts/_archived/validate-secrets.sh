@@ -72,7 +72,7 @@ EOF
 # Check prerequisites
 check_prerequisites() {
     local missing_tools=()
-    
+
     case $PLATFORM in
         github|all)
             if ! command -v gh &> /dev/null; then
@@ -88,7 +88,7 @@ check_prerequisites() {
             fi
             ;;
     esac
-    
+
     if [ ${#missing_tools[@]} -gt 0 ]; then
         error "Missing required tools:"
         for tool in "${missing_tools[@]}"; do
@@ -103,40 +103,40 @@ validate_github_secrets() {
     header "════════════════════════════════════════════════════════════════════════════════"
     header "                      GITHUB SECRETS VALIDATION"
     header "════════════════════════════════════════════════════════════════════════════════"
-    
+
     log "Validating GitHub repository secrets..."
-    
+
     # Define required secrets based on environment
     local required_secrets=()
     local optional_secrets=()
-    
+
     # Base secrets for all environments
     required_secrets+=("GCP_PROJECT_ID")
-    
+
     if [ "$ENVIRONMENT" = "staging" ] || [ "$ENVIRONMENT" = "all" ]; then
         required_secrets+=("GCP_STAGING_PROJECT_ID")
         required_secrets+=("GCP_STAGING_SA_KEY")
         required_secrets+=("FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING")
         optional_secrets+=("GOOGLE_OAUTH_CLIENT_ID_STAGING" "GOOGLE_OAUTH_CLIENT_SECRET_STAGING")
     fi
-    
+
     if [ "$ENVIRONMENT" = "production" ] || [ "$ENVIRONMENT" = "all" ]; then
         required_secrets+=("GCP_SA_KEY")
         required_secrets+=("FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT")
         optional_secrets+=("GOOGLE_OAUTH_CLIENT_ID_PROD" "GOOGLE_OAUTH_CLIENT_SECRET_PROD")
     fi
-    
+
     # AI service secrets
     required_secrets+=("GEMINI_API_KEY" "OPENAI_API_KEY" "ANTHROPIC_API_KEY")
     optional_secrets+=("PERPLEXITY_API_KEY" "CODECOV_TOKEN" "TC_CLOUD_TOKEN")
-    
+
     # AWS SES secrets
     optional_secrets+=("AWS_ACCESS_KEY_ID" "AWS_SECRET_ACCESS_KEY" "SES_SENDER_EMAIL" "AWS_REGION")
-    
+
     # Get all secrets from repository
     local existing_secrets
     existing_secrets=$(gh secret list --repo $REPO 2>/dev/null || echo "")
-    
+
     echo -e "${CYAN}Required Secrets:${NC}"
     for secret in "${required_secrets[@]}"; do
         if echo "$existing_secrets" | grep -q "^$secret$"; then
@@ -145,7 +145,7 @@ validate_github_secrets() {
             echo "  ❌ $secret (missing)"
         fi
     done
-    
+
     echo -e "${CYAN}Optional Secrets:${NC}"
     for secret in "${optional_secrets[@]}"; do
         if echo "$existing_secrets" | grep -q "^$secret$"; then
@@ -154,10 +154,10 @@ validate_github_secrets() {
             echo "  ⚠️  $secret (missing - optional)"
         fi
     done
-    
+
     # Validate secret formats
     echo -e "${CYAN}Secret Format Validation:${NC}"
-    
+
     # Check GCP project ID format
     if echo "$existing_secrets" | grep -q "^GCP_PROJECT_ID$"; then
         local gcp_project_id
@@ -168,7 +168,7 @@ validate_github_secrets() {
             echo "  ❌ GCP_PROJECT_ID format invalid"
         fi
     fi
-    
+
     # Check API key formats
     for api_key in "GEMINI_API_KEY" "OPENAI_API_KEY" "ANTHROPIC_API_KEY"; do
         if echo "$existing_secrets" | grep -q "^$api_key$"; then
@@ -206,19 +206,19 @@ validate_gcp_secrets() {
     header "════════════════════════════════════════════════════════════════════════════════"
     header "                    GCP SECRET MANAGER VALIDATION"
     header "════════════════════════════════════════════════════════════════════════════════"
-    
+
     log "Validating Google Cloud Secret Manager..."
     gcloud config set project $PROJECT_ID
-    
+
     # Define required secrets
     local required_secrets=("gemini-api-key" "jwt-secret-key")
     local optional_secrets=("openai-api-key" "anthropic-api-key" "database-url" "aws-access-key-id" "aws-secret-access-key" "ses-sender-email")
-    
+
     echo -e "${CYAN}Required Secrets:${NC}"
     for secret_id in "${required_secrets[@]}"; do
         if gcloud secrets describe "$secret_id" --project=$PROJECT_ID &>/dev/null; then
             echo "  ✅ $secret_id"
-            
+
             # Check if secret has versions
             local versions
             versions=$(gcloud secrets versions list "$secret_id" --project=$PROJECT_ID --limit=1 2>/dev/null | grep -v "NAME" | wc -l)
@@ -231,7 +231,7 @@ validate_gcp_secrets() {
             echo "  ❌ $secret_id (missing)"
         fi
     done
-    
+
     echo -e "${CYAN}Optional Secrets:${NC}"
     for secret_id in "${optional_secrets[@]}"; do
         if gcloud secrets describe "$secret_id" --project=$PROJECT_ID &>/dev/null; then
@@ -240,22 +240,22 @@ validate_gcp_secrets() {
             echo "  ⚠️  $secret_id (missing - optional)"
         fi
     done
-    
+
     # Validate service account permissions
     echo -e "${CYAN}Service Account Permissions:${NC}"
-    
+
     local service_account
     service_account="$(gcloud run services describe backend --region=us-central1 --format='value(spec.template.spec.serviceAccountName)' 2>/dev/null || echo "careercopilot-backend@$PROJECT_ID.iam.gserviceaccount.com")"
-    
+
     echo "  Service Account: $service_account"
-    
+
     # Check if service account exists
     if gcloud iam service-accounts describe "$service_account" &>/dev/null; then
         echo "  ✅ Service account exists"
     else
         echo "  ❌ Service account not found"
     fi
-    
+
     # Check permissions on a sample secret
     for secret_id in "${required_secrets[@]}"; do
         if gcloud secrets describe "$secret_id" --project=$PROJECT_ID &>/dev/null; then
@@ -267,7 +267,7 @@ validate_gcp_secrets() {
             fi
         fi
     done
-    
+
     # Test secret access
     echo -e "${CYAN}Secret Access Test:${NC}"
     for secret_id in "${required_secrets[@]}"; do
@@ -287,14 +287,14 @@ validate_aws_ses() {
     header "════════════════════════════════════════════════════════════════════════════════"
     header "                       AWS SES VALIDATION"
     header "════════════════════════════════════════════════════════════════════════════════"
-    
+
     log "Validating AWS SES configuration..."
-    
+
     # Check AWS SES secrets in GitHub
     local aws_secrets=("AWS_ACCESS_KEY_ID" "AWS_SECRET_ACCESS_KEY" "SES_SENDER_EMAIL" "AWS_REGION")
     local github_secrets
     github_secrets=$(gh secret list --repo $REPO 2>/dev/null || echo "")
-    
+
     echo -e "${CYAN}GitHub AWS SES Secrets:${NC}"
     for secret in "${aws_secrets[@]}"; do
         if echo "$github_secrets" | grep -q "^$secret$"; then
@@ -303,10 +303,10 @@ validate_aws_ses() {
             echo "  ❌ $secret (missing)"
         fi
     done
-    
+
     # Check AWS SES secrets in GCP
     local aws_gcp_secrets=("aws-access-key-id" "aws-secret-access-key" "ses-sender-email")
-    
+
     echo -e "${CYAN}GCP AWS SES Secrets:${NC}"
     for secret_id in "${aws_gcp_secrets[@]}"; do
         if gcloud secrets describe "$secret_id" --project=$PROJECT_ID &>/dev/null; then
@@ -315,7 +315,7 @@ validate_aws_ses() {
             echo "  ❌ $secret_id (missing)"
         fi
     done
-    
+
     # Validate AWS credentials format
     if echo "$github_secrets" | grep -q "^AWS_ACCESS_KEY_ID$"; then
         local access_key
@@ -326,7 +326,7 @@ validate_aws_ses() {
             echo "  ❌ AWS_ACCESS_KEY_ID format invalid (${#access_key} chars, expected 20)"
         fi
     fi
-    
+
     if echo "$github_secrets" | grep -q "^AWS_SECRET_ACCESS_KEY$"; then
         local secret_key
         secret_key=$(gh secret view AWS_SECRET_ACCESS_KEY --repo $REPO 2>/dev/null || echo "")
@@ -336,7 +336,7 @@ validate_aws_ses() {
             echo "  ❌ AWS_SECRET_ACCESS_KEY format invalid (${#secret_key} chars, expected 40)"
         fi
     fi
-    
+
     if echo "$github_secrets" | grep -q "^SES_SENDER_EMAIL$"; then
         local sender_email
         sender_email=$(gh secret view SES_SENDER_EMAIL --repo $REPO 2>/dev/null || echo "")
@@ -353,24 +353,24 @@ generate_report() {
     header "════════════════════════════════════════════════════════════════════════════════"
     header "                        VALIDATION REPORT"
     header "════════════════════════════════════════════════════════════════════════════════"
-    
+
     echo "Platform: $PLATFORM"
     echo "Environment: $ENVIRONMENT"
     echo "Timestamp: $(date)"
     echo ""
-    
+
     if [ $VALIDATION_ERRORS -eq 0 ]; then
         success "✅ All critical validations passed"
     else
         error "❌ $VALIDATION_ERRORS validation error(s) found"
     fi
-    
+
     if [ $VALIDATION_WARNINGS -gt 0 ]; then
         warning "⚠️  $VALIDATION_WARNINGS warning(s) found"
     fi
-    
+
     echo ""
-    
+
     # Overall status
     if [ $VALIDATION_ERRORS -eq 0 ]; then
         if [ $VALIDATION_WARNINGS -eq 0 ]; then
@@ -384,7 +384,7 @@ generate_report() {
         error "❌ Secrets configuration has CRITICAL issues"
         echo "Fix errors before deployment."
     fi
-    
+
     echo ""
     info "Recommendations:"
     if [ $VALIDATION_ERRORS -gt 0 ]; then
@@ -404,10 +404,10 @@ main() {
         show_help
         exit 0
     fi
-    
+
     banner
     check_prerequisites
-    
+
     case $PLATFORM in
         github)
             validate_github_secrets
@@ -428,10 +428,10 @@ main() {
             exit 1
             ;;
     esac
-    
+
     echo
     generate_report
-    
+
     # Exit with error code if validation failed
     if [ $VALIDATION_ERRORS -gt 0 ]; then
         exit 1

@@ -39,28 +39,28 @@ jobs:
         run: |
           cd frontend
           yarn build
-          
+
           # Calculate bundle sizes
           echo "📦 Calculating bundle sizes..."
           if [[ -d "dist/assets" ]]; then
             total_js=$(find dist/assets -name "*.js" -type f -exec du -b {} + | awk '{sum+=$1} END {print sum}')
             total_css=$(find dist/assets -name "*.css" -type f -exec du -b {} + | awk '{sum+=$1} END {print sum}')
             total_size=$(du -sb dist | awk '{print $1}')
-            
+
             echo "total_js=$total_js" >> $GITHUB_ENV
             echo "total_css=$total_css" >> $GITHUB_ENV
             echo "total_size=$total_size" >> $GITHUB_ENV
-            
+
             # Convert to human-readable
             total_js_kb=$(( total_js / 1024 ))
             total_css_kb=$(( total_css / 1024 ))
             total_size_kb=$(( total_size / 1024 ))
-            
+
             echo "PR Bundle Sizes:"
             echo "  JavaScript: ${total_js_kb} KB"
             echo "  CSS: ${total_css_kb} KB"
             echo "  Total: ${total_size_kb} KB"
-            
+
             # Save PR bundle info
             cat > pr-bundle.json <<EOF
           {
@@ -83,7 +83,7 @@ jobs:
         run: |
           mkdir -p bundle-analysis
           cp pr-bundle.json bundle-analysis/ || true
-          
+
           if [[ -d frontend/dist ]]; then
             # List largest files
             echo "📊 Largest files in PR build:" > bundle-analysis/largest-files.txt
@@ -101,30 +101,30 @@ jobs:
           cd base
           corepack enable
           yarn install --immutable || yarn install
-          
+
           cd frontend
           yarn build || echo "Base build failed"
-          
+
           # Calculate base bundle sizes
           echo "📦 Calculating base bundle sizes..."
           if [[ -d "dist/assets" ]]; then
             base_js=$(find dist/assets -name "*.js" -type f -exec du -b {} + | awk '{sum+=$1} END {print sum}')
             base_css=$(find dist/assets -name "*.css" -type f -exec du -b {} + | awk '{sum+=$1} END {print sum}')
             base_size=$(du -sb dist | awk '{print $1}')
-            
+
             echo "base_js=$base_js" >> $GITHUB_ENV
             echo "base_css=$base_css" >> $GITHUB_ENV
             echo "base_size=$base_size" >> $GITHUB_ENV
-            
+
             base_js_kb=$(( base_js / 1024 ))
             base_css_kb=$(( base_css / 1024 ))
             base_size_kb=$(( base_size / 1024 ))
-            
+
             echo "Base Bundle Sizes:"
             echo "  JavaScript: ${base_js_kb} KB"
             echo "  CSS: ${base_css_kb} KB"
             echo "  Total: ${base_size_kb} KB"
-            
+
             cat > ../bundle-analysis/base-bundle.json <<EOF
           {
             "js_bytes": $base_js,
@@ -147,22 +147,22 @@ jobs:
         run: |
           pr_total=${{ env.total_size }}
           base_total=${{ env.base_size }}
-          
+
           if [[ $base_total -gt 0 && $pr_total -gt 0 ]]; then
             diff=$((pr_total - base_total))
             diff_kb=$((diff / 1024))
-            
+
             # Calculate percentage change
             if [[ $base_total -gt 0 ]]; then
               percent=$(( (diff * 100) / base_total ))
             else
               percent=0
             fi
-            
+
             echo "diff_bytes=$diff" >> $GITHUB_OUTPUT
             echo "diff_kb=$diff_kb" >> $GITHUB_OUTPUT
             echo "percent=$percent" >> $GITHUB_OUTPUT
-            
+
             # Determine status
             if [[ $diff -gt 102400 ]]; then  # More than 100KB increase
               echo "status=warning" >> $GITHUB_OUTPUT
@@ -183,19 +183,19 @@ jobs:
         run: |
           cat > bundle-analysis/comparison-report.md <<'EOF'
           # 📦 Bundle Size Comparison Report
-          
+
           ## Summary
-          
+
           | Metric | Base | PR | Change |
-          |--------|------|----|---------| 
+          |--------|------|----|---------|
           | JavaScript | ${{ env.base_js }} bytes | ${{ env.total_js }} bytes | $(( ${{ env.total_js }} - ${{ env.base_js }} )) bytes |
           | CSS | ${{ env.base_css }} bytes | ${{ env.total_css }} bytes | $(( ${{ env.total_css }} - ${{ env.base_css }} )) bytes |
           | **Total** | **$(( ${{ env.base_size }} / 1024 )) KB** | **$(( ${{ env.total_size }} / 1024 )) KB** | **${{ steps.compare.outputs.diff_kb }} KB** |
-          
+
           ## Status
-          
+
           ${{ steps.compare.outputs.status == 'warning' && '⚠️  **Warning:** Significant bundle size increase detected!' || steps.compare.outputs.status == 'improvement' && '✅ **Great!** Bundle size decreased.' || 'ℹ️  Bundle size change is within acceptable range.' }}
-          
+
           EOF
 
       - name: Upload comparison artifacts
@@ -210,16 +210,16 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            
+
             const prTotal = parseInt('${{ env.total_size }}') || 0;
             const baseTotal = parseInt('${{ env.base_size }}') || 0;
             const diff = parseInt('${{ steps.compare.outputs.diff_kb }}') || 0;
             const percent = parseInt('${{ steps.compare.outputs.percent }}') || 0;
             const status = '${{ steps.compare.outputs.status }}';
-            
+
             let statusEmoji = 'ℹ️';
             let statusText = 'No significant change';
-            
+
             if (status === 'warning') {
               statusEmoji = '⚠️';
               statusText = 'Bundle size increased significantly';
@@ -227,28 +227,28 @@ jobs:
               statusEmoji = '✅';
               statusText = 'Bundle size decreased';
             }
-            
+
             const comment = `## 📦 Bundle Size Analysis
-            
+
             ${statusEmoji} **${statusText}**
-            
+
             | Metric | Base | PR | Change |
-            |--------|------|----|---------| 
+            |--------|------|----|---------|
             | JavaScript | ${Math.round(parseInt('${{ env.base_js }}') / 1024)} KB | ${Math.round(parseInt('${{ env.total_js }}') / 1024)} KB | ${Math.round((parseInt('${{ env.total_js }}') - parseInt('${{ env.base_js }}')) / 1024)} KB |
             | CSS | ${Math.round(parseInt('${{ env.base_css }}') / 1024)} KB | ${Math.round(parseInt('${{ env.total_css }}') / 1024)} KB | ${Math.round((parseInt('${{ env.total_css }}') - parseInt('${{ env.base_css }}')) / 1024)} KB |
             | **Total** | **${Math.round(baseTotal / 1024)} KB** | **${Math.round(prTotal / 1024)} KB** | **${diff > 0 ? '+' : ''}${diff} KB (${percent > 0 ? '+' : ''}${percent}%)** |
-            
+
             ${status === 'warning' ? '⚠️  **Action recommended:** Review the bundle size increase. Consider code splitting or lazy loading.' : ''}
             ${status === 'improvement' ? '🎉 Great work reducing the bundle size!' : ''}
-            
+
             <details>
             <summary>View largest files</summary>
-            
+
             Download the \`bundle-comparison\` artifact to see the full file list.
-            
+
             </details>
             `;
-            
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -266,7 +266,7 @@ jobs:
           echo "| CSS | $(( ${{ env.base_css }} / 1024 )) KB | $(( ${{ env.total_css }} / 1024 )) KB | $(( (${{ env.total_css }} - ${{ env.base_css }}) / 1024 )) KB |" >> $GITHUB_STEP_SUMMARY
           echo "| **Total** | **$(( ${{ env.base_size }} / 1024 )) KB** | **$(( ${{ env.total_size }} / 1024 )) KB** | **${{ steps.compare.outputs.diff_kb }} KB** |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           if [[ "${{ steps.compare.outputs.status }}" == "warning" ]]; then
             echo "⚠️  **Warning:** Bundle size increased by ${{ steps.compare.outputs.diff_kb }} KB (${{ steps.compare.outputs.percent }}%)" >> $GITHUB_STEP_SUMMARY
           elif [[ "${{ steps.compare.outputs.status }}" == "improvement" ]]; then

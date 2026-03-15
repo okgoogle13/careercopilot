@@ -27,25 +27,25 @@ def analyze_file(filepath):
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             content = f.read()
-            
+
         is_legacy = any(ind in content for ind in LEGACY_INDICATORS)
         is_modern = any(ind in content for ind in MODERN_INDICATORS)
-        
+
         if is_modern and not is_legacy:
             return "✨ MODERN (Keep)"
         elif is_legacy:
             return "💀 LEGACY (Migrate/Delete)"
         else:
             return "❓ UNKNOWN (Review)"
-            
+
     except Exception:
         return "⚠️ ERROR (Could not read)"
 
 def generate_map():
     results = {}
-    
+
     print(f"🕵️  Scanning {SEARCH_DIR} for components...")
-    
+
     for root, _, files in os.walk(SEARCH_DIR):
         for file in files:
             if file.endswith(('.tsx', '.jsx', '.js', '.ts')) and not file.endswith('.d.ts'):
@@ -53,9 +53,9 @@ def generate_map():
                 # Skip node_modules just in case
                 if "node_modules" in path:
                     continue
-                
+
                 status = analyze_file(path)
-                
+
                 # Group by folder
                 folder = os.path.dirname(path)
                 if folder not in results:
@@ -69,7 +69,7 @@ def generate_map():
         f.write("> * ✨ MODERN: Uses Tailwind/CVA/Framer (Good to go)\n")
         f.write("> * 💀 LEGACY: Uses MUI/CSS Modules (Needs migration)\n")
         f.write("> * ❓ UNKNOWN: Generic logic or utils\n\n")
-        
+
         for folder in sorted(results.keys()):
             f.write(f"### 📂 `{folder}`\n")
             f.write("| File | Status | Action |\n")

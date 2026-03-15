@@ -166,4 +166,3 @@ jobs:
           echo "|-----------|--------|-----|" >> $GITHUB_STEP_SUMMARY
           echo "| Frontend (Vercel) | ✅ Deployed | ${{ steps.deploy-frontend.outputs.deploy_url }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Backend (Cloud Run) | ✅ Deployed | ${{ steps.deploy-backend.outputs.url }} |" >> $GITHUB_STEP_SUMMARY
-

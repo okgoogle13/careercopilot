@@ -90,20 +90,20 @@ jobs:
         run: |
           echo "## 🔒 Backend Image Security Scan" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           if [[ -f trivy-backend-report.txt ]]; then
             # Count vulnerabilities by severity
             critical=$(grep -c "CRITICAL" trivy-backend-report.txt || echo "0")
             high=$(grep -c "HIGH" trivy-backend-report.txt || echo "0")
             medium=$(grep -c "MEDIUM" trivy-backend-report.txt || echo "0")
-            
+
             echo "| Severity | Count |" >> $GITHUB_STEP_SUMMARY
             echo "|----------|-------|" >> $GITHUB_STEP_SUMMARY
             echo "| 🔴 Critical | $critical |" >> $GITHUB_STEP_SUMMARY
             echo "| 🟠 High | $high |" >> $GITHUB_STEP_SUMMARY
             echo "| 🟡 Medium | $medium |" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
-            
+
             if [[ $critical -gt 0 ]]; then
               echo "⚠️  **Action Required:** Critical vulnerabilities found!" >> $GITHUB_STEP_SUMMARY
             elif [[ $high -gt 0 ]]; then
@@ -111,7 +111,7 @@ jobs:
             else
               echo "✅ No critical or high severity vulnerabilities found" >> $GITHUB_STEP_SUMMARY
             fi
-            
+
             echo "" >> $GITHUB_STEP_SUMMARY
             echo "📦 SBOM (Software Bill of Materials) generated and uploaded as artifact" >> $GITHUB_STEP_SUMMARY
           fi
@@ -202,20 +202,20 @@ jobs:
         run: |
           echo "## 🔒 Frontend Image Security Scan" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           if [[ "${{ steps.check-dockerfile.outputs.exists }}" == "true" ]]; then
             if [[ -f trivy-frontend-report.txt ]]; then
               critical=$(grep -c "CRITICAL" trivy-frontend-report.txt || echo "0")
               high=$(grep -c "HIGH" trivy-frontend-report.txt || echo "0")
               medium=$(grep -c "MEDIUM" trivy-frontend-report.txt || echo "0")
-              
+
               echo "| Severity | Count |" >> $GITHUB_STEP_SUMMARY
               echo "|----------|-------|" >> $GITHUB_STEP_SUMMARY
               echo "| 🔴 Critical | $critical |" >> $GITHUB_STEP_SUMMARY
               echo "| 🟠 High | $high |" >> $GITHUB_STEP_SUMMARY
               echo "| 🟡 Medium | $medium |" >> $GITHUB_STEP_SUMMARY
               echo "" >> $GITHUB_STEP_SUMMARY
-              
+
               if [[ $critical -gt 0 ]]; then
                 echo "⚠️  **Action Required:** Critical vulnerabilities found!" >> $GITHUB_STEP_SUMMARY
               elif [[ $high -gt 0 ]]; then

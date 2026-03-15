@@ -14,7 +14,7 @@ def get_api_key():
 
 @mcp.tool()
 async def perplexity_chat(
-    query: str, 
+    query: str,
     model: Literal["sonar-reasoning-pro", "sonar-reasoning", "sonar-pro", "sonar"] = "sonar",
     system_prompt: Optional[str] = "You are a helpful assistant with real-time web search capabilities."
 ) -> str:
@@ -29,7 +29,7 @@ async def perplexity_chat(
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json"
     }
-    
+
     payload = {
         "model": model,
         "messages": [
@@ -55,7 +55,7 @@ async def perplexity_search_web(
     """
     Search the web using Perplexity AI. This is a specialized tool for research.
     """
-    # Map focus to specific prompt instructions since Perplexity API 
+    # Map focus to specific prompt instructions since Perplexity API
     # uses models to determine search capability.
     prompt = f"Search focus: {focus}. Please research the following: {query}"
     return await perplexity_chat(query=prompt, model="sonar-pro")
@@ -66,7 +66,7 @@ async def perplexity_deep_research(query: str) -> str:
     Perform deep research on a topic using the most capable Perplexity model.
     """
     return await perplexity_chat(
-        query=query, 
+        query=query,
         model="sonar-reasoning-pro",
         system_prompt="You are a detailed research assistant. Provide comprehensive analysis with citations."
     )

@@ -76,11 +76,11 @@ def clean_npm():
 
 def main():
     log("Starting Deep Clean Protocol...", "INFO")
-    
+
     kill_zombies()
     clean_files()
     clean_npm()
-    
+
     log("Cleanup Complete. The environment is now a blank slate.", "DONE")
     log(">>> NEXT STEP: Run 'python tools/setup_ide_mcp.py' to establish the Single Source of Truth.", "IMPORTANT")
 

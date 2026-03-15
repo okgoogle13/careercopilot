@@ -445,4 +445,3 @@ frontend/src/features/AssetReview/
 - Monitor and iterate
 
 **Go live:** Assets now integrated into kr-solidarity design system v3.0.0 🎉
-

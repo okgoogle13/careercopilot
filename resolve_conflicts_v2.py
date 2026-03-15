@@ -5,12 +5,12 @@ def resolve_file(filepath):
     print(f"Processing {filepath}...")
     with open(filepath, 'r') as f:
         lines = f.readlines()
-    
+
     new_lines = []
     # State: 0=normal, 1=in side A, 2=in side B
     state = 0
     resolved = False
-    
+
     for line in lines:
         if line.startswith('<<<<<<< HEAD'):
             state = 1
@@ -23,12 +23,12 @@ def resolve_file(filepath):
             state = 0
             resolved = True
             continue
-            
+
         if state == 0:
             new_lines.append(line)
         elif state == 2:
             new_lines.append(line)
-            
+
     if resolved:
         with open(filepath, 'w') as f:
             f.writelines(new_lines)

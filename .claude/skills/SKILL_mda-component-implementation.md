@@ -29,5 +29,5 @@ Your workflow is strictly bounded. You do not invent architecture. You translate
 
 ```bash
 # Developer runs:
-claude /mda-component-implementation --component ApplicationDetailPanel --briefs-file docs/project/active/frontend-source-of-truth-migration/2026-03-14-tracker-supplementary-component-briefs.xml
+claude /mda-component-implementation --component ApplicationDetailPanel --briefs-file docs/project/active/frontend-source-of-truth-migration/contracts/tracker-supplementary-component-briefs.xml
 ```

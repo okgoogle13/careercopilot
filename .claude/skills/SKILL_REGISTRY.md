@@ -169,6 +169,10 @@ node scripts/kr/generate-hero-registry.mjs # → public/assets/...hero-registry.
 |---|---|---|
 | executing-plans | .claude/skills/executing-plans | Execute an existing implementation plan with explicit review, verification, and blocker escalation. |
 | writing-plans | .claude/skills/writing-plans | Turn an approved spec into a detailed, executable implementation plan before coding starts. |
+| design-orchestration | .claude/skills/design-orchestration | Orchestrates design workflows by routing work through brainstorming and execution readiness checks. |
+| brainstorming | .claude/skills/brainstorming | Transforms vague ideas into validated designs through disciplined reasoning and collaboration. |
+| blueprint | .claude/skills/blueprint | Turns an objective into a step-by-step construction plan any coding agent can execute cold. |
+| git-pr-workflows-git-workflow | .claude/skills/git-pr-workflows-git-workflow | Orchestrates a comprehensive git workflow from code review through PR creation, with compliance checks. |
 
 ### Design System & Asset Skills
 | Skill | Directory | Description |
@@ -181,6 +185,8 @@ node scripts/kr/generate-hero-registry.mjs # → public/assets/...hero-registry.
 | manifest-reconciler | .claude/skills/manifest-reconciler | Reconcile KR asset files against registries. |
 | phase4-pipeline-orchestrator | .claude/skills/phase4-pipeline-orchestrator | Deterministic phase4a->phase4b->phase4c orchestration with contract-gated outputs and failure codes. |
 | m3-expressive-ui-evaluator | .claude/skills/m3-expressive-ui-evaluator | UI audit against Material Design 3 Expressive standards. |
+| baseline-ui | .claude/skills/baseline-ui | Establishes the core UI architecture and component logic following KR Solidarity v6.0 constraints. |
+| frontend-mobile-development-component-scaffold | .claude/skills/frontend-mobile-development-component-scaffold | Scaffolds completely strict KR Solidarity React components using CSS Modules. |
 
 ## Migration Kit Audit Workflow (Canonical)
 1. `migration-audit` — one complete audit per target

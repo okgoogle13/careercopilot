@@ -41,14 +41,14 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY_STAGING }}
         run: |
           echo "⏱️  Benchmarking Flash-Sidekick startup time ($BENCHMARK_RUNS runs)..."
-          
+
           cd servers
           total_time=0
-          
+
           for i in $(seq 1 $BENCHMARK_RUNS); do
             echo "Run $i/$BENCHMARK_RUNS..."
             start=$(date +%s%N)
-            
+
             timeout 30s python3 -c "
           import sys
           sys.path.insert(0, '.')
@@ -59,16 +59,16 @@ jobs:
               print(f'Error: {e}')
               sys.exit(1)
             " || true
-            
+
             end=$(date +%s%N)
             duration=$(( (end - start) / 1000000 ))  # Convert to milliseconds
             echo "  Duration: ${duration}ms"
             total_time=$((total_time + duration))
           done
-          
+
           avg_time=$((total_time / BENCHMARK_RUNS))
           echo "📊 Average startup time: ${avg_time}ms"
-          
+
           # Create results JSON
           mkdir -p benchmark-results
           cat > benchmark-results/flash-sidekick.json <<EOF
@@ -98,14 +98,14 @@ jobs:
         run: |
           current=$(jq -r '.average_ms' benchmark-results/flash-sidekick.json)
           baseline=${{ steps.baseline.outputs.baseline }}
-          
+
           echo "## ⏱️  Flash-Sidekick Performance" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
           echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
           echo "| Current Average | ${current}ms |" >> $GITHUB_STEP_SUMMARY
           echo "| Baseline | ${baseline}ms |" >> $GITHUB_STEP_SUMMARY
-          
+
           if [[ $current -lt $baseline ]]; then
             improvement=$(( ((baseline - current) * 100) / baseline ))
             echo "| Status | ✅ ${improvement}% faster |" >> $GITHUB_STEP_SUMMARY
@@ -138,14 +138,14 @@ jobs:
       - name: Benchmark startup time
         run: |
           echo "⏱️  Benchmarking Cloud Ops startup time ($BENCHMARK_RUNS runs)..."
-          
+
           cd servers
           total_time=0
-          
+
           for i in $(seq 1 $BENCHMARK_RUNS); do
             echo "Run $i/$BENCHMARK_RUNS..."
             start=$(date +%s%N)
-            
+
             python3 -c "
           import sys
           sys.path.insert(0, '.')
@@ -155,16 +155,16 @@ jobs:
               print(f'Error: {e}')
               sys.exit(1)
             "
-            
+
             end=$(date +%s%N)
             duration=$(( (end - start) / 1000000 ))
             echo "  Duration: ${duration}ms"
             total_time=$((total_time + duration))
           done
-          
+
           avg_time=$((total_time / BENCHMARK_RUNS))
           echo "📊 Average startup time: ${avg_time}ms"
-          
+
           mkdir -p benchmark-results
           cat > benchmark-results/cloud-ops.json <<EOF
           {
@@ -181,11 +181,11 @@ jobs:
         run: |
           current=$(jq -r '.average_ms' benchmark-results/cloud-ops.json)
           baseline=1000  # Default baseline
-          
+
           if [[ -f .github/baselines/mcp_performance.json ]]; then
             baseline=$(jq -r '.benchmarks.cloud_ops_startup_ms' .github/baselines/mcp_performance.json)
           fi
-          
+
           echo "## ⏱️  Cloud Ops Performance" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY

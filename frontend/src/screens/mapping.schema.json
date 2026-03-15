@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://careercopilot.app/schemas/screen-mapping.json",
+  "title": "Screen Mapping",
+  "description": "Canonical metadata linking a screens/ directory to its wireframe, TSX implementation, and route.",
+  "type": "object",
+  "required": ["wireframe_id", "wireframe_path", "screen_component_path", "route"],
+  "additionalProperties": false,
+  "properties": {
+    "wireframe_id": {
+      "type": "string",
+      "pattern": "^\\d{2}_[a-z_]+$",
+      "description": "Directory name of the screen (e.g. '07_kanban')."
+    },
+    "wireframe_path": {
+      "type": "string",
+      "description": "Path to the canonical XML wireframe (relative to repo root)."
+    },
+    "local_wireframe_path": {
+      "type": "string",
+      "description": "Local copy of the wireframe inside the screens/ directory."
+    },
+    "source_component_path": {
+      "type": "string",
+      "description": "Path to the current live production component that implements this screen."
+    },
+    "screen_component_path": {
+      "type": "string",
+      "description": "Path to the TSX file paired directly inside screens/ (comparison reference)."
+    },
+    "route": {
+      "type": "string",
+      "description": "The production URL path this screen maps to (must exist in ROUTE_REGISTRY)."
+    },
+    "migration_status": {
+      "type": "string",
+      "enum": ["not_started", "in_progress", "done", "prototype_only"],
+      "description": "Current migration state of this screen."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Free-text notes about this screen's mapping."
+    }
+  }
+}

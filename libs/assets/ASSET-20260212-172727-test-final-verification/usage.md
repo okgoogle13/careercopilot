@@ -41,4 +41,3 @@
 - Format: PNG (lossless, supports transparency)
 - Preload in critical paths for hero sections
 - Use `background-attachment: fixed` for parallax depth
-

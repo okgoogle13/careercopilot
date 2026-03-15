@@ -7,7 +7,7 @@ files.append('frontend/src/test/setup.ts')
 for file in files:
     with open(file, 'r') as f:
         content = f.read()
-    
+
     modified = False
     lines = content.split('\n')
     new_lines = []
@@ -17,7 +17,7 @@ for file in files:
             modified = True
             continue
         new_lines.append(line)
-        
+
     if modified:
         with open(file, 'w') as f:
             f.write('\n'.join(new_lines))

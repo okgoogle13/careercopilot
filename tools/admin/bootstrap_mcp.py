@@ -53,13 +53,13 @@ def install_packages():
         except subprocess.CalledProcessError as e:
             log(f"Failed to install {pkg}. Error: {e.stderr.decode()}", "ERROR")
             # Don't exit, try the next one
-            
+
 def generate_config():
     """Generates the JSON config Antigravity needs."""
-    
+
     # Locate where npm put the binaries (usually /usr/bin/npx or via npx lookup)
     # We will configure them to run via 'npx -y' which is safer now that they are cached
-    
+
     config = {
         "mcpServers": {
             "docker": {
@@ -82,25 +82,25 @@ def generate_config():
             }
         }
     }
-    
+
     with open(MCP_OUTPUT_CONFIG, "w") as f:
         json.dump(config, f, indent=2)
-    
+
     log(f"Generated MCP Configuration at: {MCP_OUTPUT_CONFIG}", "SUCCESS")
     log(">>> ACTION REQUIRED: Copy the content of mcp_config.json into your IDE's MCP settings.", "IMPORTANT")
 
 def main():
     log("Starting CareerCopilot MCP Bootstrap...", "INFO")
-    
+
     # 1. Fix Auth
     fix_npm_auth()
-    
+
     # 2. Install Correct Packages
     install_packages()
-    
+
     # 3. Generate Config
     generate_config()
-    
+
     log("Bootstrap complete. Restart Antigravity/VS Code to apply changes.", "DONE")
 
 if __name__ == "__main__":

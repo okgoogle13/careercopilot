@@ -56,12 +56,12 @@ if [ -z "$SKIP_ENV_VAR" ]; then
     echo ""
     echo -e "${YELLOW}Note: The token will start with 'ghp_' or 'github_pat_'${NC}"
     echo ""
-    
+
     # Read token securely
     read -sp "Enter your GitHub Personal Access Token: " GITHUB_TOKEN
     echo ""
     echo ""
-    
+
     # Validate token format
     if [[ ! $GITHUB_TOKEN =~ ^(ghp_|github_pat_) ]]; then
         echo -e "${RED}✗${NC} Warning: Token doesn't look like a valid GitHub PAT"
@@ -73,7 +73,7 @@ if [ -z "$SKIP_ENV_VAR" ]; then
             exit 1
         fi
     fi
-    
+
     # Test the token
     echo "Testing token..."
     if curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/user > /dev/null 2>&1; then
@@ -83,11 +83,11 @@ if [ -z "$SKIP_ENV_VAR" ]; then
         exit 1
     fi
     echo ""
-    
+
     # Add to shell config
     echo "Step 2: Adding environment variable to $SHELL_CONFIG"
     echo "-----------------------------------------------------"
-    
+
     # Check if already in config
     if grep -q "CODEX_GITHUB_PERSONAL_ACCESS_TOKEN" "$SHELL_CONFIG"; then
         echo -e "${YELLOW}!${NC} Variable already exists in $SHELL_CONFIG"
@@ -95,15 +95,15 @@ if [ -z "$SKIP_ENV_VAR" ]; then
         # Remove old entry
         sed -i.bak '/CODEX_GITHUB_PERSONAL_ACCESS_TOKEN/d' "$SHELL_CONFIG"
     fi
-    
+
     # Add new entry
     echo "" >> "$SHELL_CONFIG"
     echo "# GitHub Personal Access Token for Codex CLI MCP (added $(date +%Y-%m-%d))" >> "$SHELL_CONFIG"
     echo "export CODEX_GITHUB_PERSONAL_ACCESS_TOKEN=\"$GITHUB_TOKEN\"" >> "$SHELL_CONFIG"
-    
+
     echo -e "${GREEN}✓${NC} Environment variable added to $SHELL_CONFIG"
     echo ""
-    
+
     # Export for current session
     export CODEX_GITHUB_PERSONAL_ACCESS_TOKEN="$GITHUB_TOKEN"
 fi
@@ -163,14 +163,14 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     GLOBAL_CODEX_DIR="$HOME/.config/codex"
     GLOBAL_CONFIG_FILE="$GLOBAL_CODEX_DIR/config.toml"
-    
+
     mkdir -p "$GLOBAL_CODEX_DIR"
-    
+
     if [ -f "$GLOBAL_CONFIG_FILE" ]; then
         cp "$GLOBAL_CONFIG_FILE" "$GLOBAL_CONFIG_FILE.backup.$(date +%Y%m%d-%H%M%S)"
         echo -e "${GREEN}✓${NC} Backed up existing global configuration"
     fi
-    
+
     cp "$CONFIG_FILE" "$GLOBAL_CONFIG_FILE"
     echo -e "${GREEN}✓${NC} Created global configuration: $GLOBAL_CONFIG_FILE"
 fi

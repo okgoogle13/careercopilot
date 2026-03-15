@@ -91,4 +91,3 @@ metadata:
       \ var(--sys-elevation-1);\n}\n\n.title {\n  color: var(--sys-color-primary);\n\
       }\n\n.content {\n  margin-top: var(--sys-spacing-2);\n}\n```"
 ---
-
