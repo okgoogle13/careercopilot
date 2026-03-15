@@ -36,6 +36,7 @@
 - Step 2 — `/tracker` build contract: `execution_ready`
 - Step 3a — `/tracker` CRUD implementation: `in_progress`
 - Step 3b/3c/3d: waiting on `/tracker` execution priority, not on additional planning work
+- Step 6 — Migration Cleanup (Orphans & Legacy Routes): `execution_ready`
 
 ## Recorded approvals
 
@@ -51,3 +52,4 @@
 2. Replace the `/tracker` hero mapping with a compliant brand treatment and rerun screenshot capture.
 3. Re-run live-session verification against the backend so Step 3a can move from `in_progress` to complete.
 4. Treat non-auth benchmark creation as deferred until `migration-audit` is explicitly needed as a route gate.
+5. Execute Step 6: systematically migrate the 11 legacy routes and 6 orphaned screens.
