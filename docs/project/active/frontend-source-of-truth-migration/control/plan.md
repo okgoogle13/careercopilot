@@ -1,13 +1,17 @@
-# Proposed Final Migration Plan
+# Frontend Source-of-Truth Migration Plan (PR126)
 
-**Date:** 2026-03-13
-**Status:** Proposed consolidated plan
-**Canonical location:** `docs/project/active/frontend-source-of-truth-migration/2026-03-13-proposed-final-migration-plan.md`
+**Date:** 2026-03-15
+**Status:** Active (updated)
+**Canonical location:** `docs/project/active/frontend-source-of-truth-migration/control/plan.md`
 **Supersedes for active planning:**
 - `.claude/plans/2026-03-12-production-readiness-corrective-workflow-design.md`
 - `.claude/plans/2026-03-12-frontend-source-of-truth-migration.md`
 - `.claude/plans/2026-03-12-migration-critique.md`
 - `.claude/plans/wireframe-source-of-truth-gap.md`
+
+Execution truth:
+- `docs/project/active/frontend-source-of-truth-migration/control/blueprint.md`
+- `docs/project/active/frontend-source-of-truth-migration/control/workflow.md`
 
 ## Purpose
 
@@ -67,6 +71,23 @@ This migration should be considered successful only if the following checks are 
 - `100%` of routes touched during migration pass token-enforcement checks before milestone closure
 - `100%` of major component surfaces are classified as canonical, support, reference-only, deferred, or cleanup candidates
 
+## Target Component State (Canonical vs Support vs Deferred)
+
+Canonical route-owned surfaces (must be live, routed, and backend-wired):
+- `/tracker`: `ApplicationTracker`
+- `/documents`: `Documents`
+- `/career/ingest`: `IngestionPage`
+- `/profile`: `ProfileView`
+- `/analysis`: `AnalysisPage`
+- `/opportunities`: `Opportunities`
+- `/apply/quick`: `ApplyQuick`
+
+Support components (route-owned or explicitly shared) and deferred components:
+- source of truth: `control/gap-map.json` and `control/gap-map.md`
+
+Rule:
+- do not promote reference-only screen components into runtime truth without a route-matrix row and a build contract when wireframes are in scope
+
 ## Minimum Rules For This Work
 
 These rules stay because they prevent the team from making the situation worse:
@@ -87,6 +108,29 @@ Current known facts from the existing review work:
 - 5 live `/kr/*` prototype routes
 
 This means the current app is not just "behind the wireframes." It is split across multiple overlapping frontend realities.
+
+## Phase 1 Evidence: Three-Truth Discovery (Advisory)
+
+These artifacts are evidence inputs only. They do not override runtime truth, design truth, or capability truth.
+
+Evidence outputs (machine-readable):
+- `docs/manifests/routes.json` (runtime routes scanned from `frontend/src/App.tsx`)
+- `docs/manifests/screens.json` (design screens scanned from `frontend/src/screens/`)
+- `docs/manifests/frontend-api-usage.json` (frontend API usage)
+- `docs/manifests/backend-endpoints.json` (mounted backend endpoints)
+- `docs/manifests/orphans.json` (cross-truth drift report)
+
+Evidence commands:
+- `npx tsx tools/scripts/scan-routes.ts`
+- `npx tsx tools/scripts/scan-screens.ts`
+- `npx tsx tools/scripts/scan-api-usage.ts`
+- `python3 tools/scripts/scan-endpoints.py`
+- `npx tsx tools/scripts/detect-orphans.ts`
+
+Current evidence snapshot (2026-03-15):
+- Runtime: 27 routes
+- Design: 11 screen dirs (paired wireframe + TSX + mapping)
+- Capability: 69 unique endpoints used by frontend; 57 endpoints mounted in backend
 
 ## Wireframe Workflow and Prior Learnings
 
@@ -112,7 +156,7 @@ Use this sequence for wireframe-led migration work:
    - generate or refresh wireframe intent only
 2. `scripts/validate-wireframe-workflow.py`
    - validate canonical XML wireframes against schema quality, route coverage, component planning, and legacy drift
-3. `2026-03-14-wireframe-build-contract-prompt.md`
+3. `contracts/wireframe-build-contract-prompt.md`
    - generate a deterministic build contract from one route-matrix row, one canonical wireframe XML, and one component-gap entry when applicable
 4. `scripts/derive-gap-fill-plan.py`
    - generate a tokens-first reuse plan from the route matrix, component gap map, existing TSX files, and an approved build contract when present
@@ -130,35 +174,27 @@ Use this sequence for wireframe-led migration work:
 
 The build-contract prompt is the missing bridge between validated XML wireframes and TSX implementation planning.
 It must reconcile:
-- `2026-03-13-target-state-route-matrix.json`
-- `2026-03-13-backend-feature-frontend-component-gap-map.json`
+- `control/route-matrix.json`
+- `control/gap-map.json`
 - one canonical `frontend/src/screens/**/*.wireframe.xml`
 
 ### Current build-contract gate status
 
-The first route-level build contract exists for `/tracker`, but it should be treated as a draft under review, not an approved implementation contract.
+The first route-level build contract exists for `/tracker` and is approved for execution.
 
 Current status:
 - route: `/tracker`
-- artifact: `2026-03-14-build-contract-tracker.xml`
-- review state: `in_review`
-- gate result: `blocked`
-
-Blocking issues that must close before broad `Phase 3` execution starts:
-- `KanbanColumn` ownership is still unresolved between route-owned support component and shared UI primitive
-- `ApplicationDetailPanel`, `ApplicationEditForm`, `ApplicationStatusActions`, and `ApplicationArchiveAction` still lack a deterministic source artifact in the canonical wireframe or a tracked supplementary brief
-
-Next sequence:
-1. close the `/tracker` build-contract blockers
-2. approve `/tracker` using the tracked review rubric
-3. reuse the approved pattern for `/profile` and `/career/ingest`
-4. expand broader `Phase 3` route work only after the first approved build contract exists
+- artifact: `contracts/build-contract-tracker.xml`
+- review state: `approved`
+- gate result: `execution_ready`
+- human approval recorded: `2026-03-14` (see `control/status.md`)
+- current execution state: Step 3a `/tracker` CRUD `in_progress` (see `control/blueprint.md`)
 
 ### Do
 
 - use `frontend/src/screens/**/*.wireframe.xml` as the canonical wireframe source
-- validate wireframes against `2026-03-13-target-state-route-matrix.json` before calling them migration-ready
-- validate wireframes against `2026-03-13-backend-feature-frontend-component-gap-map.json` before spec generation
+- validate wireframes against `control/route-matrix.json` before calling them migration-ready
+- validate wireframes against `control/gap-map.json` before spec generation
 - use the tracked build-contract prompt to produce route-level implementation contracts before `component-spec-generator` work begins
 - use the tokens-first gap-fill planner to decide whether an existing runtime component should be reused for behavior only, reused with token cleanup, treated as reference-only, or replaced
 - treat motion, asset placement, and brand polish as downstream enrichments after schema and planning consistency
@@ -177,7 +213,7 @@ Next sequence:
 
 ## The Recovery Strategy
 
-The work should run in four phases. The first phase is a planning cleanup phase; the next three are execution-driven.
+The work runs in phases aligned to the blueprint execution steps. Use `control/pm/dashboard.md` for the executive snapshot and `control/pm/phase-plan.yaml` for the phase definitions.
 
 ### Phase 1: Fix the planning inputs
 
@@ -188,10 +224,9 @@ Actions:
 - fix the broken capability gap matrix so each tracked capability has a clear status
 - align `frontend/scripts/validate-governance-artifacts.mjs` with the Python governance tests
 - define token-enforcement expectations for any route or component surface touched by migration work
-- keep only the governance artifacts needed to drive implementation:
-  - `.claude/route-family-map.json`
-  - `.claude/plans/frontend-capability-gap-matrix.json`
-  - `.claude/plans/route-family-target-state.json`
+- keep only the governance artifacts needed to drive implementation under `control/`:
+  - `control/route-matrix.json`
+  - `control/gap-map.json`
 - stop treating governance output as the main deliverable
 
 Acceptance:
@@ -245,13 +280,13 @@ Target owner:
 - `/tracker`
 
 Problem:
-- applications CRUD exists in backend but the main tracker surface is still effectively mock-backed
+- applications CRUD exists in backend; `/tracker` is now wired to the canonical `applicationService` path but still requires live-session verification and final brand signoff before closure
 
 Required outcome:
 - the tracker becomes the real owner of application list, detail, edit, and status actions
 
 Next implementation actions:
-- replace mock-backed data flow with real backend reads and writes
+- ensure no mock fallback remains in the primary runtime path
 - add missing detail and status-change flows
 - merge any useful `KanbanTracker` or `ApplicationFinalization` ideas into the routed tracker experience rather than creating another parallel surface
 
@@ -381,13 +416,22 @@ Acceptance for Phase 4:
 - no useful product surface is deleted before a real owner exists
 - runtime folder ownership aligns with the route matrix for touched route families without a repo-wide reorg
 
+## Delegation and Status (Project-Manager Overlay)
+
+PM artifacts exist to improve visibility and delegation. They do not override execution truth.
+
+- dashboard: `control/pm/dashboard.md`
+- phases and gates: `control/pm/phase-plan.yaml`
+- milestones and owners: `control/pm/milestone-tracking.json`
+- recommended backlog anchors: `control/implementation-backlog.md`
+
 ## Route-Level Priority Table
 
 ### Applications
-- Current problem: backend exists, frontend still acts like a mock surface
+- Current problem: `/tracker` is wired to the real applications API path but still needs live-session verification and final brand gate closure
 - Owner route: `/tracker`
 - Backend dependency: applications CRUD endpoints
-- Next action: replace mock data path and add detail, edit, and status actions
+- Next action: ensure no mock fallback remains in the primary runtime path, then close verification and brand gates
 
 ### Ingestion
 - Current problem: split contracts and incomplete routed flow

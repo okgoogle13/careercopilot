@@ -34,4 +34,3 @@ Scope: <area>
 
 - Claude Desktop, Antigravity, Gemini, or any agent must follow this policy.
 - If unsure where a doc belongs, default to `docs/development/` and link from `docs/atomic/README.md`.
-

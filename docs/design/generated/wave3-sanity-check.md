@@ -1,6 +1,6 @@
 # Wave 3 QA & Sanity Check Report
 
-**Date:** 2026-02-11  
+**Date:** 2026-02-11
 **Status:** ✅ COMPLETED BY QA
 
 This report summarizes the sanity check for the "The Workshop" component set (`UnifiedColumn`, `KanbanBoard`, `EditorSplitPane`).
@@ -9,37 +9,37 @@ This report summarizes the sanity check for the "The Workshop" component set (`U
 
 ### 1. UnifiedColumn (Stone)
 - **API & Typing**: Extends `UnifiedColumnProps`. Supports `title`, `count`, `children`, and `headerAction`.
-- **Accessibility**: 
+- **Accessibility**:
   - Uses semantic `<h3>` for column titles.
   - Count badge uses `font-direct-action` for distinct quantitative readability.
   - Internal scrolling handles overflow safely with custom scrollbar.
-- **Motion**: 
+- **Motion**:
   - Spring-based entrance animation for content area.
   - Respects `useReducedMotion()` (opacity only).
-- **Styling**: 
+- **Styling**:
   - `rounded-stone` container with `bg-asphalt-black/50`.
   - `shadow-viscous` for depth.
   - `border-white/5` for subtle structural definition.
 
 ### 2. KanbanBoard (Orchestrator)
 - **API & Typing**: Supports `children`, `className`, and `horizontalScroll` toggle.
-- **Accessibility**: 
+- **Accessibility**:
   - Smooth horizontal scrolling for keyboard users.
   - Semantic container for multiple `UnifiedColumn` sections.
-- **Motion**: 
+- **Motion**:
   - CSS-based `scroll-smooth` for fluid navigation.
-- **Styling**: 
+- **Styling**:
   - Gap system (`gap-6`) enforces consistent tactical rhythm.
   - `custom-scrollbar` applied for cross-browser visual consistency in dark mode.
 
 ### 3. EditorSplitPane (Interactive Slab)
 - **API & Typing**: Supports `leftContent`, `rightContent`, and `initialSplit` percentage.
-- **Accessibility**: 
+- **Accessibility**:
   - Split handle provides visual affordance for resizing.
   - Separate scroll containers for left/right panes prevent viewport lock.
-- **Motion**: 
+- **Motion**:
   - Viscous transition on divider hover.
-- **Styling**: 
+- **Styling**:
   - `bg-asphalt-black` base.
   - `ink-gold` accent on the divider handle.
   - blueprint-grid background (Z-0) ready for creator/analytical context.

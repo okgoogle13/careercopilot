@@ -75,4 +75,3 @@ When in doubt:
 - Use fewer symbols
 - Remove explanatory text
 - Re-check the canon
-

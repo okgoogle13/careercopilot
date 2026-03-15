@@ -3,9 +3,9 @@
 **Date:** 2026-03-13
 **Status:** Proposed implementation backlog
 **Canonical planning inputs:**
-- `docs/project/active/frontend-source-of-truth-migration/2026-03-13-proposed-final-migration-plan.md`
-- `docs/project/active/frontend-source-of-truth-migration/2026-03-13-target-state-route-matrix.md`
-- `docs/project/active/frontend-source-of-truth-migration/2026-03-13-backend-feature-frontend-component-gap-map.md`
+- `docs/project/active/frontend-source-of-truth-migration/control/plan.md`
+- `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.md`
+- `docs/project/active/frontend-source-of-truth-migration/control/gap-map.md`
 
 ## Objective
 
@@ -148,8 +148,8 @@ Backlog items:
 - Depends on: `MIG-006`
 - Status: **in progress** (`2026-03-14`, review-blocked)
 - Deliverables:
-  - add the tracked build-contract prompt artifact to the migration docs — **done** (`2026-03-14-wireframe-build-contract-prompt.md`)
-  - use the exact prompt to generate deterministic build contracts for priority routes — **partially done** (`2026-03-14-build-contract-tracker.xml` exists for `/tracker` but is not yet approved)
+  - add the tracked build-contract prompt artifact to the migration docs — **done** (`contracts/wireframe-build-contract-prompt.md`)
+  - use the exact prompt to generate deterministic build contracts for priority routes — **partially done** (`contracts/build-contract-tracker.xml` exists for `/tracker` but is not yet approved)
   - ensure each build contract reconciles canonical XML wireframes with the route matrix and backend-feature component gap map — **partially done** (the `/tracker` contract reconciles `07_kanban.wireframe.xml`, the `tracker` route row, and the `applications_crud` gap entry, but still contains blocking gaps)
   - record blocking `contract_gap` findings instead of inferring missing ownership or components — **done** (2 blocking gaps: KanbanColumn ownership, missing wireframe elements for new_components; 4 non-blocking gaps)
 - Completion evidence:
@@ -212,7 +212,7 @@ Backlog items:
 - Owner: `Claude`
 - Status: `pending`
 - Deliverables:
-  - regenerate `2026-03-14-build-contract-tracker.xml` after the blocking gaps are resolved
+  - regenerate `contracts/build-contract-tracker.xml` after the blocking gaps are resolved
   - remove build-critical ownership and wireframe-data gaps from the `/tracker` contract
 - Completion evidence:
   - the `/tracker` contract is reviewable as `approved`, not `draft` or `in_review`
@@ -460,6 +460,19 @@ Backlog items:
 - Completion evidence:
   - route matrix and runtime routing no longer treat `/kr/*` as live product ownership
 
+#### MIG-402A: Add route preflight inventory checks
+- Plan phase reference: `Phase 3`
+- Area: route execution
+- Type: preflight inventory
+- Depends on: `M2`, `M3`, `M4`
+- Deliverables:
+  - run `frontend/scripts/component-inventory.ts` before Step 3 route execution
+  - review `frontend/analysis/frontend-architecture-report.json` for route-family conflicts
+  - record shared-shell inheritance and duplicate live-looking surfaces for the route
+  - record lane label `KEEP` / `WRAP` / `REWRITE` / `DELETE` as support-only metadata
+- Completion evidence:
+  - each Step 3 route has a recorded preflight note with conflicts and shell inheritance
+
 #### MIG-402: Mark reference-only components and cleanup candidates
 - Plan phase reference: `Phase 4`
 - Area: component-library cleanup
@@ -522,9 +535,10 @@ Backlog items:
 13. `MIG-302` (`Phase 3`)
 14. `MIG-303` (`Phase 2.5`)
 15. `MIG-401` (`Phase 4`)
-16. `MIG-402` (`Phase 4`)
-17. `MIG-403` (`Phase 4`)
-18. `MIG-404` (`Phase 4`)
+16. `MIG-402A` (`Phase 3`)
+17. `MIG-402` (`Phase 4`)
+18. `MIG-403` (`Phase 4`)
+19. `MIG-404` (`Phase 4`)
 
 ## Readiness Score
 

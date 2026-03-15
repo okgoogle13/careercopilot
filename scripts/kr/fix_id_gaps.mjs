@@ -32,6 +32,6 @@ gapIds.forEach(id => {
   fs.writeFileSync(path.join(pkgDir, 'metadata.json'), JSON.stringify(metadata, null, 2));
   fs.writeFileSync(path.join(pkgDir, 'PACKAGING_MANIFEST.json'), JSON.stringify(manifest, null, 2));
   fs.writeFileSync(path.join(pkgDir, 'usage.md'), `# ${id}\n\nThis ID is reserved.`);
-  
+
   console.log(`Created reservation for ${id}`);
 });

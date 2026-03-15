@@ -46,7 +46,7 @@ Multiple workflows could trigger on the same push event:
   run: |
     # Remove any stale lock files from previous failed runs
     find .git -name "*.lock" -type f -delete 2>/dev/null || true
-    
+
     # Verify repository is in good state
     git status
 ```
@@ -73,14 +73,14 @@ RETRY_DELAY=2
 while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
   # Clean up any stale locks before push
   rm -f .git/index.lock .git/HEAD.lock 2>/dev/null || true
-  
+
   if git push; then
     exit 0
   else
     # Exponential backoff
     sleep $RETRY_DELAY
     RETRY_DELAY=$((RETRY_DELAY * 2))
-    
+
     # Try to pull and rebase in case of conflicts
     git pull --rebase origin ${{ github.head_ref }} || true
   fi
@@ -196,7 +196,7 @@ A standalone script for manual lock file cleanup that:
    ```bash
    # Use the cleanup script
    ./scripts/cleanup-git-locks.sh
-   
+
    # Or manually
    find .git -name "*.lock" -type f -delete
    ```

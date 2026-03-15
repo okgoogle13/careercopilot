@@ -281,7 +281,7 @@ curl -H "Authorization: token YOUR_TOKEN" https://api.github.com/user
 
 ---
 
-**Generated:** 2026-01-06  
-**Updated:** 2026-02-14 (Added Codex CLI configuration)  
-**Project:** CareerCopilot Frontend  
+**Generated:** 2026-01-06
+**Updated:** 2026-02-14 (Added Codex CLI configuration)
+**Project:** CareerCopilot Frontend
 **Status:** Configuration Ready ✅

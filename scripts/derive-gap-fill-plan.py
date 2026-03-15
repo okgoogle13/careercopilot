@@ -17,7 +17,7 @@ import argparse
 import json
 import re
 from dataclasses import dataclass, asdict
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 import xml.etree.ElementTree as ET
@@ -27,13 +27,15 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 DOCS_ROOT = (
     REPO_ROOT / "docs" / "project" / "active" / "frontend-source-of-truth-migration"
 )
-ROUTE_MATRIX_PATH = DOCS_ROOT / "2026-03-13-target-state-route-matrix.json"
-GAP_MAP_PATH = DOCS_ROOT / "2026-03-13-backend-feature-frontend-component-gap-map.json"
+CONTROL_ROOT = DOCS_ROOT / "control"
+ROUTE_MATRIX_PATH = CONTROL_ROOT / "route-matrix.json"
+GAP_MAP_PATH = CONTROL_ROOT / "gap-map.json"
+DEFAULT_JSON_OUT_DIR = REPO_ROOT / "tmp" / "migration"
 SRC_ROOT = REPO_ROOT / "frontend" / "src"
 
 ALLOWED_TOKEN_PREFIXES = ("--sys-color-", "--sys-shape-", "--sys-type-")
 BANNED_TOKEN_NAMES = ("labWrenMetalBlue", "GumLeafGreen", "WattleGold", "inkGreen")
-BANNED_ARCHETYPES = ("Jar", "Cabinet", "Seed", "Leaf")
+BANNED_ARCHETYPES = ("Seed", "Pebble", "Lens", "Jar", "Cabinet")
 HARD_CODED_COLOR_RE = re.compile(
     r"#[0-9A-Fa-f]{3,8}\b|rgba?\(|hsla?\(",
     re.MULTILINE,
@@ -101,10 +103,27 @@ def build_contract_component_gaps(build_contract_path: Path | None) -> dict[str,
                     gap.findtext("effect_on_build", "").strip(),
                 ],
             )
-        )
+        ).strip()
+        if not message:
+            continue
         for name in all_names:
             if name in message:
                 gaps.setdefault(name, []).append(message)
+    for component in root.findall(".//component"):
+        component_name = (component.findtext("component_name") or "").strip()
+        blocked_by = component.find("blocked_by")
+        if blocked_by is None:
+            continue
+        message = " ".join(part.strip() for part in blocked_by.itertext() if part.strip()).strip()
+        if not message:
+            continue
+        matched = False
+        for name in all_names:
+            if name in message:
+                gaps.setdefault(name, []).append(message)
+                matched = True
+        if component_name and not matched:
+            gaps.setdefault(component_name, []).append(message)
     return gaps
 
 
@@ -170,14 +189,14 @@ def contract_token_diff(
 
 
 def find_route_row(route_id: str, route_matrix: dict[str, Any]) -> dict[str, Any]:
-    for row in route_matrix["rows"]:
+    for row in route_matrix.get("rows", []):
         if row["route_id"] == route_id or row["current_route"] == route_id:
             return row
     raise SystemExit(f"Unknown route_id: {route_id}")
 
 
 def find_gap_entries(owner_route: str, gap_map: dict[str, Any]) -> list[dict[str, Any]]:
-    return [feature for feature in gap_map["features"] if feature["owner_route"] == owner_route]
+    return [feature for feature in gap_map.get("features", []) if feature["owner_route"] == owner_route]
 
 
 def index_tsx_files() -> dict[str, list[Path]]:
@@ -412,7 +431,7 @@ def derive_plan(route_id: str, build_contract_path: Path | None) -> dict[str, An
 
     # Gap 2: extract tokens from wireframe and diff against build contract
     wireframe_path_str = row.get("xml_wireframe_path")
-    wireframe_path = Path(wireframe_path_str) if wireframe_path_str else None
+    wireframe_path = (REPO_ROOT / wireframe_path_str) if wireframe_path_str else None
     wireframe_tokens = extract_wireframe_tokens(wireframe_path)
     token_drift = contract_token_diff(wireframe_tokens, build_contract_path)
 
@@ -437,7 +456,7 @@ def derive_plan(route_id: str, build_contract_path: Path | None) -> dict[str, An
     normalized_build_contract = build_contract_path.resolve() if build_contract_path else None
     return {
         "artifact": "tokens_first_gap_fill_plan",
-        "generated_at": datetime.now(UTC).isoformat(),
+        "generated_at": datetime.now(timezone.utc).isoformat(),
         "route_id": row["route_id"],
         "target_route": row["target_route"],
         "family": row["family"],
@@ -461,6 +480,12 @@ def derive_plan(route_id: str, build_contract_path: Path | None) -> dict[str, An
     }
 
 
+def default_json_out_path(route_id: str) -> Path:
+    safe_route = route_id.strip("/").replace("/", "-") or "root"
+    safe_route = safe_route.replace(":", "-")
+    return DEFAULT_JSON_OUT_DIR / f"{safe_route}-gap-fill-plan.json"
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--route-id", required=True, help="Route id or current route from route matrix")
@@ -470,13 +495,20 @@ def main() -> None:
         default=None,
         help="Optional route-level build contract XML used to carry blocking gaps forward",
     )
-    parser.add_argument("--json-out", type=Path, default=None, help="Optional output JSON path")
+    parser.add_argument(
+        "--json-out",
+        type=Path,
+        default=None,
+        help="Optional output JSON path. Defaults to tmp/migration/<route-id>-gap-fill-plan.json",
+    )
     args = parser.parse_args()
 
     plan = derive_plan(args.route_id, args.build_contract)
     output = json.dumps(plan, indent=2)
-    if args.json_out:
-        args.json_out.write_text(output + "\n")
+    json_out = args.json_out or default_json_out_path(args.route_id)
+    json_out.parent.mkdir(parents=True, exist_ok=True)
+    json_out.write_text(output + "\n", encoding="utf-8")
+    print(f"JSON report: {json_out.relative_to(REPO_ROOT)}")
     print(output)
 
 

@@ -8,7 +8,7 @@ We use a **strict** hierarchy to prevent root clutter and "component soup".
 - **`frontend/src/features/<feature-name>`**: self-contained modules.
   - If a component is *only* used for the "Profile" page, it belongs in `frontend/src/features/profile/components`.
   - Do NOT put feature-specific code in the global `frontend/src/components` folder.
-- **`frontend/src/components/ui`**: Dumb, atomic UI elements (Buttons, Inputs, Cards). 
+- **`frontend/src/components/ui`**: Dumb, atomic UI elements (Buttons, Inputs, Cards).
   - These should have NO business logic or domain knowledge.
 - **`frontend/src/components/shared`**: Domain-aware components used across multiple features (e.g., `UserAvatar`).
 - **`docs/`**: Documentation and project management files.

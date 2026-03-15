@@ -32,28 +32,28 @@ backup_component() {
 migrate_component() {
   local src=$1
   local dest=$2
-  
+
   if [ -d "$src" ]; then
     echo "🔄 Migrating $(basename $src) to $dest"
-    
+
     # Create destination directory if it doesn't exist
     mkdir -p "$(dirname "$dest")"
-    
+
     # Copy component files (excluding tests and stories for now)
     find "$src" -type f \( -name "*.tsx" -o -name "*.ts" -o -name "*.js" -o -name "*.jsx" \) \
       -not -path "*/node_modules/*" \
       -not -path "*/__tests__/*" \
       -not -name "*.stories.*" \
       -not -name "*.test.*" | while read -r file; do
-      
+
       # Create the target directory structure
       rel_path="${file#$src/}"
       target_dir="$(dirname "$dest/$(basename "$src")/$rel_path")"
       mkdir -p "$target_dir"
-      
+
       # Copy and update the file
       cp "$file" "$target_dir/$(basename "$file")"
-      
+
       # Update imports in the file using perl for better regex support
       perl -i -pe 's|@/components/(ui|electric)/|@/components/design-system/|g' "$target_dir/$(basename "$file")"
     done
@@ -93,19 +93,19 @@ find "frontend/src" -type f \( -name "*.tsx" -o -name "*.ts" -o -name "*.js" -o 
   -not -path "*/node_modules/*" \
   -not -path "*/_legacy/*" \
   -not -path "*/.next/*" | while read -r file; do
-  
+
   # Make a backup of the file
   cp "$file" "${file}.bak"
-  
+
   # Update import paths (handle both single and double quotes)
   perl -i -pe 's|@/components/(ui|electric)/|@/components/design-system/|g' "$file"
-  
+
   # Update component names (ElectricButton -> Button, etc.)
   perl -i -pe 's/import \{ ?Electric([A-Za-z]+) ?\}/import { \1 }/g' "$file"
   perl -i -pe 's/import \{ ?Electric([A-Za-z]+) ?as ([^}]+)\}/import { \1 as \2 }/g' "$file"
   perl -i -pe 's/<Electric([A-Za-z]+)([ >])/<\1\2/g' "$file"
   perl -i -pe 's/<\/Electric([A-Za-z]+)>/<\/\1>/g' "$file"
-  
+
   # Clean up backup if no changes were made
   if cmp -s "$file" "${file}.bak"; then
     rm "${file}.bak"

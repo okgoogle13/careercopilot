@@ -1,7 +1,7 @@
 {
   "artifact": "frontend_source_of_truth_migration_implementation_backlog",
   "generated_at": "2026-03-13",
-  "canonical_plan": "docs/project/active/frontend-source-of-truth-migration/2026-03-13-proposed-final-migration-plan.md",
+  "canonical_plan": "docs/project/active/frontend-source-of-truth-migration/control/plan.md",
   "milestones": [
     {
       "milestone_id": "M1",
@@ -155,8 +155,8 @@
             "the approved output uses the required XML contract schema, contains no code generation, and leaves no build-critical ownership decisions unresolved"
           ],
           "completion_artifacts": [
-            "docs/project/active/frontend-source-of-truth-migration/2026-03-14-wireframe-build-contract-prompt.md",
-            "docs/project/active/frontend-source-of-truth-migration/2026-03-14-build-contract-tracker.xml"
+            "docs/project/active/frontend-source-of-truth-migration/contracts/wireframe-build-contract-prompt.md",
+            "docs/project/active/frontend-source-of-truth-migration/contracts/build-contract-tracker.xml"
           ],
           "blocking_contract_gaps": 2,
           "non_blocking_contract_gaps": 4
@@ -186,7 +186,7 @@
             "route-level implementation specs can distinguish behavior reuse from presentation reuse"
           ],
           "completion_artifacts": [
-            "docs/project/active/frontend-source-of-truth-migration/2026-03-14-tokens-first-gap-fill-workflow.md",
+            "docs/project/active/frontend-source-of-truth-migration/analysis/tokens-first-gap-fill-workflow.md",
             "scripts/derive-gap-fill-plan.py"
           ]
         }
@@ -466,6 +466,27 @@
           "deliverables": [
             "remove /kr/* routes from product truth",
             "preserve useful patterns only by merging them into canonical routes"
+          ]
+        },
+        {
+          "id": "MIG-402A",
+          "title": "Add route preflight inventory checks",
+          "plan_phase_ref": "Phase 3",
+          "area": "route_execution",
+          "owner_route": null,
+          "owner_surface": null,
+          "type": "preflight_inventory",
+          "depends_on": [
+            "M2",
+            "M3",
+            "M4"
+          ],
+          "new_components": [],
+          "deliverables": [
+            "run frontend/scripts/component-inventory.ts before Step 3 route execution",
+            "review frontend/analysis/frontend-architecture-report.json for route-family conflicts",
+            "record shared-shell inheritance and duplicate live-looking surfaces for the route",
+            "record lane label KEEP / WRAP / REWRITE / DELETE as support-only metadata"
           ]
         },
         {

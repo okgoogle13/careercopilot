@@ -660,4 +660,3 @@ Coverage:      frontend/coverage/lcov-report/index.html
 ---
 
 **All test runners are ready to use. Start with `yarn test` or `yarn test:watch` for development.**
-

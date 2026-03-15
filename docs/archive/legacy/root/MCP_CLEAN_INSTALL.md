@@ -88,7 +88,7 @@ If you still see `npm exec` errors in logs:
 $ which mcp-server-playwright
 /home/njd/.config/nvm/versions/node/v22.19.0/bin/mcp-server-playwright
 
-$ which mcp-server-docker  
+$ which mcp-server-docker
 /home/njd/.config/nvm/versions/node/v22.19.0/bin/mcp-server-docker
 
 $ mcp-server-playwright --version

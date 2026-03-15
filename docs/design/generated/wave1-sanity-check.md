@@ -1,6 +1,6 @@
 # Wave 1 QA & Sanity Check Report
 
-**Date:** 2026-02-10  
+**Date:** 2026-02-10
 **Status:** ✅ COMPLETED BY QA
 
 This report summarizes the sanity check for the foundational Kerala Rage components (`SolidarityCard`, `ActionButton`, `ManifestoSlab`).
@@ -11,7 +11,7 @@ This report summarizes the sanity check for the foundational Kerala Rage compone
 - **API & Typing**: Props are clearly typed and extend `HTMLMotionProps<'div'>`. JSDoc added for usage guidance.
 - **Accessibility**: Added `focus-within` styling to ensure visible focus states for interactive children. Semantic `<article>` or `<div>` usage advised per context.
 - **Motion**: Integrated `useReducedMotion()`. Replaces spring-based entrance and hover scaling with simple opacity transitions for reduced-motion users.
-- **Color Tokens**: 
+- **Color Tokens**:
   - Background: `asphalt-black` (#1A1714)
   - Border: `white/5` (Paper White at 5% opacity)
 - **WCAG Result**: ✅ PASS (15.73:1 for text on background).

@@ -1,0 +1,46 @@
+{
+  "milestones": [
+    {
+      "milestone_id": "M1",
+      "name": "Planning Inputs Stable",
+      "status": "COMPLETE",
+      "assigned_to": "orchestrator",
+      "dependencies": []
+    },
+    {
+      "milestone_id": "M2",
+      "name": "First Route Contract Approved (/tracker)",
+      "status": "COMPLETE",
+      "assigned_to": "orchestrator",
+      "dependencies": ["M1"]
+    },
+    {
+      "milestone_id": "M3",
+      "name": "Tracker CRUD Live Verification + Brand Gate",
+      "status": "IN_PROGRESS",
+      "assigned_to": "frontend",
+      "dependencies": ["M2"]
+    },
+    {
+      "milestone_id": "M4",
+      "name": "Ingestion Route Owns Smart Ingestion Pipeline",
+      "status": "PENDING",
+      "assigned_to": "frontend",
+      "dependencies": ["M2"]
+    },
+    {
+      "milestone_id": "M5",
+      "name": "Documents Route Owns Redline Workspace",
+      "status": "PENDING",
+      "assigned_to": "frontend",
+      "dependencies": ["M2"]
+    },
+    {
+      "milestone_id": "M6",
+      "name": "Prototype Routes Retired (/kr/*)",
+      "status": "PENDING",
+      "assigned_to": "orchestrator",
+      "dependencies": ["M3", "M4", "M5"]
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 {
   "artifact": "backend_feature_frontend_component_gap_map",
   "generated_at": "2026-03-13",
-  "canonical_plan": "docs/project/active/frontend-source-of-truth-migration/2026-03-13-proposed-final-migration-plan.md",
-  "canonical_route_matrix": "docs/project/active/frontend-source-of-truth-migration/2026-03-13-target-state-route-matrix.json",
+  "canonical_plan": "docs/project/active/frontend-source-of-truth-migration/control/blueprint.md",
+  "canonical_route_matrix": "docs/project/active/frontend-source-of-truth-migration/control/route-matrix.json",
   "features": [
     {
       "feature_id": "applications_crud",

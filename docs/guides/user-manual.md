@@ -1,6 +1,6 @@
 # CareerCopilot v1.0 - User Manual
 
-**Welcome to CareerCopilot!** 🚀  
+**Welcome to CareerCopilot!** 🚀
 Your AI-powered assistant for managing job applications efficiently.
 
 ---
@@ -512,9 +512,9 @@ You're using CareerCopilot effectively if:
 
 ## 📝 Version Information
 
-**Version:** 1.0.0  
-**Release Date:** January 1, 2026  
-**Mode:** Single-User  
+**Version:** 1.0.0
+**Release Date:** January 1, 2026
+**Mode:** Single-User
 **Status:** Production Ready ✅
 
 ---

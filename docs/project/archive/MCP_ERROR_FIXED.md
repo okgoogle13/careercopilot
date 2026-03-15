@@ -1,7 +1,7 @@
 # Flash-Sidekick MCP Server - Error Fixed! ✅
 
-**Date:** 2025-12-27T02:06:07+11:00  
-**Issue:** JSON parsing error preventing MCP server connection  
+**Date:** 2025-12-27T02:06:07+11:00
+**Issue:** JSON parsing error preventing MCP server connection
 **Status:** ✅ RESOLVED
 
 ## 🔍 Root Cause Analysis

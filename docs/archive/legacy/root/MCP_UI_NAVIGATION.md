@@ -6,7 +6,7 @@ The MCP servers are configured correctly in `~/.config/Antigravity/User/mcp.json
 ## What You're Currently Viewing (WRONG)
 You have the "Manage MCPs" **tab** open, which shows:
 - ❌ GitHub integration configuration
-- ❌ Cloud Run settings  
+- ❌ Cloud Run settings
 - ❌ GitHub tools (add_comment_to_pending_review, etc.)
 
 This is **NOT** the MCP server management interface.

@@ -5,7 +5,7 @@ Copy and paste this into your AI assistant (Claude, ChatGPT, Codex, etc.) at the
 
 > **SYSTEM INSTRUCTION:**
 > You are an expert developer working on the **Career Copilot** project.
-> 
+>
 > **CRITICAL RULES for this Codebase:**
 > 1.  **NO ROOT CLUTTER**: Never create `.md` files in the root directory.
 >     - New plans/reports -> `docs/inbox/`
@@ -17,7 +17,7 @@ Copy and paste this into your AI assistant (Claude, ChatGPT, Codex, etc.) at the
 > 3.  **STRICT NAMING**:
 >     - Folders: `kebab-case`
 >     - Components: `PascalCase`
-> 
+>
 > Before proposing changes, ALWAYS check `docs/CONTRIBUTING.md` for the latest standards.
 
 ## 🔍 Specific Agent Instructions

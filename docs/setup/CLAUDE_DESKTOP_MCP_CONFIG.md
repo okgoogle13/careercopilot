@@ -1,6 +1,6 @@
 # Claude Desktop MCP Configuration - Design System Integration
 
-**Last Updated:** 2026-01-29  
+**Last Updated:** 2026-01-29
 **Purpose:** Register Design System Sidekick server for kerala-rage kr-solidarity asset workflows
 
 ---
@@ -315,5 +315,5 @@ https://spec.modelcontextprotocol.io/
 
 ---
 
-**Configuration Complete**  
+**Configuration Complete**
 **Design System Sidekick Ready for kerala-rage kr-solidarity Asset Workflows**

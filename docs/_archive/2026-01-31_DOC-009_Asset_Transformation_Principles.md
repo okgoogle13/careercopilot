@@ -21,7 +21,7 @@ Your assets deserve the same care. Each transformation serves a purpose within t
 
 **Before:** A watercolor illustration exists as a flat composite—kr-shiva, flowers, and white background fused into a single image layer. The colors are whatever the original artist chose, unaware of your token system. The edges are lost against the white ground.
 
-**After:** The kr-shiva emerges as an independent character, floating free of background constraints. Its watercolor edges feather naturally into transparency—no harsh masking that betrays digital extraction. The [DEPRECATED_STYLE] bloom beneath its breast reads unmistakably as `waratahCrimson` (#C45C4B); the Wattle spray glows with `kr-ink-gold` (#D4A84B). 
+**After:** The kr-shiva emerges as an independent character, floating free of background constraints. Its watercolor edges feather naturally into transparency—no harsh masking that betrays digital extraction. The [DEPRECATED_STYLE] bloom beneath its breast reads unmistakably as `waratahCrimson` (#C45C4B); the Wattle spray glows with `kr-ink-gold` (#D4A84B).
 
 When placed against your `kr-charcoal` stage, the Sentry appears to have been painted directly onto the interface—as if the kerala-streetprint [DEPRECATED_STYLE] who catalogued these kr-motifs simply continued their work into the digital realm. A subtle ambient shadow (following `elevation.shadow.rest` values) grounds the bird without flattening the watercolor luminosity.
 
@@ -33,7 +33,7 @@ This asset appears at three scales: intimate (512px) for inline empty states, co
 
 **Before:** A 19th-century anatomical diagram presents a complete human skeleton alongside detailed bone studies. Measurement lines, annotation numbers, and aged paper texture create visual density. The illustration serves educational purposes unrelated to career portals.
 
-**After:** Two distinct assets emerge from this single source. 
+**After:** Two distinct assets emerge from this single source.
 
 The first is **The Osteologist**—the skeleton figure extracted in full, background removed, positioned as kr-dark mode's answer to the kr-shiva. Where the Sentry embodies warmth and welcome, the Osteologist represents rigorous analysis. It appears in "parsing complete" states, document analysis confirmations, and skill extraction summaries. The skeleton's pose—arms slightly raised, as if presenting findings—reads as invitation rather than morbidity.
 

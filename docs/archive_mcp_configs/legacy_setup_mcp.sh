@@ -121,12 +121,12 @@ class FlashSidekickServer:
         self.gemini_key = os.getenv("GEMINI_API_KEY", "")
         self.initialized = False
         self._models_cache = {}
-        
+
         # Fast Engine Candidates
         env_fast = os.getenv("GEMINI_MODEL")
         self.fast_candidates = ["models/gemini-2.5-flash-lite", "models/gemini-1.5-flash"]
         if env_fast and env_fast not in self.fast_candidates: self.fast_candidates.insert(0, env_fast)
-            
+
         # Smart Engine Candidates
         env_pro = os.getenv("GEMINI_PRO_MODEL")
         self.pro_candidates = ["models/gemini-2.5-pro", "models/gemini-exp-1206", "models/gemini-1.5-pro"]
@@ -182,10 +182,10 @@ def handle_request(server, line):
         req = json.loads(line)
         method = req.get("method")
         req_id = req.get("id")
-        
+
         # Build JSON-RPC 2.0 response
         resp = {"jsonrpc": "2.0", "id": req_id}
-        
+
         if method == "initialize":
             resp["result"] = {
                 "protocolVersion": "2024-11-05",
@@ -199,7 +199,7 @@ def handle_request(server, line):
             resp["result"] = {"content": content}
         else:
             return None
-            
+
         return resp
     except Exception as e:
         logger.error(f"Error: {e}")
@@ -212,7 +212,7 @@ if __name__ == "__main__":
             line = sys.stdin.readline()
             if not line: break
             resp = handle_request(server, line)
-            if resp: 
+            if resp:
                 print(json.dumps(resp))
                 sys.stdout.flush()
         except: break
@@ -285,9 +285,9 @@ def handle_request(server, line):
         req = json.loads(line)
         method = req.get("method")
         req_id = req.get("id")
-        
+
         resp = {"jsonrpc": "2.0", "id": req_id}
-        
+
         if method == "initialize":
             resp["result"] = {
                 "protocolVersion": "2024-11-05",
@@ -300,7 +300,7 @@ def handle_request(server, line):
             resp["result"] = {"content": server.call_tool(req["params"]["name"], req["params"]["arguments"])}
         else:
             return None
-            
+
         return resp
     except: return None
 
@@ -311,7 +311,7 @@ if __name__ == "__main__":
             line = sys.stdin.readline()
             if not line: break
             resp = handle_request(server, line)
-            if resp: 
+            if resp:
                 print(json.dumps(resp))
                 sys.stdout.flush()
         except: break
@@ -373,7 +373,7 @@ exec 2>/dev/null
 EOF
 chmod +x "$SERVERS_DIR/antigravity_mcp_wrapper.sh"
 
-# Note: In the final mcp_config.json we use the direct python script 
+# Note: In the final mcp_config.json we use the direct python script
 # as our generated flash_sidekick.py now core-suppresses warnings.
 
 write_config() {

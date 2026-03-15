@@ -16,4 +16,3 @@
 
 - Treat Firestore as schema-driven (Pydantic V2).
 - Avoid dict-only payloads in internal flows.
-

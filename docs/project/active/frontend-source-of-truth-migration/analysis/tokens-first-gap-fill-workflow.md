@@ -40,8 +40,8 @@ For each target component, derive one of these actions:
 
 The planner should combine:
 
-- route ownership from `2026-03-13-target-state-route-matrix.json`
-- missing-component intent from `2026-03-13-backend-feature-frontend-component-gap-map.json`
+- route ownership from `control/route-matrix.json`
+- missing-component intent from `control/gap-map.json`
 - approved route build-contract constraints when available
 - candidate TSX files found under `frontend/src/**`
 

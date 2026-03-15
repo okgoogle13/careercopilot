@@ -1,3 +1,7 @@
+# [DEPRECATED]: This component-batch-plan is no longer the source of truth.
+# Please refer to the new layered blueprint: `docs/design/layered-component-blueprint.json`
+# which provides full-tree visibility (L1-L4 taxonomy) generated via AST crawler.
+
 components:
   - name: ManifestoCard
     mode: migrate
