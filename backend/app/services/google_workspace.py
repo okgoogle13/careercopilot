@@ -3,18 +3,21 @@ backend/app/services/google_workspace.py
 ----------------------------------------
 Handles interactions with Google Tasks and Calendar.
 """
+
 import datetime
 import os
+
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
 SCOPES = [
     "https://www.googleapis.com/auth/calendar",
     "https://www.googleapis.com/auth/tasks",
-    "https://www.googleapis.com/auth/documents"
+    "https://www.googleapis.com/auth/documents",
 ]
 # Expects this file in the project root
 SERVICE_ACCOUNT_FILE = "credentials.json"
+
 
 class GoogleWorkspaceService:
     def __init__(self):
@@ -31,14 +34,15 @@ class GoogleWorkspaceService:
 
     async def create_task(self, title: str, notes: str, due_date: str = None):
         """Creates a task in the user's default list."""
-        if not self.creds: return None
+        if not self.creds:
+            return None
 
         try:
             service = build("tasks", "v1", credentials=self.creds)
             task_body = {
                 "title": title,
                 "notes": notes,
-                "due": due_date  # Expects RFC 3339 timestamp
+                "due": due_date,  # Expects RFC 3339 timestamp
             }
             result = service.tasks().insert(tasklist="@default", body=task_body).execute()
             print(f"[+] Google Task created: {result.get('title')}")
@@ -49,7 +53,8 @@ class GoogleWorkspaceService:
 
     async def schedule_deep_work(self, summary: str, duration_minutes: int = 60):
         """Blocks time on the calendar for tomorrow morning."""
-        if not self.creds: return None
+        if not self.creds:
+            return None
 
         try:
             service = build("calendar", "v3", credentials=self.creds)
@@ -57,7 +62,12 @@ class GoogleWorkspaceService:
             # Schedule for tomorrow at 9:00 AM
             tomorrow = datetime.date.today() + datetime.timedelta(days=1)
             start_time = datetime.datetime.combine(tomorrow, datetime.time(9, 0)).isoformat() + "Z"
-            end_time = datetime.datetime.combine(tomorrow, datetime.time(9 + (duration_minutes//60), 0)).isoformat() + "Z"
+            end_time = (
+                datetime.datetime.combine(
+                    tomorrow, datetime.time(9 + (duration_minutes // 60), 0)
+                ).isoformat()
+                + "Z"
+            )
 
             event = {
                 "summary": f"🎯 Deep Work: {summary}",
@@ -76,20 +86,22 @@ class GoogleWorkspaceService:
     async def create_doc(self, title: str, content: str):
         """
         Creates a Google Doc with the specified title and content.
-        
+
         Args:
             title: Title of the document
             content: Text content to add to the document
-            
+
         Returns:
             dict: Document metadata including documentId and webViewLink, or None if credentials missing
         """
         if not self.creds:
-            print("[WARN] No credentials available. Returning content as text instead of creating Google Doc.")
+            print(
+                "[WARN] No credentials available. Returning content as text instead of creating Google Doc."
+            )
             return {
                 "status": "credentials_missing",
                 "content": content,
-                "message": "Add credentials.json to enable Google Docs integration"
+                "message": "Add credentials.json to enable Google Docs integration",
             }
 
         try:
@@ -106,14 +118,13 @@ class GoogleWorkspaceService:
                         "location": {
                             "index": 1,
                         },
-                        "text": content
+                        "text": content,
                     }
                 }
             ]
 
             docs_service.documents().batchUpdate(
-                documentId=document_id,
-                body={"requests": requests}
+                documentId=document_id, body={"requests": requests}
             ).execute()
 
             print(f"[+] Google Doc created: {title}")
@@ -124,16 +135,11 @@ class GoogleWorkspaceService:
                 "documentId": document_id,
                 "title": title,
                 "webViewLink": f"https://docs.google.com/document/d/{document_id}/edit",
-                "status": "success"
+                "status": "success",
             }
 
             return result
 
         except Exception as e:
             print(f"[-] Failed to create Google Doc: {e}")
-            return {
-                "status": "error",
-                "error": str(e),
-                "content": content
-            }
-
+            return {"status": "error", "error": str(e), "content": content}

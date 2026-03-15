@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field
 
 class AssetSpecification(BaseModel):
     """Asset specification details."""
+
     aspect_ratio: str = Field(..., description="e.g., 1:1, 3:4, 16:9")
     style: str = Field(..., description="screenprint, wheat-paste, etching, etc.")
     halo: str | None = Field(None, description="Optional halo/frame color")
@@ -22,22 +23,28 @@ class AssetSpecification(BaseModel):
 
 class ManifestAssetEntry(BaseModel):
     """Single asset entry for manifest.json."""
+
     id: str = Field(..., description="KR-SOLID-XXX")
     name: str = Field(..., description="Asset display name")
-    category: str = Field(..., description="devotional, portrait, symbol, street, abstract, texture")
+    category: str = Field(
+        ..., description="devotional, portrait, symbol, street, abstract, texture"
+    )
     file_path: str = Field(..., description="Canonical asset path")
     priority: str = Field(..., description="CRITICAL, HIGH, MEDIUM")
     status: str = Field(..., description="ready, needs-review, approved, conditional")
     intended_context: str = Field(..., description="How asset will be used")
     specs: AssetSpecification = Field(..., description="Asset specifications")
     reviewed_by: str | None = Field(None, description="Reviewer email")
-    review_decision: str | None = Field(None, description="approved, conditional-approval, needs-revision, rejected")
+    review_decision: str | None = Field(
+        None, description="approved, conditional-approval, needs-revision, rejected"
+    )
     review_feedback: str | None = Field(None, description="Reviewer feedback")
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
 
 class ManifestUpdateRequest(BaseModel):
     """Request to update manifest with new assets."""
+
     assets_to_add: list[ManifestAssetEntry] = Field(..., description="New assets")
     assets_to_update: list[ManifestAssetEntry] | None = Field(None, description="Assets to refresh")
     updated_by: str = Field(..., description="Update initiator")
@@ -47,6 +54,7 @@ class ManifestUpdateRequest(BaseModel):
 
 class ManifestValidationResult(BaseModel):
     """Validation result for manifest integrity."""
+
     valid: bool
     total_assets: int
     by_category: dict[str, int]
@@ -59,6 +67,7 @@ class ManifestValidationResult(BaseModel):
 
 class AssetIntegrationTestResult(BaseModel):
     """Test result for asset component integration."""
+
     asset_id: str
     test_name: str
     passed: bool
@@ -68,6 +77,7 @@ class AssetIntegrationTestResult(BaseModel):
 
 class ManifestDeploymentPlan(BaseModel):
     """Deployment plan before going live."""
+
     manifest_version: str
     total_new_assets: int
     total_updated_assets: int
@@ -80,6 +90,7 @@ class ManifestDeploymentPlan(BaseModel):
 
 class BackfillAssetRequest(BaseModel):
     """Request to backfill existing asset with metadata."""
+
     asset_id: str = Field(..., description="KR-SOLID-XXX")
     category: str = Field(..., description="asset category")
     political_significance: str = Field(..., description="political significance")
@@ -91,6 +102,7 @@ class BackfillAssetRequest(BaseModel):
 
 class BackfillResult(BaseModel):
     """Result of backfill operation."""
+
     success: bool
     asset_id: str
     message: str

@@ -1,5 +1,5 @@
-from docx.shared import Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.shared import Pt, RGBColor
 
 THEME_TOKENS = {
     "minimal": {
@@ -11,8 +11,8 @@ THEME_TOKENS = {
         "alignment": {
             "heading": WD_ALIGN_PARAGRAPH.LEFT,
             "body": WD_ALIGN_PARAGRAPH.JUSTIFY,
-            "contact": WD_ALIGN_PARAGRAPH.CENTER
-        }
+            "contact": WD_ALIGN_PARAGRAPH.CENTER,
+        },
     },
     "modern": {
         "font": {
@@ -23,10 +23,11 @@ THEME_TOKENS = {
         "alignment": {
             "heading": WD_ALIGN_PARAGRAPH.LEFT,
             "body": WD_ALIGN_PARAGRAPH.LEFT,
-            "contact": WD_ALIGN_PARAGRAPH.LEFT
-        }
-    }
+            "contact": WD_ALIGN_PARAGRAPH.LEFT,
+        },
+    },
 }
+
 
 def get_theme_tokens(theme_id: str) -> dict:
     """

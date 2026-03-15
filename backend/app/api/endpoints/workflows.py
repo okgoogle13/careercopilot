@@ -11,12 +11,13 @@ from fastapi import APIRouter, HTTPException, status
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
+
 class ApplicationPackageResult(BaseModel):
     pass
 
+
 class EmailWorkflowResult(BaseModel):
     pass
-
 
 
 scan_inbox_for_opportunities: Any | None = None  # Placeholder for async function
@@ -67,7 +68,9 @@ class ScanEmailResponse(BaseModel):
     response_model=GenerateApplicationResponse,
     summary="Generate Complete Application Package",
 )
-async def create_application_package(request: GenerateApplicationRequest) -> GenerateApplicationResponse:
+async def create_application_package(
+    request: GenerateApplicationRequest,
+) -> GenerateApplicationResponse:
     """
     Generate a complete job application package using AI-powered workflows.
     DISABLED: Currently unavailable during Genkit 0.4.0 migration.
@@ -109,7 +112,7 @@ async def workflow_health_check() -> dict[str, Any]:
         "components": {
             "genkit_flows": "disabled",
             "ai_models": "available",
-        }
+        },
     }
 
 

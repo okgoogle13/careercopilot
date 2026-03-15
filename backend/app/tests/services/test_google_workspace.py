@@ -74,7 +74,9 @@ def test_google_workspace_service_loads_service_account_credentials(monkeypatch,
     service = GoogleWorkspaceService()
 
     assert service.creds is creds
-    loader.assert_called_once_with(google_workspace_module.SERVICE_ACCOUNT_FILE, scopes=google_workspace_module.SCOPES)
+    loader.assert_called_once_with(
+        google_workspace_module.SERVICE_ACCOUNT_FILE, scopes=google_workspace_module.SCOPES
+    )
     mock_print.assert_not_called()
 
 

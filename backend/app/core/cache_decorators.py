@@ -171,7 +171,9 @@ class CacheContext:
         """Cache a result within the context"""
         # If result is assigned to the context instance, consider it cached
         self.result = result
-        return await self.cache.set(self.operation_type, self.user_id, self.input_data, result, ttl=ttl)
+        return await self.cache.set(
+            self.operation_type, self.user_id, self.input_data, result, ttl=ttl
+        )
 
     @property
     def cache_key(self) -> str:

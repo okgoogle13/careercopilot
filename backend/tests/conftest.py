@@ -1,5 +1,7 @@
-import pytest
 from unittest.mock import patch
+
+import pytest
+
 
 @pytest.fixture
 def mock_get_current_user():

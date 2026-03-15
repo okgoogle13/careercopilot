@@ -74,7 +74,7 @@ class TestAIEndpoints:
                 "success": True,
                 "components_generated": ["resume", "cover_letter"],
                 "processing_time_seconds": 10.0,
-                "resume": {"content": "..."}
+                "resume": {"content": "..."},
             }
 
             response = client.post(
@@ -86,7 +86,7 @@ class TestAIEndpoints:
                         "email": "john@example.com",
                         "resume_content": SAMPLE_RESUME,
                         "skills": [],
-                        "experience": []
+                        "experience": [],
                     },
                 },
             )
@@ -128,7 +128,9 @@ class TestAIEndpoints:
         """Test rate limiting on API endpoints"""
         # This test assumes the rate limit is set to 100 requests per minute
         for _ in range(105):  # Exceed rate limit
-            response = client.post("/api/analysis/resume-intelligence", json={"resume_content": SAMPLE_RESUME})
+            response = client.post(
+                "/api/analysis/resume-intelligence", json={"resume_content": SAMPLE_RESUME}
+            )
 
             if response.status_code == 429:  # Rate limit exceeded
                 break
@@ -140,7 +142,9 @@ class TestAIEndpoints:
         # Clear the auth override for this test
         app.dependency_overrides = {}
 
-        response = client.post("/api/analysis/resume-intelligence", json={"resume_content": SAMPLE_RESUME})
+        response = client.post(
+            "/api/analysis/resume-intelligence", json={"resume_content": SAMPLE_RESUME}
+        )
 
         assert response.status_code == 401  # Unauthorized
 

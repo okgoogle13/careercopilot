@@ -5,13 +5,17 @@ from app.services.playwright_service import PlaywrightService
 
 # from app.api.endpoints.job_listings import JobListingDetails # Dependency removed to avoid genkit error
 
+
 class JobListingDetails:
     """Placeholder model until pydantic schemas are stabilized"""
+
     pass
+
 
 from app.services.flash_sidekick_service import FlashSidekickService
 
 logger = logging.getLogger(__name__)
+
 
 class JobScoutAgent:
     """
@@ -22,12 +26,7 @@ class JobScoutAgent:
     def __init__(self):
         self.browser = PlaywrightService()
         self.ai_parser = FlashSidekickService()
-        self.search_domains = [
-            "ethicaljobs.com.au",
-            "seek.com.au",
-            "jora.com",
-            "linkedin.com"
-        ]
+        self.search_domains = ["ethicaljobs.com.au", "seek.com.au", "jora.com", "linkedin.com"]
 
     async def search_jobs(self, topic: str, location: str = "Australia") -> list[str]:
         """
@@ -80,9 +79,9 @@ class JobScoutAgent:
     async def analyze_job_content(self, url: str) -> dict | None:
         """
         Analyzes a job posting URL and extracts structured data.
-        
+
         Uses MCP Playwright to scrape and Genkit/Flash Sidekick to parse.
-        
+
         Returns:
             Dict with keys: title, company, salary, deadline, status
         """
@@ -107,7 +106,7 @@ Extract the following information from this job posting:
 - Application Closing Date/Deadline (if mentioned)
 
 Job Posting Content:
-{page_content[:5000]}  
+{page_content[:5000]}
 
 Return ONLY a JSON object with keys: title, company, salary, deadline (use null if not found).
 """
@@ -132,7 +131,7 @@ Return ONLY a JSON object with keys: title, company, salary, deadline (use null 
                     "company": parsed_data.get("company", "Extracted Company"),
                     "salary": parsed_data.get("salary", "Not specified"),
                     "deadline": parsed_data.get("deadline", None),
-                    "status": "ready_to_apply"
+                    "status": "ready_to_apply",
                 }
 
                 logger.info(f"[✓] Successfully analyzed: {result['title']} at {result['company']}")
@@ -146,7 +145,7 @@ Return ONLY a JSON object with keys: title, company, salary, deadline (use null 
                     "company": "Company Name (Parse Failed)",
                     "salary": "$100k - $120k + Super (Estimated)",
                     "deadline": None,
-                    "status": "ready_to_apply"
+                    "status": "ready_to_apply",
                 }
 
         except Exception as e:

@@ -6,11 +6,13 @@ except ImportError:  # pragma: no cover - optional dependency in test/CI
     Vector = None
 from app.models.database import Base, BaseMixin
 
+
 class DocumentEmbedding(Base, BaseMixin):
     """
     Stores document embeddings for vector search.
     Replaces local ChromaDB.
     """
+
     __tablename__ = "document_embeddings"
     __table_args__ = {"extend_existing": True}
 

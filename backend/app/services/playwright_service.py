@@ -1,4 +1,3 @@
-
 import asyncio
 import os
 
@@ -16,7 +15,7 @@ class PlaywrightService:
         # and available in the environment path or known location
         self.server_command = "npx"
         self.server_args = ["-y", "@executeautomation/playwright-mcp-server"]
-        self.env = {**os.environ} # Inherit current environment
+        self.env = {**os.environ}  # Inherit current environment
 
     async def navigate_and_scrape(self, url: str) -> str:
         """
@@ -28,9 +27,7 @@ class PlaywrightService:
         )
 
         server_params = StdioServerParameters(
-            command=self.server_command,
-            args=self.server_args,
-            env=self.env
+            command=self.server_command, args=self.server_args, env=self.env
         )
 
         try:
@@ -42,10 +39,7 @@ class PlaywrightService:
                     # We might want to wait for network idle to ensure dynamic content loads
                     await session.call_tool(
                         "playwright_navigate",
-                        arguments={
-                            "url": url,
-                            "waitUntil": "domcontentloaded"
-                        }
+                        arguments={"url": url, "waitUntil": "domcontentloaded"},
                     )
 
                     # 2. Extract Visible Text (or HTML if preferred for parsing)
@@ -53,11 +47,11 @@ class PlaywrightService:
                     # unless structure is strictly needed.
                     # For extraction tasks, HTML might be better. Let's get HTML for maximum context.
                     result = await session.call_tool(
-                        "playwright_get_visible_html", # Assuming this tool exists or similar
+                        "playwright_get_visible_html",  # Assuming this tool exists or similar
                         arguments={
-                             "cleanHtml": True, # If supported by the specific server wrapper
-                             "removeScripts": True
-                        }
+                            "cleanHtml": True,  # If supported by the specific server wrapper
+                            "removeScripts": True,
+                        },
                     )
 
                     # Fallback if specific tool fails or name differs - check available tools
@@ -73,6 +67,7 @@ class PlaywrightService:
         except Exception as e:
             # Propagate error with context
             raise RuntimeError(f"Playwright MCP Service Failed for {url}: {e!s}") from e
+
 
 # Simple synchronous wrapper for non-async calling contexts if needed
 def scrape_url_sync(url: str) -> str:

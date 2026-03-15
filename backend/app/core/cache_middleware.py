@@ -19,6 +19,7 @@ from .personal_cache import PersonalCache, get_ai_cache
 
 logger = logging.getLogger(__name__)
 
+
 class CacheCleanupMiddleware(BaseHTTPMiddleware):
     """Middleware to handle periodic cache cleanup"""
 
@@ -65,6 +66,7 @@ class CacheCleanupMiddleware(BaseHTTPMiddleware):
         except Exception as e:
             logger.error(f"Cache cleanup error: {e}")
 
+
 class CacheMonitoringMiddleware(BaseHTTPMiddleware):
     """Middleware to add cache performance headers"""
 
@@ -98,6 +100,7 @@ class CacheMonitoringMiddleware(BaseHTTPMiddleware):
             )
 
         return response
+
 
 class CacheInvalidationMiddleware(BaseHTTPMiddleware):
     """Middleware to automatically invalidate cache on user data changes"""
@@ -140,7 +143,9 @@ class CacheInvalidationMiddleware(BaseHTTPMiddleware):
 
             if operation_types:
                 # Invalidate file-based cache
-                invalidated_personal = await self.cache.invalidate_user_cache(user_id, operation_types)
+                invalidated_personal = await self.cache.invalidate_user_cache(
+                    user_id, operation_types
+                )
 
                 # Invalidate SQL cache
                 invalidated_sql = 0
@@ -171,16 +176,19 @@ class CacheInvalidationMiddleware(BaseHTTPMiddleware):
     def _normalize_path(self, path: str) -> str:
         return path.rstrip("/").split("?")[0]
 
+
 async def setup_cache_backend() -> PersonalCache:
     """Setup cache system"""
     logger.info("Initializing SQL-backed cache monitoring")
     return get_ai_cache()
+
 
 @asynccontextmanager
 async def cache_lifespan(app: FastAPI):
     app.state.ai_cache = await setup_cache_backend()
     yield
     logger.info("Cache system shutdown")
+
 
 def add_cache_middleware(app: FastAPI):
     app.add_middleware(CacheInvalidationMiddleware)

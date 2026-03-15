@@ -30,12 +30,12 @@ class JobScoutAgent:
         Uses 'Google Dorks' to target specific job boards.
         """
         job_links = []
-        
+
         # Construct a "Broad" query targeting multiple platforms
         # site:ethicaljobs.com.au OR site:seek.com.au "Social Work" "Melbourne"
         domains_query = " OR ".join([f"site:{d}" for d in self.search_domains])
         query = f"({domains_query}) {topic} {location}"
-        
+
         search_url = f"https://www.google.com/search?q={query.replace(' ', '+')}"
         logger.info(f"JobScout Searching: {query}")
 
@@ -46,17 +46,17 @@ class JobScoutAgent:
             # 2. Extract Links (Simple heuristic for now, can be improved with AI)
             # In a real implementation, we might send this HTML to Flash Sidekick to "extract all job result links"
             # For now, we'll do a basic parse or placeholder for the AI extraction step.
-            
+
             # TODO: Integrate Flash Sidekick here to parse the Google Results page
             # For this MVP step, we will assume we get a list back.
             # mocking return for structure
             logger.info("Search page scraped. Parsing links...")
-            
+
             # This is where we will hook in the "Smart Filter" layer next.
-            
+
         except Exception as e:
             logger.error(f"Search failed: {e}")
-            
+
         return job_links
 
     async def examine_job(self, url: str) -> Dict:
@@ -67,12 +67,12 @@ class JobScoutAgent:
         try:
             # 1. Scrape the Job Post
             job_html = await self.browser.navigate_and_scrape(url)
-            
+
             # 2. Parse with AI (Placeholder for Flash Sidekick call)
             # details = await flash_sidekick.parse(job_html)
-            
+
             return {"url": url, "raw_content_length": len(job_html)}
-            
+
         except Exception as e:
             logger.error(f"Failed to examine job {url}: {e}")
             return {}
