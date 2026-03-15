@@ -106,7 +106,7 @@ Extract the following information from this job posting:
 - Application Closing Date/Deadline (if mentioned)
 
 Job Posting Content:
-{page_content[:5000]}  
+{page_content[:5000]}
 
 Return ONLY a JSON object with keys: title, company, salary, deadline (use null if not found).
 """
