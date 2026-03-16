@@ -1,0 +1,143 @@
+{
+  "body": "Feed\nKanban\nLanding\nLab\nAnalysis\nIngest\nOverview\nAPPLICATIONTRACKER\n\nTrack every application stage from submission to final outcome.\n\nFailed to load application data. Check backend auth or API availability.\n\nNo applications yet\n\nTrack every role you apply to. Start by generating your first application pack.\n\nAdd your first application →",
+  "hasLoading": false,
+  "hasErrorBanner": true,
+  "hasEmptyState": true,
+  "apiEvents": [
+    {
+      "type": "console",
+      "text": "[vite] connecting...",
+      "kind": "debug"
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/ApplicationTracker.tsx?t=1773636901009",
+      "method": "GET"
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/CoverLetterGenerator.tsx",
+      "method": "GET"
+    },
+    {
+      "type": "console",
+      "text": "[vite] connected.",
+      "kind": "debug"
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/ApplicationTracker.tsx?t=1773636901009",
+      "status": 200
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/components/ApplicationDetailPanel.tsx?t=1773635900642",
+      "method": "GET"
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/components/KanbanColumn.tsx",
+      "method": "GET"
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/trackerTypes.ts",
+      "method": "GET"
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/CoverLetterGenerator.tsx",
+      "status": 200
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/components/JobAnalysisResultsPanel.tsx",
+      "method": "GET"
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/trackerTypes.ts",
+      "status": 200
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/components/ApplicationDetailPanel.tsx?t=1773635900642",
+      "status": 200
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/components/KanbanColumn.tsx",
+      "status": 200
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/components/ApplicationArchiveAction.tsx?t=1773635900642",
+      "method": "GET"
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/components/ApplicationEditForm.tsx?t=1773635900642",
+      "method": "GET"
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/components/ApplicationStatusActions.tsx?t=1773635900642",
+      "method": "GET"
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/components/JobAnalysisResultsPanel.tsx",
+      "status": 200
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/components/ApplicationArchiveAction.tsx?t=1773635900642",
+      "status": 200
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/components/ApplicationEditForm.tsx?t=1773635900642",
+      "status": 200
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/components/ApplicationStatusActions.tsx?t=1773635900642",
+      "status": 200
+    },
+    {
+      "type": "console",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+      "kind": "info"
+    },
+    {
+      "type": "console",
+      "text": "[ModeSync] Route: /tracker → Mode: KrDark",
+      "kind": "log"
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:8000/api/applications/",
+      "method": "GET"
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:8000/api/applications/",
+      "status": 401
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "kind": "error"
+    },
+    {
+      "type": "console",
+      "text": "Backend returned 401 Unauthorized",
+      "kind": "warning"
+    },
+    {
+      "type": "console",
+      "text": "List applications error: AxiosError",
+      "kind": "error"
+    }
+  ]
+}

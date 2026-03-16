@@ -16,9 +16,9 @@ export interface ActionButtonProps extends HTMLMotionProps<'button'> {
 }
 
 /**
- * ActionButton (Seed Archetype)
+ * ActionButton (Strike Archetype)
  *
- * Kerala Rage kr-solidarity button component implementing the Seed archetype.
+ * Kerala Rage kr-solidarity button component implementing the Strike archetype.
  * Foundational interaction primitive with semantic token support.
  *
  * Design Principles:
@@ -78,12 +78,12 @@ export const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProp
         ref={ref}
         type="button"
         style={{
-          fontFamily: 'var(--sys-type-font-work-sans, "Work Sans", sans-serif)',
-          borderRadius: 'var(--shape-marchSurge01)', // March archetype asymmetric radius
+          fontFamily: 'var(--sys-type-fontFamilies-primary, "Work Sans", sans-serif)',
+          borderRadius: 'var(--sys-shape-blockRiot03)', // Strike archetype asymmetric radius
           ...variantStyles[variant],
         }}
         className={cn(
-          'font-bold uppercase tracking-wider',
+          'type-solidarityProtest uppercase',
           'transition-colors duration-150',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sys-color-inkGold-base)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sys-color-charcoalBackground-base)]',
           'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',

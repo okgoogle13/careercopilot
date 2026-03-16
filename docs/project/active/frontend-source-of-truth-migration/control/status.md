@@ -2,64 +2,64 @@
 
 **Program:** PR126 frontend source-of-truth migration
 **Status:** Active
-**Current phase:** Step 3a `/tracker` implementation (finalizing) + Step 3b `/career/ingest` COMPLETE
+**Current phase:** Step 3a `/tracker` implementation refinement — BLOCKED on local Firebase/Firestore environment
 **Execution truth:** `control/blueprint.md`
+
+## Current Progress Metrics (Tri-Layer Truth)
+
+| Dimension | Metric | Status |
+|-----------|--------|--------|
+| **Runtime Truth** | 19/19 routes reachable | ✅ CLEAN |
+| **Design Truth** | 11/11 screen pairs aligned | ✅ CLEAN |
+| **Capability Truth** | 10/10 backend modules | 🟡 85% Saturation Target |
+| **PM Governance** | 12/12 build contracts valid | ✅ VALID |
+| **Total Migration** | ~90% Complete | 🟡 Final Closeout Pending |
 
 ## Current state
 
-- Migration docs have been normalized into `control/`, `contracts/`, and `analysis/`.
-- Canonical script inputs now point to stable filenames instead of dated filenames.
-- Validator output is standardized under `tmp/migration/`.
-- Governance readiness checks now pass from repo root:
-  - `pytest tests/plans -q`
-  - `node frontend/scripts/validate-governance-artifacts.mjs`
-- Gemini-style orchestration is adopted as a management overlay only: status, risks, sequencing, and escalation.
-- Blueprint updated on 2026-03-15 with a Target State Snapshot and an advisory-only protocol decision log entry (authority order unchanged).
-- Execution truth remains `control/blueprint.md` plus `control/workflow.md`.
-- `/tracker` now uses the canonical `applicationService` path instead of a mock-backed primary route owner.
-- Route-local migration gates now pass for `/tracker`:
-  - `bash .claude/skills/token-enforcement/scripts/run-token-enforcement.sh /tracker`
-  - `bash .claude/skills/migration-audit/scripts/run-migration-audit.sh /tracker`
-- Route-owner verification now exists for `/tracker`:
-  - `cd frontend && yarn test src/features/applications/__tests__/ApplicationTracker.test.tsx --runInBand`
+- **Scan Results (2026-03-17)**:
+  - `node --import tsx tools/ci/check-route-integrity.ts` -> route integrity clean (19 routes).
+  - `node --import tsx tools/ci/check-screen-pairs.ts` -> all 11 screens correctly paired.
+  - `python3 scripts/derive-gap-fill-plan.py` -> identifies `/opportunities` styling as "Dirty" (requires archetype swaps).
+- **Identity Gates**:
+  - Gated: `/analysis`, `/dashboard`, `/`. Artifacts verified in `analysis/`.
+  - Pending: `/opportunities` (deferred capability), `/tracker`.
+- **Shared Primitives**:
+  - `Logo`: Remediated (Compass symbol).
+  - `Sidebar`: Token-compliant; Zero-Flora violations removed.
+  - `AuthGuard`: Token violation in `App.tsx:71` (deferred).
+### Phase 4: Shell Integration & Asset Alignment (IN PROGRESS)
 
-## Current blockers
+- **Logo Component**: `DEFERRED`. Missing canonical TSX. Zero-Flora violation in legacy.
+- **AuthGuard Color**: `DEFERRED`. Token violation in hardcoded surface color.
+- **Shell Promotion**: `NEW / BLOCKED`. Routes currently persist legacy sidebar. Promotion tasks added to Completion Plan.
 
-- No planning-input blocker remains for Step 1. Python governance tests and the JS validator now agree on the canonical `control/` workspace.
-- Non-auth route benchmarks for `migration-audit` are intentionally deferred. This does not block Step 3 execution unless `migration-audit` is chosen as an immediate gate for `/tracker`, `/career/ingest`, `/documents`, or `/profile`.
-- Live-session verification is currently blocked by the local backend environment: `uvicorn` fails because `email-validator` is missing from the active Python environment.
-- The tracker hero composition is not yet acceptable for final brand signoff: the current `applications-board` mapping resolves to elephant and palm imagery that conflicts with the migration-era zero-flora / no non-human mascot direction.
+### Known Blockers
+
+| ID | Component | Severity | Status | Mitigation / Next Action |
+|---|---|---|---|---|
+| B1 | `/tracker` | `Critical` | `BLOCKED` | Evidence packet collected. Resolve Firestore connectivity. |
+| B2 | `/opportunities` | `High` | `DEFERRED` | Archetype swaps (`Pebble` -> `Strike`) pending in next phase. |
+| B3 | `App Layout` | `Medium` | `IN_PROGRESS` | **Shell Promotion**: Replace `ProtectedLayout` with `MigratedRouteLayout`. |
+
+### Execution Skill Matrix (Phase 4 Finalization)
+
+| Role | Skill | Action |
+|---|---|---|
+| **Governor** | `design-orchestration` | Run after each major refinement and before execution gate. |
+| **Scaffolder** | `blueprint` | Invoke `/blueprint` to generate step-by-step construction tasks. |
+| **Tracker** | `project-manager` | Update this document and dashboard after completion. |
+- **Diagnostic Packet**:
+    - **Error**: `401 Unauthorized` on `:8000` (missing project config).
+    - **Error**: `Stalled Read` on `:8001` (Firestore connectivity timeout).
+    - **Affected Path**: `GET /api/applications/`.
+    - **Evidence Required**: Populated Kanban screenshot with score >= 90.
 
 ## Current gate state
 
-- Step 1 — Planning inputs: `execution_ready`
-- Step 2 — `/tracker` build contract: `execution_ready`
-- Step 3a — `/tracker` CRUD implementation: `in_progress` (hero brand fix applied 2026-03-15; pending live-verify)
-- Step 3b — `/career/ingest` Ingestion implementation: `COMPLETE`
-- Step 3c — `/profile` voice_profile_capture: `COMPLETE` (2026-03-15)
-- Step 3d — `/documents` Redline Workspace: `COMPLETE` (2026-03-15; build contract generated)
-- Step 3e — `/analysis` resume_audit: `COMPLETE` (2026-03-15)
-- Step 3f — `/apply/quick` genkit_job_analysis: `in_progress` (governance normalized; JobAnalysisResultsPanel extraction pending)
-- Step 6 — Migration Cleanup (Orphans & Legacy Routes): `COMPLETE` (2026-03-15; 8 routes retired)
+- Step 3a — `/tracker` CRUD implementation: `IN_PROGRESS` (logic verified; env blocked).
+- Phase 4 — Route Gating: `COMPLETE` (Identity gates for landing, dashboard, analysis checked in).
+- Step 6B — Feature Finalization: `COMPLETE` (All 6 routes gated).
 
-## Recorded approvals
-
-- `/tracker` build contract human approval recorded on `2026-03-14`
-- `/career/ingest` migration (M4) completed on `2026-03-15`
-- Approval basis for M4:
-  - Canonical `/api/v1/ingest` contract enforcement complete
-  - KR Solidarity v6.0 token compliance verified
-  - Zero-flora asset audit passed
-  - Routing promoted to `SmartIngestion` feature owner in `App.tsx`
-- Approval basis:
-  - technical gaps resolved in `contracts/build-contract-tracker.xml`
-  - supplementary briefs present in `contracts/tracker-supplementary-component-briefs.xml`
-  - planning-layer readiness checks passing from repo root
-
-## Next actions
-
-1. Restore the local backend environment so `/tracker` can be exercised against the real applications API.
-2. Replace the `/tracker` hero mapping with a compliant brand treatment and rerun screenshot capture.
-3. Re-run live-session verification against the backend so Step 3a can move from `in_progress` to complete.
-4. Execute Step 3d: `/documents` Redline Workspace implementation.
-5. Execute Step 6: systematically migrate the 11 legacy routes and 6 orphaned screens.
+---
+*Status refreshed: 2026-03-17*

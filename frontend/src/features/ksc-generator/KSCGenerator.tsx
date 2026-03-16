@@ -12,11 +12,11 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import { motion, AnimatePresence } from 'framer-motion';
-import { DocumentWorkbench } from '../../screens/08_workbench/DocumentWorkbench';
-import { api } from '../../services/api';
-import { genkitApi } from '../../services/genkit';
-import { exportToPdf } from '../../utils/exportEngine';
-import { KrDarkSpring, staggerContainer } from '../../design/tokens/motion-presets';
+import { DocumentWorkbench } from '@/screens/08_workbench/DocumentWorkbench';
+import { api } from '@/services/api';
+import { genkitApi } from '@/services/genkit';
+import { exportToPdf } from '@/utils/exportEngine';
+import { KrDarkSpring, staggerContainer } from '@/design/tokens/motion-presets';
 import { useAnalytics } from '@/hooks/useAnalytics';
 
 export function KSCGenerator() {

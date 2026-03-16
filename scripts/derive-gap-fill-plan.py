@@ -32,6 +32,7 @@ ROUTE_MATRIX_PATH = CONTROL_ROOT / "route-matrix.json"
 GAP_MAP_PATH = CONTROL_ROOT / "gap-map.json"
 DEFAULT_JSON_OUT_DIR = REPO_ROOT / "tmp" / "migration"
 SRC_ROOT = REPO_ROOT / "frontend" / "src"
+CONSOLIDATED_REFERENCE_ROOT = DOCS_ROOT / "sources" / "consolidated-reference"
 
 ALLOWED_TOKEN_PREFIXES = ("--sys-color-", "--sys-shape-", "--sys-type-")
 BANNED_TOKEN_NAMES = ("labWrenMetalBlue", "GumLeafGreen", "WattleGold", "inkGreen")
@@ -42,6 +43,13 @@ HARD_CODED_COLOR_RE = re.compile(
 )
 MUI_RE = re.compile(r"@mui/")
 FONT_DRIFT_RE = re.compile(r"\b(Inter|Roboto|Arial|Plus Jakarta Sans|Sora)\b")
+FIGMA_ASSET_RE = re.compile(r"figma:asset/")
+REMOTE_ASSET_RE = re.compile(r"https?://", re.IGNORECASE)
+LOCAL_ASSET_RE = re.compile(r"(?:from|src=)[^\n]*assets?/", re.IGNORECASE)
+NON_COMPLIANT_MOTIF_RE = re.compile(
+    r"\b(elephant|palm(?:\s+tree)?|gum\s*leaf|eucalyptus)\b",
+    re.IGNORECASE,
+)
 
 
 @dataclass
@@ -54,6 +62,8 @@ class CandidateAssessment:
     drift_penalty: int
     total_score: int
     token_state: str
+    asset_state: str
+    promotion_eligibility: str
     required_actions: list[str]
 
 
@@ -201,8 +211,11 @@ def find_gap_entries(owner_route: str, gap_map: dict[str, Any]) -> list[dict[str
 
 def index_tsx_files() -> dict[str, list[Path]]:
     index: dict[str, list[Path]] = {}
-    for path in SRC_ROOT.rglob("*.tsx"):
-        index.setdefault(path.stem, []).append(path)
+    for root in (SRC_ROOT, CONSOLIDATED_REFERENCE_ROOT):
+        if not root.exists():
+            continue
+        for path in root.rglob("*.tsx"):
+            index.setdefault(path.stem, []).append(path)
     return index
 
 
@@ -212,6 +225,8 @@ def classify_layer(path: Path) -> str:
         return "runtime"
     if rel.startswith("frontend/src/screens/"):
         return "design_reference"
+    if rel.startswith("docs/project/active/frontend-source-of-truth-migration/sources/consolidated-reference/"):
+        return "support_reference"
     if "phase3-batch" in rel:
         return "batch_reference"
     if rel.startswith("frontend/src/components/") or rel.startswith("frontend/src/layouts/"):
@@ -248,6 +263,31 @@ def analyze_tokens(path: Path) -> tuple[str, list[str]]:
     return "unknown", actions
 
 
+def analyze_support_reference_portability(path: Path) -> tuple[str, str, list[str]]:
+    text = path.read_text(encoding="utf-8")
+    actions: list[str] = []
+
+    asset_state = "clean"
+    if FIGMA_ASSET_RE.search(text):
+        asset_state = "figma_bound"
+        actions.append("replace_figma_asset_imports")
+    elif REMOTE_ASSET_RE.search(text):
+        asset_state = "remote_asset"
+        actions.append("replace_remote_asset_dependencies")
+    elif LOCAL_ASSET_RE.search(text):
+        asset_state = "manifest_unknown"
+        actions.append("verify_asset_manifest_mapping")
+
+    promotion_eligibility = "eligible"
+    if NON_COMPLIANT_MOTIF_RE.search(text):
+        promotion_eligibility = "reference_only"
+        actions.append("remove_non_compliant_motifs")
+    elif asset_state != "clean":
+        promotion_eligibility = "behavior_only"
+
+    return asset_state, promotion_eligibility, actions
+
+
 def score_candidate(
     name: str,
     path: Path,
@@ -267,6 +307,8 @@ def score_candidate(
         behavior_score = 35 if layer == "runtime" else 18
     elif layer == "runtime":
         behavior_score = 25
+    elif layer == "support_reference":
+        behavior_score = 20
     elif layer == "component_library":
         behavior_score = 15
     elif layer == "design_reference":
@@ -287,15 +329,35 @@ def score_candidate(
         design_alignment_score = 10
     elif layer == "design_reference":
         design_alignment_score = 8
+    elif layer == "support_reference":
+        design_alignment_score = 6
     elif row.get("family") and row["family"] in rel:
         design_alignment_score = 6
 
     token_state, required_actions = analyze_tokens(path)
+    asset_state = "clean"
+    promotion_eligibility = "eligible"
+    if layer == "support_reference":
+        asset_state, promotion_eligibility, support_actions = analyze_support_reference_portability(
+            path
+        )
+        required_actions = sorted(set(required_actions + support_actions))
+        if token_state != "clean" and promotion_eligibility == "eligible":
+            promotion_eligibility = "behavior_only"
+    elif token_state != "clean":
+        promotion_eligibility = "behavior_only"
+
     drift_penalty = 0
     if token_state == "dirty":
         drift_penalty = 25
     elif token_state == "unknown":
         drift_penalty = 10
+    if asset_state in {"figma_bound", "remote_asset"}:
+        drift_penalty += 15
+    elif asset_state == "manifest_unknown":
+        drift_penalty += 5
+    if promotion_eligibility == "reference_only":
+        drift_penalty += 10
 
     total_score = behavior_score + ownership_score + design_alignment_score - drift_penalty
     return CandidateAssessment(
@@ -307,6 +369,8 @@ def score_candidate(
         drift_penalty=drift_penalty,
         total_score=total_score,
         token_state=token_state,
+        asset_state=asset_state,
+        promotion_eligibility=promotion_eligibility,
         required_actions=required_actions,
     )
 
@@ -353,18 +417,33 @@ def choose_reuse_mode(
         candidates,
         key=lambda c: (
             c.total_score,
+            1 if c.promotion_eligibility == "eligible" else 0,
+            1 if c.promotion_eligibility == "behavior_only" else 0,
             1 if c.layer == "runtime" else 0,
             1 if c.token_state == "clean" else 0,
         ),
         reverse=True,
     )[0]
 
-    if selected.token_state == "clean" and selected.total_score >= 80:
+    if (
+        selected.token_state == "clean"
+        and selected.total_score >= 80
+        and selected.promotion_eligibility == "eligible"
+    ):
         return "reuse_as_is", selected.token_state, list(selected.required_actions), selected.path
+    if selected.layer == "support_reference" and selected.promotion_eligibility == "reference_only":
+        return (
+            "reference_only",
+            selected.token_state,
+            sorted(set(selected.required_actions)),
+            selected.path,
+        )
     if selected.total_score >= 60:
         actions = list(selected.required_actions)
         if selected.token_state != "clean":
             actions.append("rewrite_styling_to_semantic_tokens")
+        if selected.asset_state != "clean":
+            actions.append("replace_non_portable_assets")
         return "keep_behavior_rewrite_styling", selected.token_state, sorted(set(actions)), selected.path
     if selected.total_score >= 40:
         actions = list(selected.required_actions)
@@ -486,6 +565,13 @@ def default_json_out_path(route_id: str) -> Path:
     return DEFAULT_JSON_OUT_DIR / f"{safe_route}-gap-fill-plan.json"
 
 
+def display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(REPO_ROOT))
+    except ValueError:
+        return str(path)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--route-id", required=True, help="Route id or current route from route matrix")
@@ -508,7 +594,7 @@ def main() -> None:
     json_out = args.json_out or default_json_out_path(args.route_id)
     json_out.parent.mkdir(parents=True, exist_ok=True)
     json_out.write_text(output + "\n", encoding="utf-8")
-    print(f"JSON report: {json_out.relative_to(REPO_ROOT)}")
+    print(f"JSON report: {display_path(json_out)}")
     print(output)
 
 
