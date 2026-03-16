@@ -198,4 +198,6 @@ def verify_id_token(id_token: str) -> dict[str, Any] | None:
 
     except (ValueError, FirebaseError) as e:
         logger.warning(f"Failed to verify ID token: {e!s}")
+        if isinstance(e, FirebaseError):
+            logger.debug(f"Firebase Error Code: {e.code}")
         return None

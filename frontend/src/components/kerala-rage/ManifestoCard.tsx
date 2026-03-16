@@ -69,12 +69,12 @@ export const ManifestoCard: React.FC<ManifestoCardProps> = ({
       <div className="absolute top-8 right-8 w-1 h-12 bg-solidarity-red" />
 
       {/* Hero Title */}
-      <h2 className="mb-8 text-display-hero font-solidarity text-solidarity-red leading-tight uppercase tracking-tighter">
+      <h2 className="mb-8 text-[var(--sys-type-scale-display)] type-solidarityProtest text-[var(--sys-color-solidarityRed-base)] leading-tight uppercase">
         {title}
       </h2>
 
       {/* Body Content */}
-      <p className="mb-12 text-lg font-direct-action text-paper-white/80 leading-relaxed max-w-lg">
+      <p className="mb-12 text-[var(--sys-type-scale-body)] text-[var(--sys-color-worker-ash-base)] leading-relaxed max-w-lg font-primary">
         {content}
       </p>
 

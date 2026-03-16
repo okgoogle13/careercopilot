@@ -1,6 +1,6 @@
 {
   "artifact": "target_state_route_matrix",
-  "generated_at": "2026-03-13",
+  "generated_at": "2026-03-16",
   "canonical_plan": "docs/project/active/frontend-source-of-truth-migration/control/blueprint.md",
   "schema_version": 3,
   "row_count": 27,
@@ -18,7 +18,7 @@
       "route_class": "product",
       "family": "landing",
       "status": "merge",
-      "implementation_status": "planned",
+      "implementation_status": "complete",
       "current_runtime_owner": "LandingPage",
       "target_runtime_owner": "LandingPage",
       "screen_reference": "frontend/src/screens/01_landing/HeroLanding.tsx",
@@ -32,9 +32,7 @@
       ],
       "component_library_action": "merge",
       "priority": "high",
-      "blockers": [
-        "prototype landing still exists under /kr/landing"
-      ],
+      "blockers": [],
       "notes": "Keep the route and backport landing reference patterns into the canonical runtime surface."
     },
     {
@@ -58,9 +56,7 @@
       ],
       "component_library_action": "merge",
       "priority": "high",
-      "blockers": [
-        "prototype auth/onboarding routes remain live"
-      ],
+      "blockers": [],
       "notes": "Keep the route and absorb auth UI patterns from the design reference, not from /kr/auth."
     },
     {
@@ -84,9 +80,7 @@
       ],
       "component_library_action": "merge",
       "priority": "high",
-      "blockers": [
-        "prototype auth/onboarding routes remain live"
-      ],
+      "blockers": [],
       "notes": "Keep the route and align it with canonical auth entry patterns."
     },
     {
@@ -96,26 +90,25 @@
       "route_class": "product",
       "family": "auth-onboarding",
       "status": "merge",
-      "implementation_status": "planned",
+      "implementation_status": "complete",
       "current_runtime_owner": "OnboardingRoute",
       "target_runtime_owner": "OnboardingRoute",
       "screen_reference": "frontend/src/screens/03_onboarding/OnboardFlow.tsx",
       "xml_wireframe_path": "frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml",
       "wireframe_coverage": "shared_family_wireframe",
-      "paired_runtime_surface": "frontend/src/App.tsx",
+      "paired_runtime_surface": "frontend/src/features/onboarding/OnboardingRoute.tsx",
       "backend_capabilities": [
         "voice_profile_capture"
       ],
       "target_component_surfaces": [
         "OnboardingRoute",
+        "OnboardingPage",
         "OnboardFlow"
       ],
       "component_library_action": "merge",
       "priority": "high",
-      "blockers": [
-        "welcome/onboarding progression still needs workflow validation"
-      ],
-      "notes": "Keep the route and selectively merge onboarding flow ideas without promoting /kr/onboarding."
+      "blockers": [],
+      "notes": "Keep the route-owned welcome gate and pair the onboarding flow to the 03_onboarding shell without promoting /kr/onboarding."
     },
     {
       "route_id": "welcome",
@@ -150,7 +143,7 @@
       "route_class": "product",
       "family": "dashboard",
       "status": "merge",
-      "implementation_status": "planned",
+      "implementation_status": "complete",
       "current_runtime_owner": "Dashboard",
       "target_runtime_owner": "Dashboard",
       "screen_reference": "frontend/src/screens/11_dashboard/DashboardOverview.tsx",
@@ -179,7 +172,7 @@
       "route_class": "product",
       "family": "analysis",
       "status": "expand",
-      "implementation_status": "planned",
+      "implementation_status": "complete",
       "current_runtime_owner": "AnalysisPage",
       "target_runtime_owner": "AnalysisPage",
       "screen_reference": "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx",
@@ -237,7 +230,7 @@
       "route_class": "product",
       "family": "documents",
       "status": "expand",
-      "implementation_status": "planned",
+      "implementation_status": "complete",
       "current_runtime_owner": "Documents",
       "target_runtime_owner": "Documents",
       "screen_reference": "frontend/src/screens/08_workbench/DocumentWorkbench.tsx",
@@ -253,10 +246,8 @@
       ],
       "component_library_action": "extend",
       "priority": "high",
-      "blockers": [
-        "document redline backend has no UI owner"
-      ],
-      "notes": "This route becomes the owner of redline and review workspace behavior."
+      "blockers": [],
+      "notes": "This route is the canonical owner of redline and review workspace behavior."
     },
     {
       "route_id": "tracker",
@@ -282,10 +273,9 @@
       "component_library_action": "extend",
       "priority": "high",
       "blockers": [
-        "/tracker is mock-backed despite real backend support",
-        "detail/edit/delete surfaces are missing"
+        "local Firebase/Firestore environment is not execution-ready for final tracker closeout: the default backend on :8000 rejects real Firebase tokens due missing project config, while a backend started with explicit project vars on :8001 verifies tokens but the applications read path stalls before returning data"
       ],
-      "notes": "This is the canonical owner of application CRUD, status, and detail flows."
+      "notes": "This is the canonical owner of application CRUD, status, and detail flows; runtime truth is aligned and the remaining blocker is local backend auth/data readiness rather than route implementation."
     },
     {
       "route_id": "apply_quick",
@@ -294,7 +284,7 @@
       "route_class": "product",
       "family": "applications",
       "status": "expand",
-      "implementation_status": "planned",
+      "implementation_status": "complete",
       "current_runtime_owner": "ApplyQuick",
       "target_runtime_owner": "ApplyQuick",
       "screen_reference": "frontend/src/screens/09_finalization/ApplicationFinalization.tsx",
@@ -312,11 +302,8 @@
       ],
       "component_library_action": "merge",
       "priority": "high",
-      "blockers": [
-        "workflow endpoints are placeholder-only today",
-        "genkit_job_analysis lacks normalized governance status metadata"
-      ],
-      "notes": "Keep route as a supporting application flow; do not split it into a new family."
+      "blockers": [],
+      "notes": "Keep route as a supporting application flow; do not split it into a new family. Current contract scope is complete even though workflow orchestration remains a backend-placeholder capability."
     },
     {
       "route_id": "opportunities",
@@ -325,7 +312,7 @@
       "route_class": "product",
       "family": "jobs",
       "status": "expand",
-      "implementation_status": "planned",
+      "implementation_status": "complete",
       "current_runtime_owner": "Opportunities",
       "target_runtime_owner": "Opportunities",
       "screen_reference": "frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
@@ -355,13 +342,13 @@
       "route_class": "product",
       "family": "jobs",
       "status": "expand",
-      "implementation_status": "planned",
+      "implementation_status": "complete",
       "current_runtime_owner": "JobQueue",
       "target_runtime_owner": "JobQueue",
       "screen_reference": "frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
       "xml_wireframe_path": "frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
       "wireframe_coverage": "shared_family_wireframe",
-      "paired_runtime_surface": "frontend/src/pages/JobQueue.tsx",
+      "paired_runtime_surface": "frontend/src/features/jobs/JobQueue.tsx",
       "backend_capabilities": [
         "job_listings_workbench"
       ],
@@ -371,10 +358,8 @@
       ],
       "component_library_action": "merge",
       "priority": "medium",
-      "blockers": [
-        "job queue wireframe ownership is unresolved"
-      ],
-      "notes": "Keep route as a queue/worklist surface inside the jobs family."
+      "blockers": [],
+      "notes": "Keep route as a queue/worklist surface inside the jobs family; pair it to the 06_lookout shell while queue actions stay route-owned."
     },
     {
       "route_id": "ksc_generator",
@@ -383,23 +368,22 @@
       "route_class": "product",
       "family": "generation",
       "status": "keep",
-      "implementation_status": "planned",
+      "implementation_status": "complete",
       "current_runtime_owner": "KSCGenerator",
       "target_runtime_owner": "KSCGenerator",
-      "screen_reference": null,
-      "xml_wireframe_path": null,
-      "wireframe_coverage": "missing_wireframe",
+      "screen_reference": "frontend/src/screens/08_workbench/DocumentWorkbench.tsx",
+      "xml_wireframe_path": "frontend/src/screens/08_workbench/08_workbench.wireframe.xml",
+      "wireframe_coverage": "shared_family_wireframe",
       "paired_runtime_surface": "frontend/src/features/ksc-generator/KSCGenerator.tsx",
       "backend_capabilities": [],
       "target_component_surfaces": [
-        "KSCGenerator"
+        "KSCGenerator",
+        "DocumentWorkbench"
       ],
-      "component_library_action": "reuse",
+      "component_library_action": "merge",
       "priority": "medium",
-      "blockers": [
-        "cross-tool handoff remains incomplete"
-      ],
-      "notes": "Keep as a dedicated generator route; no stronger screen-led replacement currently exists."
+      "blockers": [],
+      "notes": "Keep as a dedicated generator route; pair it to the 08_workbench shell while generator logic stays route-owned."
     },
     {
       "route_id": "cover_letter_generator",
@@ -408,23 +392,22 @@
       "route_class": "product",
       "family": "generation",
       "status": "keep",
-      "implementation_status": "planned",
+      "implementation_status": "complete",
       "current_runtime_owner": "CoverLetterGenerator",
       "target_runtime_owner": "CoverLetterGenerator",
-      "screen_reference": null,
-      "xml_wireframe_path": null,
-      "wireframe_coverage": "missing_wireframe",
+      "screen_reference": "frontend/src/screens/09_finalization/ApplicationFinalization.tsx",
+      "xml_wireframe_path": "frontend/src/screens/09_finalization/09_finalization.wireframe.xml",
+      "wireframe_coverage": "shared_family_wireframe",
       "paired_runtime_surface": "frontend/src/features/applications/CoverLetterGenerator.tsx",
       "backend_capabilities": [],
       "target_component_surfaces": [
-        "CoverLetterGenerator"
+        "CoverLetterGenerator",
+        "ApplicationFinalization"
       ],
-      "component_library_action": "reuse",
+      "component_library_action": "merge",
       "priority": "medium",
-      "blockers": [
-        "generic workbench mapping is conceptually weak"
-      ],
-      "notes": "Keep as a dedicated generator route; improve handoff, not route structure."
+      "blockers": [],
+      "notes": "Keep as a dedicated generator route; pair it to the 09_finalization shell while cover-letter flow stays route-owned."
     },
     {
       "route_id": "profile",
@@ -433,7 +416,7 @@
       "route_class": "product",
       "family": "account",
       "status": "expand",
-      "implementation_status": "planned",
+      "implementation_status": "complete",
       "current_runtime_owner": "ProfileView",
       "target_runtime_owner": "ProfileView",
       "screen_reference": "frontend/src/screens/10_settings/SettingsControl.tsx",
@@ -449,9 +432,7 @@
       ],
       "component_library_action": "extend",
       "priority": "high",
-      "blockers": [
-        "voice profile capability has no live UI owner today"
-      ],
+      "blockers": [],
       "notes": "This is the canonical owner of voice-profile management."
     },
     {
@@ -461,7 +442,7 @@
       "route_class": "product",
       "family": "account",
       "status": "expand",
-      "implementation_status": "planned",
+      "implementation_status": "complete",
       "current_runtime_owner": "Settings",
       "target_runtime_owner": "Settings",
       "screen_reference": "frontend/src/screens/10_settings/SettingsControl.tsx",
@@ -475,10 +456,8 @@
       ],
       "component_library_action": "extend",
       "priority": "high",
-      "blockers": [
-        "profile wireframe mapping remains imperfect"
-      ],
-      "notes": "Keep as a secondary account surface; do not move voice ownership here by default."
+      "blockers": [],
+      "notes": "Keep as a secondary account surface; pair it to the 10_settings shell while voice ownership stays on /profile."
     },
     {
       "route_id": "career_ingest",
@@ -625,9 +604,7 @@
       ],
       "component_library_action": "retire",
       "priority": "medium",
-      "blockers": [
-        "5 prototype routes remain live in App.tsx and must be retired as a batch"
-      ],
+      "blockers": [],
       "notes": "Keep only as reference material until useful patterns are merged into /."
     },
     {
@@ -650,9 +627,7 @@
       ],
       "component_library_action": "retire",
       "priority": "medium",
-      "blockers": [
-        "5 prototype routes remain live in App.tsx and must be retired as a batch"
-      ],
+      "blockers": [],
       "notes": "Do not treat as product auth ownership."
     },
     {
@@ -675,9 +650,7 @@
       ],
       "component_library_action": "retire",
       "priority": "medium",
-      "blockers": [
-        "5 prototype routes remain live in App.tsx and must be retired as a batch"
-      ],
+      "blockers": [],
       "notes": "Keep only as reference for onboarding improvements."
     },
     {
@@ -700,9 +673,7 @@
       ],
       "component_library_action": "retire",
       "priority": "medium",
-      "blockers": [
-        "5 prototype routes remain live in App.tsx and must be retired as a batch"
-      ],
+      "blockers": [],
       "notes": "Merge any useful ideas into /analysis instead of promoting this route."
     },
     {
@@ -725,9 +696,7 @@
       ],
       "component_library_action": "retire",
       "priority": "medium",
-      "blockers": [
-        "5 prototype routes remain live in App.tsx and must be retired as a batch"
-      ],
+      "blockers": [],
       "notes": "Merge reference patterns into /dashboard; retire the route."
     }
   ]

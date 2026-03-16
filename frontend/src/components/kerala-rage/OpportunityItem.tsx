@@ -56,7 +56,7 @@ export const OpportunityItem = React.forwardRef<HTMLDivElement, OpportunityItemP
           <div className="flex items-center gap-3">
             {priority && (
               <span
-                className="flex h-2 w-2 rounded-march bg-solidarity-red shadow-[0_0_8px_rgba(241,71,20,0.8)]"
+                className="flex h-2 w-2 rounded-march bg-[var(--sys-color-solidarityRed-base)] shadow-[var(--sys-shadow-glow-red)]"
                 aria-label="Priority Item"
               />
             )}
@@ -69,7 +69,11 @@ export const OpportunityItem = React.forwardRef<HTMLDivElement, OpportunityItemP
             {title}
           </h3>
 
-          {subtitle && <p className="font-primary text-sm text-gray-400">{subtitle}</p>}
+          {subtitle && (
+            <p className="font-primary text-sm text-[var(--sys-color-concreteGrey-base)]">
+              {subtitle}
+            </p>
+          )}
         </div>
 
         {onAction && (

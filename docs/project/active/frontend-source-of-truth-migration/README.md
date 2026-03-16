@@ -12,9 +12,9 @@ Start here:
 - `control/route-matrix.json` — route ownership truth for migration work
 - `control/gap-map.json` — backend capability to frontend surface mapping
 
-Current execution handoff:
-- next active route: `/tracker` (Step 3a)
-- non-auth benchmark creation is deferred unless `migration-audit` is intentionally used as an immediate gate
+Current execution lanes:
+- `/tracker` Step 3a closeout is blocked by the local Firebase/Firestore environment (`:8000` lacks Firebase config and `:8001` stalls on `/api/applications`), so leave Step 3a blocked unless the environment is restored.
+- Step 6B + Phase 4 support-reference normalization is the active lane; use the approved audit packs for `landing`, `dashboard`, and `analysis` before consuming any Figma-derived assets, and run the TSX identity gate before closing any such route.
 
 Structure:
 - `control/` — canonical living docs and control artifacts
@@ -26,6 +26,10 @@ Support artifacts (support-only, not execution truth):
 - `docs/design/architecture-migration.png` — current vs target component architecture lanes
 - `docs/design/layered-component-blueprint.json` — layered inventory snapshot for reference
 - `frontend/component-inventory.json` — inventory report derived from `frontend/scripts/component-inventory.ts`
+
+Support-reference flow reminder:
+- only honor the audit packs at `analysis/2026-03-16-support-reference-audit-{landing,dashboard,analysis}.md` as the governed path for Figma-derived behavior.
+- treat `sources/consolidated-reference/**` as evidence, not authority; rewrite styling/assets/motifs unless the corresponding audit pack permits reuse, and always pass the late-stage TSX identity gate before closure.
 
 Primary scripts:
 - `scripts/validate-wireframe-workflow.py`

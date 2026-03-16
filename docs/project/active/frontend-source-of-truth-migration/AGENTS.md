@@ -42,12 +42,18 @@ These are evidence inputs only (useful for drift detection, not authority):
 ## Working Method (One Route at a Time)
 
 1. Pick a route from `control/route-matrix.json` and confirm it is reachable in `frontend/src/App.tsx`.
-2. Confirm the intended design surface exists under `frontend/src/screens/` (or record it as missing).
-3. Confirm backend capability exists (mounted endpoint + any required auth expectations).
-4. If wireframes are in scope: validate first, then lock execution with a build contract in `contracts/`.
-5. Implement in runtime truth (`frontend/src/features/**` + `frontend/src/pages/**`) while preserving the authority order.
-6. Run route-local gates (`token-enforcement`, and `migration-audit` when the workflow requires it).
-7. Update `control/status.md` with what changed, what’s blocked, and the next executable step.
+2. **Global Primitive Check**: Audit the route for shared primitives that must be migrated or synced (e.g., `Logo`, `Sidebar`, `TopNav`, `Footer`, `AuthGuard`, `KrDarkDock`).
+3. Confirm the intended design surface exists under `frontend/src/screens/` (or record it as missing).
+4. Confirm backend capability exists (mounted endpoint + any required auth expectations).
+5. If wireframes are in scope: validate first, then lock execution with a build contract in `contracts/`.
+6. Implement in runtime truth (`frontend/src/features/**` + `frontend/src/pages/**`) while preserving the authority order.
+7. Run route-local gates (`token-enforcement`, and `migration-audit` when the workflow requires it).
+8. Update `control/status.md` with what changed, what’s blocked, and the next executable step.
+
+## Support-Reference & Identity Gate Addendum
+
+- Use the approved route audit packs for `landing`, `dashboard`, and `analysis` as the sole governed gateway for Figma-derived inputs. Do not treat other `sources/consolidated-reference` files as authoritative until a gap-fill planner + audit-pack decision explicitly authorizes them.
+- Require the late-stage TSX identity gate (`design-orchestration` → `kerala-rage-brand-enforcer` → `m3-expressive-token-orchestrator` → `kerala-rage-typography-strategy`) for any route that consumes support-reference or generated TSX, and record the result through `analysis/tsx-identity-gate-template.md` before closing the route.
 
 ## Gates & Validation (Order Matters)
 

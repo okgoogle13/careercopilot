@@ -76,7 +76,7 @@ This migration should be considered successful only if the following checks are 
 Canonical route-owned surfaces (must be live, routed, and backend-wired):
 - `/tracker`: `ApplicationTracker`
 - `/documents`: `Documents`
-- `/career/ingest`: `IngestionPage`
+- `/career/ingest`: `SmartIngestion`
 - `/profile`: `ProfileView`
 - `/analysis`: `AnalysisPage`
 - `/opportunities`: `Opportunities`
@@ -169,14 +169,38 @@ Use this sequence for wireframe-led migration work:
    - generate implementation specs only after the wireframe passes validation, the build contract locks component ownership and decomposition, and the gap-fill plan isolates true new-build work from runtime reuse work
 8. `token-enforcement`
    - enforce token and banned-term rules on implementation code
-9. `kerala-rage-brand-enforcer`
-   - run deterministic brand-policy checks on the resulting design or code artifacts
+9. `design-orchestration`
+   - map the implemented TSX to KR archetypes and record generic-SaaS risk before closure
+10. `kerala-rage-brand-enforcer`
+   - run deterministic brand-policy checks and de-SaaS the resulting design or code artifacts
+11. `m3-expressive-token-orchestrator`
+   - verify expressive semantic token wiring on the implemented TSX
+12. `kerala-rage-typography-strategy`
+   - confirm typography, voice, and hierarchy are distinctive enough for closure
+   - save the review as `analysis/YYYY-MM-DD-tsx-identity-gate-<route>.md` using `analysis/tsx-identity-gate-template.md`
 
 The build-contract prompt is the missing bridge between validated XML wireframes and TSX implementation planning.
 It must reconcile:
 - `control/route-matrix.json`
 - `control/gap-map.json`
 - one canonical `frontend/src/screens/**/*.wireframe.xml`
+
+### Consolidated-reference and evaluated promotion
+
+`docs/project/active/frontend-source-of-truth-migration/sources/consolidated-reference/` is a governed support layer assembled from external/Figma-derived material.
+
+Use it only through the tokens-first workflow:
+
+- reject "promote the strongest TSX" as a default migration strategy
+- accept "evaluated promotion" only when `scripts/derive-gap-fill-plan.py` classifies a support-reference candidate for one route
+- allow direct promotion only for candidates that survive the deterministic gate as `reuse_as_is`
+- treat token-dirty, `figma:asset`, remote-asset, or motif-conflicted candidates as behavior/layout inputs that must be rewritten or kept reference-only
+
+This preserves the authority order:
+
+- runtime truth stays in `frontend/src/features/**` + `frontend/src/pages/**`
+- design truth stays in `frontend/src/screens/**/*.wireframe.xml` + paired `*.tsx`
+- support-reference candidates never override route ownership, wireframe intent, or backend capability truth
 
 ### Current build-contract gate status
 
@@ -197,6 +221,12 @@ Current status:
 - validate wireframes against `control/gap-map.json` before spec generation
 - use the tracked build-contract prompt to produce route-level implementation contracts before `component-spec-generator` work begins
 - use the tokens-first gap-fill planner to decide whether an existing runtime component should be reused for behavior only, reused with token cleanup, treated as reference-only, or replaced
+- allow consolidated-reference TSX into the migration only as `support_reference` candidates scored by the gap-fill planner
+- record archetype mapping plus `generic_saas_risk` for any selected support-reference TSX before Step 6B consumes it
+- require a late-stage TSX identity review for any route that adopts support-reference patterns or generated TSX
+- treat the identity gate artifact as the closure record for those routes
+- use direct Figma MCP page harvest only as a structural accelerator for Step 4; keep it behind the same support-reference review path
+- allow Figma MCP to draft build-contract inputs and wireframe XML diffs, but require human review before those outputs affect canonical files
 - treat motion, asset placement, and brand polish as downstream enrichments after schema and planning consistency
 - run `manifest-reconciler` whenever asset-bearing wireframes or placement outputs change
 - allow shared-family wireframes only when the route matrix explicitly marks them as shared coverage
@@ -209,7 +239,28 @@ Current status:
 - do not use archived brand-enforcer instructions when the current KR Solidarity enforcer exists
 - do not generate component specs from wireframes that are missing route ownership or component-planning alignment
 - do not reuse existing `features/` presentation wholesale unless the candidate file is already token-clean
+- do not directly promote raw consolidated-reference TSX into runtime truth
+- do not derive backend schemas or API contracts from Figma labels, cards, or table text
+- do not treat Figma variable output as token authority; keep repo token files and token-enforcement as the gate
+- do not treat token-clean or visually polished output as sufficient if the final TSX still reads like generic SaaS
 - do not prioritize motion embellishment ahead of structural wireframe quality
+
+### Figma MCP acceleration decisions
+
+Use the direct page-node inventory in `analysis/2026-03-16-figma-mcp-inventory-and-accelerators.md` as the current evidence source for the connected Figma file.
+
+Adopt now:
+- draft build-contract generation from Scaffold nodes
+- draft wireframe XML generation or drift-diff support from page structure
+
+Pilot only:
+- structural scaffold injection for shell decomposition or scratch scaffolds
+
+Reject for now:
+- backend schema generation from Figma text labels
+- token auto-reconciliation from Figma variables
+
+These accelerators are allowed only when their outputs stay reviewable, support-only, and subordinate to runtime truth, design truth, and capability truth.
 
 ## The Recovery Strategy
 
@@ -365,12 +416,13 @@ Required workflow:
 1. identify the live route that currently owns the product surface
 2. identify the best matching screen reference
 3. compare runtime behavior, design intent, and backend capability
-4. choose one action:
+4. audit route-adjacent shared primitives and shell chrome (`Logo`, `Sidebar`, `TopNav`, `Footer`, `AuthGuard`, `KrDarkDock`) so shared-layer drift is recorded before route decisions are made
+5. choose one action:
    - keep the current route and upgrade it
    - merge the route with the screen-led reference
    - replace the route with a stronger screen-led implementation
    - retire the screen or route if it should not survive
-5. verify the touched route still uses semantic design tokens and does not introduce new hardcoded style values before closing the work item
+6. verify the touched route still uses semantic design tokens and does not introduce new hardcoded style values before closing the work item
 
 Priority product areas:
 - landing

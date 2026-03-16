@@ -1,6 +1,6 @@
 # Backend Feature to Frontend Component Gap Map
 
-**Date:** 2026-03-13
+**Date:** 2026-03-16
 **Status:** Proposed component gap map
 **Canonical companion artifacts:**
 - `docs/project/active/frontend-source-of-truth-migration/control/plan.md`
@@ -25,22 +25,23 @@ For each feature, it answers:
 - Owner route: `/tracker`
 - Owning page or feature: `ApplicationTracker`
 - Backend status: mounted and active
-- Frontend status: mock-backed
+- Frontend status: live canonical owner
 - Existing components to reuse:
   - `ApplicationTracker`
-  - `KanbanTracker` as reference-only source for interaction patterns
-- New components to build:
-  - `KanbanColumn` (kanban stage column — drag-drop target, card container)
+  - `KanbanColumn`
   - `ApplicationDetailPanel`
   - `ApplicationEditForm`
   - `ApplicationStatusActions`
   - `ApplicationArchiveAction`
+  - `KanbanTracker` as reference-only source for interaction patterns
+- New components to build:
+  - none
 - Component status:
   - canonical: `ApplicationTracker`
   - support: kanban column, detail, edit, status, and archive components
   - reference-only: `KanbanTracker`
 - Notes:
-  - This is the highest-priority product gap because the backend is already real and the current route is still effectively mock-backed.
+  - The canonical route owner is live on the real applications API path; remaining work is restoring one local backend run with working Firebase auth plus Firestore access so the authenticated tracker closeout can complete.
 
 ### Document redline workflow
 
@@ -65,11 +66,11 @@ For each feature, it answers:
 ### Smart ingestion flow
 
 - Owner route: `/career/ingest`
-- Owning page or feature: `IngestionPage`
+- Owning page or feature: `SmartIngestion`
 - Backend status: mounted and active
-- Frontend status: partially wired
+- Frontend status: live canonical
 - Existing components to reuse:
-  - `IngestionPage`
+  - `SmartIngestion`
   - `IngestionFlow` as reference-only source
   - `AssetLibrary` as supporting downstream integration surface
 - New components to build:
@@ -77,7 +78,7 @@ For each feature, it answers:
   - `SmartIngestionTagConfirmStep`
   - `SmartIngestionSaveStep`
 - Component status:
-  - canonical: `IngestionPage`
+  - canonical: `SmartIngestion`
   - support: upload, tag-confirm, and save steps
   - reference-only: `IngestionFlow`
   - downstream integration: `AssetLibrary`
@@ -137,12 +138,12 @@ For each feature, it answers:
   - `Opportunities`
   - `ApplyQuick`
 - Backend status: mounted and active
-- Frontend status: partially wired
+- Frontend status: live canonical
 - Existing components to reuse:
   - `Opportunities`
   - `ApplyQuick`
   - `LookoutDiscovery` as reference-only source
-- New components to build:
+- New components added:
   - `JobAnalysisResultsPanel`
 - Deferred or unresolved components:
   - `JobParsingWorkbench`
@@ -154,7 +155,9 @@ For each feature, it answers:
   - deferred or unresolved: parsing and advanced workbench surfaces
   - reference-only: `LookoutDiscovery`
 - Notes:
-  - `genkit_job_analysis` still has incomplete governance metadata, so this feature is only partially planning-complete.
+  - `ApplyQuick` remains the canonical live owner.
+  - `JobAnalysisResultsPanel` is now extracted and covered by focused tests.
+  - `workflow_orchestration` stays deferred and does not block `genkit_job_analysis` closure.
 
 ### Workflow orchestration
 

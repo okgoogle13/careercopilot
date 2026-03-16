@@ -204,7 +204,9 @@ const TimelineEventComponent: React.FC<TimelineEventComponentProps> = ({
       {/* Timeline Icon */}
       <div
         className={`relative z-10 flex items-center justify-center w-12 h-12 rounded-march border-2 border-[var(--color-surface-container-high)] bg-[var(--color-surface-base)] flex-shrink-0 ${
-          isLatest ? 'shadow-[0_0_0_4px_rgba(var(--bg-leaf-base)_/_0.2)]' : ''
+          isLatest
+            ? 'shadow-[0_0_0_4px_color-mix(in_srgb,var(--sys-color-inkGold-base)_20%,transparent)]'
+            : ''
         }`}
       >
         <div

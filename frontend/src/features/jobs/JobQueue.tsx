@@ -4,12 +4,12 @@ import { m3Toast } from '@/utils/toast';
 import { CheckCircle, Clock, Copy, ExternalLink, FileText, Play, Sparkles } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { KrErrorAlert } from '@/components/shared/KrErrorAlert';
-import { PageHeader } from '@/components/shared/PageHeader';
 import { API_ENDPOINTS } from '@/config/api';
 import { LayeredHero } from '@/components/kerala-rage/LayeredHero';
 import { loadHeroRegistry } from '@/design/hero/heroRegistry';
 import { composeHero } from '@/lib/composeHero';
 import type { SolidarityManifest } from '@/design/hero/heroTypes';
+import { LookoutDiscovery } from '@/screens/06_lookout/LookoutDiscovery';
 
 interface JobQueueItem {
   id: string;
@@ -241,8 +241,12 @@ export function JobQueue() {
   }
 
   return (
-    <div className="p-8 md:p-12 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500 relative">
-      {/* Hero Engine Integration */}
+    <LookoutDiscovery
+      className="max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500"
+      title="Intelligence Pipeline"
+      subtitle="Synthesize clipped opportunities into tactical application strategies."
+      showActions={false}
+    >
       {heroData && (
         <div className="absolute top-0 right-0 w-[400px] h-full pointer-events-none opacity-10 mask-gradient-to-left">
           <LayeredHero
@@ -254,12 +258,6 @@ export function JobQueue() {
           />
         </div>
       )}
-
-      <PageHeader
-        title="Intelligence Pipeline"
-        highlightedWord="Pipeline"
-        description="Synthesize clipped opportunities into tactical application strategies."
-      />
 
       {error && (
         <KrErrorAlert
@@ -287,22 +285,89 @@ export function JobQueue() {
           {jobs.map((job) => {
             const isAnalyzing = analyzingJobId === job.id;
             const isDrafting = draftingJobId === job.id;
+            const statusMeta = statusConfig[job.status];
+            const StatusIcon = statusMeta.icon;
 
             return (
-              <KanbanCard
+              <Placard
                 key={job.id}
-                id={job.id}
-                title={job.title}
-                description={job.notes || job.company}
-                status={statusConfig[job.status].label}
-                priority="medium"
-                dueDate={formatDate(job.date_clipped)}
-                onSelect={() => {
-                  if (job.status === 'pending_analysis') handleAnalyze(job.id);
-                  else if (job.status === 'ready_to_apply')
-                    handleDraft(job.id, job.title, job.company);
-                }}
-              />
+                className="border-concrete-grey/20 bg-asphalt-black/45 p-0 overflow-hidden"
+              >
+                <div className="flex items-center justify-between border-b border-concrete-grey/15 px-5 py-4">
+                  <div className="flex items-center gap-3">
+                    <StatusIcon className="h-4 w-4 text-ink-gold" />
+                    <div>
+                      <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-concrete-grey">
+                        Queue Item
+                      </p>
+                      <p className="font-display text-xl text-paper-white">{job.title}</p>
+                    </div>
+                  </div>
+                  <StatusBadge
+                    variant={statusMeta.variant}
+                    label={statusMeta.label}
+                  />
+                </div>
+
+                <div className="space-y-4 px-5 py-5">
+                  <div>
+                    <p className="text-sm font-semibold text-worker-ash">{job.company}</p>
+                    <p className="text-xs uppercase tracking-[0.22em] text-concrete-grey">
+                      {formatDate(job.date_clipped)}
+                    </p>
+                  </div>
+
+                  <KanbanCard
+                    id={job.id}
+                    title={job.title}
+                    description={job.notes || job.company}
+                    status={statusMeta.label}
+                    priority="medium"
+                    dueDate={formatDate(job.date_clipped)}
+                    onSelect={() => {
+                      if (job.status === 'pending_analysis') {
+                        void handleAnalyze(job.id);
+                      } else if (job.status === 'ready_to_apply') {
+                        void handleDraft(job.id, job.title, job.company);
+                      }
+                    }}
+                  />
+
+                  <div className="flex flex-wrap gap-3 pt-2">
+                    {job.status === 'pending_analysis' ? (
+                      <Strike
+                        onClick={() => {
+                          void handleAnalyze(job.id);
+                        }}
+                        disabled={isAnalyzing}
+                        iconLeft={<Play className="w-4 h-4" />}
+                      >
+                        {isAnalyzing ? 'Analyzing...' : 'Run Analysis'}
+                      </Strike>
+                    ) : null}
+
+                    {job.status === 'ready_to_apply' ? (
+                      <Strike
+                        onClick={() => {
+                          void handleDraft(job.id, job.title, job.company);
+                        }}
+                        disabled={isDrafting}
+                        iconLeft={<FileText className="w-4 h-4" />}
+                      >
+                        {isDrafting ? 'Drafting...' : 'Draft Cover Letter'}
+                      </Strike>
+                    ) : null}
+
+                    <Strike
+                      variant="ghost"
+                      onClick={() => window.open(job.url, '_blank', 'noopener,noreferrer')}
+                      iconLeft={<ExternalLink className="w-4 h-4" />}
+                    >
+                      Open Listing
+                    </Strike>
+                  </div>
+                </div>
+              </Placard>
             );
           })}
         </div>
@@ -347,6 +412,6 @@ export function JobQueue() {
           </div>
         </div>
       </Megaphone>
-    </div>
+    </LookoutDiscovery>
   );
 }

@@ -17,8 +17,8 @@ import { KrDarkDock } from './layouts/KrDarkShell/components/KrDarkDock';
 import { getModeForRoute } from './config/routeModeMap';
 import { useAuth } from './context/AuthContext';
 import { AssetLibrary } from './features/analysis/AssetLibrary';
+import { ApplicationTracker } from './features/applications/ApplicationTracker';
 import { CoverLetterGenerator } from './features/applications/CoverLetterGenerator';
-import { KanbanTracker } from './screens/07_kanban/KanbanTracker';
 import { Login } from './features/auth/Login';
 import { Register } from './features/auth/Register';
 import { Dashboard } from './features/dashboard/Dashboard';
@@ -26,7 +26,7 @@ import { Documents } from './features/documents/Documents';
 import { KSCGenerator } from './features/ksc-generator/KSCGenerator';
 import { LandingPage } from './features/landing/LandingPage';
 import { NotFound } from './features/not-found/NotFound';
-import { OnboardingPage } from './features/onboarding/OnboardingPage';
+import { OnboardingRoute } from './features/onboarding/OnboardingRoute';
 import { WelcomeScreen } from './features/onboarding/WelcomeScreen';
 import { Opportunities } from './features/opportunities/Opportunities';
 import { ProfileView } from './features/profile/components/ProfileView';
@@ -37,13 +37,12 @@ const SmartIngestion = lazy(() => import('./features/ingestion/SmartIngestion'))
 import { JobQueue } from './features/jobs/JobQueue';
 import { ApplyQuick } from './pages/ApplyQuick';
 import { useModeStore } from './stores/useModeStore';
-import { useUserStore } from './stores/userStore';
 
 /**
  * ModeSync Component
  * Automatically switches between KrDark and KrDark modes based on the current route
  */
-function ModeSync() {
+export function ModeSync() {
   const location = useLocation();
   const setMode = useModeStore((state) => state.setMode);
 
@@ -59,7 +58,7 @@ function ModeSync() {
   return null; // Logic-only component
 }
 
-const RequireAuth = () => {
+export const RequireAuth = () => {
   const { user, loading } = useAuth();
   const location = useLocation();
 
@@ -89,7 +88,7 @@ const RequireAuth = () => {
 };
 
 // Protected Layout with legacy sidebar shell
-const ProtectedLayout = () => {
+export const ProtectedLayout = () => {
   const location = useLocation();
 
   return (
@@ -115,7 +114,7 @@ const ProtectedLayout = () => {
 
 // Thin authenticated shell for migrated routes that must not inherit the legacy sidebar.
 // Includes the KrDarkDock for navigation.
-const MigratedRouteLayout = () => {
+export const MigratedRouteLayout = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -168,21 +167,8 @@ const MigratedRouteLayout = () => {
   );
 };
 
-const OnboardingRoute = () => {
-  const isNewUser = useUserStore((state) => state.isNewUser);
-  if (isNewUser) {
-    return (
-      <Navigate
-        to="/welcome"
-        replace
-      />
-    );
-  }
-  return <OnboardingPage />;
-};
-
 // Public Layout (Login/Register/Landing)
-const PublicLayout = () => {
+export const PublicLayout = () => {
   const showSentryTestButton =
     import.meta.env.DEV && import.meta.env.VITE_SHOW_SENTRY_TEST_BUTTON === 'true';
 
@@ -227,6 +213,15 @@ const PublicLayout = () => {
   );
 };
 
+export function ModeSyncWrapper() {
+  return (
+    <>
+      <ModeSync />
+      <Outlet />
+    </>
+  );
+}
+
 export default function App() {
   return (
     <Router
@@ -268,15 +263,27 @@ export default function App() {
           <Route element={<MigratedRouteLayout />}>
             <Route
               path="/tracker"
-              element={<KanbanTracker />}
+              element={<ApplicationTracker />}
             />
-          </Route>
-
-          <Route element={<ProtectedLayout />}>
             <Route
               path="/dashboard"
               element={<Dashboard />}
             />
+            <Route
+              path="/analysis"
+              element={<AnalysisPage />}
+            />
+            <Route
+              path="/opportunities"
+              element={<Opportunities />}
+            />
+            <Route
+              path="/career/ingest"
+              element={<SmartIngestion />}
+            />
+          </Route>
+
+          <Route element={<ProtectedLayout />}>
             <Route
               path="/onboarding"
               element={<OnboardingRoute />}
@@ -288,14 +295,6 @@ export default function App() {
             <Route
               path="/documents"
               element={<Documents />}
-            />
-            <Route
-              path="/analysis"
-              element={<AnalysisPage />}
-            />
-            <Route
-              path="/opportunities"
-              element={<Opportunities />}
             />
             <Route
               path="/ksc-generator"
@@ -316,10 +315,6 @@ export default function App() {
             <Route
               path="/asset-library"
               element={<AssetLibrary />}
-            />
-            <Route
-              path="/career/ingest"
-              element={<SmartIngestion />}
             />
             <Route
               path="/job-queue"

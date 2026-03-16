@@ -37,6 +37,10 @@ function main() {
   while ((m = importRe.exec(src)) !== null) {
     importMap.set(m[1], m[2]);
   }
+  const lazyImportRe = /const\s+(\w+)\s*=\s*lazy\(\(\)\s*=>\s*import\(['"]([^'"]+)['"]\)\)/g;
+  while ((m = lazyImportRe.exec(src)) !== null) {
+    importMap.set(m[1], m[2]);
+  }
 
   // ── Step 2: Determine layout context for each route ──
   // We parse the JSX structure to understand nesting.
