@@ -4,7 +4,7 @@ import { Input } from '@careercopilot/ui';
 import { Textarea } from '@careercopilot/ui';
 import { Button } from '@careercopilot/ui';
 import { Switch } from '@careercopilot/ui';
-import { PageHeader } from '../../components/shared/PageHeader';
+import { SettingsControl } from '@/screens/10_settings/SettingsControl';
 
 export function Settings() {
   const [firstName, setFirstName] = useState('Nishant');
@@ -16,23 +16,20 @@ export function Settings() {
   const [applicationUpdates, setApplicationUpdates] = useState(true);
   const [jobMatches, setJobMatches] = useState(false);
 
-  // Reusable card style
   const cardStyle = {
     backgroundImage: 'radial-gradient(circle, var(--sys-color-primary) 1px, transparent 1px)',
     backgroundSize: '20px 20px',
-    backgroundBlendMode: 'overlay',
+    backgroundBlendMode: 'overlay' as const,
     backgroundPosition: '0 0',
   };
 
   return (
-    <div className="p-6 md:p-12 max-w-5xl mx-auto animate-in fade-in zoom-in-95 duration-500 ease-spring">
-      {/* Header */}
-      <PageHeader
-        title="Settings"
-        description="Manage your account preferences and settings"
-      />
-
-      {/* Tabs */}
+    <SettingsControl
+      className="max-w-5xl mx-auto animate-in fade-in zoom-in-95 duration-500 ease-spring"
+      title="Settings"
+      subtitle="Manage your account preferences and settings"
+      showActions={false}
+    >
       <Tabs
         defaultValue="profile"
         className="w-full"
@@ -49,7 +46,6 @@ export function Settings() {
           ))}
         </TabsList>
 
-        {/* Profile Tab */}
         <TabsContent value="profile">
           <div
             className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1"
@@ -112,7 +108,6 @@ export function Settings() {
           </div>
         </TabsContent>
 
-        {/* Preferences Tab */}
         <TabsContent value="preferences">
           <div
             className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1"
@@ -149,7 +144,6 @@ export function Settings() {
           </div>
         </TabsContent>
 
-        {/* Notifications Tab */}
         <TabsContent value="notifications">
           <div
             className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1"
@@ -188,7 +182,6 @@ export function Settings() {
           </div>
         </TabsContent>
 
-        {/* Security Tab */}
         <TabsContent value="security">
           <div
             className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1"
@@ -238,6 +231,6 @@ export function Settings() {
           </div>
         </TabsContent>
       </Tabs>
-    </div>
+    </SettingsControl>
   );
 }

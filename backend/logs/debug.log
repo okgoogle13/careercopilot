@@ -79,3 +79,59 @@
 2026-03-16 03:42:33 | INFO     | 4825b4bf-8085-466f-9c81-ecb6cd54b757 | REST Response: 404 in 0.302s
 2026-03-16 03:42:37 | INFO     | 04ff5498-f8e8-4c01-95c4-f6a807b55053 | REST Request: GET /applications/
 2026-03-16 03:42:37 | INFO     | 04ff5498-f8e8-4c01-95c4-f6a807b55053 | REST Response: 404 in 0.003s
+2026-03-16 16:18:01 | INFO     | - | Starting CareerCopilot API application
+2026-03-16 16:18:01 | INFO     | - | Database initialized successfully
+2026-03-16 16:18:03 | INFO     | - | Genkit AI framework initialized successfully
+2026-03-16 16:30:56 | INFO     | - | Starting CareerCopilot API application
+2026-03-16 16:30:56 | INFO     | - | Database initialized successfully
+2026-03-16 16:31:01 | INFO     | - | Genkit AI framework initialized successfully
+2026-03-16 16:51:31 | INFO     | d8957217-be01-451c-ad73-22e3d904b2b6 | REST Request: GET /api/applications/
+2026-03-16 16:51:31 | INFO     | d8957217-be01-451c-ad73-22e3d904b2b6 | REST Response: 401 in 0.151s
+2026-03-16 16:56:25 | INFO     | 00b79251-519b-405e-a6bd-5815ac1f8a5d | REST Request: GET /api/applications/
+2026-03-16 16:56:25 | INFO     | 00b79251-519b-405e-a6bd-5815ac1f8a5d | REST Response: 401 in 0.075s
+2026-03-16 16:59:10 | INFO     | - | Starting CareerCopilot API application
+2026-03-16 16:59:10 | INFO     | - | Database initialized successfully
+2026-03-16 16:59:12 | INFO     | - | Genkit AI framework initialized successfully
+2026-03-16 17:08:49 | INFO     | 504d2e65-7eb6-4d97-a721-c2a157cbe396 | REST Request: GET /api/applications/
+2026-03-16 23:30:01 | INFO     | - | Starting CareerCopilot API application
+2026-03-16 23:30:01 | INFO     | - | Database initialized successfully
+2026-03-16 23:30:01 | INFO     | - | Genkit AI framework initialized successfully
+2026-03-16 23:40:31 | INFO     | d6565634-1000-4d9f-84bd-246ec8f0ff80 | REST Request: GET /api/applications/
+2026-03-16 23:40:31 | INFO     | d6565634-1000-4d9f-84bd-246ec8f0ff80 | REST Response: 401 in 0.042s
+2026-03-16 23:51:20 | INFO     | - | Starting CareerCopilot API application
+2026-03-16 23:51:20 | INFO     | - | Database initialized successfully
+2026-03-16 23:51:20 | INFO     | - | Genkit AI framework initialized successfully
+2026-03-16 23:52:47 | INFO     | 2784f1b5-6c11-4e24-a27d-c2a3798b45ee | REST Request: GET /api/applications/
+2026-03-16 23:52:47 | INFO     | 2784f1b5-6c11-4e24-a27d-c2a3798b45ee | REST Response: 401 in 0.187s
+2026-03-16 23:54:11 | INFO     | f5095ad1-737a-44a9-956f-90622bc81850 | REST Request: GET /api/applications/
+2026-03-16 23:54:11 | INFO     | f5095ad1-737a-44a9-956f-90622bc81850 | REST Response: 401 in 0.066s
+2026-03-17 00:14:18 | INFO     | 464671af-8e94-4bc9-a93d-a5feadc085c6 | REST Request: GET /api/applications/
+2026-03-17 00:14:19 | INFO     | 464671af-8e94-4bc9-a93d-a5feadc085c6 | REST Response: 401 in 0.353s
+2026-03-17 00:23:24 | INFO     | 63d97fd8-f27b-430d-84dc-4c04493a9b10 | REST Request: GET /api/applications/
+2026-03-17 00:23:24 | INFO     | 63d97fd8-f27b-430d-84dc-4c04493a9b10 | REST Response: 401 in 0.341s
+2026-03-17 00:38:08 | INFO     | - | Starting CareerCopilot API application
+2026-03-17 00:38:08 | INFO     | - | Database initialized successfully
+2026-03-17 00:38:08 | INFO     | - | Genkit AI framework initialized successfully
+2026-03-17 01:31:20 | INFO     | 8bc022d4-878a-4797-91db-36fcf7d234d9 | REST Request: GET /api/applications/
+2026-03-17 01:31:25 | ERROR    | 8bc022d4-878a-4797-91db-36fcf7d234d9 | REST Request Failed: 4 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'jobDescription'), 'msg': 'Field required', 'input': {'id': 'mock_app_1', 'userId': 'test_uid_123', 'jobTitle': 'Senior AI Agent', 'companyName': 'Antigravity Inc', 'status': 'applied', 'appliedDate': '2026-03-16T14:31:25.146089+00:00', 'createdAt': '2026-03-16T14:31:25.146226+00:00', 'updatedAt': '2026-03-16T14:31:25.146231+00:00'}}
+  {'type': 'missing', 'loc': ('response', 0, 'source'), 'msg': 'Field required', 'input': {'id': 'mock_app_1', 'userId': 'test_uid_123', 'jobTitle': 'Senior AI Agent', 'companyName': 'Antigravity Inc', 'status': 'applied', 'appliedDate': '2026-03-16T14:31:25.146089+00:00', 'createdAt': '2026-03-16T14:31:25.146226+00:00', 'updatedAt': '2026-03-16T14:31:25.146231+00:00'}}
+  {'type': 'missing', 'loc': ('response', 1, 'jobDescription'), 'msg': 'Field required', 'input': {'id': 'mock_app_2', 'userId': 'test_uid_123', 'jobTitle': 'Principal Engineer', 'companyName': 'CloudOps Solutions', 'status': 'interviewing', 'appliedDate': '2026-03-16T14:31:25.146335+00:00', 'createdAt': '2026-03-16T14:31:25.146355+00:00', 'updatedAt': '2026-03-16T14:31:25.146359+00:00'}}
+  {'type': 'missing', 'loc': ('response', 1, 'source'), 'msg': 'Field required', 'input': {'id': 'mock_app_2', 'userId': 'test_uid_123', 'jobTitle': 'Principal Engineer', 'companyName': 'CloudOps Solutions', 'status': 'interviewing', 'appliedDate': '2026-03-16T14:31:25.146335+00:00', 'createdAt': '2026-03-16T14:31:25.146355+00:00', 'updatedAt': '2026-03-16T14:31:25.146359+00:00'}}
+
+2026-03-17 01:32:04 | INFO     | 388c2654-d106-41ba-9d0a-cff63d6574cf | REST Request: GET /api/applications/
+2026-03-17 01:32:05 | ERROR    | 388c2654-d106-41ba-9d0a-cff63d6574cf | REST Request Failed: 4 validation errors:
+  {'type': 'missing', 'loc': ('response', 0, 'jobDescription'), 'msg': 'Field required', 'input': {'id': 'mock_app_1', 'userId': 'test_uid_123', 'jobTitle': 'Senior AI Agent', 'companyName': 'Antigravity Inc', 'status': 'applied', 'appliedDate': '2026-03-16T14:32:05.068820+00:00', 'createdAt': '2026-03-16T14:32:05.068856+00:00', 'updatedAt': '2026-03-16T14:32:05.068862+00:00'}}
+  {'type': 'missing', 'loc': ('response', 0, 'source'), 'msg': 'Field required', 'input': {'id': 'mock_app_1', 'userId': 'test_uid_123', 'jobTitle': 'Senior AI Agent', 'companyName': 'Antigravity Inc', 'status': 'applied', 'appliedDate': '2026-03-16T14:32:05.068820+00:00', 'createdAt': '2026-03-16T14:32:05.068856+00:00', 'updatedAt': '2026-03-16T14:32:05.068862+00:00'}}
+  {'type': 'missing', 'loc': ('response', 1, 'jobDescription'), 'msg': 'Field required', 'input': {'id': 'mock_app_2', 'userId': 'test_uid_123', 'jobTitle': 'Principal Engineer', 'companyName': 'CloudOps Solutions', 'status': 'interviewing', 'appliedDate': '2026-03-16T14:32:05.068961+00:00', 'createdAt': '2026-03-16T14:32:05.068968+00:00', 'updatedAt': '2026-03-16T14:32:05.070005+00:00'}}
+  {'type': 'missing', 'loc': ('response', 1, 'source'), 'msg': 'Field required', 'input': {'id': 'mock_app_2', 'userId': 'test_uid_123', 'jobTitle': 'Principal Engineer', 'companyName': 'CloudOps Solutions', 'status': 'interviewing', 'appliedDate': '2026-03-16T14:32:05.068961+00:00', 'createdAt': '2026-03-16T14:32:05.068968+00:00', 'updatedAt': '2026-03-16T14:32:05.070005+00:00'}}
+
+2026-03-17 01:33:28 | INFO     | - | Starting CareerCopilot API application
+2026-03-17 01:33:28 | INFO     | - | Database initialized successfully
+2026-03-17 01:33:28 | INFO     | - | Genkit AI framework initialized successfully
+2026-03-17 01:33:42 | INFO     | 50a82856-9b18-4a87-b4e3-06fca574eb4a | REST Request: GET /api/applications/
+2026-03-17 01:33:42 | INFO     | 50a82856-9b18-4a87-b4e3-06fca574eb4a | REST Response: 200 in 0.167s
+2026-03-17 01:52:51 | INFO     | 02e7037d-48ec-415a-aabc-1805df2dd6a7 | REST Request: GET /api/applications/
+2026-03-17 01:52:52 | INFO     | 02e7037d-48ec-415a-aabc-1805df2dd6a7 | REST Response: 200 in 0.427s
+2026-03-17 01:58:40 | INFO     | 321cf038-cde3-46bd-b1e5-a709cad3e996 | REST Request: GET /openapi.json
+2026-03-17 01:58:54 | INFO     | 321cf038-cde3-46bd-b1e5-a709cad3e996 | REST Response: 200 in 14.013s

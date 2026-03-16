@@ -99,9 +99,9 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
 
   const interpolatedWght = typography.pressure_profile
     ? pressure.weight
-    : Math.round(300 + 500 * scrollProgress); // Legacy fallback
+    : Math.round(300 + 500 * scrollProgress); // v6.0 scrollPressure ramp: 300 -> 800
 
-  const interpolatedWdth = typography.pressure_profile ? pressure.tracking : 75; // Legacy fallback
+  const interpolatedWdth = typography.pressure_profile ? pressure.tracking : 100; // v6.0 baseline width
 
   const animLegacy = animation as any;
   const bezier = animLegacy?.bezier

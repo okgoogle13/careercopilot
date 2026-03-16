@@ -176,7 +176,13 @@ export function Opportunities() {
                 <div className="space-y-6">
                   <div className="text-center py-12 opacity-70 flex flex-col items-center">
                     <Compass className="w-24 h-24 mb-6 text-concrete-grey animate-pulse" />
-                    <p className="font-display text-2xl text-paper-white uppercase tracking-tight drop-shadow-[0_1px_0_rgba(0,0,0,0.5)]">
+                    <p
+                      className="font-display text-2xl text-paper-white uppercase tracking-tight"
+                      style={{
+                        textShadow:
+                          '0 1px 0 color-mix(in srgb, var(--sys-color-charcoalBackground-base) 50%, transparent)',
+                      }}
+                    >
                       Lookout Deck Clear
                     </p>
                     <p className="font-mono text-xs text-concrete-grey-light uppercase tracking-[0.4em] mt-2">

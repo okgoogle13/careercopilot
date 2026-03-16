@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-15T03:27:35.216Z",
-  "count": 27,
+  "generatedAt": "2026-03-16T16:24:26.842Z",
+  "count": 19,
   "routes": [
     {
       "path": "/",
@@ -20,55 +20,6 @@
       "path": "/register",
       "component": "Register",
       "importSource": "./features/auth/Register",
-      "auth": false,
-      "layout": "public"
-    },
-    {
-      "path": "/design-sidekick",
-      "component": "DesignSidekick",
-      "importSource": "./features/design-sidekick/DesignSidekick",
-      "auth": false,
-      "layout": "public"
-    },
-    {
-      "path": "/style-guide",
-      "component": "StyleGuide",
-      "importSource": "./features/style-guide/StyleGuide",
-      "auth": false,
-      "layout": "public"
-    },
-    {
-      "path": "/kr/landing",
-      "component": "HeroLanding",
-      "importSource": "./components/phase3-batch2/HeroLanding",
-      "auth": false,
-      "layout": "public"
-    },
-    {
-      "path": "/kr/auth",
-      "component": "AuthModal",
-      "importSource": "./components/phase3-batch2/AuthModal",
-      "auth": false,
-      "layout": "public"
-    },
-    {
-      "path": "/kr/onboarding",
-      "component": "OnboardFlow",
-      "importSource": "./components/phase3-batch2/OnboardFlow",
-      "auth": false,
-      "layout": "public"
-    },
-    {
-      "path": "/kr/analysis",
-      "component": "AnalysisWorkbench",
-      "importSource": "./components/phase3-batch3/AnalysisWorkbench",
-      "auth": false,
-      "layout": "public"
-    },
-    {
-      "path": "/kr/dashboard",
-      "component": "DashboardOverview",
-      "importSource": "./components/phase3-batch3/DashboardOverview",
       "auth": false,
       "layout": "public"
     },
@@ -96,7 +47,7 @@
     {
       "path": "/onboarding",
       "component": "OnboardingRoute",
-      "importSource": "UNKNOWN",
+      "importSource": "./features/onboarding/OnboardingRoute",
       "auth": true,
       "layout": "protected"
     },
@@ -165,15 +116,15 @@
     },
     {
       "path": "/career/ingest",
-      "component": "IngestionPage",
-      "importSource": "./pages/IngestionPage",
+      "component": "SmartIngestion",
+      "importSource": "./features/ingestion/SmartIngestion",
       "auth": true,
       "layout": "protected"
     },
     {
       "path": "/job-queue",
       "component": "JobQueue",
-      "importSource": "./pages/JobQueue",
+      "importSource": "./features/jobs/JobQueue",
       "auth": true,
       "layout": "protected"
     },
@@ -181,13 +132,6 @@
       "path": "/apply/quick",
       "component": "ApplyQuick",
       "importSource": "./pages/ApplyQuick",
-      "auth": true,
-      "layout": "protected"
-    },
-    {
-      "path": "/test-tokens",
-      "component": "TokenTest",
-      "importSource": "./components/debug/TokenTest",
       "auth": true,
       "layout": "protected"
     }

@@ -19,5 +19,32 @@
     "docs/manifests/frontend-api-usage.json",
     "docs/manifests/backend-endpoints.json",
     "docs/manifests/orphans.json"
+  ],
+  "active_workstreams": [
+    {
+      "id": "route_execution",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "id": "figma_support_normalization",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "id": "cleanup_pairings",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "id": "figma_mcp_acceleration",
+      "status": "IN_PROGRESS"
+    }
+  ],
+  "success_criteria": [
+    "Execution truth remains control/blueprint.md plus control/workflow.md",
+    "sources/consolidated-reference/** is treated as support/reference input only",
+    "scripts/derive-gap-fill-plan.py can classify support_reference candidates",
+    "landing/dashboard/analysis have approved support-reference audit packs",
+    "direct Figma MCP outputs stay support-only and are limited to structural acceleration use",
+    "shared-shell Figma audit exists before shell-sensitive route work proceeds",
+    "Figma-informed routes pass the late-stage TSX identity gate before closure"
   ]
 }

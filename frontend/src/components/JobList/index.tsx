@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { Compass } from 'lucide-react';
 
 export interface JobOpportunity {
   id: string;
@@ -31,7 +32,7 @@ export const JobList: React.FC<JobListProps> = ({ jobs, onJobSelect, isLoading =
       className="max-w-4xl mx-auto p-8 flex flex-col gap-12"
       role="main"
     >
-      <h1 className="text-[72px] font-solidarity-900 text-paper-white uppercase tracking-tighter">
+      <h1 className="text-[72px] font-black text-[var(--sys-color-worker-ash-base)] uppercase tracking-tighter">
         THE LOOKOUT
       </h1>
 
@@ -44,7 +45,7 @@ export const JobList: React.FC<JobListProps> = ({ jobs, onJobSelect, isLoading =
             [...Array(3)].map((_, i) => (
               <div
                 key={i}
-                className="h-40 bg-charcoal-200/50 rounded-megaphone animate-pulse"
+                className="h-40 bg-[var(--sys-color-surface-container-low)] rounded-megaphone animate-pulse"
               />
             ))
           : jobs.map((job, index) => (
@@ -53,9 +54,9 @@ export const JobList: React.FC<JobListProps> = ({ jobs, onJobSelect, isLoading =
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: index * 0.05, type: 'spring' }}
-                whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.6)' }}
+                whileHover={{ y: -4, boxShadow: 'var(--sys-shadow-elevation3HoverLift)' }}
                 className={cn(
-                  'p-8 bg-charcoal-100 border border-blueprint-grey/20',
+                  'p-8 bg-[var(--sys-color-surface-container-low)] border border-[var(--sys-color-outline-variant)]',
                   'rounded-megaphone shadow-viscous cursor-pointer group transition-all'
                 )}
                 onClick={() => onJobSelect(job.id)}
@@ -63,10 +64,10 @@ export const JobList: React.FC<JobListProps> = ({ jobs, onJobSelect, isLoading =
                 aria-label={`Job: ${job.title} at ${job.location}`}
               >
                 <div className="flex justify-between items-start mb-6">
-                  <h2 className="text-2xl font-bold text-paper-white group-hover:text-smoke-green transition-colors">
+                  <h2 className="text-2xl font-bold text-[var(--sys-color-worker-ash-base)] group-hover:text-[var(--sys-color-inkGold-base)] transition-colors">
                     {job.title}
                   </h2>
-                  <span className="text-jetbrains-mono text-sm text-blueprint-grey">
+                  <span className="font-mono text-sm text-[var(--sys-color-concreteGrey-base)]">
                     {job.salary}
                   </span>
                 </div>
@@ -75,14 +76,14 @@ export const JobList: React.FC<JobListProps> = ({ jobs, onJobSelect, isLoading =
                   {job.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 bg-signal-green/10 text-signal-green text-xs font-bold uppercase rounded-seed border border-signal-green/20"
+                      className="px-3 py-1 bg-[var(--sys-color-primary-container)] text-[var(--sys-color-on-primary-container)] text-xs font-bold uppercase rounded-march border border-[var(--sys-color-outline-variant)]"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                <div className="mt-6 text-xs font-jetbrains-mono text-blueprint-grey/60 uppercase">
+                <div className="mt-6 text-xs font-mono text-[var(--sys-color-concreteGrey-base)] opacity-60 uppercase">
                   {job.location}
                 </div>
               </motion.div>
@@ -91,19 +92,10 @@ export const JobList: React.FC<JobListProps> = ({ jobs, onJobSelect, isLoading =
 
       {!isLoading && jobs.length === 0 && (
         <div className="flex flex-col items-center py-20 opacity-40 grayscale">
-          <svg
-            className="w-48 h-48 fill-paper-white mb-6"
-            viewBox="0 0 100 100"
-          >
-            {/* Stencil Palm Tree Motif */}
-            <path
-              d="M50,90 L50,40 M50,45 C70,45 80,30 80,20 M50,45 C30,45 20,30 20,20 M50,55 C75,55 85,45 85,35"
-              stroke="currentColor"
-              strokeWidth="2"
-              fill="none"
-            />
-          </svg>
-          <p className="font-jetbrains-mono text-sm">NO OPPORTUNITIES FOUND IN THIS SECTOR</p>
+          <Compass className="w-48 h-48 text-[var(--sys-color-concreteGrey-base)] mb-6 animate-pulse" />
+          <p className="font-mono text-sm text-[var(--sys-color-concreteGrey-base)]">
+            NO OPPORTUNITIES FOUND IN THIS SECTOR
+          </p>
         </div>
       )}
     </main>

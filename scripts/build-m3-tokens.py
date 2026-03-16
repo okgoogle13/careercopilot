@@ -10,6 +10,7 @@ from typing import Any
 
 # Define I/O paths (Kerala Rage locations)
 TOKEN_SOURCE_FILE = 'frontend/src/design/tokens/tokens.json'
+MOTION_SOURCE_FILE = 'frontend/src/design/tokens/motion-tokens.json'
 CSS_OUTPUT_FILE = 'frontend/src/design/styles/design-tokens.css'
 TAILWIND_CONFIG_PATCH = 'frontend/tailwind-m3-patch.ts'
 
@@ -31,17 +32,17 @@ LEGACY_SHADOW_ALIASES = {
     'elevation2Stone': 'elevation2Placard',
 }
 
-def load_tokens():
-    """Loads the Kerala Rage JSON tokens."""
-    print(f"Loading tokens from {TOKEN_SOURCE_FILE}...")
-    if not os.path.exists(TOKEN_SOURCE_FILE):
-        print(f"Error: Token source file not found at {TOKEN_SOURCE_FILE}")
+def load_tokens(path):
+    """Loads a Kerala Rage JSON tokens file."""
+    print(f"Loading tokens from {path}...")
+    if not os.path.exists(path):
+        print(f"Error: Token source file not found at {path}")
         return None
-    with open(TOKEN_SOURCE_FILE, 'r') as f:
+    with open(path, 'r') as f:
         try:
             return json.load(f)
         except json.JSONDecodeError as e:
-            print(f"Error: Invalid JSON in token file. {e}")
+            print(f"Error: Invalid JSON in token file {path}. {e}")
             sys.exit(1)
 
 def resolve_values(node):
@@ -127,6 +128,10 @@ def generate_css_variables(tokens):
         content.append(f"  --sys-shape-{legacy}: var(--sys-shape-{canonical});\n")
     for legacy, canonical in LEGACY_SHADOW_ALIASES.items():
         content.append(f"  --sys-shadow-{legacy}: var(--sys-shadow-{canonical});\n")
+
+    # Font Family Compat Aliases
+    content.append("  --sys-type-font-work-sans: var(--sys-type-fontFamilies-primary);\n")
+    content.append("  --sys-type-font-proclamation: var(--sys-type-fontFamilies-proclamation);\n")
     content.append("}\n")
 
     # Utility classes based on actual Kerala Rage tokens
@@ -148,6 +153,29 @@ def generate_css_variables(tokens):
         "  color: var(--sys-color-charcoalBackground-base);\n",
         "}\n",
     ])
+
+    # Dynamic Emotional Pattern Utilities
+    type_tokens = tokens.get('type', {})
+    emotional_patterns = type_tokens.get('emotionalPatterns', {})
+    if emotional_patterns:
+        content.append("\n/* Emotional Patterns (Variable Axis) */\n")
+        for name, values in emotional_patterns.items():
+            content.append(f".type-{name} {{\n")
+            settings = []
+            if 'wght' in values:
+                settings.append(f"'wght' {values['wght']}")
+            if 'wdth' in values:
+                settings.append(f"'wdth' {values['wdth']}")
+
+            if settings:
+                content.append(f"  font-variation-settings: {', '.join(settings)};\n")
+
+            if 'letterSpacing' in values and values['letterSpacing'] != 'dynamic':
+                content.append(f"  letter-spacing: {values['letterSpacing']};\n")
+
+            content.append("  font-optical-sizing: auto;\n")
+            content.append("}\n")
+
     with open(CSS_OUTPUT_FILE, 'w') as f:
         f.writelines(content)
     print(f"✅ Generated {len(content)} lines of CSS variables")
@@ -238,14 +266,28 @@ def main():
     print("=" * 60)
     print("Kerala Rage Token Builder (DTCG)")
     print("=" * 60)
-    raw_tokens = load_tokens()
+    raw_tokens = load_tokens(TOKEN_SOURCE_FILE)
     if not raw_tokens:
         sys.exit(1)
-    # Unwrap 'sys' if present
+
+    # Load motion tokens if present
+    motion_tokens = load_tokens(MOTION_SOURCE_FILE)
+
+    # Unwrap 'sys' if present in main tokens
     root = raw_tokens
     if 'sys' in root:
         print("ℹ️  Unwrapping 'sys' token group.")
         root = root['sys']
+
+    # Add motion tokens to root if they exist
+    if motion_tokens:
+        print("ℹ️  Merging motion tokens.")
+        if 'motion' in motion_tokens:
+            root['motion'] = motion_tokens['motion']
+        else:
+            # If the file itself is the motion group (DTCG style)
+            root['motion'] = motion_tokens
+
     # Resolve $value references
     print("RESOLVING DTCG values...")
     tokens = resolve_values(root)

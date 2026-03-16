@@ -1,96 +1,152 @@
-import React, { Suspense, lazy } from 'react';
-import { createBrowserRouter, Navigate, Link } from 'react-router-dom';
-import {
-  ProtectedLayout,
-  PublicLayout,
-  RequireAuth,
-  MigratedRouteLayout,
-  ModeSyncWrapper,
-} from './App';
-
-// Feature Imports
-import { LandingPage } from './features/landing/LandingPage';
+import { AnimatePresence, motion } from 'framer-motion';
+import React, { Suspense, lazy, useEffect } from 'react';
+import { createBrowserRouter, Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { getModeForRoute } from './config/routeModeMap';
+import { useAuth } from './context/AuthContext';
+import { AssetLibrary } from './features/analysis/AssetLibrary';
+import { ApplicationTracker } from './features/applications/ApplicationTracker';
 import { Login } from './features/auth/Login';
 import { Register } from './features/auth/Register';
 import { Dashboard } from './features/dashboard/Dashboard';
-import { KanbanTracker } from './screens/07_kanban/KanbanTracker';
 import { Documents } from './features/documents/Documents';
-import { AnalysisPage } from './pages/AnalysisPage';
-import { Opportunities } from './features/opportunities/Opportunities';
 import { KSCGenerator } from './features/ksc-generator/KSCGenerator';
-import { AssetLibrary } from './features/analysis/AssetLibrary';
-import { Settings } from './features/settings/Settings';
-import { ProfileView } from './features/profile/components/ProfileView';
-import { JobQueue } from './features/jobs/JobQueue';
-import { ApplyQuick } from './pages/ApplyQuick';
+import { LandingPage } from './features/landing/LandingPage';
+import { NotFound } from './features/not-found/NotFound';
+import { OnboardingRoute } from './features/onboarding/OnboardingRoute';
 import { WelcomeScreen } from './features/onboarding/WelcomeScreen';
-import { OnboardingPage } from './features/onboarding/OnboardingPage';
+import { Opportunities } from './features/opportunities/Opportunities';
+import { ProfileView } from './features/profile/components/ProfileView';
+import { Settings } from './features/settings/Settings';
+import { JobQueue } from './features/jobs/JobQueue';
+import { KrDarkDock } from './layouts/KrDarkShell/components/KrDarkDock';
+import { Layout } from './layouts/Layout';
+import { AnalysisPage } from './pages/AnalysisPage';
+import { ApplyQuick } from './pages/ApplyQuick';
+import { KanbanTracker } from './screens/07_kanban/KanbanTracker';
+import { useModeStore } from './stores/useModeStore';
 
-// Lazy Components
 const SmartIngestion = lazy(() => import('./features/ingestion/SmartIngestion'));
 
-// components
-import { Logo } from './components/kerala-rage/Logo'; // Updated path to KR Solidarity Logo
+function ModeSync() {
+  const location = useLocation();
+  const setMode = useModeStore((state) => state.setMode);
 
-/**
- * 404 — Kerala Rage / Solidarity Mode
- */
-function NotFound() {
-  return (
-    <div
-      className="min-h-screen flex flex-col items-center justify-center p-8"
-      style={{ background: 'var(--sys-color-charcoalBackground-base)' }}
-    >
-      <Logo
-        variant="icon"
-        size={120}
-        className="mb-12"
+  useEffect(() => {
+    setMode(getModeForRoute(location.pathname));
+  }, [location.pathname, setMode]);
+
+  return null;
+}
+
+const RequireAuth = () => {
+  const { user, loading } = useAuth();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const isDemoMode = searchParams.get('demo') === 'true';
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[var(--sys-color-charcoalBackground-base)] flex items-center justify-center text-[var(--sys-color-worker-ash-base)]">
+        Loading...
+      </div>
+    );
+  }
+
+  if (!user && !isDemoMode) {
+    return (
+      <Navigate
+        to="/login"
+        replace
       />
-      <h1
-        style={{
-          fontFamily: 'var(--sys-type-fontFamilies-display), serif',
-          fontVariationSettings: "'wght' 900, 'SOFT' 100, 'WONK' 1",
-          fontSize: 'clamp(4rem, 10vw, 9rem)',
-          color: 'var(--sys-color-solidarityRed-base)',
-          lineHeight: 0.95,
-          letterSpacing: '-0.02em',
-          textTransform: 'uppercase',
-        }}
-      >
-        404
-      </h1>
-      <p
-        style={{
-          fontFamily: 'var(--sys-type-fontFamilies-mono), monospace',
-          fontWeight: 700,
-          fontSize: '12px',
-          letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-          color: 'var(--sys-color-worker-ash-base)',
-          marginTop: '16px',
-        }}
-      >
-        ROUTE NOT FOUND // SOLIDARITY MODE
-      </p>
-      <Link
-        to="/"
-        style={{
-          fontFamily: 'var(--sys-type-fontFamilies-primary), system-ui, sans-serif',
-          fontWeight: 700,
-          fontSize: '14px',
-          color: 'var(--sys-color-inkGold-base)',
-          marginTop: '32px',
-          textDecoration: 'none',
-          padding: '12px 28px',
-          borderRadius: 'var(--sys-shape-corner-medium)', // Use semantic shape token
-          border: '1px solid rgba(218, 246, 116, 0.25)',
-        }}
-      >
-        BACK TO LANDING
-      </Link>
+    );
+  }
+
+  return <Outlet />;
+};
+
+const ProtectedLayout = () => {
+  const location = useLocation();
+
+  return (
+    <Layout>
+      <AnimatePresence>
+        <motion.div
+          key={location.pathname}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            duration: 0.5,
+            ease: [0.175, 0.885, 0.32, 1.275],
+          }}
+          className="min-h-screen"
+        >
+          <Outlet />
+        </motion.div>
+      </AnimatePresence>
+    </Layout>
+  );
+};
+
+const MigratedRouteLayout = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleViewChange = (view: string) => {
+    const viewMap: Record<string, string> = {
+      'KrDark-landing': '/',
+      auth: '/login',
+      'KrDark-kanban': '/tracker',
+      'lab-dashboard': '/dashboard',
+      'lab-analysis': '/analysis',
+      'KrDark-ingestion': '/career/ingest',
+    };
+
+    navigate(viewMap[view] ?? '/dashboard');
+  };
+
+  const getCurrentView = () => {
+    if (location.pathname === '/tracker') return 'KrDark-kanban';
+    if (location.pathname === '/career/ingest') return 'KrDark-ingestion';
+    if (location.pathname.startsWith('/analysis')) return 'lab-analysis';
+    if (location.pathname === '/dashboard') return 'lab-dashboard';
+    if (location.pathname === '/') return 'KrDark-landing';
+    return 'lab-dashboard';
+  };
+
+  return (
+    <div className="min-h-screen bg-surface text-on-surface relative">
+      <KrDarkDock
+        currentView={getCurrentView()}
+        onViewChange={handleViewChange}
+      />
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={location.pathname}
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{
+            duration: 0.35,
+            ease: [0.175, 0.885, 0.32, 1.1],
+          }}
+          className="min-h-screen"
+        >
+          <Outlet />
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
-}
+};
+
+const PublicLayout = () => <Outlet />;
+
+const ModeSyncWrapper = () => (
+  <>
+    <ModeSync />
+    <Outlet />
+  </>
+);
 
 export const router = createBrowserRouter(
   [
@@ -117,13 +173,12 @@ export const router = createBrowserRouter(
         {
           element: <RequireAuth />,
           children: [
-            // Migrated Routes (Expressive Shell)
             {
               element: <MigratedRouteLayout />,
               children: [
                 { path: '/dashboard', element: <Dashboard /> },
                 { path: '/dashboard-overview', element: <Dashboard /> },
-                { path: '/tracker', element: <KanbanTracker /> },
+                { path: '/tracker', element: <ApplicationTracker /> },
                 { path: '/kanban', element: <KanbanTracker /> },
                 {
                   path: '/career/ingest',
@@ -155,12 +210,11 @@ export const router = createBrowserRouter(
                 },
               ],
             },
-            // Legacy/Protected Routes
             {
               element: <ProtectedLayout />,
               children: [
                 { path: '/welcome', element: <WelcomeScreen /> },
-                { path: '/onboarding', element: <OnboardingPage /> },
+                { path: '/onboarding', element: <OnboardingRoute /> },
                 { path: '/documents', element: <Documents /> },
                 {
                   path: '/editor',

@@ -15,11 +15,11 @@ import {
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
-import { ApplicationFinalization } from '../../screens/09_finalization/ApplicationFinalization';
-import { api } from '../../services/api';
-import { genkitApi } from '../../services/genkit';
-import { exportToPdf } from '../../utils/exportEngine';
-import { KrDarkSpring } from '../../design/tokens/motion-presets';
+import { ApplicationFinalization } from '@/screens/09_finalization/ApplicationFinalization';
+import { api } from '@/services/api';
+import { genkitApi } from '@/services/genkit';
+import { exportToPdf } from '@/utils/exportEngine';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 import { useAnalytics } from '@/hooks/useAnalytics';
 
 const stepMotionProps = {
