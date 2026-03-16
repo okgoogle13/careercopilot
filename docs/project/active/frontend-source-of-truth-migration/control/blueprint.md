@@ -41,6 +41,7 @@ Wire all P0 and P1 backend capabilities into the live routed product, repair the
 ## Decision Log
 
 - 2026-03-15 — Added Gemini protocol review (`/Users/okgoogle13/.gemini/antigravity/brain/30a372bc-8284-40a6-8082-71b1f8d7298d/skill_review.md.resolved`) as advisory-only logistics guidance. It does not change authority order or gate ownership; human direction remains required for migration decisions.
+- 2026-03-16 — Classified `sources/consolidated-reference/**` as a support/reference input layer. It can inform interaction design, decomposition, IA, and behavior extraction, but it cannot override runtime/design/capability truth and cannot be promoted directly unless route-level gap-fill planning marks the candidate `reuse_as_is`.
 
 ---
 ## Blocker Semantics
@@ -170,10 +171,12 @@ Human approval is now recorded. Step 3 execution may begin.
 - [ ] **3.0.1** Run `frontend/scripts/component-inventory.ts` and save the latest inventory snapshot.
 - [ ] **3.0.2** Review `frontend/analysis/frontend-architecture-report.json` for route-family conflicts and prototype `/kr/*` bleed-through.
 - [ ] **3.0.3** Record for the route being executed: route-family conflicts, shared-shell inheritance (legacy vs route-local), duplicate live-looking surfaces, and lane label `KEEP` / `WRAP` / `REWRITE` / `DELETE` (support label only).
+- [ ] **3.0.4** Audit shared primitives that sit above or around the route body before implementation starts: `Logo`, `Sidebar`, `TopNav`, `Footer`, `AuthGuard`, `KrDarkDock`, and any route-family shell chrome. Record whether each primitive is canonical runtime truth, reference-only, or duplicated drift.
 
 ### Acceptance
 
 - Inventory preflight results are recorded for the route before implementation starts.
+- Shared primitive ownership is recorded for the route before implementation starts, so Figma/support references cannot silently replace live shell chrome.
 - Lane labels are used only for reporting; canonical ownership remains the route matrix.
 
 ---
@@ -322,7 +325,7 @@ Human approval is now recorded. Step 3 execution may begin.
 
 ---
 
-## Step 4 — Repair Wireframe-to-Component Workflow
+## Step 4 — Repair Wireframe-to-Component Workflow and Audit Figma Support Inputs
 
 **One-PR size.** Branch: `fix/wireframe-workflow`
 **Agent tier:** Gemini Pro (design reasoning) + Flash (bulk validation)
@@ -331,13 +334,16 @@ Human approval is now recorded. Step 3 execution may begin.
 
 ### Context Brief
 
-The wireframe workflow defined in the migration plan has 9 steps. The previous pass failed because it asserted completion from summaries rather than canonical files. This step installs the correct deterministic workflow so every future route migration goes through validated gates.
+The wireframe workflow defined in the migration plan now has 12 steps, including the late-stage TSX identity gate. The previous pass failed because it asserted completion from summaries rather than canonical files. This step installs the correct deterministic workflow so every future route migration goes through validated gates, and it defines the only approved entry point for evaluating Figma-derived support candidates.
+
+Direct Figma MCP page harvest is allowed only as a structural accelerator inside this step. It may draft build-contract inputs and wireframe diffs from connected Scaffold pages, but it does not become design truth, runtime truth, capability truth, or token authority.
 
 Key files:
 - `docs/project/active/frontend-source-of-truth-migration/contracts/wireframe-build-contract-prompt.md`
 - `scripts/validate-wireframe-workflow.py`
 - `scripts/derive-gap-fill-plan.py`
 - `frontend/src/screens/**/*.wireframe.xml`
+- `docs/project/active/frontend-source-of-truth-migration/sources/consolidated-reference/**/*.tsx`
 
 Priority surfaces (in order): landing → dashboard → analysis → applications → documents → ingestion → profile → jobs.
 
@@ -347,6 +353,13 @@ Priority surfaces (in order): landing → dashboard → analysis → application
 - [ ] **4.2** Run `scripts/validate-wireframe-workflow.py` on each wireframe. Classify failures.
 - [ ] **4.3** Fix schema / route-coverage / component-planning failures for each wireframe. Do not mark any surface complete until the validator passes.
 - [ ] **4.4** Use `derive-gap-fill-plan.py` to classify each component as: `reuse_as_is` / `keep_behavior_rewrite_styling` / `keep_behavior_extend_tokens` / `reference_only` / `build_new` / `blocked`.
+- [ ] **4.4a** Index `sources/consolidated-reference/**/*.tsx` as `support_reference` candidates only. They are evidence inputs, not authority.
+- [ ] **4.4b** Block direct promotion of support-reference candidates that are token-dirty, `figma:asset` bound, remote-asset bound, or non-compliant with zero-flora / no non-human mascot rules.
+- [ ] **4.4c** Generate route audit packs for `landing`, `dashboard`, and `analysis` that record approved reuse mode, candidate path, exclusions, and rewrite requirements.
+- [ ] **4.4d** Record exactly what may be reused from each approved support-reference candidate: behavior, IA/layout, and motion patterns only where applicable. Styling, assets, and motifs must be rewritten unless the planner explicitly marks `reuse_as_is`.
+- [ ] **4.4e** Run `design-orchestration` on selected support-reference TSX candidates to map them to KR archetypes and record `generic_saas_risk` before audit-pack approval.
+- [ ] **4.4f** When Figma MCP page access exists, record the direct page inventory and shared-shell notes as support-only evidence before expanding route audits beyond the current priority pack set.
+- [ ] **4.4g** Allow only these Figma MCP accelerators in this step: draft build-contract inputs, draft wireframe XML or drift diffs, and scaffold-injection pilots for shell decomposition. Do not derive backend schemas or token truth from Figma outputs.
 - [ ] **4.5** Resolve `/kr/*` routes: for each, decide `backport` or `retire`. Backport any useful patterns. Remove `/kr/*` registrations from `App.tsx` router.
 - [ ] **4.6** Run `component-spec-generator` only for surfaces that have passed wireframe validation and have an approved build contract or explicit decision record.
 - [ ] **4.7** Run `token-enforcement` on any new or modified component output from spec generation.
@@ -355,13 +368,17 @@ Priority surfaces (in order): landing → dashboard → analysis → application
 
 - Each priority wireframe passes `validate-wireframe-workflow.py` with 0 critical failures
 - Gap-fill plan exists for each priority surface (saved to `docs/project/active/`)
+- `landing`, `dashboard`, and `analysis` each have a route-scoped support-reference audit pack
+- Direct Figma MCP outputs, when used, remain support-only and are limited to approved structural accelerators
+- Support-reference audit packs record archetype mapping plus `generic_saas_risk`
 - `/kr/*` routes removed from `App.tsx` routing
 - Component specs generated only from validated wireframes
+- No raw consolidated-reference component is consumed downstream without an explicit reuse mode
 - Token enforcement: 0 violations on new specs
 
 ### Skills
 
-`wireframe-annotator`, `component-spec-generator`, `token-enforcement`, `manifest-reconciler`, `verification-before-completion`
+`wireframe-annotator`, `design-orchestration`, `component-spec-generator`, `token-enforcement`, `manifest-reconciler`, `verification-before-completion`
 
 ---
 
@@ -406,16 +423,21 @@ Target folder structure (after cleanup):
 
 ---
 
-## Step 6 — Migration Cleanup: Legacy Routes & Orphaned Screens ⚡ PARALLEL
+## Step 6 — Migration Cleanup: Legacy Routes & Orphaned Screens (6A Route Retirement + 6B Screen Pairing) ⚡ PARALLEL
 
 **One-PR size per sub-step.** Branch prefix: `feat/migration-cleanup-*`
 **Agent tier:** Gemini Pro (for refactoring logic) and design-system-sidekick (for visual compliance)
-**Depends on:** Step 2 APPROVED
+**Depends on:** Step 2 APPROVED; any sub-step that consumes consolidated-reference patterns also depends on a route-local Step 4 audit pack
 **Parallel-safe:** Yes (Sub-steps can run in parallel)
 
 ### Context Brief
 
-The orphan report (`docs/manifests/orphans.json`) identified 11 non-feature routes (legacy pages/components) and 6 unrouted screens (`04_ingestion`, `06_lookout`, `07_kanban`, `08_workbench`, `09_finalization`, `10_settings`). This step systematically moves them into the canonical `src/features/` architecture and pairs them with their UI screens. Note: `04_ingestion` and `07_kanban` overlap with Steps 3a/3b, so work here should complement or finalize those connections.
+The orphan report (`docs/manifests/orphans.json`) identified 11 non-feature routes (legacy pages/components) and 6 unrouted screens (`04_ingestion`, `06_lookout`, `07_kanban`, `08_workbench`, `09_finalization`, `10_settings`). This step systematically moves them into the canonical `src/features/` architecture and pairs them with their UI screens.
+
+- **Step 6A** covers route retirement, registry cleanup, and prototype removal.
+- **Step 6B** covers screen pairing, shell finalization, and feature ownership cleanup.
+
+Note: `04_ingestion` and `07_kanban` overlap with Steps 3a/3b, so work here should complement or finalize those connections. Support-reference candidates may inform these pairings only after the route-local Step 4 audit records an approved reuse mode.
 
 ### Tasks
 
@@ -426,7 +448,8 @@ The orphan report (`docs/manifests/orphans.json`) identified 11 non-feature rout
 - [ ] **6.5 Analysis & Apply Quick**: Move `./pages/AnalysisPage` (pair with `05_analysis`) and `./pages/ApplyQuick` to canonical `features/`.
 - [ ] **6.6 Resolve UNKNOWN**: Fix `/onboarding` route (currently pointing to UNKNOWN source, likely needs pairing with `03_onboarding`).
 - [ ] **6.7 Retire Prototypes**: Safely delete or consolidate `/kr/landing`, `/kr/auth`, `/kr/onboarding`, `/kr/analysis`, `/kr/dashboard`, and `/test-tokens`.
-- [ ] **6.8 Gate Check**:
+- [ ] **6.8 TSX Identity Review Gate**: For any route that adopts support-reference patterns or newly generated TSX, run `design-orchestration` → `kerala-rage-brand-enforcer` → `m3-expressive-token-orchestrator` → `kerala-rage-typography-strategy`. Save the review as `analysis/YYYY-MM-DD-tsx-identity-gate-<route>.md` using `analysis/tsx-identity-gate-template.md`. Record outcome as `identity_pass` / `identity_pass_with_rewrites` / `identity_fail_generic_saas` / `identity_fail_brand_drift`. Do not close the route on failure.
+- [ ] **6.9 Gate Check**:
   // turbo
   Run `pre-ship-solidarity-gate` for all UI-touching changes to ensure Visual Compliance ≥ 90, Zero-Flora, and semantic tokens only.
 
@@ -435,11 +458,13 @@ The orphan report (`docs/manifests/orphans.json`) identified 11 non-feature rout
 - 0 unrouted screens in `orphans.json`.
 - 0 non-feature routes remaining (excluding `App.tsx` router wrapper).
 - `yarn test` passes for all migrated features.
+- Any Figma-informed pairing cites an approved Step 4 route audit pack before implementation starts.
+- Any Figma-informed or generated TSX records a passing TSX identity review before route closure.
 - KR Solidarity compliance gate (`pre-ship-solidarity-gate`) passes cleanly for all migrated UI surfaces.
 
 ### Skills
 
-`blueprint`, `executing-plans`, `design-orchestration`, `token-enforcement`, `kerala-rage-brand-enforcer`
+`blueprint`, `executing-plans`, `design-orchestration`, `token-enforcement`, `kerala-rage-brand-enforcer`, `m3-expressive-token-orchestrator`, `kerala-rage-typography-strategy`
 
 ---
 

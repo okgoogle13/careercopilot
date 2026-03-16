@@ -91,7 +91,7 @@ def get_secret(
         name = f"projects/{project_id}/secrets/{secret_id}/versions/{version}"
         try:
             response = client.access_secret_version(name=name)
-            return response.payload.data.decode("UTF-8")
+            return response.payload.data.decode("UTF-8").strip()
         except SECRET_MANAGER_NOT_FOUND_EXCEPTIONS:
             pass
         except Exception as exc:

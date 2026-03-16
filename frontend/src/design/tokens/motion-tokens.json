@@ -28,16 +28,16 @@
           "$description": "Initial velocity"
         }
       },
-      "kr-dark": {
+      "standard": {
         "stiffness": {
           "$value": 800,
           "$type": "number",
-          "$description": "kr-dark mode spring stiffness — precise, controlled"
+          "$description": "Standard mode spring stiffness — precise, controlled"
         },
         "damping": {
           "$value": 40,
           "$type": "number",
-          "$description": "kr-dark mode damping — minimal overshoot, clinical precision"
+          "$description": "Standard mode damping — minimal overshoot, clinical precision"
         },
         "mass": {
           "$value": 1,
@@ -54,32 +54,32 @@
     "easing": {
       "$description": "Cubic bezier easing curves for different motion personalities",
       "viscous": {
-        "$value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        "$value": "0.34, 1.56, 0.64, 1",
         "$type": "cubicBezier",
-        "$description": "Viscous Breeze — kr-dark mode primary, gentle overshoot"
+        "$description": "Viscous Breeze — kr-dark mode primary"
       },
       "precise": {
-        "$value": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        "$value": "0.25, 0.46, 0.45, 0.94",
         "$type": "cubicBezier",
-        "$description": "kr-dark mode — no overshoot, controlled"
+        "$description": "kr-dark mode — no overshoot"
       },
       "settle": {
-        "$value": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        "$value": "0.25, 0.46, 0.45, 0.94",
         "$type": "cubicBezier",
-        "$description": "Finding rest position, smooth deceleration"
+        "$description": "Finding rest position"
       },
       "snap": {
-        "$value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "$value": "0.4, 0, 0.2, 1",
         "$type": "cubicBezier",
-        "$description": "Quick, decisive movements"
+        "$description": "Quick movements"
       },
       "elastic": {
-        "$value": "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+        "$value": "0.68, -0.55, 0.265, 1.55",
         "$type": "cubicBezier",
-        "$description": "Pronounced bounce — kr-dark mode accents only"
+        "$description": "Pronounced bounce"
       },
       "linear": {
-        "$value": "linear",
+        "$value": "0, 0, 1, 1",
         "$type": "cubicBezier",
         "$description": "Reduced motion fallback"
       }
@@ -122,11 +122,11 @@
       "hover": {
         "card": {
           "transform": {
-            "$value": "translateY(-4px)",
+            "$value": "-4px",
             "$type": "string"
           },
           "shadow": {
-            "$value": "0 8px 40px rgba(20, 18, 16, 0.6), 0 2px 8px rgba(0, 0, 0, 0.25)",
+            "$value": "0 8px 40px #14121099, 0 2px 8px #00000040",
             "$type": "shadow"
           },
           "duration": {
@@ -144,7 +144,7 @@
             "$type": "number"
           },
           "shadow": {
-            "$value": "0 0 40px rgba(212, 168, 75, 0.15)",
+            "$value": "0 0 40px #D4A84B26",
             "$type": "shadow"
           },
           "duration": {
@@ -182,7 +182,7 @@
             "$type": "number"
           },
           "shadow": {
-            "$value": "0 2px 8px rgba(20, 18, 16, 0.4)",
+            "$value": "0 2px 8px #14121066",
             "$type": "shadow"
           },
           "duration": {
@@ -216,7 +216,7 @@
       "focus": {
         "input": {
           "ring": {
-            "$value": "0 0 0 3px rgba(212, 168, 75, 0.3)",
+            "$value": "0 0 0 3px #D4A84B4D",
             "$type": "shadow"
           },
           "borderColor": {
@@ -234,7 +234,7 @@
         },
         "button": {
           "ring": {
-            "$value": "0 0 0 3px rgba(212, 168, 75, 0.3)",
+            "$value": "0 0 0 3px #D4A84B4D",
             "$type": "shadow"
           },
           "duration": {
@@ -258,7 +258,7 @@
             "$type": "number"
           },
           "shadow": {
-            "$value": "0 16px 48px rgba(20, 18, 16, 0.7)",
+            "$value": "0 16px 48px #141210B3",
             "$type": "shadow"
           },
           "easing": {
@@ -306,11 +306,11 @@
           },
           "transform": {
             "from": {
-              "$value": "translateY(24px)",
+              "$value": "24px",
               "$type": "string"
             },
             "to": {
-              "$value": "translateY(0)",
+              "$value": "0px",
               "$type": "string"
             }
           },
@@ -341,7 +341,7 @@
           "$type": "boolean"
         }
       },
-      "kr-dark": {
+      "kr-precise": {
         "defaultEasing": {
           "$value": "{motion.easing.precise}",
           "$type": "cubicBezier"

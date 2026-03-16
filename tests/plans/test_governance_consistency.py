@@ -43,6 +43,33 @@ def find_feature(data, feature_id):
     return matches[0]
 
 
+def run_gap_fill(route_id, tmp_path):
+    json_out = tmp_path / f"{route_id}.json"
+    subprocess.run(
+        [
+            "python3",
+            "scripts/derive-gap-fill-plan.py",
+            "--route-id",
+            route_id,
+            "--json-out",
+            str(json_out),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    return json.loads(json_out.read_text(encoding="utf-8"))
+
+
+def find_component_plan(data, component_name):
+    matches = [component for component in data["components"] if component["component_name"] == component_name]
+    assert len(matches) == 1, (
+        f"Expected exactly 1 component plan for '{component_name}', found {len(matches)}"
+    )
+    return matches[0]
+
+
 def test_gap_fill_script_uses_canonical_deprecated_archetype_list():
     """Gap-fill planner should match the canonical deprecated archetype list."""
     script_text = (REPO_ROOT / "scripts" / "derive-gap-fill-plan.py").read_text(encoding="utf-8")
@@ -56,6 +83,44 @@ def test_gap_fill_script_uses_timezone_utc():
     assert "datetime.now(timezone.utc)" in script_text
     assert "datetime.now(UTC)" not in script_text
     assert "from datetime import datetime, UTC" not in script_text
+
+
+def test_gap_fill_script_indexes_support_reference_candidates(tmp_path):
+    """Gap-fill planner should discover consolidated-reference candidates as support inputs."""
+    payload = run_gap_fill("root", tmp_path)
+    landing = find_component_plan(payload, "LandingPage")
+
+    support_candidates = [
+        candidate for candidate in landing["existing_candidates"] if candidate["layer"] == "support_reference"
+    ]
+
+    assert any(
+        candidate["path"].endswith(
+            "docs/project/active/frontend-source-of-truth-migration/sources/consolidated-reference/components/LandingPage.tsx"
+        )
+        for candidate in support_candidates
+    )
+
+
+def test_gap_fill_script_flags_nonportable_support_reference_candidates(tmp_path):
+    """Support-reference candidates with Figma-bound assets must not be direct-promotion eligible."""
+    payload = run_gap_fill("dashboard", tmp_path)
+    dashboard = find_component_plan(payload, "Dashboard")
+
+    matches = [
+        candidate
+        for candidate in dashboard["existing_candidates"]
+        if candidate["path"].endswith(
+            "docs/project/active/frontend-source-of-truth-migration/sources/consolidated-reference/components/Dashboard.tsx"
+        )
+    ]
+
+    assert len(matches) == 1
+    candidate = matches[0]
+    assert candidate["layer"] == "support_reference"
+    assert candidate["asset_state"] == "figma_bound"
+    assert candidate["promotion_eligibility"] == "behavior_only"
+    assert "replace_figma_asset_imports" in candidate["required_actions"]
 
 
 def test_route_matrix_metadata_points_to_blueprint():
@@ -94,7 +159,7 @@ def test_tracker_route_and_applications_crud_feature_are_aligned():
     assert "applications_crud" in tracker["backend_capabilities"]
     assert applications_crud["owner_route"] == tracker["target_route"]
     assert applications_crud["owner_surface"] == tracker["target_runtime_owner"]
-    assert applications_crud["frontend_status"] == "mock_only"
+    assert applications_crud["frontend_status"] == "live_canonical"
 
 
 def test_profile_route_and_voice_feature_are_aligned():
@@ -120,7 +185,7 @@ def test_ingestion_route_and_gap_entry_are_aligned():
     ingestion_feature = find_feature(gap_map, "smart_ingestion_asset_pipeline")
 
     assert ingest["target_route"] == "/career/ingest"
-    assert ingest["target_runtime_owner"] == "IngestionPage"
+    assert ingest["target_runtime_owner"] == "SmartIngestion"
     assert ingestion_feature["owner_route"] == ingest["target_route"]
     assert ingestion_feature["owner_surface"] == ingest["target_runtime_owner"]
 

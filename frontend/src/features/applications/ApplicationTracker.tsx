@@ -30,6 +30,7 @@ export function ApplicationTracker() {
   } = useQuery({
     queryKey: ['tracker-applications'],
     queryFn: async () => applicationService.listApplications(),
+    retry: false,
   });
 
   const trackerApplications = useMemo(() => applications.map(toTrackerApplication), [applications]);

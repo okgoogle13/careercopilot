@@ -6,149 +6,63 @@ export default {
       colors: {
   "aboriginalFlagBlack": {
     "base": "var(--sys-color-aboriginalFlagBlack-base)",
-    "steps-0": "var(--sys-color-aboriginalFlagBlack-steps-0)",
-    "steps-1": "var(--sys-color-aboriginalFlagBlack-steps-1)",
-    "steps-2": "var(--sys-color-aboriginalFlagBlack-steps-2)",
-    "steps-3": "var(--sys-color-aboriginalFlagBlack-steps-3)",
-    "steps-4": "var(--sys-color-aboriginalFlagBlack-steps-4)",
-    "usage-0": "var(--sys-color-aboriginalFlagBlack-usage-0)",
-    "usage-1": "var(--sys-color-aboriginalFlagBlack-usage-1)"
+    "steps": "var(--sys-color-aboriginalFlagBlack-steps)",
+    "usage": "var(--sys-color-aboriginalFlagBlack-usage)"
   },
   "aboriginalFlagRed": {
     "base": "var(--sys-color-aboriginalFlagRed-base)",
-    "steps-0": "var(--sys-color-aboriginalFlagRed-steps-0)",
-    "steps-1": "var(--sys-color-aboriginalFlagRed-steps-1)",
-    "steps-2": "var(--sys-color-aboriginalFlagRed-steps-2)",
-    "steps-3": "var(--sys-color-aboriginalFlagRed-steps-3)",
-    "steps-4": "var(--sys-color-aboriginalFlagRed-steps-4)",
-    "steps-5": "var(--sys-color-aboriginalFlagRed-steps-5)",
-    "usage-0": "var(--sys-color-aboriginalFlagRed-usage-0)",
-    "usage-1": "var(--sys-color-aboriginalFlagRed-usage-1)"
+    "steps": "var(--sys-color-aboriginalFlagRed-steps)",
+    "usage": "var(--sys-color-aboriginalFlagRed-usage)"
   },
   "aboriginalFlagYellow": {
     "base": "var(--sys-color-aboriginalFlagYellow-base)",
-    "steps-0": "var(--sys-color-aboriginalFlagYellow-steps-0)",
-    "steps-1": "var(--sys-color-aboriginalFlagYellow-steps-1)",
-    "steps-2": "var(--sys-color-aboriginalFlagYellow-steps-2)",
-    "steps-3": "var(--sys-color-aboriginalFlagYellow-steps-3)",
-    "steps-4": "var(--sys-color-aboriginalFlagYellow-steps-4)",
-    "steps-5": "var(--sys-color-aboriginalFlagYellow-steps-5)",
-    "usage-0": "var(--sys-color-aboriginalFlagYellow-usage-0)",
-    "usage-1": "var(--sys-color-aboriginalFlagYellow-usage-1)"
+    "steps": "var(--sys-color-aboriginalFlagYellow-steps)",
+    "usage": "var(--sys-color-aboriginalFlagYellow-usage)"
   },
   "asphaltBlack": {
     "base": "var(--sys-color-asphaltBlack-base)",
-    "steps-0": "var(--sys-color-asphaltBlack-steps-0)",
-    "steps-1": "var(--sys-color-asphaltBlack-steps-1)",
-    "steps-2": "var(--sys-color-asphaltBlack-steps-2)",
-    "steps-3": "var(--sys-color-asphaltBlack-steps-3)",
-    "steps-4": "var(--sys-color-asphaltBlack-steps-4)",
-    "usage-0": "var(--sys-color-asphaltBlack-usage-0)",
-    "usage-1": "var(--sys-color-asphaltBlack-usage-1)",
-    "usage-2": "var(--sys-color-asphaltBlack-usage-2)"
+    "steps": "var(--sys-color-asphaltBlack-steps)",
+    "usage": "var(--sys-color-asphaltBlack-usage)"
   },
   "charcoalBackground": {
     "base": "var(--sys-color-charcoalBackground-base)",
-    "steps-0": "var(--sys-color-charcoalBackground-steps-0)",
-    "steps-1": "var(--sys-color-charcoalBackground-steps-1)",
-    "steps-2": "var(--sys-color-charcoalBackground-steps-2)",
-    "steps-3": "var(--sys-color-charcoalBackground-steps-3)",
-    "steps-4": "var(--sys-color-charcoalBackground-steps-4)",
-    "steps-5": "var(--sys-color-charcoalBackground-steps-5)",
-    "steps-6": "var(--sys-color-charcoalBackground-steps-6)",
-    "usage-0": "var(--sys-color-charcoalBackground-usage-0)",
-    "usage-1": "var(--sys-color-charcoalBackground-usage-1)",
-    "usage-2": "var(--sys-color-charcoalBackground-usage-2)",
-    "usage-3": "var(--sys-color-charcoalBackground-usage-3)"
+    "steps": "var(--sys-color-charcoalBackground-steps)",
+    "usage": "var(--sys-color-charcoalBackground-usage)"
   },
   "concreteGrey": {
     "base": "var(--sys-color-concreteGrey-base)",
-    "steps-0": "var(--sys-color-concreteGrey-steps-0)",
-    "steps-1": "var(--sys-color-concreteGrey-steps-1)",
-    "steps-2": "var(--sys-color-concreteGrey-steps-2)",
-    "steps-3": "var(--sys-color-concreteGrey-steps-3)",
-    "steps-4": "var(--sys-color-concreteGrey-steps-4)",
-    "usage-0": "var(--sys-color-concreteGrey-usage-0)",
-    "usage-1": "var(--sys-color-concreteGrey-usage-1)",
-    "usage-2": "var(--sys-color-concreteGrey-usage-2)",
-    "usage-3": "var(--sys-color-concreteGrey-usage-3)"
+    "steps": "var(--sys-color-concreteGrey-steps)",
+    "usage": "var(--sys-color-concreteGrey-usage)"
   },
   "inkGold": {
     "base": "var(--sys-color-inkGold-base)",
-    "steps-0": "var(--sys-color-inkGold-steps-0)",
-    "steps-1": "var(--sys-color-inkGold-steps-1)",
-    "steps-2": "var(--sys-color-inkGold-steps-2)",
-    "steps-3": "var(--sys-color-inkGold-steps-3)",
-    "steps-4": "var(--sys-color-inkGold-steps-4)",
-    "steps-5": "var(--sys-color-inkGold-steps-5)",
-    "steps-6": "var(--sys-color-inkGold-steps-6)",
-    "usage-0": "var(--sys-color-inkGold-usage-0)",
-    "usage-1": "var(--sys-color-inkGold-usage-1)",
-    "usage-2": "var(--sys-color-inkGold-usage-2)",
-    "usage-3": "var(--sys-color-inkGold-usage-3)"
+    "steps": "var(--sys-color-inkGold-steps)",
+    "usage": "var(--sys-color-inkGold-usage)"
   },
   "kr-activistSmokeGreen": {
     "base": "var(--sys-color-kr-activistSmokeGreen-base)",
-    "steps-0": "var(--sys-color-kr-activistSmokeGreen-steps-0)",
-    "steps-1": "var(--sys-color-kr-activistSmokeGreen-steps-1)",
-    "steps-2": "var(--sys-color-kr-activistSmokeGreen-steps-2)",
-    "steps-3": "var(--sys-color-kr-activistSmokeGreen-steps-3)",
-    "steps-4": "var(--sys-color-kr-activistSmokeGreen-steps-4)",
-    "steps-5": "var(--sys-color-kr-activistSmokeGreen-steps-5)",
-    "steps-6": "var(--sys-color-kr-activistSmokeGreen-steps-6)",
-    "usage-0": "var(--sys-color-kr-activistSmokeGreen-usage-0)",
-    "usage-1": "var(--sys-color-kr-activistSmokeGreen-usage-1)",
-    "usage-2": "var(--sys-color-kr-activistSmokeGreen-usage-2)",
-    "usage-3": "var(--sys-color-kr-activistSmokeGreen-usage-3)"
+    "steps": "var(--sys-color-kr-activistSmokeGreen-steps)",
+    "usage": "var(--sys-color-kr-activistSmokeGreen-usage)"
   },
   "kr-charcoalRed": {
     "base": "var(--sys-color-kr-charcoalRed-base)",
-    "steps-0": "var(--sys-color-kr-charcoalRed-steps-0)",
-    "steps-1": "var(--sys-color-kr-charcoalRed-steps-1)",
-    "steps-2": "var(--sys-color-kr-charcoalRed-steps-2)",
-    "steps-3": "var(--sys-color-kr-charcoalRed-steps-3)",
-    "steps-4": "var(--sys-color-kr-charcoalRed-steps-4)",
-    "steps-5": "var(--sys-color-kr-charcoalRed-steps-5)",
-    "usage-0": "var(--sys-color-kr-charcoalRed-usage-0)",
-    "usage-1": "var(--sys-color-kr-charcoalRed-usage-1)",
-    "usage-2": "var(--sys-color-kr-charcoalRed-usage-2)",
-    "usage-3": "var(--sys-color-kr-charcoalRed-usage-3)"
+    "steps": "var(--sys-color-kr-charcoalRed-steps)",
+    "usage": "var(--sys-color-kr-charcoalRed-usage)"
   },
   "ochreEarth": {
     "base": "var(--sys-color-ochreEarth-base)",
-    "steps-0": "var(--sys-color-ochreEarth-steps-0)",
-    "steps-1": "var(--sys-color-ochreEarth-steps-1)",
-    "steps-2": "var(--sys-color-ochreEarth-steps-2)",
-    "steps-3": "var(--sys-color-ochreEarth-steps-3)",
-    "steps-4": "var(--sys-color-ochreEarth-steps-4)",
-    "usage-0": "var(--sys-color-ochreEarth-usage-0)",
-    "usage-1": "var(--sys-color-ochreEarth-usage-1)",
-    "usage-2": "var(--sys-color-ochreEarth-usage-2)"
+    "steps": "var(--sys-color-ochreEarth-steps)",
+    "usage": "var(--sys-color-ochreEarth-usage)"
   },
   "paperWhite": {
     "base": "var(--sys-color-paperWhite-base)",
-    "steps-0": "var(--sys-color-paperWhite-steps-0)",
-    "steps-1": "var(--sys-color-paperWhite-steps-1)",
-    "steps-2": "var(--sys-color-paperWhite-steps-2)",
-    "steps-3": "var(--sys-color-paperWhite-steps-3)",
-    "steps-4": "var(--sys-color-paperWhite-steps-4)",
-    "usage-0": "var(--sys-color-paperWhite-usage-0)",
-    "usage-1": "var(--sys-color-paperWhite-usage-1)",
-    "usage-2": "var(--sys-color-paperWhite-usage-2)"
+    "steps": "var(--sys-color-paperWhite-steps)",
+    "usage": "var(--sys-color-paperWhite-usage)"
   },
   "protestMetalBlue": {
     "base": "var(--sys-color-protestMetalBlue-base)",
-    "steps-0": "var(--sys-color-protestMetalBlue-steps-0)",
-    "steps-1": "var(--sys-color-protestMetalBlue-steps-1)",
-    "steps-2": "var(--sys-color-protestMetalBlue-steps-2)",
-    "steps-3": "var(--sys-color-protestMetalBlue-steps-3)",
-    "steps-4": "var(--sys-color-protestMetalBlue-steps-4)",
-    "steps-5": "var(--sys-color-protestMetalBlue-steps-5)",
-    "steps-6": "var(--sys-color-protestMetalBlue-steps-6)",
-    "usage-0": "var(--sys-color-protestMetalBlue-usage-0)",
-    "usage-1": "var(--sys-color-protestMetalBlue-usage-1)",
-    "usage-2": "var(--sys-color-protestMetalBlue-usage-2)",
-    "usage-3": "var(--sys-color-protestMetalBlue-usage-3)"
+    "steps": "var(--sys-color-protestMetalBlue-steps)",
+    "usage": "var(--sys-color-protestMetalBlue-usage)"
   },
   "semantic": {
     "ash-grey": "var(--sys-color-semantic-ash-grey)",
@@ -158,72 +72,28 @@ export default {
   },
   "signalGreen": {
     "base": "var(--sys-color-signalGreen-base)",
-    "steps-0": "var(--sys-color-signalGreen-steps-0)",
-    "steps-1": "var(--sys-color-signalGreen-steps-1)",
-    "steps-2": "var(--sys-color-signalGreen-steps-2)",
-    "steps-3": "var(--sys-color-signalGreen-steps-3)",
-    "steps-4": "var(--sys-color-signalGreen-steps-4)",
-    "steps-5": "var(--sys-color-signalGreen-steps-5)",
-    "steps-6": "var(--sys-color-signalGreen-steps-6)",
-    "usage-0": "var(--sys-color-signalGreen-usage-0)",
-    "usage-1": "var(--sys-color-signalGreen-usage-1)",
-    "usage-2": "var(--sys-color-signalGreen-usage-2)",
-    "usage-3": "var(--sys-color-signalGreen-usage-3)"
+    "steps": "var(--sys-color-signalGreen-steps)",
+    "usage": "var(--sys-color-signalGreen-usage)"
   },
   "solidarityRed": {
     "base": "var(--sys-color-solidarityRed-base)",
-    "steps-0": "var(--sys-color-solidarityRed-steps-0)",
-    "steps-1": "var(--sys-color-solidarityRed-steps-1)",
-    "steps-2": "var(--sys-color-solidarityRed-steps-2)",
-    "steps-3": "var(--sys-color-solidarityRed-steps-3)",
-    "steps-4": "var(--sys-color-solidarityRed-steps-4)",
-    "steps-5": "var(--sys-color-solidarityRed-steps-5)",
-    "usage-0": "var(--sys-color-solidarityRed-usage-0)",
-    "usage-1": "var(--sys-color-solidarityRed-usage-1)",
-    "usage-2": "var(--sys-color-solidarityRed-usage-2)",
-    "usage-3": "var(--sys-color-solidarityRed-usage-3)"
+    "steps": "var(--sys-color-solidarityRed-steps)",
+    "usage": "var(--sys-color-solidarityRed-usage)"
   },
   "solidaritySmokeOrange": {
     "base": "var(--sys-color-solidaritySmokeOrange-base)",
-    "steps-0": "var(--sys-color-solidaritySmokeOrange-steps-0)",
-    "steps-1": "var(--sys-color-solidaritySmokeOrange-steps-1)",
-    "steps-2": "var(--sys-color-solidaritySmokeOrange-steps-2)",
-    "steps-3": "var(--sys-color-solidaritySmokeOrange-steps-3)",
-    "steps-4": "var(--sys-color-solidaritySmokeOrange-steps-4)",
-    "steps-5": "var(--sys-color-solidaritySmokeOrange-steps-5)",
-    "steps-6": "var(--sys-color-solidaritySmokeOrange-steps-6)",
-    "usage-0": "var(--sys-color-solidaritySmokeOrange-usage-0)",
-    "usage-1": "var(--sys-color-solidaritySmokeOrange-usage-1)",
-    "usage-2": "var(--sys-color-solidaritySmokeOrange-usage-2)",
-    "usage-3": "var(--sys-color-solidaritySmokeOrange-usage-3)"
+    "steps": "var(--sys-color-solidaritySmokeOrange-steps)",
+    "usage": "var(--sys-color-solidaritySmokeOrange-usage)"
   },
   "stencilYellow": {
     "base": "var(--sys-color-stencilYellow-base)",
-    "steps-0": "var(--sys-color-stencilYellow-steps-0)",
-    "steps-1": "var(--sys-color-stencilYellow-steps-1)",
-    "steps-2": "var(--sys-color-stencilYellow-steps-2)",
-    "steps-3": "var(--sys-color-stencilYellow-steps-3)",
-    "steps-4": "var(--sys-color-stencilYellow-steps-4)",
-    "steps-5": "var(--sys-color-stencilYellow-steps-5)",
-    "steps-6": "var(--sys-color-stencilYellow-steps-6)",
-    "usage-0": "var(--sys-color-stencilYellow-usage-0)",
-    "usage-1": "var(--sys-color-stencilYellow-usage-1)",
-    "usage-2": "var(--sys-color-stencilYellow-usage-2)",
-    "usage-3": "var(--sys-color-stencilYellow-usage-3)"
+    "steps": "var(--sys-color-stencilYellow-steps)",
+    "usage": "var(--sys-color-stencilYellow-usage)"
   },
   "worker-ash": {
     "base": "var(--sys-color-worker-ash-base)",
-    "steps-0": "var(--sys-color-worker-ash-steps-0)",
-    "steps-1": "var(--sys-color-worker-ash-steps-1)",
-    "steps-2": "var(--sys-color-worker-ash-steps-2)",
-    "steps-3": "var(--sys-color-worker-ash-steps-3)",
-    "steps-4": "var(--sys-color-worker-ash-steps-4)",
-    "steps-5": "var(--sys-color-worker-ash-steps-5)",
-    "steps-6": "var(--sys-color-worker-ash-steps-6)",
-    "usage-0": "var(--sys-color-worker-ash-usage-0)",
-    "usage-1": "var(--sys-color-worker-ash-usage-1)",
-    "usage-2": "var(--sys-color-worker-ash-usage-2)",
-    "usage-3": "var(--sys-color-worker-ash-usage-3)"
+    "steps": "var(--sys-color-worker-ash-steps)",
+    "usage": "var(--sys-color-worker-ash-usage)"
   }
 },
       borderRadius: {

@@ -268,7 +268,7 @@ export function Dashboard() {
                         initial={{ width: 0 }}
                         animate={{ width: '75%' }}
                         transition={{ duration: 1.5, ease: 'circOut' }}
-                        className="h-full bg-gradient-to-r from-ink-gold to-concrete-grey shadow-[0_0_10px_rgba(var(--color-ink-gold),0.5)]"
+                        className="h-full bg-gradient-to-r from-ink-gold to-concrete-grey"
                       />
                     </div>
                     <p className="text-[9px] font-mono text-paper-white opacity-40 mt-3 uppercase tracking-widest text-right">
@@ -312,7 +312,7 @@ export function Dashboard() {
           {!hasMaster ? (
             <Link
               to="/career/ingest"
-              className="block w-full rounded-placard border border-ink-gold/35 bg-ink-gold text-asphalt-black px-8 py-6 font-black uppercase tracking-wide text-center shadow-[0_18px_40px_rgba(218,246,116,0.28)] hover:shadow-[0_24px_58px_rgba(218,246,116,0.4)] transition-all duration-300"
+              className="block w-full rounded-placard border border-[--sys-color-inkGold-base]/35 bg-[--sys-color-inkGold-base] text-[--sys-color-charcoalBackground-base] px-8 py-6 font-black uppercase tracking-wide text-center transition-all duration-300"
             >
               <span className="inline-flex items-center justify-center gap-3">
                 <Rocket className="w-5 h-5" /> Build Master Resume
@@ -326,7 +326,8 @@ export function Dashboard() {
                 style={{
                   backgroundColor: 'var(--sys-color-solidarityRed-base)',
                   color: 'var(--sys-color-charcoalBackground-base)',
-                  boxShadow: '0 16px 42px rgba(241,71,20,0.36)',
+                  boxShadow:
+                    '0 16px 42px color-mix(in srgb, var(--sys-color-solidarityRed-base) 36%, transparent)',
                 }}
               >
                 <span className="inline-flex items-center justify-center gap-2">🎯 Apply Now</span>
