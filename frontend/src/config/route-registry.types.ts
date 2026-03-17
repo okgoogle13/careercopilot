@@ -68,4 +68,6 @@ export interface RouteEntry {
    * Prototype routes are excluded from the orphan check.
    */
   prototype?: boolean;
+  /** Whether this is a legacy redirect route. */
+  isRedirect?: boolean;
 }
