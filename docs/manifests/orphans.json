@@ -1,76 +1,66 @@
 {
-  "generatedAt": "2026-03-15T05:32:25.051Z",
+  "generatedAt": "2026-03-17T16:29:21.687Z",
   "orphanedFeatures": [
     "KrDark",
+    "design-sidekick",
     "editor",
     "gallery",
-    "ingestion",
-    "jobs",
-    "sandbox"
+    "sandbox",
+    "style-guide"
   ],
   "orphanedPages": [
     "Dashboard.tsx",
+    "IngestionPage.tsx",
     "ResumeAuditPage.tsx"
   ],
   "unroutedScreens": [
+    "01_landing",
+    "02_auth",
+    "03_onboarding",
     "04_ingestion",
+    "05_analysis",
     "06_lookout",
     "07_kanban",
     "08_workbench",
     "09_finalization",
-    "10_settings"
+    "10_settings",
+    "11_dashboard"
   ],
   "nonFeatureRoutes": [
     {
-      "path": "/kr/landing",
-      "source": "./components/phase3-batch2/HeroLanding"
+      "path": "/auth",
+      "source": "react-router-dom"
     },
     {
-      "path": "/kr/auth",
-      "source": "./components/phase3-batch2/AuthModal"
+      "path": "/dashboard-overview",
+      "source": "react-router-dom"
     },
     {
-      "path": "/kr/onboarding",
-      "source": "./components/phase3-batch2/OnboardFlow"
+      "path": "/kanban",
+      "source": "react-router-dom"
     },
     {
-      "path": "/kr/analysis",
-      "source": "./components/phase3-batch3/AnalysisWorkbench"
+      "path": "/ingestion",
+      "source": "react-router-dom"
     },
     {
-      "path": "/kr/dashboard",
-      "source": "./components/phase3-batch3/DashboardOverview"
+      "path": "/feed",
+      "source": "react-router-dom"
     },
     {
-      "path": "/onboarding",
-      "source": "UNKNOWN"
+      "path": "/studio",
+      "source": "react-router-dom"
     },
     {
-      "path": "/analysis",
-      "source": "./pages/AnalysisPage"
-    },
-    {
-      "path": "/career/ingest",
-      "source": "./pages/IngestionPage"
-    },
-    {
-      "path": "/job-queue",
-      "source": "./pages/JobQueue"
-    },
-    {
-      "path": "/apply/quick",
-      "source": "./pages/ApplyQuick"
-    },
-    {
-      "path": "/test-tokens",
-      "source": "./components/debug/TokenTest"
+      "path": "/editor",
+      "source": "react-router-dom"
     }
   ],
   "summary": {
-    "totalOrphans": 25,
+    "totalOrphans": 27,
     "featureOrphans": 6,
-    "pageOrphans": 2,
-    "screenOrphans": 6,
-    "nonFeatureRoutes": 11
+    "pageOrphans": 3,
+    "screenOrphans": 11,
+    "nonFeatureRoutes": 7
   }
 }

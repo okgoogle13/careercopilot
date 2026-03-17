@@ -5,7 +5,7 @@ Execution truth:
 - `control/workflow.md`
 
 Planning narrative:
-- `control/plan.md`
+- `control/blueprint.md`
 
 Evidence inputs (advisory only):
 - `docs/manifests/routes.json`
@@ -16,8 +16,8 @@ Evidence inputs (advisory only):
 
 ## Current Phase
 
-- **Step 6B COMPLETE + Phase 4 COMPLETE (2026-03-16)** — all six Step 6B routes gated and route-matrix-complete, TSX identity-gate artifacts checked in for all three Figma-informed routes, 12/12 build contracts XSD-validated. Only remaining open item is `/tracker` CRUD closeout blocked on Firebase/Firestore environment.
-- Evidence-weighted completion: approximately 90% — all planned phases complete; final 10% is `/tracker` live verification and deferred Logo/AuthGuard cleanup.
+- **Shell Promotion COMPLETE + Step 6B COMPLETE; program closeout still IN_PROGRESS (2026-03-18)** — `/welcome` and `/documents` were promoted into the canonical migrated shell; `/asset-library` remains the only intentional legacy-shell holdout (support-only). Canonical shell state is now 14 migrated + 1 protected + 4 public, and the runtime preserves 7 explicit legacy redirect paths in `App.tsx`. Review confirms real backend progress, but the program is still not closeable from PM artifacts alone.
+- Evidence-weighted completion: approximately 90% — route ownership, shell promotion, and `/opportunities` closure are aligned, tracker backend CRUD is real, and ingestion convergence is substantially improved. However, `workflow_orchestration` and `resume_audit` history remain only backend-complete, while `/analysis` vs `/asset-library` cleanup and live tracker verification are still open.
 
 ## Recent Progress
 
@@ -26,12 +26,12 @@ Evidence inputs (advisory only):
   - `/dashboard`: `identity_pass_with_rewrites` (5 token violations remediated)
   - `/` (landing): `identity_pass`
   - Artifacts: `analysis/2026-03-16-tsx-identity-gate-{analysis,dashboard,root}.md`
-- `/opportunities` Step 6B closure complete (2026-03-16):
+- `/opportunities` Step 6B closure complete (2026-03-17):
   - token-enforcement: pass (rgba drop-shadow→color-mix remediation)
   - migration-audit: pass
   - build contract generated and XSD-validated: `contracts/build-contract-opportunities.xml`
   - route-matrix: `implementation_status: complete`
-  - M7B and M11 milestones: COMPLETE
+  - route-specific identity gate checked in
 - All 12 build contracts now validate: 12/12 pass `build_contract.xsd`
 - Five Step 6B routes are gated and now reflected as complete in the route matrix:
   - `/ksc-generator`, `/cover-letter-generator`, `/settings`, `/job-queue`, `/onboarding`
@@ -40,7 +40,7 @@ Evidence inputs (advisory only):
 - Three Figma-informed routes are gated at the route level:
   - `/analysis`, `/dashboard`, `/`
   - token-enforcement: pass; migration-audit: pass; build contracts: execution_ready
-  - identity-gate artifacts are still missing, so these are gated rather than fully closed
+  - identity-gate artifacts are checked in
 - Direct Figma MCP page harvest is now recorded for 7 canonical page nodes:
   - Home, Dashboard, Opportunities, Applications, Ingestion, Analysis, Account Control
   - Scaffold IDs and route-family mappings are captured in `analysis/2026-03-16-figma-mcp-inventory-and-accelerators.md`
@@ -55,25 +55,55 @@ Evidence inputs (advisory only):
   - `analysis/2026-03-16-support-reference-audit-account.md`
 - Tracked Claude handoff packet refreshed:
   - `control/claude-handoff.md`
-- Shared primitive audit completed (record-only): Logo MISSING, Footer MISSING, AuthGuard has `bg-[#1A1714]` token violation, KrDarkDock canonical.
+- Shared primitive audit completed (record-only): Logo canonical, Footer canonical component added, AuthGuard has `bg-[#1A1714]` token violation, KrDarkDock canonical.
 - XSD schema (`docs/schema/build_contract.xsd`) updated to support all contract shapes including apply-quick pattern.
 - `scripts/validate-wireframe-workflow.py` fixed: component_alignment uses full matrix for route-scoped runs; coverage_mismatch downgraded to warning.
 - `05_analysis.wireframe.xml` and `09_finalization.wireframe.xml` XML well-formedness issues were fixed (`&` -> `&amp;`).
 - CI integrity: route integrity clean, 11/11 screen pairs aligned, 18/18 pytest governance tests pass, governance artifacts valid.
 - Governance readiness: `pytest tests/plans -q` → 18 passed; `validate-governance-artifacts.mjs` → ok.
 
+## Recent Progress (2026-03-17)
+
+- Shell promotion complete: `/welcome` and `/documents` moved to `MigratedRouteLayout`. Canonical layout mix: migrated 14 · protected 1 · public 4. Reachable runtime paths total 26 because 7 legacy redirects are explicitly preserved in `App.tsx`.
+- Route-owner cleanup complete for the two remaining live `pages/` mounts:
+  - `/analysis` → `frontend/src/features/analysis/AnalysisPage.tsx`
+  - `/apply/quick` → `frontend/src/features/applications/ApplyQuick.tsx`
+- `frontend/src/routes.tsx` retired; `frontend/src/App.tsx` is now the sole router authority.
+- `MigratedRouteLayout.tsx` viewMap extended for `/opportunities` (`KrDark-feed`) and `/job-queue` (`overview`).
+- Tri-layer truth scripts rerun: route integrity clean, 26 reachable paths scanned (`19` canonical routes + `7` redirects), 11/11 screen pairs, 18 governance tests pass.
+- Gap-fill plan run for `/opportunities` and `/tracker` — findings saved to `tmp/migration/`.
+- `remaining-route-plan.md` created: `analysis/remaining-route-plan.md`.
+- `App.tsx` updated: migrated shell is authoritative for all canonical routes except `/asset-library` (support-only) which remains on `ProtectedLayout`.
+
+## Nested Tasks Added (2026-03-17)
+
+- **TSX Identity Gate** for `/tracker`: blocked on live env evidence.
+- **Shared-shell cleanup**: `Footer` adoption is now complete in `MigratedRouteLayout`.
+- **AuthGuard B3**: replace `bg-[#1A1714]` with semantic token (App.tsx:72).
+- **`/documents` Step 3d**: redline workspace — requires Step 3d execution.
+
 ## Next Gates
 
-- Step 3a `/tracker`: BLOCKED on Firebase/Firestore environment — do not attempt without one local backend run that has both Firebase config and working Firestore.
-- Logo remediation: deferred — `Logo.tsx` missing as standalone; `🦄` emoji in Sidebar is Zero-Flora violation. Dedicated session after Phase 4.
-- AuthGuard token violation: deferred — `App.tsx:71` uses `bg-[#1A1714]`.
+- Step 3a `/tracker`: BLOCKED on Firebase/Firestore — see `analysis/remaining-route-plan.md §4` for exact env config and validation steps.
+- AuthGuard token: `App.tsx:72` — deferred, non-critical.
 
-## Critical Blockers
+## Capability Blockers — ALL RESOLVED (2026-03-17)
 
-- `/tracker` closeout blocked by local Firebase/Firestore environment (route wiring fixed; environment not execution-ready).
-- Logo/Footer missing — no future work may silently define shared chrome.
+| Blocker | Resolution |
+|---------|-----------|
+| `workflow_orchestration` | `ApplyQuick.tsx` → `POST /api/workflows/generate-application`; full `analyzeJobFromUrl` pipeline delegated; result returned inline; tests updated to auth-required + 200 contract. |
+| `resume_audit` history | `ResumeAuditEntryPoint.tsx` renders persisted history panel via `getAuditHistory()`; wired to `GET /api/resume-audit/history`. |
+| `/analysis` vs `/asset-library` | `App.tsx` route comment explicit: support-only, intentionally NOT promoted; separate from pending design-parity routes. |
+| Ingestion client fragmentation | `ResumeUploader.tsx` → `/api/v1/ingest`; artifact upload + smart-ingestion specialized scopes unchanged. |
+
+## Remaining Open Items
+
+- `/tracker` closeout: BLOCKED on Firebase/Firestore env. `FIREBASE_PROJECT_ID` absent from `backend/.env`. Requires `FIREBASE_PROJECT_ID=careercopilot-468811` + Firestore service account. See `analysis/remaining-route-plan.md §4`.
+- Footer shell adoption: `RESOLVED` (adopted by `MigratedRouteLayout`).
+- AuthGuard B3: `App.tsx:72` `bg-[#1A1714]` → semantic token (deferred, non-critical).
 
 ## Next Actions
 
-1. Step 3a `/tracker`: BLOCKED — do not attempt without Firebase + Firestore on the same local backend run.
-2. Logo/AuthGuard cleanup: schedule as a dedicated session after tracker closeout.
+1. Step 3a `/tracker`: set `FIREBASE_PROJECT_ID=careercopilot-468811` in `backend/.env`, start backend, verify `GET /api/applications/`, capture populated board screenshot ≥90.
+2. Wire canonical `Footer` into `MigratedRouteLayout` during the next shell pass.
+3. AuthGuard semantic token fix (`App.tsx:72`).
