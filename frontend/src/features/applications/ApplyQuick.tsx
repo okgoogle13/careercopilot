@@ -36,7 +36,7 @@ export function ApplyQuick() {
     setLoading(true);
     try {
       const token = await getAuthToken();
-      const response = await fetch(API_ENDPOINTS.analyzeJobFromUrl, {
+      const response = await fetch(API_ENDPOINTS.generateApplication, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -44,13 +44,14 @@ export function ApplyQuick() {
         },
         body: JSON.stringify({
           url: jobUrl || undefined,
-          job_description: jobDescription || undefined,
+          job_description: jobDescription || 'No description provided.',
         }),
       });
       if (!response.ok) {
         throw new Error('Quick apply analysis failed.');
       }
-      const data = (await response.json()) as AnalyzeJobFromUrlResponse;
+      const payload = await response.json();
+      const data = (payload.result ?? payload) as AnalyzeJobFromUrlResponse;
       setResult(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to run quick apply.');

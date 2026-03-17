@@ -1,6 +1,14 @@
-import React, { useState } from 'react';
-import { Loader2, Shield, AlertCircle } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Clock, Loader2, Shield, AlertCircle } from 'lucide-react';
 import { toast } from 'sonner';
+import { getAuditHistory } from '@/services/resumeAuditService';
+
+export interface AuditHistoryEntry {
+  id: string;
+  created_at: string;
+  strictness_mode: string;
+  audit_result: { overallScore: number };
+}
 
 export interface ResumeAuditEntryPointProps {
   /** Called when audit completes with results */
@@ -24,6 +32,16 @@ export const ResumeAuditEntryPoint: React.FC<ResumeAuditEntryPointProps> = ({
   const [strictnessMode, setStrictnessMode] = useState<'lenient' | 'moderate' | 'strict'>(
     'moderate'
   );
+  const [history, setHistory] = useState<AuditHistoryEntry[]>([]);
+  const [historyLoading, setHistoryLoading] = useState(false);
+
+  useEffect(() => {
+    setHistoryLoading(true);
+    getAuditHistory(5)
+      .then((res) => setHistory(res?.data ?? []))
+      .catch(() => setHistory([]))
+      .finally(() => setHistoryLoading(false));
+  }, []);
 
   const handleAudit = async () => {
     if (!resumeText) {
@@ -214,6 +232,61 @@ export const ResumeAuditEntryPoint: React.FC<ResumeAuditEntryPointProps> = ({
         Processing time typically 10-30 seconds. Results are securely stored and tied to your
         profile.
       </p>
+
+      {/* Audit History */}
+      <div className="mt-6">
+        <div className="flex items-center gap-2 mb-3">
+          <Clock
+            className="w-4 h-4"
+            style={{ color: 'var(--sys-color-on-surface-variant)' }}
+          />
+          <p
+            className="text-label-medium font-bold"
+            style={{ color: 'var(--sys-color-on-surface-variant)' }}
+          >
+            Recent Audits
+          </p>
+        </div>
+        {historyLoading ? (
+          <Loader2
+            className="w-4 h-4 animate-spin"
+            style={{ color: 'var(--sys-color-on-surface-variant)' }}
+          />
+        ) : history.length === 0 ? (
+          <p
+            className="text-body-small"
+            style={{ color: 'var(--sys-color-on-surface-variant)' }}
+          >
+            No audit history yet.
+          </p>
+        ) : (
+          <ul className="space-y-2">
+            {history.map((entry) => (
+              <li
+                key={entry.id}
+                className="flex items-center justify-between rounded-blockRiot01 px-3 py-2"
+                style={{
+                  backgroundColor: 'var(--sys-color-surface-container-low)',
+                  borderRadius: 'var(--shape-blockRiot01)',
+                }}
+              >
+                <span
+                  className="text-body-small"
+                  style={{ color: 'var(--sys-color-on-surface-variant)' }}
+                >
+                  {new Date(entry.created_at).toLocaleDateString()} · {entry.strictness_mode}
+                </span>
+                <span
+                  className="text-label-small font-bold"
+                  style={{ color: 'var(--sys-color-solidarityRed-base)' }}
+                >
+                  {entry.audit_result?.overallScore ?? '—'}/100
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };

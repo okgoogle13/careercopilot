@@ -1,4 +1,4 @@
-import { Pebble, Placard } from '@/components/ui';
+import { Placard, Strike } from '@/components/ui';
 import { JobList } from '@/components/JobList';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Briefcase, Compass, ExternalLink, MapPin, Search, Sparkles } from 'lucide-react';
@@ -120,7 +120,7 @@ export function Opportunities() {
               />
             </div>
 
-            <Pebble
+            <Strike
               onClick={handleScout}
               disabled={isLoading}
               variant="primary"
@@ -136,7 +136,7 @@ export function Opportunities() {
                   <Search className="w-4 h-4 mr-2" /> BEGIN SCOUT
                 </>
               )}
-            </Pebble>
+            </Strike>
           </div>
         </Placard>
 
