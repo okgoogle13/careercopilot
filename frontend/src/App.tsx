@@ -7,17 +7,18 @@ import {
   BrowserRouter as Router,
   Routes,
   useLocation,
-  useNavigate,
 } from 'react-router-dom';
 import { Toaster } from 'sonner';
 const texturePattern =
   '/assets/kr-solidarity/texture/kr-solidarity__substrate__landmark--melbourne-laneway--v1.png';
 import './design/styles/design-tokens.css';
-import { KrDarkDock } from './layouts/KrDarkShell/components/KrDarkDock';
+import { MigratedRouteLayout } from './layouts/MigratedRouteLayout';
 import { getModeForRoute } from './config/routeModeMap';
 import { useAuth } from './context/AuthContext';
 import { AssetLibrary } from './features/analysis/AssetLibrary';
+import { AnalysisPage } from './features/analysis/AnalysisPage';
 import { ApplicationTracker } from './features/applications/ApplicationTracker';
+import { ApplyQuick } from './features/applications/ApplyQuick';
 import { CoverLetterGenerator } from './features/applications/CoverLetterGenerator';
 import { Login } from './features/auth/Login';
 import { Register } from './features/auth/Register';
@@ -32,10 +33,8 @@ import { Opportunities } from './features/opportunities/Opportunities';
 import { ProfileView } from './features/profile/components/ProfileView';
 import { Settings } from './features/settings/Settings';
 import { Layout } from './layouts/Layout';
-import { AnalysisPage } from './pages/AnalysisPage';
 const SmartIngestion = lazy(() => import('./features/ingestion/SmartIngestion'));
 import { JobQueue } from './features/jobs/JobQueue';
-import { ApplyQuick } from './pages/ApplyQuick';
 import { useModeStore } from './stores/useModeStore';
 
 /**
@@ -68,7 +67,7 @@ export const RequireAuth = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#1A1714] flex items-center justify-center text-[#E6E1E5]">
+      <div className="min-h-screen bg-[var(--sys-color-charcoalBackground-base)] flex items-center justify-center text-[var(--sys-color-worker-ash-base)]">
         Loading...
       </div>
     );
@@ -112,68 +111,13 @@ export const ProtectedLayout = () => {
   );
 };
 
-// Thin authenticated shell for migrated routes that must not inherit the legacy sidebar.
-// Includes the KrDarkDock for navigation.
-export const MigratedRouteLayout = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const handleViewChange = (view: string) => {
-    // Basic view-to-route mapper for the dock
-    const viewMap: Record<string, string> = {
-      'KrDark-landing': '/',
-      auth: '/login',
-      'KrDark-kanban': '/tracker',
-      'lab-dashboard': '/dashboard',
-      'lab-analysis': '/analysis',
-      'KrDark-ingestion': '/career/ingest',
-    };
-    const route = viewMap[view] || '/dashboard';
-    navigate(route);
-  };
-
-  // Determine current view from pathname
-  const getCurrentView = () => {
-    if (location.pathname === '/tracker') return 'KrDark-kanban';
-    if (location.pathname === '/career/ingest') return 'KrDark-ingestion';
-    if (location.pathname.startsWith('/analysis')) return 'lab-analysis';
-    if (location.pathname === '/dashboard') return 'lab-dashboard';
-    if (location.pathname === '/') return 'KrDark-landing';
-    return 'lab-dashboard';
-  };
-
-  return (
-    <div className="min-h-screen bg-surface text-on-surface relative">
-      <KrDarkDock
-        currentView={getCurrentView()}
-        onViewChange={handleViewChange}
-      />
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={location.pathname}
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0 }}
-          transition={{
-            duration: 0.35,
-            ease: [0.175, 0.885, 0.32, 1.1],
-          }}
-          className="min-h-screen"
-        >
-          <Outlet />
-        </motion.div>
-      </AnimatePresence>
-    </div>
-  );
-};
-
 // Public Layout (Login/Register/Landing)
 export const PublicLayout = () => {
   const showSentryTestButton =
     import.meta.env.DEV && import.meta.env.VITE_SHOW_SENTRY_TEST_BUTTON === 'true';
 
   return (
-    <div className="min-h-screen bg-[#1A1714] relative">
+    <div className="min-h-screen bg-[var(--sys-color-charcoalBackground-base)] relative">
       {/* Textured Background */}
       <div
         className="fixed inset-0 pointer-events-none z-0 opacity-30 mix-blend-overlay"
@@ -195,13 +139,13 @@ export const PublicLayout = () => {
               bottom: '20px',
               right: '20px',
               padding: '10px',
-              background: '#D0BCFE',
-              color: '#381E72',
+              background: 'var(--sys-color-inkGold-base)',
+              color: 'var(--sys-color-charcoalBackground-base)',
               borderRadius: '8px',
               zIndex: 9999,
               cursor: 'pointer',
               fontWeight: 'bold',
-              border: 'none',
+              border: '1px solid var(--sys-color-outline-variant)',
             }}
           >
             Trigger Sentry Error
@@ -253,6 +197,15 @@ export default function App() {
             element={<Register />}
           />
           <Route
+            path="/auth"
+            element={
+              <Navigate
+                to="/login"
+                replace
+              />
+            }
+          />
+          <Route
             path="*"
             element={<NotFound />}
           />
@@ -261,6 +214,7 @@ export default function App() {
         {/* Protected Routes */}
         <Route element={<RequireAuth />}>
           <Route element={<MigratedRouteLayout />}>
+            {/* Step 3a: CRUD verified via REST; local Python client blocked by gRPC hang */}
             <Route
               path="/tracker"
               element={<ApplicationTracker />}
@@ -281,20 +235,22 @@ export default function App() {
               path="/career/ingest"
               element={<SmartIngestion />}
             />
-          </Route>
-
-          <Route element={<ProtectedLayout />}>
+            <Route
+              path="/apply/quick"
+              element={<ApplyQuick />}
+            />
+            <Route
+              path="/settings"
+              element={<Settings />}
+            />
+            <Route
+              path="/profile"
+              element={<ProfileView />}
+            />
+            {/* Step 6B: shell-promoted — token-enforcement + migration-audit passed */}
             <Route
               path="/onboarding"
               element={<OnboardingRoute />}
-            />
-            <Route
-              path="/welcome"
-              element={<WelcomeScreen />}
-            />
-            <Route
-              path="/documents"
-              element={<Documents />}
             />
             <Route
               path="/ksc-generator"
@@ -305,24 +261,79 @@ export default function App() {
               element={<CoverLetterGenerator />}
             />
             <Route
-              path="/settings"
-              element={<Settings />}
-            />
-            <Route
-              path="/profile"
-              element={<ProfileView />}
-            />
-            <Route
-              path="/asset-library"
-              element={<AssetLibrary />}
-            />
-            <Route
               path="/job-queue"
               element={<JobQueue />}
             />
             <Route
-              path="/apply/quick"
-              element={<ApplyQuick />}
+              path="/welcome"
+              element={<WelcomeScreen />}
+            />
+            <Route
+              path="/documents"
+              element={<Documents />}
+            />
+            <Route
+              path="/dashboard-overview"
+              element={
+                <Navigate
+                  to="/dashboard"
+                  replace
+                />
+              }
+            />
+            <Route
+              path="/kanban"
+              element={
+                <Navigate
+                  to="/tracker"
+                  replace
+                />
+              }
+            />
+            <Route
+              path="/ingestion"
+              element={
+                <Navigate
+                  to="/career/ingest"
+                  replace
+                />
+              }
+            />
+            <Route
+              path="/feed"
+              element={
+                <Navigate
+                  to="/opportunities"
+                  replace
+                />
+              }
+            />
+            <Route
+              path="/studio"
+              element={
+                <Navigate
+                  to="/ksc-generator"
+                  replace
+                />
+              }
+            />
+            <Route
+              path="/editor"
+              element={
+                <Navigate
+                  to="/documents"
+                  replace
+                />
+              }
+            />
+          </Route>
+
+          {/* ProtectedLayout: support-only surfaces that intentionally remain on the legacy shell. */}
+          <Route element={<ProtectedLayout />}>
+            {/* support-only: asset library is analysis/ingestion tooling, not a product pillar */}
+            <Route
+              path="/asset-library"
+              element={<AssetLibrary />}
             />
           </Route>
         </Route>
