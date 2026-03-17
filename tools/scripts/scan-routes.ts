@@ -32,9 +32,21 @@ function main() {
 
   // ── Step 1: Extract import map (component name → import path) ──
   const importMap = new Map<string, string>();
-  const importRe = /import\s+\{?\s*(\w+)\s*\}?\s+from\s+['"]([^'"]+)['"]/g;
+  const namedImportRe = /import\s+\{([\s\S]*?)\}\s+from\s+['"]([^'"]+)['"]/g;
   let m: RegExpExecArray | null;
-  while ((m = importRe.exec(src)) !== null) {
+  while ((m = namedImportRe.exec(src)) !== null) {
+    const names = m[1]
+      .split(',')
+      .map((name) => name.trim())
+      .filter(Boolean)
+      .map((name) => name.split(/\s+as\s+/)[0]?.trim())
+      .filter(Boolean) as string[];
+    for (const name of names) {
+      importMap.set(name, m[2]);
+    }
+  }
+  const defaultImportRe = /import\s+(\w+)\s+from\s+['"]([^'"]+)['"]/g;
+  while ((m = defaultImportRe.exec(src)) !== null) {
     importMap.set(m[1], m[2]);
   }
   const lazyImportRe = /const\s+(\w+)\s*=\s*lazy\(\(\)\s*=>\s*import\(['"]([^'"]+)['"]\)\)/g;
@@ -48,11 +60,12 @@ function main() {
   const routes: RouteEntry[] = [];
 
   // Find route elements with path= and element=
-  const routeRe = /<Route\s[^>]*?path=["']([^"']+)["'][^>]*?element=\{<(\w+)/g;
+  const routeRe = /<Route\s[^>]*?path=["']([^"']+)["'][^>]*?element=\{\s*<(\w+)/g;
   while ((m = routeRe.exec(src)) !== null) {
     const routePath = m[1];
     const componentName = m[2];
-    const importSource = importMap.get(componentName) || 'UNKNOWN';
+    const importSource =
+      componentName === 'Navigate' ? 'react-router-dom' : importMap.get(componentName) || 'UNKNOWN';
 
     // Determine layout by checking what context the route line is in
     const lineIdx = src.substring(0, m.index).split('\n').length;

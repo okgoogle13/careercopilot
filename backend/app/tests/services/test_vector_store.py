@@ -5,7 +5,6 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-import app.services.vector_store as vector_store_module
 from app.services.vector_store import CareerArtifact, VectorStore
 
 

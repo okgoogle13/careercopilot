@@ -1,9 +1,6 @@
 import os
 from unittest.mock import MagicMock, patch
 
-import pytest
-
-from app.core import secret_manager
 from app.core.secret_manager import _get_client, get_firebase_config, get_secret
 
 

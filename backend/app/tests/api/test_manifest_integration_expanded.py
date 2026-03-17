@@ -1,7 +1,5 @@
 """Expanded tests for manifest integration covering versioning, validation errors, and backfill edge cases."""
 
-import json
-from pathlib import Path
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
@@ -10,16 +8,12 @@ from fastapi import HTTPException
 from app.api.endpoints.manifest_integration import (
     add_assets_to_manifest,
     backfill_asset_metadata,
-    export_manifest,
-    generate_deployment_plan,
     import_manifest,
-    recalculate_manifest_summary,
     run_integration_test,
     validate_manifest,
 )
 from app.schemas.manifest_integration import (
     BackfillAssetRequest,
-    ManifestAssetEntry,
     ManifestUpdateRequest,
 )
 

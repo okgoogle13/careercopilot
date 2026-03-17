@@ -8,7 +8,6 @@ from datetime import datetime
 from typing import Any
 
 from fastapi import HTTPException, UploadFile, status
-from sqlalchemy.orm import Session
 
 from app.core.cloud_storage import cloud_storage_client
 from app.genkit_flows.smart_ingestion import (
@@ -19,7 +18,6 @@ from app.genkit_flows.smart_ingestion import (
 )
 from app.models.asset_library_schema import AssetDocument, AssetMetadata
 from app.models.ingestion_schemas import ExtractAndSaveRequest
-from app.models.user_asset import UserAsset
 
 logger = logging.getLogger(__name__)
 

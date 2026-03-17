@@ -1,11 +1,9 @@
 """Tests for career_intelligence async genkit flow."""
 
-import json
 from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
-from app.genkit_flows import career_intelligence as module
 from app.genkit_flows.career_intelligence import (
     _build_system_context,
     careerIntelligenceFlow,

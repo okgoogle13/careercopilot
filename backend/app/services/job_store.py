@@ -37,7 +37,7 @@ class FirestoreJobStore:
         col = db.collection(self.collection_name)
 
         # Determine ID or let Firestore generate it
-        if "id" in job_data and job_data["id"]:
+        if job_data.get("id"):
             doc_ref = col.document(job_data["id"])
         else:
             doc_ref = col.document()

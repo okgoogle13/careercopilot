@@ -1,6 +1,5 @@
 import json
 import logging
-from typing import Any, Dict
 
 from app.core.genkit_init import get_model
 from app.core.prompt_service import format_prompt

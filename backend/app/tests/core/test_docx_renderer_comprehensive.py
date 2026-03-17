@@ -2,7 +2,6 @@
 Comprehensive tests for DOCX document rendering.
 """
 
-import io
 import sys
 from unittest.mock import MagicMock, Mock, patch
 

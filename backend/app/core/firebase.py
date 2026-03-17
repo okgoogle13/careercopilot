@@ -102,7 +102,13 @@ def initialize_firebase() -> App | None:
             firebase_creds = get_firebase_credentials()
             if firebase_creds:
                 logger.info("Initializing Firebase Admin SDK with credentials from Secret Manager")
-                cred = credentials.Certificate(firebase_creds)
+                try:
+                    cred = credentials.Certificate(firebase_creds)
+                except Exception as e:
+                    logger.warning(
+                        f"Failed to load service account credentials: {e}. Falling back to default."
+                    )
+                    cred = None
             else:
                 logger.info("Initializing Firebase Admin SDK with default credentials")
                 # Will use GOOGLE_APPLICATION_CREDENTIALS or default service account

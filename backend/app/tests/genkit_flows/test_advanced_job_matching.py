@@ -1,15 +1,12 @@
 """Tests for advanced_job_matching genkit flow."""
 
-from types import SimpleNamespace
 from unittest.mock import MagicMock
 
 import pytest
 
 from app.genkit_flows import advanced_job_matching as module
 from app.genkit_flows.advanced_job_matching import (
-    CareerTransitionAnalysis,
     JobMatchAnalysis,
-    JobOpportunityRanking,
     SkillMatch,
 )
 

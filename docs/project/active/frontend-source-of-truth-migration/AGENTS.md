@@ -6,7 +6,7 @@ This file is the migration-specific agent guide. It complements the repo-root `A
 
 - `control/blueprint.md` (execution authority)
 - `control/workflow.md` (gate order + definitions)
-- `control/plan.md` (working plan; explains why)
+- `control/blueprint.md` (working execution truth; explains why)
 - `control/status.md` (status only; never overrides blueprint/workflow)
 - `control/pm/dashboard.md` (visibility + delegation support; not authority)
 

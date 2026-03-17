@@ -5,7 +5,6 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from app.genkit_flows import ingestion_flow as module
 from app.genkit_flows.ingestion_flow import SYSTEM_PROMPT, _extract_output, ingest_career_history
 
 

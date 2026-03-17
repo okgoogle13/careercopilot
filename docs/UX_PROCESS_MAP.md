@@ -414,7 +414,7 @@ Maps user goals to the screens and API calls that fulfill them, organised by jou
 | UX-09 | No dashboard summary of ATS scores across recent applications | `/dashboard` | Add a mini score-trend chart (last 5 applications) |
 | UX-10 | Mobile navigation not optimised for core loop actions | All | Prioritise "Find", "Generate", and "Track" in the bottom nav on mobile |
 | UX-11 | Users cannot easily restart a generation with different tone/style parameters | `/cover-letter-generator` | Add a "Regenerate with different style" quick action below the output |
-| UX-12 | No social proof / success stories on the landing page for the target demographic | `/` | Add 2–3 short testimonials from community services / government job applicants |
+| UX-13 | Path bifurcation: Users need a clear choice between profile setup and immediate job application | Dashboard / Onboarding | Implement a 'Choose Your Path' screen after login/onboarding |
 
 ---
 

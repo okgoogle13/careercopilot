@@ -10,7 +10,6 @@ from the stale branches with a more reliable AI-based solution.
 
 import json
 import logging
-from typing import List
 
 from pydantic import BaseModel, Field
 
@@ -22,18 +21,18 @@ logger = logging.getLogger(__name__)
 class CompanyContext(BaseModel):
     """Company context for applications and interview prep"""
 
-    recent_achievements: List[str] = Field(
+    recent_achievements: list[str] = Field(
         description="2-3 recent notable achievements or initiatives", default_factory=list
     )
-    core_values: List[str] = Field(description="3-5 core company values", default_factory=list)
+    core_values: list[str] = Field(description="3-5 core company values", default_factory=list)
     recommended_tone: str = Field(
         description="Recommended tone: formal, conversational, or enthusiastic",
         default="conversational",
     )
-    why_work_here_points: List[str] = Field(
+    why_work_here_points: list[str] = Field(
         description="Key talking points for 'Why this company?'", default_factory=list
     )
-    interview_questions: List[str] = Field(
+    interview_questions: list[str] = Field(
         description="3 intelligent questions to ask the interviewer", default_factory=list
     )
     cultural_insights: str = Field(
@@ -149,7 +148,7 @@ Keep responses concise and relevant for job applications.
             raise ValueError("Failed to generate company context from the model")
 
     except Exception as e:
-        logger.error(f"Company context generation failed: {str(e)}", exc_info=True)
+        logger.error(f"Company context generation failed: {e!s}", exc_info=True)
         # Return minimal context on failure
         return CompanyContext(
             recent_achievements=[f"Unable to fetch recent achievements for {company_name}"],

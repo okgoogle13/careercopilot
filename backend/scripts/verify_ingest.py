@@ -1,8 +1,6 @@
-import asyncio
 import os
 import sys
-from io import BytesIO
-from unittest.mock import AsyncMock, MagicMock
+from unittest.mock import MagicMock
 
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
@@ -10,7 +8,7 @@ from fastapi.testclient import TestClient
 # Add project root to path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 # Import ONLY what we need (avoid app.main)
 from app.api.endpoints.ingest import router as ingest_router
@@ -82,7 +80,7 @@ def verify_ingestion():
                 print(response.text)
 
         except Exception as e:
-            print(f"❌ Exception Verification Failed: {str(e)}")
+            print(f"❌ Exception Verification Failed: {e!s}")
 
 
 if __name__ == "__main__":

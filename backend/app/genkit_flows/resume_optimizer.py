@@ -11,7 +11,6 @@ Modernized to use async patterns and current Genkit architecture.
 
 import json
 import logging
-from typing import List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -28,7 +27,7 @@ class OptimizedResume(BaseModel):
     resume_text: str = Field(
         description="The complete and updated resume text, with keywords naturally integrated."
     )
-    keywords_integrated: List[str] = Field(
+    keywords_integrated: list[str] = Field(
         default_factory=list,
         description="List of keywords that were successfully integrated into the resume.",
     )
@@ -36,7 +35,7 @@ class OptimizedResume(BaseModel):
 
 @async_genkit_flow(name="optimize_resume", output_schema=OptimizedResume)
 async def optimize_resume(
-    resume_text: str, missing_keywords: List[str], job_description: str
+    resume_text: str, missing_keywords: list[str], job_description: str
 ) -> OptimizedResume:
     """
     Analyzes a resume and a list of missing keywords, then rewrites the resume
@@ -125,7 +124,7 @@ Now, please generate the optimized resume.
             raise ValueError("Failed to generate an optimized resume from the model")
 
     except Exception as e:
-        logger.error(f"Resume optimization failed: {str(e)}", exc_info=True)
+        logger.error(f"Resume optimization failed: {e!s}", exc_info=True)
         # Return original resume on failure
         return OptimizedResume(resume_text=resume_text, keywords_integrated=[])
 
@@ -151,15 +150,15 @@ class ImprovedBullet(BaseModel):
 class SkillsGap(BaseModel):
     """Structured skills gap between resume and job description."""
 
-    matched: List[str] = Field(
+    matched: list[str] = Field(
         default_factory=list,
         description="Skills present in both the resume and the job description.",
     )
-    missing: List[str] = Field(
+    missing: list[str] = Field(
         default_factory=list,
         description="Skills required by the job that are absent from the resume.",
     )
-    adjacent: List[str] = Field(
+    adjacent: list[str] = Field(
         default_factory=list,
         description="Skills from the resume that are closely related to (but not identical to) required skills.",
     )
@@ -174,7 +173,7 @@ class SkillsGap(BaseModel):
 class EnhancedResumeResult(BaseModel):
     """Combined output of bullet enhancement + skills gap analysis."""
 
-    improved_bullets: List[ImprovedBullet] = Field(
+    improved_bullets: list[ImprovedBullet] = Field(
         default_factory=list,
         description="Bullet points rewritten with quantifiable metrics.",
     )

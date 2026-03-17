@@ -11,15 +11,15 @@ cohesive interface. It replaces redundant configurations in:
 
 import asyncio
 import contextvars
-import json
 import os
 import sys
 import time
 import uuid
+from collections.abc import Callable
 from datetime import datetime, timezone
 from functools import wraps
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Type
+from typing import Any
 
 from fastapi import FastAPI, Request, Response
 from fastapi.responses import JSONResponse
@@ -50,10 +50,10 @@ except ImportError:
 # Context Variables
 # =============================================================================
 
-request_id_context: contextvars.ContextVar[Optional[str]] = contextvars.ContextVar(
+request_id_context: contextvars.ContextVar[str | None] = contextvars.ContextVar(
     "request_id", default=None
 )
-user_id_context: contextvars.ContextVar[Optional[str]] = contextvars.ContextVar(
+user_id_context: contextvars.ContextVar[str | None] = contextvars.ContextVar(
     "user_id", default=None
 )
 
@@ -63,7 +63,7 @@ user_id_context: contextvars.ContextVar[Optional[str]] = contextvars.ContextVar(
 
 
 def configure_logging(
-    environment: Optional[str] = None,
+    environment: str | None = None,
     log_dir: str = "logs",
     service_name: str = "careercopilot",
 ) -> None:
@@ -151,7 +151,7 @@ def get_logger(name: str):
 # Metrics Initialization
 # =============================================================================
 
-_metrics: Dict[str, Any] = {}
+_metrics: dict[str, Any] = {}
 
 
 def _init_metrics():
@@ -220,7 +220,7 @@ _init_metrics()
 # =============================================================================
 
 
-def monitor_performance(operation_name: Optional[str] = None):
+def monitor_performance(operation_name: str | None = None):
     """Decorator to monitor function performance and log results."""
 
     def decorator(func: Callable):
@@ -322,7 +322,7 @@ def monitor_performance(operation_name: Optional[str] = None):
 class UnifiedObservabilityMiddleware(BaseHTTPMiddleware):
     """Middleware combining request tracking, logging, and metrics."""
 
-    def __init__(self, app: ASGIApp, exclude_paths: Optional[List[str]] = None):
+    def __init__(self, app: ASGIApp, exclude_paths: list[str] | None = None):
         super().__init__(app)
         self.exclude_paths = exclude_paths or ["/health", "/metrics", "/ready", "/docs", "/redoc"]
         self.env = os.getenv("ENV", "development")
@@ -384,7 +384,7 @@ def track_user_action(action: str, user_id: str, **metadata):
 
 
 def track_ai_usage(
-    operation_type: str, user_id: str, tokens_used: Optional[int] = None, cached: bool = False
+    operation_type: str, user_id: str, tokens_used: int | None = None, cached: bool = False
 ):
     """Track AI operation usage (stub)."""
     logger.info(
@@ -392,7 +392,7 @@ def track_ai_usage(
     )
 
 
-def track_error(error_type: str, component: str, error_message: str, user_id: Optional[str] = None):
+def track_error(error_type: str, component: str, error_message: str, user_id: str | None = None):
     """Track application errors (stub)."""
     logger.error(
         f"Error in {component}: {error_type} - {error_message}", extra={"user_id": user_id}
@@ -421,7 +421,7 @@ def get_metrics_collector():
     return StubCollector()
 
 
-def setup_observability(app: FastAPI, environment: Optional[str] = None):
+def setup_observability(app: FastAPI, environment: str | None = None):
     """Initialize everything for a FastAPI app."""
     configure_logging(environment)
     app.add_middleware(UnifiedObservabilityMiddleware)

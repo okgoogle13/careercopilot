@@ -135,3 +135,9 @@
 2026-03-17 01:52:52 | INFO     | 02e7037d-48ec-415a-aabc-1805df2dd6a7 | REST Response: 200 in 0.427s
 2026-03-17 01:58:40 | INFO     | 321cf038-cde3-46bd-b1e5-a709cad3e996 | REST Request: GET /openapi.json
 2026-03-17 01:58:54 | INFO     | 321cf038-cde3-46bd-b1e5-a709cad3e996 | REST Response: 200 in 14.013s
+2026-03-17 12:38:56 | INFO     | - | Starting CareerCopilot API application
+2026-03-17 12:38:56 | INFO     | - | Database initialized successfully
+2026-03-17 12:38:56 | INFO     | - | Genkit AI framework initialized successfully
+2026-03-17 12:39:46 | INFO     | - | Starting CareerCopilot API application
+2026-03-17 12:39:46 | INFO     | - | Database initialized successfully
+2026-03-17 12:39:46 | INFO     | - | Genkit AI framework initialized successfully

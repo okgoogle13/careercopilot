@@ -54,10 +54,6 @@ class GoogleGenAIPlugin(Protocol):
     def init(api_key: Optional[str] = None) -> GenkitPlugin:
         ...
 
-# Type variables for flow functions
-InputT = TypeVar('InputT')
-OutputT = TypeVar('OutputT')
-
 # Type for flow functions
 FlowFunction = Callable[..., OutputT]
 

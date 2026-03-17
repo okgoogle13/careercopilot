@@ -1,9 +1,9 @@
 # Backend Feature to Frontend Component Gap Map
 
-**Date:** 2026-03-16
+**Date:** 2026-03-17
 **Status:** Proposed component gap map
 **Canonical companion artifacts:**
-- `docs/project/active/frontend-source-of-truth-migration/control/plan.md`
+- `docs/project/active/frontend-source-of-truth-migration/control/blueprint.md`
 - `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.md`
 - `docs/project/active/frontend-source-of-truth-migration/control/gap-map.json`
 
@@ -48,7 +48,7 @@ For each feature, it answers:
 - Owner route: `/documents`
 - Owning page or feature: `Documents`
 - Backend status: mounted and active
-- Frontend status: no live owner
+- Frontend status: live canonical owner
 - Existing components to reuse:
   - `Documents`
   - `DocumentWorkbench` as reference-only workbench source
@@ -61,7 +61,7 @@ For each feature, it answers:
   - support: redline upload, tracked changes workspace, redline action bar
   - reference-only: `DocumentWorkbench`
 - Notes:
-  - The route stays the same; the missing work is inside the documents feature, not in a new top-level route.
+  - The route stays the same; the redline workspace is now mounted inside the canonical documents feature and no longer represents a "backend exists, no live owner" gap.
 
 ### Smart ingestion flow
 
@@ -90,7 +90,7 @@ For each feature, it answers:
 - Owner route: `/profile`
 - Owning page or feature: `ProfileView`
 - Backend status: mounted and active
-- Frontend status: no live owner
+- Frontend status: live canonical owner
 - Existing components to reuse:
   - `ProfileView`
   - `Settings` only as secondary integration if needed
@@ -106,7 +106,7 @@ For each feature, it answers:
   - secondary integration: `Settings`
   - reference-only: `SettingsControl`
 - Notes:
-  - Voice ownership is locked to `/profile` for planning purposes.
+  - Voice ownership is locked to `/profile` and the live route already mounts the voice-profile management section; remaining work is refinement, not missing route ownership.
 
 ### Resume audit
 

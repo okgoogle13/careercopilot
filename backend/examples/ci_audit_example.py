@@ -13,11 +13,9 @@ This example shows:
 
 import asyncio
 from pathlib import Path
-from typing import List
 
 # Genkit imports (install with: pip install genkit genkit-plugin-google-genai)
 from genkit import genkit
-from genkit.types import GenerateRequest
 from genkit_plugin_google_genai import google_genai
 
 # CareerCopilot CI Auditor
@@ -82,7 +80,7 @@ async def perform_audit(request: CodeAuditRequest) -> CIAuditResponse:
 # ------------------------------------------------------------------------------
 # Example 1: Audit PR files
 # ------------------------------------------------------------------------------
-async def audit_pull_request(pr_files: List[str]):
+async def audit_pull_request(pr_files: list[str]):
     """Audits all files changed in a GitHub PR."""
     request = CodeAuditRequest(
         file_paths=pr_files,
@@ -107,7 +105,7 @@ async def audit_pull_request(pr_files: List[str]):
 # ------------------------------------------------------------------------------
 # Example 2: Pre-commit quick scan
 # ------------------------------------------------------------------------------
-async def quick_scan_staged_files(staged_files: List[str]):
+async def quick_scan_staged_files(staged_files: list[str]):
     """Fast triage scan for pre-commit hook (target: <30s execution)."""
     quick_prompt = CIAuditorPrompts.build_quick_scan_prompt(
         file_count=len(staged_files), tech_stack="TypeScript React"

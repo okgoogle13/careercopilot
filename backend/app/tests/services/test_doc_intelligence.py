@@ -1,7 +1,6 @@
 """Unit tests for the document intelligence service."""
 
 from pathlib import Path
-from types import SimpleNamespace
 from unittest.mock import MagicMock
 from zipfile import ZipFile
 

@@ -6,10 +6,7 @@ Tests for the consolidated observability system
 """
 
 import asyncio
-import os
-import sys
 import uuid
-from unittest.mock import MagicMock, patch
 
 import pytest
 
@@ -18,7 +15,6 @@ from app.core.observability import (
     get_metrics_collector,
     monitor_performance,
     request_id_context,
-    setup_observability,
     track_ai_usage,
     track_error,
     track_user_action,

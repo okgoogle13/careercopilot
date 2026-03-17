@@ -34,13 +34,6 @@
         "GITHUB_TOKEN": "${GITHUB_TOKEN}"
       }
     },
-    "perplexity": {
-      "command": "/ABSOLUTE/PATH/TO/PROJECT/venv/bin/python",
-      "args": ["/ABSOLUTE/PATH/TO/PROJECT/servers/perplexity_server.py"],
-      "env": {
-        "PERPLEXITY_API_KEY": "${PERPLEXITY_API_KEY}"
-      }
-    },
     "task-router": {
       "command": "/ABSOLUTE/PATH/TO/PROJECT/venv/bin/python",
       "args": ["/ABSOLUTE/PATH/TO/PROJECT/servers/task_router_mcp.py"]

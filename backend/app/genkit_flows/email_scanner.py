@@ -4,7 +4,6 @@ from datetime import datetime, timezone
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-from sqlalchemy.orm import Session
 
 from app.core.database import SessionLocal
 from app.core.genkit_init import get_model

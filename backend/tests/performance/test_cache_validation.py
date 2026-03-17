@@ -6,7 +6,7 @@ import asyncio
 import uuid
 from asyncio import Lock
 from datetime import UTC, datetime, timedelta
-from typing import Any, Dict, Optional
+from typing import Any
 from unittest.mock import MagicMock
 
 import pytest
@@ -18,7 +18,7 @@ app = MagicMock()
 # Simple in-memory cache for testing with TTL support
 class MockAICache:
     def __init__(self):
-        self.cache: Dict[str, Dict[str, Any]] = {}
+        self.cache: dict[str, dict[str, Any]] = {}
         self.stats = {"hits": 0, "misses": 0, "size": 0}
         self._lock = Lock()
 
@@ -27,7 +27,7 @@ class MockAICache:
             self.cache.clear()
             self.stats = {"hits": 0, "misses": 0, "size": 0}
 
-    async def get(self, key: str) -> Optional[Any]:
+    async def get(self, key: str) -> Any | None:
         async with self._lock:
             if key in self.cache:
                 entry = self.cache[key]
@@ -42,7 +42,7 @@ class MockAICache:
             self.stats["misses"] += 1
             return None
 
-    async def set(self, key: str, value: Any, ttl: Optional[float] = None):
+    async def set(self, key: str, value: Any, ttl: float | None = None):
         ttl = ttl or 300  # Default 5 minutes
         async with self._lock:
             self.cache[key] = {
@@ -76,7 +76,7 @@ def cached_ai_operation(operation_type=None, ttl_seconds=300):
     def decorator(func):
         async def wrapper(*args, **kwargs):
             # Create a cache key based on function name and arguments
-            key = f"{func.__name__}:{str(args)}:{str(kwargs)}"
+            key = f"{func.__name__}:{args!s}:{kwargs!s}"
 
             # Try to get from cache
             cached = await cache.get(key)

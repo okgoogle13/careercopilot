@@ -3,9 +3,7 @@
 Tests cover protocol definitions, type stubs, and type variable initialization.
 """
 
-from typing import Any, Callable, List, Optional
-
-import pytest
+from typing import Any
 
 from app.genkit_flows.types import (
     ErrorHandler,
@@ -259,7 +257,6 @@ class TestTypeAnnotations:
 
     def test_protocols_are_runtime_checkable(self):
         """Test protocols support runtime checking."""
-        from typing_extensions import Protocol as TypingProtocol
 
         # All our protocols should be Protocol subclasses
         assert issubclass(GenkitFlow, object)

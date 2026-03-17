@@ -1,12 +1,9 @@
 from datetime import datetime, timezone
 
-import pytest
-
 from app.models.database import (
     AgentSession,
     AIInteraction,
     Application,
-    Cache,
     Job,
     MarketAnalysis,
     User,

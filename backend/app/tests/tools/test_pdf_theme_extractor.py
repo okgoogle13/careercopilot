@@ -21,7 +21,6 @@ from app.tools.pdf_theme_extractor import (
     extract_colors,
     extract_fonts,
     extract_layout,
-    extract_section_order,
     extract_theme_from_pdf,
     rgb_to_hex,
 )

@@ -1,7 +1,7 @@
 {
   "artifact": "frontend_source_of_truth_migration_implementation_backlog",
   "generated_at": "2026-03-13",
-  "canonical_plan": "docs/project/active/frontend-source-of-truth-migration/control/plan.md",
+  "canonical_plan": "docs/project/active/frontend-source-of-truth-migration/control/blueprint.md",
   "milestones": [
     {
       "milestone_id": "M1",

@@ -5,7 +5,7 @@ the advanced intelligence features for career management.
 
 import asyncio
 import json
-from typing import Any, Optional
+from typing import Any
 
 from app.core.ai_client import get_ai_client
 from app.core.cache_decorators import cached_ai_operation
@@ -456,9 +456,9 @@ class PersonalCareerWorkflow:
     async def generate_email_template(
         self,
         template_type: str,
-        job_title: Optional[str] = None,
-        company_name: Optional[str] = None,
-        contact_name: Optional[str] = None,
+        job_title: str | None = None,
+        company_name: str | None = None,
+        contact_name: str | None = None,
     ) -> dict[str, Any]:
         """
         Generate specific email template for job applications
@@ -513,7 +513,7 @@ class PersonalCareerWorkflow:
             return {"success": False, "error": str(e)}
 
     async def generate_cover_letter_template(
-        self, job_title: Optional[str] = None, company_name: Optional[str] = None
+        self, job_title: str | None = None, company_name: str | None = None
     ) -> dict[str, Any]:
         """
         Generate cover letter template with career transition context

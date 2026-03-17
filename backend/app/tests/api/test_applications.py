@@ -1,7 +1,6 @@
 """Tests for /applications API endpoints."""
 
 from types import SimpleNamespace
-from unittest.mock import MagicMock, patch
 
 import pytest
 

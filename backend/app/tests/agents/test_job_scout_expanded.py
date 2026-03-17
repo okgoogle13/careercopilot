@@ -1,7 +1,6 @@
 """Expanded tests for JobScoutAgent covering JSON parsing and fallback logic."""
 
-import json
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, patch
 
 import pytest
 
@@ -52,7 +51,6 @@ class TestJobScoutExpanded:
             # Since we can't easily execute the block directly without subprocess,
             # we just ensure the classes and logic are sound.
             # But we can try to trigger it if we reload the module with __name__ set.
-            import importlib
             import sys
 
             # This is a bit hacky but works for coverage

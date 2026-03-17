@@ -6,10 +6,8 @@ Provides common patterns for user authorization, resource fetching, and paginati
 """
 
 import logging
-from typing import Any, Generic, TypeVar
+from typing import Any, TypeVar
 
-from fastapi import HTTPException, status
-from sqlalchemy import func
 from sqlalchemy.orm import Session
 
 from app.core.error_handlers import ErrorHandler

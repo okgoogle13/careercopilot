@@ -23,8 +23,8 @@ async def test_career_ingest_flow(client, mock_db):
     # Create clean Pydantic model to return (emulating Genkit success)
     mock_ai_result = CareerDatabase(**golden_data)
 
-    from app.core.database import SessionLocal, get_db
-    from app.models.database import Base, User
+    from app.core.database import SessionLocal
+    from app.models.database import User
 
     # 2. Patch dependencies in the canonical endpoint module.
     with patch("app.api.endpoints.career.ingest_career_docs", new_callable=AsyncMock) as mock_flow:

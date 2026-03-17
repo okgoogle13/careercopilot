@@ -2,7 +2,6 @@ import os
 from unittest.mock import MagicMock, patch
 
 import pytest
-from firebase_admin.exceptions import FirebaseError
 
 from app.core import firebase
 from app.core.firebase import (

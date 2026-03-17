@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any
 
 # Path to format_rules.json
 FORMAT_RULES_PATH = (
@@ -8,8 +8,8 @@ FORMAT_RULES_PATH = (
 )
 
 
-def load_ats_rules() -> Dict[str, Any]:
-    with open(FORMAT_RULES_PATH, "r", encoding="utf-8") as f:
+def load_ats_rules() -> dict[str, Any]:
+    with open(FORMAT_RULES_PATH, encoding="utf-8") as f:
         return json.load(f)
 
 
