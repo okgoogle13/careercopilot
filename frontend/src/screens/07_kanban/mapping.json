@@ -1,7 +1,7 @@
 {
   "wireframe_id": "07_kanban",
   "wireframe_path": ".claude/wireframes/07_kanban.xml",
-  "source_component_path": "frontend/src/components/phase3-batch3/KanbanTracker.tsx",
+  "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/KanbanTracker.tsx",
   "screen_component_path": "frontend/src/screens/07_kanban/KanbanTracker.tsx",
   "route": "/kr/kanban",
   "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",

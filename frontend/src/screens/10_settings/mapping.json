@@ -1,7 +1,7 @@
 {
   "wireframe_id": "10_settings",
   "wireframe_path": ".claude/wireframes/10_settings.xml",
-  "source_component_path": "frontend/src/components/phase3-batch3/SettingsControl.tsx",
+  "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/SettingsControl.tsx",
   "screen_component_path": "frontend/src/screens/10_settings/SettingsControl.tsx",
   "route": "/kr/settings",
   "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",

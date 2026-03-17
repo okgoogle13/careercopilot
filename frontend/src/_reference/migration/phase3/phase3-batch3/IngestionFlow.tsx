@@ -12,37 +12,37 @@ type SlotDef = {
 
 const SLOT_DEFS: SlotDef[] = [
   {
-    name: 'auto_kr_solid_002',
+    name: 'background',
+    zLayer: 'Z-0',
+    token: '--sys-color-charcoalBackground-base',
+    assetCompat: 'KR-SOLID-SUBSTRATE',
+  },
+  {
+    name: 'icon_pdf',
+    zLayer: 'Z-3',
+    token: '--sys-color-worker-ash-base',
+    assetCompat: 'KR-SOLID-UIKIT',
+  },
+  {
+    name: 'icon_docx',
+    zLayer: 'Z-3',
+    token: '--sys-color-worker-ash-base',
+    assetCompat: 'KR-SOLID-UIKIT',
+  },
+  {
+    name: 'icon_upload',
+    zLayer: 'Z-3',
+    token: '--sys-color-worker-ash-base',
+    assetCompat: 'KR-SOLID-UIKIT',
+  },
+  {
+    name: 'auto_kr_solid_005',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_solid_009',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_solid_024',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_solid_006',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_solid_040',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_ui_012',
+    name: 'auto_kr_solid_039',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
@@ -54,38 +54,45 @@ const SLOT_DEFS: SlotDef[] = [
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_ui_024',
+    name: 'auto_kr_ui_010',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_ui_035',
+    name: 'auto_kr_ui_023',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_solid_043',
+    name: 'auto_kr_ui_034',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_icon_004',
+    zLayer: 'Z-3',
+    token: '--sys-color-worker-ash-base',
+    assetCompat: 'KR-SOLID-UIKIT',
   },
 ];
 const DEFAULT_SLOT_ASSETS: Partial<Record<string, string>> = {
-  auto_kr_solid_002: 'KR-SOLID-002',
-  auto_kr_solid_009: 'KR-SOLID-003',
-  auto_kr_solid_024: 'KR-SOLID-004',
-  auto_kr_solid_006: 'KR-SOLID-005',
-  auto_kr_solid_040: 'KR-SOLID-006',
-  auto_kr_ui_012: 'KR-SOLID-007',
-  auto_kr_ui_011: 'KR-SOLID-008',
-  auto_kr_ui_024: 'KR-SOLID-009',
-  auto_kr_ui_035: 'KR-SOLID-010',
-  auto_kr_solid_043: 'KR-SOLID-011',
+  background: 'KR-SOLID-040',
+  icon_pdf: 'KR-BRUTALIST-MASK-001',
+  icon_docx: 'KR-UI-016',
+  icon_upload: 'KR-UI-017',
+  auto_kr_solid_005: 'KR-UI-001',
+  auto_kr_solid_039: 'KR-UI-002',
+  auto_kr_ui_011: 'KR-UI-003',
+  auto_kr_ui_010: 'KR-UI-004',
+  auto_kr_ui_023: 'KR-UI-005',
+  auto_kr_ui_034: 'KR-UI-006',
+  auto_kr_icon_004: 'KR-UI-007',
 };
 
-export interface AnalysisWorkbenchProps {
+export interface IngestionFlowProps {
   className?: ClassValue;
   title?: string;
   subtitle?: string;
@@ -97,19 +104,19 @@ export interface AnalysisWorkbenchProps {
 }
 
 const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
+const _springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
 const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
 
-export const AnalysisWorkbench = memo(function AnalysisWorkbench({
+export const IngestionFlow = memo(function IngestionFlow({
   className,
-  title = 'Resume Analysis Results',
-  subtitle = 'Review ATS, skills, and formatting diagnostics.',
-  primaryLabel = 'Recommend Fixes',
-  secondaryLabel = 'Download Report',
+  title = 'Resume Ingestion',
+  subtitle = 'Upload and parse resume artifacts for downstream analysis.',
+  primaryLabel = 'Upload Resume',
+  secondaryLabel = 'Browse Files',
   slotAssets,
   onPrimaryAction,
   onSecondaryAction,
-}: AnalysisWorkbenchProps) {
+}: IngestionFlowProps) {
   const mode = useModeStore((state) => state.mode);
   const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
   const isKrDark = mode === 'KrDark';
@@ -130,7 +137,7 @@ export const AnalysisWorkbench = memo(function AnalysisWorkbench({
         border: '1px solid var(--sys-color-concreteGrey-base)',
       }}
       data-mode={mode}
-      data-testid="analysisworkbench"
+      data-testid="ingestionflow"
       data-motion-audit="true"
     >
       <style>{`
@@ -241,4 +248,4 @@ export const AnalysisWorkbench = memo(function AnalysisWorkbench({
   );
 });
 
-export default AnalysisWorkbench;
+export default IngestionFlow;

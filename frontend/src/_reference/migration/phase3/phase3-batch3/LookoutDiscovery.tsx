@@ -12,87 +12,73 @@ type SlotDef = {
 
 const SLOT_DEFS: SlotDef[] = [
   {
-    name: 'background',
-    zLayer: 'Z-0',
-    token: '--sys-color-charcoalBackground-base',
-    assetCompat: 'KR-SOLID-SUBSTRATE',
-  },
-  {
-    name: 'icon_pdf',
-    zLayer: 'Z-3',
-    token: '--sys-color-worker-ash-base',
-    assetCompat: 'KR-SOLID-UIKIT',
-  },
-  {
-    name: 'icon_docx',
-    zLayer: 'Z-3',
-    token: '--sys-color-worker-ash-base',
-    assetCompat: 'KR-SOLID-UIKIT',
-  },
-  {
-    name: 'icon_upload',
-    zLayer: 'Z-3',
-    token: '--sys-color-worker-ash-base',
-    assetCompat: 'KR-SOLID-UIKIT',
-  },
-  {
-    name: 'auto_kr_solid_005',
+    name: 'auto_kr_solid_003',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_solid_039',
+    name: 'auto_kr_solid_010',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_ui_011',
+    name: 'auto_kr_solid_025',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_ui_010',
+    name: 'auto_kr_solid_007',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_ui_023',
+    name: 'auto_kr_brutalist_mask_001',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_ui_034',
+    name: 'auto_kr_ui_013',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_icon_004',
+    name: 'auto_kr_ui_025',
     zLayer: 'Z-3',
-    token: '--sys-color-worker-ash-base',
-    assetCompat: 'KR-SOLID-UIKIT',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_ui_036',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_solid_044',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
   },
 ];
 const DEFAULT_SLOT_ASSETS: Partial<Record<string, string>> = {
-  background: 'KR-SOLID-040',
-  icon_pdf: 'KR-BRUTALIST-MASK-001',
-  icon_docx: 'KR-UI-016',
-  icon_upload: 'KR-UI-017',
-  auto_kr_solid_005: 'KR-UI-001',
-  auto_kr_solid_039: 'KR-UI-002',
-  auto_kr_ui_011: 'KR-UI-003',
-  auto_kr_ui_010: 'KR-UI-004',
-  auto_kr_ui_023: 'KR-UI-005',
-  auto_kr_ui_034: 'KR-UI-006',
-  auto_kr_icon_004: 'KR-UI-007',
+  auto_kr_solid_003: 'KR-UI-019',
+  auto_kr_solid_010: 'KR-UI-020',
+  auto_kr_solid_025: 'KR-UI-021',
+  auto_kr_solid_007: 'KR-UI-022',
+  auto_kr_brutalist_mask_001: 'KR-UI-023',
+  auto_kr_ui_013: 'KR-UI-024',
+  auto_kr_ui_025: 'KR-UI-025',
+  auto_kr_ui_036: 'KR-UI-026',
+  auto_kr_solid_044: 'KR-UI-027',
 };
 
-export interface IngestionFlowProps {
+export interface LookoutDiscoveryProps {
   className?: ClassValue;
   title?: string;
   subtitle?: string;
@@ -104,19 +90,19 @@ export interface IngestionFlowProps {
 }
 
 const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
+const _springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
 const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
 
-export const IngestionFlow = memo(function IngestionFlow({
+export const LookoutDiscovery = memo(function LookoutDiscovery({
   className,
-  title = 'Resume Ingestion',
-  subtitle = 'Upload and parse resume artifacts for downstream analysis.',
-  primaryLabel = 'Upload Resume',
-  secondaryLabel = 'Browse Files',
+  title = 'Job Discovery',
+  subtitle = 'Filter opportunities and evaluate job-fit quickly.',
+  primaryLabel = 'Apply Filters',
+  secondaryLabel = 'Load More',
   slotAssets,
   onPrimaryAction,
   onSecondaryAction,
-}: IngestionFlowProps) {
+}: LookoutDiscoveryProps) {
   const mode = useModeStore((state) => state.mode);
   const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
   const isKrDark = mode === 'KrDark';
@@ -137,7 +123,7 @@ export const IngestionFlow = memo(function IngestionFlow({
         border: '1px solid var(--sys-color-concreteGrey-base)',
       }}
       data-mode={mode}
-      data-testid="ingestionflow"
+      data-testid="lookoutdiscovery"
       data-motion-audit="true"
     >
       <style>{`
@@ -248,4 +234,4 @@ export const IngestionFlow = memo(function IngestionFlow({
   );
 });
 
-export default IngestionFlow;
+export default LookoutDiscovery;

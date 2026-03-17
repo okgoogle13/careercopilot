@@ -12,39 +12,80 @@ type SlotDef = {
 
 const SLOT_DEFS: SlotDef[] = [
   {
-    name: 'step1_background',
-    zLayer: 'Z-0',
-    token: '--sys-color-charcoalBackground-base',
-    assetCompat: 'KR-SOLID-SUBSTRATE',
-  },
-  {
-    name: 'step1_accent',
-    zLayer: 'Z-1',
-    token: '--sys-color-protestMetalBlue-base',
-    assetCompat: 'KR-SOLID-ATMOS',
-  },
-  {
-    name: 'cta_icon',
+    name: 'auto_kr_solid_002',
     zLayer: 'Z-3',
-    token: '--sys-color-worker-ash-base',
-    assetCompat: 'KR-SOLID-UIKIT',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_solid_009',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_solid_024',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_solid_006',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_solid_040',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_ui_012',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_ui_011',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_ui_024',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_ui_035',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_solid_043',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
   },
 ];
-
 const DEFAULT_SLOT_ASSETS: Partial<Record<string, string>> = {
-  step1_background: 'KR-SOLID-042',
-  step1_accent: 'KR-SOLID-043',
-  cta_icon: 'KR-SOLID-044',
+  auto_kr_solid_002: 'KR-SOLID-002',
+  auto_kr_solid_009: 'KR-SOLID-003',
+  auto_kr_solid_024: 'KR-SOLID-004',
+  auto_kr_solid_006: 'KR-SOLID-005',
+  auto_kr_solid_040: 'KR-SOLID-006',
+  auto_kr_ui_012: 'KR-SOLID-007',
+  auto_kr_ui_011: 'KR-SOLID-008',
+  auto_kr_ui_024: 'KR-SOLID-009',
+  auto_kr_ui_035: 'KR-SOLID-010',
+  auto_kr_solid_043: 'KR-SOLID-011',
 };
 
-const slotOpacity: Record<SlotDef['zLayer'], number> = {
-  'Z-0': 0.3,
-  'Z-1': 0.26,
-  'Z-2': 0.24,
-  'Z-3': 0.22,
-};
-
-export interface OnboardFlowProps {
+export interface AnalysisWorkbenchProps {
   className?: ClassValue;
   title?: string;
   subtitle?: string;
@@ -56,21 +97,22 @@ export interface OnboardFlowProps {
 }
 
 const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
+const _springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
 const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
 
-export const OnboardFlow = memo(function OnboardFlow({
+export const AnalysisWorkbench = memo(function AnalysisWorkbench({
   className,
-  title = 'Onboarding Flow',
-  subtitle = 'Set role preferences and skills to personalize guidance.',
-  primaryLabel = 'Next Step',
-  secondaryLabel = 'Back',
+  title = 'Resume Analysis Results',
+  subtitle = 'Review ATS, skills, and formatting diagnostics.',
+  primaryLabel = 'Recommend Fixes',
+  secondaryLabel = 'Download Report',
   slotAssets,
   onPrimaryAction,
   onSecondaryAction,
-}: OnboardFlowProps) {
+}: AnalysisWorkbenchProps) {
   const mode = useModeStore((state) => state.mode);
   const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
+  const isKrDark = mode === 'KrDark';
 
   return (
     <motion.section
@@ -79,7 +121,7 @@ export const OnboardFlow = memo(function OnboardFlow({
       animate={{ opacity: 1, y: 0 }}
       transition={undefined}
       className={clsx(
-        "relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-8 font-['Work_Sans'] text-base min-h-[75vh] flex flex-col justify-center",
+        'relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8',
         className
       )}
       style={{
@@ -88,12 +130,11 @@ export const OnboardFlow = memo(function OnboardFlow({
         border: '1px solid var(--sys-color-concreteGrey-base)',
       }}
       data-mode={mode}
-      data-testid="onboardflow"
+      data-testid="analysisworkbench"
       data-motion-audit="true"
-      data-density-ratio="0.36"
     >
       <style>{`
-        @media (prefers-reduced-motion: reduce) {
+         @media (prefers-reduced-motion: reduce) {
           [data-motion-audit="true"] *,
           [data-motion-audit="true"]::before,
           [data-motion-audit="true"]::after {
@@ -114,7 +155,7 @@ export const OnboardFlow = memo(function OnboardFlow({
             data-asset-compat={slot.assetCompat}
             data-asset-id={resolvedSlotAssets[slot.name] ?? ''}
             data-z-layer={slot.zLayer}
-            style={{ color: `var(${slot.token})`, opacity: slotOpacity[slot.zLayer] }}
+            style={{ color: `var(${slot.token})` }}
           />
         ))}
       </div>
@@ -123,10 +164,10 @@ export const OnboardFlow = memo(function OnboardFlow({
         initial={{ opacity: 0, y: 6 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ ...springHero, delay: 0.04 }}
-        className="relative z-10 max-w-2xl"
+        className="relative z-10"
       >
         <h1
-          className="text-5xl md:text-6xl font-black"
+          className="text-3xl font-black md:text-5xl"
           style={{
             fontFamily: 'var(--sys-type-font-fraunces)',
             color: 'var(--sys-color-paperWhite)',
@@ -135,7 +176,7 @@ export const OnboardFlow = memo(function OnboardFlow({
           {title}
         </h1>
         <p
-          className="mt-4 max-w-2xl text-base md:text-xl"
+          className="mt-3 max-w-4xl text-base md:text-lg"
           style={{
             fontFamily: 'var(--sys-type-font-work-sans)',
             color: 'var(--sys-color-worker-ash-base)',
@@ -149,7 +190,7 @@ export const OnboardFlow = memo(function OnboardFlow({
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={undefined}
-        className="relative z-10 mt-8 flex flex-wrap gap-4 items-center"
+        className="relative z-10 mt-6 flex flex-wrap gap-3"
       >
         <motion.button
           type="button"
@@ -157,7 +198,7 @@ export const OnboardFlow = memo(function OnboardFlow({
           whileTap={{ scale: 0.98 }}
           transition={springButton}
           onClick={onPrimaryAction}
-          className="rounded-[var(--sys-shape-blockRiot03)] px-8 py-4 font-semibold text-lg"
+          className="rounded-[var(--sys-shape-blockRiot03)] px-5 py-3 font-semibold"
           style={{
             fontFamily: 'var(--sys-type-font-work-sans)',
             backgroundColor: 'var(--sys-color-inkGold-base)',
@@ -166,28 +207,38 @@ export const OnboardFlow = memo(function OnboardFlow({
         >
           {primaryLabel}
         </motion.button>
-
-        <button
+        <motion.button
           type="button"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          transition={springButton}
           onClick={onSecondaryAction}
-          className="font-['JetBrains_Mono'] text-sm opacity-80 px-2 py-1"
-          style={{ color: 'var(--sys-color-worker-ash-base)', backgroundColor: 'transparent' }}
+          className="rounded-[var(--sys-shape-blockRiot01)] border px-5 py-3 font-medium"
+          style={{
+            fontFamily: 'var(--sys-type-font-work-sans)',
+            borderColor: 'var(--sys-color-protestMetalBlue-base)',
+            color: isKrDark ? 'var(--sys-color-worker-ash-base)' : 'var(--sys-color-paperWhite)',
+            backgroundColor: 'transparent',
+          }}
         >
           {secondaryLabel}
-        </button>
+        </motion.button>
       </motion.div>
 
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={undefined}
-        className="relative z-10 mt-8 font-['JetBrains_Mono'] text-sm opacity-80"
-        style={{ color: 'var(--sys-color-concreteGrey-base)' }}
+        className="relative z-10 mt-6 text-xs"
+        style={{
+          fontFamily: 'var(--sys-type-font-mono)',
+          color: 'var(--sys-color-concreteGrey-base)',
+        }}
       >
-        Slots: {SLOT_DEFS.length} | Density ratio: 0.36 | Max focal CTA: 1
+        Slots: {SLOT_DEFS.length} | Motion: spring-only | Tokens: --sys-* | Zustand: useModeStore
       </motion.p>
     </motion.section>
   );
 });
 
-export default OnboardFlow;
+export default AnalysisWorkbench;
