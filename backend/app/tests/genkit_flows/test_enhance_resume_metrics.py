@@ -7,10 +7,12 @@ Follows the same mocking conventions as test_ats_scoring.py:
 """
 
 import json
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import MagicMock, patch
 
 import pytest
 
+from app.genkit_flows.extract_job_requirements import JobRequirements
+from app.genkit_flows.extract_resume_entities import ResumeEntities
 from app.genkit_flows.resume_optimizer import (
     EnhancedResumeResult,
     ImprovedBullet,
@@ -18,9 +20,6 @@ from app.genkit_flows.resume_optimizer import (
     _compute_skills_gap,
     enhance_resume_with_metrics,
 )
-from app.genkit_flows.extract_job_requirements import JobRequirements
-from app.genkit_flows.extract_resume_entities import ResumeEntities
-
 
 # ---------------------------------------------------------------------------
 # Fixtures
@@ -40,9 +39,7 @@ def sample_job_reqs() -> JobRequirements:
 def sample_resume_entities() -> ResumeEntities:
     return ResumeEntities(
         skills=["Python", "Django", "React", "AWS"],
-        experience=[
-            {"title": "Backend Engineer", "company": "Acme Corp", "duration": "3 years"}
-        ],
+        experience=[{"title": "Backend Engineer", "company": "Acme Corp", "duration": "3 years"}],
         education=[{"degree": "BSc Computer Science"}],
     )
 
@@ -124,9 +121,7 @@ class TestComputeSkillsGap:
         reqs = JobRequirements(
             requiredSkills=["Python", "React"], preferredSkills=[], experienceLevel=""
         )
-        entities = ResumeEntities(
-            skills=["Python", "React"], experience=[], education=[]
-        )
+        entities = ResumeEntities(skills=["Python", "React"], experience=[], education=[])
         gap = _compute_skills_gap(entities, reqs)
         assert gap.match_score == 100
         assert set(gap.matched) == {"Python", "React"}
@@ -165,15 +160,19 @@ class TestEnhanceResumeWithMetrics:
         mock_model = MagicMock()
         mock_model.generate.return_value = mock_model_response
 
-        with patch(
-            "app.genkit_flows.resume_optimizer.extractJobRequirements",
-            return_value=sample_job_reqs,
-        ), patch(
-            "app.genkit_flows.resume_optimizer.extractResumeEntities",
-            return_value=sample_resume_entities,
-        ), patch(
-            "app.genkit_flows.resume_optimizer.get_model",
-            return_value=mock_model,
+        with (
+            patch(
+                "app.genkit_flows.resume_optimizer.extractJobRequirements",
+                return_value=sample_job_reqs,
+            ),
+            patch(
+                "app.genkit_flows.resume_optimizer.extractResumeEntities",
+                return_value=sample_resume_entities,
+            ),
+            patch(
+                "app.genkit_flows.resume_optimizer.get_model",
+                return_value=mock_model,
+            ),
         ):
             result = await enhance_resume_with_metrics(
                 resume_text=sample_resume_text,
@@ -197,9 +196,17 @@ class TestEnhanceResumeWithMetrics:
         mock_model_response = MagicMock(text=json.dumps(mock_ai_bullets))
         mock_model = MagicMock(generate=MagicMock(return_value=mock_model_response))
 
-        with patch("app.genkit_flows.resume_optimizer.extractJobRequirements", return_value=sample_job_reqs), \
-             patch("app.genkit_flows.resume_optimizer.extractResumeEntities", return_value=sample_resume_entities), \
-             patch("app.genkit_flows.resume_optimizer.get_model", return_value=mock_model):
+        with (
+            patch(
+                "app.genkit_flows.resume_optimizer.extractJobRequirements",
+                return_value=sample_job_reqs,
+            ),
+            patch(
+                "app.genkit_flows.resume_optimizer.extractResumeEntities",
+                return_value=sample_resume_entities,
+            ),
+            patch("app.genkit_flows.resume_optimizer.get_model", return_value=mock_model),
+        ):
             result = await enhance_resume_with_metrics(
                 resume_text=sample_resume_text,
                 job_description=sample_job_description,
@@ -225,9 +232,17 @@ class TestEnhanceResumeWithMetrics:
         mock_model = MagicMock()
         mock_model.generate.side_effect = RuntimeError("Simulated AI failure")
 
-        with patch("app.genkit_flows.resume_optimizer.extractJobRequirements", return_value=sample_job_reqs), \
-             patch("app.genkit_flows.resume_optimizer.extractResumeEntities", return_value=sample_resume_entities), \
-             patch("app.genkit_flows.resume_optimizer.get_model", return_value=mock_model):
+        with (
+            patch(
+                "app.genkit_flows.resume_optimizer.extractJobRequirements",
+                return_value=sample_job_reqs,
+            ),
+            patch(
+                "app.genkit_flows.resume_optimizer.extractResumeEntities",
+                return_value=sample_resume_entities,
+            ),
+            patch("app.genkit_flows.resume_optimizer.get_model", return_value=mock_model),
+        ):
             result = await enhance_resume_with_metrics(
                 resume_text=sample_resume_text,
                 job_description=sample_job_description,
@@ -249,15 +264,19 @@ class TestEnhanceResumeWithMetrics:
         mock_model_response = MagicMock(text=json.dumps(mock_ai_bullets))
         mock_model = MagicMock(generate=MagicMock(return_value=mock_model_response))
 
-        with patch(
-            "app.genkit_flows.resume_optimizer.extractJobRequirements",
-            side_effect=RuntimeError("Extraction error"),
-        ), patch(
-            "app.genkit_flows.resume_optimizer.extractResumeEntities",
-            side_effect=RuntimeError("Extraction error"),
-        ), patch(
-            "app.genkit_flows.resume_optimizer.get_model",
-            return_value=mock_model,
+        with (
+            patch(
+                "app.genkit_flows.resume_optimizer.extractJobRequirements",
+                side_effect=RuntimeError("Extraction error"),
+            ),
+            patch(
+                "app.genkit_flows.resume_optimizer.extractResumeEntities",
+                side_effect=RuntimeError("Extraction error"),
+            ),
+            patch(
+                "app.genkit_flows.resume_optimizer.get_model",
+                return_value=mock_model,
+            ),
         ):
             result = await enhance_resume_with_metrics(
                 resume_text=sample_resume_text,

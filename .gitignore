@@ -160,8 +160,10 @@ var/
 *.sqlite3
 
 # Logs
+*.log
 pip-log.txt
 pip-delete-this-directory.txt
+*~HEAD
 
 # Coverage
 .tox/
@@ -177,3 +179,9 @@ coverage.xml
 .DS_Store
 Thumbs.db
 careercopilot-migration-kit-v3/.yarn/install-state.gz
+
+# Large Figma artifacts
+frontend/KR SOLIDAIRTY FROM FIGMA.make
+frontend/KR Solidarity CAREERCOPILOT.zip
+docs/project/active/frontend-source-of-truth-migration/evidence/KR SOLIDAIRTY FROM FIGMA.make
+docs/project/active/frontend-source-of-truth-migration/evidence/KR Solidarity CAREERCOPILOT.zip

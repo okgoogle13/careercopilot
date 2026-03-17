@@ -16,7 +16,7 @@ def start_server():
     env = os.environ.copy()
     if 'GEMINI_API_KEY' not in env:
         print("WARNING: GEMINI_API_KEY not set!")
-    
+
     proc = subprocess.Popen([VENV_PYTHON, SERVER_SCRIPT],
                             stdin=subprocess.PIPE,
                             stdout=subprocess.PIPE,
@@ -34,7 +34,7 @@ def send_rpc(proc, method, params=None, request_id=1):
     }
     if params is not None:
         payload["params"] = params
-    
+
     line = json.dumps(payload) + "\n"
     proc.stdin.write(line)
     proc.stdin.flush()
@@ -43,7 +43,7 @@ def send_rpc(proc, method, params=None, request_id=1):
 def main():
     print("🚀 Starting Dual-Engine Smoke Test...")
     proc = start_server()
-    
+
     try:
         # 1. List Tools
         print("\n[INIT] Listing Tools...")
@@ -54,7 +54,7 @@ def main():
         print("\n[FAST ENGINE] Testing Flash-Lite (quick_summarize)...")
         start_time = time.time()
         summary_res = send_rpc(proc, "tools/call", {
-            "name": "quick_summarize", 
+            "name": "quick_summarize",
             "arguments": {"text": "Google Gemini 2.5 Flash-Lite is optimized for high-volume, cost-effective tasks requiring low latency. It excels at summarization and extraction."}
         }, request_id=2)
         duration = time.time() - start_time

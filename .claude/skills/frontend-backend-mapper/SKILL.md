@@ -60,7 +60,7 @@ Analyzes and maps frontend API calls to backend endpoints to detect gaps, unused
    - Only included when `--include-database` flag is used
 
 6. **[OPTIONAL] Map design token usage:**
-   - Read `frontend/src/theme/tokens.json` and CSS token definitions
+   - Read `frontend/src/design/tokens/tokens.json` and CSS token definitions
    - Scan components in `frontend/src/components/**/*.tsx`
    - Identify which components use design tokens vs hardcoded values
    - Document token application flow: Token → CSS Variable → Component

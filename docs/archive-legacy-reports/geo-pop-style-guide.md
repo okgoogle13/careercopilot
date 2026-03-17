@@ -79,9 +79,9 @@ Instead of a jagged rock, this is a smooth, tumbled stone.
 export const RiverStone = ({ children }) => (
   <div
     className="
-    bg-stone 
-    rounded-3xl 
-    border border-white/5 
+    bg-stone
+    rounded-3xl
+    border border-white/5
     shadow-inner-light
     p-8
     transition-transform duration-300
@@ -108,13 +108,13 @@ export const GemButton = ({ label, onClick }) => (
     className="
       relative
       overflow-hidden
-      bg-coral 
-      text-bedrock 
-      font-sans 
-      font-black 
+      bg-coral
+      text-bedrock
+      font-sans
+      font-black
       tracking-tight
-      px-10 py-4 
-      rounded-full 
+      px-10 py-4
+      rounded-full
       shadow-gem-glow
       transform
       transition-all

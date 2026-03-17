@@ -1,7 +1,5 @@
 """Contract tests for document export endpoint helpers."""
 
-from unittest.mock import AsyncMock
-
 import pytest
 from fastapi import HTTPException
 

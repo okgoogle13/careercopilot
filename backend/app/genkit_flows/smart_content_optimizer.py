@@ -6,9 +6,7 @@ with AI-powered suggestions and ATS optimization.
 """
 
 import json
-import os
 from enum import Enum
-from typing import Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -58,10 +56,10 @@ class ATSAnalysis(BaseModel):
     ats_score: int = Field(description="ATS compatibility score (0-100)", ge=0, le=100)
     keyword_density: float = Field(description="Keyword density percentage", ge=0, le=100)
     readability_score: int = Field(description="Human readability score (0-100)", ge=0, le=100)
-    formatting_issues: List[str] = Field(description="ATS formatting problems")
-    missing_keywords: List[str] = Field(description="Important keywords missing")
-    keyword_placement_suggestions: List[str] = Field(description="Where to place key terms")
-    section_recommendations: List[str] = Field(description="Section structure improvements")
+    formatting_issues: list[str] = Field(description="ATS formatting problems")
+    missing_keywords: list[str] = Field(description="Important keywords missing")
+    keyword_placement_suggestions: list[str] = Field(description="Where to place key terms")
+    section_recommendations: list[str] = Field(description="Section structure improvements")
 
 
 class ContentOptimizationResult(BaseModel):
@@ -71,32 +69,32 @@ class ContentOptimizationResult(BaseModel):
     )
     improvement_percentage: float = Field(description="Percentage improvement", ge=0)
 
-    suggestions: List[OptimizationSuggestion] = Field(
+    suggestions: list[OptimizationSuggestion] = Field(
         description="Detailed optimization suggestions"
     )
     ats_analysis: ATSAnalysis = Field(description="ATS compatibility analysis")
 
     optimized_content: str = Field(description="Fully optimized version of content")
-    key_improvements: List[str] = Field(description="Summary of major improvements made")
+    key_improvements: list[str] = Field(description="Summary of major improvements made")
 
-    next_steps: List[str] = Field(description="Additional steps to further improve content")
-    success_metrics: List[str] = Field(description="How to measure success of changes")
+    next_steps: list[str] = Field(description="Additional steps to further improve content")
+    success_metrics: list[str] = Field(description="How to measure success of changes")
 
 
 class PersonalBrandingAnalysis(BaseModel):
     current_brand_strength: int = Field(description="Current brand clarity (0-100)", ge=0, le=100)
     brand_consistency: int = Field(description="Consistency across content (0-100)", ge=0, le=100)
     unique_value_proposition: str = Field(description="Identified unique value proposition")
-    brand_keywords: List[str] = Field(description="Key terms that define the personal brand")
-    messaging_gaps: List[str] = Field(description="Areas where messaging could be stronger")
+    brand_keywords: list[str] = Field(description="Key terms that define the personal brand")
+    messaging_gaps: list[str] = Field(description="Areas where messaging could be stronger")
     brand_positioning: str = Field(description="How candidate should position themselves")
-    storytelling_opportunities: List[str] = Field(description="Places to add compelling narratives")
+    storytelling_opportunities: list[str] = Field(description="Places to add compelling narratives")
 
 
 @genkit_flow(output_schema=ContentOptimizationResult)
 @with_ai_error_handling()
 def optimize_content_for_job(
-    content: str, job_description: str, content_type: str, optimization_goals: List[str]
+    content: str, job_description: str, content_type: str, optimization_goals: list[str]
 ) -> ContentOptimizationResult:
     """
     Optimizes content (resume, cover letter, etc.) for a specific job opportunity.
@@ -176,7 +174,7 @@ Respond with valid JSON matching the ContentOptimizationResult schema.
 
     except Exception as e:
         raise AIError(
-            message=f"Content optimization failed: {str(e)}",
+            message=f"Content optimization failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
@@ -186,8 +184,8 @@ Respond with valid JSON matching the ContentOptimizationResult schema.
 @with_ai_error_handling()
 def analyze_personal_branding(
     resume: str,
-    linkedin_profile: Optional[str] = None,
-    career_goals: Optional[str] = None,
+    linkedin_profile: str | None = None,
+    career_goals: str | None = None,
 ) -> PersonalBrandingAnalysis:
     """
     Analyzes personal branding consistency and strength across career materials.
@@ -261,28 +259,28 @@ Respond with valid JSON matching the PersonalBrandingAnalysis schema.
 
     except Exception as e:
         raise AIError(
-            message=f"Personal branding analysis failed: {str(e)}",
+            message=f"Personal branding analysis failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
 
 
 class LinkedInOptimizationResult(BaseModel):
-    headline_suggestions: List[str] = Field(description="Optimized headline options")
+    headline_suggestions: list[str] = Field(description="Optimized headline options")
     summary_optimization: str = Field(description="Optimized about/summary section")
-    skills_recommendations: List[str] = Field(description="Skills to highlight or add")
-    experience_improvements: List[str] = Field(description="How to improve experience descriptions")
-    keyword_strategy: List[str] = Field(description="Keywords to incorporate naturally")
-    engagement_tips: List[str] = Field(description="Tips for increasing profile engagement")
-    network_building_strategy: List[str] = Field(description="Networking and connection strategies")
-    content_posting_ideas: List[str] = Field(description="Ideas for LinkedIn posts and articles")
+    skills_recommendations: list[str] = Field(description="Skills to highlight or add")
+    experience_improvements: list[str] = Field(description="How to improve experience descriptions")
+    keyword_strategy: list[str] = Field(description="Keywords to incorporate naturally")
+    engagement_tips: list[str] = Field(description="Tips for increasing profile engagement")
+    network_building_strategy: list[str] = Field(description="Networking and connection strategies")
+    content_posting_ideas: list[str] = Field(description="Ideas for LinkedIn posts and articles")
 
 
 @genkit_flow(output_schema=LinkedInOptimizationResult)
 @with_ai_error_handling()
 def optimize_linkedin_profile(
     current_profile: str,
-    target_roles: List[str],
+    target_roles: list[str],
     industry_focus: str,
     career_stage: str,
 ) -> LinkedInOptimizationResult:
@@ -353,7 +351,7 @@ Respond with valid JSON matching the LinkedInOptimizationResult schema.
 
     except Exception as e:
         raise AIError(
-            message=f"LinkedIn optimization failed: {str(e)}",
+            message=f"LinkedIn optimization failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
@@ -364,16 +362,16 @@ class MultiChannelOptimizationResult(BaseModel):
     cover_letter_template: str = Field(description="Customizable cover letter template")
     linkedin_summary: str = Field(description="Optimized LinkedIn summary")
     elevator_pitch: str = Field(description="30-second elevator pitch")
-    interview_talking_points: List[str] = Field(description="Key points for interviews")
-    email_templates: Dict[str, str] = Field(description="Professional email templates")
+    interview_talking_points: list[str] = Field(description="Key points for interviews")
+    email_templates: dict[str, str] = Field(description="Professional email templates")
     consistency_score: int = Field(description="Cross-platform consistency (0-100)", ge=0, le=100)
-    unified_messaging: List[str] = Field(description="Core messages to use everywhere")
+    unified_messaging: list[str] = Field(description="Core messages to use everywhere")
 
 
 @genkit_flow(output_schema=MultiChannelOptimizationResult)
 @with_ai_error_handling()
 def optimize_multi_channel_presence(
-    resume: str, target_role: str, unique_value_props: List[str], career_narrative: str
+    resume: str, target_role: str, unique_value_props: list[str], career_narrative: str
 ) -> MultiChannelOptimizationResult:
     """
     Creates consistent, optimized content across all career marketing channels.
@@ -441,7 +439,7 @@ Respond with valid JSON matching the MultiChannelOptimizationResult schema.
 
     except Exception as e:
         raise AIError(
-            message=f"Multi-channel optimization failed: {str(e)}",
+            message=f"Multi-channel optimization failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
@@ -449,14 +447,14 @@ Respond with valid JSON matching the MultiChannelOptimizationResult schema.
 
 # Export main functions
 __all__ = [
-    "optimize_content_for_job",
-    "analyze_personal_branding",
-    "optimize_linkedin_profile",
-    "optimize_multi_channel_presence",
     "ContentOptimizationResult",
-    "PersonalBrandingAnalysis",
+    "ContentType",
     "LinkedInOptimizationResult",
     "MultiChannelOptimizationResult",
-    "ContentType",
     "OptimizationGoal",
+    "PersonalBrandingAnalysis",
+    "analyze_personal_branding",
+    "optimize_content_for_job",
+    "optimize_linkedin_profile",
+    "optimize_multi_channel_presence",
 ]

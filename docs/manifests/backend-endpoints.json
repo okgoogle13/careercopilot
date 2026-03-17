@@ -1,0 +1,505 @@
+{
+  "generatedAt": "2026-03-15T05:58:20.162635+00:00",
+  "mainRouters": [
+    {
+      "router_ref": "api_router",
+      "prefix": "/api"
+    },
+    {
+      "router_ref": "career_router",
+      "prefix": "/api/career"
+    },
+    {
+      "router_ref": "career_ingestion_router",
+      "prefix": "/api/v1"
+    },
+    {
+      "router_ref": "job_scout_router",
+      "prefix": "/api/v1/job-scout"
+    },
+    {
+      "router_ref": "ingest.router",
+      "prefix": "/api/ingest"
+    }
+  ],
+  "apiRouters": [
+    {
+      "module": "analysis",
+      "prefix": "/analysis",
+      "tag": "Analysis"
+    },
+    {
+      "module": "auth",
+      "prefix": "/auth",
+      "tag": "Authentication"
+    },
+    {
+      "module": "config",
+      "prefix": "/config",
+      "tag": "Configuration"
+    },
+    {
+      "module": "documents",
+      "prefix": "/documents",
+      "tag": "Documents"
+    },
+    {
+      "module": "user",
+      "prefix": "/user",
+      "tag": "User"
+    },
+    {
+      "module": "workflows",
+      "prefix": "/workflows",
+      "tag": "Workflows"
+    },
+    {
+      "module": "flows",
+      "prefix": "/flows",
+      "tag": "Flows"
+    },
+    {
+      "module": "smart_ingestion",
+      "prefix": "/smart-ingestion",
+      "tag": "Smart Ingestion"
+    },
+    {
+      "module": "applications",
+      "prefix": "/applications",
+      "tag": "Applications"
+    },
+    {
+      "module": "opportunities",
+      "prefix": "/opportunities",
+      "tag": "Opportunities"
+    },
+    {
+      "module": "genkit",
+      "prefix": "/genkit",
+      "tag": "Genkit AI"
+    },
+    {
+      "module": "job_listings",
+      "prefix": "/job-listings",
+      "tag": "Job Listings"
+    },
+    {
+      "module": "manifest_integration",
+      "prefix": "/manifest-integration",
+      "tag": "Manifest Integration"
+    },
+    {
+      "module": "asset_review",
+      "prefix": "/asset-review",
+      "tag": "Asset Review"
+    },
+    {
+      "module": "resume_audit",
+      "prefix": "/resume-audit",
+      "tag": "Resume Audit"
+    }
+  ],
+  "endpointCount": 57,
+  "filesScanned": 21,
+  "endpoints": [
+    {
+      "method": "POST",
+      "localPath": "/optimize-resume",
+      "fullPath": "/api/analysis/optimize-resume",
+      "module": "analysis",
+      "file": "analysis.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/",
+      "fullPath": "/api/analysis",
+      "module": "analysis",
+      "file": "analysis.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/",
+      "fullPath": "/api/applications",
+      "module": "applications",
+      "file": "applications.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/{application_id}",
+      "fullPath": "/api/applications/{application_id}",
+      "module": "applications",
+      "file": "applications.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/",
+      "fullPath": "/api/applications",
+      "module": "applications",
+      "file": "applications.py"
+    },
+    {
+      "method": "PUT",
+      "localPath": "/{application_id}",
+      "fullPath": "/api/applications/{application_id}",
+      "module": "applications",
+      "file": "applications.py"
+    },
+    {
+      "method": "DELETE",
+      "localPath": "/{application_id}",
+      "fullPath": "/api/applications/{application_id}",
+      "module": "applications",
+      "file": "applications.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/submit",
+      "fullPath": "/api/asset-review/submit",
+      "module": "asset_review",
+      "file": "asset_review.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/bulk-submit",
+      "fullPath": "/api/asset-review/bulk-submit",
+      "module": "asset_review",
+      "file": "asset_review.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/pending",
+      "fullPath": "/api/asset-review/pending",
+      "module": "asset_review",
+      "file": "asset_review.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/dashboard/stats",
+      "fullPath": "/api/asset-review/dashboard/stats",
+      "module": "asset_review",
+      "file": "asset_review.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/override/{asset_id}/{violation_id}",
+      "fullPath": "/api/asset-review/override/{asset_id}/{violation_id}",
+      "module": "asset_review",
+      "file": "asset_review.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/asset/{asset_id}/review-history",
+      "fullPath": "/api/asset-review/asset/{asset_id}/review-history",
+      "module": "asset_review",
+      "file": "asset_review.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/export-reviews",
+      "fullPath": "/api/asset-review/export-reviews",
+      "module": "asset_review",
+      "file": "asset_review.py"
+    },
+    {
+      "method": "DELETE",
+      "localPath": "/clear-reviews",
+      "fullPath": "/api/asset-review/clear-reviews",
+      "module": "asset_review",
+      "file": "asset_review.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/me",
+      "fullPath": "/api/auth/me",
+      "module": "auth",
+      "file": "auth.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/voice-profile",
+      "fullPath": "/api/auth/voice-profile",
+      "module": "auth",
+      "file": "auth.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/ingest",
+      "fullPath": "/api/???/career/ingest",
+      "module": "career",
+      "file": "career.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/ingest",
+      "fullPath": "/api/???/career_ingestion/ingest",
+      "module": "career_ingestion",
+      "file": "career_ingestion.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/firebase-config",
+      "fullPath": "/api/config/firebase-config",
+      "module": "config",
+      "file": "config.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/cover-letter",
+      "fullPath": "/api/???/document_export/cover-letter",
+      "module": "document_export",
+      "file": "document_export.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/resume",
+      "fullPath": "/api/???/document_export/resume",
+      "module": "document_export",
+      "file": "document_export.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/ksc-response",
+      "fullPath": "/api/???/document_export/ksc-response",
+      "module": "document_export",
+      "file": "document_export.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/application-package",
+      "fullPath": "/api/???/document_export/application-package",
+      "module": "document_export",
+      "file": "document_export.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/batch",
+      "fullPath": "/api/???/document_export/batch",
+      "module": "document_export",
+      "file": "document_export.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/health",
+      "fullPath": "/api/???/document_export/health",
+      "module": "document_export",
+      "file": "document_export.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/",
+      "fullPath": "/api/documents",
+      "module": "documents",
+      "file": "documents.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/process/redline",
+      "fullPath": "/api/documents/process/redline",
+      "module": "documents",
+      "file": "documents.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/analyze-job-from-url",
+      "fullPath": "/api/flows/analyze-job-from-url",
+      "module": "flows",
+      "file": "flows.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/cover-letter/generate",
+      "fullPath": "/api/genkit/cover-letter/generate",
+      "module": "genkit",
+      "file": "genkit.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/ksc/generate",
+      "fullPath": "/api/genkit/ksc/generate",
+      "module": "genkit",
+      "file": "genkit.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/job/analyze-url",
+      "fullPath": "/api/genkit/job/analyze-url",
+      "module": "genkit",
+      "file": "genkit.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/resume/optimize",
+      "fullPath": "/api/genkit/resume/optimize",
+      "module": "genkit",
+      "file": "genkit.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/company/context",
+      "fullPath": "/api/genkit/company/context",
+      "module": "genkit",
+      "file": "genkit.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/artifacts/upload",
+      "fullPath": "/api/ingest/artifacts/upload",
+      "module": "ingest",
+      "file": "ingest.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/extract-from-text",
+      "fullPath": "/api/job-listings/extract-from-text",
+      "module": "job_listings",
+      "file": "job_listings.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/extract-from-url",
+      "fullPath": "/api/job-listings/extract-from-url",
+      "module": "job_listings",
+      "file": "job_listings.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/advanced-analysis",
+      "fullPath": "/api/job-listings/advanced-analysis",
+      "module": "job_listings",
+      "file": "job_listings.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/search",
+      "fullPath": "/api/???/job_scout/search",
+      "module": "job_scout",
+      "file": "job_scout.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/add-assets",
+      "fullPath": "/api/manifest-integration/add-assets",
+      "module": "manifest_integration",
+      "file": "manifest_integration.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/validate",
+      "fullPath": "/api/manifest-integration/validate",
+      "module": "manifest_integration",
+      "file": "manifest_integration.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/recalculate-summary",
+      "fullPath": "/api/manifest-integration/recalculate-summary",
+      "module": "manifest_integration",
+      "file": "manifest_integration.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/backfill",
+      "fullPath": "/api/manifest-integration/backfill",
+      "module": "manifest_integration",
+      "file": "manifest_integration.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/integration-test/{asset_id}",
+      "fullPath": "/api/manifest-integration/integration-test/{asset_id}",
+      "module": "manifest_integration",
+      "file": "manifest_integration.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/deployment-plan",
+      "fullPath": "/api/manifest-integration/deployment-plan",
+      "module": "manifest_integration",
+      "file": "manifest_integration.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/export",
+      "fullPath": "/api/manifest-integration/export",
+      "module": "manifest_integration",
+      "file": "manifest_integration.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/import",
+      "fullPath": "/api/manifest-integration/import",
+      "module": "manifest_integration",
+      "file": "manifest_integration.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/",
+      "fullPath": "/api/opportunities",
+      "module": "opportunities",
+      "file": "opportunities.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/evaluate",
+      "fullPath": "/api/resume-audit/evaluate",
+      "module": "resume_audit",
+      "file": "resume_audit.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/upload-and-tag",
+      "fullPath": "/api/smart-ingestion/upload-and-tag",
+      "module": "smart_ingestion",
+      "file": "smart_ingestion.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/extract-and-save",
+      "fullPath": "/api/smart-ingestion/extract-and-save",
+      "module": "smart_ingestion",
+      "file": "smart_ingestion.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/health",
+      "fullPath": "/api/smart-ingestion/health",
+      "module": "smart_ingestion",
+      "file": "smart_ingestion.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/master-status",
+      "fullPath": "/api/user/master-status",
+      "module": "user",
+      "file": "user.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/generate-application",
+      "fullPath": "/api/workflows/generate-application",
+      "module": "workflows",
+      "file": "workflows.py"
+    },
+    {
+      "method": "POST",
+      "localPath": "/scan-email-opportunities",
+      "fullPath": "/api/workflows/scan-email-opportunities",
+      "module": "workflows",
+      "file": "workflows.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/health",
+      "fullPath": "/api/workflows/health",
+      "module": "workflows",
+      "file": "workflows.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/status/{workflow_id}",
+      "fullPath": "/api/workflows/status/{workflow_id}",
+      "module": "workflows",
+      "file": "workflows.py"
+    }
+  ]
+}

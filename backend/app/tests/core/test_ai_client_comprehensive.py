@@ -2,20 +2,15 @@
 Comprehensive tests for the AI client functionality.
 """
 
-import asyncio
-from typing import Any, Dict, List
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import httpx
 import pytest
 from fastapi.testclient import TestClient
-from httpx import AsyncClient
 
 from app.api.endpoints.genkit import SmartCoverLetter
 from app.core.ai_client import (
-    AIProviderClient,
     AIRequest,
-    AIResponse,
     GoogleAIClient,
 )
 from app.core.ai_config import (
@@ -25,15 +20,13 @@ from app.core.ai_config import (
     ModelConfig,
     ProviderCredentials,
 )
-from app.core.dependencies import get_current_user
-from app.core.observability import monitor_performance, track_ai_usage, track_error
 from app.main import app  # Import the FastAPI app
 
 # from app.schemas import User  # Removed unused import
 
 
 # Mock User class for testing
-class MockUser(object):
+class MockUser:
     def __init__(self, id, email):
         self.id = id
         self.email = email
@@ -41,7 +34,7 @@ class MockUser(object):
 
 # Mock AIConfigManager
 class MockAIConfigManager(AIConfigManager):
-    def __init__(self, credentials: Dict[str, str], model_configs: List[ModelConfig]):
+    def __init__(self, credentials: dict[str, str], model_configs: list[ModelConfig]):
         self.credentials = credentials
         self.model_configs = model_configs
 
@@ -61,8 +54,6 @@ def mock_current_user():
 
     def mock_get_current_user():
         return MockUser(id="test", email="test@example.com")
-
-    from app.core import dependencies
 
     with patch("app.core.dependencies.get_current_user", new_callable=AsyncMock) as mock:
         mock.return_value = MockUser(id="test", email="test@example.com")

@@ -22,7 +22,7 @@ def create_application_strategy(job_url: str, resume_text: str, missing_keywords
     3. Performs Evidence-Based Gap Analysis (RAG).
     4. Optimizes Resume using Company Intelligence + Verified Evidence.
     """
-    
+
     # 1. Job Extraction
     try:
         job_details = extract_job_listing_details_flow(source={"url": job_url})
@@ -53,11 +53,11 @@ def create_application_strategy(job_url: str, resume_text: str, missing_keywords
         print(f"Warning: Gap Hunter failed: {e}")
 
     # 4. Resume Optimization
-    # We pass the corporate profile to the optimizer to influence tone/content, 
+    # We pass the corporate profile to the optimizer to influence tone/content,
     # and include the retrieved evidence in the job context.
-    
+
     final_job_context = f"{job_description_text}\n{evidence_context}"
-    
+
     optimized_resume_result = optimizeResume(
         resumeText=resume_text,
         missingKeywords=missing_keywords,

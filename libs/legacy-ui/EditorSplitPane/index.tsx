@@ -16,10 +16,10 @@ interface EditorSplitPaneProps {
 
 /**
  * EditorSplitPane
- * 
+ *
  * A high-interactivity component for side-by-side editing and preview.
  * Used in "The Workshop" for resume tuning and cover letter generation.
- * 
+ *
  * Design:
  * - Viscous divider bar (Agitprop aesthetics).
  * - Smooth resizing transitions.
@@ -33,13 +33,13 @@ export const EditorSplitPane: React.FC<EditorSplitPaneProps> = ({
 }) => {
   const [split, setSplit] = useState(initialSplit);
 
-  // Note: True resizing would need mouse event listeners. 
+  // Note: True resizing would need mouse event listeners.
   // For this design-first implementation, we focus on the structure and styling.
 
   return (
     <div className={cn("flex w-full h-full overflow-hidden bg-charcoal-void shadow-viscous", className)}>
       {/* Left Pane */}
-      <div 
+      <div
         style={{ width: `${split}%` }}
         className="h-full border-r border-white/10 overflow-auto custom-scrollbar"
       >
@@ -54,7 +54,7 @@ export const EditorSplitPane: React.FC<EditorSplitPaneProps> = ({
       </div>
 
       {/* Right Pane */}
-      <div 
+      <div
         style={{ width: `${100 - split}%` }}
         className="h-full overflow-auto custom-scrollbar bg-blueprint-grid/5"
       >

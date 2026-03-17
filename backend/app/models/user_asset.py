@@ -10,10 +10,13 @@ class UserAsset(Base, BaseMixin):
     """SQLAlchemy model for user assets (resumes, KSC, voice profiles).
     Replaces Firestore users/{user_id}/assetLibrary collection.
     """
+
     __tablename__ = "user_assets"
 
-    user_id: Mapped[str] = mapped_column(String(255), ForeignKey("users.id"), nullable=False, index=True)
-    document_type: Mapped[str] = mapped_column(String(50), nullable=False) # resume, ksc, voice
+    user_id: Mapped[str] = mapped_column(
+        String(255), ForeignKey("users.id"), nullable=False, index=True
+    )
+    document_type: Mapped[str] = mapped_column(String(50), nullable=False)  # resume, ksc, voice
 
     # Store the complex extracted data as JSONB
     extracted_data: Mapped[dict[str, Any]] = mapped_column(JSON, nullable=False)

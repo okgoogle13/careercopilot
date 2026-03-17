@@ -1,9 +1,9 @@
 # System Health Dashboard - Feature Ticket
 
-**Created:** 2026-01-02  
-**Type:** Enhancement  
-**Priority:** Medium  
-**Effort:** 4-6 hours  
+**Created:** 2026-01-02
+**Type:** Enhancement
+**Priority:** Medium
+**Effort:** 4-6 hours
 **Target:** Post-Launch Week 1-2
 
 ---
@@ -118,7 +118,7 @@ Detailed technical specification available in:
 
 ---
 
-**Status:** Ready to implement post-launch  
-**Assignee:** TBD  
-**Estimated Start:** Launch + 3 days  
+**Status:** Ready to implement post-launch
+**Assignee:** TBD
+**Estimated Start:** Launch + 3 days
 **Target Completion:** Launch + 7 days

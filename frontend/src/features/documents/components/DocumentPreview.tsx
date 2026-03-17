@@ -188,7 +188,10 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
 
           {/* Preview Area */}
           <div className="lg:col-span-9">
-            <div className="bg-[#E5E7EB] rounded-placard p-8 min-h-[800px] flex justify-center items-start overflow-auto">
+            <div
+              className="rounded-placard p-8 min-h-[800px] flex justify-center items-start overflow-auto"
+              style={{ backgroundColor: 'var(--sys-color-concreteGrey-base)' }}
+            >
               {/* Document Page */}
               <div
                 className="bg-white shadow-xl transition-all duration-300 origin-top"

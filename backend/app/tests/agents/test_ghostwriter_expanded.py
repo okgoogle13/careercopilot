@@ -1,7 +1,6 @@
 """Expanded tests for GhostwriterAgent covering resume loading and fallback logic."""
 
-from pathlib import Path
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, patch
 
 import pytest
 

@@ -9,9 +9,9 @@ from app.ai.document_analysis_service import (
     DocumentAnalysisService,
     JobDescriptionAnalysisResult,
     ResumeAnalysisResult,
-    analyze_resume,
     analyze_job_description,
-    get_document_analysis_service
+    analyze_resume,
+    get_document_analysis_service,
 )
 from app.core.ai_error_handling import AIError, AIErrorType
 from app.core.config import settings
@@ -35,12 +35,15 @@ def document_analysis_service():
     service.prompt_service.get_system_prompt.return_value = "system prompt"
     return service
 
+
 @pytest.fixture(autouse=True)
 def reset_global_service():
     """Reset the global service instance before each test."""
     import app.ai.document_analysis_service as das
+
     das._document_analysis_service = None
     yield
+
 
 @pytest.mark.asyncio
 async def test_analyze_resume_success(document_analysis_service):
@@ -67,6 +70,7 @@ async def test_analyze_resume_success(document_analysis_service):
     assert result == expected
     mock_model.generate.assert_awaited_once()
 
+
 @pytest.mark.asyncio
 async def test_analyze_resume_invalid_input(document_analysis_service):
     with pytest.raises(ValueError, match="Resume text must be a non-empty string"):
@@ -78,12 +82,16 @@ async def test_analyze_resume_invalid_input(document_analysis_service):
     with pytest.raises(ValueError, match="Resume text is too short for meaningful analysis"):
         await document_analysis_service.analyze_resume("short")
 
+
 @pytest.mark.asyncio
 async def test_analyze_resume_disabled(document_analysis_service):
     document_analysis_service.config["enabled"] = False
-    result = await document_analysis_service.analyze_resume("Valid long text content goes here for the test.")
+    result = await document_analysis_service.analyze_resume(
+        "Valid long text content goes here for the test."
+    )
     assert isinstance(result, ResumeAnalysisResult)
     assert result.raw_data == {"error": "Analysis not available"}
+
 
 @pytest.mark.asyncio
 async def test_analyze_resume_without_target_industry(document_analysis_service):
@@ -143,6 +151,7 @@ async def test_analyze_job_description_success(document_analysis_service):
 
     assert result == expected
 
+
 @pytest.mark.asyncio
 async def test_analyze_job_description_invalid_input(document_analysis_service):
     with pytest.raises(ValueError, match="Job description text must be a non-empty string"):
@@ -151,15 +160,21 @@ async def test_analyze_job_description_invalid_input(document_analysis_service):
     with pytest.raises(ValueError, match="Job description text must be a non-empty string"):
         await document_analysis_service.analyze_job_description(None)
 
-    with pytest.raises(ValueError, match="Job description text is too short for meaningful analysis"):
+    with pytest.raises(
+        ValueError, match="Job description text is too short for meaningful analysis"
+    ):
         await document_analysis_service.analyze_job_description("short")
+
 
 @pytest.mark.asyncio
 async def test_analyze_job_description_disabled(document_analysis_service):
     document_analysis_service.config["enabled"] = False
-    result = await document_analysis_service.analyze_job_description("Valid long text content goes here for the test.")
+    result = await document_analysis_service.analyze_job_description(
+        "Valid long text content goes here for the test."
+    )
     assert isinstance(result, JobDescriptionAnalysisResult)
     assert result.raw_data == {"error": "Analysis not available"}
+
 
 @pytest.mark.asyncio
 async def test_analyze_job_description_returns_default_result_on_ai_error(
@@ -175,8 +190,10 @@ async def test_analyze_job_description_returns_default_result_on_ai_error(
     assert result.required_skills == []
     assert "error" in (result.raw_data or {})
 
+
 class DummyModel(BaseModel):
     test_field: str
+
 
 @pytest.mark.asyncio
 async def test_analyze_document_generic_success(document_analysis_service):
@@ -186,16 +203,17 @@ async def test_analyze_document_generic_success(document_analysis_service):
 
     with (
         patch("app.ai.document_analysis_service.get_model", return_value=mock_model),
-        patch("app.ai.document_analysis_service.format_prompt", return_value="formatted prompt")
+        patch("app.ai.document_analysis_service.format_prompt", return_value="formatted prompt"),
     ):
         result = await document_analysis_service.analyze_document_generic(
             document_text="Valid long document text goes here for generic testing.",
             template_id="dummy_template",
             response_model=DummyModel,
-            param1="value1"
+            param1="value1",
         )
 
     assert result == expected
+
 
 @pytest.mark.asyncio
 async def test_analyze_document_generic_invalid_input(document_analysis_service):
@@ -205,28 +223,41 @@ async def test_analyze_document_generic_invalid_input(document_analysis_service)
     with pytest.raises(ValueError, match="Template ID must be provided"):
         await document_analysis_service.analyze_document_generic("doc text", "", BaseModel)
 
+
 @pytest.mark.asyncio
 async def test_analyze_document_generic_disabled(document_analysis_service):
     document_analysis_service.config["enabled"] = False
     with pytest.raises(AIError) as exc_info:
-        await document_analysis_service.analyze_document_generic("Valid long text", "template", BaseModel)
+        await document_analysis_service.analyze_document_generic(
+            "Valid long text", "template", BaseModel
+        )
     assert exc_info.value.error_type == AIErrorType.SERVICE_UNAVAILABLE
+
 
 @pytest.mark.asyncio
 async def test_analyze_document_generic_model_unavailable(document_analysis_service):
     with patch("app.ai.document_analysis_service.get_model", return_value=None):
         with pytest.raises(AIError) as exc_info:
-            await document_analysis_service.analyze_document_generic("Valid long text", "template", BaseModel)
+            await document_analysis_service.analyze_document_generic(
+                "Valid long text", "template", BaseModel
+            )
         assert exc_info.value.error_type == AIErrorType.MODEL_UNAVAILABLE
+
 
 @pytest.mark.asyncio
 async def test_analyze_document_generic_format_prompt_error(document_analysis_service):
     mock_model = MagicMock()
     with patch("app.ai.document_analysis_service.get_model", return_value=mock_model):
-        with patch("app.ai.document_analysis_service.format_prompt", side_effect=Exception("Formatting Error")):
+        with patch(
+            "app.ai.document_analysis_service.format_prompt",
+            side_effect=Exception("Formatting Error"),
+        ):
             with pytest.raises(AIError) as exc_info:
-                await document_analysis_service.analyze_document_generic("Valid long text", "template", BaseModel)
+                await document_analysis_service.analyze_document_generic(
+                    "Valid long text", "template", BaseModel
+                )
             assert exc_info.value.error_type == AIErrorType.PROMPT_FORMATTING_ERROR
+
 
 @pytest.mark.asyncio
 async def test_analyze_document_generic_generation_error(document_analysis_service):
@@ -236,8 +267,11 @@ async def test_analyze_document_generic_generation_error(document_analysis_servi
     with patch("app.ai.document_analysis_service.get_model", return_value=mock_model):
         with patch("app.ai.document_analysis_service.format_prompt", return_value="prompt"):
             with pytest.raises(AIError) as exc_info:
-                await document_analysis_service.analyze_document_generic("Valid long text", "template", BaseModel)
+                await document_analysis_service.analyze_document_generic(
+                    "Valid long text", "template", BaseModel
+                )
             assert exc_info.value.error_type == AIErrorType.GENERATION_ERROR
+
 
 @pytest.mark.asyncio
 async def test_analyze_document_generic_no_system_prompt(document_analysis_service):
@@ -248,12 +282,13 @@ async def test_analyze_document_generic_no_system_prompt(document_analysis_servi
 
     with (
         patch("app.ai.document_analysis_service.get_model", return_value=mock_model),
-        patch("app.ai.document_analysis_service.format_prompt", return_value="formatted prompt")
+        patch("app.ai.document_analysis_service.format_prompt", return_value="formatted prompt"),
     ):
         result = await document_analysis_service.analyze_document_generic(
             "Valid long text", "template", BaseModel
         )
     assert result == expected
+
 
 @pytest.mark.asyncio
 async def test_extract_skills_resume(document_analysis_service):
@@ -261,30 +296,44 @@ async def test_extract_skills_resume(document_analysis_service):
     # Bypass is_available check by mocking config
     document_analysis_service.config["enabled"] = True
     with patch.object(document_analysis_service, "is_available", return_value=True):
-        with patch.object(document_analysis_service, "analyze_resume", new=AsyncMock(return_value=expected_resume)):
+        with patch.object(
+            document_analysis_service, "analyze_resume", new=AsyncMock(return_value=expected_resume)
+        ):
             skills = await document_analysis_service.extract_skills("resume text", "resume")
             assert skills == ["A", "B"]
+
 
 @pytest.mark.asyncio
 async def test_extract_skills_job_description(document_analysis_service):
     expected_job = JobDescriptionAnalysisResult(required_skills=["C"], preferred_skills=["D"])
     document_analysis_service.config["enabled"] = True
     with patch.object(document_analysis_service, "is_available", return_value=True):
-        with patch.object(document_analysis_service, "analyze_job_description", new=AsyncMock(return_value=expected_job)):
+        with patch.object(
+            document_analysis_service,
+            "analyze_job_description",
+            new=AsyncMock(return_value=expected_job),
+        ):
             skills = await document_analysis_service.extract_skills("job text", "job_description")
             assert skills == ["C", "D"]
 
+
 class MockGenericSkillsModel(BaseModel):
     skills: list[str]
+
 
 @pytest.mark.asyncio
 async def test_extract_skills_generic(document_analysis_service):
     expected_generic = MockGenericSkillsModel(skills=["E", "F"])
     document_analysis_service.config["enabled"] = True
     with patch.object(document_analysis_service, "is_available", return_value=True):
-        with patch.object(document_analysis_service, "analyze_document_generic", new=AsyncMock(return_value=expected_generic)):
+        with patch.object(
+            document_analysis_service,
+            "analyze_document_generic",
+            new=AsyncMock(return_value=expected_generic),
+        ):
             skills = await document_analysis_service.extract_skills("generic text", "other")
             assert skills == ["E", "F"]
+
 
 @pytest.mark.asyncio
 async def test_extract_skills_not_available(document_analysis_service):
@@ -292,13 +341,17 @@ async def test_extract_skills_not_available(document_analysis_service):
         skills = await document_analysis_service.extract_skills("text")
         assert skills == []
 
+
 @pytest.mark.asyncio
 async def test_extract_skills_error(document_analysis_service):
     document_analysis_service.config["enabled"] = True
     with patch.object(document_analysis_service, "is_available", return_value=True):
-        with patch.object(document_analysis_service, "analyze_resume", side_effect=Exception("Failed")):
+        with patch.object(
+            document_analysis_service, "analyze_resume", side_effect=Exception("Failed")
+        ):
             skills = await document_analysis_service.extract_skills("text", "resume")
             assert skills == []
+
 
 @pytest.mark.asyncio
 async def test_convenience_functions():
@@ -309,7 +362,9 @@ async def test_convenience_functions():
     mock_service.analyze_resume = AsyncMock(return_value=expected_resume)
     mock_service.analyze_job_description = AsyncMock(return_value=expected_job)
 
-    with patch("app.ai.document_analysis_service.get_document_analysis_service", return_value=mock_service):
+    with patch(
+        "app.ai.document_analysis_service.get_document_analysis_service", return_value=mock_service
+    ):
         r1 = await analyze_resume("test")
         assert r1 == expected_resume
 
@@ -336,6 +391,7 @@ def test_service_max_tokens_config(document_analysis_service):
 def test_service_temperature_config(document_analysis_service):
     """The service should inherit the global temperature setting."""
     assert document_analysis_service.config["temperature"] == settings.ai_temperature
+
 
 def test_singleton_get_document_analysis_service():
     service1 = get_document_analysis_service()

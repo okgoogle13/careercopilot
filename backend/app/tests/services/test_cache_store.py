@@ -4,7 +4,6 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from app.models.database import Cache
 from app.services.cache_store import SQLAlchemyCacheStore
 
 

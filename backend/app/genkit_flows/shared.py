@@ -1,4 +1,5 @@
-from typing import Callable, Type, TypeVar, cast
+from collections.abc import Callable
+from typing import TypeVar, cast
 
 from pydantic import BaseModel
 
@@ -8,7 +9,7 @@ T = TypeVar("T", bound=BaseModel)
 
 
 def create_extraction_flow(
-    name: str, prompt_template: str, output_schema: Type[T]
+    name: str, prompt_template: str, output_schema: type[T]
 ) -> Callable[[str], T]:
     """
     Creates a reusable Genkit flow for extracting structured data from text.

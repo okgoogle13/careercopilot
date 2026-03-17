@@ -39,4 +39,3 @@
 - Tag + push:
   - `git tag -a vX.Y.Z -m "release: vX.Y.Z"`
   - `git push origin vX.Y.Z`
-

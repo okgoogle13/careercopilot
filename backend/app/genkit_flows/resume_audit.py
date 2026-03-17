@@ -1,6 +1,5 @@
 import json
 import logging
-from typing import Optional
 
 from app.core.genkit_init import get_model
 from app.core.prompt_service import format_prompt, get_prompt_service
@@ -12,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 @async_genkit_flow()
 async def resumeAuditRKL(
-    resume_text: str, job_description: Optional[str] = None, strictness_mode: str = "moderate"
+    resume_text: str, job_description: str | None = None, strictness_mode: str = "moderate"
 ) -> AuditResult:
     """
     Performs a specialized Australian resume audit based on Resume Knowledge Library (RKL) rules.

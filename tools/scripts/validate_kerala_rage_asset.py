@@ -51,7 +51,7 @@ def validate_metadata(image_path: Path, category: str) -> List[str]:
         with Image.open(image_path) as img:
             w, h = img.size
             dpi = img.info.get('dpi', (72, 72))
-            
+
             # Check specs
             spec = DHS_REGISTRY.get(category)
             if not spec:
@@ -63,33 +63,33 @@ def validate_metadata(image_path: Path, category: str) -> List[str]:
             actual_ratio = w / h
             if abs(actual_ratio - expected_ratio) > 0.05:
                 errors.append(f"❌ Aspect Ratio mismatch: Got {w}:{h}, expected {spec['ratio'][0]}:{spec['ratio'][1]}")
-            
+
             # Resolution check (Minimum or exact)
             if w < spec["res"][0] or h < spec["res"][1]:
                 errors.append(f"❌ Resolution too low: Got {w}x{h}, expected at least {spec['res'][0]}x{spec['res'][1]}")
-            
+
             # DPI check (Canonical is 72 for web, but higher is usually fine)
             if dpi[0] < 72:
                 errors.append(f"❌ DPI too low: {dpi[0]} DPI found.")
 
     except Exception as e:
         errors.append(f"❌ Failed to read image metadata: {e}")
-    
+
     return errors
 
 def validate_path(image_path: Path) -> List[str]:
     """Enforce the DHS directory structure."""
     errors = []
     abs_path = str(image_path.absolute())
-    
+
     if "frontend/public/assets" not in abs_path:
         errors.append("❌ Asset must be located within 'frontend/public/assets/'")
-    
+
     # Check if category subfolder exists
     category = image_path.parent.name
     if category not in DHS_REGISTRY:
         errors.append(f"❌ Invalid category folder: '{category}'. Allowed: {', '.join(DHS_REGISTRY.keys())}")
-    
+
     return errors
 
 def validate_vision(image_path: Path) -> List[str]:
@@ -109,22 +109,22 @@ def main():
     parser = argparse.ArgumentParser(description="Kerala Rage Asset Validator")
     parser.add_argument("file", help="Path to the asset file")
     args = parser.parse_args()
-    
+
     image_path = Path(args.file)
     if not image_path.exists():
         print(f"❌ File not found: {args.file}")
         sys.exit(1)
-        
+
     category = image_path.parent.name
-    
+
     print(f"🔍 Validating {image_path.name} (Category: {category})...")
-    
+
     path_errors = validate_path(image_path)
     meta_errors = validate_metadata(image_path, category)
     vision_errors = validate_vision(image_path)
-    
+
     all_errors = path_errors + meta_errors + vision_errors
-    
+
     if all_errors:
         print("\n".join(all_errors))
         print(f"\n❌ Validation FAILED for {image_path.name}")

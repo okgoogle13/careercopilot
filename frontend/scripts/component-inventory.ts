@@ -72,6 +72,23 @@ interface ComponentInfo {
   hasA11yPassed?: boolean;
   bundleImpact?: 'low' | 'medium' | 'high';
   visualRegression?: 'passed' | 'pending';
+  routeFamily?: string;
+  layerTruth?: 'design' | 'runtime' | 'capability_adjacent' | 'derived' | 'unknown';
+  canonicalStatus?:
+    | 'canonical'
+    | 'support'
+    | 'reference'
+    | 'prototype'
+    | 'deferred'
+    | 'deprecated_candidate'
+    | 'deadcode_candidate'
+    | 'unknown';
+  targetStateDecision?: 'keep' | 'expand' | 'merge' | 'replace' | 'retire' | 'unknown';
+  mockBacked?: boolean;
+  capabilityDependencies?: string[];
+  migrationPhase?: string;
+  deadCodeCandidate?: boolean;
+  prototypeStatus?: 'live_prototype' | 'unrouted_candidate' | 'runtime' | 'none';
 }
 
 interface InventoryReport {
@@ -90,7 +107,61 @@ interface InventoryReport {
     legacyM3: number;
     fullyKrSolidarity: number;
   };
+  governanceSummary: {
+    routeFamiliesByDecision: Record<string, number>;
+    mockBackedLiveSurfaces: string[];
+    unresolvedCapabilityGaps: string[];
+    deadCodeCandidates: string[];
+    prototypeCandidates: string[];
+  };
 }
+
+interface RouteMatrixRow {
+  current_route: string;
+  target_route: string;
+  family: string;
+  status: 'keep' | 'expand' | 'merge' | 'replace' | 'retire';
+  current_runtime_owner?: string;
+  target_runtime_owner?: string;
+  screen_reference?: string | null;
+  paired_runtime_surface?: string | null;
+  target_component_surfaces?: string[];
+  backend_capabilities?: string[];
+}
+
+interface RouteMatrix {
+  rows: RouteMatrixRow[];
+}
+
+interface BackendFeatureGap {
+  feature_id: string;
+  owner_route: string;
+  owner_surface: string;
+  frontend_status?: string;
+  reference_components?: string[];
+  new_components?: string[];
+  deferred_components?: string[];
+}
+
+interface BackendFeatureComponentGapMap {
+  features: BackendFeatureGap[];
+}
+
+const ROUTE_FAMILY_HINTS: Record<string, string[]> = {
+  landing: ['landing'],
+  'auth-onboarding': ['auth', 'login', 'register', 'onboarding', 'welcome'],
+  dashboard: ['dashboard'],
+  analysis: ['analysis', 'assetlibrary', 'asset-library', 'resumeaudit'],
+  documents: ['document', 'documents', 'workbench'],
+  applications: ['application', 'applications', 'tracker', 'applyquick', 'kanban'],
+  jobs: ['jobqueue', 'opportunities', 'lookout', 'job'],
+  generation: ['coverletter', 'ksc', 'generator'],
+  account: ['profile', 'profiles', 'settings', 'voice'],
+  ingestion: ['ingestion', 'ingest', 'resumeuploader', 'evidenceuploader'],
+  'internal-tools': ['designsidekick', 'styleguide', 'tokentest'],
+  'landing-prototype': ['herolanding'],
+  fallback: [],
+};
 
 const FRONTEND_DIR = path.join(__dirname, '..');
 const SRC_DIR = path.join(FRONTEND_DIR, 'src');
@@ -103,6 +174,17 @@ const COMPONENT_ROOTS = [
   path.join(SRC_DIR, 'legacy'),
   UI_PACKAGE_DIR,
 ];
+
+const REPO_ROOT = path.join(FRONTEND_DIR, '..');
+const TRACKED_MIGRATION_ROOT = path.join(
+  REPO_ROOT,
+  'docs',
+  'project',
+  'active',
+  'frontend-source-of-truth-migration'
+);
+const ROUTE_MATRIX_PATH = path.join(TRACKED_MIGRATION_ROOT, 'control', 'route-matrix.json');
+const COMPONENT_GAP_MAP_PATH = path.join(TRACKED_MIGRATION_ROOT, 'control', 'gap-map.json');
 
 function normalizePath(value: string): string {
   return value.split(path.sep).join('/');
@@ -121,6 +203,7 @@ function categorizeComponent(filePath: string): ComponentInfo['category'] {
   if (relativePath.startsWith('src/layouts/')) return 'layout';
   if (relativePath.startsWith('src/pages/')) return 'pages';
   if (relativePath.startsWith('src/features/')) return 'features';
+  if (relativePath.startsWith('src/context/')) return 'core';
   if (relativePath.startsWith('src/components/ui/')) return 'ui';
   if (relativePath.startsWith('src/components/shared/')) return 'shared';
   if (relativePath.startsWith('src/components/core/')) return 'core';
@@ -168,6 +251,194 @@ function findRelatedFiles(componentPath: string): {
   };
 }
 
+function readJsonIfExists<T>(filePath: string): T | null {
+  if (!fs.existsSync(filePath)) return null;
+  try {
+    return JSON.parse(fs.readFileSync(filePath, 'utf8')) as T;
+  } catch {
+    return null;
+  }
+}
+
+function normalizeRepoPath(p: string): string {
+  return normalizePath(path.relative(FRONTEND_DIR, p));
+}
+
+function getGovernanceContext() {
+  const routeMatrix = readJsonIfExists<RouteMatrix>(ROUTE_MATRIX_PATH);
+  const componentGapMap = readJsonIfExists<BackendFeatureComponentGapMap>(COMPONENT_GAP_MAP_PATH);
+  const routeRows = routeMatrix?.rows ?? [];
+  const featureGaps = componentGapMap?.features ?? [];
+
+  return {
+    routeRows,
+    featureGaps,
+    unresolvedCapabilityGaps: featureGaps
+      .filter(
+        (entry) =>
+          entry.frontend_status === 'no_live_owner' ||
+          entry.frontend_status === 'mock_only' ||
+          entry.frontend_status === 'partially_wired'
+      )
+      .map((entry) => entry.feature_id),
+  };
+}
+
+function scoreRouteRowMatch(
+  row: RouteMatrixRow,
+  normalizedRelativePath: string,
+  normalizedComponentName: string
+): number {
+  let score = 0;
+  const screenReference = normalizePath(row.screen_reference ?? '').toLowerCase();
+  const runtimeSurface = normalizePath(row.paired_runtime_surface ?? '').toLowerCase();
+  const targetOwner = (row.target_runtime_owner ?? '').toLowerCase();
+  const currentOwner = (row.current_runtime_owner ?? '').toLowerCase();
+  const familyHints = ROUTE_FAMILY_HINTS[row.family] ?? [];
+
+  if (screenReference && screenReference.endsWith(normalizedRelativePath)) score += 8;
+  if (runtimeSurface && runtimeSurface.endsWith(normalizedRelativePath)) score += 8;
+  if (targetOwner && targetOwner === normalizedComponentName) score += 8;
+  if (currentOwner && currentOwner === normalizedComponentName) score += 6;
+  if (
+    (row.target_component_surfaces ?? []).some(
+      (surface) => surface.toLowerCase() === normalizedComponentName
+    )
+  ) {
+    score += 5;
+  }
+  if (
+    familyHints.some(
+      (hint) => normalizedRelativePath.includes(hint) || normalizedComponentName.includes(hint)
+    )
+  ) {
+    score += 2;
+  }
+
+  return score;
+}
+
+function getGovernanceMetadata(
+  relativePath: string,
+  componentName: string,
+  governance: ReturnType<typeof getGovernanceContext>
+) {
+  const normalizedRelativePath = normalizePath(relativePath).toLowerCase();
+  const normalizedComponentName = componentName.toLowerCase();
+  const normalizedRepoRelativePath = normalizePath(
+    path.join('frontend', relativePath)
+  ).toLowerCase();
+  let routeFamily: string | undefined;
+  let targetStateDecision: ComponentInfo['targetStateDecision'] = 'unknown';
+  let capabilityDependencies: string[] = [];
+  let migrationPhase: string | undefined;
+  let prototypeStatus: ComponentInfo['prototypeStatus'] = 'none';
+  let canonicalStatus: ComponentInfo['canonicalStatus'] = 'unknown';
+
+  const matchedRoute = governance.routeRows
+    .map((row) => ({
+      row,
+      score: scoreRouteRowMatch(row, normalizedRepoRelativePath, normalizedComponentName),
+    }))
+    .filter((entry) => entry.score > 0)
+    .sort((a, b) => b.score - a.score)[0]?.row;
+
+  if (matchedRoute) {
+    routeFamily = matchedRoute.family;
+    targetStateDecision = matchedRoute.status;
+    capabilityDependencies = matchedRoute.backend_capabilities ?? [];
+  }
+
+  const matchedFeature = governance.featureGaps.find(
+    (feature) =>
+      feature.owner_surface.toLowerCase() === normalizedComponentName ||
+      (feature.reference_components ?? []).some(
+        (component) => component.toLowerCase() === normalizedComponentName
+      ) ||
+      (feature.new_components ?? []).some(
+        (component) => component.toLowerCase() === normalizedComponentName
+      ) ||
+      (feature.deferred_components ?? []).some(
+        (component) => component.toLowerCase() === normalizedComponentName
+      )
+  );
+
+  if (relativePath.startsWith('src/screens/')) {
+    canonicalStatus = 'reference';
+  } else if (relativePath.includes('phase3-batch') || relativePath.includes('/debug/')) {
+    canonicalStatus = 'deprecated_candidate';
+  } else if (
+    matchedFeature?.deferred_components?.some((component) => component === componentName)
+  ) {
+    canonicalStatus = 'deferred';
+  } else if (
+    matchedFeature?.reference_components?.some((component) => component === componentName)
+  ) {
+    canonicalStatus = 'reference';
+  } else if (
+    matchedFeature?.owner_surface === componentName ||
+    matchedRoute?.target_runtime_owner === componentName
+  ) {
+    canonicalStatus = 'canonical';
+  } else if (
+    matchedRoute?.target_component_surfaces?.some((surface) => surface === componentName) ||
+    matchedFeature?.new_components?.some((component) => component === componentName)
+  ) {
+    canonicalStatus = 'support';
+  } else if (
+    relativePath.startsWith('src/layouts/') ||
+    relativePath.startsWith('src/components/')
+  ) {
+    canonicalStatus = 'support';
+  } else if (relativePath.startsWith('src/features/') || relativePath.startsWith('src/pages/')) {
+    canonicalStatus = 'canonical';
+  }
+
+  if (relativePath.startsWith('src/screens/')) {
+    prototypeStatus = 'unrouted_candidate';
+  }
+  if (relativePath.includes('phase3-batch') || relativePath.includes('/kr/')) {
+    prototypeStatus = 'live_prototype';
+  }
+  if (relativePath.startsWith('src/features/') || relativePath.startsWith('src/pages/')) {
+    prototypeStatus = 'runtime';
+  }
+
+  const mockBacked = Boolean(
+    matchedFeature &&
+    ['mock_only', 'no_live_owner', 'partially_wired'].includes(
+      matchedFeature.frontend_status ?? ''
+    ) &&
+    (relativePath.startsWith('src/features/') || relativePath.startsWith('src/pages/'))
+  );
+
+  const deadCodeCandidate =
+    canonicalStatus === 'deprecated_candidate' ||
+    (prototypeStatus === 'unrouted_candidate' && targetStateDecision === 'retire');
+
+  const layerTruth: ComponentInfo['layerTruth'] = relativePath.startsWith('src/screens/')
+    ? 'design'
+    : relativePath.startsWith('src/features/') || relativePath.startsWith('src/pages/')
+      ? 'runtime'
+      : matchedFeature
+        ? 'capability_adjacent'
+        : relativePath.includes('phase3-batch')
+          ? 'derived'
+          : 'unknown';
+
+  return {
+    routeFamily,
+    targetStateDecision,
+    capabilityDependencies,
+    migrationPhase,
+    prototypeStatus,
+    canonicalStatus,
+    mockBacked,
+    deadCodeCandidate,
+    layerTruth,
+  };
+}
+
 function analyzeComponents(): InventoryReport {
   console.log('Initializing TypeScript project...');
 
@@ -180,7 +451,30 @@ function analyzeComponents(): InventoryReport {
     project.addSourceFilesAtPaths(path.join(UI_PACKAGE_DIR, '**/*.tsx'));
   }
 
-  console.log('Analyzing components...');
+  console.log('Crawling reachable AST graph from App.tsx and main.tsx...');
+
+  const reachableFiles = new Set<string>();
+  const queue = [path.join(SRC_DIR, 'main.tsx'), path.join(SRC_DIR, 'App.tsx')];
+
+  while (queue.length > 0) {
+    const currentPath = queue.shift()!;
+    if (reachableFiles.has(currentPath)) continue;
+
+    const sf = project.getSourceFile(currentPath);
+    if (!sf) continue;
+
+    reachableFiles.add(currentPath);
+
+    sf.getImportDeclarations().forEach((imp) => {
+      const resolvedSf = imp.getModuleSpecifierSourceFile();
+      if (resolvedSf) {
+        const resolvedPath = resolvedSf.getFilePath();
+        if (isWithinRoot(resolvedPath, SRC_DIR) && !resolvedPath.includes('node_modules')) {
+          queue.push(resolvedPath);
+        }
+      }
+    });
+  }
 
   const componentFiles = project.getSourceFiles().filter((sf) => {
     const filePath = sf.getFilePath();
@@ -190,7 +484,7 @@ function analyzeComponents(): InventoryReport {
       !filePath.includes('.stories.') &&
       !filePath.includes('node_modules') &&
       !filePath.includes('/Figma UI Files/') &&
-      COMPONENT_ROOTS.some((root) => isWithinRoot(filePath, root))
+      reachableFiles.has(filePath)
     );
   });
 
@@ -198,6 +492,7 @@ function analyzeComponents(): InventoryReport {
 
   const components: ComponentInfo[] = [];
   const importMap = new Map<string, Set<string>>();
+  const governance = getGovernanceContext();
 
   // First pass: collect all components
   for (const sourceFile of componentFiles) {
@@ -258,8 +553,10 @@ function analyzeComponents(): InventoryReport {
       }) ||
       /\bM3[A-Z]/.test(text);
 
+    // Match explicit KR identifiers only. Avoid generic substrings like "stone"
+    // triggering false positives for unrelated words such as "keystone".
     const KrSolidarityTokenPattern =
-      /(wattle|[DEPRECATED_STYLE]|kr-leaf|flannel|paper-white|kr-motif|pebble|stone|KeralaRage|KrSolidarity|kr-flower|bottlebrush|gum|fern|sentry|KrDark|KrDark|slate)/i;
+      /\b(?:KeralaRage|KrSolidarity|KrDark|Pebble|Stone|Slab|ManifestoSlab|Signal|Lens|HaloPulses)\b|(?:\bkr-(?:leaf|flower|motif)\b)|\bpaper-white\b/i;
     const usesDesignTokens =
       KrSolidarityTokenPattern.test(text) ||
       /--(radius|elevation|duration|motion|surface|color)-/i.test(text);
@@ -331,6 +628,8 @@ function analyzeComponents(): InventoryReport {
     const { hasTests, hasStories, hasDocs } = findRelatedFiles(filePath);
     const category = categorizeComponent(filePath);
 
+    const governanceMetadata = getGovernanceMetadata(relativePath, componentName, governance);
+
     const component: ComponentInfo = {
       name: componentName,
       path: filePath,
@@ -362,6 +661,15 @@ function analyzeComponents(): InventoryReport {
       hasA11yPassed: true, // Placeholder for external CI/CD tool
       bundleImpact: 'low', // Placeholder
       visualRegression: 'pending', // Placeholder
+      routeFamily: governanceMetadata.routeFamily,
+      layerTruth: governanceMetadata.layerTruth,
+      canonicalStatus: governanceMetadata.canonicalStatus,
+      targetStateDecision: governanceMetadata.targetStateDecision,
+      mockBacked: governanceMetadata.mockBacked,
+      capabilityDependencies: governanceMetadata.capabilityDependencies,
+      migrationPhase: governanceMetadata.migrationPhase,
+      deadCodeCandidate: governanceMetadata.deadCodeCandidate,
+      prototypeStatus: governanceMetadata.prototypeStatus,
     };
 
     components.push(component);
@@ -551,6 +859,43 @@ function analyzeComponents(): InventoryReport {
       `Target: 80%+ for complete KrSolidarity migration.`
   );
 
+  const routeFamiliesByDecision = components.reduce(
+    (acc, component) => {
+      const key = component.targetStateDecision ?? 'unknown';
+      acc[key] = (acc[key] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
+
+  const mockBackedLiveSurfaces = components
+    .filter((c) => c.mockBacked && c.layerTruth === 'runtime')
+    .map((c) => c.relativePath);
+  const deadCodeCandidates = components
+    .filter((c) => c.deadCodeCandidate)
+    .map((c) => c.relativePath);
+  const prototypeCandidates = components
+    .filter(
+      (c) => c.prototypeStatus === 'live_prototype' || c.prototypeStatus === 'unrouted_candidate'
+    )
+    .map((c) => c.relativePath);
+
+  if (governance.unresolvedCapabilityGaps.length > 0) {
+    recommendations.push(
+      `Unresolved capability gaps remain: ${governance.unresolvedCapabilityGaps.slice(0, 5).join(', ')}${
+        governance.unresolvedCapabilityGaps.length > 5 ? '...' : ''
+      }`
+    );
+  }
+
+  if (mockBackedLiveSurfaces.length > 0) {
+    recommendations.push(
+      `${mockBackedLiveSurfaces.length} runtime surfaces appear mock-backed and should be prioritized in the migration: ` +
+        mockBackedLiveSurfaces.slice(0, 5).join(', ') +
+        (mockBackedLiveSurfaces.length > 5 ? '...' : '')
+    );
+  }
+
   const report: InventoryReport = {
     generatedAt: new Date().toISOString(),
     totalComponents: components.length,
@@ -561,7 +906,28 @@ function analyzeComponents(): InventoryReport {
     recommendations,
     migrationSummary,
     KrSolidarityAdoption,
+    governanceSummary: {
+      routeFamiliesByDecision,
+      mockBackedLiveSurfaces,
+      unresolvedCapabilityGaps: governance.unresolvedCapabilityGaps,
+      deadCodeCandidates,
+      prototypeCandidates,
+    },
   };
+
+  if (process.argv.includes('--raw')) {
+    const rawInventory = components.map((c) => ({
+      name: c.name,
+      absolutePath: c.path,
+      relativePath: c.relativePath,
+      category: c.category,
+    }));
+    fs.writeFileSync(
+      path.join(FRONTEND_DIR, 'tmp_raw_inventory.json'),
+      JSON.stringify(rawInventory, null, 2)
+    );
+    console.log(`✅ Raw reachable inventory generated with ${rawInventory.length} components.`);
+  }
 
   return report;
 }
@@ -576,7 +942,9 @@ function main() {
       ? process.argv[process.argv.indexOf('--output') + 1]
       : path.join(FRONTEND_DIR, 'component-inventory.json');
 
-    fs.writeFileSync(outputPath, JSON.stringify(report, null, 2));
+    if (!process.argv.includes('--raw')) {
+      fs.writeFileSync(outputPath, JSON.stringify(report, null, 2));
+    }
 
     console.log('\n=== Summary ===');
     console.log(`Total Components: ${report.totalComponents}`);

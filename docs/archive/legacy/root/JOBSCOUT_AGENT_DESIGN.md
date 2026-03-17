@@ -8,7 +8,7 @@ Create an autonomous agent capable of finding, extracting, and analyzing job lis
 ### 1. The Core Agent: `JobScoutAgent`
 - **Location**: `backend/app/agents/job_scout.py`
 - **Responsibility**: Orchestrates the search -> scrape -> parse -> save pipeline.
-- **Dependencies**: 
+- **Dependencies**:
   - `playwright` (MCP Server)
   - `flash-sidekick` (MCP Server)
 
@@ -16,7 +16,7 @@ Create an autonomous agent capable of finding, extracting, and analyzing job lis
 
 #### A. `browse_job_board(url: str)`
 - **Tool**: `@executeautomation/playwright-mcp-server`
-- **Action**: 
+- **Action**:
   - Navigate to URL
   - Handle cookie banners/popups (using simple selectors or AI visual check)
   - Scroll to load dynamic content
@@ -24,14 +24,14 @@ Create an autonomous agent capable of finding, extracting, and analyzing job lis
 
 #### B. `parse_job_html(html_content: str)`
 - **Tool**: `flash-sidekick` (Gemini Flash Lite)
-- **Action**: 
+- **Action**:
   - Input: Raw Rendered HTML
   - Prompt: "Extract job title, company, salary, tech stack, and description."
   - Output: JSON `JobListingDetails`
 
 #### C. `search_aggregator(query: str)`
 - **Tool**: `playwright`
-- **Action**: 
+- **Action**:
   - Perform Google Search: `site:greenhouse.io OR site:lever.co "{query}"`
   - Extract links to job posts.
 
@@ -40,10 +40,10 @@ Since official APIs for Seek, Jora, and EthicalJobs are restricted, we use **"He
 
 ### The "No-API" Workflow
 1. **Emulation**: Playwright launches a real Chromium browser instance (headless). To the website, it looks like a standard user on a laptop.
-2. **Navigation**: 
+2. **Navigation**:
    - **EthicalJobs**: `https://www.ethicaljobs.com.au/jobs?keywords=social%20work`
    - **Seek**: `https://www.seek.com.au/social-work-jobs`
-3. **Interaction**: 
+3. **Interaction**:
    - The agent waits for the React/Angular app to hydrate (load data).
    - It "clicks" the Next Page button or "scrolls" infinite lists.
 4. **Extraction**:

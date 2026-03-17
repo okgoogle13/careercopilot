@@ -13,7 +13,7 @@ def full_reconciliation():
     if manifest_path.exists():
         with open(manifest_path, 'r') as f:
             manifest = json.load(f)
-        
+
         remaining_assets = []
         valid_ids = set()
         for asset in manifest.get('assets', []):
@@ -21,14 +21,14 @@ def full_reconciliation():
                 remaining_assets.append(asset)
                 valid_ids.add(asset['id'])
                 continue
-            
+
             file_path = asset.get('file_path')
             if file_path:
                 full_path = repo_root / 'frontend/public' / file_path.lstrip('/')
                 if full_path.exists():
                     remaining_assets.append(asset)
                     valid_ids.add(asset['id'])
-        
+
         manifest['assets'] = remaining_assets
         manifest['total_assets'] = len(remaining_assets)
         with open(manifest_path, 'w') as f:
@@ -42,7 +42,7 @@ def full_reconciliation():
     if token_map_path.exists():
         with open(token_map_path, 'r') as f:
             token_map = json.load(f)
-        
+
         new_tokens = {}
         for key, token in token_map.get('tokens', {}).items():
             ref_id = token.get('ref')
@@ -55,7 +55,7 @@ def full_reconciliation():
                     full_path = repo_root / 'frontend/public' / path_val.lstrip('/')
                     if full_path.exists():
                         new_tokens[key] = token
-        
+
         token_map['tokens'] = new_tokens
         with open(token_map_path, 'w') as f:
             json.dump(token_map, f, indent=2)
@@ -65,7 +65,7 @@ def full_reconciliation():
     if hero_registry_path.exists():
         with open(hero_registry_path, 'r') as f:
             registry = json.load(f)
-        
+
         new_compositions = []
         for comp in registry.get('compositions', []):
             comp_valid = True
@@ -76,7 +76,7 @@ def full_reconciliation():
                     break
             if comp_valid:
                 new_compositions.append(comp)
-        
+
         registry['compositions'] = new_compositions
         with open(hero_registry_path, 'w') as f:
             json.dump(registry, f, indent=2)

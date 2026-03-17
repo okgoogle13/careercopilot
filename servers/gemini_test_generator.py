@@ -29,7 +29,7 @@ class GeminiTestGenerator:
     def __init__(self, api_key: str, project_root: Path, model_name: str = 'gemini-2.0-flash'):
         self.api_key = api_key
         self.project_root = project_root
-        
+
         try:
             genai.configure(api_key=api_key)
             # Use provided model
@@ -114,14 +114,14 @@ class GeminiTestGenerator:
                     import time
                     time.sleep(retry_delay)
                     continue
-                
+
                 logger.error(f"❌ Generation failed: {e}")
                 return {
                     'success': False,
                     'error': str(e),
                     'output_file': output_file
                 }
-        
+
         return {'success': False, 'error': 'Max retries exceeded', 'output_file': output_file}
 
     def _read_reference_files(self, reference_files: List[str]) -> Dict[str, str]:
@@ -291,7 +291,7 @@ def main():
     expected_files = task_inputs.get('expected_output', [])
     if not expected_files and 'output_file' in task_inputs:
         expected_files = [task_inputs['output_file']]
-    
+
     # Ensure source file is in reference files
     reference_files = task_inputs.get('reference_files', [])
     if 'source_file' in task_inputs and task_inputs['source_file'] not in reference_files:

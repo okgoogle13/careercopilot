@@ -1,8 +1,6 @@
 """Tests for career ingestion endpoints."""
 
-from unittest.mock import ANY, AsyncMock, MagicMock, patch
-
-import pytest
+from unittest.mock import AsyncMock, patch
 
 
 class TestCareerIngest:

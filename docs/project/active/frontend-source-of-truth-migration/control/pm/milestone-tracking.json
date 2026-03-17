@@ -1,0 +1,164 @@
+{
+  "milestones": [
+    {
+      "milestone_id": "M1",
+      "name": "Planning Inputs Stable",
+      "status": "COMPLETE",
+      "assigned_to": "orchestrator",
+      "dependencies": []
+    },
+    {
+      "milestone_id": "M2",
+      "name": "First Route Contract Approved (/tracker)",
+      "status": "COMPLETE",
+      "assigned_to": "orchestrator",
+      "dependencies": [
+        "M1"
+      ]
+    },
+    {
+      "milestone_id": "M3",
+      "name": "Tracker CRUD Live Verification + Brand Gate",
+      "status": "IN_PROGRESS",
+      "assigned_to": "frontend",
+      "dependencies": [
+        "M2"
+      ]
+    },
+    {
+      "milestone_id": "M4",
+      "name": "Ingestion Route Owns Smart Ingestion Pipeline",
+      "status": "COMPLETE",
+      "assigned_to": "frontend",
+      "dependencies": [
+        "M2"
+      ]
+    },
+    {
+      "milestone_id": "M5",
+      "name": "Documents Route Owns Redline Workspace",
+      "status": "COMPLETE",
+      "assigned_to": "frontend",
+      "dependencies": [
+        "M2"
+      ]
+    },
+    {
+      "milestone_id": "M6",
+      "name": "Step 6A Route Retirement and Registry Cleanup",
+      "status": "COMPLETE",
+      "assigned_to": "orchestrator",
+      "dependencies": [
+        "M3",
+        "M4",
+        "M5"
+      ]
+    },
+    {
+      "milestone_id": "M7A",
+      "name": "Step 6B Workbench and Finalization Pairing",
+      "status": "COMPLETE",
+      "assigned_to": "frontend",
+      "dependencies": [
+        "M3"
+      ]
+    },
+    {
+      "milestone_id": "M7B",
+      "name": "Step 6B Route-Family Cleanup Closure",
+      "status": "COMPLETE",
+      "assigned_to": "frontend",
+      "dependencies": [
+        "M6",
+        "M7A",
+        "M10",
+        "M11"
+      ]
+    },
+    {
+      "milestone_id": "M8",
+      "name": "Figma Governance Alignment Complete",
+      "status": "COMPLETE",
+      "assigned_to": "orchestrator",
+      "dependencies": [
+        "M1"
+      ]
+    },
+    {
+      "milestone_id": "M9",
+      "name": "Gap-Fill Planner Indexes support_reference Candidates",
+      "status": "COMPLETE",
+      "assigned_to": "frontend",
+      "dependencies": [
+        "M8"
+      ]
+    },
+    {
+      "milestone_id": "M10",
+      "name": "Priority support-reference audit packs approved (landing/dashboard/analysis)",
+      "status": "COMPLETE",
+      "assigned_to": "design",
+      "dependencies": [
+        "M9"
+      ]
+    },
+    {
+      "milestone_id": "M11",
+      "name": "Late-stage TSX identity gate passes for Figma-informed routes",
+      "status": "COMPLETE",
+      "assigned_to": "design",
+      "dependencies": [
+        "M10"
+      ]
+    },
+    {
+      "milestone_id": "M12A",
+      "name": "Figma MCP draft build-contract accelerator ready",
+      "status": "PENDING",
+      "assigned_to": "orchestrator",
+      "dependencies": [
+        "M8",
+        "M10"
+      ]
+    },
+    {
+      "milestone_id": "M12B",
+      "name": "Figma MCP wireframe drift support ready",
+      "status": "PENDING",
+      "assigned_to": "orchestrator",
+      "dependencies": [
+        "M8",
+        "M10"
+      ]
+    },
+    {
+      "milestone_id": "M13",
+      "name": "Shared-shell Figma audit complete",
+      "status": "COMPLETE",
+      "assigned_to": "design",
+      "dependencies": [
+        "M8",
+        "M10"
+      ]
+    },
+    {
+      "milestone_id": "M14",
+      "name": "Route audit expansion complete for opportunities/applications/ingestion/account",
+      "status": "COMPLETE",
+      "assigned_to": "design",
+      "dependencies": [
+        "M13"
+      ]
+    },
+    {
+      "milestone_id": "M15",
+      "name": "Claude handoff pack refreshed for full Figma MCP inventory",
+      "status": "COMPLETE",
+      "assigned_to": "orchestrator",
+      "dependencies": [
+        "M13",
+        "M14"
+      ]
+    }
+  ]
+}

@@ -30,7 +30,7 @@ for line in lines:
             ...
 ```
 
-**Performance Impact:** 
+**Performance Impact:**
 - Eliminates O(n*m) redundant string operations
 - Reduces CPU cycles by ~40-60% for these functions
 - Caches `.lower()` result to avoid repeated string operations
@@ -216,7 +216,7 @@ Consider implementing batch operations for:
 ### 3. Caching Layer Improvements
 
 **Current:** Individual document caching
-**Potential:** 
+**Potential:**
 - Implement query result caching with cache invalidation
 - Add Redis/Memcached for frequently accessed data
 - Implement LRU cache for in-memory operations

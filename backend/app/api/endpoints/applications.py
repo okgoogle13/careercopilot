@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 
 from app.core.dependencies import get_current_user
 from app.core.firebase import get_firestore
-from app.models.application_schemas import ApplicationCreate, ApplicationResponse
+from app.models.application_schemas import ApplicationCreate, ApplicationResponse, ApplicationUpdate
 from app.models.database import User
 
 router = APIRouter()
@@ -70,22 +70,15 @@ async def get_all_applications(
     skip: int = 0,
     limit: int = 100,
 ):
-    """Retrieve all job applications for the current user with pagination."""
     db = get_firestore()
-    query = (
-        db.collection(COLLECTION_NAME)
-        .where("user_id", "==", current_user.id)
-        .limit(limit)
-        .offset(skip)
-    )
-
-    docs = query.stream()
+    query = db.collection(COLLECTION_NAME).where("user_id", "==", current_user.id)
+    query = query.offset(skip).limit(limit)
 
     applications = []
-    for doc in docs:
-        d = doc.to_dict()
-        d["id"] = doc.id
-        applications.append(d)
+    for doc in query.stream():
+        app_data = doc.to_dict()
+        app_data["id"] = doc.id
+        applications.append(app_data)
 
     return applications
 
@@ -97,7 +90,7 @@ async def get_all_applications(
 )
 async def update_application(
     application_id: str,
-    application: ApplicationCreate,
+    application: ApplicationUpdate,
     current_user: User = Depends(get_current_user),
 ):
     """Update an existing job application."""

@@ -1,9 +1,9 @@
 # Electric Alchemist v5.0 - Complete Design System Specification
 ## Material Design 3 Expressive Implementation
 
-**Status:** Production Implementation  
-**Version:** 5.0  
-**Framework:** Tailwind CSS + M3 Design Tokens  
+**Status:** Production Implementation
+**Version:** 5.0
+**Framework:** Tailwind CSS + M3 Design Tokens
 **Last Updated:** December 25, 2025
 
 ---
@@ -27,8 +27,8 @@ Electric Alchemist is a **premium, expressive design system** that combines:
 ```css
 border-radius: 24px 64px 24px 8px;
 ```
-**Purpose:** Signature shape, hero elements, content cards  
-**Psychology:** [DEPRECATED_STYLE] growth, premium feel  
+**Purpose:** Signature shape, hero elements, content cards
+**Psychology:** [DEPRECATED_STYLE] growth, premium feel
 **Usage:** Landing page hero, major feature cards, analysis sections
 
 **Examples:**
@@ -42,8 +42,8 @@ border-radius: 24px 64px 24px 8px;
 ```css
 border-radius: 16px;
 ```
-**Purpose:** Interactive elements, buttons, tags  
-**Psychology:** Approachable, tactile, friendly  
+**Purpose:** Interactive elements, buttons, tags
+**Psychology:** Approachable, tactile, friendly
 **Usage:** Primary/secondary buttons, badges, chips
 
 **Examples:**
@@ -58,8 +58,8 @@ border-radius: 16px;
 ```css
 border-radius: 12px;
 ```
-**Purpose:** Inputs, data containers, technical elements  
-**Psychology:** Precision, digital, modern  
+**Purpose:** Inputs, data containers, technical elements
+**Psychology:** Precision, digital, modern
 **Usage:** Text inputs, code blocks, impact enhancements
 
 **Examples:**
@@ -73,8 +73,8 @@ border-radius: 12px;
 ```css
 border-radius: 40px 8px 40px 8px;
 ```
-**Purpose:** Unique, attention-worthy elements (deprecated in favor of Leaf)  
-**Psychology:** Precious, rare, special  
+**Purpose:** Unique, attention-worthy elements (deprecated in favor of Leaf)
+**Psychology:** Precious, rare, special
 **Usage:** Reserved for truly unique UI moments
 
 **Note:** In v5.0, "The Leaf" has become the primary signature shape.
@@ -395,7 +395,7 @@ font-family: 'Roboto Mono', monospace;
 
 ### **Toast Notifications**
 ```tsx
-<Toaster 
+<Toaster
   position="top-right"
   theme="dark"
   richColors
@@ -414,18 +414,18 @@ toast.promise(asyncFunction(), {
 ## 🛡️ **Anti-Slop Validation Framework**
 
 ### **Banned Patterns:**
-❌ `rounded-full` on non-circular elements  
-❌ Hardcoded hex colors (`#FFFFFF`, etc.)  
-❌ Inline `style={{...}}` objects  
-❌ Generic class names (`card`, `button`)  
-❌ `figma:asset` placeholders  
+❌ `rounded-full` on non-circular elements
+❌ Hardcoded hex colors (`#FFFFFF`, etc.)
+❌ Inline `style={{...}}` objects
+❌ Generic class names (`card`, `button`)
+❌ `figma:asset` placeholders
 
 ### **Required Patterns:**
-✅ M3 shape tokens (`rounded-leaf`, `rounded-pebble`, `rounded-tech`)  
-✅ Semantic color tokens (`text-primary`, `bg-surface-container`)  
-✅ M3 typography tokens (`text-title-large`, `text-body-medium`)  
-✅ Spring easing (`ease-spring`)  
-✅ M3 elevation (`shadow-elevation-1`)  
+✅ M3 shape tokens (`rounded-leaf`, `rounded-pebble`, `rounded-tech`)
+✅ Semantic color tokens (`text-primary`, `bg-surface-container`)
+✅ M3 typography tokens (`text-title-large`, `text-body-medium`)
+✅ Spring easing (`ease-spring`)
+✅ M3 elevation (`shadow-elevation-1`)
 
 ---
 
@@ -533,17 +533,17 @@ Before committing any UI component:
 ### **Button Component**
 ```tsx
 <button className="
-  bg-primary-container 
-  text-on-primary-container 
-  hover:bg-primary 
-  hover:text-on-primary 
-  rounded-pebble 
-  px-8 
-  h-12 
-  font-bold 
+  bg-primary-container
+  text-on-primary-container
+  hover:bg-primary
+  hover:text-on-primary
+  rounded-pebble
+  px-8
+  h-12
+  font-bold
   text-label-large
-  transition-all 
-  duration-short-2 
+  transition-all
+  duration-short-2
   ease-spring
   shadow-elevation-1
 ">
@@ -554,17 +554,17 @@ Before committing any UI component:
 ### **Card Component**
 ```tsx
 <div className="
-  bg-surface-container-low 
-  border 
-  border-outline-variant 
-  rounded-leaf 
-  p-6 
-  hover:bg-surface-container 
-  hover:border-primary 
-  hover:scale-[1.02] 
-  hover:shadow-elevation-2 
-  transition-all 
-  duration-medium-1 
+  bg-surface-container-low
+  border
+  border-outline-variant
+  rounded-leaf
+  p-6
+  hover:bg-surface-container
+  hover:border-primary
+  hover:scale-[1.02]
+  hover:shadow-elevation-2
+  transition-all
+  duration-medium-1
   ease-spring
 ">
   Card content
@@ -573,7 +573,7 @@ Before committing any UI component:
 
 ---
 
-**Maintained by:** Antigravity AI Assistant  
-**Design Lead:** Material Design 3 Guidelines  
-**Version:** Electric Alchemist v5.0  
+**Maintained by:** Antigravity AI Assistant
+**Design Lead:** Material Design 3 Guidelines
+**Version:** Electric Alchemist v5.0
 **Status:** Production-Ready ✅

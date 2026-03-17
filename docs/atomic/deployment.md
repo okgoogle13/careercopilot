@@ -41,4 +41,3 @@
 
 “Confirm deployment readiness. Use filesystem MCP to read:
 `docs/development/MASTER_MIGRATION_PLAN.md`, `docs/development/CI_COVERAGE_AUDIT.md`, `docs/deployment/DEPLOYMENT_STATUS.md` if present. Provide blockers and a short approval checklist.”
-

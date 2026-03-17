@@ -1,0 +1,259 @@
+%%{init: {"theme": "dark", "themeVariables": {"primaryColor": "#F14714", "primaryTextColor": "#DAF6B3", "primaryBorderColor": "#F14714", "lineColor": "#A39B8F", "secondaryColor": "#2A2420", "tertiaryColor": "#1A1714", "background": "#1A1714", "mainBkg": "#2A2420", "nodeBorder": "#F14714", "clusterBkg": "#2A2420", "titleColor": "#DAF6B3", "edgeLabelBackground": "#1A1714", "fontFamily": "JetBrains Mono, monospace"}}}%%
+flowchart TD
+
+%% ─────────────────────────────────────────────────────────────────
+%%  ENTRY
+%% ─────────────────────────────────────────────────────────────────
+    BROWSER(["🌐 Browser"])
+    BROWSER --> APP
+
+    subgraph APP["App.tsx — BrowserRouter"]
+        direction TB
+        MODESYNC["ModeSync\n(route → KrDark mode)"]
+        TOASTER["Toaster\n(sonner, top-right)"]
+    end
+
+    APP --> ROUTER
+
+    subgraph ROUTER["React Router v6 Routes"]
+        direction LR
+        PUB["PublicLayout\n(Outlet)"]
+        GUARD["ProtectedLayout\n(auth guard → /login\nor demo=true bypass)"]
+    end
+
+%% ─────────────────────────────────────────────────────────────────
+%%  PUBLIC ROUTES  (no auth required)
+%% ─────────────────────────────────────────────────────────────────
+    PUB --> P1
+    PUB --> P2
+    PUB --> P3
+    PUB --> P4
+    PUB --> P5
+    PUB --> KR_ROUTES
+    PUB --> P99
+
+    subgraph PUBLIC["Public Routes (unauthenticated)"]
+        P1["/ — LandingPage"]
+        P2["/login — Login"]
+        P3["/register — Register"]
+        P4["/style-guide — StyleGuide"]
+        P5["/design-sidekick — DesignSidekick"]
+        P99["* — NotFound"]
+
+        subgraph KR_ROUTES["KR Prototype Routes (/kr/*)"]
+            KR1["/kr/landing — HeroLanding"]
+            KR2["/kr/auth — AuthModal"]
+            KR3["/kr/onboarding — OnboardFlow"]
+            KR4["/kr/analysis — AnalysisWorkbench"]
+            KR5["/kr/dashboard — DashboardOverview"]
+        end
+    end
+
+%% ─────────────────────────────────────────────────────────────────
+%%  PROTECTED LAYOUT — wraps all authenticated routes
+%% ─────────────────────────────────────────────────────────────────
+    GUARD --> LAYOUT
+
+    subgraph LAYOUT["Layout.tsx (authenticated shell)"]
+        direction TB
+        SIDEBAR["Sidebar.tsx\n────────────────\nDashboard\nApplications\nMy Documents\nATS Score & Optimise\nJob Scout\nCover Letter Workbench\nKey Selection Criteria\nTemplates\nSettings · Profile"]
+        MAIN_OUTLET["&lt;Outlet /&gt;\n(animated page transition\nframer-motion fade+slide)"]
+    end
+
+%% ─────────────────────────────────────────────────────────────────
+%%  ONBOARDING FLOW
+%% ─────────────────────────────────────────────────────────────────
+    LAYOUT --> ONBOARD_GATE
+
+    subgraph ONBOARDING["Onboarding Flow"]
+        direction TB
+        ONBOARD_GATE["/onboarding — OnboardingRoute\n(isNewUser? → redirect /welcome)"]
+        WELCOME["/welcome — WelcomeScreen\nValue proposition + CTA"]
+        ONBOARD_PAGE["/onboarding — OnboardingPage\nDomain selection · 9 fields\nLayeredHero · OnboardingProgress"]
+        INGEST["/career/ingest — IngestionPage\nMaster Resume builder\nPDF / DOCX upload\nEvidenceUploader"]
+
+        ONBOARD_GATE -->|"isNewUser=true"| WELCOME
+        ONBOARD_GATE -->|"returning user"| ONBOARD_PAGE
+        WELCOME -->|"Get Started"| ONBOARD_PAGE
+        ONBOARD_PAGE -->|"Domain selected"| INGEST
+    end
+
+%% ─────────────────────────────────────────────────────────────────
+%%  DASHBOARD (hub)
+%% ─────────────────────────────────────────────────────────────────
+    LAYOUT --> DASHBOARD
+
+    subgraph DASH["Hub"]
+        direction TB
+        DASHBOARD["/dashboard — Dashboard\nSolidarity Hub\nLayeredHero · OnboardingChecklist\nProfileCard · QuickAction CTAs"]
+    end
+
+    INGEST -->|"hasMaster=true"| DASHBOARD
+    WELCOME -->|"Skip"| DASHBOARD
+
+%% ─────────────────────────────────────────────────────────────────
+%%  CORE APPLICATION FEATURES
+%% ─────────────────────────────────────────────────────────────────
+    LAYOUT --> ANALYSIS_P
+    LAYOUT --> TRACKER_P
+    LAYOUT --> DOCS_P
+    LAYOUT --> OPPS_P
+    LAYOUT --> CL_P
+    LAYOUT --> KSC_P
+    LAYOUT --> APPLY_P
+    LAYOUT --> JQ_P
+    LAYOUT --> AL_P
+
+    subgraph ANALYSIS_GRP["ATS & Resume Analysis"]
+        direction TB
+        ANALYSIS_P["/analysis — AnalysisPage\nATS scoring + optimisation\nLayeredHero · EvidenceUploader\nSkillBreakdownCard · EmptyState"]
+        ATS_API(["POST /api/v1/analysis/ats-score"])
+        OPT_API(["POST /api/v1/analysis/strategy"])
+        ANALYSIS_P -->|"Run ATS check"| ATS_API
+        ANALYSIS_P -->|"Optimise resume"| OPT_API
+    end
+
+    subgraph TRACKER_GRP["Application Tracker"]
+        direction TB
+        TRACKER_P["/tracker — ApplicationTracker\nKanban · 5 stages\nQueued → Screening\n→ Interview → Offer → Closed"]
+    end
+
+    subgraph DOCS_GRP["Documents"]
+        direction TB
+        DOCS_P["/documents — Documents\nResumes · Cover Letters · KSC\nUpload · View · Delete"]
+    end
+
+    subgraph OPPS_GRP["Job Scout"]
+        direction TB
+        OPPS_P["/opportunities — Opportunities\nAutonomous job-matching agent\nSaved searches · Scout results"]
+    end
+
+    subgraph CL_GRP["Cover Letter Generator"]
+        direction TB
+        CL_P["/cover-letter-generator — CoverLetterGenerator\n4-step wizard"]
+        CL1["Step 1 — Job Details\n(URL import or manual paste)"]
+        CL2["Step 2 — Company Insights\n(name · culture · values)"]
+        CL3["Step 3 — Final Touches\n(tone · special instructions)"]
+        CL4["Step 4 — Generated Letter\n(copy · download PDF)"]
+        CL_P --> CL1 --> CL2 --> CL3 --> CL4
+        CL_API(["POST /api/genkit/cover-letter/generate\nPOST /api/flows/analyze-job-from-url"])
+        CL1 -->|"URL auto-fill"| CL_API
+        CL3 -->|"Generate"| CL_API
+    end
+
+    subgraph KSC_GRP["KSC Generator"]
+        direction TB
+        KSC_P["/ksc-generator — KSCGenerator\n3-step wizard"]
+        KSC1["Step 1 — Selection Criteria\n(URL or manual paste)"]
+        KSC2["Step 2 — STAR Evidence\n(Situation · Task · Action · Result)"]
+        KSC3["Step 3 — APS-aligned Response\n(copy · download · save draft)"]
+        KSC_P --> KSC1 --> KSC2 --> KSC3
+        KSC_API(["POST /api/genkit/ksc/generate"])
+        KSC2 -->|"Generate"| KSC_API
+    end
+
+    subgraph APPLY_GRP["Quick Apply"]
+        direction TB
+        APPLY_P["/apply/quick — ApplyQuick\nURL/JD → full application pack\nResume + Cover Letter + KSC bundle"]
+        APPLY_API(["POST /api/flows/analyze-job-from-url"])
+        APPLY_P -->|"Analyse job"| APPLY_API
+        APPLY_API -->|"Pack ready"| TRACKER_P
+    end
+
+    subgraph JQ_GRP["Job Queue"]
+        direction TB
+        JQ_P["/job-queue — JobQueue\nQueued automation tasks\nBatch job processing status"]
+    end
+
+    subgraph AL_GRP["Asset Library"]
+        direction TB
+        AL_P["/asset-library — AssetLibrary\nDocument templates · Prompts\nReuse across applications"]
+    end
+
+%% ─────────────────────────────────────────────────────────────────
+%%  PROFILE & SETTINGS
+%% ─────────────────────────────────────────────────────────────────
+    LAYOUT --> PROFILE_P
+    LAYOUT --> SETTINGS_P
+    LAYOUT --> TOKEN_P
+
+    subgraph ACCOUNT_GRP["Account"]
+        direction TB
+        PROFILE_P["/profile — ProfileView\nUser details · Master resume link\nTarget domains · Preferences"]
+        SETTINGS_P["/settings — Settings\nTheme · Notifications\nData management · API keys"]
+        TOKEN_P["/test-tokens — TokenTest\n(dev-only design token debugger)"]
+    end
+
+%% ─────────────────────────────────────────────────────────────────
+%%  SHARED COMPONENT LAYER
+%% ─────────────────────────────────────────────────────────────────
+    subgraph UI_LIB["Shared Component Library"]
+        direction LR
+        DS["Design System: KR Solidarity v6.1\n────────────────────────────────\nStrike · Placard · Scaffold\nMarch · Megaphone\nLayeredHero · StatusBadge\nSkillBreakdownCard · EmptyState\nEvidenceUploader · PathSelectionCard"]
+        STORES["Global Stores (Zustand)\n────────────────\nuseUserStore (auth · profile · hasMaster)\nuseModeStore (KrDark theme)"]
+        HOOKS["Hooks\n────────────────\nuseAuth · useAnalytics\nuseUserStore · useModeStore"]
+    end
+
+%% ─────────────────────────────────────────────────────────────────
+%%  SIDEBAR NAVIGATION CROSS-LINKS (dotted)
+%% ─────────────────────────────────────────────────────────────────
+    SIDEBAR -.->|"nav"| DASHBOARD
+    SIDEBAR -.->|"nav"| TRACKER_P
+    SIDEBAR -.->|"nav"| DOCS_P
+    SIDEBAR -.->|"nav"| ANALYSIS_P
+    SIDEBAR -.->|"nav"| OPPS_P
+    SIDEBAR -.->|"nav"| CL_P
+    SIDEBAR -.->|"nav"| KSC_P
+    SIDEBAR -.->|"nav"| AL_P
+    SIDEBAR -.->|"nav"| SETTINGS_P
+    SIDEBAR -.->|"nav"| PROFILE_P
+
+%% ─────────────────────────────────────────────────────────────────
+%%  DASHBOARD QUICK-ACTION LINKS
+%% ─────────────────────────────────────────────────────────────────
+    DASHBOARD -->|"🚀 Build Master Resume"| INGEST
+    DASHBOARD -->|"🎯 Apply Now"| APPLY_P
+    DASHBOARD -->|"View Archive"| DOCS_P
+    DASHBOARD -->|"Job Scout"| OPPS_P
+    DASHBOARD -->|"Update Master"| INGEST
+
+%% ─────────────────────────────────────────────────────────────────
+%%  CROSS-FEATURE LINKS
+%% ─────────────────────────────────────────────────────────────────
+    CL4 -.->|"saved"| DOCS_P
+    KSC3 -.->|"saved draft"| DOCS_P
+    APPLY_API -.->|"adds to pipeline"| TRACKER_P
+
+%% ─────────────────────────────────────────────────────────────────
+%%  AUTH FLOW
+%% ─────────────────────────────────────────────────────────────────
+    P1 -->|"Register CTA"| P3
+    P1 -->|"Login CTA"| P2
+    P2 -->|"✅ auth success"| DASHBOARD
+    P3 -->|"✅ auth success (new user)"| WELCOME
+    GUARD -->|"❌ not authenticated"| P2
+
+%% ─────────────────────────────────────────────────────────────────
+%%  STYLING
+%% ─────────────────────────────────────────────────────────────────
+    classDef route fill:#2A2420,stroke:#F14714,color:#DAF6B3,rx:4
+    classDef layout fill:#1E1C19,stroke:#DAF674,color:#DAF674,rx:4
+    classDef api fill:#1A2A1A,stroke:#48DA8B,color:#48DA8B,rx:8
+    classDef store fill:#1A1A2A,stroke:#48B3DA,color:#48B3DA,rx:4
+    classDef entry fill:#F14714,stroke:#F14714,color:#1A1714,rx:8
+    classDef guard fill:#3A1A10,stroke:#F6E748,color:#F6E748,rx:4
+    classDef group fill:#1A1714,stroke:#A39B8F,color:#A39B8F
+
+    class BROWSER entry
+    class GUARD guard
+    class P1,P2,P3,P4,P5,P99 route
+    class KR1,KR2,KR3,KR4,KR5 route
+    class DASHBOARD,WELCOME,ONBOARD_PAGE,INGEST route
+    class ANALYSIS_P,TRACKER_P,DOCS_P,OPPS_P route
+    class CL_P,CL1,CL2,CL3,CL4 route
+    class KSC_P,KSC1,KSC2,KSC3 route
+    class APPLY_P,JQ_P,AL_P,PROFILE_P,SETTINGS_P,TOKEN_P route
+    class ATS_API,OPT_API,CL_API,KSC_API,APPLY_API api
+    class DS,STORES,HOOKS store
+    class LAYOUT,SIDEBAR,MAIN_OUTLET layout
+    class MODESYNC,TOASTER layout

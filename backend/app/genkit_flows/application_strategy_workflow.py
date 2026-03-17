@@ -1,5 +1,3 @@
-from typing import List, Optional
-
 import genkit
 from pydantic import BaseModel
 
@@ -13,14 +11,14 @@ class ApplicationStrategyResult(BaseModel):
     """The complete strategic output for a job application."""
 
     optimization_result: OptimizedResume
-    corporate_profile: Optional[CorporateProfile] = None
-    gap_analysis: Optional[GapAnalysisResult] = None
+    corporate_profile: CorporateProfile | None = None
+    gap_analysis: GapAnalysisResult | None = None
     strategy_summary: str
 
 
 @genkit.flow(output_schema=ApplicationStrategyResult)
 async def create_application_strategy(
-    job_url: str, resume_text: str, missing_keywords: List[str]
+    job_url: str, resume_text: str, missing_keywords: list[str]
 ) -> ApplicationStrategyResult:
     """
     Orchestrates the full application strategy:

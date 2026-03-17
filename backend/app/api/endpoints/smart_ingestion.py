@@ -4,12 +4,9 @@ import logging
 
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 from fastapi.responses import JSONResponse
-from sqlalchemy.orm import Session
 
 from app.api.endpoints._shared import run_endpoint_operation
 from app.core.auth import get_current_user
-from app.core.database import get_db
-from app.core.enhanced_ai_error_handling import create_detailed_error_message
 from app.core.file_upload_decorators import FileUploadConfig, require_valid_file_upload
 from app.genkit_flows.smart_ingestion import (
     contextTaggerFlow,

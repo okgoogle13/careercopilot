@@ -1,0 +1,1076 @@
+{
+  "generatedAt": "2026-03-12T05:08:25.511Z",
+  "sources": {
+    "app": "frontend/src/App.tsx",
+    "snapshot": "frontend/analysis/react-components-snapshot.json"
+  },
+  "summary": {
+    "totalRoutes": 27,
+    "routeFamilies": 13,
+    "bucketCounts": {
+      "screens": {
+        "files": 11,
+        "components": 22,
+        "likelyPagesOrScreens": 22
+      },
+      "features": {
+        "files": 52,
+        "components": 74,
+        "likelyPagesOrScreens": 0
+      },
+      "pages": {
+        "files": 6,
+        "components": 10,
+        "likelyPagesOrScreens": 10
+      },
+      "components": {
+        "files": 89,
+        "components": 110,
+        "likelyPagesOrScreens": 0
+      }
+    },
+    "likelySurfaceCount": 17,
+    "routedSurfaceCount": 10,
+    "unroutedSurfaceCount": 7,
+    "prototypeRouteCount": 5
+  },
+  "routeGroups": {
+    "landing": [
+      {
+        "path": "/",
+        "component": "LandingPage",
+        "importPath": "./features/landing/LandingPage",
+        "family": "landing",
+        "layer": "runtime"
+      }
+    ],
+    "auth-onboarding": [
+      {
+        "path": "/login",
+        "component": "Login",
+        "importPath": "./features/auth/Login",
+        "family": "auth-onboarding",
+        "layer": "runtime"
+      },
+      {
+        "path": "/register",
+        "component": "Register",
+        "importPath": "./features/auth/Register",
+        "family": "auth-onboarding",
+        "layer": "runtime"
+      },
+      {
+        "path": "/kr/auth",
+        "component": "AuthModal",
+        "importPath": "./components/phase3-batch2/AuthModal",
+        "family": "auth-onboarding",
+        "layer": "prototype"
+      },
+      {
+        "path": "/kr/onboarding",
+        "component": "OnboardFlow",
+        "importPath": "./components/phase3-batch2/OnboardFlow",
+        "family": "auth-onboarding",
+        "layer": "prototype"
+      },
+      {
+        "path": "/onboarding",
+        "component": "OnboardingRoute",
+        "importPath": null,
+        "family": "auth-onboarding",
+        "layer": "runtime"
+      },
+      {
+        "path": "/welcome",
+        "component": "WelcomeScreen",
+        "importPath": "./features/onboarding/WelcomeScreen",
+        "family": "auth-onboarding",
+        "layer": "runtime"
+      }
+    ],
+    "internal-tools": [
+      {
+        "path": "/design-sidekick",
+        "component": "DesignSidekick",
+        "importPath": "./features/design-sidekick/DesignSidekick",
+        "family": "internal-tools",
+        "layer": "internal"
+      },
+      {
+        "path": "/style-guide",
+        "component": "StyleGuide",
+        "importPath": "./features/style-guide/StyleGuide",
+        "family": "internal-tools",
+        "layer": "internal"
+      },
+      {
+        "path": "/test-tokens",
+        "component": "TokenTest",
+        "importPath": "./components/debug/TokenTest",
+        "family": "internal-tools",
+        "layer": "internal"
+      }
+    ],
+    "landing-prototype": [
+      {
+        "path": "/kr/landing",
+        "component": "HeroLanding",
+        "importPath": "./components/phase3-batch2/HeroLanding",
+        "family": "landing-prototype",
+        "layer": "prototype"
+      }
+    ],
+    "analysis": [
+      {
+        "path": "/kr/analysis",
+        "component": "AnalysisWorkbench",
+        "importPath": "./components/phase3-batch3/AnalysisWorkbench",
+        "family": "analysis",
+        "layer": "prototype"
+      },
+      {
+        "path": "/analysis",
+        "component": "AnalysisPage",
+        "importPath": "./pages/AnalysisPage",
+        "family": "analysis",
+        "layer": "runtime"
+      },
+      {
+        "path": "/asset-library",
+        "component": "AssetLibrary",
+        "importPath": "./features/analysis/AssetLibrary",
+        "family": "analysis",
+        "layer": "runtime"
+      }
+    ],
+    "dashboard": [
+      {
+        "path": "/kr/dashboard",
+        "component": "DashboardOverview",
+        "importPath": "./components/phase3-batch3/DashboardOverview",
+        "family": "dashboard",
+        "layer": "prototype"
+      },
+      {
+        "path": "/dashboard",
+        "component": "Dashboard",
+        "importPath": "./features/dashboard/Dashboard",
+        "family": "dashboard",
+        "layer": "runtime"
+      }
+    ],
+    "fallback": [
+      {
+        "path": "*",
+        "component": "NotFound",
+        "importPath": "./features/not-found/NotFound",
+        "family": "fallback",
+        "layer": "runtime"
+      }
+    ],
+    "applications": [
+      {
+        "path": "/tracker",
+        "component": "ApplicationTracker",
+        "importPath": "./features/applications/ApplicationTracker",
+        "family": "applications",
+        "layer": "runtime"
+      },
+      {
+        "path": "/apply/quick",
+        "component": "ApplyQuick",
+        "importPath": "./pages/ApplyQuick",
+        "family": "applications",
+        "layer": "runtime"
+      }
+    ],
+    "documents": [
+      {
+        "path": "/documents",
+        "component": "Documents",
+        "importPath": "./features/documents/Documents",
+        "family": "documents",
+        "layer": "runtime"
+      }
+    ],
+    "jobs": [
+      {
+        "path": "/opportunities",
+        "component": "Opportunities",
+        "importPath": "./features/opportunities/Opportunities",
+        "family": "jobs",
+        "layer": "runtime"
+      },
+      {
+        "path": "/job-queue",
+        "component": "JobQueue",
+        "importPath": "./pages/JobQueue",
+        "family": "jobs",
+        "layer": "runtime"
+      }
+    ],
+    "generation": [
+      {
+        "path": "/ksc-generator",
+        "component": "KSCGenerator",
+        "importPath": "./features/ksc-generator/KSCGenerator",
+        "family": "generation",
+        "layer": "runtime"
+      },
+      {
+        "path": "/cover-letter-generator",
+        "component": "CoverLetterGenerator",
+        "importPath": "./features/applications/CoverLetterGenerator",
+        "family": "generation",
+        "layer": "runtime"
+      }
+    ],
+    "account": [
+      {
+        "path": "/settings",
+        "component": "Settings",
+        "importPath": "./features/settings/Settings",
+        "family": "account",
+        "layer": "runtime"
+      },
+      {
+        "path": "/profile",
+        "component": "ProfileView",
+        "importPath": "./features/profile/components/ProfileView",
+        "family": "account",
+        "layer": "runtime"
+      }
+    ],
+    "ingestion": [
+      {
+        "path": "/career/ingest",
+        "component": "IngestionPage",
+        "importPath": "./pages/IngestionPage",
+        "family": "ingestion",
+        "layer": "runtime"
+      }
+    ]
+  },
+  "routeOwnership": [
+    {
+      "path": "/",
+      "component": "LandingPage",
+      "family": "landing",
+      "layer": "runtime",
+      "importPath": "./features/landing/LandingPage",
+      "bucket": "features",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/login",
+      "component": "Login",
+      "family": "auth-onboarding",
+      "layer": "runtime",
+      "importPath": "./features/auth/Login",
+      "bucket": "features",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/register",
+      "component": "Register",
+      "family": "auth-onboarding",
+      "layer": "runtime",
+      "importPath": "./features/auth/Register",
+      "bucket": "features",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/design-sidekick",
+      "component": "DesignSidekick",
+      "family": "internal-tools",
+      "layer": "internal",
+      "importPath": "./features/design-sidekick/DesignSidekick",
+      "bucket": "features",
+      "canonicalStatus": "internal",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/style-guide",
+      "component": "StyleGuide",
+      "family": "internal-tools",
+      "layer": "internal",
+      "importPath": "./features/style-guide/StyleGuide",
+      "bucket": "features",
+      "canonicalStatus": "internal",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/kr/landing",
+      "component": "HeroLanding",
+      "family": "landing-prototype",
+      "layer": "prototype",
+      "importPath": "./components/phase3-batch2/HeroLanding",
+      "bucket": "components",
+      "canonicalStatus": "prototype",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/kr/auth",
+      "component": "AuthModal",
+      "family": "auth-onboarding",
+      "layer": "prototype",
+      "importPath": "./components/phase3-batch2/AuthModal",
+      "bucket": "components",
+      "canonicalStatus": "prototype",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/kr/onboarding",
+      "component": "OnboardFlow",
+      "family": "auth-onboarding",
+      "layer": "prototype",
+      "importPath": "./components/phase3-batch2/OnboardFlow",
+      "bucket": "components",
+      "canonicalStatus": "prototype",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/kr/analysis",
+      "component": "AnalysisWorkbench",
+      "family": "analysis",
+      "layer": "prototype",
+      "importPath": "./components/phase3-batch3/AnalysisWorkbench",
+      "bucket": "components",
+      "canonicalStatus": "prototype",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/kr/dashboard",
+      "component": "DashboardOverview",
+      "family": "dashboard",
+      "layer": "prototype",
+      "importPath": "./components/phase3-batch3/DashboardOverview",
+      "bucket": "components",
+      "canonicalStatus": "prototype",
+      "candidateReplacements": []
+    },
+    {
+      "path": "*",
+      "component": "NotFound",
+      "family": "fallback",
+      "layer": "runtime",
+      "importPath": "./features/not-found/NotFound",
+      "bucket": "features",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/dashboard",
+      "component": "Dashboard",
+      "family": "dashboard",
+      "layer": "runtime",
+      "importPath": "./features/dashboard/Dashboard",
+      "bucket": "features",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/onboarding",
+      "component": "OnboardingRoute",
+      "family": "auth-onboarding",
+      "layer": "runtime",
+      "importPath": null,
+      "bucket": "unknown",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/welcome",
+      "component": "WelcomeScreen",
+      "family": "auth-onboarding",
+      "layer": "runtime",
+      "importPath": "./features/onboarding/WelcomeScreen",
+      "bucket": "features",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/tracker",
+      "component": "ApplicationTracker",
+      "family": "applications",
+      "layer": "runtime",
+      "importPath": "./features/applications/ApplicationTracker",
+      "bucket": "features",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": [
+        {
+          "name": "KanbanTracker",
+          "filePath": "screens/07_kanban/KanbanTracker.tsx",
+          "bucket": "screens"
+        },
+        {
+          "name": "ApplicationFinalization",
+          "filePath": "screens/09_finalization/ApplicationFinalization.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "path": "/documents",
+      "component": "Documents",
+      "family": "documents",
+      "layer": "runtime",
+      "importPath": "./features/documents/Documents",
+      "bucket": "features",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": [
+        {
+          "name": "DocumentWorkbench",
+          "filePath": "screens/08_workbench/DocumentWorkbench.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "path": "/analysis",
+      "component": "AnalysisPage",
+      "family": "analysis",
+      "layer": "runtime",
+      "importPath": "./pages/AnalysisPage",
+      "bucket": "pages",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/opportunities",
+      "component": "Opportunities",
+      "family": "jobs",
+      "layer": "runtime",
+      "importPath": "./features/opportunities/Opportunities",
+      "bucket": "features",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": [
+        {
+          "name": "LookoutDiscovery",
+          "filePath": "screens/06_lookout/LookoutDiscovery.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "path": "/ksc-generator",
+      "component": "KSCGenerator",
+      "family": "generation",
+      "layer": "runtime",
+      "importPath": "./features/ksc-generator/KSCGenerator",
+      "bucket": "features",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/cover-letter-generator",
+      "component": "CoverLetterGenerator",
+      "family": "generation",
+      "layer": "runtime",
+      "importPath": "./features/applications/CoverLetterGenerator",
+      "bucket": "features",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/settings",
+      "component": "Settings",
+      "family": "account",
+      "layer": "runtime",
+      "importPath": "./features/settings/Settings",
+      "bucket": "features",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": [
+        {
+          "name": "SettingsControl",
+          "filePath": "screens/10_settings/SettingsControl.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "path": "/profile",
+      "component": "ProfileView",
+      "family": "account",
+      "layer": "runtime",
+      "importPath": "./features/profile/components/ProfileView",
+      "bucket": "features",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/asset-library",
+      "component": "AssetLibrary",
+      "family": "analysis",
+      "layer": "runtime",
+      "importPath": "./features/analysis/AssetLibrary",
+      "bucket": "features",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": []
+    },
+    {
+      "path": "/career/ingest",
+      "component": "IngestionPage",
+      "family": "ingestion",
+      "layer": "runtime",
+      "importPath": "./pages/IngestionPage",
+      "bucket": "pages",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": [
+        {
+          "name": "IngestionFlow",
+          "filePath": "screens/04_ingestion/IngestionFlow.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "path": "/job-queue",
+      "component": "JobQueue",
+      "family": "jobs",
+      "layer": "runtime",
+      "importPath": "./pages/JobQueue",
+      "bucket": "pages",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": [
+        {
+          "name": "LookoutDiscovery",
+          "filePath": "screens/06_lookout/LookoutDiscovery.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "path": "/apply/quick",
+      "component": "ApplyQuick",
+      "family": "applications",
+      "layer": "runtime",
+      "importPath": "./pages/ApplyQuick",
+      "bucket": "pages",
+      "canonicalStatus": "canonical",
+      "candidateReplacements": [
+        {
+          "name": "KanbanTracker",
+          "filePath": "screens/07_kanban/KanbanTracker.tsx",
+          "bucket": "screens"
+        },
+        {
+          "name": "ApplicationFinalization",
+          "filePath": "screens/09_finalization/ApplicationFinalization.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "path": "/test-tokens",
+      "component": "TokenTest",
+      "family": "internal-tools",
+      "layer": "internal",
+      "importPath": "./components/debug/TokenTest",
+      "bucket": "components",
+      "canonicalStatus": "internal",
+      "candidateReplacements": []
+    }
+  ],
+  "likelySurfaces": {
+    "routed": [
+      {
+        "name": "AnalysisPage",
+        "filePath": "pages/AnalysisPage.tsx",
+        "bucket": "pages",
+        "exportKind": "default"
+      },
+      {
+        "name": "ApplyQuick",
+        "filePath": "pages/ApplyQuick.tsx",
+        "bucket": "pages",
+        "exportKind": "default"
+      },
+      {
+        "name": "Dashboard",
+        "filePath": "pages/Dashboard.tsx",
+        "bucket": "pages",
+        "exportKind": "named"
+      },
+      {
+        "name": "IngestionPage",
+        "filePath": "pages/IngestionPage.tsx",
+        "bucket": "pages",
+        "exportKind": "default"
+      },
+      {
+        "name": "JobQueue",
+        "filePath": "pages/JobQueue.tsx",
+        "bucket": "pages",
+        "exportKind": "named"
+      },
+      {
+        "name": "HeroLanding",
+        "filePath": "screens/01_landing/HeroLanding.tsx",
+        "bucket": "screens",
+        "exportKind": "default"
+      },
+      {
+        "name": "AuthModal",
+        "filePath": "screens/02_auth/AuthModal.tsx",
+        "bucket": "screens",
+        "exportKind": "default"
+      },
+      {
+        "name": "OnboardFlow",
+        "filePath": "screens/03_onboarding/OnboardFlow.tsx",
+        "bucket": "screens",
+        "exportKind": "default"
+      },
+      {
+        "name": "AnalysisWorkbench",
+        "filePath": "screens/05_analysis/AnalysisWorkbench.tsx",
+        "bucket": "screens",
+        "exportKind": "default"
+      },
+      {
+        "name": "DashboardOverview",
+        "filePath": "screens/11_dashboard/DashboardOverview.tsx",
+        "bucket": "screens",
+        "exportKind": "default"
+      }
+    ],
+    "unrouted": [
+      {
+        "name": "ResumeAuditPage",
+        "filePath": "pages/ResumeAuditPage.tsx",
+        "bucket": "pages",
+        "exportKind": "named"
+      },
+      {
+        "name": "IngestionFlow",
+        "filePath": "screens/04_ingestion/IngestionFlow.tsx",
+        "bucket": "screens",
+        "exportKind": "default"
+      },
+      {
+        "name": "LookoutDiscovery",
+        "filePath": "screens/06_lookout/LookoutDiscovery.tsx",
+        "bucket": "screens",
+        "exportKind": "default"
+      },
+      {
+        "name": "KanbanTracker",
+        "filePath": "screens/07_kanban/KanbanTracker.tsx",
+        "bucket": "screens",
+        "exportKind": "default"
+      },
+      {
+        "name": "DocumentWorkbench",
+        "filePath": "screens/08_workbench/DocumentWorkbench.tsx",
+        "bucket": "screens",
+        "exportKind": "default"
+      },
+      {
+        "name": "ApplicationFinalization",
+        "filePath": "screens/09_finalization/ApplicationFinalization.tsx",
+        "bucket": "screens",
+        "exportKind": "default"
+      },
+      {
+        "name": "SettingsControl",
+        "filePath": "screens/10_settings/SettingsControl.tsx",
+        "bucket": "screens",
+        "exportKind": "default"
+      }
+    ]
+  },
+  "duplicateNames": [
+    {
+      "name": "AnalysisWorkbench",
+      "files": [
+        {
+          "filePath": "components/phase3-batch3/AnalysisWorkbench.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "screens/05_analysis/AnalysisWorkbench.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "name": "ApplicationCard",
+      "files": [
+        {
+          "filePath": "components/shared/ApplicationCard.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "features/applications/ApplicationCard.tsx",
+          "bucket": "features"
+        }
+      ]
+    },
+    {
+      "name": "ApplicationFinalization",
+      "files": [
+        {
+          "filePath": "components/phase3-batch3/ApplicationFinalization.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "screens/09_finalization/ApplicationFinalization.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "name": "ApplicationTracker",
+      "files": [
+        {
+          "filePath": "features/applications/ApplicationTracker.tsx",
+          "bucket": "features"
+        },
+        {
+          "filePath": "features/applications/components/ApplicationTracker.tsx",
+          "bucket": "features"
+        }
+      ]
+    },
+    {
+      "name": "AuthModal",
+      "files": [
+        {
+          "filePath": "components/phase3-batch2/AuthModal.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "screens/02_auth/AuthModal.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "files": [
+        {
+          "filePath": "features/dashboard/Dashboard.tsx",
+          "bucket": "features"
+        },
+        {
+          "filePath": "pages/Dashboard.tsx",
+          "bucket": "pages"
+        }
+      ]
+    },
+    {
+      "name": "DashboardOverview",
+      "files": [
+        {
+          "filePath": "components/phase3-batch3/DashboardOverview.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "screens/11_dashboard/DashboardOverview.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "name": "DocumentWorkbench",
+      "files": [
+        {
+          "filePath": "components/phase3-batch3/DocumentWorkbench.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "screens/08_workbench/DocumentWorkbench.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "name": "GlassLeafCard",
+      "files": [
+        {
+          "filePath": "features/gallery/GlassLeafCard.tsx",
+          "bucket": "features"
+        },
+        {
+          "filePath": "features/KrDark/GlassLeafCard.tsx",
+          "bucket": "features"
+        }
+      ]
+    },
+    {
+      "name": "HeroLanding",
+      "files": [
+        {
+          "filePath": "components/phase3-batch2/HeroLanding.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "screens/01_landing/HeroLanding.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "name": "IconBadge",
+      "files": [
+        {
+          "filePath": "components/shared/IconBadge.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "features/gallery/IconBadge.tsx",
+          "bucket": "features"
+        },
+        {
+          "filePath": "features/KrDark/IconBadge.tsx",
+          "bucket": "features"
+        }
+      ]
+    },
+    {
+      "name": "ImpactEnhancements",
+      "files": [
+        {
+          "filePath": "components/shared/ImpactEnhancements.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "features/analysis/ImpactEnhancements.tsx",
+          "bucket": "features"
+        }
+      ]
+    },
+    {
+      "name": "IngestionFlow",
+      "files": [
+        {
+          "filePath": "components/phase3-batch3/IngestionFlow.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "screens/04_ingestion/IngestionFlow.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "name": "JobCard",
+      "files": [
+        {
+          "filePath": "components/shared/JobCard.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "features/dashboard/components/JobCard.tsx",
+          "bucket": "features"
+        }
+      ]
+    },
+    {
+      "name": "KanbanTracker",
+      "files": [
+        {
+          "filePath": "components/phase3-batch3/KanbanTracker.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "screens/07_kanban/KanbanTracker.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "name": "LookoutDiscovery",
+      "files": [
+        {
+          "filePath": "components/phase3-batch3/LookoutDiscovery.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "screens/06_lookout/LookoutDiscovery.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "name": "MetricCard",
+      "files": [
+        {
+          "filePath": "components/shared/MetricCard.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "components/ui/metric-card.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "features/analysis/MetricCard.tsx",
+          "bucket": "features"
+        }
+      ]
+    },
+    {
+      "name": "OnboardFlow",
+      "files": [
+        {
+          "filePath": "components/phase3-batch2/OnboardFlow.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "screens/03_onboarding/OnboardFlow.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "name": "SettingsControl",
+      "files": [
+        {
+          "filePath": "components/phase3-batch3/SettingsControl.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "screens/10_settings/SettingsControl.tsx",
+          "bucket": "screens"
+        }
+      ]
+    },
+    {
+      "name": "SplitHeader",
+      "files": [
+        {
+          "filePath": "components/shared/SplitHeader.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "components/ui/SplitHeader.tsx",
+          "bucket": "components"
+        }
+      ]
+    },
+    {
+      "name": "TechCard",
+      "files": [
+        {
+          "filePath": "components/shared/TechCard.tsx",
+          "bucket": "components"
+        },
+        {
+          "filePath": "features/analysis/TechCard.tsx",
+          "bucket": "features"
+        }
+      ]
+    }
+  ],
+  "godComponentCandidates": [
+    {
+      "route": "/style-guide",
+      "component": "StyleGuide",
+      "importPath": "./features/style-guide/StyleGuide",
+      "metrics": {
+        "relativePath": "features/style-guide/StyleGuide.tsx",
+        "lines": 1021,
+        "importCount": 8,
+        "jsxTagCount": 59
+      }
+    },
+    {
+      "route": "/ksc-generator",
+      "component": "KSCGenerator",
+      "importPath": "./features/ksc-generator/KSCGenerator",
+      "metrics": {
+        "relativePath": "features/ksc-generator/KSCGenerator.tsx",
+        "lines": 499,
+        "importCount": 12,
+        "jsxTagCount": 28
+      }
+    },
+    {
+      "route": "/cover-letter-generator",
+      "component": "CoverLetterGenerator",
+      "importPath": "./features/applications/CoverLetterGenerator",
+      "metrics": {
+        "relativePath": "features/applications/CoverLetterGenerator.tsx",
+        "lines": 426,
+        "importCount": 11,
+        "jsxTagCount": 33
+      }
+    },
+    {
+      "route": "/analysis",
+      "component": "AnalysisPage",
+      "importPath": "./pages/AnalysisPage",
+      "metrics": {
+        "relativePath": "pages/AnalysisPage.tsx",
+        "lines": 425,
+        "importCount": 14,
+        "jsxTagCount": 23
+      }
+    },
+    {
+      "route": "/dashboard",
+      "component": "Dashboard",
+      "importPath": "./features/dashboard/Dashboard",
+      "metrics": {
+        "relativePath": "features/dashboard/Dashboard.tsx",
+        "lines": 423,
+        "importCount": 11,
+        "jsxTagCount": 19
+      }
+    },
+    {
+      "route": "/job-queue",
+      "component": "JobQueue",
+      "importPath": "./pages/JobQueue",
+      "metrics": {
+        "relativePath": "pages/JobQueue.tsx",
+        "lines": 321,
+        "importCount": 12,
+        "jsxTagCount": 10
+      }
+    },
+    {
+      "route": "/register",
+      "component": "Register",
+      "importPath": "./features/auth/Register",
+      "metrics": {
+        "relativePath": "features/auth/Register.tsx",
+        "lines": 266,
+        "importCount": 9,
+        "jsxTagCount": 3
+      }
+    },
+    {
+      "route": "/tracker",
+      "component": "ApplicationTracker",
+      "importPath": "./features/applications/ApplicationTracker",
+      "metrics": {
+        "relativePath": "features/applications/ApplicationTracker.tsx",
+        "lines": 261,
+        "importCount": 11,
+        "jsxTagCount": 12
+      }
+    },
+    {
+      "route": "/career/ingest",
+      "component": "IngestionPage",
+      "importPath": "./pages/IngestionPage",
+      "metrics": {
+        "relativePath": "pages/IngestionPage.tsx",
+        "lines": 250,
+        "importCount": 17,
+        "jsxTagCount": 14
+      }
+    }
+  ],
+  "smells": [
+    "21 component names exist in multiple files.",
+    "7 likely page/screen components are currently unrouted.",
+    "5 live routes sit under the prototype /kr namespace.",
+    "9 routed surfaces exceed the god-component threshold."
+  ]
+}

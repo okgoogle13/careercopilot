@@ -22,4 +22,3 @@
 - Backend checks (pytest/mypy)
 - Functions lint/build/test
 - Playwright E2E
-

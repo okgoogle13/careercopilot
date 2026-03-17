@@ -25,10 +25,9 @@ Functions tested:
 """
 
 import json
-import logging
 import tempfile
 from pathlib import Path
-from unittest.mock import MagicMock, Mock, patch
+from unittest.mock import MagicMock, patch
 
 import pytest
 
@@ -809,7 +808,7 @@ class TestPromptServiceIntegration:
 
         for template in general_templates:
             # Check that each template can be validated
-            valid_params = {p: "test_value" for p in template.parameters}
+            valid_params = dict.fromkeys(template.parameters, "test_value")
             errors = prompt_service.validate_template_parameters(
                 prompt_service.list_templates()[0], valid_params
             )

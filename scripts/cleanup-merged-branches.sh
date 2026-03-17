@@ -74,4 +74,3 @@ echo "Skipped (${#failed[@]}): ${failed[*]:-none}"
 echo ""
 echo "Active branches remaining:"
 git branch -r | grep -v 'origin/HEAD' | sed 's|  origin/||'
-

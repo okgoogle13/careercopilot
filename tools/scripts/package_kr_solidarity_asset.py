@@ -95,20 +95,20 @@ def assess_placement_fit(category: str, significance: str) -> List[str]:
     Assess which pages an asset is allowed on based on 06b-asset-placement.md.
     """
     allowed_pages = []
-    
-    # Global categories (substrate, grid, etc.) are used everywhere but usually 
+
+    # Global categories (substrate, grid, etc.) are used everywhere but usually
     # handled by the system. Here we focus on symbolic anchors.
-    
+
     if significance in ["resistance-history", "activist", "solidarity"]:
         allowed_pages.extend(["Landing", "Dashboard Overview"])
-    
+
     if category == "devotional" or significance == "cultural-anchor":
         allowed_pages.append("Analysis Dashboard")
-        
+
     # First Nations rule: Placards only on Dashboard Overview or Landing
     if "first-nations" in significance.lower():
         allowed_pages = ["Landing", "Dashboard Overview"]
-        
+
     return allowed_pages
 
 
@@ -123,11 +123,11 @@ def resize_image(image_path: str, output_path: str, target_width: Optional[int] 
                 tw = target_width or 10000
                 th = target_height or 10000
                 img.thumbnail((tw, th), Image.LANCZOS)
-                
+
             # Always ensure RGBA for consistency in Solidarity mode
             if img.mode != 'RGBA':
                 img = img.convert('RGBA')
-                
+
             img.save(output_path, 'PNG', optimize=True)
             return True
     except Exception as e:
@@ -174,7 +174,7 @@ def package_asset(
     # Generate or use provided asset ID and canonical path
     if not asset_id:
         asset_id = generate_asset_id(analysis.category)
-        
+
     canonical_path = generate_canonical_path(
         analysis.category,
         asset_name,

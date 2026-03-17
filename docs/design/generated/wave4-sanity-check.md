@@ -1,6 +1,6 @@
 # Wave 4 QA & Sanity Check Report
 
-**Date:** 2026-02-11  
+**Date:** 2026-02-11
 **Status:** ✅ COMPLETED BY QA
 
 This report summarizes the sanity check for the "The Pages" assembly phase (`KrDarkLanding`, `KrDarkDashboard`, `KrDarkKanban`).
@@ -9,37 +9,37 @@ This report summarizes the sanity check for the "The Pages" assembly phase (`KrD
 
 ### 1. KrDarkLanding (The Resurrection)
 - **Composition**: Combines `ManifestoSlab` and `ManifestoCard` for high-impact entry.
-- **Hierarchy**: 
+- **Hierarchy**:
   - `ManifestoSlab` provides the primary "Proclamation" headline.
   - `ManifestoCard` provides the "Tactical Core" with "ENTER STATION" CTA.
-- **Visuals**: 
+- **Visuals**:
   - Successfully integrates `The Sentry` mascot placeholder with `shadow-viscous`.
   - Background radial glow (`ink-gold/10`) creates atmospheric focus.
-- **Accessibility**: 
+- **Accessibility**:
   - Semantic `<main>` and `<article>` tags preserved.
   - Button actions correctly wired to routing/logic.
 
 ### 2. KrDarkDashboard (Command Center)
 - **Composition**: Uses `SolidarityCard` grid for tactical metrics.
-- **Hierarchy**: 
+- **Hierarchy**:
   - Primary headline via `ManifestoSlab`.
   - Secondary metrics using standard `Stone` primitives.
-- **Visuals**: 
+- **Visuals**:
   - Color-coded metrics (`ink-gold`, `solidarity-red`, `solidarity-green`) provide immediate status read.
   - `shadow-viscous` on cards ensures layering clarity.
-- **Accessibility**: 
+- **Accessibility**:
   - `aria-hidden` spanning for decorative placeholders.
   - Readable `font-annotation` for metric labels.
 
 ### 3. KrDarkKanban (Mission Tracker)
 - **Composition**: Full implementation of `KanbanBoard` + `UnifiedColumn` + `SolidarityCard`.
-- **Hierarchy**: 
+- **Hierarchy**:
   - Column titles use `font-proclamation` for authority.
   - Individual missions (Cards) use `font-bloom` for role titles.
-- **Visuals**: 
+- **Visuals**:
   - Dynamic status indicators (pulse animation for "Offer").
   - `MapPin` and `Clock` icons provide high-density scanning.
-- **Accessibility**: 
+- **Accessibility**:
   - Interactive cards with clear focus states and hover lifts.
   - Empty state handles (`Silent Station`) provide visual feedback when no data is present.
 

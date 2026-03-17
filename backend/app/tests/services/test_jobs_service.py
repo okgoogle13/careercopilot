@@ -28,9 +28,14 @@ async def test_compare_resume_to_job_uses_extracted_text_fallback(mock_db):
     )
     mock_db.query.return_value.filter.return_value.first.return_value = asset
 
-    with patch("app.services.jobs_service.analyze_job_description", new_callable=AsyncMock) as mock_analyze, patch(
-        "app.services.jobs_service.compare_resume_to_job", new_callable=AsyncMock
-    ) as mock_compare:
+    with (
+        patch(
+            "app.services.jobs_service.analyze_job_description", new_callable=AsyncMock
+        ) as mock_analyze,
+        patch(
+            "app.services.jobs_service.compare_resume_to_job", new_callable=AsyncMock
+        ) as mock_compare,
+    ):
         mock_analyze.return_value = json.dumps({"title": "Case Manager"})
         mock_compare.return_value = json.dumps({"match_score": 88})
 
@@ -59,9 +64,14 @@ async def test_compare_resume_to_job_returns_http_400_for_invalid_comparison_jso
     )
     mock_db.query.return_value.filter.return_value.first.return_value = asset
 
-    with patch("app.services.jobs_service.analyze_job_description", new_callable=AsyncMock) as mock_analyze, patch(
-        "app.services.jobs_service.compare_resume_to_job", new_callable=AsyncMock
-    ) as mock_compare:
+    with (
+        patch(
+            "app.services.jobs_service.analyze_job_description", new_callable=AsyncMock
+        ) as mock_analyze,
+        patch(
+            "app.services.jobs_service.compare_resume_to_job", new_callable=AsyncMock
+        ) as mock_compare,
+    ):
         mock_analyze.return_value = json.dumps({"title": "Support Worker"})
         mock_compare.return_value = "{bad-json"
 
@@ -80,7 +90,9 @@ async def test_compare_resume_to_job_returns_http_400_for_invalid_comparison_jso
 @pytest.mark.asyncio
 async def test_compare_resume_to_job_wraps_unexpected_errors_in_http_500(mock_db):
     """Unexpected errors should be normalized to a 500 HTTPException."""
-    with patch("app.services.jobs_service.analyze_job_description", new_callable=AsyncMock) as mock_analyze:
+    with patch(
+        "app.services.jobs_service.analyze_job_description", new_callable=AsyncMock
+    ) as mock_analyze:
         mock_analyze.side_effect = RuntimeError("genkit unavailable")
 
         with pytest.raises(HTTPException) as exc_info:

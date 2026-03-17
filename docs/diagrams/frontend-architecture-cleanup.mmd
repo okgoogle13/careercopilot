@@ -1,0 +1,87 @@
+flowchart LR
+
+    subgraph account["account"]
+        account_settings["/settings -> Settings"]
+        account_profile["/profile -> ProfileView"]
+    end
+
+    subgraph analysis["analysis"]
+        analysis_kr_analysis["/kr/analysis -> AnalysisWorkbench"]
+        analysis_analysis["/analysis -> AnalysisPage"]
+        analysis_asset_library["/asset-library -> AssetLibrary"]
+    end
+
+    subgraph applications["applications"]
+        applications_tracker["/tracker -> ApplicationTracker"]
+        applications_apply_quick["/apply/quick -> ApplyQuick"]
+    end
+
+    subgraph auth_onboarding["auth-onboarding"]
+        auth_onboarding_login["/login -> Login"]
+        auth_onboarding_register["/register -> Register"]
+        auth_onboarding_kr_auth["/kr/auth -> AuthModal"]
+        auth_onboarding_kr_onboarding["/kr/onboarding -> OnboardFlow"]
+        auth_onboarding_onboarding["/onboarding -> OnboardingRoute"]
+        auth_onboarding_welcome["/welcome -> WelcomeScreen"]
+    end
+
+    subgraph dashboard["dashboard"]
+        dashboard_kr_dashboard["/kr/dashboard -> DashboardOverview"]
+        dashboard_dashboard["/dashboard -> Dashboard"]
+    end
+
+    subgraph documents["documents"]
+        documents_documents["/documents -> Documents"]
+    end
+
+    subgraph fallback["fallback"]
+        fallback["* -> NotFound"]
+    end
+
+    subgraph generation["generation"]
+        generation_ksc_generator["/ksc-generator -> KSCGenerator"]
+        generation_cover_letter_generator["/cover-letter-generator -> CoverLetterGenerator"]
+    end
+
+    subgraph ingestion["ingestion"]
+        ingestion_career_ingest["/career/ingest -> IngestionPage"]
+    end
+
+    subgraph internal_tools["internal-tools"]
+        internal_tools_design_sidekick["/design-sidekick -> DesignSidekick"]
+        internal_tools_style_guide["/style-guide -> StyleGuide"]
+        internal_tools_test_tokens["/test-tokens -> TokenTest"]
+    end
+
+    subgraph jobs["jobs"]
+        jobs_opportunities["/opportunities -> Opportunities"]
+        jobs_job_queue["/job-queue -> JobQueue"]
+    end
+
+    subgraph landing["landing"]
+        landing["/ -> LandingPage"]
+    end
+
+    subgraph landing_prototype["landing-prototype"]
+        landing_prototype_kr_landing["/kr/landing -> HeroLanding"]
+    end
+
+    subgraph unrouted["unrouted screen candidates"]
+        unrouted_resumeauditpage["ResumeAuditPage (pages/ResumeAuditPage.tsx)"]
+        unrouted_ingestionflow["IngestionFlow (screens/04_ingestion/IngestionFlow.tsx)"]
+        unrouted_lookoutdiscovery["LookoutDiscovery (screens/06_lookout/LookoutDiscovery.tsx)"]
+        unrouted_kanbantracker["KanbanTracker (screens/07_kanban/KanbanTracker.tsx)"]
+        unrouted_documentworkbench["DocumentWorkbench (screens/08_workbench/DocumentWorkbench.tsx)"]
+        unrouted_applicationfinalization["ApplicationFinalization (screens/09_finalization/ApplicationFinalization.tsx)"]
+        unrouted_settingscontrol["SettingsControl (screens/10_settings/SettingsControl.tsx)"]
+    end
+
+    applications_tracker -.candidate.-> unrouted_kanbantracker
+    applications_tracker -.candidate.-> unrouted_applicationfinalization
+    documents_documents -.candidate.-> unrouted_documentworkbench
+    jobs_opportunities -.candidate.-> unrouted_lookoutdiscovery
+    account_settings -.candidate.-> unrouted_settingscontrol
+    ingestion_career_ingest -.candidate.-> unrouted_ingestionflow
+    jobs_job_queue -.candidate.-> unrouted_lookoutdiscovery
+    applications_apply_quick -.candidate.-> unrouted_kanbantracker
+    applications_apply_quick -.candidate.-> unrouted_applicationfinalization

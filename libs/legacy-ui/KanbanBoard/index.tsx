@@ -15,10 +15,10 @@ interface KanbanBoardProps {
 
 /**
  * KanbanBoard
- * 
+ *
  * A top-level container for managing multiple UnifiedColumns.
  * Primarily used for mission tracking, job applications, and task management.
- * 
+ *
  * Design:
  * - Fluid horizontal layout.
  * - Substrate-aware transparency.

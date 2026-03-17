@@ -15,10 +15,11 @@ import {
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
-import { PageHeader } from '../../components/shared/PageHeader';
-import { api } from '../../services/api';
-import { genkitApi } from '../../services/genkit';
-import { exportToPdf } from '../../utils/exportEngine';
+import { ApplicationFinalization } from '@/screens/09_finalization/ApplicationFinalization';
+import { api } from '@/services/api';
+import { genkitApi } from '@/services/genkit';
+import { exportToPdf } from '@/utils/exportEngine';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 import { useAnalytics } from '@/hooks/useAnalytics';
 
 const stepMotionProps = {
@@ -41,6 +42,7 @@ export function CoverLetterGenerator() {
   const [companyValues, setCompanyValues] = useState('');
   const [instructions, setInstructions] = useState('');
   const [style, setStyle] = useState('professional');
+  const [strengths, setStrengths] = useState('');
 
   const [generatedLetter, setGeneratedLetter] = useState<string>('');
 
@@ -136,14 +138,11 @@ export function CoverLetterGenerator() {
   }, [step, generatedLetter, style, track]);
 
   return (
-    <div className="p-6 md:p-12 max-w-5xl mx-auto animate-in fade-in zoom-in-95 duration-500 ease-spring">
-      <PageHeader
-        title="Cover Letter Generator"
-        highlightedWord="Builder"
-        description="Create role-specific cover letters with clear, guided steps."
-      />
-
-      {/* Progress Stepper */}
+    <ApplicationFinalization
+      className="max-w-5xl mx-auto"
+      title="Cover Letter Builder"
+      subtitle="Craft an application cover letter tailored to the job you want."
+    >
       <div className="flex items-center justify-center mb-8 gap-4">
         {[1, 2, 3, 4].map((s) => (
           <div
@@ -363,65 +362,84 @@ export function CoverLetterGenerator() {
                     className="bg-surface-container-high border-outline-variant h-32 rounded-scaffold"
                   />
                 </div>
+
+                <div>
+                  <label className="block text-on-surface mb-2 text-label-large font-bold font-body">
+                    Key Strengths to Highlight
+                  </label>
+                  <Textarea
+                    value={strengths}
+                    onChange={(e) => setStrengths(e.target.value)}
+                    placeholder="e.g. 5 years in child protection, fluent in Vietnamese, strong crisis de-escalation skills..."
+                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-24 focus:ring-secondary focus:border-secondary font-body"
+                  />
+                </div>
               </div>
 
-              <div className="flex justify-between pt-4">
+              <div className="flex justify-between pt-6 border-t border-outline-variant">
                 <Button
                   onClick={handleBack}
                   variant="text"
-                  className="text-on-surface-variant hover:text-on-surface"
+                  className="text-on-surface-variant hover:text-on-surface rounded-march px-6 font-body"
                 >
                   <ArrowLeft className="w-4 h-4 mr-2" /> Back
                 </Button>
                 <Button
                   onClick={handleGenerate}
                   disabled={loading}
-                  className="bg-tertiary-container text-on-tertiary-container hover:bg-tertiary hover:text-on-tertiary rounded-strike px-8 h-12 flex items-center gap-2 font-bold shadow-elevation-1"
+                  className="bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary rounded-strike px-8 h-12 flex items-center gap-2 font-bold shadow-elevation-1 transition-all group"
                 >
-                  <Sparkles className="w-5 h-5" />
-                  {loading ? 'Generating...' : 'Generate Cover Letter'}
+                  <Sparkles
+                    className={`w-5 h-5 ${loading ? 'animate-pulse text-tertiary' : 'group-hover:rotate-12 transition-transform'}`}
+                  />
+                  {loading ? 'Drafting Letter...' : 'Generate Letter'}
                 </Button>
               </div>
             </motion.div>
           )}
 
-          {/* Step 4: Result */}
+          {/* Step 4: Review & Export */}
           {step === 4 && (
             <motion.div
-              key="step-4"
-              {...stepMotionProps}
+              key="step4"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={KrDarkSpring}
               className="space-y-6"
             >
               <div className="flex items-center justify-between">
-                <h2 className="text-title-large font-bold text-on-surface flex items-center gap-2">
+                <h2 className="text-title-large font-display font-bold text-on-surface flex items-center gap-2">
                   <Sparkles className="w-6 h-6 text-tertiary" /> Your Cover Letter
                 </h2>
                 <div className="flex gap-2">
                   <Button
                     onClick={resetForm}
                     variant="text"
-                    className="text-on-surface-variant hover:text-error"
+                    className="text-on-surface-variant hover:text-error rounded-march font-body"
                   >
-                    <RefreshCw className="w-4 h-4 mr-2" /> New
+                    <RefreshCw className="w-4 h-4 mr-2" /> Start Over
                   </Button>
                 </div>
               </div>
 
-              <div
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
                 id="cover-letter-content"
                 aria-live="polite"
-                className="bg-surface-container-low rounded-megaphone p-8 text-on-surface whitespace-pre-wrap border border-outline-variant shadow-inner font-serif text-body-large leading-relaxed max-h-[600px] overflow-y-auto"
+                className="bg-surface-container-low rounded-megaphone p-8 text-on-surface whitespace-pre-wrap border border-outline-variant shadow-inner font-body text-body-medium leading-relaxed min-h-[400px]"
               >
                 {generatedLetter}
-              </div>
+              </motion.div>
 
               <div className="flex justify-end gap-4 pt-4">
                 <Button
                   onClick={handleDownloadPdf}
                   variant="outlined"
-                  className="border-tertiary text-tertiary hover:bg-tertiary hover:text-on-tertiary"
+                  className="border-tertiary text-tertiary hover:bg-tertiary hover:text-on-tertiary rounded-strike px-8 h-12 flex items-center gap-2 font-bold font-body"
                 >
-                  <Download className="w-4 h-4 mr-2" /> Download PDF
+                  <Download className="w-4 h-4" /> Download PDF
                 </Button>
                 <Button
                   onClick={() => {
@@ -429,29 +447,29 @@ export function CoverLetterGenerator() {
                     track('document_exported', { type: 'cover_letter', method: 'copy' });
                     toast.success('Copied to clipboard');
                   }}
-                  aria-label="Copy generated cover letter text"
-                  className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary"
+                  aria-label="Copy generated cover letter"
+                  className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary rounded-strike px-8 h-12 flex items-center gap-2 font-bold shadow-sm font-body"
                 >
-                  <Copy className="w-4 h-4 mr-2" /> Copy Text
+                  <Copy className="w-4 h-4" /> Copy to Clipboard
                 </Button>
               </div>
 
-              <div className="rounded-scaffold border border-outline-variant bg-surface-container-high/40 p-4">
+              <div className="rounded-scaffold border border-outline-variant bg-surface-container-high/40 p-4 mt-6">
                 <p className="text-label-small font-mono uppercase tracking-wider text-on-surface-variant mb-2">
-                  What's next?
+                  Recommended Next Steps
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link
-                    to={`/analysis${jobDescription ? `?jobDescription=${encodeURIComponent(jobDescription)}` : ''}`}
+                    to="/documents"
                     className="inline-flex items-center rounded-march bg-primary-container text-on-primary-container px-4 py-2 text-sm font-bold"
                   >
-                    Run ATS check for this role
+                    Manage Documents
                   </Link>
                   <Link
-                    to="/documents"
-                    className="inline-flex items-center rounded-march border border-outline px-4 py-2 text-sm font-semibold text-on-surface"
+                    to="/dashboard"
+                    className="inline-flex items-center rounded-march border border-outline px-4 py-2 text-sm font-semibold text-on-surface hover:bg-surface-container"
                   >
-                    Save and manage in Documents
+                    Return to Dashboard
                   </Link>
                 </div>
               </div>
@@ -459,6 +477,6 @@ export function CoverLetterGenerator() {
           )}
         </AnimatePresence>
       </motion.div>
-    </div>
+    </ApplicationFinalization>
   );
 }

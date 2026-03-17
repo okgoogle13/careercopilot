@@ -1,12 +1,12 @@
 import json
 import logging
-from typing import Dict, Any
 
 from app.core.genkit_init import get_model
 from app.core.prompt_service import format_prompt
 from app.genkit_flows.flow_decorator import async_genkit_flow
 
 logger = logging.getLogger(__name__)
+
 
 @async_genkit_flow()
 async def compare_resume_to_job(resume_text: str, job_analysis_data: dict) -> str:
@@ -20,7 +20,7 @@ async def compare_resume_to_job(resume_text: str, job_analysis_data: dict) -> st
         "matched_skills": [],
         "missing_skills": [],
         "overall_fit": "Analysis unavailable",
-        "recommendations": "Please try again later."
+        "recommendations": "Please try again later.",
     }
 
     try:
@@ -28,7 +28,7 @@ async def compare_resume_to_job(resume_text: str, job_analysis_data: dict) -> st
         prompt = format_prompt(
             "resume_job_comparison",
             resume_text=resume_text,
-            job_analysis_data=json.dumps(job_analysis_data, separators=(',', ':')),
+            job_analysis_data=json.dumps(job_analysis_data, separators=(",", ":")),
         )
 
         # Generate the response using the centralized model
@@ -51,7 +51,7 @@ async def compare_resume_to_job(resume_text: str, job_analysis_data: dict) -> st
         if isinstance(output, str):
             return output
         return json.dumps(output)
-        
+
     except Exception as e:
         logger.error(f"Error in compare_resume_to_job: {e}")
         return json.dumps(fallback_data)

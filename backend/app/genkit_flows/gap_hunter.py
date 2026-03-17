@@ -1,5 +1,3 @@
-from typing import List, Optional
-
 from pydantic import BaseModel, Field
 
 from app.core.google_genai_compat import get_configured_google_generativeai
@@ -14,10 +12,10 @@ def _get_generation_model():
 
 
 class GapAnalysisResult(BaseModel):
-    missing_skills: List[str] = Field(
+    missing_skills: list[str] = Field(
         description="List of critical skills found in JD but missing in Resume."
     )
-    evidence_found: List[str] = Field(
+    evidence_found: list[str] = Field(
         description="Evidence found in user history for these missing skills."
     )
     strategy_advice: str = Field(

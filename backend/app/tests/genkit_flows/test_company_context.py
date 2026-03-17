@@ -5,7 +5,6 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
-from app.genkit_flows import company_context as module
 from app.genkit_flows.company_context import CompanyContext, generate_company_context
 
 

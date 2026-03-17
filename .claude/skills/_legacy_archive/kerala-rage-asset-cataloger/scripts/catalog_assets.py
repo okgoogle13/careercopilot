@@ -31,13 +31,13 @@ def get_next_asset_id(manifest):
 def validate_mode_compliance(subject, mode):
     """Check Gallery/Laboratory compliance rules."""
     violations = []
-    
+
     if mode == 'laboratory':
         forbidden = ['flower', 'bloom', 'petal', 'decorative fauna']
         for term in forbidden:
             if term in subject.lower():
                 violations.append(f"[DEPRECATED_MODE] prohibits: {term}")
-    
+
     return violations
 
 def analyze_image(image_path, manifest, doc008_gaps):
@@ -46,7 +46,7 @@ def analyze_image(image_path, manifest, doc008_gaps):
     Returns dict following manifest schema.
     """
     filename = Path(image_path).name
-    
+
     # Basic structure - to be enhanced with vision analysis
     entry = {
         "filename": filename,
@@ -55,19 +55,19 @@ def analyze_image(image_path, manifest, doc008_gaps):
         "manifest_compliant": True,
         "validation_notes": []
     }
-    
+
     return entry
 
 def catalog_batch(image_paths, manifest_path, output_path):
     """Process batch of images and generate catalog JSON."""
     manifest = load_manifest(manifest_path)
-    
+
     results = []
     for image_path in image_paths:
         if Path(image_path).exists():
             entry = analyze_image(image_path, manifest, {})
             results.append(entry)
-    
+
     catalog = {
         "cataloger_version": "2.0.0",
         "source_manifest": str(manifest_path),
@@ -75,19 +75,19 @@ def catalog_batch(image_paths, manifest_path, output_path):
         "total_analyzed": len(results),
         "entries": results
     }
-    
+
     with open(output_path, 'w') as f:
         json.dump(catalog, f, indent=2)
-    
+
     print(f"✅ Cataloged {len(results)} assets → {output_path}")
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
         print("Usage: catalog_assets.py MANIFEST_PATH OUTPUT_JSON IMAGE1 [IMAGE2 ...]")
         sys.exit(1)
-    
+
     manifest_path = sys.argv[1]
     output_path = sys.argv[2]
     image_paths = sys.argv[3:]
-    
+
     catalog_batch(image_paths, manifest_path, output_path)

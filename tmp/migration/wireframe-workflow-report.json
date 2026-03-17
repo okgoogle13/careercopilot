@@ -1,0 +1,174 @@
+{
+  "status": "warn",
+  "canonical_wireframe_count": 1,
+  "matrix_row_count": 1,
+  "schema_summary": {
+    "failed_files": 0,
+    "warn_files": 1,
+    "files_with_upgraded_schema": 0
+  },
+  "route_coverage_summary": {
+    "missing_wireframes": [],
+    "failures": [],
+    "warnings": [
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/01_landing/01_landing.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/02_auth/02_auth.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/04_ingestion/04_ingestion.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/05_analysis/05_analysis.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/06_lookout/06_lookout.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/07_kanban/07_kanban.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/08_workbench/08_workbench.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/09_finalization/09_finalization.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/10_settings/10_settings.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml"
+      }
+    ]
+  },
+  "component_alignment_summary": {
+    "failures": [],
+    "warnings": []
+  },
+  "asset_integrity_summary": {
+    "placement_report_path": "/Users/okgoogle13/Projects/careercopilot/.claude/wireframes/placement_report.json",
+    "aggregate_score": 94.0,
+    "pass": true,
+    "invalid_asset_file_paths_count": 84
+  },
+  "legacy_artifact_findings": {
+    "summary": {
+      "canonical_wireframes_with_spring": 0,
+      "canonical_wireframe_count": 1,
+      "placement_report": {
+        "placement_report_path": "/Users/okgoogle13/Projects/careercopilot/.claude/wireframes/placement_report.json",
+        "aggregate_score": 94.0,
+        "pass": true,
+        "invalid_asset_file_paths_count": 84
+      }
+    },
+    "warnings": [
+      {
+        "type": "legacy_spring_completion_claim_mismatch",
+        "documented_file": "/Users/okgoogle13/Projects/careercopilot/.claude/wireframes/SPRING_PHYSICS_SUMMARY.md",
+        "canonical_wireframes_with_spring": 0,
+        "canonical_wireframe_count": 1
+      },
+      {
+        "type": "legacy_summary_claim_mismatch",
+        "documented_file": "/Users/okgoogle13/Projects/careercopilot/.claude/wireframes/SUMMARY.md",
+        "canonical_files_missing_upgraded_schema": 1
+      },
+      {
+        "type": "placement_report_integrity_warning",
+        "placement_report": "/Users/okgoogle13/Projects/careercopilot/.claude/wireframes/placement_report.json",
+        "invalid_asset_file_paths_count": 84,
+        "recommendation": "run manifest-reconciler before trusting placement success"
+      },
+      {
+        "type": "placement_report_pass_despite_integrity_issues",
+        "placement_report": "/Users/okgoogle13/Projects/careercopilot/.claude/wireframes/placement_report.json"
+      }
+    ]
+  },
+  "build_contract_xsd_summary": {
+    "contracts_checked": 12,
+    "failures": [],
+    "warnings": []
+  },
+  "schema_failures": [],
+  "schema_warnings": [
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
+      "type": "accessibility_coverage_incomplete",
+      "element_count": 7,
+      "accessible_elements": 0
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
+      "type": "missing_responsive_rules"
+    }
+  ],
+  "file_results": [
+    {
+      "wireframe_id": "06_lookout",
+      "xml_path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "accessibility_coverage_incomplete",
+          "element_count": 7,
+          "accessible_elements": 0
+        },
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 7,
+      "component_mapping_count": 7,
+      "elements_with_component_mapping": 7,
+      "accessibility_count": 0,
+      "elements_with_accessibility": 0,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "March",
+        "Pagination",
+        "Placard",
+        "Strike"
+      ]
+    }
+  ]
+}

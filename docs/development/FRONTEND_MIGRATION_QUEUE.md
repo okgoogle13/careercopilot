@@ -1,6 +1,6 @@
 # Frontend Migration Queue (Top 20)
 
-**Generated:** 2026-01-19  
+**Generated:** 2026-01-19
 **Source:** `frontend/component-inventory.json`
 
 ## Priority Migration List (by usage count)
@@ -37,4 +37,3 @@ Keep these in-place:
 
 - `frontend/packages/ui` items are already in the UI package; validate before migrating.
 - Many “0 usage” items may be unused or only referenced by Storybook.
-

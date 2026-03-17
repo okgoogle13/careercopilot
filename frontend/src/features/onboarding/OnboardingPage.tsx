@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PathSelectionCard } from '@/components/PathSelectionCard';
 import { useAnalytics } from '@/hooks/useAnalytics';
+import { OnboardFlow } from '@/screens/03_onboarding/OnboardFlow';
 import { useUserStore } from '@/stores/userStore';
 import { LayeredHero } from '../../components/kerala-rage/LayeredHero';
 import type { SolidarityManifest } from '../../design/hero/heroTypes';
@@ -111,14 +112,24 @@ export function OnboardingPage() {
   };
 
   const getCardSpan = (index: number): string => {
-    // Enforce 2-3-2-2 cadence on desktop (lg:grid-cols-6).
     if (index <= 1) return 'lg:col-span-3';
     if (index <= 4) return 'lg:col-span-2';
     return 'lg:col-span-3';
   };
 
   return (
-    <div className={styles.container}>
+    <OnboardFlow
+      className="max-w-7xl mx-auto w-full"
+      showActions={false}
+      title={
+        onboardingStep === 1 ? 'Choose Your Focus Area' : 'What Best Describes Your Situation?'
+      }
+      subtitle={
+        onboardingStep === 1
+          ? 'Select your domain to personalize job matching and drafting quality.'
+          : 'We use this to tune examples, prompts, and recommendations in your dashboard.'
+      }
+    >
       {heroData && (
         <div className="absolute inset-0 pointer-events-none opacity-25">
           <LayeredHero
@@ -132,25 +143,13 @@ export function OnboardingPage() {
       )}
 
       <div className="relative z-10 w-full">
-        <header className={styles.header}>
-          <div className="mb-6">
-            <OnboardingProgress
-              currentStep={onboardingStep === 1 ? 2 : 3}
-              totalSteps={4}
-              steps={ONBOARDING_STEPS}
-            />
-          </div>
-          <h1 className="text-display-ultra">
-            {onboardingStep === 1
-              ? 'Choose Your Focus Area'
-              : 'What Best Describes Your Situation?'}
-          </h1>
-          <p className="text-curator-accent">
-            {onboardingStep === 1
-              ? 'Select your domain to personalize job matching and drafting quality.'
-              : 'We use this to tune examples, prompts, and recommendations in your dashboard.'}
-          </p>
-        </header>
+        <div className="mb-8">
+          <OnboardingProgress
+            currentStep={onboardingStep === 1 ? 2 : 3}
+            totalSteps={4}
+            steps={ONBOARDING_STEPS}
+          />
+        </div>
 
         {onboardingStep === 1 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 p-12 max-w-7xl mx-auto">
@@ -214,7 +213,7 @@ export function OnboardingPage() {
           )}
         </footer>
       </div>
-    </div>
+    </OnboardFlow>
   );
 }
 

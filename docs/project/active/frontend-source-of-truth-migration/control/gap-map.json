@@ -1,0 +1,173 @@
+{
+  "artifact": "backend_feature_frontend_component_gap_map",
+  "generated_at": "2026-03-16",
+  "canonical_plan": "docs/project/active/frontend-source-of-truth-migration/control/blueprint.md",
+  "canonical_route_matrix": "docs/project/active/frontend-source-of-truth-migration/control/route-matrix.json",
+  "features": [
+    {
+      "feature_id": "applications_crud",
+      "owner_route": "/tracker",
+      "owner_surface": "ApplicationTracker",
+      "backend_status": "mounted_active",
+      "frontend_status": "live_canonical",
+      "reuse_components": [
+        "ApplicationTracker",
+        "KanbanColumn",
+        "ApplicationDetailPanel",
+        "ApplicationEditForm",
+        "ApplicationStatusActions",
+        "ApplicationArchiveAction"
+      ],
+      "reference_components": [
+        "KanbanTracker"
+      ],
+      "new_components": [],
+      "deferred_components": [],
+      "notes": "Canonical route owner is live on the real applications API path; successfully seeded test documents via REST API. Local backend verification is currently blocked by a gRPC hang on macOS, documented in tracker-blocker-diagnostic.md."
+    },
+    {
+      "feature_id": "documents_redline",
+      "owner_route": "/documents",
+      "owner_surface": "Documents",
+      "backend_status": "mounted_active",
+      "frontend_status": "live_canonical",
+      "reuse_components": [
+        "Documents"
+      ],
+      "reference_components": [
+        "DocumentWorkbench"
+      ],
+      "new_components": [
+        "DocumentRedlineUploadPanel",
+        "TrackedChangesWorkspace",
+        "RedlineActionBar"
+      ],
+      "deferred_components": [],
+      "notes": "Route stays the same; the canonical documents feature now mounts the redline workspace path directly. Remaining work is refinement inside the route, not missing route ownership."
+    },
+    {
+      "feature_id": "smart_ingestion_asset_pipeline",
+      "owner_route": "/career/ingest",
+      "owner_surface": "SmartIngestion",
+      "backend_status": "mounted_active",
+      "frontend_status": "live_canonical",
+      "reuse_components": [
+        "SmartIngestion",
+        "AssetLibrary"
+      ],
+      "reference_components": [
+        "IngestionFlow"
+      ],
+      "new_components": [
+        "SmartIngestionUploadStep",
+        "SmartIngestionTagConfirmStep",
+        "SmartIngestionSaveStep"
+      ],
+      "deferred_components": [],
+      "notes": "Must converge on /api/v1/ingest as the canonical contract."
+    },
+    {
+      "feature_id": "voice_profile_capture",
+      "owner_route": "/profile",
+      "owner_surface": "ProfileView",
+      "backend_status": "mounted_active",
+      "frontend_status": "live_canonical",
+      "reuse_components": [
+        "ProfileView",
+        "Settings"
+      ],
+      "reference_components": [
+        "SettingsControl"
+      ],
+      "new_components": [
+        "VoiceProfileCreationPanel",
+        "VoiceSampleSubmissionForm",
+        "VoiceProfileStatusCard",
+        "VoiceProfileManagementSection"
+      ],
+      "deferred_components": [],
+      "notes": "Voice ownership is locked to /profile and the live route already mounts the voice-profile management section."
+    },
+    {
+      "feature_id": "resume_audit",
+      "owner_route": "/analysis",
+      "owner_surface": "AnalysisPage",
+      "backend_status": "mounted_active",
+      "frontend_status": "partially_wired",
+      "reuse_components": [
+        "AnalysisPage",
+        "ResumeAuditPage"
+      ],
+      "reference_components": [
+        "AnalysisWorkbench"
+      ],
+      "new_components": [
+        "ResumeAuditEntryPoint",
+        "ResumeAuditResultsPanel"
+      ],
+      "deferred_components": [
+        "ResumeAuditHistoryList"
+      ],
+      "notes": "Backend history endpoint is now mounted, but the canonical analysis runtime still only renders immediate evaluation results; persisted history remains a frontend wiring gap."
+    },
+    {
+      "feature_id": "genkit_job_analysis",
+      "owner_route": "/apply/quick",
+      "owner_surface": "ApplyQuick",
+      "backend_status": "mounted_active",
+      "frontend_status": "live_canonical",
+      "route_ownership": {
+        "primary_execution_owner": "/apply/quick",
+        "secondary_reference": "/opportunities",
+        "ownership_note": "Opportunities links to apply/quick for execution; it does not own the analysis capability. ApplyQuick is the single execution surface."
+      },
+      "resolution_status": "complete",
+      "blocked_by": null,
+      "resolved_commit": null,
+      "reuse_components": [
+        "ApplyQuick",
+        "Opportunities"
+      ],
+      "reference_components": [
+        "LookoutDiscovery"
+      ],
+      "new_components": [
+        "JobAnalysisResultsPanel"
+      ],
+      "deferred_components": [
+        "JobParsingWorkbench",
+        "ExtractFromTextPanel",
+        "AdvancedJobAnalysisPanel"
+      ],
+      "api_contract": {
+        "endpoint": "POST /api/flows/analyze-job-from-url",
+        "auth": "get_current_user (Bearer token)",
+        "request": {
+          "url": "string | null",
+          "job_description": "string | null"
+        },
+        "response": "AnalyzeJobFromUrlResponse (job_title, company_name, normalized_job_description, chunk_matches, ats_preview, artifacts, export_pack)",
+        "contract_alignment": "synchronized \u2014 frontend types in src/types/masterResume.ts match backend schemas exactly"
+      },
+      "notes": "ApplyQuick remains the canonical live owner. JobAnalysisResultsPanel is now extracted as a support component, focused tests pass, and the build contract is ready for execution tracking. workflow_orchestration on this route remains deferred (backend placeholder-only)."
+    },
+    {
+      "feature_id": "workflow_orchestration",
+      "owner_route": "/apply/quick",
+      "owner_surface": "ApplyQuick",
+      "backend_status": "mounted_active_partial",
+      "frontend_status": "partially_wired",
+      "reuse_components": [
+        "ApplyQuick"
+      ],
+      "reference_components": [],
+      "new_components": [],
+      "deferred_components": [
+        "WorkflowProgressScreen",
+        "WorkflowStatusPanel",
+        "EmailScanResultsView"
+      ],
+      "notes": "Backend workflow endpoints are implemented, but `/apply/quick` still uses the analysis flow directly and pytest coverage still targets the old disabled contract."
+    }
+  ]
+}

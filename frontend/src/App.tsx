@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import {
   Navigate,
   Outlet,
@@ -12,11 +12,13 @@ import { Toaster } from 'sonner';
 const texturePattern =
   '/assets/kr-solidarity/texture/kr-solidarity__substrate__landmark--melbourne-laneway--v1.png';
 import './design/styles/design-tokens.css';
-import { TokenTest } from './components/debug/TokenTest';
+import { MigratedRouteLayout } from './layouts/MigratedRouteLayout';
 import { getModeForRoute } from './config/routeModeMap';
 import { useAuth } from './context/AuthContext';
 import { AssetLibrary } from './features/analysis/AssetLibrary';
+import { AnalysisPage } from './features/analysis/AnalysisPage';
 import { ApplicationTracker } from './features/applications/ApplicationTracker';
+import { ApplyQuick } from './features/applications/ApplyQuick';
 import { CoverLetterGenerator } from './features/applications/CoverLetterGenerator';
 import { Login } from './features/auth/Login';
 import { Register } from './features/auth/Register';
@@ -25,31 +27,24 @@ import { Documents } from './features/documents/Documents';
 import { KSCGenerator } from './features/ksc-generator/KSCGenerator';
 import { LandingPage } from './features/landing/LandingPage';
 import { NotFound } from './features/not-found/NotFound';
-import { OnboardingPage } from './features/onboarding/OnboardingPage';
+import { OnboardingRoute } from './features/onboarding/OnboardingRoute';
 import { WelcomeScreen } from './features/onboarding/WelcomeScreen';
 import { Opportunities } from './features/opportunities/Opportunities';
 import { ProfileView } from './features/profile/components/ProfileView';
 import { Settings } from './features/settings/Settings';
-import { StyleGuide } from './features/style-guide/StyleGuide';
 import { Layout } from './layouts/Layout';
-import { AnalysisPage } from './pages/AnalysisPage';
-import { IngestionPage } from './pages/IngestionPage';
-import { JobQueue } from './pages/JobQueue';
-import { ApplyQuick } from './pages/ApplyQuick';
-import { AuthModal } from './components/phase3-batch2/AuthModal';
-import { HeroLanding } from './components/phase3-batch2/HeroLanding';
-import { OnboardFlow } from './components/phase3-batch2/OnboardFlow';
-import { AnalysisWorkbench } from './components/phase3-batch3/AnalysisWorkbench';
-import { DashboardOverview } from './components/phase3-batch3/DashboardOverview';
-import { useModeStore } from './stores/useModeStore';
-import { useUserStore } from './stores/userStore';
+import { StyleGuide } from './features/style-guide/StyleGuide';
 import DesignSidekick from './features/design-sidekick/DesignSidekick';
+import { TokenTest } from './components/debug/TokenTest';
+const SmartIngestion = lazy(() => import('./features/ingestion/SmartIngestion'));
+import { JobQueue } from './features/jobs/JobQueue';
+import { useModeStore } from './stores/useModeStore';
 
 /**
  * ModeSync Component
  * Automatically switches between KrDark and KrDark modes based on the current route
  */
-function ModeSync() {
+export function ModeSync() {
   const location = useLocation();
   const setMode = useModeStore((state) => state.setMode);
 
@@ -65,8 +60,7 @@ function ModeSync() {
   return null; // Logic-only component
 }
 
-// Protected Layout with animations
-const ProtectedLayout = () => {
+export const RequireAuth = () => {
   const { user, loading } = useAuth();
   const location = useLocation();
 
@@ -76,7 +70,7 @@ const ProtectedLayout = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#1A1714] flex items-center justify-center text-[#E6E1E5]">
+      <div className="min-h-screen bg-[var(--sys-color-charcoalBackground-base)] flex items-center justify-center text-[var(--sys-color-worker-ash-base)]">
         Loading...
       </div>
     );
@@ -91,6 +85,13 @@ const ProtectedLayout = () => {
       />
     );
   }
+
+  return <Outlet />;
+};
+
+// Protected Layout with legacy sidebar shell
+export const ProtectedLayout = () => {
+  const location = useLocation();
 
   return (
     <Layout>
@@ -113,26 +114,13 @@ const ProtectedLayout = () => {
   );
 };
 
-const OnboardingRoute = () => {
-  const isNewUser = useUserStore((state) => state.isNewUser);
-  if (isNewUser) {
-    return (
-      <Navigate
-        to="/welcome"
-        replace
-      />
-    );
-  }
-  return <OnboardingPage />;
-};
-
 // Public Layout (Login/Register/Landing)
-const PublicLayout = () => {
+export const PublicLayout = () => {
   const showSentryTestButton =
     import.meta.env.DEV && import.meta.env.VITE_SHOW_SENTRY_TEST_BUTTON === 'true';
 
   return (
-    <div className="min-h-screen bg-[#1A1714] relative">
+    <div className="min-h-screen bg-[var(--sys-color-charcoalBackground-base)] relative">
       {/* Textured Background */}
       <div
         className="fixed inset-0 pointer-events-none z-0 opacity-30 mix-blend-overlay"
@@ -154,13 +142,13 @@ const PublicLayout = () => {
               bottom: '20px',
               right: '20px',
               padding: '10px',
-              background: '#D0BCFE',
-              color: '#381E72',
+              background: 'var(--sys-color-inkGold-base)',
+              color: 'var(--sys-color-charcoalBackground-base)',
               borderRadius: '8px',
               zIndex: 9999,
               cursor: 'pointer',
               fontWeight: 'bold',
-              border: 'none',
+              border: '1px solid var(--sys-color-outline-variant)',
             }}
           >
             Trigger Sentry Error
@@ -171,6 +159,15 @@ const PublicLayout = () => {
     </div>
   );
 };
+
+export function ModeSyncWrapper() {
+  return (
+    <>
+      <ModeSync />
+      <Outlet />
+    </>
+  );
+}
 
 export default function App() {
   return (
@@ -211,24 +208,13 @@ export default function App() {
             element={<StyleGuide />}
           />
           <Route
-            path="/kr/landing"
-            element={<HeroLanding className="m-6" />}
-          />
-          <Route
-            path="/kr/auth"
-            element={<AuthModal className="m-6" />}
-          />
-          <Route
-            path="/kr/onboarding"
-            element={<OnboardFlow className="m-6" />}
-          />
-          <Route
-            path="/kr/analysis"
-            element={<AnalysisWorkbench className="m-6" />}
-          />
-          <Route
-            path="/kr/dashboard"
-            element={<DashboardOverview className="m-6" />}
+            path="/auth"
+            element={
+              <Navigate
+                to="/login"
+                replace
+              />
+            }
           />
           <Route
             path="*"
@@ -237,71 +223,134 @@ export default function App() {
         </Route>
 
         {/* Protected Routes */}
-        <Route element={<ProtectedLayout />}>
-          <Route
-            path="/dashboard"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/onboarding"
-            element={<OnboardingRoute />}
-          />
-          <Route
-            path="/welcome"
-            element={<WelcomeScreen />}
-          />
-          <Route
-            path="/tracker"
-            element={<ApplicationTracker />}
-          />
-          <Route
-            path="/documents"
-            element={<Documents />}
-          />
-          <Route
-            path="/analysis"
-            element={<AnalysisPage />}
-          />
-          <Route
-            path="/opportunities"
-            element={<Opportunities />}
-          />
-          <Route
-            path="/ksc-generator"
-            element={<KSCGenerator />}
-          />
-          <Route
-            path="/cover-letter-generator"
-            element={<CoverLetterGenerator />}
-          />
-          <Route
-            path="/settings"
-            element={<Settings />}
-          />
-          <Route
-            path="/profile"
-            element={<ProfileView />}
-          />
-          <Route
-            path="/asset-library"
-            element={<AssetLibrary />}
-          />
-          <Route
-            path="/career/ingest"
-            element={<IngestionPage />}
-          />
-          <Route
-            path="/job-queue"
-            element={<JobQueue />}
-          />
-          <Route
-            path="/apply/quick"
-            element={<ApplyQuick />}
-          />
-          <Route
-            path="/test-tokens"
-            element={<TokenTest />}
-          />
+        <Route element={<RequireAuth />}>
+          <Route element={<MigratedRouteLayout />}>
+            {/* Step 3a: CRUD verified via REST; local Python client blocked by gRPC hang */}
+            <Route
+              path="/tracker"
+              element={<ApplicationTracker />}
+            />
+            <Route
+              path="/dashboard"
+              element={<Dashboard />}
+            />
+            <Route
+              path="/analysis"
+              element={<AnalysisPage />}
+            />
+            <Route
+              path="/opportunities"
+              element={<Opportunities />}
+            />
+            <Route
+              path="/career/ingest"
+              element={<SmartIngestion />}
+            />
+            <Route
+              path="/apply/quick"
+              element={<ApplyQuick />}
+            />
+            <Route
+              path="/settings"
+              element={<Settings />}
+            />
+            <Route
+              path="/profile"
+              element={<ProfileView />}
+            />
+            {/* Step 6B: shell-promoted — token-enforcement + migration-audit passed */}
+            <Route
+              path="/onboarding"
+              element={<OnboardingRoute />}
+            />
+            <Route
+              path="/ksc-generator"
+              element={<KSCGenerator />}
+            />
+            <Route
+              path="/cover-letter-generator"
+              element={<CoverLetterGenerator />}
+            />
+            <Route
+              path="/job-queue"
+              element={<JobQueue />}
+            />
+            <Route
+              path="/welcome"
+              element={<WelcomeScreen />}
+            />
+            <Route
+              path="/documents"
+              element={<Documents />}
+            />
+            <Route
+              path="/dashboard-overview"
+              element={
+                <Navigate
+                  to="/dashboard"
+                  replace
+                />
+              }
+            />
+            <Route
+              path="/kanban"
+              element={
+                <Navigate
+                  to="/tracker"
+                  replace
+                />
+              }
+            />
+            <Route
+              path="/ingestion"
+              element={
+                <Navigate
+                  to="/career/ingest"
+                  replace
+                />
+              }
+            />
+            <Route
+              path="/feed"
+              element={
+                <Navigate
+                  to="/opportunities"
+                  replace
+                />
+              }
+            />
+            <Route
+              path="/studio"
+              element={
+                <Navigate
+                  to="/ksc-generator"
+                  replace
+                />
+              }
+            />
+            <Route
+              path="/editor"
+              element={
+                <Navigate
+                  to="/documents"
+                  replace
+                />
+              }
+            />
+          </Route>
+
+          {/* ProtectedLayout: support-only surfaces that intentionally remain on the legacy shell. */}
+          <Route element={<ProtectedLayout />}>
+            {/* support-only: asset library is analysis/ingestion tooling, not a product pillar */}
+            <Route
+              path="/asset-library"
+              element={<AssetLibrary />}
+            />
+            <Route
+              path="/test-tokens"
+              element={<TokenTest />}
+            />
+          </Route>
         </Route>
       </Routes>
     </Router>

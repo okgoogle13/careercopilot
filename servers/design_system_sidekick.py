@@ -27,7 +27,8 @@ try:
     from dotenv import load_dotenv
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
-    load_dotenv(os.path.join(project_root, '.env'), override=True)
+    for env_name in ('.env.mcp', '.env'):
+        load_dotenv(os.path.join(project_root, env_name), override=True)
 except ImportError:
     pass
 
@@ -39,9 +40,10 @@ logging.basicConfig(
 logger = logging.getLogger("DesignSystemSidekick")
 
 # Initialize Sentry
-if os.getenv("SENTRY_DSN"):
+sentry_dsn = os.getenv("SENTRY_DSN")
+if sentry_dsn and sentry_dsn.startswith("http") and not sentry_dsn.startswith("${"):
     sentry_sdk.init(
-        dsn=os.getenv("SENTRY_DSN"),
+        dsn=sentry_dsn,
         send_default_pii=True,
         environment=os.getenv("ENV", "development"),
     )

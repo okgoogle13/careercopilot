@@ -1,0 +1,239 @@
+{
+  "generatedAt": "2026-03-15T03:30:31.967Z",
+  "count": 11,
+  "paired": 11,
+  "unpaired": 0,
+  "screens": [
+    {
+      "screenId": "01_landing",
+      "dirPath": "frontend/src/screens/01_landing",
+      "hasMapping": true,
+      "hasWireframe": true,
+      "hasTsx": true,
+      "isPaired": true,
+      "mapping": {
+        "wireframe_id": "01_landing",
+        "wireframe_path": ".claude/wireframes/01_landing.xml",
+        "source_component_path": "frontend/src/components/phase3-batch2/HeroLanding.tsx",
+        "screen_component_path": "frontend/src/screens/01_landing/HeroLanding.tsx",
+        "route": "/kr/landing",
+        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "local_wireframe_path": "frontend/src/screens/01_landing/01_landing.wireframe.xml"
+      },
+      "wireframePath": "01_landing/01_landing.wireframe.xml",
+      "tsxFiles": [
+        "HeroLanding.tsx"
+      ]
+    },
+    {
+      "screenId": "02_auth",
+      "dirPath": "frontend/src/screens/02_auth",
+      "hasMapping": true,
+      "hasWireframe": true,
+      "hasTsx": true,
+      "isPaired": true,
+      "mapping": {
+        "wireframe_id": "02_auth",
+        "wireframe_path": ".claude/wireframes/02_auth.xml",
+        "source_component_path": "frontend/src/components/phase3-batch2/AuthModal.tsx",
+        "screen_component_path": "frontend/src/screens/02_auth/AuthModal.tsx",
+        "route": "/kr/auth",
+        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "local_wireframe_path": "frontend/src/screens/02_auth/02_auth.wireframe.xml"
+      },
+      "wireframePath": "02_auth/02_auth.wireframe.xml",
+      "tsxFiles": [
+        "AuthModal.tsx"
+      ]
+    },
+    {
+      "screenId": "03_onboarding",
+      "dirPath": "frontend/src/screens/03_onboarding",
+      "hasMapping": true,
+      "hasWireframe": true,
+      "hasTsx": true,
+      "isPaired": true,
+      "mapping": {
+        "wireframe_id": "03_onboarding",
+        "wireframe_path": ".claude/wireframes/03_onboarding.xml",
+        "source_component_path": "frontend/src/components/phase3-batch2/OnboardFlow.tsx",
+        "screen_component_path": "frontend/src/screens/03_onboarding/OnboardFlow.tsx",
+        "route": "/kr/onboarding",
+        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "local_wireframe_path": "frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml"
+      },
+      "wireframePath": "03_onboarding/03_onboarding.wireframe.xml",
+      "tsxFiles": [
+        "OnboardFlow.tsx"
+      ]
+    },
+    {
+      "screenId": "04_ingestion",
+      "dirPath": "frontend/src/screens/04_ingestion",
+      "hasMapping": true,
+      "hasWireframe": true,
+      "hasTsx": true,
+      "isPaired": true,
+      "mapping": {
+        "wireframe_id": "04_ingestion",
+        "wireframe_path": ".claude/wireframes/04_ingestion.xml",
+        "source_component_path": "frontend/src/components/phase3-batch3/IngestionFlow.tsx",
+        "screen_component_path": "frontend/src/screens/04_ingestion/IngestionFlow.tsx",
+        "route": "/kr/ingestion",
+        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "local_wireframe_path": "frontend/src/screens/04_ingestion/04_ingestion.wireframe.xml"
+      },
+      "wireframePath": "04_ingestion/04_ingestion.wireframe.xml",
+      "tsxFiles": [
+        "IngestionFlow.tsx"
+      ]
+    },
+    {
+      "screenId": "05_analysis",
+      "dirPath": "frontend/src/screens/05_analysis",
+      "hasMapping": true,
+      "hasWireframe": true,
+      "hasTsx": true,
+      "isPaired": true,
+      "mapping": {
+        "wireframe_id": "05_analysis",
+        "wireframe_path": ".claude/wireframes/05_analysis.xml",
+        "source_component_path": "frontend/src/components/phase3-batch3/AnalysisWorkbench.tsx",
+        "screen_component_path": "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx",
+        "route": "/kr/analysis",
+        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "local_wireframe_path": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml"
+      },
+      "wireframePath": "05_analysis/05_analysis.wireframe.xml",
+      "tsxFiles": [
+        "AnalysisWorkbench.tsx"
+      ]
+    },
+    {
+      "screenId": "06_lookout",
+      "dirPath": "frontend/src/screens/06_lookout",
+      "hasMapping": true,
+      "hasWireframe": true,
+      "hasTsx": true,
+      "isPaired": true,
+      "mapping": {
+        "wireframe_id": "06_lookout",
+        "wireframe_path": ".claude/wireframes/06_lookout.xml",
+        "source_component_path": "frontend/src/components/phase3-batch3/LookoutDiscovery.tsx",
+        "screen_component_path": "frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
+        "route": "/kr/lookout",
+        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "local_wireframe_path": "frontend/src/screens/06_lookout/06_lookout.wireframe.xml"
+      },
+      "wireframePath": "06_lookout/06_lookout.wireframe.xml",
+      "tsxFiles": [
+        "LookoutDiscovery.tsx"
+      ]
+    },
+    {
+      "screenId": "07_kanban",
+      "dirPath": "frontend/src/screens/07_kanban",
+      "hasMapping": true,
+      "hasWireframe": true,
+      "hasTsx": true,
+      "isPaired": true,
+      "mapping": {
+        "wireframe_id": "07_kanban",
+        "wireframe_path": ".claude/wireframes/07_kanban.xml",
+        "source_component_path": "frontend/src/components/phase3-batch3/KanbanTracker.tsx",
+        "screen_component_path": "frontend/src/screens/07_kanban/KanbanTracker.tsx",
+        "route": "/kr/kanban",
+        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "local_wireframe_path": "frontend/src/screens/07_kanban/07_kanban.wireframe.xml"
+      },
+      "wireframePath": "07_kanban/07_kanban.wireframe.xml",
+      "tsxFiles": [
+        "KanbanTracker.tsx"
+      ]
+    },
+    {
+      "screenId": "08_workbench",
+      "dirPath": "frontend/src/screens/08_workbench",
+      "hasMapping": true,
+      "hasWireframe": true,
+      "hasTsx": true,
+      "isPaired": true,
+      "mapping": {
+        "wireframe_id": "08_workbench",
+        "wireframe_path": ".claude/wireframes/08_workbench.xml",
+        "source_component_path": "frontend/src/components/phase3-batch3/DocumentWorkbench.tsx",
+        "screen_component_path": "frontend/src/screens/08_workbench/DocumentWorkbench.tsx",
+        "route": "/kr/workbench",
+        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "local_wireframe_path": "frontend/src/screens/08_workbench/08_workbench.wireframe.xml"
+      },
+      "wireframePath": "08_workbench/08_workbench.wireframe.xml",
+      "tsxFiles": [
+        "DocumentWorkbench.tsx"
+      ]
+    },
+    {
+      "screenId": "09_finalization",
+      "dirPath": "frontend/src/screens/09_finalization",
+      "hasMapping": true,
+      "hasWireframe": true,
+      "hasTsx": true,
+      "isPaired": true,
+      "mapping": {
+        "wireframe_id": "09_finalization",
+        "wireframe_path": ".claude/wireframes/09_finalization.xml",
+        "source_component_path": "frontend/src/components/phase3-batch3/ApplicationFinalization.tsx",
+        "screen_component_path": "frontend/src/screens/09_finalization/ApplicationFinalization.tsx",
+        "route": "/kr/finalization",
+        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "local_wireframe_path": "frontend/src/screens/09_finalization/09_finalization.wireframe.xml"
+      },
+      "wireframePath": "09_finalization/09_finalization.wireframe.xml",
+      "tsxFiles": [
+        "ApplicationFinalization.tsx"
+      ]
+    },
+    {
+      "screenId": "10_settings",
+      "dirPath": "frontend/src/screens/10_settings",
+      "hasMapping": true,
+      "hasWireframe": true,
+      "hasTsx": true,
+      "isPaired": true,
+      "mapping": {
+        "wireframe_id": "10_settings",
+        "wireframe_path": ".claude/wireframes/10_settings.xml",
+        "source_component_path": "frontend/src/components/phase3-batch3/SettingsControl.tsx",
+        "screen_component_path": "frontend/src/screens/10_settings/SettingsControl.tsx",
+        "route": "/kr/settings",
+        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "local_wireframe_path": "frontend/src/screens/10_settings/10_settings.wireframe.xml"
+      },
+      "wireframePath": "10_settings/10_settings.wireframe.xml",
+      "tsxFiles": [
+        "SettingsControl.tsx"
+      ]
+    },
+    {
+      "screenId": "11_dashboard",
+      "dirPath": "frontend/src/screens/11_dashboard",
+      "hasMapping": true,
+      "hasWireframe": true,
+      "hasTsx": true,
+      "isPaired": true,
+      "mapping": {
+        "wireframe_id": "11_dashboard",
+        "wireframe_path": ".claude/wireframes/11_dashboard.xml",
+        "source_component_path": "frontend/src/components/phase3-batch3/DashboardOverview.tsx",
+        "screen_component_path": "frontend/src/screens/11_dashboard/DashboardOverview.tsx",
+        "route": "/kr/dashboard",
+        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "local_wireframe_path": "frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml"
+      },
+      "wireframePath": "11_dashboard/11_dashboard.wireframe.xml",
+      "tsxFiles": [
+        "DashboardOverview.tsx"
+      ]
+    }
+  ]
+}

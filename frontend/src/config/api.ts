@@ -28,6 +28,8 @@ export const API_ENDPOINTS = {
   profile: `${API_BASE_URL}/api/profile`,
   masterStatus: `${API_BASE_URL}/api/user/master-status`,
   analyzeJobFromUrl: `${API_BASE_URL}/api/flows/analyze-job-from-url`,
+  generateApplication: `${API_BASE_URL}/api/workflows/generate-application`,
+  workflowStatus: (id: string) => `${API_BASE_URL}/api/workflows/status/${id}`,
 
   // Health Check
   health: `${API_BASE_URL}/health`,

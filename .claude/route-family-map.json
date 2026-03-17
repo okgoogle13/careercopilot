@@ -1,0 +1,318 @@
+{
+  "artifact": "route_family_map",
+  "generated_at": "2026-03-12",
+  "source_artifacts": [
+    ".claude/plans/frontend-capability-gap-matrix.json",
+    ".claude/plans/route-family-target-state.json",
+    "frontend/analysis/frontend-architecture-report.json"
+  ],
+  "canonical_truth_model": {
+    "design_truth": "frontend/src/screens/**/*.wireframe.xml + paired frontend/src/screens/**/*.tsx",
+    "runtime_truth": "frontend/src/features/** + frontend/src/pages/** reachable from frontend/src/App.tsx",
+    "capability_truth": "mounted backend endpoints and real workflow contracts",
+    "derived_artifacts": "migration-kit JSON wireframes"
+  },
+  "migration_branch_strategy": {
+    "source_branch": "current_branch_tip",
+    "target_branch": "feat/frontend-source-of-truth-migration",
+    "requires_cleanup_ledger": true
+  },
+  "cleanup_categories": [
+    "migration_relevant",
+    "unrelated_user_work",
+    "obsolete_failed_migration_residue"
+  ],
+  "canonical_backend_contracts": {
+    "ingestion": {
+      "canonical": "/api/v1/ingest",
+      "deprecated": [
+        "/api/career/ingest"
+      ],
+      "invalid_or_unmounted": [
+        "/api/ingest/artifacts/upload"
+      ]
+    }
+  },
+  "capability_led_additions": [
+    {
+      "id": "application_detail_management",
+      "owner_family": "applications",
+      "owner_route": "/tracker",
+      "status": "planned"
+    },
+    {
+      "id": "smart_ingestion_flow",
+      "owner_family": "ingestion",
+      "owner_route": "/career/ingest",
+      "status": "planned"
+    },
+    {
+      "id": "voice_profile_management",
+      "owner_family": "account",
+      "owner_route": "/profile",
+      "status": "planned"
+    },
+    {
+      "id": "document_redline_workspace",
+      "owner_family": "documents",
+      "owner_route": "/documents",
+      "status": "planned"
+    },
+    {
+      "id": "resume_audit_history",
+      "owner_family": "analysis",
+      "owner_route": "/analysis",
+      "status": "deferred_until_backend_history_exists"
+    }
+  ],
+  "families": [
+    {
+      "family": "landing",
+      "decision": "merge",
+      "phase": "phase_2_reconcile",
+      "canonical_owner": "/",
+      "runtime_routes": [
+        "/"
+      ],
+      "design_references": [
+        "frontend/src/screens/01_landing/HeroLanding.tsx"
+      ],
+      "capability_dependencies": [],
+      "notes": [
+        "Merge design-reference layout and token patterns into LandingPage.",
+        "Retire /kr/landing from product truth."
+      ]
+    },
+    {
+      "family": "auth-onboarding",
+      "decision": "merge",
+      "phase": "phase_2_reconcile",
+      "canonical_owner": "/login",
+      "runtime_routes": [
+        "/login",
+        "/register",
+        "/onboarding",
+        "/welcome"
+      ],
+      "design_references": [
+        "frontend/src/screens/02_auth/AuthModal.tsx",
+        "frontend/src/components/phase3-batch2/OnboardFlow.tsx"
+      ],
+      "capability_dependencies": [
+        "voice_profile_capture"
+      ],
+      "notes": [
+        "Keep runtime auth/onboarding routes.",
+        "Do not treat /kr/auth or /kr/onboarding as product truth."
+      ]
+    },
+    {
+      "family": "dashboard",
+      "decision": "merge",
+      "phase": "phase_2_reconcile",
+      "canonical_owner": "/dashboard",
+      "runtime_routes": [
+        "/dashboard"
+      ],
+      "design_references": [
+        "frontend/src/screens/11_dashboard/DashboardOverview.tsx"
+      ],
+      "capability_dependencies": [
+        "applications_crud",
+        "smart_ingestion_asset_pipeline"
+      ],
+      "notes": [
+        "Keep Dashboard as runtime truth and backport design-reference patterns."
+      ]
+    },
+    {
+      "family": "analysis",
+      "decision": "expand",
+      "phase": "phase_2_reconcile",
+      "canonical_owner": "/analysis",
+      "runtime_routes": [
+        "/analysis",
+        "/asset-library"
+      ],
+      "design_references": [
+        "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx",
+        "frontend/src/pages/ResumeAuditPage.tsx"
+      ],
+      "capability_dependencies": [
+        "resume_audit",
+        "smart_ingestion_asset_pipeline"
+      ],
+      "notes": [
+        "Expand family to own resume audit and clarify asset-library/smart-ingestion relationship."
+      ]
+    },
+    {
+      "family": "documents",
+      "decision": "expand",
+      "phase": "phase_3_reconcile",
+      "canonical_owner": "/documents",
+      "runtime_routes": [
+        "/documents"
+      ],
+      "design_references": [
+        "frontend/src/screens/08_workbench/DocumentWorkbench.tsx"
+      ],
+      "capability_dependencies": [
+        "documents_redline"
+      ],
+      "notes": [
+        "Keep /documents but decide whether to absorb a review/redline workspace."
+      ]
+    },
+    {
+      "family": "applications",
+      "decision": "expand",
+      "phase": "phase_3_reconcile",
+      "canonical_owner": "/tracker",
+      "runtime_routes": [
+        "/tracker",
+        "/apply/quick"
+      ],
+      "design_references": [
+        "frontend/src/screens/07_kanban/KanbanTracker.tsx",
+        "frontend/src/screens/09_finalization/ApplicationFinalization.tsx"
+      ],
+      "capability_dependencies": [
+        "applications_crud",
+        "workflow_orchestration"
+      ],
+      "notes": [
+        "Tracker is currently mock-backed and must absorb application detail/edit/status flows."
+      ]
+    },
+    {
+      "family": "jobs",
+      "decision": "expand",
+      "phase": "phase_3_reconcile",
+      "canonical_owner": "/opportunities",
+      "runtime_routes": [
+        "/opportunities",
+        "/job-queue"
+      ],
+      "design_references": [
+        "frontend/src/screens/06_lookout/LookoutDiscovery.tsx"
+      ],
+      "capability_dependencies": [
+        "job_listings_workbench"
+      ],
+      "notes": [
+        "Clarify relationship between scouting, queueing, and job-analysis workbench concepts."
+      ]
+    },
+    {
+      "family": "generation",
+      "decision": "keep",
+      "phase": "phase_3_reconcile",
+      "canonical_owner": "/cover-letter-generator",
+      "runtime_routes": [
+        "/ksc-generator",
+        "/cover-letter-generator"
+      ],
+      "design_references": [
+        "frontend/src/screens/08_workbench/DocumentWorkbench.tsx"
+      ],
+      "capability_dependencies": [],
+      "notes": [
+        "Keep generator routes and improve workflow handoff without forcing workbench unification."
+      ]
+    },
+    {
+      "family": "account",
+      "decision": "expand",
+      "phase": "phase_2_reconcile",
+      "canonical_owner": "/profile",
+      "runtime_routes": [
+        "/settings",
+        "/profile"
+      ],
+      "design_references": [
+        "frontend/src/screens/10_settings/SettingsControl.tsx"
+      ],
+      "capability_dependencies": [
+        "voice_profile_capture"
+      ],
+      "notes": [
+        "Profile is the canonical runtime owner for voice profile creation and management."
+      ]
+    },
+    {
+      "family": "ingestion",
+      "decision": "expand",
+      "phase": "phase_2_reconcile",
+      "canonical_owner": "/career/ingest",
+      "runtime_routes": [
+        "/career/ingest"
+      ],
+      "design_references": [
+        "frontend/src/screens/04_ingestion/IngestionFlow.tsx"
+      ],
+      "capability_dependencies": [
+        "smart_ingestion_asset_pipeline",
+        "artifact_upload_contract",
+        "duplicate_ingestion_contracts"
+      ],
+      "canonical_backend_contracts": [
+        "/api/v1/ingest"
+      ],
+      "notes": [
+        "Family must converge on one canonical contract before deeper migration work."
+      ]
+    },
+    {
+      "family": "internal-tools",
+      "decision": "retire",
+      "phase": "phase_4_cleanup",
+      "canonical_owner": "/design-sidekick",
+      "runtime_routes": [
+        "/design-sidekick",
+        "/style-guide",
+        "/test-tokens"
+      ],
+      "design_references": [],
+      "capability_dependencies": [],
+      "notes": [
+        "Treat as non-product routes and quarantine from production architecture."
+      ]
+    },
+    {
+      "family": "landing-prototype",
+      "decision": "retire",
+      "phase": "phase_4_cleanup",
+      "canonical_owner": "/kr/landing",
+      "runtime_routes": [
+        "/kr/landing",
+        "/kr/auth",
+        "/kr/onboarding",
+        "/kr/analysis",
+        "/kr/dashboard"
+      ],
+      "design_references": [
+        "frontend/src/screens/01_landing/HeroLanding.tsx"
+      ],
+      "capability_dependencies": [],
+      "notes": [
+        "All 5 /kr/* prototype routes must be retired as a batch.",
+        "Keep screen components as design-reference material only."
+      ]
+    },
+    {
+      "family": "fallback",
+      "decision": "keep",
+      "phase": "phase_3_reconcile",
+      "canonical_owner": "*",
+      "runtime_routes": [
+        "*"
+      ],
+      "design_references": [],
+      "capability_dependencies": [],
+      "notes": [
+        "Keep as runtime infrastructure."
+      ]
+    }
+  ]
+}

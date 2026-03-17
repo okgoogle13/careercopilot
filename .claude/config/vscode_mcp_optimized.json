@@ -7,39 +7,53 @@
         "/Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py"
       ]
     },
+    "design-system-sidekick": {
+      "type": "stdio",
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
+      "args": [
+        "/Users/okgoogle13/Projects/careercopilot/servers/design_system_sidekick.py"
+      ]
+    },
+    "vision-scorer-mcp": {
+      "type": "stdio",
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
+      "args": [
+        "/Users/okgoogle13/Projects/careercopilot/servers/vision_scorer_mcp.py"
+      ]
+    },
+    "perplexity": {
+      "type": "stdio",
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
+      "args": [
+        "/Users/okgoogle13/Projects/careercopilot/servers/perplexity_server.py"
+      ]
+    },
+    "task-router": {
+      "type": "stdio",
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
+      "args": [
+        "/Users/okgoogle13/Projects/careercopilot/servers/task_router_mcp.py"
+      ]
+    },
+    "filesystem": {
+      "type": "stdio",
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
+      "args": [
+        "/Users/okgoogle13/Projects/careercopilot/servers/filesystem_mcp.py"
+      ]
+    },
+    "git": {
+      "type": "stdio",
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
+      "args": [
+        "/Users/okgoogle13/Projects/careercopilot/servers/git_mcp.py"
+      ]
+    },
     "github": {
       "type": "stdio",
-      "command": "npx",
+      "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
       "args": [
-        "-y",
-        "@modelcontextprotocol/server-github"
-      ],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
-      }
-    },
-    "playwright": {
-      "type": "stdio",
-      "command": "/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-playwright"
-      ]
-    },
-    "docker": {
-      "type": "stdio",
-      "command": "/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/npx",
-      "args": [
-        "-y",
-        "mcp-server-docker"
-      ]
-    },
-    "puppeteer": {
-      "type": "stdio",
-      "command": "/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-puppeteer"
+        "/Users/okgoogle13/Projects/careercopilot/servers/github_mcp.py"
       ]
     },
     "genkit": {

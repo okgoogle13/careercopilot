@@ -2,16 +2,11 @@
 Tests for ksc_generator_expanded.
 """
 
-from typing import Dict
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 from fastapi.testclient import TestClient
-from pydantic import BaseModel
 
-from app.core.genkit_init import get_model
-from app.core.observability import monitor_performance
-from app.core.prompt_service import format_prompt
 from app.genkit_flows.ksc_generator import STAR_Response, generateKscResponse
 
 # Mock user profile data for testing

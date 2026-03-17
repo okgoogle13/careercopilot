@@ -15,7 +15,7 @@
    ```bash
    # Copy the downloaded file to project root
    cp ~/Downloads/your-project-xxxxx.json firebase_credentials.json
-   
+
    # Verify it's in the right place
    ls firebase_credentials.json
    ```
@@ -30,7 +30,7 @@
    ```bash
    # Check storage status
    curl http://localhost:8000/api/ingest/storage/status
-   
+
    # Should show:
    # "mode": "firestore"  ✅
    ```
@@ -93,14 +93,14 @@ This is **OK for development** but **NOT for production**.
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    
+
     // Jobs collection - only authenticated users can read/write their own jobs
     match /jobs/{jobId} {
-      allow read, write: if request.auth != null 
+      allow read, write: if request.auth != null
         && request.auth.uid == resource.data.user_id;
       allow create: if request.auth != null;
     }
-    
+
     // Deny all other access
     match /{document=**} {
       allow read, write: if false;
@@ -199,7 +199,7 @@ from app.services.job_store import get_job_store
 async def test():
     store = get_job_store()
     print(f"Storage mode: {store.get_storage_mode()}")
-    
+
     # Add a test job
     job_id = await store.add_job({
         "title": "Test Job",
@@ -207,17 +207,17 @@ async def test():
         "url": "https://example.com",
         "status": "pending_analysis"
     })
-    
+
     print(f"✓ Job added: {job_id}")
-    
+
     # Retrieve it
     job = await store.get_job(job_id)
     print(f"✓ Job retrieved: {job['title']}")
-    
+
     # Update it
     await store.update_job(job_id, {"title": "Updated Job"})
     print("✓ Job updated")
-    
+
     # Get all jobs
     all_jobs = await store.get_all_jobs()
     print(f"✓ Total jobs: {len(all_jobs)}")

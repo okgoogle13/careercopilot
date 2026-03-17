@@ -18,10 +18,10 @@ MOVES = {
     "frontend": "apps/frontend",
     "backend": "apps/backend",
     "functions": "apps/functions",
-    
+
     # Libs
     "src/components": "libs/legacy-ui",
-    
+
     # Tools
     "servers": "tools/mcp-servers",
     # "tools": "tools/admin"  -- Handled specially to avoid self-move
@@ -73,18 +73,18 @@ def safe_move(src: Path, dest: Path):
 def categorize_root_files():
     """Moves files from root based on patterns."""
     processed_files = set()
-    
+
     # Sort patterns by specificity (longer pattern -> more specific, generally)
     # This helps ensure setup_*.py is matched before *.py
     sorted_patterns = sorted(ROOT_PATTERNS.keys(), key=lambda x: len(x), reverse=True)
-    
+
     for pattern in sorted_patterns:
         dest_folder = ROOT_PATTERNS[pattern]
         files = list(ROOT_DIR.glob(pattern))
         for file_path in files:
             if file_path.name == "refactor_monorepo.py":
                 continue # Don't move self
-            
+
             if file_path in processed_files:
                 continue
 
@@ -94,18 +94,18 @@ def categorize_root_files():
 
             target_dir = ROOT_DIR / dest_folder
             target_path = target_dir / file_path.name
-            
+
             safe_move(file_path, target_path)
             processed_files.add(file_path)
 
 def main():
     global DRY_RUN
-    
+
     print("="*50)
     print("CAREERCOPILOT MONOREPO REFACTOR")
     print("="*50)
     print(f"Root: {ROOT_DIR}")
-    
+
     if "--execute" in sys.argv:
         DRY_RUN = False
         print("!! EXECUTION MODE !!")
@@ -154,7 +154,7 @@ def main():
                 log(f"[DRY RUN] Will create {admin_dir}")
             else:
                 admin_dir.mkdir(parents=True, exist_ok=True)
-        
+
         reserved = {"admin", "scripts", "mcp-servers", ".DS_Store"}
         # Iterate over original items in tools (some might be new dirs now)
         # We need to be careful not to move newly created dirs
@@ -165,7 +165,7 @@ def main():
             # If it's one of the new dirs created in step 1, skip
             if item.name in ["scripts", "mcp-servers"]:
                 continue
-                
+
             dest_item = admin_dir / item.name
             safe_move(item, dest_item)
 

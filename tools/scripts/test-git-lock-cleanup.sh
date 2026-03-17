@@ -63,15 +63,15 @@ touch "$TEST_LOCK"
 
 if [ -f "$TEST_LOCK" ]; then
     echo "  Created test lock file"
-    
+
     OUTPUT=$("$CLEANUP_SCRIPT" --force 2>&1)
-    
+
     if echo "$OUTPUT" | grep -q "Found 1 lock file"; then
         echo -e "${GREEN}✓ PASS: Lock file detected${NC}"
     else
         echo -e "${YELLOW}⚠ WARN: Lock file detection may have issues${NC}"
     fi
-    
+
     # Verify cleanup
     if [ ! -f "$TEST_LOCK" ]; then
         echo -e "${GREEN}✓ PASS: Lock file cleaned up${NC}"

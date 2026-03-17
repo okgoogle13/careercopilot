@@ -30,32 +30,32 @@ echo ""
 echo "📋 Step 2: Checking M3 utility classes..."
 if [ -f "src/index.css" ]; then
     utilities_count=0
-    
+
     if grep -q "shadow-elevation-1" src/index.css; then
         echo -e "${GREEN}✓${NC} Elevation utilities found"
         ((utilities_count++))
     fi
-    
+
     if grep -q "rounded-pebble" src/index.css; then
         echo -e "${GREEN}✓${NC} [DEPRECATED_STYLE] shape utilities found"
         ((utilities_count++))
     fi
-    
+
     if grep -q "ease-spring" src/index.css; then
         echo -e "${GREEN}✓${NC} Motion easing utilities found"
         ((utilities_count++))
     fi
-    
+
     if grep -q "text-headline-large" src/index.css; then
         echo -e "${GREEN}✓${NC} Typography utilities found"
         ((utilities_count++))
     fi
-    
+
     if grep -q "p-space-xl" src/index.css; then
         echo -e "${GREEN}✓${NC} Spacing utilities found"
         ((utilities_count++))
     fi
-    
+
     echo -e "${GREEN}$utilities_count/5${NC} M3 utility categories implemented"
 else
     echo -e "${RED}✗${NC} index.css not found"
@@ -70,13 +70,13 @@ if [ -f "src/components/shared/ApplicationCard.tsx" ]; then
     else
         echo -e "${YELLOW}⚠${NC} ApplicationCard still using generic rounded corners"
     fi
-    
+
     if grep -q "p-space-xl" src/components/shared/ApplicationCard.tsx; then
         echo -e "${GREEN}✓${NC} ApplicationCard uses M3 spacing"
     else
         echo -e "${YELLOW}⚠${NC} ApplicationCard still using ad-hoc padding"
     fi
-    
+
     if grep -q "M3 Compliant" src/components/shared/ApplicationCard.tsx; then
         echo -e "${GREEN}✓${NC} ApplicationCard has JSDoc documentation"
     else

@@ -1,11 +1,9 @@
-import os
 from unittest.mock import MagicMock, patch
 
 import pytest
-from fastapi import HTTPException, Request, status
+from fastapi import HTTPException, Request
 from firebase_admin import auth
 
-from app.core import security
 from app.core.security import (
     AuthenticationError,
     create_access_token,

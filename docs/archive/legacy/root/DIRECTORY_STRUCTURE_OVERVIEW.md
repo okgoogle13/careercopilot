@@ -2,8 +2,8 @@
 
 **Purpose:** High-level overview of the CareerCopilot repository structure showing only directories (excluding files and non-essential directories).
 
-**Generated:** 2025-11-29  
-**Method:** `tree -d -I '.git|node_modules|dist|build|venv|.ai_reports|coverage'`  
+**Generated:** 2025-11-29
+**Method:** `tree -d -I '.git|node_modules|dist|build|venv|.ai_reports|coverage'`
 **Total Directories:** 548
 
 ---

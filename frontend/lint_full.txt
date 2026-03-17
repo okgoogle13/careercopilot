@@ -31,4 +31,3 @@ Warning: React version not specified in eslint-plugin-react settings. See https:
   87:7  warning  'responseText' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
 
 ✖ 14 problems (1 error, 13 warnings)
-

@@ -1,6 +1,6 @@
 # MCP Configuration — Architecture & Single Source of Truth
 
-**Last Updated:** 2026-03-03  
+**Last Updated:** 2026-03-03
 **Status:** ✅ Consolidated to `.vscode/mcp.json`
 
 ---
@@ -31,7 +31,7 @@ not support JSONC. The set of `mcpServers` entries must match `.vscode/mcp.json`
 
 Previously, there were multiple config files (`claude_desktop_config.json`,
 `~/.gemini/antigravity/mcp_config.json`, `tools/config/mcp.json`) that drifted out of sync
-over time, causing servers to appear in one client but not another.  
+over time, causing servers to appear in one client but not another.
 The single-source model eliminates this drift.
 
 ---

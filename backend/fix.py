@@ -1,6 +1,6 @@
 import re
 
-with open('app/core/document_export_service.py', 'r') as f:
+with open("app/core/document_export_service.py") as f:
     text = f.read()
 
 prefix = """# backend/app/core/document_export_service.py
@@ -49,28 +49,39 @@ class DocumentExportService:
         user_id: str,
         job_title: str,"""
 
-text = re.sub(r'# backend/app/core/document_export_service.py.*?cloud_storage_client', prefix, text, flags=re.DOTALL)
+text = re.sub(
+    r"# backend/app/core/document_export_service.py.*?cloud_storage_client",
+    prefix,
+    text,
+    flags=re.DOTALL,
+)
 
 replace2 = """    async def export_resume(
         self,
         content: dict[str, Any] | str,
         user_id: str,
         job_title: str,"""
-text = re.sub(r'        content: dict\[str, Any\],\s+user_id: str,\s+job_title: str,', replace2, text)
+text = re.sub(
+    r"        content: dict\[str, Any\],\s+user_id: str,\s+job_title: str,", replace2, text
+)
 
 replace3 = """    async def export_ksc_response(
         self,
         response_data: dict[str, Any] | list[Any],
         user_id: str,
         job_title: str,"""
-text = re.sub(r'        response_data: dict\[str, Any\],\s+user_id: str,\s+job_title: str,', replace3, text)
+text = re.sub(
+    r"        response_data: dict\[str, Any\],\s+user_id: str,\s+job_title: str,", replace3, text
+)
 
 replace4 = """    async def export_application_package(
         self,
         package_data: dict[str, Any],
         user_id: str,
         job_id: str,"""
-text = re.sub(r'        package_data: dict\[str, Any\],\s+user_id: str,\s+job_id: str,', replace4, text)
+text = re.sub(
+    r"        package_data: dict\[str, Any\],\s+user_id: str,\s+job_id: str,", replace4, text
+)
 
-with open('app/core/document_export_service.py', 'w') as f:
+with open("app/core/document_export_service.py", "w") as f:
     f.write(text)

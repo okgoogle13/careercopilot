@@ -12,7 +12,7 @@ Extract, analyze, de-duplicate, merge, and structure the information from ALL pr
 
 4.  **DEEP STAR CRITIQUE & VALIDATION**:
     For every KSC Response, perform a "High-Impact Audit". Set 'Needs_Review_Flag' to true if any of the following are detected:
-    
+
     - **Vague Language Audit**: Check for "fluff" words like "assisted," "involved in," "handled," or "helped with." Replace with power verbs like "orchestrated," "standardized," "mitigated," or "pioneered."
     - **Quantification Gap**: If the 'Result' lacks numbers, percentages, dollar amounts, or timeframes (e.g., "improved efficiency" vs. "reduced processing time by 30%"), flag it.
     - **Detail Deficiency**:
@@ -25,8 +25,8 @@ Extract, analyze, de-duplicate, merge, and structure the information from ALL pr
     - **Improvement_Suggestions**: Provide draft rewrites that include placeholders (e.g., "[Insert Number here]") to show the user exactly where they need to provide more data to reach a 10/10 rating.
 
 5.  **Achievement Optimization**:
-    For EVERY Structured Achievement, provide an "Improvement_Suggestions" object. 
-    Analyze the original text and provide the strongest possible version for the Action Verb, Noun/Task, Metric, Strategy, and Outcome. 
+    For EVERY Structured Achievement, provide an "Improvement_Suggestions" object.
+    Analyze the original text and provide the strongest possible version for the Action Verb, Noun/Task, Metric, Strategy, and Outcome.
     If the metric is missing in the original, suggest a realistic placeholder.
 
 6.  **Subtype Tagging**: Apply relevant tags aligned with Australian Community Services best practices (e.g., NDIS, Trauma-Informed, Strengths-Based).

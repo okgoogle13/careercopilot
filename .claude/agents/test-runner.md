@@ -60,7 +60,7 @@ pytest backend/app/tests/ -v          # From root
 pytest backend/app/tests/test_file.py
 
 # With coverage
-pytest backend/app/tests/ --cov
+pytest backend/app/tests/ --cov=app
 ```
 
 ### Functions Tests (Node)
@@ -79,6 +79,22 @@ npm test -- test_name
 npm run test:all                       # Runs frontend + functions + backend + e2e
 ```
 
+### Migration & Token Compliance
+
+```bash
+# Token Hygiene Check
+.claude/skills/token-enforcement/scripts/run-token-enforcement.sh [route_id]
+
+# Full Migration Audit (includes tokens + vision + benchmarks)
+.claude/skills/migration-audit/scripts/run-migration-audit.sh [route_id]
+```
+
+#### Gate Integration Notes
+
+- **Token enforcement** is the first structural gate for any migrated route or component. Always run `.claude/skills/token-enforcement/scripts/run-token-enforcement.sh` as soon as the code touches route-scoped files; capture its JSON output (status, violations, re-check command) and include it in failure reports. A `fail` status is a blocker—note the violating files, fix the tokens/archetypes, and re-run the exact command before declaring the change ready.
+- **Migration audit** follows token enforcement for UI changes. After token hygiene passes, run `.claude/skills/migration-audit/scripts/run-migration-audit.sh [route_id]` to produce the pass/needs_refinement/fail report and proof artifacts. If the audit flags `needs_refinement`, preserve the evidence paths (screenshots, contracts) and record the recommended follow-up commands in the failure report so reviewers can act on the blockers.
+- **Hand-off expectations**: When reporting success, attach both the token audit output and the migration audit JSON (or mention the section of the report) so downstream reviewers can trace compliance. When you rerun either gate (because code changed), rerun the other to keep the pipeline consistent.
+
 ## Intelligent Test Selection
 
 ### When files change, run these tests:
@@ -87,6 +103,7 @@ npm run test:all                       # Runs frontend + functions + backend + e
 | -------------------------------------- | --------------------------- | ------------------- |
 | `frontend/src/components/**/*.tsx`     | `yarn test [ComponentName]` | Component tests     |
 | `frontend/src/**/*.ts` (non-component) | `yarn test --onlyChanged`   | Changed test files  |
+| `frontend/src/**/*.tsx`                | `.claude/skills/token-enforcement/scripts/run-token-enforcement.sh` | Token hygiene |
 | `frontend/tests/**/*.spec.js`          | `yarn test:e2e`             | E2E tests           |
 | `backend/app/**/*.py`                  | `pytest backend/app/tests/` | Backend tests       |
 | `functions/src/**/*.ts`                | `npm run test:functions`    | Functions tests     |
@@ -243,8 +260,9 @@ New Status:
 
 1. ✅ All unit tests pass (yarn test)
 2. ✅ E2E tests pass (yarn test:e2e)
-3. ✅ No console errors/warnings
-4. ✅ Coverage hasn't decreased
+3. ✅ Token compliance pass (.claude/skills/token-enforcement/scripts/run-token-enforcement.sh [route_id])
+4. ✅ No console errors/warnings
+5. ✅ Coverage hasn't decreased
 
 **Before deployment:**
 
@@ -272,8 +290,11 @@ New Status:
 - Jest config: `frontend/jest.config.mjs`
 - E2E config: `frontend/playwright.config.ts`
 - Test setup: `frontend/src/setupTests.ts`
-- Quick reference: `.ai_reports/TEST_QUICK_REFERENCE.md`
-- Complete guide: `.ai_reports/TEST_RUNNER_GUIDE.md`
+
+## Complementary Skills
+
+- **token-enforcement** (`.claude/skills/token-enforcement/SKILL.md`) – the structural gate that flags banned tokens/archetypes; its JSON report is required evidence whenever `test-runner` reports on migrated UI work.
+- **migration-audit** (`.claude/skills/migration-audit/SKILL.md`) – the higher-level audit that wraps token enforcement, benchmarks, and visual checks; include its follow-up commands and pass/needs_refinement/fail status in failures to keep the workflow traceable.
 
 ---
 

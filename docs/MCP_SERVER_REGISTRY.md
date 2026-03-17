@@ -1,6 +1,6 @@
 # MCP Server Registry
 
-**Last Updated:** 2026-03-03  
+**Last Updated:** 2026-03-03
 **Source of Truth Config:** `.vscode/mcp.json`
 
 ---
@@ -129,13 +129,13 @@
 | Field | Value |
 |---|---|
 | **Purpose** | Read/write access to the project directory |
-| **Package** | `@modelcontextprotocol/server-filesystem@0.6.2` (npm, pinned) |
+| **Implementation** | `servers/filesystem_mcp.py` (FastMCP, workspace-scoped) |
+| **Optional npm** | `@modelcontextprotocol/server-filesystem@0.6.2` (pinned) |
 | **Required env** | None |
 | **Status** | ✅ Active |
 
-> **Security note:** The npm package is pinned to a specific, audited version. Bump it
-> intentionally after reviewing the changelog. Do not use unversioned `npx` invocations,
-> which would silently execute the latest release on every run.
+> If npm-based servers are available in your environment, prefer the pinned npm server
+> for maximum compatibility; see the commented block in `.vscode/mcp.json`.
 
 ---
 
@@ -144,7 +144,8 @@
 | Field | Value |
 |---|---|
 | **Purpose** | Git repository operations (log, diff, blame, etc.) |
-| **Package** | `@modelcontextprotocol/server-git@0.6.2` (npm, pinned) |
+| **Implementation** | `servers/git_mcp.py` (FastMCP; subprocess `git`) |
+| **Optional npm** | `@modelcontextprotocol/server-git@0.6.2` (pinned) |
 | **Required env** | None |
 | **Status** | ✅ Active |
 
@@ -155,7 +156,8 @@
 | Field | Value |
 |---|---|
 | **Purpose** | GitHub API — issues, PRs, releases, search |
-| **Package** | `@modelcontextprotocol/server-github@0.6.2` (npm, pinned) |
+| **Implementation** | `servers/github_mcp.py` (FastMCP; REST + GraphQL) |
+| **Optional npm** | `@modelcontextprotocol/server-github@0.6.2` (pinned) |
 | **Required env** | `GITHUB_TOKEN` |
 | **Status** | ✅ Active |
 

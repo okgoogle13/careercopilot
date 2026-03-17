@@ -2,7 +2,7 @@ import asyncio
 import inspect
 import json
 from collections.abc import Coroutine
-from typing import Any, List, Optional, cast
+from typing import Any, cast
 
 from pydantic import BaseModel, Field
 
@@ -16,7 +16,7 @@ class CorporateProfile(BaseModel):
 
     name: str = Field(description="The canonical name of the company.")
     mission_statement: str = Field(description="Inferred or explicit mission statement.")
-    core_values: List[str] = Field(description="List of core values or cultural pillars.")
+    core_values: list[str] = Field(description="List of core values or cultural pillars.")
     strategic_focus: str = Field(description="Current strategic focus or key business objectives.")
     communication_style: str = Field(
         description="The tone and style of their communication (e.g., 'Formal', 'Disruptive', 'Academic')."

@@ -7,7 +7,7 @@ falling back to local environment variables during development.
 
 import logging
 import os
-from typing import Any, Dict, Optional, Tuple, cast
+from typing import Any, cast
 
 from pydantic import validator
 
@@ -30,9 +30,9 @@ except ImportError:  # pragma: no cover - local fallback
 
     def get_secret(
         secret_id: str,
-        project_id: Optional[str] = None,
+        project_id: str | None = None,
         version: str = "latest",
-        default: Optional[str] = None,
+        default: str | None = None,
     ) -> str:
         _ = (project_id, version)
         value = os.getenv(secret_id) or os.getenv(secret_id.upper().replace("-", "_"))
@@ -61,7 +61,7 @@ class SecureSettings(BaseSettings):
 
     # Database
     DATABASE_URL: str = "sqlite:///data/careercopilot-dev.db"
-    DB_PASSWORD: Optional[str] = None
+    DB_PASSWORD: str | None = None
     DB_HOST: str = "localhost"
     DB_PORT: int = 5432
     DB_NAME: str = "careercopilot"
@@ -77,30 +77,30 @@ class SecureSettings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440
 
     # Firebase
-    FIREBASE_PROJECT_ID: Optional[str] = None
+    FIREBASE_PROJECT_ID: str | None = None
     FIREBASE_STORAGE_BUCKET: str = ""
     FIREBASE_DATABASE_URL: str = ""
-    FIREBASE_AUTH_EMULATOR_HOST: Optional[str] = None
-    FIREBASE_STORAGE_EMULATOR_HOST: Optional[str] = None
-    FIREBASE_DATABASE_EMULATOR_HOST: Optional[str] = None
+    FIREBASE_AUTH_EMULATOR_HOST: str | None = None
+    FIREBASE_STORAGE_EMULATOR_HOST: str | None = None
+    FIREBASE_DATABASE_EMULATOR_HOST: str | None = None
     FIREBASE_EMULATOR: bool = False
-    FIREBASE_CREDENTIALS_JSON: Optional[str] = None
+    FIREBASE_CREDENTIALS_JSON: str | None = None
 
     # Google Cloud
-    GOOGLE_CLOUD_PROJECT: Optional[str] = None
-    GCP_PROJECT_ID: Optional[str] = None
-    GOOGLE_APPLICATION_CREDENTIALS: Optional[str] = None
-    GOOGLE_APPLICATION_CREDENTIALS_JSON: Optional[str] = None
+    GOOGLE_CLOUD_PROJECT: str | None = None
+    GCP_PROJECT_ID: str | None = None
+    GOOGLE_APPLICATION_CREDENTIALS: str | None = None
+    GOOGLE_APPLICATION_CREDENTIALS_JSON: str | None = None
 
     # AI Services
-    GEMINI_API_KEY: Optional[str] = None
-    ANTHROPIC_API_KEY: Optional[str] = None
+    GEMINI_API_KEY: str | None = None
+    ANTHROPIC_API_KEY: str | None = None
 
     # Email
-    AWS_ACCESS_KEY_ID: Optional[str] = None
-    AWS_SECRET_ACCESS_KEY: Optional[str] = None
+    AWS_ACCESS_KEY_ID: str | None = None
+    AWS_SECRET_ACCESS_KEY: str | None = None
     AWS_REGION: str = "us-east-1"
-    SES_SENDER_EMAIL: Optional[str] = None
+    SES_SENDER_EMAIL: str | None = None
 
     # Performance
     MAX_WORKERS: int = 2
@@ -165,9 +165,9 @@ class SecureSettings(BaseSettings):
     @validator("FIREBASE_CREDENTIALS_JSON", pre=True)
     def validate_firebase_creds(
         cls,
-        value: Optional[str],
-        values: Dict[str, Any],
-    ) -> Optional[str]:
+        value: str | None,
+        values: dict[str, Any],
+    ) -> str | None:
         """Allow ADC fallback when the project matches and explicit JSON is absent."""
         if not value and values.get("FIREBASE_PROJECT_ID"):
             try:
@@ -192,18 +192,18 @@ class SecureSettings(BaseSettings):
             init_settings: Any,
             env_settings: Any,
             file_secret_settings: Any,
-        ) -> Tuple[Any, Dict[str, str], Any]:
+        ) -> tuple[Any, dict[str, str], Any]:
             """Load values from init, environment, then file secrets."""
             if not SECRET_MANAGER_AVAILABLE:
                 return (
                     init_settings,
-                    cast(Dict[str, str], env_settings()),
+                    cast(dict[str, str], env_settings()),
                     file_secret_settings,
                 )
 
-            settings: Dict[str, str] = {
+            settings: dict[str, str] = {
                 **os.environ,
-                **cast(Dict[str, str], env_settings()),
+                **cast(dict[str, str], env_settings()),
             }
             return (
                 init_settings,

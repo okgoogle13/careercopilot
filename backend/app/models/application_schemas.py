@@ -33,7 +33,9 @@ class Contact(BaseModel):
 class InterviewSchedule(BaseModel):
     model_config = {"populate_by_name": True, "from_attributes": True}
     interview_date: datetime = Field(..., alias="interviewDate")
-    interview_type: Literal["phone", "video", "onsite", "take-home"] = Field(..., alias="interviewType")
+    interview_type: Literal["phone", "video", "onsite", "take-home"] = Field(
+        ..., alias="interviewType"
+    )
     interviewer_names: list[str] = Field(default_factory=list, alias="interviewerNames")
     notes: str | None = None
 
@@ -52,6 +54,24 @@ class ApplicationCreate(BaseModel):
     deadline: datetime | None = None
     documents: DocumentReferences | None = None
     application_metadata: dict[str, Any] = Field(default_factory=dict)
+
+
+class ApplicationUpdate(BaseModel):
+    model_config = {"populate_by_name": True, "from_attributes": True}
+    job_title: str | None = Field(None, alias="jobTitle", min_length=1)
+    company_name: str | None = Field(None, alias="companyName", min_length=1)
+    job_description: str | None = Field(None, alias="jobDescription", min_length=50)
+    deadline: datetime | None = None
+    documents: DocumentReferences | None = None
+    status: ApplicationStatus | None = None
+    applied_date: datetime | None = Field(None, alias="appliedDate")
+    contacts: list[Contact] | None = None
+    interviews: list[InterviewSchedule] | None = None
+    notes: str | None = None
+    rating: int | None = Field(None, ge=1, le=5)
+    salary: SalaryRange | None = None
+    integrations: dict[str, str] | None = None
+    application_metadata: dict[str, Any] | None = Field(None, alias="applicationMetadata")
 
 
 class ApplicationResponse(BaseModel):

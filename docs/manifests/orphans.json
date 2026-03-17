@@ -1,0 +1,66 @@
+{
+  "generatedAt": "2026-03-17T16:29:21.687Z",
+  "orphanedFeatures": [
+    "KrDark",
+    "design-sidekick",
+    "editor",
+    "gallery",
+    "sandbox",
+    "style-guide"
+  ],
+  "orphanedPages": [
+    "Dashboard.tsx",
+    "IngestionPage.tsx",
+    "ResumeAuditPage.tsx"
+  ],
+  "unroutedScreens": [
+    "01_landing",
+    "02_auth",
+    "03_onboarding",
+    "04_ingestion",
+    "05_analysis",
+    "06_lookout",
+    "07_kanban",
+    "08_workbench",
+    "09_finalization",
+    "10_settings",
+    "11_dashboard"
+  ],
+  "nonFeatureRoutes": [
+    {
+      "path": "/auth",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/dashboard-overview",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/kanban",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/ingestion",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/feed",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/studio",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/editor",
+      "source": "react-router-dom"
+    }
+  ],
+  "summary": {
+    "totalOrphans": 27,
+    "featureOrphans": 6,
+    "pageOrphans": 3,
+    "screenOrphans": 11,
+    "nonFeatureRoutes": 7
+  }
+}

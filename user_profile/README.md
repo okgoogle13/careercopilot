@@ -26,8 +26,8 @@ Your resume should include:
 ```markdown
 # [Your Name]
 
-**Email:** your.email@example.com  
-**Phone:** +61 XXX XXX XXX  
+**Email:** your.email@example.com
+**Phone:** +61 XXX XXX XXX
 **LinkedIn:** linkedin.com/in/yourprofile
 
 ## Professional Summary
@@ -50,7 +50,7 @@ Your resume should include:
 
 ## Education
 
-**[Degree]** | [University Name]  
+**[Degree]** | [University Name]
 *Graduated: [Year]*
 
 ## Skills

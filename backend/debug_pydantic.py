@@ -1,6 +1,7 @@
 from datetime import datetime
-from typing import Any
+
 from pydantic import ValidationError
+
 from app.models.application_schemas import ApplicationResponse
 
 data = {
@@ -12,7 +13,7 @@ data = {
     "status": "draft",
     "source": "manual",
     "created_at": datetime.now(),
-    "updated_at": datetime.now()
+    "updated_at": datetime.now(),
 }
 
 try:

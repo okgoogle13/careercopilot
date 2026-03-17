@@ -32,7 +32,7 @@ find "$TARGET_DIR" -type f \( -name "* 2.*" -o -name "* 2" \) \
     -not -path "*/node_modules/*" \
     -not -path "*/.venv/*" \
     -print0 | while IFS= read -r -d '' file; do
-    
+
     if [ "$DRY_RUN" = true ]; then
         echo "[DRY-RUN] Would delete: $file"
     else

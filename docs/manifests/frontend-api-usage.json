@@ -1,0 +1,943 @@
+{
+  "generatedAt": "2026-03-15T05:18:49.784Z",
+  "totalCalls": 98,
+  "uniqueEndpoints": 69,
+  "filesScanned": 22,
+  "calls": [
+    {
+      "method": "POST",
+      "pathPattern": "/ats-score",
+      "sourceFile": "analysisService.ts",
+      "lineNumber": 74
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/analyze-document",
+      "sourceFile": "analysisService.ts",
+      "lineNumber": 90
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/optimize-content",
+      "sourceFile": "analysisService.ts",
+      "lineNumber": 108
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/resume-intelligence",
+      "sourceFile": "analysisService.ts",
+      "lineNumber": 124
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/keywords",
+      "sourceFile": "analysisService.ts",
+      "lineNumber": 146
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/dashboard",
+      "sourceFile": "analyticsService.ts",
+      "lineNumber": 88
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/trends",
+      "sourceFile": "analyticsService.ts",
+      "lineNumber": 103
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/competitive-analysis",
+      "sourceFile": "analyticsService.ts",
+      "lineNumber": 118
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/metrics",
+      "sourceFile": "analyticsService.ts",
+      "lineNumber": 133
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/applications",
+      "sourceFile": "analyticsService.ts",
+      "lineNumber": 155
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/success-rate",
+      "sourceFile": "analyticsService.ts",
+      "lineNumber": 178
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/",
+      "sourceFile": "applicationService.ts",
+      "lineNumber": 113
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/",
+      "sourceFile": "applicationService.ts",
+      "lineNumber": 129
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/:param",
+      "sourceFile": "applicationService.ts",
+      "lineNumber": 144
+    },
+    {
+      "method": "PUT",
+      "pathPattern": "/:param",
+      "sourceFile": "applicationService.ts",
+      "lineNumber": 157
+    },
+    {
+      "method": "DELETE",
+      "pathPattern": "/:param",
+      "sourceFile": "applicationService.ts",
+      "lineNumber": 170
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/bulk-update",
+      "sourceFile": "applicationService.ts",
+      "lineNumber": 186
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/:param/contacts",
+      "sourceFile": "applicationService.ts",
+      "lineNumber": 202
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/:param/interviews",
+      "sourceFile": "applicationService.ts",
+      "lineNumber": 218
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/",
+      "sourceFile": "applicationService.ts",
+      "lineNumber": 231
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/export",
+      "sourceFile": "applicationService.ts",
+      "lineNumber": 246
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/auth/login",
+      "sourceFile": "authService.ts",
+      "lineNumber": 18
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/auth/register",
+      "sourceFile": "authService.ts",
+      "lineNumber": 32
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/auth/logout",
+      "sourceFile": "authService.ts",
+      "lineNumber": 46
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/auth/me",
+      "sourceFile": "authService.ts",
+      "lineNumber": 54
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/",
+      "sourceFile": "calendarService.ts",
+      "lineNumber": 63
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/",
+      "sourceFile": "calendarService.ts",
+      "lineNumber": 76
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/:param",
+      "sourceFile": "calendarService.ts",
+      "lineNumber": 91
+    },
+    {
+      "method": "PUT",
+      "pathPattern": "/:param",
+      "sourceFile": "calendarService.ts",
+      "lineNumber": 104
+    },
+    {
+      "method": "DELETE",
+      "pathPattern": "/:param",
+      "sourceFile": "calendarService.ts",
+      "lineNumber": 117
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/sync-deadlines",
+      "sourceFile": "calendarService.ts",
+      "lineNumber": 130
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/upcoming",
+      "sourceFile": "calendarService.ts",
+      "lineNumber": 143
+    },
+    {
+      "method": "PUT",
+      "pathPattern": "/:param/complete",
+      "sourceFile": "calendarService.ts",
+      "lineNumber": 158
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/",
+      "sourceFile": "documentCRUDService.ts",
+      "lineNumber": 77
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/:param",
+      "sourceFile": "documentCRUDService.ts",
+      "lineNumber": 92
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/",
+      "sourceFile": "documentCRUDService.ts",
+      "lineNumber": 105
+    },
+    {
+      "method": "PUT",
+      "pathPattern": "/:param",
+      "sourceFile": "documentCRUDService.ts",
+      "lineNumber": 120
+    },
+    {
+      "method": "DELETE",
+      "pathPattern": "/:param",
+      "sourceFile": "documentCRUDService.ts",
+      "lineNumber": 133
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/:param/versions",
+      "sourceFile": "documentCRUDService.ts",
+      "lineNumber": 146
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/:param/versions",
+      "sourceFile": "documentCRUDService.ts",
+      "lineNumber": 159
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/:param/versions/:param/restore",
+      "sourceFile": "documentCRUDService.ts",
+      "lineNumber": 172
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/:param/download",
+      "sourceFile": "documentCRUDService.ts",
+      "lineNumber": 188
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/:param/duplicate",
+      "sourceFile": "documentCRUDService.ts",
+      "lineNumber": 204
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/generate-cover-letter",
+      "sourceFile": "documentService.ts",
+      "lineNumber": 75
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/generate-tailored-resume",
+      "sourceFile": "documentService.ts",
+      "lineNumber": 88
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/optimize-content",
+      "sourceFile": "documentService.ts",
+      "lineNumber": 101
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/generate-ksc-response",
+      "sourceFile": "documentService.ts",
+      "lineNumber": 127
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/:param/download",
+      "sourceFile": "documentService.ts",
+      "lineNumber": 140
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/connect-gmail",
+      "sourceFile": "emailService.ts",
+      "lineNumber": 64
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/disconnect",
+      "sourceFile": "emailService.ts",
+      "lineNumber": 77
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/scan-inbox",
+      "sourceFile": "emailService.ts",
+      "lineNumber": 92
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/opportunities",
+      "sourceFile": "emailService.ts",
+      "lineNumber": 107
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/status",
+      "sourceFile": "emailService.ts",
+      "lineNumber": 122
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/setup-monitoring",
+      "sourceFile": "emailService.ts",
+      "lineNumber": 140
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/api/ingestion/upload-and-tag",
+      "sourceFile": "ingestion.service.ts",
+      "lineNumber": 56
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/api/ingestion/extract-and-save",
+      "sourceFile": "ingestion.service.ts",
+      "lineNumber": 106
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/extract-from-url",
+      "sourceFile": "jobService.ts",
+      "lineNumber": 84
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/extract-from-text",
+      "sourceFile": "jobService.ts",
+      "lineNumber": 97
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/advanced-analysis",
+      "sourceFile": "jobService.ts",
+      "lineNumber": 110
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/matching",
+      "sourceFile": "jobService.ts",
+      "lineNumber": 123
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/opportunities",
+      "sourceFile": "jobService.ts",
+      "lineNumber": 139
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/opportunities/:param",
+      "sourceFile": "jobService.ts",
+      "lineNumber": 154
+    },
+    {
+      "method": "DELETE",
+      "pathPattern": "/opportunities/:param",
+      "sourceFile": "jobService.ts",
+      "lineNumber": 167
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/",
+      "sourceFile": "notificationService.ts",
+      "lineNumber": 60
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/unread-count",
+      "sourceFile": "notificationService.ts",
+      "lineNumber": 75
+    },
+    {
+      "method": "PUT",
+      "pathPattern": "/:param/read",
+      "sourceFile": "notificationService.ts",
+      "lineNumber": 88
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/mark-all-read",
+      "sourceFile": "notificationService.ts",
+      "lineNumber": 101
+    },
+    {
+      "method": "DELETE",
+      "pathPattern": "/:param",
+      "sourceFile": "notificationService.ts",
+      "lineNumber": 114
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/preferences",
+      "sourceFile": "notificationService.ts",
+      "lineNumber": 127
+    },
+    {
+      "method": "PUT",
+      "pathPattern": "/preferences",
+      "sourceFile": "notificationService.ts",
+      "lineNumber": 145
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/push-subscribe",
+      "sourceFile": "notificationService.ts",
+      "lineNumber": 161
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/",
+      "sourceFile": "profileService.ts",
+      "lineNumber": 64
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/",
+      "sourceFile": "profileService.ts",
+      "lineNumber": 77
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/:param",
+      "sourceFile": "profileService.ts",
+      "lineNumber": 92
+    },
+    {
+      "method": "PUT",
+      "pathPattern": "/:param",
+      "sourceFile": "profileService.ts",
+      "lineNumber": 105
+    },
+    {
+      "method": "DELETE",
+      "pathPattern": "/:param",
+      "sourceFile": "profileService.ts",
+      "lineNumber": 118
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/:param/duplicate",
+      "sourceFile": "profileService.ts",
+      "lineNumber": 131
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/",
+      "sourceFile": "settingsService.ts",
+      "lineNumber": 61
+    },
+    {
+      "method": "PUT",
+      "pathPattern": "/",
+      "sourceFile": "settingsService.ts",
+      "lineNumber": 76
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/api-keys",
+      "sourceFile": "settingsService.ts",
+      "lineNumber": 95
+    },
+    {
+      "method": "DELETE",
+      "pathPattern": "/api-keys/:param",
+      "sourceFile": "settingsService.ts",
+      "lineNumber": 111
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/api-keys/:param/test",
+      "sourceFile": "settingsService.ts",
+      "lineNumber": 124
+    },
+    {
+      "method": "PUT",
+      "pathPattern": "/integrations",
+      "sourceFile": "settingsService.ts",
+      "lineNumber": 140
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/export",
+      "sourceFile": "settingsService.ts",
+      "lineNumber": 156
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/delete-account",
+      "sourceFile": "settingsService.ts",
+      "lineNumber": 171
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/asset-library/search",
+      "sourceFile": "smartIngestionService.ts",
+      "lineNumber": 81
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/health",
+      "sourceFile": "smartIngestionService.ts",
+      "lineNumber": 96
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/",
+      "sourceFile": "templateService.ts",
+      "lineNumber": 59
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/:param",
+      "sourceFile": "templateService.ts",
+      "lineNumber": 74
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/:param/select",
+      "sourceFile": "templateService.ts",
+      "lineNumber": 90
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/custom",
+      "sourceFile": "templateService.ts",
+      "lineNumber": 105
+    },
+    {
+      "method": "PUT",
+      "pathPattern": "/:param",
+      "sourceFile": "templateService.ts",
+      "lineNumber": 118
+    },
+    {
+      "method": "DELETE",
+      "pathPattern": "/:param",
+      "sourceFile": "templateService.ts",
+      "lineNumber": 131
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/:param/preview",
+      "sourceFile": "templateService.ts",
+      "lineNumber": 147
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/generate-application",
+      "sourceFile": "workflowService.ts",
+      "lineNumber": 74
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/status/:param",
+      "sourceFile": "workflowService.ts",
+      "lineNumber": 87
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/",
+      "sourceFile": "workflowService.ts",
+      "lineNumber": 100
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/:param/cancel",
+      "sourceFile": "workflowService.ts",
+      "lineNumber": 115
+    }
+  ],
+  "unique": [
+    {
+      "method": "POST",
+      "pathPattern": "/ats-score",
+      "firstSeenIn": "analysisService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/analyze-document",
+      "firstSeenIn": "analysisService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/optimize-content",
+      "firstSeenIn": "analysisService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/resume-intelligence",
+      "firstSeenIn": "analysisService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/keywords",
+      "firstSeenIn": "analysisService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/dashboard",
+      "firstSeenIn": "analyticsService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/trends",
+      "firstSeenIn": "analyticsService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/competitive-analysis",
+      "firstSeenIn": "analyticsService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/metrics",
+      "firstSeenIn": "analyticsService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/applications",
+      "firstSeenIn": "analyticsService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/success-rate",
+      "firstSeenIn": "analyticsService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/",
+      "firstSeenIn": "applicationService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/",
+      "firstSeenIn": "applicationService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/:param",
+      "firstSeenIn": "applicationService.ts"
+    },
+    {
+      "method": "PUT",
+      "pathPattern": "/:param",
+      "firstSeenIn": "applicationService.ts"
+    },
+    {
+      "method": "DELETE",
+      "pathPattern": "/:param",
+      "firstSeenIn": "applicationService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/bulk-update",
+      "firstSeenIn": "applicationService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/:param/contacts",
+      "firstSeenIn": "applicationService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/:param/interviews",
+      "firstSeenIn": "applicationService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/export",
+      "firstSeenIn": "applicationService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/auth/login",
+      "firstSeenIn": "authService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/auth/register",
+      "firstSeenIn": "authService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/auth/logout",
+      "firstSeenIn": "authService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/auth/me",
+      "firstSeenIn": "authService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/sync-deadlines",
+      "firstSeenIn": "calendarService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/upcoming",
+      "firstSeenIn": "calendarService.ts"
+    },
+    {
+      "method": "PUT",
+      "pathPattern": "/:param/complete",
+      "firstSeenIn": "calendarService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/:param/versions",
+      "firstSeenIn": "documentCRUDService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/:param/versions",
+      "firstSeenIn": "documentCRUDService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/:param/versions/:param/restore",
+      "firstSeenIn": "documentCRUDService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/:param/download",
+      "firstSeenIn": "documentCRUDService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/:param/duplicate",
+      "firstSeenIn": "documentCRUDService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/generate-cover-letter",
+      "firstSeenIn": "documentService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/generate-tailored-resume",
+      "firstSeenIn": "documentService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/generate-ksc-response",
+      "firstSeenIn": "documentService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/connect-gmail",
+      "firstSeenIn": "emailService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/disconnect",
+      "firstSeenIn": "emailService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/scan-inbox",
+      "firstSeenIn": "emailService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/opportunities",
+      "firstSeenIn": "emailService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/status",
+      "firstSeenIn": "emailService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/setup-monitoring",
+      "firstSeenIn": "emailService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/api/ingestion/upload-and-tag",
+      "firstSeenIn": "ingestion.service.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/api/ingestion/extract-and-save",
+      "firstSeenIn": "ingestion.service.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/extract-from-url",
+      "firstSeenIn": "jobService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/extract-from-text",
+      "firstSeenIn": "jobService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/advanced-analysis",
+      "firstSeenIn": "jobService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/matching",
+      "firstSeenIn": "jobService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/opportunities/:param",
+      "firstSeenIn": "jobService.ts"
+    },
+    {
+      "method": "DELETE",
+      "pathPattern": "/opportunities/:param",
+      "firstSeenIn": "jobService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/unread-count",
+      "firstSeenIn": "notificationService.ts"
+    },
+    {
+      "method": "PUT",
+      "pathPattern": "/:param/read",
+      "firstSeenIn": "notificationService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/mark-all-read",
+      "firstSeenIn": "notificationService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/preferences",
+      "firstSeenIn": "notificationService.ts"
+    },
+    {
+      "method": "PUT",
+      "pathPattern": "/preferences",
+      "firstSeenIn": "notificationService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/push-subscribe",
+      "firstSeenIn": "notificationService.ts"
+    },
+    {
+      "method": "PUT",
+      "pathPattern": "/",
+      "firstSeenIn": "settingsService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/api-keys",
+      "firstSeenIn": "settingsService.ts"
+    },
+    {
+      "method": "DELETE",
+      "pathPattern": "/api-keys/:param",
+      "firstSeenIn": "settingsService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/api-keys/:param/test",
+      "firstSeenIn": "settingsService.ts"
+    },
+    {
+      "method": "PUT",
+      "pathPattern": "/integrations",
+      "firstSeenIn": "settingsService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/delete-account",
+      "firstSeenIn": "settingsService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/asset-library/search",
+      "firstSeenIn": "smartIngestionService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/health",
+      "firstSeenIn": "smartIngestionService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/:param/select",
+      "firstSeenIn": "templateService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/custom",
+      "firstSeenIn": "templateService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/:param/preview",
+      "firstSeenIn": "templateService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/generate-application",
+      "firstSeenIn": "workflowService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/status/:param",
+      "firstSeenIn": "workflowService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/:param/cancel",
+      "firstSeenIn": "workflowService.ts"
+    }
+  ]
+}

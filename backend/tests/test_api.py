@@ -3,9 +3,12 @@ Comprehensive test cases for the FastAPI backend API endpoints.
 Includes edge cases, error conditions, and integration tests.
 """
 
-import pytest
+from datetime import timedelta
+
+from fastapi import status
 from fastapi.testclient import TestClient
 
+from app.core.security import create_access_token
 from app.main import app
 
 client = TestClient(app)
@@ -120,6 +123,3 @@ def test_protected_endpoints():
     )
     response = client.get("/api/users/me", headers={"Authorization": f"Bearer {expired_token}"})
     assert response.status_code == status.HTTP_401_UNAUTHORIZED
-
-
-

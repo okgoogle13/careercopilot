@@ -425,7 +425,7 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
         const buffers: Buffer[] = [];
 
         doc.on("data", buffers.push.bind(buffers));
-        
+
         doc.fontSize(20).text("Job Applications", {align: "center"});
         doc.moveDown();
 

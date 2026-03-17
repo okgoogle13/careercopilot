@@ -7,6 +7,7 @@ import pytest
 # Note: These tests require proper Genkit setup and API keys
 # For now, they serve as integration test templates
 
+
 @pytest.mark.asyncio
 @pytest.mark.skip(reason="Requires Genkit initialization and API keys")
 async def test_resume_optimizer_basic():
@@ -16,7 +17,7 @@ async def test_resume_optimizer_basic():
     result = await optimize_resume(
         resume_text="Software engineer with Python experience",
         missing_keywords=["React", "TypeScript"],
-        job_description="Looking for fullstack developer"
+        job_description="Looking for fullstack developer",
     )
 
     assert result.resume_text
@@ -44,8 +45,7 @@ async def test_optimize_resume_endpoint_structure():
 
     # Verify request model
     request = OptimizeResumeRequest(
-        job_description="Test job description",
-        company_url="https://example.com"
+        job_description="Test job description", company_url="https://example.com"
     )
     assert request.job_description == "Test job description"
     assert request.company_url == "https://example.com"
@@ -60,6 +60,7 @@ def test_genkit_flows_exist():
     try:
         from app.genkit_flows.company_analyzer import CompanyAnalysis, analyze_company_website
         from app.genkit_flows.resume_optimizer import OptimizedResume, optimize_resume
+
         assert optimize_resume is not None
         assert analyze_company_website is not None
         assert OptimizedResume is not None

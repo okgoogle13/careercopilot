@@ -1,0 +1,625 @@
+{
+  "artifact": "route_family_target_state",
+  "generated_at": "2026-03-12",
+  "purpose": "Single machine-readable target-state map that merges live route families, design references, backend capability support, and recommended keep/expand/merge/replace/retire decisions.",
+  "sources": {
+    "frontend_architecture_report": "/Users/okgoogle13/Projects/careercopilot/frontend/analysis/frontend-architecture-report.json",
+    "frontend_capability_gap_matrix": "/Users/okgoogle13/Projects/careercopilot/.claude/plans/frontend-capability-gap-matrix.json",
+    "canonical_migration_plan": "/Users/okgoogle13/Projects/careercopilot/docs/project/active/frontend-source-of-truth-migration/control/plan.md"
+  },
+  "decision_legend": {
+    "keep": "Current runtime route family remains canonical with only normal cleanup.",
+    "expand": "Current runtime route family remains canonical but must absorb missing capability or missing UX surface.",
+    "merge": "Runtime family should stay canonical but selectively absorb design-reference patterns from screens.",
+    "replace": "Current runtime family should be superseded by a better existing candidate.",
+    "retire": "Family or surface should be removed, quarantined, or treated as non-product."
+  },
+  "canonical_truth_model": {
+    "design_truth": "frontend/src/screens/**/*.wireframe.xml + paired frontend/src/screens/**/*.tsx",
+    "runtime_truth": "frontend/src/features/** + frontend/src/pages/** reachable from frontend/src/App.tsx",
+    "capability_truth": "mounted backend endpoints and real workflow contracts",
+    "derived_artifacts": "migration-kit JSON wireframes"
+  },
+  "family_order": [
+    "landing",
+    "auth-onboarding",
+    "dashboard",
+    "analysis",
+    "documents",
+    "applications",
+    "jobs",
+    "generation",
+    "account",
+    "ingestion",
+    "internal-tools",
+    "landing-prototype",
+    "fallback"
+  ],
+  "families": [
+    {
+      "family": "landing",
+      "decision": "merge",
+      "priority": "high",
+      "current_runtime_routes": [
+        "/"
+      ],
+      "current_runtime_owners": [
+        {
+          "route": "/",
+          "component": "LandingPage",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/landing/LandingPage.tsx",
+          "bucket": "features"
+        }
+      ],
+      "design_references": [
+        {
+          "component": "HeroLanding",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/01_landing/HeroLanding.tsx"
+        }
+      ],
+      "backend_capability_support": [],
+      "target_state_action": "Keep the live landing route and selectively merge design-reference layout/token patterns from HeroLanding.",
+      "key_gaps": [
+        "prototype landing still exists under /kr/landing"
+      ]
+    },
+    {
+      "family": "auth-onboarding",
+      "decision": "merge",
+      "priority": "high",
+      "current_runtime_routes": [
+        "/login",
+        "/register",
+        "/onboarding",
+        "/welcome"
+      ],
+      "current_runtime_owners": [
+        {
+          "route": "/login",
+          "component": "Login",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/auth/Login.tsx",
+          "bucket": "features"
+        },
+        {
+          "route": "/register",
+          "component": "Register",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/auth/Register.tsx",
+          "bucket": "features"
+        },
+        {
+          "route": "/onboarding",
+          "component": "OnboardingRoute",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx",
+          "bucket": "runtime-route-wrapper"
+        },
+        {
+          "route": "/welcome",
+          "component": "WelcomeScreen",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/onboarding/WelcomeScreen.tsx",
+          "bucket": "features"
+        }
+      ],
+      "design_references": [
+        {
+          "component": "AuthModal",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/02_auth/AuthModal.tsx"
+        },
+        {
+          "component": "OnboardFlow",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch2/OnboardFlow.tsx"
+        }
+      ],
+      "backend_capability_support": [
+        {
+          "capability_id": "voice_profile_capture",
+          "relationship": "adjacent_but_not_primary"
+        }
+      ],
+      "target_state_action": "Keep auth/onboarding runtime routes and merge design-reference patterns selectively; do not use /kr auth routes as product truth.",
+      "key_gaps": [
+        "prototype auth/onboarding routes remain live",
+        "welcome/onboarding progression still needs workflow validation"
+      ]
+    },
+    {
+      "family": "dashboard",
+      "decision": "merge",
+      "priority": "high",
+      "current_runtime_routes": [
+        "/dashboard"
+      ],
+      "current_runtime_owners": [
+        {
+          "route": "/dashboard",
+          "component": "Dashboard",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/dashboard/Dashboard.tsx",
+          "bucket": "features"
+        }
+      ],
+      "design_references": [
+        {
+          "component": "DashboardOverview",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/11_dashboard/DashboardOverview.tsx"
+        }
+      ],
+      "backend_capability_support": [
+        {
+          "capability_id": "applications_crud",
+          "relationship": "navigation_dependency"
+        },
+        {
+          "capability_id": "smart_ingestion_asset_pipeline",
+          "relationship": "navigation_dependency"
+        }
+      ],
+      "target_state_action": "Keep /dashboard as the canonical owner and merge visual/reference patterns from DashboardOverview.",
+      "key_gaps": [
+        "dashboard onboarding checklist logic remains workflow-sensitive"
+      ]
+    },
+    {
+      "family": "analysis",
+      "decision": "expand",
+      "priority": "high",
+      "current_runtime_routes": [
+        "/analysis",
+        "/asset-library"
+      ],
+      "current_runtime_owners": [
+        {
+          "route": "/analysis",
+          "component": "AnalysisPage",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/AnalysisPage.tsx",
+          "bucket": "pages"
+        },
+        {
+          "route": "/asset-library",
+          "component": "AssetLibrary",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/analysis/AssetLibrary.tsx",
+          "bucket": "features"
+        }
+      ],
+      "design_references": [
+        {
+          "component": "AnalysisWorkbench",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/05_analysis/AnalysisWorkbench.tsx"
+        },
+        {
+          "component": "ResumeAuditPage",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/ResumeAuditPage.tsx",
+          "status": "unrouted_candidate",
+          "promotion_decision": "promote",
+          "target_route": "/analysis/audit",
+          "condition": "backend exposes GET /resume-audit/history"
+        }
+      ],
+      "backend_capability_support": [
+        {
+          "capability_id": "resume_audit",
+          "relationship": "missing_surface"
+        },
+        {
+          "capability_id": "smart_ingestion_asset_pipeline",
+          "relationship": "owned_or_adjacent"
+        },
+        {
+          "capability_id": "job_listings_workbench",
+          "relationship": "defer_or_retire"
+        }
+      ],
+      "target_state_action": "Keep /analysis and /asset-library, but expand the family to explicitly absorb resume-audit and smart-ingestion decisions.",
+      "key_gaps": [
+        "resume audit is not clearly routed",
+        "asset library and smart-ingestion relationship is unresolved",
+        "analysis workflow handoff remains partially cosmetic"
+      ]
+    },
+    {
+      "family": "documents",
+      "decision": "expand",
+      "priority": "high",
+      "current_runtime_routes": [
+        "/documents"
+      ],
+      "current_runtime_owners": [
+        {
+          "route": "/documents",
+          "component": "Documents",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/documents/Documents.tsx",
+          "bucket": "features"
+        }
+      ],
+      "design_references": [
+        {
+          "component": "DocumentWorkbench",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/08_workbench/DocumentWorkbench.tsx",
+          "status": "unrouted_candidate"
+        }
+      ],
+      "backend_capability_support": [
+        {
+          "capability_id": "documents_redline",
+          "relationship": "missing_surface"
+        }
+      ],
+      "target_state_action": "Keep /documents as the canonical route family, but expand it to either absorb a redline/review workspace or explicitly defer that capability.",
+      "key_gaps": [
+        "current runtime documents screen is still lightweight/mock-oriented",
+        "DocumentWorkbench concept alignment is unresolved",
+        "document redline backend has no UI owner"
+      ]
+    },
+    {
+      "family": "applications",
+      "decision": "expand",
+      "priority": "high",
+      "current_runtime_routes": [
+        "/tracker",
+        "/apply/quick"
+      ],
+      "current_runtime_owners": [
+        {
+          "route": "/tracker",
+          "component": "ApplicationTracker",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/applications/ApplicationTracker.tsx",
+          "bucket": "features"
+        },
+        {
+          "route": "/apply/quick",
+          "component": "ApplyQuick",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/ApplyQuick.tsx",
+          "bucket": "pages"
+        }
+      ],
+      "design_references": [
+        {
+          "component": "KanbanTracker",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/07_kanban/KanbanTracker.tsx",
+          "status": "unrouted_candidate"
+        },
+        {
+          "component": "ApplicationFinalization",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/09_finalization/ApplicationFinalization.tsx",
+          "status": "unrouted_candidate"
+        }
+      ],
+      "backend_capability_support": [
+        {
+          "capability_id": "applications_crud",
+          "relationship": "owned_but_underexposed"
+        },
+        {
+          "capability_id": "workflow_orchestration",
+          "relationship": "defer_until_backend_ready"
+        }
+      ],
+      "target_state_action": "Keep the applications family, but expand /tracker and/or /apply/quick to expose real CRUD detail/edit/status flows before considering any new top-level route.",
+      "key_gaps": [
+        "/tracker is mock-backed despite real backend support",
+        "detail/edit/delete surfaces are missing",
+        "workflow endpoints are placeholder-only today"
+      ]
+    },
+    {
+      "family": "jobs",
+      "decision": "expand",
+      "priority": "medium",
+      "current_runtime_routes": [
+        "/opportunities",
+        "/job-queue"
+      ],
+      "current_runtime_owners": [
+        {
+          "route": "/opportunities",
+          "component": "Opportunities",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/opportunities/Opportunities.tsx",
+          "bucket": "features"
+        },
+        {
+          "route": "/job-queue",
+          "component": "JobQueue",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/JobQueue.tsx",
+          "bucket": "pages"
+        }
+      ],
+      "design_references": [
+        {
+          "component": "LookoutDiscovery",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
+          "status": "unrouted_candidate"
+        },
+        {
+          "component": "KanbanTracker",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/07_kanban/KanbanTracker.tsx",
+          "status": "adjacent_candidate"
+        }
+      ],
+      "backend_capability_support": [
+        {
+          "capability_id": "job_listings_workbench",
+          "relationship": "likely_retire_or_quarantine"
+        }
+      ],
+      "target_state_action": "Keep the jobs family and clarify the relationship between scouting, queueing, and job-analysis workbench concepts before any route replacement.",
+      "key_gaps": [
+        "job queue wireframe ownership is unresolved",
+        "job listings backend workbench may be redundant with existing job analysis flows"
+      ]
+    },
+    {
+      "family": "generation",
+      "decision": "keep",
+      "priority": "medium",
+      "current_runtime_routes": [
+        "/ksc-generator",
+        "/cover-letter-generator"
+      ],
+      "current_runtime_owners": [
+        {
+          "route": "/ksc-generator",
+          "component": "KSCGenerator",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/ksc-generator/KSCGenerator.tsx",
+          "bucket": "features"
+        },
+        {
+          "route": "/cover-letter-generator",
+          "component": "CoverLetterGenerator",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/applications/CoverLetterGenerator.tsx",
+          "bucket": "features"
+        }
+      ],
+      "design_references": [
+        {
+          "component": "DocumentWorkbench",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/08_workbench/DocumentWorkbench.tsx",
+          "status": "generic_reference_only"
+        }
+      ],
+      "backend_capability_support": [
+        {
+          "capability_id": "workflow_orchestration",
+          "relationship": "not_required_for_basic_runtime"
+        }
+      ],
+      "target_state_action": "Keep generator routes as their own family; improve workflow handoff and tokens, but do not force them into a generic workbench until concept alignment is clearer.",
+      "key_gaps": [
+        "cross-tool handoff remains incomplete",
+        "generic workbench mapping is conceptually weak"
+      ]
+    },
+    {
+      "family": "account",
+      "decision": "expand",
+      "priority": "high",
+      "current_runtime_routes": [
+        "/settings",
+        "/profile"
+      ],
+      "current_runtime_owners": [
+        {
+          "route": "/settings",
+          "component": "Settings",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/settings/Settings.tsx",
+          "bucket": "features"
+        },
+        {
+          "route": "/profile",
+          "component": "ProfileView",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/profile/components/ProfileView.tsx",
+          "bucket": "features"
+        }
+      ],
+      "design_references": [
+        {
+          "component": "SettingsControl",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/10_settings/SettingsControl.tsx",
+          "status": "unrouted_candidate"
+        }
+      ],
+      "backend_capability_support": [
+        {
+          "capability_id": "voice_profile_capture",
+          "relationship": "missing_surface"
+        }
+      ],
+      "target_state_action": "Keep the account family and expand it to own voice profile creation/management explicitly; default owner should be /profile unless later changed.",
+      "key_gaps": [
+        "profile wireframe mapping remains imperfect",
+        "voice profile capability has no live UI owner"
+      ]
+    },
+    {
+      "family": "ingestion",
+      "decision": "expand",
+      "priority": "high",
+      "current_runtime_routes": [
+        "/career/ingest"
+      ],
+      "current_runtime_owners": [
+        {
+          "route": "/career/ingest",
+          "component": "IngestionPage",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/pages/IngestionPage.tsx",
+          "bucket": "pages"
+        }
+      ],
+      "design_references": [
+        {
+          "component": "IngestionFlow",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/04_ingestion/IngestionFlow.tsx",
+          "status": "unrouted_candidate",
+          "promotion_decision": "promote",
+          "target_route": "/career/ingest",
+          "condition": "after canonical contract"
+        }
+      ],
+      "backend_capability_support": [
+        {
+          "capability_id": "smart_ingestion_asset_pipeline",
+          "relationship": "adjacent_or_merge_candidate"
+        },
+        {
+          "capability_id": "artifact_upload_contract",
+          "relationship": "broken_contract"
+        },
+        {
+          "capability_id": "duplicate_ingestion_contracts",
+          "relationship": "must_resolve"
+        }
+      ],
+      "target_state_action": "Keep the ingestion family, but expand it around a single canonical backend contract and explicitly define how smart-ingestion and asset upload fit into the same flow.",
+      "key_gaps": [
+        "three overlapping ingestion contracts exist",
+        "one live-upload endpoint file is unmounted",
+        "design/runtime/backend disagree on family boundaries"
+      ]
+    },
+    {
+      "family": "internal-tools",
+      "decision": "retire",
+      "priority": "low",
+      "current_runtime_routes": [
+        "/design-sidekick",
+        "/style-guide",
+        "/test-tokens"
+      ],
+      "current_runtime_owners": [
+        {
+          "route": "/design-sidekick",
+          "component": "DesignSidekick",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/design-sidekick/DesignSidekick.tsx",
+          "bucket": "features"
+        },
+        {
+          "route": "/style-guide",
+          "component": "StyleGuide",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/style-guide/StyleGuide.tsx",
+          "bucket": "features"
+        },
+        {
+          "route": "/test-tokens",
+          "component": "TokenTest",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/debug/TokenTest.tsx",
+          "bucket": "components"
+        }
+      ],
+      "design_references": [],
+      "backend_capability_support": [],
+      "target_state_action": "Treat these as non-product routes and quarantine them from production architecture decisions.",
+      "key_gaps": [
+        "style-guide is a god component but not a target-state product route"
+      ]
+    },
+    {
+      "family": "landing-prototype",
+      "decision": "retire",
+      "priority": "medium",
+      "current_runtime_routes": [
+        "/kr/landing",
+        "/kr/auth",
+        "/kr/onboarding",
+        "/kr/analysis",
+        "/kr/dashboard"
+      ],
+      "current_runtime_owners": [
+        {
+          "route": "/kr/landing",
+          "component": "HeroLanding",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch2/HeroLanding.tsx",
+          "bucket": "components"
+        },
+        {
+          "route": "/kr/auth",
+          "component": "AuthModal",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch2/AuthModal.tsx",
+          "bucket": "components"
+        },
+        {
+          "route": "/kr/onboarding",
+          "component": "OnboardFlow",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch2/OnboardFlow.tsx",
+          "bucket": "components"
+        },
+        {
+          "route": "/kr/analysis",
+          "component": "AnalysisWorkbench",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch3/AnalysisWorkbench.tsx",
+          "bucket": "components"
+        },
+        {
+          "route": "/kr/dashboard",
+          "component": "DashboardOverview",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch3/DashboardOverview.tsx",
+          "bucket": "components"
+        }
+      ],
+      "design_references": [
+        {
+          "component": "HeroLanding",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/screens/01_landing/HeroLanding.tsx"
+        }
+      ],
+      "backend_capability_support": [],
+      "target_state_action": "Remove all 5 /kr/* prototype routes from product route planning. Keep screen components as design-reference material only.",
+      "key_gaps": [
+        "5 prototype routes remain live in App.tsx and must be retired as a batch"
+      ]
+    },
+    {
+      "family": "fallback",
+      "decision": "keep",
+      "priority": "low",
+      "current_runtime_routes": [
+        "*"
+      ],
+      "current_runtime_owners": [
+        {
+          "route": "*",
+          "component": "NotFound",
+          "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/not-found/NotFound.tsx",
+          "bucket": "features"
+        }
+      ],
+      "design_references": [],
+      "backend_capability_support": [],
+      "target_state_action": "Keep fallback as supporting runtime infrastructure.",
+      "key_gaps": []
+    }
+  ],
+  "cross_family_decisions": [
+    {
+      "topic": "voice_ownership",
+      "decision": "locked",
+      "locked_runtime_owner": "/profile",
+      "rationale": "Final owner for voice profile mgmt. No reopening.",
+      "preferred_runtime_owner": "/profile",
+      "alternate_owner_candidates": [
+        "/settings",
+        "/asset-library"
+      ]
+    },
+    {
+      "topic": "canonical_ingestion_contract",
+      "decision": "resolved",
+      "canonical": "/api/v1/ingest",
+      "deprecated": [
+        "/api/career/ingest"
+      ],
+      "invalid_or_unmounted": [
+        "/api/ingest/artifacts/upload"
+      ],
+      "status": "resolved"
+    },
+    {
+      "topic": "prototype_routes",
+      "decision": "retire_from_product_truth",
+      "affected_routes": [
+        "/kr/landing",
+        "/kr/auth",
+        "/kr/onboarding",
+        "/kr/analysis",
+        "/kr/dashboard"
+      ]
+    }
+  ]
+}

@@ -32,12 +32,12 @@ Updated `.env.mcp.example` with `CODEX_GITHUB_PERSONAL_ACCESS_TOKEN`
 
 ## Key Features
 
-✅ No tokens hardcoded in repository  
-✅ Environment variable-based authentication  
-✅ Automated setup script with validation  
-✅ Three levels of documentation  
-✅ Platform-specific instructions (macOS, Linux, Windows)  
-✅ Comprehensive troubleshooting  
+✅ No tokens hardcoded in repository
+✅ Environment variable-based authentication
+✅ Automated setup script with validation
+✅ Three levels of documentation
+✅ Platform-specific instructions (macOS, Linux, Windows)
+✅ Comprehensive troubleshooting
 
 ## Next Steps for User
 

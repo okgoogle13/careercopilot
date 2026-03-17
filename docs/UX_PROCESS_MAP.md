@@ -414,25 +414,25 @@ Maps user goals to the screens and API calls that fulfill them, organised by jou
 | UX-09 | No dashboard summary of ATS scores across recent applications | `/dashboard` | Add a mini score-trend chart (last 5 applications) |
 | UX-10 | Mobile navigation not optimised for core loop actions | All | Prioritise "Find", "Generate", and "Track" in the bottom nav on mobile |
 | UX-11 | Users cannot easily restart a generation with different tone/style parameters | `/cover-letter-generator` | Add a "Regenerate with different style" quick action below the output |
-| UX-12 | No social proof / success stories on the landing page for the target demographic | `/` | Add 2–3 short testimonials from community services / government job applicants |
+| UX-13 | Path bifurcation: Users need a clear choice between profile setup and immediate job application | Dashboard / Onboarding | Implement a 'Choose Your Path' screen after login/onboarding |
 
 ---
 
 ```markdown
 ## Open UX Design Questions & Proposed Directions
 
-1.  **Onboarding depth**: 
+1.  **Onboarding depth**:
     *   **Proposed Direction**: Maintain the optional flow to minimize initial friction and drop-off. Instead of a mandatory block, implement a "Getting Started" checklist on the Dashboard that incentivizes document uploads with clear benefit callouts (e.g., "Upload your resume to unlock ATS scoring").
 
-2.  **KSC visibility**: 
+2.  **KSC visibility**:
     *   **Proposed Direction**: Surface contextually. When the system detects a government-related job posting (via keywords or domain), trigger a "Government Application detected: Generate KSC responses" call-to-action within the Job Analysis view.
 
-3.  **Voice profile**: 
+3.  **Voice profile**:
     *   **Proposed Direction**: Keep the detailed configuration in Settings to avoid overwhelming new users. However, introduce a "Teach the AI your voice" prompt immediately after a user's first successful document generation to capture style preferences while the value proposition is fresh.
 
-4.  **Opportunity discovery vs manual entry**: 
+4.  **Opportunity discovery vs manual entry**:
     *   **Proposed Direction**: Treat both as primary. The Dashboard should feature a prominent "Paste Job URL" quick-action for users with a specific target, while the "Discovery" tab serves users browsing for new opportunities. Data shows power users often start with a URL.
 
-5.  **Tracker–Generator link**: 
+5.  **Tracker–Generator link**:
     *   **Proposed Direction**: Implement a dedicated "Application Detail" view. This provides a unified workspace for each application, housing the job description, resume version, cover letter, and tracking status in one place, rather than scattering them across different generator routes.
 ```

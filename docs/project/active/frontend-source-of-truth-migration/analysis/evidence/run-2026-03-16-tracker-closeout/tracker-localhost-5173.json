@@ -1,0 +1,201 @@
+{
+  "title": "Career Copilot",
+  "url": "http://localhost:5173/tracker?demo=true",
+  "body": "Feed\nKanban\nLanding\nLab\nAnalysis\nIngest\nOverview\nAPPLICATIONTRACKER\n\nTrack every application stage from submission to final outcome.\n\nFailed to load application data. Check backend auth or API availability.\n\nNo applications yet\n\nTrack every role you apply to. Start by generating your first application pack.\n\nAdd your first application →",
+  "hasErrorBanner": true,
+  "hasEmptyState": true,
+  "hasAddApplication": false,
+  "hasColumnApplied": false,
+  "apiEvents": [
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/ApplicationTracker.tsx",
+      "method": "GET"
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/CoverLetterGenerator.tsx",
+      "method": "GET"
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/ApplicationTracker.tsx",
+      "status": 200
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/components/ApplicationDetailPanel.tsx",
+      "method": "GET"
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/components/KanbanColumn.tsx",
+      "method": "GET"
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/trackerTypes.ts",
+      "method": "GET"
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/CoverLetterGenerator.tsx",
+      "status": 200
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/components/JobAnalysisResultsPanel.tsx",
+      "method": "GET"
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/components/ApplicationDetailPanel.tsx",
+      "status": 200
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/components/ApplicationArchiveAction.tsx",
+      "method": "GET"
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/components/ApplicationEditForm.tsx",
+      "method": "GET"
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:5173/src/features/applications/components/ApplicationStatusActions.tsx",
+      "method": "GET"
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/components/KanbanColumn.tsx",
+      "status": 200
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/trackerTypes.ts",
+      "status": 200
+    },
+    {
+      "type": "console",
+      "text": "[vite] connecting...",
+      "kind": "debug"
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/components/JobAnalysisResultsPanel.tsx",
+      "status": 200
+    },
+    {
+      "type": "console",
+      "text": "[vite] connected.",
+      "kind": "debug"
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/components/ApplicationArchiveAction.tsx",
+      "status": 200
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/components/ApplicationEditForm.tsx",
+      "status": 200
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:5173/src/features/applications/components/ApplicationStatusActions.tsx",
+      "status": 200
+    },
+    {
+      "type": "console",
+      "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+      "kind": "info"
+    },
+    {
+      "type": "console",
+      "text": "[ModeSync] Route: /tracker → Mode: KrDark",
+      "kind": "log"
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:8000/applications/",
+      "method": "GET"
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:8000/applications/",
+      "status": 404
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "kind": "error"
+    },
+    {
+      "type": "console",
+      "text": "List applications error: AxiosError",
+      "kind": "error"
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:8000/applications/",
+      "method": "GET"
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:8000/applications/",
+      "status": 404
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "kind": "error"
+    },
+    {
+      "type": "console",
+      "text": "List applications error: AxiosError",
+      "kind": "error"
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:8000/applications/",
+      "method": "GET"
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:8000/applications/",
+      "status": 404
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "kind": "error"
+    },
+    {
+      "type": "console",
+      "text": "List applications error: AxiosError",
+      "kind": "error"
+    },
+    {
+      "type": "request",
+      "url": "http://localhost:8000/applications/",
+      "method": "GET"
+    },
+    {
+      "type": "response",
+      "url": "http://localhost:8000/applications/",
+      "status": 404
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "kind": "error"
+    },
+    {
+      "type": "console",
+      "text": "List applications error: AxiosError",
+      "kind": "error"
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import json
 import sys
 import types
 from pathlib import Path
+from typing import Any
 
 import pytest
 from fastapi import HTTPException
@@ -11,15 +12,15 @@ from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from starlette.requests import Request
 
 if "weasyprint" not in sys.modules:
-    weasyprint_mod = types.ModuleType("weasyprint")
-    setattr(weasyprint_mod, "HTML", object)
+    weasyprint_mod: Any = types.ModuleType("weasyprint")
+    weasyprint_mod.HTML = object
     sys.modules["weasyprint"] = weasyprint_mod
 
 if "docx" not in sys.modules:
-    docx_mod = types.ModuleType("docx")
-    shared_mod = types.ModuleType("docx.shared")
-    enum_mod = types.ModuleType("docx.enum")
-    text_mod = types.ModuleType("docx.enum.text")
+    docx_mod: Any = types.ModuleType("docx")
+    shared_mod: Any = types.ModuleType("docx.shared")
+    enum_mod: Any = types.ModuleType("docx.enum")
+    text_mod: Any = types.ModuleType("docx.enum.text")
 
     class _RGBColor:
         def __init__(self, r: int, g: int, b: int):
@@ -30,9 +31,9 @@ if "docx" not in sys.modules:
         JUSTIFY = 3
         CENTER = 1
 
-    setattr(shared_mod, "RGBColor", _RGBColor)
-    setattr(shared_mod, "Pt", lambda x: x)
-    setattr(text_mod, "WD_ALIGN_PARAGRAPH", _WDAlign)
+    shared_mod.RGBColor = _RGBColor
+    shared_mod.Pt = lambda x: x
+    text_mod.WD_ALIGN_PARAGRAPH = _WDAlign
 
     sys.modules["docx"] = docx_mod
     sys.modules["docx.shared"] = shared_mod

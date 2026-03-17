@@ -35,7 +35,7 @@ from httpx import AsyncClient
 from app.main import app
 
 class Test{{FeatureName}}Integration:
-    
+
     @pytest.fixture
     def mock_genkit_flow(self):
         with patch("app.genkit_flows.{{genkit_flow}}.run") as mock:
@@ -48,7 +48,7 @@ class Test{{FeatureName}}Integration:
         """
         # 1. Setup Data
         payload = { ... }
-        
+
         # 2. Mock AI Response
         mock_genkit_flow.return_value = { "result": "success" }
 
@@ -58,7 +58,7 @@ class Test{{FeatureName}}Integration:
         # 4. Verification
         assert response.status_code == 200
         assert response.json()["status"] == "completed"
-        
+
         # Verify Flow was called
         mock_genkit_flow.assert_called_once()
 ```

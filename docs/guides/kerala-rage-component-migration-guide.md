@@ -1,7 +1,7 @@
 # Kerala Rage kr-solidarity - Component Migration Guide (v1.0)
 
 ## Overview
-This guide documents the technical rationale and standard procedures for migrating legacy M3/Firebase-era components to the **Kerala Rage kr-solidarity** design system. 
+This guide documents the technical rationale and standard procedures for migrating legacy M3/Firebase-era components to the **Kerala Rage kr-solidarity** design system.
 
 The primary goal is to ensure 100% compliance with the **Solidarity Mode** (no mode-switching), **archetype-specific shapes**, and **semantic design tokens**.
 

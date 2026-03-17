@@ -30,7 +30,7 @@ if [ -d "$BASE_DIR/ui" ]; then
   echo "#### Components:" >> "$OUTPUT_FILE"
   get_components "$BASE_DIR/ui" | sed 's/^/- /' >> "$OUTPUT_FILE"
   echo "" >> "$OUTPUT_FILE"
-  
+
   echo "#### Directory Structure:" >> "$OUTPUT_FILE"
   find "$BASE_DIR/ui" -type d -not -path "*/node_modules*" -not -path "*/.git*" -not -path "*/__tests__*" | sort | \
     sed -e 's|[^/]*/|  |g' -e 's|/|/|' >> "$OUTPUT_FILE"
@@ -46,7 +46,7 @@ if [ -d "$BASE_DIR/electric" ]; then
   echo "#### Components:" >> "$OUTPUT_FILE"
   get_components "$BASE_DIR/electric" | sed 's/^/- /' >> "$OUTPUT_FILE"
   echo "" >> "$OUTPUT_FILE"
-  
+
   echo "#### Directory Structure:" >> "$OUTPUT_FILE"
   find "$BASE_DIR/electric" -type d -not -path "*/node_modules*" -not -path "*/.git*" -not -path "*/__tests__*" | sort | \
     sed -e 's|[^/]*/|  |g' -e 's|/|/|' >> "$OUTPUT_FILE"
@@ -62,7 +62,7 @@ if [ -d "$BASE_DIR/m3" ]; then
   echo "#### Components:" >> "$OUTPUT_FILE"
   get_components "$BASE_DIR/m3" | sed 's/^/- /' >> "$OUTPUT_FILE"
   echo "" >> "$OUTPUT_FILE"
-  
+
   echo "#### Directory Structure:" >> "$OUTPUT_FILE"
   find "$BASE_DIR/m3" -type d -not -path "*/node_modules*" -not -path "*/.git*" -not -path "*/__tests__*" | sort | \
     sed -e 's|[^/]*/|  |g' -e 's|/|/|' >> "$OUTPUT_FILE"
@@ -79,19 +79,19 @@ if [ -d "$BASE_DIR/m3" ]; then
   echo "- Total UI Components: $ui_count" >> "$OUTPUT_FILE"
   echo "- Total Electric Components: $electric_count" >> "$OUTPUT_FILE"
   echo "- Total M3 Components: $m3_count" >> "$OUTPUT_FILE"
-  
+
   # Find common components
   echo "\n### Common Components Across Libraries" >> "$OUTPUT_FILE"
   comm -12 <(get_components "$BASE_DIR/ui") <(get_components "$BASE_DIR/electric") | \
     while read -r comp; do
       echo "- $comp (UI & Electric)" >> "$OUTPUT_FILE"
     done
-  
+
   comm -12 <(get_components "$BASE_DIR/ui") <(get_components "$BASE_DIR/m3") | \
     while read -r comp; do
       echo "- $comp (UI & M3)" >> "$OUTPUT_FILE"
     done
-  
+
   comm -12 <(get_components "$BASE_DIR/electric") <(get_components "$BASE_DIR/m3") | \
     while read -r comp; do
       echo "- $comp (Electric & M3)" >> "$OUTPUT_FILE"
@@ -99,7 +99,7 @@ if [ -d "$BASE_DIR/m3" ]; then
 else
   echo "- Total UI Components: $ui_count" >> "$OUTPUT_FILE"
   echo "- Total Electric Components: $electric_count" >> "$OUTPUT_FILE"
-  
+
   # Find common components between UI and Electric
   echo "\n### Common Components (UI & Electric)" >> "$OUTPUT_FILE"
   comm -12 <(get_components "$BASE_DIR/ui") <(get_components "$BASE_DIR/electric") | \

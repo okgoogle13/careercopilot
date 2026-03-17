@@ -23,18 +23,46 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ---
 
-## Task Delegation (Token Conservation) ⚡
+## Active Initiative: Frontend Source-of-Truth Migration
+
+**Phase**: M1 (Planning Gates) — no implementation started
+**Plan**: `docs/project/active/frontend-source-of-truth-migration/`
+
+### Locked Route Decisions
+- **expand**: `/tracker` (mock→CRUD), `/career/ingest`, `/profile`, `/documents`, `/analysis`, `/opportunities`, `/apply/quick`
+- **retire**: `/kr/*` (5 prototype routes), `/design-sidekick`, `/style-guide`, `/test-tokens`
+
+### M1 Gates (must clear before M2)
+- MIG-001: Fix capability matrix (`resolution_status`, `blocked_by`, `resolved_commit`)
+- MIG-002: Align `validate-governance-artifacts.mjs` with Python tests (blocks on MIG-001)
+- MIG-003: Approve 5 migration skills (sprint-coordinator, frontend-backend-mapper, api-contract-validator, migration-audit, verification-before-completion)
+- MIG-004: Approve scripts review (component-inventory.ts `approved_with_limits`; mjs `not_fit_for_purpose`)
+- MIG-005: Define token-enforcement gate (regex scan hardcoded colors on touched routes)
+
+### Tool Limits (until human upgrades to `approved`)
+- All migration skills: `approved_with_limits` — cannot override route matrix or decide product truth
+- `validate-governance-artifacts.mjs`: `not_fit_for_purpose` — ad hoc inspection only, NOT a gate
+
+### Critical Blockers
+- `workflow_orchestration` backend placeholder-only (defers workflow UI to M5)
+- Ingestion callers fragmented across 4 API paths (canonicalized in MIG-103)
+
+---
+
+## Task Delegation & Token Efficiency ⚡
 
 **RULE: Default to delegation via the task-router MCP, NOT local execution.**
 
+- **Efficiency Mandates (TOKEN GUARDIAN Enforcement)**:
+  - **MCP-First Delegation**: Never read files > 300 lines or search the codebase directly. Use `flash-sidekick.quick_summarize` and `batch_file_analysis`.
+  - **Thinking Bursts**: Disable intense Thinking Mode for repetitive "grunt work" (file moving, linting). Enable it ONLY for architecture (Phase 4) and identity gates.
+  - **Persistent Status**: Every session MUST end with a `status.md` update: "Completed Task ID X. Next: Task ID Y. Blocker: Z."
 - **Delegate Heavy Tasks**:
-  - Test generation (>50 lines), security/coverage analysis, refactoring, report generation, documentation.
-  - If it takes >15K tokens or is an autonomous task, DELEGATE to the `task-router` MCP server (e.g., use the `create_task` tool to assign tasks to other agents like `gemini` or `flash-sidekick`).
+  - Test generation (>50 lines), security/coverage analysis, refactoring, reports, and documentation.
+  - If a task is >15K tokens or autonomous, DELEGATE to the `task-router` MCP.
 - **Keep Local**:
-  - Code review, bug fixes with architectural decisions, git operations, and integration/deployment.
-- **Token Budget Target**:
-  - Max 150K per sprint (Claude Code).
-  - Use Sidekick tools aggressively to preserve tokens per `.claude/TOKEN_GUARDIAN.md`.
+  - Code review, architectural decisions, git operations, and critical integration fixes.
+- **Token Budget**: Max 200K per session. Adhere to `.claude/TOKEN_GUARDIAN.md`.
 
 ---
 
@@ -89,6 +117,18 @@ Follow `/.agent/workflows/design-workflow-2026.md` and use available skills:
 - `/kerala-rage-brand-enforcer`
 - `/token-orchestrator`
 - `/wireframe-annotator`
+
+---
+
+## Code Review Standards
+After completing any implementation, review the code for:
+- Functions longer than 30 lines (likely doing too much)
+- Logic duplicated more than twice (extract to utility)
+- Any `any` type usage in TypeScript (replace with real types)
+- Components with more than 3 props that could be grouped into an object
+- Missing error handling on async operations
+
+Run /simplify before presenting code to the user.
 
 ---
 *Tokens are law. Semantic CSS variables are truth. Zero-Flora enforced.*

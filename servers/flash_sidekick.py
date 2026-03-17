@@ -38,8 +38,8 @@ try:
     # Explicitly load .env from project root
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
-    env_path = os.path.join(project_root, '.env')
-    load_dotenv(env_path, override=True)
+    for env_name in ('.env.mcp', '.env'):
+        load_dotenv(os.path.join(project_root, env_name), override=True)
 except ImportError:
     pass
 
@@ -52,9 +52,10 @@ logging.basicConfig(
 logger = logging.getLogger("FlashSidekick")
 
 # Initialize Sentry
-if os.getenv("SENTRY_DSN"):
+sentry_dsn = os.getenv("SENTRY_DSN")
+if sentry_dsn and sentry_dsn.startswith("http") and not sentry_dsn.startswith("${"):
     sentry_sdk.init(
-        dsn=os.getenv("SENTRY_DSN"),
+        dsn=sentry_dsn,
         send_default_pii=True,
         traces_sample_rate=1.0,
         profiles_sample_rate=1.0,
@@ -212,7 +213,7 @@ async def _analyze_image_async(image_path: str, prompt: str, sys_instruct: str =
     loop = asyncio.get_event_loop()
 
     def blocking_call():
-        model = _get_model(FAST_CANDIDATES) 
+        model = _get_model(FAST_CANDIDATES)
         if not model: return None
         try:
             if not os.path.exists(image_path):
@@ -401,7 +402,7 @@ async def catalog_assets_task(args):
                 if cleaned_json.startswith("```json"):
                     cleaned_json = cleaned_json[7:]
                 if cleaned_json.startswith("```"):
-                    cleaned_json = cleaned_json.strip("`") 
+                    cleaned_json = cleaned_json.strip("`")
                 if cleaned_json.endswith("```"):
                     cleaned_json = cleaned_json[:-3]
 

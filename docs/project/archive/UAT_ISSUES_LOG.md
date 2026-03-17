@@ -1,6 +1,6 @@
 # UAT Phase 2: Autonomous Functional Verification
-**Generated:** January 4, 2026, 2:20 PM AEST  
-**Status:** API-Level Testing (Browser automation unavailable)  
+**Generated:** January 4, 2026, 2:20 PM AEST
+**Status:** API-Level Testing (Browser automation unavailable)
 **Method:** REST API verification + Code analysis
 
 ---
@@ -25,10 +25,10 @@ Due to browser sub-agent connectivity issues, Phase 2 is performed via:
 
 ### **Test 1: Job Queue Fetch** (`GET /api/ingest/queue`)
 
-**Status:** ⚠️ Connection blocked from host  
-**Expected:** JSON array of clipped jobs  
-**Actual:** `curl: (7) Failed to connect to localhost:8000`  
-**Reason:** Docker container network isolation  
+**Status:** ⚠️ Connection blocked from host
+**Expected:** JSON array of clipped jobs
+**Actual:** `curl: (7) Failed to connect to localhost:8000`
+**Reason:** Docker container network isolation
 
 **Mitigation:** Backend is healthy (verified via docker logs), container-to-container communication likely working.
 
@@ -202,7 +202,7 @@ Based on `App.tsx` routing configuration:
 
 #### **Issue #2: Hardcoded API URLs**
 - **Severity:** HIGH
-- **Files:** 
+- **Files:**
   - `Opportunities.tsx:22`
   - `JobQueue.tsx:68, 89, 117`
 - **Problem:** `http://localhost:8000` hardcoded, not environment-aware
@@ -314,7 +314,7 @@ Based on `App.tsx` routing configuration:
 
 ### **Test 9: External Links**
 
-**JobQueue:** 
+**JobQueue:**
 - `View Job` button uses `<M3Button href={job.url} target="_blank" rel="noopener noreferrer">`
 - ✅ Correct `rel` attribute prevents tab-napping
 - ⚠️ No validation that `job.url` is a valid URL
@@ -340,9 +340,9 @@ Based on `App.tsx` routing configuration:
 
 ## 📝 **Phase 2 Completion Summary**
 
-### **Tests Executed:** 10  
-### **Automated Tests:** 0 (browser automation unavailable)  
-### **Code-Level Tests:** 10  
+### **Tests Executed:** 10
+### **Automated Tests:** 0 (browser automation unavailable)
+### **Code-Level Tests:** 10
 
 ### **Issue Breakdown:**
 - **Critical:** 0
@@ -381,5 +381,5 @@ Based on `App.tsx` routing configuration:
 
 ---
 
-**End of Phase 2 Report**  
+**End of Phase 2 Report**
 **Next:** Phase 3 - Visual & UX Audit (Manual browser testing)

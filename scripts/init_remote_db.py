@@ -18,7 +18,7 @@ def init_remote_db():
     print(f"Initializing database at: {db_config.database_url}")
     if "sqlite" in db_config.database_url:
         print("WARNING: Using SQLite. Ensure DATABASE_URL is set for remote Supabase initialization.")
-    
+
     try:
         print("Creating tables...")
         Base.metadata.create_all(bind=db_config.engine)

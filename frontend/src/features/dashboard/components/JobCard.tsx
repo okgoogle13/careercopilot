@@ -55,7 +55,8 @@ export const JobCard: React.FC<JobCardProps> = ({
       }}
       data-testid={`kanban-card-${id}`}
       style={{
-        backgroundImage: 'radial-gradient(circle, rgba(255, 255, 255, 0.02) 1px, transparent 1px)',
+        backgroundImage:
+          'radial-gradient(circle, color-mix(in srgb, var(--sys-color-paperWhite-base) 2%, transparent) 1px, transparent 1px)',
         backgroundSize: '16px 16px',
       }}
     >

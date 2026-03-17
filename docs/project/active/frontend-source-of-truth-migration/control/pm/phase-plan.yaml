@@ -1,0 +1,59 @@
+project: "PR126 Frontend Source-of-Truth Migration"
+status: IN_PROGRESS
+
+phases:
+  - id: phase-1-planning-inputs
+    name: "Phase 1: Planning Inputs + Parity"
+    status: COMPLETE
+    gates_required:
+      - "pytest tests/plans -q == PASS"
+      - "node frontend/scripts/validate-governance-artifacts.mjs == PASS"
+    exit_criteria:
+      - "control/route-matrix.json and control/gap-map.json are canonical and validated"
+
+  - id: phase-2-contract-gates
+    name: "Phase 2: Build-Contract Gates"
+    status: COMPLETE
+    gates_required:
+      - "contracts/build-contract-tracker.xml approved"
+    exit_criteria:
+      - "At least one route contract approved and reusable pattern documented"
+
+  - id: phase-3-route-execution
+    name: "Phase 3: Route Execution (Parallel-Safe)"
+    status: IN_PROGRESS
+    gates_required:
+      - "route has route-matrix row"
+      - "token-enforcement passes on touched files"
+    exit_criteria:
+      - "P0/P1 backend capabilities have routed owners and no mock-backed primary paths"
+
+  - id: phase-4-wireframe-workflow
+    name: "Phase 4: Wireframe + Figma Support Workflow Repair"
+    status: IN_PROGRESS
+    gates_required:
+      - "python3 scripts/validate-wireframe-workflow.py produces report"
+      - "wireframe-build-contract prompt used for route contracts where applicable"
+      - "scripts/derive-gap-fill-plan.py indexes support_reference candidates"
+      - "direct Figma MCP page inventory is recorded as support-only evidence for connected page nodes"
+    exit_criteria:
+      - "wireframe -> contract -> gap-fill -> spec sequence is deterministic and followed"
+      - "landing/dashboard/analysis audit packs exist for support-reference candidates"
+      - "direct Figma MCP accelerators are scoped correctly: draft build-contract inputs and wireframe diffs allowed; scaffold injection pilot only; schema extraction and token auto-reconciliation blocked"
+      - "shared-shell audit exists for sidebar/logo/header/footer/layout before shell-sensitive route work proceeds"
+      - "support-reference audit coverage expands from the current 3 Figma-informed routes to the remaining page families touched by the connected Figma file"
+      - "support-reference audit packs record archetype mapping and generic-SaaS risk"
+      - "downstream routes consume only approved reuse modes from Step 4"
+      - "Figma-informed route gating is reflected in checked-in identity-gate artifacts before those routes are reported closed"
+
+  - id: phase-5-cleanup
+    name: "Phase 5: Cleanup + Prototype Retirement"
+    status: IN_PROGRESS
+    gates_required:
+      - "route-matrix: /kr/* routes classified as retire"
+      - "Figma-informed cleanup surfaces have an approved Step 4 audit pack"
+      - "Figma-informed cleanup surfaces pass the late-stage TSX identity gate and have the checked-in artifact to prove it"
+    exit_criteria:
+      - "0 /kr/* prototype routes in product truth"
+      - "Step 6A is complete and Step 6B route-family cleanup is complete, including the Step 6.1 /opportunities branch"
+      - "Figma-informed or generated TSX does not close with unresolved identity_gate_failed status"
