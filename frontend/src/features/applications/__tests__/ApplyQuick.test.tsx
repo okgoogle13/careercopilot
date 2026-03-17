@@ -126,7 +126,7 @@ describe('ApplyQuick', () => {
 
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledWith(
-        API_ENDPOINTS.analyzeJobFromUrl,
+        API_ENDPOINTS.generateApplication,
         expect.objectContaining({
           method: 'POST',
           headers: expect.objectContaining({
@@ -139,6 +139,7 @@ describe('ApplyQuick', () => {
 
     expect(JSON.parse((global.fetch as jest.Mock).mock.calls[0][1].body)).toEqual({
       job_description: 'Coordinate applications and service delivery.',
+      url: undefined,
     });
 
     await waitFor(() => {
