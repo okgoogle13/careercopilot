@@ -1,21 +1,11 @@
 import { Button, Input, Textarea } from '@careercopilot/ui';
-import { API_ENDPOINTS } from '@/config/api';
-import { auth } from '@/config/firebase';
 import type { AnalyzeJobFromUrlResponse } from '@/types/masterResume';
 import { JobAnalysisResultsPanel } from '@/features/applications/components/JobAnalysisResultsPanel';
 import { motion } from 'framer-motion';
 import { ArrowRight, Loader2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-const USE_MOCK = import.meta.env?.VITE_USE_MOCK_API !== 'false';
-
-async function getAuthToken(): Promise<string> {
-  if (USE_MOCK) return 'dev-token';
-  const user = auth.currentUser;
-  if (!user) return '';
-  return user.getIdToken();
-}
+import { workflowService } from '@/api/workflowService';
 
 export function ApplyQuick() {
   const navigate = useNavigate();
@@ -35,24 +25,11 @@ export function ApplyQuick() {
     setError(null);
     setLoading(true);
     try {
-      const token = await getAuthToken();
-      const response = await fetch(API_ENDPOINTS.generateApplication, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          url: jobUrl || undefined,
-          job_description: jobDescription || 'No description provided.',
-        }),
+      const payload = await workflowService.quickApply({
+        jobDescription: jobDescription || 'No description provided.',
+        jobUrl: jobUrl.trim() || undefined,
       });
-      if (!response.ok) {
-        throw new Error('Quick apply analysis failed.');
-      }
-      const payload = await response.json();
-      const data = (payload.result ?? payload) as AnalyzeJobFromUrlResponse;
-      setResult(data);
+      setResult(payload as AnalyzeJobFromUrlResponse);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to run quick apply.');
     } finally {
