@@ -11,31 +11,31 @@ export const NAVIGATION_SCHEMA: NavigationItem[] = [
   {
     id: 'KrDark-feed',
     label: 'Feed',
-    route: '/KrDark/feed',
+    route: '/opportunities',
     modeAvailability: 'KrDark',
   },
   {
     id: 'KrDark-kanban',
     label: 'Kanban',
-    route: '/KrDark/kanban',
+    route: '/tracker',
     modeAvailability: 'KrDark',
   },
   {
     id: 'KrDark-landing',
     label: 'Landing',
-    route: '/KrDark',
+    route: '/',
     modeAvailability: 'KrDark',
   },
   {
     id: 'lab-dashboard',
-    label: 'Lab',
-    route: '/lab',
+    label: 'Dashboard',
+    route: '/dashboard',
     modeAvailability: 'KrDark',
   },
   {
     id: 'lab-analysis',
     label: 'Analysis',
-    route: '/lab/analysis',
+    route: '/analysis',
     modeAvailability: 'KrDark',
   },
   {
@@ -47,7 +47,7 @@ export const NAVIGATION_SCHEMA: NavigationItem[] = [
   {
     id: 'overview',
     label: 'Overview',
-    route: '/overview',
+    route: '/job-queue',
     modeAvailability: 'both',
   },
 ];

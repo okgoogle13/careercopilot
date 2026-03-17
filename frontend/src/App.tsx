@@ -33,6 +33,9 @@ import { Opportunities } from './features/opportunities/Opportunities';
 import { ProfileView } from './features/profile/components/ProfileView';
 import { Settings } from './features/settings/Settings';
 import { Layout } from './layouts/Layout';
+import { StyleGuide } from './features/style-guide/StyleGuide';
+import DesignSidekick from './features/design-sidekick/DesignSidekick';
+import { TokenTest } from './components/debug/TokenTest';
 const SmartIngestion = lazy(() => import('./features/ingestion/SmartIngestion'));
 import { JobQueue } from './features/jobs/JobQueue';
 import { useModeStore } from './stores/useModeStore';
@@ -197,6 +200,14 @@ export default function App() {
             element={<Register />}
           />
           <Route
+            path="/design-sidekick"
+            element={<DesignSidekick />}
+          />
+          <Route
+            path="/style-guide"
+            element={<StyleGuide />}
+          />
+          <Route
             path="/auth"
             element={
               <Navigate
@@ -334,6 +345,10 @@ export default function App() {
             <Route
               path="/asset-library"
               element={<AssetLibrary />}
+            />
+            <Route
+              path="/test-tokens"
+              element={<TokenTest />}
             />
           </Route>
         </Route>
