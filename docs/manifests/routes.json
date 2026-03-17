@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-16T16:24:26.842Z",
-  "count": 19,
+  "generatedAt": "2026-03-17T16:29:21.440Z",
+  "count": 26,
   "routes": [
     {
       "path": "/",
@@ -24,6 +24,13 @@
       "layout": "public"
     },
     {
+      "path": "/auth",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": false,
+      "layout": "public"
+    },
+    {
       "path": "*",
       "component": "NotFound",
       "importSource": "./features/not-found/NotFound",
@@ -42,96 +49,138 @@
       "component": "Dashboard",
       "importSource": "./features/dashboard/Dashboard",
       "auth": true,
-      "layout": "protected"
-    },
-    {
-      "path": "/onboarding",
-      "component": "OnboardingRoute",
-      "importSource": "./features/onboarding/OnboardingRoute",
-      "auth": true,
-      "layout": "protected"
-    },
-    {
-      "path": "/welcome",
-      "component": "WelcomeScreen",
-      "importSource": "./features/onboarding/WelcomeScreen",
-      "auth": true,
-      "layout": "protected"
-    },
-    {
-      "path": "/documents",
-      "component": "Documents",
-      "importSource": "./features/documents/Documents",
-      "auth": true,
-      "layout": "protected"
+      "layout": "migrated"
     },
     {
       "path": "/analysis",
       "component": "AnalysisPage",
-      "importSource": "./pages/AnalysisPage",
+      "importSource": "./features/analysis/AnalysisPage",
       "auth": true,
-      "layout": "protected"
+      "layout": "migrated"
     },
     {
       "path": "/opportunities",
       "component": "Opportunities",
       "importSource": "./features/opportunities/Opportunities",
       "auth": true,
-      "layout": "protected"
-    },
-    {
-      "path": "/ksc-generator",
-      "component": "KSCGenerator",
-      "importSource": "./features/ksc-generator/KSCGenerator",
-      "auth": true,
-      "layout": "protected"
-    },
-    {
-      "path": "/cover-letter-generator",
-      "component": "CoverLetterGenerator",
-      "importSource": "./features/applications/CoverLetterGenerator",
-      "auth": true,
-      "layout": "protected"
-    },
-    {
-      "path": "/settings",
-      "component": "Settings",
-      "importSource": "./features/settings/Settings",
-      "auth": true,
-      "layout": "protected"
-    },
-    {
-      "path": "/profile",
-      "component": "ProfileView",
-      "importSource": "./features/profile/components/ProfileView",
-      "auth": true,
-      "layout": "protected"
-    },
-    {
-      "path": "/asset-library",
-      "component": "AssetLibrary",
-      "importSource": "./features/analysis/AssetLibrary",
-      "auth": true,
-      "layout": "protected"
+      "layout": "migrated"
     },
     {
       "path": "/career/ingest",
       "component": "SmartIngestion",
       "importSource": "./features/ingestion/SmartIngestion",
       "auth": true,
-      "layout": "protected"
+      "layout": "migrated"
+    },
+    {
+      "path": "/apply/quick",
+      "component": "ApplyQuick",
+      "importSource": "./features/applications/ApplyQuick",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/settings",
+      "component": "Settings",
+      "importSource": "./features/settings/Settings",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/profile",
+      "component": "ProfileView",
+      "importSource": "./features/profile/components/ProfileView",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/onboarding",
+      "component": "OnboardingRoute",
+      "importSource": "./features/onboarding/OnboardingRoute",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/ksc-generator",
+      "component": "KSCGenerator",
+      "importSource": "./features/ksc-generator/KSCGenerator",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/cover-letter-generator",
+      "component": "CoverLetterGenerator",
+      "importSource": "./features/applications/CoverLetterGenerator",
+      "auth": true,
+      "layout": "migrated"
     },
     {
       "path": "/job-queue",
       "component": "JobQueue",
       "importSource": "./features/jobs/JobQueue",
       "auth": true,
-      "layout": "protected"
+      "layout": "migrated"
     },
     {
-      "path": "/apply/quick",
-      "component": "ApplyQuick",
-      "importSource": "./pages/ApplyQuick",
+      "path": "/welcome",
+      "component": "WelcomeScreen",
+      "importSource": "./features/onboarding/WelcomeScreen",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/documents",
+      "component": "Documents",
+      "importSource": "./features/documents/Documents",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/dashboard-overview",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/kanban",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/ingestion",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/feed",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/studio",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/editor",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/asset-library",
+      "component": "AssetLibrary",
+      "importSource": "./features/analysis/AssetLibrary",
       "auth": true,
       "layout": "protected"
     }
