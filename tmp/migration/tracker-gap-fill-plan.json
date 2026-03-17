@@ -1,6 +1,6 @@
 {
   "artifact": "tokens_first_gap_fill_plan",
-  "generated_at": "2026-03-16T16:25:18.627889+00:00",
+  "generated_at": "2026-03-16T17:51:53.675372+00:00",
   "route_id": "tracker",
   "target_route": "/tracker",
   "family": "applications",
@@ -48,14 +48,12 @@
           "behavior_score": 35,
           "ownership_score": 25,
           "design_alignment_score": 6,
-          "drift_penalty": 25,
-          "total_score": 41,
-          "token_state": "dirty",
+          "drift_penalty": 0,
+          "total_score": 66,
+          "token_state": "clean",
           "asset_state": "clean",
-          "promotion_eligibility": "behavior_only",
-          "required_actions": [
-            "swap_deprecated_archetypes"
-          ]
+          "promotion_eligibility": "eligible",
+          "required_actions": []
         }
       ],
       "required_actions": [],
@@ -183,8 +181,8 @@
       "owner_surface": "ApplicationTracker",
       "canonical_status": "support",
       "selected_base": "frontend/src/features/applications/components/ApplicationEditForm.tsx",
-      "reuse_mode": "keep_behavior_extend_tokens",
-      "token_state": "clean",
+      "reuse_mode": "blocked",
+      "token_state": "unknown",
       "existing_candidates": [
         {
           "path": "frontend/src/features/applications/components/ApplicationEditForm.tsx",
@@ -192,16 +190,16 @@
           "behavior_score": 25,
           "ownership_score": 18,
           "design_alignment_score": 6,
-          "drift_penalty": 0,
-          "total_score": 49,
-          "token_state": "clean",
+          "drift_penalty": 10,
+          "total_score": 39,
+          "token_state": "unknown",
           "asset_state": "clean",
-          "promotion_eligibility": "eligible",
+          "promotion_eligibility": "behavior_only",
           "required_actions": []
         }
       ],
       "required_actions": [
-        "extend_token_coverage"
+        "insufficient_runtime_base"
       ],
       "source_of_truth": [
         "route_matrix",

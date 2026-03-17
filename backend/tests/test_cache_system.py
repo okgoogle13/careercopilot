@@ -4,7 +4,6 @@ Tests for the AI operations caching system using the new cache implementation.
 
 import asyncio
 from datetime import datetime, timezone
-from typing import Any, Dict
 from unittest.mock import AsyncMock, patch
 
 import pytest

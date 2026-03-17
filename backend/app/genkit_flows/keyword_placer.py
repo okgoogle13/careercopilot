@@ -1,4 +1,4 @@
-from typing import List, cast
+from typing import cast
 
 from pydantic import BaseModel, Field
 
@@ -24,7 +24,7 @@ class KeywordPlacementSuggestion(BaseModel):
 class KeywordPlacementResponse(BaseModel):
     """A list of keyword placement suggestions."""
 
-    suggestions: List[KeywordPlacementSuggestion]
+    suggestions: list[KeywordPlacementSuggestion]
 
 
 # --- Genkit Flow ---
@@ -32,7 +32,7 @@ class KeywordPlacementResponse(BaseModel):
 
 @simple_genkit_flow(output_schema=KeywordPlacementResponse)
 def suggestKeywordPlacement(
-    resumeText: str, list_of_missing_keywords: List[str]
+    resumeText: str, list_of_missing_keywords: list[str]
 ) -> KeywordPlacementResponse:
     """
     Analyzes a resume and a list of missing keywords to suggest the most

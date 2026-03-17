@@ -11,7 +11,6 @@ from app.core.firebase import (
     get_realtime_db,
     get_storage,
     initialize_firebase,
-    verify_id_token,
 )
 
 

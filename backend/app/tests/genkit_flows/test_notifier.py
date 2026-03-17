@@ -6,10 +6,8 @@ import os
 from unittest.mock import patch
 
 import pytest
-from fastapi.testclient import TestClient
 
 from app.genkit_flows.notifier import sendNewOpportunityNotification
-from app.services.email_service import send_email
 
 
 @pytest.fixture(autouse=True)

@@ -1,6 +1,5 @@
 """Comprehensive tests for ingest endpoint behavior."""
 
-from types import SimpleNamespace
 from unittest.mock import patch
 
 from fastapi import HTTPException
@@ -30,7 +29,6 @@ def test_upload_artifact_returns_422_for_missing_file(client):
 
 
 def test_upload_artifact_returns_401_without_auth_override(monkeypatch):
-    from app.core.dependencies import get_current_user
     from app.main import app
 
     app.dependency_overrides = {}

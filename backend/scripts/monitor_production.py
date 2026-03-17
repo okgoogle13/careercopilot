@@ -7,7 +7,6 @@ import asyncio
 import logging
 from collections import defaultdict
 from datetime import datetime, timedelta
-from typing import Dict, List
 
 from prometheus_client import Counter, Gauge, Histogram, start_http_server  # type: ignore
 from pydantic import BaseModel
@@ -52,8 +51,8 @@ class MonitoringService:
     def __init__(self, prometheus_port: int = 8000):
         self.prometheus_port = prometheus_port
         self.start_time = datetime.utcnow()
-        self.ai_metrics: Dict[str, List[dict]] = defaultdict(list)
-        self.cache_stats: Dict[str, CacheStats] = {}
+        self.ai_metrics: dict[str, list[dict]] = defaultdict(list)
+        self.cache_stats: dict[str, CacheStats] = {}
 
     async def start(self):
         """Start the monitoring service"""
@@ -132,7 +131,7 @@ class MonitoringService:
             "time_period_hours": hours,
         }
 
-    async def get_cache_stats(self) -> Dict[str, dict]:
+    async def get_cache_stats(self) -> dict[str, dict]:
         """Get cache statistics"""
         return {
             op: {

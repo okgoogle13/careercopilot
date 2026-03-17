@@ -2,8 +2,6 @@
 
 from types import SimpleNamespace
 
-import pytest
-
 from app.genkit_flows import corporate_intelligence as module
 
 

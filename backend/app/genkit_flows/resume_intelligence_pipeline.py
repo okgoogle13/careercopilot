@@ -8,15 +8,13 @@ and optimization recommendations using AI-powered analysis.
 from __future__ import annotations
 
 import asyncio
-import json
 from datetime import datetime
 from enum import Enum
-from typing import Any, Callable, Dict, List, Optional, Type, TypeVar, cast
+from typing import Any, TypeVar, cast
 
 from pydantic import BaseModel, Field
 from typing_extensions import ParamSpec
 
-from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handling
 from app.core.input_validation import InputSanitizer, InputValidationError
 from app.core.prompt_service import format_prompt
@@ -30,7 +28,7 @@ R = TypeVar("R")
 class ModelConfigProtocol:
     """Protocol for model configuration."""
 
-    def generate(self, prompt: str, **kwargs: Any) -> Any: ...
+    def generate(self, prompt: str, **kwargs: Any) -> Any: ...  # noqa: E704
 
 
 from app.core.genkit_init import async_genkit_flow, get_model
@@ -59,9 +57,9 @@ class ExperienceEntry(BaseModel):
     job_title: str = Field(description="Job title or role")
     company: str = Field(description="Company name")
     duration: str = Field(description="Time period in role")
-    responsibilities: List[str] = Field(description="Key responsibilities")
-    achievements: List[str] = Field(description="Quantifiable achievements")
-    skills_demonstrated: List[str] = Field(description="Skills shown in this role")
+    responsibilities: list[str] = Field(description="Key responsibilities")
+    achievements: list[str] = Field(description="Quantifiable achievements")
+    skills_demonstrated: list[str] = Field(description="Skills shown in this role")
     impact_score: int = Field(description="Impact score (1-10)", ge=1, le=10)
 
 
@@ -69,7 +67,7 @@ class SkillAssessment(BaseModel):
     skill: str = Field(description="Skill name")
     level: SkillLevel = Field(description="Assessed skill level")
     evidence_count: int = Field(description="Number of supporting evidence points")
-    years_experience: Optional[int] = Field(description="Estimated years of experience")
+    years_experience: int | None = Field(description="Estimated years of experience")
     market_demand: str = Field(description="Market demand: high, medium, low")
     improvement_potential: str = Field(description="Potential for growth: high, medium, low")
 
@@ -83,35 +81,35 @@ class ResumeAnalysisResult(BaseModel):
     impact_score: int = Field(description="Achievement impact score (0-100)", ge=0, le=100)
 
     # Detailed breakdowns
-    section_scores: Dict[str, int] = Field(description="Score by resume section")
-    experience_analysis: List[ExperienceEntry] = Field(description="Detailed experience analysis")
-    skills_assessment: List[SkillAssessment] = Field(description="Comprehensive skills evaluation")
+    section_scores: dict[str, int] = Field(description="Score by resume section")
+    experience_analysis: list[ExperienceEntry] = Field(description="Detailed experience analysis")
+    skills_assessment: list[SkillAssessment] = Field(description="Comprehensive skills evaluation")
 
     # Key insights
-    strengths: List[str] = Field(description="Resume's strongest points")
-    weaknesses: List[str] = Field(description="Areas needing improvement")
-    missing_elements: List[str] = Field(description="Important missing components")
+    strengths: list[str] = Field(description="Resume's strongest points")
+    weaknesses: list[str] = Field(description="Areas needing improvement")
+    missing_elements: list[str] = Field(description="Important missing components")
 
     # Recommendations
-    immediate_improvements: List[str] = Field(description="Quick wins for improvement")
-    strategic_recommendations: List[str] = Field(description="Long-term improvement strategy")
+    immediate_improvements: list[str] = Field(description="Quick wins for improvement")
+    strategic_recommendations: list[str] = Field(description="Long-term improvement strategy")
     industry_alignment: str = Field(description="How well aligned with target industry")
 
     # Competitive analysis
     competitive_position: str = Field(description="strong, average, weak market position")
-    unique_differentiators: List[str] = Field(description="What makes this candidate unique")
-    market_positioning_advice: List[str] = Field(description="How to position competitively")
+    unique_differentiators: list[str] = Field(description="What makes this candidate unique")
+    market_positioning_advice: list[str] = Field(description="How to position competitively")
 
 
 class CareerProgressionAnalysis(BaseModel):
     career_trajectory: str = Field(description="upward, lateral, mixed, unclear progression")
     progression_score: int = Field(description="Career growth score (0-100)", ge=0, le=100)
-    title_progression: List[str] = Field(description="Sequence of job titles")
-    skill_evolution: Dict[str, List[str]] = Field(description="How skills developed over time")
-    career_gaps: List[str] = Field(description="Identified gaps or inconsistencies")
-    growth_patterns: List[str] = Field(description="Patterns of professional development")
-    future_trajectory: List[str] = Field(description="Likely next career moves")
-    positioning_for_advancement: List[str] = Field(description="How to position for next level")
+    title_progression: list[str] = Field(description="Sequence of job titles")
+    skill_evolution: dict[str, list[str]] = Field(description="How skills developed over time")
+    career_gaps: list[str] = Field(description="Identified gaps or inconsistencies")
+    growth_patterns: list[str] = Field(description="Patterns of professional development")
+    future_trajectory: list[str] = Field(description="Likely next career moves")
+    positioning_for_advancement: list[str] = Field(description="How to position for next level")
 
 
 class ResumeIntelligenceReport(BaseModel):
@@ -129,19 +127,19 @@ class ResumeIntelligenceReport(BaseModel):
     )
 
     # Action plan
-    thirty_day_action_items: List[str] = Field(description="Immediate actions to take")
-    ninety_day_strategic_plan: List[str] = Field(description="Medium-term improvement plan")
-    success_metrics: List[str] = Field(description="How to measure improvement")
+    thirty_day_action_items: list[str] = Field(description="Immediate actions to take")
+    ninety_day_strategic_plan: list[str] = Field(description="Medium-term improvement plan")
+    success_metrics: list[str] = Field(description="How to measure improvement")
 
     # Industry-specific insights
-    industry_fit_analysis: Dict[str, int] = Field(description="Fit scores by industry")
-    role_recommendations: List[str] = Field(description="Suitable roles based on profile")
+    industry_fit_analysis: dict[str, int] = Field(description="Fit scores by industry")
+    role_recommendations: list[str] = Field(description="Suitable roles based on profile")
 
 
 @async_genkit_flow(output_schema=ResumeAnalysisResult)
 @with_ai_error_handling()
 async def analyze_resume_comprehensive(
-    resume_content: str, target_industry: Optional[str] = None
+    resume_content: str, target_industry: str | None = None
 ) -> ResumeAnalysisResult:
     """
     Performs comprehensive resume analysis with detailed scoring and insights.
@@ -183,7 +181,7 @@ async def analyze_resume_comprehensive(
 
     except Exception as e:
         raise AIError(
-            message=f"Comprehensive resume analysis failed: {str(e)}",
+            message=f"Comprehensive resume analysis failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
@@ -192,7 +190,7 @@ async def analyze_resume_comprehensive(
 @async_genkit_flow(output_schema=CareerProgressionAnalysis)
 @with_ai_error_handling()
 async def analyze_career_progression(
-    resume_content: str, career_goals: Optional[str] = None
+    resume_content: str, career_goals: str | None = None
 ) -> CareerProgressionAnalysis:
     """
     Analyzes career progression patterns and provides advancement strategy.
@@ -233,7 +231,7 @@ async def analyze_career_progression(
 
     except Exception as e:
         raise AIError(
-            message=f"Career progression analysis failed: {str(e)}",
+            message=f"Career progression analysis failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
@@ -243,8 +241,8 @@ async def analyze_career_progression(
 @with_ai_error_handling()
 async def generate_resume_intelligence_report(
     resume_content: str,
-    target_industry: Optional[str] = None,
-    career_goals: Optional[str] = None,
+    target_industry: str | None = None,
+    career_goals: str | None = None,
     experience_level: str = "mid_level",
 ) -> ResumeIntelligenceReport:
     """
@@ -337,7 +335,7 @@ Respond with valid JSON matching the ResumeIntelligenceReport schema.
 
     except Exception as e:
         raise AIError(
-            message=f"Resume intelligence report generation failed: {str(e)}",
+            message=f"Resume intelligence report generation failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
@@ -346,8 +344,8 @@ Respond with valid JSON matching the ResumeIntelligenceReport schema.
 # Utility function for batch resume analysis
 @with_ai_error_handling()
 async def analyze_resume_batch(
-    resume_contents: List[str], target_industry: Optional[str] = None
-) -> List[Dict[str, Any]]:
+    resume_contents: list[str], target_industry: str | None = None
+) -> list[dict[str, Any]]:
     """
     Analyzes multiple resumes for comparative insights.
 
@@ -380,12 +378,12 @@ async def analyze_resume_batch(
 
 # Skills gap analysis for career transition
 class SkillsGapAnalysis(BaseModel):
-    current_skills: List[SkillAssessment] = Field(description="Current skill inventory")
-    target_role_requirements: List[str] = Field(description="Skills required for target role")
-    skill_gaps: List[str] = Field(description="Missing skills for target role")
-    transferable_skills: List[str] = Field(description="Skills that transfer well")
-    development_priority: List[str] = Field(description="Skills to develop first")
-    learning_recommendations: List[str] = Field(description="How to acquire missing skills")
+    current_skills: list[SkillAssessment] = Field(description="Current skill inventory")
+    target_role_requirements: list[str] = Field(description="Skills required for target role")
+    skill_gaps: list[str] = Field(description="Missing skills for target role")
+    transferable_skills: list[str] = Field(description="Skills that transfer well")
+    development_priority: list[str] = Field(description="Skills to develop first")
+    learning_recommendations: list[str] = Field(description="How to acquire missing skills")
     timeline_estimate: str = Field(description="Estimated time to bridge gaps")
     feasibility_score: int = Field(
         description="Career transition feasibility (0-100)", ge=0, le=100
@@ -452,7 +450,7 @@ Respond with valid JSON matching the SkillsGapAnalysis schema.
 
     except Exception as e:
         raise AIError(
-            message=f"Skills gap analysis failed: {str(e)}",
+            message=f"Skills gap analysis failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
@@ -460,15 +458,15 @@ Respond with valid JSON matching the SkillsGapAnalysis schema.
 
 # Export main functions
 __all__ = [
-    "analyze_resume_comprehensive",
-    "analyze_career_progression",
-    "generate_resume_intelligence_report",
-    "analyze_skills_gap_for_transition",
-    "analyze_resume_batch",
-    "ResumeAnalysisResult",
     "CareerProgressionAnalysis",
-    "ResumeIntelligenceReport",
-    "SkillsGapAnalysis",
     "ExperienceEntry",
+    "ResumeAnalysisResult",
+    "ResumeIntelligenceReport",
     "SkillAssessment",
+    "SkillsGapAnalysis",
+    "analyze_career_progression",
+    "analyze_resume_batch",
+    "analyze_resume_comprehensive",
+    "analyze_skills_gap_for_transition",
+    "generate_resume_intelligence_report",
 ]

@@ -1,7 +1,3 @@
-import os
-from types import SimpleNamespace
-from typing import List
-
 import requests
 from bs4 import BeautifulSoup
 from pydantic import BaseModel, Field
@@ -12,7 +8,7 @@ from app.core.genkit_init import genkit_flow, get_model
 class CompanyAnalysis(BaseModel):
     """Structured analysis of a company's website."""
 
-    company_keywords: List[str] = Field(
+    company_keywords: list[str] = Field(
         description="Keywords related to the company's technologies, products, and values."
     )
     company_tone: str = Field(

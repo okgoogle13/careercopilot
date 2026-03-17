@@ -3,10 +3,8 @@ Batch 3C: Document Processor tests for coverage.
 Focuses on document chunking, content type detection, and error handling.
 """
 
-import asyncio
 from pathlib import Path
-from typing import Any
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, patch
 
 import pytest
 

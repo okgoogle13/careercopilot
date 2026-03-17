@@ -6,7 +6,8 @@ across API endpoints and services. Consolidates repeated try-except-HTTPExceptio
 """
 
 import logging
-from typing import Any, Callable, TypeVar
+from collections.abc import Awaitable, Callable
+from typing import Any, TypeVar, cast
 
 from fastapi import HTTPException, status
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
@@ -115,23 +116,23 @@ def with_error_handling(context: str = ""):
         context: Description of the operation for logging
     """
 
-    def decorator(func: Callable[..., T]) -> Callable[..., T]:
-        async def wrapper(*args, **kwargs) -> T:
+    def decorator(func: Callable[..., Awaitable[T]]) -> Callable[..., Awaitable[T]]:
+        async def wrapper(*args: Any, **kwargs: Any) -> T:
             try:
                 return await func(*args, **kwargs)
             except ValueError as e:
-                raise ErrorHandler.handle_value_error(e, context)
+                raise ErrorHandler.handle_value_error(e, context) from e
             except (IntegrityError, SQLAlchemyError) as e:
-                raise ErrorHandler.handle_database_error(e, context)
+                raise ErrorHandler.handle_database_error(e, context) from e
             except HTTPException:
                 # Re-raise HTTPExceptions as-is
                 raise
             except Exception as e:
-                raise ErrorHandler.handle_generic_error(e, context)
+                raise ErrorHandler.handle_generic_error(e, context) from e
 
         wrapper.__name__ = func.__name__
         wrapper.__doc__ = func.__doc__
-        return wrapper
+        return cast(Callable[..., Awaitable[T]], wrapper)
 
     return decorator
 

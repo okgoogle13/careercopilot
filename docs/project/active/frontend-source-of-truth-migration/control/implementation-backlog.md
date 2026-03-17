@@ -3,7 +3,7 @@
 **Date:** 2026-03-13
 **Status:** Proposed implementation backlog
 **Canonical planning inputs:**
-- `docs/project/active/frontend-source-of-truth-migration/control/plan.md`
+- `docs/project/active/frontend-source-of-truth-migration/control/blueprint.md`
 - `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.md`
 - `docs/project/active/frontend-source-of-truth-migration/control/gap-map.md`
 

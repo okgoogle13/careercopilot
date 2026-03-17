@@ -1,6 +1,5 @@
 """Focused tests for the document processor."""
 
-import io
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest

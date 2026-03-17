@@ -1,6 +1,6 @@
 import re
 
-with open("app/core/document_export_service.py", "r") as f:
+with open("app/core/document_export_service.py") as f:
     text = f.read()
 
 prefix = """# backend/app/core/document_export_service.py

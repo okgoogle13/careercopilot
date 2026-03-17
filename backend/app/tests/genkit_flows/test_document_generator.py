@@ -1,7 +1,5 @@
 """Focused tests for the document generator helper."""
 
-from types import SimpleNamespace
-
 import pytest
 
 from app.genkit_flows import document_generator as module

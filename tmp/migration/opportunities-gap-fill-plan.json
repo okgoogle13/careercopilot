@@ -1,6 +1,6 @@
 {
   "artifact": "tokens_first_gap_fill_plan",
-  "generated_at": "2026-03-16T16:25:18.943009+00:00",
+  "generated_at": "2026-03-17T00:40:29.809570+00:00",
   "route_id": "opportunities",
   "target_route": "/opportunities",
   "family": "jobs",
@@ -26,8 +26,8 @@
       "owner_surface": "Opportunities",
       "canonical_status": "canonical",
       "selected_base": "frontend/src/features/opportunities/Opportunities.tsx",
-      "reuse_mode": "keep_behavior_extend_tokens",
-      "token_state": "dirty",
+      "reuse_mode": "keep_behavior_rewrite_styling",
+      "token_state": "clean",
       "existing_candidates": [
         {
           "path": "frontend/src/features/opportunities/Opportunities.tsx",
@@ -35,14 +35,12 @@
           "behavior_score": 40,
           "ownership_score": 25,
           "design_alignment_score": 0,
-          "drift_penalty": 25,
-          "total_score": 40,
-          "token_state": "dirty",
+          "drift_penalty": 0,
+          "total_score": 65,
+          "token_state": "clean",
           "asset_state": "clean",
-          "promotion_eligibility": "behavior_only",
-          "required_actions": [
-            "swap_deprecated_archetypes"
-          ]
+          "promotion_eligibility": "eligible",
+          "required_actions": []
         },
         {
           "path": "docs/project/active/frontend-source-of-truth-migration/sources/consolidated-reference/components/Opportunities.tsx",
@@ -61,10 +59,7 @@
           ]
         }
       ],
-      "required_actions": [
-        "extend_token_coverage",
-        "swap_deprecated_archetypes"
-      ],
+      "required_actions": [],
       "source_of_truth": [
         "route_matrix",
         "runtime_or_reference_tsx"

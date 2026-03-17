@@ -70,33 +70,15 @@ async def get_all_applications(
     skip: int = 0,
     limit: int = 100,
 ):
-    # MOCK DATA FOR CAPTURE
-    applications = [
-        {
-            "id": "mock_app_1",
-            "user_id": current_user.id,
-            "job_title": "Senior AI Agent",
-            "company_name": "Antigravity Inc",
-            "job_description": "Building the future of coding with autonomous agents and deep reasoning models.",
-            "source": "manual",
-            "status": "applied",
-            "applied_date": datetime.now(timezone.utc).isoformat(),
-            "created_at": datetime.now(timezone.utc).isoformat(),
-            "updated_at": datetime.now(timezone.utc).isoformat(),
-        },
-        {
-            "id": "mock_app_2",
-            "user_id": current_user.id,
-            "job_title": "Principal Engineer",
-            "company_name": "CloudOps Solutions",
-            "job_description": "Scaling cloud infrastructure to support high-volume AI workloads and real-time processing.",
-            "source": "manual",
-            "status": "interviewing",
-            "applied_date": datetime.now(timezone.utc).isoformat(),
-            "created_at": datetime.now(timezone.utc).isoformat(),
-            "updated_at": datetime.now(timezone.utc).isoformat(),
-        },
-    ]
+    db = get_firestore()
+    query = db.collection(COLLECTION_NAME).where("user_id", "==", current_user.id)
+    query = query.offset(skip).limit(limit)
+
+    applications = []
+    for doc in query.stream():
+        app_data = doc.to_dict()
+        app_data["id"] = doc.id
+        applications.append(app_data)
 
     return applications
 

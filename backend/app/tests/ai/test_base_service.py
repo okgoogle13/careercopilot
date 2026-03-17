@@ -4,10 +4,9 @@ import logging
 from unittest.mock import patch
 
 import pytest
-from fastapi.testclient import TestClient
 from pydantic import BaseModel
 
-from app.ai.base_service import BaseAIService, T
+from app.ai.base_service import BaseAIService
 
 # Configure logging for tests
 logging.basicConfig(level=logging.INFO)

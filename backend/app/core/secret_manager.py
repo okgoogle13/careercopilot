@@ -8,7 +8,7 @@ available and a project is configured.
 
 import json
 import os
-from typing import Any, Dict, Optional
+from typing import Any
 
 
 class SecretManagerNotFound(Exception):
@@ -41,7 +41,7 @@ def _env_candidates(secret_id: str) -> list[str]:
     return candidates
 
 
-def _get_env_secret(secret_id: str) -> Optional[str]:
+def _get_env_secret(secret_id: str) -> str | None:
     """Return a secret from the environment if present."""
     for candidate in _env_candidates(secret_id):
         value = os.getenv(candidate)
@@ -69,9 +69,9 @@ def _get_client() -> Any:
 
 def get_secret(
     secret_id: str,
-    project_id: Optional[str] = None,
+    project_id: str | None = None,
     version: str = "latest",
-    default: Optional[str] = None,
+    default: str | None = None,
 ) -> str:
     """
     Retrieve a secret from environment variables or Secret Manager.
@@ -117,7 +117,7 @@ def get_secret_key() -> str:
     return get_secret("SECRET_KEY", default="insecure-default-secret-key")
 
 
-def get_firebase_credentials() -> Optional[Dict[str, Any]]:
+def get_firebase_credentials() -> dict[str, Any] | None:
     """Get Firebase Admin SDK credentials as parsed JSON."""
     try:
         creds_json = get_secret("firebase-credentials-json", default="")
@@ -128,7 +128,7 @@ def get_firebase_credentials() -> Optional[Dict[str, Any]]:
     return None
 
 
-def get_firebase_config() -> Dict[str, Any]:
+def get_firebase_config() -> dict[str, Any]:
     """Get Firebase configuration from secrets or environment variables."""
     return {
         "project_id": get_secret(
@@ -163,7 +163,7 @@ def get_firebase_config() -> Dict[str, Any]:
     }
 
 
-def get_firebase_frontend_config() -> Dict[str, Any]:
+def get_firebase_frontend_config() -> dict[str, Any]:
     """Get Firebase frontend configuration for Vite environment variables."""
     return {
         "api_key": get_secret(
@@ -189,6 +189,6 @@ def get_firebase_frontend_config() -> Dict[str, Any]:
     }
 
 
-def get_app_secret(secret_name: str, default: Optional[str] = None) -> str:
+def get_app_secret(secret_name: str, default: str | None = None) -> str:
     """Get an application secret using either hyphenated or env-style naming."""
     return get_secret(secret_name, default=default)

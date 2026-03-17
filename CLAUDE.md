@@ -49,18 +49,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ---
 
-## Task Delegation (Token Conservation) ⚡
+## Task Delegation & Token Efficiency ⚡
 
 **RULE: Default to delegation via the task-router MCP, NOT local execution.**
 
+- **Efficiency Mandates (TOKEN GUARDIAN Enforcement)**:
+  - **MCP-First Delegation**: Never read files > 300 lines or search the codebase directly. Use `flash-sidekick.quick_summarize` and `batch_file_analysis`.
+  - **Thinking Bursts**: Disable intense Thinking Mode for repetitive "grunt work" (file moving, linting). Enable it ONLY for architecture (Phase 4) and identity gates.
+  - **Persistent Status**: Every session MUST end with a `status.md` update: "Completed Task ID X. Next: Task ID Y. Blocker: Z."
 - **Delegate Heavy Tasks**:
-  - Test generation (>50 lines), security/coverage analysis, refactoring, report generation, documentation.
-  - If it takes >15K tokens or is an autonomous task, DELEGATE to the `task-router` MCP server (e.g., use the `create_task` tool to assign tasks to other agents like `gemini` or `flash-sidekick`).
+  - Test generation (>50 lines), security/coverage analysis, refactoring, reports, and documentation.
+  - If a task is >15K tokens or autonomous, DELEGATE to the `task-router` MCP.
 - **Keep Local**:
-  - Code review, bug fixes with architectural decisions, git operations, and integration/deployment.
-- **Token Budget Target**:
-  - Max 150K per sprint (Claude Code).
-  - Use Sidekick tools aggressively to preserve tokens per `.claude/TOKEN_GUARDIAN.md`.
+  - Code review, architectural decisions, git operations, and critical integration fixes.
+- **Token Budget**: Max 200K per session. Adhere to `.claude/TOKEN_GUARDIAN.md`.
 
 ---
 

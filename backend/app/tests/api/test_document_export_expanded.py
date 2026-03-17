@@ -1,6 +1,6 @@
 """Expanded tests for document export endpoints covering missing branches and types."""
 
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, patch
 
 import pytest
 from fastapi import HTTPException
@@ -19,7 +19,6 @@ from app.models.document_export_schemas import (
     BatchExportRequest,
     CoverLetterExportRequest,
     DocumentExportRequest,
-    DocumentExportResponse,
     ResumeExportRequest,
 )
 

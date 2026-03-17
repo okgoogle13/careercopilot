@@ -7,7 +7,7 @@ Follows the same mocking conventions as test_ats_scoring.py:
 """
 
 import json
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import MagicMock, patch
 
 import pytest
 

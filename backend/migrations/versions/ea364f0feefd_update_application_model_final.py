@@ -6,31 +6,21 @@ Create Date: 2025-10-26 10:40:00.000000
 
 """
 
-from typing import Sequence, Union, List, Dict, Any
-from datetime import datetime
 import uuid
+from collections.abc import Sequence
+from datetime import datetime
 
-from alembic import op
 import sqlalchemy as sa
-from sqlalchemy.dialects import sqlite
+from alembic import op
 from sqlalchemy import (
-    orm,
-    Column,
-    String,
-    Text,
-    DateTime,
-    Boolean,
-    ForeignKey,
     JSON,
-    Integer,
-    Float,
 )
 
 # revision identifiers, used by Alembic.
 revision: str = "ea364f0feefd"
-down_revision: Union[str, None] = "bc8b9dcfbe50"
-branch_labels: Union[str, Sequence[str], None] = None
-depends_on: Union[str, Sequence[str], None] = None
+down_revision: str | None = "bc8b9dcfbe50"
+branch_labels: str | Sequence[str] | None = None
+depends_on: str | Sequence[str] | None = None
 
 
 def has_table(table_name: str) -> bool:

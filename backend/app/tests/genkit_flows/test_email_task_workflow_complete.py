@@ -5,7 +5,6 @@ from unittest.mock import AsyncMock
 
 import pytest
 
-from app.core.input_validation import InputValidationError
 from app.genkit_flows import email_task_workflow as module
 
 

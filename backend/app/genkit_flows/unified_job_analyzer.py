@@ -11,7 +11,6 @@ This enables users to paste a job URL and get:
 """
 
 import logging
-from typing import Optional
 
 from pydantic import BaseModel, Field
 
@@ -29,13 +28,13 @@ class UnifiedJobAnalysis(BaseModel):
     job_details: JobListingDetails = Field(
         description="Structured job listing details extracted from the URL"
     )
-    company_context: Optional[CompanyContext] = Field(
+    company_context: CompanyContext | None = Field(
         None, description="Company insights for applications and interviews"
     )
     analysis_success: bool = Field(
         default=True, description="Whether the full analysis completed successfully"
     )
-    error_message: Optional[str] = Field(
+    error_message: str | None = Field(
         None, description="Error message if analysis partially failed"
     )
 
@@ -85,7 +84,7 @@ async def analyze_job_from_url(url: str) -> UnifiedJobAnalysis:
                     job_description=job_details.full_description,
                 )
             except Exception as e:
-                logger.warning(f"Company context generation failed: {str(e)}")
+                logger.warning(f"Company context generation failed: {e!s}")
                 # Continue without company context - not critical
 
         return UnifiedJobAnalysis(
@@ -96,6 +95,6 @@ async def analyze_job_from_url(url: str) -> UnifiedJobAnalysis:
         )
 
     except Exception as e:
-        logger.error(f"Job analysis failed: {str(e)}", exc_info=True)
+        logger.error(f"Job analysis failed: {e!s}", exc_info=True)
         # Return partial results if possible
-        raise RuntimeError(f"Failed to analyze job from URL: {str(e)}")
+        raise RuntimeError(f"Failed to analyze job from URL: {e!s}")

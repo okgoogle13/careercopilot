@@ -1,9 +1,10 @@
 import hashlib
 import time
+from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app.core.dependencies import get_current_user_optional
+from app.core.dependencies import get_current_user, get_current_user_optional
 from app.core.firebase import get_firestore
 from app.genkit_flows.resume_audit import resumeAuditRKL
 from app.models.database import User
@@ -60,5 +61,28 @@ async def evaluate_resume(
             },
         )
 
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/history")
+async def get_audit_history(
+    current_user: User = Depends(get_current_user),
+) -> dict[str, Any]:
+    """
+    Return persisted resume audit records for the authenticated user,
+    ordered by creation time descending. Limit 50.
+    """
+    try:
+        db = get_firestore()
+        col = db.collection(COLLECTION_NAME)
+        docs = (
+            col.where("user_id", "==", current_user.id)
+            .order_by("created_at", direction="DESCENDING")
+            .limit(50)
+            .stream()
+        )
+        records = [doc.to_dict() for doc in docs]
+        return {"success": True, "data": records, "count": len(records)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

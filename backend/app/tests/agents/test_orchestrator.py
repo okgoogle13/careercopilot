@@ -7,7 +7,6 @@ import pytest
 
 from app.agents.orchestrator import (
     AgentOrchestrator,
-    AgentPriority,
     AgentStatus,
     ApplicationAgent,
     BaseAgent,
