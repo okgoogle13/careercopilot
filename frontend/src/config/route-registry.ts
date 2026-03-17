@@ -52,6 +52,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     auth: false,
     layout: 'public',
     mode: 'KrDark',
+    isRedirect: true,
     apiDeps: ['authService'],
   },
   {
@@ -129,6 +130,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     auth: true,
     layout: 'migrated',
     mode: 'KrDark',
+    isRedirect: true,
     apiDeps: ['analysisService', 'applicationService'],
   },
   {
@@ -137,6 +139,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     auth: true,
     layout: 'migrated',
     mode: 'KrDark',
+    isRedirect: true,
     apiDeps: ['applicationService'],
   },
   {
@@ -145,6 +148,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     auth: true,
     layout: 'migrated',
     mode: 'KrDark',
+    isRedirect: true,
     apiDeps: ['ingestion.service', 'smartIngestionService'],
   },
   {
@@ -153,6 +157,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     auth: true,
     layout: 'migrated',
     mode: 'KrDark',
+    isRedirect: true,
     apiDeps: ['jobService'],
   },
   {
@@ -161,6 +166,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     auth: true,
     layout: 'migrated',
     mode: 'KrDark',
+    isRedirect: true,
     apiDeps: ['aiServices', 'workflowService'],
   },
 
@@ -291,6 +297,7 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     auth: true,
     layout: 'migrated',
     mode: 'KrDark',
+    isRedirect: true,
     apiDeps: ['documentService'],
   },
   {
