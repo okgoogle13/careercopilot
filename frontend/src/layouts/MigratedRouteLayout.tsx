@@ -3,6 +3,7 @@ import { useLocation, useNavigate, Outlet } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { KrDarkDock } from './KrDarkShell/components/KrDarkDock';
 import { Footer } from '../components/ui/Footer';
+import { NAVIGATION_SCHEMA } from '../config/navigation.schema';
 
 /**
  * MigratedRouteLayout
@@ -14,32 +15,24 @@ export const MigratedRouteLayout = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleViewChange = (view: string) => {
-    const viewMap: Record<string, string> = {
-      'KrDark-landing': '/',
-      auth: '/login',
-      'KrDark-kanban': '/tracker',
-      'lab-dashboard': '/dashboard',
-      'lab-analysis': '/analysis',
-      'KrDark-ingestion': '/career/ingest',
-      'KrDark-feed': '/opportunities',
-      overview: '/job-queue',
-    };
-    const route = viewMap[view] || '/dashboard';
-    navigate(route);
+  const handleViewChange = (viewId: string) => {
+    const item = NAVIGATION_SCHEMA.find((i) => i.id === viewId);
+    if (item) {
+      navigate(item.route);
+    } else {
+      // Fallback for known specific logic if needed, otherwise dashboard
+      navigate('/dashboard');
+    }
   };
 
   // Determine current view from pathname
   const getCurrentView = () => {
     const { pathname } = location;
-    if (pathname === '/tracker') return 'KrDark-kanban';
-    if (pathname === '/career/ingest') return 'KrDark-ingestion';
-    if (pathname.startsWith('/analysis')) return 'lab-analysis';
-    if (pathname === '/dashboard') return 'lab-dashboard';
-    if (pathname === '/') return 'KrDark-landing';
-    if (pathname === '/opportunities') return 'KrDark-feed';
-    if (pathname === '/job-queue') return 'overview';
-    return 'lab-dashboard';
+    // Find the best match in NAVIGATION_SCHEMA
+    const match = NAVIGATION_SCHEMA.find(
+      (item) => item.route === pathname || (item.route !== '/' && pathname.startsWith(item.route))
+    );
+    return match ? match.id : 'lab-dashboard';
   };
 
   return (
