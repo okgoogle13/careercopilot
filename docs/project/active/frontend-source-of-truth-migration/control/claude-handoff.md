@@ -1,4 +1,4 @@
-# Claude Handoff — PR126 Migration Workflow
+# Migration Closeout Handover: Remaining Real Blockers
 
 Read first:
 - `docs/project/active/frontend-source-of-truth-migration/control/status.md`
@@ -30,24 +30,52 @@ Execution rules:
   - backend/schema generation from Figma labels
   - token authority from Figma variables
 
-Current state:
-- Step 3a `/tracker` route logic is fixed (canonical API path restored, retry logic optimized); closeout is blocked only by local Firebase/Firestore environment convergence.
-- **Environment Evidence**:
-  - Valid Firebase tokens for `careercopilot-468811` verify successfully on `:8001`.
-  - Stale backend on `:8000` lacks project config.
-  - CRUD operations (`GET /api/applications/`) are pending a working Firestore backend run.
-- Step 6A is complete.
-- Step 6B is mostly complete; `/opportunities` remains the open route-family item.
-- Step 4 audit coverage now spans all 7 Figma pages plus a dedicated shared-shell audit.
-- Figma-informed closure is still blocked by missing TSX identity-gate artifacts for `/analysis`, `/dashboard`, and `/`.
+Current truth (2026-03-18):
+- `genkit_job_analysis` is complete in capability truth. `/apply/quick` is the canonical execution owner; `/opportunities` is support-only. Do not reopen this blocker.
+- Step 6A: complete.
+- Step 6B: complete (including `/opportunities` route-matrix closure). Archetype swaps on `Opportunities.tsx` are complete.
+- Shell promotion is complete for `/onboarding`, `/ksc-generator`, `/cover-letter-generator`, `/job-queue`, and the migrated shell now also owns `/welcome` and `/documents`. Canonical layout mix: migrated 14 · protected 1 · public 4, with 7 explicit legacy redirect paths preserved in `App.tsx`.
+- Tri-layer scripts last known clean: route integrity clean; runtime scan shows 26 reachable paths (`19` canonical routes + `7` redirects); 11/11 screen pairs; 18/18 governance tests.
+- `/tracker` route logic is fixed but live closeout is still blocked on Firebase/Firestore env evidence.
 
-Immediate next actions:
-1. Record TSX identity-gate artifacts for `/analysis`, `/dashboard`, and `/`, or explicitly downgrade those routes from closed to gated.
-2. Explicitly complete or defer `/opportunities` so Step 6B can close honestly.
-3. **Restore `/tracker` environment**:
-   - Backend requirements: `FIREBASE_PROJECT_ID=careercopilot-468811`, `GOOGLE_APPLICATION_CREDENTIALS` (service account with Firestore permissions).
-   - Validation steps: Generate a fresh Firebase ID token, verify `GET /api/applications/` returns data, and capture high-fidelity browser screenshots of the Kanban board.
-   - Evidence check: See `analysis/2026-03-16-tracker-live-session-closeout.md` for the latest session logs and API fixes.
+Remaining real blockers:
+1. `workflow_orchestration` remains placeholder-only in backend capability truth.
+2. `resume_audit` history remains deferred.
+3. `/analysis` vs `/asset-library` ownership boundaries still need cleanup.
+4. Ingestion clients remain fragmented across `/api/v1/ingest`, `/api/career/ingest`, `/api/ingest/artifacts/upload`, and `/api/ingestion/*`.
+
+Implementation targets:
+1. Add real `POST /api/workflows/generate-application` + `GET /api/workflows/status/{workflow_id}` support for `/apply/quick`.
+2. Add `GET /api/resume-audit/history` and wire `/analysis` to persisted history.
+3. Keep `/asset-library` as a support route only; remove orphan/parallel-product ambiguity in runtime and docs.
+4. Converge user-facing career-ingestion clients on `/api/v1/ingest`; keep artifact upload specialized.
+5. After implementation, reconcile:
+   - `control/route-matrix.md`
+   - `control/gap-map.json`
+   - `control/status.md`
+   - `control/pm/dashboard.md`
+   - `analysis/remaining-route-plan.md`
+
+Execution order:
+1. Ingestion convergence
+2. Resume audit history
+3. Workflow orchestration MVP
+4. `/analysis` vs `/asset-library` boundary cleanup
+5. PM artifact reconciliation
+
+Verification required:
+- `cd frontend && yarn type-check`
+- targeted backend pytest slices for workflows, resume audit, and ingestion APIs
+- `node frontend/scripts/validate-governance-artifacts.mjs`
+- `node --import tsx tools/ci/check-route-integrity.ts`
+
+Non-goals:
+- no full async queue/worker rollout
+- no product expansion beyond MVP-real backend support
+- no promotion of `/asset-library` to a first-class product pillar
+
+Additional blocker:
+- `/tracker` live verification still requires `FIREBASE_PROJECT_ID=careercopilot-468811` plus Firestore-capable credentials before final closeout evidence can be captured.
 
 Shell rules:
 - Do not silently redefine sidebar/logo/header/footer/layout ownership.

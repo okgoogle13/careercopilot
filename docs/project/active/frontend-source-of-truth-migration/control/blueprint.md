@@ -63,6 +63,7 @@ Use these labels only to clarify execution state. They are not a separate govern
 - [ ] 0 `/kr/*` prototype routes remain in product truth
 - [ ] 0 high-priority mock-backed product routes remain after Step 4
 - [ ] 100% of touched routes pass token-enforcement before milestone closure
+- [ ] 100% of shell-promoted routes pass design critique (≥90/100 score) before production release
 - [ ] 100% of major component surfaces classified: `canonical` / `support` / `reference-only` / `deferred` / `cleanup`
 
 ---
@@ -314,16 +315,18 @@ Human approval is now recorded. Step 3 execution may begin.
 - [ ] **3d.3** Add a redline review workspace panel or page owned by `/documents` (not a new isolated route).
 - [ ] **3d.4** Write tests: trigger redline, display result, error state.
 - [ ] **3d.5** Token-enforcement and brand-enforcer: 0 violations.
+- [ ] **3d.6** Run `careercopilot-design-critique` on `/documents`. Gate requires ≥90/100 score before shell promotion.
 
 ### Acceptance
 
 - `/documents` exposes redline entry and review workspace
 - No isolated duplicate redline page outside the documents route
 - Tests pass, token/brand clean
+- Design critique score ≥90/100; approved for shell promotion if candidate
 
 ### Skills
 
-`executing-plans`, `token-enforcement`, `verification-before-completion`
+`executing-plans`, `token-enforcement`, `careercopilot-design-critique`, `verification-before-completion`
 
 ---
 
@@ -410,6 +413,7 @@ Target folder structure (after cleanup):
 - [ ] **5.4** Update inventory scripts so each entry reports: `live_routed_owner`, `paired_screen_reference`, `backend_dependency`, `mock_backed`, `retirement_candidate`, `shared_shell_dependency`, `inherited_shell`, `shell_status`, `route_family_conflict`, `lane_label`.
 - [ ] **5.5** Run full test suite: `yarn test`. Run type-check: `yarn type-check`. Run lint: `yarn lint`. All must pass.
 - [ ] **5.6** Run `migration-audit` on cleaned surfaces for final compliance snapshot, but only for routes with explicit benchmark coverage.
+- [ ] **5.7** Run `careercopilot-design-critique` on all 12 migrated routes. Ensure ≥90/100 score before shell promotion gate. Document any deferred design refinements in status.md.
 
 ### Acceptance
 
@@ -418,10 +422,11 @@ Target folder structure (after cleanup):
 - Folder structure matches canonical layout above
 - `yarn test`, `yarn type-check`, `yarn lint` all pass
 - `migration-audit` final snapshot shows 0 critical violations for routes with defined benchmarks
+- All routes targeted for shell promotion pass design critique (≥90/100)
 
 ### Skills
 
-`executing-plans`, `migration-audit`, `finishing-a-development-branch`, `verification-before-completion`
+`executing-plans`, `careercopilot-design-critique`, `migration-audit`, `finishing-a-development-branch`, `verification-before-completion`
 
 ---
 
@@ -447,7 +452,7 @@ Note: `04_ingestion` and `07_kanban` overlap with Steps 3a/3b, so work here shou
 - [ ] **6.2 Workbench & KSC (`/ksc-generator`)**: Implement canonical feature for `src/screens/08_workbench`.
 - [ ] **6.3 Finalization (`/cover-letter-generator`)**: Implement canonical feature for `src/screens/09_finalization`.
 - [ ] **6.4 Settings (`/settings`)**: Implement canonical feature for `src/screens/10_settings`.
-- [ ] **6.5 Analysis & Apply Quick**: Move `./pages/AnalysisPage` (pair with `05_analysis`) and `./pages/ApplyQuick` to canonical `features/`.
+- [x] **6.5 Analysis & Apply Quick**: Move `./pages/AnalysisPage` (pair with `05_analysis`) and `./pages/ApplyQuick` to canonical `features/`.
 - [ ] **6.6 Resolve UNKNOWN**: Fix `/onboarding` route (currently pointing to UNKNOWN source, likely needs pairing with `03_onboarding`).
 - [ ] **6.7 Retire Prototypes**: Safely delete or consolidate `/kr/landing`, `/kr/auth`, `/kr/onboarding`, `/kr/analysis`, `/kr/dashboard`, and `/test-tokens`.
 - [ ] **6.8 TSX Identity Review Gate**: For any route that adopts support-reference patterns or newly generated TSX, run `design-orchestration` → `kerala-rage-brand-enforcer` → `m3-expressive-token-orchestrator` → `kerala-rage-typography-strategy`. Save the review as `analysis/YYYY-MM-DD-tsx-identity-gate-<route>.md` using `analysis/tsx-identity-gate-template.md`. Record outcome as `identity_pass` / `identity_pass_with_rewrites` / `identity_fail_generic_saas` / `identity_fail_brand_drift`. Do not close the route on failure.
@@ -572,15 +577,17 @@ tasks:
 
 | Step | Branch | Status | PRs | Blocker |
 |---|---|---|---|---|
-| 1 — Fix planning inputs | `fix/planning-inputs` | ✅ Execution ready | — | — |
-| 2 — Tracker build contract | `fix/tracker-build-contract` | ✅ Execution ready | — | — |
-| 3a — Applications CRUD | `feat/tracker-real-crud` | 🟢 Ready to start | — | — |
+| 1 — Fix planning inputs | `fix/planning-inputs` | ✅ COMPLETE | — | — |
+| 2 — Tracker build contract | `fix/tracker-build-contract` | ✅ COMPLETE | — | — |
+| 3a — Applications CRUD | `feat/tracker-real-crud` | 🔴 IN_PROGRESS / BLOCKED | — | Firebase/Firestore env. `FIREBASE_PROJECT_ID=careercopilot-468811` required. |
 | 3b — Smart ingestion | `feat/ingest-upload-to-save` | ✅ COMPLETE | PR126 | — |
-| 3c — Voice profile | `feat/profile-voice-capture` | ⬜ Waiting on Step 2 | — | — |
-| 3d — Documents redline | `feat/documents-redline-workspace` | ⬜ Waiting on Step 2 | — | — |
-| 4 — Wireframe workflow | `fix/wireframe-workflow` | ⬜ Waiting on Step 3 execution progress | — | — |
+| 3c — Voice profile | `feat/profile-voice-capture` | ⬜ Not started | — | Waiting on Firebase env resolution |
+| 3d — Documents redline | `feat/documents-redline-workspace` | ⬜ Not started | — | Waiting on Step 3a unblock |
+| 4 — Wireframe workflow | `fix/wireframe-workflow` | 🟡 PARTIAL | — | Audit packs complete; component-spec-gen + `/kr/*` removal pending |
 | 5 — Route cleanup | `chore/route-cleanup` | ⬜ Waiting on Steps 3+4 | — | — |
-| 6 — Migration Cleanup (11 routes, 6 screens) | `feat/migration-cleanup-*` | 🟢 Ready to start | — | — |
+| 6A — Route retirement | `feat/migration-cleanup-*` | ✅ COMPLETE | — | — |
+| 6B — Screen pairing / shell finalization | `feat/migration-cleanup-*` | ✅ COMPLETE | — | `/opportunities` cleanup is now aligned with route ownership; only `/tracker` live verification still blocks program closeout. |
+| Shell Promotion (B3) | `feat/migration-cleanup-jobs-opportunities` | ✅ COMPLETE (2026-03-18) | — | Canonical shell mix: 14 migrated, 1 protected (`/asset-library` support-only), 4 public. Runtime also preserves 7 explicit redirect paths. |
 
 ---
 
