@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Search, Database, ChevronRight, Star } from 'lucide-react';
 
 export function EvidenceSidebar() {

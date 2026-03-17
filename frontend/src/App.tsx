@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { Suspense, lazy, useEffect } from 'react';
+import React, { lazy, useEffect } from 'react';
 import {
   Navigate,
   Outlet,

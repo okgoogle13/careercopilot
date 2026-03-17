@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-17T16:40:33.531Z",
-  "count": 26,
+  "generatedAt": "2026-03-17T17:21:42.341Z",
+  "count": 29,
   "routes": [
     {
       "path": "/",
@@ -20,6 +20,20 @@
       "path": "/register",
       "component": "Register",
       "importSource": "./features/auth/Register",
+      "auth": false,
+      "layout": "public"
+    },
+    {
+      "path": "/design-sidekick",
+      "component": "DesignSidekick",
+      "importSource": "./features/design-sidekick/DesignSidekick",
+      "auth": false,
+      "layout": "public"
+    },
+    {
+      "path": "/style-guide",
+      "component": "StyleGuide",
+      "importSource": "./features/style-guide/StyleGuide",
       "auth": false,
       "layout": "public"
     },
@@ -181,6 +195,13 @@
       "path": "/asset-library",
       "component": "AssetLibrary",
       "importSource": "./features/analysis/AssetLibrary",
+      "auth": true,
+      "layout": "protected"
+    },
+    {
+      "path": "/test-tokens",
+      "component": "TokenTest",
+      "importSource": "./components/debug/TokenTest",
       "auth": true,
       "layout": "protected"
     }

@@ -12,13 +12,13 @@ type SlotDef = {
 
 const SLOT_DEFS: SlotDef[] = [
   {
-    name: 'background',
+    name: 'step1_background',
     zLayer: 'Z-0',
     token: '--sys-color-charcoalBackground-base',
     assetCompat: 'KR-SOLID-SUBSTRATE',
   },
   {
-    name: 'background_accent',
+    name: 'step1_accent',
     zLayer: 'Z-1',
     token: '--sys-color-protestMetalBlue-base',
     assetCompat: 'KR-SOLID-ATMOS',
@@ -32,9 +32,9 @@ const SLOT_DEFS: SlotDef[] = [
 ];
 
 const DEFAULT_SLOT_ASSETS: Partial<Record<string, string>> = {
-  background: 'KR-SOLID-027',
-  background_accent: 'KR-SOLID-028',
-  cta_icon: 'KR-SOLID-029',
+  step1_background: 'KR-SOLID-042',
+  step1_accent: 'KR-SOLID-043',
+  cta_icon: 'KR-SOLID-044',
 };
 
 const slotOpacity: Record<SlotDef['zLayer'], number> = {
@@ -44,7 +44,7 @@ const slotOpacity: Record<SlotDef['zLayer'], number> = {
   'Z-3': 0.22,
 };
 
-export interface AuthModalProps {
+export interface OnboardFlowProps {
   className?: ClassValue;
   title?: string;
   subtitle?: string;
@@ -56,19 +56,19 @@ export interface AuthModalProps {
 }
 
 const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
+const _springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
 const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
 
-export const AuthModal = memo(function AuthModal({
+export const OnboardFlow = memo(function OnboardFlow({
   className,
-  title = 'Sign In / Register',
-  subtitle = 'Secure access to your CareerCopilot workspace.',
-  primaryLabel = 'Continue',
-  secondaryLabel = 'Use OAuth',
+  title = 'Onboarding Flow',
+  subtitle = 'Set role preferences and skills to personalize guidance.',
+  primaryLabel = 'Next Step',
+  secondaryLabel = 'Back',
   slotAssets,
   onPrimaryAction,
   onSecondaryAction,
-}: AuthModalProps) {
+}: OnboardFlowProps) {
   const mode = useModeStore((state) => state.mode);
   const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
 
@@ -88,7 +88,7 @@ export const AuthModal = memo(function AuthModal({
         border: '1px solid var(--sys-color-concreteGrey-base)',
       }}
       data-mode={mode}
-      data-testid="authmodal"
+      data-testid="onboardflow"
       data-motion-audit="true"
       data-density-ratio="0.36"
     >
@@ -190,4 +190,4 @@ export const AuthModal = memo(function AuthModal({
   );
 });
 
-export default AuthModal;
+export default OnboardFlow;
