@@ -6,7 +6,6 @@ from app.services.document_extractor import (
     detect_document_links,
     download_document,
     extract_documents_from_page,
-    extract_text_from_docx,
     extract_text_from_pdf,
 )
 

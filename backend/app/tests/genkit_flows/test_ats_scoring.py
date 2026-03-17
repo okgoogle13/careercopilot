@@ -127,6 +127,13 @@ class TestAtsScoringFlow:
                         assert hasattr(
                             result, "keywordMatches"
                         ), "Result should have keywordMatches"
+                        assert hasattr(result, "jobTitleMatch"), "Result should have jobTitleMatch"
+                        assert hasattr(
+                            result, "educationMatch"
+                        ), "Result should have educationMatch"
+                        assert hasattr(
+                            result, "experienceMatch"
+                        ), "Result should have experienceMatch"
                         assert hasattr(
                             result, "recommendations"
                         ), "Result should have recommendations"
@@ -144,11 +151,17 @@ class TestAtsScoringFlow:
                             result.breakdown, ScoreBreakdown
                         ), "breakdown should be ScoreBreakdown instance"
                         assert hasattr(
-                            result.breakdown, "keywordScore"
-                        ), "breakdown should have keywordScore"
+                            result.breakdown, "keywordDensityScore"
+                        ), "breakdown should have keywordDensityScore"
+                        assert hasattr(
+                            result.breakdown, "jobTitleScore"
+                        ), "breakdown should have jobTitleScore"
                         assert hasattr(
                             result.breakdown, "semanticScore"
                         ), "breakdown should have semanticScore"
+                        assert hasattr(
+                            result.breakdown, "educationExperienceScore"
+                        ), "breakdown should have educationExperienceScore"
                         assert hasattr(
                             result.breakdown, "formattingScore"
                         ), "breakdown should have formattingScore"

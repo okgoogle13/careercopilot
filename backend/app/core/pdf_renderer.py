@@ -4,8 +4,7 @@ PDF Renderer: Generates PDF documents from structured career data.
 Uses WeasyPrint for HTML-to-PDF conversion to allow for CSS styling.
 """
 
-import io
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from weasyprint import HTML
 
@@ -45,7 +44,7 @@ def _generate_html_from_content(title: str, content_html: str, theme_id: str = "
 
 def render_cover_letter_pdf(
     content: str,
-    candidate_name: Optional[str] = None,
+    candidate_name: str | None = None,
     theme_id: str = "minimal",
 ) -> bytes:
     """Renders a cover letter to PDF."""
@@ -61,8 +60,8 @@ def render_cover_letter_pdf(
 
 
 def render_resume_pdf(
-    sections: Dict[str, Any],
-    candidate_name: Optional[str] = None,
+    sections: dict[str, Any],
+    candidate_name: str | None = None,
     theme_id: str = "minimal",
 ) -> bytes:
     """Renders a resume to PDF."""
@@ -108,7 +107,7 @@ def render_resume_pdf(
 
 
 def render_ksc_pdf(
-    responses: List[Dict[str, Any]],
+    responses: list[dict[str, Any]],
     job_title: str = "Job Application",
     theme_id: str = "minimal",
 ) -> bytes:

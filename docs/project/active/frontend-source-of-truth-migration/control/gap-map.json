@@ -23,14 +23,14 @@
       ],
       "new_components": [],
       "deferred_components": [],
-      "notes": "Canonical route owner is live on the real applications API path; remaining work is restoring one local backend run with both Firebase auth and Firestore access working so the authenticated tracker closeout can complete."
+      "notes": "Canonical route owner is live on the real applications API path; successfully seeded test documents via REST API. Local backend verification is currently blocked by a gRPC hang on macOS, documented in tracker-blocker-diagnostic.md."
     },
     {
       "feature_id": "documents_redline",
       "owner_route": "/documents",
       "owner_surface": "Documents",
       "backend_status": "mounted_active",
-      "frontend_status": "no_live_owner",
+      "frontend_status": "live_canonical",
       "reuse_components": [
         "Documents"
       ],
@@ -43,7 +43,7 @@
         "RedlineActionBar"
       ],
       "deferred_components": [],
-      "notes": "Route stays the same; missing work lives inside the documents feature."
+      "notes": "Route stays the same; the canonical documents feature now mounts the redline workspace path directly. Remaining work is refinement inside the route, not missing route ownership."
     },
     {
       "feature_id": "smart_ingestion_asset_pipeline",
@@ -71,7 +71,7 @@
       "owner_route": "/profile",
       "owner_surface": "ProfileView",
       "backend_status": "mounted_active",
-      "frontend_status": "no_live_owner",
+      "frontend_status": "live_canonical",
       "reuse_components": [
         "ProfileView",
         "Settings"
@@ -86,13 +86,13 @@
         "VoiceProfileManagementSection"
       ],
       "deferred_components": [],
-      "notes": "Voice ownership is locked to /profile for planning purposes."
+      "notes": "Voice ownership is locked to /profile and the live route already mounts the voice-profile management section."
     },
     {
       "feature_id": "resume_audit",
       "owner_route": "/analysis",
       "owner_surface": "AnalysisPage",
-      "backend_status": "mounted_active_partial",
+      "backend_status": "mounted_active",
       "frontend_status": "partially_wired",
       "reuse_components": [
         "AnalysisPage",
@@ -108,7 +108,7 @@
       "deferred_components": [
         "ResumeAuditHistoryList"
       ],
-      "notes": "Minimum viable target state is routed evaluation support; history remains deferred."
+      "notes": "Backend history endpoint is now mounted, but the canonical analysis runtime still only renders immediate evaluation results; persisted history remains a frontend wiring gap."
     },
     {
       "feature_id": "genkit_job_analysis",
@@ -155,7 +155,7 @@
       "feature_id": "workflow_orchestration",
       "owner_route": "/apply/quick",
       "owner_surface": "ApplyQuick",
-      "backend_status": "mounted_placeholder",
+      "backend_status": "mounted_active_partial",
       "frontend_status": "partially_wired",
       "reuse_components": [
         "ApplyQuick"
@@ -167,7 +167,7 @@
         "WorkflowStatusPanel",
         "EmailScanResultsView"
       ],
-      "notes": "Blocked until backend moves beyond placeholder responses."
+      "notes": "Backend workflow endpoints are implemented, but `/apply/quick` still uses the analysis flow directly and pytest coverage still targets the old disabled contract."
     }
   ]
 }

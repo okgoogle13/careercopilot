@@ -3,9 +3,12 @@ Comprehensive test cases for the FastAPI backend API endpoints.
 Includes edge cases, error conditions, and integration tests.
 """
 
-import pytest
+from datetime import timedelta
+
+from fastapi import status
 from fastapi.testclient import TestClient
 
+from app.core.security import create_access_token
 from app.main import app
 
 client = TestClient(app)

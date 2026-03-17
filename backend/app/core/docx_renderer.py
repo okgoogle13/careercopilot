@@ -5,18 +5,17 @@ Follows ATS-safe best practices: single column, standard fonts, no tables/graphi
 """
 
 import io
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from docx import Document
-from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.shared import Pt, RGBColor
+from docx.shared import Pt
 
 from app.core.theme_tokens import get_theme_tokens
 
 
 def render_cover_letter_docx(
     content: str,
-    candidate_name: Optional[str] = None,
+    candidate_name: str | None = None,
     theme_id: str = "minimal",
 ) -> bytes:
     """
@@ -52,8 +51,8 @@ def render_cover_letter_docx(
 
 
 def render_resume_docx(
-    sections: Dict[str, Any],
-    candidate_name: Optional[str] = None,
+    sections: dict[str, Any],
+    candidate_name: str | None = None,
     theme_id: str = "minimal",
 ) -> bytes:
     """
@@ -138,7 +137,7 @@ def render_resume_docx(
 
 
 def render_ksc_docx(
-    responses: List[Dict[str, Any]],
+    responses: list[dict[str, Any]],
     job_title: str = "Job Application",
     theme_id: str = "minimal",
 ) -> bytes:

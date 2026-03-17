@@ -1,8 +1,7 @@
 import json
 import logging
-from typing import Any, Dict, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from app.core.genkit_init import get_model
 from app.core.prompt_service import format_prompt
@@ -20,7 +19,7 @@ class JobAnalysisSchema(BaseModel):
     technical_skills: list[str]
     soft_skills: list[str]
     experience_level: str
-    match_score: Optional[int] = None
+    match_score: int | None = None
 
 
 @async_genkit_flow()

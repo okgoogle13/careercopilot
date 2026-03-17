@@ -1,9 +1,8 @@
 import re
-import sys
 
 file_path = "app/core/document_export_service.py"
 
-with open(file_path, "r") as f:
+with open(file_path) as f:
     content = f.read()
 
 # Remove the import line

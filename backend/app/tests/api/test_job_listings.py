@@ -1,8 +1,6 @@
 """Tests for job-listings API endpoints."""
 
-from unittest.mock import AsyncMock, MagicMock, patch
-
-import pytest
+from unittest.mock import AsyncMock, patch
 
 
 class TestJobListingsEndpoints:

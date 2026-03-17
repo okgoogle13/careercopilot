@@ -2,7 +2,7 @@
 
 **Route row:** `analysis` in `control/route-matrix.json`
 **Canonical screen:** `frontend/src/screens/05_analysis/05_analysis.wireframe.xml` + `frontend/src/screens/05_analysis/AnalysisWorkbench.tsx`
-**Runtime owner:** `frontend/src/pages/AnalysisPage.tsx`
+**Runtime owner:** `frontend/src/features/analysis/AnalysisPage.tsx`
 **Support candidate:** `docs/project/active/frontend-source-of-truth-migration/sources/consolidated-reference/components/Analysis.tsx`
 
 ## Decision

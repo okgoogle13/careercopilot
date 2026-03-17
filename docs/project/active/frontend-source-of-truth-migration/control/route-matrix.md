@@ -1,9 +1,9 @@
 # Target-State Route Matrix
 
-**Date:** 2026-03-16
+**Date:** 2026-03-17
 **Status:** Canonical living route-level target-state matrix
 **Canonical companion artifacts:**
-- `docs/project/active/frontend-source-of-truth-migration/control/plan.md`
+- `docs/project/active/frontend-source-of-truth-migration/control/blueprint.md`
 - `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.json`
 
 ## Purpose
@@ -41,7 +41,7 @@ For each live route, it shows:
 | `/documents` | `/documents` | `documents` | `expand` | `complete` | `Documents` | `frontend/src/screens/08_workbench/DocumentWorkbench.tsx` | `frontend/src/screens/08_workbench/08_workbench.wireframe.xml` | `route_specific_wireframe` | `documents_redline` | `extend` | This route becomes the owner of redline and review workspace behavior. |
 | `/tracker` | `/tracker` | `applications` | `expand` | `planned` | `ApplicationTracker` | `frontend/src/screens/07_kanban/KanbanTracker.tsx` | `frontend/src/screens/07_kanban/07_kanban.wireframe.xml` | `route_specific_wireframe` | `applications_crud` | `extend` | This is the canonical owner of application CRUD, status, and detail flows; runtime truth is aligned and the remaining blocker is local Firebase/Firestore readiness, not route implementation. |
 | `/apply/quick` | `/apply/quick` | `applications` | `expand` | `complete` | `ApplyQuick` | `frontend/src/screens/09_finalization/ApplicationFinalization.tsx` | `frontend/src/screens/09_finalization/09_finalization.wireframe.xml` | `route_specific_wireframe` | `applications_crud`, `genkit_job_analysis`, `workflow_orchestration` | `merge` | Keep route as a supporting application flow; do not split it into a new family. |
-| `/opportunities` | `/opportunities` | `jobs` | `expand` | `planned` | `Opportunities` | `frontend/src/screens/06_lookout/LookoutDiscovery.tsx` | `frontend/src/screens/06_lookout/06_lookout.wireframe.xml` | `shared_family_wireframe` | `job_listings_workbench`, `genkit_job_analysis` | `merge` | Keep route and merge stronger lookout/workbench patterns into it. |
+| `/opportunities` | `/opportunities` | `jobs` | `expand` | `complete` | `Opportunities` | `frontend/src/screens/06_lookout/LookoutDiscovery.tsx` | `frontend/src/screens/06_lookout/06_lookout.wireframe.xml` | `shared_family_wireframe` | `job_listings_workbench`, `genkit_job_analysis` | `merge` | Keep route and merge stronger lookout/workbench patterns into it. Post-closeout cleanup is limited to tracker-blocked evidence and shell follow-through, not route ownership drift. |
 | `/job-queue` | `/job-queue` | `jobs` | `expand` | `complete` | `JobQueue` | `frontend/src/screens/06_lookout/LookoutDiscovery.tsx` | `frontend/src/screens/06_lookout/06_lookout.wireframe.xml` | `shared_family_wireframe` | `job_listings_workbench` | `merge` | Keep route as a queue/worklist surface inside the jobs family; pair it to the 06_lookout shell while queue actions stay route-owned. |
 | `/ksc-generator` | `/ksc-generator` | `generation` | `keep` | `complete` | `KSCGenerator` | `frontend/src/screens/08_workbench/DocumentWorkbench.tsx` | `frontend/src/screens/08_workbench/08_workbench.wireframe.xml` | `shared_family_wireframe` | none | `merge` | Keep as a dedicated generator route; pair it to the 08_workbench shell while generator logic stays route-owned. |
 | `/cover-letter-generator` | `/cover-letter-generator` | `generation` | `keep` | `complete` | `CoverLetterGenerator` | `frontend/src/screens/09_finalization/ApplicationFinalization.tsx` | `frontend/src/screens/09_finalization/09_finalization.wireframe.xml` | `shared_family_wireframe` | none | `merge` | Keep as a dedicated generator route; pair it to the 09_finalization shell while cover-letter flow stays route-owned. |
@@ -130,8 +130,10 @@ For each live route, it shows:
 
 ## Matrix Gaps Still Blocking Full Implementation
 
-- `genkit_job_analysis` still lacks a normalized `resolution_status` entry in the capability matrix
-- workflow orchestration remains backend-placeholder work, so `/apply/quick` can only partially own that flow
-- resume audit history remains deferred until backend support is complete
-- analysis and asset-library ownership boundaries still need implementation cleanup even though the target routes are now locked
-- ingestion clients are still fragmented across `/api/v1/ingest`, `/api/career/ingest`, `/api/ingest/artifacts/upload`, and `/api/ingestion/*`
+- `workflow_orchestration` backend endpoints now exist, but `/apply/quick` is still not wired to the new workflow status flow and workflow tests still target the old disabled contract
+- `resume_audit` history backend support exists, but the canonical analysis runtime still does not render persisted history
+- `/analysis` and `/asset-library` ownership boundaries still need implementation cleanup even though the target routes are now locked
+- active career-ingestion callers now converge on `/api/v1/ingest`; `/api/ingest/artifacts/upload` and `/api/ingestion/*` remain specialized endpoint families
+
+Resolved note:
+- `genkit_job_analysis` is complete in the capability map; do not reopen it as a migration blocker

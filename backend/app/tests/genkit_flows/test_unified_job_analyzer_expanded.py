@@ -2,15 +2,12 @@
 Test suite for unified_job_analyzer_expanded.
 """
 
-from typing import Optional
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock
 
 import pytest
 from fastapi.testclient import TestClient
-from pydantic import BaseModel, Field
 
-from app.genkit_flows.company_context import CompanyContext, generate_company_context
-from app.genkit_flows.job_listing_extractor import extract_job_listing_details_flow
+from app.genkit_flows.company_context import CompanyContext
 from app.genkit_flows.unified_job_analyzer import UnifiedJobAnalysis, analyze_job_from_url
 from app.models.schemas import JobListingDetails
 

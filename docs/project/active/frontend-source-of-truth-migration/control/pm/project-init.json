@@ -4,10 +4,10 @@
   "target_end_date": "2026-03-31",
   "status": "IN_PROGRESS",
   "owners": {
-    "orchestrator": "TBD",
-    "frontend": "TBD",
-    "backend": "TBD",
-    "design": "TBD"
+    "orchestrator": "Claude",
+    "frontend": "Claude",
+    "backend": "Gemini",
+    "design": "Claude"
   },
   "execution_truth": [
     "docs/project/active/frontend-source-of-truth-migration/control/blueprint.md",

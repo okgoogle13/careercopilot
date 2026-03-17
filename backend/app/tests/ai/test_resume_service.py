@@ -2,11 +2,9 @@
 Tests for the resume analysis service.
 """
 
-from typing import Any, Dict
 from unittest.mock import AsyncMock, patch
 
 import pytest
-from fastapi.testclient import TestClient
 
 from app.ai.resume_service import (
     Education,
@@ -14,10 +12,7 @@ from app.ai.resume_service import (
     ResumeAnalysisResult,
     ResumeAnalysisService,
 )
-from app.core.ai_client import get_ai_client
 from app.core.config import settings
-from app.core.dependencies import get_current_user
-from app.core.document_processing import PromptTemplates, process_document
 from app.models import User
 
 pytestmark = pytest.mark.asyncio

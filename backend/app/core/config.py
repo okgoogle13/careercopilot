@@ -34,13 +34,13 @@ class Settings(BaseSettings):
     show_debug_info: bool = secure_settings.SHOW_DEBUG_INFO
 
     # AI Settings
-    model_name: str = Field("gemini-1.5-flash", description="AI model to use")
+    model_name: str = "gemini-1.5-flash"
     ai_max_tokens: int = 2000
     ai_temperature: float = 0.2
 
     # Document processing
     max_document_size_mb: int = 10
-    allowed_document_types: list[str] = field(
+    allowed_document_types: list[str] = Field(
         default_factory=lambda: ["application/pdf", "text/plain", "text/markdown"]
     )
 
@@ -69,7 +69,13 @@ class Settings(BaseSettings):
 
     # ATS Scoring Configuration
     ats_scoring_weights: dict[str, float] = field(
-        default_factory=lambda: {"keyword": 0.45, "semantic": 0.35, "formatting": 0.20}
+        default_factory=lambda: {
+            "keyword_density": 0.30,
+            "job_title": 0.20,
+            "semantic": 0.25,
+            "education_experience": 0.15,
+            "formatting": 0.10,
+        }
     )
 
     class Config:

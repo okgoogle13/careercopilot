@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
 
 from app.api.endpoints._shared import collect_uploaded_text, run_endpoint_operation
-from app.core.database import get_db
 from app.core.dependencies import get_current_user
 from app.genkit_flows.career_ingest import IngestInput, ingest_career_docs
 from app.models import User

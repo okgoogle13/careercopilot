@@ -12,7 +12,6 @@ It includes flows for:
 import json
 import logging
 from pathlib import Path
-from typing import Union
 
 from app.core.genkit_init import genkit_flow, get_model
 from app.models.schemas import JobListingDetails
@@ -51,11 +50,11 @@ def _scrape_url_content(url: str) -> str:
         return content
     except Exception as e:
         logger.error(f"Error scraping URL {url}: {e}")
-        raise IOError(f"Failed to retrieve content from the URL: {url}") from e
+        raise OSError(f"Failed to retrieve content from the URL: {url}") from e
 
 
 @genkit_flow(output_schema=JobListingDetails)
-async def extract_job_listing_details_flow(source: Union[str, dict]) -> JobListingDetails:
+async def extract_job_listing_details_flow(source: str | dict) -> JobListingDetails:
     """
     Orchestrates the extraction of structured job details.
     """

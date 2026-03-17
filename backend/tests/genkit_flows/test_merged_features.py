@@ -1,6 +1,6 @@
 import os
 import sys
-from unittest.mock import AsyncMock, MagicMock
+from unittest.mock import MagicMock
 
 # Add backend to sys.path so 'app' interactions work as expected
 backend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
@@ -59,7 +59,7 @@ with patch("builtins.open", mock_open(read_data=mock_prompts_json)):
     from app.genkit_flows.resume_optimizer import OptimizedResume, optimize_resume
 
     # We import the modules under test. They will use the mocked genkit.
-    from app.genkit_flows.unified_job_analyzer import UnifiedJobAnalysis, analyze_job_from_url
+    from app.genkit_flows.unified_job_analyzer import analyze_job_from_url
     from app.models.schemas import JobListingDetails
 
 

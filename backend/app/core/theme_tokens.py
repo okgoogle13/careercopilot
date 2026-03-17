@@ -1,5 +1,5 @@
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.shared import Pt, RGBColor
+from docx.shared import RGBColor
 
 THEME_TOKENS = {
     "minimal": {

@@ -3,9 +3,6 @@ Batch 3D: Document Analysis Service tests for final push to 95%.
 Tests Pydantic models and analysis workflows.
 """
 
-import pytest
-from pydantic import ValidationError
-
 from app.ai.document_analysis_service import (
     Education,
     Experience,
