@@ -1,14 +1,10 @@
 """Tests for Career Application Workflow."""
 
-import json
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
 from app.genkit_flows.career_application_workflow import (
-    ApplicationPackageResult,
-    KSCResponsesResult,
-    TailoredResumeResult,
     generate_application_package,
 )
 

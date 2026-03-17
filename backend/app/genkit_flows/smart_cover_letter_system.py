@@ -6,9 +6,7 @@ and multi-format output capabilities.
 """
 
 import json
-import os
 from enum import Enum
-from typing import Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -36,9 +34,9 @@ class CoverLetterFormat(str, Enum):
 class CoverLetterSection(BaseModel):
     section_name: str = Field(description="Name of the section")
     content: str = Field(description="Content of the section")
-    personalization_elements: List[str] = Field(description="Personalized elements used")
-    key_messages: List[str] = Field(description="Main messages conveyed")
-    call_to_action: Optional[str] = Field(description="Any call to action in this section")
+    personalization_elements: list[str] = Field(description="Personalized elements used")
+    key_messages: list[str] = Field(description="Main messages conveyed")
+    call_to_action: str | None = Field(description="Any call to action in this section")
 
 
 class CoverLetterAnalysis(BaseModel):
@@ -47,47 +45,47 @@ class CoverLetterAnalysis(BaseModel):
     compelling_score: int = Field(description="How compelling/persuasive (0-100)", ge=0, le=100)
     keyword_alignment: int = Field(description="Job keyword alignment (0-100)", ge=0, le=100)
 
-    strengths: List[str] = Field(description="Cover letter strengths")
-    improvement_areas: List[str] = Field(description="Areas for improvement")
+    strengths: list[str] = Field(description="Cover letter strengths")
+    improvement_areas: list[str] = Field(description="Areas for improvement")
     tone_assessment: str = Field(description="Overall tone: professional, friendly, formal, etc.")
-    unique_elements: List[str] = Field(description="What makes this letter stand out")
+    unique_elements: list[str] = Field(description="What makes this letter stand out")
 
 
 class SmartCoverLetter(BaseModel):
     letter_content: str = Field(description="Complete cover letter content")
-    subject_line: Optional[str] = Field(description="Email subject line if applicable")
+    subject_line: str | None = Field(description="Email subject line if applicable")
 
-    sections: List[CoverLetterSection] = Field(description="Breakdown by sections")
+    sections: list[CoverLetterSection] = Field(description="Breakdown by sections")
     analysis: CoverLetterAnalysis = Field(description="Quality analysis")
 
-    personalization_notes: List[str] = Field(description="How the letter was personalized")
-    key_selling_points: List[str] = Field(description="Main selling points highlighted")
-    company_connections: List[str] = Field(description="Company-specific connections made")
+    personalization_notes: list[str] = Field(description="How the letter was personalized")
+    key_selling_points: list[str] = Field(description="Main selling points highlighted")
+    company_connections: list[str] = Field(description="Company-specific connections made")
 
-    alternative_versions: Dict[str, str] = Field(description="Different style/format versions")
-    follow_up_suggestions: List[str] = Field(description="Follow-up communication suggestions")
+    alternative_versions: dict[str, str] = Field(description="Different style/format versions")
+    follow_up_suggestions: list[str] = Field(description="Follow-up communication suggestions")
 
 
 class CompanyResearchInsights(BaseModel):
     company_overview: str = Field(description="Brief company overview")
-    recent_news: List[str] = Field(description="Recent company developments")
-    company_values: List[str] = Field(description="Core company values and culture")
-    key_initiatives: List[str] = Field(description="Major projects or initiatives")
+    recent_news: list[str] = Field(description="Recent company developments")
+    company_values: list[str] = Field(description="Core company values and culture")
+    key_initiatives: list[str] = Field(description="Major projects or initiatives")
     industry_position: str = Field(description="Company's position in industry")
-    growth_indicators: List[str] = Field(description="Signs of company growth/success")
-    potential_challenges: List[str] = Field(description="Challenges company may be facing")
-    connection_opportunities: List[str] = Field(description="Ways to connect with company mission")
+    growth_indicators: list[str] = Field(description="Signs of company growth/success")
+    potential_challenges: list[str] = Field(description="Challenges company may be facing")
+    connection_opportunities: list[str] = Field(description="Ways to connect with company mission")
 
 
 @genkit_flow(output_schema=SmartCoverLetter)
 @with_ai_error_handling()
 def generate_smart_cover_letter(
-    candidate_profile: Dict,
+    candidate_profile: dict,
     job_description: str,
-    company_info: Optional[Dict] = None,
+    company_info: dict | None = None,
     style: str = "professional",
     format_type: str = "full_letter",
-    special_instructions: Optional[str] = None,
+    special_instructions: str | None = None,
 ) -> SmartCoverLetter:
     """
     Generates a highly personalized, compelling cover letter with company research integration.
@@ -197,7 +195,7 @@ Respond with valid JSON matching the SmartCoverLetter schema.
 
     except Exception as e:
         raise AIError(
-            message=f"Smart cover letter generation failed: {str(e)}",
+            message=f"Smart cover letter generation failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
@@ -209,7 +207,7 @@ def research_company_for_application(
     company_name: str,
     industry: str,
     job_role: str,
-    additional_context: Optional[str] = None,
+    additional_context: str | None = None,
 ) -> CompanyResearchInsights:
     """
     Generates company research insights to inform personalized cover letters.
@@ -307,7 +305,7 @@ Respond with valid JSON matching the CompanyResearchInsights schema.
 
     except Exception as e:
         raise AIError(
-            message=f"Company research failed: {str(e)}",
+            message=f"Company research failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
@@ -319,10 +317,10 @@ class CoverLetterOptimizationResult(BaseModel):
     improvement_percentage: float = Field(description="Percentage improvement")
 
     optimized_content: str = Field(description="Optimized cover letter content")
-    changes_made: List[str] = Field(description="Specific changes and improvements")
-    optimization_rationale: List[str] = Field(description="Why changes were made")
+    changes_made: list[str] = Field(description="Specific changes and improvements")
+    optimization_rationale: list[str] = Field(description="Why changes were made")
 
-    before_after_comparison: Dict[str, Dict[str, str]] = Field(
+    before_after_comparison: dict[str, dict[str, str]] = Field(
         description="Side-by-side comparison"
     )
     success_probability: int = Field(description="Estimated success probability", ge=0, le=100)
@@ -333,8 +331,8 @@ class CoverLetterOptimizationResult(BaseModel):
 def optimize_existing_cover_letter(
     existing_cover_letter: str,
     job_description: str,
-    candidate_profile: Dict,
-    company_insights: Optional[Dict] = None,
+    candidate_profile: dict,
+    company_insights: dict | None = None,
 ) -> CoverLetterOptimizationResult:
     """
     Optimizes an existing cover letter for better impact and job alignment.
@@ -431,7 +429,7 @@ Respond with valid JSON matching the CoverLetterOptimizationResult schema.
 
     except Exception as e:
         raise AIError(
-            message=f"Cover letter optimization failed: {str(e)}",
+            message=f"Cover letter optimization failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
@@ -442,19 +440,19 @@ class MultiFormatCoverLetterSuite(BaseModel):
     email_version: str = Field(description="Email application version")
     linkedin_message: str = Field(description="LinkedIn connection message")
     networking_email: str = Field(description="Networking/informational interview email")
-    follow_up_templates: Dict[str, str] = Field(description="Follow-up email templates")
+    follow_up_templates: dict[str, str] = Field(description="Follow-up email templates")
 
-    format_guidelines: Dict[str, str] = Field(description="Usage guidelines for each format")
-    personalization_tips: List[str] = Field(description="How to further personalize each version")
-    timing_recommendations: Dict[str, str] = Field(description="When to use each format")
+    format_guidelines: dict[str, str] = Field(description="Usage guidelines for each format")
+    personalization_tips: list[str] = Field(description="How to further personalize each version")
+    timing_recommendations: dict[str, str] = Field(description="When to use each format")
 
 
 @genkit_flow(output_schema=MultiFormatCoverLetterSuite)
 @with_ai_error_handling()
 def create_multi_format_cover_letter_suite(
-    candidate_profile: Dict,
+    candidate_profile: dict,
     job_description: str,
-    company_insights: Optional[Dict] = None,
+    company_insights: dict | None = None,
 ) -> MultiFormatCoverLetterSuite:
     """
     Creates a complete suite of application materials in different formats.
@@ -549,7 +547,7 @@ Respond with valid JSON matching the MultiFormatCoverLetterSuite schema.
 
     except Exception as e:
         raise AIError(
-            message=f"Multi-format cover letter suite creation failed: {str(e)}",
+            message=f"Multi-format cover letter suite creation failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
@@ -557,14 +555,14 @@ Respond with valid JSON matching the MultiFormatCoverLetterSuite schema.
 
 # Export main functions
 __all__ = [
-    "generate_smart_cover_letter",
-    "research_company_for_application",
-    "optimize_existing_cover_letter",
-    "create_multi_format_cover_letter_suite",
-    "SmartCoverLetter",
     "CompanyResearchInsights",
-    "CoverLetterOptimizationResult",
-    "MultiFormatCoverLetterSuite",
-    "CoverLetterStyle",
     "CoverLetterFormat",
+    "CoverLetterOptimizationResult",
+    "CoverLetterStyle",
+    "MultiFormatCoverLetterSuite",
+    "SmartCoverLetter",
+    "create_multi_format_cover_letter_suite",
+    "generate_smart_cover_letter",
+    "optimize_existing_cover_letter",
+    "research_company_for_application",
 ]

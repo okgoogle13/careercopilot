@@ -13,7 +13,7 @@ sys.modules["genkit.plugins.googleai"] = MagicMock()
 sys.modules["google.generativeai"] = MagicMock()
 
 # Mock Pydantic
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class GapAnalysisResult(BaseModel):
@@ -29,7 +29,7 @@ sys.modules["app.services.vector_store"] = mock_vs_module
 # --- IMPORT FLOW ---
 # We need to patch the internal generation call inside the flow
 with patch("app.genkit_flows.gap_hunter.gemini_pro") as mock_gemini:
-    from app.genkit_flows.gap_hunter import GapAnalysisResult, gap_hunter_flow
+    from app.genkit_flows.gap_hunter import gap_hunter_flow
 
     # --- SETUP TEST DATA ---
     # Mock Gemini Response for Gap ID

@@ -4,6 +4,8 @@ Route Migration Completion Plan
 > For agentic workers: REQUIRED: Use [subagent-driven-development](file:///.claude/skills/subagent-driven-development) or [executing-plans](file:///.claude/skills/executing-plans) to implement this plan.
 >
 > **Authority Guard**: Implementation must prioritize **Runtime Truth** (`App.tsx`) > **Design Truth** (`wireframe.xml`) > **Capability Truth** (Endpoints) before modifying any support artifacts.
+>
+> During any React implementation, Vercel skills act as required code reviewers: `vercel-composition-patterns` → `vercel-react-best-practices` → `web-design-guidelines`.
 
 Goal: Capture the remaining migration work (status artifacts, route/component gaps, /tracker environment, and Figma-informed routes) so Claude/Gemini can execute a clean handoff.
 
@@ -59,6 +61,10 @@ Tech Stack: Node (Vite) scripts for inventory and integrity, Python governance s
 - [ ] **Step 4: Document Findings**
     - Update `control/gap-map.json/.md` with results.
 
+- **Skill Handoff Note**:
+    - Task 2 only identifies which routes/components need work (from `scan-routes.ts`, `derive-gap-fill-plan.py`, `validate-wireframe-workflow.py`).
+    - Vercel skills are **not** invoked in Task 2; they will be used later on the components/routes flagged here.
+
 ---
 
 ### Task 3: Remaining Route & Component Workplan (Identity & Visual Gate)
@@ -71,6 +77,8 @@ Tech Stack: Node (Vite) scripts for inventory and integrity, Python governance s
 - [ ] **Step 2: Shared Primitive & Visual Gate**
     - Audit `Logo`, `Sidebar`, `AuthGuard`, `KrDarkDock`, `Footer`.
     - **Visual Check**: Run `vision-scorer-mcp` or a visual audit (score >= 90) specifically for `Logo` and `Sidebar` to confirm Zero-Flora compliance.
+    - When working on `Logo`, `Sidebar`, `AuthGuard`, `KrDarkDock`, `Footer`, and route shells, use `vercel-composition-patterns` to: detect boolean/config prop bloat, propose a more composable API, and rewrite the component plus 1–2 usages while preserving behaviour.
+    - After `check-screen-pairs.ts`, `vision-scorer-mcp`, and token-enforcement pass for a route, use `web-design-guidelines` on those components/pages to: audit accessibility and UX, suggest minimal fixes, and apply them with small, backward-compatible diffs.
 - [ ] **Step 3: Identity Gate Evidence**
     - For each route, require the Late-Stage TSX Identity Gate.
     - **Mandatory Artifact**: Record outcomes in `docs/project/active/frontend-source-of-truth-migration/analysis/tsx-identity-gate-template.md` (or route-specific instances).
@@ -78,6 +86,7 @@ Tech Stack: Node (Vite) scripts for inventory and integrity, Python governance s
     - **Problem**: Dev server persists legacy `Sidebar` and `Logo` via `ProtectedLayout`.
     - **Action**: In `App.tsx`, replace `ProtectedLayout` with `MigratedRouteLayout` for all routes where design parity is confirmed.
     - **Audit**: Ensure `KrDarkDock` is the authoritative navigation component.
+    - When promoting `MigratedRouteLayout`, updating route wrappers, or Identity Gates in `App.tsx`, use `vercel-react-best-practices` to: remove React anti-patterns, confirm structure matches `check-route-integrity.ts`, and output drop-in replacements.
 - [ ] **Step 4: Blocker Diagnostic Packet**
     - **Failure-Mode Evidence**: Document the specific Firebase/Firestore error logs, environment vars, and `AuthContext.tsx` failure points for `/tracker`. This packet must ensure the next agent has actionable diagnostics.
 - [ ] **Step 5: Delegation Instructions**
@@ -95,13 +104,19 @@ Tech Stack: Node (Vite) scripts for inventory and integrity, Python governance s
 
 ---
 
-### Task 5: Execution Strategy (Skill Routing)
+### Task 5: Execution Strategy & Efficiency Guardrails
 
-To execute this plan via Claude Code, use the following skill integration:
+To execute this plan via Claude Code, use the following skill integration and **Token Efficiency Guardrails**:
 
 1. **`design-orchestration` (Workflow Governor)**: Use to route work through brainstorming and blueprinting phases. It enforces the KR Solidarity compliance gates and ensures no implementation starts without a validated design.
 2. **`blueprint` (Construction Plan)**: Invoke `/blueprint` for the remaining routes. This will generate the `blueprint.md` artifacts required for "cold-start" execution by subsequent agents.
-3. **`project-manager` / `sprint-coordinator`**: Use these for tracking milestone completion and reporting progress to the user.
+3. **Efficiency Guardrails (MANDATORY)**:
+   - **Anchored Execution**: Use `blueprint.md` **Task IDs** (e.g., `Step 3a.2`) as the only context anchors. Load ONLY files required for the current Task ID.
+   - **Build Contract Centricity**: Use the XML Build Contracts as the *primary* implementation reference. Avoid loading multiple legacy components for "inspiration."
+   - **Script-Driven Inventory**: Never use `ls -R` or `grep` to find orphan routes. Run `scan-routes.ts` or `detect-orphans.ts` and read only the JSON output.
+4. **`project-manager` / `sprint-coordinator`**: Use these for tracking milestone completion and reporting progress to the user.
+
+For any React/UI implementation, first follow `blueprint` and script outputs, then use `vercel-composition-patterns` to shape component APIs, then `vercel-react-best-practices` to write/refactor code, and finally `web-design-guidelines` after visual/CI checks to tighten accessibility/UX.
 
 ---
 

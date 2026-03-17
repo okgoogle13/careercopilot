@@ -2,26 +2,14 @@
 Tests for AI response validation and parsing utility.
 """
 
-import json
-from typing import Any, Dict, List, Optional
-
-import pytest
-from fastapi import HTTPException
-from fastapi.testclient import TestClient
-from pydantic import ValidationError
-
 from app.core import ai_response_validation
 from app.core.ai_response_validation import (
     AIResponseValidationError,
-    BaseAIResponseSchema,
-    ExperienceSelection,
     JobRequirements,
-    KSCAnalysis,
     KSCResponseComplete,
     SemanticAnalysis,
     STARResponse,
     ValidationErrorType,
-    ValidationResult,
 )
 
 # TestClient removed as ai_response_validation does not expose a FastAPI app

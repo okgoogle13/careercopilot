@@ -14,7 +14,6 @@ All flows use gemini-3.0-pro for structured JSON output and large context window
 """
 
 import logging
-from typing import List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -276,7 +275,7 @@ Return valid JSON matching the MasterCareerProfile schema v4.
 class KSCExtractionResult(BaseModel):
     """Result of KSC extraction with criteria examples and related skills."""
 
-    examples: List[KeySelectionCriteriaExample] = Field(
+    examples: list[KeySelectionCriteriaExample] = Field(
         ..., description="Extracted Key Selection Criteria examples"
     )
 
@@ -448,10 +447,10 @@ Return valid JSON matching the VoiceProfile schema.
 class SkillsExtractionResult(BaseModel):
     """Result of skills extraction with categorized skills."""
 
-    technical: List[str] = Field(default_factory=list, description="Technical skills")
-    tools: List[str] = Field(default_factory=list, description="Software and tools")
-    soft: List[str] = Field(default_factory=list, description="Soft/interpersonal skills")
-    methodologies: List[str] = Field(
+    technical: list[str] = Field(default_factory=list, description="Technical skills")
+    tools: list[str] = Field(default_factory=list, description="Software and tools")
+    soft: list[str] = Field(default_factory=list, description="Soft/interpersonal skills")
+    methodologies: list[str] = Field(
         default_factory=list, description="Methodologies and frameworks"
     )
 

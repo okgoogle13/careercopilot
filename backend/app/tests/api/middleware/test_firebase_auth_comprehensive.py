@@ -2,15 +2,13 @@
 Comprehensive tests for Firebase Authentication Middleware.
 """
 
-from typing import Any
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pytest
 from fastapi import Depends, FastAPI, Request, status
 from fastapi.testclient import TestClient
 
 from app.api.middleware.firebase_auth import (
-    FirebaseAuthBackend,
     auth_backend,
     get_current_user,
     require_role,

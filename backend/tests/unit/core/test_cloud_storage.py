@@ -1,6 +1,5 @@
 """Unit tests for CloudStorageClient."""
 
-from datetime import timedelta
 from unittest.mock import MagicMock, patch
 
 import pytest

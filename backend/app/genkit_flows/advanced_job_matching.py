@@ -6,8 +6,6 @@ of compatibility between candidates and job opportunities.
 """
 
 import json
-import os
-from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -29,12 +27,12 @@ class CareerTransitionAnalysis(BaseModel):
     transition_feasibility: int = Field(
         description="How feasible the transition is (0-100)", ge=0, le=100
     )
-    transferable_skills: List[str] = Field(description="Skills that transfer from current field")
-    skill_gaps: List[str] = Field(description="Skills needed for successful transition")
+    transferable_skills: list[str] = Field(description="Skills that transfer from current field")
+    skill_gaps: list[str] = Field(description="Skills needed for successful transition")
     transition_timeline: str = Field(
         description="Estimated timeline: immediate, 3-6months, 6-12months, 1-2years"
     )
-    transition_strategy: List[str] = Field(description="Recommended steps for transition")
+    transition_strategy: list[str] = Field(description="Recommended steps for transition")
 
 
 class JobMatchAnalysis(BaseModel):
@@ -44,18 +42,18 @@ class JobMatchAnalysis(BaseModel):
     cultural_fit: int = Field(description="Cultural and values fit (0-100)", ge=0, le=100)
     growth_potential: int = Field(description="Career growth potential (0-100)", ge=0, le=100)
 
-    skill_matches: List[SkillMatch] = Field(description="Detailed skill-by-skill analysis")
-    critical_gaps: List[str] = Field(description="Critical gaps that may prevent success")
-    competitive_advantages: List[str] = Field(
+    skill_matches: list[SkillMatch] = Field(description="Detailed skill-by-skill analysis")
+    critical_gaps: list[str] = Field(description="Critical gaps that may prevent success")
+    competitive_advantages: list[str] = Field(
         description="Candidate's unique strengths for this role"
     )
 
-    career_transition: Optional[CareerTransitionAnalysis] = Field(
+    career_transition: CareerTransitionAnalysis | None = Field(
         default=None, description="Career transition analysis if applicable"
     )
 
-    recommendations: List[str] = Field(description="Actionable recommendations to improve match")
-    interview_prep_focus: List[str] = Field(
+    recommendations: list[str] = Field(description="Actionable recommendations to improve match")
+    interview_prep_focus: list[str] = Field(
         description="Key areas to focus on for interview preparation"
     )
 
@@ -78,21 +76,21 @@ class JobOpportunityRanking(BaseModel):
 class CandidateProfile(BaseModel):
     """Structured representation of a candidate's profile"""
 
-    current_role: Optional[str] = None
+    current_role: str | None = None
     years_experience: int = 0
-    skills: List[str] = []
-    education: List[str] = []
-    career_transition_from: Optional[str] = None
-    career_transition_to: Optional[str] = None
-    preferred_location: Optional[str] = None
-    salary_expectations: Optional[str] = None
-    work_preferences: List[str] = []
-    achievements: List[str] = []
+    skills: list[str] = []
+    education: list[str] = []
+    career_transition_from: str | None = None
+    career_transition_to: str | None = None
+    preferred_location: str | None = None
+    salary_expectations: str | None = None
+    work_preferences: list[str] = []
+    achievements: list[str] = []
 
 
 @genkit_flow(output_schema=JobMatchAnalysis)
 @with_ai_error_handling()
-def analyze_job_match_detailed(job_description: str, candidate_profile: Dict) -> JobMatchAnalysis:
+def analyze_job_match_detailed(job_description: str, candidate_profile: dict) -> JobMatchAnalysis:
     """
     Performs comprehensive job matching analysis using multiple AI evaluation criteria.
 
@@ -171,7 +169,7 @@ Respond with a valid JSON object matching the JobMatchAnalysis schema.
 
     except Exception as e:
         raise AIError(
-            message=f"Job match analysis failed: {str(e)}",
+            message=f"Job match analysis failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
@@ -180,8 +178,8 @@ Respond with a valid JSON object matching the JobMatchAnalysis schema.
 @genkit_flow()
 @with_ai_error_handling()
 def rank_job_opportunities(
-    candidate_profile: Dict, job_opportunities: List[Dict]
-) -> List[JobOpportunityRanking]:
+    candidate_profile: dict, job_opportunities: list[dict]
+) -> list[JobOpportunityRanking]:
     """
     Ranks multiple job opportunities for a candidate based on match quality and success probability.
 
@@ -244,14 +242,14 @@ Return jobs ranked from best to worst match as a JSON array matching the JobOppo
                 "response_mime_type": "application/json",
                 "temperature": 0.2,
             },
-            output_schema=List[JobOpportunityRanking],
+            output_schema=list[JobOpportunityRanking],
         )
 
         return response.output()
 
     except Exception as e:
         raise AIError(
-            message=f"Job ranking failed: {str(e)}",
+            message=f"Job ranking failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
@@ -261,17 +259,17 @@ class MarketPositioningAnalysis(BaseModel):
     competitive_position: str = Field(description="strong, moderate, weak competitive position")
     market_demand: int = Field(description="Market demand score (0-100)", ge=0, le=100)
     salary_competitiveness: str = Field(description="above_market, market_rate, below_market")
-    unique_value_proposition: List[str] = Field(description="Candidate's unique strengths")
-    market_differentiators: List[str] = Field(description="What sets candidate apart")
-    positioning_recommendations: List[str] = Field(description="How to position candidacy")
-    target_companies: List[str] = Field(description="Companies that would value this profile")
-    negotiation_strengths: List[str] = Field(description="Strengths for salary negotiation")
+    unique_value_proposition: list[str] = Field(description="Candidate's unique strengths")
+    market_differentiators: list[str] = Field(description="What sets candidate apart")
+    positioning_recommendations: list[str] = Field(description="How to position candidacy")
+    target_companies: list[str] = Field(description="Companies that would value this profile")
+    negotiation_strengths: list[str] = Field(description="Strengths for salary negotiation")
 
 
 @genkit_flow(output_schema=MarketPositioningAnalysis)
 @with_ai_error_handling()
 def analyze_market_positioning(
-    candidate_profile: Dict, target_role: str, location: str
+    candidate_profile: dict, target_role: str, location: str
 ) -> MarketPositioningAnalysis:
     """
     Analyzes candidate's market positioning for their target role and provides strategic insights.
@@ -335,7 +333,7 @@ Respond with valid JSON matching the MarketPositioningAnalysis schema.
 
     except Exception as e:
         raise AIError(
-            message=f"Market positioning analysis failed: {str(e)}",
+            message=f"Market positioning analysis failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
@@ -343,7 +341,7 @@ Respond with valid JSON matching the MarketPositioningAnalysis schema.
 
 # Helper function for batch job analysis
 @with_ai_error_handling()
-def analyze_job_batch(candidate_profile: Dict, job_descriptions: List[str]) -> List[Dict]:
+def analyze_job_batch(candidate_profile: dict, job_descriptions: list[str]) -> list[dict]:
     """
     Analyzes multiple jobs for a candidate in batch for efficiency.
 
@@ -370,12 +368,12 @@ def analyze_job_batch(candidate_profile: Dict, job_descriptions: List[str]) -> L
 
 # Export main functions
 __all__ = [
-    "analyze_job_match_detailed",
-    "rank_job_opportunities",
-    "analyze_market_positioning",
-    "analyze_job_batch",
+    "CandidateProfile",
     "JobMatchAnalysis",
     "JobOpportunityRanking",
     "MarketPositioningAnalysis",
-    "CandidateProfile",
+    "analyze_job_batch",
+    "analyze_job_match_detailed",
+    "analyze_market_positioning",
+    "rank_job_opportunities",
 ]

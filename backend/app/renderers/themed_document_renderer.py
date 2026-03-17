@@ -4,8 +4,9 @@ Theme-aware HTML and PDF rendering for resume and cover-letter documents.
 
 from __future__ import annotations
 
+from collections.abc import Mapping, Sequence
 from html import escape
-from typing import Any, Mapping, Sequence
+from typing import Any
 
 from jinja2 import Template
 from weasyprint import HTML

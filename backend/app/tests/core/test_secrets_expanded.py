@@ -1,9 +1,7 @@
-import os
 from unittest.mock import MagicMock, patch
 
 import pytest
 
-from app.core import secrets
 from app.core.secrets import (
     _get_secret_manager_client,
     _secret_exists,

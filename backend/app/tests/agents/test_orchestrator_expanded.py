@@ -4,7 +4,6 @@ from datetime import datetime, timedelta
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
-from fastapi import HTTPException
 
 from app.agents.orchestrator import (
     AgentOrchestrator,

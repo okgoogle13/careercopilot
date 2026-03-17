@@ -178,7 +178,7 @@
       "screen_reference": "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx",
       "xml_wireframe_path": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml",
       "wireframe_coverage": "shared_family_wireframe",
-      "paired_runtime_surface": "frontend/src/pages/AnalysisPage.tsx",
+      "paired_runtime_surface": "frontend/src/features/analysis/AnalysisPage.tsx",
       "backend_capabilities": [
         "resume_audit"
       ],
@@ -290,7 +290,7 @@
       "screen_reference": "frontend/src/screens/09_finalization/ApplicationFinalization.tsx",
       "xml_wireframe_path": "frontend/src/screens/09_finalization/09_finalization.wireframe.xml",
       "wireframe_coverage": "route_specific_wireframe",
-      "paired_runtime_surface": "frontend/src/pages/ApplyQuick.tsx",
+      "paired_runtime_surface": "frontend/src/features/applications/ApplyQuick.tsx",
       "backend_capabilities": [
         "applications_crud",
         "genkit_job_analysis",

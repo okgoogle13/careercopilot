@@ -1,6 +1,6 @@
 """Unit tests for the web search service."""
 
-from unittest.mock import AsyncMock, patch
+from unittest.mock import patch
 
 import pytest
 

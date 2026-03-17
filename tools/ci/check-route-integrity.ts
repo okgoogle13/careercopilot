@@ -32,6 +32,7 @@ interface CheckResult {
 
 function resolveImport(importSource: string): string | null {
   if (importSource === 'UNKNOWN') return null;
+  if (importSource === 'react-router-dom') return importSource;
   const base = importSource.replace(/^\.\//, '');
   const candidates = [
     path.join(SRC_DIR, base + '.tsx'),
@@ -72,6 +73,7 @@ function main() {
 
     // 2. Check non-prototype routes source from features/
     if (!route.importSource.includes('/features/') &&
+        route.importSource !== 'react-router-dom' &&
         !route.importSource.includes('/pages/') &&  // pages/ is known legacy
         route.importSource !== 'UNKNOWN' &&
         !route.path.startsWith('/kr/') &&

@@ -3,14 +3,12 @@ Comprehensive tests for ats_scoring.py genkit flow.
 Target coverage: 61% → 80% (15-20 tests)
 """
 
-from unittest.mock import AsyncMock, MagicMock, Mock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
 from app.genkit_flows.ats_scoring import (
     AtsResult,
-    KeywordMatches,
-    ScoreBreakdown,
     SemanticAnalysis,
     _calculate_formatting_score,
     _calculate_keyword_score,

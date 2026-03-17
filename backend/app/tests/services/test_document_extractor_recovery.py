@@ -3,8 +3,7 @@ Comprehensive tests for document_extractor.py service.
 Target coverage: 57% → 85% (20-25 tests)
 """
 
-from io import BytesIO
-from unittest.mock import MagicMock, Mock, call, patch
+from unittest.mock import MagicMock, Mock, patch
 
 import pytest
 

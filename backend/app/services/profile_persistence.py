@@ -5,8 +5,6 @@ from __future__ import annotations
 import logging
 from typing import Any
 
-from sqlalchemy.orm import Session
-
 from app.services.user_profile_service import user_profile_service
 
 

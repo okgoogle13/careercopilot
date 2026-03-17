@@ -10,22 +10,11 @@ from unittest.mock import MagicMock
 sys.modules["transformers"] = MagicMock()
 sys.modules["spacy"] = MagicMock()
 
-import time
 import unittest.mock as mock
 
-import psutil
 import pytest
-from fastapi.testclient import TestClient
 
 from app.core.nlp_model_manager import NLPModelManager
-from app.monitoring.nlp_metrics import (
-    NLP_REQUEST_DURATION,
-    track_model_load_time,
-    track_model_memory_usage,
-    track_nlp_duration,
-    track_nlp_request,
-    track_tokens_processed,
-)
 
 
 # Mocking dependencies

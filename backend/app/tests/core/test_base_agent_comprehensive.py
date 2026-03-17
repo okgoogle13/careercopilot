@@ -4,18 +4,12 @@ Test suite for base_agent.py
 
 import hashlib
 import json
-from datetime import datetime, timedelta
-from typing import Any, Dict
-from unittest.mock import patch
+from datetime import timedelta
+from typing import Any
 
 import pytest
-from fastapi import HTTPException
-from pytest_mock import MockerFixture
 
-from app.core.ai_client import get_ai_client
-from app.core.base_agent import BaseAgent, PromptType
-from app.core.personal_cache import get_personal_cache
-from app.services.ai_prompt_builder import get_ai_prompt_builder
+from app.core.base_agent import BaseAgent
 
 
 class MockAgent(BaseAgent):

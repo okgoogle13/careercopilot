@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import sys
 import types
+from typing import Any
 
 import pytest
 
@@ -85,10 +86,10 @@ def test_secure_settings_development_tolerates_secret_failure(
 
 
 def test_validate_firebase_creds_with_adc_match(monkeypatch: pytest.MonkeyPatch) -> None:
-    google_mod = types.ModuleType("google")
-    google_auth_mod = types.ModuleType("google.auth")
-    setattr(google_auth_mod, "default", lambda: (object(), "proj-match"))
-    setattr(google_mod, "auth", google_auth_mod)
+    google_mod: Any = types.ModuleType("google")
+    google_auth_mod: Any = types.ModuleType("google.auth")
+    google_auth_mod.default = lambda: (object(), "proj-match")
+    google_mod.auth = google_auth_mod
     monkeypatch.setitem(sys.modules, "google", google_mod)
     monkeypatch.setitem(sys.modules, "google.auth", google_auth_mod)
 
@@ -101,10 +102,10 @@ def test_validate_firebase_creds_with_adc_match(monkeypatch: pytest.MonkeyPatch)
 def test_validate_firebase_creds_project_mismatch_returns_input(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    google_mod = types.ModuleType("google")
-    google_auth_mod = types.ModuleType("google.auth")
-    setattr(google_auth_mod, "default", lambda: (object(), "other-project"))
-    setattr(google_mod, "auth", google_auth_mod)
+    google_mod: Any = types.ModuleType("google")
+    google_auth_mod: Any = types.ModuleType("google.auth")
+    google_auth_mod.default = lambda: (object(), "other-project")
+    google_mod.auth = google_auth_mod
     monkeypatch.setitem(sys.modules, "google", google_mod)
     monkeypatch.setitem(sys.modules, "google.auth", google_auth_mod)
 
@@ -127,14 +128,14 @@ def test_validate_firebase_creds_returns_input_on_explicit_or_no_project() -> No
 def test_validate_firebase_creds_handles_google_auth_exception(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    google_mod = types.ModuleType("google")
-    google_auth_mod = types.ModuleType("google.auth")
+    google_mod: Any = types.ModuleType("google")
+    google_auth_mod: Any = types.ModuleType("google.auth")
 
     def _broken_default():
         raise RuntimeError("adc unavailable")
 
-    setattr(google_auth_mod, "default", _broken_default)
-    setattr(google_mod, "auth", google_auth_mod)
+    google_auth_mod.default = _broken_default
+    google_mod.auth = google_auth_mod
     monkeypatch.setitem(sys.modules, "google", google_mod)
     monkeypatch.setitem(sys.modules, "google.auth", google_auth_mod)
 

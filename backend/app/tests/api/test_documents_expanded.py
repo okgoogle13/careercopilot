@@ -1,18 +1,13 @@
 import io
 import json
-import os
 from unittest.mock import MagicMock, patch
 
 import pytest
-from fastapi import status
 from fastapi.testclient import TestClient
 
-from app.core.database import get_db
 from app.core.dependencies import get_current_user
 from app.main import app
 from app.models.database import User
-from app.models.user_asset import UserAsset
-from app.services.doc_intelligence import DocumentIntelligenceService
 
 
 # Mocking

@@ -209,7 +209,7 @@ def mock_error_handler_decorator(*args, **kwargs):
                     if isinstance(e, AIError):
                         raise
                     raise AIError(
-                        message=f"Comprehensive resume analysis failed: {str(e)}",
+                        message=f"Comprehensive resume analysis failed: {e!s}",
                         error_type=AIErrorType.GENERATION_FAILED,
                         original_error=e,
                     )
@@ -225,7 +225,7 @@ def mock_error_handler_decorator(*args, **kwargs):
                     if isinstance(e, AIError):
                         raise
                     raise AIError(
-                        message=f"Comprehensive resume analysis failed: {str(e)}",
+                        message=f"Comprehensive resume analysis failed: {e!s}",
                         error_type=AIErrorType.GENERATION_FAILED,
                         original_error=e,
                     )
@@ -644,7 +644,6 @@ def setup_mocks(
     """Set up mocks for the resume intelligence pipeline"""
     # Import the module first to ensure it's in sys.modules
     from app.core import genkit_init
-    from app.genkit_flows import resume_intelligence_pipeline as rip
 
     # Mock get_model to return our mock_gemini
     monkeypatch.setattr(rip, "get_model", lambda: mock_gemini)

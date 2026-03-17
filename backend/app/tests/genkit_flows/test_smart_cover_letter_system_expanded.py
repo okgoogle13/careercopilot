@@ -2,22 +2,16 @@
 Tests for the smart cover letter generation system.
 """
 
-import json
-from typing import Dict, List, Optional
 from unittest.mock import patch
 
 import pytest
 from fastapi.testclient import TestClient
 from pydantic import BaseModel
 
-from app.core.ai_error_handling import AIError, AIErrorType
-from app.core.input_validation import InputValidationError
+from app.core.ai_error_handling import AIError
 from app.genkit_flows.smart_cover_letter_system import (
-    CompanyResearchInsights,
     CoverLetterAnalysis,
-    CoverLetterFormat,
     CoverLetterSection,
-    CoverLetterStyle,
     SmartCoverLetter,
     generate_smart_cover_letter,
 )

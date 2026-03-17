@@ -18,6 +18,6 @@ async def extract_text_from_upload(file: UploadFile) -> str:
             text = [page.extract_text() for page in reader.pages]
             return "\n".join(text)
         except Exception as e:
-            return f"[Error reading PDF {file.filename}: {str(e)}]"
+            return f"[Error reading PDF {file.filename}: {e!s}]"
 
     return ""  # Unsupported type
