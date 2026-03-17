@@ -12,39 +12,66 @@ type SlotDef = {
 
 const SLOT_DEFS: SlotDef[] = [
   {
-    name: 'hero_background',
-    zLayer: 'Z-0',
-    token: '--sys-color-charcoalBackground-base',
-    assetCompat: 'KR-SOLID-SUBSTRATE',
-  },
-  {
-    name: 'hero_accent',
-    zLayer: 'Z-1',
-    token: '--sys-color-protestMetalBlue-base',
-    assetCompat: 'KR-SOLID-ATMOS',
-  },
-  {
-    name: 'cta_icon',
+    name: 'auto_kr_solid_006',
     zLayer: 'Z-3',
-    token: '--sys-color-worker-ash-base',
-    assetCompat: 'KR-SOLID-UIKIT',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_solid_013',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_solid_028',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_solid_033',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_ui_002',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_ui_018',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_ui_028',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_solid_041',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
   },
 ];
-
 const DEFAULT_SLOT_ASSETS: Partial<Record<string, string>> = {
-  hero_background: 'KR-SOLID-002',
-  hero_accent: 'KR-SOLID-004',
-  cta_icon: 'KR-SOLID-023',
+  auto_kr_solid_006: 'KR-SOLID-012',
+  auto_kr_solid_013: 'KR-SOLID-013',
+  auto_kr_solid_028: 'KR-SOLID-014',
+  auto_kr_solid_033: 'KR-SOLID-019',
+  auto_kr_ui_002: 'KR-SOLID-020',
+  auto_kr_ui_018: 'KR-SOLID-021',
+  auto_kr_ui_028: 'KR-SOLID-022',
+  auto_kr_solid_041: 'KR-SOLID-023',
 };
 
-const slotOpacity: Record<SlotDef['zLayer'], number> = {
-  'Z-0': 0.3,
-  'Z-1': 0.26,
-  'Z-2': 0.24,
-  'Z-3': 0.22,
-};
-
-export interface HeroLandingProps {
+export interface ApplicationFinalizationProps {
   className?: ClassValue;
   title?: string;
   subtitle?: string;
@@ -56,21 +83,22 @@ export interface HeroLandingProps {
 }
 
 const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
+const _springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
 const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
 
-export const HeroLanding = memo(function HeroLanding({
+export const ApplicationFinalization = memo(function ApplicationFinalization({
   className,
-  title = 'Career Applications, Perfected',
-  subtitle = 'ATS-optimized resumes, compelling cover letters, and strategic job discovery.',
-  primaryLabel = 'Get Started',
-  secondaryLabel = 'Learn More',
+  title = 'Application Finalization',
+  subtitle = 'Run checklist and submit with confidence.',
+  primaryLabel = 'Submit Application',
+  secondaryLabel = 'Save Draft',
   slotAssets,
   onPrimaryAction,
   onSecondaryAction,
-}: HeroLandingProps) {
+}: ApplicationFinalizationProps) {
   const mode = useModeStore((state) => state.mode);
   const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
+  const isKrDark = mode === 'KrDark';
 
   return (
     <motion.section
@@ -79,7 +107,7 @@ export const HeroLanding = memo(function HeroLanding({
       animate={{ opacity: 1, y: 0 }}
       transition={undefined}
       className={clsx(
-        "relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-8 font-['Work_Sans'] text-base min-h-[75vh] flex flex-col justify-center",
+        'relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8',
         className
       )}
       style={{
@@ -88,12 +116,11 @@ export const HeroLanding = memo(function HeroLanding({
         border: '1px solid var(--sys-color-concreteGrey-base)',
       }}
       data-mode={mode}
-      data-testid="herolanding"
+      data-testid="applicationfinalization"
       data-motion-audit="true"
-      data-density-ratio="0.36"
     >
       <style>{`
-        @media (prefers-reduced-motion: reduce) {
+         @media (prefers-reduced-motion: reduce) {
           [data-motion-audit="true"] *,
           [data-motion-audit="true"]::before,
           [data-motion-audit="true"]::after {
@@ -114,7 +141,7 @@ export const HeroLanding = memo(function HeroLanding({
             data-asset-compat={slot.assetCompat}
             data-asset-id={resolvedSlotAssets[slot.name] ?? ''}
             data-z-layer={slot.zLayer}
-            style={{ color: `var(${slot.token})`, opacity: slotOpacity[slot.zLayer] }}
+            style={{ color: `var(${slot.token})` }}
           />
         ))}
       </div>
@@ -123,10 +150,10 @@ export const HeroLanding = memo(function HeroLanding({
         initial={{ opacity: 0, y: 6 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ ...springHero, delay: 0.04 }}
-        className="relative z-10 max-w-2xl"
+        className="relative z-10"
       >
         <h1
-          className="font-['Fraunces'] font-black text-6xl md:text-7xl tracking-[-0.02em]"
+          className="text-3xl font-black md:text-5xl"
           style={{
             fontFamily: 'var(--sys-type-font-fraunces)',
             color: 'var(--sys-color-paperWhite)',
@@ -135,7 +162,7 @@ export const HeroLanding = memo(function HeroLanding({
           {title}
         </h1>
         <p
-          className="mt-4 max-w-2xl font-['Work_Sans'] font-normal text-xl md:text-2xl opacity-90"
+          className="mt-3 max-w-4xl text-base md:text-lg"
           style={{
             fontFamily: 'var(--sys-type-font-work-sans)',
             color: 'var(--sys-color-worker-ash-base)',
@@ -149,7 +176,7 @@ export const HeroLanding = memo(function HeroLanding({
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={undefined}
-        className="relative z-10 mt-8 flex flex-wrap gap-4 items-center"
+        className="relative z-10 mt-6 flex flex-wrap gap-3"
       >
         <motion.button
           type="button"
@@ -157,7 +184,7 @@ export const HeroLanding = memo(function HeroLanding({
           whileTap={{ scale: 0.98 }}
           transition={springButton}
           onClick={onPrimaryAction}
-          className="rounded-[var(--sys-shape-blockRiot03)] font-['Work_Sans'] font-semibold text-lg px-8 py-4"
+          className="rounded-[var(--sys-shape-blockRiot03)] px-5 py-3 font-semibold"
           style={{
             fontFamily: 'var(--sys-type-font-work-sans)',
             backgroundColor: 'var(--sys-color-inkGold-base)',
@@ -166,28 +193,38 @@ export const HeroLanding = memo(function HeroLanding({
         >
           {primaryLabel}
         </motion.button>
-
-        <button
+        <motion.button
           type="button"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          transition={springButton}
           onClick={onSecondaryAction}
-          className="font-['JetBrains_Mono'] text-sm opacity-80 px-2 py-1"
-          style={{ color: 'var(--sys-color-worker-ash-base)', backgroundColor: 'transparent' }}
+          className="rounded-[var(--sys-shape-blockRiot01)] border px-5 py-3 font-medium"
+          style={{
+            fontFamily: 'var(--sys-type-font-work-sans)',
+            borderColor: 'var(--sys-color-protestMetalBlue-base)',
+            color: isKrDark ? 'var(--sys-color-worker-ash-base)' : 'var(--sys-color-paperWhite)',
+            backgroundColor: 'transparent',
+          }}
         >
           {secondaryLabel}
-        </button>
+        </motion.button>
       </motion.div>
 
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={undefined}
-        className="relative z-10 mt-8 font-['JetBrains_Mono'] text-sm opacity-80"
-        style={{ color: 'var(--sys-color-concreteGrey-base)' }}
+        className="relative z-10 mt-6 text-xs"
+        style={{
+          fontFamily: 'var(--sys-type-font-mono)',
+          color: 'var(--sys-color-concreteGrey-base)',
+        }}
       >
-        Slots: {SLOT_DEFS.length} | Density ratio: 0.36 | Max focal CTA: 1
+        Slots: {SLOT_DEFS.length} | Motion: spring-only | Tokens: --sys-* | Zustand: useModeStore
       </motion.p>
     </motion.section>
   );
 });
 
-export default HeroLanding;
+export default ApplicationFinalization;

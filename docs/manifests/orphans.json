@@ -1,18 +1,9 @@
 {
-  "generatedAt": "2026-03-17T16:29:21.687Z",
+  "generatedAt": "2026-03-17T17:21:49.784Z",
   "orphanedFeatures": [
-    "KrDark",
-    "design-sidekick",
-    "editor",
-    "gallery",
-    "sandbox",
-    "style-guide"
+    "KrDark"
   ],
-  "orphanedPages": [
-    "Dashboard.tsx",
-    "IngestionPage.tsx",
-    "ResumeAuditPage.tsx"
-  ],
+  "orphanedPages": [],
   "unroutedScreens": [
     "01_landing",
     "02_auth",
@@ -54,13 +45,17 @@
     {
       "path": "/editor",
       "source": "react-router-dom"
+    },
+    {
+      "path": "/test-tokens",
+      "source": "./components/debug/TokenTest"
     }
   ],
   "summary": {
-    "totalOrphans": 27,
-    "featureOrphans": 6,
-    "pageOrphans": 3,
+    "totalOrphans": 20,
+    "featureOrphans": 1,
+    "pageOrphans": 0,
     "screenOrphans": 11,
-    "nonFeatureRoutes": 7
+    "nonFeatureRoutes": 8
   }
 }

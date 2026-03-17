@@ -12,73 +12,66 @@ type SlotDef = {
 
 const SLOT_DEFS: SlotDef[] = [
   {
-    name: 'auto_kr_solid_005',
+    name: 'auto_kr_solid_007',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_solid_012',
+    name: 'auto_kr_solid_014',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_solid_027',
+    name: 'auto_kr_solid_029',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_solid_022',
+    name: 'auto_kr_solid_034',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_ui_001',
+    name: 'auto_kr_ui_003',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_ui_015',
+    name: 'auto_kr_ui_019',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_ui_027',
+    name: 'auto_kr_ui_029',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_ui_038',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_solid_046',
+    name: 'auto_kr_solid_042',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
 ];
 const DEFAULT_SLOT_ASSETS: Partial<Record<string, string>> = {
-  auto_kr_solid_005: 'KR-SOLID-031',
-  auto_kr_solid_012: 'KR-SOLID-032',
-  auto_kr_solid_027: 'KR-SOLID-033',
-  auto_kr_solid_022: 'KR-SOLID-034',
-  auto_kr_ui_001: 'KR-SOLID-035',
-  auto_kr_ui_015: 'KR-SOLID-036',
-  auto_kr_ui_027: 'KR-SOLID-037',
-  auto_kr_ui_038: 'KR-SOLID-038',
-  auto_kr_solid_046: 'KR-SOLID-039',
+  auto_kr_solid_007: 'KR-UI-028',
+  auto_kr_solid_014: 'KR-UI-029',
+  auto_kr_solid_029: 'KR-UI-030',
+  auto_kr_solid_034: 'KR-UI-031',
+  auto_kr_ui_003: 'KR-UI-032',
+  auto_kr_ui_019: 'KR-UI-033',
+  auto_kr_ui_029: 'KR-UI-034',
+  auto_kr_solid_042: 'KR-UI-035',
 };
 
-export interface DocumentWorkbenchProps {
+export interface SettingsControlProps {
   className?: ClassValue;
   title?: string;
   subtitle?: string;
@@ -90,19 +83,19 @@ export interface DocumentWorkbenchProps {
 }
 
 const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
+const _springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
 const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
 
-export const DocumentWorkbench = memo(function DocumentWorkbench({
+export const SettingsControl = memo(function SettingsControl({
   className,
-  title = 'Document Workbench',
-  subtitle = 'Edit resume/cover letter and preview export output.',
-  primaryLabel = 'Save Draft',
-  secondaryLabel = 'Export PDF',
+  title = 'Settings',
+  subtitle = 'Manage preferences, integrations, and account options.',
+  primaryLabel = 'Save Settings',
+  secondaryLabel = 'Reset Changes',
   slotAssets,
   onPrimaryAction,
   onSecondaryAction,
-}: DocumentWorkbenchProps) {
+}: SettingsControlProps) {
   const mode = useModeStore((state) => state.mode);
   const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
   const isKrDark = mode === 'KrDark';
@@ -123,7 +116,7 @@ export const DocumentWorkbench = memo(function DocumentWorkbench({
         border: '1px solid var(--sys-color-concreteGrey-base)',
       }}
       data-mode={mode}
-      data-testid="documentworkbench"
+      data-testid="settingscontrol"
       data-motion-audit="true"
     >
       <style>{`
@@ -234,4 +227,4 @@ export const DocumentWorkbench = memo(function DocumentWorkbench({
   );
 });
 
-export default DocumentWorkbench;
+export default SettingsControl;

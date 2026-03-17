@@ -1,7 +1,7 @@
 {
   "wireframe_id": "06_lookout",
   "wireframe_path": ".claude/wireframes/06_lookout.xml",
-  "source_component_path": "frontend/src/components/phase3-batch3/LookoutDiscovery.tsx",
+  "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/LookoutDiscovery.tsx",
   "screen_component_path": "frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
   "route": "/kr/lookout",
   "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",

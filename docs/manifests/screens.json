@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-15T03:30:31.967Z",
+  "generatedAt": "2026-03-17T17:21:37.809Z",
   "count": 11,
   "paired": 11,
   "unpaired": 0,
@@ -14,7 +14,7 @@
       "mapping": {
         "wireframe_id": "01_landing",
         "wireframe_path": ".claude/wireframes/01_landing.xml",
-        "source_component_path": "frontend/src/components/phase3-batch2/HeroLanding.tsx",
+        "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch2/HeroLanding.tsx",
         "screen_component_path": "frontend/src/screens/01_landing/HeroLanding.tsx",
         "route": "/kr/landing",
         "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
@@ -35,7 +35,7 @@
       "mapping": {
         "wireframe_id": "02_auth",
         "wireframe_path": ".claude/wireframes/02_auth.xml",
-        "source_component_path": "frontend/src/components/phase3-batch2/AuthModal.tsx",
+        "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch2/AuthModal.tsx",
         "screen_component_path": "frontend/src/screens/02_auth/AuthModal.tsx",
         "route": "/kr/auth",
         "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
@@ -56,7 +56,7 @@
       "mapping": {
         "wireframe_id": "03_onboarding",
         "wireframe_path": ".claude/wireframes/03_onboarding.xml",
-        "source_component_path": "frontend/src/components/phase3-batch2/OnboardFlow.tsx",
+        "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch2/OnboardFlow.tsx",
         "screen_component_path": "frontend/src/screens/03_onboarding/OnboardFlow.tsx",
         "route": "/kr/onboarding",
         "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
@@ -77,7 +77,7 @@
       "mapping": {
         "wireframe_id": "04_ingestion",
         "wireframe_path": ".claude/wireframes/04_ingestion.xml",
-        "source_component_path": "frontend/src/components/phase3-batch3/IngestionFlow.tsx",
+        "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/IngestionFlow.tsx",
         "screen_component_path": "frontend/src/screens/04_ingestion/IngestionFlow.tsx",
         "route": "/kr/ingestion",
         "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
@@ -98,7 +98,7 @@
       "mapping": {
         "wireframe_id": "05_analysis",
         "wireframe_path": ".claude/wireframes/05_analysis.xml",
-        "source_component_path": "frontend/src/components/phase3-batch3/AnalysisWorkbench.tsx",
+        "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/AnalysisWorkbench.tsx",
         "screen_component_path": "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx",
         "route": "/kr/analysis",
         "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
@@ -119,7 +119,7 @@
       "mapping": {
         "wireframe_id": "06_lookout",
         "wireframe_path": ".claude/wireframes/06_lookout.xml",
-        "source_component_path": "frontend/src/components/phase3-batch3/LookoutDiscovery.tsx",
+        "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/LookoutDiscovery.tsx",
         "screen_component_path": "frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
         "route": "/kr/lookout",
         "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
@@ -140,7 +140,7 @@
       "mapping": {
         "wireframe_id": "07_kanban",
         "wireframe_path": ".claude/wireframes/07_kanban.xml",
-        "source_component_path": "frontend/src/components/phase3-batch3/KanbanTracker.tsx",
+        "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/KanbanTracker.tsx",
         "screen_component_path": "frontend/src/screens/07_kanban/KanbanTracker.tsx",
         "route": "/kr/kanban",
         "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
@@ -161,7 +161,7 @@
       "mapping": {
         "wireframe_id": "08_workbench",
         "wireframe_path": ".claude/wireframes/08_workbench.xml",
-        "source_component_path": "frontend/src/components/phase3-batch3/DocumentWorkbench.tsx",
+        "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/DocumentWorkbench.tsx",
         "screen_component_path": "frontend/src/screens/08_workbench/DocumentWorkbench.tsx",
         "route": "/kr/workbench",
         "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
@@ -182,7 +182,7 @@
       "mapping": {
         "wireframe_id": "09_finalization",
         "wireframe_path": ".claude/wireframes/09_finalization.xml",
-        "source_component_path": "frontend/src/components/phase3-batch3/ApplicationFinalization.tsx",
+        "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/ApplicationFinalization.tsx",
         "screen_component_path": "frontend/src/screens/09_finalization/ApplicationFinalization.tsx",
         "route": "/kr/finalization",
         "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
@@ -203,7 +203,7 @@
       "mapping": {
         "wireframe_id": "10_settings",
         "wireframe_path": ".claude/wireframes/10_settings.xml",
-        "source_component_path": "frontend/src/components/phase3-batch3/SettingsControl.tsx",
+        "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/SettingsControl.tsx",
         "screen_component_path": "frontend/src/screens/10_settings/SettingsControl.tsx",
         "route": "/kr/settings",
         "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
@@ -224,7 +224,7 @@
       "mapping": {
         "wireframe_id": "11_dashboard",
         "wireframe_path": ".claude/wireframes/11_dashboard.xml",
-        "source_component_path": "frontend/src/components/phase3-batch3/DashboardOverview.tsx",
+        "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/DashboardOverview.tsx",
         "screen_component_path": "frontend/src/screens/11_dashboard/DashboardOverview.tsx",
         "route": "/kr/dashboard",
         "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",

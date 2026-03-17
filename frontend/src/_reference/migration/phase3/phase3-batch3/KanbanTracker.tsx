@@ -12,66 +12,73 @@ type SlotDef = {
 
 const SLOT_DEFS: SlotDef[] = [
   {
-    name: 'auto_kr_solid_006',
+    name: 'auto_kr_solid_004',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_solid_013',
+    name: 'auto_kr_solid_011',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_solid_028',
+    name: 'auto_kr_solid_026',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_solid_033',
+    name: 'auto_kr_solid_009',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_ui_002',
+    name: 'auto_kr_ui_017',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_ui_018',
+    name: 'auto_kr_ui_014',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_ui_028',
+    name: 'auto_kr_ui_026',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_solid_041',
+    name: 'auto_kr_ui_037',
+    zLayer: 'Z-3',
+    token: '--sys-color-inkGold-base',
+    assetCompat: 'KR-SOLID-GENERAL',
+  },
+  {
+    name: 'auto_kr_solid_045',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
 ];
 const DEFAULT_SLOT_ASSETS: Partial<Record<string, string>> = {
-  auto_kr_solid_006: 'KR-SOLID-012',
-  auto_kr_solid_013: 'KR-SOLID-013',
-  auto_kr_solid_028: 'KR-SOLID-014',
-  auto_kr_solid_033: 'KR-SOLID-019',
-  auto_kr_ui_002: 'KR-SOLID-020',
-  auto_kr_ui_018: 'KR-SOLID-021',
-  auto_kr_ui_028: 'KR-SOLID-022',
-  auto_kr_solid_041: 'KR-SOLID-023',
+  auto_kr_solid_004: 'KR-UI-008',
+  auto_kr_solid_011: 'KR-UI-009',
+  auto_kr_solid_026: 'KR-UI-010',
+  auto_kr_solid_009: 'KR-UI-011',
+  auto_kr_ui_017: 'KR-UI-012',
+  auto_kr_ui_014: 'KR-UI-013',
+  auto_kr_ui_026: 'KR-UI-014',
+  auto_kr_ui_037: 'KR-UI-015',
+  auto_kr_solid_045: 'KR-UI-018',
 };
 
-export interface ApplicationFinalizationProps {
+export interface KanbanTrackerProps {
   className?: ClassValue;
   title?: string;
   subtitle?: string;
@@ -83,19 +90,19 @@ export interface ApplicationFinalizationProps {
 }
 
 const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
+const _springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
 const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
 
-export const ApplicationFinalization = memo(function ApplicationFinalization({
+export const KanbanTracker = memo(function KanbanTracker({
   className,
-  title = 'Application Finalization',
-  subtitle = 'Run checklist and submit with confidence.',
-  primaryLabel = 'Submit Application',
-  secondaryLabel = 'Save Draft',
+  title = 'Application Kanban',
+  subtitle = 'Track application state transitions in one board.',
+  primaryLabel = 'Open Card',
+  secondaryLabel = 'View Timeline',
   slotAssets,
   onPrimaryAction,
   onSecondaryAction,
-}: ApplicationFinalizationProps) {
+}: KanbanTrackerProps) {
   const mode = useModeStore((state) => state.mode);
   const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
   const isKrDark = mode === 'KrDark';
@@ -116,7 +123,7 @@ export const ApplicationFinalization = memo(function ApplicationFinalization({
         border: '1px solid var(--sys-color-concreteGrey-base)',
       }}
       data-mode={mode}
-      data-testid="applicationfinalization"
+      data-testid="kanbantracker"
       data-motion-audit="true"
     >
       <style>{`
@@ -227,4 +234,4 @@ export const ApplicationFinalization = memo(function ApplicationFinalization({
   );
 });
 
-export default ApplicationFinalization;
+export default KanbanTracker;

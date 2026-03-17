@@ -12,73 +12,39 @@ type SlotDef = {
 
 const SLOT_DEFS: SlotDef[] = [
   {
-    name: 'auto_kr_solid_004',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
+    name: 'background',
+    zLayer: 'Z-0',
+    token: '--sys-color-charcoalBackground-base',
+    assetCompat: 'KR-SOLID-SUBSTRATE',
   },
   {
-    name: 'auto_kr_solid_011',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
+    name: 'background_accent',
+    zLayer: 'Z-1',
+    token: '--sys-color-protestMetalBlue-base',
+    assetCompat: 'KR-SOLID-ATMOS',
   },
   {
-    name: 'auto_kr_solid_026',
+    name: 'cta_icon',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_solid_009',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_ui_017',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_ui_014',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_ui_026',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_ui_037',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_solid_045',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
+    token: '--sys-color-worker-ash-base',
+    assetCompat: 'KR-SOLID-UIKIT',
   },
 ];
+
 const DEFAULT_SLOT_ASSETS: Partial<Record<string, string>> = {
-  auto_kr_solid_004: 'KR-UI-008',
-  auto_kr_solid_011: 'KR-UI-009',
-  auto_kr_solid_026: 'KR-UI-010',
-  auto_kr_solid_009: 'KR-UI-011',
-  auto_kr_ui_017: 'KR-UI-012',
-  auto_kr_ui_014: 'KR-UI-013',
-  auto_kr_ui_026: 'KR-UI-014',
-  auto_kr_ui_037: 'KR-UI-015',
-  auto_kr_solid_045: 'KR-UI-018',
+  background: 'KR-SOLID-027',
+  background_accent: 'KR-SOLID-028',
+  cta_icon: 'KR-SOLID-029',
 };
 
-export interface KanbanTrackerProps {
+const slotOpacity: Record<SlotDef['zLayer'], number> = {
+  'Z-0': 0.3,
+  'Z-1': 0.26,
+  'Z-2': 0.24,
+  'Z-3': 0.22,
+};
+
+export interface AuthModalProps {
   className?: ClassValue;
   title?: string;
   subtitle?: string;
@@ -90,22 +56,21 @@ export interface KanbanTrackerProps {
 }
 
 const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
+const _springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
 const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
 
-export const KanbanTracker = memo(function KanbanTracker({
+export const AuthModal = memo(function AuthModal({
   className,
-  title = 'Application Kanban',
-  subtitle = 'Track application state transitions in one board.',
-  primaryLabel = 'Open Card',
-  secondaryLabel = 'View Timeline',
+  title = 'Sign In / Register',
+  subtitle = 'Secure access to your CareerCopilot workspace.',
+  primaryLabel = 'Continue',
+  secondaryLabel = 'Use OAuth',
   slotAssets,
   onPrimaryAction,
   onSecondaryAction,
-}: KanbanTrackerProps) {
+}: AuthModalProps) {
   const mode = useModeStore((state) => state.mode);
   const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
-  const isKrDark = mode === 'KrDark';
 
   return (
     <motion.section
@@ -114,7 +79,7 @@ export const KanbanTracker = memo(function KanbanTracker({
       animate={{ opacity: 1, y: 0 }}
       transition={undefined}
       className={clsx(
-        'relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8',
+        "relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-8 font-['Work_Sans'] text-base min-h-[75vh] flex flex-col justify-center",
         className
       )}
       style={{
@@ -123,11 +88,12 @@ export const KanbanTracker = memo(function KanbanTracker({
         border: '1px solid var(--sys-color-concreteGrey-base)',
       }}
       data-mode={mode}
-      data-testid="kanbantracker"
+      data-testid="authmodal"
       data-motion-audit="true"
+      data-density-ratio="0.36"
     >
       <style>{`
-         @media (prefers-reduced-motion: reduce) {
+        @media (prefers-reduced-motion: reduce) {
           [data-motion-audit="true"] *,
           [data-motion-audit="true"]::before,
           [data-motion-audit="true"]::after {
@@ -148,7 +114,7 @@ export const KanbanTracker = memo(function KanbanTracker({
             data-asset-compat={slot.assetCompat}
             data-asset-id={resolvedSlotAssets[slot.name] ?? ''}
             data-z-layer={slot.zLayer}
-            style={{ color: `var(${slot.token})` }}
+            style={{ color: `var(${slot.token})`, opacity: slotOpacity[slot.zLayer] }}
           />
         ))}
       </div>
@@ -157,10 +123,10 @@ export const KanbanTracker = memo(function KanbanTracker({
         initial={{ opacity: 0, y: 6 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ ...springHero, delay: 0.04 }}
-        className="relative z-10"
+        className="relative z-10 max-w-2xl"
       >
         <h1
-          className="text-3xl font-black md:text-5xl"
+          className="text-5xl md:text-6xl font-black"
           style={{
             fontFamily: 'var(--sys-type-font-fraunces)',
             color: 'var(--sys-color-paperWhite)',
@@ -169,7 +135,7 @@ export const KanbanTracker = memo(function KanbanTracker({
           {title}
         </h1>
         <p
-          className="mt-3 max-w-4xl text-base md:text-lg"
+          className="mt-4 max-w-2xl text-base md:text-xl"
           style={{
             fontFamily: 'var(--sys-type-font-work-sans)',
             color: 'var(--sys-color-worker-ash-base)',
@@ -183,7 +149,7 @@ export const KanbanTracker = memo(function KanbanTracker({
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={undefined}
-        className="relative z-10 mt-6 flex flex-wrap gap-3"
+        className="relative z-10 mt-8 flex flex-wrap gap-4 items-center"
       >
         <motion.button
           type="button"
@@ -191,7 +157,7 @@ export const KanbanTracker = memo(function KanbanTracker({
           whileTap={{ scale: 0.98 }}
           transition={springButton}
           onClick={onPrimaryAction}
-          className="rounded-[var(--sys-shape-blockRiot03)] px-5 py-3 font-semibold"
+          className="rounded-[var(--sys-shape-blockRiot03)] px-8 py-4 font-semibold text-lg"
           style={{
             fontFamily: 'var(--sys-type-font-work-sans)',
             backgroundColor: 'var(--sys-color-inkGold-base)',
@@ -200,38 +166,28 @@ export const KanbanTracker = memo(function KanbanTracker({
         >
           {primaryLabel}
         </motion.button>
-        <motion.button
+
+        <button
           type="button"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          transition={springButton}
           onClick={onSecondaryAction}
-          className="rounded-[var(--sys-shape-blockRiot01)] border px-5 py-3 font-medium"
-          style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            borderColor: 'var(--sys-color-protestMetalBlue-base)',
-            color: isKrDark ? 'var(--sys-color-worker-ash-base)' : 'var(--sys-color-paperWhite)',
-            backgroundColor: 'transparent',
-          }}
+          className="font-['JetBrains_Mono'] text-sm opacity-80 px-2 py-1"
+          style={{ color: 'var(--sys-color-worker-ash-base)', backgroundColor: 'transparent' }}
         >
           {secondaryLabel}
-        </motion.button>
+        </button>
       </motion.div>
 
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={undefined}
-        className="relative z-10 mt-6 text-xs"
-        style={{
-          fontFamily: 'var(--sys-type-font-mono)',
-          color: 'var(--sys-color-concreteGrey-base)',
-        }}
+        className="relative z-10 mt-8 font-['JetBrains_Mono'] text-sm opacity-80"
+        style={{ color: 'var(--sys-color-concreteGrey-base)' }}
       >
-        Slots: {SLOT_DEFS.length} | Motion: spring-only | Tokens: --sys-* | Zustand: useModeStore
+        Slots: {SLOT_DEFS.length} | Density ratio: 0.36 | Max focal CTA: 1
       </motion.p>
     </motion.section>
   );
 });
 
-export default KanbanTracker;
+export default AuthModal;

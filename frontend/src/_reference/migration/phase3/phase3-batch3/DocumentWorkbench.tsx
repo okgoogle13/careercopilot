@@ -12,73 +12,73 @@ type SlotDef = {
 
 const SLOT_DEFS: SlotDef[] = [
   {
-    name: 'auto_kr_solid_003',
+    name: 'auto_kr_solid_005',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_solid_010',
+    name: 'auto_kr_solid_012',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_solid_025',
+    name: 'auto_kr_solid_027',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_solid_007',
+    name: 'auto_kr_solid_022',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_brutalist_mask_001',
+    name: 'auto_kr_ui_001',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_ui_013',
+    name: 'auto_kr_ui_015',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_ui_025',
+    name: 'auto_kr_ui_027',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_ui_036',
+    name: 'auto_kr_ui_038',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
-    name: 'auto_kr_solid_044',
+    name: 'auto_kr_solid_046',
     zLayer: 'Z-3',
     token: '--sys-color-inkGold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
 ];
 const DEFAULT_SLOT_ASSETS: Partial<Record<string, string>> = {
-  auto_kr_solid_003: 'KR-UI-019',
-  auto_kr_solid_010: 'KR-UI-020',
-  auto_kr_solid_025: 'KR-UI-021',
-  auto_kr_solid_007: 'KR-UI-022',
-  auto_kr_brutalist_mask_001: 'KR-UI-023',
-  auto_kr_ui_013: 'KR-UI-024',
-  auto_kr_ui_025: 'KR-UI-025',
-  auto_kr_ui_036: 'KR-UI-026',
-  auto_kr_solid_044: 'KR-UI-027',
+  auto_kr_solid_005: 'KR-SOLID-031',
+  auto_kr_solid_012: 'KR-SOLID-032',
+  auto_kr_solid_027: 'KR-SOLID-033',
+  auto_kr_solid_022: 'KR-SOLID-034',
+  auto_kr_ui_001: 'KR-SOLID-035',
+  auto_kr_ui_015: 'KR-SOLID-036',
+  auto_kr_ui_027: 'KR-SOLID-037',
+  auto_kr_ui_038: 'KR-SOLID-038',
+  auto_kr_solid_046: 'KR-SOLID-039',
 };
 
-export interface LookoutDiscoveryProps {
+export interface DocumentWorkbenchProps {
   className?: ClassValue;
   title?: string;
   subtitle?: string;
@@ -90,19 +90,19 @@ export interface LookoutDiscoveryProps {
 }
 
 const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
+const _springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
 const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
 
-export const LookoutDiscovery = memo(function LookoutDiscovery({
+export const DocumentWorkbench = memo(function DocumentWorkbench({
   className,
-  title = 'Job Discovery',
-  subtitle = 'Filter opportunities and evaluate job-fit quickly.',
-  primaryLabel = 'Apply Filters',
-  secondaryLabel = 'Load More',
+  title = 'Document Workbench',
+  subtitle = 'Edit resume/cover letter and preview export output.',
+  primaryLabel = 'Save Draft',
+  secondaryLabel = 'Export PDF',
   slotAssets,
   onPrimaryAction,
   onSecondaryAction,
-}: LookoutDiscoveryProps) {
+}: DocumentWorkbenchProps) {
   const mode = useModeStore((state) => state.mode);
   const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
   const isKrDark = mode === 'KrDark';
@@ -123,7 +123,7 @@ export const LookoutDiscovery = memo(function LookoutDiscovery({
         border: '1px solid var(--sys-color-concreteGrey-base)',
       }}
       data-mode={mode}
-      data-testid="lookoutdiscovery"
+      data-testid="documentworkbench"
       data-motion-audit="true"
     >
       <style>{`
@@ -234,4 +234,4 @@ export const LookoutDiscovery = memo(function LookoutDiscovery({
   );
 });
 
-export default LookoutDiscovery;
+export default DocumentWorkbench;

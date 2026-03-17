@@ -134,7 +134,7 @@ export function Signal(props: SignalProps) {
       try {
         const Component = IconComponent as React.ComponentType<any>;
         return <Component className="w-5 h-5" />;
-      } catch (e) {
+      } catch (_e) {
         return null;
       }
     }
