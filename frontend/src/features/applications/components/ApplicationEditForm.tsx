@@ -1,5 +1,5 @@
 import { applicationService } from '@/api/applicationService';
-import { Strike } from '@/components/ui';
+import { Strike, ScaffoldInput, ScaffoldArea } from '@/components/ui';
 import { useMutation } from '@tanstack/react-query';
 import React from 'react';
 import type { ApplicationEditPayload } from '../trackerTypes';
@@ -47,57 +47,45 @@ export const ApplicationEditForm = ({
         updateApplication.mutate(formState);
       }}
     >
-      <label className="block space-y-2">
-        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-concrete-grey">
-          Role
-        </span>
-        <input
-          className="w-full rounded-scaffold bg-[var(--sys-color-charcoalBackground-steps-1)] border border-[var(--sys-color-concreteGrey-steps-1)] px-3 py-2 text-sm text-paper-white"
-          value={formState.jobTitle ?? ''}
-          onChange={(event) =>
-            setFormState((current) => ({ ...current, jobTitle: event.target.value }))
-          }
-        />
-      </label>
+      <ScaffoldInput
+        label="Role"
+        value={formState.jobTitle ?? ''}
+        placeholder="e.g. Senior Case Manager"
+        onChange={(event) =>
+          setFormState((current) => ({ ...current, jobTitle: event.target.value }))
+        }
+        fullWidth
+      />
 
-      <label className="block space-y-2">
-        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-concrete-grey">
-          Company
-        </span>
-        <input
-          className="w-full rounded-scaffold bg-[var(--sys-color-charcoalBackground-steps-1)] border border-[var(--sys-color-concreteGrey-steps-1)] px-3 py-2 text-sm text-paper-white"
-          value={formState.companyName ?? ''}
-          onChange={(event) =>
-            setFormState((current) => ({ ...current, companyName: event.target.value }))
-          }
-        />
-      </label>
+      <ScaffoldInput
+        label="Company"
+        value={formState.companyName ?? ''}
+        placeholder="e.g. Community First"
+        onChange={(event) =>
+          setFormState((current) => ({ ...current, companyName: event.target.value }))
+        }
+        fullWidth
+      />
 
-      <label className="block space-y-2">
-        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-concrete-grey">
-          Job description
-        </span>
-        <textarea
-          className="w-full min-h-28 rounded-scaffold bg-[var(--sys-color-charcoalBackground-steps-1)] border border-[var(--sys-color-concreteGrey-steps-1)] px-3 py-2 text-sm text-paper-white"
-          value={formState.jobDescription ?? ''}
-          onChange={(event) =>
-            setFormState((current) => ({ ...current, jobDescription: event.target.value }))
-          }
-        />
-      </label>
+      <ScaffoldArea
+        label="Job description"
+        value={formState.jobDescription ?? ''}
+        placeholder="Paste the role requirements here..."
+        onChange={(event) =>
+          setFormState((current) => ({ ...current, jobDescription: event.target.value }))
+        }
+        fullWidth
+        rows={6}
+      />
 
-      <label className="block space-y-2">
-        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-concrete-grey">
-          Notes
-        </span>
-        <textarea
-          className="w-full min-h-24 rounded-scaffold bg-[var(--sys-color-charcoalBackground-steps-1)] border border-[var(--sys-color-concreteGrey-steps-1)] px-3 py-2 text-sm text-paper-white"
-          value={formState.notes ?? ''}
-          onChange={(event) =>
-            setFormState((current) => ({ ...current, notes: event.target.value }))
-          }
-        />
-      </label>
+      <ScaffoldArea
+        label="Notes"
+        value={formState.notes ?? ''}
+        placeholder="Reflections on this opportunity..."
+        onChange={(event) => setFormState((current) => ({ ...current, notes: event.target.value }))}
+        fullWidth
+        rows={4}
+      />
 
       <div className="flex justify-end">
         <Strike

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { JobQueue } from '../pages/JobQueue';
+import { JobQueue } from '../features/jobs/JobQueue';
 import { API_ENDPOINTS } from '../config/api';
 import { Toaster } from 'sonner';
 
@@ -13,7 +13,7 @@ import { Toaster } from 'sonner';
  * we are mocking it in the story decorators.
  */
 const meta: Meta<typeof JobQueue> = {
-  title: 'Pages/JobQueue',
+  title: 'Features/Jobs/JobQueue',
   component: JobQueue,
   parameters: {
     layout: 'fullscreen',

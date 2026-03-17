@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { IngestionPage } from '../pages/IngestionPage';
+import { SmartIngestion as IngestionPage } from '../features/ingestion/SmartIngestion';
 import { EntryType } from '../types/api';
 
 const meta: Meta<typeof IngestionPage> = {
-  title: 'Pages/IngestionPage',
+  title: 'Features/Ingestion/SmartIngestion',
   component: IngestionPage,
   parameters: {
     layout: 'fullscreen',

@@ -64,7 +64,7 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
         headers['Authorization'] = `Bearer ${token}`;
       }
 
-      const response = await fetch('/api/career/ingest', {
+      const response = await fetch('/api/v1/ingest', {
         method: 'POST',
         body: formData,
         headers: headers,

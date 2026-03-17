@@ -47,6 +47,8 @@ export { KrIcon } from './KrIcon';
 export type { KrIconName, KrIconProps } from './KrIcon';
 
 export { AuroraHeader } from './AuroraHeader';
+export { Footer } from './Footer';
+export type { FooterProps } from './Footer';
 export { Mark } from './Mark';
 export { SplitHeader } from './SplitHeader';
 export { Valve } from './Valve';

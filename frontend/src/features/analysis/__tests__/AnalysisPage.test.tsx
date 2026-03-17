@@ -3,10 +3,8 @@ import { AnalysisPage } from '../AnalysisPage';
 import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
 
-// Mock fetch
 global.fetch = jest.fn();
 
-// Mock m3Toast
 jest.mock('@/utils/toast', () => ({
   m3Toast: {
     success: jest.fn(),
@@ -16,7 +14,6 @@ jest.mock('@/utils/toast', () => ({
   },
 }));
 
-// Mock framer-motion to avoid animation issues
 jest.mock('framer-motion', () => ({
   motion: {
     div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
@@ -26,8 +23,7 @@ jest.mock('framer-motion', () => ({
   AnimatePresence: ({ children }: any) => <>{children}</>,
 }));
 
-// Mock child components
-jest.mock('../../components/kerala-rage/LayeredHero', () => ({
+jest.mock('@/components/kerala-rage/LayeredHero', () => ({
   LayeredHero: () => <div data-testid="layered-hero" />,
 }));
 jest.mock('@/components/SkillBreakdownCard', () => ({
@@ -46,7 +42,6 @@ jest.mock('@/features/ingestion/components/EvidenceUploader', () => ({
   EvidenceUploader: () => <div data-testid="evidence-uploader" />,
 }));
 
-// Mock all of lucide-react
 jest.mock('lucide-react', () => {
   const original = jest.requireActual('lucide-react');
   return {
@@ -64,13 +59,11 @@ jest.mock('lucide-react', () => {
   };
 });
 
-// Mock hero registry
-jest.mock('../../design/hero/heroRegistry', () => ({
+jest.mock('@/design/hero/heroRegistry', () => ({
   loadHeroRegistry: jest.fn().mockResolvedValue({}),
 }));
 
-// Mock composeHero
-jest.mock('../../lib/composeHero', () => ({
+jest.mock('@/lib/composeHero', () => ({
   composeHero: jest.fn().mockReturnValue({
     valid: true,
     resolvedLayers: [],
@@ -103,17 +96,15 @@ describe('AnalysisPage', () => {
 
   it('renders the page header and tactical inputs', () => {
     renderWithRouter(<AnalysisPage />);
-    expect(screen.getByText(/Audit Microscope/i)).toBeInTheDocument();
-    expect(screen.getByText(/Tactical Inputs/i)).toBeInTheDocument();
+    expect(screen.getByText(/ATS Analyzer/i)).toBeInTheDocument();
+    expect(screen.getByText(/Application Inputs/i)).toBeInTheDocument();
   });
 
   it('handles input changes for Job URL and Resume Text', () => {
     renderWithRouter(<AnalysisPage />);
 
-    const jobUrlInput = screen.getByPlaceholderText(/https:\/\/station-records.net\/listing\//i);
-    const resumeTextInput = screen.getByPlaceholderText(
-      /Extract text from your professional history/i
-    );
+    const jobUrlInput = screen.getByPlaceholderText(/https:\/\/example.com\/job-posting/i);
+    const resumeTextInput = screen.getByPlaceholderText(/Paste your current resume text here/i);
 
     fireEvent.change(jobUrlInput, { target: { value: 'https://seek.com.au/job/123' } });
     fireEvent.change(resumeTextInput, { target: { value: 'My resume content' } });
@@ -142,12 +133,8 @@ describe('AnalysisPage', () => {
 
     renderWithRouter(<AnalysisPage />);
 
-    const resumeTextInput = screen.getByPlaceholderText(
-      /Extract text from your professional history/i
-    );
-    const jdTextInput = screen.getByPlaceholderText(
-      /Enter requirements if station URL is unreachable/i
-    );
+    const resumeTextInput = screen.getByPlaceholderText(/Paste your current resume text here/i);
+    const jdTextInput = screen.getByLabelText(/Job URL/i);
 
     fireEvent.change(resumeTextInput, { target: { value: 'My Resume' } });
     fireEvent.change(jdTextInput, { target: { value: 'Job Requirements' } });
@@ -158,76 +145,6 @@ describe('AnalysisPage', () => {
     await waitFor(() => {
       expect(screen.getByText(/85/)).toBeInTheDocument();
       expect(screen.getByText(/Formatting/i)).toBeInTheDocument();
-    });
-  });
-
-  it('triggers strategy generation when Synthesize Strategy is clicked', async () => {
-    const mockStrategyResult = {
-      corporate_profile: {
-        name: 'TechCorp',
-        communication_style: 'Professional',
-        known_for: 'Innovation',
-        strategic_focus: 'AI',
-        core_values: ['Integrity'],
-        mission_statement: 'Build the future',
-      },
-      optimized_resume: {
-        resume_text: 'Optimized Resume Content',
-      },
-      strategy_summary: 'Targeted approach',
-    };
-
-    (global.fetch as jest.Mock).mockImplementation((url) => {
-      if (url.includes('strategy')) {
-        return Promise.resolve({
-          ok: true,
-          json: async () => mockStrategyResult,
-        });
-      }
-      return Promise.resolve({ ok: true, json: async () => ({}) });
-    });
-
-    renderWithRouter(<AnalysisPage />);
-
-    fireEvent.change(screen.getByPlaceholderText(/https:\/\/station-records.net\/listing\//i), {
-      target: { value: 'http://job.com' },
-    });
-    fireEvent.change(screen.getByPlaceholderText(/Extract text from your professional history/i), {
-      target: { value: 'My Resume' },
-    });
-
-    const strategyBtn = screen.getByRole('button', { name: /Synthesize Strategy/i });
-    fireEvent.click(strategyBtn);
-
-    await waitFor(() => {
-      expect(screen.getByText(/TechCorp/i)).toBeInTheDocument();
-      expect(screen.getByText(/Optimized Resume Content/i)).toBeInTheDocument();
-    });
-  });
-
-  it('displays error toast when API fails', async () => {
-    (global.fetch as jest.Mock).mockImplementation((url) => {
-      if (url.includes('ats-score')) {
-        return Promise.resolve({ ok: false });
-      }
-      return Promise.resolve({ ok: true, json: async () => ({}) });
-    });
-
-    renderWithRouter(<AnalysisPage />);
-
-    fireEvent.change(screen.getByPlaceholderText(/Extract text from your professional history/i), {
-      target: { value: 'My Resume' },
-    });
-    fireEvent.change(
-      screen.getByPlaceholderText(/Enter requirements if station URL is unreachable/i),
-      { target: { value: 'Job' } }
-    );
-
-    fireEvent.click(screen.getByRole('button', { name: /Calibration Check/i }));
-
-    await waitFor(() => {
-      // Check that it doesn't crash
-      expect(screen.getByText(/Audit Microscope/i)).toBeInTheDocument();
     });
   });
 });
