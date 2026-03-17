@@ -12,47 +12,17 @@ import { LayeredHero } from '@/components/kerala-rage/LayeredHero';
 import { loadHeroRegistry } from '@/design/hero/heroRegistry';
 import { composeHero } from '@/lib/composeHero';
 import type { SolidarityManifest } from '@/design/hero/heroTypes';
+import {
+  analysisService,
+  type AtsScoreResponse,
+  type StrategyResponse,
+} from '@/api/analysisService';
 
 // KrDark Assets
 const solidarityTexture =
   '/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__texture--solidarity-chatgpt-image-f--v1.png';
 const paperGrain =
   '/assets/kr-solidarity/texture/kr-solidarity__substrate__landmark--melbourne-laneway--v1.png';
-
-interface AtsResult {
-  overallScore: number;
-  categories: Array<{
-    name: string;
-    score: number;
-    status: string;
-    suggestions: string[];
-  }>;
-  matched_keywords: string[];
-  missing_keywords: string[];
-}
-
-interface CorporateProfile {
-  name: string;
-  mission_statement: string;
-  core_values: string[];
-  strategic_focus: string;
-  communication_style: string;
-  known_for: string;
-}
-
-interface StrategyResult {
-  job_details: any;
-  corporate_profile: CorporateProfile | null;
-  optimized_resume: {
-    resume_text: string;
-  };
-  strategy_summary: string;
-  gap_analysis?: {
-    missing_skills: string[];
-    evidence_found: string[];
-    strategy_advice: string;
-  };
-}
 
 export const AnalysisPage: React.FC = () => {
   const { track } = useAnalytics();
@@ -95,8 +65,8 @@ export const AnalysisPage: React.FC = () => {
   const [jobUrl, setJobUrl] = useState('');
   const [jobDescription, setJobDescription] = useState('');
   const [resumeText, setResumeText] = useState('');
-  const [atsResult, setAtsResult] = useState<AtsResult | null>(null);
-  const [strategyResult, setStrategyResult] = useState<StrategyResult | null>(null);
+  const [atsResult, setAtsResult] = useState<AtsScoreResponse | null>(null);
+  const [strategyResult, setStrategyResult] = useState<StrategyResponse | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isGeneratingStrategy, setIsGeneratingStrategy] = useState(false);
 
@@ -112,13 +82,7 @@ export const AnalysisPage: React.FC = () => {
     });
     setAtsResult(null);
     try {
-      const response = await fetch('/api/v1/analysis/ats-score', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ resume_text: resumeText, job_description: jobDescription }),
-      });
-      if (!response.ok) throw new Error('Analysis failed');
-      const result = await response.json();
+      const result = await analysisService.getATSScore(resumeText, jobDescription);
       setAtsResult(result);
       m3Toast.success('Success', 'ATS Analysis complete!');
     } catch (error) {
@@ -137,17 +101,11 @@ export const AnalysisPage: React.FC = () => {
     setIsGeneratingStrategy(true);
     setStrategyResult(null);
     try {
-      const response = await fetch('/api/v1/analysis/strategy', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          job_url: jobUrl,
-          resume_text: resumeText,
-          missing_keywords: atsResult?.missing_keywords || [],
-        }),
+      const result = await analysisService.getStrategy({
+        jobUrl,
+        resumeText,
+        missingKeywords: atsResult?.missing_keywords,
       });
-      if (!response.ok) throw new Error('Strategy Generation failed');
-      const result = await response.json();
       setStrategyResult(result);
       m3Toast.success('Done', 'Resume strategy generated.');
       if (result.job_details) {
