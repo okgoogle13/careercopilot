@@ -147,4 +147,32 @@ export const documentService = {
       throw error;
     }
   },
+  async processRedline(
+    documentId: number,
+    file: File,
+    edits: unknown[]
+  ): Promise<{ blob: Blob; filename: string }> {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('edits', JSON.stringify(edits));
+    formData.append('document_id', String(documentId));
+
+    try {
+      const response = await apiClient.post('/process/redline', formData, {
+        responseType: 'blob',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      const disposition = response.headers['content-disposition'] ?? '';
+      const match = disposition.match(/filename[^;=\n]*=["']?([^"'\n;]+)["']?/);
+      const filename = match?.[1] ?? `redlined_${file.name}`;
+
+      return { blob: response.data, filename };
+    } catch (error) {
+      console.error('Document redline error:', error);
+      throw error;
+    }
+  },
 };
