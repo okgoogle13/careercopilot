@@ -2,7 +2,7 @@
 
 **Program:** PR126 frontend source-of-truth migration
 **Status:** Active
-**Current phase:** Migration closeout — route-complete frontend wiring done; `/tracker` Firebase env verification still pending
+**Current phase:** Migration closeout — API wiring, route cleanup, and shared-component ownership now aligning; `/tracker` Firebase env verification still pending
 **Execution truth:** `control/blueprint.md`
 
 ## Current Progress Metrics (Tri-Layer Truth)
@@ -11,7 +11,7 @@
 |-----------|--------|--------|
 | **Runtime Truth** | 26/26 reachable paths (`19` canonical routes + `7` legacy redirects) | ✅ CLEAN |
 | **Design Truth** | 11/11 screen pairs aligned | ✅ CLEAN |
-| **Capability Truth** | 10/10 backend modules | ✅ 90% Saturation Target |
+| **Capability Truth** | 10/10 backend modules | ✅ 95% Saturation Target |
 | **PM Governance** | 12/12 build contracts valid | ✅ VALID |
 | **Shell Promotion** | 14/15 canonical protected routes on MigratedRouteLayout | ✅ PROMOTED (1 canonical holdout on ProtectedLayout) |
 | **Total Migration** | ~93% Complete | 🟡 Final Closeout Pending |
@@ -40,6 +40,7 @@
   - `resume_audit`: RESOLVED — `ResumeAuditEntryPoint.tsx` fetches and renders persisted history via `getAuditHistory()`; history panel added below action button.
   - `/asset-library`: RESOLVED — `App.tsx` comment updated; route explicitly marked support-only (intentionally NOT promoted); distinct from `/welcome` and `/documents`.
   - Ingestion: active career-ingestion callers now converge on `/api/v1/ingest`; specialized artifact and smart-ingestion endpoints remain intentionally separate.
+  - API convergence (2026-03-18): Quick Apply, Analysis, Evidence upload, redline upload, Jobs/Opportunities/Profile flows now call the service-client wrappers (`workflowService`, `analysisService`, `ingestion.service`, `documentService`); shared `axiosInstance` keeps auth/error handling centralized. Verification pack (`scan-routes.ts`, `scan-screens.ts`, `detect-orphans.ts`, `tools/ci/check-route-integrity.ts`, `tools/ci/check-screen-pairs.ts`, `cd frontend && yarn type-check`) reran after each slice and stays green.
 - **Identity Gates**:
   - Complete: `/analysis` (`identity_pass`), `/dashboard` (`identity_pass_with_rewrites`), `/` (`identity_pass`).
   - Complete: `/opportunities` (`identity_pass_with_rewrites`)
@@ -49,11 +50,18 @@
   - `Sidebar`: Token-compliant; Zero-Flora violations removed.
   - `KrDarkDock`: Canonical nav — authoritative.
   - `Footer`: Canonical component adopted by the authoritative migrated shell (`MigratedRouteLayout`).
+  - Placeholder UI primitives removed from `frontend/src/components/ui/` (icon-badge, chart, collapsible, table), leaving the shared `frontend/packages/ui` exports as the canonical implementation.
 
 ### Phase 4: Shell Integration & Asset Alignment
 
 - **Logo Component**: `COMPLETE`. Canonical TSX exists and is mounted in `Sidebar`.
 - **Shell Promotion**: `COMPLETE`. Canonical shell mix is now 14 migrated + 1 protected + 4 public.
+
+### Phase 5: API Convergence & Closeout
+
+- **Shared clients**: `workflowService`, `analysisService`, `ingestion.service`, and `documentService` now sit behind every production route that was still hitting `fetch`. The shared `axiosInstance` manages auth, error logging, and interceptors.
+- **Verification reruns**: After each client migration chunk the following remained green: `scan-routes.ts`, `scan-screens.ts`, `detect-orphans.ts`, `tools/ci/check-route-integrity.ts`, `tools/ci/check-screen-pairs.ts`, and `cd frontend && yarn type-check`.
+- **Next steps**: Sync PM artifacts with this wiring progress (route matrix, blueprint, status) and capture the still-blocked `/tracker` Firebase verification evidence before final gate closure.
 
 ### Known Blockers
 
@@ -65,6 +73,7 @@
 | B4 | `ingestion contract convergence` | `High` | `RESOLVED` | Active career-ingestion callers now use `/api/v1/ingest`; artifact upload and smart-ingestion remain specialized scopes. |
 | B5 | `/tracker` env verification | `Medium` | `PARTIALLY_UNBLOCKED` | Backend applications CRUD is real and API tests pass, but this review did not rerun live Firebase/Firestore verification against a running local stack. |
 | B6 | `Footer shell adoption` | `Low` | `RESOLVED` | Canonical `Footer` is adopted by `MigratedRouteLayout`. |
+| B7 | `fetch ⇒ service client cleanup` | `Low` | `RESOLVED` | Jobs/Opportunities/Profile/analysis/ingestion flows now use the shared API services; verification scripts reran cleanly after each slice. |
 
 ### Execution Skill Matrix (Phase 4 Finalization)
 

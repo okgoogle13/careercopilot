@@ -16,7 +16,7 @@ Evidence inputs (advisory only):
 
 ## Current Phase
 
-- **Shell Promotion COMPLETE + Step 6B COMPLETE; program closeout still IN_PROGRESS (2026-03-18)** — `/welcome` and `/documents` were promoted into the canonical migrated shell; `/asset-library` remains the only intentional legacy-shell holdout (support-only). Canonical shell state is now 14 migrated + 1 protected + 4 public, and the runtime preserves 7 explicit legacy redirect paths in `App.tsx`. Review confirms real backend progress, but the program is still not closeable from PM artifacts alone.
+- **Shell Promotion COMPLETE + Phase 5 (API convergence) ACTIVE; program closeout still IN_PROGRESS (2026-03-18)** — `/welcome` and `/documents` were promoted into the canonical migrated shell; `/asset-library` remains the only intentional legacy-shell holdout (support-only). Canonical shell state is now 14 migrated + 1 protected + 4 public, and the runtime preserves 7 explicit legacy redirect paths in `App.tsx`. API wiring now funnels all jobs, opportunities, profile, ingestion, analysis, and quick-apply flows through the shared `frontend/src/api/*Service` layer, so PM gate metrics now need a final artifact refresh.
 - Evidence-weighted completion: approximately 90% — route ownership, shell promotion, and `/opportunities` closure are aligned, tracker backend CRUD is real, and ingestion convergence is substantially improved. However, `workflow_orchestration` and `resume_audit` history remain only backend-complete, while `/analysis` vs `/asset-library` cleanup and live tracker verification are still open.
 
 ## Recent Progress
@@ -45,6 +45,7 @@ Evidence inputs (advisory only):
   - Home, Dashboard, Opportunities, Applications, Ingestion, Analysis, Account Control
   - Scaffold IDs and route-family mappings are captured in `analysis/2026-03-16-figma-mcp-inventory-and-accelerators.md`
   - accelerator policy is now explicit: adopt draft build-contract and wireframe-diff support; pilot scaffold injection only; reject schema extraction and token sync automation for now
+- Shared-client cleanup: `workflowService`, `analysisService`, `ingestion.service`, and `documentService` now back all fetch-heavy flows (quick apply, ATS scoring, evidence upload, document redline), and the shared `axiosInstance` remains the single auth/token gate; verification scripts reran clean after each slice.
 - Shared-shell Figma audit is now checked in:
   - `analysis/2026-03-16-figma-shared-shell-audit.md`
   - shell inheritance is now explicit for layout, sidebar, logo, top-nav/header, and footer
@@ -101,6 +102,7 @@ Evidence inputs (advisory only):
 - `/tracker` closeout: BLOCKED on Firebase/Firestore env. `FIREBASE_PROJECT_ID` absent from `backend/.env`. Requires `FIREBASE_PROJECT_ID=careercopilot-468811` + Firestore service account. See `analysis/remaining-route-plan.md §4`.
 - Footer shell adoption: `RESOLVED` (adopted by `MigratedRouteLayout`).
 - AuthGuard B3: `App.tsx:72` `bg-[#1A1714]` → semantic token (deferred, non-critical).
+- PM artifact refresh: update `status.md`/`blueprint.md`/`route-matrix.md` to cite API convergence and note outstanding `/tracker` env evidence before closing the book.
 
 ## Next Actions
 

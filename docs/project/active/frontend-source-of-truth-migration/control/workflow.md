@@ -20,6 +20,9 @@ It exists because the last wireframe pass produced useful reference material, bu
   - useful rationale for asset placement choices
 - `SUMMARY.md`
   - useful high-level pipeline ordering only
+- External prototype references (including one-off Vite apps, extensions, or demo repos)
+  - useful for IA/layout decomposition patterns, interaction sequencing, and copy tone exploration
+  - must be treated as `support_reference` candidates and classified by the gap-fill planner before any reuse is recorded
 
 These are reference inputs, not execution truth.
 
@@ -74,6 +77,7 @@ This prompt is the required planning input before route-level spec generation fo
 - Keep shared-family wireframes explicit in the route matrix.
 - Treat existing runtime components as behavior inputs, not styling truth, unless they are already token-clean.
 - Treat `sources/consolidated-reference/**` as support/reference input only. It must be classified by the gap-fill planner before any route-level reuse decision is recorded.
+- Treat external prototype codebases the same way as consolidated-reference and Figma outputs: support-only until reviewed against route ownership, canonical wireframes, and backend capability truth.
 - Treat direct Figma MCP outputs the same way: support-only until reviewed against route ownership, wireframes, and capability truth.
 - Treat late-stage TSX identity review as a required closure gate for any support-influenced route, not an optional polish pass.
 
@@ -86,6 +90,7 @@ This prompt is the required planning input before route-level spec generation fo
 - Do not let inconsistent `features/` presentation become canonical without a tokens-first reuse decision.
 - Do not prioritize motion embellishment before wireframe structure and ownership are correct.
 - Do not promote raw consolidated-reference TSX directly into runtime truth. It must first pass route-level gap-fill classification and any required audit pack review.
+- Do not promote raw external prototype TSX directly into runtime truth. At most, port structure/approach after gap-fill classification, and require the TSX identity gate for any support-influenced implementation.
 - Do not derive backend schemas or API contracts from Figma page text or card labels.
 - Do not treat Figma variable output as token authority while repo token files remain canonical.
 - Do not treat token-clean output as sufficient if the final TSX still reads as generic SaaS. The identity gate must pass before closure.
