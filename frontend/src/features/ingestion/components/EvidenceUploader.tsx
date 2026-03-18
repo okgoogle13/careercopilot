@@ -1,12 +1,11 @@
 import { March, Placard, Strike } from '@/components/ui';
 import { m3Toast } from '@/utils/toast';
+import { uploadAndTagFile, type IngestionSourceType } from '@/api/ingestion.service';
 import { validateFile } from '@/utils/fileValidation';
 import { FileText, UploadCloud } from 'lucide-react';
 import React, { useState } from 'react';
 
-const API_BASE_URL = '/api';
-
-type SourceType = 'resume' | 'cover_letter' | 'ksc_response';
+type SourceType = IngestionSourceType;
 
 export const EvidenceUploader: React.FC = () => {
   const [isUploading, setIsUploading] = useState(false);
@@ -24,21 +23,9 @@ export const EvidenceUploader: React.FC = () => {
     }
 
     setIsUploading(true);
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('source_type', selectedType);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/ingest/artifacts/upload`, {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.detail || 'Upload failed');
-      }
-
+      await uploadAndTagFile(file, () => {}, selectedType);
       m3Toast.success('Success', `Ingested ${file.name}`);
     } catch (error) {
       console.error(error);
@@ -49,7 +36,7 @@ export const EvidenceUploader: React.FC = () => {
     }
   };
 
-  const documentOptions = [
+  const documentOptions: { value: SourceType; label: string }[] = [
     { value: 'ksc_response', label: 'KSC Response' },
     { value: 'cover_letter', label: 'Cover Letter' },
     { value: 'resume', label: 'Past Resume' },

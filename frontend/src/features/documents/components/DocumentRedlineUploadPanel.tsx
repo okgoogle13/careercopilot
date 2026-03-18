@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { Placard } from '../../../components/ui/Placard';
 import { RedlineActionBar } from './RedlineActionBar';
+import { documentService } from '@/api/documentService';
 
 export interface DocumentRedlineUploadPanelProps {
   documentId: number;
@@ -50,26 +51,11 @@ export function DocumentRedlineUploadPanel({
 
     setIsSubmitting(true);
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('edits', JSON.stringify(parsedEdits));
-
-      const response = await fetch('/api/documents/process/redline', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        const text = await response.text().catch(() => '');
-        setError(`Request failed (${response.status})${text ? `: ${text}` : ''}.`);
-        return;
-      }
-
-      const blob = await response.blob();
-      const disposition = response.headers.get('Content-Disposition') ?? '';
-      const match = disposition.match(/filename[^;=\n]*=["']?([^"'\n;]+)["']?/);
-      const filename = match?.[1] ?? `redlined_${file.name}`;
-
+      const { blob, filename } = await documentService.processRedline(
+        _documentId,
+        file,
+        parsedEdits
+      );
       onSuccess(blob, filename);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Network error. Try again.');
