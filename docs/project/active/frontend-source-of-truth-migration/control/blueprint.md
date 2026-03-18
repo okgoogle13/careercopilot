@@ -52,6 +52,19 @@ Wire all P0 and P1 backend capabilities into the live routed product, repair the
 
 Use these labels only to clarify execution state. They are not a separate governance workflow.
 
+## Task Status Overview
+
+| Step | Status | Notes |
+| --- | --- | --- |
+| Step 1 — Fix Planning Inputs | ⚠️ In Progress | Python tests passing (18/18), JS validator parity still under review; conduit entries in `control/fit-for-purpose.md` pending. |
+| Step 2 — Resolve Build-Contract Gate (`/tracker`) | ✅ Complete | Contract approved; `/tracker` route now has execution-ready status once backend auth/data blockers clear. |
+| Step 3a — `/tracker` CRUD | ✅ Complete (deferred verification) | All runtime wiring done; Firebase env verification pending per `control/status.md`. |
+| Step 3b — `/career/ingest` Smart Ingestion | ✅ Complete | Upload-to-save flow converged on `/api/v1/ingest`; token/brand gates satisfied. |
+| Step 3c — `/analysis` / resume audit | 🟡 Mixed | Route expanded, backend history wired but persisted state still flagged; dismiss after audit pack confirms design retention. |
+| Step 3d — `/apply/quick` | ✅ Complete | Execution owner locked; job analysis results panel extracted as support component. |
+| Step 4 — Wireframe Workflow Repair | 🟡 Warning | Validator flagged asset-integrity and schema drift; re-run validator after asset sync and manifest reconciliation. |
+| Step 5 — Cleanup | ⚪ Planned | Post-verification tracking cleanup pending final tracker env gate.
+
 ---
 
 ## Success Metrics (Exit Gate for Full Blueprint)
@@ -356,6 +369,34 @@ Priority surfaces (in order): landing → dashboard → analysis → application
 - [ ] **4.2** Run `scripts/validate-wireframe-workflow.py` on each wireframe. Classify failures.
 - [ ] **4.3** Fix schema / route-coverage / component-planning failures for each wireframe. Do not mark any surface complete until the validator passes.
 - [ ] **4.4** Use `derive-gap-fill-plan.py` to classify each component as: `reuse_as_is` / `keep_behavior_rewrite_styling` / `keep_behavior_extend_tokens` / `reference_only` / `build_new` / `blocked`.
+
+# Step 5 — API Convergence & Artifact Sync
+
+**One-PR size.** Branch: `chore/api-convergence`
+**Agent tier:** GPT-5.2-codex or codex-like (execution-focused)
+**Depends on:** Step 3 and Step 4 Completion (route-owner cleanup + artifact repair)
+**Parallel-safe:** Yes (independent of other Step 5 chunks)
+
+### Context Brief
+
+The final migration closeout is not ready to ship until every live route relies on exactly one client for backend interaction, and the PM artifacts explicitly cite the wiring status. Existing flows still had scattered `fetch` calls, so this step consolidates them into `frontend/src/api/*Service.ts` helpers (job queue, quick apply, analysis, ingestion, documents) and then refreshes the governance docs (`status.md`, `dashboard.md`, `blueprint.md` and `route-matrix.json`) to capture the new status + remaining blockers (e.g., `/tracker` Firebase verification). After every chunk, rerun the verification suite so the artifact updates are grounded in fresh scans.
+
+### Tasks
+
+- [ ] **5.1** Replace remaining `fetch`/`axios` calls in `Jobs`, `Opportunities`, `Profile`, `Applications`, `Analysis`, `Ingestion`, and `Documents` flows with the corresponding service client (`workflowService`, `analysisService`, `ingestion.service`, `documentService`, `applicationService`, etc.) so each workflow has one logical client.
+- [ ] **5.2** After each chunk, rerun `node --import tsx tools/scripts/scan-routes.ts`, `node --import tsx tools/scripts/scan-screens.ts`, `node --import tsx tools/scripts/detect-orphans.ts`, `node --import tsx tools/ci/check-route-integrity.ts`, `node --import tsx tools/ci/check-screen-pairs.ts`, and `cd frontend && yarn type-check`. Record outputs (pass/fail) in the `status.md` / `dashboard.md` update notes.
+- [ ] **5.3** Refresh the PM artifacts (`status.md`, `dashboard.md`, `blueprint.md`, `route-matrix.json`) to explicitly document the API convergence, highlight the open `/tracker` Firebase proof gap, and capture any outstanding blocker/resolution actions.
+- [ ] **5.4** If any `fetch` rewrite introduces new dependencies (e.g., local `axios` configs), document them in `control/blueprint.md` so future agents know the canonical client location and interceptors.
+
+### Acceptance
+
+- No production route still uses inline `fetch` after this step.
+- The verification suite is fully rerun and green after the final chunk.
+- PM artifacts note the API convergence progress, the tracker verification blocker, and readiness pointers for the release gate.
+
+### Skills
+
+`subagent-driven-development`, `verification-before-completion`, `project-manager`
 - [ ] **4.4a** Index `sources/consolidated-reference/**/*.tsx` as `support_reference` candidates only. They are evidence inputs, not authority.
 - [ ] **4.4b** Block direct promotion of support-reference candidates that are token-dirty, `figma:asset` bound, remote-asset bound, or non-compliant with zero-flora / no non-human mascot rules.
 - [ ] **4.4c** Generate route audit packs for `landing`, `dashboard`, and `analysis` that record approved reuse mode, candidate path, exclusions, and rewrite requirements.
