@@ -46,8 +46,8 @@
       "current_runtime_owner": "Login",
       "target_runtime_owner": "Login",
       "screen_reference": "frontend/src/screens/02_auth/AuthModal.tsx",
-      "xml_wireframe_path": "frontend/src/screens/02_auth/02_auth.wireframe.xml",
-      "wireframe_coverage": "shared_family_wireframe",
+      "xml_wireframe_path": "frontend/src/screens/02_auth/02_login.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
       "paired_runtime_surface": "frontend/src/features/auth/Login.tsx",
       "backend_capabilities": [],
       "target_component_surfaces": [
@@ -70,8 +70,8 @@
       "current_runtime_owner": "Register",
       "target_runtime_owner": "Register",
       "screen_reference": "frontend/src/screens/02_auth/AuthModal.tsx",
-      "xml_wireframe_path": "frontend/src/screens/02_auth/02_auth.wireframe.xml",
-      "wireframe_coverage": "shared_family_wireframe",
+      "xml_wireframe_path": "frontend/src/screens/02_auth/02_register.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
       "paired_runtime_surface": "frontend/src/features/auth/Register.tsx",
       "backend_capabilities": [],
       "target_component_surfaces": [
@@ -95,7 +95,7 @@
       "target_runtime_owner": "OnboardingRoute",
       "screen_reference": "frontend/src/screens/03_onboarding/OnboardFlow.tsx",
       "xml_wireframe_path": "frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml",
-      "wireframe_coverage": "shared_family_wireframe",
+      "wireframe_coverage": "route_specific_wireframe",
       "paired_runtime_surface": "frontend/src/features/onboarding/OnboardingRoute.tsx",
       "backend_capabilities": [
         "voice_profile_capture"
@@ -121,8 +121,8 @@
       "current_runtime_owner": "WelcomeScreen",
       "target_runtime_owner": "WelcomeScreen",
       "screen_reference": "frontend/src/screens/03_onboarding/OnboardFlow.tsx",
-      "xml_wireframe_path": "frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml",
-      "wireframe_coverage": "shared_family_wireframe",
+      "xml_wireframe_path": "frontend/src/screens/03_onboarding/03_welcome.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
       "paired_runtime_surface": "frontend/src/features/onboarding/WelcomeScreen.tsx",
       "backend_capabilities": [],
       "target_component_surfaces": [
@@ -177,7 +177,7 @@
       "target_runtime_owner": "AnalysisPage",
       "screen_reference": "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx",
       "xml_wireframe_path": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml",
-      "wireframe_coverage": "shared_family_wireframe",
+      "wireframe_coverage": "route_specific_wireframe",
       "paired_runtime_surface": "frontend/src/features/analysis/AnalysisPage.tsx",
       "backend_capabilities": [
         "resume_audit"
@@ -206,8 +206,8 @@
       "current_runtime_owner": "AssetLibrary",
       "target_runtime_owner": "AssetLibrary",
       "screen_reference": "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx",
-      "xml_wireframe_path": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml",
-      "wireframe_coverage": "shared_family_wireframe",
+      "xml_wireframe_path": "frontend/src/screens/05_analysis/05_asset_library.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
       "paired_runtime_surface": "frontend/src/features/analysis/AssetLibrary.tsx",
       "backend_capabilities": [
         "smart_ingestion_asset_pipeline"
@@ -316,8 +316,8 @@
       "current_runtime_owner": "Opportunities",
       "target_runtime_owner": "Opportunities",
       "screen_reference": "frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
-      "xml_wireframe_path": "frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
-      "wireframe_coverage": "shared_family_wireframe",
+      "xml_wireframe_path": "frontend/src/screens/06_lookout/06_opportunities.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
       "paired_runtime_surface": "frontend/src/features/opportunities/Opportunities.tsx",
       "backend_capabilities": [
         "job_listings_workbench",
@@ -346,8 +346,8 @@
       "current_runtime_owner": "JobQueue",
       "target_runtime_owner": "JobQueue",
       "screen_reference": "frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
-      "xml_wireframe_path": "frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
-      "wireframe_coverage": "shared_family_wireframe",
+      "xml_wireframe_path": "frontend/src/screens/06_lookout/06_job_queue.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
       "paired_runtime_surface": "frontend/src/features/jobs/JobQueue.tsx",
       "backend_capabilities": [
         "job_listings_workbench"
@@ -371,14 +371,14 @@
       "implementation_status": "complete",
       "current_runtime_owner": "KSCGenerator",
       "target_runtime_owner": "KSCGenerator",
-      "screen_reference": "frontend/src/screens/08_workbench/DocumentWorkbench.tsx",
-      "xml_wireframe_path": "frontend/src/screens/08_workbench/08_workbench.wireframe.xml",
-      "wireframe_coverage": "shared_family_wireframe",
+      "screen_reference": "frontend/src/screens/12_generation/GenerationWorkbench.tsx",
+      "xml_wireframe_path": "frontend/src/screens/12_generation/12_ksc_generator.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
       "paired_runtime_surface": "frontend/src/features/ksc-generator/KSCGenerator.tsx",
       "backend_capabilities": [],
       "target_component_surfaces": [
         "KSCGenerator",
-        "DocumentWorkbench"
+        "GenerationWorkbench"
       ],
       "component_library_action": "merge",
       "priority": "medium",
@@ -395,14 +395,14 @@
       "implementation_status": "complete",
       "current_runtime_owner": "CoverLetterGenerator",
       "target_runtime_owner": "CoverLetterGenerator",
-      "screen_reference": "frontend/src/screens/09_finalization/ApplicationFinalization.tsx",
-      "xml_wireframe_path": "frontend/src/screens/09_finalization/09_finalization.wireframe.xml",
-      "wireframe_coverage": "shared_family_wireframe",
+      "screen_reference": "frontend/src/screens/12_generation/GenerationWorkbench.tsx",
+      "xml_wireframe_path": "frontend/src/screens/12_generation/12_cover_letter_generator.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
       "paired_runtime_surface": "frontend/src/features/applications/CoverLetterGenerator.tsx",
       "backend_capabilities": [],
       "target_component_surfaces": [
         "CoverLetterGenerator",
-        "ApplicationFinalization"
+        "GenerationWorkbench"
       ],
       "component_library_action": "merge",
       "priority": "medium",
@@ -420,8 +420,8 @@
       "current_runtime_owner": "ProfileView",
       "target_runtime_owner": "ProfileView",
       "screen_reference": "frontend/src/screens/10_settings/SettingsControl.tsx",
-      "xml_wireframe_path": "frontend/src/screens/10_settings/10_settings.wireframe.xml",
-      "wireframe_coverage": "shared_family_wireframe",
+      "xml_wireframe_path": "frontend/src/screens/10_settings/10_profile.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
       "paired_runtime_surface": "frontend/src/features/profile/components/ProfileView.tsx",
       "backend_capabilities": [
         "voice_profile_capture"
@@ -447,7 +447,7 @@
       "target_runtime_owner": "Settings",
       "screen_reference": "frontend/src/screens/10_settings/SettingsControl.tsx",
       "xml_wireframe_path": "frontend/src/screens/10_settings/10_settings.wireframe.xml",
-      "wireframe_coverage": "shared_family_wireframe",
+      "wireframe_coverage": "route_specific_wireframe",
       "paired_runtime_surface": "frontend/src/features/settings/Settings.tsx",
       "backend_capabilities": [],
       "target_component_surfaces": [
