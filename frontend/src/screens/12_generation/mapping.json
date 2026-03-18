@@ -1,0 +1,9 @@
+{
+  "wireframe_id": "12_generation",
+  "wireframe_path": "frontend/src/screens/12_generation/12_generation.wireframe.xml",
+  "source_component_path": "frontend/src/features/ksc-generator/KSCGenerator.tsx",
+  "screen_component_path": "frontend/src/screens/12_generation/GenerationWorkbench.tsx",
+  "route": "/ksc-generator, /cover-letter-generator",
+  "notes": "Shared layout for generative AI document generation",
+  "local_wireframe_path": "frontend/src/screens/12_generation/12_generation.wireframe.xml"
+}

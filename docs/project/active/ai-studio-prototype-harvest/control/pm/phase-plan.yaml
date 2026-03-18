@@ -1,0 +1,241 @@
+project: "AI Studio Prototype Harvest"
+status: IN_PROGRESS
+source_of_truth: "~/.gemini/antigravity/brain/50c45308-06bb-4297-923a-2910145304b5/AI_STUDIO_HARVEST_PLAN.updated.md"
+
+phases:
+
+  - id: phase-0-precheck
+    name: "Phase 0: AI Studio Tweak Verification"
+    status: COMPLETE
+    owner: Human / AI Studio
+    description: >
+      PT-2 through PT-5 prompts executed on prototype branch careercopilot-aistud.
+      Structural tweaks pre-completed manually. This phase is read-only from the PM perspective.
+    completed_artefacts:
+      - "ingestion_prompts.md — snake_case aligned, comment on line 1"
+      - "ATSScoreCard.tsx — token re-skin applied (PT-3)"
+      - "AuditDisplay.tsx — token re-skin applied (PT-4)"
+      - "ValidationDashboard.tsx decomposition JSON — ready for Step B"
+    gate: "Human confirmation that AI Studio outputs are committed to careercopilot-aistud"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # TRACK A — must complete before Track C can start
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: track-a-backend-py
+    name: "Track A: Backend Python Alignment"
+    status: PENDING
+    owner: sprint-coordinator → pydantic-model-scaffolder
+    description: >
+      Harvest snake_case-aligned field names from PT-2 output and verify/patch
+      backend Pydantic models. Ensures zero transcription errors before Track C wires APIs.
+    milestones:
+      - id: A-001
+        name: "Verify PT-2 output on prototype branch"
+        description: >
+          Locate ingestion_prompts.md on careercopilot-aistud. Confirm line 1 comment
+          '# Python-harvest-ready — snake_case aligned 2026-03-18' is present.
+          Confirm all 5 field names use snake_case:
+            needs_review_flag, star_feedback, improvement_suggestions, action_verb, noun_task
+        status: PENDING
+        gate: "PT-2 comment present AND all 5 field names confirmed snake_case"
+
+      - id: A-002
+        name: "Audit backend Pydantic models for field-name divergence"
+        description: >
+          Grep backend/app/schemas/ and backend/app/models/ for the 5 field names
+          and their PascalCase variants (Needs_Review_Flag etc).
+          Produce a diff: which files need patching.
+        status: PENDING
+        gate: "Divergence map produced — list of files + line numbers"
+
+      - id: A-003
+        name: "Apply snake_case patches to Pydantic models"
+        description: >
+          Edit only the divergent lines identified in A-002.
+          Do not rename fields that are already snake_case.
+        status: PENDING
+        gate: "No PascalCase variant of the 5 names exists in backend/app/"
+
+      - id: A-004
+        name: "Run pytest — no regressions"
+        description: "cd backend && pytest app/tests/ -q"
+        status: PENDING
+        gate: "pytest exit 0, all tests pass"
+
+    gates_required:
+      - "A-001 COMPLETE"
+      - "A-002 COMPLETE"
+      - "A-003 COMPLETE"
+      - "A-004 COMPLETE (pytest green)"
+    exit_criteria:
+      - "ingestion_prompts.md snake_case alignment verified"
+      - "All Pydantic models use snake_case for the 5 harvested fields"
+      - "pytest passes with zero new failures"
+    blocks: ["track-c-data-wiring"]
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # TRACK B — parallel with Track A; must complete before Track C
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: track-b-ui-components
+    name: "Track B: UI Component Harvest + KR Compliance"
+    status: PENDING
+    owner: sprint-coordinator → careercopilot-design-critique / before-and-after / web-design-guidelines / design-orchestration
+    description: >
+      Copy PT-3 (ATSScoreCard.tsx) and PT-4 (AuditDisplay.tsx) outputs from prototype
+      into the main repo at their canonical paths. Run all mandatory review skills.
+    milestones:
+      - id: B-001
+        name: "Harvest ATSScoreCard.tsx (PT-3)"
+        description: >
+          Copy PT-3 output from careercopilot-aistud into
+          frontend/src/features/analysis/components/ATSScoreCard.tsx
+          (confirm canonical path with App.tsx import tree).
+        status: PENDING
+        gate: "File present at canonical path; no import errors"
+
+      - id: B-002
+        name: "Harvest AuditDisplay.tsx (PT-4)"
+        description: >
+          Copy PT-4 output from careercopilot-aistud into
+          frontend/src/features/analysis/components/AuditDisplay.tsx
+        status: PENDING
+        gate: "File present at canonical path; no import errors"
+
+      - id: B-003
+        name: "Run token-enforcement gate on both components"
+        description: >
+          bash .claude/skills/token-enforcement/scripts/run-token-enforcement.sh \
+            frontend/src/features/analysis/components/ATSScoreCard.tsx
+          bash .claude/skills/token-enforcement/scripts/run-token-enforcement.sh \
+            frontend/src/features/analysis/components/AuditDisplay.tsx
+        status: PENDING
+        gate: "Zero hard-coded hex colors; zero raw Tailwind colour utilities"
+
+      - id: B-004
+        name: "Invoke before-and-after skill — visual diff"
+        description: >
+          Generate before/after screenshot comparison proving token swap did not
+          break layout. Target: /analysis route rendered in dev server.
+        status: PENDING
+        skill: "before-and-after"
+        gate: "Visual diff generated; no layout regression confirmed by reviewer"
+
+      - id: B-005
+        name: "Run web-design-guidelines audit — semantic accessibility"
+        description: >
+          Invoke web-design-guidelines skill on both harvested components.
+          Resolve any HIGH severity issues before advancing.
+        status: PENDING
+        skill: "web-design-guidelines"
+        gate: "No HIGH severity accessibility issues"
+
+      - id: B-006
+        name: "Invoke design-orchestration Step 5 Readiness Check"
+        description: >
+          Run design-orchestration 'Step 5 Execution Readiness Check'.
+          Triggers visual-design-director agent AND migration-audit gate.
+          Verifies 100% adherence to ZERO-FLORA KR Solidarity v6.1 canon.
+        status: PENDING
+        skill: "design-orchestration (Step 5 Readiness Check)"
+        sub_agents: ["visual-design-director", "migration-audit"]
+        gate: "design critique score ≥90/100; zero ZERO-FLORA violations; migration-audit PASS"
+
+    gates_required:
+      - "B-001 through B-006 COMPLETE"
+      - "token-enforcement PASS on both components"
+      - "design critique ≥90/100"
+      - "migration-audit PASS"
+    exit_criteria:
+      - "ATSScoreCard.tsx and AuditDisplay.tsx live at canonical paths in main repo"
+      - "Zero hard-coded hex colors or raw Tailwind colour utilities in either file"
+      - "Layout verified unchanged via before-and-after diff"
+      - "Accessibility audit passed"
+      - "KR Solidarity compliance confirmed by design-orchestration"
+    blocks: ["track-c-data-wiring"]
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # TRACK C — blocked by Track A AND Track B
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: track-c-data-wiring
+    name: "Track C: ValidationDashboard Decomposition + API Wiring"
+    status: BLOCKED
+    blocked_by: ["track-a-backend-py", "track-b-ui-components"]
+    owner: sprint-coordinator → vercel-composition-patterns / vercel-react-best-practices
+    description: >
+      Decompose the 1,200-line ValidationDashboard.tsx monolith (PT-5) and wire
+      all API callbacks to the backend endpoints aligned in Track A.
+      Apply vercel-composition-patterns and vercel-react-best-practices throughout.
+    milestones:
+      - id: C-001
+        name: "Confirm PT-5 Step A decomposition JSON from AI Studio"
+        description: >
+          Retrieve the proposed sub-component JSON from AI Studio prototype.
+          Validate constraints: ≤4 sub-components, each ≤200 lines,
+          no direct geminiService or Firebase calls.
+        status: PENDING
+        gate: "JSON present, ≤4 components, all constraints satisfied"
+
+      - id: C-002
+        name: "Harvest sub-components from AI Studio (PT-5 Step B)"
+        description: >
+          Copy each generated sub-component tsx file from prototype into
+          frontend/src/features/analysis/components/.
+          Apply vercel-composition-patterns review after each file.
+          Enforce KR Solidarity token rules per vercel-composition-patterns CAREER COPILOT OVERRIDE.
+        status: PENDING
+        skill: "vercel-composition-patterns"
+        gate: "Each sub-component ≤200 lines; typed props interface present; no `any` types"
+
+      - id: C-003
+        name: "Harvest barrel export index.ts (PT-5 Step C)"
+        description: >
+          Copy components/index.ts from prototype into canonical path.
+          Confirm all sub-components are exported as named re-exports.
+        status: PENDING
+        gate: "index.ts present; all sub-components exported"
+
+      - id: C-004
+        name: "Wire onRequestAI → analysisService backend endpoint"
+        description: >
+          Replace the onRequestAI(type, payload) callback stubs with real calls
+          to the appropriate analysisService / workflowService method.
+          Field names must match snake_case schema from Track A.
+        status: PENDING
+        gate: "No stub callbacks remain; all calls use snake_case field names"
+
+      - id: C-005
+        name: "Wire onSaveProfile → profileService backend endpoint"
+        description: >
+          Replace onSaveProfile(data) stubs with profileService.update() call.
+        status: PENDING
+        gate: "No stub callbacks remain"
+
+      - id: C-006
+        name: "Run vercel-react-best-practices audit on all harvested files"
+        description: >
+          Invoke vercel-react-best-practices skill across Track C deliverables.
+          Resolve any HIGH priority findings before gate close.
+        status: PENDING
+        skill: "vercel-react-best-practices"
+        gate: "No HIGH priority React best-practice violations"
+
+      - id: C-007
+        name: "Run token-enforcement on all Track C files"
+        description: >
+          Verify no raw Tailwind colour utilities introduced during wiring.
+        status: PENDING
+        gate: "token-enforcement PASS"
+
+    gates_required:
+      - "track-a-backend-py COMPLETE"
+      - "track-b-ui-components COMPLETE"
+      - "C-001 through C-007 COMPLETE"
+      - "vercel-composition-patterns audit PASS"
+      - "vercel-react-best-practices audit PASS"
+      - "token-enforcement PASS"
+    exit_criteria:
+      - "ValidationDashboard.tsx monolith replaced by ≤4 sub-components each ≤200 lines"
+      - "No sub-component calls geminiService or Firebase directly"
+      - "API callbacks wired; field names snake_case throughout"
+      - "All composition patterns compliant with KR Solidarity token override"
+      - "Full harvest complete — AI Studio prototype can be archived"

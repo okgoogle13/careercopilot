@@ -10,7 +10,7 @@
 | Dimension | Metric | Status |
 |-----------|--------|--------|
 | **Runtime Truth** | 26/26 reachable paths (`19` canonical routes + `7` legacy redirects) | ✅ CLEAN |
-| **Design Truth** | 11/11 screen pairs aligned | ✅ CLEAN |
+| **Design Truth** | 12/12 screen pairs aligned | ✅ CLEAN |
 | **Capability Truth** | 10/10 backend modules | ✅ 95% Saturation Target |
 | **PM Governance** | 12/12 build contracts valid | ✅ VALID |
 | **Shell Promotion** | 14/15 canonical protected routes on MigratedRouteLayout | ✅ PROMOTED (1 canonical holdout on ProtectedLayout) |
@@ -20,7 +20,7 @@
 
 - **Scan Results (2026-03-18)**:
   - `node --import tsx tools/ci/check-route-integrity.ts` → route integrity clean (26 reachable paths scanned from `App.tsx`).
-  - `node --import tsx tools/ci/check-screen-pairs.ts` → all 11 screens correctly paired.
+  - `node --import tsx tools/ci/check-screen-pairs.ts` → all 12 screens correctly paired.
   - `node --import tsx tools/scripts/scan-routes.ts` → 26 reachable paths: public 5 · migrated 20 · protected 1. Canonical surfaces remain 19 total (`4` public + `14` migrated + `1` protected); 7 additional paths are legacy redirects.
   - `python3 scripts/derive-gap-fill-plan.py --route-id opportunities` → `Opportunities` token_state=`clean`; no required_actions remain.
   - `python3 scripts/validate-wireframe-workflow.py --route opportunities` → status `warn`; 0 schema failures, 4 schema warnings, 0 XSD failures.

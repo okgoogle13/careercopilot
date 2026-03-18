@@ -1,0 +1,42 @@
+{
+  "project_id": "ai-studio-harvest-2026",
+  "project_name": "AI Studio Prototype Harvest",
+  "status": "IN_PROGRESS",
+  "start_date": "2026-03-18",
+  "target_end_date": "2026-03-25",
+  "source_of_truth": "~/.gemini/antigravity/brain/50c45308-06bb-4297-923a-2910145304b5/AI_STUDIO_HARVEST_PLAN.updated.md",
+  "prototype_branch": "careercopilot-aistud",
+  "objective": "Extract clean, KR-Solidarity-tokenized UI components and Python-aligned backend artefacts from the AI Studio prototype and integrate them into the main CareerCopilot repo — no monoliths, no hard-coded tokens, no transcription errors.",
+  "owners": {
+    "orchestrator": "Claude (project-manager skill)",
+    "track_a_backend": "sprint-coordinator → pytest-test-scaffolder / pydantic-model-scaffolder",
+    "track_b_ui": "sprint-coordinator → careercopilot-design-critique / before-and-after / web-design-guidelines / design-orchestration",
+    "track_c_wiring": "sprint-coordinator → vercel-composition-patterns / vercel-react-best-practices"
+  },
+  "phase_sequence": ["phase-0-precheck", "track-a-backend-py", "track-b-ui-components", "track-c-data-wiring"],
+  "phase_0_status": "COMPLETE",
+  "execution_truth": [
+    "docs/project/active/ai-studio-prototype-harvest/control/blueprint.md"
+  ],
+  "skill_registry": {
+    "track_b_required": [
+      "before-and-after",
+      "web-design-guidelines",
+      "design-orchestration (Step 5 Readiness Check)"
+    ],
+    "track_c_required": [
+      "vercel-composition-patterns",
+      "vercel-react-best-practices"
+    ]
+  },
+  "success_criteria": [
+    "All ingestion_prompts.md field names are snake_case in backend Pydantic models (no transcription errors)",
+    "ATSScoreCard.tsx and AuditDisplay.tsx contain zero hard-coded hex colors or raw Tailwind colour utilities",
+    "Both components pass token-enforcement gate (--sys-color-* and --sys-shape-* only)",
+    "Both components pass design critique gate (≥90/100, zero ZERO-FLORA violations)",
+    "ValidationDashboard.tsx decomposed into ≤4 sub-components each ≤200 lines",
+    "No sub-component calls geminiService or Firebase directly",
+    "API callbacks (onRequestAI, onSaveProfile) wired to correct backend endpoints",
+    "All harvested files pass vercel-composition-patterns and vercel-react-best-practices audit"
+  ]
+}

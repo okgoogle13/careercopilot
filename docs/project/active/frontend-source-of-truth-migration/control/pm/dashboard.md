@@ -60,7 +60,7 @@ Evidence inputs (advisory only):
 - XSD schema (`docs/schema/build_contract.xsd`) updated to support all contract shapes including apply-quick pattern.
 - `scripts/validate-wireframe-workflow.py` fixed: component_alignment uses full matrix for route-scoped runs; coverage_mismatch downgraded to warning.
 - `05_analysis.wireframe.xml` and `09_finalization.wireframe.xml` XML well-formedness issues were fixed (`&` -> `&amp;`).
-- CI integrity: route integrity clean, 11/11 screen pairs aligned, 18/18 pytest governance tests pass, governance artifacts valid.
+- CI integrity: route integrity clean, 12/12 screen pairs aligned, 18/18 pytest governance tests pass, governance artifacts valid.
 - Governance readiness: `pytest tests/plans -q` → 18 passed; `validate-governance-artifacts.mjs` → ok.
 
 ## Recent Progress (2026-03-17)
@@ -71,7 +71,7 @@ Evidence inputs (advisory only):
   - `/apply/quick` → `frontend/src/features/applications/ApplyQuick.tsx`
 - `frontend/src/routes.tsx` retired; `frontend/src/App.tsx` is now the sole router authority.
 - `MigratedRouteLayout.tsx` viewMap extended for `/opportunities` (`KrDark-feed`) and `/job-queue` (`overview`).
-- Tri-layer truth scripts rerun: route integrity clean, 26 reachable paths scanned (`19` canonical routes + `7` redirects), 11/11 screen pairs, 18 governance tests pass.
+- Tri-layer truth scripts rerun: route integrity clean, 26 reachable paths scanned (`19` canonical routes + `7` redirects), 12/12 screen pairs, 18 governance tests pass.
 - Gap-fill plan run for `/opportunities` and `/tracker` — findings saved to `tmp/migration/`.
 - `remaining-route-plan.md` created: `analysis/remaining-route-plan.md`.
 - `App.tsx` updated: migrated shell is authoritative for all canonical routes except `/asset-library` (support-only) which remains on `ProtectedLayout`.

@@ -35,7 +35,7 @@ Current truth (2026-03-18):
 - Step 6A: complete.
 - Step 6B: complete (including `/opportunities` route-matrix closure). Archetype swaps on `Opportunities.tsx` are complete.
 - Shell promotion is complete for `/onboarding`, `/ksc-generator`, `/cover-letter-generator`, `/job-queue`, and the migrated shell now also owns `/welcome` and `/documents`. Canonical layout mix: migrated 14 · protected 1 · public 4, with 7 explicit legacy redirect paths preserved in `App.tsx`.
-- Tri-layer scripts last known clean: route integrity clean; runtime scan shows 26 reachable paths (`19` canonical routes + `7` redirects); 11/11 screen pairs; 18/18 governance tests.
+- Tri-layer scripts last known clean: route integrity clean; runtime scan shows 26 reachable paths (`19` canonical routes + `7` redirects); 12/12 screen pairs; 18/18 governance tests.
 - `/tracker` route logic is fixed but live closeout is still blocked on Firebase/Firestore env evidence.
 
 Remaining real blockers:
