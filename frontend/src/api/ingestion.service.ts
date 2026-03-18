@@ -40,9 +40,12 @@ export class ApiServiceError extends Error {
  * @returns A promise that resolves to the validated upload-and-tag response.
  * @throws {ApiServiceError} If the API request fails or the response is invalid.
  */
+export type IngestionSourceType = 'resume' | 'cover_letter' | 'ksc_response';
+
 export const uploadAndTagFile = async (
   file: File,
-  onUploadProgress: (progress: number) => void
+  onUploadProgress: (progress: number) => void,
+  sourceType?: IngestionSourceType
 ): Promise<UploadAndTagResponse> => {
   const validation = validateFile(file);
   if (!validation.valid) {
@@ -51,6 +54,9 @@ export const uploadAndTagFile = async (
 
   const formData = new FormData();
   formData.append('file', file);
+  if (sourceType) {
+    formData.append('source_type', sourceType);
+  }
 
   try {
     const response = await axios.post('/api/ingestion/upload-and-tag', formData, {
