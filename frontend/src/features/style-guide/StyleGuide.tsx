@@ -21,7 +21,6 @@ import {
   Placard,
   ScaffoldArea,
   ScaffoldInput,
-  Signal,
   StatusBadge,
   Strike,
   KrIcon,
@@ -65,7 +64,7 @@ const ARCHETYPE_MATRIX = [
     loading: 'shape.megaphoneCut01-loading',
     ambient: 'shape.substrateTile01',
     motion: 'typeSpringSlam (600ms)',
-    components: 'Megaphone, Signal',
+    components: 'Megaphone',
   },
   {
     archetype: 'Placard',
@@ -474,23 +473,10 @@ export function StyleGuide() {
 
               <Placard
                 elevation="raised"
-                header={
-                  <h3 className="text-title-medium font-black uppercase">Status and Signals</h3>
-                }
               >
                 <div className="space-y-4">
-                  <Signal
-                    severity="info"
-                    title="COLLECTIVE SIGNAL"
-                  >
-                    Token synchronization complete. All systems following v6.0.
-                  </Signal>
-                  <Signal
-                    severity="success"
-                    title="GO FOR SHIP"
-                  >
-                    Validation checks are green. Institutional Squelch suppressed.
-                  </Signal>
+                  
+                  
                   <div className="flex flex-wrap gap-2 pt-2">
                     <StatusBadge
                       label="Ready"

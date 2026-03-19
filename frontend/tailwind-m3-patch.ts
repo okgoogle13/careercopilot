@@ -97,10 +97,6 @@ export default {
   }
 },
       borderRadius: {
-  "_comment": "var(--sys-shape-_comment)",
-  "_comment_compat": "var(--sys-shape-_comment_compat)",
-  "_comment_tension": "var(--sys-shape-_comment_tension)",
-  "_comment_v61": "var(--sys-shape-_comment_v61)",
   "alertShard01": "var(--sys-shape-alertShard01)",
   "alertShard01-pressed": "var(--sys-shape-alertShard01-pressed)",
   "blob01": "var(--sys-shape-blob01)",
@@ -147,8 +143,7 @@ export default {
   "substrateTile01": "var(--sys-shape-substrateTile01)",
   "substrateTile01-hover": "var(--sys-shape-substrateTile01-hover)",
   "substrateTile02": "var(--sys-shape-substrateTile02)",
-  "tearBanner01": "var(--sys-shape-tearBanner01)",
-  "tornEdgeClipPath": "var(--sys-shape-tornEdgeClipPath)"
+  "tearBanner01": "var(--sys-shape-tearBanner01)"
 },
       boxShadow: {
   "elevation1Pebble": "var(--sys-shadow-elevation1Strike)",

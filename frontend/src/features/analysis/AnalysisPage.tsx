@@ -1,6 +1,8 @@
-import { Lens, LensArea, Pebble, StatusBadge, Stone } from '@/components/ui';
-import { SkillBreakdownCard } from '@/components/SkillBreakdownCard';
+import { ScaffoldInput, Strike, Placard, ScaffoldArea } from '@/components/ui'
 import { EvidenceUploader } from '@/features/ingestion/components/EvidenceUploader';
+import { ATSScoreCard } from './components/ATSScoreCard';
+import { AuditDisplay } from './components/AuditDisplay';
+import type { ATSScoreResult, DocumentAudit } from '@/types/analysis';
 import { m3Toast } from '@/utils/toast';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import { EmptyState } from '@/components/ui/EmptyState';
@@ -44,7 +46,7 @@ export const AnalysisPage: React.FC = () => {
         const result = composeHero(
           manifest as SolidarityManifest,
           registry,
-          'resistance-portrait-hero'
+          'resistance-portrait-hero-1'
         );
 
         if (result.valid) {
@@ -142,7 +144,7 @@ export const AnalysisPage: React.FC = () => {
 
       <header className="mb-12 flex items-center justify-between border-b border-concrete-grey/10 pb-8 relative z-10">
         <div className="flex items-center gap-6">
-          <div className="w-20 h-20 rounded-megaphone bg-ink-gold/5 flex items-center justify-center border border-ink-gold/20 shadow-inner">
+          <div className="w-20 h-20 rounded-march bg-ink-gold/5 flex items-center justify-center border border-ink-gold/20 shadow-inner">
             <Compass className="w-10 h-10 text-ink-gold animate-in spin-in-12 duration-1000" />
           </div>
           <div>
@@ -160,7 +162,7 @@ export const AnalysisPage: React.FC = () => {
         <section className="lg:col-span-2 space-y-8">
           <EvidenceUploader />
 
-          <Stone
+          <Placard
             elevation="raised"
             className="border-concrete-grey/10 p-10 bg-asphalt-black/20"
           >
@@ -169,53 +171,81 @@ export const AnalysisPage: React.FC = () => {
             </h2>
 
             <div className="grid grid-cols-1 gap-8">
-              <Lens
+              <ScaffoldInput
                 label="Job URL"
                 placeholder="https://example.com/job-posting"
                 value={jobUrl}
-                onChange={(e) => setJobUrl(e.target.value)}
+                onChange={(e: any) => setJobUrl(e.target.value)}
                 variant="filled"
                 className="w-full font-primary"
               />
 
-              <LensArea
+              <ScaffoldArea
                 rows={8}
                 label="Resume Text"
                 value={resumeText}
-                onChange={(e) => setResumeText(e.target.value)}
+                onChange={(e: any) => setResumeText(e.target.value)}
                 placeholder="Paste your current resume text here..."
                 className="w-full font-primary text-sm"
               />
 
               <div className="flex items-center gap-4">
-                <Pebble
+                <Strike
                   onClick={handleAnalysis}
                   disabled={isAnalyzing}
                 >
                   Calibration Check
-                </Pebble>
-                <Pebble
+                </Strike>
+                <Strike
                   onClick={handleHolisticStrategy}
                   disabled={isGeneratingStrategy}
                   variant="secondary"
                 >
                   Synthesize Strategy
-                </Pebble>
+                </Strike>
               </div>
             </div>
-          </Stone>
+          </Placard>
         </section>
 
         <aside className="space-y-8">
           {atsResult ? (
-            <SkillBreakdownCard
-              overallScore={atsResult.overallScore}
-              categories={atsResult.categories.map((category) => ({
-                label: category.name,
-                value: category.score,
-                status: category.status,
-              }))}
-            />
+            <div className="space-y-6">
+              <ATSScoreCard
+                score={{
+                  overallScore: atsResult.overallScore,
+                  breakdown: {
+                    keywordMatch: atsResult.categories.find(c => c.name.toLowerCase().includes('keyword'))?.score || 0,
+                    skillsAlignment: atsResult.categories.find(c => c.name.toLowerCase().includes('skill'))?.score || 0,
+                    jobTitleMatch: atsResult.categories.find(c => c.name.toLowerCase().includes('title'))?.score || 0,
+                    experienceRelevance: atsResult.categories.find(c => c.name.toLowerCase().includes('experience'))?.score || 0,
+                    formatCompliance: atsResult.categories.find(c => c.name.toLowerCase().includes('format'))?.score || 0,
+                  },
+                  matchedKeywords: atsResult.matched_keywords,
+                  missingKeywords: atsResult.missing_keywords,
+                  suggestions: atsResult.categories.flatMap(c => c.suggestions),
+                  keywordDensity: {},
+                }}
+                isCalculating={isAnalyzing}
+                documentType="resume"
+              />
+              
+              <AuditDisplay
+                title="Resume"
+                audit={{
+                  overallScore: atsResult.overallScore,
+                  scanSimulation: "The recruiter's eye is drawn to your skills section first. Ensure your core competencies are prominent.",
+                  violations: atsResult.categories.flatMap(c => 
+                    c.suggestions.map(s => ({
+                      ruleId: c.name,
+                      severity: c.status === 'ERROR' ? 'error' : c.status === 'WARNING' ? 'warning' : 'info',
+                      message: s,
+                    }))
+                  ),
+                  recommendations: atsResult.categories.flatMap(c => c.suggestions),
+                }}
+              />
+            </div>
           ) : (
             <EmptyState
               title="No analysis yet"
@@ -225,7 +255,7 @@ export const AnalysisPage: React.FC = () => {
           )}
 
           {strategyResult && (
-            <Stone
+            <Placard
               elevation="raised"
               className="p-6 border-concrete-grey/10 bg-asphalt-black/20"
             >
@@ -233,10 +263,9 @@ export const AnalysisPage: React.FC = () => {
                 <h3 className="font-display text-2xl uppercase text-paper-white">
                   Strategy Output
                 </h3>
-                <StatusBadge
-                  label="Ready"
-                  variant="success"
-                />
+                <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-[var(--sys-color-kr-activistSmokeGreen-base)] border border-[var(--sys-color-kr-activistSmokeGreen-base)]/30 bg-[var(--sys-color-kr-activistSmokeGreen-base)]/10 rounded-march">
+                  Ready
+                </span>
               </div>
               <div className="space-y-4 text-sm text-paper-white/80">
                 <div className="flex items-center gap-2">
@@ -254,20 +283,20 @@ export const AnalysisPage: React.FC = () => {
                 </div>
                 <div className="flex flex-wrap gap-3">
                   <Link to="/documents">
-                    <Pebble variant="secondary">
+                    <Strike variant="secondary">
                       <Copy className="h-4 w-4" />
                       Export Pack
-                    </Pebble>
+                    </Strike>
                   </Link>
                   <Link to="/apply/quick">
-                    <Pebble>
+                    <Strike>
                       <Sparkles className="h-4 w-4" />
                       Continue to Quick Apply
-                    </Pebble>
+                    </Strike>
                   </Link>
                 </div>
               </div>
-            </Stone>
+            </Placard>
           )}
         </aside>
       </div>

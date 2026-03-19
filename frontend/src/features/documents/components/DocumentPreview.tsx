@@ -1,6 +1,5 @@
-import { Pebble } from '@/components/ui/Pebble';
-import { StatusBadge } from '@/components/ui/StatusBadge/StatusBadge';
-import { Stone } from '@/components/ui/Stone';
+import { StatusBadge, Strike, Placard } from '@/components/ui';
+
 import {
   ArrowLeft,
   Clock,
@@ -49,14 +48,14 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
         <div className="mb-8 border-b border-[var(--color-surface-container-high)] pb-6">
           <div className="flex flex-col xl:flex-row justify-between items-start gap-4">
             <div>
-              <Pebble
+              <Strike
                 variant="ghost"
                 iconLeft={<ArrowLeft size={16} />}
                 onClick={onBack}
                 className="mb-4"
               >
                 Back to Templates
-              </Pebble>
+              </Strike>
               <h1 className="text-display-medium font-bold text-[var(--color-text-primary)] mb-1">
                 Document Preview
               </h1>
@@ -69,31 +68,31 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
             </div>
 
             <div className="flex gap-2 flex-wrap">
-              <Pebble
+              <Strike
                 variant="ghost"
                 iconLeft={<Edit3 size={16} />}
                 onClick={onEdit}
               >
                 Edit
-              </Pebble>
-              <Pebble
+              </Strike>
+              <Strike
                 variant="ghost"
                 iconLeft={<Share2 size={16} />}
               >
                 Share
-              </Pebble>
-              <Pebble
+              </Strike>
+              <Strike
                 variant="ghost"
                 iconLeft={<Printer size={16} />}
               >
                 Print
-              </Pebble>
-              <Pebble
+              </Strike>
+              <Strike
                 variant="primary"
                 iconLeft={<Download size={16} />}
               >
                 Download PDF
-              </Pebble>
+              </Strike>
             </div>
           </div>
         </div>
@@ -102,7 +101,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
           {/* Sidebar */}
           <div className="lg:col-span-3 flex flex-col gap-6">
             {/* Document Info */}
-            <Stone elevation="flat">
+            <Placard elevation="flat">
               <div className="p-4">
                 <h3 className="text-title-small font-bold text-[var(--color-text-primary)] mb-4 border-b border-[var(--color-surface-container)] pb-2">
                   Document Info
@@ -145,10 +144,10 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                   </div>
                 </div>
               </div>
-            </Stone>
+            </Placard>
 
             {/* Zoom Controls */}
-            <Stone elevation="flat">
+            <Placard elevation="flat">
               <div className="p-4">
                 <h3 className="text-title-small font-bold text-[var(--color-text-primary)] mb-4 border-b border-[var(--color-surface-container)] pb-2">
                   Zoom Controls
@@ -173,17 +172,17 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                       <ZoomIn size={16} />
                     </button>
                   </div>
-                  <Pebble
+                  <Strike
                     variant="ghost"
                     size="sm"
                     iconLeft={<RotateCcw size={14} />}
                     onClick={handleResetZoom}
                   >
                     Reset Zoom
-                  </Pebble>
+                  </Strike>
                 </div>
               </div>
-            </Stone>
+            </Placard>
           </div>
 
           {/* Preview Area */}

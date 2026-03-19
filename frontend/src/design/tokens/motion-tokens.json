@@ -1,11 +1,6 @@
 {
-  "$schema": "https://design-tokens.org/schema.json",
-  "name": "kerala-rage kr-solidarity Motion Library",
-  "version": "1.0.0",
-  "description": "Comprehensive motion token library quantifying 'Viscous Breeze' physics for kr-dark and kr-dark modes",
   "motion": {
     "physics": {
-      "$description": "Spring physics parameters for natural, physics-based animations",
       "kr-dark": {
         "stiffness": {
           "$value": 500,
@@ -52,7 +47,6 @@
       }
     },
     "easing": {
-      "$description": "Cubic bezier easing curves for different motion personalities",
       "viscous": {
         "$value": "0.34, 1.56, 0.64, 1",
         "$type": "cubicBezier",
@@ -85,7 +79,6 @@
       }
     },
     "duration": {
-      "$description": "Semantic duration scale for consistent timing",
       "instant": {
         "$value": "100ms",
         "$type": "duration",
@@ -118,16 +111,11 @@
       }
     },
     "interactions": {
-      "$description": "Pre-defined interaction patterns for common UI elements",
       "hover": {
         "card": {
           "transform": {
             "$value": "-4px",
             "$type": "string"
-          },
-          "shadow": {
-            "$value": "0 8px 40px #14121099, 0 2px 8px #00000040",
-            "$type": "shadow"
           },
           "duration": {
             "$value": "{motion.duration.standard}",
@@ -136,16 +124,16 @@
           "easing": {
             "$value": "{motion.easing.viscous}",
             "$type": "cubicBezier"
+          },
+          "shadow": {
+            "$value": "{shadow.card.motion}",
+            "$type": "shadow"
           }
         },
         "button": {
           "scale": {
             "$value": "1.02",
             "$type": "number"
-          },
-          "shadow": {
-            "$value": "0 0 40px #D4A84B26",
-            "$type": "shadow"
           },
           "duration": {
             "$value": "{motion.duration.fast}",
@@ -154,11 +142,15 @@
           "easing": {
             "$value": "{motion.easing.viscous}",
             "$type": "cubicBezier"
+          },
+          "shadow": {
+            "$value": "{shadow.card.motion}",
+            "$type": "shadow"
           }
         },
         "link": {
           "color": {
-            "$value": "{color.primary.inkGlow}",
+            "$value": "#D4A84B",
             "$type": "color"
           },
           "underlineOffset": {
@@ -182,7 +174,7 @@
             "$type": "number"
           },
           "shadow": {
-            "$value": "0 2px 8px #14121066",
+            "$value": "{shadow.card.motion}",
             "$type": "shadow"
           },
           "duration": {
@@ -216,11 +208,11 @@
       "focus": {
         "input": {
           "ring": {
-            "$value": "0 0 0 3px #D4A84B4D",
+            "$value": "{shadow.card.motion}",
             "$type": "shadow"
           },
           "borderColor": {
-            "$value": "{color.primary.kr-ink-gold}",
+            "$value": "#FFC800",
             "$type": "color"
           },
           "duration": {
@@ -234,7 +226,7 @@
         },
         "button": {
           "ring": {
-            "$value": "0 0 0 3px #D4A84B4D",
+            "$value": "{shadow.card.motion}",
             "$type": "shadow"
           },
           "duration": {
@@ -257,13 +249,13 @@
             "$value": "0.9",
             "$type": "number"
           },
-          "shadow": {
-            "$value": "0 16px 48px #141210B3",
-            "$type": "shadow"
-          },
           "easing": {
             "$value": "{motion.easing.viscous}",
             "$type": "cubicBezier"
+          },
+          "shadow": {
+            "$value": "{shadow.card.motion}",
+            "$type": "shadow"
           }
         },
         "modal": {
@@ -326,7 +318,6 @@
       }
     },
     "modeSpecific": {
-      "$description": "Mode-specific motion overrides",
       "kr-dark": {
         "defaultEasing": {
           "$value": "{motion.easing.viscous}",
@@ -357,7 +348,6 @@
       }
     },
     "accessibility": {
-      "$description": "Reduced motion support for accessibility",
       "reducedMotion": {
         "duration": {
           "$value": "50ms",

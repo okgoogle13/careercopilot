@@ -95,7 +95,7 @@ export const ResumeAuditResultsPanel: React.FC<ResumeAuditResultsPanelProps> = (
           {/* Score Gauge */}
           <div className="flex flex-col items-center gap-2">
             <div
-              className="w-24 h-24 rounded-full flex items-center justify-center font-bold text-display-medium border-4"
+              className="w-24 h-24 rounded-march flex items-center justify-center font-bold text-display-medium border-4"
               style={{
                 backgroundColor: 'var(--sys-color-surface-container-low)',
                 borderColor: getScoreColor(data.overallScore),

@@ -1,4 +1,4 @@
-import { Strike, StatusBadge, Placard } from '@/components/ui';
+import { Strike, Placard } from '@/components/ui';
 import { motion } from 'framer-motion';
 import { FileText, Layout, Plus, Rocket, Sparkles, Target, Zap } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -229,10 +229,9 @@ export function Dashboard() {
                     <span className="text-7xl font-black text-paper-white leading-none tracking-tighter">
                       08
                     </span>
-                    <StatusBadge
-                      label="STABLE"
-                      variant="success"
-                    />
+                    <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-[var(--sys-color-kr-activistSmokeGreen-base)] border border-[var(--sys-color-kr-activistSmokeGreen-base)]/30 bg-[var(--sys-color-kr-activistSmokeGreen-base)]/10 rounded-march">
+                      STABLE
+                    </span>
                   </div>
                 </div>
 
@@ -411,11 +410,13 @@ export function Dashboard() {
                           </div>
 
                           <div className="flex items-center gap-4">
-                            <StatusBadge
-                              label={profile.status}
-                              variant={profile.status === 'EXCELLENT' ? 'success' : 'warning'}
-                              showDot
-                            />
+                            <span className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded-march ${
+                              profile.status === 'EXCELLENT' 
+                                ? 'text-[var(--sys-color-kr-activistSmokeGreen-base)] border border-[var(--sys-color-kr-activistSmokeGreen-base)]/30 bg-[var(--sys-color-kr-activistSmokeGreen-base)]/10'
+                                : 'text-[var(--sys-color-stencilYellow-base)] border border-[var(--sys-color-stencilYellow-base)]/30 bg-[var(--sys-color-stencilYellow-base)]/10'
+                            }`}>
+                              {profile.status}
+                            </span>
                             <span className="font-mono text-[9px] text-concrete-grey opacity-40 uppercase tracking-widest leading-none">
                               Last updated: 2m ago
                             </span>

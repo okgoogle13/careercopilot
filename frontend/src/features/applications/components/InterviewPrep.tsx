@@ -1,7 +1,7 @@
-import { LensArea } from '@/components/ui/Lens';
-import { Pebble } from '@/components/ui/Pebble';
+import { Strike, Placard, ScaffoldInput, ScaffoldArea } from '@/components/ui';
+
 import { StatusBadge } from '@/components/ui/StatusBadge/StatusBadge';
-import { Stone } from '@/components/ui/Stone';
+
 import { ArrowLeft, Loader2, MessageSquare, Mic, MicOff, RotateCcw, Sparkles } from 'lucide-react';
 import React, { useState } from 'react';
 
@@ -141,14 +141,14 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <Pebble
+          <Strike
             variant="ghost"
             iconLeft={<ArrowLeft size={16} />}
             onClick={onBack}
             className="mb-6"
           >
             Back to Career Hub
-          </Pebble>
+          </Strike>
 
           <div className="text-center">
             <div className="flex items-center justify-center gap-3 mb-3">
@@ -171,7 +171,7 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
             {/* Question CategoriesGrid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {questionCategories.map((category) => (
-                <Stone
+                <Placard
                   key={category.id}
                   elevation="flat"
                   className="cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-leaf-base)] group"
@@ -194,7 +194,7 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                       {category.description}
                     </p>
                   </div>
-                </Stone>
+                </Placard>
               ))}
             </div>
           </>
@@ -202,7 +202,7 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Question Panel */}
             <div className="lg:col-span-2">
-              <Stone className="mb-6">
+              <Placard className="mb-6">
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-6">
                     <div className="flex flex-wrap gap-2">
@@ -222,14 +222,14 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                         className="font-semibold"
                       />
                     </div>
-                    <Pebble
+                    <Strike
                       variant="ghost"
                       size="sm"
                       iconLeft={<RotateCcw size={14} />}
                       onClick={handleNewQuestion}
                     >
                       New Question
-                    </Pebble>
+                    </Strike>
                   </div>
 
                   <h2 className="text-display-small font-semibold text-[var(--color-text-primary)] mb-8 leading-tight">
@@ -242,7 +242,7 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                       <span className="text-label-large font-bold text-[var(--color-text-primary)]">
                         Your Answer
                       </span>
-                      <Pebble
+                      <Strike
                         variant={isRecording ? 'secondary' : 'ghost'}
                         size="sm"
                         iconLeft={isRecording ? <MicOff size={16} /> : <Mic size={16} />}
@@ -254,11 +254,11 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                         }
                       >
                         {isRecording ? 'Stop Recording' : 'Voice Answer'}
-                      </Pebble>
+                      </Strike>
                     </div>
-                    <LensArea
+                    <ScaffoldArea
                       value={userAnswer}
-                      onChange={(e) => setUserAnswer(e.target.value)}
+                      onChange={(e: any) => setUserAnswer(e.target.value)}
                       placeholder="Type or record your answer here..."
                       rows={8}
                       className="w-full font-serif"
@@ -268,13 +268,13 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                   {/* Sample Answer */}
                   {currentQuestion.sampleAnswer && (
                     <div className="mt-4">
-                      <Pebble
+                      <Strike
                         variant="secondary"
                         onClick={() => setShowSampleAnswer(!showSampleAnswer)}
                         className="w-full justify-center mb-4"
                       >
                         {showSampleAnswer ? 'Hide' : 'Show'} Sample Answer
-                      </Pebble>
+                      </Strike>
 
                       {showSampleAnswer && (
                         <div className="bg-[var(--color-surface-container-low)] border border-[var(--color-leaf-base)] rounded-pebble p-4 animate-in fade-in slide-in-from-top-2">
@@ -289,9 +289,9 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                     </div>
                   )}
                 </div>
-              </Stone>
+              </Placard>
 
-              <Pebble
+              <Strike
                 variant="primary"
                 className="w-full justify-center py-4 text-lg"
                 iconLeft={
@@ -308,12 +308,12 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                 disabled={isGeneratingTips || !userAnswer}
               >
                 {isGeneratingTips ? 'Analyzing Answer...' : 'Get AI Feedback'}
-              </Pebble>
+              </Strike>
             </div>
 
             {/* Tips Panel */}
             <div className="lg:col-span-1">
-              <Stone className="lg:sticky lg:top-6 bg-[var(--color-surface-container)]">
+              <Placard className="lg:sticky lg:top-6 bg-[var(--color-surface-container)]">
                 <div className="p-6">
                   <div className="flex items-center gap-2 mb-4 text-[var(--color-flower-base)]">
                     <Sparkles size={20} />
@@ -336,7 +336,7 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                     ))}
                   </div>
                 </div>
-              </Stone>
+              </Placard>
             </div>
           </div>
         )}

@@ -1,4 +1,4 @@
-import { Placard, Signal, Strike } from '@/components/ui';
+import { Placard,  Strike } from '@/components/ui';
 import { ValidationDashboard } from '@/features/onboarding/components/ValidationDashboard';
 import { OnboardingProgress } from '@/features/onboarding/OnboardingProgress';
 import { useCareerIngestion } from '@/hooks/useCareerIngestion';
