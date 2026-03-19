@@ -28,7 +28,7 @@
 
 ## Track A — Next Actions (sprint-coordinator will execute)
 
-1. **A-001**: Locate `ingestion_prompts.md` on branch `careercopilot-aistud` — verify line 1 comment and all 5 snake_case field names
+1. **A-001**: Locate `ingestion_prompts.md` in `https://github.com/okgoogle13/prototype_v2.0` — verify line 1 comment and all 5 snake_case field names
 2. **A-002**: `grep -rn "Needs_Review_Flag\|STAR_Feedback\|Improvement_Suggestions\|Action_Verb\|Noun_Task" backend/app/` — produce divergence map
 3. **A-003**: Patch divergent Pydantic fields
 4. **A-004**: `cd backend && pytest app/tests/ -q` — confirm green

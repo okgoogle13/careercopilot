@@ -1,4 +1,4 @@
-import { ScaffoldInput, Strike, Placard , ScaffoldArea } from '@/components/ui';
+import { ScaffoldInput, Strike, Placard, ScaffoldArea } from '@/components/ui';
 import { ArrowLeft, Download, Eye, Plus, Save, X } from 'lucide-react';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';

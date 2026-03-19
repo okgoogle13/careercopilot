@@ -40,6 +40,9 @@
       "args": [
         "/Users/okgoogle13/Projects/careercopilot/servers/filesystem_mcp.py"
       ],
+      "env": {
+        "MCP_WORKSPACE_ROOT": "/Users/okgoogle13/Projects/careercopilot"
+      },
       "description": "Workspace-scoped filesystem tools (Python fallback)"
     },
     "git": {

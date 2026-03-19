@@ -3,12 +3,19 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from mcp.server.fastmcp import FastMCP
 
 
-_ROOT_DIR = Path(__file__).resolve().parent.parent
+def _workspace_root() -> Path:
+    env_root = os.environ.get("MCP_WORKSPACE_ROOT")
+    if env_root:
+        return Path(env_root).expanduser().resolve()
+    return Path(__file__).resolve().parent.parent
+
+
+_ROOT_DIR = _workspace_root()
 mcp = FastMCP("filesystem")
 
 

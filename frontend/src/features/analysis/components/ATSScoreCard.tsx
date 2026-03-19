@@ -71,7 +71,8 @@ export function ATSScoreCard({ score, isCalculating, documentType }: ATSScoreCar
                 key={key}
                 className="p-3 shadow-sm"
                 style={{
-                  background: 'color-mix(in srgb, var(--sys-color-charcoalBackground-base) 85%, transparent)',
+                  background:
+                    'color-mix(in srgb, var(--sys-color-charcoalBackground-base) 85%, transparent)',
                   borderColor: 'var(--sys-color-concreteGrey-steps-0)',
                   borderRadius: 'var(--sys-shape-blockRiot02)',
                   borderWidth: 1,
@@ -93,12 +94,16 @@ export function ATSScoreCard({ score, isCalculating, documentType }: ATSScoreCar
               {score.overallScore}%
             </span>
             <p className="text-sm text-[var(--sys-color-worker-ash-base)] mt-2">
-              This score is equivalent to industry-standard ATS compliance scanners. It is not an arbitrary calculation.
+              This score is equivalent to industry-standard ATS compliance scanners. It is not an
+              arbitrary calculation.
             </p>
           </div>
 
           <div className="relative w-32 h-32 mx-auto">
-            <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+            <svg
+              className="w-full h-full transform -rotate-90"
+              viewBox="0 0 100 100"
+            >
               <circle
                 cx="50"
                 cy="50"
@@ -128,15 +133,22 @@ export function ATSScoreCard({ score, isCalculating, documentType }: ATSScoreCar
           <p className="text-center mt-4 text-sm text-[var(--sys-color-worker-ash-base)]">
             {documentType === 'coverLetter' ? (
               <>
-                {score.overallScore >= 90 && 'Excellent match! Highly competitive for recruiter review.'}
-                {score.overallScore >= 80 && score.overallScore < 90 && 'Optimal match. Good chance of passing ATS.'}
-                {score.overallScore >= 70 && score.overallScore < 80 && 'Acceptable match. Some optimization recommended.'}
+                {score.overallScore >= 90 &&
+                  'Excellent match! Highly competitive for recruiter review.'}
+                {score.overallScore >= 80 &&
+                  score.overallScore < 90 &&
+                  'Optimal match. Good chance of passing ATS.'}
+                {score.overallScore >= 70 &&
+                  score.overallScore < 80 &&
+                  'Acceptable match. Some optimization recommended.'}
                 {score.overallScore < 70 && 'Failing match. High risk of automatic rejection.'}
               </>
             ) : (
               <>
                 {score.overallScore >= 80 && 'Excellent match! Your document is highly optimized.'}
-                {score.overallScore >= 60 && score.overallScore < 80 && 'Good match, but some optimization could help.'}
+                {score.overallScore >= 60 &&
+                  score.overallScore < 80 &&
+                  'Good match, but some optimization could help.'}
                 {score.overallScore < 60 && 'Needs significant optimization to pass ATS filters.'}
               </>
             )}

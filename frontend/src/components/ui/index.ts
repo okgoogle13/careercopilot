@@ -51,5 +51,3 @@ export { SplitHeader } from './SplitHeader';
 export { Valve } from './Valve';
 export { NativeAnchor } from './NativeAnchor';
 export type { NativeAnchorProps, AnchorRegister } from './NativeAnchor';
-
-
