@@ -1,3 +1,4 @@
+# Python-harvest-ready — snake_case aligned 2026-03-18
 ### Master Career Database Ingestion
 **System Role:** Career Database Pre-processor
 **Input:** Raw file text content.
@@ -11,7 +12,7 @@ Extract, analyze, de-duplicate, merge, and structure the information from ALL pr
 3.  **KSC to STAR Method**: Structure narrative selection criteria responses into STAR format.
 
 4.  **DEEP STAR CRITIQUE & VALIDATION**:
-    For every KSC Response, perform a "High-Impact Audit". Set 'Needs_Review_Flag' to true if any of the following are detected:
+    For every KSC Response, perform a "High-Impact Audit". Set 'needs_review_flag' to true if any of the following are detected:
 
     - **Vague Language Audit**: Check for "fluff" words like "assisted," "involved in," "handled," or "helped with." Replace with power verbs like "orchestrated," "standardized," "mitigated," or "pioneered."
     - **Quantification Gap**: If the 'Result' lacks numbers, percentages, dollar amounts, or timeframes (e.g., "improved efficiency" vs. "reduced processing time by 30%"), flag it.
@@ -21,12 +22,12 @@ Extract, analyze, de-duplicate, merge, and structure the information from ALL pr
         - **Action**: Are the technical tools or specific steps missing? (e.g., "I used software" vs. "I leveraged Python's Pandas library to automate...").
         - **Result**: Is the qualitative impact (stakeholder feedback, award) or quantitative metric missing?
 
-    - **STAR_Feedback**: Provide a professional, critical analysis. Tell the user exactly *why* their response is currently weak.
-    - **Improvement_Suggestions**: Provide draft rewrites that include placeholders (e.g., "[Insert Number here]") to show the user exactly where they need to provide more data to reach a 10/10 rating.
+    - **star_feedback**: Provide a professional, critical analysis. Tell the user exactly *why* their response is currently weak.
+    - **improvement_suggestions**: Provide draft rewrites that include placeholders (e.g., "[Insert Number here]") to show the user exactly where they need to provide more data to reach a 10/10 rating.
 
 5.  **Achievement Optimization**:
-    For EVERY Structured Achievement, provide an "Improvement_Suggestions" object.
-    Analyze the original text and provide the strongest possible version for the Action Verb, Noun/Task, Metric, Strategy, and Outcome.
+    For EVERY Structured Achievement, provide an "improvement_suggestions" object.
+    Analyze the original text and provide the strongest possible version for the action_verb, noun_task, metric, strategy, and outcome.
     If the metric is missing in the original, suggest a realistic placeholder.
 
 6.  **Subtype Tagging**: Apply relevant tags aligned with Australian Community Services best practices (e.g., NDIS, Trauma-Informed, Strengths-Based).
@@ -62,10 +63,10 @@ Analyze the following career items (Work entries or KSC responses) in the contex
 Refine the following STAR response to be more impactful, concise, and metric-driven.
 
 **Original Prompt:** {ksc_prompt}
-**Current Situation:** {situation}
-**Current Task:** {task}
-**Current Action:** {action}
-**Current Result:** {result}
+**Current situation:** {situation}
+**Current task:** {task}
+**Current action:** {action}
+**Current result:** {result}
 
 ---
 
@@ -74,11 +75,11 @@ Refine the following STAR response to be more impactful, concise, and metric-dri
 
 **Context:** The user has a career achievement: "{original_text}".
 **Current Parsed Data:**
-- Action: {action_verb}
-- Task: {noun_task}
-- Metric: {metric}
-- Strategy: {strategy}
-- Outcome: {outcome}
+- action: {action_verb}
+- task: {noun_task}
+- metric: {metric}
+- strategy: {strategy}
+- outcome: {outcome}
 
 **Task:** Suggest a stronger, more professional, or more specific value for the field: "{field_to_optimize}".
 If the field is 'Metric' and the current value is 'X' or missing, suggest a realistic placeholder format (e.g. "reduced processing time by 20%").

@@ -1,4 +1,4 @@
-import { Lens, LensArea, Pebble, Stone } from '@/components/ui';
+import { ScaffoldInput, Strike, Placard , ScaffoldArea } from '@/components/ui';
 import { ArrowLeft, Download, Eye, Plus, Save, X } from 'lucide-react';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -124,36 +124,36 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBack, onNext, pr
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
           <div className="flex items-center gap-4">
-            <Pebble
+            <Strike
               iconLeft={<ArrowLeft size={16} />}
               onClick={handleBack}
               variant="ghost"
             >
               Back to Dashboard
-            </Pebble>
+            </Strike>
             <h1 className="text-3xl font-bold text-[var(--color-leaf-base)]">Resume Builder</h1>
           </div>
           <div className="flex gap-2">
-            <Pebble
+            <Strike
               variant="secondary"
               iconLeft={<Eye size={16} />}
               onClick={onNext}
             >
               Preview
-            </Pebble>
-            <Pebble
+            </Strike>
+            <Strike
               variant="secondary"
               iconLeft={<Download size={16} />}
             >
               Export PDF
-            </Pebble>
-            <Pebble
+            </Strike>
+            <Strike
               variant="primary"
               iconLeft={<Save size={16} />}
               onClick={onNext}
             >
               Save & Continue
-            </Pebble>
+            </Strike>
           </div>
         </div>
 
@@ -161,7 +161,7 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBack, onNext, pr
           {/* Left Column */}
           <div className="flex flex-col gap-6">
             {/* Personal Info */}
-            <Stone
+            <Placard
               elevation="raised"
               className="p-6"
             >
@@ -169,57 +169,57 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBack, onNext, pr
                 Personal Information
               </h2>
               <div className="flex flex-col gap-4">
-                <Lens
+                <ScaffoldInput
                   className="w-full"
                   label="Full Name"
                   value={resumeData.personalInfo.fullName}
-                  onChange={(e) => updatePersonalInfo('fullName', e.target.value)}
+                  onChange={(e: any) => updatePersonalInfo('fullName', e.target.value)}
                 />
-                <Lens
+                <ScaffoldInput
                   className="w-full"
                   label="Email"
                   type="email"
                   value={resumeData.personalInfo.email}
-                  onChange={(e) => updatePersonalInfo('email', e.target.value)}
+                  onChange={(e: any) => updatePersonalInfo('email', e.target.value)}
                 />
-                <Lens
+                <ScaffoldInput
                   className="w-full"
                   label="Phone"
                   value={resumeData.personalInfo.phone}
-                  onChange={(e) => updatePersonalInfo('phone', e.target.value)}
+                  onChange={(e: any) => updatePersonalInfo('phone', e.target.value)}
                 />
-                <Lens
+                <ScaffoldInput
                   className="w-full"
                   label="Location"
                   value={resumeData.personalInfo.location}
-                  onChange={(e) => updatePersonalInfo('location', e.target.value)}
+                  onChange={(e: any) => updatePersonalInfo('location', e.target.value)}
                 />
-                <LensArea
+                <ScaffoldArea
                   className="w-full"
                   label="Professional Summary"
                   rows={4}
                   value={resumeData.personalInfo.summary}
-                  onChange={(e) => updatePersonalInfo('summary', e.target.value)}
+                  onChange={(e: any) => updatePersonalInfo('summary', e.target.value)}
                 />
               </div>
-            </Stone>
+            </Placard>
 
             {/* Skills */}
-            <Stone
+            <Placard
               elevation="raised"
               className="p-6"
             >
               <h2 className="text-xl font-bold mb-6 text-[var(--color-leaf-base)]">Skills</h2>
               <div className="flex gap-2 mb-4">
-                <Lens
+                <ScaffoldInput
                   className="w-full"
                   placeholder="Add a skill"
                   size="medium"
                   value={newSkill}
-                  onChange={(e) => setNewSkill(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && addSkill()}
+                  onChange={(e: any) => setNewSkill(e.target.value)}
+                  onKeyPress={(e: any) => e.key === 'Enter' && addSkill()}
                 />
-                <Pebble
+                <Strike
                   variant="primary"
                   onClick={addSkill}
                   className="min-w-[48px]"
@@ -242,26 +242,26 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBack, onNext, pr
                   </div>
                 ))}
               </div>
-            </Stone>
+            </Placard>
           </div>
 
           {/* Right Column */}
           <div className="flex flex-col gap-6">
             {/* Experience */}
-            <Stone
+            <Placard
               elevation="raised"
               className="p-6"
             >
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-bold text-[var(--color-leaf-base)]">Work Experience</h2>
-                <Pebble
+                <Strike
                   variant="secondary"
                   size="sm"
                   iconLeft={<Plus size={14} />}
                   onClick={addExperience}
                 >
                   Add
-                </Pebble>
+                </Strike>
               </div>
               <div className="flex flex-col gap-6">
                 {resumeData.experience.map((exp, index) => (
@@ -270,52 +270,52 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBack, onNext, pr
                     className="flex flex-col gap-4"
                   >
                     {index > 0 && <hr className="border-[var(--color-leaf-base)]/20" />}
-                    <Lens
+                    <ScaffoldInput
                       className="w-full"
                       label="Job Title"
                       value={exp.title}
-                      onChange={(e) => updateExperience(index, 'title', e.target.value)}
+                      onChange={(e: any) => updateExperience(index, 'title', e.target.value)}
                     />
-                    <Lens
+                    <ScaffoldInput
                       className="w-full"
                       label="Company"
                       value={exp.company}
-                      onChange={(e) => updateExperience(index, 'company', e.target.value)}
+                      onChange={(e: any) => updateExperience(index, 'company', e.target.value)}
                     />
-                    <Lens
+                    <ScaffoldInput
                       className="w-full"
                       label="Duration"
                       placeholder="e.g. Jan 2020 - Present"
                       value={exp.duration}
-                      onChange={(e) => updateExperience(index, 'duration', e.target.value)}
+                      onChange={(e: any) => updateExperience(index, 'duration', e.target.value)}
                     />
-                    <LensArea
+                    <ScaffoldArea
                       className="w-full"
                       label="Description"
                       rows={3}
                       value={exp.description}
-                      onChange={(e) => updateExperience(index, 'description', e.target.value)}
+                      onChange={(e: any) => updateExperience(index, 'description', e.target.value)}
                     />
                   </div>
                 ))}
               </div>
-            </Stone>
+            </Placard>
 
             {/* Education */}
-            <Stone
+            <Placard
               elevation="raised"
               className="p-6"
             >
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-bold text-[var(--color-leaf-base)]">Education</h2>
-                <Pebble
+                <Strike
                   variant="secondary"
                   size="sm"
                   iconLeft={<Plus size={14} />}
                   onClick={addEducation}
                 >
                   Add
-                </Pebble>
+                </Strike>
               </div>
               <div className="flex flex-col gap-6">
                 {resumeData.education.map((edu, index) => (
@@ -324,29 +324,29 @@ export const ResumeBuilder: React.FC<ResumeBuilderProps> = ({ onBack, onNext, pr
                     className="flex flex-col gap-4"
                   >
                     {index > 0 && <hr className="border-[var(--color-leaf-base)]/20" />}
-                    <Lens
+                    <ScaffoldInput
                       className="w-full"
                       label="Degree"
                       value={edu.degree}
-                      onChange={(e) => updateEducation(index, 'degree', e.target.value)}
+                      onChange={(e: any) => updateEducation(index, 'degree', e.target.value)}
                     />
-                    <Lens
+                    <ScaffoldInput
                       className="w-full"
                       label="School/Institution"
                       value={edu.school}
-                      onChange={(e) => updateEducation(index, 'school', e.target.value)}
+                      onChange={(e: any) => updateEducation(index, 'school', e.target.value)}
                     />
-                    <Lens
+                    <ScaffoldInput
                       className="w-full"
                       label="Year"
                       placeholder="e.g. 2020"
                       value={edu.year}
-                      onChange={(e) => updateEducation(index, 'year', e.target.value)}
+                      onChange={(e: any) => updateEducation(index, 'year', e.target.value)}
                     />
                   </div>
                 ))}
               </div>
-            </Stone>
+            </Placard>
           </div>
         </div>
       </div>

@@ -1,6 +1,5 @@
 import { JobCard } from '@/components/shared/JobCard';
-import { Lens } from '@/components/ui/Lens';
-import { Pebble } from '@/components/ui/Pebble';
+import { ScaffoldInput, Strike } from '@/components/ui';
 import { Briefcase, Filter, MapPin, Search } from 'lucide-react';
 import { useState } from 'react';
 
@@ -88,10 +87,10 @@ export const JobSearch = () => {
         {/* Search & Filter Bar */}
         <div className="bg-[var(--color-surface-container)] p-4 rounded-placard shadow-sm mb-10 flex flex-col md:flex-row gap-4 items-center border border-[var(--color-surface-container-high)]">
           <div className="flex-1 w-full relative">
-            <Lens
+            <ScaffoldInput
               placeholder="Search by job title, company, or keywords..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e: any) => setSearchQuery(e.target.value)}
               className="w-full pl-12 h-14 text-body-large"
               // Note: Lens might not support icon prop directly depending on implementation,
               // so we might place the icon absolutely if Lens doesn't have a slot.
@@ -104,24 +103,24 @@ export const JobSearch = () => {
           </div>
 
           <div className="flex gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
-            <Pebble
+            <Strike
               variant="secondary"
               iconLeft={<MapPin size={16} />}
             >
               Location
-            </Pebble>
-            <Pebble
+            </Strike>
+            <Strike
               variant="secondary"
               iconLeft={<Briefcase size={16} />}
             >
               Job Type
-            </Pebble>
-            <Pebble
+            </Strike>
+            <Strike
               variant="ghost"
               iconLeft={<Filter size={16} />}
             >
               More Filters
-            </Pebble>
+            </Strike>
           </div>
         </div>
 
@@ -162,13 +161,13 @@ export const JobSearch = () => {
               <p className="text-body-medium text-[var(--color-text-secondary)] mt-2">
                 Try adjusting your search terms or filters.
               </p>
-              <Pebble
+              <Strike
                 variant="ghost"
                 className="mt-4 text-[var(--color-leaf-base)]"
                 onClick={() => setSearchQuery('')}
               >
                 Clear Search
-              </Pebble>
+              </Strike>
             </div>
           )}
         </div>

@@ -1,4 +1,4 @@
-import { Pebble, StatusBadge, Stone } from '@/components/ui';
+import { Strike, StatusBadge, Placard } from '@/components/ui';
 import { ProfileHeader } from '@/components/ProfileHeader';
 import { motion } from 'framer-motion';
 import {
@@ -71,12 +71,12 @@ export function ProfileView() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Main Column - Career Strata */}
           <div className="lg:col-span-8 space-y-12">
-            <Stone
+            <Placard
               elevation="raised"
               className="p-10 border-concrete-grey/10 bg-asphalt-black/40 backdrop-blur-md"
             >
               <ResumeUploader onUploadSuccess={setCareerData} />
-            </Stone>
+            </Placard>
 
             <section className="space-y-8">
               <div className="flex items-baseline gap-4">
@@ -124,7 +124,7 @@ export function ProfileView() {
 
           {/* Sidebar Column - Traits & Filaments */}
           <div className="lg:col-span-4 space-y-8">
-            <Stone
+            <Placard
               elevation="floating"
               className="p-8 border-concrete-grey/10 bg-asphalt-black/20"
             >
@@ -155,9 +155,9 @@ export function ProfileView() {
                   </div>
                 ))}
               </div>
-            </Stone>
+            </Placard>
 
-            <Stone
+            <Placard
               elevation="floating"
               className="p-8 border-concrete-grey/10 bg-asphalt-black/20"
             >
@@ -193,7 +193,7 @@ export function ProfileView() {
                   title="Archivist"
                 />
               </div>
-            </Stone>
+            </Placard>
 
             <VoiceProfileManagementSection />
 
@@ -222,7 +222,7 @@ function TimelineItem({
   description?: string;
 }) {
   return (
-    <Stone
+    <Placard
       elevation="flat"
       className="p-6 border-concrete-grey/5 bg-white/5 hover:border-ink-gold/20 transition-all group overflow-hidden relative"
     >
@@ -243,7 +243,7 @@ function TimelineItem({
           {description}
         </p>
       )}
-    </Stone>
+    </Placard>
   );
 }
 

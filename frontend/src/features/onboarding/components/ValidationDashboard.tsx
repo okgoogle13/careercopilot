@@ -1,4 +1,4 @@
-import { Pebble, Signal, Stone, Vessel } from '@/components/ui';
+import { Strike, Placard, Vessel } from '@/components/ui';
 import { m3Toast } from '@/utils/toast';
 import {
   AlertTriangle,
@@ -178,44 +178,44 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <Pebble
+            <Strike
               variant="secondary"
               iconLeft={<Undo2 className="w-4 h-4" />}
               onClick={handleUndo}
               disabled={historyIndex === 0}
             >
               Undo
-            </Pebble>
-            <Pebble
+            </Strike>
+            <Strike
               variant="secondary"
               iconLeft={<Redo2 className="w-4 h-4" />}
               onClick={handleRedo}
               disabled={historyIndex === history.length - 1}
             >
               Redo
-            </Pebble>
+            </Strike>
             {(flaggedAchievements.length > 0 || flaggedKSCs.length > 0) && (
-              <Pebble
+              <Strike
                 variant="secondary"
                 iconLeft={<Sparkles className="w-4 h-4" />}
                 onClick={handleApplyAllSuggestions}
               >
                 Apply AI Suggestions
-              </Pebble>
+              </Strike>
             )}
-            <Pebble
+            <Strike
               variant="primary"
               iconLeft={<Download className="w-4 h-4" />}
               onClick={handleDownloadJSON}
             >
               Export Vector
-            </Pebble>
+            </Strike>
           </div>
         </header>
 
         {/* Summary Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-          <Stone
+          <Placard
             elevation="raised"
             className="flex items-center gap-6 border-l-4 border-l-[var(--sys-color-inkGold-base)]"
           >
@@ -228,9 +228,9 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                 Tactical Achievements
               </span>
             </div>
-          </Stone>
+          </Placard>
 
-          <Stone
+          <Placard
             elevation="raised"
             className="flex items-center gap-6 border-l-4 border-l-[var(--sys-color-concreteGrey-base)]"
           >
@@ -243,9 +243,9 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                 Core Competencies
               </span>
             </div>
-          </Stone>
+          </Placard>
 
-          <Stone
+          <Placard
             elevation="raised"
             className={`flex items-center gap-6 border-l-4 ${flaggedAchievements.length + flaggedKSCs.length > 0 ? 'border-l-[var(--sys-color-inkGold-base)] bg-[var(--sys-color-inkGold-steps-0)]' : 'border-l-[var(--sys-color-concreteGrey-base)]'}`}
           >
@@ -260,15 +260,14 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                 Review Flags
               </span>
             </div>
-          </Stone>
+          </Placard>
         </div>
 
         {/* Conflict/Audit Alert */}
         {(flaggedAchievements.length > 0 || flaggedKSCs.length > 0) && (
-          <Signal
-            severity="warning"
-            variant="tonal"
-            className="mb-10"
+          <Placard
+            elevation="raised"
+            className="mb-10 border-[var(--sys-color-inkGold-steps-2)]"
           >
             <div className="flex flex-col gap-1">
               <span className="font-bold">
@@ -280,7 +279,7 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
                 them in applications.
               </span>
             </div>
-          </Signal>
+          </Placard>
         )}
 
         {/* Detailed Sections */}

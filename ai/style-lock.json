@@ -1,0 +1,35 @@
+{
+  "art_style": "premium gritty editorial street-poster collage, archival portrait energy, distressed but curated, cinematic contrast",
+  "background_rules": "dark asphalt wall, no clean studio backdrops, no glossy surfaces",
+  "palette": [
+    "charcoal",
+    "soot black",
+    "dusty beige",
+    "faded tan paper",
+    "muted teal",
+    "oxidized yellow",
+    "brick red",
+    "restrained green"
+  ],
+  "texture_rules": [
+    "screenprint grain",
+    "paper wear",
+    "paste-shadow",
+    "soft mist",
+    "light paint splatter",
+    "mild surface erosion"
+  ],
+  "typography_rules": "no typography baked into generated assets unless part of source-poster look; keep website copy live in HTML",
+  "hard_exclusions": [
+    "neon cyberpunk",
+    "glossy 3D",
+    "modern fashion models",
+    "collage grids",
+    "heavy face obstruction",
+    "clean corporate minimalism",
+    "extra objects",
+    "stickers",
+    "logos",
+    "white backgrounds"
+  ]
+}

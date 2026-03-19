@@ -1,4 +1,4 @@
-import { Pebble, Stone } from '@/components/ui';
+import { Placard, Strike } from '@/components/ui'
 import { Building, Globe, MapPin, Save, Share2 } from 'lucide-react';
 import React from 'react';
 
@@ -30,7 +30,7 @@ export const JobCard: React.FC<JobCardProps> = ({
   onSave,
 }) => {
   return (
-    <Stone
+    <Placard
       elevation="raised"
       className="h-full flex flex-col p-6 transition-all hover:border-[var(--color-leaf-base)]/30"
     >
@@ -58,21 +58,21 @@ export const JobCard: React.FC<JobCardProps> = ({
           </div>
         </div>
         <div className="flex gap-1">
-          <Pebble
+          <Strike
             variant="ghost"
             size="sm"
             onClick={onSave}
             className="w-8 h-8 p-0 min-w-0"
           >
             <Save size={16} />
-          </Pebble>
-          <Pebble
+          </Strike>
+          <Strike
             variant="ghost"
             size="sm"
             className="w-8 h-8 p-0 min-w-0"
           >
             <Share2 size={16} />
-          </Pebble>
+          </Strike>
         </div>
       </div>
 
@@ -107,25 +107,25 @@ export const JobCard: React.FC<JobCardProps> = ({
         </div>
 
         <div className="flex gap-3 pt-2">
-          <Pebble
+          <Strike
             variant="primary"
             className="flex-1"
             onClick={onApply}
           >
             Apply Now
-          </Pebble>
-          <Pebble
+          </Strike>
+          <Strike
             variant="secondary"
             onClick={() => {}}
           >
             Details
-          </Pebble>
+          </Strike>
         </div>
       </div>
 
       <div className="mt-4 pt-4 border-t border-white/5 text-[10px] text-[var(--color-text-tertiary)] uppercase tracking-widest font-medium">
         Posted {postedAt}
       </div>
-    </Stone>
+    </Placard>
   );
 };

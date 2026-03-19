@@ -34,7 +34,7 @@ export function OnboardingProgress({ currentStep, totalSteps, steps }: Onboardin
             <div className="flex flex-col items-center gap-2">
               <div
                 className={`
-                  w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all duration-300
+                  w-8 h-8 rounded-march flex items-center justify-center text-sm font-bold border-2 transition-all duration-300
                   ${
                     isComplete
                       ? 'bg-ink-gold border-ink-gold text-asphalt-black'

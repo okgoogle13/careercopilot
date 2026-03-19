@@ -181,7 +181,7 @@ export function OnboardingChecklist({ onDismiss }: OnboardingChecklistProps) {
           </div>
 
           {/* Progress bar */}
-          <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden mb-8">
+          <div className="h-1 w-full bg-white/5 rounded-march overflow-hidden mb-8">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${(completedCount / CHECKLIST_ITEMS.length) * 100}%` }}
