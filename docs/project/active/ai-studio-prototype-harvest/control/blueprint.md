@@ -9,7 +9,7 @@
 
 ## Objective
 
-Extract tokenized UI components and Python-aligned backend artefacts from the AI Studio prototype repository (`https://github.com/okgoogle13/prototype_v2.0`) into the main CareerCopilot repo. No monoliths. No hard-coded tokens. No transcription errors.
+Extract tokenized UI components and Python-aligned backend artefacts from the AI Studio prototype at `/Users/okgoogle13/Projects/prototype_v2.0` into the main CareerCopilot repo. No monoliths. No hard-coded tokens. No transcription errors.
 
 ---
 
@@ -18,7 +18,7 @@ Extract tokenized UI components and Python-aligned backend artefacts from the AI
 1. **Source of Truth**: `AI_STUDIO_HARVEST_PLAN.updated.md`
 2. **Execution**: This blueprint (`control/blueprint.md`)
 3. **Progress**: `control/status.md` (observability only — never overrides blueprint)
-4. **Prototype Repository**: `https://github.com/okgoogle13/prototype_v2.0` (support/reference input; local deleted checkout is no longer valid)
+4. **Prototype Path**: `/Users/okgoogle13/Projects/prototype_v2.0` (support/reference input; the deleted Downloads checkout is no longer valid)
 
 ---
 
@@ -43,7 +43,7 @@ Track B ────────────────────────
 
 ## Phase 0 — Pre-Completed ✅
 
-AI Studio prompts run against `https://github.com/okgoogle13/prototype_v2.0` before main tracks begin.
+AI Studio prompts run against `/Users/okgoogle13/Projects/prototype_v2.0` before main tracks begin.
 
 | Prompt | Component | Outcome |
 |---|---|---|
@@ -65,7 +65,7 @@ AI Studio prompts run against `https://github.com/okgoogle13/prototype_v2.0` bef
 
 | ID | Task | Gate |
 |---|---|---|
-| A-001 | Verify PT-2 output in `https://github.com/okgoogle13/prototype_v2.0` — line 1 comment + 5 snake_case field names | comment present + all names confirmed |
+| A-001 | Verify PT-2 output in `/Users/okgoogle13/Projects/prototype_v2.0` — line 1 comment + 5 snake_case field names | comment present + all names confirmed |
 | A-002 | `grep` backend/app for PascalCase variants → produce divergence map | map produced |
 | A-003 | Patch divergent Pydantic model fields | zero PascalCase variants remain |
 | A-004 | `cd backend && pytest app/tests/ -q` | exit 0, all green |

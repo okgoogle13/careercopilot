@@ -1,7 +1,7 @@
 # AI_STUDIO_PROMPTS.md
 ## Single Source of Truth — Human-Paste Prompts for Google AI Studio
 
-> Run these steps IN ORDER on the `prototype_v2.0` repository (`https://github.com/okgoogle13/prototype_v2.0`) before beginning Track A/B/C execution in the main repo.
+> Run these steps IN ORDER on the prototype source path `/Users/okgoogle13/Projects/prototype_v2.0` before beginning Track A/B/C execution in the main repo.
 
 ---
 
@@ -10,7 +10,7 @@
 | Prompt type | Where it lives | How it's used |
 |---|---|---|
 | UI component tweaks (B1, B2, PT-5) | `AI_STUDIO_PROMPTS.md` (this file) | Paste manually into Google AI Studio |
-| Backend ingestion prompts (DEEP STAR etc.) | `prototype_v2.0/backend/prompts/ingestion_prompts.md` | Already in prototype — copy logic into main repo `ingestion_flow.py` as Track A2. Never paste into AI Studio. |
+| Backend ingestion prompts (DEEP STAR etc.) | `/Users/okgoogle13/Projects/prototype_v2.0/backend/prompts/ingestion_prompts.md` | Already in prototype — copy logic into main repo `ingestion_flow.py` as Track A2. Never paste into AI Studio. |
 | IDE analysis prompts | `AI_STUDIO_HARVEST_PLAN.updated.md` | Run in Antigravity / Gemini IDE only |
 
 ---

@@ -10,7 +10,7 @@ Objective:
 Keep the Google AI Studio prototype useful as `support_reference` while preventing it from redefining canonical routing, shell ownership, or route-family truth in the main repo.
 
 Prototype source:
-`https://github.com/okgoogle13/prototype_v2.0`
+`/Users/okgoogle13/Projects/prototype_v2.0`
 
 Deprecated local checkout:
 `/Users/okgoogle13/Downloads/careercopilot-aistud` was deleted and is no longer a valid source reference.
@@ -32,7 +32,7 @@ Completed:
 - `AI_STUDIO_CLOSE_OUT_PROMPTS.md` exists and now carries the stabilization prompt
 - `AI_STUDIO_HARVEST_PLAN.updated.md` exists and now records the blocked pre-harvest gate
 - `STRUCTURE_MAP.prototype.md` exists
-- Active prototype source references now target `https://github.com/okgoogle13/prototype_v2.0`
+- Active prototype source references now target `/Users/okgoogle13/Projects/prototype_v2.0`
 - Prototype-integration guidance exists in the migration workspace
 - Review of the latest Gemini-generated plan is complete
 
@@ -80,7 +80,7 @@ Gate result options:
 ## 5. Immediate Operating Sequence
 
 1. Read the four governing docs listed above.
-2. Treat all current prototype artifacts from `https://github.com/okgoogle13/prototype_v2.0` as support-only unless explicitly remapped.
+2. Treat all current prototype artifacts from `/Users/okgoogle13/Projects/prototype_v2.0` as support-only unless explicitly remapped.
 3. Wait for or ingest the latest AI Studio stabilization output.
 4. Evaluate the output against the stabilization gate.
 5. If PASS:

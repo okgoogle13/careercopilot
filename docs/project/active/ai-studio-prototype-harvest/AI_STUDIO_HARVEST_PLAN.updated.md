@@ -4,7 +4,7 @@
 
 > **Current gate:** Run the prototype stabilization prompt in `AI_STUDIO_CLOSE_OUT_PROMPTS.md` first. Do not begin physical harvest until the stabilization gate passes.
 
-**Prototype source:** `https://github.com/okgoogle13/prototype_v2.0`
+**Prototype source:** `/Users/okgoogle13/Projects/prototype_v2.0`
 **Deprecated local checkout:** `/Users/okgoogle13/Downloads/careercopilot-aistud` (deleted; invalid)
 
 **Date:** 2026-03-20
@@ -25,7 +25,7 @@
 - The prior close-out prompt instructed AI Studio to normalize shell and routing behavior that belongs to canonical runtime authority.
 - The prior handover advanced directly to physical harvest before stabilization was verified.
 - The prototype still carries tab-driven pseudo-routing that can mislead downstream harvest work.
-- The old local prototype checkout was deleted, so all prototype-facing instructions must target the GitHub repository instead.
+- The old local prototype checkout was deleted, so all prototype-facing instructions must target `/Users/okgoogle13/Projects/prototype_v2.0` instead.
 
 ### Exit Criteria For This Phase
 
@@ -63,8 +63,8 @@ Prototype work must obey these rules:
 
 Run the stabilization prompt in `AI_STUDIO_CLOSE_OUT_PROMPTS.md` against the prototype only.
 
-Source repository for that work:
-- `https://github.com/okgoogle13/prototype_v2.0`
+Source path for that work:
+- `/Users/okgoogle13/Projects/prototype_v2.0`
 
 Expected deliverables from AI Studio:
 - required file renames completed
@@ -126,7 +126,7 @@ Do not harvest any component into the main repository until those deliverables a
 | Prototype stabilization prompt | `AI_STUDIO_CLOSE_OUT_PROMPTS.md` |
 | Claude restart handover | `CLAUDE_HANDOVER.md` |
 | Prototype structure map | `STRUCTURE_MAP.prototype.md` |
-| Prototype source repository | `https://github.com/okgoogle13/prototype_v2.0` |
+| Prototype source path | `/Users/okgoogle13/Projects/prototype_v2.0` |
 
 ---
 

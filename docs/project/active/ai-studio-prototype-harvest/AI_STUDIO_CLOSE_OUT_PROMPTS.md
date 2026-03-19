@@ -13,10 +13,10 @@
 Role: Technical Project Manager and UI Architect
 
 Mission:
-Normalize the Google AI Studio prototype in the `prototype_v2.0` repository (`https://github.com/okgoogle13/prototype_v2.0`) so it becomes a clean `support_reference` package for the PR126 migration workflow. Gemini has previously misunderstood routes. This prompt is intentionally strict: do not invent or modify canonical product routing.
+Normalize the Google AI Studio prototype at `/Users/okgoogle13/Projects/prototype_v2.0` so it becomes a clean `support_reference` package for the PR126 migration workflow. Gemini has previously misunderstood routes. This prompt is intentionally strict: do not invent or modify canonical product routing.
 
 Hard scope:
-- Work only inside the `prototype_v2.0` repository: `https://github.com/okgoogle13/prototype_v2.0`
+- Work only inside `/Users/okgoogle13/Projects/prototype_v2.0`
 - The deleted local path `/Users/okgoogle13/Downloads/careercopilot-aistud` is invalid and must not appear in output or instructions
 - Do not modify `/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx`
 - Do not modify any file in the main CareerCopilot repo
