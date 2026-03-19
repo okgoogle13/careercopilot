@@ -5,7 +5,7 @@
   "start_date": "2026-03-18",
   "target_end_date": "2026-03-25",
   "source_of_truth": "~/.gemini/antigravity/brain/50c45308-06bb-4297-923a-2910145304b5/AI_STUDIO_HARVEST_PLAN.updated.md",
-  "prototype_repository": "https://github.com/okgoogle13/prototype_v2.0",
+  "prototype_path": "/Users/okgoogle13/Projects/prototype_v2.0",
   "objective": "Extract clean, KR-Solidarity-tokenized UI components and Python-aligned backend artefacts from the AI Studio prototype and integrate them into the main CareerCopilot repo — no monoliths, no hard-coded tokens, no transcription errors.",
   "owners": {
     "orchestrator": "Claude (project-manager skill)",

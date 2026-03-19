@@ -2,7 +2,7 @@
 
 **Date:** 2026-03-18
 **Blueprint ref:** `control/blueprint-ai-studio-integration.md` (Option 3, Tracks A/B/C)
-**Prototype:** `https://github.com/okgoogle13/prototype_v2.0`
+**Prototype:** `/Users/okgoogle13/Projects/prototype_v2.0`
 **Main repo:** `careercopilot` (branch: `feat/migration-cleanup-jobs-opportunities`)
 
 ---
