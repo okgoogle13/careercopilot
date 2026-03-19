@@ -160,7 +160,7 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
 
           placementStyle.objectFit = objectFit;
           placementStyle.transformOrigin = anchor;
-          placementStyle.transform = `translate(${t.x}%, ${t.y + parallaxOffset}px) scale(${s})`;
+          placementStyle.transform = `translate(${t.x}%, calc(${t.y}% + ${parallaxOffset}px)) scale(${s})`;
         } else {
           placementStyle.transform = `translateY(${parallaxOffset}px)`;
         }

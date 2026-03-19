@@ -40,7 +40,10 @@
       "command": "/Users/okgoogle13/Projects/careercopilot/venv/bin/python",
       "args": [
         "/Users/okgoogle13/Projects/careercopilot/servers/filesystem_mcp.py"
-      ]
+      ],
+      "env": {
+        "MCP_WORKSPACE_ROOT": "/Users/okgoogle13/Projects/careercopilot"
+      }
     },
     "git": {
       "type": "stdio",

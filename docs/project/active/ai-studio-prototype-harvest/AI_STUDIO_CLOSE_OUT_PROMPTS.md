@@ -1,55 +1,116 @@
-# AI Studio Final Close-Out Prompts
+# AI Studio Prototype Stabilization Prompt
 
-### M3 Expressive Proportions + KR Solidarity Canon (v6.0)
+## Status
 
-This document contains the consolidated "Final Pass" prompts to be executed in AI Studio before the physical harvest. They unify the **Architectural Map** (canonical routes) with the **M3 Expressive** adaptive layout rules.
+- This document supersedes the prior close-out prompt that pushed adaptive shell and route normalization.
+- The prototype is a `support_reference`, not runtime truth.
+- The old local checkout at `/Users/okgoogle13/Downloads/careercopilot-aistud` was deleted and must not be referenced.
+- Do not edit the main CareerCopilot repo from AI Studio.
 
----
-
-
-## Batch 4.1: Adaptive Shell & Persistent Navigation
-
-**Target Files:** `App.tsx`, `Layout.tsx`, `Sidebar.tsx`, `AppShell.tsx`
-**Logic:** Implement the M3 Adaptive Window Size Classes while enforcing the "Solidarity Mode" (Dark-only) palette.
+## Gemini / AI Studio Prompt
 
 ```text
-Update the global application shell to strictly follow M3 Adaptive Window Size Classes and KR Solidarity v6.0 styling.
+Role: Technical Project Manager and UI Architect
 
-1. **Adaptive Layout Logic**:
-   - **Expanded (1200dp+)**: Implement a dual-pane layout. The primary navigation must be a left-aligned persistent Standard Navigation Drawer (width: 360dp). The main content panel must occupy the remaining space, using a 12-column fluid grid. Cap the maximum width of the main content body at 1200dp with flexible horizontal margins.
-   - **Medium (600dp - 1199dp)**: Collapse the sidebar into an M3 Navigation Rail (width: 80dp) containing icons and short labels. Main content shifts to an 8-column grid.
-   - **Compact (<600dp)**: Remove side navigation. Implement an M3 Bottom Navigation Bar for core routing. Content stacks in a 4-column single-column view.
+Mission:
+Normalize the Google AI Studio prototype in the `prototype_v2.0` repository (`https://github.com/okgoogle13/prototype_v2.0`) so it becomes a clean `support_reference` package for the PR126 migration workflow. Gemini has previously misunderstood routes. This prompt is intentionally strict: do not invent or modify canonical product routing.
 
-2. **Styling (Solidarity Canon)**:
-   - **Backgrounds**: Use style={{ background: 'var(--sys-color-charcoalBackground-base)' }}.
-   - **Shapes**: DO NOT use perfect circles (border-radius: 50%) for avatars or buttons. Use "Riot" asymmetric cuts. For Navigation Rails/Drawers, use style={{ borderRadius: 'var(--sys-shape-cutoutRiot01)' }}.
-   - **Borders**: All panel dividers must use 1px solid var(--sys-color-outline-variant).
-   - **Zero-Flora**: Ensure all icons (M3 standard) are geometric or abstract. Strictly no botanical or organic flora motifs during this pass.
+Hard scope:
+- Work only inside the `prototype_v2.0` repository: `https://github.com/okgoogle13/prototype_v2.0`
+- The deleted local path `/Users/okgoogle13/Downloads/careercopilot-aistud` is invalid and must not appear in output or instructions
+- Do not modify `/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx`
+- Do not modify any file in the main CareerCopilot repo
+- Do not create or rename canonical product routes
+- Treat the prototype as `support_reference` only
+
+Non-negotiable routing rules:
+- Canonical runtime routing authority lives in `/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx`
+- Canonical route ownership lives in `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.md`
+- The prototype must not redefine top-level navigation
+- The prototype must not introduce `/workspace`, `/past`, `/library`, or `/studio` as canonical product routes
+- In the main repo, `/studio` is only a redirect, not a canonical standalone owner
+- Keep shared shell ownership separate from page/content ownership
+
+Canonical route mapping that must be respected:
+- `/apply/quick` = canonical owner for application workbench flow
+- `/tracker` = canonical owner for application history / CRUD
+- `/profile` = canonical owner for profile management
+- `/asset-library` = support-only route, not a product pillar
+- `/ksc-generator` and `/cover-letter-generator` = canonical generation routes
+
+What to change in the prototype:
+1. Rename misleading prototype files so they read as support-reference artifacts aligned to the target state:
+   - `src/pages/ApplicationWorkspacePage.tsx` -> `ApplyQuickWorkspaceReference.tsx`
+   - `src/pages/ProfileEditorPage.tsx` -> `ProfileView.tsx`
+   - `src/pages/PastApplicationsPage.tsx` -> `PastApplicationsReference.tsx`
+   - `src/pages/ComponentLibraryPage.tsx` -> `LibraryReferencePage.tsx`
+   - `components/MatchDashboard.tsx` -> `StudioMatchPanel.tsx`
+
+2. Update imports and exports for those renames everywhere in the prototype.
+
+3. Reduce or neutralize misleading route semantics:
+   - Do not convert the prototype to `react-router-dom`
+   - Do not create product-like route paths
+   - If `activeTab` remains, explicitly mark it as prototype-only navigation state
+   - Add a code comment near the top-level shell/router area that canonical routing is owned by the main repo router
+
+4. Sidebar cleanup:
+   - Keep labels as prototype/support labels only
+   - Do not imply these are canonical product routes
+   - If labels are retained, use this exact sequence for support labeling only:
+     `WORKSPACE`, `PROFILE`, `PAST`, `STUDIO`, `LIBRARY`
+   - Also add a nearby comment stating:
+     `Prototype-only labels. Canonical runtime routing lives in the main CareerCopilot repo App.tsx and route matrix.`
+
+5. Component classification:
+   - `StudioMatchPanel` is a support component, not a route-level view
+   - Do not rename components in a way that implies standalone route ownership unless that ownership exists in the canonical mapping above
+   - Use `Reference` suffix for support-only pages
+   - Use `Panel` for support components
+
+6. Cleanup rules:
+   - Search for imports before deleting any file
+   - Do not delete `Dashboard.tsx`, `ValidationDashboard.tsx`, or any similarly named file unless you prove it has zero remaining imports and is redundant
+   - If uncertain, retain the file and record it under `Files Reviewed But Not Deleted`
+   - Ignore any request to delete files by broad pattern only
+
+7. Create a mapping artifact:
+   - Create `docs/prototype-to-canonical-mapping.md` inside the prototype
+   - Include this exact mapping:
+     - `ApplyQuickWorkspaceReference` -> `/apply/quick`
+     - `PastApplicationsReference` -> `/tracker`
+     - `ProfileView` -> `/profile`
+     - `LibraryReferencePage` -> `/asset-library` (support-only analog)
+     - `StudioMatchPanel` -> generation/analysis support component only, not a canonical route
+
+Acceptance criteria:
+- All required renames completed
+- All imports updated with no stale paths
+- No canonical route changes introduced
+- Prototype comments explicitly say routing authority belongs to the main repo
+- Any deleted file is justified by zero remaining imports
+- A mapping doc is created
+- Final file tree is reported
+
+Output format:
+Return exactly these sections:
+1. `Summary`
+2. `Files Renamed`
+3. `Imports Updated`
+4. `Files Deleted`
+5. `Files Reviewed But Not Deleted`
+6. `Prototype To Canonical Mapping`
+7. `Final File Tree`
+8. `Notes`
+
+Execution reminder:
+This is a prototype stabilization task only. Do not modify canonical runtime routing or harvest code into the main repo.
 ```
 
----
+## Verification Checklist
 
-
-## Batch 4.2: Feature-Level Quick Wins (State & Feedback)
-
-**Target Routes:** `/dashboard`, `/analysis`, `/tracker`, `/career/ingest`
-**Logic:** Apply M3 Expressive component patterns (cards, progress, status) to canonical feature surfaces.
-
-```text
-Perform a M3 Expressive design audit on the following core product routes:
-
-1. **Dashboard (/dashboard)**: 
-   - Wrap the "Profile Completeness" tracker in an elevated M3 Card using style={{ borderRadius: 'var(--sys-shape-blockRiot03)' }}. 
-   - Use a thick, expressive progress bar with fully rounded ends (semantic color: var(--sys-color-inkGold-base)).
-   - Add an M3 Filled Tonal button for "Load Sample Profile" that hydrates the local state.
-
-2. **Analysis (/analysis) & Ingestion (/career/ingest)**:
-   - Update processing screens. Replace spinners with animated text status (e.g., "Extracting skills...") in an M3-styled elevated surface.
-   - For text paste fallbacks, use an M3 Outlined Textarea with rounded corners.
-   - (REC-008): In analysis lists, add M3 toggle switches to cross out or dim ignored criteria.
-
-3. **Tracker (/tracker) & Documents (/documents)**:
-   - Implement the M3 Secondary Tab bar (Resume, Cover Letter, KSC) in the preview workspace.
-   - Ensure the "Save & Rescore" action is an M3 Extended Floating Action Button (FAB) nested above the bottom navigation on mobile viewports.
-   - Add an M3 Outlined button labeled "Copy to Clipboard for ATS" using standard clipboard APIs.
-```
+- Confirm the AI Studio output is limited to the prototype directory.
+- Confirm no `react-router-dom` conversion or new route path creation was introduced.
+- Confirm the top-level prototype shell explicitly states that routing authority belongs to the main repo.
+- Confirm the mapping artifact exists and uses the canonical route ownership defined above.
+- Confirm any file deletion includes proof of zero remaining imports.
