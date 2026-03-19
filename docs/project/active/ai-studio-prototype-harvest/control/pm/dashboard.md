@@ -40,7 +40,7 @@
 
 ## Next Gate Decisions Required
 
-1. **[Human]** Confirm Phase 0 is complete — AI Studio prompts were executed on `careercopilot-aistud` and outputs are committed
+1. **[Human]** Confirm Phase 0 is complete — AI Studio prompts were executed on `https://github.com/okgoogle13/prototype_v2.0` and outputs are committed
 2. **[sprint-coordinator]** Kick off Track A milestones A-001 → A-004
 3. **[sprint-coordinator]** Kick off Track B milestones B-001 → B-006 in parallel with Track A
 4. **[Human — before C-001]** Review PT-5 Step A decomposition JSON — approve sub-component split before generation proceeds
@@ -49,7 +49,7 @@
 
 ## Highest-Priority Decision
 
-**Are the AI Studio Phase 0 outputs committed to `careercopilot-aistud`?**
+**Are the AI Studio Phase 0 outputs committed to `https://github.com/okgoogle13/prototype_v2.0`?**
 This is the single gate blocking ALL downstream tracks. Human confirmation required before sprint-coordinator spins up Track A + Track B tasks.
 
 ---

@@ -10,7 +10,7 @@
 
 ## Context
 
-The external `careercopilot-aistud` prototype contains two categories of harvestable value absent from the current project:
+The external `prototype_v2.0` repository (`https://github.com/okgoogle13/prototype_v2.0`) contains two categories of harvestable value absent from the current project:
 
 1. **AI Prompt Heuristics** — `ingestion_prompts.md` contains a DEEP STAR CRITIQUE system (Vague Language Audit, Quantification Gap, per-field Improvement_Suggestions) more detailed than the current `ingestion_flow.py` and `career_ingest.py`.
 2. **UI Component Patterns** — `ATSScoreCard.tsx`, `AuditDisplay.tsx` (including the "10-Second Recruiter Scan" UX), and eventually `ValidationDashboard.tsx` fill the known `/analysis` blocker: *"analysis workflow handoff remains partially cosmetic."*
@@ -176,7 +176,7 @@ grep -rn "bg-\|text-\|border-\|stroke-\|fill-" \
 
 ### B1 — ATSScoreCard → KR Solidarity v6.1
 
-**Source:** `Downloads/careercopilot-aistud/components/ATSScoreCard.tsx`
+**Source:** `prototype_v2.0/components/ATSScoreCard.tsx` from `https://github.com/okgoogle13/prototype_v2.0`
 **Destination:** `frontend/src/features/analysis/components/ATSScoreCard.tsx`
 
 #### Google AI Studio Prompt
@@ -222,7 +222,7 @@ OUTPUT ONLY the transformed TypeScript/TSX code. No explanation.
 
 ### B2 — AuditDisplay → KR Solidarity v6.1
 
-**Source:** `Downloads/careercopilot-aistud/components/AuditDisplay.tsx`
+**Source:** `prototype_v2.0/components/AuditDisplay.tsx` from `https://github.com/okgoogle13/prototype_v2.0`
 **Destination:** `frontend/src/features/analysis/components/AuditDisplay.tsx`
 
 #### Google AI Studio Prompt

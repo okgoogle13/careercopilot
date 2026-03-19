@@ -471,12 +471,8 @@ export function StyleGuide() {
                 </div>
               </Placard>
 
-              <Placard
-                elevation="raised"
-              >
+              <Placard elevation="raised">
                 <div className="space-y-4">
-                  
-                  
                   <div className="flex flex-wrap gap-2 pt-2">
                     <StatusBadge
                       label="Ready"

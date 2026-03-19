@@ -17,6 +17,12 @@
       "id": "nabla-accented-hero",
       "description": "Occasional accent hero using the Nabla colored font for specialized moments",
       "prompt": "Generate a high-impact occasional hero composition.\n\nTypography Accent:\n- The headline MUST use the Nabla font (font_family: 'nabla' in the JSON).\n- The colored font should be used for festive, high-tech, or disruptive 'Melbourne laneway' vibes.\n\nConstraints:\n- Use 'atmospheric' layer with paint splashes.\n- Substrate required.\n- Resistance layer optional.\n\nOutput:\nA structured JSON object (same schema as deterministic-layered-hero, but include \"font_family\": \"nabla\" in the typography object)."
+    },
+    {
+      "id": "urban-gallery-wall",
+      "description": "Multi-layer street-art collage using the 'Urban Gallery Wall' asset set",
+      "prompt": "Compose a gritty urban gallery wall scene with layered posters and atmospheric decay.\n\nRequired Layers (back to front):\n1. Substrate: KR-SOLID-042 (Urban Wall Base)\n2. Atmospheric: KR-SOLID-043 (Grain Overlay)\n3. Resistance: KR-SOLID-044 (Main Poster)\n4. Resistance: KR-SOLID-045, 046 (Secondary Posters)\n5. Atmospheric: KR-SOLID-047 (Splatter), 048 (Mist Drips), 049 (Shadow Paste)\n\nRules:\n- Maintain street-poster overlap and varied z-index.\n- Use 'multiply' or 'overlay' for stains and shadows to blend with wall texture.\n- Ensure cinematic asymmetry and editorial contrast.",
+      "register_context": "Register: 'Defiance'. Register: 'Solidarity'. Style: Street-Poster Collage."
     }
   ]
 }

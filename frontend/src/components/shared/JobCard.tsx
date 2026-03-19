@@ -1,4 +1,4 @@
-import { Placard, Strike } from '@/components/ui'
+import { Placard, Strike } from '@/components/ui';
 import { Building, Globe, MapPin, Save, Share2 } from 'lucide-react';
 import React from 'react';
 
