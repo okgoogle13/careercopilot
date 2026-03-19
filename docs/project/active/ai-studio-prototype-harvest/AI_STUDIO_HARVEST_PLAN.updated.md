@@ -1,105 +1,135 @@
 # AI Studio Prototype Staging & Harvest Plan
 
-### Prototype-First Lens (Revision 2.0)
+## Prototype-First Lens (Revision 3.0)
 
-> **All AI Studio prompts are in `AI_STUDIO_PROMPTS.md`. Run those first, then return here for Track A/B/C execution.**
+> **Current gate:** Run the prototype stabilization prompt in `AI_STUDIO_CLOSE_OUT_PROMPTS.md` first. Do not begin physical harvest until the stabilization gate passes.
 
-**Date:** 2026-03-18  
-**Analysis ref:** `STRUCTURE_MAP.prototype.md`  
-**Core Strategy:** Shift complexity from the main repo migration to the prototype staging environment. **Edit in AI Studio while it's cheap, then harvest clean code.**
+**Prototype source:** `https://github.com/okgoogle13/prototype_v2.0`
+**Deprecated local checkout:** `/Users/okgoogle13/Downloads/careercopilot-aistud` (deleted; invalid)
 
----
-
-## 1 · What Changed (Prototype-First Lens)
-
-This strategy treats the AI Studio prototype as a **staging environment**, not just a static source. By fixing "upstream" in the prototype, we eliminate several high-friction tasks in the migration blueprint.
-
-| Migration Task | Impact of Prototype-First Tweak | Outcome |
-|:---:|---|---|
-| **B1/B2 (Re-skins)** | Props/imports/hex-codes are pre-cleaned in AI Studio. | Blueprint tasks become simple "copy results" gates. |
-| **B3 (Types)** | Verified matching schemas in `types.ts`. | **DELETED**; replaced with 5-minute direct copy. |
-| **A2 (Prompts)** | PascalCase field names fixed to snake_case in proto. | Eliminates transcription errors during Python conversion. |
-| **Sprint 2 (Monolith)** | Decomposition + tokenization happen in AI Studio. | No 70KB monoliths ever enter the main repo PRs. |
+**Date:** 2026-03-20
+**Analysis ref:** `STRUCTURE_MAP.prototype.md`
+**Core Strategy:** Keep the AI Studio prototype useful as a staging environment while preventing it from redefining canonical routing, shell ownership, or route-family truth in the main repository.
 
 ---
 
-## 2 · TWEAK_FIRST DETAILS (AI Studio Prompts)
+## 1 · Current Phase
 
-Execute these prompts in AI Studio on the prototype branch `careercopilot-aistud` BEFORE beginning the migration tracks.
+**Phase:** `Pre-Harvest Stabilization`
+**Sprint Status:** `blocked`
+**Readiness Score:** `58/100`
 
-### PT-2: `ingestion_prompts.md` Casing Alignment
-**Goal:** Align data fields with Python Pydantic naming conventions.
+### Why We Are Blocked
 
-**Prompt:**
-```
-In the file ingestion_prompts.md, find every reference to a structured data field name
-and rewrite it in snake_case. Apply these replacements exactly:
-  Needs_Review_Flag → needs_review_flag
-  STAR_Feedback → star_feedback
-  Improvement_Suggestions → improvement_suggestions
-  Action_Verb → action_verb
-  Noun_Task → noun_task
-  Master_Skills_Inventory → (leave as-is)
+- The latest Gemini-generated implementation plan treated the prototype as implementation truth.
+- The prior close-out prompt instructed AI Studio to normalize shell and routing behavior that belongs to canonical runtime authority.
+- The prior handover advanced directly to physical harvest before stabilization was verified.
+- The prototype still carries tab-driven pseudo-routing that can mislead downstream harvest work.
+- The old local prototype checkout was deleted, so all prototype-facing instructions must target the GitHub repository instead.
 
-Add this comment on line 1: "# Python-harvest-ready — snake_case aligned 2026-03-18"
-Output the full revised file contents only.
-```
+### Exit Criteria For This Phase
 
-
-### PT-3: `ATSScoreCard.tsx` Token Re-Skin
-
-**Goal:** Clean imports and replace raw Tailwind with KR Solidarity CSS variables using context-aware replacements instead of static line numbers.
-
-→ See `AI_STUDIO_PROMPTS.md`, Step 1
-
-
-### PT-4: `AuditDisplay.tsx` Token Re-Skin
-
-**Goal:** Clean imports and apply Solidarity tokens to violations and scan block with context-aware precision.
-
-→ See `AI_STUDIO_PROMPTS.md`, Step 2
-
-
-### PT-5: `ValidationDashboard.tsx` Decomposition (Sprint 2 Pre-flight)
-
-**Goal:** Split the 1,200-line monolith into harvestable sub-components over three sequential prompted steps.
-
-**Step A** (decomposition JSON) → See `AI_STUDIO_PROMPTS.md`, Step 3
-**Step B** (per sub-component generation) → See `AI_STUDIO_PROMPTS.md`, Step 4
-**Step C** (barrel export) → See `AI_STUDIO_PROMPTS.md`, Step 5
-
-*Wait for AI Studio to return the Step 3 JSON and confirm the split before proceeding to Step 4.*
-
-
-### PT-6: Global Polish & Layout (Batch 4)
-
-**Goal:** Enforce the KR Solidarity v6.0 dark mode, proper typographic hierarchy, and safe component shapes for navigational elements while strictly preventing non-canon assets.
-
-→ See `AI_STUDIO_PROMPTS.md`, Step 6
-
-
-### PT-7: Final Close-Out (Adaptive M3 + Layout)
-
-**Goal:** Implement the definitive M3 Adaptive Window Size Classes (360dp/80dp/BottomNav) across the 16 canonical product routes.
-
-→ See `AI_STUDIO_CLOSE_OUT_PROMPTS.md`
+- Prototype route/navigation ambiguity is removed or explicitly annotated as prototype-only.
+- Support-reference file names are aligned to canonical target-state ownership.
+- Prototype-to-canonical mapping artifact is created.
+- Imports are updated after renames.
+- No unauthorized route or shell ownership drift is introduced.
 
 ---
 
-## 3 · UX Insights ( Conceptual Patterns to Keep)
+## 2 · Governing Constraints
 
-While the `App.tsx` navigation code is `IGNORE` for harvest, do not lose these two logic patterns:
+Prototype work must obey these rules:
 
-1. **Workspace-First Entry:** The prototype bypasses onboarding to land directly on the analysis UI. We should consider `/analysis` as the primary post-login landing for power users.
-2. **Simplified Role-Based Navigation:** The 4 prototype tabs map perfectly to the 4 key user jobs. We should use this to evaluate simplifying the main repo's sidebar navigation.
+- Prototype is `support_reference` only.
+- Canonical runtime routing authority remains `frontend/src/App.tsx` in the main repo.
+- Canonical route ownership remains `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.md`.
+- Do not promote prototype tabs, labels, or shell behavior into product truth.
+- Do not recommence physical harvest until the stabilization gate passes.
 
 ---
 
-## 4 · Final File List
+## 3 · Completed Work
+
+- Harvest planning docs were migrated into `docs/project/active/ai-studio-prototype-harvest/`.
+- `STRUCTURE_MAP.prototype.md` documents the prototype structure and its support-only role.
+- `AI_STUDIO_CLOSE_OUT_PROMPTS.md` now contains the corrected prototype-only stabilization prompt.
+- `CLAUDE_HANDOVER.md` now instructs Claude to invoke `project-manager` and hold at the stabilization gate.
+- Review of the broken Gemini plan is complete; its route and shell assumptions are rejected.
+
+---
+
+## 4 · Active Next Step
+
+Run the stabilization prompt in `AI_STUDIO_CLOSE_OUT_PROMPTS.md` against the prototype only.
+
+Source repository for that work:
+- `https://github.com/okgoogle13/prototype_v2.0`
+
+Expected deliverables from AI Studio:
+- required file renames completed
+- imports/exports updated
+- top-level prototype comments stating canonical routing belongs to the main repo
+- no canonical route claims introduced
+- `docs/prototype-to-canonical-mapping.md` created inside the prototype
+- final file tree and deletion audit reported
+
+Do not harvest any component into the main repository until those deliverables are verified.
+
+---
+
+## 5 · Phase Sequence
+
+### Phase A: Prototype Stabilization
+
+**Owner:** Gemini / AI Studio
+**Status:** `active`
+**Goal:** Remove route ambiguity and align support-reference naming to target-state ownership.
+
+**Acceptance criteria:**
+- all stabilization exit criteria satisfied
+- explicit proof that deleted files had zero remaining imports
+- no main-repo runtime route changes proposed or made
+
+### Phase B: Physical Harvest Planning
+
+**Owner:** Claude via `project-manager`
+**Status:** `blocked on Phase A`
+
+**Goal:** Reopen harvest planning only after the stabilized prototype output is verified.
+
+**Phase B can start only when Phase A is `PASS`.**
+
+### Phase C: Physical Harvest Execution
+
+**Owner:** implementation agents
+**Status:** `not started`
+
+**Goal:** Move approved support-reference patterns into canonical repo surfaces according to the migration authority stack.
+
+---
+
+## 6 · Explicit Non-Goals
+
+- Do not convert the prototype to `react-router-dom`.
+- Do not invent `/workspace`, `/past`, `/library`, or `/studio` as canonical product routes.
+- Do not treat prototype shell/navigation patterns as runtime authority.
+- Do not begin component-by-component harvesting from AI Studio output until stabilization is verified.
+
+---
+
+## 7 · Active File List
 
 | Role | Final Path |
-|---|---|
-| **Structure Map** | `STRUCTURE_MAP.prototype.md` |
-| **latest Plan / Prompts** | `AI_STUDIO_HARVEST_PLAN.updated.md` |
-| **Claude Response Doc** | `claude_analysis_responses.md` |
-| **Logic Verification** | `jobscan_final_report.md` |
+| --- | --- |
+| Strategy and phase tracking | `AI_STUDIO_HARVEST_PLAN.updated.md` |
+| Prototype stabilization prompt | `AI_STUDIO_CLOSE_OUT_PROMPTS.md` |
+| Claude restart handover | `CLAUDE_HANDOVER.md` |
+| Prototype structure map | `STRUCTURE_MAP.prototype.md` |
+| Prototype source repository | `https://github.com/okgoogle13/prototype_v2.0` |
+
+---
+
+## 8 · Immediate Operator Instruction
+
+Run the corrected AI Studio prompt first. Then review the output against the stabilization gate. Only after a verified `PASS` should Claude recommence harvest planning through the `project-manager` skill.

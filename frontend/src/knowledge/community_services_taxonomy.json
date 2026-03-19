@@ -1,0 +1,37 @@
+{
+  "taxonomy": "Community Services & Social Work",
+  "categories": [
+    {
+      "name": "Therapeutic Approaches",
+      "skills": [
+        "Trauma-Informed Practice",
+        "Strengths-Based Practice",
+        "Motivational Interviewing",
+        "Person-Centered Care",
+        "Harm Minimization"
+      ]
+    },
+    {
+      "name": "Specialized Client Work",
+      "skills": [
+        "Mental Health Support",
+        "Substance Use Support",
+        "Homelessness Services",
+        "AOD (Alcohol and Other Drugs) Support",
+        "Peer Support",
+        "Crisis Intervention",
+        "Case Management"
+      ]
+    },
+    {
+      "name": "Legislative Frameworks",
+      "skills": [
+        "Child Protection Act",
+        "Mental Health Act",
+        "Privacy Act",
+        "NDIS Quality and Safeguards Framework",
+        "Family Violence Protection Act"
+      ]
+    }
+  ]
+}

@@ -3,7 +3,7 @@
   "version": "6.0.0",
   "last_updated": "2026-03-09",
   "strategy": "Layered Identity System",
-  "total_assets": 87,
+  "total_assets": 95,
   "layers": ["substrate", "atmospheric", "cultural", "resistance", "spiritual", "ui-kit"],
   "assets": [
     {
@@ -1918,6 +1918,182 @@
       "layering_compatibility": {
         "can_overlay_with": ["substrate", "atmospheric", "cultural", "resistance", "spiritual"],
         "cannot_overlay_with": []
+      }
+    },
+    {
+      "id": "KR-SOLID-042",
+      "name": "Urban Wall Base",
+      "category": "substrate",
+      "layer": "substrate",
+      "aspect_ratio": "16:9",
+      "file_path": "/assets/kr-solidarity/urban-gallery/kr-solidarity__substrate__urban--wall-base--v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "material-base",
+        "semantic_weight": "material",
+        "layering_role": "background-base"
+      },
+      "usage_rules": {
+        "scale_suitability": ["hero-background"],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": [],
+        "cannot_overlay_with": ["substrate"]
+      }
+    },
+    {
+      "id": "KR-SOLID-043",
+      "name": "Urban Grain Overlay",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/urban-gallery/kr-solidarity__atmospheric__urban--grain-overlay--v1.png",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": ["hero", "section"],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": ["substrate"],
+        "cannot_overlay_with": ["atmospheric"]
+      }
+    },
+    {
+      "id": "KR-SOLID-044",
+      "name": "Urban Main Poster",
+      "category": "resistance",
+      "layer": "resistance",
+      "aspect_ratio": "3:4",
+      "file_path": "/assets/kr-solidarity/urban-gallery/kr-solidarity__resistance__urban--main-poster--v1.png",
+      "priority": "CRITICAL",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": ["hero-only"],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
+      }
+    },
+    {
+      "id": "KR-SOLID-045",
+      "name": "Urban Secondary Poster Upper",
+      "category": "resistance",
+      "layer": "resistance",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/urban-gallery/kr-solidarity__resistance__urban--secondary-poster-upper--v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": ["hero-only"],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
+      }
+    },
+    {
+      "id": "KR-SOLID-046",
+      "name": "Urban Secondary Poster Lower",
+      "category": "resistance",
+      "layer": "resistance",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/urban-gallery/kr-solidarity__resistance__urban--secondary-poster-lower--v1.png",
+      "priority": "HIGH",
+      "semantics": {
+        "functional_role": "editorial-hero",
+        "semantic_weight": "heroic",
+        "layering_role": "foreground"
+      },
+      "usage_rules": {
+        "scale_suitability": ["hero-only"],
+        "small_ui_safe": false
+      },
+      "layering_compatibility": {
+        "can_overlay_with": ["substrate", "atmospheric"],
+        "cannot_overlay_with": ["resistance", "spiritual"]
+      }
+    },
+    {
+      "id": "KR-SOLID-047",
+      "name": "Urban Splatter Accent",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/urban-gallery/kr-solidarity__atmospheric__urban--splatter-accent--v1.png",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": ["hero"],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": ["substrate"],
+        "cannot_overlay_with": ["atmospheric"]
+      }
+    },
+    {
+      "id": "KR-SOLID-048",
+      "name": "Urban Mist Drips",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/urban-gallery/kr-solidarity__atmospheric__urban--mist-drips--v1.png",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": ["hero"],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": ["substrate"],
+        "cannot_overlay_with": ["atmospheric"]
+      }
+    },
+    {
+      "id": "KR-SOLID-049",
+      "name": "Urban Shadow Paste FX",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "aspect_ratio": "1:1",
+      "file_path": "/assets/kr-solidarity/urban-gallery/kr-solidarity__atmospheric__urban--shadow-paste-fx--v1.png",
+      "priority": "MEDIUM",
+      "semantics": {
+        "functional_role": "background-texture",
+        "semantic_weight": "atmospheric",
+        "layering_role": "overlay"
+      },
+      "usage_rules": {
+        "scale_suitability": ["hero"],
+        "small_ui_safe": true
+      },
+      "layering_compatibility": {
+        "can_overlay_with": ["substrate"],
+        "cannot_overlay_with": ["atmospheric"]
       }
     }
   ]

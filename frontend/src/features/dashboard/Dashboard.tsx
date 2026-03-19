@@ -410,11 +410,13 @@ export function Dashboard() {
                           </div>
 
                           <div className="flex items-center gap-4">
-                            <span className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded-march ${
-                              profile.status === 'EXCELLENT' 
-                                ? 'text-[var(--sys-color-kr-activistSmokeGreen-base)] border border-[var(--sys-color-kr-activistSmokeGreen-base)]/30 bg-[var(--sys-color-kr-activistSmokeGreen-base)]/10'
-                                : 'text-[var(--sys-color-stencilYellow-base)] border border-[var(--sys-color-stencilYellow-base)]/30 bg-[var(--sys-color-stencilYellow-base)]/10'
-                            }`}>
+                            <span
+                              className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded-march ${
+                                profile.status === 'EXCELLENT'
+                                  ? 'text-[var(--sys-color-kr-activistSmokeGreen-base)] border border-[var(--sys-color-kr-activistSmokeGreen-base)]/30 bg-[var(--sys-color-kr-activistSmokeGreen-base)]/10'
+                                  : 'text-[var(--sys-color-stencilYellow-base)] border border-[var(--sys-color-stencilYellow-base)]/30 bg-[var(--sys-color-stencilYellow-base)]/10'
+                              }`}
+                            >
                               {profile.status}
                             </span>
                             <span className="font-mono text-[9px] text-concrete-grey opacity-40 uppercase tracking-widest leading-none">

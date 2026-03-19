@@ -33,9 +33,9 @@ const SEVERITY_STYLE: Record<'error' | 'warning' | 'info', React.CSSProperties> 
 
 export const AuditDisplay: React.FC<AuditDisplayProps> = ({ audit, title }) => {
   const severityCounts = {
-    error: audit.violations.filter(v => v.severity === 'error').length,
-    warning: audit.violations.filter(v => v.severity === 'warning').length,
-    info: audit.violations.filter(v => v.severity === 'info').length,
+    error: audit.violations.filter((v) => v.severity === 'error').length,
+    warning: audit.violations.filter((v) => v.severity === 'warning').length,
+    info: audit.violations.filter((v) => v.severity === 'info').length,
   };
 
   return (
@@ -80,8 +80,8 @@ export const AuditDisplay: React.FC<AuditDisplayProps> = ({ audit, title }) => {
               audit.overallScore >= 80
                 ? 'text-[var(--sys-color-kr-activistSmokeGreen-base)]'
                 : audit.overallScore >= 60
-                ? 'text-[var(--sys-color-stencilYellow-base)]'
-                : 'text-[var(--sys-color-solidarityRed-base)]'
+                  ? 'text-[var(--sys-color-stencilYellow-base)]'
+                  : 'text-[var(--sys-color-solidarityRed-base)]'
             }`}
           >
             {audit.overallScore}/100
@@ -135,7 +135,9 @@ export const AuditDisplay: React.FC<AuditDisplayProps> = ({ audit, title }) => {
               >
                 <div className="flex justify-between items-start mb-1">
                   <code className="text-[10px] font-mono opacity-70">{v.ruleId}</code>
-                  <span className="text-[10px] font-bold uppercase tracking-tighter">{v.severity}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-tighter">
+                    {v.severity}
+                  </span>
                 </div>
                 <p className="text-sm font-medium">{v.message}</p>
                 {v.location && (
@@ -153,7 +155,10 @@ export const AuditDisplay: React.FC<AuditDisplayProps> = ({ audit, title }) => {
           </h4>
           <ul className="space-y-2">
             {audit.recommendations.map((rec, i) => (
-              <li key={i} className="flex gap-3 text-sm text-[var(--sys-color-worker-ash-base)]">
+              <li
+                key={i}
+                className="flex gap-3 text-sm text-[var(--sys-color-worker-ash-base)]"
+              >
                 <span className="text-[var(--sys-color-inkGold-base)] font-bold">→</span>
                 <span>{rec}</span>
               </li>

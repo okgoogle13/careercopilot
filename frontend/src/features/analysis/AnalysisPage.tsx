@@ -1,4 +1,4 @@
-import { ScaffoldInput, Strike, Placard, ScaffoldArea } from '@/components/ui'
+import { ScaffoldInput, Strike, Placard, ScaffoldArea } from '@/components/ui';
 import { EvidenceUploader } from '@/features/ingestion/components/EvidenceUploader';
 import { ATSScoreCard } from './components/ATSScoreCard';
 import { AuditDisplay } from './components/AuditDisplay';
@@ -215,34 +215,50 @@ export const AnalysisPage: React.FC = () => {
                 score={{
                   overallScore: atsResult.overallScore,
                   breakdown: {
-                    keywordMatch: atsResult.categories.find(c => c.name.toLowerCase().includes('keyword'))?.score || 0,
-                    skillsAlignment: atsResult.categories.find(c => c.name.toLowerCase().includes('skill'))?.score || 0,
-                    jobTitleMatch: atsResult.categories.find(c => c.name.toLowerCase().includes('title'))?.score || 0,
-                    experienceRelevance: atsResult.categories.find(c => c.name.toLowerCase().includes('experience'))?.score || 0,
-                    formatCompliance: atsResult.categories.find(c => c.name.toLowerCase().includes('format'))?.score || 0,
+                    keywordMatch:
+                      atsResult.categories.find((c) => c.name.toLowerCase().includes('keyword'))
+                        ?.score || 0,
+                    skillsAlignment:
+                      atsResult.categories.find((c) => c.name.toLowerCase().includes('skill'))
+                        ?.score || 0,
+                    jobTitleMatch:
+                      atsResult.categories.find((c) => c.name.toLowerCase().includes('title'))
+                        ?.score || 0,
+                    experienceRelevance:
+                      atsResult.categories.find((c) => c.name.toLowerCase().includes('experience'))
+                        ?.score || 0,
+                    formatCompliance:
+                      atsResult.categories.find((c) => c.name.toLowerCase().includes('format'))
+                        ?.score || 0,
                   },
                   matchedKeywords: atsResult.matched_keywords,
                   missingKeywords: atsResult.missing_keywords,
-                  suggestions: atsResult.categories.flatMap(c => c.suggestions),
+                  suggestions: atsResult.categories.flatMap((c) => c.suggestions),
                   keywordDensity: {},
                 }}
                 isCalculating={isAnalyzing}
                 documentType="resume"
               />
-              
+
               <AuditDisplay
                 title="Resume"
                 audit={{
                   overallScore: atsResult.overallScore,
-                  scanSimulation: "The recruiter's eye is drawn to your skills section first. Ensure your core competencies are prominent.",
-                  violations: atsResult.categories.flatMap(c => 
-                    c.suggestions.map(s => ({
+                  scanSimulation:
+                    "The recruiter's eye is drawn to your skills section first. Ensure your core competencies are prominent.",
+                  violations: atsResult.categories.flatMap((c) =>
+                    c.suggestions.map((s) => ({
                       ruleId: c.name,
-                      severity: c.status === 'ERROR' ? 'error' : c.status === 'WARNING' ? 'warning' : 'info',
+                      severity:
+                        c.status === 'ERROR'
+                          ? 'error'
+                          : c.status === 'WARNING'
+                            ? 'warning'
+                            : 'info',
                       message: s,
                     }))
                   ),
-                  recommendations: atsResult.categories.flatMap(c => c.suggestions),
+                  recommendations: atsResult.categories.flatMap((c) => c.suggestions),
                 }}
               />
             </div>

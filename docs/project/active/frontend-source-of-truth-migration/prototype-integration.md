@@ -1,7 +1,7 @@
 # Prototype Integration Guide
 
 ## Purpose
-- Capture how the `/Users/okgoogle13/Downloads/careercopilot-aistud` prototype can inform PR126 while respecting the migration authority stack (`control/blueprint.md`, `control/workflow.md`, `AGENTS.md`).
+- Capture how the `prototype_v2.0` repository (`https://github.com/okgoogle13/prototype_v2.0`) can inform PR126 while respecting the migration authority stack (`control/blueprint.md`, `control/workflow.md`, `AGENTS.md`).
 - Keep the prototype as **support/reference input only**; nothing from it should override runtime/design/capability truth (see `control/blueprint.md` for the layered authority table).
 
 ## Reusable structure (support-reference patterns)

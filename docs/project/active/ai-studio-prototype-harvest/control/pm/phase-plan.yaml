@@ -9,14 +9,14 @@ phases:
     status: COMPLETE
     owner: Human / AI Studio
     description: >
-      PT-2 through PT-5 prompts executed on prototype branch careercopilot-aistud.
+      PT-2 through PT-5 prompts executed on the prototype repository https://github.com/okgoogle13/prototype_v2.0.
       Structural tweaks pre-completed manually. This phase is read-only from the PM perspective.
     completed_artefacts:
       - "ingestion_prompts.md — snake_case aligned, comment on line 1"
       - "ATSScoreCard.tsx — token re-skin applied (PT-3)"
       - "AuditDisplay.tsx — token re-skin applied (PT-4)"
       - "ValidationDashboard.tsx decomposition JSON — ready for Step B"
-    gate: "Human confirmation that AI Studio outputs are committed to careercopilot-aistud"
+    gate: "Human confirmation that AI Studio outputs are committed to https://github.com/okgoogle13/prototype_v2.0"
 
   # ─────────────────────────────────────────────────────────────────────────────
   # TRACK A — must complete before Track C can start
@@ -32,7 +32,7 @@ phases:
       - id: A-001
         name: "Verify PT-2 output on prototype branch"
         description: >
-          Locate ingestion_prompts.md on careercopilot-aistud. Confirm line 1 comment
+          Locate ingestion_prompts.md in https://github.com/okgoogle13/prototype_v2.0. Confirm line 1 comment
           '# Python-harvest-ready — snake_case aligned 2026-03-18' is present.
           Confirm all 5 field names use snake_case:
             needs_review_flag, star_feedback, improvement_suggestions, action_verb, noun_task
@@ -87,7 +87,7 @@ phases:
       - id: B-001
         name: "Harvest ATSScoreCard.tsx (PT-3)"
         description: >
-          Copy PT-3 output from careercopilot-aistud into
+          Copy PT-3 output from https://github.com/okgoogle13/prototype_v2.0 into
           frontend/src/features/analysis/components/ATSScoreCard.tsx
           (confirm canonical path with App.tsx import tree).
         status: PENDING
@@ -96,7 +96,7 @@ phases:
       - id: B-002
         name: "Harvest AuditDisplay.tsx (PT-4)"
         description: >
-          Copy PT-4 output from careercopilot-aistud into
+          Copy PT-4 output from https://github.com/okgoogle13/prototype_v2.0 into
           frontend/src/features/analysis/components/AuditDisplay.tsx
         status: PENDING
         gate: "File present at canonical path; no import errors"
