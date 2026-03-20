@@ -15,6 +15,10 @@ import { SuggestionsPanel } from './SuggestionsPanel';
 import { useATSScoring } from '../hooks/useATSScoring';
 import { RESUME_TEMPLATES, TemplateStyle } from '../constants';
 import { CoverLetterScoreResult } from '../types';
+import { AnalysisHeader } from './analysis/AnalysisHeader';
+import { TemplateSelector } from './analysis/TemplateSelector';
+import { DocumentTabBar } from './analysis/DocumentTabBar';
+import { ExportToolbar } from './analysis/ExportToolbar';
 import { Document, Packer, Paragraph, TextRun, HeadingLevel, ColumnBreak } from 'docx';
 import html2pdf from 'html2pdf.js';
 import { saveAs } from 'file-saver';
@@ -29,9 +33,7 @@ interface MatchDashboardProps {
 
 export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
   const { careerData, job, onUpdate, onAnalyze, onSave } = props;
-  const [currentUserId, setCurrentUserId] = useState<string | undefined>(
-    auth.currentUser?.uid
-  );
+  const [currentUserId, setCurrentUserId] = useState<string | undefined>(auth.currentUser?.uid);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user: { uid: string } | null) => {
@@ -41,7 +43,7 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
   }, []);
   const [analysis, setAnalysis] = useState<MatchAnalysis | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [_error, setError] = useState<string | null>(null);
   // Prototype-only navigation state
   const [activeTab, setActiveTab] = useState<'resume' | 'coverLetter' | 'ksc'>('resume');
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateStyle>(RESUME_TEMPLATES[0]);
@@ -424,7 +426,7 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
             Job Extracted Successfully
           </h2>
           <p className="text-[var(--sys-color-worker-ash-base)] mb-8 max-w-lg mx-auto">
-            We've analyzed the job posting. Now, let's see how your career database matches up and
+            We&apos;ve analyzed the job posting. Now, let&apos;s see how your career database matches up and
             generate your tailored application materials.
           </p>
           <button
@@ -457,348 +459,59 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
 
   if (!analysis) return null;
 
-  // Map recommended achievements
-  const recommendedAchievements = analysis.Recommended_Achievement_IDs.map((id) =>
+  // Map recommended achievements (reserved for future use)
+  const _recommendedAchievements = analysis.Recommended_Achievement_IDs.map((id) =>
     careerData.Structured_Achievements.find((a) => a.Achievement_ID === id)
   ).filter(Boolean);
 
   return (
     <div className="max-w-6xl mx-auto space-y-8 animate-fade-in">
-      {/* Score Header */}
-      <div className="bg-[var(--sys-color-charcoalBackground-steps-1)] p-8 rounded-[var(--sys-shape-radius-xl)] border border-[var(--sys-color-concreteGrey-steps-0)] flex items-center gap-8">
-        <div className="relative w-32 h-32 flex items-center justify-center shrink-0">
-          <svg
-            className="w-full h-full transform -rotate-90"
-            viewBox="0 0 100 100"
-          >
-            <circle
-              cx="50"
-              cy="50"
-              r="45"
-              fill="none"
-              stroke="#374151"
-              strokeWidth="10"
-            />
-            <circle
-              cx="50"
-              cy="50"
-              r="45"
-              fill="none"
-              stroke={
-                analysis.Overall_Fit_Score >= 80
-                  ? '#10B981'
-                  : analysis.Overall_Fit_Score >= 60
-                    ? '#F59E0B'
-                    : '#EF4444'
-              }
-              strokeWidth="10"
-              strokeDasharray={`${analysis.Overall_Fit_Score * 2.827} 282.7`}
-              className="transition-all duration-1000 ease-out"
-            />
-          </svg>
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-3xl font-bold text-[var(--sys-color-paperWhite-base)]">
-              {analysis.Overall_Fit_Score}%
-            </span>
-            <span className="text-xs text-[var(--sys-color-worker-ash-base)] uppercase tracking-wider">
-              Fit Score
-            </span>
-          </div>
-        </div>
-        <div>
-          <h2 className="text-3xl font-bold text-[var(--sys-color-paperWhite-base)] mb-2">
-            Match Analysis Complete
-          </h2>
-          <p className="text-[var(--sys-color-worker-ash-base)] text-lg">
-            Your profile is a{' '}
-            <strong>
-              {analysis.Overall_Fit_Score >= 80
-                ? 'strong'
-                : analysis.Overall_Fit_Score >= 60
-                  ? 'moderate'
-                  : 'weak'}{' '}
-              match
-            </strong>{' '}
-            for the {job.Job_Title} role at {job.Company_Name}.
-          </p>
-        </div>
-      </div>
+      <AnalysisHeader
+        score={analysis.Overall_Fit_Score}
+        jobTitle={job.Job_Title}
+        companyName={job.Company_Name}
+      />
 
-      {/* Template Selector */}
-      <div className="bg-[var(--sys-color-charcoalBackground-steps-1)] p-6 rounded-[var(--sys-shape-radius-xl)] border border-[var(--sys-color-concreteGrey-steps-0)]">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="text-sm font-bold text-[var(--sys-color-inkGold-base)] uppercase tracking-widest">
-            Select Document Template
-          </h3>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-[var(--sys-color-worker-ash-base)] uppercase tracking-wider">
-              Locale:
-            </span>
-            <div className="flex bg-[var(--sys-color-charcoalBackground-base)] rounded-[var(--sys-shape-radius-lg)] p-1 border border-[var(--sys-color-concreteGrey-steps-0)]">
-              <button
-                onClick={() => setLocale('US')}
-                className={`px-3 py-1 rounded-[var(--sys-shape-radius-lg)] text-xs font-bold transition-colors ${locale === 'US' ? 'bg-[var(--sys-color-solidarityRed-base)] text-[var(--sys-color-paperWhite-base)]' : 'text-[var(--sys-color-worker-ash-base)] hover:text-[var(--sys-color-paperWhite-base)]'}`}
-              >
-                US
-              </button>
-              <button
-                onClick={() => setLocale('UK/AU')}
-                className={`px-3 py-1 rounded-[var(--sys-shape-radius-lg)] text-xs font-bold transition-colors ${locale === 'UK/AU' ? 'bg-[var(--sys-color-solidarityRed-base)] text-[var(--sys-color-paperWhite-base)]' : 'text-[var(--sys-color-worker-ash-base)] hover:text-[var(--sys-color-paperWhite-base)]'}`}
-              >
-                UK/AU
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          {RESUME_TEMPLATES.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => setSelectedTemplate(t)}
-              className={`group flex flex-col items-center gap-2 p-2 rounded-[var(--sys-shape-radius-lg)] border transition-all ${
-                selectedTemplate.id === t.id
-                  ? 'bg-[var(--sys-color-solidarityRed-steps-0)]/20 border-[var(--sys-color-inkGold-base)]'
-                  : 'bg-[var(--sys-color-charcoalBackground-base)] border-[var(--sys-color-concreteGrey-steps-0)] hover:border-[var(--sys-color-concreteGrey-steps-0)]'
-              }`}
-            >
-              <div
-                className="w-full aspect-[3/4] rounded shadow-sm border border-[var(--sys-color-paperWhite-base)]/10 overflow-hidden relative"
-                style={{ backgroundColor: t.bgLight }}
-              >
-                <div
-                  className="absolute top-0 left-0 right-0 h-2"
-                  style={{ backgroundColor: t.primaryColor }}
-                />
-                <div className="p-1 space-y-1">
-                  <div
-                    className="h-1 w-2/3 rounded-[var(--sys-shape-radius-full)] mt-2"
-                    style={{ backgroundColor: t.headingColor, opacity: 0.3 }}
-                  />
-                  <div
-                    className="h-0.5 w-full rounded-[var(--sys-shape-radius-full)]"
-                    style={{ backgroundColor: t.textColor, opacity: 0.1 }}
-                  />
-                  <div
-                    className="h-0.5 w-full rounded-[var(--sys-shape-radius-full)]"
-                    style={{ backgroundColor: t.textColor, opacity: 0.1 }}
-                  />
-                  <div
-                    className="h-0.5 w-4/5 rounded-[var(--sys-shape-radius-full)]"
-                    style={{ backgroundColor: t.textColor, opacity: 0.1 }}
-                  />
-                </div>
-              </div>
-              <span
-                className={`text-[10px] font-bold truncate w-full text-center ${selectedTemplate.id === t.id ? 'text-[var(--sys-color-inkGold-base)]' : 'text-[var(--sys-color-worker-ash-base)] group-hover:text-[var(--sys-color-paperWhite-base)]'}`}
-              >
-                {t.name}
-              </span>
-            </button>
-          ))}
-        </div>
-      </div>
+      <TemplateSelector
+        templates={RESUME_TEMPLATES}
+        selected={selectedTemplate}
+        onSelect={setSelectedTemplate}
+        locale={locale}
+        onLocaleChange={setLocale}
+      />
 
       {/* Tabs and Export */}
       <div className="flex flex-col md:flex-row justify-between items-end border-b border-[var(--sys-color-outline-variant)] pb-0 sticky top-0 bg-[var(--sys-color-charcoalBackground-base)] z-40 pt-4">
-        <div className="flex w-full md:w-auto overflow-x-auto scrollbar-hide">
-          <button
-            onClick={() => setActiveTab('resume')}
-            className={`relative flex-1 md:flex-none px-6 py-3 text-sm font-medium transition-colors whitespace-nowrap ${
+        <DocumentTabBar
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          hasKSC={hasSelectionCriteria}
+        />
+        <ExportToolbar
+          activeTab={activeTab}
+          showAudit={showAudit}
+          onToggleAudit={() => setShowAudit(!showAudit)}
+          onRescore={handleAnalyze}
+          onSaveToProfile={handleSaveToProfile}
+          onCopy={() => {
+            const text =
               activeTab === 'resume'
-                ? 'text-[var(--sys-color-paperWhite-base)]'
-                : 'text-[var(--sys-color-worker-ash-base)] hover:text-[var(--sys-color-paperWhite-base)]'
-            }`}
-          >
-            Resume
-            {activeTab === 'resume' && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--sys-color-solidarityRed-base)]" />
-            )}
-          </button>
-          <button
-            onClick={() => setActiveTab('coverLetter')}
-            className={`relative flex-1 md:flex-none px-6 py-3 text-sm font-medium transition-colors whitespace-nowrap ${
-              activeTab === 'coverLetter'
-                ? 'text-[var(--sys-color-paperWhite-base)]'
-                : 'text-[var(--sys-color-worker-ash-base)] hover:text-[var(--sys-color-paperWhite-base)]'
-            }`}
-          >
-            Cover Letter
-            {activeTab === 'coverLetter' && (
-              <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--sys-color-solidarityRed-base)]" />
-            )}
-          </button>
-          {hasSelectionCriteria && (
-            <button
-              onClick={() => setActiveTab('ksc')}
-              className={`relative flex-1 md:flex-none px-6 py-3 text-sm font-medium transition-colors whitespace-nowrap ${
-                activeTab === 'ksc'
-                  ? 'text-[var(--sys-color-paperWhite-base)]'
-                  : 'text-[var(--sys-color-worker-ash-base)] hover:text-[var(--sys-color-paperWhite-base)]'
-              }`}
-            >
-              KSC Responses
-              {activeTab === 'ksc' && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--sys-color-solidarityRed-base)]" />
-              )}
-            </button>
-          )}
-        </div>
-
-        <div className="flex flex-wrap items-center gap-3 mt-4 md:mt-0 w-full md:w-auto justify-end pb-3 md:pb-2 pr-2">
-          <button
-            onClick={handleAnalyze}
-            className="fixed bottom-20 right-4 md:static md:bottom-auto md:right-auto z-50 flex items-center gap-2 bg-[var(--sys-color-charcoalBackground-steps-3)] hover:bg-[var(--sys-color-charcoalBackground-steps-4)] text-[var(--sys-color-paperWhite-base)] font-bold py-4 px-6 md:py-2 md:px-4 rounded-2xl md:rounded-full transition-colors shadow-lg md:shadow-none border border-[var(--sys-color-outline-variant)]"
-          >
-            <svg
-              className="w-5 h-5 md:hidden"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-              />
-            </svg>
-            Save & Rescore
-          </button>
-
-          {(activeTab === 'resume' || activeTab === 'coverLetter' || activeTab === 'ksc') && (
-            <div className="flex flex-wrap gap-2 items-center w-full md:w-auto justify-end">
-              {(activeTab === 'resume' || activeTab === 'coverLetter') && (
-                <button
-                  onClick={() => setShowAudit(!showAudit)}
-                  className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium transition-colors border ${
-                    showAudit
-                      ? 'bg-[var(--sys-color-solidarityRed-base)] text-[var(--sys-color-paperWhite-base)] border-[var(--sys-color-solidarityRed-base)]'
-                      : 'bg-transparent text-[var(--sys-color-paperWhite-base)] border-[var(--sys-color-outline-variant)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)]'
-                  }`}
-                >
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <span className="hidden sm:inline">
-                    {showAudit ? 'Hide Audit' : 'Show Audit'}
-                  </span>
-                  <span className="sm:hidden">Audit</span>
-                </button>
-              )}
-              {activeTab === 'coverLetter' && currentUserId && (
-                <button
-                  onClick={handleSaveToProfile}
-                  disabled={isSaving || saveSuccess}
-                  className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium transition-colors border ${
-                    saveSuccess
-                      ? 'bg-[var(--sys-color-solidarityRed-base)] text-[var(--sys-color-paperWhite-base)] border-[var(--sys-color-solidarityRed-base)]'
-                      : 'bg-transparent text-[var(--sys-color-paperWhite-base)] border-[var(--sys-color-outline-variant)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)]'
-                  }`}
-                >
-                  {isSaving ? (
-                    <span className="flex items-center gap-1.5">
-                      <svg
-                        className="animate-spin h-4 w-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
-                      </svg>
-                      <span className="hidden sm:inline">Saving...</span>
-                    </span>
-                  ) : saveSuccess ? (
-                    <span className="flex items-center gap-1.5">
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                      <span className="hidden sm:inline">Saved!</span>
-                    </span>
-                  ) : (
-                    <span className="flex items-center gap-1.5">
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"
-                        />
-                      </svg>
-                      <span className="hidden sm:inline">Save</span>
-                    </span>
-                  )}
-                </button>
-              )}
-              <button
-                onClick={() => {
-                  const text =
-                    activeTab === 'resume'
-                      ? getFullResumeText()
-                      : activeTab === 'coverLetter'
-                        ? coverLetterContent
-                        : analysis?.KSC_Responses_Drafts?.map(
-                            (k) => `${k.KSC_Prompt}\n${k.Response}`
-                          ).join('\n\n') || '';
-                  navigator.clipboard.writeText(text);
-                  alert('Copied to clipboard for ATS parsing!');
-                }}
-                className="border border-[var(--sys-color-outline-variant)] text-[var(--sys-color-paperWhite-base)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)] px-4 py-2 rounded-full text-sm font-medium transition-colors"
-                title="Copy Text"
-              >
-                Copy to Clipboard for ATS
-              </button>
-              <button
-                onClick={exportToPDF}
-                className="border border-[var(--sys-color-outline-variant)] text-[var(--sys-color-paperWhite-base)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)] px-3 py-2 rounded-full text-sm font-medium transition-colors"
-              >
-                PDF
-              </button>
-              <button
-                onClick={exportToDOCX}
-                className="border border-[var(--sys-color-outline-variant)] text-[var(--sys-color-paperWhite-base)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)] px-3 py-2 rounded-full text-sm font-medium transition-colors"
-              >
-                DOCX
-              </button>
-            </div>
-          )}
-        </div>
+                ? getFullResumeText()
+                : activeTab === 'coverLetter'
+                  ? coverLetterContent
+                  : analysis?.KSC_Responses_Drafts?.map(
+                      (k) => `${k.KSC_Prompt}\n${k.Response}`
+                    ).join('\n\n') || '';
+            navigator.clipboard.writeText(text);
+            alert('Copied to clipboard for ATS parsing!');
+          }}
+          onExportPDF={exportToPDF}
+          onExportDOCX={exportToDOCX}
+          onExportMarkdown={exportToMarkdown}
+          isSaving={isSaving}
+          saveSuccess={saveSuccess}
+          hasUser={!!currentUserId}
+        />
       </div>
 
       {activeTab === 'resume' && (
