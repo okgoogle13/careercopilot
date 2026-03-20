@@ -18,31 +18,33 @@ OutputT = TypeVar("OutputT")
 class GenkitFlow(Protocol[P, T]):
     """Protocol for genkit.flow decorator."""
 
-    def __call__(self, func: Callable[P, T]) -> Callable[P, T]: ...  # noqa: E704
+    def __call__(self, func: Callable[P, T]) -> Callable[P, T]: ...
 
 
 class GenkitPlugin(Protocol):
     """Protocol for genkit plugins."""
 
-    def init(self, **kwargs: Any) -> Any: ...  # noqa: E704
+    def init(self, **kwargs: Any) -> Any: ...
 
 
 class ModelConfig(Protocol):
     """Protocol for model configuration."""
 
-    def generate(self, prompt: str, **kwargs: Any) -> Any: ...  # noqa: E704
-    def __call__(self, *args: Any, **kwargs: Any) -> Any: ...  # noqa: E704
+    def generate(self, prompt: str, **kwargs: Any) -> Any: ...
+
+    def __call__(self, *args: Any, **kwargs: Any) -> Any: ...
 
 
 # Stub for genkit module
 class GenkitModule(Protocol):
     """Stub for genkit module."""
 
-    def get_plugin(self, name: str) -> GenkitPlugin | None: ...  # noqa: E704
-    def init(self, plugins: list[Any] | None = None) -> None: ...  # noqa: E704
+    def get_plugin(self, name: str) -> GenkitPlugin | None: ...
+
+    def init(self, plugins: list[Any] | None = None) -> None: ...
 
     @property
-    def flow(self) -> GenkitFlow[P, T]: ...  # noqa: E704
+    def flow(self) -> GenkitFlow[P, T]: ...
 
 
 # Stub for google_genai plugin
@@ -50,7 +52,7 @@ class GoogleGenAIPlugin(Protocol):
     """Stub for google_genai plugin."""
 
     @staticmethod
-    def init(api_key: str | None = None) -> GenkitPlugin: ...  # noqa: E704
+    def init(api_key: str | None = None) -> GenkitPlugin: ...
 
 
 # Type for flow functions

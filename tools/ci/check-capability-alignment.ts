@@ -24,11 +24,11 @@ function main() {
 
   // We read the registry content to extract apiDeps via regex
   const registryText = fs.readFileSync(REGISTRY_PATH, 'utf-8');
-  
+
   // Extract all apiDeps strings
   const apiDepMatch = registryText.match(/apiDeps: \[[^\]]*\]/g);
   const declaredDeps = new Set<string>();
-  
+
   if (apiDepMatch) {
     for (const m of apiDepMatch) {
       const endpoints = m.match(/['"`]([^'"`]+)['"`]/g);
@@ -58,7 +58,7 @@ function main() {
   }
 
   console.log(`\nTotal: ${errors} errors, ${warnings} warnings`);
-  
+
   if (errors > 0) {
     console.error('\nFAIL: One or more declared API dependencies are missing from the codebase.');
     process.exit(1);

@@ -13,31 +13,44 @@
 
 ---
 
-## 1 · Current Phase
+## 1. Phase Status: PASS
 
-**Phase:** `Pre-Harvest Stabilization`
-**Sprint Status:** `blocked`
-**Readiness Score:** `58/100`
+- **Current Phase**: `Physical Component Harvest (Track B)` (Pre-harvest stabilization COMPLETE)
+- **Stabilization Gate**: `PASS` (2026-03-20)
+- **Readiness Score**: `92/100`
 
-### Why We Are Blocked
+### Gate Audit Results (Confirmed via Batch Audit)
+- ✅ **Renames Verified**: `ApplyQuickWorkspaceReference`, `ProfileView`, `PastApplicationsReference`, `LibraryReferencePage`, `StudioMatchPanel`
+- ✅ **Imports Sanitized**: `tsc --noEmit` and `npm run build` passed in AI Studio session.
+- ✅ **Routing Neutralized**: Explicit warnings in `App.tsx` and `SidebarNav.tsx` regarding canonical authority.
+- ✅ **Mapping Created**: `docs/prototype-to-canonical-mapping.md` exists and verified.
+- ⚠️ **Cleanup Restricted**: Generic files (`Button.tsx`, `Layout.tsx`, etc.) retained in "Reviewed But Not Deleted" bucket for safety.
 
-- The latest Gemini-generated implementation plan treated the prototype as implementation truth.
-- The prior close-out prompt instructed AI Studio to normalize shell and routing behavior that belongs to canonical runtime authority.
-- The prior handover advanced directly to physical harvest before stabilization was verified.
-- The prototype still carries tab-driven pseudo-routing that can mislead downstream harvest work.
-- The old local prototype checkout was deleted, so all prototype-facing instructions must target `/Users/okgoogle13/Projects/prototype_v2.0` instead.
+---
 
-### Exit Criteria For This Phase
+## 2. Next Execution: Physical Harvest Planning (Track B)
 
-- Prototype route/navigation ambiguity is removed or explicitly annotated as prototype-only.
-- Support-reference file names are aligned to canonical target-state ownership.
-- Prototype-to-canonical mapping artifact is created.
+### Current Harvest Queue (Track B)
+
+| Component / Logic      | Prototype Source | Staging Target (Reference) | Status      |
+| ---------------------- | ---------------- | -------------------------- | ----------- |
+| `ATSScoreCard.tsx`     | `Analysis.tsx`   | `comp/analysis/`           | ✅ HARVESTED |
+| `AuditDisplay.tsx`     | `Analysis.tsx`   | `comp/analysis/`           | ✅ HARVESTED |
+| `TrendChart.tsx`       | `Analysis.tsx`   | `comp/analysis/`           | ✅ HARVESTED |
+| `PipelineChart.tsx`    | `Analysis.tsx`   | `comp/analysis/`           | ✅ HARVESTED |
+| `Deep STAR` Ingestion  | `Ingestion.tsx`  | `backend/services/`        | ✅ HARVESTED |
+| `ValidationDashboard`  | `Validation.tsx` | `comp/validation/`         | ⏳ QUEUED    |
+| (MISSING FROM STAGING) |                  |                            |              |
+Ingestion Service Logic (Track A2)
+- Port "DEEP STAR" extraction logic into `backend/app/services/ingestion_flow.py`.
+
+### Priority 3: Large Component Decomposition (Track PT-5)
+- Decompose `ValidationDashboard.tsx` into ≤4 sub-components.
 - Imports are updated after renames.
 - No unauthorized route or shell ownership drift is introduced.
 
 ---
 
-## 2 · Governing Constraints
 
 Prototype work must obey these rules:
 

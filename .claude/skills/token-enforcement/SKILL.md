@@ -1,6 +1,8 @@
+---
 name: token-enforcement
 description: Atomic enforcement gate to verify KR Solidarity token and copy hygiene in migrated frontend code.
 ---
+
 
 # Token Enforcement
 
