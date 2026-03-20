@@ -45,9 +45,9 @@ The `project-manager` uses the task router to orchestrate high-level "Phase Gate
   "executor": "codebase-orchestrator",
   "action": "verify-gate",
   "criteria": {
-    "build": "SUCCESS",
-    "lint": "< 5 warnings",
-    "test_coverage": "> 90%"
+  "build": "SUCCESS",
+  "lint": "< 5 warnings",
+  "tests_passing": true
   }
 }
 ```
@@ -71,13 +71,12 @@ Broadcast from **project-manager** to stakeholders and downstream systems.
 {
   "event": "phase_complete",
   "phase_id": "phase-2",
-  "phase_name": "Component Migration Remediation",
-  "completion_date": "2026-02-22T18:45:00Z",
+  "phase_name": "Feature Integration",
+  "completion_date": "2026-02-05T18:45:00Z",
   "metrics": {
-    "duration_days": 7,
-    "tasks_completed": 12,
-    "compliance_achieved": 99,
-    "velocity": 1.7
+    "duration_days": 5,
+    "tasks_completed": 8,
+    "velocity": 1.6
   },
   "next_recommendations": [
     "Conduct sprint retrospective",
@@ -85,14 +84,14 @@ Broadcast from **project-manager** to stakeholders and downstream systems.
     "Plan next sprint"
   ],
   "next_phase": {
-    "phase_id": "phase-3",
-    "phase_name": "StatusBadge Migration",
-    "kickoff_suggested": "2026-02-26",
-    "preparation_items": [
-      "Review Phase 2 lessons learned",
-      "Verify no UI regressions from token migrations",
-      "Prepare component-transformer for remaining legacy tokens"
-    ]
+  "phase_id": "phase-3",
+  "phase_name": "Delivery & Validation",
+  "kickoff_suggested": "2026-02-10",
+  "preparation_items": [
+  "Review Phase 2 lessons learned",
+  "Verify no regressions from Phase 2 changes",
+  "Prepare delivery checklist"
+  ]
   }
 }
 ```

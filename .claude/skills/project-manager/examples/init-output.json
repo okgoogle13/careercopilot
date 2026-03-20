@@ -1,25 +1,25 @@
 {
-  "project_id": "cc-kr-solidarity-rollout",
-  "name": "CareerCopilot Kerala Rage kr-solidarity Rollout",
+  "project_id": "my-project-001",
+  "name": "Example Project",
   "status": "PLANNING",
-  "start_date": "2026-02-17T00:00:00Z",
-  "target_end_date": "2026-03-17T00:00:00Z",
+  "start_date": "2026-01-01T00:00:00Z",
+  "target_end_date": "2026-02-01T00:00:00Z",
   "phases": [
     {
-      "phase_id": "phase-1-heroes",
+      "phase_id": "phase-1-setup",
       "sequence": 1,
-      "name": "Hero Component Creation",
+      "name": "Environment Setup",
       "status": "COMPLETE",
       "progress_percent": 100,
       "metrics": {
-        "hours_spent": 45,
-        "hours_estimated": 60
+        "hours_spent": 20,
+        "hours_estimated": 24
       }
     },
     {
-      "phase_id": "phase-2-tokens",
+      "phase_id": "phase-2-implementation",
       "sequence": 2,
-      "name": "Token Compliance Migration",
+      "name": "Feature Implementation",
       "status": "PENDING",
       "gates_required": [
         "Phase 1 complete (MET)",
@@ -28,19 +28,19 @@
       "gates_met": [true, true],
       "milestones": [
         {
-          "name": "Component Audit",
+          "name": "Core Logic",
           "status": "PENDING",
-          "effort_hours": 0.33
+          "effort_hours": 8
         },
         {
-          "name": "Token Injection",
+          "name": "Integration",
           "status": "PENDING",
-          "effort_hours": 0.5
+          "effort_hours": 4
         }
       ],
       "progress_percent": 0,
-      "estimated_hours_remaining": 90
+      "estimated_hours_remaining": 40
     }
   ],
-  "created_at": "2026-02-17T10:00:00Z"
+  "created_at": "2026-01-01T10:00:00Z"
 }

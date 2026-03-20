@@ -1,32 +1,30 @@
-# CareerCopilot Project Manager Dashboard
-**Generated**: 2026-02-24 14:45 UTC
+# Project Manager Dashboard — Example Output
+**Generated**: 2026-01-15 09:00 UTC
 **Status**: Phase 2 Ready to Execute
 **Overall Progress**: 33% (1/3 phases complete)
 
 ## Timeline Overview
-Phase 1: [████████████████████] 100% ✅ (Heroes complete)
-Phase 2: [░░░░░░░░░░░░░░░░░░░░]   0% 🟡 (Tokens - READY)
-Phase 3: [░░░░░░░░░░░░░░░░░░░░]   0% ⏳ (Post-Migration)
+Phase 1: [████████████████████] 100% ✅ (Setup complete)
+Phase 2: [░░░░░░░░░░░░░░░░░░░░]   0% 🟡 (Implementation - READY)
+Phase 3: [░░░░░░░░░░░░░░░░░░░░]   0% ⏳ (Delivery)
 
 ## Critical Path
-Phase 2 → Phase 3 (can run parallel)
-**ETA Production**: 2026-02-28
+Phase 2 → Phase 3 (sequential dependency)
+**ETA Delivery**: 2026-02-01
 
-## Phase Details: Token Compliance Migration (Phase 2)
-- **Goals**: Migrate 119 components to semantic tokens, Zero hardcoded colors.
-- **Success Criteria**: 0 hardcoded hex, yarn build passes.
+## Phase Details: Feature Implementation (Phase 2)
+- **Goals**: Implement core features, wire up integrations.
+- **Success Criteria**: All acceptance criteria met, build passes.
 - **Gates**: Phase 1 complete (PASS), Build passing (PASS).
 
 ## Critical Blockers
-🟢 **RESOLVED**: Token naming mismatch
-- **Impact**: Blocked Phase 2 token migration.
-- **Resolution**: Verified `tokens.json` consistency; components now use correct `--sys-color-*` variables.
+🟢 **NONE** — No active blockers.
 
 ## Team Capacity
-- **Backend Team**: 120/160 hours (75%) — Available for Phase 2.
-- **Frontend Team**: 60/160 hours (38%) — Available for Phase 2.
+- **Team A**: 80/160 hours (50%) — Available for Phase 2.
+- **Team B**: 40/160 hours (25%) — Available for Phase 2.
 
 ## Next 7-Day Forecast
-- **2026-02-24**: Start Phase 2 token migration.
-- **2026-02-26**: Phase 2 validation.
-- **2026-02-28**: Deployment readiness gate.
+- **Day 1**: Begin Phase 2 implementation.
+- **Day 4**: Phase 2 mid-point check.
+- **Day 7**: Phase 2 completion gate.
