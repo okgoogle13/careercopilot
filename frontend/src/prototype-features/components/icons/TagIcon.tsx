@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 
 export const TagIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' }) => (

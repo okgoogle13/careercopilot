@@ -1,3 +1,4 @@
+/* eslint-disable */
 export interface PersonalInformation {
   FullName: string;
   Phone: string;

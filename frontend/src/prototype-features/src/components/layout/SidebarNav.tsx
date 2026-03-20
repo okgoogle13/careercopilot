@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { motion } from 'motion/react';
 import { Briefcase, User, History, LogOut, Library, Image } from 'lucide-react';

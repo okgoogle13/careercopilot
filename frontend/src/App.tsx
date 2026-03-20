@@ -39,6 +39,7 @@ import { TokenTest } from './components/debug/TokenTest';
 const SmartIngestion = lazy(() => import('./features/ingestion/SmartIngestion'));
 import { JobQueue } from './features/jobs/JobQueue';
 import { useModeStore } from './stores/useModeStore';
+import { PrototypeRoutes } from './prototype-features/prototype-routes';
 
 /**
  * ModeSync Component
@@ -221,6 +222,12 @@ export default function App() {
             element={<NotFound />}
           />
         </Route>
+
+        {/* Prototype Routes — no auth required, quarantine zone */}
+        <Route
+          path="/prototype/*"
+          element={<PrototypeRoutes />}
+        />
 
         {/* Protected Routes */}
         <Route element={<RequireAuth />}>

@@ -1,11 +1,11 @@
-/* eslint-disable */
 /**
  * CLASSIFICATION: Support Component Only
  * This component is for generation/analysis support and is not a canonical route.
  */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useAutoSave } from '../hooks/useAutoSave';
 import { CareerDatabase, JobOpportunity, MatchAnalysis, SavedDocument } from '../types';
+import { auth } from '@/config/firebase';
 import { TailoredResumeView } from './TailoredResumeView';
 import { KSCResponsesView } from './KSCResponsesView';
 import { AuditDisplay } from './AuditDisplay';
@@ -23,13 +23,22 @@ interface MatchDashboardProps {
   careerData: CareerDatabase;
   job: JobOpportunity;
   onUpdate?: (data: CareerDatabase) => void;
-  userId?: string;
   onAnalyze: (careerData: CareerDatabase, job: JobOpportunity) => Promise<MatchAnalysis>;
   onSave: (userId: string, data: CareerDatabase) => Promise<void>;
 }
 
 export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
-  const { careerData, job, onUpdate, userId, onAnalyze, onSave } = props;
+  const { careerData, job, onUpdate, onAnalyze, onSave } = props;
+  const [currentUserId, setCurrentUserId] = useState<string | undefined>(
+    auth.currentUser?.uid
+  );
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user: { uid: string } | null) => {
+      setCurrentUserId(user?.uid);
+    });
+    return unsubscribe;
+  }, []);
   const [analysis, setAnalysis] = useState<MatchAnalysis | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -38,8 +47,6 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateStyle>(RESUME_TEMPLATES[0]);
   const [showAudit, setShowAudit] = useState(false);
   const [coverLetterContent, setCoverLetterContent] = useState('');
-  const [isSaving, setIsSaving] = useState(false);
-  const [saveSuccess, setSaveSuccess] = useState(false);
   const [locale, setLocale] = useState<'US' | 'UK/AU'>('US');
   const [hasSelectionCriteria, setHasSelectionCriteria] = useState(false);
   const resumeRef = useRef<HTMLDivElement>(null);
@@ -106,7 +113,7 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
   };
 
   const saveDocument = async (content: string) => {
-    if (!userId || !analysis || !onUpdate) return;
+    if (!currentUserId || !analysis || !onUpdate) return;
     const newDoc: SavedDocument = {
       id: crypto.randomUUID(),
       jobTitle: job.Job_Title,
@@ -121,7 +128,7 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
       Saved_Documents: [...(careerData.Saved_Documents || []), newDoc],
     };
 
-    await onSave(userId!, updatedData);
+    await onSave(currentUserId, updatedData);
     onUpdate(updatedData);
   };
 
@@ -129,18 +136,16 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
     isSaving: isAutoSaving,
     lastSaved,
     save,
-  } = useAutoSave(userId, coverLetterContent, saveDocument);
+  } = useAutoSave(currentUserId, coverLetterContent, saveDocument);
+
+  const isSaving = isAutoSaving;
+  const saveSuccess = lastSaved !== null;
 
   const handleSaveToProfile = async () => {
-    setIsSaving(true);
     try {
       await save(coverLetterContent);
-      setSaveSuccess(true);
-      setTimeout(() => setSaveSuccess(false), 3000);
     } catch (err) {
       console.error('Failed to save document:', err);
-    } finally {
-      setIsSaving(false);
     }
   };
 
@@ -234,7 +239,7 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
     } else if (activeTab === 'coverLetter' && analysis) {
       const blob = new Blob([analysis.Cover_Letter_Draft], { type: 'text/markdown;charset=utf-8' });
       saveAs(blob, 'Cover_Letter.md');
-    } else if (activeTab === 'ksc' && analysis.KSC_Responses_Drafts) {
+    } else if (activeTab === 'ksc' && analysis && analysis.KSC_Responses_Drafts) {
       let md = `# Key Selection Criteria Responses\n\n`;
       analysis.KSC_Responses_Drafts.forEach((ksc, i) => {
         md += `## Criterion ${i + 1}: ${ksc.KSC_Prompt}\n\n${ksc.Response}\n\n`;
@@ -375,7 +380,7 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
       });
       const blob = await Packer.toBlob(doc);
       saveAs(blob, 'Cover_Letter.docx');
-    } else if (activeTab === 'ksc' && analysis.KSC_Responses_Drafts) {
+    } else if (activeTab === 'ksc' && analysis && analysis.KSC_Responses_Drafts) {
       const doc = new Document({
         sections: [
           {
@@ -690,7 +695,7 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
                   <span className="sm:hidden">Audit</span>
                 </button>
               )}
-              {activeTab === 'coverLetter' && userId && (
+              {activeTab === 'coverLetter' && currentUserId && (
                 <button
                   onClick={handleSaveToProfile}
                   disabled={isSaving || saveSuccess}

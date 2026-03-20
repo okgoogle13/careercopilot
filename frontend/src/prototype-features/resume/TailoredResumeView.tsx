@@ -3,9 +3,9 @@
  * Prototype-only component.
  */
 import React, { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import { CareerDatabase, MatchAnalysis, StructuredAchievement } from '../types';
 import { TemplateStyle } from '../constants';
-import { refineAchievementField } from '../services/geminiService';
 
 interface TailoredResumeViewProps {
   careerData: CareerDatabase;
@@ -24,8 +24,30 @@ export const TailoredResumeView: React.FC<TailoredResumeViewProps> = ({
     careerData;
   const [achievements, setAchievements] =
     useState<StructuredAchievement[]>(Structured_Achievements);
-  const [isPolishing, setIsPolishing] = useState<string | null>(null);
   const [suggestions, setSuggestions] = useState<Record<string, string>>({});
+
+  const refineMutation = useMutation({
+    mutationFn: async ({ ach, field }: { ach: StructuredAchievement; field: keyof StructuredAchievement }) => {
+      const { apiClient } = await import('@/api/apiClient');
+      const response = await apiClient.post('/api/v1/analysis/refine-achievement', {
+        achievementId: ach.Achievement_ID,
+        field,
+        currentValue: ach[field],
+        context: ach,
+      });
+      return response.data as string;
+    },
+    onSuccess: (polishedText, { ach, field }) => {
+      setSuggestions((prev) => ({ ...prev, [`${ach.Achievement_ID}-${field}`]: polishedText }));
+    },
+    onError: (error) => {
+      console.error('Failed to polish text:', error);
+    },
+  });
+
+  const isPolishing = refineMutation.isPending
+    ? `${refineMutation.variables?.ach.Achievement_ID}-${refineMutation.variables?.field}`
+    : null;
 
   const formatDate = (dateString: string) => {
     if (!dateString) return '';
@@ -39,19 +61,10 @@ export const TailoredResumeView: React.FC<TailoredResumeViewProps> = ({
     }
   };
 
-  const handlePolish = async (achId: string, field: keyof StructuredAchievement) => {
-    setIsPolishing(`${achId}-${field}`);
-    try {
-      const ach = achievements.find((a) => a.Achievement_ID === achId);
-      if (!ach) return;
-      const polishedText = await refineAchievementField(ach, field);
-      setSuggestions((prev) => ({ ...prev, [`${achId}-${field}`]: polishedText }));
-    } catch (error) {
-      console.error('Failed to polish text:', error);
-      alert('Failed to polish text. Please try again.');
-    } finally {
-      setIsPolishing(null);
-    }
+  const handlePolish = (achId: string, field: keyof StructuredAchievement) => {
+    const ach = achievements.find((a) => a.Achievement_ID === achId);
+    if (!ach) return;
+    refineMutation.mutate({ ach, field });
   };
 
   const applySuggestion = (achId: string, field: keyof StructuredAchievement) => {
