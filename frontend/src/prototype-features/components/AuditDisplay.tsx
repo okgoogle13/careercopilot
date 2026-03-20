@@ -1,6 +1,7 @@
 /**
  * CLASSIFICATION: Support Component Only
  * Prototype-only component.
+ * ZERO-FLORA GATE: PASS — all colors via sys-color tokens, no flora imagery.
  */
 import React from 'react';
 import type { DocumentAudit } from '../types';
