@@ -28,25 +28,25 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
     const levelColors = {
       beginner:
         mode === 'KrDark'
-          ? 'text-[var(--sys-color-kr-activistSmokeGreen)]'
-          : 'text-[var(--sys-color-kr-activistSmokeGreen)]',
-      intermediate: 'text-[var(--sys-color-inkGold)]',
+          ? 'text-[var(--sys-color-kr-activistSmokeGreen-base)]'
+          : 'text-[var(--sys-color-kr-activistSmokeGreen-base)]',
+      intermediate: 'text-[var(--sys-color-inkGold-base)]',
       advanced:
         mode === 'KrDark'
-          ? 'text-[var(--sys-color-solidaritySmokeOrange)]'
-          : 'text-[var(--sys-color-solidaritySmokeOrange)]',
+          ? 'text-[var(--sys-color-solidaritySmokeOrange-base)]'
+          : 'text-[var(--sys-color-solidaritySmokeOrange-base)]',
       expert:
         mode === 'KrDark'
-          ? 'text-[var(--sys-color-solidarityRed)]'
-          : 'text-[var(--sys-color-kr-charcoalRed)]',
+          ? 'text-[var(--sys-color-solidarityRed-base)]'
+          : 'text-[var(--sys-color-kr-charcoalRed-base)]',
     };
 
     // Styles derived from glass variant logic
     const containerClasses = cn(
       'relative overflow-hidden transition-all duration-300 border backdrop-blur-md',
       mode === 'KrDark'
-        ? 'bg-[var(--sys-color-charcoalBackground)] border-white/10 text-[var(--sys-color-paperWhite)]'
-        : 'bg-[var(--sys-color-charcoalBackground)] border-white/5 text-[var(--sys-color-paperWhite)]',
+        ? 'bg-[var(--sys-color-charcoalBackground-base)] border-white/10 text-[var(--sys-color-paperWhite-base)]'
+        : 'bg-[var(--sys-color-charcoalBackground-base)] border-white/5 text-[var(--sys-color-paperWhite-base)]',
       className
     );
 
@@ -127,8 +127,8 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
                   className={cn(
                     'px-2 py-1 text-xs font-mono uppercase tracking-wider',
                     mode === 'KrDark'
-                      ? 'bg-[var(--sys-color-concreteGrey)]/20 border border-[var(--sys-color-concreteGrey)]'
-                      : 'bg-[var(--sys-color-concreteGrey)]/10 border border-[var(--sys-color-concreteGrey)]'
+                      ? 'bg-[var(--sys-color-concreteGrey-base)]/20 border border-[var(--sys-color-concreteGrey-base)]'
+                      : 'bg-[var(--sys-color-concreteGrey-base)]/10 border border-[var(--sys-color-concreteGrey-base)]'
                   )}
                   style={{
                     borderRadius: mode === 'KrDark' ? 'var(--shape-marchSurge01)' : '2px',

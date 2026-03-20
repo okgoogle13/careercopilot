@@ -26,8 +26,8 @@ export function Settings() {
   return (
     <SettingsControl
       className="max-w-5xl mx-auto animate-in fade-in zoom-in-95 duration-500 ease-spring"
-      title="Settings"
-      subtitle="Manage your account preferences and settings"
+      title="Your Workbench"
+      subtitle="Set how Career Copilot supports your applications."
       showActions={false}
     >
       <Tabs
@@ -35,13 +35,18 @@ export function Settings() {
         className="w-full"
       >
         <TabsList className="bg-surface-container border border-outline-variant mb-8 p-1 rounded-placard h-auto shadow-sm">
-          {['Profile', 'Preferences', 'Notifications', 'Security'].map((tab) => (
+          {[
+            { label: 'Identity', value: 'profile', shapeClass: 'rounded-blockRiot01' },
+            { label: 'Rhythm', value: 'preferences', shapeClass: 'rounded-blockRiot02' },
+            { label: 'Signals', value: 'notifications', shapeClass: 'rounded-blockRiot03' },
+            { label: 'Access', value: 'security', shapeClass: 'rounded-placardTorn01' },
+          ].map((tab) => (
             <TabsTrigger
-              key={tab}
-              value={tab.toLowerCase()}
-              className="rounded-march data-[state=active]:bg-primary-container data-[state=active]:text-on-primary-container data-[state=active]:shadow-sm text-on-surface-variant hover:text-on-surface transition-all px-6 py-2 ease-spring duration-300"
+              key={tab.value}
+              value={tab.value}
+              className={`${tab.shapeClass} data-[state=active]:bg-primary-container data-[state=active]:text-on-primary-container data-[state=active]:shadow-sm text-on-surface-variant hover:text-on-surface transition-all px-6 py-2 ease-spring duration-300`}
             >
-              {tab}
+              {tab.label}
             </TabsTrigger>
           ))}
         </TabsList>
@@ -51,58 +56,58 @@ export function Settings() {
             className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1"
             style={cardStyle}
           >
-            <h3 className="text-on-surface mb-6 text-headline-small font-bold">Profile Settings</h3>
+            <h3 className="text-on-surface mb-6 text-headline-small font-bold">Profile Signals</h3>
             <div className="space-y-6">
               <div className="grid grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm text-on-surface-variant mb-2 font-medium">
-                    First Name
+                    Given Name
                   </label>
                   <Input
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-blockRiot01 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                   />
                 </div>
                 <div>
                   <label className="block text-sm text-on-surface-variant mb-2 font-medium">
-                    Last Name
+                    Family Name
                   </label>
                   <Input
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-blockRiot02 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                   />
                 </div>
               </div>
 
               <div>
                 <label className="block text-sm text-on-surface-variant mb-2 font-medium">
-                  Email
+                  Contact Line
                 </label>
                 <Input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-blockRiot03 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                 />
               </div>
 
               <div>
                 <label className="block text-sm text-on-surface-variant mb-2 font-medium">
-                  Bio
+                  Positioning Note
                 </label>
                 <Textarea
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
-                  placeholder="Tell us about yourself..."
+                  placeholder="Write the short line you want your work to carry..."
                   rows={4}
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold focus:ring-primary focus:border-primary resize-none transition-all ease-spring"
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-placardTorn01 focus:ring-primary focus:border-primary resize-none transition-all ease-spring"
                 />
               </div>
 
               <Button className="bg-primary text-on-primary hover:bg-primary/90 rounded-strike px-8 h-12 shadow-sm hover:shadow-elevation-1 transition-all ease-spring">
-                Save Changes
+                Save This Setup
               </Button>
             </div>
           </div>
@@ -113,13 +118,13 @@ export function Settings() {
             className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1"
             style={cardStyle}
           >
-            <h3 className="text-on-surface mb-6 text-headline-small font-bold">Preferences</h3>
+            <h3 className="text-on-surface mb-6 text-headline-small font-bold">Workbench Rhythm</h3>
             <div className="space-y-6">
               <div className="flex items-center justify-between py-4 border-b border-outline-variant">
                 <div>
-                  <p className="text-on-surface font-medium">Dark Mode</p>
+                  <p className="text-on-surface font-medium">Solidarity Mode</p>
                   <p className="text-sm text-on-surface-variant">
-                    Use dark theme throughout the app
+                    Keep the interface on the KR night-shift palette
                   </p>
                 </div>
                 <Switch
@@ -130,9 +135,9 @@ export function Settings() {
 
               <div className="flex items-center justify-between py-4 border-b border-outline-variant">
                 <div>
-                  <p className="text-on-surface font-medium">Email Notifications</p>
+                  <p className="text-on-surface font-medium">Dispatch Notes</p>
                   <p className="text-sm text-on-surface-variant">
-                    Receive email updates and notifications
+                    Receive short field updates in your inbox
                   </p>
                 </div>
                 <Switch
@@ -149,15 +154,13 @@ export function Settings() {
             className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1"
             style={cardStyle}
           >
-            <h3 className="text-on-surface mb-6 text-headline-small font-bold">
-              Notification Settings
-            </h3>
+            <h3 className="text-on-surface mb-6 text-headline-small font-bold">Dispatch Signals</h3>
             <div className="space-y-6">
               <div className="flex items-center justify-between py-4 border-b border-outline-variant">
                 <div>
-                  <p className="text-on-surface font-medium">Application Updates</p>
+                  <p className="text-on-surface font-medium">Queue Updates</p>
                   <p className="text-sm text-on-surface-variant">
-                    Get notified about application status changes
+                    Hear when an application changes position
                   </p>
                 </div>
                 <Switch
@@ -168,9 +171,9 @@ export function Settings() {
 
               <div className="flex items-center justify-between py-4 border-b border-outline-variant">
                 <div>
-                  <p className="text-on-surface font-medium">Job Matches</p>
+                  <p className="text-on-surface font-medium">Scout Alerts</p>
                   <p className="text-sm text-on-surface-variant">
-                    Receive notifications for matching job opportunities
+                    Surface new roles that match your current push
                   </p>
                 </div>
                 <Switch
@@ -187,45 +190,43 @@ export function Settings() {
             className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1"
             style={cardStyle}
           >
-            <h3 className="text-on-surface mb-6 text-headline-small font-bold">
-              Security Settings
-            </h3>
+            <h3 className="text-on-surface mb-6 text-headline-small font-bold">Access Line</h3>
             <div className="space-y-6">
               <div>
                 <label className="block text-sm text-on-surface-variant mb-2 font-medium">
-                  Current Password
+                  Current Passphrase
                 </label>
                 <Input
                   type="password"
                   placeholder="••••••••"
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-blockRiot01 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                 />
               </div>
 
               <div>
                 <label className="block text-sm text-on-surface-variant mb-2 font-medium">
-                  New Password
+                  New Passphrase
                 </label>
                 <Input
                   type="password"
                   placeholder="••••••••"
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-blockRiot02 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                 />
               </div>
 
               <div>
                 <label className="block text-sm text-on-surface-variant mb-2 font-medium">
-                  Confirm New Password
+                  Confirm New Passphrase
                 </label>
                 <Input
                   type="password"
                   placeholder="••••••••"
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-blockRiot03 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                 />
               </div>
 
               <Button className="bg-primary text-on-primary hover:bg-primary/90 rounded-strike px-8 h-12 shadow-sm hover:shadow-elevation-1 transition-all ease-spring">
-                Update Password
+                Refresh Access
               </Button>
             </div>
           </div>

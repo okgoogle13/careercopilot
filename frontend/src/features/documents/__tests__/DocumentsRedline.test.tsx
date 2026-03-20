@@ -7,7 +7,12 @@ import userEvent from '@testing-library/user-event';
 // ---------------------------------------------------------------------------
 
 (jest as any).unstable_mockModule('@/components/shared/PageHeader', () => ({
-  PageHeader: ({ title }: { title: string }) => <div data-testid="page-header">{title}</div>,
+  PageHeader: ({ title, description }: { title: string; description?: string }) => (
+    <div data-testid="page-header">
+      <div>{title}</div>
+      {description ? <div>{description}</div> : null}
+    </div>
+  ),
 }));
 
 (jest as any).unstable_mockModule('@/components/ui/EmptyState', () => ({
@@ -82,6 +87,15 @@ describe('Documents — Redline overlay', () => {
     await userEvent.click(btn);
 
     expect(getOverlay()).toBeInTheDocument();
+  });
+
+  it('renders archive-first copy in the page header', () => {
+    render(<Documents />);
+
+    expect(screen.getByRole('heading', { name: /working papers/i })).toBeInTheDocument();
+    expect(
+      screen.getByText(/keep your resumes, letters, and ksc drafts ready for the next push/i)
+    ).toBeInTheDocument();
   });
 
   it('closes the overlay when the close button is clicked', async () => {

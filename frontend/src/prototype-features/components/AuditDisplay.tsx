@@ -83,7 +83,7 @@ export const AuditDisplay: React.FC<AuditDisplayProps> = ({ audit, title }) => {
             10-Second Recruiter Scan
           </h4>
           <p className="text-sm text-[var(--sys-color-worker-ash-base)] leading-relaxed italic">
-            "{audit.scanSimulation}"
+            &ldquo;{audit.scanSimulation}&rdquo;
           </p>
         </div>
 

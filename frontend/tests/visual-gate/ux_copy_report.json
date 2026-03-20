@@ -1,0 +1,111 @@
+{
+  "files_audited": [
+    "frontend/src/features/landing/LandingPage.tsx",
+    "frontend/src/features/auth/Register.tsx"
+  ],
+  "gate": "PASS",
+  "fixes_applied": [
+    {
+      "file": "Register.tsx",
+      "line": 91,
+      "rule": "BR-COPY-001 + BR-COPY-005",
+      "before": "Create Account",
+      "after": "Get Your Career Copilot",
+      "context": "h1 heading",
+      "status": "CONFIRMED"
+    },
+    {
+      "file": "Register.tsx",
+      "line": 53,
+      "rule": "BR-COPY-003 + BR-COPY-004",
+      "before": "Failed to create account. Please try again.",
+      "after": "Couldn't create your account. Give it another go.",
+      "context": "Runtime auth error fallback message",
+      "status": "CONFIRMED"
+    },
+    {
+      "file": "Register.tsx",
+      "line": 20,
+      "rule": "BR-COPY-004",
+      "before": "Please enter a valid email",
+      "after": "That doesn't look like an email",
+      "context": "Zod schema email validation message",
+      "status": "CONFIRMED"
+    }
+  ],
+  "high_severity": [],
+  "medium_severity": [
+    {
+      "file": "Register.tsx",
+      "line": 100,
+      "rule": "BR-COPY-001 (admin/meta language)",
+      "text": "Start your CareerCopilot workspace",
+      "context": "Subheading beneath the h1",
+      "issue": "\"workspace\" is product-management / SaaS admin language. Not solidarity-voiced.",
+      "suggested_fix": "\"Your evidence archive starts here\" | \"Build the record that speaks for you\""
+    },
+    {
+      "file": "Register.tsx",
+      "line": 262,
+      "rule": "BR-COPY-005 (generic CTA)",
+      "text": "Create Account / Creating account...",
+      "context": "Primary submit button label (idle and loading states)",
+      "issue": "\"Create Account\" as a CTA is generic SaaS convention with no solidarity specificity.",
+      "suggested_fix": "\"Start My Record\" / \"Building your archive...\" | \"Claim My Place\" / \"Securing your ground...\""
+    },
+    {
+      "file": "Register.tsx",
+      "line": 19,
+      "rule": "BR-COPY-004 (instructional voice)",
+      "text": "Name must be at least 2 characters",
+      "context": "Zod validation message rendered at errors.displayName",
+      "issue": "Clinical constraint language. Imperative requirement stated as a rule.",
+      "suggested_fix": "\"Name needs at least 2 characters\" | \"That's too short for a name\""
+    },
+    {
+      "file": "Register.tsx",
+      "line": 21,
+      "rule": "BR-COPY-004 (instructional voice)",
+      "text": "Password must be at least 6 characters",
+      "context": "Zod validation message rendered at errors.password",
+      "issue": "Clinical constraint language. No brand voice present.",
+      "suggested_fix": "\"Password needs 6+ characters\" | \"Keep it at least 6 characters strong\""
+    }
+  ],
+  "low_severity": [
+    {
+      "file": "Register.tsx",
+      "line": 25,
+      "rule": "BR-COPY-006 (clinical/neutral brand voice)",
+      "text": "Passwords don't match",
+      "context": "Zod schema refine validation message rendered at errors.confirmPassword",
+      "issue": "Neutral/clinical tone. Functional but no solidarity register.",
+      "suggested_fix": "\"These don't match — check both fields\" | \"Not the same — try again\""
+    },
+    {
+      "file": "Register.tsx",
+      "line": 275,
+      "rule": "BR-COPY-006 (clinical/neutral brand voice)",
+      "text": "Already have an account? Sign in.",
+      "context": "Utility nav link at page footer",
+      "issue": "Generic SaaS utility copy. Low impact but could carry more voice.",
+      "suggested_fix": "\"Already in? Sign back in.\" | \"Got a record already? Sign in.\""
+    },
+    {
+      "file": "LandingPage.tsx",
+      "line": 71,
+      "rule": "BR-COPY-006 (brand voice — borderline)",
+      "text": "Transition from manifesto to action: capture your strongest role evidence and start the archive flow.",
+      "context": "CTA panel body copy on the landing hero",
+      "issue": "\"archive flow\" edges toward product-management vocabulary.",
+      "suggested_fix": "\"...and open your archive\" — drop \"flow\" to eliminate SaaS residue"
+    }
+  ],
+  "summary": "PASS — All 3 previously flagged high-severity violations in Register.tsx have been resolved. h1 now reads 'Get Your Career Copilot' (was 'Create Account'). Error fallback now reads 'Couldn't create your account. Give it another go.' (was 'Failed to create account. Please try again.'). Zod email validation now reads 'That doesn't look like an email' (was 'Please enter a valid email'). No new high-severity violations found. Remaining medium/low items are carry-overs from the previous audit and do not block gate passage.",
+  "files_searched": [
+    "frontend/src/features/landing/LandingPage.tsx",
+    "frontend/src/features/auth/Register.tsx"
+  ],
+  "audited_at": "2026-03-21",
+  "re_audited_at": "2026-03-21"
+}

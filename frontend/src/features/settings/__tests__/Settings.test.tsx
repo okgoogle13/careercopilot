@@ -45,9 +45,11 @@ describe('Settings', () => {
     render(<Settings />);
 
     expect(screen.getByTestId('settings-control')).toBeInTheDocument();
-    expect(screen.getByText('Settings')).toBeInTheDocument();
-    expect(screen.getByText(/Manage your account preferences and settings/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Profile' })).toBeInTheDocument();
-    expect(screen.getByText('Profile Settings')).toBeInTheDocument();
+    expect(screen.getByText('Your Workbench')).toBeInTheDocument();
+    expect(
+      screen.getByText(/Set how Career Copilot supports your applications/i)
+    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Identity' })).toBeInTheDocument();
+    expect(screen.getByText('Profile Signals')).toBeInTheDocument();
   });
 });

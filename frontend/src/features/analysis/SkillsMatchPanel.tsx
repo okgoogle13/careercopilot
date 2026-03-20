@@ -11,14 +11,21 @@ interface ChipListProps {
 }
 
 const CHIP_STYLE: Record<ChipListProps['variant'], string> = {
-  matched: 'bg-secondary-container text-on-secondary-container border border-secondary/30',
-  missing: 'bg-error-container text-on-error-container border border-error/30',
-  adjacent: 'bg-tertiary-container text-on-tertiary-container border border-tertiary/30',
+  matched:
+    'bg-[var(--sys-color-kr-activistSmokeGreen-steps-0)] text-[var(--sys-color-worker-ash-base)] border border-[var(--sys-color-kr-activistSmokeGreen-base)]/30',
+  missing:
+    'bg-[var(--sys-color-kr-charcoalRed-steps-0)] text-[var(--sys-color-paperWhite-base)] border border-[var(--sys-color-kr-charcoalRed-base)]/30',
+  adjacent:
+    'bg-[var(--sys-color-solidaritySmokeOrange-steps-0)] text-[var(--sys-color-worker-ash-base)] border border-[var(--sys-color-solidaritySmokeOrange-base)]/30',
 };
 
 function ChipList({ items, variant }: ChipListProps) {
   if (items.length === 0) {
-    return <p className="text-body-small text-on-surface-variant italic">None identified</p>;
+    return (
+      <p className="text-body-small text-[var(--sys-color-concreteGrey-base)] italic">
+        None identified
+      </p>
+    );
   }
   return (
     <div className="flex flex-wrap gap-2">
@@ -48,26 +55,36 @@ export function SkillsMatchPanel({ skillsGap }: SkillsMatchPanelProps) {
   const { matched, missing, adjacent, match_score } = skillsGap;
 
   const scoreColor =
-    match_score >= 70 ? 'text-secondary' : match_score >= 40 ? 'text-tertiary' : 'text-error';
+    match_score >= 70
+      ? 'text-[var(--sys-color-kr-activistSmokeGreen-base)]'
+      : match_score >= 40
+        ? 'text-[var(--sys-color-solidaritySmokeOrange-base)]'
+        : 'text-[var(--sys-color-kr-charcoalRed-base)]';
 
   const barColor =
-    match_score >= 70 ? 'bg-secondary' : match_score >= 40 ? 'bg-tertiary' : 'bg-error';
+    match_score >= 70
+      ? 'bg-[var(--sys-color-kr-activistSmokeGreen-base)]'
+      : match_score >= 40
+        ? 'bg-[var(--sys-color-solidaritySmokeOrange-base)]'
+        : 'bg-[var(--sys-color-kr-charcoalRed-base)]';
 
   return (
     <div
-      className="bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1"
+      className="bg-[var(--sys-color-charcoalBackground-steps-2)] rounded-tech p-8 border border-[var(--sys-color-concreteGrey-steps-0)] shadow-elevation-1"
       data-testid="skills-match-panel"
     >
       {/* Header */}
       <div className="flex items-center gap-3 mb-6">
-        <Shield className="w-6 h-6 text-primary" />
-        <h2 className="text-title-large font-bold text-on-surface">Skills Match</h2>
+        <Shield className="w-6 h-6 text-[var(--sys-color-solidarityRed-base)]" />
+        <h2 className="text-title-large font-bold text-[var(--sys-color-worker-ash-base)]">
+          Skills Match
+        </h2>
       </div>
 
       {/* Score gauge */}
-      <div className="mb-6 bg-surface-container-low rounded-pebble p-5 border border-outline">
+      <div className="mb-6 bg-[var(--sys-color-charcoalBackground-steps-1)] rounded-pebble p-5 border border-[var(--sys-color-concreteGrey-steps-1)]">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-label-medium font-bold text-on-surface-variant uppercase tracking-wider">
+          <span className="text-label-medium font-bold text-[var(--sys-color-concreteGrey-base)] uppercase tracking-wider">
             Required Skills Match
           </span>
           <span
@@ -78,7 +95,7 @@ export function SkillsMatchPanel({ skillsGap }: SkillsMatchPanelProps) {
           </span>
         </div>
         {/* Progress bar */}
-        <div className="w-full h-2 bg-surface-container-high rounded-march overflow-hidden">
+        <div className="w-full h-2 bg-[var(--sys-color-charcoalBackground-steps-3)] rounded-march overflow-hidden">
           <div
             className={`h-full rounded-march transition-all duration-500 ${barColor}`}
             style={{ width: `${match_score}%` }}
@@ -95,8 +112,10 @@ export function SkillsMatchPanel({ skillsGap }: SkillsMatchPanelProps) {
         {/* Matched */}
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-label-large font-bold text-on-surface">✅ Matched</span>
-            <span className="text-xs bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-pebble font-mono font-bold">
+            <span className="text-label-large font-bold text-[var(--sys-color-worker-ash-base)]">
+              ✅ Matched
+            </span>
+            <span className="text-xs bg-[var(--sys-color-kr-activistSmokeGreen-steps-0)] text-[var(--sys-color-worker-ash-base)] px-2 py-0.5 rounded-pebble font-mono font-bold">
               {matched.length}
             </span>
           </div>
@@ -109,8 +128,10 @@ export function SkillsMatchPanel({ skillsGap }: SkillsMatchPanelProps) {
         {/* Missing */}
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-label-large font-bold text-on-surface">❌ Missing</span>
-            <span className="text-xs bg-error-container text-on-error-container px-2 py-0.5 rounded-pebble font-mono font-bold">
+            <span className="text-label-large font-bold text-[var(--sys-color-worker-ash-base)]">
+              ❌ Missing
+            </span>
+            <span className="text-xs bg-[var(--sys-color-kr-charcoalRed-steps-0)] text-[var(--sys-color-paperWhite-base)] px-2 py-0.5 rounded-pebble font-mono font-bold">
               {missing.length}
             </span>
           </div>
@@ -123,8 +144,10 @@ export function SkillsMatchPanel({ skillsGap }: SkillsMatchPanelProps) {
         {/* Adjacent */}
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-label-large font-bold text-on-surface">🔄 Adjacent</span>
-            <span className="text-xs bg-tertiary-container text-on-tertiary-container px-2 py-0.5 rounded-pebble font-mono font-bold">
+            <span className="text-label-large font-bold text-[var(--sys-color-worker-ash-base)]">
+              🔄 Adjacent
+            </span>
+            <span className="text-xs bg-[var(--sys-color-solidaritySmokeOrange-steps-0)] text-[var(--sys-color-worker-ash-base)] px-2 py-0.5 rounded-pebble font-mono font-bold">
               {adjacent.length}
             </span>
           </div>
@@ -132,7 +155,7 @@ export function SkillsMatchPanel({ skillsGap }: SkillsMatchPanelProps) {
             items={adjacent}
             variant="adjacent"
           />
-          <p className="text-body-small text-on-surface-variant mt-2">
+          <p className="text-body-small text-[var(--sys-color-concreteGrey-base)] mt-2">
             Adjacent skills from your resume that are closely related to missing requirements.
           </p>
         </div>

@@ -1,10 +1,11 @@
 # Target-State Route Matrix
 
-**Date:** 2026-03-17
+**Date:** 2026-03-21
 **Status:** Canonical living route-level target-state matrix
 **Canonical companion artifacts:**
 - `docs/project/active/frontend-source-of-truth-migration/control/blueprint.md`
 - `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.json`
+- `docs/project/active/frontend-source-of-truth-migration/control/requirements-audit-checklist.md`
 
 ## Purpose
 
@@ -17,6 +18,7 @@ For each live route, it shows:
 - which screen reference should drive target-state work
 - whether that route has route-specific wireframe coverage, shared family coverage, no required wireframe, or a missing wireframe
 - which backend capabilities belong to that route
+- which archived requirement clusters map to the route family
 - what this means for the target component library
 
 ## Decision Rules
@@ -25,6 +27,17 @@ For each live route, it shows:
 - Treat `/kr/*` routes as prototype-only and retire them from product truth.
 - Treat `/design-sidekick`, `/style-guide`, and `/test-tokens` as non-product routes.
 - Assign each retained backend-backed capability to one clear route owner.
+- Use archived requirements as audit inputs only; runtime/design/capability truth remain authoritative when requirements drift.
+
+## Requirements Traceability Overlay
+
+| Requirement Cluster | Archived IDs | Primary Routes | Current Sync Status | Notes |
+| --- | --- | --- | --- | --- |
+| Auth & profile lifecycle | `REQ-1.1.1` to `REQ-1.1.5` | `/login`, `/register`, `/onboarding`, `/welcome`, `/profile`, `/settings`, `/career/ingest`, `/documents` | `partial` | `/login`, `/register`, and `/welcome` remain planned merge surfaces. |
+| Document generation | `REQ-1.2.1` to `REQ-1.2.5` | `/cover-letter-generator`, `/ksc-generator`, `/documents`, `/apply/quick`, `/analysis` | `partial` | Generation routes are live; resume-tailoring and profile-variation mapping still need audit evidence. |
+| ATS analysis & optimization | `REQ-1.3.1` to `REQ-1.3.4` | `/analysis`, support from `/apply/quick` | `partial` | Audit history is now wired; score-iteration evidence still needs explicit audit capture. |
+| Proactive job management | `REQ-1.4.1` to `REQ-1.4.4` | `/opportunities`, `/job-queue`, `/apply/quick` | `deferred` | Archived Gmail/Calendar/notification automation is not yet established as current capability truth. |
+| Theme & branding management | `REQ-1.5.1` to `REQ-1.5.4` | cross-route | `superseded` | Archived multi-theme expectations conflict with current KR Solidarity dark-only canon. |
 
 ## Product Routes
 
@@ -36,12 +49,12 @@ For each live route, it shows:
 | `/onboarding` | `/onboarding` | `auth-onboarding` | `merge` | `complete` | `OnboardingRoute` | `frontend/src/screens/03_onboarding/OnboardFlow.tsx` | `frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml` | `route_specific_wireframe` | `voice_profile_capture` | `merge` | Keep the route-owned welcome gate and pair the onboarding flow to the 03_onboarding shell without promoting `/kr/onboarding`. |
 | `/welcome` | `/welcome` | `auth-onboarding` | `merge` | `planned` | `WelcomeScreen` | `frontend/src/screens/03_onboarding/OnboardFlow.tsx` | `frontend/src/screens/03_onboarding/03_welcome.wireframe.xml` | `route_specific_wireframe` | none | `merge` | Keep as part of onboarding progression; align with onboarding flow references. |
 | `/dashboard` | `/dashboard` | `dashboard` | `merge` | `complete` | `Dashboard` | `frontend/src/screens/11_dashboard/DashboardOverview.tsx` | `frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml` | `route_specific_wireframe` | `applications_crud`, `smart_ingestion_asset_pipeline` | `merge` | Dashboard stays canonical; merge visual structure only, not a competing route concept. |
-| `/analysis` | `/analysis` | `analysis` | `expand` | `complete` | `AnalysisPage` | `frontend/src/screens/05_analysis/AnalysisWorkbench.tsx` | `frontend/src/screens/05_analysis/05_analysis.wireframe.xml` | `route_specific_wireframe` | `resume_audit` | `extend` | Keep route and expand it into the canonical analysis surface. |
-| `/asset-library` | `/asset-library` | `analysis` | `expand` | `planned` | `AssetLibrary` | `frontend/src/screens/05_analysis/AnalysisWorkbench.tsx` | `frontend/src/screens/05_analysis/05_asset_library.wireframe.xml` | `route_specific_wireframe` | `smart_ingestion_asset_pipeline` | `extend` | Keep route but clarify it as an analysis-family support surface, not a parallel product tree. |
+| `/analysis` | `/analysis` | `analysis` | `expand` | `complete` | `AnalysisPage` | `frontend/src/screens/05_analysis/AnalysisWorkbench.tsx` | `frontend/src/screens/05_analysis/05_analysis.wireframe.xml` | `route_specific_wireframe` | `resume_audit` | `extend` | Keep route and expand it into the canonical analysis surface. Persisted audit history is now wired in runtime truth. |
+| `/asset-library` | `/asset-library` | `analysis` | `expand` | `complete` | `AssetLibrary` | `frontend/src/screens/05_analysis/AnalysisWorkbench.tsx` | `frontend/src/screens/05_analysis/05_asset_library.wireframe.xml` | `route_specific_wireframe` | `smart_ingestion_asset_pipeline` | `extend` | Keep route as an analysis-family support surface. Ownership ambiguity is resolved; route remains intentionally support-only in shell promotion. |
 | `/documents` | `/documents` | `documents` | `expand` | `complete` | `Documents` | `frontend/src/screens/08_workbench/DocumentWorkbench.tsx` | `frontend/src/screens/08_workbench/08_workbench.wireframe.xml` | `route_specific_wireframe` | `documents_redline` | `extend` | This route becomes the owner of redline and review workspace behavior. |
-| `/tracker` | `/tracker` | `applications` | `expand` | `planned` | `ApplicationTracker` | `frontend/src/screens/07_kanban/KanbanTracker.tsx` | `frontend/src/screens/07_kanban/07_kanban.wireframe.xml` | `route_specific_wireframe` | `applications_crud` | `extend` | This is the canonical owner of application CRUD, status, and detail flows; runtime truth is aligned and the remaining blocker is local Firebase/Firestore readiness, not route implementation. |
-| `/apply/quick` | `/apply/quick` | `applications` | `expand` | `complete` | `ApplyQuick` | `frontend/src/screens/09_finalization/ApplicationFinalization.tsx` | `frontend/src/screens/09_finalization/09_finalization.wireframe.xml` | `route_specific_wireframe` | `applications_crud`, `genkit_job_analysis`, `workflow_orchestration` | `merge` | Keep route as a supporting application flow; do not split it into a new family. |
-| `/opportunities` | `/opportunities` | `jobs` | `expand` | `complete` | `Opportunities` | `frontend/src/screens/06_lookout/LookoutDiscovery.tsx` | `frontend/src/screens/06_lookout/06_opportunities.wireframe.xml` | `route_specific_wireframe` | `job_listings_workbench`, `genkit_job_analysis` | `merge` | Keep route and merge stronger lookout/workbench patterns into it. Post-closeout cleanup is limited to tracker-blocked evidence and shell follow-through, not route ownership drift. |
+| `/tracker` | `/tracker` | `applications` | `expand` | `complete (deferred verification)` | `ApplicationTracker` | `frontend/src/screens/07_kanban/KanbanTracker.tsx` | `frontend/src/screens/07_kanban/07_kanban.wireframe.xml` | `route_specific_wireframe` | `applications_crud` | `extend` | This is the canonical owner of application CRUD, status, and detail flows; runtime truth is aligned and the remaining blocker is local Firebase/Firestore readiness, not route implementation. |
+| `/apply/quick` | `/apply/quick` | `applications` | `expand` | `complete` | `ApplyQuick` | `frontend/src/screens/09_finalization/ApplicationFinalization.tsx` | `frontend/src/screens/09_finalization/09_finalization.wireframe.xml` | `route_specific_wireframe` | `applications_crud`, `genkit_job_analysis`, `workflow_orchestration` | `merge` | Keep route as a supporting application flow; do not split it into a new family. Workflow generation is wired to the live backend contract and job-analysis ownership is resolved here. |
+| `/opportunities` | `/opportunities` | `jobs` | `expand` | `complete` | `Opportunities` | `frontend/src/screens/06_lookout/LookoutDiscovery.tsx` | `frontend/src/screens/06_lookout/06_opportunities.wireframe.xml` | `route_specific_wireframe` | `job_listings_workbench`, `genkit_job_analysis` | `merge` | Keep route and merge stronger lookout/workbench patterns into it. `/apply/quick` remains the execution owner for job analysis; `/opportunities` is support/discovery. |
 | `/job-queue` | `/job-queue` | `jobs` | `expand` | `complete` | `JobQueue` | `frontend/src/screens/06_lookout/LookoutDiscovery.tsx` | `frontend/src/screens/06_lookout/06_job_queue.wireframe.xml` | `route_specific_wireframe` | `job_listings_workbench` | `merge` | Keep route as a queue/worklist surface inside the jobs family; pair it to the 06_lookout shell while queue actions stay route-owned. |
 | `/ksc-generator` | `/ksc-generator` | `generation` | `keep` | `complete` | `KSCGenerator` | `frontend/src/screens/12_generation/GenerationWorkbench.tsx` | `frontend/src/screens/12_generation/12_ksc_generator.wireframe.xml` | `route_specific_wireframe` | none | `merge` | Keep as a dedicated generator route; pair it to the 12_generation shell while generator logic stays route-owned. |
 | `/cover-letter-generator` | `/cover-letter-generator` | `generation` | `keep` | `complete` | `CoverLetterGenerator` | `frontend/src/screens/12_generation/GenerationWorkbench.tsx` | `frontend/src/screens/12_generation/12_cover_letter_generator.wireframe.xml` | `route_specific_wireframe` | none | `merge` | Keep as a dedicated generator route; pair it to the 12_generation shell while cover-letter flow stays route-owned. |
@@ -123,10 +136,10 @@ For each live route, it shows:
 
 ## Matrix Gaps Still Blocking Full Implementation
 
-- `workflow_orchestration` backend endpoints now exist, but `/apply/quick` is still not wired to the new workflow status flow and workflow tests still target the old disabled contract
-- `resume_audit` history backend support exists, but the canonical analysis runtime still does not render persisted history
-- `/analysis` and `/asset-library` ownership boundaries still need implementation cleanup even though the target routes are now locked
-- active career-ingestion callers now converge on `/api/v1/ingest`; `/api/ingest/artifacts/upload` and `/api/ingestion/*` remain specialized endpoint families
+- `/tracker` still needs final live Firebase/Firestore environment verification before closeout can claim full route evidence
+- `/login`, `/register`, and `/welcome` remain planned merge surfaces and should be included in the next route-family audit pass
+- archived proactive-job-management requirements (`REQ-1.4.*`) are not yet ratified against current capability truth
+- archived multi-theme requirements (`REQ-1.5.*`) conflict with current KR Solidarity dark-only canon and need explicit supersession handling
 
 Resolved note:
-- `genkit_job_analysis` is complete in the capability map; do not reopen it as a migration blocker
+- `genkit_job_analysis`, `workflow_orchestration`, `resume_audit` history, and `/analysis` vs `/asset-library` ownership are no longer route-matrix blockers

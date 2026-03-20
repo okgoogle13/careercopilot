@@ -48,6 +48,15 @@ Before running the audit, ensure:
 4.  **Manifest Check**: Verifies route presence and checks for prototype status (P0 gate).
 5.  **Live Verification** (Optional: `--visual`): Captures headless screenshot of the target route.
 6.  **Token Enforcement**: Checks for structural/brand compliance (P0 gate).
+
+### Visual Audit Integration
+
+If the `--visual` flag is used and a screenshot is successfully captured, the audit will automatically suggest a follow-up visual compliance check:
+
+```bash
+/m3-visual-audit --screenshot /path/to/evidence/capture.png
+```
+
 7.  **Reporting**: Emits consolidated JSON audit report with follow-up commands.
 
 ## Usage

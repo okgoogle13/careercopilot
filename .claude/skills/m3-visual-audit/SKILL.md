@@ -2,6 +2,7 @@
 name: m3-visual-audit
 description: Audit UI screenshots against KR Solidarity M3 Expressive standards with deterministic scoring and actionable remediation.
 commands:
+  - // turbo
   - /visual-audit
   - /audit-visual
   - /m3-audit
@@ -17,15 +18,15 @@ metadata:
 
 ## Purpose
 
-Evaluate screenshot-level M3 Expressive compliance for KR Solidarity interfaces and emit deterministic findings.
+Evaluate screenshot-level M3 Expressive compliance for KR Solidarity interfaces using `vision-scorer-mcp` as the primary scoring engine for deterministic findings.
 
 ## Usage
 
 ### Via slash command
 
 ```bash
-/visual-audit screenshot.png
-/visual-audit frontend/docs/design/generated/previews/login.png
+/m3-visual-audit --screenshot /absolute/path/to/capture.png
+/m3-visual-audit --route /dashboard --output /absolute/path/results.json
 /m3-audit screenshot.png --component LoginScreen
 /audit-visual screenshot.png --context "Login form, default state"
 ```
@@ -104,9 +105,10 @@ Status thresholds:
 ## Process
 
 1. Validate screenshot quality and context.
-2. Score each dimension with evidence.
-3. Classify violations by severity.
-4. Emit structured report with fixes.
+2. Invoke `vision-scorer-mcp` with screenshot evidence.
+3. Classify findings using Solidarity audit dimensions (Typography, Color, Layout, Expressiveness).
+4. Classify violations by severity.
+5. Emit structured report with fixes.
 
 ## Evidence Requirements
 
@@ -165,6 +167,8 @@ Minimum JSON shape:
 
 ## Related Skills
 
-- `component-visual-audit`
+- `component
+- `vision-scorer-mcp`
 - `ui-design-evaluator`
-- `kerala-rage-brand-enforcer`
+- `web-design-guidelines`
+-brand-enforcer`

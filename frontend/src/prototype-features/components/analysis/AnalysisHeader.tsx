@@ -7,14 +7,23 @@ interface AnalysisHeaderProps {
 }
 
 export const AnalysisHeader: React.FC<AnalysisHeaderProps> = ({ score, jobTitle, companyName }) => {
-  const strokeColor =
-    score >= 80 ? '#10B981' : score >= 60 ? '#F59E0B' : '#EF4444';
+  const strokeColor = score >= 80 ? '#10B981' : score >= 60 ? '#F59E0B' : '#EF4444';
 
   return (
     <div className="bg-[var(--sys-color-charcoalBackground-steps-1)] p-8 rounded-[var(--sys-shape-radius-xl)] border border-[var(--sys-color-concreteGrey-steps-0)] flex items-center gap-8">
       <div className="relative w-32 h-32 flex items-center justify-center shrink-0">
-        <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="45" fill="none" stroke="#374151" strokeWidth="10" />
+        <svg
+          className="w-full h-full transform -rotate-90"
+          viewBox="0 0 100 100"
+        >
+          <circle
+            cx="50"
+            cy="50"
+            r="45"
+            fill="none"
+            stroke="#374151"
+            strokeWidth="10"
+          />
           <circle
             cx="50"
             cy="50"
@@ -41,10 +50,8 @@ export const AnalysisHeader: React.FC<AnalysisHeaderProps> = ({ score, jobTitle,
         </h2>
         <p className="text-[var(--sys-color-worker-ash-base)] text-lg">
           Your profile is a{' '}
-          <strong>
-            {score >= 80 ? 'strong' : score >= 60 ? 'moderate' : 'weak'} match
-          </strong>{' '}
-          for the {jobTitle} role at {companyName}.
+          <strong>{score >= 80 ? 'strong' : score >= 60 ? 'moderate' : 'weak'} match</strong> for
+          the {jobTitle} role at {companyName}.
         </p>
       </div>
     </div>

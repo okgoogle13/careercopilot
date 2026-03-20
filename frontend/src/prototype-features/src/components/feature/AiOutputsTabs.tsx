@@ -185,7 +185,7 @@ export function AiOutputsTabs() {
                     scalable web applications using React and TypeScript, I am confident in my
                     ability to contribute effectively to your team.
                     {'\n\n'}
-                    While I don't have direct production experience with GraphQL, my solid
+                    While I don&apos;t have direct production experience with GraphQL, my solid
                     foundation in REST APIs and Node.js allows me to quickly adapt to new data
                     fetching paradigms.
                     {'\n\n'}

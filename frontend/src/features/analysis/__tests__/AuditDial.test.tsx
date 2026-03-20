@@ -80,8 +80,8 @@ describe('AuditDial', () => {
     );
 
     const circle = screen.getByTestId('motion-circle');
-    // Color for sage is #B4D8AE
-    expect(circle.getAttribute('stroke')).toBe('#B4D8AE');
+    // Color for sage is var(--sys-color-kr-activistSmokeGreen-base)
+    expect(circle.getAttribute('stroke')).toBe('var(--sys-color-kr-activistSmokeGreen-base)');
   });
 
   it('applies terracotta color when score is low or gate is closed', () => {
@@ -93,7 +93,7 @@ describe('AuditDial', () => {
     );
 
     const circle = screen.getByTestId('motion-circle');
-    // Color for terracotta is #E09F7D
-    expect(circle.getAttribute('stroke')).toBe('#E09F7D');
+    // Color for terracotta is var(--sys-color-solidaritySmokeOrange-base)
+    expect(circle.getAttribute('stroke')).toBe('var(--sys-color-solidaritySmokeOrange-base)');
   });
 });

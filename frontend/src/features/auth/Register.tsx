@@ -17,7 +17,7 @@ const paperWhiteGrid =
 const registerSchema = z
   .object({
     displayName: z.string().min(2, 'Name must be at least 2 characters'),
-    email: z.string().email('Please enter a valid email'),
+    email: z.string().email("That doesn't look like an email"),
     password: z.string().min(6, 'Password must be at least 6 characters'),
     confirmPassword: z.string(),
   })
@@ -50,7 +50,7 @@ export function Register() {
       navigate('/welcome');
     } catch (err: any) {
       console.error('Registration error:', err);
-      setAuthError(err?.message || 'Failed to create account. Please try again.');
+      setAuthError(err?.message || "Couldn't create your account. Give it another go.");
     }
   };
 
@@ -88,7 +88,7 @@ export function Register() {
                 fontVariationSettings: "'wght' 900, 'SOFT' 0, 'WONK' 1, 'opsz' 72",
               }}
             >
-              Create Account
+              Get Your Career Copilot
             </h1>
             <p
               className="text-micro text-concrete-grey opacity-[0.8] uppercase tracking-widest leading-none"

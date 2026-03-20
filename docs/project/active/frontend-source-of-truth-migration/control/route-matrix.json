@@ -1,14 +1,132 @@
 {
   "artifact": "target_state_route_matrix",
-  "generated_at": "2026-03-16",
+  "generated_at": "2026-03-21",
   "canonical_plan": "docs/project/active/frontend-source-of-truth-migration/control/blueprint.md",
-  "schema_version": 3,
+  "schema_version": 4,
+  "requirements_audit_checklist": "docs/project/active/frontend-source-of-truth-migration/control/requirements-audit-checklist.md",
   "row_count": 27,
   "decision_rules": [
     "Prefer existing product routes over inventing new top-level routes.",
     "Retire /kr/* prototype routes from product truth.",
     "Treat /design-sidekick, /style-guide, and /test-tokens as non-product routes.",
-    "Assign each retained backend capability to one clear target route."
+    "Assign each retained backend capability to one clear target route.",
+    "Use archived requirements as audit inputs only; runtime/design/capability truth remain authoritative when requirements drift."
+  ],
+  "requirements_traceability": [
+    {
+      "requirement_cluster": "auth_profile_lifecycle",
+      "archived_requirements": [
+        "REQ-1.1.1",
+        "REQ-1.1.2",
+        "REQ-1.1.3",
+        "REQ-1.1.4",
+        "REQ-1.1.5"
+      ],
+      "solution_design_stories": [
+        "Epic 1 / Story 1.1",
+        "Epic 1 / Story 1.2",
+        "Epic 1 / Story 1.3"
+      ],
+      "primary_routes": [
+        "/login",
+        "/register",
+        "/onboarding",
+        "/welcome",
+        "/profile",
+        "/settings",
+        "/career/ingest",
+        "/documents"
+      ],
+      "audit_status": "partial",
+      "notes": "/login, /register, and /welcome remain planned merge surfaces in the active route matrix."
+    },
+    {
+      "requirement_cluster": "document_generation",
+      "archived_requirements": [
+        "REQ-1.2.1",
+        "REQ-1.2.2",
+        "REQ-1.2.3",
+        "REQ-1.2.4",
+        "REQ-1.2.5"
+      ],
+      "solution_design_stories": [
+        "Epic 2 / Story 2.1",
+        "Epic 2 / Story 2.2",
+        "Epic 2 / Story 2.3",
+        "Epic 4 / Story 4.3"
+      ],
+      "primary_routes": [
+        "/cover-letter-generator",
+        "/ksc-generator",
+        "/documents",
+        "/apply/quick",
+        "/analysis"
+      ],
+      "audit_status": "partial",
+      "notes": "Generation routes are live; resume-tailoring and profile-variation mapping still need explicit audit evidence."
+    },
+    {
+      "requirement_cluster": "ats_analysis_optimization",
+      "archived_requirements": [
+        "REQ-1.3.1",
+        "REQ-1.3.2",
+        "REQ-1.3.3",
+        "REQ-1.3.4"
+      ],
+      "solution_design_stories": [
+        "Epic 3 / Story 3.1",
+        "Epic 3 / Story 3.2",
+        "Epic 3 / Story 3.3"
+      ],
+      "primary_routes": [
+        "/analysis",
+        "/apply/quick"
+      ],
+      "audit_status": "partial",
+      "notes": "Persisted audit history is now wired, but score-iteration evidence still needs explicit audit capture."
+    },
+    {
+      "requirement_cluster": "proactive_job_management",
+      "archived_requirements": [
+        "REQ-1.4.1",
+        "REQ-1.4.2",
+        "REQ-1.4.3",
+        "REQ-1.4.4"
+      ],
+      "solution_design_stories": [
+        "Epic 5 / Story 5.1"
+      ],
+      "primary_routes": [
+        "/opportunities",
+        "/job-queue",
+        "/apply/quick"
+      ],
+      "audit_status": "deferred",
+      "notes": "Archived Gmail, Calendar, and notification automation is not yet established as current capability truth."
+    },
+    {
+      "requirement_cluster": "theme_branding_management",
+      "archived_requirements": [
+        "REQ-1.5.1",
+        "REQ-1.5.2",
+        "REQ-1.5.3",
+        "REQ-1.5.4"
+      ],
+      "solution_design_stories": [
+        "Epic 4 / Story 4.1",
+        "Epic 4 / Story 4.2",
+        "Epic 4 / Story 4.3"
+      ],
+      "primary_routes": [
+        "/documents",
+        "/cover-letter-generator",
+        "/ksc-generator",
+        "/analysis",
+        "/settings"
+      ],
+      "audit_status": "superseded",
+      "notes": "Archived multi-theme expectations conflict with the current KR Solidarity dark-only canon."
+    }
   ],
   "rows": [
     {
@@ -189,11 +307,8 @@
       ],
       "component_library_action": "extend",
       "priority": "high",
-      "blockers": [
-        "resume audit is not clearly routed",
-        "analysis workflow handoff remains partially cosmetic"
-      ],
-      "notes": "Keep route and expand it into the canonical analysis surface."
+      "blockers": [],
+      "notes": "Keep route and expand it into the canonical analysis surface. Persisted audit history is now wired in runtime truth."
     },
     {
       "route_id": "asset_library",
@@ -202,7 +317,7 @@
       "route_class": "product",
       "family": "analysis",
       "status": "expand",
-      "implementation_status": "planned",
+      "implementation_status": "complete",
       "current_runtime_owner": "AssetLibrary",
       "target_runtime_owner": "AssetLibrary",
       "screen_reference": "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx",
@@ -218,10 +333,8 @@
       ],
       "component_library_action": "extend",
       "priority": "high",
-      "blockers": [
-        "asset library and smart-ingestion relationship is unresolved"
-      ],
-      "notes": "Keep route but clarify it as an analysis-family support surface, not a parallel product tree."
+      "blockers": [],
+      "notes": "Keep route as an analysis-family support surface. Ownership ambiguity is resolved; route remains intentionally support-only in shell promotion."
     },
     {
       "route_id": "documents",
@@ -256,7 +369,7 @@
       "route_class": "product",
       "family": "applications",
       "status": "expand",
-      "implementation_status": "planned",
+      "implementation_status": "complete_deferred_verification",
       "current_runtime_owner": "ApplicationTracker",
       "target_runtime_owner": "ApplicationTracker",
       "screen_reference": "frontend/src/screens/07_kanban/KanbanTracker.tsx",
@@ -303,7 +416,7 @@
       "component_library_action": "merge",
       "priority": "high",
       "blockers": [],
-      "notes": "Keep route as a supporting application flow; do not split it into a new family. Current contract scope is complete even though workflow orchestration remains a backend-placeholder capability."
+      "notes": "Keep route as a supporting application flow; do not split it into a new family. Workflow generation is wired to the live backend contract and job-analysis ownership is resolved here."
     },
     {
       "route_id": "opportunities",
@@ -329,11 +442,8 @@
       ],
       "component_library_action": "merge",
       "priority": "medium",
-      "blockers": [
-        "job listings backend workbench may be redundant with existing job analysis flows",
-        "genkit_job_analysis lacks normalized governance status metadata"
-      ],
-      "notes": "Keep route and merge stronger lookout/workbench patterns into it."
+      "blockers": [],
+      "notes": "Keep route and merge stronger lookout/workbench patterns into it. /apply/quick remains the execution owner for job analysis; /opportunities is support/discovery."
     },
     {
       "route_id": "job_queue",
