@@ -5,11 +5,11 @@ This document defines the technical execution model for the `project-manager` sk
 ## Execution Model
 
 ### Invocation Method
-The `project-manager` functions as a **Python Agent** integrated into the CareerCopilot backend.
+The `project-manager` functions as an **orchestration layer** invoked within the current session.
 
-- **Entry Point**: `/backend/app/agents/project_manager_agent.py`
-- **Communication Protocol**: Receives and returns JSON via the **task-router-mcp**.
-- **State Persistence**: Maintains critical project state in a **PostgreSQL** database (`projects`, `phases`, `milestones` tables).
+- **Entry Point**: Invoked by the controller agent reading the current project plan.
+- **Communication Protocol**: Receives and returns structured JSON or Markdown via the **task-router-mcp** or directly within the session.
+- **State Persistence**: Tracks state via plan files and task lists in the project directory.
 
 ### Execution Flow
 
@@ -66,6 +66,5 @@ When `transition_to_phase(target_id)` is triggered or when a phase reaches `PHAS
 
 ## Data Architecture
 
-- **Primary Storage**: PostgreSQL (Relational integrity for complex dependency graphs).
-- **Caching**: Redis (For high-frequency dashboard queries).
-- **Audit Log**: Git (Uses commit history and tags to verify production deployment gates).
+- **Primary Storage**: Plan and task files in the project directory (JSON/Markdown).
+- **Audit Log**: Git commit history to verify phase completion gates.
