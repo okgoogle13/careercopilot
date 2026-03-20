@@ -5,23 +5,29 @@
  */
 import React from 'react';
 import { motion } from 'motion/react';
+import { useQuery } from '@tanstack/react-query';
 import { WorkspaceLayout } from '../components/layout/WorkspaceLayout';
 import { SolidarityPageLayout } from '../components/layout/SolidarityPageLayout';
 import { LayeredHero } from '../components/layout/LayeredHero';
 import { JobInputPanel } from '../components/feature/JobInputPanel';
 import { AiOutputsTabs } from '../components/feature/AiOutputsTabs';
 import { SaveApplicationBar } from '../components/feature/SaveApplicationBar';
-import { PrimaryButton } from '@/components/PrototypeAdapter';
+import { PrimaryButton } from '../components/ui/PrimaryButton';
+import { useUserStore } from '@/stores/userStore';
+import { profileService } from '@/api/profileService';
 
 export function ApplyQuickWorkspaceReference() {
+  const { hasMaster, loadingMaster } = useUserStore();
+
+  const { data: profiles, isLoading: isLoadingProfiles } = useQuery({
+    queryKey: ['userProfiles'],
+    queryFn: () => profileService.getUserProfiles(),
+    enabled: hasMaster,
+  });
+
   const handleLoadSampleProfile = () => {
-    // Mock data
-    const mockProfile = {
-      workExperience: [{ title: 'Software Engineer', company: 'TechCorp' }],
-      skills: ['React', 'TypeScript'],
-    };
-    console.log('Loading sample profile:', mockProfile);
-    alert('Profile loaded (Prototype only)');
+    if (isLoadingProfiles || !profiles) return;
+    console.log('Profiles loaded:', profiles);
   };
 
   return (
@@ -61,7 +67,7 @@ export function ApplyQuickWorkspaceReference() {
                   NO NEUTRAL CANVAS. TAILOR YOUR RESPONSE.
                 </p>
                 <PrimaryButton
-                  label="Load Sample Profile"
+                  label={isLoadingProfiles || loadingMaster ? 'Loading...' : 'Load Profile'}
                   onClick={handleLoadSampleProfile}
                   variant="tonal"
                 />

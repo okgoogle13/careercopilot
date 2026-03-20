@@ -1,4 +1,3 @@
-/* eslint-disable */
 /**
  * CLASSIFICATION: Support Component Only
  * Prototype-only component.
@@ -6,7 +5,7 @@
 import React, { useState } from 'react';
 import { CareerDatabase, MatchAnalysis, StructuredAchievement } from '../types';
 import { TemplateStyle } from '../constants';
-import { refineAchievementField } from '../services/geminiService';
+import { useAIRefinement } from '../hooks/useAIRefinement';
 
 interface TailoredResumeViewProps {
   careerData: CareerDatabase;
@@ -25,8 +24,8 @@ export const TailoredResumeView: React.FC<TailoredResumeViewProps> = ({
     careerData;
   const [achievements, setAchievements] =
     useState<StructuredAchievement[]>(Structured_Achievements);
-  const [isPolishing, setIsPolishing] = useState<string | null>(null);
   const [suggestions, setSuggestions] = useState<Record<string, string>>({});
+  const { refineField, isRefining, activeKey } = useAIRefinement();
 
   const formatDate = (dateString: string) => {
     if (!dateString) return '';
@@ -41,17 +40,14 @@ export const TailoredResumeView: React.FC<TailoredResumeViewProps> = ({
   };
 
   const handlePolish = async (achId: string, field: keyof StructuredAchievement) => {
-    setIsPolishing(`${achId}-${field}`);
+    const ach = achievements.find((a) => a.Achievement_ID === achId);
+    if (!ach) return;
     try {
-      const ach = achievements.find((a) => a.Achievement_ID === achId);
-      if (!ach) return;
-      const polishedText = await refineAchievementField(ach, field);
+      const polishedText = await refineField(ach, field);
       setSuggestions((prev) => ({ ...prev, [`${achId}-${field}`]: polishedText }));
     } catch (error) {
       console.error('Failed to polish text:', error);
       alert('Failed to polish text. Please try again.');
-    } finally {
-      setIsPolishing(null);
     }
   };
 
@@ -288,11 +284,11 @@ export const TailoredResumeView: React.FC<TailoredResumeViewProps> = ({
                               ) : (
                                 <button
                                   onClick={() => handlePolish(ach.Achievement_ID, 'Outcome')}
-                                  disabled={isPolishing === `${ach.Achievement_ID}-Outcome`}
+                                  disabled={isRefining && activeKey === `${ach.Achievement_ID}-Outcome`}
                                   className="p-1 bg-gray-100 hover:bg-gray-200 rounded text-gray-600"
                                   title="AI Polish Outcome"
                                 >
-                                  {isPolishing === `${ach.Achievement_ID}-Outcome` ? (
+                                  {isRefining && activeKey === `${ach.Achievement_ID}-Outcome` ? (
                                     <svg
                                       className="animate-spin h-3 w-3"
                                       xmlns="http://www.w3.org/2000/svg"
@@ -490,11 +486,11 @@ export const TailoredResumeView: React.FC<TailoredResumeViewProps> = ({
                                 ) : (
                                   <button
                                     onClick={() => handlePolish(ach.Achievement_ID, 'Outcome')}
-                                    disabled={isPolishing === `${ach.Achievement_ID}-Outcome`}
+                                    disabled={isRefining && activeKey === `${ach.Achievement_ID}-Outcome`}
                                     className="p-1 bg-gray-100 hover:bg-gray-200 rounded text-gray-600"
                                     title="AI Polish Outcome"
                                   >
-                                    {isPolishing === `${ach.Achievement_ID}-Outcome` ? (
+                                    {isRefining && activeKey === `${ach.Achievement_ID}-Outcome` ? (
                                       <svg
                                         className="animate-spin h-3 w-3"
                                         xmlns="http://www.w3.org/2000/svg"
