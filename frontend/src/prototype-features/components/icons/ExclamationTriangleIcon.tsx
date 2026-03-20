@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 
 export const ExclamationTriangleIcon: React.FC<{ className?: string }> = ({

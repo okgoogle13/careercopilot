@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 
 type TabKey = 'resume' | 'coverLetter' | 'ksc';

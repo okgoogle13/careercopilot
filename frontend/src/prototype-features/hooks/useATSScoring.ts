@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { useState, useEffect, useCallback } from 'react';
 import { debounce } from 'lodash';
 import { ATSScorer } from '../services/atsScorer';

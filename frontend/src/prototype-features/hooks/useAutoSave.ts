@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { useEffect, useState, useCallback } from 'react';
 import { saveUserCareerData } from '../services/firebase';
 import { CareerDatabase } from '../types';

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import nlp from 'compromise';
 import { ATSScoreResult, CoverLetterScoreResult, DocumentType, ScoringWeights } from '../types';
 

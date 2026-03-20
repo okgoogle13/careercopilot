@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { GoogleGenAI, Type, ThinkingLevel } from '@google/genai';
 import {
   CareerDatabase,

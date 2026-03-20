@@ -1,5 +1,5 @@
-console.log("Background service worker started.");
+console.log('Background service worker started.');
 chrome.runtime.onInstalled.addListener(() => {
-  console.log("CareerCopilot Extension installed.");
+  console.log('CareerCopilot Extension installed.');
 });
 //# sourceMappingURL=background.js.map

@@ -1,4 +1,3 @@
-/* eslint-disable */
 /**
  * CLASSIFICATION: Support-Reference Page
  * Prototype-only reference page.
@@ -8,7 +7,9 @@ import { motion } from 'motion/react';
 import { WorkspaceLayout } from '../components/layout/WorkspaceLayout';
 import { SolidarityPageLayout } from '../components/layout/SolidarityPageLayout';
 import { LayeredHero } from '../components/layout/LayeredHero';
-import { SectionHeader, Card, Badge } from '@/components/PrototypeAdapter';
+import { SectionHeader } from '../components/ui/SectionHeader';
+import { Card } from '../components/ui/Card';
+import { Badge } from '../components/ui/Badge';
 
 export function PastApplicationsReference() {
   return (

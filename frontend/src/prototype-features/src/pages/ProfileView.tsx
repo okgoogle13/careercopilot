@@ -1,4 +1,3 @@
-/* eslint-disable */
 /**
  * CLASSIFICATION: Support-Reference Page
  * Prototype-only reference page.
@@ -8,7 +7,10 @@ import { motion } from 'motion/react';
 import { WorkspaceLayout } from '../components/layout/WorkspaceLayout';
 import { SolidarityPageLayout } from '../components/layout/SolidarityPageLayout';
 import { LayeredHero } from '../components/layout/LayeredHero';
-import { SectionHeader, TextInput, PrimaryButton, Modal } from '@/components/PrototypeAdapter';
+import { SectionHeader } from '../components/ui/SectionHeader';
+import { TextInput } from '../components/ui/TextInput';
+import { PrimaryButton } from '../components/ui/PrimaryButton';
+import { Modal } from '../components/ui/Modal';
 import { DocumentInput } from '../../components/DocumentInput';
 
 export function ProfileView() {
