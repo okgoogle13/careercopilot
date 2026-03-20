@@ -1,4 +1,3 @@
-/* eslint-disable */
 /**
  * CLASSIFICATION: Support Component Only
  * Prototype-only component.

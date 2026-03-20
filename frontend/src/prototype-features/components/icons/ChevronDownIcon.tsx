@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 
 export const ChevronDownIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' }) => (

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { useMutation } from '@tanstack/react-query';
 import { refineAchievement, RefineAchievementRequest } from '@/api/aiServices';
 import { StructuredAchievement } from '../types';

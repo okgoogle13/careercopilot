@@ -1,4 +1,3 @@
-/* eslint-disable */
 export interface TemplateStyle {
   id: string;
   name: string;

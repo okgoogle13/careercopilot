@@ -27,7 +27,13 @@ export const TailoredResumeView: React.FC<TailoredResumeViewProps> = ({
   const [suggestions, setSuggestions] = useState<Record<string, string>>({});
 
   const refineMutation = useMutation({
-    mutationFn: async ({ ach, field }: { ach: StructuredAchievement; field: keyof StructuredAchievement }) => {
+    mutationFn: async ({
+      ach,
+      field,
+    }: {
+      ach: StructuredAchievement;
+      field: keyof StructuredAchievement;
+    }) => {
       const { apiClient } = await import('@/api/apiClient');
       const response = await apiClient.post('/api/v1/analysis/refine-achievement', {
         achievementId: ach.Achievement_ID,

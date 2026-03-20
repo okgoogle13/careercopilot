@@ -1,4 +1,3 @@
-/* eslint-disable */
 /**
  * CLASSIFICATION: Support Component Only
  * Prototype-only component. Maps to /ksc-generator in canonical product.

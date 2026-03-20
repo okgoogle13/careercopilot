@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 
 export const FileIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' }) => (

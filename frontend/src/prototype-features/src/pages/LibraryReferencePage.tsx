@@ -1,4 +1,3 @@
-/* eslint-disable */
 /**
  * CLASSIFICATION: Support-Reference Page
  * Prototype-only reference page.
@@ -8,16 +7,14 @@ import { motion } from 'motion/react';
 import { WorkspaceLayout } from '../components/layout/WorkspaceLayout';
 import { SolidarityPageLayout } from '../components/layout/SolidarityPageLayout';
 import { LayeredHero } from '../components/layout/LayeredHero';
-import {
-  SectionHeader,
-  PrimaryButton,
-  TextInput,
-  Textarea,
-  Card,
-  Badge,
-  Loader,
-  Modal,
-} from '@/components/PrototypeAdapter';
+import { SectionHeader } from '../components/ui/SectionHeader';
+import { PrimaryButton } from '../components/ui/PrimaryButton';
+import { TextInput } from '../components/ui/TextInput';
+import { Textarea } from '../components/ui/Textarea';
+import { Card } from '../components/ui/Card';
+import { Badge } from '../components/ui/Badge';
+import { Loader } from '../components/ui/Loader';
+import { Modal } from '../components/ui/Modal';
 import { Checkbox } from '../components/ui/Checkbox';
 
 export function LibraryReferencePage() {
