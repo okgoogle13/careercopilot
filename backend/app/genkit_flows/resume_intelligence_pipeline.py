@@ -28,7 +28,7 @@ R = TypeVar("R")
 class ModelConfigProtocol:
     """Protocol for model configuration."""
 
-    def generate(self, prompt: str, **kwargs: Any) -> Any: ...  # noqa: E704
+    def generate(self, prompt: str, **kwargs: Any) -> Any: ...
 
 
 from app.core.genkit_init import async_genkit_flow, get_model

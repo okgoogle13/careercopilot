@@ -29,6 +29,8 @@ from app.genkit_flows.unified_job_analyzer import (
     UnifiedJobAnalysis,
     analyze_job_from_url,
 )
+from app.schemas.career_master import CareerDatabase
+from app.services.ingestion_flow import process_career_ingestion
 
 router = APIRouter()
 
@@ -107,6 +109,10 @@ class AnalyzeJobUrlRequest(BaseModel):
     url: str
 
 
+class CareerHistoryIngestRequest(BaseModel):
+    text_content: str
+
+
 @router.post(
     "/job/analyze-url",
     response_model=UnifiedJobAnalysis,
@@ -161,5 +167,22 @@ async def get_company_context_endpoint(request: CompanyContextRequest) -> Compan
     return await run_genkit_endpoint(
         operation,
         "Company context generation failed",
+        enabled_check=is_genkit_enabled,
+    )
+
+
+@router.post(
+    "/ingest/career-history",
+    response_model=CareerDatabase,
+    summary="Ingest Career History (Deep STAR)",
+    description="Unified ingestion flow for career documents with DEEP STAR critique and de-duplication.",
+)
+async def ingest_career_history_endpoint(request: CareerHistoryIngestRequest) -> CareerDatabase:
+    async def operation() -> CareerDatabase:
+        return await process_career_ingestion(text_content=request.text_content)
+
+    return await run_genkit_endpoint(
+        operation,
+        "Deep STAR career history ingestion failed",
         enabled_check=is_genkit_enabled,
     )

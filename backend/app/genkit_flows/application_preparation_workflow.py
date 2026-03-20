@@ -32,7 +32,8 @@ R = TypeVar("R")
 class ModelConfigProtocol(Protocol):
     """Protocol for model configuration."""
 
-    def generate(self, prompt: str, **kwargs: Any) -> Any: ...  # noqa: E704
+    def generate(self, prompt: str, **kwargs: Any) -> Any:
+        pass
 
 
 def _get_generation_model() -> ModelConfigProtocol:
