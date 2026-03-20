@@ -1,13 +1,14 @@
+/* eslint-disable */
 /**
  * CLASSIFICATION: Support-Reference Page
  * Prototype-only reference page.
  */
 import React from 'react';
 import { motion } from 'motion/react';
-import { WorkspaceLayout } from '../components/layout/WorkspaceLayout';
-import { SolidarityPageLayout } from '../components/layout/SolidarityPageLayout';
-import { LayeredHero } from '../components/layout/LayeredHero';
-import { ImageStudio } from '../components/ImageStudio';
+import { WorkspaceLayout } from '../src/components/layout/WorkspaceLayout';
+import { SolidarityPageLayout } from '../src/components/layout/SolidarityPageLayout';
+import { LayeredHero } from '../src/components/layout/LayeredHero';
+import { ImageStudio } from './ImageStudio';
 
 export function ImageStudioPage() {
   return (

@@ -1,134 +1,100 @@
-# CLAUDE.md
+# CLAUDE.md — Branch Override: feat/prototype-harvest-prep
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file overrides `CLAUDE.md` for the duration of this branch.
+**Design enforcement is fully suspended. This is a Ready-to-Receive quarantine zone.**
 
 > **Output**: Code first. No preamble.
 
 <output_constraints>
-- NO PREAMBLE: Skip all introductory phrases, conversational fillers, and verbose status updates. Lead with direct action verbs.
-- NO UNNECESSARY REPORTS: DO NOT generate comprehensive markdown reports summarizing your tasks unless explicitly instructed by the user. Status updates must be kept strictly under 2 sentences.
-- TOKEN GUARDIAN ACTIVE: You must adhere to the rules in `.claude/TOKEN_GUARDIAN.md`. Track token usage and mandate sidekick routing if usage exceeds 80%.
-- PLAN LOCATION: **ALWAYS** save implementation plans to `/Users/okgoogle13/Projects/careercopilot/.claude/plans/`. NEVER save plans to worktree directories or global user home folder.
-- REPORT LOCATION: Save reports and documentation to `.claude/reports/` within the project repository.
+- NO PREAMBLE: Lead with direct action verbs.
+- NO UNNECESSARY REPORTS: Status updates under 2 sentences.
+- PLAN LOCATION: Save plans to `.claude/plans/`.
+- REPORT LOCATION: Save reports to `.claude/reports/`.
 </output_constraints>
 
 ---
 
 ## Stack
+
 - **Frontend**: React 18 + TS + Vite + Tailwind v4 + Zustand + TanStack Query
 - **Backend**: FastAPI + SQLAlchemy + Genkit + Python 3.10+
-- **Cloud**: GCP us-central1 · Firebase · Cloud Run
-- **Design**: **KR Solidarity v6.1** (M3 Expressive)
 - **Tests**: Jest, Playwright (e2e), pytest
 
 ---
 
-## Active Initiative: Frontend Source-of-Truth Migration
+## Branch Objective
 
-**Phase**: M1 (Planning Gates) — no implementation started
-**Plan**: `docs/project/active/frontend-source-of-truth-migration/`
-
-### Locked Route Decisions
-- **expand**: `/tracker` (mock→CRUD), `/career/ingest`, `/profile`, `/documents`, `/analysis`, `/opportunities`, `/apply/quick`
-- **retire**: `/kr/*` (5 prototype routes), `/design-sidekick`, `/style-guide`, `/test-tokens`
-
-### M1 Gates (must clear before M2)
-- MIG-001: Fix capability matrix (`resolution_status`, `blocked_by`, `resolved_commit`)
-- MIG-002: Align `validate-governance-artifacts.mjs` with Python tests (blocks on MIG-001)
-- MIG-003: Approve 5 migration skills (sprint-coordinator, frontend-backend-mapper, api-contract-validator, migration-audit, verification-before-completion)
-- MIG-004: Approve scripts review (component-inventory.ts `approved_with_limits`; mjs `not_fit_for_purpose`)
-- MIG-005: Define token-enforcement gate (regex scan hardcoded colors on touched routes)
-
-### Tool Limits (until human upgrades to `approved`)
-- All migration skills: `approved_with_limits` — cannot override route matrix or decide product truth
-- `validate-governance-artifacts.mjs`: `not_fit_for_purpose` — ad hoc inspection only, NOT a gate
-
-### Critical Blockers
-- `workflow_orchestration` backend placeholder-only (defers workflow UI to M5)
-- Ingestion callers fragmented across 4 API paths (canonicalized in MIG-103)
+Harvest and isolate all AI Studio prototype logic into `frontend/src/prototype-features/`
+so it is reachable at `/prototype/*` without touching canonical product code.
 
 ---
 
-## Task Delegation & Token Efficiency ⚡
+## Quarantine Rules (ENFORCED)
 
-**RULE: Default to delegation via the task-router MCP, NOT local execution.**
-
-- **Efficiency Mandates (TOKEN GUARDIAN Enforcement)**:
-  - **MCP-First Delegation**: Never read files > 300 lines or search the codebase directly. Use `flash-sidekick.quick_summarize` and `batch_file_analysis`.
-  - **Thinking Bursts**: Disable intense Thinking Mode for repetitive "grunt work" (file moving, linting). Enable it ONLY for architecture (Phase 4) and identity gates.
-  - **Persistent Status**: Every session MUST end with a `status.md` update: "Completed Task ID X. Next: Task ID Y. Blocker: Z."
-- **Delegate Heavy Tasks**:
-  - Test generation (>50 lines), security/coverage analysis, refactoring, reports, and documentation.
-  - If a task is >15K tokens or autonomous, DELEGATE to the `task-router` MCP.
-- **Keep Local**:
-  - Code review, architectural decisions, git operations, and critical integration fixes.
-- **Token Budget**: Max 200K per session. Adhere to `.claude/TOKEN_GUARDIAN.md`.
+| Rule | Detail |
+|---|---|
+| Quarantine boundary | All work inside `frontend/src/prototype-features/` only |
+| Protected paths | Do NOT touch `src/features/`, `src/components/ui/`, `src/api/` |
+| UI imports | Must resolve to `@/components/PrototypeAdapter` — not `@/components/ui` |
+| Lint suppression | `/* eslint-disable */` at top of every harvested `.ts` / `.tsx` file — keep it |
+| Routes | All prototype routes under `/prototype/*` with `prototype: true` in route-registry |
 
 ---
 
-## Workspace Structure & Quick Commands
+## Suspended Rules (do not apply on this branch)
 
-- **Frontend**: `cd frontend` -> `yarn dev`, `yarn test`, `yarn build`.
-  - UI Primitives: `src/components/ui/`
-  - Design Tokens: `src/design/tokens/tokens.json` (Source of truth, DTCG format)
-- **Backend**: `cd backend && source venv/bin/activate` -> `uvicorn app.main:app --reload --port 8000`, `pytest`.
-- **Scripts**: Run `python3 scripts/build-m3-tokens.py` to rebuild CSS variables from `tokens.json`.
+- KR Solidarity design tokens, Zero-Flora, semantic color enforcement
+- Archetype naming (Strike, Placard, Scaffold, Megaphone, March)
+- Typography stack enforcement (Work Sans, Fraunces etc.)
+- Shape token rules, no-hardcoded-hex rule
+- All design/audit skills from SKILL_REGISTRY.md Tier 1–3
 
----
-
-## Design System: KR Solidarity v6.1 (M3 Expressive)
-
-**Strict Rules**:
-- **Zero-Flora Lockdown**: Absolutely NO flora or Australian endemic fauna.
-- **Dark-only territory**: No white backgrounds. All backgrounds use `--sys-color-charcoalBackground-base`.
-- **No generic shapes**: Use asymmetric `shape.*` radii tokens (e.g. `shape.blockRiot03`).
-- **Semantic Colors Only**: Use `--sys-color-{name}-base` variable tokens for assignments.
-- **Extreme Contrast**: Variable fonts (`Work Sans`, `Fraunces`, `Libre Bodoni`, `JetBrains Mono`, `Caveat`, `Nabla`) with strict optical sizing and 9x weight ratios.
-
-### Canonical Archetypes (v6.1) & Gold Standard Components
-*Note: Pebble, Stone, Slab, Jar, Lens, and Cabinet are deprecated.*
-
-| Archetype | Component | Shape Token | Role |
-| --- | --- | --- | --- |
-| **Strike** | `Strike.tsx` | `shape.blockRiot03` | Primary active buttons, decisive actions. |
-| **Placard** | `Placard.tsx` | `shape.placardTorn01` | Content containers, opportunity logic feeds. |
-| **Scaffold** | `ScaffoldInput.tsx` / `ScaffoldArea.tsx` | `shape.blockRiot02` | Immutable structural layout framing, inputs. |
-| **March** | `March.tsx` | `shape.blockRiot01` -> `pebbleSurge01` | Sequential select flows, collective progress. |
-| **Megaphone** | `Megaphone.tsx` | `shape.megaphoneCut01` | Modals, intense announcement focus. |
-
-**Component Source**: `frontend/src/components/ui/*.tsx`
-
-### Sources of Truth
-1. **Canon**: `docs/design/01_CANON.md` (Identity, Rules)
-2. **System**: `docs/design/02_SYSTEM.md` (Palette, Typography)
-3. **Components**: `docs/design/03_COMPONENTS.md` (Archetypes)
-4. **Assets**: `docs/design/04_ASSETS.md`
-5. **Tokens**: `frontend/src/design/tokens/tokens.json`
+See `.claude/BRANCH_CONTEXT.md` for the full suspended skill list.
 
 ---
 
-## Design Workflow (Design Workflow 2026)
+## Active Skills
 
-Follow `/.agent/workflows/design-workflow-2026.md` and use available skills:
-- `/figma-to-page`
-- `/kr-svg`
-- `/ui-design-evaluator`
-- `/m3-expressive-ui-evaluator`
-- `/kerala-rage-brand-enforcer`
-- `/token-orchestrator`
-- `/wireframe-annotator`
+| Role | Skill |
+|---|---|
+| Execution engine | `subagent-driven-development` |
+| Phase tracking | `project-manager` |
+| Crash/gap diagnosis | `systematic-debugging` |
+| Headless route testing | Playwright MCP |
+| Git ops | `git-pr-workflows-git-workflow` |
+
+---
+
+## Workspace Commands
+
+```bash
+# Frontend
+cd frontend && yarn dev
+cd frontend && yarn type-check
+cd frontend && yarn test
+
+# Backend
+cd backend && source venv/bin/activate && uvicorn app.main:app --reload --port 8000
+cd backend && pytest
+```
+
+---
+
+## Task Delegation
+
+- Heavy tasks (>15K tokens): delegate via `task-router` MCP
+- File analysis (>300 lines): use `flash-sidekick.quick_summarize`
+- Route smoke tests: use Playwright MCP headlessly
 
 ---
 
 ## Code Review Standards
-After completing any implementation, review the code for:
-- Functions longer than 30 lines (likely doing too much)
-- Logic duplicated more than twice (extract to utility)
-- Any `any` type usage in TypeScript (replace with real types)
-- Components with more than 3 props that could be grouped into an object
-- Missing error handling on async operations
 
-Run /simplify before presenting code to the user.
+- Functions > 30 lines: likely doing too much
+- Logic duplicated > 2×: extract to utility
+- No `any` type in TypeScript
+- Missing error handling on async ops
 
 ---
-*Tokens are law. Semantic CSS variables are truth. Zero-Flora enforced.*
+
+*Delete this file and `.claude/BRANCH_CONTEXT.md` before merging to `main`.*

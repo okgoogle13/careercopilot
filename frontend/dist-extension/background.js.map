@@ -1,0 +1,1 @@
+{"version":3,"file":"background.js","sources":["../src/extension/background.ts"],"sourcesContent":["console.log('Background service worker started.');\n\nchrome.runtime.onInstalled.addListener(() => {\n  console.log('CareerCopilot Extension installed.');\n});\n"],"names":[],"mappings":"AAAA,QAAQ,IAAI,oCAAoC;AAEhD,OAAO,QAAQ,YAAY,YAAY,MAAM;AAC3C,UAAQ,IAAI,oCAAoC;AAClD,CAAC;"}

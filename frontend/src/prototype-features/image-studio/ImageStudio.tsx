@@ -6,9 +6,9 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'motion/react';
 import { GoogleGenAI } from '@google/genai';
-import { PrimaryButton } from './ui/PrimaryButton';
-import { TextInput } from './ui/TextInput';
-import { SectionHeader } from './ui/SectionHeader';
+import { PrimaryButton } from '../src/components/ui/PrimaryButton';
+import { TextInput } from '../src/components/ui/TextInput';
+import { SectionHeader } from '../src/components/ui/SectionHeader';
 
 export function ImageStudio() {
   const [prompt, setPrompt] = useState('');

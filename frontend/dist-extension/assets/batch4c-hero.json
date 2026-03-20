@@ -1,0 +1,159 @@
+{
+  "metadata": {
+    "generated_at": "2026-03-09T03:23:21Z",
+    "target_count": 16,
+    "visual_gate_passed": true
+  },
+  "heroes": [
+    {
+      "id": "KR-SOLID-020",
+      "category": "resistance",
+      "layer": "resistance",
+      "priority": "CRITICAL",
+      "selected_reason": "registry:collective-uprising-hero",
+      "source": "/assets/kr-solidarity/heroes/kr-solidarity__resistance__hero--resistance-portrait--v1.png"
+    },
+    {
+      "id": "KR-SOLID-007",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "priority": "HIGH",
+      "selected_reason": "registry:collective-uprising-hero",
+      "source": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__abstract--solidarity-embers--v1.png"
+    },
+    {
+      "id": "KR-UI-037",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "priority": "MEDIUM",
+      "selected_reason": "registry:collective-uprising-hero",
+      "source": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-037--v1.svg"
+    },
+    {
+      "id": "KR-SOLID-037",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "priority": "HIGH",
+      "selected_reason": "registry:devotional-anchor-hero",
+      "source": "/assets/kr-solidarity/texture/kr-solidarity__atmospheric__texture--wet-pavement-reflections--v2.png"
+    },
+    {
+      "id": "KR-SOLID-002",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "priority": "HIGH",
+      "selected_reason": "registry:devotional-anchor-hero",
+      "source": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__texture--solidarity-chatgpt-image-f--v1.png"
+    },
+    {
+      "id": "KR-SOLID-009",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "priority": "HIGH",
+      "selected_reason": "registry:devotional-anchor-hero",
+      "source": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__texture--paint-splash--v1.png"
+    },
+    {
+      "id": "KR-SOLID-036",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "priority": "HIGH",
+      "selected_reason": "registry:resistance-portrait-hero",
+      "source": "/assets/kr-solidarity/texture/kr-solidarity__atmospheric__texture--asphalt-grain--v2.png"
+    },
+    {
+      "id": "KR-SOLID-003",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "priority": "HIGH",
+      "selected_reason": "registry:resistance-portrait-hero",
+      "source": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__texture--solidarity-dalle-2026-01--v1.png"
+    },
+    {
+      "id": "KR-SOLID-019",
+      "category": "resistance",
+      "layer": "resistance",
+      "priority": "CRITICAL",
+      "selected_reason": "registry:resistance-portrait-hero",
+      "source": "/assets/kr-solidarity/heroes/kr-solidarity__resistance__hero--collective-uprising--v5.png"
+    },
+    {
+      "id": "KR-SOLID-035",
+      "category": "cultural",
+      "layer": "cultural",
+      "priority": "HIGH",
+      "selected_reason": "registry:cultural-symbol-hero",
+      "source": "/assets/kr-solidarity/symbol/kr-solidarity__cultural__symbol--solidarity-network--v2.png"
+    },
+    {
+      "id": "KR-SOLID-004",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "priority": "HIGH",
+      "selected_reason": "registry:cultural-symbol-hero",
+      "source": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__texture--solidarity-kr-solidarity--v1.png"
+    },
+    {
+      "id": "KR-SOLID-034",
+      "category": "cultural",
+      "layer": "cultural",
+      "priority": "HIGH",
+      "selected_reason": "registry:cultural-symbol-hero",
+      "source": "/assets/kr-solidarity/symbol/kr-solidarity__cultural__symbol--kerala-landscape--v1.png"
+    },
+    {
+      "id": "KR-UI-038",
+      "category": "ui-kit",
+      "layer": "ui-kit",
+      "priority": "MEDIUM",
+      "selected_reason": "registry:cultural-symbol-hero",
+      "source": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-038--v1.svg"
+    },
+    {
+      "id": "KR-LOGO-002",
+      "category": "brand",
+      "layer": "ui-kit",
+      "priority": "HIGH",
+      "selected_reason": "manifest_fallback",
+      "source": "/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__brand--careercopilot-poster-logo--v1.svg"
+    },
+    {
+      "id": "KR-SOLID-005",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "priority": "HIGH",
+      "selected_reason": "manifest_fallback",
+      "source": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__texture--solidarity-moodboard-12-ti--v1.png"
+    },
+    {
+      "id": "KR-SOLID-006",
+      "category": "atmospheric",
+      "layer": "atmospheric",
+      "priority": "HIGH",
+      "selected_reason": "manifest_fallback",
+      "source": "/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__texture--solidarity--v1.png"
+    }
+  ],
+  "decision_log": [
+    {
+      "step": "phase4c_visual_gate_check",
+      "status": "passed"
+    },
+    {
+      "step": "registry_composition_extract",
+      "status": "executed"
+    },
+    {
+      "step": "manifest_fallback_fill",
+      "status": "executed"
+    },
+    {
+      "step": "hero_contract_emit",
+      "status": "executed"
+    },
+    {
+      "step": "phase4c_final_gate_state",
+      "status": "pass"
+    }
+  ]
+}

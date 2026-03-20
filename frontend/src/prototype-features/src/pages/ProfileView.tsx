@@ -9,7 +9,7 @@ import { WorkspaceLayout } from '../components/layout/WorkspaceLayout';
 import { SolidarityPageLayout } from '../components/layout/SolidarityPageLayout';
 import { LayeredHero } from '../components/layout/LayeredHero';
 import { SectionHeader, TextInput, PrimaryButton, Modal } from '@/components/PrototypeAdapter';
-import { DocumentInput } from '../../../components/DocumentInput';
+import { DocumentInput } from '../../components/DocumentInput';
 
 export function ProfileView() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);

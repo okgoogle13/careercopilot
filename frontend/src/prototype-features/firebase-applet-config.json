@@ -1,0 +1,10 @@
+{
+  "apiKey": "PROTOTYPE_STUB",
+  "authDomain": "PROTOTYPE_STUB.firebaseapp.com",
+  "projectId": "PROTOTYPE_STUB",
+  "storageBucket": "PROTOTYPE_STUB.appspot.com",
+  "messagingSenderId": "000000000000",
+  "appId": "1:000000000000:web:0000000000000000000000",
+  "firestoreDatabaseId": "(default)",
+  "_note": "Stub file — replace with real credentials to enable Firebase features. DO NOT commit real credentials."
+}
