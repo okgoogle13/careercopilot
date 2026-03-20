@@ -539,9 +539,7 @@ export interface RefineAchievementResponse {
  * Refine a single achievement field via the backend AI endpoint.
  * Replaces the prototype's direct @google/genai call in TailoredResumeView.
  */
-export async function refineAchievement(
-  request: RefineAchievementRequest
-): Promise<string> {
+export async function refineAchievement(request: RefineAchievementRequest): Promise<string> {
   try {
     const response = await apiClient.post<RefineAchievementResponse>(
       '/ai/refine-achievement',

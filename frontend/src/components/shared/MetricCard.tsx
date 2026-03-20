@@ -20,7 +20,7 @@ export function MetricCard({
   label,
   value,
   annotation,
-  iconColor = 'text-[var(--color-ink-gold)]',
+  iconColor = 'text-[var(--sys-color-solidarityInkGold)]',
   variant = 'outlined',
   hoverable = true,
   className = '',
@@ -30,7 +30,8 @@ export function MetricCard({
   const cardStyle: React.CSSProperties = {
     borderRadius: 'var(--shape-megaphoneCut01)',
     padding: 'var(--spacing-lg)',
-    backgroundColor: variant === 'filled' ? 'var(--color-asphalt-black)' : 'transparent',
+    backgroundColor:
+      variant === 'filled' ? 'var(--sys-color-solidarityAsphaltBlack)' : 'transparent',
     border: '1px solid rgba(240, 234, 214, 0.1)',
     transition: 'all var(--duration-standard) var(--ease-viscous-breeze)',
     boxShadow: isHovered && hoverable ? 'var(--shadow-standard)' : 'var(--shadow-subtle)',
@@ -47,7 +48,8 @@ export function MetricCard({
       <div
         className="absolute inset-0 opacity-[0.02] pointer-events-none"
         style={{
-          backgroundImage: 'radial-gradient(var(--color-paper-white) 1px, transparent 1px)',
+          backgroundImage:
+            'radial-gradient(var(--sys-color-solidarityPaperWhite) 1px, transparent 1px)',
           backgroundSize: '12px 12px',
         }}
       />

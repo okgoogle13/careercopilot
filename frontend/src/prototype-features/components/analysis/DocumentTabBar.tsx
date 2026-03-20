@@ -19,9 +19,7 @@ export const DocumentTabBar: React.FC<DocumentTabBarProps> = ({
   onTabChange,
   hasKSC,
 }) => {
-  const tabs: TabKey[] = hasKSC
-    ? ['resume', 'coverLetter', 'ksc']
-    : ['resume', 'coverLetter'];
+  const tabs: TabKey[] = hasKSC ? ['resume', 'coverLetter', 'ksc'] : ['resume', 'coverLetter'];
 
   return (
     <div className="flex w-full md:w-auto overflow-x-auto scrollbar-hide">

@@ -293,7 +293,7 @@ export class ATSScorer {
     let score = 100;
     const companyNameMatch =
       jobDescription.match(/Company:?\s*([^\n]+)/i) ||
-      jobDescription.match(/at\s+([A-Z][a-zA-Z\s&]+?)[\.,\s]/);
+      jobDescription.match(/at\s+([A-Z][a-zA-Z\s&]+?)[.,\s]/);
     const companyName = companyNameMatch ? companyNameMatch[1].trim() : null;
 
     if (companyName && !text.toLowerCase().includes(companyName.toLowerCase())) {

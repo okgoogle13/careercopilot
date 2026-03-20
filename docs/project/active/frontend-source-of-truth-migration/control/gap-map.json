@@ -1,8 +1,9 @@
 {
   "artifact": "backend_feature_frontend_component_gap_map",
-  "generated_at": "2026-03-16",
+  "generated_at": "2026-03-21",
   "canonical_plan": "docs/project/active/frontend-source-of-truth-migration/control/blueprint.md",
   "canonical_route_matrix": "docs/project/active/frontend-source-of-truth-migration/control/route-matrix.json",
+  "requirements_audit_checklist": "docs/project/active/frontend-source-of-truth-migration/control/requirements-audit-checklist.md",
   "features": [
     {
       "feature_id": "applications_crud",
@@ -93,7 +94,7 @@
       "owner_route": "/analysis",
       "owner_surface": "AnalysisPage",
       "backend_status": "mounted_active",
-      "frontend_status": "partially_wired",
+      "frontend_status": "live_canonical",
       "reuse_components": [
         "AnalysisPage",
         "ResumeAuditPage"
@@ -108,7 +109,7 @@
       "deferred_components": [
         "ResumeAuditHistoryList"
       ],
-      "notes": "Backend history endpoint is now mounted, but the canonical analysis runtime still only renders immediate evaluation results; persisted history remains a frontend wiring gap."
+      "notes": "Canonical analysis runtime now renders persisted history via getAuditHistory(); remaining work is audit evidence capture, not missing route wiring."
     },
     {
       "feature_id": "genkit_job_analysis",
@@ -156,7 +157,7 @@
       "owner_route": "/apply/quick",
       "owner_surface": "ApplyQuick",
       "backend_status": "mounted_active_partial",
-      "frontend_status": "partially_wired",
+      "frontend_status": "live_canonical",
       "reuse_components": [
         "ApplyQuick"
       ],
@@ -167,7 +168,7 @@
         "WorkflowStatusPanel",
         "EmailScanResultsView"
       ],
-      "notes": "Backend workflow endpoints are implemented, but `/apply/quick` still uses the analysis flow directly and pytest coverage still targets the old disabled contract."
+      "notes": "ApplyQuick now calls the live workflow generation endpoint and renders inline results. Remaining work is deeper workflow UX, not missing frontend ownership."
     }
   ]
 }

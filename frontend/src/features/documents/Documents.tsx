@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { Calendar, Download, FileText, Search, X } from 'lucide-react';
+import { Calendar, Download, FileText, Mail, Search, ScrollText, X } from 'lucide-react';
 import { useState } from 'react';
 
 import { PageHeader } from '../../components/shared/PageHeader';
@@ -20,7 +20,6 @@ export interface Document {
   name: string;
   type: DocumentType;
   date: string;
-  icon: string;
 }
 
 export type DocumentTab = 'all' | 'resumes' | 'covers' | 'ksc';
@@ -37,59 +36,51 @@ interface RedlineResult {
 const DOCUMENTS: Document[] = [
   {
     id: 1,
-    name: 'Software Engineer Resume',
+    name: 'Community Support Resume',
     type: 'resume',
     date: 'Updated 2 days ago',
-    icon: '📄',
   },
   {
     id: 2,
-    name: 'Cover Letter - TechCorp',
+    name: 'Settlement Collective Letter',
     type: 'cover',
     date: 'Updated 3 days ago',
-    icon: '📝',
   },
   {
     id: 3,
-    name: 'UX Designer Resume',
+    name: 'Youth Outreach Resume',
     type: 'resume',
     date: 'Updated 1 week ago',
-    icon: '📄',
   },
   {
     id: 4,
-    name: 'Product Manager Resume',
+    name: 'Advocacy Lead Resume',
     type: 'resume',
     date: 'Updated 1 week ago',
-    icon: '📄',
   },
   {
     id: 5,
-    name: 'Cover Letter - DesignHub',
+    name: 'Neighbourhood Services Letter',
     type: 'cover',
     date: 'Updated 5 days ago',
-    icon: '📝',
   },
   {
     id: 6,
-    name: 'Generic Cover Letter',
+    name: 'Rapid Response Letter',
     type: 'cover',
     date: 'Updated 2 weeks ago',
-    icon: '📝',
   },
   {
     id: 7,
-    name: 'KSC Response - Leadership',
+    name: 'KSC Case - Leadership',
     type: 'ksc',
     date: 'Updated 4 days ago',
-    icon: '📋',
   },
   {
     id: 8,
-    name: 'KSC Response - Communication',
+    name: 'KSC Case - Communication',
     type: 'ksc',
     date: 'Updated 1 week ago',
-    icon: '📋',
   },
 ];
 
@@ -134,17 +125,17 @@ export function Documents() {
       <div className="relative z-10">
         {/* Header */}
         <PageHeader
-          title="Your Documents"
-          highlightedWord="Documents"
-          description="Manage your career documents and generate tailored versions"
+          title="Working Papers"
+          highlightedWord="Papers"
+          description="Keep your resumes, letters, and KSC drafts ready for the next push."
         />
 
         {/* Search Bar */}
-        <div className="bg-surface-container-high rounded-pebble p-4 mb-8 flex items-center gap-3 border border-outline-variant focus-within:border-primary focus-within:ring-2 ring-primary/20 transition-all">
+        <div className="bg-surface-container-high rounded-placard p-4 mb-8 flex items-center gap-3 border border-outline-variant focus-within:border-primary focus-within:ring-2 ring-primary/20 transition-all">
           <Search className="w-5 h-5 text-on-surface-variant" />
           <input
             type="text"
-            placeholder="Search documents..."
+            placeholder="Search the archive..."
             className="bg-transparent flex-1 outline-none text-on-surface placeholder:text-on-surface-variant font-body"
           />
         </div>
@@ -152,22 +143,22 @@ export function Documents() {
         {/* Tabs */}
         <div className="flex gap-2 mb-8 bg-surface-container rounded-tech p-2 w-fit border border-outline-variant">
           <TabButton
-            label="All"
+            label="All Files"
             isActive={activeTab === 'all'}
             onClick={() => setActiveTab('all')}
           />
           <TabButton
-            label="Resumes"
+            label="Resume Drafts"
             isActive={activeTab === 'resumes'}
             onClick={() => setActiveTab('resumes')}
           />
           <TabButton
-            label="Cover Letters"
+            label="Letter Front"
             isActive={activeTab === 'covers'}
             onClick={() => setActiveTab('covers')}
           />
           <TabButton
-            label="KSC Responses"
+            label="KSC Cases"
             isActive={activeTab === 'ksc'}
             onClick={() => setActiveTab('ksc')}
           />
@@ -279,8 +270,8 @@ function TabButton({ label, isActive, onClick }: TabButtonProps) {
     <button
       onClick={onClick}
       className={`
-        px-8 py-3 rounded-pebble transition-all duration-short-2 ease-spring font-medium text-label-large
-        ${isActive ? 'bg-primary-container text-on-primary-container shadow-sm' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-dim'}
+        px-8 py-3 transition-all duration-short-2 ease-spring font-medium text-label-large
+        ${isActive ? 'rounded-strike bg-primary-container text-on-primary-container shadow-sm' : 'rounded-scaffold text-on-surface-variant hover:text-on-surface hover:bg-surface-dim'}
       `}
     >
       {label}
@@ -294,6 +285,19 @@ interface DocumentCardProps {
 }
 
 function DocumentCard({ document, onRedline }: DocumentCardProps) {
+  const typeBadge = {
+    resume: { label: 'CV', icon: FileText, iconClass: 'text-primary' },
+    cover: { label: 'LETTER', icon: Mail, iconClass: 'text-secondary' },
+    ksc: { label: 'KSC', icon: ScrollText, iconClass: 'text-tertiary' },
+  }[document.type];
+  const Icon = typeBadge.icon;
+  const cardShapeClass =
+    document.type === 'resume'
+      ? 'rounded-placard'
+      : document.type === 'cover'
+        ? 'rounded-blockRiot03'
+        : 'rounded-blockRiot01';
+
   const handleDownload = async (e: React.MouseEvent) => {
     e.stopPropagation();
     try {
@@ -313,10 +317,10 @@ function DocumentCard({ document, onRedline }: DocumentCardProps) {
   return (
     <div
       id={`document-card-${document.id}`}
-      className="bg-surface-container-low border border-outline-variant rounded-leaf p-6 hover:bg-surface-container hover:border-primary hover:scale-[1.02] hover:shadow-elevation-2 transition-all duration-medium-1 ease-spring cursor-pointer group backdrop-blur-md relative"
+      className={`bg-surface-container-low border border-outline-variant ${cardShapeClass} p-6 hover:bg-surface-container hover:border-primary hover:scale-[1.02] hover:shadow-elevation-2 transition-all duration-medium-1 ease-spring cursor-pointer group backdrop-blur-md relative`}
     >
-      <div className="w-12 h-12 bg-surface-container-high rounded-tech flex items-center justify-center text-2xl mb-4 group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
-        {document.icon}
+      <div className="w-12 h-12 bg-surface-container-high rounded-tech flex items-center justify-center mb-4 group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+        <Icon className={`w-5 h-5 ${typeBadge.iconClass}`} />
       </div>
       <h4 className="text-on-surface mb-2 font-bold text-title-medium">{document.name}</h4>
       <div className="flex items-center justify-between gap-2">
@@ -327,9 +331,12 @@ function DocumentCard({ document, onRedline }: DocumentCardProps) {
           </span>
         </div>
         <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          <span className="px-2 py-1 rounded-blockRiot01 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant border border-outline-variant">
+            {typeBadge.label}
+          </span>
           <button
             onClick={handleRedlineClick}
-            className="px-2 py-1 rounded-pebble text-xs font-medium transition-all"
+            className="px-2 py-1 rounded-blockRiot01 text-xs font-medium transition-all"
             style={{
               backgroundColor: 'var(--sys-color-charcoalBackground-steps-3)',
               color: 'var(--sys-color-inkGold-base)',
@@ -342,7 +349,7 @@ function DocumentCard({ document, onRedline }: DocumentCardProps) {
           </button>
           <button
             onClick={handleDownload}
-            className="p-2 rounded-pebble bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary transition-all"
+            className="p-2 rounded-scaffold bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary transition-all"
             title="Download as PDF"
           >
             <Download className="w-4 h-4" />

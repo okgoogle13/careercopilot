@@ -46,7 +46,7 @@ describe('MetricCard', () => {
       />
     );
     const card = container.firstChild as HTMLElement;
-    expect(card.className).toContain('bg-[var(--color-asphalt-black)]');
+    expect(card.className).toContain('bg-[var(--sys-color-solidarityAsphaltBlack)]');
   });
 
   it('applies elevation classes when hoverable is true', () => {

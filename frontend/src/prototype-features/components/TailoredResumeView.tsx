@@ -284,7 +284,9 @@ export const TailoredResumeView: React.FC<TailoredResumeViewProps> = ({
                               ) : (
                                 <button
                                   onClick={() => handlePolish(ach.Achievement_ID, 'Outcome')}
-                                  disabled={isRefining && activeKey === `${ach.Achievement_ID}-Outcome`}
+                                  disabled={
+                                    isRefining && activeKey === `${ach.Achievement_ID}-Outcome`
+                                  }
                                   className="p-1 bg-gray-100 hover:bg-gray-200 rounded text-gray-600"
                                   title="AI Polish Outcome"
                                 >
@@ -486,7 +488,9 @@ export const TailoredResumeView: React.FC<TailoredResumeViewProps> = ({
                                 ) : (
                                   <button
                                     onClick={() => handlePolish(ach.Achievement_ID, 'Outcome')}
-                                    disabled={isRefining && activeKey === `${ach.Achievement_ID}-Outcome`}
+                                    disabled={
+                                      isRefining && activeKey === `${ach.Achievement_ID}-Outcome`
+                                    }
                                     className="p-1 bg-gray-100 hover:bg-gray-200 rounded text-gray-600"
                                     title="AI Polish Outcome"
                                   >

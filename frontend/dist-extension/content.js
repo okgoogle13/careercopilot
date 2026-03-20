@@ -1,3 +1,4 @@
+/* global chrome */
 console.log('Content script loaded.');
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'extractJobDescription') {

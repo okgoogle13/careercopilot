@@ -43,7 +43,7 @@ export function Logo({ className, size = 'md', showText = true }: LogoProps) {
             CareerCopilot
           </h4>
           <p className="text-[var(--sys-color-on-surface-variant)] mt-1 uppercase tracking-widest font-mono text-[10px]">
-            YOUR AI JOB PARTNER
+            TOOLS FOR THE COLLECTIVE
           </p>
         </div>
       )}

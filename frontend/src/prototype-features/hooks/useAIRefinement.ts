@@ -30,7 +30,9 @@ export function useAIRefinement() {
   return {
     refineField,
     isRefining: mutation.isPending,
-    activeKey: mutation.isPending ? mutation.variables?.achievementId + '-' + mutation.variables?.field : null,
+    activeKey: mutation.isPending
+      ? mutation.variables?.achievementId + '-' + mutation.variables?.field
+      : null,
     error: mutation.error,
     reset: mutation.reset,
   };

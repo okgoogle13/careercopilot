@@ -426,8 +426,8 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
             Job Extracted Successfully
           </h2>
           <p className="text-[var(--sys-color-worker-ash-base)] mb-8 max-w-lg mx-auto">
-            We&apos;ve analyzed the job posting. Now, let&apos;s see how your career database matches up and
-            generate your tailored application materials.
+            We&apos;ve analyzed the job posting. Now, let&apos;s see how your career database
+            matches up and generate your tailored application materials.
           </p>
           <button
             onClick={handleAnalyze}

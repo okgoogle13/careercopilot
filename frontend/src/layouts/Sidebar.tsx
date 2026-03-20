@@ -79,10 +79,10 @@ export function Sidebar() {
                     ? {
                         backgroundColor: 'var(--sys-color-nav-active-container)',
                         color: 'var(--sys-color-on-nav-active)',
-                        borderRadius: 'var(--sys-shape-corner-extra-large)',
+                        borderRadius: 'var(--sys-shape-blockRiot02)',
                       }
                     : {
-                        borderRadius: 'var(--sys-shape-corner-large)',
+                        borderRadius: 'var(--sys-shape-blockRiot01)',
                       }
                 }
               >
@@ -97,7 +97,12 @@ export function Sidebar() {
       {/* User Profile */}
       <div className="p-4 m-4 bg-surface-container rounded-placard flex-shrink-0 border border-outline-variant">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-march flex-shrink-0 bg-tertiary-container" />
+          <div
+            className="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-tertiary-container text-on-tertiary-container font-black text-sm"
+            style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
+          >
+            N
+          </div>
           <div className="flex-1">
             <p className="text-sm text-on-surface font-bold">Nishant</p>
             <p className="text-xs text-primary uppercase tracking-wider font-mono">PREMIUM USER</p>
