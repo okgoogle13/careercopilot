@@ -1,10 +1,8 @@
-import functions from "firebase-functions";
-import admin from "firebase-admin";
+import * as functions from "firebase-functions";
+import admin from "./firebase";
 import {db, storage} from "./firebase";
 
-if (admin.apps.length === 0) {
-  admin.initializeApp();
-}
+
 
 interface StorageFile {
   name: string;

@@ -7,7 +7,7 @@ commands:
   - /audit-visual
   - /m3-audit
 metadata:
-  version: 6.2.0
+  version: 6.3.0
   tags:
     - visual-audit
     - m3-expressive
@@ -38,10 +38,11 @@ claude-code --skill m3-visual-audit --screenshot screenshot.png
 ```
 
 Arguments:
-- `screenshot` required: path to screenshot evidence
-- `--component`: component or screen name for context
-- `--context`: short description of UI state being audited
-- `--output`: optional output path, default `m3-visual-audit-report.json`
+- `--screenshot <absolute-path>`: required string path to a PNG, JPG, or WebP screenshot
+- `--component <name>`: optional string label for the screen or component under review
+- `--context <text>`: optional string describing state, viewport, and user journey position
+- `--output <absolute-path>`: optional string path for the JSON report; defaults to `m3-visual-audit-report.json`
+- `--mode <baseline|regression|exploratory>`: optional enum; defaults to `baseline`
 
 ## When to Use
 
@@ -65,7 +66,7 @@ This skill focuses on screenshot evidence for:
 - typography hierarchy and contrast
 - color expressiveness and token alignment
 - layout asymmetry and depth
-- motion intent inference from visual cues
+- motion intent inference from comparative visual cues
 
 ## Audit Dimensions (100)
 
@@ -93,9 +94,10 @@ Layout and hierarchy:
 - whether the primary action and information order are obvious
 
 Expressive distinctiveness:
-- whether the screen feels intentionally KR Solidarity / M3 Expressive instead of generic
-- whether motion intent is inferable from the visual treatment
-- whether the composition avoids flat, timid, or AI-slop defaults
+- whether the composition uses at least one deliberate asymmetry anchor such as an offset scaffold, non-centered hero mass, or staggered panel edge
+- whether the surface system shows at least two depth cues such as grain, torn edge logic, layered substrate, or high-contrast panel separation
+- whether accent deployment is intentional: one dominant emphasis signal and one supporting highlight, without generic frosted-glass or flat SaaS neutrality
+- whether motion intent is evidenced by comparative states; static single-state screenshots may only score this sub-point at reduced confidence
 
 Status thresholds:
 - `>= 90`: pass
@@ -109,6 +111,7 @@ Status thresholds:
 3. Classify findings using Solidarity audit dimensions (Typography, Color, Layout, Expressiveness).
 4. Classify violations by severity.
 5. Emit structured report with fixes.
+6. Downgrade confidence when evidence is incomplete instead of inferring absent states.
 
 ## Evidence Requirements
 
@@ -125,6 +128,23 @@ Concrete repo examples:
 If evidence is incomplete:
 - mark confidence down
 - avoid overclaiming motion or state-specific findings
+
+## Edge Cases
+
+### No screenshot available
+- Do not fabricate a visual score.
+- Return `status: "blocked_missing_evidence"`.
+- Ask for at least one default-state capture before scoring.
+
+### Single screenshot only
+- Score typography, color, and layout normally if visible.
+- Cap motion-related confidence at `low`.
+- Mark any state-specific recommendation as provisional.
+
+### Regression mode
+- Prefer paired `before` and `after` evidence with the same viewport.
+- Call out delta findings first: regressions, unchanged failures, and resolved violations.
+- Do not rescore unchanged unknown areas with artificial precision.
 
 ## Output Contract
 
@@ -161,14 +181,18 @@ Minimum JSON shape:
 - Request hover/focus/active captures.
 - Avoid high-confidence motion judgments without state evidence.
 
+### Regression audit with mismatched viewports
+- Treat the comparison as advisory only.
+- Do not claim a regression win or loss on spacing, hierarchy, or depth if the capture sizes differ materially.
+
 ### Screen is structurally compliant but still scores low
 - this is expected when visual hierarchy, composition, or expressiveness is weak
 - route the implementation to `kerala-rage-typography-strategy` or `component-visual-audit` depending on whether the problem is page-wide or local
 
 ## Related Skills
 
-- `component
+- `component-visual-audit`
 - `vision-scorer-mcp`
 - `ui-design-evaluator`
 - `web-design-guidelines`
--brand-enforcer`
+- `kerala-rage-brand-enforcer`
