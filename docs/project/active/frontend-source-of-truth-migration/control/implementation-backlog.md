@@ -6,6 +6,8 @@
 - `docs/project/active/frontend-source-of-truth-migration/control/blueprint.md`
 - `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.md`
 - `docs/project/active/frontend-source-of-truth-migration/control/gap-map.md`
+- `docs/project/active/frontend-source-of-truth-migration/control/comet-backlog.md` (AI Studio Governance Mirror)
+- `docs/project/active/frontend-source-of-truth-migration/control/aistudio-report.md` (AI Studio Strategy Report)
 
 ## Objective
 
