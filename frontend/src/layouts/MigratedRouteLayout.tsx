@@ -32,7 +32,7 @@ export const MigratedRouteLayout = () => {
     const match = NAVIGATION_SCHEMA.find(
       (item) => item.route === pathname || (item.route !== '/' && pathname.startsWith(item.route))
     );
-    return match ? match.id : 'lab-dashboard';
+    return match ? match.id : 'nav-dashboard';
   };
 
   return (

@@ -29,9 +29,7 @@ const getStatusIcon = (status: VerificationItem['status']) => {
   }
 };
 
-export const SourceVerificationGrid: React.FC<SourceVerificationGridProps> = ({
-  items,
-}) => {
+export const SourceVerificationGrid: React.FC<SourceVerificationGridProps> = ({ items }) => {
   return (
     <Placard
       elevation="floating"
@@ -58,7 +56,10 @@ export const SourceVerificationGrid: React.FC<SourceVerificationGridProps> = ({
           </thead>
           <tbody className="divide-y divide-[var(--sys-color-concreteGrey-base)]/5">
             {items.map((entry) => (
-              <tr key={entry.id} className="hover:bg-white/5 transition-colors">
+              <tr
+                key={entry.id}
+                className="hover:bg-white/5 transition-colors"
+              >
                 <td className="py-4 px-6 font-mono text-[var(--sys-color-inkGold-base)]">
                   {entry.field}
                 </td>

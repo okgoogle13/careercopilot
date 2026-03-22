@@ -1,83 +1,62 @@
 # Route Migration Checklist: {ROUTE_NAME}
 
-## Gate 1: draft-generated
+## 1. Authority Lock
 
-- [ ] Run `npm run migrate:screen {route-name}`
-- [ ] Verify scaffold exists: `apps/web/src/screens/{RouteName}Screen.tsx`
-- [ ] Update MIGRATION_TRACKER.md: `status: draft-generated`
+- [ ] Confirm route row in `control/route-matrix.md`
+- [ ] Confirm canonical runtime owner is reachable from `frontend/src/App.tsx`
+- [ ] Confirm paired screen reference and backend capabilities
+- [ ] Confirm this is canonical app work, not prototype support-reference work
 
-**Validation**: `test -f apps/web/src/screens/{RouteName}Screen.tsx`
-
----
-
-## Gate 2: benchmark-defined
-
-- [ ] Assign benchmark id: `{benchmark-id}`
-- [ ] Create benchmark bundle: `docs/design-system/benchmarks/{benchmark-id}/`
-- [ ] Copy style-guide rubric → `{benchmark-id}/rubric.json`
-- [ ] Run `npm run generate:wireframe {route-name}`
-- [ ] Verify wireframe: `docs/design-system/wireframes/{route-name}.json`
-- [ ] Update MIGRATION_TRACKER.md: `benchmark_defined: true, benchmark_id: {benchmark-id}`
-
-**Validation**: `test -d docs/design-system/benchmarks/{benchmark-id}`
+**Validation**
+```bash
+npx tsx tools/ci/check-route-integrity.ts
+```
 
 ---
 
-## Gate 3: copy-cleared
+## 2. Wireframe And Gap-Fill
 
-- [ ] Rewrite all user-facing copy (JSX text, aria-labels, titles)
-- [ ] Remove meta-language: `migration`, `feature flag`, `placeholder`
-- [ ] Remove bureaucratic framing: `Worker Portal`, `Workspace`
-- [ ] Add journey context to CTAs
-- [ ] Run `npm run audit:copy`
-- [ ] Verify 0 violations
-- [ ] Update MIGRATION_TRACKER.md: `copy_cleared: true, banned_term_violations: 0`
-
-**Validation**: `npm run audit:copy && echo $?` → Must be 0
+- [ ] Run `python3 scripts/validate-wireframe-workflow.py`
+- [ ] Run `python3 scripts/derive-gap-fill-plan.py --route-id {route-id}`
+- [ ] Record selected reuse mode
+- [ ] Record whether any support-reference TSX is `reference_only`, `behavior_only`, or blocked
+- [ ] Stop if ownership or contract gaps remain unresolved
 
 ---
 
-## Gate 4: visual-ready
+## 3. Route-Local Implementation
 
-- [ ] Implement route in `apps/web/src/screens/{RouteName}Screen.tsx`
-- [ ] Use semantic tokens only: `--sys-color-*`, `--sys-shape-*`, `--sys-type-*`
-- [ ] Add feature flag in `apps/web/src/router/featureFlags.ts`
-- [ ] Wire RouteGate in `apps/web/src/router/ScreensRouter.tsx`
-- [ ] Test flag-off: renders legacy component
-- [ ] Test flag-on: renders migrated screen
-- [ ] Run `npm run screenshot:capture`
-- [ ] Verify screenshots: `docs/design-system/benchmarks/{benchmark-id}/{route}-*.png`
-- [ ] Update MIGRATION_TRACKER.md: `visual_ready: true`
+- [ ] Update only the canonical runtime owner for the route
+- [ ] Keep route path unchanged unless route matrix explicitly says otherwise
+- [ ] Use semantic tokens only
+- [ ] Remove hardcoded colors, forbidden fonts, and deprecated aliases
+- [ ] Keep public labels plain and user-facing
+- [ ] Avoid prototype shell semantics and old migration-kit rollout patterns
 
-**Validation**: `test -f docs/design-system/benchmarks/{benchmark-id}/{route}-desktop.png`
-
----
-
-## Gate 5: migrated-ready
-
-- [ ] Run `npm run verify` (lint + type-check + test + audit:copy + design-audit)
-- [ ] All checks pass with 0 violations
-- [ ] Run visual benchmark audit (manual: compare screenshots vs rubric)
-- [ ] Visual audit score ≥ 90/100
-- [ ] Update MIGRATION_TRACKER.md: `status: migrated-ready, audit: passed, rollback_ready: true`
-
-**Validation**: `npm run verify && echo $?` → Must be 0
+**Validation**
+```bash
+(cd frontend && yarn type-check)
+(cd frontend && yarn lint)
+```
 
 ---
 
-## Rollback Verification
+## 4. Closure Gates
 
-- [ ] Set flag to false: `DEFAULT_FEATURE_FLAGS.{route} = false`
-- [ ] Test: route renders legacy component
-- [ ] Set flag to true: `DEFAULT_FEATURE_FLAGS.{route} = true`
-- [ ] Test: route renders migrated screen
-- [ ] Confirm: Rollback is flag change, not code revert
+- [ ] Run `token-enforcement`
+- [ ] Run `migration-audit`
+- [ ] Run `npx tsx tools/ci/check-route-integrity.ts`
+- [ ] Run `npx tsx tools/ci/check-screen-pairs.ts`
+- [ ] If support-influenced, complete the TSX identity gate from `control/workflow.md`
+- [ ] If route is part of broader readiness work, run `./scripts/test-deployment.sh`
 
 ---
 
-## Final Status
+## Final Route Status
 
 Route: `{ROUTE_NAME}`
-Status: `{STATUS}`
-Benchmark: `{BENCHMARK_ID}`
-Ready for Rollout: `{YES/NO}`
+Runtime owner: `{RUNTIME_OWNER}`
+Reuse mode: `{REUSE_MODE}`
+Blocked: `{YES/NO}`
+Ready for closure: `{YES/NO}`
+Notes: `{NOTES}`

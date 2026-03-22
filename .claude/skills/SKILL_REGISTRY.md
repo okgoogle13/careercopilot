@@ -1,6 +1,6 @@
 # KR Solidarity: Skills Registry (v6.1)
 
-_Last updated: 2026-03-10_
+_Last updated: 2026-03-22_
 
 ## Design System Audits
 
@@ -34,8 +34,33 @@ _Last updated: 2026-03-10_
 **Usage**: `/copy-review LoginButton.tsx` or `/copy-review --generate "Error message..."`
 **Aliases**: `/audit-copy`, `/ux-copy`
 
+## Harvest Core
+
+Use this stack for prototype harvest and Comet review:
+
+- `prototype-harvest-manager` — primary harvest orchestrator
+- `blueprint` — harvest-aware planning
+- `subagent-driven-development` — bounded execution
+- `frontend-cleanup-manager` — drift and readiness review
+- `systematic-debugging` — break/fix support
+
+Late-stage canonical gates only:
+
+- `token-enforcement`
+- `migration-audit`
+- `route-migration`
+
+Removed from the active harvest surface:
+
+- `migration-audit-orchestrator`
+- `react-component-scaffolder`
+- `react-page-scaffolder`
+- `baseline-ui`
+- `frontend-migration`
+- `figma-to-page`
+
 ## Summary
-- Active skills: **73** (promoted migration-audit as canonical; kept migration-audit-orchestrator as a compatibility wrapper)
+- Active harvest surface is intentionally narrower; deprecated wrappers, page scaffolders, and legacy migration helpers were removed from active discovery.
 - Manifest v6.0.0 — 87 assets (PNG + SVG), all validated via KR Solidarity Canon ✅
 - Backend Coverage: **Module-Saturation Approach** — 10 modules (95% target), 53+ test specs ready
 - Design Docs: **Streamlined to 5 Core Docs** for faster iteration and AI-driven implementation
@@ -162,7 +187,14 @@ node scripts/kr/generate-hero-registry.mjs # → public/assets/...hero-registry.
 | Skill | Directory | Description |
 |---|---|---|
 | migration-audit | .claude/skills/migration-audit | Canonical audit entrypoint for migration-kit routes. Orchestrates code, token, asset, visual, typography, anti-slop, and UX-copy audits with benchmark scoring and executable follow-ons. |
-| migration-audit-orchestrator | .claude/skills/migration-audit-orchestrator | Internal compatibility wrapper that redirects older references to `migration-audit`. |
+
+### Harvest Stack
+| Skill / Agent | Directory | Description |
+|---|---|---|
+| prototype-harvest-manager | .claude/agents/prototype-harvest-manager.md | Canonical harvest orchestrator for prototype review, owner mapping, and route-owned port sequencing. |
+| frontend-cleanup-manager | .claude/agents/frontend-cleanup-manager.md | Canonical review surface for harvest readiness, shell drift, and cleanup decisions. |
+| blueprint | .claude/skills/blueprint | Harvest-aware execution blueprinting. |
+| subagent-driven-development | .claude/skills/subagent-driven-development | Bounded execution workflow with explicit harvest task typing. |
 
 ### Process Skills
 | Skill | Directory | Description |
@@ -185,7 +217,6 @@ node scripts/kr/generate-hero-registry.mjs # → public/assets/...hero-registry.
 | manifest-reconciler | .claude/skills/manifest-reconciler | Reconcile KR asset files against registries. |
 | phase4-pipeline-orchestrator | .claude/skills/phase4-pipeline-orchestrator | Deterministic phase4a->phase4b->phase4c orchestration with contract-gated outputs and failure codes. |
 | m3-expressive-ui-evaluator | .claude/skills/m3-expressive-ui-evaluator | UI audit against Material Design 3 Expressive standards. |
-| baseline-ui | .claude/skills/baseline-ui | Establishes the core UI architecture and component logic following KR Solidarity v6.0 constraints. |
 | frontend-mobile-development-component-scaffold | .claude/skills/frontend-mobile-development-component-scaffold | Scaffolds completely strict KR Solidarity React components using CSS Modules. |
 
 ## Migration Kit Audit Workflow (Canonical)

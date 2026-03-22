@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
+/* eslint-disable */
+import React from 'react';
 
 export interface LoginCredentials {
   email: string;
@@ -8,27 +7,14 @@ export interface LoginCredentials {
 }
 
 export interface LoginCardProps {
-  /** Callback on submission */
   onLogin: (credentials: LoginCredentials) => void;
-  /** Callback for registration link */
-  onRegisterClick: () => void;
-  /** Loading state for the verification pulse */
+  onRegisterClick?: () => void;
   isLoading?: boolean;
 }
 
-/**
- * LoginCard
- *
- * The "Verification Gateway" for Kerala Rage.
- * Enforces Solidarity Mode geometry and motion.
- */
-export const LoginCard: React.FC<LoginCardProps> = ({
-  onLogin,
-  onRegisterClick,
-  isLoading = false,
-}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export const LoginCard: React.FC<LoginCardProps> = ({ onLogin, onRegisterClick, isLoading }) => {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,140 +22,89 @@ export const LoginCard: React.FC<LoginCardProps> = ({
   };
 
   return (
-    <div className="relative group">
-      {/* Halo Disk Radiance */}
-      <div
-        className={cn(
-          'absolute inset-0 -z-10 bg-ink-gold/20 blur-3xl rounded-march scale-150 transition-opacity',
-          isLoading ? 'animate-pulse opacity-60' : 'opacity-0 group-hover:opacity-40'
-        )}
-      />
-
-      <motion.form
-        onSubmit={handleSubmit}
-        initial={{ scale: 0.95, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        className={cn(
-          'w-[480px] p-12 bg-[var(--sys-color-charcoalBackground-base)]/90 backdrop-blur-md',
-          'border border-blueprint-grey/30 rounded-megaphone shadow-viscous',
-          'flex flex-col gap-8 relative overflow-hidden'
-        )}
-        aria-label="Verification Gateway"
-        role="form"
+    <div
+      className="w-full max-w-md p-8 rounded-[var(--sys-shape-placard01,8px)] border"
+      style={{
+        background: 'var(--sys-color-charcoalBackground-base)',
+        borderColor: 'rgba(163,155,143,0.2)',
+      }}
+    >
+      <h2
+        className="text-2xl font-bold mb-6 uppercase tracking-widest"
+        style={{ color: 'var(--sys-color-worker-ash-base)' }}
       >
-        {/* Screenprint Substrate Overlay */}
-        <div className="absolute inset-0 opacity-[0.08] pointer-events-none bg-[url('/assets/kr-solidarity/texture/kr-solidarity__atmospheric__texture--asphalt-grain--v2.png')] mix-blend-overlay" />
+        Sign In
+      </h2>
 
-        <h2
-          className="text-display font-black text-paper-white tracking-widest text-center"
-          style={{
-            fontFamily: 'var(--sys-type-fontFamilies-display)',
-            fontVariationSettings: "'wght' 900, 'SOFT' 0, 'WONK' 1, 'opsz' 72",
-            lineHeight: 0.9,
-          }}
-        >
-          VERIFY IDENTITY
-        </h2>
-
-        <div className="flex flex-col gap-6 relative z-10">
-          <div className="space-y-2">
-            <label
-              htmlFor="email-input"
-              className="text-blueprint-grey font-mono text-micro uppercase tracking-widest block"
-              style={{
-                fontFamily: 'var(--sys-type-fontFamilies-primary)',
-                fontVariationSettings: "'wght' 500, 'opsz' 12",
-              }}
-            >
-              Email Address
-            </label>
-            <input
-              id="email-input"
-              data-testid="email-input"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={cn(
-                'w-full bg-[var(--sys-color-charcoalBackground-base)]/40 border border-blueprint-grey/20 p-4 rounded-slab',
-                'text-paper-white focus:border-ink-gold focus:outline-none transition-all'
-              )}
-              style={{
-                fontFamily: 'var(--sys-type-fontFamilies-mono)',
-                fontVariationSettings: "'wght' 400",
-              }}
-              required
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label
-              htmlFor="password-input"
-              className="text-blueprint-grey font-mono text-micro uppercase tracking-widest block"
-              style={{
-                fontFamily: 'var(--sys-type-fontFamilies-primary)',
-                fontVariationSettings: "'wght' 500, 'opsz' 12",
-              }}
-            >
-              Password
-            </label>
-            <input
-              id="password-input"
-              data-testid="password-input"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className={cn(
-                'w-full bg-[var(--sys-color-charcoalBackground-base)]/40 border border-blueprint-grey/20 p-4 rounded-slab',
-                'text-paper-white focus:border-ink-gold focus:outline-none transition-all'
-              )}
-              style={{
-                fontFamily: 'var(--sys-type-fontFamilies-mono)',
-                fontVariationSettings: "'wght' 400",
-              }}
-              required
-            />
-          </div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label
+            className="block text-xs font-mono uppercase tracking-widest mb-1"
+            style={{ color: 'var(--sys-color-concreteGrey-base)' }}
+          >
+            Email
+          </label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="w-full p-3 rounded-sm border bg-transparent text-sm outline-none"
+            style={{
+              borderColor: 'rgba(163,155,143,0.2)',
+              color: 'var(--sys-color-worker-ash-base)',
+            }}
+          />
         </div>
 
-        <motion.button
-          whileHover={{ scale: 1.01, y: -1 }}
-          whileTap={{ scale: 0.99 }}
-          type="submit"
-          className={cn(
-            'mt-4 py-5 bg-[var(--sys-color-inkGold-base)] text-[var(--sys-color-asphaltBlack-base)] font-bold uppercase tracking-[0.2em]',
-            'rounded-pebble shadow-hover-rise text-lg border border-[var(--sys-color-inkGold-base)]/70 shadow-glow-gold hover:brightness-105 transition-all'
-          )}
-          style={{
-            fontFamily: 'var(--sys-type-fontFamilies-primary)',
-            fontVariationSettings: "'wght' 700, 'opsz' 24",
-          }}
-          disabled={isLoading}
-        >
-          {isLoading ? 'VERIFYING...' : 'ENTER ARCHIVE'}
-        </motion.button>
-
-        <p
-          className="text-center text-[10px] uppercase tracking-[0.3em] text-ink-gold/70 -mt-3"
-          style={{
-            fontFamily: 'var(--sys-type-fontFamilies-mono)',
-            fontVariationSettings: "'wght' 300",
-          }}
-        >
-          Primary Entry Action
-        </p>
+        <div>
+          <label
+            className="block text-xs font-mono uppercase tracking-widest mb-1"
+            style={{ color: 'var(--sys-color-concreteGrey-base)' }}
+          >
+            Password
+          </label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="w-full p-3 rounded-sm border bg-transparent text-sm outline-none"
+            style={{
+              borderColor: 'rgba(163,155,143,0.2)',
+              color: 'var(--sys-color-worker-ash-base)',
+            }}
+          />
+        </div>
 
         <button
-          type="button"
-          onClick={onRegisterClick}
-          className="text-center text-paper-white/60 text-[10px] uppercase tracking-widest hover:text-ink-gold transition-colors"
+          type="submit"
+          disabled={isLoading}
+          className="w-full py-3 font-bold uppercase tracking-widest text-sm disabled:opacity-40"
           style={{
-            fontFamily: 'var(--sys-type-fontFamilies-mono)',
-            fontVariationSettings: "'wght' 400",
+            background: 'var(--sys-color-solidarityRed-base)',
+            color: 'var(--sys-color-worker-ash-base)',
           }}
         >
-          Create Collective ID
+          {isLoading ? 'Signing in…' : 'Sign In'}
         </button>
-      </motion.form>
+      </form>
+
+      {onRegisterClick && (
+        <p className="mt-6 text-center text-xs" style={{ color: 'var(--sys-color-concreteGrey-base)' }}>
+          No account?{' '}
+          <button
+            type="button"
+            onClick={onRegisterClick}
+            className="underline"
+            style={{ color: 'var(--sys-color-inkGold-base)' }}
+          >
+            Register
+          </button>
+        </p>
+      )}
     </div>
   );
 };
+
+export default LoginCard;

@@ -1,6 +1,6 @@
 {
   "artifact": "frontend_source_of_truth_migration_implementation_backlog",
-  "generated_at": "2026-03-13",
+  "generated_at": "2026-03-22",
   "canonical_plan": "docs/project/active/frontend-source-of-truth-migration/control/blueprint.md",
   "milestones": [
     {
@@ -27,6 +27,7 @@
         {
           "id": "MIG-001",
           "title": "Fix capability matrix completeness",
+          "status": "completed",
           "plan_phase_ref": "Phase 1",
           "area": "planning_integrity",
           "owner_route": null,
@@ -42,6 +43,7 @@
         {
           "id": "MIG-002",
           "title": "Align governance validator with tests",
+          "status": "completed",
           "plan_phase_ref": "Phase 1",
           "area": "planning_integrity",
           "owner_route": null,
@@ -93,6 +95,7 @@
         {
           "id": "MIG-005",
           "title": "Define token-enforcement gate for touched routes",
+          "status": "completed",
           "plan_phase_ref": "Phase 1",
           "area": "planning_integrity",
           "owner_route": null,
@@ -123,7 +126,7 @@
           "deliverables": [
             "record prior wireframe-process learnings, reuse guidance, and workflow do/don't rules in the tracked migration docs",
             "add a deterministic validator for canonical XML wireframes and planning-artifact consistency",
-            "validate wireframes against the route matrix, component gap map, and asset-integrity warnings before Phase 3 execution"
+            "validate wireframes against the route matrix, component gap map, and asset-integrity warnings before Phase 3 execution starts"
           ],
           "completion_evidence": [
             "scripts/validate-wireframe-workflow.py runs against the repo and emits a structured report",
@@ -207,6 +210,7 @@
         {
           "id": "MIG-101",
           "title": "Replace mock-backed applications flow in /tracker",
+          "status": "completed",
           "plan_phase_ref": "Phase 2.1",
           "area": "applications",
           "owner_route": "/tracker",
@@ -229,6 +233,7 @@
         {
           "id": "MIG-102",
           "title": "Add application detail, edit, and status flows",
+          "status": "completed",
           "plan_phase_ref": "Phase 2.1",
           "area": "applications",
           "owner_route": "/tracker",
@@ -253,6 +258,7 @@
         {
           "id": "MIG-103",
           "title": "Converge ingestion on /api/v1/ingest",
+          "status": "completed",
           "plan_phase_ref": "Phase 2.2",
           "area": "ingestion",
           "owner_route": "/career/ingest",
@@ -277,6 +283,7 @@
         {
           "id": "MIG-104",
           "title": "Build the routed smart-ingestion flow",
+          "status": "completed",
           "plan_phase_ref": "Phase 2.2",
           "area": "ingestion",
           "owner_route": "/career/ingest",
@@ -373,6 +380,7 @@
         {
           "id": "MIG-301",
           "title": "Decide and wire the minimum viable resume audit flow",
+          "status": "completed",
           "plan_phase_ref": "Phase 2.5",
           "area": "analysis",
           "owner_route": "/analysis",
@@ -395,6 +403,7 @@
         {
           "id": "MIG-302",
           "title": "Add the canonical job analysis results surface",
+          "status": "completed",
           "plan_phase_ref": "Phase 3",
           "area": "jobs",
           "owner_route": "/apply/quick",
@@ -418,6 +427,7 @@
         {
           "id": "MIG-303",
           "title": "Keep workflow orchestration explicitly deferred",
+          "status": "completed",
           "plan_phase_ref": "Phase 2.5",
           "area": "applications_workflows",
           "owner_route": "/apply/quick",
@@ -452,6 +462,7 @@
         {
           "id": "MIG-401",
           "title": "Retire prototype /kr/* routes from live product routing",
+          "status": "completed",
           "plan_phase_ref": "Phase 4",
           "area": "route_cleanup",
           "owner_route": null,
@@ -471,6 +482,7 @@
         {
           "id": "MIG-402A",
           "title": "Add route preflight inventory checks",
+          "status": "completed",
           "plan_phase_ref": "Phase 3",
           "area": "route_execution",
           "owner_route": null,
@@ -551,6 +563,111 @@
             "no touched product area has competing live-looking runtime homes without explicit reference-only labeling",
             "folder ownership for touched route families matches the route matrix",
             "cleanup stays bounded and does not become a repo-wide frontend reorganization"
+          ]
+        }
+      ]
+    },
+    {
+      "milestone_id": "M6",
+      "name": "Phase 6 - Legacy Routes and Orphaned Screens",
+      "plan_phase_refs": [
+        "Phase 6"
+      ],
+      "acceptance": [
+        "0 unrouted screens in orphans.json",
+        "0 non-feature routes remaining",
+        "Legacy routes moved to features/"
+      ],
+      "items": [
+        {
+          "id": "MIG-601",
+          "title": "Opportunities & Job Queue Migration",
+          "status": "completed",
+          "plan_phase_ref": "Phase 6",
+          "area": "route_cleanup",
+          "owner_route": "/opportunities",
+          "owner_surface": "Opportunities",
+          "type": "refactor",
+          "depends_on": ["M5"],
+          "new_components": [],
+          "deliverables": [
+            "Move JobQueue into features/jobs/",
+            "Pair /opportunities with 06_lookout screen"
+          ]
+        },
+        {
+          "id": "MIG-602",
+          "title": "Workbench & KSC Implementation",
+          "status": "completed",
+          "plan_phase_ref": "Phase 6",
+          "area": "route_cleanup",
+          "owner_route": "/ksc-generator",
+          "owner_surface": "KSCGenerator",
+          "type": "refactor",
+          "depends_on": ["M5"],
+          "new_components": [],
+          "deliverables": [
+            "Implement canonical feature for 08_workbench"
+          ]
+        },
+        {
+          "id": "MIG-603",
+          "title": "Finalization & Cover Letter Implementation",
+          "status": "completed",
+          "plan_phase_ref": "Phase 6",
+          "area": "route_cleanup",
+          "owner_route": "/cover-letter-generator",
+          "owner_surface": "CoverLetterGenerator",
+          "type": "refactor",
+          "depends_on": ["M5"],
+          "new_components": [],
+          "deliverables": [
+            "Implement canonical feature for 09_finalization"
+          ]
+        },
+        {
+          "id": "MIG-604",
+          "title": "Settings Integration",
+          "status": "completed",
+          "plan_phase_ref": "Phase 6",
+          "area": "route_cleanup",
+          "owner_route": "/settings",
+          "owner_surface": "Settings",
+          "type": "refactor",
+          "depends_on": ["M5"],
+          "new_components": [],
+          "deliverables": [
+            "Implement canonical feature for 10_settings"
+          ]
+        },
+        {
+          "id": "MIG-605",
+          "title": "Analysis & Apply Quick Refactor",
+          "status": "completed",
+          "plan_phase_ref": "Phase 6",
+          "area": "route_cleanup",
+          "owner_route": "/analysis",
+          "owner_surface": "AnalysisPage",
+          "type": "refactor",
+          "depends_on": ["M5"],
+          "new_components": [],
+          "deliverables": [
+            "Move AnalysisPage and ApplyQuick to canonical features/"
+          ]
+        },
+        {
+          "id": "MIG-607",
+          "title": "Retire Prototypes and Test Tokens",
+          "status": "completed",
+          "plan_phase_ref": "Phase 6",
+          "area": "route_cleanup",
+          "owner_route": null,
+          "owner_surface": null,
+          "type": "cleanup",
+          "depends_on": ["M5"],
+          "new_components": [],
+          "deliverables": [
+            "Delete /kr/* and /test-tokens registrations"
           ]
         }
       ]

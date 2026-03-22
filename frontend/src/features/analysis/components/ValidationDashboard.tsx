@@ -147,14 +147,10 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
             {/* Stats Summary */}
             <ValidationStats
               passCount={
-                localData.Structured_Achievements.filter(
-                  (a) => !a.Needs_Review_Flag
-                ).length
+                localData.Structured_Achievements.filter((a) => !a.Needs_Review_Flag).length
               }
               reviewCount={
-                localData.Structured_Achievements.filter(
-                  (a) => a.Needs_Review_Flag
-                ).length
+                localData.Structured_Achievements.filter((a) => a.Needs_Review_Flag).length
               }
               avgConfidence={0.92}
             />
@@ -165,119 +161,121 @@ export const ValidationDashboard: React.FC<ValidationDashboardProps> = ({ data, 
               icon={<ShieldCheck className="w-5 h-5 text-ink-gold" />}
               className="flex-1 flex flex-col overflow-hidden border-[var(--sys-color-concreteGrey-base)]/10"
             >
-          <div className="flex-1 overflow-y-auto space-y-8 p-8">
-            <section className="space-y-4">
-              <div className="flex items-center gap-2 text-[var(--sys-color-kr-activistSmokeGreen-base)] mb-2">
-                <Trophy className="w-5 h-5" />
-                <h3 className="font-bold tracking-tight">ACHIEVEMENTS</h3>
-              </div>
+              <div className="flex-1 overflow-y-auto space-y-8 p-8">
+                <section className="space-y-4">
+                  <div className="flex items-center gap-2 text-[var(--sys-color-kr-activistSmokeGreen-base)] mb-2">
+                    <Trophy className="w-5 h-5" />
+                    <h3 className="font-bold tracking-tight">ACHIEVEMENTS</h3>
+                  </div>
 
-              <div className="grid gap-6">
-                {localData.Structured_Achievements.map((achievement) => (
+                  <div className="grid gap-6">
+                    {localData.Structured_Achievements.map((achievement) => (
+                      <Placard
+                        key={achievement.Achievement_ID}
+                        elevation="floating"
+                        className="border-[var(--sys-color-concreteGrey-base)]/10"
+                        header={
+                          <div className="flex items-center justify-between gap-4">
+                            <div className="flex items-center gap-3">
+                              <CheckCircle2 className="w-4 h-4 text-[var(--sys-color-kr-activistSmokeGreen-base)]" />
+                              <span className="font-mono text-[10px] text-[var(--sys-color-inkGold-base)] tracking-widest">
+                                ID: {achievement.Achievement_ID}
+                              </span>
+                            </div>
+                            {achievement.Needs_Review_Flag && (
+                              <div className="flex items-center gap-1.5 px-2 py-0.5 bg-[var(--sys-color-stencilYellow-base)]/10 border border-[var(--sys-color-stencilYellow-base)]/20 rounded text-[9px] font-bold text-[var(--sys-color-stencilYellow-base)] tracking-wider">
+                                <AlertTriangle className="w-3 h-3" />
+                                NEEDS REVIEW
+                              </div>
+                            )}
+                          </div>
+                        }
+                      >
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                          <EditableField
+                            label="Outcome"
+                            value={achievement.Outcome || ''}
+                            onSave={(val: string) => {
+                              const newData = { ...localData };
+                              const achievementIndex = newData.Structured_Achievements.findIndex(
+                                (a) => a.Achievement_ID === achievement.Achievement_ID
+                              );
+                              if (achievementIndex !== -1) {
+                                newData.Structured_Achievements[achievementIndex].Outcome = val;
+                                handleUpdate(newData);
+                              }
+                            }}
+                          />
+                          <EditableField
+                            label="Original Text"
+                            value={achievement.Original_Text || ''}
+                            onSave={(val: string) => {
+                              const newData = { ...localData };
+                              const achievementIndex = newData.Structured_Achievements.findIndex(
+                                (a) => a.Achievement_ID === achievement.Achievement_ID
+                              );
+                              if (achievementIndex !== -1) {
+                                newData.Structured_Achievements[achievementIndex].Original_Text =
+                                  val;
+                                handleUpdate(newData);
+                              }
+                            }}
+                          />
+                          <EditableField
+                            label="Needs Review Flag"
+                            value={achievement.Needs_Review_Flag ? 'true' : 'false'}
+                            onSave={(val: string) => {
+                              const newData = { ...localData };
+                              const achievementIndex = newData.Structured_Achievements.findIndex(
+                                (a) => a.Achievement_ID === achievement.Achievement_ID
+                              );
+                              if (achievementIndex !== -1) {
+                                newData.Structured_Achievements[
+                                  achievementIndex
+                                ].Needs_Review_Flag = val === 'true';
+                                handleUpdate(newData);
+                              }
+                            }}
+                          />
+                        </div>
+                      </Placard>
+                    ))}
+                  </div>
+                </section>
+
+                <section className="space-y-4">
+                  <div className="flex items-center gap-2 text-[var(--sys-color-kr-activistSmokeGreen-base)] mb-2">
+                    <User className="w-5 h-5" />
+                    <h3 className="font-bold tracking-tight">PERSONAL INFORMATION</h3>
+                  </div>
                   <Placard
-                    key={achievement.Achievement_ID}
                     elevation="floating"
                     className="border-[var(--sys-color-concreteGrey-base)]/10"
-                    header={
-                      <div className="flex items-center justify-between gap-4">
-                        <div className="flex items-center gap-3">
-                          <CheckCircle2 className="w-4 h-4 text-[var(--sys-color-kr-activistSmokeGreen-base)]" />
-                          <span className="font-mono text-[10px] text-[var(--sys-color-inkGold-base)] tracking-widest">
-                            ID: {achievement.Achievement_ID}
-                          </span>
-                        </div>
-                        {achievement.Needs_Review_Flag && (
-                          <div className="flex items-center gap-1.5 px-2 py-0.5 bg-[var(--sys-color-stencilYellow-base)]/10 border border-[var(--sys-color-stencilYellow-base)]/20 rounded text-[9px] font-bold text-[var(--sys-color-stencilYellow-base)] tracking-wider">
-                            <AlertTriangle className="w-3 h-3" />
-                            NEEDS REVIEW
-                          </div>
-                        )}
-                      </div>
-                    }
                   >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                       <EditableField
-                        label="Outcome"
-                        value={achievement.Outcome || ''}
+                        label="Full Name"
+                        value={localData.Personal_Information.FullName}
                         onSave={(val: string) => {
                           const newData = { ...localData };
-                          const achievementIndex = newData.Structured_Achievements.findIndex(
-                            (a) => a.Achievement_ID === achievement.Achievement_ID
-                          );
-                          if (achievementIndex !== -1) {
-                            newData.Structured_Achievements[achievementIndex].Outcome = val;
-                            handleUpdate(newData);
-                          }
+                          newData.Personal_Information.FullName = val;
+                          handleUpdate(newData);
                         }}
                       />
                       <EditableField
-                        label="Original Text"
-                        value={achievement.Original_Text || ''}
+                        label="Contact Email"
+                        value={localData.Personal_Information.Email}
                         onSave={(val: string) => {
                           const newData = { ...localData };
-                          const achievementIndex = newData.Structured_Achievements.findIndex(
-                            (a) => a.Achievement_ID === achievement.Achievement_ID
-                          );
-                          if (achievementIndex !== -1) {
-                            newData.Structured_Achievements[achievementIndex].Original_Text = val;
-                            handleUpdate(newData);
-                          }
-                        }}
-                      />
-                      <EditableField
-                        label="Needs Review Flag"
-                        value={achievement.Needs_Review_Flag ? 'true' : 'false'}
-                        onSave={(val: string) => {
-                          const newData = { ...localData };
-                          const achievementIndex = newData.Structured_Achievements.findIndex(
-                            (a) => a.Achievement_ID === achievement.Achievement_ID
-                          );
-                          if (achievementIndex !== -1) {
-                            newData.Structured_Achievements[achievementIndex].Needs_Review_Flag =
-                              val === 'true';
-                            handleUpdate(newData);
-                          }
+                          newData.Personal_Information.Email = val;
+                          handleUpdate(newData);
                         }}
                       />
                     </div>
                   </Placard>
-                ))}
+                </section>
               </div>
-            </section>
-
-            <section className="space-y-4">
-              <div className="flex items-center gap-2 text-[var(--sys-color-kr-activistSmokeGreen-base)] mb-2">
-                <User className="w-5 h-5" />
-                <h3 className="font-bold tracking-tight">PERSONAL INFORMATION</h3>
-              </div>
-              <Placard
-                elevation="floating"
-                className="border-[var(--sys-color-concreteGrey-base)]/10"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                  <EditableField
-                    label="Full Name"
-                    value={localData.Personal_Information.FullName}
-                    onSave={(val: string) => {
-                      const newData = { ...localData };
-                      newData.Personal_Information.FullName = val;
-                      handleUpdate(newData);
-                    }}
-                  />
-                  <EditableField
-                    label="Contact Email"
-                    value={localData.Personal_Information.Email}
-                    onSave={(val: string) => {
-                      const newData = { ...localData };
-                      newData.Personal_Information.Email = val;
-                      handleUpdate(newData);
-                    }}
-                  />
-                </div>
-              </Placard>
-            </section>
-          </div>
-        </Vessel>
+            </Vessel>
             {/* Verification Grid */}
             <SourceVerificationGrid
               items={localData.Structured_Achievements.map((a) => ({

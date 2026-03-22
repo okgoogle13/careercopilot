@@ -1,23 +1,24 @@
-# 🤖 AI AGENTS, SKILLS, AND MCP INFRASTRUCTURE
+# AI Agents, Skills, and MCP Infrastructure
 
-## Model Context Protocol (MCP)
+## Current Harvest Entry Points
 
-The system uses the MCP to route expensive tasks to external, specialized servers (Gemini, Perplexity, etc.) to save Claude tokens.
+| Surface | Role | Location |
+|---|---|---|
+| `prototype-harvest-manager` | harvest orchestration | `.claude/agents/prototype-harvest-manager.md` |
+| `frontend-cleanup-manager` | harvest review authority | `.claude/agents/frontend-cleanup-manager.md` |
+| `blueprint` | harvest-aware planning | `.claude/skills/blueprint/SKILL.md` |
+| `subagent-driven-development` | bounded execution | `.claude/skills/subagent-driven-development/SKILL.md` |
 
-## Primary Agents (Orchestrators)
+## Late-Stage Canonical Gates
 
-| Agent Name                 | Role                                                        | Location                                         |
-| :------------------------- | :---------------------------------------------------------- | :----------------------------------------------- |
-| **mcp-orchestrator**       | Routes tasks, manages caching and token saving.             | `servers/mcp-claude-orchestrator/`               |
-| **m3-migration-architect** | Orchestrates 12-step M3 migration protocol.                 | `.claude/agents/m3-migration-architect.md`       |
-| **gemini-wrapper**         | Executes specialized analysis and summarization via Gemini. | `.claude/interfaces/gemini-wrapper-interface.py` |
+- `token-enforcement`
+- `migration-audit`
+- `route-migration`
 
-## Key Skill Sets
+## MCP Notes
 
-- **Scaffolding:** `fastapi-endpoint-scaffolder`, `pydantic-model-scaffolder`
-- **Testing:** `jest-test-scaffolder`, `api-integration-test-scaffolder`
-- **M3 Expressive:** `m3-spring-motion-choreography`, `m3-anti-slop-validator` (design/aesthetic focus).
+Use MCP servers to reduce context cost, but do not let MCP outputs override runtime truth, route ownership, or support-only harvest rules.
 
-## Skill Index
+## Removed Legacy Surfaces
 
-- **Complete Skill List:** `docs/architecture/SKILL_AGENT_MATRIX.md`
+Legacy M3 migration orchestrators, page scaffolders, and compatibility wrappers were removed from active discovery to reduce harvest pollution.

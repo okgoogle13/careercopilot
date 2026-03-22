@@ -163,7 +163,7 @@ The Skill Reviewer provides comprehensive quality assurance and improvement reco
 ### Basic Review
 
 ```bash
-# User: "Review the react-component-scaffolder skill"
+# User: "Review the blueprint skill"
 # Skill Reviewer will:
 # 1. Read the SKILL.md file
 # 2. Evaluate against all criteria

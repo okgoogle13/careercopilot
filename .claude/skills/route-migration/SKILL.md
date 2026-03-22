@@ -1,230 +1,121 @@
 ---
 name: route-migration
-description: 3-gate lifecycle for route migration with auto-fix (40% faster). Returns gate status JSON. Use for single routes or parallel batch processing.
-chainable: true
-gate_type: orchestrator
-lifecycle_stages: [draft, token-clean, visual-hero]
-triggers: [token-enforcement, migration-audit]
-json_io: true
+description: Execute or validate canonical route-local migration work in the main CareerCopilot app after route ownership is already decided in route-matrix.md.
 ---
 
 # Route Migration
 
-## Objective
+## Purpose
 
-Move routes from legacy features to migrated screens through streamlined 3-gate lifecycle with 80% auto-fix automation. Designed for batch processing and parallel execution.
+Use this skill for canonical route work in the main app after the route already has a clear owner in the tracked migration artifacts.
 
-## When to Use
+This skill is for:
+- porting one canonical route in `frontend/src/**`
+- validating a route-local implementation against the current migration workflow
+- closing a route after token, wireframe, and identity gates
 
-- Migrating single route (e.g., /login) from legacy to screen
-- Batch-migrating multiple routes in parallel (/profile, /settings, /help)
-- Automating migration pipeline via CI/CD
-- Validating existing route against lifecycle gates
+This skill is not for:
+- Comet / prototype support-reference work
+- nav-label decisions
+- greenfield page scaffolding
+- the old `careercopilot-migration-kit-v3` RouteGate workflow
+- promoting raw prototype or consolidated-reference TSX directly into runtime truth
 
-## When to Chain
+## Read First
 
-**Upstream Skills**: None (starts migration workflow)
+- `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.md`
+- `docs/project/active/frontend-source-of-truth-migration/control/workflow.md`
+- `docs/project/active/frontend-source-of-truth-migration/control/COMET-MANIFEST.md`
 
-**Downstream Skills**:
-- `@token-enforcement` - Gate 2 (token-clean validation)
-- `@migration-audit` - Gate 3 (visual-hero orchestration)
+Read `references/ROUTE_LIFECYCLE.md` for the current route-level sequence and `assets/route-checklist-template.md` when you need a route handoff or closure checklist.
 
-**Batch Automation**:
-```bash
-# Batch migrate 10 routes with auto-fix
-ROUTES=(profile settings help documents analysis tracker opportunities apply settings library)
+## When To Use
 
-for route in "${ROUTES[@]}"; do
-  (
-    npm run migrate:screen "$route"     # Gate 1: draft
-    npm run fix:all                     # Gate 2: token-clean (auto-fix 80%)
-    @migration-audit "/$route" --visual  # Gate 3: visual-hero
-  ) &
-done
-wait
-```
+- A route owner is already explicit in `route-matrix.md`
+- The work is in the canonical app, not the prototype shell
+- The route needs gap-fill planning, implementation, or closure evidence
+- You need to verify a route against route integrity, screen pairing, and token/identity gates
 
-## 3-Gate Lifecycle (40% Faster)
+## Required Inputs
 
-See `references/ROUTE_LIFECYCLE.md` for detailed gate specifications.
+- one route id or current route from `route-matrix.json`
+- the current route row from `route-matrix.md`
+- the paired screen reference / wireframe path if present
+- the canonical runtime owner in `frontend/src/features/**` or `frontend/src/pages/**`
+- any approved build contract or support-reference input already classified by the gap-fill planner
 
-### Gate 1: draft
+If route ownership is still ambiguous, stop and use `blueprint` or `prototype-harvest-manager` first.
 
-```bash
-npm run migrate:screen <route-name>
-```
+## Canonical Workflow
 
-**Output**: Scaffold with semantic tokens
-**Tracker**: `status: draft`
+### 1. Authority Lock
 
-### Gate 2: token-clean
+- Confirm the route is present in `route-matrix.md`
+- Confirm the runtime owner is reachable from `frontend/src/App.tsx`
+- Confirm backend capability ownership from the route matrix before changing the route
+- Preserve route paths unless the route matrix explicitly says otherwise
 
-**Auto-Fix (80% automation)**:
-```bash
-npm run fix:tokens      # sed -i 's/#1A1714/var(--sys-color-charcoalBackground-base)/g'
-npm run fix:typography  # sed -i 's/"Inter"/"var(--sys-type-headingFamily)"/g'
-npm run fix:copy        # node tools/auto-fix-copy.js (remove meta-language)
-npm run fix:all         # Run all 3 auto-fixes
-```
+### 2. Wireframe And Gap-Fill Planning
 
-**Manual Remediation (20%)**:
-```bash
-npm run verify -- --json > /tmp/violations.json
-# Fix complex patterns using benchmark references
-```
+- Validate canonical wireframes:
+  - `python3 scripts/validate-wireframe-workflow.py`
+- Generate a tokens-first gap-fill plan for the route:
+  - `python3 scripts/derive-gap-fill-plan.py --route-id <route>`
+- Use the gap-fill output to decide:
+  - reuse runtime behavior as-is
+  - keep behavior and rewrite styling to semantic tokens
+  - keep behavior and extend token coverage
+  - build new
+  - block the route until missing contracts are resolved
+- Treat support-reference TSX as support-only until the gap-fill planner classifies it. Never promote raw external prototype TSX directly.
 
-**Output**: 0 violations
-**Tracker**: `token_clean: true, violations: 0`
+### 3. Route-Local Implementation
 
-### Gate 3: visual-hero
+- Modify only the canonical runtime surface for the route
+- Prefer `frontend/src/features/**`; use `frontend/src/pages/**` only when that route is already owned there
+- Keep public UI language plain and user-facing
+- Use semantic tokens only: `--sys-color-*`, `--sys-shape-*`, `--sys-type-*`
+- Do not introduce hardcoded colors, forbidden fonts, or deprecated aliases
+- Do not let design-reference or support-reference styling override runtime ownership
 
-**Typography Scoring + Archetype Validation**:
-```bash
-@migration-audit /<route> --audit-mode visual_only --json
-```
+### 4. Closure Gates
 
-**Expected JSON**:
-```json
-{
-  "typography_score": "10/10",
-  "archetypes": ["blockRiot03", "placardTorn01"],
-  "violations": []
-}
-```
-
-**Manual Fixes**:
-- Typography: Variable fonts (Fraunces, Work Sans), 9x weight ratios, optical sizing
-- Archetypes: Replace deprecated (pebbleSurge01 → blockRiot03)
-- RouteGate: Wire feature flag + legacy fallback
-
-**Output**: Typography 10/10, archetypes current, RouteGate wired, screenshots captured
-**Tracker**: `status: migrated-ready, typography: 10/10, archetypes: current`
-
-## Machine-Readable Mode
-
-### JSON Input
-
-```json
-{
-  "route": "/profile",
-  "gate": 1,
-  "mode": "validate" | "execute"
-}
-```
-
-### JSON Output (Gate 3: visual-hero)
-
-```json
-{
-  "route": "/profile",
-  "gate": 3,
-  "status": "pass" | "fail",
-  "lifecycle_stage": "visual-hero",
-  "typography_score": "10/10",
-  "archetypes": ["blockRiot03"],
-  "violations": [
-    {
-      "type": "wrong-variable-font",
-      "severity": "high",
-      "file": "ProfileScreen.tsx:24",
-      "found": "Inter",
-      "expected": "Fraunces",
-      "remediation": {
-        "action": "Replace Inter with Fraunces variable font",
-        "benchmark_example": "auth-benchmark-v1/LoginScreen.tsx:24 uses Fraunces"
-      }
-    }
-  ],
-  "dimension_scores": {
-    "typography": 10,
-    "archetypes": 10,
-    "m3_expressive": 12
-  }
-}
-```
-
-## Auto-Fix Scripts (package.json)
-
-Add to `careercopilot-migration-kit-v3/package.json`:
-
-```json
-{
-  "scripts": {
-    "fix:tokens": "find apps/web/src/screens -name '*.tsx' -exec sed -i '' -E 's/#[0-9A-Fa-f]{6}/var(--sys-color-charcoalBackground-base)/g' {} \\;",
-    "fix:typography": "find apps/web/src/screens -name '*.tsx' -exec sed -i '' 's/fontFamily: \"Inter\"/fontFamily: \"var(--sys-type-headingFamily)\"/g' {} \\;",
-    "fix:copy": "node tools/auto-fix-copy.js",
-    "fix:all": "npm run fix:tokens && npm run fix:typography && npm run fix:copy"
-  }
-}
-```
-
-## RouteGate Wiring Pattern
-
-**Feature Flag** (`apps/web/src/router/featureFlags.ts`):
-```typescript
-export const DEFAULT_FEATURE_FLAGS = {
-  profile: false,  // default flag-off until rollout
-}
-```
-
-**Route** (`apps/web/src/router/ScreensRouter.tsx`):
-```typescript
-<RouteGate
-  path="/profile"
-  flagKey="profile"
-  legacy={<ProfileLegacy />}
-  migrated={<ProfileScreen />}
-/>
-```
-
-**Rollback**: `profile: true` → `profile: false`, redeploy. No code revert.
+- Route integrity:
+  - `npx tsx tools/ci/check-route-integrity.ts`
+- Screen pairing:
+  - `npx tsx tools/ci/check-screen-pairs.ts`
+- Frontend validation:
+  - `(cd frontend && yarn type-check)`
+  - `(cd frontend && yarn lint)`
+- Run `token-enforcement`
+- Run `migration-audit`
+- For support-influenced routes, complete the TSX identity gate described in `workflow.md`
+- Use `./scripts/test-deployment.sh` when the route is part of broader closeout or readiness validation
 
 ## Guardrails
 
-- Preserve route path (no URL changes)
-- Preserve legacy fallback until flag flip
-- RouteGate is only cutover switch
-- Committed default flag-off until explicit rollout
-- Semantic tokens only: `--sys-color-*`, `--sys-shape-*`, `--sys-type-*`
-- Zero-flora and deprecated-token bans enforced
-- Typography: Variable fonts with 9x weight ratios + optical sizing
-- Archetypes: Current only (no deprecated pebbleSurge01/scaffoldSlab01)
+- Route matrix and `frontend/src/App.tsx` are the authority for route ownership
+- `workflow.md` is the authority for wireframe and gap-fill sequencing
+- `COMET-MANIFEST.md` governs prototype support-reference work, not canonical route cutover
+- Plain primitive naming is preferred in planning outputs; KR archetypes are internal mappings only
+- No direct prototype-to-runtime consolidation
+- No migration-kit-specific scripts, RouteGate wiring, or feature-flag rollback model
 
-Source: MIGRATION_GUARDRAILS.md
+## Recommended Output
+
+Return a concise route report with:
+- route
+- canonical runtime owner
+- paired screen reference
+- gap-fill reuse mode
+- files touched or to be touched
+- unresolved blockers
+- closure evidence collected
 
 ## Related Skills
 
-- `@token-enforcement` - Gate 2: Token-copy-clean validation
-- `@migration-audit` - Gate 3: Visual-hero orchestration
-- `@component-visual-audit` - Screenshot compliance scoring
-- `@ui-design-evaluator` - KR Solidarity design system evaluation
-
-## Success Criteria
-
-- All 3 gates pass with deterministic validation
-- MIGRATION_TRACKER.md shows `migrated-ready`
-- Typography score: 10/10
-- Archetypes: current (no deprecated)
-- Route toggles cleanly via flag
-- `npm run verify` passes with 0 violations
-- Rollback is flag change, not code revert
-
-## Efficiency Gains
-
-**5-Gate → 3-Gate**:
-- Gate count: 5 → 3 (40% reduction)
-- Per-route time: ~45min → ~15min (67% faster)
-
-**Manual → Auto (80% automation)**:
-- Token fixes: 100% manual → 80% auto
-- Typography fixes: 100% manual → 80% auto
-- Copy fixes: 100% manual → 80% auto
-- Remaining 20%: Complex patterns, archetypes (manual with benchmark)
-
-## Fallback
-
-If skill unavailable:
-- Lifecycle Gates: `references/ROUTE_LIFECYCLE.md`
-- Guardrails: MIGRATION_GUARDRAILS.md
-- PR Plan: PR_PLAN.md lines 10-36
-- Cutover Runbook: PR_PLAN.md lines 112-139
+- `@blueprint` for route planning when ownership or sequence is unclear
+- `@prototype-harvest-manager` for support-reference classification before canonical porting
+- `@token-enforcement` for token/copy hygiene
+- `@migration-audit` for deterministic route-quality audit
+- `@systematic-debugging` when checks fail or the route behaves unexpectedly

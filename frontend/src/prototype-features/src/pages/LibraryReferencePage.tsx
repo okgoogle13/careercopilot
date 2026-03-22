@@ -1,6 +1,8 @@
+/* eslint-disable */
 /**
  * CLASSIFICATION: Support-Reference Page
  * Prototype-only reference page.
+ * CANONICAL ROUTE OWNER: none — component reference, support-only
  */
 import React, { useState } from 'react';
 import { motion } from 'motion/react';

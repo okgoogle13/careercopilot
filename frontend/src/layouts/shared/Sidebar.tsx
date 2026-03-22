@@ -3,11 +3,9 @@ import {
   Briefcase,
   ClipboardList,
   FileText,
-  FolderOpen,
   Home,
-  Inbox,
   Settings,
-  Sparkles,
+  UserCircle,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
@@ -15,13 +13,11 @@ import { Logo } from '@/components/ui/Logo';
 
 const mainNavItems = [
   { path: '/dashboard', icon: Home, label: 'Dashboard' },
+  { path: '/opportunities', icon: Briefcase, label: 'Jobs' },
   { path: '/tracker', icon: ClipboardList, label: 'Applications' },
-  { path: '/documents', icon: FileText, label: 'My Documents' },
-  { path: '/analysis', icon: BarChart3, label: 'ATS Score & Optimise' },
-  { path: '/opportunities', icon: Briefcase, label: 'Job Scout' },
-  { path: '/cover-letter-generator', icon: Sparkles, label: 'Cover Letter Workbench' },
-  { path: '/ksc-generator', icon: Inbox, label: 'Key Selection Criteria (KSC)' },
-  { path: '/asset-library', icon: FolderOpen, label: 'Templates' },
+  { path: '/analysis', icon: BarChart3, label: 'Analysis' },
+  { path: '/documents', icon: FileText, label: 'Documents' },
+  { path: '/profile', icon: UserCircle, label: 'Profile' },
 ];
 
 export function Sidebar() {
