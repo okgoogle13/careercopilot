@@ -1,7 +1,7 @@
 # CLAUDE.md — Branch Override: feat/prototype-harvest-prep
 
 This file overrides `CLAUDE.md` for the duration of this branch.
-**Design enforcement is fully suspended. This is a Ready-to-Receive quarantine zone.**
+This branch is a prototype-harvest quarantine lane, but it still defers to the active harvest control docs.
 
 > **Output**: Code first. No preamble.
 
@@ -24,10 +24,22 @@ This file overrides `CLAUDE.md` for the duration of this branch.
 
 ## Branch Objective
 
-Harvest and isolate all AI Studio prototype logic into `frontend/src/prototype-features/`
-so it is reachable at `/prototype/*` without touching canonical product code.
+Harvest and isolate AI Studio prototype logic into `frontend/src/prototype-features/`
+without promoting prototype shell ownership into canonical product routing.
 
 ---
+
+## Harvest Authority
+
+Use these as the active decision stack:
+
+1. `docs/project/active/frontend-source-of-truth-migration/control/workflow.md`
+2. `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.md`
+3. `docs/project/active/frontend-source-of-truth-migration/control/COMET-MANIFEST.md`
+4. `docs/project/active/frontend-source-of-truth-migration/control/harvest-spec.md`
+5. `docs/project/active/frontend-source-of-truth-migration/control/fit-for-purpose.md`
+
+Prototype code is support/reference input only unless a route-owned port decision explicitly promotes a pattern.
 
 ## Quarantine Rules (ENFORCED)
 
@@ -41,15 +53,11 @@ so it is reachable at `/prototype/*` without touching canonical product code.
 
 ---
 
-## Suspended Rules (do not apply on this branch)
+## Branch-Specific Limits
 
-- KR Solidarity design tokens, Zero-Flora, semantic color enforcement
-- Archetype naming (Strike, Placard, Scaffold, Megaphone, March)
-- Typography stack enforcement (Work Sans, Fraunces etc.)
-- Shape token rules, no-hardcoded-hex rule
-- All design/audit skills from SKILL_REGISTRY.md Tier 1–3
-
-See `.claude/BRANCH_CONTEXT.md` for the full suspended skill list.
+- Do not run late-stage canonical closure gates on prototype-only files unless the task explicitly asks for a port-readiness audit.
+- Do not treat the prototype shell, tab labels, or local `activeTab` state as canonical route authority.
+- Do not introduce `react-router-dom` or new dependencies into prototype surfaces.
 
 ---
 
@@ -57,11 +65,12 @@ See `.claude/BRANCH_CONTEXT.md` for the full suspended skill list.
 
 | Role | Skill |
 |---|---|
+| Harvest orchestration | `prototype-harvest-manager` |
+| Harvest review | `frontend-cleanup-manager` |
+| Planning | `blueprint` |
 | Execution engine | `subagent-driven-development` |
-| Phase tracking | `project-manager` |
 | Crash/gap diagnosis | `systematic-debugging` |
-| Headless route testing | Playwright MCP |
-| Git ops | `git-pr-workflows-git-workflow` |
+| Canonical late-stage gates | `token-enforcement`, `migration-audit`, `route-migration` |
 
 ---
 

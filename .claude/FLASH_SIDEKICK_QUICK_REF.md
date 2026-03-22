@@ -8,35 +8,35 @@
 
 #### 1. Analyzing Code Files
 
-```
+```markdown
 ❌ DON'T: "Read and analyze /path/to/file.py"
 ✅ DO: "Use flash-sidekick analyze_code_quality on /path/to/file.py"
 ```
 
 #### 2. Summarizing Large Files
 
-```
+```markdown
 ❌ DON'T: "Read AGENTS.md and summarize"
 ✅ DO: "Use flash-sidekick quick_summarize on AGENTS.md content"
 ```
 
 #### 3. Multiple File Analysis
 
-```
+```markdown
 ❌ DON'T: "Analyze flash_sidekick.py, agent_handoff.py, and cloud_ops.py"
 ✅ DO: "Use flash-sidekick batch_file_analysis with files=[...] and type='quality'"
 ```
 
 #### 4. Generating Documentation
 
-```
+```markdown
 ❌ DON'T: "Read all server files and create a README"
 ✅ DO: "Use flash-sidekick create_readme with combined code"
 ```
 
 #### 5. Code Refactoring Suggestions
 
-```
+```markdown
 ❌ DON'T: "Read this file and suggest refactorings"
 ✅ DO: "Use flash-sidekick suggest_refactoring on this code"
 ```
@@ -129,9 +129,32 @@ echo '{"jsonrpc":"2.0","method":"tools/list","id":1}' | \
   /Users/okgoogle13/Projects/careercopilot/servers/flash_sidekick.py
 ```
 
----
+## 🎯 Token Efficiency & Strategic Search
 
-**Remember:** Flash-sidekick uses Gemini (free/cheap), Filesystem uses Claude tokens (expensive/limited)
+### Naming Protocol v2.0 Rule
+When using Flash-Sidekick for bulk search or analysis, **ALWAYS use Plain UI primitives** in your queries. Treat KR archetypes as internal mappings only.
 
-**Last Updated:** 2026-01-29
-**Status:** Flash-sidekick fixed, ready to use after restart
+| Query Mode | Preferred Search Terms (Plain UI) | Internal Mapping (KR Archetype) |
+| :--- | :--- | :--- |
+| **Action** | `Button`, `Link`, `Control` | `Strike` |
+| **Surface** | `Card`, `Box`, `Section`, `Panel` | `Placard` |
+| **Shell** | `Layout`, `Container`, `Grid` | `Scaffold`, `Substrate` |
+| **Input** | `TextField`, `Select`, `Form` | `ScaffoldInput`, `March` |
+| **Feedback** | `Modal`, `Dialog`, `Alert` | `Megaphone` |
+
+### Case Study: Route Search
+```
+❌ DON'T: "Find all Strike components in /kr/ routes."
+✅ DO: "Use flash-sidekick batch_file_analysis to find all Button components across the canonical /work and /archive routes."
+```
+
+## 📋 Available Tools
+...
+[Existing tools table remains, but ensure it refers to the latest server definitions]
+...
+
+## 📊 Status & Health
+
+**Current Protocol:** KR Solidarity v6.1 Alignment
+**Last Updated:** 2026-03-22
+**Status:** **ACTIVE** - Unified with Design System Sidekick & Route Matrix

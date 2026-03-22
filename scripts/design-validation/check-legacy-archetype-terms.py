@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 """
-Fail if legacy archetype terms appear outside approved compatibility zones.
+Fail if deprecated legacy component/archetype aliases appear outside approved
+compatibility zones.
+
+This gate is intentionally narrow:
+- it blocks deprecated aliases such as Pebble/Stone/Jar/Lens/Cabinet/Seed
+- it does not police current KR archetype names such as Strike/Placard/March
+- it does not replace the plain-language docs policy for Button/Card/Dialog/etc.
 """
 
 from __future__ import annotations
@@ -120,12 +126,12 @@ def main() -> int:
                 violations.append(f"{path.relative_to(PROJECT_ROOT)}:{idx}: {line.strip()}")
 
     if violations:
-        print("Legacy archetype terms detected outside approved compatibility zones:")
+        print("Deprecated legacy aliases detected outside approved compatibility zones:")
         for violation in violations:
             print(f"  - {violation}")
         return 1
 
-    print("No forbidden legacy archetype terms found outside approved compatibility zones.")
+    print("No forbidden deprecated aliases found outside approved compatibility zones.")
     return 0
 
 

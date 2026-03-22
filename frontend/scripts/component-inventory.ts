@@ -3,22 +3,28 @@
  * Component Inventory Generator - KeralaRage KrSolidarity Edition
  *
  * This script analyzes the frontend codebase to generate an accurate inventory
- * of all components, their usage patterns, and KeralaRage KrSolidarity migration status.
+ * of all components, their usage patterns, and KR Solidarity migration status.
  *
  * Features:
  * - Uses TypeScript AST analysis via ts-morph for accuracy
  * - Detects all import patterns (default, named, dynamic)
- * - Tracks component dependencies and KeralaRage KrSolidarity migration status
+ * - Tracks component dependencies and KR Solidarity migration status
  * - Identifies test/story file coverage
  * - Categorizes components by type
- * - Analyzes KeralaRage KrSolidarity adoption (token usage, mode system, legacy usage)
+ * - Analyzes KR Solidarity adoption (token usage, mode system, legacy usage)
  * - Generates detailed JSON report with migration recommendations
  *
- * Migration Status Detection (KeralaRage KrSolidarity):
- * - 'migrated': Uses KrSolidarity tokens/mode system, no legacy MUI/M3 dependencies
- * - 'mixed': Uses KrSolidarity tokens/mode system alongside legacy MUI/M3
- * - 'not_migrated': Uses legacy MUI/M3 without KrSolidarity tokens
- * - 'unknown': No clear KrSolidarity or legacy signals detected
+ * Migration Status Detection (KR Solidarity):
+ * - 'migrated': Uses KR token/mode signals, no legacy MUI/M3 dependencies
+ * - 'mixed': Uses KR token/mode signals alongside legacy MUI/M3
+ * - 'not_migrated': Uses legacy MUI/M3 without KR token/mode signals
+ * - 'unknown': No clear KR or legacy signals detected
+ *
+ * Naming policy:
+ * - Route planning and output summaries should use plain UI language first
+ *   (`Button`, `Card`, `Dialog`, `Input`, `Select`, `Surface`).
+ * - Internal KR archetype names (`Strike`, `Placard`, `Megaphone`, etc.) remain
+ *   valid implementation signals and migration hints.
  *
  * Usage:
  *   npx ts-node scripts/component-inventory.ts
@@ -555,10 +561,12 @@ function analyzeComponents(): InventoryReport {
 
     // Match explicit KR identifiers only. Avoid generic substrings like "stone"
     // triggering false positives for unrelated words such as "keystone".
-    const KrSolidarityTokenPattern =
-      /\b(?:KeralaRage|KrSolidarity|KrDark|Pebble|Stone|Slab|ManifestoSlab|Signal|Lens|HaloPulses)\b|(?:\bkr-(?:leaf|flower|motif)\b)|\bpaper-white\b/i;
+    // Include both current internal archetype names and deprecated aliases so
+    // migration status stays accurate during the docs-first naming transition.
+    const KrSolidaritySignalPattern =
+      /\b(?:KeralaRage|KrSolidarity|KrDark|Strike|Placard|Scaffold|ScaffoldInput|ScaffoldArea|March|Megaphone|Substrate|NativeAnchor|Pebble|Stone|Slab|ManifestoSlab|Signal|Lens|HaloPulses)\b|(?:\bkr-(?:leaf|flower|motif)\b)|\bpaper-white\b/i;
     const usesDesignTokens =
-      KrSolidarityTokenPattern.test(text) ||
+      KrSolidaritySignalPattern.test(text) ||
       /--(radius|elevation|duration|motion|surface|color)-/i.test(text);
 
     const usesModeSystem =
@@ -572,7 +580,7 @@ function analyzeComponents(): InventoryReport {
     const isDemo = filePath.includes('Figma UI Files');
     let migrationStatus: ComponentInfo['migrationStatus'] = 'unknown';
 
-    // Determine migration status with KeralaRage KrSolidarity detection
+    // Determine migration status with KR Solidarity signal detection.
     const usesKrSolidaritySignals = usesDesignTokens || usesModeSystem;
     const usesLegacy = usesMUI || usesLegacyM3;
 
@@ -590,7 +598,16 @@ function analyzeComponents(): InventoryReport {
     const hasSubstrate = text.includes("bg-[url('/assets/kr-solidarity");
     const isExpressiveDone = hasMotion || hasViscous || hasSubstrate;
 
+    // Support both plain UI names and internal archetype/component names.
     const atoms = [
+      'Button',
+      'Card',
+      'Dialog',
+      'Input',
+      'Textarea',
+      'Select',
+      'Surface',
+      'Panel',
       'KeralaRageButton',
       'Strike',
       'Pebble',
@@ -600,6 +617,11 @@ function analyzeComponents(): InventoryReport {
       'Lens',
       'AuroraHeader',
       'ScaffoldInput',
+      'ScaffoldArea',
+      'March',
+      'Megaphone',
+      'Substrate',
+      'NativeAnchor',
     ];
     const molecules = ['AssetLibrary', 'TechCard', 'EvidenceUploader'];
     const organisms = [

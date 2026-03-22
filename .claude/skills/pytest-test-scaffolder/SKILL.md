@@ -172,7 +172,7 @@ Templates located in `.claude/skills/pytest-test-scaffolder/templates/`:
 - **testing-specialist**: Uses this skill to generate backend tests
 - **test-automation-specialist**: Parallelizes backend test generation across modules
 - **test-runner**: Executes generated tests via `pytest backend/app/tests/ -v`
-- **fullstack-integration-specialist**: Uses alongside api-integration-test-scaffolder
+- **prototype-harvest-manager**: Uses this once a task graduates into canonical route or integration work
 
 ## Coverage Goals
 

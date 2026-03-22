@@ -195,11 +195,11 @@
 
 **Collaboration Workflow:**
 
-#### **With `fullstack-integration-specialist`:**
+#### **With `prototype-harvest-manager`:**
 
-- **When:** New full-stack feature planned
-- **Role:** Generate tests for each layer (frontend, backend, integration, E2E)
-- **Handoff:** After feature implementation, generate comprehensive test suite
+- **When:** A harvest task becomes a route-owned port or canonical stabilization task
+- **Role:** Generate tests for each affected layer (frontend, backend, integration, E2E)
+- **Handoff:** After implementation scope is approved, generate the comprehensive test suite
 
 #### **With `test-runner`:**
 
@@ -213,11 +213,11 @@
 - **Role:** Validate test coverage and quality
 - **Handoff:** `code-reviewer` includes test quality in review checklist
 
-#### **With `frontend-specialist`:**
+#### **With route-local implementers:**
 
-- **When:** New React component created
-- **Role:** Automatically generate unit test and Storybook story
-- **Handoff:** Component + tests + story delivered together
+- **When:** New React component or route-owned surface is created
+- **Role:** Generate unit tests and supporting test artifacts
+- **Handoff:** implementation plus tests delivered together
 
 #### **With `debugger`:**
 
@@ -434,7 +434,7 @@ Testing Specialist:
 
 **Automatically generate tests when:**
 
-1. ✅ New component created (frontend-specialist creates component)
+1. ✅ New component created (route-local implementer or harvest task creates component)
 2. ✅ New API endpoint created (fastapi-endpoint-scaffolder triggered)
 3. ✅ PR submitted without tests (code-reviewer flags)
 4. ✅ Coverage drops below threshold (CI/CD alert)

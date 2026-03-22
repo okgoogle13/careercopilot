@@ -9,45 +9,39 @@ export interface NavigationItem {
 
 export const NAVIGATION_SCHEMA: NavigationItem[] = [
   {
-    id: 'KrDark-feed',
-    label: 'Feed',
-    route: '/opportunities',
-    modeAvailability: 'KrDark',
-  },
-  {
-    id: 'KrDark-kanban',
-    label: 'Kanban',
-    route: '/tracker',
-    modeAvailability: 'KrDark',
-  },
-  {
-    id: 'KrDark-landing',
-    label: 'Landing',
-    route: '/',
-    modeAvailability: 'KrDark',
-  },
-  {
-    id: 'lab-dashboard',
+    id: 'nav-dashboard',
     label: 'Dashboard',
     route: '/dashboard',
     modeAvailability: 'KrDark',
   },
   {
-    id: 'lab-analysis',
+    id: 'nav-jobs',
+    label: 'Jobs',
+    route: '/opportunities',
+    modeAvailability: 'KrDark',
+  },
+  {
+    id: 'nav-applications',
+    label: 'Applications',
+    route: '/tracker',
+    modeAvailability: 'KrDark',
+  },
+  {
+    id: 'nav-analysis',
     label: 'Analysis',
     route: '/analysis',
     modeAvailability: 'KrDark',
   },
   {
-    id: 'KrDark-ingestion',
-    label: 'Ingest',
-    route: '/career/ingest',
+    id: 'nav-documents',
+    label: 'Documents',
+    route: '/documents',
     modeAvailability: 'KrDark',
   },
   {
-    id: 'overview',
-    label: 'Overview',
-    route: '/job-queue',
-    modeAvailability: 'both',
+    id: 'nav-profile',
+    label: 'Profile',
+    route: '/profile',
+    modeAvailability: 'KrDark',
   },
 ];

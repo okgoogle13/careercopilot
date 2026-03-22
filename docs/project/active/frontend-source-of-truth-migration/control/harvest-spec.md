@@ -33,7 +33,7 @@ To maximize token efficiency, all tools must delegate bulk scanning to **Flash S
 
 ### 2.4 KR Harvest Audit (Audit-First)
 - **Mode**: Lint JSX for hardcoded styles and discouraged tokens.
-- **Compliance**: Enforces Zero-Flora and KR Solidarity v6.0 archetypes.
+- **Compliance**: Enforces Zero-Flora and KR Solidarity v6.0 internal archetype mappings while keeping public planning language in plain primitive terms.
 - **Action**: Optional `--apply` codemod mode behind explicit flag.
 
 ### 2.5 Visual Drift "Diff-Auditor"

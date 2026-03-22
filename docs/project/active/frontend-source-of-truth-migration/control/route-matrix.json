@@ -1,6 +1,6 @@
 {
   "artifact": "target_state_route_matrix",
-  "generated_at": "2026-03-21",
+  "generated_at": "2026-03-22",
   "canonical_plan": "docs/project/active/frontend-source-of-truth-migration/control/blueprint.md",
   "schema_version": 4,
   "requirements_audit_checklist": "docs/project/active/frontend-source-of-truth-migration/control/requirements-audit-checklist.md",
@@ -10,7 +10,8 @@
     "Retire /kr/* prototype routes from product truth.",
     "Treat /design-sidekick, /style-guide, and /test-tokens as non-product routes.",
     "Assign each retained backend capability to one clear target route.",
-    "Use archived requirements as audit inputs only; runtime/design/capability truth remain authoritative when requirements drift."
+    "Use archive requirements as audit inputs only; runtime/design/capability truth remain authoritative when requirements drift.",
+    "Describe component work in plain primitive language first; treat KR archetypes as internal implementation mappings."
   ],
   "requirements_traceability": [
     {

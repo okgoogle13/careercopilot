@@ -37,7 +37,7 @@ import { cn } from '../../lib/utils';
 
 const ARCHETYPE_MATRIX = [
   {
-    archetype: 'Strike',
+    archetype: 'Button (Strike)',
     purpose: 'Primary actions and irreversible commits',
     base: 'shape.blockRiot03',
     active: 'shape.blockRiot02',
@@ -47,7 +47,7 @@ const ARCHETYPE_MATRIX = [
     components: 'Strike, KeralaRageButton',
   },
   {
-    archetype: 'March',
+    archetype: 'Select (March)',
     purpose: 'Sequential selection and progression controls',
     base: 'shape.blockRiot01',
     active: 'shape.marchSurge01',
@@ -57,7 +57,7 @@ const ARCHETYPE_MATRIX = [
     components: 'March',
   },
   {
-    archetype: 'Megaphone',
+    archetype: 'Dialog (Megaphone)',
     purpose: 'Interruption, announcement, priority focus',
     base: 'shape.megaphoneCut01',
     active: 'shape.megaphoneCut01',
@@ -67,7 +67,7 @@ const ARCHETYPE_MATRIX = [
     components: 'Megaphone',
   },
   {
-    archetype: 'Placard',
+    archetype: 'Card (Placard)',
     purpose: 'Content framing and narrative containers',
     base: 'shape.placardTorn01',
     active: 'shape.placardTorn01-selected',
@@ -77,7 +77,7 @@ const ARCHETYPE_MATRIX = [
     components: 'Placard',
   },
   {
-    archetype: 'Scaffold',
+    archetype: 'Input / Textarea / Panel (Scaffold)',
     purpose: 'Structural layout and form infrastructure',
     base: 'shape.scaffoldFrame01 / shape.blockRiot02',
     active: 'immutable',
@@ -87,7 +87,7 @@ const ARCHETYPE_MATRIX = [
     components: 'ScaffoldInput, ScaffoldArea',
   },
   {
-    archetype: 'Substrate',
+    archetype: 'Surface / Background (Substrate)',
     purpose: 'Atmospheric background and environmental texture',
     base: 'shape.substrateTile02',
     active: '—',
@@ -435,7 +435,7 @@ export function StyleGuide() {
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
               <Placard
                 elevation="raised"
-                header={<h3 className="text-title-medium font-black uppercase">Strike Variants</h3>}
+                header={<h3 className="text-title-medium font-black uppercase">Button Variants</h3>}
               >
                 <div className="space-y-6">
                   <div className="flex flex-wrap gap-4">
@@ -443,7 +443,7 @@ export function StyleGuide() {
                       variant="primary"
                       onClick={() => handleInteraction('components')}
                     >
-                      Primary Strike
+                      Primary Button
                     </Strike>
                     <Strike variant="secondary">Secondary</Strike>
                     <Strike variant="ghost">Ghost</Strike>
@@ -500,7 +500,7 @@ export function StyleGuide() {
 
               <Placard
                 elevation="raised"
-                header={<h3 className="text-title-medium font-black uppercase">Scaffold Inputs</h3>}
+                header={<h3 className="text-title-medium font-black uppercase">Input and Textarea</h3>}
               >
                 <div className="space-y-6">
                   <ScaffoldInput
@@ -511,7 +511,7 @@ export function StyleGuide() {
                       setScaffoldInput(e.target.value);
                       handleInteraction('components');
                     }}
-                    helperText="Scaffold archetype is immutable."
+                    helperText="Structural input geometry is immutable."
                     fullWidth
                   />
                   <ScaffoldArea
@@ -532,7 +532,7 @@ export function StyleGuide() {
               <Placard
                 elevation="raised"
                 header={
-                  <h3 className="text-title-medium font-black uppercase">Scaffold Error States</h3>
+                  <h3 className="text-title-medium font-black uppercase">Input Error States</h3>
                 }
               >
                 <div className="space-y-6">
@@ -542,7 +542,7 @@ export function StyleGuide() {
                     value=""
                     error={true}
                     errorMessage="This field is required"
-                    helperText="Scaffold shows error state with red border and alert message"
+                    helperText="Input shows error state with red border and alert message"
                     fullWidth
                   />
                   <ScaffoldArea
@@ -561,7 +561,7 @@ export function StyleGuide() {
               <Placard
                 elevation="raised"
                 header={
-                  <h3 className="text-title-medium font-black uppercase">March and Megaphone</h3>
+                  <h3 className="text-title-medium font-black uppercase">Select and Dialog</h3>
                 }
                 footer={
                   <div className="flex justify-end pt-4">
@@ -569,7 +569,7 @@ export function StyleGuide() {
                       variant="secondary"
                       onClick={() => setShowMegaphone(true)}
                     >
-                      Open Megaphone
+                      Open Dialog
                     </Strike>
                   </div>
                 }
@@ -999,7 +999,7 @@ export function StyleGuide() {
           >
             <div className="space-y-6">
               <p className="text-lg font-display leading-snug text-worker-ash-base">
-                This modal demonstrates the <strong>Megaphone archetype</strong> using{' '}
+                This dialog demonstrates the <strong>Megaphone</strong> internal mapping using{' '}
                 <em>typeSpringSlam</em> entry physics.
               </p>
               <div className="p-4 bg-white/5 rounded-strike border border-white/10 space-y-2">

@@ -1,78 +1,35 @@
-# ⚡ Design System Sidekick Quick Reference
+# ⚡ Design System Sidekick Quick Reference (v6.1)
 
-Use this server to **bridge creative direction with programmatic validation**.
+### 1. Naming Protocol v2.0: Plain UI First
+**Public/Repo Docs:** Use Plain UI primitives (Button, Card, Input).
+**Internal/Implementation:** Map to KR Archetypes (Strike, Placard, ScaffoldInput).
 
-## 🛑 WHEN TO USE
+### 2. Emotional Registers
+Use these to set the "intensity" of the Generative sidekick and design scoring:
+- **Possibility**: Low contrast, lighter weights, airy spacing.
+- **Reflection**: Deep charcoal, focus on typography and whitespace.
+- **Direct Action**: High contrast, Solidarity Crimson, thick borders.
+- **Insight**: Stencil Yellow highlights, high information density.
 
-- 🎨 **Asset Auditing**: Checking if a generated image matches kerala-rage standards.
-- 📦 **Implementation**: Generating CSS/React code for a validated asset.
-- ✅ **Compliance**: Ensuring typography, color, and layout rules are met.
+### 3. Palette & Motif Guardrails
+- ✅ **ALLOWED**: Solidarity Charcoal, Worker Ash, Solidarity Crimson, Ink Gold, Activist Smoke, Stencil Yellow, **Protest Metal Blue**.
+- ❌ **STRICT LOCKDOWN**: **Zero-Flora** (No gum leaves, no flowers). No bureaucratic seals. No perfect circles (`border-radius: 50%` banned).
 
 ## 🛠️ AVAILABLE TOOLS
 
 ### 1. 👁️ `validate_asset_compliance` (Visual Audit)
-
-**Use for:** Checking generated images against design rules.
-**Cost:** High (Vision API) - Use strategically.
-
-**Example Prompt:**
-
-> "Audit this generated kr-shiva image for kerala-rage compliance."
-
-**What it does:**
-
-- Analyzes image using Gemini Vision.
-- Checks against:
-  - 🎨 Palette (Ochre, Crimson, Sage, etc.) / NO Blues/Purples.
-  - 📐 Geometry (Haeckelian patterns).
-  - 💡 Lighting (Chiaroscuro).
-  - 🏛️ Typography (if present).
-
----
-
-### 2. 📦 `generate_implementation_package` (Code Gen)
-
-**Use for:** Creating the code to use an asset in the frontend.
-**Cost:** Medium (Text Generation).
-
-**Example Prompt:**
-
-> "Create the React component and CSS for this validated [DEPRECATED_STYLE] background."
-
-**What it does:**
-
-- Generates:
-  - `Motif{Name}.tsx` (React Component).
-  - `motif-{name}.module.css` (CSS Modules).
-  - `index.ts` (Export).
-- Applies correct CSS variables (`var(--sys-color-...)`).
-- Handles responsive sizing and accessibility props.
-
----
-
-## 💡 BEST PRACTICES
-
-### ✅ DO:
-
-- **Audit First:** Always run `validate_asset_compliance` _before_ generating code.
-- **Be Specific:** Provide the `asset_id` and specific `image_path` (absolute path).
-- **Review Findings:** Read the audit report; if it fails, regenerate the image, don't generate code for a bad asset.
-
-### ❌ DON'T:
-
-- **Don't Audit Sketches:** Only audit "final candidate" generations.
-- **Don't Ignore Fails:** If the audit says "Blue feathers detected," fix the prompt, don't force implementation.
-- **No Parallel Calls:** Run audit -> Review -> Run implementation.
-
----
+...
+[Existing tool description, but update context]
+...
 
 ## 📋 CHEATSHEET
 
 | Intent          | Tool                              | Arguments Pattern                                              |
 | :-------------- | :-------------------------------- | :------------------------------------------------------------- |
-| **Check Image** | `validate_asset_compliance`       | `asset_id="frillneck-01"`, `image_path="/abs/path/to/img.png"` |
-| **Make Code**   | `generate_implementation_package` | `asset_id="frillneck-01"`, `asset_metadata={...}`              |
+| **Check Image** | `validate_asset_compliance`       | `asset_id="strike-01"`, `image_path="/abs/path/img.png"`       |
+| **Make Code**   | `generate_implementation_package` | `asset_id="strike-01"`, `asset_metadata={...}`                |
 
 ---
 
-_Reference: `.claude/skills/kerala-rage-visual-audit/SKILL.md`_
+_Reference: `docs/design/01_CANON.md`_
+_Last Updated: 2026-03-22_

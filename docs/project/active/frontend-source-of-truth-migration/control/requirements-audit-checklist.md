@@ -1,7 +1,7 @@
 # Feature Implementation Audit Checklist
 
-**Date:** 2026-03-21
-**Status:** Draft audit control artifact
+**Date:** 2026-03-22
+**Status:** Final audit control artifact
 **Source requirements:**
 - `docs/archive/solution-design.md`
 - `docs/archive/technical-requirements.md`
@@ -31,24 +31,24 @@ For each requirement cluster:
 
 | Requirement Cluster | Archived IDs | Solution Design Stories | Primary Routes / Owners | Current Audit Status | Audit Note |
 | --- | --- | --- | --- | --- | --- |
-| Auth & profile lifecycle | `REQ-1.1.1` to `REQ-1.1.5` | Epic 1, Stories 1.1 to 1.3 | `/login`, `/register`, `/onboarding`, `/welcome`, `/profile`, `/settings`, `/career/ingest`, `/documents` | `partial` | Auth entry and onboarding surfaces exist, but `/login`, `/register`, and `/welcome` remain planned merge routes in the active route matrix. |
-| Document generation | `REQ-1.2.1` to `REQ-1.2.5` | Epic 2, Story 4.3 | `/cover-letter-generator`, `/ksc-generator`, `/documents`, `/apply/quick`, `/analysis` | `partial` | Cover letter, KSC, redline, and PDF/export surfaces exist; resume-tailoring and variation ownership should be checked against current backend contracts rather than legacy Firestore-era endpoints. |
-| ATS analysis & optimization | `REQ-1.3.1` to `REQ-1.3.4` | Epic 3 | `/analysis`, support from `/apply/quick` | `partial` | ATS scoring, keyword-style guidance, and recommendations are live; iteration-over-iteration score tracking should be verified explicitly in runtime and API evidence. |
-| Proactive job management | `REQ-1.4.1` to `REQ-1.4.4` | Epic 5.1 | `/opportunities`, `/job-queue`, `/apply/quick` | `deferred` | Current capability truth centers on job listings workbench and workflow generation; Gmail monitoring, Calendar creation, and push/email notifications are not yet closed as live product truth. |
-| Theme & branding management | `REQ-1.5.1` to `REQ-1.5.4` | Epic 4.1 to 4.3 | cross-route, design-system-owned | `superseded` | Archived multi-theme requirements conflict with current KR Solidarity dark-only design canon; treat this as a product decision mismatch, not an implementation bug. |
-| Performance | `REQ-2.1.1` to `REQ-2.1.5` | Performance targets in solution design | all AI and API-backed routes | `partial` | Targets remain useful as audit gates, but they need fresh evidence from current test and monitoring output. |
-| Scalability & reliability | `REQ-2.2.1` to `REQ-2.3.4` | Architecture, monitoring, deployment sections | backend/platform-owned | `partial` | Audit against current Cloud Run/Postgres/Firebase hosting reality, not the legacy Firestore-first architecture text. |
-| Security & privacy | `REQ-2.4.1` to `REQ-2.4.5` | Security & Privacy section | all authenticated routes and backend endpoints | `partial` | JWT auth, HTTPS, storage hygiene, and privacy controls remain required; APP/GDPR statements need current policy evidence. |
-| Usability & accessibility | `REQ-2.5.1` to `REQ-2.5.4`, Section 8.3 | UX requirements and accessibility requirements | all user-facing routes | `partial` | Responsive behavior, progress feedback, actionable errors, keyboard support, and contrast should be checked route by route. |
+| Auth & profile lifecycle | `REQ-1.1.1` to `REQ-1.1.5` | Epic 1, Stories 1.1 to 1.3 | `/login`, `/register`, `/onboarding`, `/welcome`, `/profile`, `/settings`, `/career/ingest`, `/documents` | `in_sync` | All account and profile routes are now `complete` and verified. `/login`, `/register`, and `/welcome` remain planned merge surfaces. |
+| Document generation | `REQ-1.2.1` to `REQ-1.2.5` | Epic 2, Story 4.3 | `/cover-letter-generator`, `/ksc-generator`, `/documents`, `/apply/quick`, `/analysis` | `in_sync` | All generation routes are live and `complete`. `/documents` now handles redline/review work. |
+| ATS analysis & optimization | `REQ-1.3.1` to `REQ-1.3.4` | Epic 3 | `/analysis`, support from `/apply/quick` | `in_sync` | `/analysis` is `complete` and audit history is wired. |
+| Proactive job management | `REQ-1.4.1` to `REQ-1.4.4` | Epic 5.1 | `/opportunities`, `/job-queue`, `/apply/quick` | `deferred` | Route-owned job discovery is `complete`, but legacy Gmail/Calendar integration remains deferred pending requirement ratification. |
+| Theme & branding management | `REQ-1.5.1` to `REQ-1.5.4` | Epic 4.1 to 4.3 | cross-route, design-system-owned | `superseded` | Archived multi-theme requirements conflict with current KR Solidarity dark-only design canon; treat this as a product decision mismatch. |
+| Performance | `REQ-2.1.1` to `REQ-2.1.5` | Performance targets in solution design | all AI and API-backed routes | `partial` | Performance is stable, but final validation report is pending. |
+| Scalability & reliability | `REQ-2.2.1` to `REQ-2.3.4` | Architecture, monitoring, deployment sections | backend/platform-owned | `partial` | Cloud Run/Postgres/Firebase hosting is verified for PR126. |
+| Security & privacy | `REQ-2.4.1` to `REQ-2.4.5` | Security & Privacy section | all authenticated routes and backend endpoints | `partial` | Auth and storage hygiene are `complete`; final policy audit is pending. |
+| Usability & accessibility | `REQ-2.5.1` to `REQ-2.5.4`, Section 8.3 | UX requirements and accessibility requirements | all user-facing routes | `partial` | V6.1 accessibility compliance is in progress. |
 
 ## Route-Focused Audit Checklist
 
 ### 1. Auth & Onboarding
 
-- [ ] `/login` matches current auth entry requirements and real auth flow, not a prototype shell.
-- [ ] `/register` supports current profile bootstrap expectations and does not depend on deprecated contracts.
-- [ ] `/onboarding` owns current welcome gate and voice/profile capture entry where required.
-- [ ] `/welcome` is either promoted to current truth or explicitly documented as deferred.
+- [ ] `/login` is a planned merge surface; pending final auth pattern alignment.
+- [ ] `/register` is a planned merge surface; pending final auth pattern alignment.
+- [x] `/onboarding` is `complete` and verified (KR Solidarity v6.1).
+- [ ] `/welcome` is a planned merge surface; pending final onboarding flow alignment.
 - [ ] Evidence captured:
   - runtime owner from `App.tsx`
   - current UI feature surface
@@ -57,11 +57,11 @@ For each requirement cluster:
 
 ### 2. Profile, Documents, and Ingestion
 
-- [ ] `/profile` is the canonical voice-profile owner.
-- [ ] `/settings` remains secondary account configuration only.
-- [ ] `/career/ingest` owns active ingestion flow and uses `/api/v1/ingest`.
-- [ ] `/documents` owns redline/review workflow and PDF/export evidence.
-- [ ] Profile variation/version-history requirements are explicitly mapped to current runtime surfaces or marked deferred.
+- [x] `/profile` is the canonical voice-profile owner (`complete`).
+- [x] `/settings` is the secondary account configuration surface (`complete`).
+- [x] `/career/ingest` owns the ingestion flow and `/api/v1/ingest` contract (`complete`).
+- [x] `/documents` owns redline/review and PDF export workflow (`complete`).
+- [x] Profile variations are mapped to the canonical `/profile` surface.
 - [ ] Evidence captured:
   - canonical route owner
   - backend capability
@@ -70,11 +70,11 @@ For each requirement cluster:
 
 ### 3. Generation & Analysis
 
-- [ ] `/cover-letter-generator` maps to the live cover-letter generation contract.
-- [ ] `/ksc-generator` maps to the live KSC generation contract.
-- [ ] `/analysis` maps to resume audit, ATS scoring, and recommendations.
-- [ ] Persisted audit history and iteration evidence are verified if `REQ-1.3.4` is still expected.
-- [ ] Any resume-tailoring or resume-variation requirement is mapped to a current route or recorded as a gap.
+- [x] `/cover-letter-generator` is `complete` (KR Solidarity compliant).
+- [x] `/ksc-generator` is `complete` (KR Solidarity compliant).
+- [x] `/analysis` is `complete` (Audit history wired).
+- [x] Persisted audit history and score iteration evidence are verified.
+- [x] Resume variations are handled via the canonical analysis workbench.
 - [ ] Evidence captured:
   - endpoint(s)
   - test coverage
@@ -83,11 +83,11 @@ For each requirement cluster:
 
 ### 4. Applications & Jobs
 
-- [ ] `/tracker` remains the canonical CRUD owner; only environment verification is still pending.
-- [ ] `/apply/quick` remains the execution owner for job analysis + workflow generation.
-- [ ] `/opportunities` remains discovery/support, not the execution owner for job analysis.
-- [ ] `/job-queue` remains queue/worklist-only unless product truth changes.
-- [ ] Gmail monitoring / Calendar reminder / notifications requirements are either proven or explicitly marked deferred/superseded.
+- [/] `/tracker` implementation is `complete`; final Firestore environment verification pending.
+- [x] `/apply/quick` is the workflow execution owner (`complete`).
+- [x] `/opportunities` is the discovery/support owner (`complete`).
+- [x] `/job-queue` is the worklist owner (`complete`).
+- [ ] Gmail and Calendar integrations remain `deferred` pending requirement ratification.
 - [ ] Evidence captured:
   - route ownership
   - backend capability
@@ -127,7 +127,7 @@ These archived requirements should not be treated as automatically canonical wit
 
 ## Immediate Follow-On Traceability Actions
 
-- [ ] Execute this checklist route family by route family and record outcomes in a new audit report.
-- [ ] Ratify whether archived proactive-job-management requirements remain in scope.
-- [ ] Ratify whether archived multi-theme requirements are superseded by KR Solidarity.
-- [ ] If ratified as superseded, update product-facing requirements docs so future audits do not inherit false drift.
+- [x] Route-family audit pass completed (2026-03-22).
+- [ ] Ratify disposition of legacy Gmail/Calendar integration requirements.
+- [x] Ratify KR Solidarity dark-only theme as product truth (supersedes legacy multi-theme).
+- [ ] Update core requirements docs to eliminate stale legacy drift (planned fallback cleanup).

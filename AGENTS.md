@@ -4,6 +4,7 @@ Career Copilot is an AI-powered job application assistant built with React, Fast
 
 **Note**: This file complements README.md by providing detailed context for AI agents and coding assistants across multiple platforms (GitHub Copilot, OpenAI Codex, Claude, etc.).
 For PR126 migration work, also read `docs/project/active/frontend-source-of-truth-migration/AGENTS.md`.
+For current AI Studio / Comet strategy, also read `docs/project/active/frontend-source-of-truth-migration/control/COMET-MANIFEST.md`.
 
 ## Quick Commands
 
@@ -73,12 +74,14 @@ cd frontend && yarn test:e2e
 - **Name**: KR Solidarity v6.0 – Manifesto-Driven Design System
 - **Foundation**: Material 3 Expressive, dark theme only ("Solidarity Mode")
 - **Canon Docs** (read these before any design work):
-  - [`docs/design/01_CANON.md`](docs/design/01_CANON.md) — Identity, Non-Negotiables, Zero-Flora Rule
+  - [`docs/design/01_CANON.md`](docs/design/01_CANON.md) — Identity, naming layers, emotional registers, non-negotiables
   - [`docs/design/02_SYSTEM.md`](docs/design/02_SYSTEM.md) — Palette, Typography, Shape Archetypes
   - [`docs/design/03_COMPONENTS.md`](docs/design/03_COMPONENTS.md) — Component Catalog
   - [`docs/design/04_ASSETS.md`](docs/design/04_ASSETS.md) — Asset IDs, Manifest, Naming
   - [`docs/design/05_FLOWS.md`](docs/design/05_FLOWS.md) — Page-level UX Flows
-  - [`.claude/skills/SKILL_REGISTRY.md`](.claude/skills/SKILL_REGISTRY.md) — 67 agent skills
+  - [`.claude/skills/SKILL_REGISTRY.md`](.claude/skills/SKILL_REGISTRY.md) — Active skill registry
+  - [`docs/project/active/frontend-source-of-truth-migration/control/route-matrix.md`](docs/project/active/frontend-source-of-truth-migration/control/route-matrix.md) — Route ownership and canonical family mapping
+  - [`docs/project/active/frontend-source-of-truth-migration/control/COMET-MANIFEST.md`](docs/project/active/frontend-source-of-truth-migration/control/COMET-MANIFEST.md) — Support-reference harvest strategy, archive inputs, route-family emotional registers
 - **Palette (v3.2):**
   - Background/surface: **Solidarity Charcoal** `#1A1714` (`--sys-color-charcoalBackground-base`)
   - Text: **Worker Ash** `#DAF6B3` (`--sys-color-worker-ash-base`)
@@ -99,7 +102,15 @@ cd frontend && yarn test:e2e
   - **STRICT ZERO-FLORA LOCKDOWN**: No flora, no Australian endemic species, no gum leaves
   - No bureaucratic motifs (passports, borders, visas, government seals)
   - No perfect geometry (`border-radius: 50%` banned); use KR Solidarity archetypes and `shape.*` tokens only
-- **Components** (reference implementations; canonical names):
+- **Public UI primitives** (preferred in docs, prompts, and engineering guidance):
+  - `Button`
+  - `Card`
+  - `Dialog`
+  - `Input`
+  - `Textarea`
+  - `Select`
+  - `Surface`
+- **Internal KR archetype mappings** (use when design semantics are the point):
   - `Strike` (primary action)
   - `Placard` (content container)
   - `Scaffold` (layout panels)
@@ -107,6 +118,12 @@ cd frontend && yarn test:e2e
   - `March` (select / flow elements)
   - `Megaphone` (modal / announcement)
   - `NativeAnchor` (symbolic anchor)
+- **Emotional Registers** (must guide UX copy, text formatting, and expressive typography):
+  - `Possibility` — dashboard, jobs, discovery
+  - `Direct Action` — tracker, ingestion, execution flows
+  - `Revelation` — ATS check, diagnostics, scoring
+  - `Craft` — submitted docs, templates, generation workspaces
+  - `Reflection` — profile, settings, trust-heavy account surfaces
 - **Deprecated Names / Compat Aliases (do not use in new code)**:
   - Component names: `Pebble`, `Stone`, `Slab`, `Jar`, `Cabinet`, `Lens`, `Signal`, `HaloPulses`
   - Shape aliases (still present in `frontend/src/design/styles/design-tokens.css` for compat): `--sys-shape-pebble01`, `--sys-shape-stone01`, `--sys-shape-slab01`, `--sys-shape-pebbleSurge01`, `--sys-shape-scaffoldSlab01`
@@ -183,6 +200,7 @@ The frontend migration and audit model depends on four explicit layers of author
 
 Rules:
 - Do not treat derived artifacts as the primary authority when they disagree with design, runtime, or capability truth.
+- Treat previous docs, legacy prompt packs, and support-only migration outputs as **archive/reference inputs**, never as execution truth.
 - Prefer runtime truth for current product behavior, design truth for layout/token intent, and capability truth for deciding whether a missing screen or workflow still belongs in target state.
 - Prototype `/kr/*` routes and duplicate batch surfaces are not canonical product truth unless explicitly promoted.
 
@@ -200,7 +218,8 @@ Rules:
 - ✅ Include confidence scores where the response schema supports it
 - ✅ Use async/await in FastAPI endpoints and Genkit flows
 - ✅ Use TypeScript strict mode (`tsconfig.json: "strict": true`)
-- ✅ Apply KR Solidarity v6.0 design tokens for all UI (no hardcoded colors, **zero-flora**, Strike/March/Megaphone/Placard/Scaffold/Substrate archetypes only)
+- ✅ Apply KR Solidarity v6.0 design tokens for all UI (no hardcoded colors, **zero-flora**, plain public UI naming first, internal archetypes as mappings)
+- ✅ Use the route-family emotional register to guide UX copy, text formatting, and expressive typography intensity
 - ✅ Validate all AI agent inputs before processing
 - ✅ Test AI agents with sample user data before deployment
 - ✅ Use environment variables for API keys, model configs, and secrets

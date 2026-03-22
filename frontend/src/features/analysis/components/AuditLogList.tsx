@@ -47,9 +47,7 @@ export const AuditLogList: React.FC<AuditLogListProps> = ({ items }) => {
             key={item.id}
             className="flex items-start gap-4 p-4 rounded-march border border-[var(--sys-color-concreteGrey-base)]/5 bg-white/5 hover:bg-white/10 transition-colors"
           >
-            <div className="mt-1">
-              {getStatusIcon(item.status)}
-            </div>
+            <div className="mt-1">{getStatusIcon(item.status)}</div>
             <div className="flex-1">
               <div className="flex justify-between items-center mb-1">
                 <span className="font-mono text-[10px] text-ink-gold/60 uppercase">

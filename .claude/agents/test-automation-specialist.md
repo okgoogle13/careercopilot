@@ -152,10 +152,10 @@ if (!hasM3Tests && component.isM3Component) {
 - **You:** Generate tests
 - **code-reviewer:** Review test quality, ensure best practices
 
-### With frontend-specialist
+### With prototype-harvest-manager
 
-- **You:** Generate tests for new components
-- **frontend-specialist:** Build components, ensure testability
+- **You:** Generate tests for newly ported or newly stabilized surfaces
+- **prototype-harvest-manager:** owns sequencing and decides whether the target is prototype-only or canonical
 
 ## Best Practices You Follow
 

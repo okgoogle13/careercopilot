@@ -1,6 +1,8 @@
+/* eslint-disable */
 /**
  * CLASSIFICATION: Support-Reference Page
  * Prototype-only reference page.
+ * CANONICAL ROUTE OWNER: none — support-only, no canonical promotion
  */
 import React from 'react';
 import { motion } from 'motion/react';

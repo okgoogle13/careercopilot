@@ -211,7 +211,6 @@ Pattern-based clearing:
 Works with:
 
 - FirestoreDataAccessServer MCP
-- mcp-orchestrator agent
 - Backend Genkit flows
 - Frontend data services
 - Real-time sync mechanisms

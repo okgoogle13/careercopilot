@@ -24,11 +24,8 @@ Legend: ✅ = Primary User | ⚪ = Secondary/Occasional User
 
 | Skill Name                   | Description                    | Frontend Spec | Fullstack Spec | Testing Spec | Design PM |
 | :--------------------------- | :----------------------------- | :-----------: | :------------: | :----------: | :-------: |
-| `react-component-scaffolder` | Creates .tsx/.css structure    |      ✅       |       ⚪       |              |           |
-| `react-page-scaffolder`      | Creates new page directories   |      ✅       |       ⚪       |              |           |
 | `storybook-scaffolder`       | Creates .stories.tsx files     |      ✅       |                |      ✅      |           |
 | `figma-to-component`         | Vision-based code generation   |      ✅       |                |              |    ⚪     |
-| `figma-to-page`              | Vision-based page generation   |      ✅       |                |              |           |
 | `component-builder`          | Writes M3-compliant React code |      ✅       |                |              |    ✅     |
 
 ## 3. Backend & Architecture Skills

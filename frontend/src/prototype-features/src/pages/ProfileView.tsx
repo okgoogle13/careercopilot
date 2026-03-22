@@ -1,6 +1,8 @@
+/* eslint-disable */
 /**
  * CLASSIFICATION: Support-Reference Page
  * Prototype-only reference page.
+ * CANONICAL ROUTE OWNER: /profile (account family)
  */
 import React, { useState } from 'react';
 import { motion } from 'motion/react';

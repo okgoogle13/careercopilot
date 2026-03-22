@@ -1,6 +1,6 @@
 # Target-State Route Matrix
 
-**Date:** 2026-03-21
+**Date:** 2026-03-22
 **Status:** Canonical living route-level target-state matrix
 **Canonical companion artifacts:**
 - `docs/project/active/frontend-source-of-truth-migration/control/blueprint.md`
@@ -18,8 +18,13 @@ For each live route, it shows:
 - which screen reference should drive target-state work
 - whether that route has route-specific wireframe coverage, shared family coverage, no required wireframe, or a missing wireframe
 - which backend capabilities belong to that route
-- which archived requirement clusters map to the route family
+- which archive requirement clusters map to the route family
 - what this means for the target component library
+
+Component-library note:
+- Route planning should use conventional route names and plain primitive labels such as `Button`, `Card`, `Dialog`, `Input`, `Select`, and `Surface`.
+- KR archetype names remain valid as internal design-system mappings, but they are not route architecture or public planning vocabulary.
+- Route families should also inherit a default emotional register that governs UX copy, text formatting, and expressive typography intensity in downstream prompts and audits.
 
 ## Decision Rules
 
@@ -27,7 +32,8 @@ For each live route, it shows:
 - Treat `/kr/*` routes as prototype-only and retire them from product truth.
 - Treat `/design-sidekick`, `/style-guide`, and `/test-tokens` as non-product routes.
 - Assign each retained backend-backed capability to one clear route owner.
-- Use archived requirements as audit inputs only; runtime/design/capability truth remain authoritative when requirements drift.
+- Use archive requirements as audit inputs only; runtime/design/capability truth remain authoritative when requirements drift.
+- Describe component work in plain primitive language first; treat KR archetypes as internal implementation mappings.
 
 ## Requirements Traceability Overlay
 
@@ -80,6 +86,25 @@ For each live route, it shows:
 | `/kr/onboarding` | none | `landing-prototype` | `retire` | `retired` | `OnboardFlow` | `frontend/src/screens/03_onboarding/OnboardFlow.tsx` | `frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml` | `shared_family_wireframe` | none | `retire` | Keep only as reference for onboarding improvements. |
 | `/kr/analysis` | none | `landing-prototype` | `retire` | `retired` | `AnalysisWorkbench` | `frontend/src/screens/05_analysis/AnalysisWorkbench.tsx` | `frontend/src/screens/05_analysis/05_analysis.wireframe.xml` | `shared_family_wireframe` | none | `retire` | Merge any useful ideas into `/analysis` instead of promoting this route. |
 | `/kr/dashboard` | none | `landing-prototype` | `retire` | `retired` | `DashboardOverview` | `frontend/src/screens/11_dashboard/DashboardOverview.tsx` | `frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml` | `shared_family_wireframe` | none | `retire` | Merge reference patterns into `/dashboard`; retire the route. |
+
+## Permanent Authenticated Navigation Lock (2026-03-22)
+
+Six routes locked as permanent side-nav items. This is the canonical source of truth for `navigation.schema.ts` and `Sidebar.tsx`.
+
+| Position | Nav Label | Route | Schema ID |
+| --- | --- | --- | --- |
+| 1 | Dashboard | `/dashboard` | `nav-dashboard` |
+| 2 | Jobs | `/opportunities` | `nav-jobs` |
+| 3 | Applications | `/tracker` | `nav-applications` |
+| 4 | Analysis | `/analysis` | `nav-analysis` |
+| 5 | Documents | `/documents` | `nav-documents` |
+| 6 | Profile | `/profile` | `nav-profile` |
+
+Routes excluded from permanent nav: `/career/ingest`, `/apply/quick`, `/ksc-generator`, `/cover-letter-generator`, `/job-queue`, `/settings`, `/onboarding`, `/welcome`, `/asset-library`, all `/prototype/*` routes, all internal tools.
+
+Settings is accessed via gear icon in the user profile card at the bottom of the sidebar — not a top-level nav item.
+
+---
 
 ## Target Component Library Summary
 
@@ -138,8 +163,8 @@ For each live route, it shows:
 
 - `/tracker` still needs final live Firebase/Firestore environment verification before closeout can claim full route evidence
 - `/login`, `/register`, and `/welcome` remain planned merge surfaces and should be included in the next route-family audit pass
-- archived proactive-job-management requirements (`REQ-1.4.*`) are not yet ratified against current capability truth
-- archived multi-theme requirements (`REQ-1.5.*`) conflict with current KR Solidarity dark-only canon and need explicit supersession handling
+- archive proactive-job-management requirements (`REQ-1.4.*`) are not yet ratified against current capability truth
+- archive multi-theme requirements (`REQ-1.5.*`) conflict with current KR Solidarity dark-only canon and need explicit supersession handling
 
 Resolved note:
 - `genkit_job_analysis`, `workflow_orchestration`, `resume_audit` history, and `/analysis` vs `/asset-library` ownership are no longer route-matrix blockers

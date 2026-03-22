@@ -83,6 +83,28 @@ Do not introduce:
 - avoid decorative slant or instability in core task flows unless the benchmark explicitly supports it
 - treat expressive display use as headline-level emphasis, not default body styling
 
+## Emotional Register Intensity
+
+Typography intensity must follow the page or route emotional register:
+
+- `Possibility`
+  - assertive display typography allowed in headings and hero summaries
+  - body copy stays stable and readable
+- `Direct Action`
+  - moderate expressive typography
+  - prioritize command clarity and CTA contrast over dramatic display play
+- `Revelation`
+  - moderate expressive typography focused on scores, summaries, and diagnostic hierarchy
+  - avoid decorative treatment in explanatory body text
+- `Craft`
+  - moderate editorial typography
+  - stronger section hierarchy, but keep drafting surfaces highly legible
+- `Reflection`
+  - restrained typography
+  - trust, calm, and legibility override expressive flourish
+
+When the route register is known, it overrides generic typography instincts.
+
 ## Scoring Methodology (100)
 
 - Stack compliance: 30
