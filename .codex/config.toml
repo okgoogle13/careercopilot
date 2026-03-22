@@ -5,9 +5,8 @@
 # GitHub MCP Server Configuration
 # The GitHub MCP server provides access to GitHub repositories, issues, PRs, and more
 [mcp_servers.github]
-# Environment variable containing your GitHub Personal Access Token
-# Create a PAT at: https://github.com/settings/personal-access-tokens
-# Required scopes: repo, workflow, read:org
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-github"]
 bearer_token_env_var = "CODEX_GITHUB_PERSONAL_ACCESS_TOKEN"
 
 # Flash Sidekick MCP Server
@@ -36,7 +35,7 @@ args = ["servers/test_coverage_sprint.py"]
 # Playwright (Efficiency Audit Only)
 [mcp_servers.playwright]
 command = "npx"
-args = ["-y", "@modelcontextprotocol/server-playwright"]
+args = ["-y", "@playwright/mcp"]
 disabled_tools = ["resize", "drag", "hover", "press_key", "console_messages", "network_requests", "file_upload"]
 
 # --- DEPRIORITIZED (Commented out to reduce noise) ---

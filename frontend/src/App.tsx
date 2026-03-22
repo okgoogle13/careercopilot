@@ -30,7 +30,7 @@ import { NotFound } from './features/not-found/NotFound';
 import { OnboardingRoute } from './features/onboarding/OnboardingRoute';
 import { WelcomeScreen } from './features/onboarding/WelcomeScreen';
 import { Opportunities } from './features/opportunities/Opportunities';
-import { ProfileView } from './features/profile/components/ProfileView';
+import { ProfileView } from './features/profile/ProfileView';
 import { Settings } from './features/settings/Settings';
 import { Layout } from './layouts/Layout';
 import { StyleGuide } from './features/style-guide/StyleGuide';

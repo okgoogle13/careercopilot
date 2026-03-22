@@ -1,5 +1,5 @@
 import { Placard, Strike } from '@/components/ui';
-import { ValidationDashboard } from '@/features/onboarding/components/ValidationDashboard';
+import { ValidationDashboard } from '@/features/analysis/components/ValidationDashboard';
 import { OnboardingProgress } from '@/features/onboarding/OnboardingProgress';
 import { useCareerIngestion } from '@/hooks/useCareerIngestion';
 import { useAnalytics } from '@/hooks/useAnalytics';

@@ -157,3 +157,64 @@ Both pages are below the ≥90 gate threshold. Neither is merge-blocking for the
 
 *Updated: 2026-03-21 — Skill-Reviewer + Per-Page Audit appended*
 *Auditor: Antigravity Agentic Design Gate (v2.0) + Claude Sonnet 4.6 subagent verification*
+
+---
+
+## Re-Run: Updated Skill Rubric (2026-03-21)
+
+This pass re-scored the latest screenshot evidence using the patched `m3-visual-audit` and `vision-scorer-mcp` skill guidance.
+
+**Evidence used**
+- `frontend/docs/design/generated/previews/register-fresh.png`
+- `frontend/docs/design/generated/previews/analysis-fresh.png`
+
+**Scoring mode**
+- `m3-visual-audit` manual fallback
+- single-screenshot evidence only
+- `vision-scorer-mcp` MCP resource unavailable in-session
+- local fallback CLI referenced by `visual-audit-assertions.spec.ts` (`tools/vision-scorer/cli.mjs`) is not present in this repo checkout
+
+### Re-Run Scores
+
+| Page | Route | Score | Status | Notes |
+|------|-------|-------|--------|-------|
+| Register | `/register` | **81/100** | needs_refinement | Strong typography and substrate; still too centered and auth-generic |
+| Analysis | `/analysis` | **80/100** | needs_refinement | Major improvement from prior pass; dark empty state now compliant, but density remains light |
+
+### /register — 81/100
+
+**Dimension scores**
+- Typography: 23/25
+- Color/token compliance: 21/25
+- Layout and hierarchy: 17/25
+- Expressive distinctiveness: 20/25
+
+**What improved in the updated rubric**
+- The page now gets explicit credit for depth cues already visible in the screenshot: textured substrate plus panel separation.
+- The score still stays below gate because the main scaffold remains centrally boxed and reads like a polished auth card more than an agitated asymmetric composition.
+
+**Highest-value fixes**
+1. Break the centered card pattern with an offset scaffold or split composition.
+2. Replace `CREATE ACCOUNT` and footer auth copy with solidarity-register language.
+3. Reduce the translucent/glass read of the shell and make the container feel more printed, layered, or torn-edge.
+
+### /analysis — 80/100
+
+**Dimension scores**
+- Typography: 20/25
+- Color/token compliance: 22/25
+- Layout and hierarchy: 21/25
+- Expressive distinctiveness: 17/25
+
+**What changed since the earlier pass**
+- The previous dominant blocker is gone: the right-side empty state now stays in dark territory and no longer violates the dark-only mandate.
+- The page still loses points because the empty state remains sparse, with limited narrative density and low evidence of interaction-state expressiveness.
+
+**Highest-value fixes**
+1. Replace the bare `No analysis yet` state with an idle audit construct that carries more hierarchy and visual storytelling.
+2. Strengthen emphasis between ingest controls and result state so the right panel feels like a destination, not a placeholder.
+3. Raise the scale and legibility of supporting microcopy and secondary controls.
+
+### Re-Run Decision
+
+The rerun materially improves confidence in `/analysis` and removes the earlier dark-only blocker. Neither page is at the `>=90` pass threshold yet, but both are now better framed by deterministic anchors rather than subjective scoring language.

@@ -1,11 +1,7 @@
-import admin from "firebase-admin";
-import functions from "firebase-functions";
+import admin from "./firebase";
+import * as functions from "firebase-functions/v1";
 import {JobListingExtractor} from "./services/job_listing_extractor";
-
-// Initialize Firebase Admin
-if (!admin.apps.length) {
-  admin.initializeApp();
-}
+import {getFunctions} from "firebase-admin/functions";
 
 // Genkit is initialized in ./genkit.ts and used by services
 // Initialize services
@@ -37,7 +33,8 @@ export const enqueueJobProcessing = functions.https.onCall(
       });
 
       // Enqueue the background task
-      await processJobListing.enqueue({
+      const queue = getFunctions().taskQueue("processJobListing");
+      await queue.enqueue({
         jobId: jobRef.id,
         source: data.source,
       });
@@ -50,12 +47,11 @@ export const enqueueJobProcessing = functions.https.onCall(
   },
 );
 
-export const processJobListing = functions.tasks
-  .taskQueue({
+export const processJobListing = functions.tasks.taskQueue({
     retryConfig: {
       maxAttempts: 5,
       minBackoffSeconds: 60,
-      maxBackoutSeconds: 600,
+      maxBackoffSeconds: 600,
       maxDoublings: 3,
     },
     rateLimits: {
@@ -80,8 +76,6 @@ export const processJobListing = functions.tasks
         result: result,
         completedAt: admin.firestore.FieldValue.serverTimestamp(),
       });
-
-      return {success: true, jobId};
     } catch (error) {
       console.error("Error processing job listing:", error);
 

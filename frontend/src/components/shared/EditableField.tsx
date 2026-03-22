@@ -1,4 +1,5 @@
-import { ScaffoldInput, Strike } from '@/components/ui';
+import { ScaffoldInput } from '../ui/ScaffoldInput';
+import { Strike } from '../ui/Strike';
 import { Check, Edit, Sparkles, X } from 'lucide-react';
 import React, { useState } from 'react';
 

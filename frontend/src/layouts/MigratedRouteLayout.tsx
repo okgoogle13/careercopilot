@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate, Outlet } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { KrDarkDock } from './KrDarkShell/components/KrDarkDock';
-import { Footer } from '../components/ui/Footer';
+import { Footer } from './shared/Footer';
 import { NAVIGATION_SCHEMA } from '../config/navigation.schema';
 
 /**
