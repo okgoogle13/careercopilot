@@ -12,11 +12,11 @@ interface VoiceProfileResponse {
 }
 
 interface VoiceProfileData {
-  tone?: string;
-  vocabularyLevel?: string;
-  style?: string;
-  sentenceComplexity?: string;
-  preferredPhrasing?: string[];
+  tone: string;
+  style: string;
+  vocabularyLevel: string;
+  preferredPhrasing: string[];
+  savedAt?: string;
 }
 
 /**
@@ -52,11 +52,22 @@ export async function createVoiceProfile(documents: string[]): Promise<VoiceProf
 }
 
 /**
- * Fetch current user's voice profile (if cached on backend).
- * Note: Backend doesn't expose a GET endpoint yet; this is a placeholder.
+ * Fetch current user's voice profile from the backend.
+ *
+ * @returns The user's voice profile, or null if none exists yet.
  */
 export async function getVoiceProfile(): Promise<VoiceProfileData | null> {
-  // Placeholder: backend would need a GET /api/v1/auth/voice-profile endpoint
-  // For now, voice profile is stored but not directly retrievable
-  return null;
+  const response = await fetch('/api/v1/auth/voice-profile', {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    const detail = errorData.detail || `HTTP ${response.status}`;
+    throw new Error(detail);
+  }
+
+  const data = await response.json();
+  return data ?? null;
 }

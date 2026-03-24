@@ -5,9 +5,9 @@
 # GitHub MCP Server Configuration
 # The GitHub MCP server provides access to GitHub repositories, issues, PRs, and more
 [mcp_servers.github]
-command = "npx"
-args = ["-y", "@modelcontextprotocol/server-github"]
-bearer_token_env_var = "CODEX_GITHUB_PERSONAL_ACCESS_TOKEN"
+command = "/bin/zsh"
+args = ["-lc", "export GITHUB_PERSONAL_ACCESS_TOKEN=\"${GITHUB_PERSONAL_ACCESS_TOKEN:-$CODEX_GITHUB_PERSONAL_ACCESS_TOKEN}\"; export GITHUB_TOKEN=\"${GITHUB_TOKEN:-$GITHUB_PERSONAL_ACCESS_TOKEN}\"; exec npx -y @modelcontextprotocol/server-github@0.6.2"]
+startup_timeout_sec = 45
 
 # Flash Sidekick MCP Server
 [mcp_servers.flash-sidekick]
@@ -37,6 +37,7 @@ args = ["servers/test_coverage_sprint.py"]
 command = "npx"
 args = ["-y", "@playwright/mcp"]
 disabled_tools = ["resize", "drag", "hover", "press_key", "console_messages", "network_requests", "file_upload"]
+startup_timeout_sec = 45
 
 # --- DEPRIORITIZED (Commented out to reduce noise) ---
 # [mcp_servers.firebase-mcp-server]

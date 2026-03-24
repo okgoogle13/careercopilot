@@ -1,11 +1,13 @@
 # PR126 Migration Dashboard
 
 Execution truth:
-- `control/blueprint.md`
-- `control/workflow.md`
+- `control/COMET-MANIFEST.md`
+- `control/AI-STUDIO-PROMPT-PACK.md`
 
 Planning narrative:
-- `control/blueprint.md`
+- `control/status.md`
+- `control/archive/route-matrix.md`
+- `control/archive/implementation-backlog.md`
 
 Evidence inputs (advisory only):
 - `docs/manifests/routes.json`
@@ -16,10 +18,15 @@ Evidence inputs (advisory only):
 
 ## Current Phase
 
-- **Shell Promotion COMPLETE + Phase 5 (API convergence) ACTIVE; program closeout still IN_PROGRESS (2026-03-18)** — `/welcome` and `/documents` were promoted into the canonical migrated shell; `/asset-library` remains the only intentional legacy-shell holdout (support-only). Canonical shell state is now 14 migrated + 1 protected + 4 public, and the runtime preserves 7 explicit legacy redirect paths in `App.tsx`. API wiring now funnels all jobs, opportunities, profile, ingestion, analysis, and quick-apply flows through the shared `frontend/src/api/*Service` layer, so PM gate metrics now need a final artifact refresh.
-- Evidence-weighted completion: approximately 90% — route ownership, shell promotion, and `/opportunities` closure are aligned, tracker backend CRUD is real, and ingestion convergence is substantially improved. However, `workflow_orchestration` and `resume_audit` history remain only backend-complete, while `/analysis` vs `/asset-library` cleanup and live tracker verification are still open.
+- **Migration closeout IN_PROGRESS (2026-03-24)** — shell promotion, route ownership cleanup, API convergence, and governed build-contract coverage are complete. Canonical shell state remains 14 migrated + 1 protected + 4 public, and the runtime preserves 7 explicit legacy redirect paths in `App.tsx`. The only program-level blocker is env-backed verification for `/tracker` and `/profile`.
+- Evidence-weighted completion: approximately 97% — all governed build contracts now validate, the canonical gap-fill planner has been rerun for the priority routes, and the PM artifacts now reflect the real remaining work: environment verification plus bounded cleanup.
 
 ## Recent Progress
+
+- Planning/control sync refreshed (2026-03-25):
+  - active control docs now reference the retained `control/archive/` route-matrix, backlog, and workflow baselines instead of missing root-level files
+  - `COMET-MANIFEST.md` and `AI-STUDIO-PROMPT-PACK.md` now annotate batches against canonical route owners and `contracts/*.xml`
+  - support-reference `Submitted Docs` prompts now explicitly preserve `/documents`, `/ksc-generator`, and `/cover-letter-generator` ownership separation
 
 - TSX identity-gate artifacts checked in for all three Figma-informed routes (2026-03-16):
   - `/analysis`: `identity_pass`
@@ -32,7 +39,20 @@ Evidence inputs (advisory only):
   - build contract generated and XSD-validated: `contracts/build-contract-opportunities.xml`
   - route-matrix: `implementation_status: complete`
   - route-specific identity gate checked in
-- All 12 build contracts now validate: 12/12 pass `build_contract.xsd`
+- Governed build-contract coverage refreshed (2026-03-24):
+  - `/profile` contract added: `contracts/build-contract-profile.xml`
+  - all 13 governed build contracts now validate against `build_contract.xsd`
+  - the governed contract set is now complete for the currently active product routes
+- Canonical gap-fill outputs regenerated (2026-03-24):
+  - `tmp/migration/tracker-gap-fill-plan.json`
+  - `tmp/migration/opportunities-gap-fill-plan.json`
+  - `tmp/migration/analysis-gap-fill-plan.json`
+  - `tmp/migration/dashboard-gap-fill-plan.json`
+  - `tmp/migration/root-gap-fill-plan.json`
+  - `tmp/migration/profile-gap-fill-plan.json`
+- Wireframe validator status refreshed (2026-03-24):
+  - `scripts/validate-wireframe-workflow.py --json-out tmp/migration/wireframe-workflow-report.json`
+  - current result: fail on warnings only (`79` warnings), with 0 schema failures and 0 build-contract XSD failures
 - Five Step 6B routes are gated and now reflected as complete in the route matrix:
   - `/ksc-generator`, `/cover-letter-generator`, `/settings`, `/job-queue`, `/onboarding`
   - token-enforcement: pass (0 violations), migration-audit: pass on all 5
@@ -72,20 +92,21 @@ Evidence inputs (advisory only):
 - `frontend/src/routes.tsx` retired; `frontend/src/App.tsx` is now the sole router authority.
 - `MigratedRouteLayout.tsx` viewMap extended for `/opportunities` (`KrDark-feed`) and `/job-queue` (`overview`).
 - Tri-layer truth scripts rerun: route integrity clean, 26 reachable paths scanned (`19` canonical routes + `7` redirects), 12/12 screen pairs, 18 governance tests pass.
-- Gap-fill plan run for `/opportunities` and `/tracker` — findings saved to `tmp/migration/`.
+- Gap-fill plan run for `/tracker`, `/opportunities`, `/analysis`, `/dashboard`, `/`, and `/profile` — findings saved to `tmp/migration/`.
 - `remaining-route-plan.md` created: `analysis/remaining-route-plan.md`.
 - `App.tsx` updated: migrated shell is authoritative for all canonical routes except `/asset-library` (support-only) which remains on `ProtectedLayout`.
 
-## Nested Tasks Added (2026-03-17)
+## Nested Tasks Added (2026-03-24)
 
 - **TSX Identity Gate** for `/tracker`: blocked on live env evidence.
+- **Env-backed route verification** for `/profile`: blocked on live Firebase/auth evidence.
 - **Shared-shell cleanup**: `Footer` adoption is now complete in `MigratedRouteLayout`.
 - **AuthGuard B3**: replace `bg-[#1A1714]` with semantic token (App.tsx:72).
-- **`/documents` Step 3d**: redline workspace — requires Step 3d execution.
 
 ## Next Gates
 
 - Step 3a `/tracker`: BLOCKED on Firebase/Firestore — see `analysis/remaining-route-plan.md §4` for exact env config and validation steps.
+- Step 3c `/profile`: BLOCKED on the same Firebase/auth environment — verify GET/POST `/api/v1/auth/voice-profile` before marking the route fully closed.
 - AuthGuard token: `App.tsx:72` — deferred, non-critical.
 
 ## Capability Blockers — ALL RESOLVED (2026-03-17)
@@ -100,12 +121,13 @@ Evidence inputs (advisory only):
 ## Remaining Open Items
 
 - `/tracker` closeout: BLOCKED on Firebase/Firestore env. `FIREBASE_PROJECT_ID` absent from `backend/.env`. Requires `FIREBASE_PROJECT_ID=careercopilot-468811` + Firestore service account. See `analysis/remaining-route-plan.md §4`.
+- `/profile` closeout: BLOCKED on Firebase/auth env. Requires the same local project configuration plus an authenticated verification pass against `GET/POST /api/v1/auth/voice-profile`.
 - Footer shell adoption: `RESOLVED` (adopted by `MigratedRouteLayout`).
 - AuthGuard B3: `App.tsx:72` `bg-[#1A1714]` → semantic token (deferred, non-critical).
-- PM artifact refresh: update `status.md`/`blueprint.md`/`route-matrix.md` to cite API convergence and note outstanding `/tracker` env evidence before closing the book.
+- PM artifact refresh: `status.md`, `implementation-backlog.*`, and `remaining-route-plan.md` synced on 2026-03-24; keep `blueprint.md` task-status summary aligned during final closeout.
 
 ## Next Actions
 
 1. Step 3a `/tracker`: set `FIREBASE_PROJECT_ID=careercopilot-468811` in `backend/.env`, start backend, verify `GET /api/applications/`, capture populated board screenshot ≥90.
-2. Wire canonical `Footer` into `MigratedRouteLayout` during the next shell pass.
+2. Step 3c `/profile`: with the same env restored, verify authenticated `GET` and `POST /api/v1/auth/voice-profile`, then confirm `/profile` remains the visible runtime owner.
 3. AuthGuard semantic token fix (`App.tsx:72`).

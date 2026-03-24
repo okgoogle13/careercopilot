@@ -1,6 +1,19 @@
 ---
 name: expressive-amplifier
-description: Turbocharge component styling with extreme contrast, variable fonts, spring physics, and semantic emotional coupling while maintaining professional standards
+description: >
+  Turbocharge component styling with extreme contrast, variable fonts, spring physics, and semantic
+  emotional coupling — AND annotate .md planning docs (COMET-MANIFEST, batch prompt packs,
+  blueprint files) with route-family emotional registers and KR token guidance.
+metadata:
+  filePattern: "**/*.{tsx,ts,md}"
+  triggers:
+    - "amplify"
+    - "expressive"
+    - "emotional register"
+    - "route-family register"
+    - "annotate batch"
+    - "apply emotional"
+    - "expressive-amplifier"
 ---
 
 # Expressive Amplifier
@@ -19,6 +32,92 @@ Amplify visual expression across typography, motion, color, and shapes while adh
 - **Accessibility Compliance**: Ensure WCAG AA contrast and reduced motion support while maximizing expression
 
 **NOT for**: Over-expression in data-heavy contexts (dashboards, tables, forms requiring focus), decorative animation without semantic intent, or bypassing accessibility requirements.
+
+---
+
+## Markdown Planning Mode
+
+Apply this skill to `.md` planning docs — COMET-MANIFEST, batch prompt packs, blueprint files, and route migration specs — to annotate them with route-family emotional registers and KR token guidance. This does **not** add TSX code; it inserts structured annotation blocks so downstream engineers and AI Studio prompts know which expressive register to enforce.
+
+### When to Use (Markdown Mode)
+
+- A batch prompt pack (`AI-STUDIO-PROMPT-PACK.md`) lacks register guidance for a route
+- A COMET manifest section needs explicit typography intensity and KR token pointers
+- A blueprint step specifies UI work without naming the emotional register
+- You are authoring a new batch prompt and need the register pre-filled
+
+### Route-Family → Emotional Register Mapping
+
+This is the canonical lookup for CareerCopilot. Sourced from COMET-MANIFEST §1 "Route-Family Emotional Registers":
+
+| Route / Surface | Route-Family | Emotional State | Typography Intensity | Primary KR Tokens |
+| --- | --- | --- | --- | --- |
+| `/dashboard`, onboarding, discovery | **Possibility** | `solidarity` | Assertive hero — 9× weight, 6× size | `solidarityRed`, `inkGold`, `typeSpringSlam` |
+| `/tracker`, `/career/ingest`, `/apply/quick` | **Direct Action** | `labor-pressure` | Moderate expressive — 5× weight, 3× size | `charcoalRed`, `stencilYellow`, `dragSettle` |
+| `/analysis`, ATS/diagnostic surfaces | **Revelation** | `labor-pressure` (summary focus) | Moderate expressive on scores/summaries | `charcoalRed`, `stencilYellow`, `pulseThrob` |
+| `/documents`, templates, generators | **Craft** | `solidarity` (editorial) | Moderate expressive with editorial structure | `solidarityRed`, `inkGold`, `dragSettle` |
+| `/profile`, `/settings`, auth | **Reflection** | `melancholy` | Restrained — 3× weight max, no spring slam | `activistSmokeGreen`, `worker-ash`, `melancholyBreath` |
+
+### Annotation Block Format
+
+Insert this block at the top of each batch prompt section or route-scoped section in a planning doc:
+
+```markdown
+<!-- expressive-amplifier: register=<REGISTER> intensity=<LEVEL> -->
+<!-- KR tokens: typography=<PATTERN> motion=<PATTERN> color=<COLOR> shadow=<SHADOW> -->
+```
+
+Fill in from the mapping table above. Example for a `/tracker` batch:
+
+```markdown
+<!-- expressive-amplifier: register=Direct Action intensity=moderate -->
+<!-- KR tokens: typography=laborExploitationPressure motion=dragSettle color=charcoalRed shadow=elevation3HoverLift -->
+```
+
+### Procedure: Annotating a Planning Doc
+
+1. **Identify surfaces** — scan the doc for route names, tab labels, or section descriptions.
+2. **Resolve register** — look up each surface in the Route-Family mapping table above.
+3. **Insert annotation block** — place it immediately before the batch prompt code-block or section header.
+4. **Add register summary** (optional, for long docs) — append a `## Expressive Register Summary` table at the end of the doc listing every route and its resolved register/tokens.
+5. **Do not modify batch prompt content** — annotation blocks are additive only. Do not rewrite prompt text.
+
+### Example: Annotating COMET-MANIFEST Batch Section
+
+**Before:**
+
+```markdown
+### B5 — Jobs Feed & Job Cards
+
+Task: Build the Jobs tab with a scrollable feed of job cards...
+```
+
+**After:**
+
+```markdown
+### B5 — Jobs Feed & Job Cards
+<!-- expressive-amplifier: register=Possibility intensity=assertive -->
+<!-- KR tokens: typography=solidarityProtest motion=typeSpringSlam color=solidarityRed shadow=solidarityBleed -->
+
+Task: Build the Jobs tab with a scrollable feed of job cards...
+```
+
+### Example: Register Summary Table (append to end of doc)
+
+```markdown
+## Expressive Register Summary
+
+| Route / Surface | Register | Typography | Motion | Color | Shadow |
+|---|---|---|---|---|---|
+| Dashboard (B1, B3) | Possibility | solidarityProtest | typeSpringSlam | solidarityRed / inkGold | solidarityBleed |
+| Jobs (B5, B6) | Possibility | solidarityProtest | typeSpringSlam | solidarityRed | solidarityBleed |
+| ATS Check (B7) | Revelation | laborExploitationPressure | pulseThrob | charcoalRed / stencilYellow | elevation3HoverLift |
+| Applications (B8, B14) | Direct Action | laborExploitationPressure | dragSettle | charcoalRed | elevation3HoverLift |
+| Submitted Docs (B9-B13) | Craft | solidarityProtest (editorial) | dragSettle | solidarityRed / inkGold | inkOffset |
+| Profile (MIG-202, B18) | Reflection | melancholyLonging | melancholyBreath | activistSmokeGreen / worker-ash | subtle glow |
+```
+
+---
 
 ## Capabilities
 

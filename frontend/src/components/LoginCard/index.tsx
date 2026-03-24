@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 
 export interface LoginCredentials {
@@ -36,7 +35,10 @@ export const LoginCard: React.FC<LoginCardProps> = ({ onLogin, onRegisterClick, 
         Sign In
       </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-4"
+      >
         <div>
           <label
             className="block text-xs font-mono uppercase tracking-widest mb-1"
@@ -91,7 +93,10 @@ export const LoginCard: React.FC<LoginCardProps> = ({ onLogin, onRegisterClick, 
       </form>
 
       {onRegisterClick && (
-        <p className="mt-6 text-center text-xs" style={{ color: 'var(--sys-color-concreteGrey-base)' }}>
+        <p
+          className="mt-6 text-center text-xs"
+          style={{ color: 'var(--sys-color-concreteGrey-base)' }}
+        >
           No account?{' '}
           <button
             type="button"

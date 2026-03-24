@@ -1,35 +1,23 @@
 /**
  * Voice Profile Status Card
  *
- * Displays the current voice profile characteristics (tone, vocabulary level)
- * or indicates when no profile exists yet.
+ * Displays confirmation that a voice profile exists,
+ * or a calm empty state when none has been established yet.
  */
 
 import { Zap } from 'lucide-react';
 
 export interface VoiceProfileStatusCardProps {
-  tone?: string;
-  vocabularyLevel?: string;
-  createdAt?: string;
+  profileSaved?: boolean;
+  savedAt?: string;
   loading?: boolean;
 }
 
-/**
- * Card showing current voice profile characteristics or empty state.
- *
- * @param tone - The identified tone of the user's writing
- * @param vocabularyLevel - The assessed vocabulary sophistication
- * @param createdAt - When the voice profile was created
- * @param loading - Whether profile is being loaded
- */
 export function VoiceProfileStatusCard({
-  tone,
-  vocabularyLevel,
-  createdAt,
+  profileSaved = false,
+  savedAt,
   loading = false,
 }: VoiceProfileStatusCardProps) {
-  const hasProfile = tone && vocabularyLevel;
-
   if (loading) {
     return (
       <div
@@ -47,13 +35,13 @@ export function VoiceProfileStatusCard({
           }}
           className="text-sm font-mono uppercase tracking-widest"
         >
-          Loading profile...
+          Reading your voice...
         </div>
       </div>
     );
   }
 
-  if (!hasProfile) {
+  if (!profileSaved) {
     return (
       <div
         style={{
@@ -73,19 +61,19 @@ export function VoiceProfileStatusCard({
           style={{ color: 'var(--sys-color-concreteGrey-base)' }}
           className="text-sm font-mono uppercase tracking-widest opacity-70"
         >
-          No Voice Profile Yet
+          Your voice is not yet on record
         </p>
         <p
           style={{ color: 'var(--sys-color-paperWhite-base)' }}
           className="text-xs mt-2 opacity-60 font-primary leading-relaxed"
         >
-          Submit a writing sample below to create your voice profile.
+          Share a piece of your writing below. Every word you choose is already part of who you are.
         </p>
       </div>
     );
   }
 
-  // Has profile - display characteristics
+  // Profile confirmed saved
   return (
     <div
       style={{
@@ -95,8 +83,7 @@ export function VoiceProfileStatusCard({
       }}
       className="p-6 border-2 border-opacity-30"
     >
-      {/* Header */}
-      <div className="flex items-center gap-3 mb-6">
+      <div className="flex items-center gap-3 mb-4">
         <Zap
           className="w-5 h-5"
           style={{ color: 'var(--sys-color-solidarityRed-base)' }}
@@ -105,56 +92,28 @@ export function VoiceProfileStatusCard({
           style={{ color: 'var(--sys-color-paperWhite-base)' }}
           className="font-display text-lg font-bold uppercase tracking-tight"
         >
-          Your Voice Profile
+          Voice on Record
         </h3>
       </div>
 
-      {/* Profile attributes */}
-      <div className="space-y-4">
-        {/* Tone */}
-        <div>
-          <label
-            style={{ color: 'var(--sys-color-concreteGrey-base)' }}
-            className="block text-xs font-mono uppercase tracking-widest mb-2 opacity-70"
-          >
-            Writing Tone
-          </label>
+      <p
+        style={{ color: 'var(--sys-color-concreteGrey-base)' }}
+        className="font-primary text-sm opacity-80 leading-relaxed"
+      >
+        Your writing has been read and kept. Generated documents will carry the weight of your own
+        voice, not a template's.
+      </p>
+
+      {savedAt && (
+        <div className="mt-4 pt-4 border-t border-concreteGrey/20">
           <p
-            style={{ color: 'var(--sys-color-inkGold-base)' }}
-            className="font-primary text-base font-medium"
+            style={{ color: 'var(--sys-color-concreteGrey-base)' }}
+            className="text-xs opacity-50 font-mono"
           >
-            {tone}
+            Recorded {new Date(savedAt).toLocaleDateString()}
           </p>
         </div>
-
-        {/* Vocabulary Level */}
-        <div>
-          <label
-            style={{ color: 'var(--sys-color-concreteGrey-base)' }}
-            className="block text-xs font-mono uppercase tracking-widest mb-2 opacity-70"
-          >
-            Vocabulary Level
-          </label>
-          <p
-            style={{ color: 'var(--sys-color-signalGreen-base)' }}
-            className="font-primary text-base font-medium"
-          >
-            {vocabularyLevel}
-          </p>
-        </div>
-
-        {/* Created date */}
-        {createdAt && (
-          <div className="pt-4 border-t border-concreteGrey/20">
-            <p
-              style={{ color: 'var(--sys-color-concreteGrey-base)' }}
-              className="text-xs opacity-50 font-mono"
-            >
-              Created {new Date(createdAt).toLocaleDateString()}
-            </p>
-          </div>
-        )}
-      </div>
+      )}
     </div>
   );
 }

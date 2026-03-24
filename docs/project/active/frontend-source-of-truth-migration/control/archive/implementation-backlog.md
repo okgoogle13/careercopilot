@@ -1,7 +1,7 @@
 # Frontend Source-Of-Truth Migration Implementation Backlog
 
-**Date:** 2026-03-22
-**Status:** Syncing with Phase 6 Completion
+**Date:** 2026-03-24
+**Status:** Prototype-first sequence sync refreshed after AI Studio prompt-order update
 **Canonical planning inputs:**
 - `docs/project/active/frontend-source-of-truth-migration/control/blueprint.md`
 - `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.md`
@@ -15,17 +15,21 @@ Convert the migration plan into a feature-first, component-aware backlog that ca
 
 | Priority | Action | Backlog anchor | Recommended agent |
 | --- | --- | --- | --- |
-| `P0` | Finalize /tracker verification (Firebase blocked) | `MIG-101`, `MIG-102` | `Claude` |
+| `P0` | Complete prototype-wide AI Studio batch pass (`B1-B19`) before harvest | `COMET` | `Google AI Studio` |
+| `P0` | Preserve `MIG-202` as the `/profile` voice-ownership lock during later prototype batches | `MIG-202` | `Google AI Studio` |
+| `P0` | Finalize /tracker verification (Firebase blocked) after prototype harvest | `MIG-101`, `MIG-102` | `Claude` |
+| `P0` | Finalize /profile verification (Firebase/auth blocked) after prototype harvest | `MIG-202` | `Claude` |
 | `P0` | Resolve Firebase Environment (FIREBASE_PROJECT_ID) | `ENV-001` | `Human` |
-| `P1` | Complete Phase 3 Build Contracts | `MIG-007`, `MIG-008` | `Claude` |
-| `P2` | Execute Route Cleanup post-Step 6 | `MIG-402`, `MIG-404` | `Codex` |
+| `P1` | Maintain Phase 3 Build Contracts & Gap Plans | `MIG-007`, `MIG-008` | `Claude` |
+| `P2` | Execute bounded route cleanup post-verification | `MIG-402`, `MIG-404` | `Codex` |
 
 ## Current Review Snapshot
 
-- **Current phase:** Phase 3/4 Execution and Phase 6 Cleanup
-- **Overall Progress:** ~95%
-- **Critical Blocker:** Firebase Environment (Step 3a/3c)
-- **Recently Completed:** Step 6 (Route Cleanup & Feature Migration)
+- **Current phase:** Prototype-first AI Studio completion, then canonical harvest and verification
+- **Overall Progress:** ~97%
+- **Critical Blocker:** Firebase/auth environment for `/tracker` and `/profile`
+- **Recently Completed:** Governed build-contract coverage and canonical gap-fill regeneration
+- **Sequence lock:** Finish the selected prototype-wide AI Studio pass before starting any new harvest work
 
 ## Milestones
 
@@ -44,8 +48,8 @@ Convert the migration plan into a feature-first, component-aware backlog that ca
 | MIG-004 | Review migration scripts for fit-for-purpose | `completed` |
 | MIG-005 | Define token-enforcement gate for touched routes | `completed` |
 | MIG-006 | Document and validate the wireframe workflow | `completed` |
-| MIG-007 | Generate route-level wireframe build contracts | `in_progress` |
-| MIG-008 | Derive tokens-first gap-fill plans | `in_progress` |
+| MIG-007 | Generate route-level wireframe build contracts | `completed` |
+| MIG-008 | Derive tokens-first gap-fill plans | `completed` |
 
 ### M2: Phase 2.1 and Phase 2.2 - Applications and Smart Ingestion
 
@@ -63,7 +67,7 @@ Convert the migration plan into a feature-first, component-aware backlog that ca
 
 ### M3: Phase 2.3 and Phase 2.4 - Voice Profile and Documents Redline
 
-**Status:** Partially Unblocked
+**Status:** Implemented / Verification Blocked
 **Acceptance:**
 - `/documents` owns redline workflow.
 - `/profile` owns voice profile workflow.
@@ -71,7 +75,7 @@ Convert the migration plan into a feature-first, component-aware backlog that ca
 | ID | Title | Status |
 | --- | --- | --- |
 | MIG-201 | Add redline workflow ownership to /documents | `completed` |
-| MIG-202 | Add voice profile management to /profile | `in_progress` |
+| MIG-202 | Add voice profile management to /profile | `completed_deferred_verif` |
 
 ### M4: Phase 2.5 and Phase 3 Support - Resume Audit, Jobs, and Explicit Deferrals
 
@@ -112,7 +116,7 @@ Convert the migration plan into a feature-first, component-aware backlog that ca
 | ID | Title | Status |
 | --- | --- | --- |
 | MIG-601 | Opportunities & Job Queue Migration | `completed` |
-| MIG-602 | Workbench & KSC Implementation | `completed` |
+| MIG-602 | Submitted Docs & KSC Implementation | `completed` |
 | MIG-603 | Finalization & Cover Letter Implementation | `completed` |
 | MIG-604 | Settings Integration | `completed` |
 | MIG-605 | Analysis & Apply Quick Refactor | `completed` |
@@ -128,20 +132,26 @@ Convert the migration plan into a feature-first, component-aware backlog that ca
 
 ## Suggested Implementation Order
 
-1. **ENV-001:** Resolve Firebase Environment Variables (**URGENT**)
-2. **MIG-007 / MIG-008:** Finalize Build Contracts & Gap Plans
-3. **MIG-202:** Complete Voice Profile UI
-4. **MIG-402 / MIG-404:** Execute Final Structural Sanitization
+1. **COMET B1-B4:** Complete shell and discovery foundations across the prototype
+2. **COMET B5-B13:** Complete jobs, ATS, Submitted Docs, and voice CTA surfaces
+3. **MIG-202 lock:** Reconfirm `/profile` voice ownership before any later settings-oriented batch work
+4. **COMET B14-B19:** Complete extended prototype features, keeping `B18` utility-only and secondary to `/profile`
+5. **Prototype-wide alignment sweep:** Normalize naming, ownership, tone, and harvest readiness across the prototype
+6. **Canonical harvest:** Harvest the aligned prototype output into the runtime repo
+7. **ENV-001 + verification:** Resolve environment and capture live verification for `/tracker` and `/profile`
+8. **MIG-402 / MIG-404:** Execute final bounded structural sanitization
+9. **MIG-403:** Re-run token/dependency integrity after cleanup
 
 ## Readiness Score
 
 - **Formula:** `(completed_milestones / 6) * 80 + blocker_bonus`
-- **Current Stats:** 4 complete, 2 in progress.
-- **Score:** ~73/100 (Yellow Band)
+- **Current Stats:** 5 complete, 1 in progress.
+- **Score:** ~86/100 (Yellow Band)
 - **Note:** Blocker bonus (20) withheld due to Firebase/Firestore environment issues.
 
 ## Known Blockers
 
-- **Firebase/Firestore Environment:** `FIREBASE_PROJECT_ID` missing; blocks `/tracker` (3a) and `/profile` (3c).
-- **Validation Pipeline:** Completion check for Step 3 is deferred until environment is stable.
+- **Firebase/Firestore Environment:** `FIREBASE_PROJECT_ID` missing; blocks `/tracker` and `/profile` live verification.
+- **Prototype-first sequence discipline:** Harvest must not begin before the prototype-wide AI Studio pass and alignment sweep are complete.
+- **Verification Pipeline:** Final closeout for `/tracker` and `/profile` is deferred until environment is stable.
 - **Structural Cleanup:** Must stay bounded to route-family alignment to avoid high-churn refactor.

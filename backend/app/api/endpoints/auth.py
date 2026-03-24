@@ -63,6 +63,14 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
 
 
+class VoiceProfileResponse(BaseModel):
+    tone: str
+    style: str
+    vocabularyLevel: str
+    preferredPhrasing: list[str]
+    savedAt: str | None = None  # ISO timestamp from metadata if available
+
+
 @router.get("/me", response_model=dict[str, str])
 async def get_current_user_info(
     current_user: User = Depends(get_current_user),
@@ -76,6 +84,25 @@ async def get_current_user_info(
         "name": current_user.name,
         "message": "User information retrieved from local cache",
     }
+
+
+@router.get("/voice-profile", response_model=VoiceProfileResponse | None)
+async def get_voice_profile(
+    current_user: User = Depends(get_current_user),
+) -> VoiceProfileResponse | None:
+    """Return the user's current voice profile, or null if none exists."""
+    from app.ai_operations.voice_profiler import voice_profiler
+
+    result = await voice_profiler.generate_voice_profile(user_id=current_user.id)
+    if result is None:
+        return None
+    return VoiceProfileResponse(
+        tone=result.get("tone", ""),
+        style=result.get("style", result.get("professional_vocabulary", "")),
+        vocabularyLevel=result.get("vocabularyLevel", "Moderate"),
+        preferredPhrasing=result.get("common_phrases", result.get("preferredPhrasing", [])),
+        savedAt=result.get("savedAt"),
+    )
 
 
 @router.post("/voice-profile", response_model=dict[str, str])

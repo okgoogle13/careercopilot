@@ -4,13 +4,13 @@ Run all commands from repo root.
 
 ## Migration control scripts
 
-`python3 scripts/validate-wireframe-workflow.py`
+`python3 scripts/validate-wireframe-workflow.py --json-out tmp/migration/wireframe-workflow-report.json`
 - Validates canonical wireframes against:
   - `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.json`
   - `docs/project/active/frontend-source-of-truth-migration/control/gap-map.json`
 - Writes: `tmp/migration/wireframe-workflow-report.json`
 
-`python3 scripts/derive-gap-fill-plan.py --route-id <route-id> --build-contract <contract.xml>`
+`python3 scripts/derive-gap-fill-plan.py --route-id <route-id> --build-contract <contract.xml> --json-out tmp/migration/<route-id>-gap-fill-plan.json`
 - Derives tokens-first reuse/build guidance for one route
 - Default output:
   - `tmp/migration/<route-id>-gap-fill-plan.json`

@@ -1,7 +1,8 @@
 """Tests for /auth API endpoints."""
 
+import sys
 from types import SimpleNamespace
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
@@ -47,3 +48,37 @@ class TestAuthEndpoints:
         response = auth_client.post("/api/auth/voice-profile", json=[" ", ""])
         assert response.status_code == 400
         assert "At least one document" in response.json()["detail"]
+
+    def test_get_voice_profile_returns_profile(self, auth_client):
+        """Should return mapped voice profile fields when profile exists."""
+        mock_result = {
+            "tone": "Professional",
+            "style": "Concise and direct",
+            "vocabularyLevel": "Advanced",
+            "common_phrases": ["leveraged", "delivered outcomes"],
+            "savedAt": "2025-01-15T10:00:00Z",
+        }
+        mock_vp_instance = MagicMock()
+        mock_vp_instance.generate_voice_profile = AsyncMock(return_value=mock_result)
+        mock_vp_module = MagicMock()
+        mock_vp_module.voice_profiler = mock_vp_instance
+        with patch.dict(sys.modules, {"app.ai_operations.voice_profiler": mock_vp_module}):
+            response = auth_client.get("/api/auth/voice-profile")
+        assert response.status_code == 200
+        data = response.json()
+        assert data["tone"] == "Professional"
+        assert data["style"] == "Concise and direct"
+        assert data["vocabularyLevel"] == "Advanced"
+        assert data["preferredPhrasing"] == ["leveraged", "delivered outcomes"]
+        assert data["savedAt"] == "2025-01-15T10:00:00Z"
+
+    def test_get_voice_profile_returns_null_when_none(self, auth_client):
+        """Should return null body when no voice profile exists."""
+        mock_vp_instance = MagicMock()
+        mock_vp_instance.generate_voice_profile = AsyncMock(return_value=None)
+        mock_vp_module = MagicMock()
+        mock_vp_module.voice_profiler = mock_vp_instance
+        with patch.dict(sys.modules, {"app.ai_operations.voice_profiler": mock_vp_module}):
+            response = auth_client.get("/api/auth/voice-profile")
+        assert response.status_code == 200
+        assert response.json() is None

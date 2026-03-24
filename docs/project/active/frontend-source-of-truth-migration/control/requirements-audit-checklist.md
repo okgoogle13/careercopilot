@@ -3,19 +3,30 @@
 **Date:** 2026-03-22
 **Status:** Final audit control artifact
 **Source requirements:**
+
 - `docs/archive/solution-design.md`
 - `docs/archive/technical-requirements.md`
 **Current authority for implementation truth:**
 - runtime truth: `frontend/src/App.tsx` and routed feature/page surfaces
 - design truth: `frontend/src/screens/**/*.wireframe.xml` with paired screen TSX
 - capability truth: mounted backend endpoints under `backend/app/api/endpoints/`
-- active migration controls: `control/route-matrix.md`, `control/route-matrix.json`, `control/gap-map.md`, `control/gap-map.json`, `control/status.md`
+- active migration controls: `control/COMET-MANIFEST.md`, `control/AI-STUDIO-PROMPT-PACK.md`, `control/archive/route-matrix.md`, `control/archive/route-matrix.json`, `control/archive/implementation-backlog.md`, `control/status.md`, and `contracts/*.xml`
 
 ## How To Use This Checklist
 
 Use this checklist when auditing whether shipped or in-flight implementation still matches the archived requirements set.
 
+When a prompt or prototype uses the locked user-facing nav labels, review them against these canonical route mappings:
+- `Dashboard` → `/dashboard`
+- `Jobs` → `/opportunities`
+- `ATS Check` → `/analysis`
+- `Applications` → `/tracker`
+- `Submitted Docs` → `/documents`
+- `Profile` → `/profile`
+- `Settings` utility-only → `/settings`
+
 For each requirement cluster:
+
 1. Confirm the owning route and runtime surface still match the route matrix.
 2. Confirm backend capability still exists and remains mounted.
 3. Record evidence from runtime truth, capability truth, tests, and active control docs.
@@ -57,11 +68,12 @@ For each requirement cluster:
 
 ### 2. Profile, Documents, and Ingestion
 
-- [x] `/profile` is the canonical voice-profile owner (`complete`).
+- [x] `/profile` is the canonical voice-profile owner (`complete_deferred_verif` pending env-backed GET/POST confirmation).
 - [x] `/settings` is the secondary account configuration surface (`complete`).
 - [x] `/career/ingest` owns the ingestion flow and `/api/v1/ingest` contract (`complete`).
 - [x] `/documents` owns redline/review and PDF export workflow (`complete`).
 - [x] Profile variations are mapped to the canonical `/profile` surface.
+- [x] Any prototype-only `Submitted Docs` composite is treated as support-reference only and does not override `/documents`, `/ksc-generator`, or `/cover-letter-generator` contract ownership.
 - [ ] Evidence captured:
   - canonical route owner
   - backend capability
@@ -75,6 +87,7 @@ For each requirement cluster:
 - [x] `/analysis` is `complete` (Audit history wired).
 - [x] Persisted audit history and score iteration evidence are verified.
 - [x] Resume variations are handled via the canonical analysis workbench.
+- [x] Prompt-pack references treat `/cover-letter-generator` and `/ksc-generator` as dedicated generator owners even when prototype support-reference flows preview those states under `Submitted Docs`.
 - [ ] Evidence captured:
   - endpoint(s)
   - test coverage

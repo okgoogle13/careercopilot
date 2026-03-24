@@ -90,19 +90,21 @@ Component-library note:
 ## Permanent Authenticated Navigation Lock (2026-03-22)
 
 Six routes locked as permanent side-nav items. This is the canonical source of truth for `navigation.schema.ts` and `Sidebar.tsx`.
+These labels are user-facing navigation labels only. Route ownership and route paths remain unchanged.
 
 | Position | Nav Label | Route | Schema ID |
 | --- | --- | --- | --- |
 | 1 | Dashboard | `/dashboard` | `nav-dashboard` |
 | 2 | Jobs | `/opportunities` | `nav-jobs` |
 | 3 | Applications | `/tracker` | `nav-applications` |
-| 4 | Analysis | `/analysis` | `nav-analysis` |
-| 5 | Documents | `/documents` | `nav-documents` |
+| 4 | ATS Check | `/analysis` | `nav-analysis` |
+| 5 | Submitted Docs | `/documents` | `nav-documents` |
 | 6 | Profile | `/profile` | `nav-profile` |
 
 Routes excluded from permanent nav: `/career/ingest`, `/apply/quick`, `/ksc-generator`, `/cover-letter-generator`, `/job-queue`, `/settings`, `/onboarding`, `/welcome`, `/asset-library`, all `/prototype/*` routes, all internal tools.
 
 Settings is accessed via gear icon in the user profile card at the bottom of the sidebar — not a top-level nav item.
+`/documents` remains the document hub and must support both submitted/generated document history and templates for resume, cover letter, and KSC drafting.
 
 ---
 

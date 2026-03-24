@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import { Route, Routes, Link } from 'react-router-dom';
 import { ApplyQuickWorkspaceReference } from './src/pages/ApplyQuickWorkspaceReference';
@@ -39,64 +38,142 @@ const PrototypeIndex: React.FC = () => (
 
     {/* Applications family → /apply/quick, /tracker */}
     <section style={{ marginBottom: '1.5rem' }}>
-      <h2 style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#888', marginBottom: '0.5rem' }}>
+      <h2
+        style={{
+          fontSize: '0.75rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.1em',
+          color: '#888',
+          marginBottom: '0.5rem',
+        }}
+      >
         Applications family
       </h2>
-      <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+      <ul
+        style={{
+          listStyle: 'none',
+          padding: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.5rem',
+        }}
+      >
         <li>
           <Link to="/prototype/apply-quick">Apply Quick Workspace</Link>
-          <span style={{ marginLeft: '0.75rem', fontSize: '0.8rem', color: '#888' }}>→ canonical: /apply/quick</span>
+          <span style={{ marginLeft: '0.75rem', fontSize: '0.8rem', color: '#888' }}>
+            → canonical: /apply/quick
+          </span>
         </li>
         <li>
           <Link to="/prototype/past-applications">Past Applications</Link>
-          <span style={{ marginLeft: '0.75rem', fontSize: '0.8rem', color: '#888' }}>→ canonical: /tracker</span>
+          <span style={{ marginLeft: '0.75rem', fontSize: '0.8rem', color: '#888' }}>
+            → canonical: /tracker
+          </span>
         </li>
       </ul>
     </section>
 
     {/* Documents family → /documents */}
     <section style={{ marginBottom: '1.5rem' }}>
-      <h2 style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#888', marginBottom: '0.5rem' }}>
+      <h2
+        style={{
+          fontSize: '0.75rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.1em',
+          color: '#888',
+          marginBottom: '0.5rem',
+        }}
+      >
         Documents family
       </h2>
-      <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+      <ul
+        style={{
+          listStyle: 'none',
+          padding: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.5rem',
+        }}
+      >
         <li>
           <Link to="/prototype/resume">Tailored Resume (stub)</Link>
-          <span style={{ marginLeft: '0.75rem', fontSize: '0.8rem', color: '#888' }}>→ canonical: /documents</span>
+          <span style={{ marginLeft: '0.75rem', fontSize: '0.8rem', color: '#888' }}>
+            → canonical: /documents
+          </span>
         </li>
         <li>
           <Link to="/prototype/cover-letter">Cover Letter Metrics (stub)</Link>
-          <span style={{ marginLeft: '0.75rem', fontSize: '0.8rem', color: '#888' }}>→ canonical: /documents</span>
+          <span style={{ marginLeft: '0.75rem', fontSize: '0.8rem', color: '#888' }}>
+            → canonical: /documents
+          </span>
         </li>
       </ul>
     </section>
 
     {/* Account family → /profile */}
     <section style={{ marginBottom: '1.5rem' }}>
-      <h2 style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#888', marginBottom: '0.5rem' }}>
+      <h2
+        style={{
+          fontSize: '0.75rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.1em',
+          color: '#888',
+          marginBottom: '0.5rem',
+        }}
+      >
         Account family
       </h2>
-      <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+      <ul
+        style={{
+          listStyle: 'none',
+          padding: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.5rem',
+        }}
+      >
         <li>
           <Link to="/prototype/profile">Profile</Link>
-          <span style={{ marginLeft: '0.75rem', fontSize: '0.8rem', color: '#888' }}>→ canonical: /profile</span>
+          <span style={{ marginLeft: '0.75rem', fontSize: '0.8rem', color: '#888' }}>
+            → canonical: /profile
+          </span>
         </li>
       </ul>
     </section>
 
     {/* Support-reference only — no canonical product route */}
     <section style={{ marginBottom: '1.5rem' }}>
-      <h2 style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#888', marginBottom: '0.5rem' }}>
+      <h2
+        style={{
+          fontSize: '0.75rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.1em',
+          color: '#888',
+          marginBottom: '0.5rem',
+        }}
+      >
         Support-reference only (no canonical promotion)
       </h2>
-      <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+      <ul
+        style={{
+          listStyle: 'none',
+          padding: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.5rem',
+        }}
+      >
         <li>
           <Link to="/prototype/library">Component Library</Link>
-          <span style={{ marginLeft: '0.75rem', fontSize: '0.8rem', color: '#888' }}>→ component reference, support-only</span>
+          <span style={{ marginLeft: '0.75rem', fontSize: '0.8rem', color: '#888' }}>
+            → component reference, support-only
+          </span>
         </li>
         <li>
           <Link to="/prototype/image-studio">Image Studio</Link>
-          <span style={{ marginLeft: '0.75rem', fontSize: '0.8rem', color: '#888' }}>→ support-only</span>
+          <span style={{ marginLeft: '0.75rem', fontSize: '0.8rem', color: '#888' }}>
+            → support-only
+          </span>
         </li>
       </ul>
     </section>
