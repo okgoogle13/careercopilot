@@ -142,7 +142,7 @@
           "owner_route": null,
           "owner_surface": null,
           "type": "planning_spec_generation",
-          "status": "in_progress",
+          "status": "completed",
           "depends_on": [
             "MIG-006"
           ],
@@ -159,10 +159,11 @@
           ],
           "completion_artifacts": [
             "docs/project/active/frontend-source-of-truth-migration/contracts/wireframe-build-contract-prompt.md",
-            "docs/project/active/frontend-source-of-truth-migration/contracts/build-contract-tracker.xml"
+            "docs/project/active/frontend-source-of-truth-migration/contracts/build-contract-tracker.xml",
+            "docs/project/active/frontend-source-of-truth-migration/contracts/build-contract-profile.xml"
           ],
-          "blocking_contract_gaps": 2,
-          "non_blocking_contract_gaps": 4
+          "blocking_contract_gaps": 0,
+          "non_blocking_contract_gaps": 0
         },
         {
           "id": "MIG-008",
@@ -172,7 +173,7 @@
           "owner_route": null,
           "owner_surface": null,
           "type": "planning_spec_generation",
-          "status": "in_progress",
+          "status": "completed",
           "depends_on": [
             "MIG-007"
           ],
@@ -190,7 +191,13 @@
           ],
           "completion_artifacts": [
             "docs/project/active/frontend-source-of-truth-migration/analysis/tokens-first-gap-fill-workflow.md",
-            "scripts/derive-gap-fill-plan.py"
+            "scripts/derive-gap-fill-plan.py",
+            "tmp/migration/tracker-gap-fill-plan.json",
+            "tmp/migration/opportunities-gap-fill-plan.json",
+            "tmp/migration/analysis-gap-fill-plan.json",
+            "tmp/migration/dashboard-gap-fill-plan.json",
+            "tmp/migration/root-gap-fill-plan.json",
+            "tmp/migration/profile-gap-fill-plan.json"
           ]
         }
       ]
@@ -318,6 +325,7 @@
         {
           "id": "MIG-201",
           "title": "Add redline workflow ownership to /documents",
+          "status": "completed",
           "plan_phase_ref": "Phase 2.4",
           "area": "documents",
           "owner_route": "/documents",
@@ -343,6 +351,7 @@
         {
           "id": "MIG-202",
           "title": "Add voice profile management to /profile",
+          "status": "completed",
           "plan_phase_ref": "Phase 2.3",
           "area": "account_profile",
           "owner_route": "/profile",
@@ -359,6 +368,11 @@
           ],
           "deliverables": [
             "make profile route the visible owner of voice profile management"
+          ],
+          "completion_evidence": [
+            "ProfileView mounts VoiceProfileManagementSection as the canonical route-owned surface",
+            "voice profile support components and focused tests are checked in",
+            "remaining blocker is env-backed Firebase/auth verification, not route ownership"
           ]
         }
       ]
@@ -504,6 +518,7 @@
         {
           "id": "MIG-402",
           "title": "Mark reference-only components and cleanup candidates",
+          "status": "planned",
           "plan_phase_ref": "Phase 4",
           "area": "component_library_cleanup",
           "owner_route": null,
@@ -522,6 +537,7 @@
         {
           "id": "MIG-403",
           "title": "Verify token and dependency integrity after route cleanup",
+          "status": "planned",
           "plan_phase_ref": "Phase 4",
           "area": "component_library_cleanup",
           "owner_route": null,
@@ -541,6 +557,7 @@
         {
           "id": "MIG-404",
           "title": "Sanitize frontend structure after route-family migration",
+          "status": "planned",
           "plan_phase_ref": "Phase 4",
           "area": "frontend structure cleanup",
           "owner_route": null,

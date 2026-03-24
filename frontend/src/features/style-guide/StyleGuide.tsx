@@ -500,7 +500,9 @@ export function StyleGuide() {
 
               <Placard
                 elevation="raised"
-                header={<h3 className="text-title-medium font-black uppercase">Input and Textarea</h3>}
+                header={
+                  <h3 className="text-title-medium font-black uppercase">Input and Textarea</h3>
+                }
               >
                 <div className="space-y-6">
                   <ScaffoldInput

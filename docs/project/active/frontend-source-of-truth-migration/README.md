@@ -8,13 +8,19 @@ Start here:
 - `control/status.md` — current phase, active blockers, next actions
 - `control/workflow.md` — deterministic script and gate sequence
 - `control/pm/dashboard.md` — executive snapshot (phase, gates, blockers, next steps)
+- `control/solution-requirements-tech-spec.md` — baseline product scope, route ownership, and traceability spec
+- `control/comet-frontend-feature-spec-prompt-pack.md` — detailed `B1-B19` Google AI Studio / Comet prompt pack for the prototype-first pass
+- `control/comet-profile-voice-ownership-prompt-pack.md` — route-specific AI Studio / Comet prompt pack for `/profile` voice ownership
 - `control/tracker-step-3a-execution-packet.md` — first `/tracker` stub-generation packet
 - `control/route-matrix.json` — route ownership truth for migration work
 - `control/gap-map.json` — backend capability to frontend surface mapping
 
 Current execution lanes:
+- Prototype-first AI Studio completion is the active sequence: finish the selected `B1-B19` batch pass, keep `MIG-202` locked as the `/profile` voice-owner override during later prototype batches, then run one prototype-wide alignment sweep before harvest.
 - `/tracker` Step 3a closeout is blocked by the local Firebase/Firestore environment (`:8000` lacks Firebase config and `:8001` stalls on `/api/applications`), so leave Step 3a blocked unless the environment is restored.
-- Step 6B + Phase 4 support-reference normalization is the active lane; use the approved audit packs for `landing`, `dashboard`, and `analysis` before consuming any Figma-derived assets, and run the TSX identity gate before closing any such route.
+- `/profile` Step 3c closeout is blocked by the same local Firebase/auth environment; route ownership is implemented, but live GET/POST verification is still required.
+- Canonical harvest starts only after the prototype-wide pass is complete; do not treat `MIG-202` completion as an immediate harvest trigger.
+- Step 6B + Phase 4 support-reference normalization remains downstream cleanup; use the approved audit packs for `landing`, `dashboard`, and `analysis` before consuming any Figma-derived assets, and run the TSX identity gate before closing any such route.
 
 Structure:
 - `control/` — canonical living docs and control artifacts
@@ -34,18 +40,18 @@ Support-reference flow reminder:
 Primary scripts:
 - `scripts/validate-wireframe-workflow.py`
   - validates canonical wireframes against `control/route-matrix.json` and `control/gap-map.json`
-  - writes `tmp/migration/wireframe-workflow-report.json`
+  - writes `tmp/migration/wireframe-workflow-report.json` when run with `--json-out`
 - `scripts/derive-gap-fill-plan.py`
   - produces tokens-first route reuse/build guidance
-  - writes `tmp/migration/<route-id>-gap-fill-plan.json`
+  - writes `tmp/migration/<route-id>-gap-fill-plan.json` when run with `--json-out` or by default
 - `scripts/scaffold-from-contract.py`
   - scaffolds files from `contracts/build-contract-tracker.xml`
 
 Run from repo root:
 
 ```bash
-python3 scripts/validate-wireframe-workflow.py
-python3 scripts/derive-gap-fill-plan.py --route-id tracker --build-contract docs/project/active/frontend-source-of-truth-migration/contracts/build-contract-tracker.xml
+python3 scripts/validate-wireframe-workflow.py --json-out tmp/migration/wireframe-workflow-report.json
+python3 scripts/derive-gap-fill-plan.py --route-id tracker --build-contract docs/project/active/frontend-source-of-truth-migration/contracts/build-contract-tracker.xml --json-out tmp/migration/tracker-gap-fill-plan.json
 python3 scripts/scaffold-from-contract.py --build-contract docs/project/active/frontend-source-of-truth-migration/contracts/build-contract-tracker.xml --supplementary-briefs docs/project/active/frontend-source-of-truth-migration/contracts/tracker-supplementary-component-briefs.xml --dry-run
 ```
 

@@ -1,16 +1,16 @@
 {
   "artifact": "tokens_first_gap_fill_plan",
-  "generated_at": "2026-03-23T16:01:27.504432+00:00",
-  "route_id": "opportunities",
-  "target_route": "/opportunities",
-  "family": "jobs",
+  "generated_at": "2026-03-23T16:01:27.503898+00:00",
+  "route_id": "root",
+  "target_route": "/",
+  "family": "landing",
   "component_library_action": "merge",
-  "route_status": "expand",
-  "build_contract": "docs/project/active/frontend-source-of-truth-migration/contracts/build-contract-opportunities.xml",
+  "route_status": "merge",
+  "build_contract": "docs/project/active/frontend-source-of-truth-migration/contracts/build-contract-root.xml",
   "summary": {
-    "canonical_owner": "Opportunities",
-    "screen_reference": "frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
-    "paired_runtime_surface": "frontend/src/features/opportunities/Opportunities.tsx",
+    "canonical_owner": "LandingPage",
+    "screen_reference": "frontend/src/screens/01_landing/HeroLanding.tsx",
+    "paired_runtime_surface": "frontend/src/features/landing/LandingPage.tsx",
     "token_rule": "reuse behavior and ownership from runtime; reuse presentation only if token-clean; otherwise rewrite styling to semantic tokens"
   },
   "candidate_token_list": [],
@@ -21,29 +21,29 @@
   },
   "components": [
     {
-      "component_name": "Opportunities",
-      "owner_route": "/opportunities",
-      "owner_surface": "Opportunities",
+      "component_name": "LandingPage",
+      "owner_route": "/",
+      "owner_surface": "LandingPage",
       "canonical_status": "canonical",
-      "selected_base": "frontend/src/features/opportunities/Opportunities.tsx",
+      "selected_base": "frontend/src/features/landing/LandingPage.tsx",
       "reuse_mode": "keep_behavior_rewrite_styling",
-      "token_state": "clean",
+      "token_state": "unknown",
       "existing_candidates": [
         {
-          "path": "frontend/src/features/opportunities/Opportunities.tsx",
+          "path": "frontend/src/features/landing/LandingPage.tsx",
           "layer": "runtime",
           "behavior_score": 40,
           "ownership_score": 25,
-          "design_alignment_score": 0,
-          "drift_penalty": 0,
-          "total_score": 65,
-          "token_state": "clean",
+          "design_alignment_score": 6,
+          "drift_penalty": 10,
+          "total_score": 61,
+          "token_state": "unknown",
           "asset_state": "clean",
-          "promotion_eligibility": "eligible",
+          "promotion_eligibility": "behavior_only",
           "required_actions": []
         },
         {
-          "path": "docs/project/active/frontend-source-of-truth-migration/sources/consolidated-reference/components/Opportunities.tsx",
+          "path": "docs/project/active/frontend-source-of-truth-migration/sources/consolidated-reference/components/LandingPage.tsx",
           "layer": "support_reference",
           "behavior_score": 18,
           "ownership_score": 25,
@@ -59,7 +59,9 @@
           ]
         }
       ],
-      "required_actions": [],
+      "required_actions": [
+        "rewrite_styling_to_semantic_tokens"
+      ],
       "source_of_truth": [
         "route_matrix",
         "runtime_or_reference_tsx"
@@ -67,16 +69,16 @@
       "blocking_gaps": []
     },
     {
-      "component_name": "LookoutDiscovery",
-      "owner_route": "/opportunities",
-      "owner_surface": "Opportunities",
+      "component_name": "HeroLanding",
+      "owner_route": "/",
+      "owner_surface": "LandingPage",
       "canonical_status": "support",
-      "selected_base": "frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
+      "selected_base": "frontend/src/screens/01_landing/HeroLanding.tsx",
       "reuse_mode": "blocked",
       "token_state": "clean",
       "existing_candidates": [
         {
-          "path": "frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
+          "path": "frontend/src/screens/01_landing/HeroLanding.tsx",
           "layer": "design_reference",
           "behavior_score": 10,
           "ownership_score": 18,
@@ -89,7 +91,7 @@
           "required_actions": []
         },
         {
-          "path": "frontend/src/_reference/migration/phase3/phase3-batch3/LookoutDiscovery.tsx",
+          "path": "frontend/src/_reference/migration/phase3/phase3-batch2/HeroLanding.tsx",
           "layer": "batch_reference",
           "behavior_score": 0,
           "ownership_score": 18,

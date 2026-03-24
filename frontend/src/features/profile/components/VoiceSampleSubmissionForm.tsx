@@ -1,8 +1,7 @@
 /**
  * Voice Sample Submission Form
  *
- * Form component for submitting writing samples to extract voice profile.
- * Uses React Hook Form for validation and state management.
+ * Form for submitting a writing sample used to establish the user's voice profile.
  */
 
 import { useCallback } from 'react';
@@ -10,11 +9,10 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-// Validation schema
 const voiceSampleSchema = z.object({
   writingSample: z
     .string()
-    .min(50, 'Writing sample must be at least 50 characters')
+    .min(50, 'At least 50 characters needed — a short paragraph is enough.')
     .max(5000, 'Writing sample must not exceed 5000 characters'),
 });
 
@@ -26,13 +24,6 @@ export interface VoiceSampleSubmissionFormProps {
   error?: string | null;
 }
 
-/**
- * Form for submitting a writing sample for voice profile extraction.
- *
- * @param onSubmit - Callback when form is submitted with validated sample
- * @param loading - Whether submission is in progress
- * @param error - Error message to display if submission failed
- */
 export function VoiceSampleSubmissionForm({
   onSubmit,
   loading = false,
@@ -56,7 +47,7 @@ export function VoiceSampleSubmissionForm({
         await onSubmit(data.writingSample);
         reset();
       } catch (err) {
-        // Error handled by parent component
+        // Error surfaced via the error prop from the parent
       }
     },
     [onSubmit, reset]
@@ -70,22 +61,21 @@ export function VoiceSampleSubmissionForm({
       className="w-full"
     >
       <div className="space-y-4">
-        {/* Instructions */}
+        {/* Prompt — Reflection register */}
         <div
           className="text-sm leading-relaxed"
           style={{ color: 'var(--sys-color-paperWhite-base)' }}
         >
           <p className="opacity-80">
-            Paste a writing sample (cover letter, email, or other professional text) to create your
-            voice profile. This helps us understand your writing style for personalized content
-            generation.
+            Paste anything you have written — a cover letter, an email, a short reflection. A
+            paragraph is enough. We will take it from there.
           </p>
         </div>
 
         {/* Textarea */}
         <textarea
           {...register('writingSample')}
-          placeholder="Paste your writing sample here... (minimum 50 characters)"
+          placeholder="Your words go here..."
           disabled={isProcessing}
           style={{
             backgroundColor: 'var(--sys-color-charcoalBackground-steps-2)',
@@ -98,15 +88,7 @@ export function VoiceSampleSubmissionForm({
           className="w-full p-4 border-2 transition-colors duration-200 min-h-[200px] font-primary text-base resize-none focus:outline-none focus:border-opacity-100"
         />
 
-        {/* Character count */}
-        <div
-          className="text-xs text-right opacity-60"
-          style={{ color: 'var(--sys-color-concreteGrey-base)' }}
-        >
-          {/* Character count would be dynamic in real usage */}
-        </div>
-
-        {/* Error message */}
+        {/* Validation error */}
         {errors.writingSample && (
           <div
             style={{ color: 'var(--sys-color-kr-charcoalRed-base)' }}
@@ -130,7 +112,7 @@ export function VoiceSampleSubmissionForm({
           </div>
         )}
 
-        {/* Submit button */}
+        {/* Submit */}
         <button
           type="submit"
           disabled={isProcessing}
@@ -144,7 +126,7 @@ export function VoiceSampleSubmissionForm({
           }}
           className="w-full px-6 py-3 font-display font-bold text-sm uppercase tracking-wide transition-all duration-200 disabled:cursor-not-allowed hover:opacity-90"
         >
-          {isProcessing ? 'Analyzing...' : 'Create Voice Profile'}
+          {isProcessing ? 'Reading your voice...' : 'Record My Voice'}
         </button>
       </div>
     </form>

@@ -1,8 +1,8 @@
 /**
  * Voice Profile Management Section
  *
- * Container component for voice profile feature.
- * Provides heading, description, and integration point for all voice profile components.
+ * Container component for the voice profile feature on /profile.
+ * Canonical owner of voice_profile_capture affordances.
  */
 
 import { Wand2 } from 'lucide-react';
@@ -12,10 +12,6 @@ export interface VoiceProfileManagementSectionProps {
   onProfileCreated?: () => void;
 }
 
-/**
- * Full voice profile management section for the profile page.
- * Includes heading, description, and creation panel.
- */
 export function VoiceProfileManagementSection({
   onProfileCreated,
 }: VoiceProfileManagementSectionProps) {
@@ -41,17 +37,15 @@ export function VoiceProfileManagementSection({
         />
       </div>
 
-      {/* Description */}
+      {/* Section Description — Reflection register: calm, grounded, trust-heavy */}
       <p
         style={{ color: 'var(--sys-color-concreteGrey-base)' }}
         className="font-primary text-sm opacity-70 leading-relaxed max-w-prose"
       >
-        Your voice profile captures your writing style, tone, and vocabulary level. This information
-        helps us personalize generated content (cover letters, resumes, etc.) to match your
-        authentic professional voice.
+        The way you write is already yours. Sharing a piece of it here means the documents we build
+        together will sound like you — not like everyone else.
       </p>
 
-      {/* Voice Profile Creation Panel */}
       <VoiceProfileCreationPanel onSuccess={onProfileCreated} />
     </section>
   );

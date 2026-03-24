@@ -56,13 +56,13 @@ Use these labels only to clarify execution state. They are not a separate govern
 
 | Step | Status | Notes |
 | --- | --- | --- |
-| Step 1 — Fix Planning Inputs | ⚠️ In Progress | Python tests passing (18/18), JS validator parity still under review; conduit entries in `control/fit-for-purpose.md` pending. |
+| Step 1 — Fix Planning Inputs | ✅ Complete | Python governance tests and JS validator parity are green; fit-for-purpose dispositions are recorded. |
 | Step 2 — Resolve Build-Contract Gate (`/tracker`) | ✅ Complete | Contract approved; `/tracker` route now has execution-ready status once backend auth/data blockers clear. |
 | Step 3a — `/tracker` CRUD | ✅ Complete (deferred verification) | All runtime wiring done; Firebase env verification pending per `control/status.md`. |
 | Step 3b — `/career/ingest` Smart Ingestion | ✅ Complete | Upload-to-save flow converged on `/api/v1/ingest`; token/brand gates satisfied. |
-| Step 3c — `/analysis` / resume audit | 🟡 Mixed | Route expanded, backend history wired but persisted state still flagged; dismiss after audit pack confirms design retention. |
-| Step 3d — `/apply/quick` | ✅ Complete | Execution owner locked; job analysis results panel extracted as support component. |
-| Step 4 — Wireframe Workflow Repair | 🟡 Warning | Validator flagged asset-integrity and schema drift; re-run validator after asset sync and manifest reconciliation. |
+| Step 3c — `/profile` voice profile | ✅ Complete (deferred verification) | Runtime owner and support components are implemented; auth/Firebase verification still pending. |
+| Step 3d — `/documents` redline | ✅ Complete | Route-owned redline workspace is implemented; contract and tests are checked in. |
+| Step 4 — Wireframe Workflow Repair | ✅ Complete (warning burn-down pending) | Governed build-contract coverage is complete and canonical gap-fill outputs are regenerated; validator warnings remain but schema/XSD are green. |
 | Step 5 — Cleanup | ⚪ Planned | Post-verification tracking cleanup pending final tracker env gate.
 
 ---

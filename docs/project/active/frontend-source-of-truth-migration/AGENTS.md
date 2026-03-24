@@ -4,11 +4,12 @@ This file is the migration-specific agent guide. It complements the repo-root `A
 
 ## Execution Truth (Read First)
 
-- `control/blueprint.md` (execution authority)
-- `control/workflow.md` (gate order + definitions)
-- `control/blueprint.md` (working execution truth; explains why)
-- `control/status.md` (status only; never overrides blueprint/workflow)
+- `control/COMET-MANIFEST.md` (active prototype prompting + harvest sequence authority)
+- `control/AI-STUDIO-PROMPT-PACK.md` (expanded batch prompts)
+- `control/status.md` (current program state and blockers)
 - `control/pm/dashboard.md` (visibility + delegation support; not authority)
+- `control/archive/route-matrix.json` and `control/archive/route-matrix.md` (retained route-planning baseline)
+- `control/archive/implementation-backlog.md` and `control/archive/workflow.md` (retained backlog and workflow baseline)
 
 ## Authority Layers (In Order)
 
@@ -16,14 +17,15 @@ This file is the migration-specific agent guide. It complements the repo-root `A
 - **Design truth**: `frontend/src/screens/**/*.wireframe.xml` + paired `frontend/src/screens/**/*.tsx`
 - **Capability truth**: mounted endpoints in `backend/app/api/endpoints/`
 - **Contracts (route-level execution locks)**: `contracts/*.xml`
-- **Support artifacts**: `control/route-matrix.json`, `control/gap-map.json`, manifests, migration-kit outputs
+- **Support artifacts**: `control/archive/route-matrix.json`, `control/archive/implementation-backlog.md`, manifests, and prototype/reference outputs
 
 Rule: support artifacts may inform decisions but must never override runtime/design/capability truth.
 
 ## Canonical Inputs (Route-Level Work)
 
-- `control/route-matrix.json` (route classification + owner)
-- `control/gap-map.json` (component state + backlog)
+- `control/archive/route-matrix.json` (route classification + owner)
+- `control/archive/implementation-backlog.md` (retained milestone and backlog baseline)
+- `control/archive/workflow.md` (retained workflow/gate baseline)
 - `contracts/*.xml` (build contracts + supplementary briefs)
 - `frontend/src/App.tsx` (route reachability)
 - `frontend/src/screens/**` (wireframe + paired TSX truth)
@@ -41,14 +43,14 @@ These are evidence inputs only (useful for drift detection, not authority):
 
 ## Working Method (One Route at a Time)
 
-1. Pick a route from `control/route-matrix.json` and confirm it is reachable in `frontend/src/App.tsx`.
+1. Pick a route from `control/archive/route-matrix.json` and confirm it is reachable in `frontend/src/App.tsx`.
 2. **Global Primitive Check**: Audit the route for shared primitives that must be migrated or synced (e.g., `Logo`, `Sidebar`, `TopNav`, `Footer`, `AuthGuard`, `KrDarkDock`).
 3. Confirm the intended design surface exists under `frontend/src/screens/` (or record it as missing).
 4. Confirm backend capability exists (mounted endpoint + any required auth expectations).
 5. If wireframes are in scope: validate first, then lock execution with a build contract in `contracts/`.
 6. Implement in runtime truth (`frontend/src/features/**` + `frontend/src/pages/**`) while preserving the authority order.
 7. Run route-local gates (`token-enforcement`, and `migration-audit` when the workflow requires it).
-8. Update `control/status.md` with what changed, what’s blocked, and the next executable step.
+8. Update `control/status.md` and `control/pm/dashboard.md` with what changed, what’s blocked, and the next executable step.
 
 ## Support-Reference & Identity Gate Addendum
 
@@ -76,7 +78,7 @@ Route-local gates (run for every touched route):
 bash .claude/skills/token-enforcement/scripts/run-token-enforcement.sh <route>
 ```
 
-Optional/conditional route-local audit gate (only when `control/workflow.md` says so):
+Optional/conditional route-local audit gate (only when `control/archive/workflow.md` says so):
 
 ```bash
 bash .claude/skills/migration-audit/scripts/run-migration-audit.sh <route>
