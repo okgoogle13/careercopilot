@@ -49,6 +49,16 @@
   - `build-contract-profile.xml` added to complete governed route coverage for `/profile`.
   - `scripts/derive-gap-fill-plan.py` rerun for `tracker`, `opportunities`, `analysis`, `dashboard`, `root`, and `profile`; outputs now live under `tmp/migration/`.
   - `scripts/validate-wireframe-workflow.py --json-out tmp/migration/wireframe-workflow-report.json` confirms 13/13 build contracts valid with 0 XSD failures; current remaining wireframe issue is warning burn-down (`79` warnings), not schema breakage.
+- **Prototype Harvest Blocker Sprint Closed (2026-03-25)**:
+  - All 5 prototype harvest blockers resolved. Readiness score: 35 → 95/100.
+  - `README.md` rewritten as support/reference-only; stale Firebase, `react-router-dom`, History API routing claims removed.
+  - `guidelines.md` route section replaced with contract-backed mapping table; obsolete routes removed.
+  - `ImageStudioPage.tsx` voice CTA corrected: `/profile` is canonical voice owner (was Settings).
+  - `GettingStartedChecklist.tsx` extension-first item replaced with neutral job-intake action.
+  - `PROTOTYPE-HARVEST-PATTERN-CATALOG.md` created with 6 route family entries.
+  - `prototype_v2.0` is now a harvest-prepared support/reference source.
+  - PM milestone M16 added; Phase 6 added to phase-plan.yaml as COMPLETE.
+
 - **Planning sync refresh (2026-03-25)**:
   - active control docs now point at the retained `control/archive/` route-matrix, backlog, and workflow baselines instead of missing root-level files.
   - `AI-STUDIO-PROMPT-PACK.md` and `COMET-MANIFEST.md` now use contract-alignment annotations instead of expressive-token annotations.
