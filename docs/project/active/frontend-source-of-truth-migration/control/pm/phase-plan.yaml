@@ -57,3 +57,19 @@ phases:
       - "0 /kr/* prototype routes in product truth"
       - "Step 6A is complete and Step 6B route-family cleanup is complete, including the Step 6.1 /opportunities branch"
       - "Figma-informed or generated TSX does not close with unresolved identity_gate_failed status"
+
+  - id: phase-6-prototype-harvest-prep
+    name: "Phase 6: Prototype Harvest Prep Sprint"
+    status: COMPLETE
+    completed_date: "2026-03-25"
+    readiness_score: "95/100"
+    gates_required:
+      - "rg returns CLEAN for stale routing/Firebase claims in README+guidelines"
+      - "rg returns CLEAN for voice ownership drift in ImageStudioPage.tsx"
+      - "rg returns CLEAN for Install Extension in GettingStartedChecklist.tsx"
+      - "PROTOTYPE-HARVEST-PATTERN-CATALOG.md contains all 6 route families"
+    exit_criteria:
+      - "prototype_v2.0 is harvest-prepared support/reference source"
+      - "all 5 blocker conditions resolved with verification evidence"
+      - "readiness score >= 85/100"
+    notes: "All gates passed 2026-03-25. Score: 95/100. Remaining 5pts: OnboardingPathBifurcation.tsx and LandingPage.tsx explicitly blocked — documented, no escalation required."

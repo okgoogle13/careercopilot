@@ -159,6 +159,25 @@
         "M13",
         "M14"
       ]
+    },
+    {
+      "milestone_id": "M16",
+      "name": "Prototype Harvest Blocker Sprint \u2014 All 5 Blockers Resolved",
+      "status": "COMPLETE",
+      "assigned_to": "orchestrator",
+      "completed_date": "2026-03-25",
+      "readiness_score": "95/100",
+      "deliverables": [
+        "README.md quarantined (stale Firebase/react-router-dom/History API routing claims removed)",
+        "guidelines.md route section replaced with contract-backed mapping table",
+        "ImageStudioPage.tsx voice CTA corrected to /profile",
+        "GettingStartedChecklist.tsx extension-first item replaced with neutral job-intake action",
+        "PROTOTYPE-HARVEST-PATTERN-CATALOG.md created \u2014 6 route families mapped"
+      ],
+      "dependencies": [
+        "M9",
+        "M15"
+      ]
     }
   ]
 }
