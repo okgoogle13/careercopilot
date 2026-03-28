@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-03-17T17:21:42.341Z",
-  "count": 29,
+  "generatedAt": "2026-03-28T06:31:55.672Z",
+  "count": 31,
   "routes": [
     {
       "path": "/",
@@ -45,9 +45,23 @@
       "layout": "public"
     },
     {
+      "path": "/animation-test",
+      "component": "AnimationTestPage",
+      "importSource": "./pages/AnimationTest",
+      "auth": false,
+      "layout": "public"
+    },
+    {
       "path": "*",
       "component": "NotFound",
       "importSource": "./features/not-found/NotFound",
+      "auth": false,
+      "layout": "public"
+    },
+    {
+      "path": "/prototype/*",
+      "component": "PrototypeRoutes",
+      "importSource": "./prototype-features/prototype-routes",
       "auth": false,
       "layout": "public"
     },
@@ -103,7 +117,7 @@
     {
       "path": "/profile",
       "component": "ProfileView",
-      "importSource": "./features/profile/components/ProfileView",
+      "importSource": "./features/profile/ProfileView",
       "auth": true,
       "layout": "migrated"
     },

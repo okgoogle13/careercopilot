@@ -1,19 +1,19 @@
-// Harvested from proto:components/ATSScoreCard.tsx — B1
-// Token re-skin: all raw Tailwind replaced with KR Solidarity CSS vars
-// getScoreBg returns CSS var string (not stroke-* class) for SVG style prop
-
+/**
+ * CLASSIFICATION: Support Component Only
+ * Prototype-only component.
+ */
 import React from 'react';
 import { motion } from 'framer-motion';
-import type { ATSScoreResult, DocumentType } from '../../../types/analysis';
+import type { ATSScoreResult } from '../../../types/career';
 
 interface ATSScoreCardProps {
   score: ATSScoreResult | null;
   isCalculating: boolean;
-  documentType: DocumentType;
+  documentType: 'resume' | 'coverLetter';
 }
 
 export function ATSScoreCard({ score, isCalculating, documentType }: ATSScoreCardProps) {
-  const getScoreColor = (value: number): string => {
+  const getScoreColor = (value: number) => {
     if (documentType === 'coverLetter') {
       if (value >= 90) return 'text-[var(--sys-color-kr-activistSmokeGreen-base)]';
       if (value >= 80) return 'text-[var(--sys-color-kr-activistSmokeGreen-base)]';
@@ -25,7 +25,7 @@ export function ATSScoreCard({ score, isCalculating, documentType }: ATSScoreCar
     return 'text-[var(--sys-color-solidarityRed-base)]';
   };
 
-  const getScoreBg = (value: number): string => {
+  const getScoreBg = (value: number) => {
     if (documentType === 'coverLetter') {
       if (value >= 90) return 'var(--sys-color-kr-activistSmokeGreen-base)';
       if (value >= 80) return 'var(--sys-color-kr-activistSmokeGreen-base)';
@@ -39,6 +39,7 @@ export function ATSScoreCard({ score, isCalculating, documentType }: ATSScoreCar
 
   return (
     <div
+      className="shadow-xl"
       style={{
         background: 'var(--sys-color-charcoalBackground-steps-1)',
         borderColor: 'var(--sys-color-concreteGrey-steps-0)',
@@ -88,7 +89,6 @@ export function ATSScoreCard({ score, isCalculating, documentType }: ATSScoreCar
               </div>
             ))}
           </div>
-
           <div className="text-center mb-6">
             <span className={`text-6xl font-black ${getScoreColor(score.overallScore)}`}>
               {score.overallScore}%
@@ -98,7 +98,6 @@ export function ATSScoreCard({ score, isCalculating, documentType }: ATSScoreCar
               arbitrary calculation.
             </p>
           </div>
-
           <div className="relative w-32 h-32 mx-auto">
             <svg
               className="w-full h-full transform -rotate-90"
@@ -117,13 +116,13 @@ export function ATSScoreCard({ score, isCalculating, documentType }: ATSScoreCar
                 cy="50"
                 r="45"
                 fill="none"
+                className={`transition-all duration-1000 ease-out`}
                 style={{ stroke: getScoreBg(score.overallScore) }}
                 strokeWidth="8"
                 strokeDasharray={`${score.overallScore * 2.827} 282.7`}
-                className="transition-all duration-1000 ease-out"
               />
             </svg>
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className={`absolute inset-0 flex items-center justify-center`}>
               <span className={`text-3xl font-bold ${getScoreColor(score.overallScore)}`}>
                 {score.overallScore}
               </span>

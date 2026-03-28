@@ -111,11 +111,11 @@ _models_cache = {}
 
 # Candidates
 # Verified available models from list_models()
-FAST_CANDIDATES = ["models/gemini-2.0-flash", "models/gemini-1.5-flash"]
+FAST_CANDIDATES = ["models/gemini-3-flash-preview", "models/gemini-2.0-flash", "models/gemini-1.5-flash"]
 env_fast = os.getenv("GEMINI_MODEL")
 if env_fast and env_fast not in FAST_CANDIDATES: FAST_CANDIDATES.insert(0, env_fast)
 
-PRO_CANDIDATES = ["models/gemini-2.0-pro-exp-02-05", "models/gemini-1.5-pro"]
+PRO_CANDIDATES = ["models/gemini-2.5-pro", "models/gemini-2.0-pro-exp-02-05", "models/gemini-1.5-pro"]
 env_pro = os.getenv("GEMINI_PRO_MODEL")
 if env_pro and env_pro not in PRO_CANDIDATES: PRO_CANDIDATES.insert(0, env_pro)
 

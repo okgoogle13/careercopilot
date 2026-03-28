@@ -73,3 +73,18 @@ phases:
       - "all 5 blocker conditions resolved with verification evidence"
       - "readiness score >= 85/100"
     notes: "All gates passed 2026-03-25. Score: 95/100. Remaining 5pts: OnboardingPathBifurcation.tsx and LandingPage.tsx explicitly blocked — documented, no escalation required."
+
+  - id: phase-7-terminal-closeout
+    name: "Phase 7: Runtime Resync + Migration Workspace Dissolution"
+    status: IN_PROGRESS
+    gates_required:
+      - "route-matrix artifacts are synchronized to live App.tsx route truth and current path counts"
+      - "FRONTEND-CLEANUP-REPORT.md contains a canonical destination map for every retained migration artifact class"
+      - "PROTOTYPE-SALVAGE-TRACKER.md gives every remaining harvest candidate a terminal outcome: PORTED, ALREADY_CANONICAL, or DISCARDED"
+      - "grep proof shows no live frontend runtime imports from docs/project/active/frontend-source-of-truth-migration/**"
+      - "remaining migration-workspace contents are classified as retained archive/history or delete candidates"
+    exit_criteria:
+      - "canonical runtime code lives under frontend/src/** only"
+      - "canonical design canon lives under docs/design/**"
+      - "no active frontend execution depends on migration-workspace code or control docs"
+      - "frontend-source-of-truth-migration leaves Active status and is either archived/minimized or explicitly reduced to retained history"

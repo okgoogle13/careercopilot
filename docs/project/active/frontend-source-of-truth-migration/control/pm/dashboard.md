@@ -3,9 +3,12 @@
 Execution truth:
 - `control/COMET-MANIFEST.md`
 - `control/AI-STUDIO-PROMPT-PACK.md`
+- `control/FRONTEND-CLEANUP-REPORT.md`
+- `control/PROTOTYPE-SALVAGE-TRACKER.md`
 
 Planning narrative:
 - `control/status.md`
+- `control/route-matrix.json`
 - `control/archive/route-matrix.md`
 - `control/archive/implementation-backlog.md`
 
@@ -18,10 +21,27 @@ Evidence inputs (advisory only):
 
 ## Current Phase
 
-- **Migration closeout IN_PROGRESS (2026-03-24)** — shell promotion, route ownership cleanup, API convergence, and governed build-contract coverage are complete. Canonical shell state remains 14 migrated + 1 protected + 4 public, and the runtime preserves 7 explicit legacy redirect paths in `App.tsx`. The only program-level blocker is env-backed verification for `/tracker` and `/profile`.
-- Evidence-weighted completion: approximately 97% — all governed build contracts now validate, the canonical gap-fill planner has been rerun for the priority routes, and the PM artifacts now reflect the real remaining work: environment verification plus bounded cleanup.
+- **Migration closeout IN_PROGRESS (2026-03-28)** — shell promotion, route ownership cleanup, API convergence, and governed build-contract coverage are complete, but PM closeout still requires runtime-truth resync and a terminal migration-workspace dissolve plan.
+- Evidence-weighted completion: approximately 94% — route and screen integrity are green, but route-matrix/runtime classification and migration-workspace closeout are still incomplete.
+
+## Executive Snapshot
+
+- **Highest-priority decision:** classify the live runtime paths that are mounted in `App.tsx` but not yet fully represented in route-matrix planning.
+- **Primary risk:** PM/control artifacts still undercount live mounted paths and can overstate closeout readiness if left unchanged.
+- **Dependency at risk:** the migration workspace cannot be dissolved safely until route-matrix truth is resynced, the remaining salvage candidates are given terminal outcomes, and a canonical destination map exists.
+- **Next gate:** `frontend-cleanup-manager` Batch A — runtime-truth resync.
 
 ## Recent Progress
+
+- Frontend cleanup remediation frame added (2026-03-28):
+  - `FRONTEND-CLEANUP-REPORT.md` created as the execution brief for `frontend-cleanup-manager`
+  - route-matrix gaps are now enumerated directly from live `App.tsx` mounts
+  - terminal migration-workspace dissolution is now a named PM closeout stream instead of an implied future cleanup
+
+- Prototype salvage execution lane defined (2026-03-28):
+  - `PROTOTYPE-SALVAGE-TRACKER.md` created to separate actual salvage work from the prototype audit labels
+  - the remaining four prototype `[HARVEST]` candidates are now mapped to canonical destinations and terminal statuses
+  - final migration-workspace dissolution now depends on salvage resolution, not just cleanup reporting
 
 - Planning/control sync refreshed (2026-03-25):
   - active control docs now reference the retained `control/archive/` route-matrix, backlog, and workflow baselines instead of missing root-level files
@@ -107,7 +127,9 @@ Evidence inputs (advisory only):
 
 - Step 3a `/tracker`: BLOCKED on Firebase/Firestore — see `analysis/remaining-route-plan.md §4` for exact env config and validation steps.
 - Step 3c `/profile`: BLOCKED on the same Firebase/auth environment — verify GET/POST `/api/v1/auth/voice-profile` before marking the route fully closed.
-- AuthGuard token: `App.tsx:72` — deferred, non-critical.
+- `frontend-cleanup-manager` Batch A: resync `App.tsx`, `route-registry.ts`, `routes.json`, `route-matrix.json`, and `status.md`
+- Prototype salvage pass: update `PROTOTYPE-SALVAGE-TRACKER.md` so each remaining harvest candidate is ported, confirmed already canonical, or discarded
+- `frontend-cleanup-manager` Batch D: publish destination map and reduce the migration workspace to retained archive/history
 
 ## Capability Blockers — ALL RESOLVED (2026-03-17)
 
@@ -122,12 +144,17 @@ Evidence inputs (advisory only):
 
 - `/tracker` closeout: BLOCKED on Firebase/Firestore env. `FIREBASE_PROJECT_ID` absent from `backend/.env`. Requires `FIREBASE_PROJECT_ID=careercopilot-468811` + Firestore service account. See `analysis/remaining-route-plan.md §4`.
 - `/profile` closeout: BLOCKED on Firebase/auth env. Requires the same local project configuration plus an authenticated verification pass against `GET/POST /api/v1/auth/voice-profile`.
+- Route-matrix/runtime drift: live mounted paths currently exceed the planning layer's explicit path accounting and require cleanup-manager classification.
+- Prototype salvage pass: still pending; remaining harvest candidates need terminal outcomes before the migration workspace can be dissolved.
+- Migration workspace dissolution: planned but not executed; destination mapping and runtime-import proof are still outstanding.
 - Footer shell adoption: `RESOLVED` (adopted by `MigratedRouteLayout`).
 - AuthGuard B3: `App.tsx:72` `bg-[#1A1714]` → semantic token (deferred, non-critical).
 - PM artifact refresh: `status.md`, `implementation-backlog.*`, and `remaining-route-plan.md` synced on 2026-03-24; keep `blueprint.md` task-status summary aligned during final closeout.
 
 ## Next Actions
 
-1. Step 3a `/tracker`: set `FIREBASE_PROJECT_ID=careercopilot-468811` in `backend/.env`, start backend, verify `GET /api/applications/`, capture populated board screenshot ≥90.
-2. Step 3c `/profile`: with the same env restored, verify authenticated `GET` and `POST /api/v1/auth/voice-profile`, then confirm `/profile` remains the visible runtime owner.
-3. AuthGuard semantic token fix (`App.tsx:72`).
+1. `frontend-cleanup-manager` Batch A: classify all mounted runtime paths and resync PM/control route truth.
+2. Step 3a `/tracker`: set `FIREBASE_PROJECT_ID=careercopilot-468811` in `backend/.env`, start backend, verify `GET /api/applications/`, capture populated board screenshot ≥90.
+3. Step 3c `/profile`: with the same env restored, verify authenticated `GET` and `POST /api/v1/auth/voice-profile`, then confirm `/profile` remains the visible runtime owner.
+4. Prototype salvage pass: resolve the remaining four harvest candidates in `PROTOTYPE-SALVAGE-TRACKER.md`.
+5. `frontend-cleanup-manager` Batch D: publish canonical destination map and move the migration workspace out of Active status.

@@ -2,7 +2,8 @@
 
 ## 1. Authority Lock
 
-- [ ] Confirm route row in `control/route-matrix.md`
+- [ ] Confirm route record in `control/route-matrix.json`
+- [ ] Confirm the human-readable route row in `control/archive/route-matrix.md`
 - [ ] Confirm canonical runtime owner is reachable from `frontend/src/App.tsx`
 - [ ] Confirm paired screen reference and backend capabilities
 - [ ] Confirm this is canonical app work, not prototype support-reference work
@@ -47,7 +48,7 @@ npx tsx tools/ci/check-route-integrity.ts
 - [ ] Run `migration-audit`
 - [ ] Run `npx tsx tools/ci/check-route-integrity.ts`
 - [ ] Run `npx tsx tools/ci/check-screen-pairs.ts`
-- [ ] If support-influenced, complete the TSX identity gate from `control/workflow.md`
+- [ ] If support-influenced, complete the TSX identity gate from `control/archive/workflow.md`
 - [ ] If route is part of broader readiness work, run `./scripts/test-deployment.sh`
 
 ---

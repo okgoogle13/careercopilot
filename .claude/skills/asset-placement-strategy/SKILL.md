@@ -1,37 +1,32 @@
 ---
 name: asset-placement-strategy
-description: Resolve wireframe TODO[asset] slots to canonical manifest IDs and emit deterministic placement compliance reports.
-metadata:
-  version: 6.5.0
-  tags:
-    - assets
-    - wireframes
-    - placement
+description: Resolve wireframe TODO[asset] slots to canonical manifest IDs and emit deterministic placement compliance reports for CI or migration evidence. Use after integrity and path checks when a screen has candidate assets but slotting, layering, token fit, or justification still need verification.
 ---
 
 # Asset Placement Strategy
 
 ## Purpose
 
-Convert wireframe TODO asset hints into valid manifest placements and produce report artifacts suitable for CI gating.
-
-## When to Use
-
-- Between wireframe annotation and component implementation.
-- During placement regression checks.
-- When a migration audit flags weak or incorrect asset usage.
-- When a screen has the right assets available but they are poorly slotted, layered, or justified.
+Convert wireframe TODO asset hints into valid manifest placements and produce report artifacts suitable for CI gating, migration evidence, and harvest-prep review.
 
 ## Shared References
 
 - `references/SCORING.md`
 - `../shared-references/BRAND_CANON.md`
 - `../shared-references/STATUS_THRESHOLDS.md`
+- `../../../docs/project/active/frontend-source-of-truth-migration/control/COMET-MANIFEST.md`
+- `../../../docs/project/active/frontend-source-of-truth-migration/control/archive/harvest-spec.md`
 
 ## Scripts
 
 - `scripts/run_asset_placement.py`
 - `scripts/validate_placement_report.py`
+
+## Preconditions
+
+- run `manifest-reconciler` first when asset integrity is uncertain
+- run `asset-path-validator` first when references may still drift
+- keep prototype shell and support-only surfaces outside acceptance decisions unless a canonical owner and contract explicitly authorize the candidate
 
 ## How To Use
 
@@ -43,6 +38,7 @@ Use this skill when you have a wireframe or screen-level asset expectation and n
 2. Run placement resolution.
 3. Validate the resulting placement report.
 4. Feed the result into a migration or visual audit as the asset-usage evidence source.
+5. Treat the report as evidence for harvest planning, not as standalone authorization to port support-only prototype code.
 
 ### Example invocation
 
@@ -75,6 +71,13 @@ Run the scripts directly when:
 - you already know the placement workflow
 - you just need to regenerate or validate a report artifact quickly
 
+## Harvest Alignment
+
+- map a passing placement report to "placement evidence ready", not automatically to `harvest_now`
+- if the source surface is still support-only or blocked by contract ownership, keep it support-only even when placement scores are high
+- use `migration-audit`, route contracts, and the harvest spec to decide `harvest_now`, `support_only`, or `blocked`
+- use `scripts/enforce-asset-coverage.sh` when harvest prep needs broader wireframe coverage after base placement is already working
+
 ## Runtime Controls
 
 - `--timestamp`
@@ -90,6 +93,7 @@ Run the scripts directly when:
 - resolved asset output directory
 - deterministic score using `references/SCORING.md`
 - diagnostics for unresolved slots, invalid token refs, or invalid asset refs
+- evidence suitable for downstream migration or visual audit, not a substitute for contract ownership review
 
 ## Edge Cases
 
@@ -99,6 +103,8 @@ Run the scripts directly when:
   - hard-rule failures still block acceptance
 - Wrong asset but valid manifest id:
   - this is still a placement/composition failure, not a manifest success
+- High score on a support-only prototype surface:
+  - keep it support-only until the canonical owner and harvest spec authorize promotion
 
 ## Troubleshooting
 
@@ -116,6 +122,11 @@ Run the scripts directly when:
 
 - treat this as a token-compliance issue inside placement, not as a visual-only issue
 
+### Placement passes but harvest still should not proceed
+
+- confirm contract ownership, support-only boundaries, and migration audit requirements
+- this skill validates slot quality, not route authority
+
 ## Tests
 
 - `tests/test_placement.sh`
@@ -123,6 +134,7 @@ Run the scripts directly when:
 
 ## Related Skills
 
+- `asset-path-validator`
 - `wireframe-annotator`
 - `manifest-reconciler`
 - `ui-design-evaluator`

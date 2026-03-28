@@ -21,6 +21,7 @@ import { genkitApi } from '@/services/genkit';
 import { exportToPdf } from '@/utils/exportEngine';
 import { KrDarkSpring } from '@/design/tokens/motion-presets';
 import { useAnalytics } from '@/hooks/useAnalytics';
+import { useDocumentExport } from '@/features/documents/hooks/useDocumentExport';
 
 const stepMotionProps = {
   initial: { opacity: 0, x: 24 },
@@ -31,6 +32,7 @@ const stepMotionProps = {
 
 export function CoverLetterGenerator() {
   const { track } = useAnalytics();
+  const { exportDocx } = useDocumentExport();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
 
@@ -119,6 +121,22 @@ export function CoverLetterGenerator() {
     } catch (error) {
       console.error('Failed to download PDF:', error);
       toast.error('Failed to download PDF. Please try again.');
+    }
+  };
+
+  const handleDownloadDocx = async () => {
+    try {
+      await exportDocx({
+        type: 'cover-letter',
+        fileName: `${(companyName || 'Cover_Letter').replace(/\s+/g, '_')}.docx`,
+        heading: companyName ? `Cover Letter — ${companyName}` : 'Cover Letter',
+        content: generatedLetter,
+      });
+      track('document_exported', { type: 'cover_letter', method: 'docx' });
+      toast.success('Cover Letter downloaded as DOCX!');
+    } catch (error) {
+      console.error('Failed to download DOCX:', error);
+      toast.error('Failed to download DOCX. Please try again.');
     }
   };
 
@@ -440,6 +458,13 @@ export function CoverLetterGenerator() {
                   className="border-tertiary text-tertiary hover:bg-tertiary hover:text-on-tertiary rounded-strike px-8 h-12 flex items-center gap-2 font-bold font-body"
                 >
                   <Download className="w-4 h-4" /> Download PDF
+                </Button>
+                <Button
+                  onClick={handleDownloadDocx}
+                  variant="outlined"
+                  className="border-primary text-primary hover:bg-primary hover:text-on-primary rounded-strike px-8 h-12 flex items-center gap-2 font-bold font-body"
+                >
+                  <Download className="w-4 h-4" /> Download DOCX
                 </Button>
                 <Button
                   onClick={() => {

@@ -18,7 +18,7 @@ Coordinates multi-agent workflows via a task queue, eliminating manual handoffs 
 
 ## When to Use
 
-- When delegating long-running or complex tasks to specialized agents (e.g., Gemini, Codex).
+- When delegating long-running or complex tasks to specialized agents (e.g., flash-sidekick, design-system-sidekick).
 - When orchestrating multi-step workflows where output from one agent is input for another.
 
 ## Process
@@ -31,12 +31,12 @@ Coordinates multi-agent workflows via a task queue, eliminating manual handoffs 
 
 ## Architecture
 
-```
+```text
 Claude Desktop (Orchestrator)
     ↓ creates tasks
 Task Queue (JSON file-based)
     ↓ agents poll
-[Gemini | Claude Code | Codex CLI]
+[flash-sidekick | design-system-sidekick | Codex CLI]
     ↓ claim → execute → complete
 Next Task Auto-assigned
 ```
@@ -48,7 +48,7 @@ Next Task Auto-assigned
 ```json
 {
   "task_id": "asset-3-generation",
-  "assigned_to": "gemini",
+  "assigned_to": "flash-sidekick",
   "status": "pending",
   "priority": "high",
   "inputs": {
@@ -69,7 +69,7 @@ Agent marks task as in-progress:
 {
   "task_id": "asset-3-generation",
   "status": "in_progress",
-  "claimed_by": "gemini",
+  "claimed_by": "flash-sidekick",
   "claimed_at": "2026-01-30T10:15:00Z"
 }
 ```
@@ -97,7 +97,7 @@ Query tasks by status/agent:
 ```json
 {
   "status": "pending",
-  "assigned_to": "gemini"
+  "assigned_to": "flash-sidekick"
 }
 ```
 
@@ -115,22 +115,20 @@ If validation fails, rollback to previous state:
 }
 ```
 
-## Task Flow Example
-
-**Phase: Asset 3 Generation**
+### Task Flow Example: Asset Generation
 
 1. Claude Desktop creates task:
 
 ```json
 {
   "task_id": "asset-3-gen",
-  "assigned_to": "gemini",
+  "assigned_to": "flash-sidekick",
   "inputs": { "prompt": "...", "resolution": "512x512" },
   "next_task": "asset-3-validate"
 }
 ```
 
-2. Gemini polls queue → claims task → generates → completes:
+2. flash-sidekick polls queue → claims task → generates → completes:
 
 ```json
 {
@@ -219,13 +217,13 @@ class TaskRouter:
 
 Each agent polls queue every 30 seconds:
 
-**Gemini (Antigravity):**
+**flash-sidekick (Antigravity):**
 
 ```python
 while True:
     tasks = mcp.call_tool("task-router", "list_tasks", {
         "status": "pending",
-        "assigned_to": "gemini"
+        "assigned_to": "flash-sidekick"
     })
     if tasks:
         task = tasks[0]

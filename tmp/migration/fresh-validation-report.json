@@ -1,0 +1,1273 @@
+{
+  "status": "fail",
+  "canonical_wireframe_count": 21,
+  "matrix_row_count": 27,
+  "schema_summary": {
+    "failed_files": 0,
+    "warn_files": 20,
+    "files_with_upgraded_schema": 1
+  },
+  "route_coverage_summary": {
+    "missing_wireframes": [],
+    "failures": [],
+    "warnings": [
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "frontend/src/screens/06_lookout/06_lookout.wireframe.xml"
+      },
+      {
+        "type": "orphan_canonical_wireframe",
+        "xml_wireframe_path": "frontend/src/screens/12_generation/12_generation.wireframe.xml"
+      }
+    ]
+  },
+  "component_alignment_summary": {
+    "failures": [
+      {
+        "type": "feature_owner_surface_not_in_matrix_target_surfaces",
+        "feature_id": "smart_ingestion_asset_pipeline",
+        "owner_route": "/career/ingest",
+        "owner_surface": "SmartIngestion",
+        "target_component_surfaces": [
+          "IngestionFlow",
+          "IngestionPage"
+        ]
+      }
+    ],
+    "warnings": []
+  },
+  "asset_integrity_summary": {},
+  "legacy_artifact_findings": {
+    "summary": {
+      "canonical_wireframes_with_spring": 1,
+      "canonical_wireframe_count": 21,
+      "placement_report": {}
+    },
+    "warnings": []
+  },
+  "build_contract_xsd_summary": {
+    "contracts_checked": 13,
+    "failures": [],
+    "warnings": []
+  },
+  "schema_failures": [],
+  "schema_warnings": [
+    {
+      "xml_path": "frontend/src/screens/01_landing/01_landing.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/01_landing/01_landing.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/01_landing/01_landing.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/02_auth/02_auth.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/02_auth/02_auth.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/02_auth/02_auth.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/02_auth/02_login.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/02_auth/02_login.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/02_auth/02_login.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/02_auth/02_register.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/02_auth/02_register.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/02_auth/02_register.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/03_onboarding/03_welcome.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/03_onboarding/03_welcome.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/03_onboarding/03_welcome.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/04_ingestion/04_ingestion.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/04_ingestion/04_ingestion.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/04_ingestion/04_ingestion.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml",
+      "type": "component_mapping_coverage_mismatch",
+      "element_count": 8,
+      "mapped_elements": 7
+    },
+    {
+      "xml_path": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml",
+      "type": "accessibility_coverage_incomplete",
+      "element_count": 8,
+      "accessible_elements": 2
+    },
+    {
+      "xml_path": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/05_analysis/05_asset_library.wireframe.xml",
+      "type": "component_mapping_coverage_mismatch",
+      "element_count": 8,
+      "mapped_elements": 7
+    },
+    {
+      "xml_path": "frontend/src/screens/05_analysis/05_asset_library.wireframe.xml",
+      "type": "accessibility_coverage_incomplete",
+      "element_count": 8,
+      "accessible_elements": 2
+    },
+    {
+      "xml_path": "frontend/src/screens/05_analysis/05_asset_library.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/05_analysis/05_asset_library.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/05_analysis/05_asset_library.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/06_lookout/06_job_queue.wireframe.xml",
+      "type": "accessibility_coverage_incomplete",
+      "element_count": 7,
+      "accessible_elements": 0
+    },
+    {
+      "xml_path": "frontend/src/screens/06_lookout/06_job_queue.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/06_lookout/06_job_queue.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/06_lookout/06_job_queue.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
+      "type": "accessibility_coverage_incomplete",
+      "element_count": 7,
+      "accessible_elements": 0
+    },
+    {
+      "xml_path": "frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/06_lookout/06_opportunities.wireframe.xml",
+      "type": "accessibility_coverage_incomplete",
+      "element_count": 7,
+      "accessible_elements": 0
+    },
+    {
+      "xml_path": "frontend/src/screens/06_lookout/06_opportunities.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/06_lookout/06_opportunities.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/06_lookout/06_opportunities.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/08_workbench/08_workbench.wireframe.xml",
+      "type": "accessibility_coverage_incomplete",
+      "element_count": 5,
+      "accessible_elements": 0
+    },
+    {
+      "xml_path": "frontend/src/screens/08_workbench/08_workbench.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/08_workbench/08_workbench.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/08_workbench/08_workbench.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/09_finalization/09_finalization.wireframe.xml",
+      "type": "component_mapping_coverage_mismatch",
+      "element_count": 5,
+      "mapped_elements": 2
+    },
+    {
+      "xml_path": "frontend/src/screens/09_finalization/09_finalization.wireframe.xml",
+      "type": "accessibility_coverage_incomplete",
+      "element_count": 5,
+      "accessible_elements": 0
+    },
+    {
+      "xml_path": "frontend/src/screens/09_finalization/09_finalization.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/09_finalization/09_finalization.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/09_finalization/09_finalization.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/10_settings/10_profile.wireframe.xml",
+      "type": "component_mapping_coverage_mismatch",
+      "element_count": 9,
+      "mapped_elements": 7
+    },
+    {
+      "xml_path": "frontend/src/screens/10_settings/10_profile.wireframe.xml",
+      "type": "accessibility_coverage_incomplete",
+      "element_count": 9,
+      "accessible_elements": 0
+    },
+    {
+      "xml_path": "frontend/src/screens/10_settings/10_profile.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/10_settings/10_profile.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/10_settings/10_profile.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/10_settings/10_settings.wireframe.xml",
+      "type": "component_mapping_coverage_mismatch",
+      "element_count": 9,
+      "mapped_elements": 7
+    },
+    {
+      "xml_path": "frontend/src/screens/10_settings/10_settings.wireframe.xml",
+      "type": "accessibility_coverage_incomplete",
+      "element_count": 9,
+      "accessible_elements": 0
+    },
+    {
+      "xml_path": "frontend/src/screens/10_settings/10_settings.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/10_settings/10_settings.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/10_settings/10_settings.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml",
+      "type": "component_mapping_coverage_mismatch",
+      "element_count": 10,
+      "mapped_elements": 8
+    },
+    {
+      "xml_path": "frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml",
+      "type": "accessibility_coverage_incomplete",
+      "element_count": 10,
+      "accessible_elements": 1
+    },
+    {
+      "xml_path": "frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/12_generation/12_cover_letter_generator.wireframe.xml",
+      "type": "accessibility_coverage_incomplete",
+      "element_count": 5,
+      "accessible_elements": 0
+    },
+    {
+      "xml_path": "frontend/src/screens/12_generation/12_cover_letter_generator.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/12_generation/12_cover_letter_generator.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/12_generation/12_cover_letter_generator.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/12_generation/12_generation.wireframe.xml",
+      "type": "accessibility_coverage_incomplete",
+      "element_count": 5,
+      "accessible_elements": 0
+    },
+    {
+      "xml_path": "frontend/src/screens/12_generation/12_generation.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/12_generation/12_generation.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/12_generation/12_generation.wireframe.xml",
+      "type": "missing_responsive_rules"
+    },
+    {
+      "xml_path": "frontend/src/screens/12_generation/12_ksc_generator.wireframe.xml",
+      "type": "accessibility_coverage_incomplete",
+      "element_count": 5,
+      "accessible_elements": 0
+    },
+    {
+      "xml_path": "frontend/src/screens/12_generation/12_ksc_generator.wireframe.xml",
+      "type": "missing_layout_structure"
+    },
+    {
+      "xml_path": "frontend/src/screens/12_generation/12_ksc_generator.wireframe.xml",
+      "type": "missing_layout_binding"
+    },
+    {
+      "xml_path": "frontend/src/screens/12_generation/12_ksc_generator.wireframe.xml",
+      "type": "missing_responsive_rules"
+    }
+  ],
+  "file_results": [
+    {
+      "wireframe_id": "01_landing",
+      "xml_path": "frontend/src/screens/01_landing/01_landing.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 7,
+      "component_mapping_count": 7,
+      "elements_with_component_mapping": 7,
+      "accessibility_count": 7,
+      "elements_with_accessibility": 7,
+      "motion_contract_count": 2,
+      "spring_motion_contract_count": 2,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "Placard",
+        "Strike",
+        "Typography"
+      ]
+    },
+    {
+      "wireframe_id": "02_auth",
+      "xml_path": "frontend/src/screens/02_auth/02_auth.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 10,
+      "component_mapping_count": 10,
+      "elements_with_component_mapping": 10,
+      "accessibility_count": 10,
+      "elements_with_accessibility": 10,
+      "motion_contract_count": 6,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 6,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "Divider",
+        "Link",
+        "Placard",
+        "ScaffoldInput",
+        "Strike",
+        "Typography"
+      ]
+    },
+    {
+      "wireframe_id": "02_login",
+      "xml_path": "frontend/src/screens/02_auth/02_login.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 10,
+      "component_mapping_count": 10,
+      "elements_with_component_mapping": 10,
+      "accessibility_count": 10,
+      "elements_with_accessibility": 10,
+      "motion_contract_count": 6,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 6,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "Divider",
+        "Link",
+        "Placard",
+        "ScaffoldInput",
+        "Strike",
+        "Typography"
+      ]
+    },
+    {
+      "wireframe_id": "02_register",
+      "xml_path": "frontend/src/screens/02_auth/02_register.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 10,
+      "component_mapping_count": 10,
+      "elements_with_component_mapping": 10,
+      "accessibility_count": 10,
+      "elements_with_accessibility": 10,
+      "motion_contract_count": 6,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 6,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "Divider",
+        "Link",
+        "Placard",
+        "ScaffoldInput",
+        "Strike",
+        "Typography"
+      ]
+    },
+    {
+      "wireframe_id": "03_onboarding",
+      "xml_path": "frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 10,
+      "component_mapping_count": 10,
+      "elements_with_component_mapping": 10,
+      "accessibility_count": 10,
+      "elements_with_accessibility": 10,
+      "motion_contract_count": 7,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 7,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "ChipGroup",
+        "Link",
+        "March",
+        "ProgressBar",
+        "ScaffoldArea",
+        "ScaffoldInput",
+        "Strike",
+        "Typography"
+      ]
+    },
+    {
+      "wireframe_id": "03_welcome",
+      "xml_path": "frontend/src/screens/03_onboarding/03_welcome.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 10,
+      "component_mapping_count": 10,
+      "elements_with_component_mapping": 10,
+      "accessibility_count": 10,
+      "elements_with_accessibility": 10,
+      "motion_contract_count": 7,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 7,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "ChipGroup",
+        "Link",
+        "March",
+        "ProgressBar",
+        "ScaffoldArea",
+        "ScaffoldInput",
+        "Strike",
+        "Typography"
+      ]
+    },
+    {
+      "wireframe_id": "04_ingestion",
+      "xml_path": "frontend/src/screens/04_ingestion/04_ingestion.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 5,
+      "component_mapping_count": 5,
+      "elements_with_component_mapping": 5,
+      "accessibility_count": 5,
+      "elements_with_accessibility": 5,
+      "motion_contract_count": 2,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 2,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "DataSection",
+        "StatusIndicator",
+        "Strike",
+        "Typography",
+        "UploadDropZone"
+      ]
+    },
+    {
+      "wireframe_id": "05_analysis",
+      "xml_path": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "component_mapping_coverage_mismatch",
+          "element_count": 8,
+          "mapped_elements": 7
+        },
+        {
+          "type": "accessibility_coverage_incomplete",
+          "element_count": 8,
+          "accessible_elements": 2
+        },
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 8,
+      "component_mapping_count": 7,
+      "elements_with_component_mapping": 7,
+      "accessibility_count": 2,
+      "elements_with_accessibility": 2,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "DataTable",
+        "Placard",
+        "Strike",
+        "TabList"
+      ]
+    },
+    {
+      "wireframe_id": "05_asset_library",
+      "xml_path": "frontend/src/screens/05_analysis/05_asset_library.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "component_mapping_coverage_mismatch",
+          "element_count": 8,
+          "mapped_elements": 7
+        },
+        {
+          "type": "accessibility_coverage_incomplete",
+          "element_count": 8,
+          "accessible_elements": 2
+        },
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 8,
+      "component_mapping_count": 7,
+      "elements_with_component_mapping": 7,
+      "accessibility_count": 2,
+      "elements_with_accessibility": 2,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "DataTable",
+        "Placard",
+        "Strike",
+        "TabList"
+      ]
+    },
+    {
+      "wireframe_id": "06_job_queue",
+      "xml_path": "frontend/src/screens/06_lookout/06_job_queue.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "accessibility_coverage_incomplete",
+          "element_count": 7,
+          "accessible_elements": 0
+        },
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 7,
+      "component_mapping_count": 7,
+      "elements_with_component_mapping": 7,
+      "accessibility_count": 0,
+      "elements_with_accessibility": 0,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "March",
+        "Pagination",
+        "Placard",
+        "Strike"
+      ]
+    },
+    {
+      "wireframe_id": "06_lookout",
+      "xml_path": "frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "accessibility_coverage_incomplete",
+          "element_count": 7,
+          "accessible_elements": 0
+        },
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 7,
+      "component_mapping_count": 7,
+      "elements_with_component_mapping": 7,
+      "accessibility_count": 0,
+      "elements_with_accessibility": 0,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "March",
+        "Pagination",
+        "Placard",
+        "Strike"
+      ]
+    },
+    {
+      "wireframe_id": "06_opportunities",
+      "xml_path": "frontend/src/screens/06_lookout/06_opportunities.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "accessibility_coverage_incomplete",
+          "element_count": 7,
+          "accessible_elements": 0
+        },
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 7,
+      "component_mapping_count": 7,
+      "elements_with_component_mapping": 7,
+      "accessibility_count": 0,
+      "elements_with_accessibility": 0,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "March",
+        "Pagination",
+        "Placard",
+        "Strike"
+      ]
+    },
+    {
+      "wireframe_id": "07_kanban",
+      "xml_path": "frontend/src/screens/07_kanban/07_kanban.wireframe.xml",
+      "status": "pass",
+      "missing_blocks": [],
+      "warnings": [],
+      "failures": [],
+      "element_count": 13,
+      "component_mapping_count": 13,
+      "elements_with_component_mapping": 13,
+      "accessibility_count": 13,
+      "elements_with_accessibility": 13,
+      "motion_contract_count": 9,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 9,
+      "token_hygiene_pass": true,
+      "has_layout_structure": true,
+      "has_layout_binding": true,
+      "has_responsive_rules": true,
+      "code_components": [
+        "ApplicationArchiveAction",
+        "ApplicationDetailPanel",
+        "ApplicationEditForm",
+        "ApplicationStatusActions",
+        "KanbanColumn",
+        "Placard",
+        "TopNav"
+      ]
+    },
+    {
+      "wireframe_id": "08_workbench",
+      "xml_path": "frontend/src/screens/08_workbench/08_workbench.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "accessibility_coverage_incomplete",
+          "element_count": 5,
+          "accessible_elements": 0
+        },
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 5,
+      "component_mapping_count": 5,
+      "elements_with_component_mapping": 5,
+      "accessibility_count": 0,
+      "elements_with_accessibility": 0,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "ButtonGroup",
+        "DocumentPreview",
+        "ScaffoldArea",
+        "Toolbar",
+        "Typography"
+      ]
+    },
+    {
+      "wireframe_id": "09_finalization",
+      "xml_path": "frontend/src/screens/09_finalization/09_finalization.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "component_mapping_coverage_mismatch",
+          "element_count": 5,
+          "mapped_elements": 2
+        },
+        {
+          "type": "accessibility_coverage_incomplete",
+          "element_count": 5,
+          "accessible_elements": 0
+        },
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 5,
+      "component_mapping_count": 2,
+      "elements_with_component_mapping": 2,
+      "accessibility_count": 0,
+      "elements_with_accessibility": 0,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "Strike"
+      ]
+    },
+    {
+      "wireframe_id": "10_profile",
+      "xml_path": "frontend/src/screens/10_settings/10_profile.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "component_mapping_coverage_mismatch",
+          "element_count": 9,
+          "mapped_elements": 7
+        },
+        {
+          "type": "accessibility_coverage_incomplete",
+          "element_count": 9,
+          "accessible_elements": 0
+        },
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 9,
+      "component_mapping_count": 7,
+      "elements_with_component_mapping": 7,
+      "accessibility_count": 0,
+      "elements_with_accessibility": 0,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "March",
+        "Menu",
+        "ScaffoldInput",
+        "Strike",
+        "Toggle"
+      ]
+    },
+    {
+      "wireframe_id": "10_settings",
+      "xml_path": "frontend/src/screens/10_settings/10_settings.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "component_mapping_coverage_mismatch",
+          "element_count": 9,
+          "mapped_elements": 7
+        },
+        {
+          "type": "accessibility_coverage_incomplete",
+          "element_count": 9,
+          "accessible_elements": 0
+        },
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 9,
+      "component_mapping_count": 7,
+      "elements_with_component_mapping": 7,
+      "accessibility_count": 0,
+      "elements_with_accessibility": 0,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "March",
+        "Menu",
+        "ScaffoldInput",
+        "Strike",
+        "Toggle"
+      ]
+    },
+    {
+      "wireframe_id": "11_dashboard",
+      "xml_path": "frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "component_mapping_coverage_mismatch",
+          "element_count": 10,
+          "mapped_elements": 8
+        },
+        {
+          "type": "accessibility_coverage_incomplete",
+          "element_count": 10,
+          "accessible_elements": 1
+        },
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 10,
+      "component_mapping_count": 8,
+      "elements_with_component_mapping": 8,
+      "accessibility_count": 1,
+      "elements_with_accessibility": 1,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "Placard",
+        "Strike",
+        "Timeline",
+        "Typography"
+      ]
+    },
+    {
+      "wireframe_id": "12_cover_letter_generator",
+      "xml_path": "frontend/src/screens/12_generation/12_cover_letter_generator.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "accessibility_coverage_incomplete",
+          "element_count": 5,
+          "accessible_elements": 0
+        },
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 5,
+      "component_mapping_count": 5,
+      "elements_with_component_mapping": 5,
+      "accessibility_count": 0,
+      "elements_with_accessibility": 0,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "ButtonGroup",
+        "GenerationResult",
+        "ScaffoldForm",
+        "StrikeButton",
+        "Typography"
+      ]
+    },
+    {
+      "wireframe_id": "12_generation",
+      "xml_path": "frontend/src/screens/12_generation/12_generation.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "accessibility_coverage_incomplete",
+          "element_count": 5,
+          "accessible_elements": 0
+        },
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 5,
+      "component_mapping_count": 5,
+      "elements_with_component_mapping": 5,
+      "accessibility_count": 0,
+      "elements_with_accessibility": 0,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "ButtonGroup",
+        "GenerationResult",
+        "ScaffoldForm",
+        "StrikeButton",
+        "Typography"
+      ]
+    },
+    {
+      "wireframe_id": "12_ksc_generator",
+      "xml_path": "frontend/src/screens/12_generation/12_ksc_generator.wireframe.xml",
+      "status": "warn",
+      "missing_blocks": [],
+      "warnings": [
+        {
+          "type": "accessibility_coverage_incomplete",
+          "element_count": 5,
+          "accessible_elements": 0
+        },
+        {
+          "type": "missing_layout_structure"
+        },
+        {
+          "type": "missing_layout_binding"
+        },
+        {
+          "type": "missing_responsive_rules"
+        }
+      ],
+      "failures": [],
+      "element_count": 5,
+      "component_mapping_count": 5,
+      "elements_with_component_mapping": 5,
+      "accessibility_count": 0,
+      "elements_with_accessibility": 0,
+      "motion_contract_count": 0,
+      "spring_motion_contract_count": 0,
+      "legacy_motion_contract_count": 0,
+      "token_hygiene_pass": true,
+      "has_layout_structure": false,
+      "has_layout_binding": false,
+      "has_responsive_rules": false,
+      "code_components": [
+        "ButtonGroup",
+        "GenerationResult",
+        "ScaffoldForm",
+        "StrikeButton",
+        "Typography"
+      ]
+    }
+  ]
+}

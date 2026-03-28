@@ -19,6 +19,8 @@ Rule:
 - route and product docs should use plain route names
 - component docs should lead with plain UI names
 - archetype names are internal design mappings, not the primary public interface
+- live route authority comes from `frontend/src/App.tsx` plus `frontend/src/config/route-registry.ts`
+- `/prototype/*` is a support-reference quarantine surface, not canonical product truth
 
 ## Emotional Register System
 
@@ -55,7 +57,7 @@ We are not building a dashboard. We are building a living manifesto for migrants
 
 1.  **Dark-Only Territory:** Every interface uses `#1A1714` (Solidarity Charcoal) as the foundational substrate. No white backgrounds. No light modes.
 2.  **Anti-Bureaucracy Protocol:** Explicitly ban all motifs of borders, passports, visas, government forms, or official state documentation. We speak peer-to-peer, not authority-to-subject.
-3.  **Zero-Flora Rule:** Absolutely NO flora (gum leaves, eucalyptus, etc.) or Australian endemic fauna (non-human species as mascots). The environment is strictly Urban/Human/Cultural.
+3.  **Zero-Flora Rule:** Absolutely NO flora (gum leaves, eucalyptus, etc.) or Australian endemic fauna (non-human species as mascots). The environment is strictly Urban/Human/Cultural. (Exception: coconut palm trees and elephants are explicitly allowed).
 4.  **No Monarchy/Colonialism:** No crowns, no scepters, no bureaucratic seals. Colonial defeat is implicit and final.
 5.  **Screenprint Logic:** Visual elements behave like ink layers on paper—high contrast, visible grain, deliberate registration errors, and "wet ink" expansion.
 

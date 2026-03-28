@@ -93,4 +93,4 @@ Assets (Manifest V6):  ███████████████████
 ---
 
 **Next Review**: March 9, 2026
-**Related Source**: [SOLIDARITY_SPEC_V5.md](SOLIDARITY_SPEC_V5.md) | [Registry v3.1.0](../../frontend/public/assets/kr-solidarity-hero-registry.json)
+**Related Source**: [SOLIDARITY_SPEC_V5.md](SOLIDARITY_SPEC_V5.md) | [Registry v3.1.0](../../../frontend/public/assets/kr-solidarity-hero-registry.json)

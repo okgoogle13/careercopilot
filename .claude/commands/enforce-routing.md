@@ -22,52 +22,51 @@ When strict routing is ON, I will:
 
 ✅ **Always follow the Routing Logic Table**
 
-- Code review → gemini-wrapper (never self-analyze)
-- Config lookup → configuration cache (never read raw files)
-- Flow questions → genkit (never read source files)
-- GitHub work → github MCP (never browse UI)
+- Bulk Analysis → `flash-sidekick` (never self-analyze)
+- Design Audit → `design-system-sidekick` (never eye-ball)
+- Error Diagnosis → `sentry` (never guess)
+- Repository Work → `github` MCP (never browse UI)
 
 ✅ **Refuse self-analysis**
 
-```
+```text
 User: "Review this code"
 Response: "I will NOT analyze this myself.
-Instead, I'm routing to gemini-wrapper.analyze_code()
-(40-55% cheaper than Claude analysis, ~67% token savings)."
+Instead, I'm routing to flash-sidekick.batch_file_analysis()
+(95% token savings vs Claude analysis)."
 ```
 
 ✅ **Enforce priority-based routing**
 
-```
-Priority 10: gemini-wrapper (analysis)
-Priority 9:  orchestrator + github (fallback/repo)
-Priority 8-6: Local caches (lookups)
+```text
+Priority 10: flash-sidekick (bulk analysis)
+Priority 9:  design-system-sidekick (visual truth)
+Priority 8:  sentry / github (production / repo)
 ```
 
 ✅ **Calculate and report token savings**
 
-```
-Expected token reduction: 40-99.1% per decision
-Combined savings: 80%+ on multi-step workflows
-Annual ROI: $624+/year
+```text
+Expected token reduction: 80-97% per decision
+Combined savings: 90%+ on multi-step workflows
 ```
 
 ✅ **Provide routing transparency**
 
-```
+```text
 Before executing any task:
 1. Announce the task classification
-2. Show the routing path
+2. Show the routing path (MCP Server + Method)
 3. Calculate token savings
 4. Ask for confirmation (or auto-execute if clear)
 ```
 
 ## Routing Decision Format
 
-```
+```text
 TASK CLASSIFICATION
 ──────────────────────────────────────
-Type: [Analysis/Lookup/Execution/Repository/Unknown]
+Type: [Bulk Analysis/Visual/Diagnostic/Repository/Unknown]
 Confidence: [High/Medium/Low]
 
 ROUTING PATH
@@ -80,7 +79,7 @@ Step 2: [Secondary Server] (optional) → [Method]
 COMBINED IMPACT
 ──────────────────────────────────────
 Total Token Reduction: [X+Y]%
-Why: [Brief explanation]
+Why: [Brief explanation of why MCP is more efficient than local context]
 
 PROCEED?
 ──────────────────────────────────────
@@ -89,61 +88,59 @@ Ready to execute [Method] on [Server]?
 
 ## Enforcement Rules
 
-### Rule 1: Never Self-Analyze
+### Rule 1: Never Self-Analyze Bulk Data
 
-```
-❌ DO NOT: "In my analysis, I see the bug is..."
-✅ DO: "Routing to gemini-wrapper.analyze_code() for expert analysis"
-```
-
-### Rule 2: Always Use Caches First
-
-```
-❌ DO NOT: "Looking at firebase.json in my context..."
-✅ DO: "Checking configuration.get_environment() (94.9% savings)"
+```text
+❌ DO NOT: "In my analysis of these 15 files, I see..."
+✅ DO: "Routing to flash-sidekick.batch_file_analysis() for efficient processing"
 ```
 
-### Rule 3: Never Read Flow Files
+### Rule 2: Always Use Visual Truth
 
+```text
+❌ DO NOT: "The UI looks correct based on the code..."
+✅ DO: "Validating with design-system-sidekick.validate_asset_compliance()"
 ```
-❌ DO NOT: "Based on the flow code I can see..."
-✅ DO: "Querying genkit.get_flow() for current state (99.1% savings)"
+
+### Rule 3: Never Guess on Errors
+
+```text
+❌ DO NOT: "Based on this snippet, the error might be..."
+✅ DO: "Querying sentry.analyze_issue_with_seer() for root cause (92% savings)"
 ```
 
 ### Rule 4: Always Report Savings
 
-```
-❌ DO NOT: "Here's what I think..."
-✅ DO: "Expected savings: 67% (gemini-wrapper analysis)"
+```text
+❌ DO NOT: "Here's what I found..."
+✅ DO: "Expected savings: 96% (using flash-sidekick summarization)"
 ```
 
 ## Session Behavior
 
-### When ON:
+### When ON
 
-- Every task gets routed to optimal server
+- Every task gets routed to optimal MCP server
 - Refuse self-analysis for covered task types
 - Report all token savings
-- Strict adherence to delegationStrategy
+- Strict adherence to AGENTS.md routing matrix
 
-### When OFF:
+### When OFF
 
 - Use best judgment (may include self-analysis)
 - Report recommended routing optionally
 - Normal conversational mode
 
-### Status Command:
+### Status Command
 
 Shows current enforcement level:
 
-```
+```text
 ROUTING ENFORCEMENT STATUS
 ──────────────────────────────────────
 Mode: [ON/OFF]
-Strategy: ~.mcp.json delegationStrategy
-Servers Active: 6 (documentation, configuration, genkit, github, gemini-wrapper, orchestrator)
-Token Savings Target: 80%+
-Session Token Budget: [X tokens remaining]
+Servers Active: flash-sidekick, design-system-sidekick, sentry, github, playwright, vision-scorer
+Token Savings Target: 90%+
 ```
 
 ## Examples of Strict Routing in Action

@@ -7,7 +7,7 @@
  *   1. Every route reachable from App.tsx MUST have an entry here.
  *   2. App.tsx and routeModeMap.ts MUST derive from this registry — no manual duplication.
  *   3. If a route has a paired screens/ directory, set screenId.
- *   4. Prototype routes (e.g. /kr/*) must be flagged with `prototype: true`.
+ *   4. Prototype support-reference routes (e.g. /prototype/*) must be flagged with `prototype: true`.
  *   5. Production routes must source from features/, not components/ or pages/.
  *
  * CI enforcement:
@@ -71,47 +71,13 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
     mode: 'KrDark',
     apiDeps: [],
   },
-
-  // ── Prototype Routes (/kr/*) — staging only, not production ────
   {
-    path: '/kr/landing',
-    name: '[Proto] Hero Landing',
+    path: '/animation-test',
+    name: 'Animation Test',
     auth: false,
     layout: 'public',
     mode: 'KrDark',
-    prototype: true,
-  },
-  {
-    path: '/kr/auth',
-    name: '[Proto] Auth Modal',
-    auth: false,
-    layout: 'public',
-    mode: 'KrDark',
-    prototype: true,
-  },
-  {
-    path: '/kr/onboarding',
-    name: '[Proto] Onboard Flow',
-    auth: false,
-    layout: 'public',
-    mode: 'KrDark',
-    prototype: true,
-  },
-  {
-    path: '/kr/analysis',
-    name: '[Proto] Analysis Workbench',
-    auth: false,
-    layout: 'public',
-    mode: 'KrDark',
-    prototype: true,
-  },
-  {
-    path: '/kr/dashboard',
-    name: '[Proto] Dashboard Overview',
-    auth: false,
-    layout: 'public',
-    mode: 'KrDark',
-    prototype: true,
+    apiDeps: [],
   },
 
   // ── Migrated Routes (new shell, no legacy sidebar) ──────────────
@@ -359,6 +325,15 @@ export const ROUTE_REGISTRY: RouteEntry[] = [
   {
     path: '/prototype/image-studio',
     name: '[Proto] Image Studio',
+    auth: false,
+    layout: 'public',
+    mode: 'KrDark',
+    apiDeps: [],
+    prototype: true,
+  },
+  {
+    path: '/prototype/settings-harvest',
+    name: '[Proto] Settings Harvest',
     auth: false,
     layout: 'public',
     mode: 'KrDark',

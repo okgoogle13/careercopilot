@@ -1,4 +1,4 @@
-update # AGENTS.md
+# AGENTS.md
 
 Career Copilot is an AI-powered job application assistant built with React, FastAPI, Google Genkit, and Postgres (Firebase/Cloud Run hosted). This document guides AI models and coding agents on project conventions, workflows, dependencies, code style, testing, security, and boundaries.
 
@@ -219,7 +219,7 @@ Rules:
 - ❌ Do NOT introduce new Firebase client usage (legacy server-side only)
 - ❌ Do NOT commit sensitive files (`.env.local`, API credentials)
 - ❌ Do NOT use Inter, Roboto, Arial, Sora, or Plus Jakarta Sans (use only: Work Sans, Fraunces, JetBrains Mono, Libre Bodoni, Caveat, Nabla)
-- ❌ Do NOT use Australian flora/fauna motifs (STRICT ZERO-FLORA LOCKDOWN per `docs/design/01_CANON.md`)
+- ❌ Do NOT use Australian flora/fauna motifs (STRICT ZERO-FLORA LOCKDOWN per `docs/design/01_CANON.md`, although coconut palm trees and elephants are explicitly allowed)
 - ❌ Do NOT use `labWrenMetalBlue` token — deprecated; use `protestMetalBlue`
 - ❌ Do NOT use legacy archetype/component names in new components (`Pebble`, `Stone`, `Slab`, `Jar`, `Cabinet`, `Lens`, `Signal`, `HaloPulses`) — use current archetypes instead
 
@@ -330,6 +330,7 @@ If the task involves **code-only styling changes** (e.g., Tailwind classes, toke
 ### MCP Failure Handling
 
 If an MCP server is unavailable:
+1. **Use the documented local fallback** for that task and keep the scope tight.
 2. **When context/runtime gets expensive**: checkpoint progress and continue in smaller batches
 3. **Only pause for user confirmation** when a task requires reduced coverage or risk acceptance
 

@@ -19,13 +19,13 @@ Canonical public names for new docs and new code:
 
 | Public UI Name | Internal Archetype | Current Runtime Surface | Deprecated / Legacy Aliases |
 | :--- | :--- | :--- | :--- |
-| `Button` | `Strike` | `Strike.tsx` | `KeralaRageButton`, `Pebble` |
-| `Card` | `Placard` | `Placard.tsx` | `ActionCard`, `SolidarityCard`, `Stone` |
+| `Button` | `Strike` | `frontend/src/components/ui/Strike.tsx` | `KeralaRageButton`, `Pebble` |
+| `Card` | `Placard` | `frontend/src/components/ui/Placard.tsx` | `ActionCard`, `SolidarityCard`, `Stone` |
 | `Panel` / `LayoutPanel` | `Scaffold` | structural layout shells | `StructuralPanel`, `Slab`, `Cabinet` |
-| `Input` | `Scaffold` | `ScaffoldInput.tsx` | `TacticalInput`, `Lens` |
-| `Textarea` | `Scaffold` | `ScaffoldArea` | `Lens` variants |
-| `Select` | `March` | `March.tsx` | `Jar` |
-| `Dialog` / `Modal` | `Megaphone` | `Megaphone.tsx` | `Cabinet` |
+| `Input` | `Scaffold` | `frontend/src/components/ui/ScaffoldInput.tsx` | `TacticalInput`, `Lens` |
+| `Textarea` | `Scaffold` | `frontend/src/components/ui/ScaffoldInput.tsx` (`ScaffoldArea`) | `Lens` variants |
+| `Select` | `March` | `frontend/src/components/ui/March.tsx` | `Jar` |
+| `Dialog` / `Modal` | `Megaphone` | `frontend/src/components/ui/Megaphone.tsx` | `Cabinet` |
 | `Surface` / `BackgroundLayer` | `Substrate` | atmospheric/background use only | none |
 
 Rule:
@@ -43,11 +43,11 @@ Shape: `shape.blockRiot03` base → `shape.blockRiot02` active.
 ### `Button` (`Strike`)
 - **Internal mapping:** `Strike` — `--shape-blockRiot03`
 - **Shape Morph:** hover/press → `--shape-blockRiot02` (`typeSpringSlam` 600ms)
-- **Primary Color:** `inkGold` bg / `charcoal-bg` text.
-- **Defiance Variant:** `solidarityRed` bg / `charcoal-bg` text (high-authority actions).
-- **Secondary Variant:** Transparent bg / `worker-ash` text / `concrete-grey` border.
+- **Primary Color:** `--sys-color-inkGold-base` bg / `--sys-color-charcoalBackground-base` text.
+- **Defiance Variant:** `--sys-color-solidarityRed-base` bg / `--sys-color-charcoalBackground-base` text (high-authority actions).
+- **Secondary Variant:** transparent bg / `--sys-color-worker-ash-base` text / `--sys-color-concreteGrey-base` border.
 - **Motion:** Hover expands `wght` by +200 and scales elements by 1.1x.
-- **Current runtime surface:** `Strike.tsx`
+- **Current runtime surface:** `frontend/src/components/ui/Strike.tsx`
 - **Deprecated aliases:** `KeralaRageButton.tsx`, `Pebble.tsx`
 
 ### `NativeAnchor` (symbolic surface)
@@ -66,7 +66,7 @@ Shape: `shape.blockRiot03` base → `shape.blockRiot02` active.
 - **Surface:** `charcoalBackground` with layered grit texture.
 - **Shadow:** Sharp, high-contrast elevation (`--sys-shadow-elevation2Placard`).
 - **Usage:** Opportunity feed, Skill analysis, Kanban items, content framing.
-- **Current runtime surface:** `Placard.tsx`
+- **Current runtime surface:** `frontend/src/components/ui/Placard.tsx`
 - **Deprecated aliases:** `ActionCard`, `SolidarityCard`, `Stone`
 
 ### `Panel` / `LayoutPanel` (`Scaffold`)
@@ -77,9 +77,9 @@ Shape: `shape.blockRiot03` base → `shape.blockRiot02` active.
 - **Deprecated aliases:** `StructuralPanel`, `Slab`, `Cabinet`
 
 ### `AnalysisTile` (`Scaffold`)
-- **Internal mapping:** `Scaffold` — `--shape-blockRiot01`
+- **Internal mapping:** `Scaffold` — `--sys-shape-blockRiot01`
 - **Typography:** `JetBrains Mono` for metadata weight.
-- **Surface:** `blueprint-grey` borders at 1px.
+- **Surface:** `--sys-color-protestMetalBlue-base` accents at low density for blueprint/analysis contexts only.
 
 ---
 
@@ -87,16 +87,16 @@ Shape: `shape.blockRiot03` base → `shape.blockRiot02` active.
 
 ### `Input` and `Textarea` (`Scaffold`)
 - **Internal mapping:** `Scaffold`
-- **Surface:** `charcoal-bg` with `concrete-grey` border.
-- **Focus State:** Border and label shift to `inkGold` (the "Reveal" glow).
+- **Surface:** `--sys-color-charcoalBackground-base` with `--sys-color-concreteGrey-base` border.
+- **Focus State:** Border and label shift to `--sys-color-inkGold-base` (the "Reveal" glow).
 - **Motion:** Label slams upward on focus. Container shape does NOT morph.
-- **Current runtime surfaces:** `ScaffoldInput.tsx`, `ScaffoldArea`
+- **Current runtime surfaces:** `frontend/src/components/ui/ScaffoldInput.tsx`, `ScaffoldArea`
 - **Deprecated aliases:** `TacticalInput`, `Lens`
 
 ### `Select` (`March`)
 - **Internal mapping:** `March`
 - **Shape Morph:** closed `8px 2px 8px 2px` → open `20px 8px 12px 32px` (`dragSettle` 800ms)
-- **Current runtime surface:** `March.tsx`
+- **Current runtime surface:** `frontend/src/components/ui/March.tsx`
 - **Deprecated aliases:** `Jar`
 
 ---
@@ -107,7 +107,7 @@ Shape: `shape.blockRiot03` base → `shape.blockRiot02` active.
 - **Internal mapping:** `Megaphone` — uses `Placard` as inner container
 - **Motion:** Entrance `typeSpringSlam` (600ms, cubic-bezier(0.34, 1.56, 0.64, 1))
 - **Close button:** `Button` (`Strike`) ghost variant
-- **Current runtime surface:** `Megaphone.tsx`
+- **Current runtime surface:** `frontend/src/components/ui/Megaphone.tsx`
 - **Deprecated aliases:** `Cabinet`
 
 ---
@@ -129,7 +129,7 @@ Shape: `shape.blockRiot03` base → `shape.blockRiot02` active.
 - **Effect:** Surface opacities drop to 50%, highlighting `blueprint-grid` (Z-1) in `solidarityRed`.
 
 ### The "Dry Ink" Transition
-- **Loading State:** `Button` (`Strike`) morphs to `shape.pillMarch01` while loading (`typeSpringSlam`). Skeleton shimmer across `worker-ash` gradients.
+- **Loading State:** `Button` (`Strike`) morphs to `shape.pillMarch01` while loading (`typeSpringSlam`). Skeleton shimmer across `--sys-color-worker-ash-base` gradients.
 - **Empty State:** High-contrast `stencil-yellow` typography + broken magnifying glass motif (`KR-UI-020`).
 
 ### `VerificationStamp` (The Stamp — no archetype)

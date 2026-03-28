@@ -14,6 +14,7 @@ import { LayeredHero } from '@/components/kerala-rage/LayeredHero';
 import { loadHeroRegistry } from '@/design/hero/heroRegistry';
 import { composeHero } from '@/lib/composeHero';
 import type { SolidarityManifest } from '@/design/hero/heroTypes';
+import { AiOutputsTabs, type ResumeKeyword } from './components/AiOutputsTabs';
 import {
   analysisService,
   type AtsScoreResponse,
@@ -71,6 +72,20 @@ export const AnalysisPage: React.FC = () => {
   const [strategyResult, setStrategyResult] = useState<StrategyResponse | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isGeneratingStrategy, setIsGeneratingStrategy] = useState(false);
+
+  const aiCriteria =
+    strategyResult?.job_details.key_responsibilities?.map((title, index) => ({
+      id: index + 1,
+      title,
+      required: true,
+    })) ?? [];
+
+  const resumeKeywords: ResumeKeyword[] = atsResult
+    ? [
+        ...atsResult.matched_keywords.map((label) => ({ label, match: 'strong' as const })),
+        ...atsResult.missing_keywords.map((label) => ({ label, match: 'missing' as const })),
+      ]
+    : [];
 
   const handleAnalysis = async () => {
     if (!resumeText || !jobDescription) {
@@ -313,6 +328,14 @@ export const AnalysisPage: React.FC = () => {
                 </div>
               </div>
             </Placard>
+          )}
+
+          {(strategyResult || atsResult) && (
+            <AiOutputsTabs
+              criteria={aiCriteria}
+              resumeKeywords={resumeKeywords}
+              coverLetterDraft=""
+            />
           )}
         </aside>
       </div>

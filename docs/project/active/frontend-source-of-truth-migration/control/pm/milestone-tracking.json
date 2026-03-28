@@ -178,6 +178,64 @@
         "M9",
         "M15"
       ]
+    },
+    {
+      "milestone_id": "M17",
+      "name": "Frontend cleanup report and route-gap brief published",
+      "status": "COMPLETE",
+      "assigned_to": "orchestrator",
+      "completed_date": "2026-03-28",
+      "deliverables": [
+        "FRONTEND-CLEANUP-REPORT.md created",
+        "Live route-matrix gaps enumerated for frontend-cleanup-manager",
+        "Terminal migration-workspace dissolution requirements defined"
+      ],
+      "dependencies": [
+        "M16"
+      ]
+    },
+    {
+      "milestone_id": "M18",
+      "name": "Runtime-truth resync across App, registry, routes manifest, and route matrix",
+      "status": "IN_PROGRESS",
+      "assigned_to": "frontend",
+      "dependencies": [
+        "M17"
+      ]
+    },
+    {
+      "milestone_id": "M19",
+      "name": "Single-owner surface cleanup batches defined and executed",
+      "status": "PENDING",
+      "assigned_to": "frontend",
+      "dependencies": [
+        "M18"
+      ]
+    },
+    {
+      "milestone_id": "M20",
+      "name": "Migration workspace dissolved into canonical homes or retained archive",
+      "status": "PENDING",
+      "assigned_to": "frontend",
+      "dependencies": [
+        "M19",
+        "M21",
+        "M3"
+      ]
+    },
+    {
+      "milestone_id": "M21",
+      "name": "Prototype salvage pass resolves the remaining harvest candidates",
+      "status": "PENDING",
+      "assigned_to": "frontend",
+      "dependencies": [
+        "M18"
+      ],
+      "deliverables": [
+        "PROTOTYPE-SALVAGE-TRACKER.md created and updated with terminal statuses",
+        "AiOutputsTabs.tsx, SaveApplicationBar.tsx, and useAiOutputs.ts either ported or explicitly discarded",
+        "KanbanTracker.tsx confirmed as already canonical or updated with residual salvage notes"
+      ]
     }
   ]
 }

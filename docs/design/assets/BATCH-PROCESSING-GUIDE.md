@@ -508,7 +508,7 @@ export const DashboardHero = () => {
   return (
     <div
       style={{
-        backgroundImage: 'url(/assets/kr-motifs/kerala-rage-ink-burst-kr-dark-1024.png)',
+        backgroundImage: 'url(/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__abstract--solidarity-light-burst--v2.png)',
         backgroundSize: 'cover',
         opacity: 0.65  // Solidarity mode
       }}

@@ -1,0 +1,851 @@
+{
+  "artifact": "target_state_route_matrix",
+  "generated_at": "2026-03-22",
+  "canonical_plan": "docs/project/active/frontend-source-of-truth-migration/control/blueprint.md",
+  "schema_version": 4,
+  "requirements_audit_checklist": "docs/project/active/frontend-source-of-truth-migration/control/requirements-audit-checklist.md",
+  "row_count": 27,
+  "decision_rules": [
+    "Prefer existing product routes over inventing new top-level routes.",
+    "Retire /kr/* prototype routes from product truth.",
+    "Treat /design-sidekick, /style-guide, and /test-tokens as non-product routes.",
+    "Assign each retained backend capability to one clear target route.",
+    "Use archive requirements as audit inputs only; runtime/design/capability truth remain authoritative when requirements drift.",
+    "Describe component work in plain primitive language first; treat KR archetypes as internal implementation mappings."
+  ],
+  "requirements_traceability": [
+    {
+      "requirement_cluster": "auth_profile_lifecycle",
+      "archived_requirements": [
+        "REQ-1.1.1",
+        "REQ-1.1.2",
+        "REQ-1.1.3",
+        "REQ-1.1.4",
+        "REQ-1.1.5"
+      ],
+      "solution_design_stories": [
+        "Epic 1 / Story 1.1",
+        "Epic 1 / Story 1.2",
+        "Epic 1 / Story 1.3"
+      ],
+      "primary_routes": [
+        "/login",
+        "/register",
+        "/onboarding",
+        "/welcome",
+        "/profile",
+        "/settings",
+        "/career/ingest",
+        "/documents"
+      ],
+      "audit_status": "partial",
+      "notes": "/login, /register, and /welcome remain planned merge surfaces in the active route matrix."
+    },
+    {
+      "requirement_cluster": "document_generation",
+      "archived_requirements": [
+        "REQ-1.2.1",
+        "REQ-1.2.2",
+        "REQ-1.2.3",
+        "REQ-1.2.4",
+        "REQ-1.2.5"
+      ],
+      "solution_design_stories": [
+        "Epic 2 / Story 2.1",
+        "Epic 2 / Story 2.2",
+        "Epic 2 / Story 2.3",
+        "Epic 4 / Story 4.3"
+      ],
+      "primary_routes": [
+        "/cover-letter-generator",
+        "/ksc-generator",
+        "/documents",
+        "/apply/quick",
+        "/analysis"
+      ],
+      "audit_status": "partial",
+      "notes": "Generation routes are live; resume-tailoring and profile-variation mapping still need explicit audit evidence."
+    },
+    {
+      "requirement_cluster": "ats_analysis_optimization",
+      "archived_requirements": [
+        "REQ-1.3.1",
+        "REQ-1.3.2",
+        "REQ-1.3.3",
+        "REQ-1.3.4"
+      ],
+      "solution_design_stories": [
+        "Epic 3 / Story 3.1",
+        "Epic 3 / Story 3.2",
+        "Epic 3 / Story 3.3"
+      ],
+      "primary_routes": [
+        "/analysis",
+        "/apply/quick"
+      ],
+      "audit_status": "partial",
+      "notes": "Persisted audit history is now wired, but score-iteration evidence still needs explicit audit capture."
+    },
+    {
+      "requirement_cluster": "proactive_job_management",
+      "archived_requirements": [
+        "REQ-1.4.1",
+        "REQ-1.4.2",
+        "REQ-1.4.3",
+        "REQ-1.4.4"
+      ],
+      "solution_design_stories": [
+        "Epic 5 / Story 5.1"
+      ],
+      "primary_routes": [
+        "/opportunities",
+        "/job-queue",
+        "/apply/quick"
+      ],
+      "audit_status": "deferred",
+      "notes": "Archived Gmail, Calendar, and notification automation is not yet established as current capability truth."
+    },
+    {
+      "requirement_cluster": "theme_branding_management",
+      "archived_requirements": [
+        "REQ-1.5.1",
+        "REQ-1.5.2",
+        "REQ-1.5.3",
+        "REQ-1.5.4"
+      ],
+      "solution_design_stories": [
+        "Epic 4 / Story 4.1",
+        "Epic 4 / Story 4.2",
+        "Epic 4 / Story 4.3"
+      ],
+      "primary_routes": [
+        "/documents",
+        "/cover-letter-generator",
+        "/ksc-generator",
+        "/analysis",
+        "/settings"
+      ],
+      "audit_status": "superseded",
+      "notes": "Archived multi-theme expectations conflict with the current KR Solidarity dark-only canon."
+    }
+  ],
+  "rows": [
+    {
+      "route_id": "root",
+      "current_route": "/",
+      "target_route": "/",
+      "dominant_archetypes": ["Substrate", "Strike"],
+      "route_class": "product",
+      "family": "landing",
+      "benchmark_id": "root-benchmark-v1",
+      "status": "merge",
+      "implementation_status": "complete",
+      "current_runtime_owner": "LandingPage",
+      "target_runtime_owner": "LandingPage",
+      "screen_reference": "frontend/src/screens/01_landing/HeroLanding.tsx",
+      "xml_wireframe_path": "frontend/src/screens/01_landing/01_landing.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/landing/LandingPage.tsx",
+      "backend_capabilities": [],
+      "target_component_surfaces": [
+        "LandingPage",
+        "HeroLanding"
+      ],
+      "component_library_action": "merge",
+      "priority": "high",
+      "blockers": [],
+      "notes": "Keep the route and backport landing reference patterns into the canonical runtime surface."
+    },
+    {
+      "route_id": "login",
+      "current_route": "/login",
+      "target_route": "/login",
+      "dominant_archetypes": ["Substrate", "Scaffold", "Strike"],
+      "route_class": "product",
+      "family": "auth-onboarding",
+      "benchmark_id": "auth-benchmark-v1",
+      "status": "merge",
+      "implementation_status": "planned",
+      "current_runtime_owner": "Login",
+      "target_runtime_owner": "Login",
+      "screen_reference": "frontend/src/screens/02_auth/AuthModal.tsx",
+      "xml_wireframe_path": "frontend/src/screens/02_auth/02_login.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/auth/Login.tsx",
+      "backend_capabilities": [],
+      "target_component_surfaces": [
+        "Login",
+        "AuthModal"
+      ],
+      "component_library_action": "merge",
+      "priority": "high",
+      "blockers": [],
+      "notes": "Keep the route and absorb auth UI patterns from the design reference, not from /kr/auth."
+    },
+    {
+      "route_id": "register",
+      "current_route": "/register",
+      "target_route": "/register",
+      "dominant_archetypes": ["Substrate", "Scaffold", "Strike"],
+      "route_class": "product",
+      "family": "auth-onboarding",
+      "benchmark_id": "auth-benchmark-v1",
+      "status": "merge",
+      "implementation_status": "planned",
+      "current_runtime_owner": "Register",
+      "target_runtime_owner": "Register",
+      "screen_reference": "frontend/src/screens/02_auth/AuthModal.tsx",
+      "xml_wireframe_path": "frontend/src/screens/02_auth/02_register.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/auth/Register.tsx",
+      "backend_capabilities": [],
+      "target_component_surfaces": [
+        "Register",
+        "AuthModal"
+      ],
+      "component_library_action": "merge",
+      "priority": "high",
+      "blockers": [],
+      "notes": "Keep the route and align it with canonical auth entry patterns."
+    },
+    {
+      "route_id": "onboarding",
+      "current_route": "/onboarding",
+      "target_route": "/onboarding",
+      "dominant_archetypes": ["Substrate", "Scaffold", "Strike"],
+      "route_class": "product",
+      "family": "auth-onboarding",
+      "benchmark_id": "onboarding-benchmark-v1",
+      "status": "merge",
+      "implementation_status": "complete",
+      "current_runtime_owner": "OnboardingRoute",
+      "target_runtime_owner": "OnboardingRoute",
+      "screen_reference": "frontend/src/screens/03_onboarding/OnboardFlow.tsx",
+      "xml_wireframe_path": "frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/onboarding/OnboardingRoute.tsx",
+      "backend_capabilities": [
+        "voice_profile_capture"
+      ],
+      "target_component_surfaces": [
+        "OnboardingRoute",
+        "OnboardingPage",
+        "OnboardFlow"
+      ],
+      "component_library_action": "merge",
+      "priority": "high",
+      "blockers": [],
+      "notes": "Keep the route-owned welcome gate and pair the onboarding flow to the 03_onboarding shell without promoting /kr/onboarding."
+    },
+    {
+      "route_id": "welcome",
+      "current_route": "/welcome",
+      "target_route": "/welcome",
+      "dominant_archetypes": ["Substrate", "Scaffold", "Strike"],
+      "route_class": "product",
+      "family": "auth-onboarding",
+      "benchmark_id": "welcome-benchmark-v1",
+      "status": "merge",
+      "implementation_status": "planned",
+      "current_runtime_owner": "WelcomeScreen",
+      "target_runtime_owner": "WelcomeScreen",
+      "screen_reference": "frontend/src/screens/03_onboarding/OnboardFlow.tsx",
+      "xml_wireframe_path": "frontend/src/screens/03_onboarding/03_welcome.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/onboarding/WelcomeScreen.tsx",
+      "backend_capabilities": [],
+      "target_component_surfaces": [
+        "WelcomeScreen",
+        "OnboardFlow"
+      ],
+      "component_library_action": "merge",
+      "priority": "high",
+      "blockers": [
+        "welcome/onboarding progression still needs workflow validation"
+      ],
+      "notes": "Keep as part of the onboarding progression."
+    },
+    {
+      "route_id": "dashboard",
+      "current_route": "/dashboard",
+      "target_route": "/dashboard",
+      "dominant_archetypes": ["Scaffold", "Placard", "Strike"],
+      "route_class": "product",
+      "family": "dashboard",
+      "benchmark_id": "dashboard-benchmark-v1",
+      "status": "merge",
+      "implementation_status": "complete",
+      "current_runtime_owner": "Dashboard",
+      "target_runtime_owner": "Dashboard",
+      "screen_reference": "frontend/src/screens/11_dashboard/DashboardOverview.tsx",
+      "xml_wireframe_path": "frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/dashboard/Dashboard.tsx",
+      "backend_capabilities": [
+        "applications_crud",
+        "smart_ingestion_asset_pipeline"
+      ],
+      "target_component_surfaces": [
+        "Dashboard",
+        "DashboardOverview"
+      ],
+      "component_library_action": "merge",
+      "priority": "high",
+      "blockers": [
+        "dashboard onboarding checklist logic remains workflow-sensitive"
+      ],
+      "notes": "Dashboard stays canonical; merge visual structure only, not a competing route concept."
+    },
+    {
+      "route_id": "analysis",
+      "current_route": "/analysis",
+      "target_route": "/analysis",
+      "dominant_archetypes": ["Placard", "Strike", "Scaffold"],
+      "route_class": "product",
+      "family": "analysis",
+      "benchmark_id": "analysis-benchmark-v1",
+      "status": "expand",
+      "implementation_status": "complete",
+      "current_runtime_owner": "AnalysisPage",
+      "target_runtime_owner": "AnalysisPage",
+      "screen_reference": "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx",
+      "xml_wireframe_path": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/analysis/AnalysisPage.tsx",
+      "backend_capabilities": [
+        "resume_audit"
+      ],
+      "target_component_surfaces": [
+        "AnalysisPage",
+        "AnalysisWorkbench",
+        "ResumeAuditPage"
+      ],
+      "component_library_action": "extend",
+      "priority": "high",
+      "blockers": [],
+      "notes": "Keep route and expand it into the canonical analysis surface. Persisted audit history is now wired in runtime truth."
+    },
+    {
+      "route_id": "asset_library",
+      "current_route": "/asset-library",
+      "target_route": "/asset-library",
+      "route_class": "product",
+      "family": "analysis",
+      "benchmark_id": "asset-library-benchmark-v1",
+      "status": "expand",
+      "implementation_status": "complete",
+      "current_runtime_owner": "AssetLibrary",
+      "target_runtime_owner": "AssetLibrary",
+      "screen_reference": "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx",
+      "xml_wireframe_path": "frontend/src/screens/05_analysis/05_asset_library.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/analysis/AssetLibrary.tsx",
+      "backend_capabilities": [
+        "smart_ingestion_asset_pipeline"
+      ],
+      "target_component_surfaces": [
+        "AssetLibrary",
+        "AnalysisWorkbench"
+      ],
+      "component_library_action": "extend",
+      "priority": "high",
+      "blockers": [],
+      "notes": "Keep route as an analysis-family support surface. Ownership ambiguity is resolved; route remains intentionally support-only in shell promotion."
+    },
+    {
+      "route_id": "documents",
+      "current_route": "/documents",
+      "target_route": "/documents",
+      "dominant_archetypes": ["Scaffold", "Placard", "Strike"],
+      "route_class": "product",
+      "family": "documents",
+      "benchmark_id": "documents-benchmark-v1",
+      "status": "expand",
+      "implementation_status": "complete",
+      "current_runtime_owner": "Documents",
+      "target_runtime_owner": "Documents",
+      "screen_reference": "frontend/src/screens/08_workbench/DocumentWorkbench.tsx",
+      "xml_wireframe_path": "frontend/src/screens/08_workbench/08_workbench.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/documents/Documents.tsx",
+      "backend_capabilities": [
+        "documents_redline"
+      ],
+      "target_component_surfaces": [
+        "Documents",
+        "DocumentWorkbench"
+      ],
+      "component_library_action": "extend",
+      "priority": "high",
+      "blockers": [],
+      "notes": "This route is the canonical owner of redline and review workspace behavior."
+    },
+    {
+      "route_id": "tracker",
+      "current_route": "/tracker",
+      "target_route": "/tracker",
+      "dominant_archetypes": ["Scaffold", "Placard"],
+      "route_class": "product",
+      "family": "applications",
+      "benchmark_id": "tracker-benchmark-v1",
+      "status": "expand",
+      "implementation_status": "complete_deferred_verification",
+      "current_runtime_owner": "ApplicationTracker",
+      "target_runtime_owner": "ApplicationTracker",
+      "screen_reference": "frontend/src/screens/07_kanban/KanbanTracker.tsx",
+      "xml_wireframe_path": "frontend/src/screens/07_kanban/07_kanban.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/applications/ApplicationTracker.tsx",
+      "backend_capabilities": [
+        "applications_crud"
+      ],
+      "target_component_surfaces": [
+        "ApplicationTracker",
+        "KanbanTracker"
+      ],
+      "component_library_action": "extend",
+      "priority": "high",
+      "blockers": [
+        "local Firebase/Firestore environment is not execution-ready for final tracker closeout: the default backend on :8000 rejects real Firebase tokens due missing project config, while a backend started with explicit project vars on :8001 verifies tokens but the applications read path stalls before returning data"
+      ],
+      "notes": "This is the canonical owner of application CRUD, status, and detail flows; runtime truth is aligned and the remaining blocker is local backend auth/data readiness rather than route implementation."
+    },
+    {
+      "route_id": "apply_quick",
+      "current_route": "/apply/quick",
+      "target_route": "/apply/quick",
+      "dominant_archetypes": ["Strike", "Megaphone", "Scaffold"],
+      "route_class": "product",
+      "family": "applications",
+      "benchmark_id": "apply-benchmark-v1",
+      "status": "expand",
+      "implementation_status": "complete",
+      "current_runtime_owner": "ApplyQuick",
+      "target_runtime_owner": "ApplyQuick",
+      "screen_reference": "frontend/src/screens/09_finalization/ApplicationFinalization.tsx",
+      "xml_wireframe_path": "frontend/src/screens/09_finalization/09_finalization.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/applications/ApplyQuick.tsx",
+      "backend_capabilities": [
+        "applications_crud",
+        "genkit_job_analysis",
+        "workflow_orchestration"
+      ],
+      "target_component_surfaces": [
+        "ApplyQuick",
+        "ApplicationFinalization"
+      ],
+      "component_library_action": "merge",
+      "priority": "high",
+      "blockers": [],
+      "notes": "Keep route as a supporting application flow; do not split it into a new family. Workflow generation is wired to the live backend contract and job-analysis ownership is resolved here."
+    },
+    {
+      "route_id": "opportunities",
+      "current_route": "/opportunities",
+      "target_route": "/opportunities",
+      "dominant_archetypes": ["Scaffold", "March", "Placard"],
+      "route_class": "product",
+      "family": "jobs",
+      "benchmark_id": "opportunities-benchmark-v1",
+      "status": "expand",
+      "implementation_status": "complete",
+      "current_runtime_owner": "Opportunities",
+      "target_runtime_owner": "Opportunities",
+      "screen_reference": "frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
+      "xml_wireframe_path": "frontend/src/screens/06_lookout/06_opportunities.wireframe.xml",
+      "parent_wireframe_path": "frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/opportunities/Opportunities.tsx",
+      "backend_capabilities": [
+        "job_listings_workbench",
+        "genkit_job_analysis"
+      ],
+      "target_component_surfaces": [
+        "Opportunities",
+        "LookoutDiscovery"
+      ],
+      "component_library_action": "merge",
+      "priority": "medium",
+      "blockers": [],
+      "notes": "Keep route and merge stronger lookout/workbench patterns into it. /apply/quick remains the execution owner for job analysis; /opportunities is support/discovery."
+    },
+    {
+      "route_id": "job_queue",
+      "current_route": "/job-queue",
+      "target_route": "/job-queue",
+      "route_class": "product",
+      "family": "jobs",
+      "benchmark_id": "job-queue-benchmark-v1",
+      "status": "expand",
+      "implementation_status": "complete",
+      "current_runtime_owner": "JobQueue",
+      "target_runtime_owner": "JobQueue",
+      "screen_reference": "frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
+      "xml_wireframe_path": "frontend/src/screens/06_lookout/06_job_queue.wireframe.xml",
+      "parent_wireframe_path": "frontend/src/screens/06_lookout/06_lookout.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/jobs/JobQueue.tsx",
+      "backend_capabilities": [
+        "job_listings_workbench"
+      ],
+      "target_component_surfaces": [
+        "JobQueue",
+        "LookoutDiscovery"
+      ],
+      "component_library_action": "merge",
+      "priority": "medium",
+      "blockers": [],
+      "notes": "Keep route as a queue/worklist surface inside the jobs family; pair it to the 06_lookout shell while queue actions stay route-owned."
+    },
+    {
+      "route_id": "ksc_generator",
+      "current_route": "/ksc-generator",
+      "target_route": "/ksc-generator",
+      "route_class": "product",
+      "family": "generation",
+      "benchmark_id": "ksc-generator-benchmark-v1",
+      "status": "keep",
+      "implementation_status": "complete",
+      "current_runtime_owner": "KSCGenerator",
+      "target_runtime_owner": "KSCGenerator",
+      "screen_reference": "frontend/src/screens/12_generation/GenerationWorkbench.tsx",
+      "xml_wireframe_path": "frontend/src/screens/12_generation/12_ksc_generator.wireframe.xml",
+      "parent_wireframe_path": "frontend/src/screens/12_generation/12_generation.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/ksc-generator/KSCGenerator.tsx",
+      "backend_capabilities": [],
+      "target_component_surfaces": [
+        "KSCGenerator",
+        "GenerationWorkbench"
+      ],
+      "component_library_action": "merge",
+      "priority": "medium",
+      "blockers": [],
+      "notes": "Keep as a dedicated generator route; pair it to the 08_workbench shell while generator logic stays route-owned."
+    },
+    {
+      "route_id": "cover_letter_generator",
+      "current_route": "/cover-letter-generator",
+      "target_route": "/cover-letter-generator",
+      "route_class": "product",
+      "family": "generation",
+      "benchmark_id": "cover-letter-generator-benchmark-v1",
+      "status": "keep",
+      "implementation_status": "complete",
+      "current_runtime_owner": "CoverLetterGenerator",
+      "target_runtime_owner": "CoverLetterGenerator",
+      "screen_reference": "frontend/src/screens/12_generation/GenerationWorkbench.tsx",
+      "xml_wireframe_path": "frontend/src/screens/12_generation/12_cover_letter_generator.wireframe.xml",
+      "parent_wireframe_path": "frontend/src/screens/12_generation/12_generation.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/applications/CoverLetterGenerator.tsx",
+      "backend_capabilities": [],
+      "target_component_surfaces": [
+        "CoverLetterGenerator",
+        "GenerationWorkbench"
+      ],
+      "component_library_action": "merge",
+      "priority": "medium",
+      "blockers": [],
+      "notes": "Keep as a dedicated generator route; pair it to the 09_finalization shell while cover-letter flow stays route-owned."
+    },
+    {
+      "route_id": "profile",
+      "current_route": "/profile",
+      "target_route": "/profile",
+      "dominant_archetypes": ["Scaffold", "Strike"],
+      "route_class": "product",
+      "family": "account",
+      "benchmark_id": "profile-benchmark-v1",
+      "status": "expand",
+      "implementation_status": "complete",
+      "current_runtime_owner": "ProfileView",
+      "target_runtime_owner": "ProfileView",
+      "screen_reference": "frontend/src/screens/10_settings/SettingsControl.tsx",
+      "xml_wireframe_path": "frontend/src/screens/10_settings/10_profile.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/profile/components/ProfileView.tsx",
+      "backend_capabilities": [
+        "voice_profile_capture"
+      ],
+      "target_component_surfaces": [
+        "ProfileView",
+        "SettingsControl"
+      ],
+      "component_library_action": "extend",
+      "priority": "high",
+      "blockers": [],
+      "notes": "This is the canonical owner of voice-profile management."
+    },
+    {
+      "route_id": "settings",
+      "current_route": "/settings",
+      "target_route": "/settings",
+      "dominant_archetypes": ["Scaffold", "Strike"],
+      "route_class": "product",
+      "family": "account",
+      "benchmark_id": "settings-benchmark-v1",
+      "status": "expand",
+      "implementation_status": "complete",
+      "current_runtime_owner": "Settings",
+      "target_runtime_owner": "Settings",
+      "screen_reference": "frontend/src/screens/10_settings/SettingsControl.tsx",
+      "xml_wireframe_path": "frontend/src/screens/10_settings/10_settings.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/settings/Settings.tsx",
+      "backend_capabilities": [],
+      "target_component_surfaces": [
+        "Settings",
+        "SettingsControl"
+      ],
+      "component_library_action": "extend",
+      "priority": "high",
+      "blockers": [],
+      "notes": "Keep as a secondary account surface; pair it to the 10_settings shell while voice ownership stays on /profile."
+    },
+    {
+      "route_id": "career_ingest",
+      "current_route": "/career/ingest",
+      "target_route": "/career/ingest",
+      "dominant_archetypes": ["Scaffold", "Strike", "Placard"],
+      "route_class": "product",
+      "family": "ingestion",
+      "benchmark_id": "ingest-benchmark-v1",
+      "status": "expand",
+      "implementation_status": "complete",
+      "current_runtime_owner": "IngestionPage",
+      "target_runtime_owner": "SmartIngestion",
+      "screen_reference": "frontend/src/screens/04_ingestion/IngestionFlow.tsx",
+      "xml_wireframe_path": "frontend/src/screens/04_ingestion/04_ingestion.wireframe.xml",
+      "wireframe_coverage": "route_specific_wireframe",
+      "paired_runtime_surface": "frontend/src/features/ingestion/SmartIngestion.tsx",
+      "audit_status": "reference_only",
+      "backend_capabilities": [
+        "smart_ingestion_asset_pipeline",
+        "artifact_upload_contract",
+        "duplicate_ingestion_contracts"
+      ],
+      "target_component_surfaces": [
+        "IngestionPage",
+        "IngestionFlow"
+      ],
+      "component_library_action": "extend",
+      "priority": "high",
+      "blockers": [
+        "frontend ingestion callers are split across multiple contracts",
+        "canonical and deprecated ingestion paths are not yet fully classified"
+      ],
+      "notes": "This is the canonical owner of the ingestion flow and /api/v1/ingest contract."
+    },
+    {
+      "route_id": "fallback",
+      "current_route": "*",
+      "target_route": "*",
+      "route_class": "fallback",
+      "family": "fallback",
+      "status": "keep",
+      "implementation_status": "planned",
+      "current_runtime_owner": "NotFound",
+      "target_runtime_owner": "NotFound",
+      "screen_reference": null,
+      "xml_wireframe_path": null,
+      "wireframe_coverage": "internal_no_wireframe_required",
+      "paired_runtime_surface": "frontend/src/features/not-found/NotFound.tsx",
+      "backend_capabilities": [],
+      "target_component_surfaces": [
+        "NotFound"
+      ],
+      "component_library_action": "reuse",
+      "priority": "low",
+      "blockers": [],
+      "notes": "Supporting runtime infrastructure only."
+    },
+    {
+      "route_id": "design_sidekick",
+      "current_route": "/design-sidekick",
+      "target_route": null,
+      "route_class": "internal",
+      "family": "internal-tools",
+      "status": "retire",
+      "implementation_status": "retired",
+      "current_runtime_owner": "DesignSidekick",
+      "target_runtime_owner": null,
+      "screen_reference": null,
+      "xml_wireframe_path": null,
+      "wireframe_coverage": "internal_no_wireframe_required",
+      "paired_runtime_surface": "frontend/src/features/design-sidekick/DesignSidekick.tsx",
+      "backend_capabilities": [],
+      "target_component_surfaces": [
+        "DesignSidekick"
+      ],
+      "component_library_action": "retire",
+      "priority": "low",
+      "blockers": [],
+      "notes": "Keep available only as internal tooling if needed; exclude from product target state."
+    },
+    {
+      "route_id": "style_guide",
+      "current_route": "/style-guide",
+      "target_route": null,
+      "route_class": "internal",
+      "family": "internal-tools",
+      "status": "retire",
+      "implementation_status": "retired",
+      "current_runtime_owner": "StyleGuide",
+      "target_runtime_owner": null,
+      "screen_reference": null,
+      "xml_wireframe_path": null,
+      "wireframe_coverage": "internal_no_wireframe_required",
+      "paired_runtime_surface": "frontend/src/features/style-guide/StyleGuide.tsx",
+      "backend_capabilities": [],
+      "target_component_surfaces": [
+        "StyleGuide"
+      ],
+      "component_library_action": "retire",
+      "priority": "low",
+      "blockers": [
+        "style-guide is a god component but not a target-state product route"
+      ],
+      "notes": "Treat as internal reference only, not a production route."
+    },
+    {
+      "route_id": "test_tokens",
+      "current_route": "/test-tokens",
+      "target_route": null,
+      "route_class": "internal",
+      "family": "internal-tools",
+      "status": "retire",
+      "implementation_status": "retired",
+      "current_runtime_owner": "TokenTest",
+      "target_runtime_owner": null,
+      "screen_reference": null,
+      "xml_wireframe_path": null,
+      "wireframe_coverage": "internal_no_wireframe_required",
+      "paired_runtime_surface": "frontend/src/components/debug/TokenTest.tsx",
+      "backend_capabilities": [],
+      "target_component_surfaces": [
+        "TokenTest"
+      ],
+      "component_library_action": "retire",
+      "priority": "low",
+      "blockers": [],
+      "notes": "Debug surface only; not part of target product route map."
+    },
+    {
+      "route_id": "kr_landing",
+      "current_route": "/kr/landing",
+      "target_route": null,
+      "route_class": "prototype",
+      "family": "landing-prototype",
+      "status": "retire",
+      "implementation_status": "retired",
+      "current_runtime_owner": "HeroLanding",
+      "target_runtime_owner": null,
+      "screen_reference": "frontend/src/screens/01_landing/HeroLanding.tsx",
+      "xml_wireframe_path": "frontend/src/screens/01_landing/01_landing.wireframe.xml",
+      "wireframe_coverage": "shared_family_wireframe",
+      "paired_runtime_surface": "frontend/src/components/phase3-batch2/HeroLanding.tsx",
+      "backend_capabilities": [],
+      "target_component_surfaces": [
+        "HeroLanding"
+      ],
+      "component_library_action": "retire",
+      "priority": "medium",
+      "blockers": [],
+      "notes": "Keep only as reference material until useful patterns are merged into /."
+    },
+    {
+      "route_id": "kr_auth",
+      "current_route": "/kr/auth",
+      "target_route": null,
+      "route_class": "prototype",
+      "family": "landing-prototype",
+      "status": "retire",
+      "implementation_status": "retired",
+      "current_runtime_owner": "AuthModal",
+      "target_runtime_owner": null,
+      "screen_reference": "frontend/src/screens/02_auth/AuthModal.tsx",
+      "xml_wireframe_path": "frontend/src/screens/02_auth/02_auth.wireframe.xml",
+      "wireframe_coverage": "shared_family_wireframe",
+      "paired_runtime_surface": "frontend/src/components/phase3-batch2/AuthModal.tsx",
+      "backend_capabilities": [],
+      "target_component_surfaces": [
+        "AuthModal"
+      ],
+      "component_library_action": "retire",
+      "priority": "medium",
+      "blockers": [],
+      "notes": "Do not treat as product auth ownership."
+    },
+    {
+      "route_id": "kr_onboarding",
+      "current_route": "/kr/onboarding",
+      "target_route": null,
+      "route_class": "prototype",
+      "family": "landing-prototype",
+      "status": "retire",
+      "implementation_status": "retired",
+      "current_runtime_owner": "OnboardFlow",
+      "target_runtime_owner": null,
+      "screen_reference": "frontend/src/screens/03_onboarding/OnboardFlow.tsx",
+      "xml_wireframe_path": "frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml",
+      "wireframe_coverage": "shared_family_wireframe",
+      "paired_runtime_surface": "frontend/src/components/phase3-batch2/OnboardFlow.tsx",
+      "backend_capabilities": [],
+      "target_component_surfaces": [
+        "OnboardFlow"
+      ],
+      "component_library_action": "retire",
+      "priority": "medium",
+      "blockers": [],
+      "notes": "Keep only as reference for onboarding improvements."
+    },
+    {
+      "route_id": "kr_analysis",
+      "current_route": "/kr/analysis",
+      "target_route": null,
+      "route_class": "prototype",
+      "family": "landing-prototype",
+      "status": "retire",
+      "implementation_status": "retired",
+      "current_runtime_owner": "AnalysisWorkbench",
+      "target_runtime_owner": null,
+      "screen_reference": "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx",
+      "xml_wireframe_path": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml",
+      "wireframe_coverage": "shared_family_wireframe",
+      "paired_runtime_surface": "frontend/src/components/phase3-batch3/AnalysisWorkbench.tsx",
+      "backend_capabilities": [],
+      "target_component_surfaces": [
+        "AnalysisWorkbench"
+      ],
+      "component_library_action": "retire",
+      "priority": "medium",
+      "blockers": [],
+      "notes": "Merge any useful ideas into /analysis instead of promoting this route."
+    },
+    {
+      "route_id": "kr_dashboard",
+      "current_route": "/kr/dashboard",
+      "target_route": null,
+      "route_class": "prototype",
+      "family": "landing-prototype",
+      "status": "retire",
+      "implementation_status": "retired",
+      "current_runtime_owner": "DashboardOverview",
+      "target_runtime_owner": null,
+      "screen_reference": "frontend/src/screens/11_dashboard/DashboardOverview.tsx",
+      "xml_wireframe_path": "frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml",
+      "wireframe_coverage": "shared_family_wireframe",
+      "paired_runtime_surface": "frontend/src/components/phase3-batch3/DashboardOverview.tsx",
+      "backend_capabilities": [],
+      "target_component_surfaces": [
+        "DashboardOverview"
+      ],
+      "component_library_action": "retire",
+      "priority": "medium",
+      "blockers": [],
+      "notes": "Merge reference patterns into /dashboard; retire the route."
+    }
+  ]
+}

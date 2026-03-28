@@ -1,11 +1,11 @@
-# A08 — urban_gallery_wall__A08_shadow_paste_fx__1400x900.png
+# A08 — kr-solidarity__atmospheric__urban--shadow-paste-fx--v1.png
 
         ## Output contract
         - Generate exactly one image.
         - No collage grid.
         - No extra text.
         - Keep Global Style Lock intact.
-        - Save as: `public/hero/generated/urban_gallery_wall__A08_shadow_paste_fx__1400x900.png`
+        - Save as: `public/hero/generated/kr-solidarity__atmospheric__urban--shadow-paste-fx--v1.png`
 
         ## Asset metadata
         - Asset ID: A08

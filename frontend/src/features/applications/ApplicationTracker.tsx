@@ -1,12 +1,17 @@
 import { applicationService } from '@/api/applicationService';
+import { LayeredHero } from '@/components/kerala-rage/LayeredHero';
 import { Strike } from '@/components/ui';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { PageHeader } from '@/components/shared/PageHeader';
+import { loadHeroRegistry } from '@/design/hero/heroRegistry';
+import { resolvePageHeroComposition } from '@/design/hero/pageHeroMap';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { FileText, Plus } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ApplicationDetailPanel } from '@/features/applications/components/ApplicationDetailPanel';
 import { KanbanColumn } from '@/features/applications/components/KanbanColumn';
+import { composeHero } from '@/lib/composeHero';
+import type { SolidarityManifest } from '@/design/hero/heroTypes';
 import {
   TRACKER_COLUMNS,
   mapTrackerStageToStatus,
@@ -22,6 +27,44 @@ const wallpaper =
 export function ApplicationTracker() {
   const queryClient = useQueryClient();
   const [selectedApplicationId, setSelectedApplicationId] = useState<string | null>(null);
+  const [heroData, setHeroData] = useState<{
+    layers: any[];
+    typography: any;
+    animation: any;
+    safeZones?: any;
+    renderHints?: any;
+  } | null>(null);
+
+  useEffect(() => {
+    async function loadHero() {
+      try {
+        const [manifest, registry] = await Promise.all([
+          fetch('/assets/kerala-rage-kr-solidarity-manifest.json').then((r) => r.json()),
+          loadHeroRegistry(),
+        ]);
+
+        const result = composeHero(
+          manifest as SolidarityManifest,
+          registry,
+          resolvePageHeroComposition('applications-board')
+        );
+
+        if (result.valid) {
+          setHeroData({
+            layers: result.resolvedLayers,
+            typography: result.typography,
+            animation: result.animation ?? result.motion,
+            safeZones: result.safeZones,
+            renderHints: result.renderHints,
+          });
+        }
+      } catch (error) {
+        console.error('Failed to load tracker hero:', error);
+      }
+    }
+
+    void loadHero();
+  }, []);
 
   const {
     data: applications = [],
@@ -56,6 +99,19 @@ export function ApplicationTracker() {
 
   return (
     <div className="min-h-screen bg-asphalt-black relative overflow-hidden pb-12 w-full">
+      {heroData && (
+        <div className="absolute inset-0 pointer-events-none opacity-16 z-0">
+          <LayeredHero
+            layers={heroData.layers}
+            typography={{ ...heroData.typography, headline: '', supporting: '' }}
+            animation={heroData.animation}
+            safeZones={heroData.safeZones}
+            renderHints={heroData.renderHints}
+            className="h-full"
+          />
+        </div>
+      )}
+
       <div
         className="absolute inset-0 opacity-5 pointer-events-none mix-blend-overlay"
         style={{ backgroundImage: `url(${wallpaper})`, backgroundSize: '400px' }}

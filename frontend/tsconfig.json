@@ -33,6 +33,8 @@
     "**/__mocks__",
     "src/_reference",
     "src/_reference/**",
+    "QUARANTINE - HARVESTED PROTOTYPE FEATURES",
+    "QUARANTINE - HARVESTED PROTOTYPE FEATURES/**",
     "src/components/library",
     "src/components/m3-expressive",
     "functions",

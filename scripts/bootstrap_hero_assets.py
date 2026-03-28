@@ -46,8 +46,11 @@ GLOBAL_STYLE_LOCK = {
 ASSETS = [
     {
         "id": "A01",
+        "asset_id": "KR-SOLID-042",
         "name": "wall_base",
-        "filename": "urban_gallery_wall__A01_wall_base__1920x1080.png",
+        "category": "urban",
+        "layer_type": "substrate",
+        "filename": "kr-solidarity__substrate__urban--wall-base--v1.png",
         "size": "1920x1080",
         "aspect_ratio": "16:9",
         "image_size": "2K",
@@ -59,8 +62,11 @@ ASSETS = [
     },
     {
         "id": "A02",
+        "asset_id": "KR-SOLID-043",
         "name": "grain_overlay",
-        "filename": "urban_gallery_wall__A02_grain_overlay__1920x1080.png",
+        "category": "urban",
+        "layer_type": "atmospheric",
+        "filename": "kr-solidarity__atmospheric__urban--grain-overlay--v1.png",
         "size": "1920x1080",
         "aspect_ratio": "16:9",
         "image_size": "2K",
@@ -72,8 +78,11 @@ ASSETS = [
     },
     {
         "id": "A03",
+        "asset_id": "KR-SOLID-044",
         "name": "main_poster",
-        "filename": "urban_gallery_wall__A03_main_poster__900x1400.png",
+        "category": "urban",
+        "layer_type": "resistance",
+        "filename": "kr-solidarity__resistance__urban--main-poster--v1.png",
         "size": "900x1400",
         "aspect_ratio": "9:14",
         "image_size": "2K",
@@ -85,8 +94,11 @@ ASSETS = [
     },
     {
         "id": "A04",
+        "asset_id": "KR-SOLID-045",
         "name": "secondary_poster_upper",
-        "filename": "urban_gallery_wall__A04_secondary_poster_upper__780x1220.png",
+        "category": "urban",
+        "layer_type": "resistance",
+        "filename": "kr-solidarity__resistance__urban--secondary-poster-upper--v1.png",
         "size": "780x1220",
         "aspect_ratio": "39:61",
         "image_size": "2K",
@@ -98,8 +110,11 @@ ASSETS = [
     },
     {
         "id": "A05",
+        "asset_id": "KR-SOLID-046",
         "name": "secondary_poster_lower",
-        "filename": "urban_gallery_wall__A05_secondary_poster_lower__760x1180.png",
+        "category": "urban",
+        "layer_type": "resistance",
+        "filename": "kr-solidarity__resistance__urban--secondary-poster-lower--v1.png",
         "size": "760x1180",
         "aspect_ratio": "38:59",
         "image_size": "2K",
@@ -111,8 +126,11 @@ ASSETS = [
     },
     {
         "id": "A06",
+        "asset_id": "KR-SOLID-047",
         "name": "splatter_left_accent",
-        "filename": "urban_gallery_wall__A06_splatter_left_accent__1200x900.png",
+        "category": "urban",
+        "layer_type": "atmospheric",
+        "filename": "kr-solidarity__atmospheric__urban--splatter-accent--v1.png",
         "size": "1200x900",
         "aspect_ratio": "4:3",
         "image_size": "2K",
@@ -124,8 +142,11 @@ ASSETS = [
     },
     {
         "id": "A07",
+        "asset_id": "KR-SOLID-048",
         "name": "mist_drips_back",
-        "filename": "urban_gallery_wall__A07_mist_drips_back__1600x1000.png",
+        "category": "urban",
+        "layer_type": "atmospheric",
+        "filename": "kr-solidarity__atmospheric__urban--mist-drips--v1.png",
         "size": "1600x1000",
         "aspect_ratio": "16:10",
         "image_size": "2K",
@@ -137,8 +158,11 @@ ASSETS = [
     },
     {
         "id": "A08",
+        "asset_id": "KR-SOLID-049",
         "name": "shadow_paste_fx",
-        "filename": "urban_gallery_wall__A08_shadow_paste_fx__1400x900.png",
+        "category": "urban",
+        "layer_type": "atmospheric",
+        "filename": "kr-solidarity__atmospheric__urban--shadow-paste-fx--v1.png",
         "size": "1400x900",
         "aspect_ratio": "14:9",
         "image_size": "2K",
@@ -457,7 +481,7 @@ def build_gemini_generator() -> str:
 
         ROOT = Path(__file__).resolve().parents[1]
         QUEUE_PATH = ROOT / "ai" / "queue.json"
-        OUTPUT_DIR = ROOT / "public" / "hero" / "generated"
+        OUTPUT_DIR = ROOT / "frontend" / "public" / "assets" / "kr-solidarity" / "urban-gallery"
 
         MODEL = os.getenv("GEMINI_IMAGE_MODEL", "gemini-3-pro-image-preview")
         API_KEY = os.getenv("GEMINI_API_KEY")

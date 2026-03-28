@@ -28,85 +28,80 @@ Instantly get the optimal MCP server routing for any task. Use this command to e
 
 ## Routing Logic (Enforced)
 
-| Task Type                | Routes To      | Savings |
-| ------------------------ | -------------- | ------- |
-| Code analysis/review     | gemini-wrapper | 40-55%  |
-| Error diagnosis          | gemini-wrapper | 50%     |
-| Refactoring suggestions  | gemini-wrapper | 35%     |
-| Architecture analysis    | gemini-wrapper | 45%     |
-| Performance optimization | gemini-wrapper | 55%     |
-| Configuration lookup     | configuration  | 94.9%   |
-| Documentation lookup     | documentation  | 93.3%   |
-| Flow execution           | genkit         | 99.1%   |
-| GitHub PR/issue          | github         | 80%     |
+| Task Type                    | Routes To                | Savings |
+| ---------------------------- | ------------------------ | ------- |
+| Read 10+ files / Summarize   | `flash-sidekick`         | 96%     |
+| Grep + read matches          | `flash-sidekick`         | 97%     |
+| Code quality / Unit tests    | `flash-sidekick`         | 95%     |
+| Complex reasoning            | `flash-sidekick` (Pro)   | 40-60%  |
+| Design validation / Assets   | `design-system-sidekick` | 85%     |
+| Visual compliance scoring    | `vision-scorer-mcp`      | 90%     |
+| GitHub operations            | `github`                 | 80%     |
+| Error analysis (Seer)        | `sentry`                 | 92%     |
 
 ## Key Rules (ENFORCED)
 
 ✅ **DO:**
 
-- Delegate analysis to Gemini (40-55% cheaper)
-- Use cache servers for lookups (93-99% savings)
-- Combine routes for multi-step tasks (80%+ total)
-- Report token savings in your response
+- Delegate bulk file reading to `flash-sidekick` (96%+ savings)
+- Use `design-system-sidekick` for all KR Solidarity visual checks
+- Use `sentry` (Seer) for production error root cause analysis
+- Report token savings in your response to the user
 
 ❌ **DO NOT:**
 
-- Analyze code yourself when Gemini available
-- Read raw files when cache servers exist
-- Execute flows without genkit server
-- Browse GitHub UI when MCP available
+- Read large files (>500 lines) locally if `flash-sidekick` can summarize
+- Perform manual visual audits if `vision-scorer` can automate them
+- Browse GitHub UI when `github` MCP is available
+- Hardcode design tokens; use `design-system-sidekick` to validate
 
 ## Decision Tree
 
 ```
 User Task Arrives
-  ├─ Analysis (code review, debug, optimize)?
-  │  └─ Route to: gemini-wrapper (40-55%)
-  ├─ Factual Lookup (config, docs, facts)?
-  │  └─ Route to: documentation or configuration (93-99%)
-  ├─ Flow Execution (run, check, validate)?
-  │  └─ Route to: genkit (99.1%)
-  ├─ Repository Work (PR, issue, file)?
-  │  └─ Route to: github (80%)
-  └─ Multi-step Task?
-     └─ Route to: Primary + Secondary (80%+ combined)
+  ├─ Bulk Data (read many files, summarize, search)?
+  │  └─ Route to: flash-sidekick (96-97%)
+  ├─ Code Analysis (quality, tests, refactor)?
+  │  └─ Route to: flash-sidekick (95%)
+  ├─ Design/Visual (tokens, compliance, assets)?
+  │  └─ Route to: design-system-sidekick / vision-scorer (85-90%)
+  ├─ Production Errors (sentry issues, releases)?
+  │  └─ Route to: sentry (92%)
+  └─ Repository Work (PR, issue, branch)?
+     └─ Route to: github (80%)
 ```
 
 ## Server Details
 
-**Priority 10: gemini-wrapper**
+**Priority 10: flash-sidekick**
 
-- Model: gemini-1.5-flash
-- Methods: analyze_code, refactoring_suggestions, error_diagnosis, architecture_analysis, optimization_analysis, documentation_insights, explain_text
-- Use for: Analysis, optimization, insights
+- Methods: `quick_summarize`, `batch_file_analysis`, `analyze_code_quality`, `consult_pro`, `web_research_synthesis`
+- Use for: Bulk analysis, token efficiency, deep reasoning, and search grounding.
 
-**Priority 9: claude-orchestrator**
+**Priority 9: design-system-sidekick**
 
-- Methods: health_check_all, execute_batch
-- Use for: Fallback, multi-step orchestration
+- Methods: `validate_asset_compliance`, `generate_implementation_package`
+- Use for: KR Solidarity / kerala-rage visual and token compliance.
 
-**Priority 9: github**
+**Priority 9: vision-scorer-mcp**
 
-- Methods: read_file, list_issues, get_pull_request
-- Use for: Repository operations
+- Methods: `score_asset_compliance`, `extract_visual_tokens`, `compare_attempts`
+- Use for: Quantitative visual scoring and design token extraction from images.
 
-**Priority 8: documentation**
+**Priority 8: sentry**
 
-- Savings: 93.3%
-- Methods: search_docs, get_docs, get_agents, get_skills
-- Use for: Documentation lookups, factual queries
+- Methods: `analyze_issue_with_seer`, `get_issue_details`, `list_events`
+- Use for: Production error analysis and root cause investigation.
 
-**Priority 7: configuration**
+**Priority 8: github**
 
-- Savings: 94.9%
-- Methods: get_environment, list_scripts, validate_all
-- Use for: Config lookups, script discovery
+- Methods: `create_pull_request`, `search_code`, `get_file_contents`
+- Use for: All repository and CI/CD interaction.
 
-**Priority 6: genkit**
+**Priority 7: playwright**
 
-- Savings: 99.1%
-- Methods: list_flows, get_flow, execute_flow
-- Use for: Flow execution and caching
+- Methods: `browser_snapshot`, `browser_click`, `browser_type`
+- Use for: E2E UI verification and dynamic web content.
 
 ## Output Format
 

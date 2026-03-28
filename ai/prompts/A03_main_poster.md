@@ -1,11 +1,11 @@
-# A03 — urban_gallery_wall__A03_main_poster__900x1400.png
+# A03 — kr-solidarity__resistance__urban--main-poster--v1.png
 
         ## Output contract
         - Generate exactly one image.
         - No collage grid.
         - No extra text.
         - Keep Global Style Lock intact.
-        - Save as: `public/hero/generated/urban_gallery_wall__A03_main_poster__900x1400.png`
+        - Save as: `public/hero/generated/kr-solidarity__resistance__urban--main-poster--v1.png`
 
         ## Asset metadata
         - Asset ID: A03

@@ -10,7 +10,7 @@ from google.genai import types
 
 ROOT = Path(__file__).resolve().parents[1]
 QUEUE_PATH = ROOT / "ai" / "queue.json"
-OUTPUT_DIR = ROOT / "public" / "hero" / "generated"
+OUTPUT_DIR = ROOT / "frontend" / "public" / "assets" / "kr-solidarity" / "urban-gallery"
 
 MODEL = os.getenv("GEMINI_IMAGE_MODEL", "gemini-3-pro-image-preview")
 API_KEY = os.getenv("GEMINI_API_KEY")

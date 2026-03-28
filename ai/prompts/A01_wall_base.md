@@ -1,11 +1,11 @@
-# A01 — urban_gallery_wall__A01_wall_base__1920x1080.png
+# A01 — kr-solidarity__substrate__urban--wall-base--v1.png
 
         ## Output contract
         - Generate exactly one image.
         - No collage grid.
         - No extra text.
         - Keep Global Style Lock intact.
-        - Save as: `public/hero/generated/urban_gallery_wall__A01_wall_base__1920x1080.png`
+        - Save as: `public/hero/generated/kr-solidarity__substrate__urban--wall-base--v1.png`
 
         ## Asset metadata
         - Asset ID: A01

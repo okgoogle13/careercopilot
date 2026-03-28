@@ -20,7 +20,7 @@ To ensure perfect alignment between design vision, AI generation, and frontend i
 - **Used by:** Gemini (Implementation Engine), Frontend Developers, and kr-dark Mode UI controllers.
 - **Contents:** Color Hectors, Border Radii, Motion Curves, and Grid/Annotation System specifications.
 
-### 3. The Asset Manifest ([kerala-rage-kr-solidarity-manifest.json](file:///Users/okgoogle13/Projects/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json))
+### 3. The Asset Manifest ([kerala-rage-kr-solidarity-manifest.json](../../frontend/public/assets/kerala-rage-kr-solidarity-manifest.json))
 
 - **Role:** Production & Automation.
 - **Used by:** Asset pipelines, validation scripts, and dynamic UI loading logic.
@@ -38,7 +38,7 @@ To ensure perfect alignment between design vision, AI generation, and frontend i
 
 ### For UI Implementation (Gemini-Lead)
 
-1. **Query** the [Manifest](file:///Users/okgoogle13/Projects/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json) independently.
+1. **Query** the [Manifest](../../frontend/public/assets/kerala-rage-kr-solidarity-manifest.json) independently.
 2. **Implement** changes using the repo-aware code modification tools.
 3. **Verify** compliance using the technical tokens in `01-tokens.md`.
 

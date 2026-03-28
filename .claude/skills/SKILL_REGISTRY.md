@@ -76,11 +76,12 @@ Removed from the active harvest surface:
 
 ## Design Doc Validation Workflow (Streamlined)
 1. **Source of Truth**: `docs/design/{01..05}_*.md` (DTCG + M3 Expressive + Zero-Flora rules)
-2. **Token Validation** → `token-orchestrator`: DTCG compliance + semantic color rules
-3. **UI Audit** → `m3-expressive-ui-evaluator`: Typography, contrast, motion, component archetypes
-4. **Asset Compliance** → `auto-validator`: Vision-based scoring (≥90 gate)
-5. **Manifest Reconciliation** → `manifest-reconciler`: No orphans, broken refs, hero coverage
-6. **Delivery** → `asset-packager`: Production bundle (assets + context.md + hero-registry.json)
+2. **Context Delegation** → `flash-sidekick`: Bulk file analysis, token efficiency, and batching
+3. **Token Validation** → `design-system-sidekick`: Visual audit, token extraction, and KR compliance
+4. **UI Audit** → `m3-expressive-ui-evaluator`: Typography, contrast, motion, component archetypes
+5. **Asset Compliance** → `auto-validator`: Vision-based scoring (≥90 gate)
+6. **Manifest Reconciliation** → `manifest-reconciler`: No orphans, broken refs, hero coverage
+7. **Delivery** → `asset-packager`: Production bundle (assets + context.md + hero-registry.json)
 
 ## Asset Audit Workflow (>=90)
 1. Validate tokens and semantic variable usage (`--sys-color-*`, `--sys-type-*`).

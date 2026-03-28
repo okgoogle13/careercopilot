@@ -77,6 +77,7 @@ function main() {
         !route.importSource.includes('/pages/') &&  // pages/ is known legacy
         route.importSource !== 'UNKNOWN' &&
         !route.path.startsWith('/kr/') &&
+        !route.path.startsWith('/prototype') &&
         route.path !== '/test-tokens') {
       results.push({
         severity: 'warning',
