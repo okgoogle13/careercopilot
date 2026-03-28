@@ -46,6 +46,7 @@ dependencies = [
     "requests",
     "slowapi",
     "loguru",
+    "google-cloud-talent",
 ]
 
 [project.optional-dependencies]

@@ -10,16 +10,16 @@ metadata:
 ---
 
 ## INPUT CONTRACT
-- `wireframe_id`: "01_landing.xml" (.claude/wireframes/)
-- `manifest_path`: "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json"
+- `wireframe_id`: "01_landing.wireframe.xml" (frontend/src/screens/[feature]/)
+- `manifest_path`: "frontend/src/design/tokens/tokens.json"
 - `placement_report`: JSON from asset-placement-strategy
 
 ## OUTPUT SCHEMA (JSON array)
 [
   {
     "component_id": "hero_cta_card",
-    "source_wireframe": "01_landing.xml::hero_region",
-    "tokens_required": ["--sys-color-primary"],
+    "source_wireframe": "01_landing.wireframe.xml::hero_region",
+    "tokens_required": ["--sys-color-solidarityRed-base"],
     "slots": [{"id": "cta_background", "compatible_assets": ["KR-SOLID-021"]}],
     "hierarchy": ["headline", "body", "cta"]
   }

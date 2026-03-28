@@ -1,11 +1,11 @@
-# A02 — urban_gallery_wall__A02_grain_overlay__1920x1080.png
+# A02 — kr-solidarity__atmospheric__urban--grain-overlay--v1.png
 
         ## Output contract
         - Generate exactly one image.
         - No collage grid.
         - No extra text.
         - Keep Global Style Lock intact.
-        - Save as: `public/hero/generated/urban_gallery_wall__A02_grain_overlay__1920x1080.png`
+        - Save as: `public/hero/generated/kr-solidarity__atmospheric__urban--grain-overlay--v1.png`
 
         ## Asset metadata
         - Asset ID: A02

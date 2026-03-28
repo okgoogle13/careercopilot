@@ -56,6 +56,7 @@ class Settings(BaseSettings):
     google_application_credentials: str = ""
     gcp_project_id: str = secure_settings.GCP_PROJECT_ID or ""
     google_cloud_project: str = secure_settings.GOOGLE_CLOUD_PROJECT or ""
+    cts_tenant_id: str = secure_settings.CTS_TENANT_ID
 
     # Database settings
     database_url: str = secure_settings.DATABASE_URL or ""

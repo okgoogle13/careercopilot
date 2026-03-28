@@ -230,7 +230,7 @@ Input PNG
 ### usage.md (CSS Implementation)
 ```css
 .asset-[DEPRECATED_STYLE]-canopy {
-  background-image: url('/assets/kr-motifs/kerala-rage-[DEPRECATED_STYLE]-canopy-kr-dark-1024.png');
+  background-image: url('/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__abstract--solidarity-light-burst--v2.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

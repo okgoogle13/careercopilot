@@ -1,11 +1,11 @@
-# A06 — urban_gallery_wall__A06_splatter_left_accent__1200x900.png
+# A06 — kr-solidarity__atmospheric__urban--splatter-accent--v1.png
 
         ## Output contract
         - Generate exactly one image.
         - No collage grid.
         - No extra text.
         - Keep Global Style Lock intact.
-        - Save as: `public/hero/generated/urban_gallery_wall__A06_splatter_left_accent__1200x900.png`
+        - Save as: `public/hero/generated/kr-solidarity__atmospheric__urban--splatter-accent--v1.png`
 
         ## Asset metadata
         - Asset ID: A06

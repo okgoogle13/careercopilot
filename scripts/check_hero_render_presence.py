@@ -7,7 +7,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 TARGETS = {
     "landing-page": "frontend/src/features/landing/LandingPage.tsx",
     "lens-dashboard": "frontend/src/features/dashboard/Dashboard.tsx",
-    "jar-flow": "frontend/src/pages/IngestionPage.tsx",
+    "jar-flow": "frontend/src/features/ingestion/SmartIngestion.tsx",
     "applications-board": "frontend/src/features/applications/ApplicationTracker.tsx",
     "onboarding": "frontend/src/features/onboarding/OnboardingPage.tsx",
 }

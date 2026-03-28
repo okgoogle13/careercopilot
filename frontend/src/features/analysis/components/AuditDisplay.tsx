@@ -1,35 +1,14 @@
-// Harvested from proto:components/AuditDisplay.tsx — B2
-// Token re-skin: all raw Tailwind replaced with KR Solidarity CSS vars
-// Violations: text color via className, border/bg via inline style object
-
+/**
+ * CLASSIFICATION: Support Component Only
+ * Prototype-only component.
+ */
 import React from 'react';
-import type { DocumentAudit } from '../../../types/analysis';
+import type { DocumentAudit } from '../../../types/career';
 
 interface AuditDisplayProps {
   audit: DocumentAudit;
   title: string;
 }
-
-const SEVERITY_TEXT_CLASS = {
-  error: 'text-[var(--sys-color-solidarityRed-base)]',
-  warning: 'text-[var(--sys-color-stencilYellow-base)]',
-  info: 'text-[var(--sys-color-protestMetalBlue-base)]',
-} as const;
-
-const SEVERITY_STYLE: Record<'error' | 'warning' | 'info', React.CSSProperties> = {
-  error: {
-    borderColor: 'color-mix(in srgb, var(--sys-color-solidarityRed-base) 30%, transparent)',
-    background: 'color-mix(in srgb, var(--sys-color-solidarityRed-base) 10%, transparent)',
-  },
-  warning: {
-    borderColor: 'color-mix(in srgb, var(--sys-color-stencilYellow-base) 30%, transparent)',
-    background: 'color-mix(in srgb, var(--sys-color-stencilYellow-base) 10%, transparent)',
-  },
-  info: {
-    borderColor: 'color-mix(in srgb, var(--sys-color-protestMetalBlue-base) 30%, transparent)',
-    background: 'color-mix(in srgb, var(--sys-color-protestMetalBlue-base) 10%, transparent)',
-  },
-};
 
 export const AuditDisplay: React.FC<AuditDisplayProps> = ({ audit, title }) => {
   const severityCounts = {
@@ -40,6 +19,7 @@ export const AuditDisplay: React.FC<AuditDisplayProps> = ({ audit, title }) => {
 
   return (
     <div
+      className="overflow-hidden"
       style={{
         background: 'color-mix(in srgb, var(--sys-color-charcoalBackground-base) 80%, transparent)',
         borderRadius: 'var(--sys-shape-blockRiot03)',
@@ -76,13 +56,7 @@ export const AuditDisplay: React.FC<AuditDisplayProps> = ({ audit, title }) => {
         </div>
         <div className="text-right">
           <div
-            className={`text-2xl font-bold ${
-              audit.overallScore >= 80
-                ? 'text-[var(--sys-color-kr-activistSmokeGreen-base)]'
-                : audit.overallScore >= 60
-                  ? 'text-[var(--sys-color-stencilYellow-base)]'
-                  : 'text-[var(--sys-color-solidarityRed-base)]'
-            }`}
+            className={`text-2xl font-bold ${audit.overallScore >= 80 ? 'text-[var(--sys-color-kr-activistSmokeGreen-base)]' : audit.overallScore >= 60 ? 'text-[var(--sys-color-stencilYellow-base)]' : 'text-[var(--sys-color-solidarityRed-base)]'}`}
           >
             {audit.overallScore}/100
           </div>
@@ -122,29 +96,53 @@ export const AuditDisplay: React.FC<AuditDisplayProps> = ({ audit, title }) => {
               No violations found. Great job!
             </p>
           ) : (
-            audit.violations.map((v, i) => (
-              <div
-                key={i}
-                className={`p-3 ${SEVERITY_TEXT_CLASS[v.severity]}`}
-                style={{
-                  ...SEVERITY_STYLE[v.severity],
-                  borderRadius: 'var(--sys-shape-blockRiot02)',
-                  borderWidth: 1,
-                  borderStyle: 'solid',
-                }}
-              >
-                <div className="flex justify-between items-start mb-1">
-                  <code className="text-[10px] font-mono opacity-70">{v.ruleId}</code>
-                  <span className="text-[10px] font-bold uppercase tracking-tighter">
-                    {v.severity}
-                  </span>
+            audit.violations.map((v, i) => {
+              const styles = {
+                error: 'text-[var(--sys-color-solidarityRed-base)]',
+                warning: 'text-[var(--sys-color-stencilYellow-base)]',
+                info: 'text-[var(--sys-color-protestMetalBlue-base)]',
+              }[v.severity];
+
+              const inlineStyles = {
+                error: {
+                  borderColor:
+                    'color-mix(in srgb, var(--sys-color-solidarityRed-base) 30%, transparent)',
+                  background:
+                    'color-mix(in srgb, var(--sys-color-solidarityRed-base) 10%, transparent)',
+                },
+                warning: {
+                  borderColor:
+                    'color-mix(in srgb, var(--sys-color-stencilYellow-base) 30%, transparent)',
+                  background:
+                    'color-mix(in srgb, var(--sys-color-stencilYellow-base) 10%, transparent)',
+                },
+                info: {
+                  borderColor:
+                    'color-mix(in srgb, var(--sys-color-protestMetalBlue-base) 30%, transparent)',
+                  background:
+                    'color-mix(in srgb, var(--sys-color-protestMetalBlue-base) 10%, transparent)',
+                },
+              }[v.severity];
+
+              return (
+                <div
+                  key={i}
+                  className={`p-3 rounded-lg border ${styles}`}
+                  style={inlineStyles}
+                >
+                  <div className="flex justify-between items-start mb-1">
+                    <code className="text-[10px] font-mono opacity-70">{v.ruleId}</code>
+                    <span className="text-[10px] font-bold uppercase tracking-tighter">
+                      {v.severity}
+                    </span>
+                  </div>
+                  <p className="text-sm font-medium">{v.message}</p>
+                  {v.location && (
+                    <p className="text-[10px] mt-1 opacity-60 italic">Location: {v.location}</p>
+                  )}
                 </div>
-                <p className="text-sm font-medium">{v.message}</p>
-                {v.location && (
-                  <p className="text-[10px] mt-1 opacity-60 italic">Location: {v.location}</p>
-                )}
-              </div>
-            ))
+              );
+            })
           )}
         </div>
 

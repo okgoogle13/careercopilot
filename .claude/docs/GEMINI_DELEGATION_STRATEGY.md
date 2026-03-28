@@ -10,12 +10,13 @@
 
 ### Priority-Based Server Routing
 
-```
-Priority 10: gemini-wrapper (PRIMARY)
-Priority 9:  claude-orchestrator (FALLBACK)
-Priority 8:  documentation (CACHE LAYER)
-Priority 7:  configuration (CACHE LAYER)
-Priority 6:  genkit (EXECUTION LAYER)
+```bash
+Priority 10: flash-sidekick (PRIMARY)
+Priority 9:  design-system-sidekick (VISUAL)
+Priority 8:  sentry (ERROR ANALYSIS)
+Priority 7:  documentation (CACHE LAYER)
+Priority 6:  configuration (CACHE LAYER)
+Priority 5:  genkit (EXECUTION LAYER)
 ```
 
 ---
@@ -33,7 +34,7 @@ Priority 6:  genkit (EXECUTION LAYER)
 | Optimization           | `optimization_analysis`   | ↓ 55%        | Performance tuning suggestions        |
 | Documentation Insights | `documentation_insights`  | ↓ 30%        | Extract patterns, improve docs        |
 
-**Why:** Gemini-1.5-flash is optimized for analysis. Offloading reduces Claude's context burden and costs 90% less per token.
+**Why:** `flash-sidekick` is optimized for bulk analysis and batching. Offloading reduces Claude's context burden and costs 90% less per token, with 95%+ efficiency on batch reads.
 
 ### Factual Tasks → Use Local Cache
 
@@ -52,7 +53,7 @@ Priority 6:  genkit (EXECUTION LAYER)
 
 ### Pattern 1: Quick Lookup (Minimal Cost)
 
-```
+```text
 User Request
   ↓
 Documentation Server (cache hit, <50ms)
@@ -64,26 +65,26 @@ Return (93.3% savings, <100 tokens used)
 
 ### Pattern 2: Analysis with Insight (Maximum Savings)
 
-```
+```text
 User Request (code review needed)
   ↓
-Gemini Wrapper
-  ├─ Analyze code (gemini-1.5-flash)
-  └─ Suggest optimizations
+flash-sidekick
+  ├─ analyze_code_quality (Gemini 1.5 Flash)
+  └─ batch_file_analysis
   ↓
-Return analysis (40-55% reduction vs Claude alone)
+Return analysis (95%+ reduction vs Claude alone)
 ```
 
-**Example:** "Review this function" → Gemini analysis → 60% token reduction
+**Example:** "Review these 10 files" → `flash-sidekick.batch_file_analysis` → 97% token reduction
 
 ### Pattern 3: Combined (Optimal Efficiency)
 
-```
+```text
 User Request (context needed)
   ↓
 Documentation Server (get code/config)
   ↓
-Gemini Wrapper (analyze findings)
+flash-sidekick (analyze findings)
   ↓
 Return insights (80%+ savings)
 ```
@@ -100,41 +101,41 @@ Return insights (80%+ savings)
 
 ### Core Analysis Methods (11 total)
 
-1. **delegate_to_gemini(prompt, system_prompt)**
-   - Raw delegation with custom system prompt
-   - Use for specialized analysis tasks
+1.  **delegate_to_gemini(prompt, system_prompt)**
+    - Raw delegation with custom system prompt
+    - Use for specialized analysis tasks
 
-2. **analyze_code(code, language)**
-   - Code review from expert perspective
-   - Detects bugs, anti-patterns, improvements
+2.  **analyze_code(code, language)**
+    - Code review from expert perspective
+    - Detects bugs, anti-patterns, improvements
 
-3. **refactoring_suggestions(code, language)**
-   - Refactoring recommendations for code quality
-   - Focus: maintainability, performance, readability
+3.  **refactoring_suggestions(code, language)**
+    - Refactoring recommendations for code quality
+    - Focus: maintainability, performance, readability
 
-4. **error_diagnosis(error_message, context)**
-   - Root cause analysis of errors
-   - Suggests most likely fixes
+4.  **error_diagnosis(error_message, context)**
+    - Root cause analysis of errors
+    - Suggests most likely fixes
 
-5. **documentation_insights(doc_content, query)**
-   - Extract patterns from documentation
-   - Suggest documentation improvements
+5.  **documentation_insights(doc_content, query)**
+    - Extract patterns from documentation
+    - Suggest documentation improvements
 
-6. **architecture_analysis(system_description)**
-   - System design evaluation
-   - Identifies bottlenecks, suggests optimizations
+6.  **architecture_analysis(system_description)**
+    - System design evaluation
+    - Identifies bottlenecks, suggests optimizations
 
-7. **optimization_analysis(performance_data)**
-   - Performance bottleneck identification
-   - Concrete optimization suggestions with impact estimates
+7.  **optimization_analysis(performance_data)**
+    - Performance bottleneck identification
+    - Concrete optimization suggestions with impact estimates
 
-8. **explain_text(text)**
-   - One-sentence explanation of concepts
-   - Useful for term clarification
+8.  **explain_text(text)**
+    - One-sentence explanation of concepts
+    - Useful for term clarification
 
-9. **summarize(text)**
-   - 2-3 sentence summary
-   - Extract key points
+9.  **summarize(text)**
+    - 2-3 sentence summary
+    - Extract key points
 
 10. **brainstorm(topic, count)**
     - Generate N creative ideas
@@ -247,7 +248,7 @@ Return insights (80%+ savings)
 
 ### Example 1: Code Review
 
-```
+```text
 Method: analyze_code
 Params: {
   "code": "def foo(): return bar",
@@ -259,7 +260,7 @@ Savings: 40% vs Claude analysis
 
 ### Example 2: Error Diagnosis
 
-```
+```text
 Method: error_diagnosis
 Params: {
   "error_message": "TypeError: unsupported operand type(s)",
@@ -271,10 +272,10 @@ Savings: 50% vs manual debugging context
 
 ### Example 3: Configuration + Analysis
 
-```
+```text
 1. documentation.get_docs(query="config loading")
    → 341 tokens (cached)
-2. gemini.optimization_analysis(perf_data)
+2. flash-sidekick.optimization_analysis(perf_data)
    → 200 tokens (Gemini analysis)
 Total: 88%+ savings vs loading full docs + Claude analysis
 ```
@@ -293,8 +294,8 @@ Total: 88%+ savings vs loading full docs + Claude analysis
 
 ### Health Checks
 
-```
-gemini-wrapper.health() → {
+```text
+flash-sidekick.health() → {
   "status": "healthy",
   "initialized": true,
   "api_key_set": true,
@@ -306,7 +307,6 @@ gemini-wrapper.health() → {
 
 ## Next Steps
 
-1. **Production Deployment**
    - Enable MCP servers in ~/.claude/settings.json
    - Set GEMINI_API_KEY environment variable
    - Monitor real usage for 1 week

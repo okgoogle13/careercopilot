@@ -2,19 +2,31 @@
 
 **Date:** 2026-03-24
 **Status:** Active detailed prompt source
-**Purpose:** Provide one canonical, expanded prompt pack for Google AI Studio / Comet when executing the prototype-first frontend feature-spec update pass.
+**Purpose:** Provide one canonical, expanded single-file replay pack for Google AI Studio / Comet when executing the prototype-first frontend feature-spec update pass, including the full `MIG-202` route-lock workflow inline.
 
-## Canonical Inputs
+## Replay Inputs And Reference Files
 
-- `docs/project/active/frontend-source-of-truth-migration/control/COMET-MANIFEST.md`
-- `docs/project/active/frontend-source-of-truth-migration/control/archive/implementation-backlog.md`
-- `docs/project/active/frontend-source-of-truth-migration/control/archive/route-matrix.json`
+- [COMET-MANIFEST.md](file:///Users/okgoogle13/Projects/careercopilot/docs/project/active/frontend-source-of-truth-migration/control/COMET-MANIFEST.md)
+- [archive/implementation-backlog.md](file:///Users/okgoogle13/Projects/careercopilot/docs/project/active/frontend-source-of-truth-migration/control/archive/implementation-backlog.md)
+- [archive/route-matrix.md](file:///Users/okgoogle13/Projects/careercopilot/docs/project/active/frontend-source-of-truth-migration/control/archive/route-matrix.md)
+- [route-matrix.json](file:///Users/okgoogle13/Projects/careercopilot/docs/project/active/frontend-source-of-truth-migration/control/route-matrix.json)
 - `docs/project/active/frontend-source-of-truth-migration/control/requirements-audit-checklist.md`
-- `docs/project/active/frontend-source-of-truth-migration/control/comet-profile-voice-ownership-prompt-pack.md`
-- `docs/project/active/frontend-source-of-truth-migration/contracts/*.xml`
+- `docs/project/active/frontend-source-of-truth-migration/control/comet-profile-voice-ownership-prompt-pack.md` (provenance/source only; fully inlined below)
+- `docs/project/active/frontend-source-of-truth-migration/analysis/2026-03-16-support-reference-audit-account.md`
+- `docs/project/active/frontend-source-of-truth-migration/contracts/*.xml` when present
+
+Contract-reference note:
+- In this prompt pack, `build-contract-*.xml` names are governance identifiers for route ownership and harvest locks.
+- If a referenced build-contract XML is not currently materialized under `contracts/`, use `COMET-MANIFEST.md` plus `route-matrix.json` as the operational source of truth for that route lock.
+- Missing local XML files do not authorize route remapping, owner collapse, or support-reference drift.
+
+Replay note:
+- This file is intended to be sufficient on its own for replaying the full prototype harvest sequence in AI Studio.
+- `control/comet-profile-voice-ownership-prompt-pack.md` remains a provenance/source document, but the full `MIG-202` workflow is inlined below so replay does not depend on a second prompt pack.
 
 ## Source Material Used To Build This Pack
 
+- `docs/project/active/frontend-source-of-truth-migration/control/comet-profile-voice-ownership-prompt-pack.md`
 - `docs/project/active/frontend-source-of-truth-migration/control/archive/route-matrix.md`
 - `docs/project/active/frontend-source-of-truth-migration/control/archive/implementation-backlog.md`
 - `docs/project/active/frontend-source-of-truth-migration/control/pm/dashboard.md`
@@ -35,18 +47,94 @@ When a prompt uses the locked user-facing labels, preserve these canonical route
 
 Support-reference ownership rule:
 - Any prototype-only `Submitted Docs` composite must not reassign canonical generation ownership away from `/documents`, `/ksc-generator`, or `/cover-letter-generator`.
+- Treat any referenced `build-contract-*.xml` path as a governed route-lock label first, and as a local file path only when that XML is actually present in `contracts/`.
 
 ## Sequence Rules
 
 1. Run `B1-B4`.
 2. Run `B5-B8`.
 3. Run `B9-B13`.
-4. Run the route-specific `MIG-202` prompt pack to lock `/profile` voice ownership.
+4. Run the inlined `MIG-202` route-lock sequence to lock `/profile` voice ownership.
 5. Run `B14-B19`.
 6. Run one prototype-wide alignment sweep.
 7. Only then begin harvest into the canonical repo.
 
 Rule: `MIG-202` is an ownership lock inside the prototype pass. It is not an immediate harvest trigger.
+
+## Full Replay Order
+
+Use this exact replay sequence in AI Studio:
+
+1. Start a fresh Build conversation.
+2. Send the shared session preamble from this file once.
+3. Run `B1` through `B13` in order.
+4. Run the full inlined `MIG-202` workflow in this file:
+   - `MIG-202-A`
+   - `MIG-202-B`
+   - `MIG-202-C`
+5. Confirm the `MIG-202` review gate is holding in Preview.
+6. Run `B14` through `B19` in order.
+7. Run the prototype-wide alignment sweep from this file.
+8. Only after the full replay pass and alignment sweep are complete, begin harvest planning in the canonical repo.
+
+## MIG-202 Replay Bundle
+
+This section consolidates the full `/profile` voice-ownership workflow into the main replay packet.
+
+### MIG-202 Source-Of-Truth Inputs
+
+- `control/COMET-MANIFEST.md`
+- `control/archive/implementation-backlog.md`
+- `control/requirements-audit-checklist.md`
+- `contracts/build-contract-profile.xml`
+- `contracts/build-contract-settings.xml`
+- `analysis/2026-03-16-support-reference-audit-account.md`
+
+### MIG-202 Locked Decisions
+
+- Target route: `/profile`
+- Route family: `account`
+- Data mode in prototype: `local UI state only`
+- `/settings` stays secondary-only
+- `/profile` is the visible owner of voice-profile management
+- No routing drift: keep `activeTab`, no `react-router-dom`
+- No backend calls, no new packages, no shell rewrite
+
+### MIG-202 Shared Allowed / Banned File Scope
+
+**Allowed files**
+
+- `App.tsx`
+- `types.ts`
+- `constants.ts`
+- `src/**/*Profile*`
+- `src/**/*Settings*`
+- `src/**/profile/**`
+- `src/**/settings/**`
+- `components/**/*Profile*`
+- `components/**/*Settings*`
+- `hooks/**/*profile*`
+- `services/**/*profile*`
+
+**Banned files**
+
+- `package.json`
+- `backend/**`
+- `docs/**`
+- `.env*`
+- `firebase.json`
+- `src/routes/**`
+
+### MIG-202 Replay Constraints
+
+These apply in addition to the shared session preamble:
+
+- Preserve `/profile` as the visible owner of voice-profile management.
+- Keep `/settings` secondary-only in navigation, copy, and placement.
+- Work with local stub state only; do not introduce backend assumptions.
+- Keep component naming plain and portable for harvest.
+- Do not create a detached modal-first flow or a new top-level route.
+- Do not collapse profile/settings/account surfaces into a generic settings page.
 
 ## Shared Session Preamble
 
@@ -90,6 +178,21 @@ Shared stub state slots (use these exact names in all batches):
 - pendingJobUrl: string | null  — set by B6, read by B7
 - isGovernmentJob: boolean      — set by B8 stub, read by B8 CTA and B12 KSC section
 - hasGeneratedDocument: boolean — set by B9-B12, read by B13 CTA bridge
+
+### 🚨 KR Solidarity v6.1 Aesthetics & Mechanics (MANDATORY)
+
+When generating or modifying UI code, apply the following KR Solidarity v6.1 "No-Slop" rules exclusively:
+
+1. **Tokens Over Hardcoding**: Use CSS variables from `frontend/src/design/styles/design-tokens.css` (`--sys-*`). Never use hex codes, generic Tailwind colors (e.g., `text-blue-500`), or raw pixel values.
+2. **Zero-Flora Lockdown**: Strict ban on any botanical, flora, or endemic-species motifs (no gum leaves, flowers, or vines).
+3. **Archetype Geometry**: Use asymmetric radii (`--sys-shape-*`) for containers. Use the `dominant_archetypes` metadata in `route-matrix.json` to select the primary shape and interaction patterns (e.g., `Placard` for card-heavy flows, `Scaffold` for structured forms).
+   - `Strike` (Button): High-energy, sharp/blocky morphing.
+   - `Placard` (Card): Torn/asymmetric edges.
+   - `Scaffold` (Shell/Internal): Structural, immutable geometry.
+   - `March` (Select/Dropdown): Viscous, organic transitions.
+   - `Megaphone` (Dialogue): Proclamatory, asymmetrical frames.
+4. **Typography**: Use `Work Sans` for UI, `Fraunces` for display headers, and `JetBrains Mono` for all technical metadata/scores.
+5. **Color Hierarchy**: `charcoalBackground` is the only valid canvas. Use `solidarityRed` and `inkGold` as meaning-rich highlights only.
 ```
 
 ## Review Gate Between Batches
@@ -542,15 +645,193 @@ At the end of your response, output exactly:
 ✅ COMET-B13 COMPLETE — voice-profile CTA bridge is implemented.
 ```
 
-### MIG-202 Lock
+### MIG-202 — Profile Voice Ownership Lock
 
-<!-- contract-alignment: run control/comet-profile-voice-ownership-prompt-pack.md; preserve /profile over /settings -->
+<!-- contract-alignment: preserve /profile over /settings; inline replay for MIG-202 -->
 
-After `B13`, run the route-specific pack at:
+Run this full route-lock workflow immediately after `B13`. Do not continue to `B14-B19` until the `MIG-202` ownership lock is holding in Preview.
 
-- `docs/project/active/frontend-source-of-truth-migration/control/comet-profile-voice-ownership-prompt-pack.md`
+#### MIG-202-A — Route Ownership and Section Placement
 
-Do not continue to `B14-B19` until the `MIG-202` ownership lock is holding in Preview.
+**Completion signal**
+
+- `✅ MIG-202-A COMPLETE — /profile owns the voice-profile entry surface.`
+
+```text
+Task: MIG-202 Batch A — Route Ownership and Section Placement
+
+Goal:
+Make /profile the visible and canonical owner of voice profile management. Do not move this workflow to /settings and do not create a separate top-level route.
+
+Implement or refine the /profile surface so it includes a dedicated voice-profile section using VoiceProfileManagementSection or an equivalent clearly named boundary.
+
+Requirements:
+1. /profile must visibly own the voice-profile workflow inside the page body.
+2. /settings must remain a secondary account/configuration surface only.
+3. Do not create a detached modal-first workflow or a new route.
+4. Preserve the existing shell and activeTab behavior.
+5. Keep the implementation harvest-friendly:
+   - no backend edits
+   - no package changes
+   - no file moves unless absolutely necessary
+6. Use plain user-facing copy that makes ownership and actions clear.
+
+Allowed files only:
+- App.tsx
+- types.ts
+- constants.ts
+- src/**/*Profile*
+- src/**/*Settings*
+- src/**/profile/**
+- src/**/settings/**
+- components/**/*Profile*
+- components/**/*Settings*
+- hooks/**/*profile*
+- services/**/*profile*
+
+Verification target in Preview:
+- open /profile
+- confirm voice-profile UI is clearly present on /profile
+- confirm Settings is not the primary owner
+- confirm navigation still depends on activeTab only
+
+At the end of your response, output exactly:
+✅ MIG-202-A COMPLETE — /profile owns the voice-profile entry surface.
+```
+
+#### MIG-202-B — Interaction States and Stubbed Behavior
+
+**Completion signal**
+
+- `✅ MIG-202-B COMPLETE — voice-profile states are implemented with local stub logic.`
+
+```text
+Task: MIG-202 Batch B — Interaction States and Stubbed Behavior
+
+Goal:
+Implement the actual voice-profile interaction flow on /profile using local UI state only.
+
+Use these support-component boundaries or equivalent:
+- VoiceProfileCreationPanel
+- VoiceSampleSubmissionForm
+- VoiceProfileStatusCard
+
+Behavior requirements:
+1. The user can see whether a voice profile exists.
+2. The user can paste or enter a writing sample.
+3. The user can submit the sample and see loading, success, and error states.
+4. The user can return to an update or replace state after a successful save.
+5. Use local stub save/read behavior only:
+   - no real API calls
+   - no auth integration
+   - no backend assumptions
+6. Keep all interaction boundaries inside /profile.
+7. Keep status changes and component boundaries explicit so they are easy to harvest later.
+
+Allowed files only:
+- App.tsx
+- types.ts
+- constants.ts
+- src/**/*Profile*
+- src/**/*Settings*
+- src/**/profile/**
+- src/**/settings/**
+- components/**/*Profile*
+- components/**/*Settings*
+- hooks/**/*profile*
+- services/**/*profile*
+
+Verification target in Preview:
+- open /profile
+- demonstrate empty state
+- demonstrate input state
+- demonstrate loading state
+- demonstrate saved/success state
+- demonstrate update/re-submit path
+- demonstrate error state without backend access
+
+At the end of your response, output exactly:
+✅ MIG-202-B COMPLETE — voice-profile states are implemented with local stub logic.
+```
+
+#### MIG-202-C — Polish and Harvest Readiness
+
+**Completion signal**
+
+- `✅ MIG-202-C COMPLETE — prototype is harvest-ready for /profile voice ownership.`
+
+```text
+Task: MIG-202 Batch C — Polish and Harvest Readiness
+
+Goal:
+Refine the /profile voice-profile implementation so it is harvest-ready for the canonical repo without re-deciding ownership.
+
+Polish requirements:
+1. Tighten section hierarchy, helper text, CTA labels, and component naming so the interaction flow is easy to harvest.
+2. Keep /settings secondary-only in effect and presentation.
+3. Keep the output harvest-friendly:
+   - no duplicate shadow structure
+   - no backend or schema assumptions
+   - no package changes
+   - no route changes
+4. Do not collapse account/profile/settings into one generic settings page.
+5. Keep component naming plain and portable.
+
+Allowed files only:
+- App.tsx
+- types.ts
+- constants.ts
+- src/**/*Profile*
+- src/**/*Settings*
+- src/**/profile/**
+- src/**/settings/**
+- components/**/*Profile*
+- components/**/*Settings*
+- hooks/**/*profile*
+- services/**/*profile*
+
+Required self-audit in the response:
+- confirm /profile is the visible owner
+- confirm /settings remains secondary-only
+- confirm activeTab routing model is unchanged
+- confirm all logic is still local stub state only
+
+Verification target in Preview:
+- open /profile
+- confirm the section is clearly route-owned
+- confirm the interaction states are easy to identify
+- confirm the shell and nav remain unchanged
+
+At the end of your response, output exactly:
+✅ MIG-202-C COMPLETE — prototype is harvest-ready for /profile voice ownership.
+```
+
+#### MIG-202 Review Gate
+
+After each `MIG-202` batch:
+
+1. Preview `/profile`.
+2. Check `control/requirements-audit-checklist.md` section `2. Profile, Documents, and Ingestion`.
+3. Confirm `/settings` is still secondary-only.
+4. Confirm no routing drift and no real backend integration.
+5. Only continue to the next `MIG-202` batch if ownership and shell behavior still hold.
+
+#### MIG-202 Placement In Replay Sequence
+
+- Run this inlined workflow after `B9-B13` has established the Submitted Docs to Profile voice CTA.
+- Treat the completed `MIG-202` sequence as an ownership lock before running later prototype batches that touch account or settings surfaces, especially `B18`.
+- If a later generic batch drifts voice ownership away from `/profile`, repair the prototype back to the `MIG-202` outcome before continuing.
+
+#### MIG-202 Harvest Notes
+
+- Do not harvest immediately after `MIG-202-C`.
+- Harvest only after the full selected prototype batch pass and the prototype-wide alignment sweep are complete.
+- Treat prototype logic as support-reference input, not backend contract truth.
+- Preserve these boundaries during harvest:
+  - `VoiceProfileManagementSection`
+  - `VoiceProfileCreationPanel`
+  - `VoiceSampleSubmissionForm`
+  - `VoiceProfileStatusCard`
 
 ### B14 — Cover Letter Metrics
 
@@ -577,6 +858,7 @@ Requirements:
 4. Use local stub data only.
 5. Do not add backend scoring logic.
 6. Keep /profile as the voice owner and do not alter settings ownership while making this change.
+7. UI Architecture: Use `--sys-shape-placardTorn01` shapes for metric cards. All score values and technical metadata MUST use `JetBrains Mono` (`--sys-type-fontFamilies-mono`).
 
 Allowed files only:
 - The Submitted Docs component or its cover-letter subsection
@@ -608,6 +890,7 @@ Requirements:
 2. Mount as a collapsible section or tertiary tab inside Submitted Docs, labelled 'Image Studio (Preview)'.
 3. Do not integrate real image generation APIs.
 4. Do not create a new top-level nav item.
+5. UI Architecture: The preview grid cards must use the `Placard` archetype (`--sys-shape-placardTorn01`).
 
 Allowed files only:
 - Submitted Docs component
@@ -646,6 +929,7 @@ Requirements:
    - linked documents
    - current status
 5. Use local state only.
+6. UI Architecture: Application cards must use `Placard` geometry (`--sys-shape-placardTorn01`). Board columns and the Detail Workspace must use `Scaffold` tokens for structural consistency.
 
 Allowed files only:
 - The Applications content component
@@ -676,6 +960,7 @@ Requirements:
 3. Place it near other performance summaries.
 4. Keep the chart lightweight and readable without changing the surrounding shell structure.
 5. Do not introduce heavy charting dependencies. Use SVG elements or plain HTML/CSS only — no third-party chart library.
+6. UI Architecture: Use `--sys-color-inkGold-base` for positive trends and `--sys-color-solidarityRed-base` for critical score dips. The chart container itself must follow the `Placard` archetype.
 
 Allowed files only:
 - The Dashboard component
@@ -709,6 +994,7 @@ Requirements:
 4. Do not add OAuth flows or real integrations.
 5. Settings must remain utility-only.
 6. Do not move, duplicate, or reframe voice-profile ownership here; /profile remains the canonical voice owner.
+7. UI Architecture: Use `Scaffold` structural tokens for integration panels and the `Strike` archetype (`--sys-shape-blockRiot03`) for 'Manage' buttons.
 
 Allowed files only:
 - The Settings component or utility account surface
@@ -742,6 +1028,7 @@ Requirements:
 3. Use icons and labels with clear tap targets.
 4. Hide or reduce the desktop sidebar on small screens so the bottom nav becomes the main mobile navigation mechanism.
 5. Do not change desktop behavior.
+6. UI Architecture: Icons and text must use `--sys-color-worker-ash-base` on a `--sys-color-charcoalBackground-base` bar. Tap targets should emulate `Strike` interaction physics.
 
 Allowed files only:
 - App.tsx
@@ -781,6 +1068,10 @@ At the end of your response, output exactly:
 ```
 
 ## Contract Alignment Summary
+
+Reference note:
+- Contract references below are governed route-lock identifiers from the active migration controls.
+- Some identifiers may not yet exist as local XML files under `contracts/`; when absent, defer to `COMET-MANIFEST.md` and `route-matrix.json` for the same ownership rule.
 
 | Batch | Support-Reference Surface | Canonical Owners Preserved | Contract References |
 | --- | --- | --- | --- |

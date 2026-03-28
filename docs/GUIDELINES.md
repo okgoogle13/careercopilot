@@ -4,37 +4,42 @@
 
 CareerCopilot is not just a tool; it is a living, contemporary interface for navigating work as a migrant, POC, or career‑changer in Australia.
 
-We use the **kerala-rage Contemporary Australian** design system, combining:
+We use the **kerala-rage KR Solidarity v6.1 (Neon Tandava)** design system, combining:
 
-- Peter Drew–style street art boldness
-- Material 3 Expressive motion and structure
-- A dark UI anchored in Asphalt Black (`#1A1714`) and Paper White (`#F5F0E8`)
-- Australian endemic species (kr-shiva, [DEPRECATED_STYLE], kr-flower, kr-leafus) as living symbols of guardianship, resilience, and growth
+- Screenprint manifesto and street-art boldness (wheat-paste, misregistered printing)
+- Material 3 Expressive motion and structure (exact bezier spring physics)
+- A strictly dark UI anchored in True Void Black (`#0A0A0A`)
+- High-contrast neon accents (Neon Crimson, Acid Marigold, Volt Lime, Cyber Blue)
+- Strict Zero-Flora geometry (no organic shapes, no leaves, highly geometric brutalism)
 
-We deliberately avoid kerala-streetprint museum and kr-motif aesthetics. The interface centers present-tense, living context in 2026 Melbourne, not nostalgic cabinets of kr-solidaritysities.
+We deliberately avoid nostalgic aesthetics or generic components. The interface centers present-tense, living context with aggressive, unignorable high-contrast typography and motion.
 
-## 🎨 Design Philosophy: The Haeckel Sandwich
+## 🎨 Design Philosophy: The Neon Tandava
 
-Our visual strategy is constructed in three distinct layers (The "Haeckel Sandwich"):
+Our visual strategy is constructed with aggressive high-contrast layers:
 
 ### 1. The Void (Atmosphere)
 
-- **Concept**: A deep, urban darkness – like a Melbourne laneway wall at night.
-- **Color**: Asphalt Black `#1A1714`.
-- **Role**: Provide infinite depth and contrast behind content.
-- **Rule**: Never use pure digital black `#000000` or pure white backgrounds; always use Asphalt Black and Paper White for a softer, lived-in contrast.
+- **Concept**: Absolute depth and light absorption.
+- **Color**: Void Black `#0A0A0A` (replacing Asphalt Black).
+- **Role**: Provide infinite contrast for neon accents.
+- **Rule**: Never use light backgrounds; use true black to allow neon elements to vibrate optically.
 
-### 2. The kr-motif (Content)
+### 2. The Protest Ink (Content & Accents)
 
-- **Concept**: The user's career data is the "kr-motif" on display.
-- **Visuals**: Australian endemic flora/kr-symbol (kr-flower, kr-leafus, Echidna) representing growth and structure.
-- **Rule**: Authenticity. No generic leaves; specific, anatomically correct species.
+- **Concept**: Misregistered, aggressive screenprint coloring.
+- **Colors**:
+  - Neon Crimson (`#FF2A00`) for destructive/loud actions.
+  - Acid Marigold (`#FFD54F`) for primary interaction.
+  - Volt Lime (`#CCFF00`) for active focus/halos.
+  - Cyber Blue (`#00E5FF`) for secondary contrast.
+- **Rule**: Apply as flat solids or stark drop-shadow offsets. No subtle gradients.
 
-### 3. The Lens (UI/Overlay)
+### 3. The Typography (Structure)
 
-- **Concept**: The scientific instrument viewing the kr-motif.
-- **Visuals**: Geometric overlays, reticles, frost glass (Mica), and precise typography.
-- **Rule**: High precision. Thin lines, clear hierarchy (Crimson Text for labels, Sans-serif for data).
+- **Concept**: Extreme scale and weight shifting (9×/6× rule).
+- **Visuals**: Bone White (`#F2F2F2`) text over black, snapping between Hairline and Ultra-Black.
+- **Rule**: High precision conflict. Typography acts as the primary layout structure alongside asymmetric geometry.
 
 ---
 
@@ -43,7 +48,7 @@ Our visual strategy is constructed in three distinct layers (The "Haeckel Sandwi
 ### Design & Assets
 
 - **[Master Design Overview](design/00-overview.md)**: The central source of truth for the kerala-rage kr-solidarity system (Theory, Duality, Palette).
-- **[Design Principles](design/kerala-rage-design-principles.md)**: Detailed breakdown of the visual language (Haeckel Sandwich).
+- **[Design Principles](design/kerala-rag   e-design-principles.md)**: Detailed breakdown of the visual language (Haeckel Sandwich).
 - **[Typography Strategy](design/02-typography.md)**: Rules for Crimson Text and Work Sans/JetBrains Mono.
 - **[Asset Guidelines](design/05-assets.md)**: Specifications for generated assets.
 - **[Voice & Tone](design/04-voice.md)**: Microcopy and personality guidelines.
@@ -56,21 +61,23 @@ Our visual strategy is constructed in three distinct layers (The "Haeckel Sandwi
 
 ## 🚀 Quick Summary for Designers
 
-1.  **Tone**: Serious, Scientific, elegant, yet modern (M3 Expressive).
-2.  **Motion**: "Spring" physics (bouncy yet controlled).
-3.  **Layout**: "[DEPRECATED_STYLE]" (Cabinet of kr-solidaritysities) - organized clutter, dense but hierarchical.
+1. **Tone**: Serious, Scientific, elegant, yet modern (M3 Expressive).
+2. **Motion**: "Spring" physics (bouncy yet controlled).
+3. **Layout**: "[DEPRECATED_STYLE]" (Cabinet of kr-solidaritysities) - organized clutter, dense but hierarchical.
 
 ## Cultural and Visual Governance
 
 This project operates under strict cultural and symbolic constraints.
 
 All contributors are expected to:
+
 - Follow the Design System Canon
 - Avoid decorative or aesthetic-only use of cultural symbols
 - Respect First Nations and devotional boundaries
 - Reject “propaganda” tone in favour of declarative, archival expression
 
 When in doubt:
+
 - Do less
 - Use fewer symbols
 - Remove explanatory text

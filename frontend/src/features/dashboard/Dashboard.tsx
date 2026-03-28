@@ -8,6 +8,7 @@ import { loadHeroRegistry } from '../../design/hero/heroRegistry';
 import { composeHero } from '../../lib/composeHero';
 import type { SolidarityManifest } from '../../design/hero/heroTypes';
 import { OnboardingChecklist, CHECKLIST_DISMISSED_KEY } from './OnboardingChecklist';
+import { ATSTrendChart } from './components/ATSTrendChart';
 import { useUserStore } from '@/stores/userStore';
 
 // ============================================================================
@@ -445,6 +446,11 @@ export function Dashboard() {
                 ))}
               </div>
             </section>
+
+            {/* ATS Score Trend Chart — B19 harvest */}
+            <motion.div variants={item as any}>
+              <ATSTrendChart />
+            </motion.div>
           </>
         )}
       </motion.div>

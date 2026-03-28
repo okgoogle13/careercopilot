@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { lazy, useEffect } from 'react';
+import AnimationTestPage from './pages/AnimationTest';
 import {
   Navigate,
   Outlet,
@@ -216,6 +217,10 @@ export default function App() {
                 replace
               />
             }
+          />
+          <Route
+            path="/animation-test"
+            element={<AnimationTestPage />}
           />
           <Route
             path="*"

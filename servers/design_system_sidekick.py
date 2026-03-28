@@ -51,10 +51,10 @@ if sentry_dsn and sentry_dsn.startswith("http") and not sentry_dsn.startswith("$
 
 # Model Tiers (March 2026)
 MODEL_TIERS = {
-    "Frontier": "gemini-3.1-pro",
-    "Performance": "gemini-3.1-flash",
-    "Utility": "gemini-3.1-flash-lite",
-    "LTS": "gemini-1.5-pro"
+    "Frontier": os.getenv("GEMINI_FRONTIER_MODEL", "models/gemini-3.1-pro-preview"),
+    "Performance": os.getenv("GEMINI_PERFORMANCE_MODEL", "models/gemini-3-flash-preview"),
+    "Utility": os.getenv("GEMINI_UTILITY_MODEL", "models/gemini-3.1-flash-lite-preview"),
+    "LTS": os.getenv("GEMINI_LTS_MODEL", "models/gemini-2.5-pro")
 }
 
 class DesignSystemSidekickServer:

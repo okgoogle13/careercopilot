@@ -1,6 +1,6 @@
 ---
 name: route-migration
-description: Execute or validate canonical route-local migration work in the main CareerCopilot app after route ownership is already decided in route-matrix.md.
+description: Execute or validate canonical route-local migration work in the main CareerCopilot app after route ownership is already decided in the active route-matrix artifacts.
 ---
 
 # Route Migration
@@ -23,23 +23,25 @@ This skill is not for:
 
 ## Read First
 
-- `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.md`
-- `docs/project/active/frontend-source-of-truth-migration/control/workflow.md`
+- `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.json`
+- `docs/project/active/frontend-source-of-truth-migration/control/archive/route-matrix.md`
+- `docs/project/active/frontend-source-of-truth-migration/analysis/tokens-first-gap-fill-workflow.md`
+- `docs/project/active/frontend-source-of-truth-migration/control/archive/workflow.md`
 - `docs/project/active/frontend-source-of-truth-migration/control/COMET-MANIFEST.md`
 
 Read `references/ROUTE_LIFECYCLE.md` for the current route-level sequence and `assets/route-checklist-template.md` when you need a route handoff or closure checklist.
 
 ## When To Use
 
-- A route owner is already explicit in `route-matrix.md`
+- A route owner is already explicit in `control/route-matrix.json` and the archived human-readable route matrix
 - The work is in the canonical app, not the prototype shell
 - The route needs gap-fill planning, implementation, or closure evidence
 - You need to verify a route against route integrity, screen pairing, and token/identity gates
 
 ## Required Inputs
 
-- one route id or current route from `route-matrix.json`
-- the current route row from `route-matrix.md`
+- one route id or current route from `control/route-matrix.json`
+- the current route row from `control/archive/route-matrix.md`
 - the paired screen reference / wireframe path if present
 - the canonical runtime owner in `frontend/src/features/**` or `frontend/src/pages/**`
 - any approved build contract or support-reference input already classified by the gap-fill planner
@@ -50,7 +52,8 @@ If route ownership is still ambiguous, stop and use `blueprint` or `prototype-ha
 
 ### 1. Authority Lock
 
-- Confirm the route is present in `route-matrix.md`
+- Confirm the route is present in `control/route-matrix.json`
+- Confirm the human-readable route intent in `control/archive/route-matrix.md`
 - Confirm the runtime owner is reachable from `frontend/src/App.tsx`
 - Confirm backend capability ownership from the route matrix before changing the route
 - Preserve route paths unless the route matrix explicitly says otherwise
@@ -95,7 +98,8 @@ If route ownership is still ambiguous, stop and use `blueprint` or `prototype-ha
 ## Guardrails
 
 - Route matrix and `frontend/src/App.tsx` are the authority for route ownership
-- `workflow.md` is the authority for wireframe and gap-fill sequencing
+- `analysis/tokens-first-gap-fill-workflow.md` is the authority for wireframe and gap-fill sequencing
+- `control/archive/workflow.md` remains the reference for TSX identity gate wording until that gate is promoted into a non-archive control doc
 - `COMET-MANIFEST.md` governs prototype support-reference work, not canonical route cutover
 - Plain primitive naming is preferred in planning outputs; KR archetypes are internal mappings only
 - No direct prototype-to-runtime consolidation

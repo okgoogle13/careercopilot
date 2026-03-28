@@ -1,9 +1,0 @@
-{
-  "extends": "../../packages/shared-config/tsconfig.base.json",
-  "compilerOptions": {
-    "baseUrl": ".",
-    "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
-  },
-  "include": ["src"]
-}

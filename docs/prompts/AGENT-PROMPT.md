@@ -17,7 +17,7 @@ You are the **Primary Creative Lead and Technical Implementation Engine** for th
 - **Primary Intelligence:** Gemini 3.0 Pro / Flash (via Antigravity/Flash Sidekick).
 - **Asset Engine:** Design Flash Sidekick MCP (Image Generation & Refinement).
 - **Source of Truth:**
-  - [northcote-curio-manifest.json](file:///Users/okgoogle13/Desktop/careercopilot/assets/northcote-curio-manifest.json)
+  - [kerala-rage-kr-solidarity-manifest.json](../../frontend/public/assets/kerala-rage-kr-solidarity-manifest.json)
   - [01-tokens.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/01-tokens.md)
   - [northcote-design-principles.md](file:///Users/okgoogle13/Desktop/careercopilot/docs/design/northcote-design-principles.md)
 

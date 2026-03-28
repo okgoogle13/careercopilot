@@ -11,20 +11,25 @@ Our palette is limited, high-salience, and grounded in the screenprint ink-hit a
 
 | Token | CSS Variable | Hex | Usage |
 | :--- | :--- | :--- | :--- |
-| **Solidarity Charcoal** | `--sys-color-charcoal-bg` | `#1A1714` | **The Substrate** — Matte background. |
-| **Ink Gold** | `--sys-color-solidarity-gold` | `#DAF674` | **The Radiance** — Focus, primary actions, halos. |
-| **Solidarity Crimson** | `--sys-color-solidarity-crimson` | `#F14714` | **The Resistance** — Critical alerts, navigation peaks. |
-| **Activist Smoke** | `--sys-color-smoke-green` | `#48DA8B` | **The Life** — Growth metrics, secondary highlights. |
-| **Signal Green** | `--sys-color-signal-green` | `#48F0E5` | **The Pulse** — Success states, technical links. |
-| **Worker Ash** | `--sys-color-worker-ash` | `#DAF6B3` | **The Ink** — High-contrast typography on dark. |
-| **Stencil Yellow** | `--sys-color-stencil-yellow` | `#F6E748` | **The Attention** — Stencil phrases, key alerts. |
-| **Concrete Grey** | `--sys-color-concrete-grey` | `#A39B8F` | **The Grit** — Dividers, borders, urban context. |
+| **Solidarity Charcoal** | `--sys-color-charcoalBackground-base` | `#1A1714` | **The Substrate** — Matte background. |
+| **Ink Gold** | `--sys-color-inkGold-base` | `#DAF674` | **The Radiance** — Focus, primary actions, halos. |
+| **Solidarity Crimson** | `--sys-color-solidarityRed-base` | `#F14714` | **The Resistance** — Critical alerts, navigation peaks. |
+| **Activist Smoke** | `--sys-color-kr-activistSmokeGreen-base` | `#48DA8B` | **The Life** — Growth metrics, secondary highlights. |
+| **Signal Green** | `--sys-color-signalGreen-base` | `#48F0E5` | **The Pulse** — Success states, technical links. |
+| **Worker Ash** | `--sys-color-worker-ash-base` | `#DAF6B3` | **The Ink** — High-contrast typography on dark. |
+| **Stencil Yellow** | `--sys-color-stencilYellow-base` | `#F6E748` | **The Attention** — Stencil phrases, key alerts. |
+| **Protest Metal Blue** | `--sys-color-protestMetalBlue-base` | `#48B3DA` | **The Cool Accent** — charts, metadata, water-ripple secondary accents. |
+| **Concrete Grey** | `--sys-color-concreteGrey-base` | `#A39B8F` | **The Grit** — Dividers, borders, urban context. |
+| **Paper White** | `--sys-color-paperWhite-base` | `#F5F0E8` | **The Poster Base** — high-contrast highlights and editorial poster moments. |
 
 ---
 
 ## 2. Typography Strategy (v4.0)
 
 Blending street-poster impact with Material 3 Expressive motion. All fonts use `font-optical-sizing: auto`.
+
+Operational implementation standard:
+- see [06_TYPOGRAPHY_STANDARDS.md](06_TYPOGRAPHY_STANDARDS.md) for role mapping, hierarchy rules, axis usage, accessibility constraints, and audit guidance
 
 | Role | Font Family | Usage |
 | :--- | :--- | :--- |
@@ -72,19 +77,19 @@ Reusable, named shapes. Each shape carries no inherent meaning — archetypes as
 
 | Token | CSS Variable | Border-Radius Definition | Allowed Tier |
 | :--- | :--- | :--- | :--- |
-| `shape.block01` | `--sys-shape-block01` | `radius.md radius.xs radius.md radius.xs` → `8px 2px 8px 2px` | **Core UI** |
-| `shape.block02` | `--sys-shape-block02` | `radius.xl radius.sm radius.lg radius.xs` → `20px 4px 12px 2px` | **Core UI** |
-| `shape.block03` | `--sys-shape-block03` | `radius.xxl radius.xs radius.xs radius.xs` → `32px 2px 2px 2px` | **Core UI** |
-| `shape.pill01` | `--sys-shape-pill01` | `radius.full` → `9999px` (all corners) | **Core UI** |
-| `shape.marchOpen01` | `--sys-shape-marchOpen01` | `radius.xl radius.md radius.lg radius.xxl` → `20px 8px 12px 32px` | **Core UI** |
+| `shape.blockRiot01` | `--sys-shape-blockRiot01` | `radius.md radius.xs radius.md radius.xs` → `8px 2px 8px 2px` | **Core UI** |
+| `shape.blockRiot02` | `--sys-shape-blockRiot02` | `radius.xl radius.sm radius.lg radius.xs` → `20px 4px 12px 2px` | **Core UI** |
+| `shape.blockRiot03` | `--sys-shape-blockRiot03` | `radius.xxl radius.xs radius.xs radius.xs` → `32px 2px 2px 2px` | **Core UI** |
+| `shape.pillMarch01` | `--sys-shape-pillMarch01` | `radius.full` → `9999px` (all corners) | **Core UI** |
+| `shape.marchSurge01` | `--sys-shape-marchSurge01` | `radius.xl radius.md radius.lg radius.xxl` → `20px 8px 12px 32px` | **Core UI** |
 | `shape.megaphoneBase01` | `--sys-shape-megaphoneBase01` | `42% 58% 45% 55% / 48% 62% 38% 52%` (organic % radii) | **Core UI** |
 | `shape.placardBase01` | `--sys-shape-placardBase01` | `48% 52% 58% 42% / 55% 45% 60% 40%` (organic % radii) | **Core UI** |
-| `shape.blob01` | `--sys-shape-blob01` | `60% 40% 30% 70% / 60% 30% 70% 40%` | **Decorative** |
-| `shape.blob02` | `--sys-shape-blob02` | `40% 60% 70% 30% / 40% 50% 60% 50%` | **Decorative** |
+| `shape.substrateTile01` | `--sys-shape-substrateTile01` | `60% 40% 30% 70% / 60% 30% 70% 40%` | **Decorative** |
+| `shape.substrateTile02` | `--sys-shape-substrateTile02` | `40% 60% 70% 30% / 40% 50% 60% 50%` | **Decorative** |
 
-> **Tier rules:** **Core UI** shapes are available to all archetype contexts. **Decorative** shapes (`shape.blob*`) are restricted to Substrate archetype, avatar masks, and hero frame backgrounds. All other uses require explicit whitelist.
+> **Tier rules:** **Core UI** shapes are available to all archetype contexts. **Decorative** shapes (`shape.substrateTile*`) are restricted to Substrate archetype, avatar masks, and hero frame backgrounds. All other uses require explicit whitelist.
 
-**Compatibility aliases** remain valid for one release only. Prefer `radius-megaphoneBase`, `radius-placardBase`, `radius-marchOpen`, `sentryAvatar`, and `tornEdgeClipPath`.
+**Compatibility aliases** remain valid for one release only. Prefer `--sys-shape-megaphoneCut01`, `--sys-shape-placardTorn01`, `--sys-shape-marchSurge01`, `sentryAvatar`, and `tornEdgeClipPath`.
 
 ---
 
@@ -94,12 +99,12 @@ Each archetype defines a shape palette (not a single locked shape) and morph sta
 
 | Archetype | Base Shape | Active / Selected | In-Progress | Ambient | Motion Coupling |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Strike** | `shape.block03` | `shape.block02` | `shape.pill01` | — | `typeSpringSlam` (600ms) |
-| **March** | `shape.block01` | `shape.marchOpen01` | `shape.block02` | — | `dragSettle` (800ms) |
-| **Megaphone** | `shape.megaphoneBase01` | `shape.megaphoneBase01` | `shape.placardBase01` | `shape.blob01` | `typeSpringSlam` (600ms) |
-| **Placard** | `shape.placardBase01` | `shape.block02` | `shape.block03` | — | `dragSettle` (800ms) |
-| **Scaffold** | `shape.block01` | `shape.block01` | `shape.block01` | — | none (static) |
-| **Substrate** | `shape.blob02` | — | — | `shape.blob01` | `waterRipple` (3000ms) |
+| **Strike** | `shape.blockRiot03` | `shape.blockRiot02` | `shape.pillMarch01` | — | `typeSpringSlam` (600ms) |
+| **March** | `shape.blockRiot01` | `shape.marchSurge01` | `shape.blockRiot02` | — | `dragSettle` (800ms) |
+| **Megaphone** | `shape.megaphoneCut01` | `shape.megaphoneCut01` | `shape.placardTorn01` | `shape.substrateTile01` | `typeSpringSlam` (600ms) |
+| **Placard** | `shape.placardTorn01` | `shape.blockRiot02` | `shape.blockRiot03` | — | `dragSettle` (800ms) |
+| **Scaffold** | `shape.blockRiot01` | `shape.blockRiot01` | `shape.blockRiot01` | — | none (static) |
+| **Substrate** | `shape.substrateTile02` | — | — | `shape.substrateTile01` | `waterRipple` (3000ms) |
 
 **Morph trigger rules (M3-aligned, KR-adapted):**
 - **Interaction morph**: Shape changes between `base` and `active` on press/hover (deliberate tension — sharp vs round).
@@ -114,8 +119,8 @@ Each archetype defines a shape palette (not a single locked shape) and morph sta
 
 - All `border-radius` values in component code **must** reference `--sys-radius-*` or `--sys-shape-*` CSS variables. No hardcoded `px` values.
 - `border-radius: 50%` is **banned**. Use `--sys-radius-full` or `sentryAvatar` (`98%`).
-- `shape.blob*` tokens are **banned** outside Substrate archetype, avatar masks, and hero frames, unless explicitly documented as a whitelist exception.
-- Scaffold (`shape.block01`) does **not** morph. If your layout element is changing shape on interaction, it is not a Scaffold — reassign its archetype.
+- `shape.substrateTile*` tokens are **banned** outside Substrate archetype, avatar masks, and hero frames, unless explicitly documented as a whitelist exception.
+- Scaffold (`shape.blockRiot01`) does **not** morph. If your layout element is changing shape on interaction, it is not a Scaffold — reassign its archetype.
 - No shape may have all four corners identical unless the shape token explicitly defines it (e.g., `shape.pill01`). Uniform corner-radius is the Institutional Squelch.
 
 ---
@@ -124,9 +129,9 @@ Each archetype defines a shape palette (not a single locked shape) and morph sta
 
 | Name | Mapped Token | Shape Token Equivalent |
 | :--- | :--- | :--- |
-| **March Open** | `radius-marchOpen` | `shape.marchOpen01` |
-| **Megaphone Base** | `radius-megaphoneBase` | `shape.megaphoneBase01` |
-| **Placard Base** | `radius-placardBase` | `shape.placardBase01` |
+| **March Open** | `radius-marchOpen` | `shape.marchSurge01` |
+| **Megaphone Base** | `radius-megaphoneBase` | `shape.megaphoneCut01` |
+| **Placard Base** | `radius-placardBase` | `shape.placardTorn01` |
 | **Sentry Avatar** | `sentryAvatar` (`98%`) | No equivalent (use direct) |
 | **Torn Edge** | `tornEdgeClipPath` | No equivalent (clip-path, not radius) |
 

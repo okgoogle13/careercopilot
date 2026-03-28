@@ -1,11 +1,11 @@
-# A07 — urban_gallery_wall__A07_mist_drips_back__1600x1000.png
+# A07 — kr-solidarity__atmospheric__urban--mist-drips--v1.png
 
         ## Output contract
         - Generate exactly one image.
         - No collage grid.
         - No extra text.
         - Keep Global Style Lock intact.
-        - Save as: `public/hero/generated/urban_gallery_wall__A07_mist_drips_back__1600x1000.png`
+        - Save as: `public/hero/generated/kr-solidarity__atmospheric__urban--mist-drips--v1.png`
 
         ## Asset metadata
         - Asset ID: A07

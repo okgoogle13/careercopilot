@@ -1,5 +1,5 @@
 import React from 'react';
-import { Strike } from './ui/Strike';
+import { Strike, type StrikeProps } from './ui/Strike';
 import { Placard } from './ui/Placard';
 import { ScaffoldInput, ScaffoldArea } from './ui/ScaffoldInput';
 import { Megaphone } from './ui/Megaphone';
@@ -8,12 +8,9 @@ import { PageHeader } from './shared/PageHeader';
 import { Loader2 } from 'lucide-react';
 
 // --- Buttons ---
-export interface PrimaryButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface PrimaryButtonProps extends Omit<StrikeProps, 'children' | 'variant' | 'size'> {
   label: string;
-  onClick: () => void;
   variant?: 'strike' | 'march' | 'tonal';
-  disabled?: boolean;
-  isLoading?: boolean;
 }
 
 export const PrimaryButton: React.FC<PrimaryButtonProps> = ({

@@ -1,44 +1,34 @@
 ---
 name: manifest-reconciler
-description: Reconcile assets across filesystem, manifest, and hero registry and report deterministic integrity gaps.
-metadata:
-  version: 2.3.0
-  tags:
-    - assets
-    - manifest
-    - integrity
+description: Reconcile filesystem assets, manifest entries, and hero registry references to prove integrity and route asset issues to path validation or placement review. Use after asset additions, renames, bulk edits, packaging checks, or harvest prep when files, manifest, and registry may have drifted.
 ---
 
 # Manifest Reconciler
 
 ## Purpose
 
-Detect mismatches between on-disk assets, manifest entries, and hero registry references.
-
-## Prerequisites
-
-- frontend KR asset scripts are present under `frontend/scripts/kr`
-- manifest source of truth is the frontend public asset tree
-- the operator knows whether the target issue is integrity, placement, or visual quality
-
-## Best Practices
-
-- run this after asset additions, deletions, or renames
-- use this before packaging or release gating when asset integrity is in doubt
-- do not confuse integrity success with visual success; use `asset-placement-strategy` for slot quality and `migration-audit` for screen readiness
-
-## When to Use
-
-- Before packaging/deploy.
-- After bulk asset edits.
-- When asset placement looks correct visually but integrity still needs verification.
-- When a migration or visual audit flags suspicious asset references, drift, or registry mismatches.
+Detect mismatches between on-disk assets, manifest entries, and hero registry references before any path audit, placement review, packaging, or harvest gating.
 
 ## Shared References
 
 - `../shared-references/STATUS_THRESHOLDS.md`
-- `../../docs/design/04_ASSETS.md`
 - `../shared-references/AUDIT_OUTPUT_CONTRACT.md`
+- `references/WORKFLOW.md`
+- `../../../docs/design/04_ASSETS.md`
+- `../../../docs/project/active/frontend-source-of-truth-migration/control/COMET-MANIFEST.md`
+- `../../../docs/project/active/frontend-source-of-truth-migration/control/archive/harvest-spec.md`
+
+## Prerequisites
+
+- keep `frontend/public/assets` as the asset source of truth
+- keep `frontend/scripts/kr` generators available before claiming integrity success
+- know whether the target issue is integrity, pathing, placement, or visual quality
+
+## Harvest Boundary
+
+- treat this skill as an integrity gate only
+- do not treat a passing reconciliation run as approval to harvest raw prototype TSX or support-only shell surfaces
+- follow the migration harvest order from `COMET-MANIFEST.md`: integrity first, then pathing, then placement, then route-local audit or visual review as required
 
 ## Scope
 
@@ -48,21 +38,26 @@ Checks:
 - hero-registry/manifest drift
 - layering compatibility consistency
 
-## How To Use
+## Operator Workflow
 
-Use this skill when asset correctness must be proven across:
-- on-disk files
-- manifest entries
-- hero registry usage
+1. Confirm the route, asset set, or packaging context.
+2. Run the wrapper for the default reconciliation sequence.
+3. If the wrapper fails mid-step, rerun the individual frontend commands to isolate the broken stage.
+4. If integrity passes, hand off to `asset-path-validator`.
+5. Only hand off to `asset-placement-strategy` after integrity and path references are both clean enough to trust manifest ids.
 
-### Typical workflow
+### Preferred entrypoint
 
-1. Identify the target asset set or route context.
-2. Reconcile filesystem assets against the manifest.
-3. Check hero registry references for drift.
-4. Feed the reconciliation result into packaging or migration audit decisions.
+Use the wrapper when you want one repeatable integrity pass:
+
+```bash
+cd /Users/okgoogle13/Projects/careercopilot
+.claude/skills/manifest-reconciler/scripts/run-manifest-reconciliation.sh
+```
 
 ### Repo-native commands
+
+Use the individual frontend commands when you are debugging one step:
 
 ```bash
 cd /Users/okgoogle13/Projects/careercopilot/frontend
@@ -70,37 +65,6 @@ node scripts/kr/generate-manifest.mjs
 node scripts/kr/validate-manifest.mjs
 node scripts/kr/generate-hero-registry.mjs
 ```
-
-### Preferred operator workflow
-
-Use the wrapper script when you want a repeatable reconciliation pass with one entrypoint:
-
-```bash
-cd /Users/okgoogle13/Projects/careercopilot
-.claude/skills/manifest-reconciler/scripts/run-manifest-reconciliation.sh
-```
-
-Use the individual frontend commands directly when:
-- you are debugging one generation step
-- you already know the pipeline and only need one script rerun
-- you want to inspect intermediate output before the full sequence completes
-
-Use this skill instead of running those commands blindly when you need:
-- interpretation of the integrity findings
-- a decision about whether the issue is blocking
-- guidance on whether to hand off to placement, packaging, or path validation
-
-## Workflow
-
-1. Confirm the relevant asset set, route, or packaging context.
-2. Regenerate the manifest if assets may have changed.
-3. Validate the manifest structure and file references.
-4. Regenerate the hero registry so composition references align to current manifest state.
-5. Interpret the result:
-   - integrity pass
-   - blocking integrity failure
-   - non-blocking cleanup task
-6. Hand off to the next skill if the issue is not actually integrity-related.
 
 ## Output Interpretation
 
@@ -114,40 +78,39 @@ Treat these as follow-on issues:
 - unused assets with documented reasons
 - naming cleanup that does not break integrity
 
+Map outcomes to the harvest sequence:
+- `pass`: integrity is proven; continue to `asset-path-validator`
+- `needs_refinement`: treat as support-only until the mismatch is fixed or explicitly quarantined
+- `fail`: block packaging, placement, and harvest prep until integrity is restored
+
 ## Decision Guide
 
-Use `manifest-reconciler` when the question is:
-- "Do the files, manifest, and registry still agree?"
-
-Use `asset-placement-strategy` when the question is:
-- "Are the right assets in the right slots?"
-
-Use `component-visual-audit` or `m3-visual-audit` when the question is:
-- "Does the composed result actually look right?"
+- Use `manifest-reconciler` for: "Do the files, manifest, and registry still agree?"
+- Use `asset-path-validator` next for: "Do code, docs, and wireframes point at canonical asset locations?"
+- Use `asset-placement-strategy` after that for: "Are the right assets in the right slots?"
+- Use `component-visual-audit` or `m3-visual-audit` last for: "Does the composed result actually look right?"
 
 ## Example
 
 ```bash
-cd /Users/okgoogle13/Projects/careercopilot/frontend
-node scripts/kr/generate-manifest.mjs
-node scripts/kr/validate-manifest.mjs
-node scripts/kr/generate-hero-registry.mjs
+cd /Users/okgoogle13/Projects/careercopilot
+.claude/skills/manifest-reconciler/scripts/run-manifest-reconciliation.sh
 ```
 
 Expected outcome:
 - manifest and registry are regenerated consistently
 - integrity mismatches become explicit
-- downstream asset audits can trust the registry state
+- downstream path and placement audits can trust the registry state
 
 ### Example JSON-style outcome
 
 ```json
 {
   "wrapper": "manifest_reconciliation_audit",
-  "status": "pass",
+  "status": "pass|needs_refinement|fail",
   "blocking_issues": [],
   "follow_on_issues": [],
-  "next_skill": "asset-placement-strategy"
+  "next_skill": "asset-path-validator"
 }
 ```
 
@@ -156,13 +119,13 @@ Expected outcome:
 - No asset changes but reconciliation still fails:
   - suspect registry drift or stale generated artifacts
 - Assets exist on disk but are not canonical:
-  - treat as integrity failure until naming/manifest alignment is restored
+  - treat as integrity failure until naming or manifest alignment is restored
 - Hero registry is valid but the screen still looks wrong:
   - hand off to `asset-placement-strategy` or visual audit; reconciliation only proves integrity
 - Validation script missing:
   - stop and restore the frontend KR scripts before claiming integrity success
 - Generated files changed but git diff is unexpectedly large:
-  - inspect for unintended asset naming or folder-structure drift before continuing
+  - inspect for unintended asset naming, folder-structure drift, or accidental prototype-source promotion before continuing
 
 ## Troubleshooting
 
@@ -194,13 +157,14 @@ Expected outcome:
 
 ## Output Contract
 
-Use deterministic shape with wrapper key `manifest_reconciliation_audit`.
+Use deterministic shape with wrapper key `manifest_reconciliation_audit` and map the result to `pass`, `needs_refinement`, or `fail`.
 
 ## Success Metrics
 
 - one operator can run a full reconciliation from a single wrapper command
-- blocking integrity issues are separated from visual or placement issues
+- blocking integrity issues are separated from path, placement, and visual issues
 - manifest drift, missing files, and registry drift are unambiguous in the result
+- the next handoff is explicit enough that harvest workers do not skip straight from integrity to porting
 
 ## Related Skills
 

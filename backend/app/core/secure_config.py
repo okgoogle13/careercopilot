@@ -91,6 +91,7 @@ class SecureSettings(BaseSettings):
     GCP_PROJECT_ID: str | None = None
     GOOGLE_APPLICATION_CREDENTIALS: str | None = None
     GOOGLE_APPLICATION_CREDENTIALS_JSON: str | None = None
+    CTS_TENANT_ID: str = "default"
 
     # AI Services
     GEMINI_API_KEY: str | None = None

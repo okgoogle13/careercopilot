@@ -12,6 +12,7 @@ class JobListingDetails:
     pass
 
 
+from app.services.cts_service import cts_service
 from app.services.flash_sidekick_service import FlashSidekickService
 
 logger = logging.getLogger(__name__)
@@ -26,37 +27,44 @@ class JobScoutAgent:
     def __init__(self):
         self.browser = PlaywrightService()
         self.ai_parser = FlashSidekickService()
+        self.cts = cts_service
         self.search_domains = ["ethicaljobs.com.au", "seek.com.au", "jora.com", "linkedin.com"]
 
     async def search_jobs(self, topic: str, location: str = "Australia") -> list[str]:
         """
-        Performs a broad Google search to find job listing URLs.
-        Uses 'Google Dorks' to target specific job boards.
+        Performs a job search. Prioritizes CTS (API) results and falls back to Google Scraping.
         """
         job_links = []
 
-        # Construct a "Broad" query targeting multiple platforms
-        # site:ethicaljobs.com.au OR site:seek.com.au "Social Work" "Melbourne"
-        domains_query = " OR ".join([f"site:{d}" for d in self.search_domains])
-        query = f"({domains_query}) {topic} {location}"
-
-        search_url = f"https://www.google.com/search?q={query.replace(' ', '+')}"
-        logger.info(f"JobScout Searching: {query}")
-
+        # 1. Try Google Cloud Talent Solution (CTS) - Structured API
         try:
-            # 1. Get the Search Results Page
-            html_content = await self.browser.navigate_and_scrape(search_url)
+            logger.info(f"Trying CTS Search for: {topic} in {location}")
+            cts_results = await self.cts.search_jobs(query=topic, location=location)
+            for res in cts_results:
+                if res.get("application_info", {}).get("uris"):
+                    job_links.extend(res["application_info"]["uris"])
 
-            # 2. Extract Links with AI
-            logger.info("Search page scraped. Sending to Flash Sidekick for extraction...")
-            job_links = await self.ai_parser.extract_links_from_search_results(html_content)
-
-            logger.info(f"Found {len(job_links)} potential job links.")
-
+            if job_links:
+                logger.info(f"CTS found {len(job_links)} job links.")
         except Exception as e:
-            logger.error(f"Search failed: {e}")
+            logger.warning(f"CTS Search failed (falling back to scraping): {e}")
 
-        return job_links
+        # 2. Fallback to Google Dorking (Scraping) if CTS is empty/fails
+        if not job_links:
+            logger.info("Falling back to Google Scraping...")
+            domains_query = " OR ".join([f"site:{d}" for d in self.search_domains])
+            query = f"({domains_query}) {topic} {location}"
+            search_url = f"https://www.google.com/search?q={query.replace(' ', '+')}"
+
+            try:
+                html_content = await self.browser.navigate_and_scrape(search_url)
+                scraped_links = await self.ai_parser.extract_links_from_search_results(html_content)
+                job_links.extend(scraped_links)
+                logger.info(f"Scraped {len(scraped_links)} job links from Google.")
+            except Exception as e:
+                logger.error(f"Scraping failed: {e}")
+
+        return list(set(job_links))  # Deduplicate
 
     async def examine_job(self, url: str) -> dict:
         """

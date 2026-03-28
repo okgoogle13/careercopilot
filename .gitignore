@@ -130,6 +130,10 @@ purge/
 _backup_*/
 cleanup_backup_*/
 
+# Nested source snapshots with their own .git history
+docs/project/active/frontend-source-of-truth-migration/sources/prototype_v2.0/
+docs/project/active/frontend-source-of-truth-migration/sources/prototype_v2.0-upstream/
+
 # Python
 **/__pycache__/
 **/*.py[cod]
@@ -164,6 +168,8 @@ var/
 pip-log.txt
 pip-delete-this-directory.txt
 *~HEAD
+repomix-output.xml
+style_guide_final.png
 
 # Coverage
 .tox/

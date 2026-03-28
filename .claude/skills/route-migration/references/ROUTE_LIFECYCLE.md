@@ -15,7 +15,8 @@ Sequence:
 ## 1. authority-lock
 
 **Entry**
-- Route exists in `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.md`
+- Route exists in `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.json`
+- Human-readable route row exists in `docs/project/active/frontend-source-of-truth-migration/control/archive/route-matrix.md`
 
 **Exit**
 - Canonical runtime owner is confirmed from the route matrix and reachable from `frontend/src/App.tsx`
@@ -100,7 +101,7 @@ npx tsx tools/ci/check-screen-pairs.ts
 - `migration-audit`
 
 **Additional rule**
-- For support-influenced routes, complete the TSX identity gate from `control/workflow.md` before closure
+- For support-influenced routes, complete the TSX identity gate from `control/archive/workflow.md` before closure
 
 ## Do Not Use This Lifecycle For
 

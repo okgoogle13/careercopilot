@@ -127,12 +127,12 @@ We are reviewing the cloned AI Studio prototype at `docs/project/active/frontend
 
 - **Goal**: Define what must be true before harvest can begin.
 - **Actions**:
-  - [ ] Treat the prototype as a pattern catalog, not as a drop-in implementation.
-  - [ ] Strip shell, router, extension, and Firebase assumptions from any harvested notes.
-  - [ ] Extract route-local interaction patterns only, mapped to current contract owners.
-  - [ ] Verify each harvested surface against the matching build contract before canonical porting.
-  - [ ] Keep `/profile` as the only voice-profile owner and `/settings` as secondary-only.
-  - [ ] Keep `/documents` as the canonical document hub and do not collapse generator ownership into prototype tabs.
+  - [x] Treat the prototype as a pattern catalog, not as a drop-in implementation.
+  - [x] Strip shell, router, extension, and Firebase assumptions from any harvested notes.
+  - [x] Extract route-local interaction patterns only, mapped to current contract owners.
+  - [x] Verify each harvested surface against the matching build contract before canonical porting.
+  - [x] Keep `/profile` as the only voice-profile owner and `/settings` as secondary-only.
+  - [x] Keep `/documents` as the canonical document hub and do not collapse generator ownership into prototype tabs.
 - **Definition of Done (DoD)**: The harvest input set is reduced to route-safe interior patterns with owner mapping and contract references.
 
 ---
@@ -143,9 +143,9 @@ We are reviewing the cloned AI Studio prototype at `docs/project/active/frontend
 
 - **Goal**: Make an explicit harvest readiness call.
 - **Decision**:
-  - **Harvest-ready now?** No
-  - **Support/reference-ready now?** Yes
-  - **Harvest-ready after prep?** Yes
+  - **Complete folder safe to copy wholesale?** No
+  - **Harvest-prepared support/reference source now?** Yes
+  - **Route-owned port tasks may proceed now?** Yes
 - **Definition of Done (DoD)**: Folder status is unambiguous for future planners and harvest work.
 
 ### Task 8: Recommended Harvest Sequence
@@ -205,3 +205,27 @@ Remaining 5 points: `OnboardingPathBifurcation.tsx` and `LandingPage.tsx` remain
   - review interior patterns against contract-backed canonical owners
   - discard shell/router/platform assumptions (documented in the catalog)
   - proceed with route-owned port tasks per the harvest spec
+
+## Recommended Next Actions
+
+### Immediate
+
+- Route-owned port tasks may now proceed.
+- Use `PROTOTYPE-HARVEST-PATTERN-CATALOG.md` as the entry point for harvest work. Each route family includes source files, reusable patterns, blocked assumptions, and a contract reference.
+
+### Short-Term
+
+- Resolve `B5` (`/tracker` env verification) and `B8` (`/profile` env verification).
+- These remain the only high-severity blockers preventing 100% migration closeout.
+- Required environment remains:
+  - `FIREBASE_PROJECT_ID=careercopilot-468811`
+  - local Firebase/auth readiness sufficient to verify `/tracker` and `/profile` against live environment behavior
+
+### Long-Term
+
+- Once `B5` and `B8` close, the migration reaches 100%.
+- Final closeout gate remains:
+  - `scan-routes.ts`
+  - `scan-screens.ts`
+  - `detect-orphans.ts`
+- All canonical routes must be verified green in environment before the program is marked fully complete.

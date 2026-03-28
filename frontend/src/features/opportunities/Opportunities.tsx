@@ -5,6 +5,7 @@ import { Briefcase, Compass, ExternalLink, MapPin, Search, Sparkles } from 'luci
 import { useState } from 'react';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { API_ENDPOINTS } from '@/config/api';
+import { useJobInput } from '../jobs/hooks/useJobInput';
 
 // Assets
 const sentryKrShiva =
@@ -30,6 +31,12 @@ export function Opportunities() {
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState<string[]>([]);
   const [scoutMessage, setScoutMessage] = useState('');
+
+  const jobInput = useJobInput({
+    onAnalyze: async (title, company, text) => {
+      setQuery(title);
+    },
+  });
 
   const handleScout = async () => {
     setIsLoading(true);
@@ -137,6 +144,32 @@ export function Opportunities() {
                 </>
               )}
             </Strike>
+          </div>
+        </Placard>
+
+        {/* Job Integration Feature: Extract via URL */}
+        <Placard className="mb-12 p-8 border-concrete-grey/10 bg-asphalt-black/40">
+          <div className="flex flex-col gap-4">
+            <label className="text-xs font-mono text-ink-gold uppercase tracking-[0.3em] flex items-center gap-2">
+              <ExternalLink className="w-3 h-3" /> Intake from URL
+            </label>
+            <input
+              type="url"
+              value={jobInput.jobUrl}
+              onChange={(e) => jobInput.setJobUrl(e.target.value)}
+              onBlur={jobInput.handleUrlBlur}
+              className="w-full bg-bark-light/5 border-b border-concrete-grey/20 font-primary text-xl text-paper-white p-3 focus:border-ink-gold outline-none transition-all placeholder:text-concrete-grey/30"
+              placeholder="Paste job URL here to extract"
+            />
+            {jobInput.isExtracting && (
+              <p className="text-sm font-mono text-concrete-grey animate-pulse">Extracting...</p>
+            )}
+            {jobInput.extractedRole && (
+              <div className="p-4 bg-ink-gold/5 border border-ink-gold/20 flex flex-col gap-2">
+                <span className="text-sm font-bold text-paper-white">{jobInput.extractedRole}</span>
+                <span className="text-xs text-concrete-grey">{jobInput.extractedCompany}</span>
+              </div>
+            )}
           </div>
         </Placard>
 

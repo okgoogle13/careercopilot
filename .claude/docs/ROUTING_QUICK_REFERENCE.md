@@ -6,102 +6,99 @@
 
 ## The 4 Magic Rules
 
-| When User Asks                | DO THIS                          | Savings | Method                                                  |
-| ----------------------------- | -------------------------------- | ------- | ------------------------------------------------------- |
-| **"Review/audit this code"**  | Route to **Gemini**              | 40-55%  | `analyze_code()`                                        |
-| **"What's the config/docs?"** | Route to **Cache**               | 93-99%  | `get_environment()` / `search_docs()`                   |
-| **"Why is flow failing?"**    | Route to **Genkit** + **Gemini** | 75%+    | `get_flow()` + `error_diagnosis()`                      |
-| **"Optimize/refactor this"**  | Route to **Gemini**              | 35-55%  | `refactoring_suggestions()` / `optimization_analysis()` |
+| When User Asks                | DO THIS                        | Savings | Method                                                  |
+| ----------------------------- | ------------------------------ | ------- | ------------------------------------------------------- |
+| **"Read/Analyze these files"** | Route to **Flash Sidekick**    | 95-97%  | `batch_file_analysis()` / `quick_summarize()`           |
+| **"What's the design/token?"** | Route to **Design Specialist** | 85%     | `validate_asset_compliance()`                           |
+| **"Why is the app crashing?"** | Route to **Sentry + Flash**    | 92%     | `analyze_issue_with_seer()` + `analyze_code_quality()`  |
+| **"Optimize/refactor this"**  | Route to **Flash Sidekick**    | 90%     | `suggest_refactoring()` / `consult_pro()`               |
 
 ---
 
 ## Quick Decision Tree
 
-```
+```text
 User asks a question
 │
-├─ Code analysis/review?      → gemini-wrapper (40-55%)
-├─ Error diagnosis?            → gemini-wrapper (50%)
-├─ Optimization advice?        → gemini-wrapper (55%)
-├─ Config lookup?              → configuration (94.9%)
-├─ Documentation lookup?       → documentation (93.3%)
-├─ Flow execution?             → genkit (99.1%)
+├─ Bulk Data / Read Files?     → flash-sidekick (96-97%)
+├─ Code Quality / Tests?       → flash-sidekick (95%)
+├─ Design / Tokens?            → design-system-sidekick (85%)
+├─ Visual Scoring?             → vision-scorer-mcp (90%)
+├─ Sentry Issues?              → sentry (92%)
 ├─ GitHub PR/issue?            → github (80%)
-└─ Unsure?                     → documentation first (93.3%)
+└─ Complex Reasoning?          → flash-sidekick (Gemini Pro) (40-60%)
 ```
 
 ---
 
 ## Server Priority Order
 
-```
-Priority 10: gemini-wrapper      ← Analysis (40-55% savings)
-Priority 9:  orchestrator        ← Fallback (multi-step)
-Priority 8:  documentation       ← Lookups (93.3% savings)
-Priority 7:  configuration       ← Config (94.9% savings)
-Priority 6:  genkit              ← Flows (99.1% savings)
+```text
+Priority 10: flash-sidekick      ← Bulk Analysis (95-97% savings)
+Priority 9:  design-system       ← Visual Truth (85% savings)
+Priority 9:  vision-scorer       ← Visual Scoring (90% savings)
+Priority 8:  sentry              ← Error Analysis (92% savings)
+Priority 8:  github              ← Repository Work (80% savings)
+Priority 7:  playwright          ← UI Verification (Mixed)
 ```
 
 ---
 
 ## Methods You Can Call
 
-### Gemini Wrapper (Analysis)
+### Flash Sidekick (Analysis)
 
-```
-analyze_code(code, language="python")
-refactoring_suggestions(code, language="python")
-error_diagnosis(error_message, context="")
-architecture_analysis(system_description)
-optimization_analysis(performance_data)
-documentation_insights(doc_content, query="")
-explain_text(text)
-```
-
-### Documentation Cache
-
-```
-search_docs(query)
-get_docs(key)
-get_agents()
-get_skills()
+```javascript
+quick_summarize({ text })
+batch_file_analysis({ analysis_type, file_paths })
+analyze_code_quality({ code, language })
+consult_pro({ query, context })
+suggest_refactoring({ code })
+generate_unit_tests({ code, framework })
 ```
 
-### Configuration Cache
+### Design System Specialist
 
-```
-get_environment(env="production")
-list_scripts()
-validate_all()
+```javascript
+validate_asset_compliance({ asset_id, image_path })
+generate_implementation_package({ asset_id, asset_metadata })
 ```
 
-### Genkit Cache
+### Visual Scorer
 
+```javascript
+score_asset_compliance({ asset_id, image_path, target_score })
+extract_visual_tokens({ image_path })
+compare_attempts({ attempt_paths })
 ```
-list_flows()
-get_flow(flow_name)
-execute_flow(flow_name, inputs)
+
+### Sentry Error Analysis (Seer)
+
+```javascript
+analyze_issue_with_seer({ issueUrl, instruction })
+get_issue_details({ issueId, organizationSlug })
+list_events({ dataset, query })
 ```
 
 ### GitHub MCP
 
-```
-read_file(path)
-list_issues()
-get_pull_request(number)
+```javascript
+get_file_contents({ owner, repo, path })
+search_code({ q })
+create_pull_request({ owner, repo, title, body, head, base })
 ```
 
 ---
 
 ## Token Savings Cheat Sheet
 
-| Task Type       | No Routing | With Routing  | Savings |
-| --------------- | ---------- | ------------- | ------- |
-| Code review     | 1,200      | 400 (Gemini)  | **67%** |
-| Config lookup   | 5,000      | 78 (cache)    | **98%** |
-| Error diagnosis | 2,000      | 500 (Gemini)  | **75%** |
-| Flow execution  | 3,000      | 20 (genkit)   | **99%** |
-| Combined task   | 8,000      | 1,200 (mixed) | **85%** |
+| Task Type             | No Routing | With Routing  | Savings |
+| --------------------- | ---------- | ------------- | ------- |
+| Read 10+ files        | 50,000     | 2,000 (Flash) | **96%** |
+| Grep + read matches   | 30,000     | 1,000 (Flash) | **97%** |
+| Code quality audit    | 20,000     | 1,000 (Flash) | **95%** |
+| Design validation     | 15,000     | 2,250 (DS)    | **85%** |
+| Error root cause      | 25,000     | 2,000 (Seer)  | **92%** |
 
 ---
 
@@ -127,56 +124,53 @@ get_pull_request(number)
 
 ## Example Responses
 
-### Code Review
+### Code Quality Audit
 
-> "I'll use Gemini-1.5-Flash to review your code (40-55% cheaper than Claude analysis)."
+> "I'll use `flash-sidekick` to run a batch analysis on these files (95% token savings vs local context reading)."
 
-### Configuration Query
+### Design Compliance
 
-> "I'll check our cached configuration (94.9% savings vs reading raw files)."
+> "I'll validate this UI component with `design-system-sidekick` to check KR Solidarity token compliance (85% savings)."
 
-### Error Diagnosis
+### Error Root Cause
 
-> "I'll check the Genkit flow status, then delegate error analysis to Gemini for diagnosis (75%+ savings)."
-
-### Multi-Step Task
-
-> "I'll look up the documentation (93.3%), then use Gemini to optimize (55%), for 85%+ combined savings."
+> "I'll trigger a Sentry Seer analysis to find the root cause of this production error (92% savings vs manual log parsing)."
 
 ---
 
 ## When in Doubt
 
-1. **Check the Routing Logic Table** in SKILL.md
+1. **Check AGENTS.md** for the authoritative Routing Matrix
 2. **Follow the Decision Tree** (above)
-3. **Default to cache** for lookups
-4. **Default to Gemini** for analysis
+3. **Default to Flash Sidekick** for bulk data
+4. **Default to Design System Specialist** for visual truth
 5. **Ask user** if still unsure
 
 ---
 
 ## Key Files to Reference
 
-| File                                             | Purpose                       | Bookmarks           |
-| ------------------------------------------------ | ----------------------------- | ------------------- |
-| `.claude/skills/mcp-routing-specialist/SKILL.md` | Full routing table & protocol | Routing Logic Table |
-| `.claude/docs/ROUTING_VERIFICATION_TEST.md`      | Real examples                 | Test Cases 1-7      |
-| `.claude/docs/ROUTING_QUICK_REFERENCE.md`        | This file                     | Quick lookup        |
+| File | Purpose |
+| :--- | :--- |
+| `AGENTS.md` | Core project standards and routing matrix |
+| `docs/design/01_CANON.md` | Design system non-negotiables |
+| `.claude/commands/route.md` | Detailed routing decision engine |
+| `.claude/docs/ROUTING_QUICK_REFERENCE.md` | This file |
 
 ---
 
 ## Success Metrics
 
-After deploying MCP routing, you should see:
+After deploying modern MCP routing, you should see:
 
-- ✅ 80%+ token reduction in production workflows
-- ✅ $624+/year cost savings
-- ✅ 4x faster response times for cache hits
-- ✅ 99.1% savings for flow executions
-- ✅ User satisfaction with cost optimization
+- ✅ 90%+ token reduction in production workflows
+- ✅ Zero-Flora compliance verified across all assets
+- ✅ 10x faster response times for file processing
+- ✅ Automated visual scoring for all UI PRs
+- ✅ Radical transparency in token consumption
 
 ---
 
-**Print this card. Bookmark it. Reference it with every user question.**
+**Reference AGENTS.md for the source of truth.**
 
-**Goal: Achieve 80%+ token efficiency across all workflows.**
+**Goal: Achieve 90%+ token efficiency across all workflows.**

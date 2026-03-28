@@ -2,6 +2,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { AnalysisPage } from '../AnalysisPage';
 import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
+import { analysisService } from '@/api/analysisService';
 
 global.fetch = jest.fn();
 
@@ -25,18 +26,6 @@ jest.mock('framer-motion', () => ({
 
 jest.mock('@/components/kerala-rage/LayeredHero', () => ({
   LayeredHero: () => <div data-testid="layered-hero" />,
-}));
-jest.mock('@/components/SkillBreakdownCard', () => ({
-  SkillBreakdownCard: ({ categories, overallScore }: any) => (
-    <div data-testid="skill-breakdown">
-      <div data-testid="overall-score">{overallScore}</div>
-      {categories.map((c: any) => (
-        <div key={c.label}>
-          {c.label}: {c.value}
-        </div>
-      ))}
-    </div>
-  ),
 }));
 jest.mock('@/features/ingestion/components/EvidenceUploader', () => ({
   EvidenceUploader: () => <div data-testid="evidence-uploader" />,
@@ -92,6 +81,22 @@ describe('AnalysisPage', () => {
         json: async () => ({}),
       });
     });
+
+    jest.spyOn(analysisService, 'getATSScore').mockResolvedValue({
+      overallScore: 85,
+      categories: [{ name: 'Formatting', score: 90, status: 'Good', suggestions: [] }],
+      matched_keywords: ['Python'],
+      missing_keywords: ['React'],
+    });
+    jest.spyOn(analysisService, 'getStrategy').mockResolvedValue({
+      corporate_profile: { name: 'Community First' },
+      strategy_summary: 'Refocus the resume on client advocacy outcomes.',
+      optimized_resume: { resume_text: 'Optimized resume text' },
+      job_details: {
+        role_title: 'Support Worker',
+        key_responsibilities: ['Deliver case notes', 'Support community outreach'],
+      },
+    });
   });
 
   it('renders the page header and tactical inputs', () => {
@@ -114,37 +119,47 @@ describe('AnalysisPage', () => {
   });
 
   it('triggers ATS analysis when Calibration Check is clicked', async () => {
-    const mockAtsResult = {
-      overallScore: 85,
-      categories: [{ name: 'Formatting', score: 90, status: 'Good', suggestions: [] }],
-      matched_keywords: ['Python'],
-      missing_keywords: ['React'],
-    };
-
-    (global.fetch as jest.Mock).mockImplementation((url) => {
-      if (url.includes('ats-score')) {
-        return Promise.resolve({
-          ok: true,
-          json: async () => mockAtsResult,
-        });
-      }
-      return Promise.resolve({ ok: true, json: async () => ({}) });
-    });
-
     renderWithRouter(<AnalysisPage />);
 
+    const jobUrlInput = screen.getByPlaceholderText(/https:\/\/example.com\/job-posting/i);
     const resumeTextInput = screen.getByPlaceholderText(/Paste your current resume text here/i);
-    const jdTextInput = screen.getByLabelText(/Job URL/i);
 
     fireEvent.change(resumeTextInput, { target: { value: 'My Resume' } });
-    fireEvent.change(jdTextInput, { target: { value: 'Job Requirements' } });
+    fireEvent.change(jobUrlInput, { target: { value: 'https://seek.com.au/job/123' } });
+
+    fireEvent.click(screen.getByRole('button', { name: /Synthesize Strategy/i }));
+
+    await waitFor(() => {
+      expect(analysisService.getStrategy).toHaveBeenCalled();
+    });
 
     const analyzeBtn = screen.getByRole('button', { name: /Calibration Check/i });
     fireEvent.click(analyzeBtn);
 
     await waitFor(() => {
-      expect(screen.getByText(/85/)).toBeInTheDocument();
-      expect(screen.getByText(/Formatting/i)).toBeInTheDocument();
+      expect(analysisService.getATSScore).toHaveBeenCalled();
+      expect(screen.getByText('85')).toBeInTheDocument();
     });
+  });
+
+  it('mounts salvaged AI output tabs on the canonical analysis page after strategy generation', async () => {
+    renderWithRouter(<AnalysisPage />);
+
+    fireEvent.change(screen.getByPlaceholderText(/https:\/\/example.com\/job-posting/i), {
+      target: { value: 'https://seek.com.au/job/123' },
+    });
+    fireEvent.change(screen.getByPlaceholderText(/Paste your current resume text here/i), {
+      target: { value: 'My resume content' },
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: /Synthesize Strategy/i }));
+
+    await waitFor(() => {
+      expect(analysisService.getStrategy).toHaveBeenCalled();
+      expect(screen.getByText(/Key Selection Criteria/i)).toBeInTheDocument();
+    });
+
+    expect(screen.getByText(/Deliver case notes/i)).toBeInTheDocument();
+    expect(screen.getByText(/Support community outreach/i)).toBeInTheDocument();
   });
 });

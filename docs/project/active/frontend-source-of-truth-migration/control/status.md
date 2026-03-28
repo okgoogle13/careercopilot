@@ -2,20 +2,22 @@
 
 **Program:** PR126 frontend source-of-truth migration
 **Status:** Active
-**Current phase:** Prototype-first AI Studio completion — execute the active prompt sequence from `control/AI-STUDIO-PROMPT-PACK.md`, preserve contract route ownership during the prototype pass, then harvest; `/tracker` and `/profile` env verification remain downstream closeout gates
+**Current phase:** Runtime-truth resync and migration-workspace closeout planning — `frontend-cleanup-manager` owns Batch A route classification and Batch D destination-map/dissolution prep while `/tracker` and `/profile` env verification remain downstream closeout gates
 **Execution truth:** `control/COMET-MANIFEST.md`
 **Retained planning baselines:** `control/archive/route-matrix.{md,json}`, `control/archive/implementation-backlog.md`, `control/archive/workflow.md`
+**Terminal closeout requirement:** this workspace does not remain active indefinitely; after runtime resync and canonical destination mapping, surviving artifacts must move to canonical homes or retained archive/history status.
+**Salvage requirement:** remaining prototype `[HARVEST]` candidates must receive terminal outcomes in `control/PROTOTYPE-SALVAGE-TRACKER.md` before dissolution can be called complete.
 
 ## Current Progress Metrics (Tri-Layer Truth)
 
 | Dimension | Metric | Status |
 | :--- | :--- | :--- |
-| **Runtime Truth** | 26/26 reachable paths (`19` canonical routes + `7` legacy redirects) | ✅ CLEAN |
+| **Runtime Truth** | 31 mounted paths in `App.tsx`; route integrity is green, but PM/control classification is not yet fully resynced | 🟡 RESYNC REQUIRED |
 | **Design Truth** | 12/12 screen pairs aligned | ✅ CLEAN |
 | **Capability Truth** | 10/10 backend modules | ✅ 95% Saturation Target |
 | **PM Governance** | 13/13 build contracts valid | ✅ VALID |
 | **Shell Promotion** | 14/15 canonical protected routes on MigratedRouteLayout | ✅ PROMOTED (1 canonical holdout on ProtectedLayout) |
-| **Total Migration** | ~97% Complete | 🟡 Final Closeout Pending |
+| **Total Migration** | ~94% Complete | 🟡 Final Closeout Pending |
 
 ## Current state
 
@@ -36,10 +38,10 @@
   - `6A — Route retirement`: Prototype `/kr/*` routes retired and registration removed from `App.tsx`.
   - `6B — Screen pairing`: 6 unrouted screens paired with canonical features; orphan report cleared.
   - `Shell Promotion`: 14 canonical routes now use the migrated shell; 7 redirects explicit in router.
-- **Scan Results (2026-03-18)**:
-  - `node --import tsx tools/ci/check-route-integrity.ts` → route integrity clean (26 reachable paths scanned from `App.tsx`).
+- **Scan Results (2026-03-28 refresh)**:
+  - `node --import tsx tools/ci/check-route-integrity.ts` → route integrity clean.
   - `node --import tsx tools/ci/check-screen-pairs.ts` → all 12 screens correctly paired.
-  - `node --import tsx tools/scripts/scan-routes.ts` → 26 reachable paths: public 5 · migrated 20 · protected 1.
+  - `node --import tsx tools/scripts/scan-routes.ts` → 31 live mounted paths now reflected in runtime evidence; PM/control route classification still needs cleanup-manager resync.
 - **Route ownership cleanup (2026-03-17)**:
   - `/analysis` and `/apply/quick` runtime owners moved to `features/`.
   - `frontend/src/routes.tsx` removed; `frontend/src/App.tsx` is authoritative.
@@ -63,6 +65,14 @@
   - active control docs now point at the retained `control/archive/` route-matrix, backlog, and workflow baselines instead of missing root-level files.
   - `AI-STUDIO-PROMPT-PACK.md` and `COMET-MANIFEST.md` now use contract-alignment annotations instead of expressive-token annotations.
   - prompt-pack notes now explicitly preserve canonical ownership for `/documents`, `/ksc-generator`, `/cover-letter-generator`, `/profile`, and `/settings`.
+- **Frontend cleanup remediation frame (2026-03-28)**:
+  - `FRONTEND-CLEANUP-REPORT.md` created as the execution brief for `frontend-cleanup-manager`.
+  - route-matrix gap is now explicit: live runtime mounts exceed current PM/control path accounting.
+  - terminal migration-workspace dissolution is now defined as a named closeout phase with destination-map and runtime-import-proof requirements.
+- **Prototype salvage lane defined (2026-03-28)**:
+  - `PROTOTYPE-SALVAGE-TRACKER.md` created to separate actual salvage execution from audit labels.
+  - the remaining four `[HARVEST]` candidates now have explicit canonical destinations and must end in `PORTED`, `ALREADY_CANONICAL`, or `DISCARDED`.
+  - final migration-workspace dissolution now depends on salvage resolution as well as cleanup reporting.
 - **Identity Gates**:
   - Complete: `/analysis`, `/dashboard`, `/`, `/opportunities`.
   - Pending environment verification: `/tracker`, `/profile`.
@@ -76,7 +86,28 @@
 
 - **Shared clients**: `workflowService`, `analysisService`, `ingestion.service`, and `documentService` now sit behind every production route.
 - **Verification reruns**: `scan-routes.ts`, `scan-screens.ts`, `detect-orphans.ts` stay green.
-- **Next steps**: Complete the selected prototype-wide AI Studio pass, hold the `MIG-202` route lock through later prototype batches, then harvest into canonical runtime code and return to `/tracker` and `/profile` env verification.
+- **Current closeout lane**:
+  - Batch A: classify every live mounted path in `App.tsx` and resync `route-registry.ts`, `routes.json`, `route-matrix.json`, and PM status metrics.
+  - Batch B/C: collapse duplicate owner candidates to a single runtime owner and prove no live runtime dependency on migration-workspace artifacts.
+  - Prototype salvage pass: resolve the remaining `[HARVEST]` candidates recorded in `PROTOTYPE-SALVAGE-TRACKER.md`.
+  - Batch D: publish the canonical destination map and reduce this workspace to retained archive/history only.
+- **Follow-on work after cleanup-manager batches**: return to `/tracker` and `/profile` env verification, then complete final archive/deactivation.
+- **Final archive gate (planned)**:
+  - resync `control/route-matrix.json` and `control/archive/route-matrix.md` to the current `App.tsx` route set
+  - give every remaining prototype harvest candidate a terminal outcome in `control/PROTOTYPE-SALVAGE-TRACKER.md`
+  - produce a canonical destination map for any surviving migration artifacts
+  - prove that no live frontend runtime imports from `docs/project/active/frontend-source-of-truth-migration/**`
+  - move the folder out of Active status once only retained archive/history contents remain
+- **Known route-matrix gaps to classify**:
+  - `/auth`
+  - `/animation-test`
+  - `/prototype/*`
+  - `/dashboard-overview`
+  - `/kanban`
+  - `/ingestion`
+  - `/feed`
+  - `/studio`
+  - `/editor`
 
 ### Known Blockers
 
@@ -88,6 +119,9 @@
 | B4 | `ingestion contract convergence` | `High` | `RESOLVED` | All callers now use `/api/v1/ingest`. |
 | B5 | `/tracker` env verification | `High` | `BLOCKED` | `FIREBASE_PROJECT_ID=careercopilot-468811` and Firestore env missing. |
 | B8 | `/profile` env verification | `High` | `BLOCKED` | Voice-profile GET/POST verification is blocked on the same local Firebase/auth environment readiness. |
+| B9 | `route-matrix/runtime resync` | `High` | `BLOCKED` | Live runtime paths exceed current PM route accounting; `frontend-cleanup-manager` must classify and resync route artifacts before final closeout. |
+| B11 | `prototype salvage pass` | `Medium` | `BLOCKED` | Remaining `[HARVEST]` candidates still need terminal salvage outcomes in `PROTOTYPE-SALVAGE-TRACKER.md` before dissolution is credible. |
+| B10 | `migration workspace dissolution` | `Medium` | `BLOCKED` | Canonical destination map and runtime-import proof are now required before this folder can leave Active status. |
 | B6 | `Footer shell adoption` | `Low` | `RESOLVED` | Canonical `Footer` is adopted by `MigratedRouteLayout`. |
 | B7 | `fetch ⇒ service client cleanup` | `Low` | `RESOLVED` | All production routes use shared API services. |
 
@@ -105,10 +139,12 @@
 
 - Step 3a — `/tracker` CRUD: `COMPLETE_DEFERRED_VERIF` (seeded via REST; logic verified; env blocker documented).
 - Step 3c — `/profile` Voice Capture: `COMPLETE_DEFERRED_VERIF` (route owner and support components are implemented; env-backed verification remains blocked).
-- Prototype pass — Comet/AI Studio: `IN_PROGRESS` (complete the selected `B1-B19` batch pass and prototype alignment before new harvest work).
+- Prototype pass — Comet/AI Studio: `COMPLETE_FOR_REMEDIATION` (prototype harvest prep is complete enough for cleanup/resync closeout planning; no new prototype-first batch is required before Batch A route classification).
 - Phase 4 — Route Gating: `COMPLETE_WITH_WARNING` (governed contracts and gap-fill outputs are current; wireframe validator still reports non-schema warnings).
 - Shell Promotion — B3: `COMPLETE` (14 canonical routes on `MigratedRouteLayout`).
 - Step 6A/B — Retirement/Pairing: `COMPLETE` (Clean route registry, 12 paired screens).
+- Prototype salvage pass: `PLANNED` (tracker created; remaining four harvest candidates now need terminal outcomes).
+- Phase 7 — Runtime Resync + Migration Workspace Dissolution: `IN_PROGRESS` (`frontend-cleanup-manager` execution is now defined; Batch A route classification is the active gate).
 
 ---
-*Status refreshed: 2026-03-24 (build-contract coverage + gap-fill closeout sync)*
+*Status refreshed: 2026-03-28 (cleanup-manager closeout planning sync)*

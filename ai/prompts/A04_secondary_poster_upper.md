@@ -1,11 +1,11 @@
-# A04 — urban_gallery_wall__A04_secondary_poster_upper__780x1220.png
+# A04 — kr-solidarity__resistance__urban--secondary-poster-upper--v1.png
 
         ## Output contract
         - Generate exactly one image.
         - No collage grid.
         - No extra text.
         - Keep Global Style Lock intact.
-        - Save as: `public/hero/generated/urban_gallery_wall__A04_secondary_poster_upper__780x1220.png`
+        - Save as: `public/hero/generated/kr-solidarity__resistance__urban--secondary-poster-upper--v1.png`
 
         ## Asset metadata
         - Asset ID: A04

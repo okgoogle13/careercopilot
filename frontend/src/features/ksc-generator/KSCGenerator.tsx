@@ -18,9 +18,11 @@ import { genkitApi } from '@/services/genkit';
 import { exportToPdf } from '@/utils/exportEngine';
 import { KrDarkSpring, staggerContainer } from '@/design/tokens/motion-presets';
 import { useAnalytics } from '@/hooks/useAnalytics';
+import { useDocumentExport } from '@/features/documents/hooks/useDocumentExport';
 
 export function KSCGenerator() {
   const { track } = useAnalytics();
+  const { exportDocx } = useDocumentExport();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
@@ -144,6 +146,22 @@ export function KSCGenerator() {
     } catch (error) {
       console.error('Failed to download PDF:', error);
       toast.error('Failed to download PDF. Please try again.');
+    }
+  };
+
+  const handleDownloadDocx = async () => {
+    try {
+      await exportDocx({
+        type: 'ksc',
+        fileName: 'KSC_Response.docx',
+        criterion: criteria,
+        content: response,
+      });
+      track('document_exported', { type: 'ksc', method: 'docx' });
+      toast.success('KSC Response downloaded as DOCX!');
+    } catch (error) {
+      console.error('Failed to download DOCX:', error);
+      toast.error('Failed to download DOCX. Please try again.');
     }
   };
 
@@ -422,6 +440,13 @@ export function KSCGenerator() {
                   className="border-tertiary text-tertiary hover:bg-tertiary hover:text-on-tertiary rounded-strike px-8 h-12 flex items-center gap-2 font-bold font-body"
                 >
                   <Download className="w-4 h-4" /> Download PDF
+                </Button>
+                <Button
+                  onClick={handleDownloadDocx}
+                  variant="outlined"
+                  className="border-primary text-primary hover:bg-primary hover:text-on-primary rounded-strike px-8 h-12 flex items-center gap-2 font-bold font-body"
+                >
+                  <Download className="w-4 h-4" /> Download DOCX
                 </Button>
                 <Button
                   onClick={() => {
