@@ -30,7 +30,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { toast } from 'sonner';
-import { MetricCard } from '../../components/shared/MetricCard';
+import { SolidarityMetric } from '../../components/kerala-rage/SolidarityMetric';
 import { KeywordTag } from '../../components/shared/KeywordTag';
 import { PageHeader } from '../../components/shared/PageHeader';
 import { ChartPane } from '../../components/shared/ChartPane';
@@ -365,33 +365,49 @@ export function Analysis() {
 
         {/* 4-Quadrant Metric Cards with Hero Highlighting */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <MetricCard
+          <SolidarityMetric
             icon={Award}
             label="Hard Skills Match"
             value={`${scores.hardSkills}%`}
-            iconColor={heroQuadrant.name === 'Hard Skills' ? 'text-[#D0BCFF]' : 'text-primary'}
-            variant={heroQuadrant.name === 'Hard Skills' ? 'filled' : 'outlined'}
+            iconColor={heroQuadrant.name === 'Hard Skills' ? 'text-primary-base' : undefined}
+            elevation={heroQuadrant.name === 'Hard Skills' ? 'floating' : 'raised'}
+            className={
+              heroQuadrant.name === 'Hard Skills'
+                ? 'ring-2 ring-primary-base border-primary-base'
+                : ''
+            }
           />
-          <MetricCard
+          <SolidarityMetric
             icon={TrendingUp}
             label="Soft Skills & Verbs"
             value={`${scores.softSkills}%`}
-            iconColor={heroQuadrant.name === 'Soft Skills' ? 'text-[#D0BCFF]' : 'text-secondary'}
-            variant={heroQuadrant.name === 'Soft Skills' ? 'filled' : 'outlined'}
+            iconColor={heroQuadrant.name === 'Soft Skills' ? 'text-primary-base' : undefined}
+            elevation={heroQuadrant.name === 'Soft Skills' ? 'floating' : 'raised'}
+            className={
+              heroQuadrant.name === 'Soft Skills'
+                ? 'ring-2 ring-primary-base border-primary-base'
+                : ''
+            }
           />
-          <MetricCard
+          <SolidarityMetric
             icon={Target}
             label="Quantifiable Impact"
             value={`${scores.impact}%`}
-            iconColor={heroQuadrant.name === 'Impact' ? 'text-[#D0BCFF]' : 'text-tertiary'}
-            variant={heroQuadrant.name === 'Impact' ? 'filled' : 'outlined'}
+            iconColor={heroQuadrant.name === 'Impact' ? 'text-primary-base' : undefined}
+            elevation={heroQuadrant.name === 'Impact' ? 'floating' : 'raised'}
+            className={
+              heroQuadrant.name === 'Impact' ? 'ring-2 ring-primary-base border-primary-base' : ''
+            }
           />
-          <MetricCard
+          <SolidarityMetric
             icon={Award}
             label="ATS Readability"
             value={`${scores.atsReadability}%`}
-            iconColor={heroQuadrant.name === 'ATS' ? 'text-[#D0BCFF]' : 'text-error'}
-            variant={heroQuadrant.name === 'ATS' ? 'filled' : 'outlined'}
+            iconColor={heroQuadrant.name === 'ATS' ? 'text-primary-base' : undefined}
+            elevation={heroQuadrant.name === 'ATS' ? 'floating' : 'raised'}
+            className={
+              heroQuadrant.name === 'ATS' ? 'ring-2 ring-primary-base border-primary-base' : ''
+            }
           />
         </div>
 

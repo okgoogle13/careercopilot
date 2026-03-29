@@ -91,9 +91,13 @@ cd backend && pytest
 
 ## Task Delegation
 
-- Heavy tasks (>15K tokens): delegate via `task-router` MCP
-- File analysis (>300 lines): use `flash-sidekick.quick_summarize`
-- Route smoke tests: use Playwright MCP headlessly
+- **Heavy tasks (>15K tokens)**: delegate via `task-router` MCP.
+- **File analysis (>300 lines)**: use `flash-sidekick.quick_summarize` or `flash-sidekick.generate_idf`.
+- **Bulk analysis**: use `flash-sidekick.batch_file_analysis` for multiple files.
+- **Deep reasoning**: use `flash-sidekick.consult_pro` for complex logic or architecture analysis.
+- **Visual compliance**: use `design-system-sidekick.validate_asset_compliance` for assets/UI.
+- **Design scaffolding**: use `design-system-sidekick.generate_implementation_package` for KR-validated assets.
+- **Route smoke tests**: use Playwright MCP headlessly.
 
 ---
 

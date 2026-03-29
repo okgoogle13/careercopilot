@@ -1,5 +1,6 @@
 import { Check, ChevronDown } from 'lucide-react';
 import React, { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export interface MarchOption {
   value: string;
@@ -203,16 +204,9 @@ export function March({
 
   // Shape morphs: block01 (closed) → marchOpen01 (open) — March archetype interaction morph
   const buttonStyle: React.CSSProperties = {
-    borderRadius: isOpen ? 'var(--sys-shape-marchSurge01)' : 'var(--sys-shape-blockRiot01)',
     backgroundColor: 'var(--sys-color-charcoalBackground-steps-3)',
     border: '2px solid',
-    borderColor: error
-      ? 'var(--sys-color-solidarityRed-base)'
-      : isOpen
-        ? 'var(--sys-color-inkGold-base)'
-        : 'var(--sys-color-worker-ash-base)',
     color: 'var(--sys-color-worker-ash-base)',
-    transition: 'all 800ms cubic-bezier(0.34, 1.56, 0.64, 1)',
   };
 
   return (
@@ -234,10 +228,24 @@ export function March({
         </label>
       )}
 
-      <button
+      <motion.button
         type="button"
         id={selectId}
         style={buttonStyle}
+        animate={{
+          borderRadius: isOpen ? 'var(--sys-shape-marchSurge01)' : 'var(--sys-shape-blockRiot01)',
+          borderColor: error
+            ? 'var(--sys-color-solidarityRed-base)'
+            : isOpen
+              ? 'var(--sys-color-inkGold-base)'
+              : 'var(--sys-color-worker-ash-base)',
+        }}
+        transition={{
+          type: 'spring',
+          stiffness: 300,
+          damping: 25,
+          mass: 1.2,
+        }}
         data-archetype="march"
         className={`
           ${fullWidth ? 'w-full' : 'w-auto min-w-[200px]'}
@@ -283,7 +291,7 @@ export function March({
             ${isOpen ? 'rotate-180' : 'rotate-0'}
           `}
         />
-      </button>
+      </motion.button>
 
       {isOpen && (
         <div

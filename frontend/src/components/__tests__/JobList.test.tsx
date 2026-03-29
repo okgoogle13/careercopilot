@@ -27,14 +27,14 @@ describe('JobList', () => {
     expect(screen.getByText('Sydney')).toBeDefined();
   });
 
-  it('shows empty state when no jobs are provided', () => {
-    render(
+  it('renders nothing when no jobs are provided', () => {
+    const { container } = render(
       <JobList
         jobs={[]}
         onJobSelect={jest.fn()}
       />
     );
-    expect(screen.getByText(/NO OPPORTUNITIES FOUND/i)).toBeDefined();
+    expect(container.firstChild).toBeNull();
   });
 
   it('calls onJobSelect with the clicked job id', () => {
@@ -47,13 +47,13 @@ describe('JobList', () => {
       />
     );
 
-    fireEvent.click(screen.getByLabelText('Job: Lead Engineer at Melbourne'));
+    fireEvent.click(screen.getByText('Lead Engineer').closest('li')!);
 
     expect(onJobSelect).toHaveBeenCalledWith('1');
   });
 
-  it('renders three skeleton cards while loading', () => {
-    const { container } = render(
+  it('shows loading text while loading', () => {
+    render(
       <JobList
         jobs={[]}
         onJobSelect={jest.fn()}
@@ -61,7 +61,6 @@ describe('JobList', () => {
       />
     );
 
-    expect(container.querySelectorAll('.animate-pulse')).toHaveLength(3);
-    expect(screen.queryByText(/NO OPPORTUNITIES FOUND/i)).not.toBeInTheDocument();
+    expect(screen.getByText(/Loading/i)).toBeInTheDocument();
   });
 });

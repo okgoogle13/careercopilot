@@ -6,6 +6,12 @@ const mockUseAuth = jest.fn();
   useAuth: mockUseAuth,
 }));
 
+// Mock fileValidation to bypass JSDOM File.size=0 limitation
+(jest as any).unstable_mockModule('@/utils/fileValidation', () => ({
+  validateFiles: jest.fn(() => ({ valid: true })),
+  validateFile: jest.fn(() => ({ valid: true })),
+}));
+
 const mockSession = { access_token: 'test-token', user: { email: 'test@example.com' } };
 
 import { renderHook, act } from '@testing-library/react';

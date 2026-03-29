@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
 // @ts-ignore - Importing JS in TS
-import m3Patch from './tailwind-m3-patch.ts';
+import solidarityTokens from './src/design/tokens/solidarity-tokens.ts';
 
 const config: Config = {
   darkMode: 'class',
@@ -13,6 +13,52 @@ const config: Config = {
     './.storybook/**/*.{ts,tsx}',
   ],
   theme: {
+    colors: {
+      ...(solidarityTokens?.theme?.extend?.colors || {}),
+      // Lab Wren Metal Blue - Ripples & accents
+      'lab-wren-metal-blue': 'var(--sys-color-labWrenMetalBlue-base)',
+
+      // Semantic Mappings (Kerala Rage KrSolidarity)
+      border: 'var(--color-concrete-grey)',
+      input: 'var(--color-concrete-grey)',
+      ring: 'var(--color-ink-gold)',
+      background: 'var(--color-asphalt-black)',
+      foreground: 'var(--color-paper-white)',
+
+      primary: {
+        DEFAULT: 'var(--color-ink-gold)',
+        foreground: 'var(--color-asphalt-black)',
+        container: 'var(--sys-color-inkGold-container)',
+      },
+      secondary: {
+        DEFAULT: 'var(--color-concrete-grey)',
+        foreground: 'var(--color-asphalt-black)',
+      },
+      destructive: {
+        DEFAULT: 'var(--color-solidarity-red)',
+        foreground: 'var(--color-paper-white)',
+      },
+      muted: {
+        DEFAULT: 'var(--color-concrete-grey-dark)',
+        foreground: 'var(--color-concrete-grey-lightest)',
+      },
+      accent: {
+        DEFAULT: 'var(--color-solidarity-red)',
+        foreground: 'var(--color-paper-white)',
+      },
+      popover: {
+        DEFAULT: 'var(--color-asphalt-black-light)',
+        foreground: 'var(--color-paper-white)',
+      },
+      card: {
+        DEFAULT: 'var(--color-asphalt-black)',
+        foreground: 'var(--color-paper-white)',
+      },
+      transparent: 'transparent',
+      current: 'currentColor',
+      white: '#ffffff',
+      black: '#000000',
+    },
     container: {
       center: true,
       padding: '2rem',
@@ -21,48 +67,6 @@ const config: Config = {
       },
     },
     extend: {
-      colors: {
-        ...(m3Patch?.theme?.extend?.colors || {}),
-        // Lab Wren Metal Blue - Ripples & accents
-        'lab-wren-metal-blue': 'var(--sys-color-labWrenMetalBlue-base)',
-
-        // Semantic Mappings (Kerala Rage KrSolidarity)
-        border: 'var(--color-concrete-grey)',
-        input: 'var(--color-concrete-grey)',
-        ring: 'var(--color-ink-gold)',
-        background: 'var(--color-asphalt-black)',
-        foreground: 'var(--color-paper-white)',
-
-        primary: {
-          DEFAULT: 'var(--color-ink-gold)',
-          foreground: 'var(--color-asphalt-black)',
-          container: 'var(--sys-color-inkGold-container)',
-        },
-        secondary: {
-          DEFAULT: 'var(--color-concrete-grey)',
-          foreground: 'var(--color-asphalt-black)',
-        },
-        destructive: {
-          DEFAULT: 'var(--color-solidarity-red)',
-          foreground: 'var(--color-paper-white)',
-        },
-        muted: {
-          DEFAULT: 'var(--color-concrete-grey-dark)',
-          foreground: 'var(--color-concrete-grey-lightest)',
-        },
-        accent: {
-          DEFAULT: 'var(--color-solidarity-red)',
-          foreground: 'var(--color-paper-white)',
-        },
-        popover: {
-          DEFAULT: 'var(--color-asphalt-black-light)',
-          foreground: 'var(--color-paper-white)',
-        },
-        card: {
-          DEFAULT: 'var(--color-asphalt-black)',
-          foreground: 'var(--color-paper-white)',
-        },
-      },
       fontSize: {
         'display-hero': [
           '120px',
@@ -84,7 +88,7 @@ const config: Config = {
         'label-sm': ['11px', { lineHeight: '1.5', fontWeight: '500', letterSpacing: '0.5px' }],
       },
       fontFamily: {
-        ...(m3Patch?.theme?.extend?.fontFamily || {}),
+        ...(solidarityTokens?.theme?.extend?.fontFamily || {}),
         proclamation: ['"kr-serif-bold"', '"Playfair Display"', ...defaultTheme.fontFamily.serif],
         bloom: ['"Fraunces"', ...defaultTheme.fontFamily.serif],
         'field-note': ['"Work Sans"', ...defaultTheme.fontFamily.sans],

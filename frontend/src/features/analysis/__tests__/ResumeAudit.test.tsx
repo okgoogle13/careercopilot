@@ -1,5 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 import { ResumeAuditEntryPoint } from '../components/ResumeAuditEntryPoint';
 import { ResumeAuditResultsPanel } from '../components/ResumeAuditResultsPanel';
 
@@ -12,6 +13,11 @@ jest.mock('sonner', () => ({
   },
 }));
 
+// Mock resume audit service
+jest.mock('@/services/resumeAuditService', () => ({
+  getAuditHistory: jest.fn().mockResolvedValue({ data: [] }),
+}));
+
 describe('ResumeAuditEntryPoint', () => {
   const mockResume = 'I am a software engineer with 5 years of experience.';
   const mockJobDescription = 'Looking for senior engineer with React and Node.js experience';
@@ -21,37 +27,55 @@ describe('ResumeAuditEntryPoint', () => {
   });
 
   it('renders entry point with shield icon and header', () => {
-    render(<ResumeAuditEntryPoint resumeText={mockResume} />);
+    render(
+      <MemoryRouter>
+        <ResumeAuditEntryPoint resumeText={mockResume} />
+      </MemoryRouter>
+    );
     expect(screen.getByText('Resume Audit Evaluation')).toBeInTheDocument();
     expect(screen.getByText('Evaluation Strictness')).toBeInTheDocument();
   });
 
   it('disables audit button when resume text is empty', () => {
-    render(<ResumeAuditEntryPoint resumeText="" />);
+    render(
+      <MemoryRouter>
+        <ResumeAuditEntryPoint resumeText="" />
+      </MemoryRouter>
+    );
     const button = screen.getByRole('button', { name: /start rkl evaluation/i });
     expect(button).toBeDisabled();
   });
 
   it('disables audit button when disabled prop is true', () => {
     render(
-      <ResumeAuditEntryPoint
-        resumeText={mockResume}
-        disabled={true}
-      />
+      <MemoryRouter>
+        <ResumeAuditEntryPoint
+          resumeText={mockResume}
+          disabled={true}
+        />
+      </MemoryRouter>
     );
     const button = screen.getByRole('button', { name: /start rkl evaluation/i });
     expect(button).toBeDisabled();
   });
 
   it('renders strictness mode selector with three options', () => {
-    render(<ResumeAuditEntryPoint resumeText={mockResume} />);
+    render(
+      <MemoryRouter>
+        <ResumeAuditEntryPoint resumeText={mockResume} />
+      </MemoryRouter>
+    );
     expect(screen.getByRole('button', { name: /lenient/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /moderate/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /strict/i })).toBeInTheDocument();
   });
 
   it('allows changing strictness mode', async () => {
-    render(<ResumeAuditEntryPoint resumeText={mockResume} />);
+    render(
+      <MemoryRouter>
+        <ResumeAuditEntryPoint resumeText={mockResume} />
+      </MemoryRouter>
+    );
     const strictButton = screen.getByRole('button', { name: /strict/i });
     await userEvent.click(strictButton);
     // Button should have different styling when selected (we can't test CSS directly, but button should be clickable)
@@ -75,11 +99,13 @@ describe('ResumeAuditEntryPoint', () => {
 
     const onComplete = jest.fn();
     render(
-      <ResumeAuditEntryPoint
-        resumeText={mockResume}
-        jobDescription={mockJobDescription}
-        onAuditComplete={onComplete}
-      />
+      <MemoryRouter>
+        <ResumeAuditEntryPoint
+          resumeText={mockResume}
+          jobDescription={mockJobDescription}
+          onAuditComplete={onComplete}
+        />
+      </MemoryRouter>
     );
 
     const button = screen.getByRole('button', { name: /start rkl evaluation/i });
@@ -114,7 +140,11 @@ describe('ResumeAuditEntryPoint', () => {
       statusText: 'Internal Server Error',
     });
 
-    render(<ResumeAuditEntryPoint resumeText={mockResume} />);
+    render(
+      <MemoryRouter>
+        <ResumeAuditEntryPoint resumeText={mockResume} />
+      </MemoryRouter>
+    );
     const button = screen.getByRole('button', { name: /start rkl evaluation/i });
     await userEvent.click(button);
 
@@ -143,7 +173,11 @@ describe('ResumeAuditEntryPoint', () => {
       });
     });
 
-    render(<ResumeAuditEntryPoint resumeText={mockResume} />);
+    render(
+      <MemoryRouter>
+        <ResumeAuditEntryPoint resumeText={mockResume} />
+      </MemoryRouter>
+    );
     const button = screen.getByRole('button', { name: /start rkl evaluation/i });
     await userEvent.click(button);
 
@@ -181,14 +215,22 @@ describe('ResumeAuditResultsPanel', () => {
   };
 
   it('renders results panel with overall score', () => {
-    render(<ResumeAuditResultsPanel data={mockAuditData} />);
+    render(
+      <MemoryRouter>
+        <ResumeAuditResultsPanel data={mockAuditData} />
+      </MemoryRouter>
+    );
     expect(screen.getByText('Resume Audit Results')).toBeInTheDocument();
     expect(screen.getByText('85%')).toBeInTheDocument();
     expect(screen.getByText('Overall Score')).toBeInTheDocument();
   });
 
   it('displays summary stats correctly', () => {
-    render(<ResumeAuditResultsPanel data={mockAuditData} />);
+    render(
+      <MemoryRouter>
+        <ResumeAuditResultsPanel data={mockAuditData} />
+      </MemoryRouter>
+    );
     // 1 error, 1 warning
     expect(screen.getByText('Errors')).toBeInTheDocument();
     expect(screen.getByText('Warnings')).toBeInTheDocument();
@@ -196,13 +238,21 @@ describe('ResumeAuditResultsPanel', () => {
   });
 
   it('displays recruiter scan simulation', () => {
-    render(<ResumeAuditResultsPanel data={mockAuditData} />);
+    render(
+      <MemoryRouter>
+        <ResumeAuditResultsPanel data={mockAuditData} />
+      </MemoryRouter>
+    );
     expect(screen.getByText('10-Second Recruiter Scan')).toBeInTheDocument();
     expect(screen.getByText(/This resume has strong technical foundations/)).toBeInTheDocument();
   });
 
   it('renders all violations with severity icons', () => {
-    render(<ResumeAuditResultsPanel data={mockAuditData} />);
+    render(
+      <MemoryRouter>
+        <ResumeAuditResultsPanel data={mockAuditData} />
+      </MemoryRouter>
+    );
     expect(screen.getByText('Issues Detected')).toBeInTheDocument();
     expect(screen.getByText('L1.002')).toBeInTheDocument();
     expect(screen.getByText('L2.001')).toBeInTheDocument();
@@ -211,7 +261,11 @@ describe('ResumeAuditResultsPanel', () => {
   });
 
   it('displays recommendations with bullet points', () => {
-    render(<ResumeAuditResultsPanel data={mockAuditData} />);
+    render(
+      <MemoryRouter>
+        <ResumeAuditResultsPanel data={mockAuditData} />
+      </MemoryRouter>
+    );
     expect(screen.getByText('Recommendations')).toBeInTheDocument();
     expect(screen.getByText(/Add specific numbers to sales achievements/)).toBeInTheDocument();
     expect(screen.getByText(/Include relevant certifications/)).toBeInTheDocument();
@@ -221,10 +275,12 @@ describe('ResumeAuditResultsPanel', () => {
   it('calls onDismiss when close button clicked', async () => {
     const onDismiss = jest.fn();
     render(
-      <ResumeAuditResultsPanel
-        data={mockAuditData}
-        onDismiss={onDismiss}
-      />
+      <MemoryRouter>
+        <ResumeAuditResultsPanel
+          data={mockAuditData}
+          onDismiss={onDismiss}
+        />
+      </MemoryRouter>
     );
     const closeButton = screen.getByRole('button', { name: /close/i });
     await userEvent.click(closeButton);
@@ -232,7 +288,11 @@ describe('ResumeAuditResultsPanel', () => {
   });
 
   it('renders optimize resume action link', () => {
-    render(<ResumeAuditResultsPanel data={mockAuditData} />);
+    render(
+      <MemoryRouter>
+        <ResumeAuditResultsPanel data={mockAuditData} />
+      </MemoryRouter>
+    );
     const optimizeLink = screen.getByRole('link', { name: /optimize resume/i });
     expect(optimizeLink).toBeInTheDocument();
   });
@@ -242,7 +302,11 @@ describe('ResumeAuditResultsPanel', () => {
       ...mockAuditData,
       violations: [],
     };
-    render(<ResumeAuditResultsPanel data={dataWithoutViolations} />);
+    render(
+      <MemoryRouter>
+        <ResumeAuditResultsPanel data={dataWithoutViolations} />
+      </MemoryRouter>
+    );
     // Issues Detected section should not be prominent
     expect(screen.queryByText('Issues Detected')).not.toBeInTheDocument();
   });
@@ -252,7 +316,11 @@ describe('ResumeAuditResultsPanel', () => {
       ...mockAuditData,
       recommendations: [],
     };
-    render(<ResumeAuditResultsPanel data={dataWithoutRecommendations} />);
+    render(
+      <MemoryRouter>
+        <ResumeAuditResultsPanel data={dataWithoutRecommendations} />
+      </MemoryRouter>
+    );
     // Recommendations section header shouldn't appear
     const recommendationsHeading = screen.queryByText('Recommendations');
     if (recommendationsHeading) {
@@ -262,7 +330,11 @@ describe('ResumeAuditResultsPanel', () => {
   });
 
   it('displays violation locations when provided', () => {
-    render(<ResumeAuditResultsPanel data={mockAuditData} />);
+    render(
+      <MemoryRouter>
+        <ResumeAuditResultsPanel data={mockAuditData} />
+      </MemoryRouter>
+    );
     expect(screen.getByText(/Location: Experience section/)).toBeInTheDocument();
     expect(screen.getByText(/Location: Certifications section/)).toBeInTheDocument();
   });
@@ -272,7 +344,11 @@ describe('ResumeAuditResultsPanel', () => {
       ...mockAuditData,
       overallScore: 45.6,
     };
-    render(<ResumeAuditResultsPanel data={lowScoreData} />);
+    render(
+      <MemoryRouter>
+        <ResumeAuditResultsPanel data={lowScoreData} />
+      </MemoryRouter>
+    );
     expect(screen.getByText('46%')).toBeInTheDocument();
   });
 });

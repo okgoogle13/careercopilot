@@ -13,9 +13,9 @@ interface UnifiedColumnProps {
 }
 
 /**
- * UnifiedColumn (Stone)
+ * UnifiedColumn (Scaffold Archetype)
  *
- * A specialized "Stone" container for vertical content organization.
+ * A specialized "Scaffold" container for vertical content organization.
  * Used in Kanban boards, dashboards, and feeds.
  *
  * Pattern Principles:
@@ -56,8 +56,11 @@ export const UnifiedColumn: React.FC<UnifiedColumnProps> = ({
 
   return (
     <div
+      style={{
+        borderRadius: 'var(--sys-shape-megaphoneCut01)',
+      }}
       className={cn(
-        'flex flex-col h-full min-w-[320px] max-w-[400px] bg-asphalt-black/50 rounded-megaphone border border-white/5 shadow-viscous',
+        'flex flex-col h-full min-w-[320px] max-w-[400px] bg-asphalt-black/50 border border-white/5 shadow-viscous',
         tone === 'success' && 'border-solidarity-green/20',
         className
       )}
@@ -69,7 +72,13 @@ export const UnifiedColumn: React.FC<UnifiedColumnProps> = ({
             {title}
           </h3>
           {count !== undefined && (
-            <span className="px-2 py-0.5 text-xs font-direct-action bg-white/10 rounded-pebble text-paper-white/60">
+            <span
+              style={{
+                fontFamily: 'var(--sys-type-fontFamilies-primary)',
+                borderRadius: 'var(--sys-shape-scaffoldFrame01)',
+              }}
+              className="px-2 py-0.5 text-xs bg-white/10 text-paper-white/60"
+            >
               {count}
             </span>
           )}

@@ -44,10 +44,11 @@ export const LoginCard: React.FC<LoginCardProps> = ({ onLogin, onRegisterClick, 
             className="block text-xs font-mono uppercase tracking-widest mb-1"
             style={{ color: 'var(--sys-color-concreteGrey-base)' }}
           >
-            Email
+            Email Address
           </label>
           <input
             type="email"
+            data-testid="email-input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -68,6 +69,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({ onLogin, onRegisterClick, 
           </label>
           <input
             type="password"
+            data-testid="password-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -88,7 +90,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({ onLogin, onRegisterClick, 
             color: 'var(--sys-color-worker-ash-base)',
           }}
         >
-          {isLoading ? 'Signing in…' : 'Sign In'}
+          {isLoading ? 'VERIFYING' : 'ENTER ARCHIVE'}
         </button>
       </form>
 
@@ -104,7 +106,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({ onLogin, onRegisterClick, 
             className="underline"
             style={{ color: 'var(--sys-color-inkGold-base)' }}
           >
-            Register
+            Create Collective ID
           </button>
         </p>
       )}

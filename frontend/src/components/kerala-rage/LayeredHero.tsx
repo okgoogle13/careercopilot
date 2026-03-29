@@ -30,7 +30,7 @@ const BLEED_COLOR_MAP: Record<string, string> = {
   'grounded-grit': 'var(--sys-color-solidaritySmokeOrange-steps-3)',
   'industrial-decay': 'var(--sys-color-solidarityRed-steps-4)',
   'heritage-urban': 'var(--sys-color-stencilYellow-steps-3)',
-  'futuristic-contemplative': 'var(--sys-color-labWrenMetalBlue-steps-3)',
+  'futuristic-contemplative': 'var(--sys-color-protestMetalBlue-steps-3)',
 };
 
 export const LayeredHero: React.FC<LayeredHeroProps> = ({
@@ -165,6 +165,10 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
           placementStyle.transform = `translateY(${parallaxOffset}px)`;
         }
 
+        // Apply 2.5D Tectonic Shape strategy (v6.1)
+        const tectonicShape =
+          index % 2 === 0 ? 'var(--sys-shape-waveTectonic01)' : 'var(--sys-shape-waveTectonic02)';
+
         return (
           <div
             key={`layer-${index}`}
@@ -174,6 +178,8 @@ export const LayeredHero: React.FC<LayeredHeroProps> = ({
               opacity: layer.opacity,
               mixBlendMode: layer.blendMode as any,
               transition: isKineticTarget ? 'transform 80ms linear' : 'transform 100ms linear',
+              borderRadius: layer.type !== 'substrate' ? tectonicShape : '0px',
+              overflow: 'hidden',
               ...placementStyle,
             }}
           >

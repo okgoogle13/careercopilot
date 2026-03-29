@@ -285,11 +285,14 @@ If a task is both large and visual (e.g., "audit multiple UI screens and check t
 
 For tasks involving bulk data, prefer `flash-sidekick` when available:
 
-| Operation           | Direct Agent Cost | Delegated (Flash) Cost | Savings |
-| ------------------- | ----------------- | ---------------------- | ------- |
-| Read 10 files       | ~50K tokens          | ~2K tokens             | 96%     |
-| Grep + read matches | ~30K tokens          | ~1K tokens             | 97%     |
-| Generate tests      | ~20K tokens          | ~1K tokens             | 95%     |
+| Operation               | Tool                                 | Direct Agent Cost | Delegated Cost | Savings |
+| ----------------------- | ------------------------------------ | ----------------- | -------------- | ------- |
+| File analysis (>300 L)  | `quick_summarize`                    | ~10K tokens       | ~500 tokens    | 95%     |
+| Code extraction         | `generate_idf`                       | ~15K tokens       | ~1K tokens     | 93%     |
+| Read 10 files           | `batch_file_analysis`                | ~50K tokens       | ~2K tokens     | 96%     |
+| Grep + read matches     | `batch_file_analysis`                | ~30K tokens       | ~1K tokens     | 97%     |
+| Complex Logic/Arch Audit| `consult_pro`                        | ~20K tokens       | ~2K tokens     | 90%     |
+| Generate tests          | `generate_unit_tests`                | ~20K tokens       | ~1K tokens     | 95%     |
 
 ### Delegation Rules
 
@@ -309,10 +312,11 @@ elif task == "git_history":
 
 Use **design-system-sidekick** whenever a task requires **visual validation**, **token extraction**, or **kerala-rage kr-solidarity compliance**. This includes:
 
-- Validating newly generated assets (e.g., wallpaper, motifs, kr-motifs).
-- Checking a UI screenshot for palette, density, or typographic compliance.
-- Extracting or comparing design tokens from visuals.
-- Suggesting prompt refinements for asset regeneration.
+- **Visual Audit**: `validate_asset_compliance(asset_id, image_path)` for newly generated assets (e.g., wallpaper, motifs, kr-motifs).
+- **Compliance Check**: Checking a UI screenshot for palette, density, or typographic compliance.
+- **Implementation**: `generate_implementation_package(asset_id)` for KR-validated assets.
+- **Token Extraction**: Extracting or comparing design tokens from visuals.
+- **Refinement**: Suggesting prompt refinements for asset regeneration.
 
 If the task involves **code-only styling changes** (e.g., Tailwind classes, token mapping in CSS/TS), use flash-sidekick for bulk reads and analysis, then apply changes locally.
 

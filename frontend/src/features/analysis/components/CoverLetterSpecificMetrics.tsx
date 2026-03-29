@@ -4,7 +4,7 @@
  */
 import { CheckCircle, BookOpen, User, MessageSquare } from 'lucide-react';
 import { CoverLetterScoreResult } from '../../../types/career';
-import { MetricCard } from '../../../components/shared/MetricCard';
+import { SolidarityMetric } from '../../../components/kerala-rage/SolidarityMetric';
 
 interface CoverLetterSpecificMetricsProps {
   score: CoverLetterScoreResult;
@@ -32,7 +32,7 @@ export function CoverLetterSpecificMetrics({ score, wordCount }: CoverLetterSpec
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <MetricCard
+        <SolidarityMetric
           icon={CheckCircle}
           label="Keyword Placement"
           value={score.keywordPlacement}
@@ -40,7 +40,7 @@ export function CoverLetterSpecificMetrics({ score, wordCount }: CoverLetterSpec
           annotation="Opening impact"
         />
 
-        <MetricCard
+        <SolidarityMetric
           icon={BookOpen}
           label="Narrative Quality"
           value={score.narrativeQuality}
@@ -48,7 +48,7 @@ export function CoverLetterSpecificMetrics({ score, wordCount }: CoverLetterSpec
           annotation="STAR alignment"
         />
 
-        <MetricCard
+        <SolidarityMetric
           icon={User}
           label="Personalization"
           value={score.personalizationScore}
@@ -56,7 +56,7 @@ export function CoverLetterSpecificMetrics({ score, wordCount }: CoverLetterSpec
           annotation="Research depth"
         />
 
-        <MetricCard
+        <SolidarityMetric
           icon={MessageSquare}
           label="Professional Tone"
           value={score.toneProfessionalism}

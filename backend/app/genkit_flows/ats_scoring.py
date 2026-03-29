@@ -281,6 +281,7 @@ class KeywordMatches(BaseModel):
 
 class AtsResult(BaseModel):
     overallScore: float
+    summary: str = Field(description="A brief summary of the overall match.")
     breakdown: ScoreBreakdown
     categories: list[CategoryAnalysis]
     keywordMatches: KeywordMatches
@@ -542,6 +543,7 @@ async def atsScoring(
     # Construct the final output
     return AtsResult(
         overallScore=round(overall_score, 2),
+        summary=semantic_analysis.explanation,
         breakdown=ScoreBreakdown(
             keywordDensityScore=round(keyword_analysis["score"], 2),
             jobTitleScore=round(job_title_score, 2),

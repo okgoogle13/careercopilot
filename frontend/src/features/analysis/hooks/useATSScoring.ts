@@ -11,6 +11,11 @@ export function useATSScoring(
 ) {
   const [score, setScore] = useState<ATSScoreResult | CoverLetterScoreResult | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
+  /**
+   * Orchestrator Decision: KR Solidarity v6.1 Authority Model
+   * 1. Backend (/api/v1/ats-score) is the Source of Truth for final results.
+   * 2. Client-side (ATSScorer) provides immediate heuristic feedback for UX speed.
+   */
   const scorer = new ATSScorer();
 
   const calculate = useCallback(

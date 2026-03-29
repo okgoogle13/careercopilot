@@ -14,11 +14,11 @@ export interface ManifestoCardProps {
 }
 
 /**
- * ManifestoCard (Slab/Stone Hybrid)
+ * ManifestoCard (Placard/Scaffold Archetype)
  *
  * High-impact component for bold declarations.
  * Pattern Principles:
- * 1. Unified spring motion with the Stone primitive.
+ * 1. Unified spring motion with the Scaffold archetype.
  * 2. Visual anchoring via the "Red Flag" accent.
  */
 export const ManifestoCard: React.FC<ManifestoCardProps> = ({
@@ -58,9 +58,13 @@ export const ManifestoCard: React.FC<ManifestoCardProps> = ({
     <motion.article
       layout
       {...motionProps}
+      style={{
+        backgroundColor: 'var(--sys-color-charcoalBackground-base)',
+        borderRadius: 'var(--sys-shape-megaphoneCut01)',
+      }}
       className={cn(
         'relative p-8 md:p-12 max-w-2xl overflow-hidden',
-        'bg-asphalt-black rounded-megaphone border shadow-viscous',
+        'border shadow-viscous',
         toneStyles[tone],
         className
       )}
@@ -74,7 +78,12 @@ export const ManifestoCard: React.FC<ManifestoCardProps> = ({
       </h2>
 
       {/* Body Content */}
-      <p className="mb-12 text-[var(--sys-type-scale-body)] text-[var(--sys-color-worker-ash-base)] leading-relaxed max-w-lg font-primary">
+      <p
+        style={{
+          fontFamily: 'var(--sys-type-fontFamilies-primary)',
+        }}
+        className="mb-12 text-[var(--sys-type-scale-body)] text-[var(--sys-color-worker-ash-base)] leading-relaxed max-w-lg"
+      >
         {content}
       </p>
 

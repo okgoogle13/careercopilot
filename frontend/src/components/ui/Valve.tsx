@@ -1,4 +1,5 @@
 import React, { forwardRef, useId, useMemo, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export interface ValveProps extends Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -126,15 +127,29 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
             />
 
             {/* Thumb */}
-            <div
+            <motion.div
+              layout
+              animate={{
+                x: isChecked ? (size === 'small' ? 16 : 24) : 0,
+                borderRadius: isChecked
+                  ? 'var(--sys-shape-round-march)'
+                  : 'var(--sys-shape-round-march)',
+              }}
+              whileTap={{
+                borderRadius: 'var(--sys-shape-toggleSlide01)', // Kinetic "Stretch" morph on drag/tap
+                scaleX: 1.2,
+              }}
+              transition={{
+                type: 'spring',
+                stiffness: 600,
+                damping: 35,
+                mass: 0.8,
+              }}
               className={`
                         absolute top-0.5 left-0.5
                         ${currentSize.thumb}
                         bg-[var(--sys-color-worker-ash-base)]
-                        rounded-march
                         shadow-sm
-                        transition-all duration-[var(--duration-standard)] ease-[var(--ease-viscous-breeze)]
-                        ${isChecked ? currentSize.translate : 'translate-x-0'}
                     `}
             />
           </div>

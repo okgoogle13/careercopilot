@@ -12,7 +12,7 @@ Use this skill to manage sprint-sized delivery work. Keep it focused on executio
 1. Normalize the sprint scope: capture the sprint name, duration, goals, constraints, target environment, and the owners or agents available to execute the work.
 2. Break goals into milestones, then into tasks with explicit acceptance criteria, effort, priority, and dependencies.
 3. Preserve parallelism: keep tasks concurrent unless a real dependency forces sequencing.
-4. Pull evidence from specialist skills instead of inventing status. Use `project-health-checker`, `codebase-orchestrator`, `compliance-dashboard`, `audit-agent`, `deployment-manager`, and `task-router-mcp` as the source of truth for health and execution state.
+4. Pull evidence from specialist skills instead of inventing status. Use `project-health-checker`, `codebase-orchestrator`, `compliance-dashboard`, `audit-agent`, `deployment-manager`, and `task-router-mcp` as the source of truth for health and execution state. For mapping out complex dependency chains or unblocking stubborn sprint issues, utilize the `sequential-thinking` MCP server.
 5. When coordinating migration-kit quality work, treat `migration-audit` as the canonical worker per target and split its evidence-acquisition and sub-audit stages into parallel child tasks where dependencies allow it.
 6. Record blockers with severity, owner, impact radius, mitigation, and an escalation clock.
 7. Recompute velocity and ETA from completed and in-progress work whenever generating standups or readiness reports.

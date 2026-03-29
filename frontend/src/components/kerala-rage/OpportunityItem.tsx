@@ -13,9 +13,9 @@ export interface OpportunityItemProps extends Omit<SolidarityCardProps, 'childre
 }
 
 /**
- * OpportunityItem (Stone)
+ * OpportunityItem (Placard Archetype)
  *
- * Specialized card for the tactical feed.
+ * Specialized card for the tactical feed implementing the Placard archetype.
  * Features a "halo" indicator for priority items.
  *
  * @mission Visual hierarchy, list stability, and clear CTA.
@@ -48,7 +48,12 @@ export const OpportunityItem = React.forwardRef<HTMLDivElement, OpportunityItemP
         {/* Priority Halo - TODO[asset]: Human replacement with halo disk PNG. */}
         {priority && (
           <div className="absolute top-0 right-0 w-16 h-16 pointer-events-none overflow-hidden">
-            <div className="absolute top-[-20%] right-[-20%] w-24 h-24 bg-ink-gold/20 blur-xl rounded-march animate-pulse" />
+            <div
+              style={{
+                borderRadius: 'var(--sys-shape-marchOrganic01)',
+              }}
+              className="absolute top-[-20%] right-[-20%] w-24 h-24 bg-ink-gold/20 blur-xl animate-pulse"
+            />
           </div>
         )}
 
@@ -56,21 +61,39 @@ export const OpportunityItem = React.forwardRef<HTMLDivElement, OpportunityItemP
           <div className="flex items-center gap-3">
             {priority && (
               <span
-                className="flex h-2 w-2 rounded-march bg-[var(--sys-color-solidarityRed-base)] shadow-[var(--sys-shadow-glow-red)]"
+                style={{
+                  borderRadius: 'var(--sys-shape-marchOrganic01)',
+                }}
+                className="flex h-2 w-2 bg-[var(--sys-color-solidarityRed-base)] shadow-[var(--sys-shadow-glow-red)]"
                 aria-label="Priority Item"
               />
             )}
-            <span className="font-mono text-xs text-ink-gold tracking-widest uppercase">
+            <span
+              style={{
+                fontFamily: 'var(--sys-type-fontFamilies-mono)',
+              }}
+              className="text-xs text-ink-gold tracking-widest uppercase"
+            >
               {meta}
             </span>
           </div>
 
-          <h3 className="font-display text-xl text-paper-white group-hover:text-ink-gold transition-colors">
+          <h3
+            style={{
+              fontFamily: 'var(--sys-type-fontFamilies-display)',
+            }}
+            className="text-xl text-paper-white group-hover:text-ink-gold transition-colors"
+          >
             {title}
           </h3>
 
           {subtitle && (
-            <p className="font-primary text-sm text-[var(--sys-color-concreteGrey-base)]">
+            <p
+              style={{
+                fontFamily: 'var(--sys-type-fontFamilies-primary)',
+              }}
+              className="text-sm text-[var(--sys-color-concreteGrey-base)]"
+            >
               {subtitle}
             </p>
           )}

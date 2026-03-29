@@ -55,6 +55,8 @@ function StepCard({ number, Icon, label, desc }: StepCardProps) {
 export function ApplyQuick() {
   const navigate = useNavigate();
   const [jobUrl, setJobUrl] = useState('');
+  const [jobTitle, setJobTitle] = useState('');
+  const [companyName, setCompanyName] = useState('');
   const [jobDescription, setJobDescription] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<AnalyzeJobFromUrlResponse | null>(null);
@@ -77,6 +79,8 @@ export function ApplyQuick() {
       const payload = await workflowService.quickApply({
         jobDescription: jobDescription || 'No description provided.',
         jobUrl: jobUrl.trim() || undefined,
+        jobTitle: jobTitle.trim() || undefined,
+        companyName: companyName.trim() || undefined,
       });
       setResult(payload as AnalyzeJobFromUrlResponse);
     } catch (err) {
@@ -166,6 +170,40 @@ export function ApplyQuick() {
             className="border border-[var(--sys-color-outline-variant)] bg-[var(--sys-color-charcoalBackground-steps-1)] p-6 space-y-5"
             style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
           >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  htmlFor="apply-quick-title"
+                  className="block text-xs font-bold uppercase tracking-widest text-[var(--sys-color-worker-ash-base)] mb-2"
+                >
+                  Target Role
+                </label>
+                <Input
+                  id="apply-quick-title"
+                  value={jobTitle}
+                  onChange={(e) => setJobTitle(e.target.value)}
+                  placeholder="e.g. Senior Case Manager"
+                  className="bg-[var(--sys-color-charcoalBackground-steps-2)]"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="apply-quick-company"
+                  className="block text-xs font-bold uppercase tracking-widest text-[var(--sys-color-worker-ash-base)] mb-2"
+                >
+                  Company Name
+                </label>
+                <Input
+                  id="apply-quick-company"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                  placeholder="e.g. Community First"
+                  className="bg-[var(--sys-color-charcoalBackground-steps-2)]"
+                />
+              </div>
+            </div>
+
             <div>
               <label
                 htmlFor="apply-quick-url"

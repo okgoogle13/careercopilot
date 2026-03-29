@@ -159,14 +159,23 @@ export const TwoColumnResume: React.FC<Props> = ({
                               <>
                                 <button
                                   onClick={() => applySuggestion(ach.Achievement_ID, 'Outcome')}
-                                  className="p-1 bg-green-100 hover:bg-green-200 rounded text-green-700"
+                                  className="p-1 rounded transition-colors"
+                                  style={{
+                                    backgroundColor:
+                                      'var(--sys-color-kr-activistSmokeGreen-steps-0)',
+                                    color: 'var(--sys-color-kr-activistSmokeGreen-base)',
+                                  }}
                                   title="Apply"
                                 >
                                   ✓
                                 </button>
                                 <button
                                   onClick={() => discardSuggestion(ach.Achievement_ID, 'Outcome')}
-                                  className="p-1 bg-red-100 hover:bg-red-200 rounded text-red-700"
+                                  className="p-1 rounded transition-colors"
+                                  style={{
+                                    backgroundColor: 'var(--sys-color-kr-charcoalRed-steps-0)',
+                                    color: 'var(--sys-color-kr-charcoalRed-base)',
+                                  }}
                                   title="Discard"
                                 >
                                   ✕
@@ -176,7 +185,11 @@ export const TwoColumnResume: React.FC<Props> = ({
                               <button
                                 onClick={() => handlePolish(ach.Achievement_ID, 'Outcome')}
                                 disabled={isPolishing === `${ach.Achievement_ID}-Outcome`}
-                                className="p-1 bg-gray-100 hover:bg-gray-200 rounded text-gray-600"
+                                className="p-1 rounded transition-colors"
+                                style={{
+                                  backgroundColor: 'var(--sys-color-charcoalBackground-steps-3)',
+                                  color: 'var(--sys-color-concreteGrey-base)',
+                                }}
                                 title="AI Polish Outcome"
                               >
                                 {isPolishing === `${ach.Achievement_ID}-Outcome` ? (

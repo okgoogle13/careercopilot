@@ -175,8 +175,8 @@ export function OnboardingPage() {
                 onClick={() => setSegment(item.id)}
                 className={`text-left rounded-placard border px-6 py-5 transition-all ${
                   segment === item.id
-                    ? 'border-ink-gold bg-ink-gold/10 text-paper-white'
-                    : 'border-concrete-grey/20 bg-asphalt-black/45 text-concrete-grey hover:border-ink-gold/40'
+                    ? 'border-inkGold-base bg-inkGold-base/10 text-worker-ash-base'
+                    : 'border-concreteGrey-base/20 bg-charcoalBackground-base/45 text-concreteGrey-base hover:border-inkGold-base/40'
                 }`}
               >
                 <p className="font-display text-xl">{item.title}</p>
@@ -188,7 +188,7 @@ export function OnboardingPage() {
         <footer className={styles.footer}>
           {onboardingStep === 1 ? (
             <button
-              className="btn-strike bg-ink-gold text-asphalt-black px-12 py-4 disabled:opacity-30 disabled:cursor-not-allowed"
+              className="btn-strike bg-inkGold-base text-charcoalBackground-base px-12 py-4 disabled:opacity-30 disabled:cursor-not-allowed"
               disabled={!selected}
               onClick={() => setOnboardingStep(2)}
             >
@@ -197,13 +197,13 @@ export function OnboardingPage() {
           ) : (
             <div className="flex items-center gap-4">
               <button
-                className="btn-strike bg-concrete-grey/20 text-paper-white px-8 py-4"
+                className="btn-strike bg-concreteGrey-base/20 text-worker-ash-base px-8 py-4"
                 onClick={() => setOnboardingStep(1)}
               >
                 Back
               </button>
               <button
-                className="btn-strike bg-ink-gold text-asphalt-black px-12 py-4 disabled:opacity-30 disabled:cursor-not-allowed"
+                className="btn-strike bg-inkGold-base text-charcoalBackground-base px-12 py-4 disabled:opacity-30 disabled:cursor-not-allowed"
                 disabled={!segment}
                 onClick={handleProceed}
               >

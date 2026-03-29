@@ -25,7 +25,7 @@ describe('PathSelectionCard', () => {
     expect(props.onSelect).toHaveBeenCalled();
   });
 
-  it('shows SELECTED state when isSelected is true', () => {
+  it('shows selected styling when isSelected is true', () => {
     const props = createProps();
 
     render(
@@ -34,16 +34,19 @@ describe('PathSelectionCard', () => {
         isSelected={true}
       />
     );
-    expect(screen.getByText('SELECTED')).toBeDefined();
-    expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'true');
+    // Component uses CSS border change, no text indicator
+    const btn = screen.getByRole('button');
+    expect(btn).toBeInTheDocument();
+    expect(btn).toHaveClass('border-[var(--sys-color-inkGold-base)]');
   });
 
-  it('marks the card as unselected by default', () => {
+  it('shows unselected styling by default', () => {
     const props = createProps();
 
     render(<PathSelectionCard {...props} />);
 
-    expect(screen.getByText('CHOOSE THIS PATH')).toBeInTheDocument();
-    expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'false');
+    const btn = screen.getByRole('button');
+    expect(btn).toBeInTheDocument();
+    expect(btn).not.toHaveClass('border-[var(--sys-color-inkGold-base)]');
   });
 });

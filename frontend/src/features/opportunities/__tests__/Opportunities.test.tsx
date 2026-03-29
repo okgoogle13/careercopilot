@@ -31,20 +31,20 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
 // Mock UI components from @/components/ui
 (jest as any).unstable_mockModule('@/components/ui', () => ({
-  Pebble: ({ children, onClick, disabled }: any) => (
+  Strike: ({ children, onClick, disabled }: any) => (
     <button
       onClick={onClick}
       disabled={disabled}
-      data-testid="pebble-button"
+      data-testid="strike-button-mock"
     >
       {children}
     </button>
   ),
   StatusBadge: ({ children }: any) => <div data-testid="status-badge">{children}</div>,
-  Stone: ({ children, className }: any) => (
+  Placard: ({ children, className }: any) => (
     <div
       className={className}
-      data-testid="stone-container"
+      data-testid="placard-container-mock"
     >
       {children}
     </div>

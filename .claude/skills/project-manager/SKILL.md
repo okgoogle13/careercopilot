@@ -12,7 +12,7 @@ Use this skill as the top-level orchestration layer for work that spans multiple
 1. Define the project frame: capture the objective, delivery window, owners, success criteria, and the phases required to complete the work.
 2. Break the project into phase-sized outcomes: define the goal, exit criteria, dependencies, and measurable checkpoints for each phase.
 3. Keep dependencies explicit: identify which phases can run in parallel, which are blocked, and what gate must pass before a handoff.
-4. Route execution to narrower skills instead of absorbing implementation here. Use `sprint-coordinator` for sprint planning, `task-router-mcp` for queue-based delegation, and `codebase-orchestrator` for build, test, and deployment signals.
+4. Route execution to narrower skills instead of absorbing implementation here. Use `sprint-coordinator` for sprint planning, `task-router-mcp` for queue-based delegation, and `codebase-orchestrator` for build, test, and deployment signals. For cross-phase blocker resolution and deep risk assessment, utilize the `sequential-thinking` MCP server.
 5. Recalculate status from evidence: update progress based on completed milestones, failed gates, active blockers, and current capacity rather than narrative estimates alone.
 6. Escalate blockers early: record severity, owner, impact radius, mitigation, and the next checkpoint where the blocker must be re-evaluated.
 7. Publish an executive snapshot: summarize current phase, completion percent, key risks, dependencies at risk, next gates, and the single highest-priority decision.

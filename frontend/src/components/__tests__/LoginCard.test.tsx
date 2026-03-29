@@ -2,7 +2,12 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import React from 'react';
 import '@testing-library/jest-dom';
 
-const { LoginCard } = await import('../LoginCard');
+let LoginCard: any;
+
+beforeAll(async () => {
+  const mod = await import('../LoginCard');
+  LoginCard = mod.LoginCard;
+});
 
 describe('LoginCard', () => {
   const createHandlers = () => ({

@@ -20,12 +20,12 @@ import { render, screen } from '@testing-library/react';
 
 // Mock components
 (jest as any).unstable_mockModule('@/components/ui', () => ({
-  Pebble: ({ children }: any) => <button>{children}</button>,
+  Strike: ({ children }: any) => <button>{children}</button>,
   StatusBadge: ({ label }: any) => <div>{label}</div>,
-  Stone: ({ children, className }: any) => (
+  Placard: ({ children, className }: any) => (
     <div
       className={className}
-      data-testid="stone-container"
+      data-testid="placard-container-mock"
     >
       {children}
     </div>
@@ -46,7 +46,7 @@ import { render, screen } from '@testing-library/react';
   default: () => <div data-testid="resume-uploader">Mock Resume Uploader</div>,
 }));
 
-const { ProfileView } = await import('../ProfileView');
+const { ProfileView } = await import('../../ProfileView');
 
 describe('ProfileView', () => {
   it('renders correctly with default data', () => {
