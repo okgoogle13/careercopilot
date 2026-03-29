@@ -159,11 +159,15 @@ export const workflowService = {
   async quickApply(request: {
     jobDescription: string;
     jobUrl?: string;
+    jobTitle?: string;
+    companyName?: string;
   }): Promise<AnalyzeJobFromUrlResponse> {
     try {
       const response = await apiClient.post('/generate-application', {
         job_description: request.jobDescription,
-        job_url: request.jobUrl,
+        url: request.jobUrl,
+        job_title: request.jobTitle,
+        company_name: request.companyName,
       });
       const payload = response.data.result ?? response.data;
       return payload;

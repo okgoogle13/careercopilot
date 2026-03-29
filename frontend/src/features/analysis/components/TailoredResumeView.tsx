@@ -54,8 +54,9 @@ export const TailoredResumeView: React.FC<TailoredResumeViewProps> = ({
 
   return (
     <div
-      className="bg-white p-10 shadow-lg max-w-4xl mx-auto"
+      className="p-10 max-w-4xl mx-auto"
       style={{
+        backgroundColor: template.bgLight,
         fontFamily: template.fontSans,
         color: template.textColor,
         lineHeight: '1.5',

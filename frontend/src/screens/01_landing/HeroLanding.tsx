@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { motion } from 'framer-motion';
 import clsx, { type ClassValue } from 'clsx';
+import { useNavigate } from 'react-router-dom';
 import { useModeStore } from '../../stores/useModeStore';
 
 type SlotDef = {
@@ -56,7 +57,6 @@ export interface HeroLandingProps {
 }
 
 const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const _springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
 const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
 
 export const HeroLanding = memo(function HeroLanding({
@@ -69,8 +69,12 @@ export const HeroLanding = memo(function HeroLanding({
   onPrimaryAction,
   onSecondaryAction,
 }: HeroLandingProps) {
+  const navigate = useNavigate();
   const mode = useModeStore((state) => state.mode);
   const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
+
+  const handlePrimary = onPrimaryAction ?? (() => navigate('/auth'));
+  const handleSecondary = onSecondaryAction ?? (() => navigate('/docs'));
 
   return (
     <motion.section
@@ -79,7 +83,7 @@ export const HeroLanding = memo(function HeroLanding({
       animate={{ opacity: 1, y: 0 }}
       transition={undefined}
       className={clsx(
-        "relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-8 font-['Work_Sans'] text-base min-h-[75vh] flex flex-col justify-center",
+        'font-primary relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-8 text-base min-h-[75vh] flex flex-col justify-center',
         className
       )}
       style={{
@@ -126,20 +130,14 @@ export const HeroLanding = memo(function HeroLanding({
         className="relative z-10 max-w-2xl"
       >
         <h1
-          className="font-['Fraunces'] font-black text-6xl md:text-7xl tracking-[-0.02em]"
-          style={{
-            fontFamily: 'var(--sys-type-font-fraunces)',
-            color: 'var(--sys-color-paperWhite)',
-          }}
+          className="font-display font-black text-6xl md:text-7xl tracking-[-0.02em]"
+          style={{ color: 'var(--sys-color-paperWhite)' }}
         >
           {title}
         </h1>
         <p
-          className="mt-4 max-w-2xl font-['Work_Sans'] font-normal text-xl md:text-2xl opacity-90"
-          style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            color: 'var(--sys-color-worker-ash-base)',
-          }}
+          className="mt-4 max-w-2xl font-normal text-xl md:text-2xl opacity-90"
+          style={{ color: 'var(--sys-color-worker-ash-base)' }}
         >
           {subtitle}
         </p>
@@ -156,10 +154,9 @@ export const HeroLanding = memo(function HeroLanding({
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           transition={springButton}
-          onClick={onPrimaryAction}
-          className="rounded-[var(--sys-shape-blockRiot03)] font-['Work_Sans'] font-semibold text-lg px-8 py-4"
+          onClick={handlePrimary}
+          className="rounded-[var(--sys-shape-blockRiot03)] font-semibold text-lg px-8 py-4"
           style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
             backgroundColor: 'var(--sys-color-inkGold-base)',
             color: 'var(--sys-color-charcoalBackground-base)',
           }}
@@ -169,23 +166,13 @@ export const HeroLanding = memo(function HeroLanding({
 
         <button
           type="button"
-          onClick={onSecondaryAction}
-          className="font-['JetBrains_Mono'] text-sm opacity-80 px-2 py-1"
+          onClick={handleSecondary}
+          className="font-mono text-sm opacity-80 px-2 py-1"
           style={{ color: 'var(--sys-color-worker-ash-base)', backgroundColor: 'transparent' }}
         >
           {secondaryLabel}
         </button>
       </motion.div>
-
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={undefined}
-        className="relative z-10 mt-8 font-['JetBrains_Mono'] text-sm opacity-80"
-        style={{ color: 'var(--sys-color-concreteGrey-base)' }}
-      >
-        Slots: {SLOT_DEFS.length} | Density ratio: 0.36 | Max focal CTA: 1
-      </motion.p>
     </motion.section>
   );
 });

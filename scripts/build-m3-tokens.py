@@ -5,6 +5,8 @@ Build Kerala Rage design tokens into CSS variables and Tailwind configuration.
 """
 import json
 import os
+import shutil
+import subprocess
 import sys
 from typing import Any
 
@@ -12,7 +14,7 @@ from typing import Any
 TOKEN_SOURCE_FILE = 'frontend/src/design/tokens/tokens.json'
 MOTION_SOURCE_FILE = 'frontend/src/design/tokens/motion-tokens.json'
 CSS_OUTPUT_FILE = 'frontend/src/design/styles/design-tokens.css'
-TAILWIND_CONFIG_PATCH = 'frontend/tailwind-m3-patch.ts'
+TAILWIND_CONFIG_PATCH = 'frontend/src/design/tokens/solidarity-tokens.ts'
 
 LEGACY_SHAPE_ALIASES = {
     'pebble01': 'marchOpen01',
@@ -30,6 +32,17 @@ LEGACY_SHAPE_ALIASES = {
 LEGACY_SHADOW_ALIASES = {
     'elevation1Pebble': 'elevation1Strike',
     'elevation2Stone': 'elevation2Placard',
+}
+
+LEGACY_COLOR_ALIASES = {
+    'concrete-grey': 'concreteGrey-base',
+    'ink-gold': 'inkGold-base',
+    'asphalt-black': 'asphaltBlack-base',
+    'paper-white': 'paperWhite-base',
+    'solidarity-red': 'solidarityRed-base',
+    'concrete-grey-dark': 'concreteGrey-steps-0',
+    'concrete-grey-lightest': 'concreteGrey-steps-4',
+    'asphalt-black-light': 'asphaltBlack-steps-3',
 }
 
 def load_tokens(path):
@@ -76,16 +89,31 @@ def resolve_aliases(node: Any, root: dict[str, Any]) -> Any:
         return {k: resolve_aliases(v, root) for k, v in node.items()}
     if isinstance(node, list):
         return [resolve_aliases(item, root) for item in node]
-    if isinstance(node, str) and node.startswith('{') and node.endswith('}'):
-        alias_path = node[1:-1].strip()
-        alias_value = get_by_path(root, alias_path)
-        if alias_value is None:
-            return node
-        if isinstance(alias_value, dict) and '$value' in alias_value:
-            return resolve_aliases(resolve_values(alias_value), root)
-        if isinstance(alias_value, (dict, list)):
-            return resolve_aliases(alias_value, root)
-        return alias_value
+    if isinstance(node, str):
+        # Pattern to find {sys.color.inkGold.base} style aliases
+        import re
+        pattern = r"\{([^}]+)\}"
+
+        def replace_match(match):
+            alias_path = match.group(1).strip()
+            alias_value = get_by_path(root, alias_path)
+            if alias_value is None:
+                return match.group(0)
+
+            # If it's a DTCG node, resolve its $value
+            if isinstance(alias_value, dict) and '$value' in alias_value:
+                # Use str() because this is used inside re.sub
+                return str(resolve_aliases(resolve_values(alias_value), root))
+
+            if isinstance(alias_value, (dict, list)):
+                return str(resolve_aliases(alias_value, root))
+
+            return str(alias_value)
+
+        # Apply regex replacement for nested aliases inside strings (like shadows)
+        if '{' in node:
+            return re.sub(pattern, replace_match, node)
+        return node
     return node
 
 def flatten_dict(d, parent_key='', sep='-'):
@@ -111,7 +139,13 @@ def generate_css_variables(tokens):
     ]
     flat_tokens = flatten_dict(tokens)
     for key, value in flat_tokens.items():
-        if isinstance(value, list):
+        # Special handling for shape tokens to match archetypes.ts expectation
+        # archetypes.ts uses var(--shape-tokenName), so we emit both --shape- and --sys-shape-
+        if key.startswith('shape-'):
+            token_name = key[len('shape-'):]
+            content.append(f"  --shape-{token_name}: {value};\n")
+            content.append(f"  --sys-{key}: {value};\n")
+        elif isinstance(value, list):
             for i, item in enumerate(value):
                 var_name = f"--sys-{key}-{i}"
                 content.append(f"  {var_name}: {item};\n")
@@ -128,6 +162,8 @@ def generate_css_variables(tokens):
         content.append(f"  --sys-shape-{legacy}: var(--sys-shape-{canonical});\n")
     for legacy, canonical in LEGACY_SHADOW_ALIASES.items():
         content.append(f"  --sys-shadow-{legacy}: var(--sys-shadow-{canonical});\n")
+    for legacy, canonical in LEGACY_COLOR_ALIASES.items():
+        content.append(f"  --color-{legacy}: var(--sys-color-{canonical});\n")
 
     # Font Family Compat Aliases
     content.append("  --sys-type-font-work-sans: var(--sys-type-fontFamilies-primary);\n")
@@ -258,6 +294,26 @@ export default {{
     with open(TAILWIND_CONFIG_PATCH, 'w') as f:
         # Ensure deterministic trailing newline so EOF fixer does not mutate on every commit.
         f.write(patch_content if patch_content.endswith('\n') else patch_content + '\n')
+
+    # Keep the generated TS file aligned with the repo's formatter so pre-commit converges.
+    prettier_candidates = [
+        os.path.join('frontend', 'node_modules', '.bin', 'prettier'),
+        os.path.join('node_modules', '.bin', 'prettier'),
+        shutil.which('prettier'),
+    ]
+    for prettier_cmd in prettier_candidates:
+        if not prettier_cmd or not os.path.exists(prettier_cmd):
+            continue
+        try:
+            subprocess.run(
+                [prettier_cmd, '--write', TAILWIND_CONFIG_PATCH],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            break
+        except (OSError, subprocess.CalledProcessError):
+            continue
     print("✅ Tailwind config patch generated")
     return True
 

@@ -439,11 +439,11 @@ def validate_template_schema(template: dict) -> None:
         raise ValueError(f"Missing required ATS headings: {missing}")
 ```
 
-   - Synchronize `format_rules.json` and template schemas by:
-     - Defining **one canonical `ats_rules.json`** that includes both content rules (word counts, forbidden characters) and structural rules (layout constraints), and
-     - Having both `ats_gate.py` and `validate_template_schema` read from this single source.
+- Synchronize `format_rules.json` and template schemas by:
+  - Defining **one canonical `ats_rules.json`** that includes both content rules (word counts, forbidden characters) and structural rules (layout constraints), and
+  - Having both `ats_gate.py` and `validate_template_schema` read from this single source.
 
-4. **User uploads**
+1. **User uploads**
    - Avoid accepting raw DOCX templates from users for ATS documents.
    - If a future roadmap includes this, gate it as a **separate feature** with strong warnings and a distinct non‑ATS template category.
 

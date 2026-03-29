@@ -20,14 +20,17 @@ import {
   type AtsScoreResponse,
   type StrategyResponse,
 } from '@/api/analysisService';
+import { StudioMatchPanel } from './components/StudioMatchPanel';
+import { SuggestionsPanel } from './components/SuggestionsPanel';
+import type { CareerDatabase, JobOpportunity, MatchAnalysis } from '@/types/career';
+import { useAuth } from '@/context/AuthContext';
 
 // KrDark Assets
-const solidarityTexture =
-  '/assets/kr-solidarity/abstract/kr-solidarity__atmospheric__texture--solidarity-chatgpt-image-f--v1.png';
 const paperGrain =
   '/assets/kr-solidarity/texture/kr-solidarity__substrate__landmark--melbourne-laneway--v1.png';
 
 export const AnalysisPage: React.FC = () => {
+  const { user } = useAuth();
   const { track } = useAnalytics();
   const [heroData, setHeroData] = useState<{
     layers: any[];
@@ -72,6 +75,45 @@ export const AnalysisPage: React.FC = () => {
   const [strategyResult, setStrategyResult] = useState<StrategyResponse | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isGeneratingStrategy, setIsGeneratingStrategy] = useState(false);
+  const [showStudioMatch, setShowStudioMatch] = useState(false);
+
+  const [careerData, setCareerData] = useState<CareerDatabase>({
+    Personal_Information: {
+      FullName: '',
+      Phone: '',
+      Email: '',
+      Location: '',
+      Portfolio_Website_URLs: [],
+    },
+    Career_Profile: {
+      Target_Titles: [],
+      Master_Summary_Points: [],
+    },
+    Master_Skills_Inventory: [],
+    Career_Entries: [],
+    Structured_Achievements: [],
+    KSC_Responses: [],
+    Saved_Documents: [],
+    Ingested_Documents: [],
+    Voice_Profiles: [],
+  });
+
+  const [jobOpportunity, setJobOpportunity] = useState<JobOpportunity>({
+    Job_Title: '',
+    Company_Name: '',
+    Location: '',
+    Work_Type: 'Unspecified',
+    Salary_Range: '',
+    Key_Responsibilities: [],
+    Required_Hard_Skills: [],
+    Required_Soft_Skills: [],
+    Preferred_Skills: [],
+    Required_Experience: '',
+    Company_Culture_Keywords: [],
+    Red_Flags: [],
+    Application_Deadline: '',
+    Source_URL: '',
+  });
 
   const aiCriteria =
     strategyResult?.job_details.key_responsibilities?.map((title, index) => ({
@@ -82,8 +124,8 @@ export const AnalysisPage: React.FC = () => {
 
   const resumeKeywords: ResumeKeyword[] = atsResult
     ? [
-        ...atsResult.matched_keywords.map((label) => ({ label, match: 'strong' as const })),
-        ...atsResult.missing_keywords.map((label) => ({ label, match: 'missing' as const })),
+        ...atsResult.keywordMatches.matched.map((label) => ({ label, match: 'strong' as const })),
+        ...atsResult.keywordMatches.missing.map((label) => ({ label, match: 'missing' as const })),
       ]
     : [];
 
@@ -92,22 +134,66 @@ export const AnalysisPage: React.FC = () => {
       m3Toast.error('Incomplete Details', 'Please enter both resume text and job description');
       return;
     }
-    setIsAnalyzing(true);
-    track('ats_score_run', {
-      has_job_description: Boolean(jobDescription),
-      has_resume: Boolean(resumeText),
-    });
-    setAtsResult(null);
-    try {
-      const result = await analysisService.getATSScore(resumeText, jobDescription);
-      setAtsResult(result);
-      m3Toast.success('Success', 'ATS Analysis complete!');
-    } catch (error) {
-      m3Toast.error('Error', 'Analysis failed.');
-      console.error(error);
-    } finally {
-      setIsAnalyzing(false);
-    }
+
+    // Convert flat state to structured CareerDatabase for the Studio engine
+    setCareerData((prev) => ({
+      ...prev,
+      Personal_Information: {
+        ...prev.Personal_Information,
+        FullName: user?.displayName || 'Candidate',
+        Email: user?.email || '',
+      },
+    }));
+
+    // Extract basic job info from text for the initial studio view
+    const jobLines = jobDescription.split('\n').filter((l) => l.trim());
+    setJobOpportunity((prev) => ({
+      ...prev,
+      Job_Title: jobLines[0] || 'Target Role',
+      Company_Name: 'Prospect',
+      Key_Responsibilities: [jobDescription],
+    }));
+
+    setShowStudioMatch(true);
+    track('studio_match_gate_open', { has_resume: true });
+    m3Toast.info('Studio Initialized', 'Start the analysis to begin tailoring your application.');
+  };
+
+  const handleStudioAnalyze = async (
+    data: CareerDatabase,
+    job: JobOpportunity
+  ): Promise<MatchAnalysis> => {
+    track('studio_match_run', { job_title: job.Job_Title });
+
+    // Orchestrator Decision: Backend /ats-score is the Source of Truth
+    const result = await analysisService.getATSScore(resumeText, jobDescription);
+
+    // Map AtsScoreResponse to MatchAnalysis (KR Solidarity v6.1)
+    return {
+      Overall_Fit_Score: result.overallScore,
+      Tailored_Summary: result.summary,
+      Skill_Gaps: result.keywordMatches.missing.map((k) => ({
+        Skill: k,
+        Match_Level: 'Missing',
+        Evidence: 'Not found in current resume draft.',
+      })),
+      Recommended_Achievement_IDs: [],
+      Resume_Audit: {
+        overallScore: result.overallScore,
+        scanSimulation: 'Simulated ATS parser interpretation of this document structure.',
+        violations: result.recommendations.map((s, i) => ({
+          ruleId: `RULE_${i}`,
+          severity: 'warning' as const,
+          message: s,
+        })),
+        recommendations: result.recommendations,
+      },
+    };
+  };
+
+  const handleSaveToProfile = async (uid: string, data: CareerDatabase) => {
+    // Placeholder for profile service integration
+    m3Toast.success('Saved', 'Application data synced to your Career Collective ID.');
   };
 
   const handleHolisticStrategy = async () => {
@@ -121,7 +207,7 @@ export const AnalysisPage: React.FC = () => {
       const result = await analysisService.getStrategy({
         jobUrl,
         resumeText,
-        missingKeywords: atsResult?.missing_keywords,
+        missingKeywords: atsResult?.keywordMatches.missing,
       });
       setStrategyResult(result);
       m3Toast.success('Done', 'Resume strategy generated.');
@@ -138,12 +224,7 @@ export const AnalysisPage: React.FC = () => {
   };
 
   return (
-    <div className="p-8 max-w-[1440px] mx-auto min-h-screen bg-asphalt-black-darkest relative overflow-hidden">
-      <div
-        className="absolute inset-0 opacity-5 pointer-events-none mix-blend-screen"
-        style={{ backgroundImage: `url(${paperGrain})`, backgroundRepeat: 'repeat' }}
-      />
-
+    <div className="p-8 max-w-[1440px] mx-auto min-h-screen relative overflow-hidden">
       {heroData && (
         <div className="absolute top-0 left-0 w-full h-[300px] pointer-events-none opacity-20 mask-gradient-to-bottom">
           <LayeredHero
@@ -157,16 +238,16 @@ export const AnalysisPage: React.FC = () => {
         </div>
       )}
 
-      <header className="mb-12 flex items-center justify-between border-b border-concrete-grey/10 pb-8 relative z-10">
+      <header className="mb-12 flex items-center justify-between border-b border-concreteGrey-base/10 pb-8 relative z-10">
         <div className="flex items-center gap-6">
-          <div className="w-20 h-20 rounded-march bg-ink-gold/5 flex items-center justify-center border border-ink-gold/20 shadow-inner">
-            <Compass className="w-10 h-10 text-ink-gold animate-in spin-in-12 duration-1000" />
+          <div className="w-20 h-20 rounded-march bg-inkGold-base/5 flex items-center justify-center border border-inkGold-base/20 shadow-inner">
+            <Compass className="w-10 h-10 text-inkGold-base animate-in spin-in-12 duration-1000" />
           </div>
           <div>
-            <h1 className="font-display text-6xl font-black text-paper-white tracking-tighter uppercase">
+            <h1 className="font-display text-6xl font-black text-worker-ash-base tracking-tighter uppercase">
               ATS Analyzer
             </h1>
-            <p className="font-mono text-xs text-concrete-grey tracking-[0.4em] uppercase opacity-50">
+            <p className="font-mono text-xs text-concreteGrey-base tracking-[0.4em] uppercase opacity-50">
               [ ROLE MATCH ANALYSIS ]
             </p>
           </div>
@@ -179,9 +260,9 @@ export const AnalysisPage: React.FC = () => {
 
           <Placard
             elevation="raised"
-            className="border-concrete-grey/10 p-10 bg-asphalt-black/20"
+            className="border-concreteGrey-base/10 p-10 bg-charcoalBackground-base/20"
           >
-            <h2 className="font-display text-2xl font-bold text-ink-gold mb-8 flex items-center gap-3 uppercase tracking-tight">
+            <h2 className="font-display text-2xl font-bold text-inkGold-base mb-8 flex items-center gap-3 uppercase tracking-tight">
               <Target className="w-6 h-6" /> Application Inputs
             </h2>
 
@@ -224,32 +305,27 @@ export const AnalysisPage: React.FC = () => {
         </section>
 
         <aside className="space-y-8">
-          {atsResult ? (
+          {showStudioMatch ? (
+            <div className="lg:col-span-3">
+              <StudioMatchPanel
+                careerData={careerData}
+                job={jobOpportunity}
+                userId={user?.uid}
+                onAnalyze={handleStudioAnalyze}
+                onSave={handleSaveToProfile}
+                onUpdate={setCareerData}
+              />
+            </div>
+          ) : atsResult ? (
             <div className="space-y-6">
               <ATSScoreCard
                 score={{
                   overallScore: atsResult.overallScore,
-                  breakdown: {
-                    keywordMatch:
-                      atsResult.categories.find((c) => c.name.toLowerCase().includes('keyword'))
-                        ?.score || 0,
-                    skillsAlignment:
-                      atsResult.categories.find((c) => c.name.toLowerCase().includes('skill'))
-                        ?.score || 0,
-                    jobTitleMatch:
-                      atsResult.categories.find((c) => c.name.toLowerCase().includes('title'))
-                        ?.score || 0,
-                    experienceRelevance:
-                      atsResult.categories.find((c) => c.name.toLowerCase().includes('experience'))
-                        ?.score || 0,
-                    formatCompliance:
-                      atsResult.categories.find((c) => c.name.toLowerCase().includes('format'))
-                        ?.score || 0,
-                  },
-                  matchedKeywords: atsResult.matched_keywords,
-                  missingKeywords: atsResult.missing_keywords,
-                  suggestions: atsResult.categories.flatMap((c) => c.suggestions),
-                  keywordDensity: {},
+                  summary: atsResult.summary,
+                  breakdown: atsResult.breakdown,
+                  matchedKeywords: atsResult.keywordMatches.matched,
+                  missingKeywords: atsResult.keywordMatches.missing,
+                  recommendations: atsResult.recommendations,
                 }}
                 isCalculating={isAnalyzing}
                 documentType="resume"
@@ -275,6 +351,18 @@ export const AnalysisPage: React.FC = () => {
                   ),
                   recommendations: atsResult.categories.flatMap((c) => c.suggestions),
                 }}
+              />
+
+              <SuggestionsPanel
+                score={{
+                  overallScore: atsResult.overallScore,
+                  summary: atsResult.summary,
+                  breakdown: atsResult.breakdown,
+                  matchedKeywords: atsResult.keywordMatches.matched,
+                  missingKeywords: atsResult.keywordMatches.missing,
+                  recommendations: atsResult.recommendations,
+                }}
+                documentType="resume"
               />
             </div>
           ) : (

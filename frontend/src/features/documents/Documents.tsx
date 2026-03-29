@@ -1,10 +1,12 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Calendar, Download, FileText, Mail, Search, ScrollText, X } from 'lucide-react';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { PageHeader } from '../../components/shared/PageHeader';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { exportToPdf } from '../../utils/exportEngine';
+import { useDocumentExport } from './hooks/useDocumentExport';
+import type { ExportableDocument } from './services/docxExport';
 import { DocumentWorkbench } from '../../screens/08_workbench/DocumentWorkbench';
 import { DocumentRedlineUploadPanel } from './components/DocumentRedlineUploadPanel';
 import { TrackedChangesWorkspace } from './components/TrackedChangesWorkspace';
@@ -100,6 +102,22 @@ function filterDocuments(documents: Document[], tab: DocumentTab): Document[] {
   return documents.filter((doc) => doc.type === typeMap[tab as keyof typeof typeMap]);
 }
 
+function toExportableDocument(doc: Document): ExportableDocument {
+  const fileName = `${doc.name.replace(/\s+/g, '_')}.docx`;
+  if (doc.type === 'resume') {
+    return { type: 'resume', fileName, title: doc.name, summary: '(Content not yet loaded)' };
+  }
+  if (doc.type === 'cover') {
+    return {
+      type: 'cover-letter',
+      fileName,
+      heading: doc.name,
+      content: '(Content not yet loaded)',
+    };
+  }
+  return { type: 'ksc', fileName, criterion: doc.name, content: '(Content not yet loaded)' };
+}
+
 // ============================================================================
 // COMPONENT
 // ============================================================================
@@ -108,6 +126,14 @@ export function Documents() {
   const [activeTab, setActiveTab] = useState<DocumentTab>('all');
   const [redlineTarget, setRedlineTarget] = useState<Document | null>(null);
   const [redlineResult, setRedlineResult] = useState<RedlineResult | null>(null);
+  const { exportDocx } = useDocumentExport();
+
+  const handleDocxExport = useCallback(
+    async (doc: Document) => {
+      await exportDocx(toExportableDocument(doc));
+    },
+    [exportDocx]
+  );
 
   const filteredDocs = filterDocuments(DOCUMENTS, activeTab);
 
@@ -172,6 +198,7 @@ export function Documents() {
                 key={doc.id}
                 document={doc}
                 onRedline={() => setRedlineTarget(doc)}
+                onDocxExport={handleDocxExport}
               />
             ))}
           </div>
@@ -282,9 +309,10 @@ function TabButton({ label, isActive, onClick }: TabButtonProps) {
 interface DocumentCardProps {
   document: Document;
   onRedline: () => void;
+  onDocxExport: (doc: Document) => void;
 }
 
-function DocumentCard({ document, onRedline }: DocumentCardProps) {
+function DocumentCard({ document, onRedline, onDocxExport }: DocumentCardProps) {
   const typeBadge = {
     resume: { label: 'CV', icon: FileText, iconClass: 'text-primary' },
     cover: { label: 'LETTER', icon: Mail, iconClass: 'text-secondary' },
@@ -353,6 +381,17 @@ function DocumentCard({ document, onRedline }: DocumentCardProps) {
             title="Download as PDF"
           >
             <Download className="w-4 h-4" />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onDocxExport(document);
+            }}
+            className="p-2 rounded-scaffold bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary transition-all"
+            title="Download as DOCX"
+            data-testid={`docx-btn-${document.id}`}
+          >
+            <FileText className="w-4 h-4" />
           </button>
         </div>
       </div>

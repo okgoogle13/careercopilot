@@ -64,12 +64,20 @@ export const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProp
     const motionProps = shouldReduceMotion
       ? { whileHover: { opacity: 0.8 }, whileTap: { opacity: 0.6 } }
       : {
-          whileHover: { y: -4, scale: 1.02 },
-          whileTap: { scale: 0.98 },
+          whileHover: {
+            y: -2,
+            scale: 1.01,
+            borderRadius: 'var(--sys-shape-blockRiot02)', // Active/Hover morph
+          },
+          whileTap: {
+            scale: 0.98,
+            borderRadius: 'var(--sys-shape-strikePuff01)', // 'Puff' morph on press
+          },
           transition: {
             type: 'spring',
-            stiffness: 400,
-            damping: 20,
+            stiffness: 500,
+            damping: 30,
+            mass: 0.8,
           },
         };
 
@@ -78,7 +86,7 @@ export const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProp
         ref={ref}
         type="button"
         style={{
-          fontFamily: 'var(--sys-type-fontFamilies-primary, "Work Sans", sans-serif)',
+          fontFamily: 'var(--sys-type-fontFamilies-primary)',
           borderRadius: 'var(--sys-shape-blockRiot03)', // Strike archetype asymmetric radius
           ...variantStyles[variant],
         }}

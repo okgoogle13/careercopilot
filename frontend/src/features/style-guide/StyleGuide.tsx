@@ -26,6 +26,7 @@ import {
   KrIcon,
   Valve,
 } from '../../components/ui';
+import { SolidarityProgress } from '../../components/kerala-rage/SolidarityProgress';
 import { PageHeader } from '../../components/shared/PageHeader';
 import {
   ArchetypeMorphPreviewer,
@@ -285,14 +286,10 @@ export function StyleGuide() {
                     showDot
                   />
                 </div>
-                <div className="h-1.5 bg-outline-variant rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full bg-primary"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${progress}%` }}
-                    transition={{ type: 'spring', stiffness: 50, damping: 20 }}
-                  />
-                </div>
+                <SolidarityProgress
+                  progress={progress}
+                  color="var(--sys-color-solidarityRed-base)"
+                />
                 <p className="text-[9px] font-mono opacity-40 uppercase text-center">
                   {Math.round(progress)}% Validation Complete
                 </p>

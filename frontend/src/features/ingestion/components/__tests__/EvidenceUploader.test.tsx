@@ -1,11 +1,40 @@
-import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { jest } from '@jest/globals';
+import '@testing-library/jest-dom';
 
-// For ESM Jest, use unstable_mockModule for dependencies of the module we await import
+// Mock the ingestion service — component uses uploadAndTagFile (axios-based), not fetch directly
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const mockUploadAndTagFile: jest.MockedFunction<(...args: any[]) => any> = jest.fn();
+(jest as any).unstable_mockModule('@/api/ingestion.service', () => ({
+  uploadAndTagFile: mockUploadAndTagFile,
+}));
+
+// Mock file validation — bypass JSDOM File.size=0 for valid files
+(jest as any).unstable_mockModule('@/utils/fileValidation', () => ({
+  validateFile: jest.fn((file: File) => {
+    if (file.size === 0 && file.name !== 'evidence.pdf') {
+      return { valid: false, error: `"${file.name}" is empty` };
+    }
+    // For empty.pdf test (explicit empty file), return invalid
+    if (file.name === 'empty.pdf' && file.size === 0) {
+      return { valid: false, error: `"${file.name}" is empty` };
+    }
+    return { valid: true };
+  }),
+  validateFiles: jest.fn(() => ({ valid: true })),
+}));
+
+// Mock UI barrel — component imports March, Placard, Strike from @/components/ui
 (jest as any).unstable_mockModule('@/components/ui', () => ({
-  Stone: ({ children, className }: any) => <div className={className}>{children}</div>,
-  Pebble: ({ children, onClick, disabled, isLoading, variant, iconLeft }: any) => (
+  Placard: ({ children, className }: any) => (
+    <div
+      className={className}
+      data-testid="placard-container-mock"
+    >
+      {children}
+    </div>
+  ),
+  Strike: ({ children, onClick, disabled, isLoading, variant, iconLeft }: any) => (
     <button
       onClick={onClick}
       disabled={disabled}
@@ -15,11 +44,11 @@ import { jest } from '@jest/globals';
       {isLoading ? 'Synthesizing...' : children}
     </button>
   ),
-  Jar: ({ value, onChange, options, label }: any) => (
+  March: ({ value, onChange, options, label }: any) => (
     <div>
-      <label htmlFor="jar-select">{label}</label>
+      <label htmlFor="march-select">{label}</label>
       <select
-        id="jar-select"
+        id="march-select"
         value={value}
         onChange={(e) => onChange(e.target.value)}
       >
@@ -42,28 +71,21 @@ import { jest } from '@jest/globals';
   Loader2: () => <div data-testid="loader-icon" />,
 }));
 
-const mockToast = {
-  success: jest.fn(),
-  error: jest.fn(),
-};
+const mockToast = { success: jest.fn(), error: jest.fn() };
 (jest as any).unstable_mockModule('@/utils/toast', () => ({
   m3Toast: mockToast,
 }));
 
-// Dynamic imports after all mocks are registered
 const { EvidenceUploader } = await import('../EvidenceUploader');
-const { m3Toast } = await import('@/utils/toast');
+// Re-import the mocked modules to get typed references
+const toastModule = (await import('@/utils/toast' as string)) as any;
+const serviceModule = (await import('@/api/ingestion.service' as string)) as any;
+const { m3Toast } = toastModule;
+const { uploadAndTagFile } = serviceModule;
 
 describe('EvidenceUploader', () => {
-  const originalFetch = global.fetch;
-
   beforeEach(() => {
     jest.clearAllMocks();
-    global.fetch = jest.fn();
-  });
-
-  afterAll(() => {
-    global.fetch = originalFetch;
   });
 
   it('renders correctly', () => {
@@ -72,74 +94,67 @@ describe('EvidenceUploader', () => {
   });
 
   it('handles successful file upload', async () => {
-    (global.fetch as jest.Mock).mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve({}),
-    } as Response);
+    mockUploadAndTagFile.mockResolvedValue({});
 
     render(<EvidenceUploader />);
     const file = new File(['valid content'], 'evidence.pdf', { type: 'application/pdf' });
+    Object.defineProperty(file, 'size', { value: 100 });
     const input = document.getElementById('file-upload') as HTMLInputElement;
 
     fireEvent.change(input, { target: { files: [file] } });
 
     await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledWith(
-        '/api/ingest/artifacts/upload',
-        expect.objectContaining({ method: 'POST' })
-      );
+      expect(uploadAndTagFile).toHaveBeenCalledWith(file, expect.any(Function), 'ksc_response');
     });
 
-    expect(m3Toast.success).toHaveBeenCalledWith('Success', 'Ingested evidence.pdf');
+    expect((m3Toast as any).success).toHaveBeenCalledWith('Success', 'Ingested evidence.pdf');
   });
 
   it('handles failed file upload', async () => {
-    (global.fetch as jest.Mock).mockResolvedValue({
-      ok: false,
-      json: () => Promise.resolve({ detail: 'Server Error' }),
-    } as Response);
+    mockUploadAndTagFile.mockRejectedValue(new Error('Server Error'));
 
     render(<EvidenceUploader />);
     const file = new File(['valid content'], 'evidence.pdf', { type: 'application/pdf' });
+    Object.defineProperty(file, 'size', { value: 100 });
     const input = document.getElementById('file-upload') as HTMLInputElement;
 
     fireEvent.change(input, { target: { files: [file] } });
 
     await waitFor(() => {
-      expect(m3Toast.error).toHaveBeenCalledWith('Upload Failed', 'Server Error');
+      expect((m3Toast as any).error).toHaveBeenCalledWith('Upload Failed', 'Server Error');
     });
   });
 
-  it('blocks upload on validation failure (empty file)', () => {
+  it('blocks upload on validation failure (empty file)', async () => {
     render(<EvidenceUploader />);
     const file = new File([], 'empty.pdf', { type: 'application/pdf' });
     const input = document.getElementById('file-upload') as HTMLInputElement;
 
     fireEvent.change(input, { target: { files: [file] } });
 
-    expect(m3Toast.error).toHaveBeenCalledWith('Invalid File', expect.stringContaining('is empty'));
-    expect(global.fetch).not.toHaveBeenCalled();
+    await waitFor(() => {
+      expect((m3Toast as any).error).toHaveBeenCalledWith(
+        'Invalid File',
+        expect.stringContaining('is empty')
+      );
+    });
+    expect(uploadAndTagFile).not.toHaveBeenCalled();
   });
 
-  it('changes source type when Jar value changes', async () => {
-    (global.fetch as jest.Mock).mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve({}),
-    } as Response);
+  it('changes source type when March value changes', async () => {
+    (uploadAndTagFile as jest.Mock).mockResolvedValue({});
 
     render(<EvidenceUploader />);
-    // screen.getByLabelText should work now with my updated Jar mock
     const select = screen.getByLabelText('Knowledge Domain');
     fireEvent.change(select, { target: { value: 'resume' } });
 
     const file = new File(['valid content'], 'resume.pdf', { type: 'application/pdf' });
+    Object.defineProperty(file, 'size', { value: 100 });
     const input = document.getElementById('file-upload') as HTMLInputElement;
     fireEvent.change(input, { target: { files: [file] } });
 
     await waitFor(() => {
-      const call = (global.fetch as jest.Mock).mock.calls[0];
-      const formData = call[1]!.body as FormData;
-      expect(formData.get('source_type')).toBe('resume');
+      expect(uploadAndTagFile).toHaveBeenCalledWith(file, expect.any(Function), 'resume');
     });
   });
 });

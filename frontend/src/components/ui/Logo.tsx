@@ -31,7 +31,7 @@ export function Logo({ className, size = 'md', showText = true }: LogoProps) {
     <div className={cn('flex flex-col items-start', className)}>
       <div
         className={cn(
-          'rounded-march flex items-center justify-center bg-[var(--sys-color-primary-container)] text-[var(--sys-color-on-primary-container)] shadow-lg mb-4',
+          'rounded-march flex items-center justify-center bg-[var(--sys-color-solidarityRed-base)] text-[var(--sys-color-charcoalBackground-base)] shadow-elevation2Placard mb-4',
           sizeMap[size]
         )}
       >
@@ -39,10 +39,10 @@ export function Logo({ className, size = 'md', showText = true }: LogoProps) {
       </div>
       {showText && (
         <div className="flex flex-col">
-          <h4 className="text-[var(--sys-color-primary)] text-xl font-black uppercase tracking-tight leading-none">
+          <h4 className="text-[var(--sys-color-worker-ash-base)] text-xl font-black uppercase tracking-tight leading-none">
             CareerCopilot
           </h4>
-          <p className="text-[var(--sys-color-on-surface-variant)] mt-1 uppercase tracking-widest font-mono text-[10px]">
+          <p className="text-[var(--sys-color-concreteGrey-base)] mt-1 uppercase tracking-widest font-mono text-[10px]">
             TOOLS FOR THE COLLECTIVE
           </p>
         </div>

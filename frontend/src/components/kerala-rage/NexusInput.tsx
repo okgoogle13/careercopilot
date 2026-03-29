@@ -11,10 +11,10 @@ export interface NexusInputProps extends React.InputHTMLAttributes<HTMLInputElem
 }
 
 /**
- * NexusInput (Pebble)
+ * NexusInput (ScaffoldInput Archetype)
  *
  * Unified input pattern for the Kerala Rage tactical interface.
- * Implements "Pebble" rounding with interactive focus states.
+ * Implements "ScaffoldInput" structural rounding with interactive focus states.
  *
  * @mission Technical precision, accessible labeling, and fluid interaction.
  */
@@ -53,8 +53,8 @@ export const NexusInput = React.forwardRef<HTMLInputElement, NexusInputProps>(
             aria-label={label}
             className={cn(
               // Base Styles
-              'w-full bg-asphalt-black text-paper-white font-primary',
-              'border-2 border-white/10 rounded-pebble',
+              'w-full bg-asphalt-black text-paper-white',
+              'border-2 border-white/10',
               'placeholder:text-white/30',
 
               // Spacing
@@ -72,7 +72,8 @@ export const NexusInput = React.forwardRef<HTMLInputElement, NexusInputProps>(
             )}
             style={{
               // Ensure we don't accidentally inherit display fonts
-              fontFamily: 'var(--font-primary)',
+              fontFamily: 'var(--sys-type-fontFamilies-primary)',
+              borderRadius: 'var(--sys-shape-scaffoldFrame01)',
             }}
             {...props}
           />

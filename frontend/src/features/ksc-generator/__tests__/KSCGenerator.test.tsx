@@ -1,59 +1,25 @@
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
 
-(jest as any).unstable_mockModule('framer-motion', () => ({
-  motion: {
-    div: ({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-      <div {...props}>{children}</div>
-    ),
-  },
-  AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-}));
+// All unstable_mockModule calls must precede dynamic imports
 
-(jest as any).unstable_mockModule('lucide-react', () => ({
-  ArrowLeft: () => <span data-testid="icon-arrow-left" />,
-  ArrowRight: () => <span data-testid="icon-arrow-right" />,
-  CheckCircle2: () => <span data-testid="icon-check-circle" />,
-  Copy: () => <span data-testid="icon-copy" />,
-  Download: () => <span data-testid="icon-download" />,
-  RefreshCw: () => <span data-testid="icon-refresh" />,
-  Sparkles: () => <span data-testid="icon-sparkles" />,
-}));
-
-(jest as any).unstable_mockModule('@careercopilot/ui', () => ({
-  Button: ({ children, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
-    <button {...props}>{children}</button>
-  ),
-  Input: (props: React.InputHTMLAttributes<HTMLInputElement>) => <input {...props} />,
-  Textarea: (props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) => <textarea {...props} />,
-}));
-
-(jest as any).unstable_mockModule('sonner', () => ({
-  toast: {
-    info: jest.fn(),
-    success: jest.fn(),
-    error: jest.fn(),
-    promise: jest.fn(),
-  },
-}));
-
-const getKSCDraft = jest.fn().mockResolvedValue(null);
-const saveKSCDraft = jest.fn().mockResolvedValue(undefined);
-const clearKSCDraft = jest.fn().mockResolvedValue(undefined);
-const getUserProfile = jest.fn().mockResolvedValue({});
+const mockApi = {
+  getKSCDraft: jest.fn() as jest.MockedFunction<(...args: any[]) => any>,
+  saveKSCDraft: jest.fn() as jest.MockedFunction<(...args: any[]) => any>,
+  generateKSC: jest.fn() as jest.MockedFunction<(...args: any[]) => any>,
+  clearKSCDraft: jest.fn() as jest.MockedFunction<(...args: any[]) => any>,
+  getUserProfile: jest.fn() as jest.MockedFunction<(...args: any[]) => any>,
+};
 
 (jest as any).unstable_mockModule('@/services/api', () => ({
-  api: {
-    getKSCDraft: () => getKSCDraft(),
-    saveKSCDraft: (...args: unknown[]) => saveKSCDraft(...args),
-    clearKSCDraft: () => clearKSCDraft(),
-    getUserProfile: () => getUserProfile(),
-  },
+  api: mockApi,
 }));
 
 (jest as any).unstable_mockModule('@/services/genkit', () => ({
   genkitApi: {
+    generateKSCAll: jest.fn(),
     analyzeJobFromUrl: jest.fn(),
     generateKSCResponse: jest.fn(),
   },
@@ -65,51 +31,111 @@ const getUserProfile = jest.fn().mockResolvedValue({});
 
 (jest as any).unstable_mockModule('@/hooks/useAnalytics', () => ({
   useAnalytics: () => ({
+    trackEvent: jest.fn(),
     track: jest.fn(),
   }),
 }));
 
+(jest as any).unstable_mockModule('sonner', () => ({
+  toast: {
+    info: jest.fn(),
+    success: jest.fn(),
+    error: jest.fn(),
+    promise: jest.fn(),
+  },
+}));
+
+(jest as any).unstable_mockModule('@/features/documents/hooks/useDocumentExport', () => ({
+  useDocumentExport: () => ({ exportDocx: jest.fn() }),
+}));
+
+(jest as any).unstable_mockModule('file-saver', () => ({
+  saveAs: jest.fn(),
+  default: { saveAs: jest.fn() },
+}));
+
+(jest as any).unstable_mockModule('@/features/documents/services/docxExport', () => ({
+  exportDocumentAsDocx: jest.fn(),
+}));
+
+(jest as any).unstable_mockModule('@/design/tokens/motion-presets', () => ({
+  KrDarkSpring: {},
+  staggerContainer: {},
+}));
+
 (jest as any).unstable_mockModule('@/screens/08_workbench/DocumentWorkbench', () => ({
-  DocumentWorkbench: ({
-    children,
-    title,
-    subtitle,
-  }: {
-    children: React.ReactNode;
-    title?: string;
-    subtitle?: string;
-  }) => (
-    <section data-testid="document-workbench">
+  DocumentWorkbench: ({ children, title, subtitle }: any) => (
+    <div data-testid="documentworkbench">
       <h1>{title}</h1>
       <p>{subtitle}</p>
       {children}
-    </section>
+    </div>
   ),
 }));
 
-const { KSCGenerator } = await import('../KSCGenerator');
+(jest as any).unstable_mockModule('lucide-react', () => {
+  const cache = new Map<string, any>();
+  return new Proxy(
+    {},
+    {
+      get: (_t, prop) => {
+        if (typeof prop !== 'string') return undefined;
+        if (!cache.has(prop)) {
+          const Icon = ({ className }: any) =>
+            React.createElement('span', { 'data-testid': `icon-${prop.toLowerCase()}`, className });
+          cache.set(prop, Icon);
+        }
+        return cache.get(prop);
+      },
+    }
+  );
+});
+
+const { KSCGenerator } = (await import('../KSCGenerator')) as any;
 
 describe('KSCGenerator', () => {
+  const mockData = {
+    criteria: 'Experience in React',
+    star: { situation: 'Initial React response', task: '', action: '', result: '' },
+    step: 1,
+  };
+
   beforeEach(() => {
     jest.clearAllMocks();
+    mockApi.getKSCDraft.mockResolvedValue(mockData);
+    mockApi.saveKSCDraft.mockResolvedValue(undefined);
   });
 
-  it('renders inside the DocumentWorkbench shell with the step-one content', async () => {
+  const renderPage = () =>
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <KSCGenerator />
-      </BrowserRouter>
+      </MemoryRouter>
     );
 
+  it('renders correctly and loads data from api', async () => {
+    renderPage();
+
     await waitFor(() => {
-      expect(screen.getByTestId('document-workbench')).toBeInTheDocument();
+      expect(mockApi.getKSCDraft).toHaveBeenCalled();
     });
 
-    expect(screen.getByText('Key Selection Criteria')).toBeInTheDocument();
-    expect(
-      screen.getByText(/Draft structured KSC responses using the STAR method/i)
-    ).toBeInTheDocument();
-    expect(screen.getByText(/Target Selection Criteria/i)).toBeInTheDocument();
-    expect(screen.getByText(/Step 1 of 3/i)).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Key Selection Criteria')).toBeInTheDocument();
+      expect(screen.getByText('Target Selection Criteria')).toBeInTheDocument();
+    });
+  });
+
+  it('updates criterion response correctly', async () => {
+    renderPage();
+
+    await waitFor(() => {
+      expect(screen.getByText('Target Selection Criteria')).toBeInTheDocument();
+    });
+
+    const textarea = screen.getAllByRole('textbox')[0];
+    fireEvent.change(textarea, { target: { value: 'Successfully led React projects.' } });
+
+    expect(textarea).toHaveValue('Successfully led React projects.');
   });
 });

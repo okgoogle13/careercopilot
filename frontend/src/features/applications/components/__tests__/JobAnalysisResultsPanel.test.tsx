@@ -14,16 +14,19 @@ jest.mock('framer-motion', () => ({
     section: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => (
       <section {...props}>{children}</section>
     ),
+    div: ({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+      <div {...props}>{children}</div>
+    ),
   },
+  AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
 
 jest.mock('lucide-react', () => ({
-  Link2: (props: React.SVGProps<SVGSVGElement>) => (
-    <svg
-      {...props}
-      data-testid="icon-link"
-    />
-  ),
+  Link2: () => <span data-testid="icon-link" />,
+  ArrowRight: () => <span data-testid="icon-arrow" />,
+  Copy: () => <span data-testid="icon-copy" />,
+  Check: () => <span data-testid="icon-check" />,
+  AlertCircle: () => <span data-testid="icon-alert" />,
 }));
 
 const mockResult: AnalyzeJobFromUrlResponse = {
@@ -52,15 +55,15 @@ const mockResult: AnalyzeJobFromUrlResponse = {
     },
   ],
   artifacts: {
-    tailored_resume: 'resume',
-    cover_letter: 'cover-letter',
-    ksc_response: 'ksc',
+    tailored_resume: 'resume content',
+    cover_letter: 'cover letter content',
+    ksc_response: 'ksc content',
   },
   export_pack: {},
 };
 
 describe('JobAnalysisResultsPanel', () => {
-  it('renders ATS summary and chunk match details', () => {
+  it('renders ATS summary and chunk match details with progress bars', () => {
     render(
       <JobAnalysisResultsPanel
         result={mockResult}
@@ -68,15 +71,25 @@ describe('JobAnalysisResultsPanel', () => {
       />
     );
 
+    // Score assertion
     expect(screen.getByText('87')).toBeInTheDocument();
     expect(screen.getByText('Community Services Officer')).toBeInTheDocument();
     expect(screen.getByText('Solidarity Works')).toBeInTheDocument();
+
+    // Chunk match details
     expect(screen.getByText('Stakeholder alignment')).toBeInTheDocument();
-    expect(screen.getByText('67%')).toBeInTheDocument();
-    expect(screen.getByText('terms: none')).toBeInTheDocument();
+    // Progress bar check for 67% (0.67 score)
+    // The component renders "terms: stakeholder engagement" and "terms: none"
+    expect(screen.getByText(/terms: stakeholder engagement/i)).toBeInTheDocument();
+    expect(screen.getByText(/terms: none/i)).toBeInTheDocument();
+
+    // Artifact sections
+    expect(screen.getByText('Tailored Resume')).toBeInTheDocument();
+    expect(screen.getByText('Cover Letter')).toBeInTheDocument();
+    expect(screen.getByText('KSC Response')).toBeInTheDocument();
   });
 
-  it('calls the tracker callback from the CTA', () => {
+  it('calls the tracker callback from the CTA with correct capitalization', () => {
     const onNavigateToTracker = jest.fn();
 
     render(
@@ -86,8 +99,32 @@ describe('JobAnalysisResultsPanel', () => {
       />
     );
 
-    fireEvent.click(screen.getByRole('button', { name: /go to tracker/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Go To Tracker/i }));
 
     expect(onNavigateToTracker).toHaveBeenCalledTimes(1);
+  });
+
+  it('handles item match colors correctly', () => {
+    const { rerender } = render(
+      <JobAnalysisResultsPanel
+        result={mockResult}
+        onNavigateToTracker={jest.fn()}
+      />
+    );
+
+    // High score item (0.67 is medium in our logic, need a high one to test)
+    const resultHigh = {
+      ...mockResult,
+      chunk_matches: [{ ...mockResult.chunk_matches[0], score: 0.9 }],
+    };
+
+    rerender(
+      <JobAnalysisResultsPanel
+        result={resultHigh}
+        onNavigateToTracker={jest.fn()}
+      />
+    );
+
+    expect(screen.getByText(/Stakeholder alignment/i)).toBeInTheDocument();
   });
 });

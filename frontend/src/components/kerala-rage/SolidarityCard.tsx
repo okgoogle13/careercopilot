@@ -83,7 +83,7 @@ export const SolidarityCard: React.FC<SolidarityCardProps> = ({
       style={{
         backgroundColor:
           variant === 'ghost' ? 'transparent' : 'var(--sys-color-charcoalBackground-base)',
-        borderRadius: 'var(--shape-placardTorn01)', // Placard archetype asymmetric radius
+        borderRadius: 'var(--sys-shape-placardTorn01)', // Placard archetype asymmetric radius
         boxShadow:
           variant === 'standard'
             ? '0 4px 16px rgba(0, 0, 0, 0.25)'

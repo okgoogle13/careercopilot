@@ -24,11 +24,11 @@ import { render, screen, fireEvent } from '@testing-library/react';
 }));
 
 // Mock UI components
-(jest as any).unstable_mockModule('@/components/ui/Pebble', () => ({
-  Pebble: ({ children, onClick }: any) => (
+(jest as any).unstable_mockModule('@/components/ui/Strike', () => ({
+  Strike: ({ children, onClick }: any) => (
     <button
       onClick={onClick}
-      data-testid="pebble-btn"
+      data-testid="strike-btn"
     >
       {children}
     </button>
@@ -39,8 +39,8 @@ import { render, screen, fireEvent } from '@testing-library/react';
   StatusBadge: ({ label }: any) => <div data-testid="status-badge">{label}</div>,
 }));
 
-(jest as any).unstable_mockModule('@/components/ui/Stone', () => ({
-  Stone: ({ children }: any) => <div data-testid="stone-container">{children}</div>,
+(jest as any).unstable_mockModule('@/components/ui/Placard', () => ({
+  Placard: ({ children }: any) => <div data-testid="placard-container">{children}</div>,
 }));
 
 const { TimelineView } = await import('../TimelineView');

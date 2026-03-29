@@ -206,6 +206,7 @@ node scripts/kr/generate-hero-registry.mjs # → public/assets/...hero-registry.
 | brainstorming | .claude/skills/brainstorming | Transforms vague ideas into validated designs through disciplined reasoning and collaboration. |
 | blueprint | .claude/skills/blueprint | Turns an objective into a step-by-step construction plan any coding agent can execute cold. |
 | git-pr-workflows-git-workflow | .claude/skills/git-pr-workflows-git-workflow | Orchestrates a comprehensive git workflow from code review through PR creation, with compliance checks. |
+| sequential-thinking | .claude/skills/sequential-thinking | MCP server integration to map out complex logic, multi-step problem solving, and dynamic thought processing. |
 
 ### Design System & Asset Skills
 | Skill | Directory | Description |

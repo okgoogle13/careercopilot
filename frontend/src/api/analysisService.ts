@@ -7,14 +7,25 @@ import { axiosInstance } from '@/api/axiosConfig';
 
 export interface AtsScoreResponse {
   overallScore: number;
+  summary: string;
+  breakdown: {
+    keywordDensityScore: number;
+    jobTitleScore: number;
+    semanticScore: number;
+    educationExperienceScore: number;
+    formattingScore: number;
+  };
   categories: Array<{
     name: string;
     score: number;
     status: string;
     suggestions: string[];
   }>;
-  matched_keywords: string[];
-  missing_keywords: string[];
+  keywordMatches: {
+    matched: string[];
+    missing: string[];
+  };
+  recommendations: string[];
 }
 
 export interface CorporateProfile {

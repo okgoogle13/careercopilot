@@ -1,18 +1,24 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 
-// Mock lucide-react first
-(jest as any).unstable_mockModule('lucide-react', () => ({
-  Search: () => <div data-testid="search-icon" />,
-  MapPin: () => <div data-testid="map-pin-icon" />,
-  Briefcase: () => <div data-testid="briefcase-icon" />,
-  Filter: () => <div data-testid="filter-icon" />,
-  Building: () => <div data-testid="building-icon" />,
-  Globe: () => <div data-testid="globe-icon" />,
-  Save: () => <div data-testid="save-icon" />,
-  Share2: () => <div data-testid="share2-icon" />,
-  Loader2: () => <div data-testid="loader2-icon" />,
-}));
+// Mock lucide-react — Proxy covers any icon the component imports
+(jest as any).unstable_mockModule('lucide-react', () => {
+  const cache = new Map<string, any>();
+  return new Proxy(
+    {},
+    {
+      get: (_t, prop) => {
+        if (typeof prop !== 'string') return undefined;
+        if (!cache.has(prop)) {
+          const Icon = ({ className }: any) =>
+            React.createElement('div', { 'data-testid': `${prop.toLowerCase()}-icon`, className });
+          cache.set(prop, Icon);
+        }
+        return cache.get(prop);
+      },
+    }
+  );
+});
 
 // Mock components
 (jest as any).unstable_mockModule('@/components/shared/JobCard', () => ({
@@ -24,10 +30,10 @@ import { render, screen, fireEvent } from '@testing-library/react';
   ),
 }));
 
-(jest as any).unstable_mockModule('@/components/ui/Lens', () => ({
-  Lens: ({ value, onChange, placeholder, className }: any) => (
+(jest as any).unstable_mockModule('@/components/ui/ScaffoldInput', () => ({
+  ScaffoldInput: ({ value, onChange, placeholder, className }: any) => (
     <input
-      data-testid="lens-input"
+      data-testid="scaffold-input-mock"
       value={value}
       onChange={onChange}
       placeholder={placeholder}
@@ -36,12 +42,12 @@ import { render, screen, fireEvent } from '@testing-library/react';
   ),
 }));
 
-(jest as any).unstable_mockModule('@/components/ui/Pebble', () => ({
-  Pebble: ({ children, onClick, disabled }: any) => (
+(jest as any).unstable_mockModule('@/components/ui/Strike', () => ({
+  Strike: ({ children, onClick, disabled }: any) => (
     <button
       onClick={onClick}
       disabled={disabled}
-      data-testid="pebble-button"
+      data-testid="strike-button-mock"
     >
       {children}
     </button>
@@ -64,7 +70,7 @@ describe('JobSearch', () => {
   it('filters job listings based on search query', () => {
     render(<JobSearch />);
 
-    const input = screen.getByTestId('lens-input');
+    const input = screen.getByTestId('scaffold-input-mock');
     fireEvent.change(input, { target: { value: 'Senior' } });
 
     const jobCards = screen.getAllByTestId('job-card');
@@ -75,7 +81,7 @@ describe('JobSearch', () => {
   it('shows no jobs found message for non-matching query', () => {
     render(<JobSearch />);
 
-    const input = screen.getByTestId('lens-input');
+    const input = screen.getByTestId('scaffold-input-mock');
     fireEvent.change(input, { target: { value: 'Zookeeper' } });
 
     expect(screen.getByText('No jobs found')).toBeInTheDocument();
@@ -85,7 +91,7 @@ describe('JobSearch', () => {
   it('clears search when "Clear Search" is clicked', () => {
     render(<JobSearch />);
 
-    const input = screen.getByTestId('lens-input');
+    const input = screen.getByTestId('scaffold-input-mock');
     fireEvent.change(input, { target: { value: 'Zookeeper' } });
 
     const clearButton = screen.getByText('Clear Search');

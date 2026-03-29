@@ -202,20 +202,18 @@ export enum AppState {
 
 export interface ATSScoreResult {
   overallScore: number;
+  summary: string;
   breakdown: {
-    keywordMatch: number;
-    skillsAlignment: number;
-    jobTitleMatch: number;
-    experienceRelevance: number;
-    formatCompliance: number;
-    narrativeQuality?: number;
-    personalizationScore?: number;
-    toneProfessionalism?: number;
+    keywordDensityScore: number;
+    jobTitleScore: number;
+    semanticScore: number;
+    educationExperienceScore: number;
+    formattingScore: number;
   };
   matchedKeywords: string[];
   missingKeywords: string[];
-  suggestions: string[];
-  keywordDensity: Record<string, number>;
+  recommendations: string[];
+  keywordDensity?: Record<string, number>;
 }
 
 export interface CoverLetterScoreResult extends ATSScoreResult {

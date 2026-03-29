@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { lazy, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import AnimationTestPage from './pages/AnimationTest';
 import {
   Navigate,
@@ -10,41 +10,55 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { Toaster } from 'sonner';
-const texturePattern =
-  '/assets/kr-solidarity/texture/kr-solidarity__substrate__landmark--melbourne-laneway--v1.png';
+import { BannerTexture } from './components/kerala-rage/BannerTexture';
 import './design/styles/design-tokens.css';
 import { MigratedRouteLayout } from './layouts/MigratedRouteLayout';
 import { getModeForRoute } from './config/routeModeMap';
 import { useAuth } from './context/AuthContext';
-import { AssetLibrary } from './features/analysis/AssetLibrary';
-import { AnalysisPage } from './features/analysis/AnalysisPage';
-import { ApplicationTracker } from './features/applications/ApplicationTracker';
-import { ApplyQuick } from './features/applications/ApplyQuick';
-import { CoverLetterGenerator } from './features/applications/CoverLetterGenerator';
-import { Login } from './features/auth/Login';
-import { Register } from './features/auth/Register';
-import { Dashboard } from './features/dashboard/Dashboard';
-import { Documents } from './features/documents/Documents';
-import { KSCGenerator } from './features/ksc-generator/KSCGenerator';
-import { LandingPage } from './features/landing/LandingPage';
-import { NotFound } from './features/not-found/NotFound';
-import { OnboardingRoute } from './features/onboarding/OnboardingRoute';
-import { WelcomeScreen } from './features/onboarding/WelcomeScreen';
-import { Opportunities } from './features/opportunities/Opportunities';
-import { ProfileView } from './features/profile/ProfileView';
-import { Settings } from './features/settings/Settings';
 import { Layout } from './layouts/Layout';
+import { useModeStore } from './stores/useModeStore';
+
+// Canonical Pages
+import LandingPage from './pages/LandingPage';
+import OnboardingPage from './pages/OnboardingPage';
+import DashboardPage from './pages/DashboardPage';
+import ProfilePage from './pages/ProfilePage';
+import LookoutPage from './pages/LookoutPage';
+import ApplicationsPage from './pages/ApplicationsPage';
+import AnalysisPage from './pages/AnalysisPage';
+import DocsPage from './pages/DocsPage';
+import ApplyPage from './pages/ApplyPage';
+import GenerationPage from './pages/GenerationPage';
+import SettingsPage from './pages/SettingsPage';
+import AuthModal from './screens/02_auth/AuthModal';
+import { Scaffold } from './components/archetypes';
+
+// Preserved non-canonical / utility
+import { NotFound } from './features/not-found/NotFound';
 import { StyleGuide } from './features/style-guide/StyleGuide';
 import DesignSidekick from './features/design-sidekick/DesignSidekick';
 import { TokenTest } from './components/debug/TokenTest';
-const SmartIngestion = lazy(() => import('./features/ingestion/SmartIngestion'));
-import { JobQueue } from './features/jobs/JobQueue';
-import { useModeStore } from './stores/useModeStore';
-import { PrototypeRoutes } from './prototype-features/prototype-routes';
+import { AssetLibrary } from './features/analysis/AssetLibrary';
+
+/**
+ * AuthPage Bridge
+ * Handles /auth canonical route with mode detection
+ */
+function AuthPage() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const mode = (searchParams.get('mode') as 'login' | 'register') || 'login';
+
+  return (
+    <Scaffold>
+      <AuthModal mode={mode} />
+    </Scaffold>
+  );
+}
 
 /**
  * ModeSync Component
- * Automatically switches between KrDark and KrDark modes based on the current route
+ * Automatically switches between modes based on the current route
  */
 export function ModeSync() {
   const location = useLocation();
@@ -82,7 +96,7 @@ export const RequireAuth = () => {
   if (!user && !isDemoMode) {
     return (
       <Navigate
-        to="/login"
+        to="/auth"
         replace
       />
     );
@@ -97,17 +111,18 @@ export const ProtectedLayout = () => {
 
   return (
     <Layout>
+      <BannerTexture />
       <AnimatePresence>
         <motion.div
           key={location.pathname}
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.98, y: 12 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0 }}
           transition={{
-            duration: 0.5,
-            ease: [0.175, 0.885, 0.32, 1.275], // expressive-spring
+            duration: 0.45,
+            ease: [0.175, 0.885, 0.32, 1.1],
           }}
-          className="min-h-screen"
+          className="min-h-screen relative z-10"
         >
           <Outlet />
         </motion.div>
@@ -118,58 +133,15 @@ export const ProtectedLayout = () => {
 
 // Public Layout (Login/Register/Landing)
 export const PublicLayout = () => {
-  const showSentryTestButton =
-    import.meta.env.DEV && import.meta.env.VITE_SHOW_SENTRY_TEST_BUTTON === 'true';
-
   return (
-    <div className="min-h-screen bg-[var(--sys-color-charcoalBackground-base)] relative">
-      {/* Textured Background */}
-      <div
-        className="fixed inset-0 pointer-events-none z-0 opacity-30 mix-blend-overlay"
-        style={{
-          backgroundImage: `url(${texturePattern})`,
-          backgroundRepeat: 'repeat',
-          backgroundSize: 'auto',
-        }}
-      />
+    <div className="min-h-screen bg-charcoalBackground-base text-worker-ash-base relative">
+      <BannerTexture />
       <div className="relative z-10">
-        {/* Temporary Sentry Test Button */}
-        {showSentryTestButton && (
-          <button
-            onClick={() => {
-              throw new Error('Sentry Frontend Test Error');
-            }}
-            style={{
-              position: 'fixed',
-              bottom: '20px',
-              right: '20px',
-              padding: '10px',
-              background: 'var(--sys-color-inkGold-base)',
-              color: 'var(--sys-color-charcoalBackground-base)',
-              borderRadius: '8px',
-              zIndex: 9999,
-              cursor: 'pointer',
-              fontWeight: 'bold',
-              border: '1px solid var(--sys-color-outline-variant)',
-            }}
-          >
-            Trigger Sentry Error
-          </button>
-        )}
         <Outlet />
       </div>
     </div>
   );
 };
-
-export function ModeSyncWrapper() {
-  return (
-    <>
-      <ModeSync />
-      <Outlet />
-    </>
-  );
-}
 
 export default function App() {
   return (
@@ -194,13 +166,29 @@ export default function App() {
             element={<LandingPage />}
           />
           <Route
+            path="/auth"
+            element={<AuthPage />}
+          />
+          <Route
             path="/login"
-            element={<Login />}
+            element={
+              <Navigate
+                to="/auth?mode=login"
+                replace
+              />
+            }
           />
           <Route
             path="/register"
-            element={<Register />}
+            element={
+              <Navigate
+                to="/auth?mode=register"
+                replace
+              />
+            }
           />
+
+          {/* Developer / Internal Routes */}
           <Route
             path="/design-sidekick"
             element={<DesignSidekick />}
@@ -208,15 +196,6 @@ export default function App() {
           <Route
             path="/style-guide"
             element={<StyleGuide />}
-          />
-          <Route
-            path="/auth"
-            element={
-              <Navigate
-                to="/login"
-                replace
-              />
-            }
           />
           <Route
             path="/animation-test"
@@ -228,72 +207,122 @@ export default function App() {
           />
         </Route>
 
-        {/* Prototype Routes — no auth required, quarantine zone */}
-        <Route
-          path="/prototype/*"
-          element={<PrototypeRoutes />}
-        />
-
-        {/* Protected Routes */}
+        {/* Protected Canonical Routes */}
         <Route element={<RequireAuth />}>
           <Route element={<MigratedRouteLayout />}>
-            {/* Step 3a: CRUD verified via REST; local Python client blocked by gRPC hang */}
-            <Route
-              path="/tracker"
-              element={<ApplicationTracker />}
-            />
             <Route
               path="/dashboard"
-              element={<Dashboard />}
+              element={<DashboardPage />}
+            />
+            <Route
+              path="/profile"
+              element={<ProfilePage />}
+            />
+            <Route
+              path="/lookout"
+              element={<LookoutPage />}
+            />
+            <Route
+              path="/applications"
+              element={<ApplicationsPage />}
             />
             <Route
               path="/analysis"
               element={<AnalysisPage />}
             />
             <Route
-              path="/opportunities"
-              element={<Opportunities />}
+              path="/docs"
+              element={<DocsPage />}
             />
             <Route
-              path="/career/ingest"
-              element={<SmartIngestion />}
+              path="/apply"
+              element={<ApplyPage />}
             />
             <Route
-              path="/apply/quick"
-              element={<ApplyQuick />}
+              path="/generation"
+              element={<GenerationPage />}
             />
             <Route
               path="/settings"
-              element={<Settings />}
+              element={<SettingsPage />}
             />
-            <Route
-              path="/profile"
-              element={<ProfileView />}
-            />
-            {/* Step 6B: shell-promoted — token-enforcement + migration-audit passed */}
             <Route
               path="/onboarding"
-              element={<OnboardingRoute />}
+              element={<OnboardingPage />}
+            />
+
+            {/* Legacy Redirects */}
+            <Route
+              path="/tracker"
+              element={
+                <Navigate
+                  to="/applications"
+                  replace
+                />
+              }
+            />
+            <Route
+              path="/opportunities"
+              element={
+                <Navigate
+                  to="/lookout"
+                  replace
+                />
+              }
+            />
+            <Route
+              path="/career/ingest"
+              element={
+                <Navigate
+                  to="/profile"
+                  replace
+                />
+              }
+            />
+            <Route
+              path="/apply/quick"
+              element={
+                <Navigate
+                  to="/apply"
+                  replace
+                />
+              }
             />
             <Route
               path="/ksc-generator"
-              element={<KSCGenerator />}
+              element={
+                <Navigate
+                  to="/generation"
+                  replace
+                />
+              }
             />
             <Route
               path="/cover-letter-generator"
-              element={<CoverLetterGenerator />}
+              element={
+                <Navigate
+                  to="/generation"
+                  replace
+                />
+              }
             />
             <Route
               path="/job-queue"
-              element={<JobQueue />}
-            />
-            <Route
-              path="/welcome"
-              element={<WelcomeScreen />}
+              element={
+                <Navigate
+                  to="/dashboard"
+                  replace
+                />
+              }
             />
             <Route
               path="/documents"
-              element={<Documents />}
+              element={
+                <Navigate
+                  to="/docs"
+                  replace
+                />
+              }
             />
             <Route
               path="/dashboard-overview"
@@ -308,7 +337,7 @@ export default function App() {
               path="/kanban"
               element={
                 <Navigate
-                  to="/tracker"
+                  to="/applications"
                   replace
                 />
               }
@@ -317,7 +346,7 @@ export default function App() {
               path="/ingestion"
               element={
                 <Navigate
-                  to="/career/ingest"
+                  to="/profile"
                   replace
                 />
               }
@@ -326,7 +355,7 @@ export default function App() {
               path="/feed"
               element={
                 <Navigate
-                  to="/opportunities"
+                  to="/lookout"
                   replace
                 />
               }
@@ -335,7 +364,7 @@ export default function App() {
               path="/studio"
               element={
                 <Navigate
-                  to="/ksc-generator"
+                  to="/generation"
                   replace
                 />
               }
@@ -344,7 +373,16 @@ export default function App() {
               path="/editor"
               element={
                 <Navigate
-                  to="/documents"
+                  to="/docs"
+                  replace
+                />
+              }
+            />
+            <Route
+              path="/welcome"
+              element={
+                <Navigate
+                  to="/onboarding"
                   replace
                 />
               }
@@ -353,7 +391,6 @@ export default function App() {
 
           {/* ProtectedLayout: support-only surfaces that intentionally remain on the legacy shell. */}
           <Route element={<ProtectedLayout />}>
-            {/* support-only: asset library is analysis/ingestion tooling, not a product pillar */}
             <Route
               path="/asset-library"
               element={<AssetLibrary />}

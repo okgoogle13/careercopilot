@@ -2,31 +2,34 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 import '@testing-library/jest-dom';
 
-// Mock UI components
-(jest as any).unstable_mockModule('@/components/ui', () => ({
-  Pebble: ({ children, onClick, disabled }: any) => (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      data-testid="pebble-button"
-    >
-      {children}
-    </button>
-  ),
-  Signal: ({ children }: any) => <div data-testid="signal">{children}</div>,
-  Stone: ({ children, className }: any) => (
-    <div
-      className={className}
-      data-testid="stone"
-    >
-      {children}
-    </div>
-  ),
+// Mock individual UI component paths (component uses direct imports, not barrel)
+(jest as any).unstable_mockModule('@/components/ui/Vessel', () => ({
   Vessel: ({ title, children }: any) => (
     <div data-testid="vessel">
       <h3>{title}</h3>
       {children}
     </div>
+  ),
+}));
+
+(jest as any).unstable_mockModule('@/components/ui/Placard', () => ({
+  Placard: ({ children, header }: any) => (
+    <div data-testid="placard">
+      {header}
+      {children}
+    </div>
+  ),
+}));
+
+(jest as any).unstable_mockModule('@/components/ui/Strike', () => ({
+  Strike: ({ children, onClick, disabled }: any) => (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      data-testid="strike-button"
+    >
+      {children}
+    </button>
   ),
 }));
 
@@ -50,6 +53,19 @@ import '@testing-library/jest-dom';
   ),
 }));
 
+// Mock sub-components to avoid loading their lucide/framer dependencies
+(jest as any).unstable_mockModule('@/features/analysis/components/ValidationStats', () => ({
+  ValidationStats: () => <div data-testid="validation-stats" />,
+}));
+
+(jest as any).unstable_mockModule('@/features/analysis/components/AuditLogList', () => ({
+  AuditLogList: () => <div data-testid="audit-log-list" />,
+}));
+
+(jest as any).unstable_mockModule('@/features/analysis/components/SourceVerificationGrid', () => ({
+  SourceVerificationGrid: () => <div data-testid="source-verification-grid" />,
+}));
+
 // Mock toast
 (jest as any).unstable_mockModule('@/utils/toast', () => ({
   m3Toast: {
@@ -58,12 +74,15 @@ import '@testing-library/jest-dom';
   },
 }));
 
-// Mock lucide-react (already handled by setupTests but let's be explicit if needed)
+// Mock lucide-react — includes CheckCircle2 used in achievement header
 (jest as any).unstable_mockModule('lucide-react', () => ({
   AlertTriangle: () => <span>AlertTriangle</span>,
   BrainCircuit: () => <span>BrainCircuit</span>,
   Briefcase: () => <span>Briefcase</span>,
+  CheckCircle2: () => <span>CheckCircle2</span>,
+  ChevronDown: () => <span>ChevronDown</span>,
   Download: () => <span>Download</span>,
+  Loader2: () => <span>Loader2</span>,
   Redo2: () => <span>Redo2</span>,
   ShieldCheck: () => <span>ShieldCheck</span>,
   Sparkles: () => <span>Sparkles</span>,
@@ -125,11 +144,9 @@ describe('ValidationDashboard', () => {
       />
     );
 
-    // Check for unique heading text
-    expect(screen.getByText('Professional Vector')).toBeInTheDocument();
+    expect(screen.getByText('AI STUDIO HARVEST')).toBeInTheDocument();
     expect(screen.getByDisplayValue('John Doe')).toBeInTheDocument();
-    expect(screen.getByText('Tactical Achievements')).toBeInTheDocument();
-    expect(screen.getByText('Core Competencies')).toBeInTheDocument();
+    expect(screen.getByText('ACHIEVEMENTS')).toBeInTheDocument();
   });
 
   it('handles field updates', () => {
@@ -140,7 +157,7 @@ describe('ValidationDashboard', () => {
       />
     );
 
-    const nameInput = screen.getByTestId('input-full-legal-name');
+    const nameInput = screen.getByTestId('input-full-name');
     fireEvent.change(nameInput, { target: { value: 'Jane Doe' } });
     fireEvent.blur(nameInput);
 
@@ -153,7 +170,7 @@ describe('ValidationDashboard', () => {
     );
   });
 
-  it('applies AI suggestions', () => {
+  it('handles needs-review flag update', () => {
     render(
       <ValidationDashboard
         data={mockData}
@@ -161,14 +178,14 @@ describe('ValidationDashboard', () => {
       />
     );
 
-    const applyButton = screen.getByText('Apply AI Suggestions');
-    fireEvent.click(applyButton);
+    const flagInput = screen.getByTestId('input-needs-review-flag');
+    fireEvent.change(flagInput, { target: { value: 'false' } });
+    fireEvent.blur(flagInput);
 
     expect(mockOnUpdate).toHaveBeenCalledWith(
       expect.objectContaining({
         Structured_Achievements: [
           expect.objectContaining({
-            Action_Verb: 'Orchestrated',
             Needs_Review_Flag: false,
           }),
         ],
@@ -184,36 +201,31 @@ describe('ValidationDashboard', () => {
       />
     );
 
-    // Update something to populate history
-    const nameInput = screen.getByTestId('input-full-legal-name');
+    // Make a change to populate history
+    const nameInput = screen.getByTestId('input-full-name');
     fireEvent.change(nameInput, { target: { value: 'Jane Doe' } });
     fireEvent.blur(nameInput);
 
     expect(mockOnUpdate).toHaveBeenCalledWith(
       expect.objectContaining({
-        Personal_Information: expect.objectContaining({
-          FullName: 'Jane Doe',
-        }),
+        Personal_Information: expect.objectContaining({ FullName: 'Jane Doe' }),
       })
     );
 
-    // Undo should be enabled now
-    const undoButton = screen.getByText('Undo');
+    // Undo should be enabled after a change
+    const undoButton = screen.getByRole('button', { name: /UNDO/i });
     expect(undoButton).not.toBeDisabled();
     fireEvent.click(undoButton);
 
-    // The undo should call onUpdate with original mockData
     expect(mockOnUpdate).toHaveBeenLastCalledWith(mockData);
 
     // Redo
-    const redoButton = screen.getByText('Redo');
+    const redoButton = screen.getByRole('button', { name: /REDO/i });
     fireEvent.click(redoButton);
 
     expect(mockOnUpdate).toHaveBeenLastCalledWith(
       expect.objectContaining({
-        Personal_Information: expect.objectContaining({
-          FullName: 'Jane Doe',
-        }),
+        Personal_Information: expect.objectContaining({ FullName: 'Jane Doe' }),
       })
     );
   });
@@ -231,20 +243,16 @@ describe('ValidationDashboard', () => {
       />
     );
 
-    const exportButton = screen.getByText('Export Vector');
+    const exportButton = screen.getByRole('button', { name: /EXPORT CANON/i });
     fireEvent.click(exportButton);
 
-    expect(global.URL.createObjectURL).toHaveBeenCalled();
-
-    // In JSDOM, click() on an anchor might not be easily trackable without mocking either the element
-    // or the click method. Since we can't easily mock the element without breaking render,
-    // we'll just check if appendChild was called with an 'a' tag.
+    expect(global.URL.createObjectURL).not.toHaveBeenCalled();
 
     const anchor = appendSpy.mock.calls.find(
       (call) => (call[0] as any).tagName === 'A'
     )?.[0] as HTMLAnchorElement;
     expect(anchor).toBeDefined();
-    expect(anchor.download).toContain('professional-vector');
+    expect(anchor.download).toContain('validated_career_data.json');
 
     appendSpy.mockRestore();
     removeSpy.mockRestore();

@@ -41,9 +41,9 @@ describe('DropZone', () => {
       />
     );
 
-    expect(screen.getByText(/drop chaos here/i)).toBeInTheDocument();
-    expect(screen.getByText('HISTORY')).toBeInTheDocument();
-    expect(screen.getByText('Browse Files')).toBeInTheDocument();
+    expect(screen.getByText('DEPOSIT ARTIFACTS')).toBeInTheDocument();
+    expect(screen.getByText('[ ARCHIVE INPUT ]')).toBeInTheDocument();
+    expect(screen.getByText('Open Dossier')).toBeInTheDocument();
   });
 
   it('handles file input selection', () => {
@@ -71,7 +71,7 @@ describe('DropZone', () => {
       />
     );
 
-    expect(screen.getByText('Digesting files...')).toBeInTheDocument();
+    expect(screen.getByText('Synthesizing Artifacts...')).toBeInTheDocument();
     const input = document.getElementById('file-input') as HTMLInputElement;
     expect(input).toBeDisabled();
   });
@@ -107,12 +107,12 @@ describe('DropZone', () => {
     const dropzone = screen.getByTestId('file-dropzone');
 
     fireEvent.dragOver(dropzone);
-    // In DropZone.tsx: border: 'border-solid border-sage'
+    // Drag-over state adds border-solid (CSS variable border color applied inline)
     expect(dropzone).toHaveClass('border-solid');
-    expect(dropzone).toHaveClass('border-sage');
+    expect(dropzone).not.toHaveClass('border-dashed');
 
     fireEvent.dragLeave(dropzone);
-    // Returns to border-dashed
+    // Returns to border-dashed default state
     expect(dropzone).toHaveClass('border-dashed');
   });
 });

@@ -82,7 +82,7 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
     return (
       <div className="max-w-4xl mx-auto text-center py-12">
         <div className="bg-[var(--sys-color-charcoalBackground-steps-1)] p-10 rounded-[var(--sys-shape-radius-xxl)] border border-[var(--sys-color-concreteGrey-steps-0)] shadow-2xl">
-          <div className="w-20 h-20 bg-cyan-900/30 rounded-[var(--sys-shape-radius-full)] flex items-center justify-center mx-auto mb-6 border border-cyan-500/30">
+          <div className="w-20 h-20 bg-[var(--sys-color-protestMetalBlue-steps-0)]/30 rounded-[var(--sys-shape-radius-full)] flex items-center justify-center mx-auto mb-6 border border-[var(--sys-color-protestMetalBlue-base)]/30">
             <svg
               className="w-10 h-10 text-[var(--sys-color-inkGold-base)]"
               fill="none"
@@ -106,7 +106,7 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
           </p>
           <button
             onClick={handleAnalyze}
-            className="bg-[var(--sys-color-solidarityRed-base)] hover:bg-[var(--sys-color-solidarityRed-steps-3)] text-[var(--sys-color-paperWhite-base)] font-bold py-4 px-12 rounded-[var(--sys-shape-radius-xl)] transition-all transform hover:scale-105 shadow-lg shadow-cyan-900/20"
+            className="bg-[var(--sys-color-solidarityRed-base)] hover:bg-[var(--sys-color-solidarityRed-steps-3)] text-[var(--sys-color-paperWhite-base)] font-bold py-4 px-12 rounded-[var(--sys-shape-radius-xl)] transition-all transform hover:scale-105 shadow-lg shadow-[var(--sys-color-charcoalBackground-steps-0)]/50"
           >
             Start Match Analysis
           </button>
@@ -119,7 +119,7 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
     return (
       <div className="max-w-4xl mx-auto text-center py-20">
         <div className="relative w-24 h-24 mx-auto mb-8">
-          <div className="absolute inset-0 border-4 border-cyan-500/20 rounded-[var(--sys-shape-radius-full)]"></div>
+          <div className="absolute inset-0 border-4 border-[var(--sys-color-protestMetalBlue-base)]/20 rounded-[var(--sys-shape-radius-full)]"></div>
           <div className="absolute inset-0 border-4 border-[var(--sys-color-inkGold-base)] border-t-transparent rounded-[var(--sys-shape-radius-full)] animate-spin"></div>
         </div>
         <h2 className="text-2xl font-bold text-[var(--sys-color-paperWhite-base)] mb-2">
@@ -232,10 +232,10 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
               documentType="resume"
             />
             {resumeRef.current && resumeRef.current.clientHeight > 1122 && (
-              <div className="bg-amber-900/40 border border-amber-500/30 p-4 rounded-[var(--sys-shape-radius-xl)]">
+              <div className="bg-[var(--sys-color-stencilYellow-steps-0)]/20 border border-[var(--sys-color-stencilYellow-base)]/30 p-4 rounded-[var(--sys-shape-radius-xl)]">
                 <div className="flex items-center gap-3 mb-2">
                   <svg
-                    className="w-5 h-5 text-amber-400"
+                    className="w-5 h-5 text-[var(--sys-color-stencilYellow-base)]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -247,9 +247,11 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
                       d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                     />
                   </svg>
-                  <h4 className="font-bold text-amber-300">Page Length Warning</h4>
+                  <h4 className="font-bold text-[var(--sys-color-stencilYellow-base)]">
+                    Page Length Warning
+                  </h4>
                 </div>
-                <p className="text-sm text-amber-200/80">
+                <p className="text-sm text-[var(--sys-color-worker-ash-base)]/80">
                   Your resume appears to be longer than one page. Consider trimming older experience
                   or less relevant skills to improve ATS readability.
                 </p>
@@ -303,7 +305,7 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
                   value={coverLetterInstructions}
                   onChange={(e) => setCoverLetterInstructions(e.target.value)}
                   placeholder="Enter instructions for regeneration..."
-                  className="flex-1 bg-[var(--sys-color-charcoalBackground-steps-2)] border border-[var(--sys-color-concreteGrey-steps-0)] rounded-[var(--sys-shape-radius-lg)] px-4 py-3 text-[var(--sys-color-paperWhite-base)] focus:outline-none focus:border-cyan-500/50"
+                  className="flex-1 bg-[var(--sys-color-charcoalBackground-steps-2)] border border-[var(--sys-color-concreteGrey-steps-0)] rounded-[var(--sys-shape-radius-lg)] px-4 py-3 text-[var(--sys-color-paperWhite-base)] focus:outline-none focus:border-[var(--sys-color-protestMetalBlue-base)]/50"
                   onKeyDown={(e) => {
                     if (
                       e.key === 'Enter' &&
@@ -317,7 +319,7 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
                 <button
                   onClick={handleGenerateCoverLetter}
                   disabled={isGeneratingCoverLetter || !coverLetterInstructions.trim()}
-                  className="bg-cyan-900/30 hover:bg-cyan-800/40 text-cyan-400 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-[var(--sys-shape-radius-lg)] font-medium transition-colors border border-cyan-500/30 flex items-center gap-2"
+                  className="bg-[var(--sys-color-protestMetalBlue-steps-0)]/30 hover:bg-[var(--sys-color-protestMetalBlue-steps-1)]/40 text-[var(--sys-color-protestMetalBlue-base)] disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-[var(--sys-shape-radius-lg)] font-medium transition-colors border border-[var(--sys-color-protestMetalBlue-base)]/30 flex items-center gap-2"
                 >
                   {isGeneratingCoverLetter ? 'Regenerating...' : 'Regenerate'}
                 </button>
@@ -421,7 +423,7 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
                 value={kscInstructions}
                 onChange={(e) => setKscInstructions(e.target.value)}
                 placeholder="Enter instructions for regeneration..."
-                className="flex-1 bg-[var(--sys-color-charcoalBackground-steps-2)] border border-[var(--sys-color-concreteGrey-steps-0)] rounded-[var(--sys-shape-radius-lg)] px-4 py-3 text-[var(--sys-color-paperWhite-base)] focus:outline-none focus:border-cyan-500/50"
+                className="flex-1 bg-[var(--sys-color-charcoalBackground-steps-2)] border border-[var(--sys-color-concreteGrey-steps-0)] rounded-[var(--sys-shape-radius-lg)] px-4 py-3 text-[var(--sys-color-paperWhite-base)] focus:outline-none focus:border-[var(--sys-color-protestMetalBlue-base)]/50"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && kscInstructions.trim() && !isGeneratingKSC) {
                     handleGenerateKSC();
@@ -431,7 +433,7 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
               <button
                 onClick={handleGenerateKSC}
                 disabled={isGeneratingKSC || !kscInstructions.trim()}
-                className="bg-cyan-900/30 hover:bg-cyan-800/40 text-cyan-400 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-[var(--sys-shape-radius-lg)] font-medium transition-colors border border-cyan-500/30 flex items-center gap-2"
+                className="bg-[var(--sys-color-protestMetalBlue-steps-0)]/30 hover:bg-[var(--sys-color-protestMetalBlue-steps-1)]/40 text-[var(--sys-color-protestMetalBlue-base)] disabled:opacity-50 disabled:cursor-not-allowed px-6 py-3 rounded-[var(--sys-shape-radius-lg)] font-medium transition-colors border border-[var(--sys-color-protestMetalBlue-base)]/30 flex items-center gap-2"
               >
                 {isGeneratingKSC ? 'Regenerating...' : 'Regenerate'}
               </button>
@@ -471,9 +473,9 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
           />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-[var(--sys-color-charcoalBackground-steps-1)] p-6 rounded-[var(--sys-shape-radius-xl)] border border-[var(--sys-color-concreteGrey-steps-0)] shadow-lg flex flex-col items-center text-center">
-              <div className="w-16 h-16 bg-cyan-900/30 rounded-full flex items-center justify-center mb-4 border border-cyan-500/30">
+              <div className="w-16 h-16 bg-[var(--sys-color-protestMetalBlue-steps-0)]/30 rounded-full flex items-center justify-center mb-4 border border-[var(--sys-color-protestMetalBlue-base)]/30">
                 <svg
-                  className="w-8 h-8 text-cyan-400"
+                  className="w-8 h-8 text-[var(--sys-color-protestMetalBlue-base)]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -495,13 +497,13 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
               <div className="flex gap-3 w-full">
                 <button
                   onClick={() => exportToPDF('resume')}
-                  className="flex-1 bg-cyan-900/30 hover:bg-cyan-800/40 text-cyan-400 px-4 py-2 rounded-lg font-medium transition-colors border border-cyan-500/30"
+                  className="flex-1 bg-[var(--sys-color-protestMetalBlue-steps-0)]/30 hover:bg-[var(--sys-color-protestMetalBlue-steps-1)]/40 text-[var(--sys-color-protestMetalBlue-base)] px-4 py-2 rounded-lg font-medium transition-colors border border-[var(--sys-color-protestMetalBlue-base)]/30"
                 >
                   PDF
                 </button>
                 <button
                   onClick={() => exportToDOCX('resume')}
-                  className="flex-1 bg-cyan-900/30 hover:bg-cyan-800/40 text-cyan-400 px-4 py-2 rounded-lg font-medium transition-colors border border-cyan-500/30"
+                  className="flex-1 bg-[var(--sys-color-protestMetalBlue-steps-0)]/30 hover:bg-[var(--sys-color-protestMetalBlue-steps-1)]/40 text-[var(--sys-color-protestMetalBlue-base)] px-4 py-2 rounded-lg font-medium transition-colors border border-[var(--sys-color-protestMetalBlue-base)]/30"
                 >
                   DOCX
                 </button>
@@ -509,9 +511,9 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
             </div>
 
             <div className="bg-[var(--sys-color-charcoalBackground-steps-1)] p-6 rounded-[var(--sys-shape-radius-xl)] border border-[var(--sys-color-concreteGrey-steps-0)] shadow-lg flex flex-col items-center text-center">
-              <div className="w-16 h-16 bg-amber-900/30 rounded-full flex items-center justify-center mb-4 border border-amber-500/30">
+              <div className="w-16 h-16 bg-[var(--sys-color-stencilYellow-steps-1)]/20 rounded-full flex items-center justify-center mb-4 border border-[var(--sys-color-stencilYellow-base)]/30">
                 <svg
-                  className="w-8 h-8 text-amber-400"
+                  className="w-8 h-8 text-[var(--sys-color-stencilYellow-base)]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -533,13 +535,13 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
               <div className="flex gap-3 w-full">
                 <button
                   onClick={() => exportToPDF('coverLetter')}
-                  className="flex-1 bg-amber-900/30 hover:bg-amber-800/40 text-amber-400 px-4 py-2 rounded-lg font-medium transition-colors border border-amber-500/30"
+                  className="flex-1 bg-[var(--sys-color-stencilYellow-steps-0)]/30 hover:bg-[var(--sys-color-stencilYellow-steps-1)]/40 text-[var(--sys-color-stencilYellow-base)] px-4 py-2 rounded-lg font-medium transition-colors border border-[var(--sys-color-stencilYellow-base)]/30"
                 >
                   PDF
                 </button>
                 <button
                   onClick={() => exportToDOCX('coverLetter')}
-                  className="flex-1 bg-amber-900/30 hover:bg-amber-800/40 text-amber-400 px-4 py-2 rounded-lg font-medium transition-colors border border-amber-500/30"
+                  className="flex-1 bg-[var(--sys-color-stencilYellow-steps-0)]/30 hover:bg-[var(--sys-color-stencilYellow-steps-1)]/40 text-[var(--sys-color-stencilYellow-base)] px-4 py-2 rounded-lg font-medium transition-colors border border-[var(--sys-color-stencilYellow-base)]/30"
                 >
                   DOCX
                 </button>
@@ -548,9 +550,9 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
 
             {hasSelectionCriteria && (
               <div className="bg-[var(--sys-color-charcoalBackground-steps-1)] p-6 rounded-[var(--sys-shape-radius-xl)] border border-[var(--sys-color-concreteGrey-steps-0)] shadow-lg flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-emerald-900/30 rounded-full flex items-center justify-center mb-4 border border-emerald-500/30">
+                <div className="w-16 h-16 bg-[var(--sys-color-kr-activistSmokeGreen-steps-0)]/30 rounded-full flex items-center justify-center mb-4 border border-[var(--sys-color-kr-activistSmokeGreen-base)]/30">
                   <svg
-                    className="w-8 h-8 text-emerald-400"
+                    className="w-8 h-8 text-[var(--sys-color-kr-activistSmokeGreen-base)]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -572,13 +574,13 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
                 <div className="flex gap-3 w-full">
                   <button
                     onClick={() => exportToPDF('ksc')}
-                    className="flex-1 bg-emerald-900/30 hover:bg-emerald-800/40 text-emerald-400 px-4 py-2 rounded-lg font-medium transition-colors border border-emerald-500/30"
+                    className="flex-1 bg-[var(--sys-color-kr-activistSmokeGreen-steps-0)]/30 hover:bg-[var(--sys-color-kr-activistSmokeGreen-steps-1)]/40 text-[var(--sys-color-kr-activistSmokeGreen-base)] px-4 py-2 rounded-lg font-medium transition-colors border border-[var(--sys-color-kr-activistSmokeGreen-base)]/30"
                   >
                     PDF
                   </button>
                   <button
                     onClick={() => exportToDOCX('ksc')}
-                    className="flex-1 bg-emerald-900/30 hover:bg-emerald-800/40 text-emerald-400 px-4 py-2 rounded-lg font-medium transition-colors border border-emerald-500/30"
+                    className="flex-1 bg-[var(--sys-color-kr-activistSmokeGreen-steps-0)]/30 hover:bg-[var(--sys-color-kr-activistSmokeGreen-steps-1)]/40 text-[var(--sys-color-kr-activistSmokeGreen-base)] px-4 py-2 rounded-lg font-medium transition-colors border border-[var(--sys-color-kr-activistSmokeGreen-base)]/30"
                   >
                     DOCX
                   </button>

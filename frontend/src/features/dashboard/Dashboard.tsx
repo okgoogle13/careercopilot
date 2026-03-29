@@ -133,10 +133,10 @@ export function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-asphalt-black relative overflow-hidden p-8 md:p-12 lg:p-16">
+    <div className="relative overflow-hidden p-6 md:p-10 lg:p-14">
       {/* Background Layer: Hero Engine Integration */}
       {heroData && (
-        <div className="absolute inset-0 pointer-events-none opacity-30">
+        <div className="absolute inset-0 pointer-events-none opacity-20">
           <LayeredHero
             layers={heroData.layers}
             typography={{ ...heroData.typography, headline: '', supporting: '' }} // Hide text for background use
@@ -459,12 +459,12 @@ export function Dashboard() {
       <motion.div
         animate={{
           scale: [1, 1.1, 1],
-          opacity: [0.3, 0.4, 0.3],
+          opacity: [0.15, 0.25, 0.15],
           x: [0, 20, 0],
           y: [0, -20, 0],
         }}
         transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
-        className="absolute -bottom-64 -right-64 w-[800px] h-[800px] rounded-march bg-gradient-to-tl from-concrete-grey/10 via-transparent to-transparent blur-3xl pointer-events-none"
+        className="absolute -bottom-64 -right-64 w-[800px] h-[800px] rounded-march bg-gradient-to-tl from-concreteGrey-base/5 via-transparent to-transparent blur-3xl pointer-events-none"
       />
     </div>
   );

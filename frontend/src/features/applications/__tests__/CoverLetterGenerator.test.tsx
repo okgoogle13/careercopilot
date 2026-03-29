@@ -62,6 +62,15 @@ import { BrowserRouter } from 'react-router-dom';
   }),
 }));
 
+(jest as any).unstable_mockModule('file-saver', () => ({
+  saveAs: jest.fn(),
+  default: { saveAs: jest.fn() },
+}));
+
+(jest as any).unstable_mockModule('@/features/documents/services/docxExport', () => ({
+  exportDocumentAsDocx: jest.fn(),
+}));
+
 (jest as any).unstable_mockModule('@/screens/09_finalization/ApplicationFinalization', () => ({
   ApplicationFinalization: ({
     children,

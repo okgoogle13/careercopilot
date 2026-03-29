@@ -53,16 +53,18 @@ export class ATSScorer {
 
     return {
       overallScore,
+      summary:
+        'Manual local scan completed. For deep semantic analysis, use the AI Studio Harvest.',
       breakdown: {
-        keywordMatch: keywordMatchScore,
-        skillsAlignment: skillsScore,
-        jobTitleMatch: jobTitleScore,
-        experienceRelevance: experienceScore,
-        formatCompliance: formatScore,
+        keywordDensityScore: keywordMatchScore,
+        jobTitleScore: jobTitleScore,
+        semanticScore: skillsScore,
+        educationExperienceScore: experienceScore,
+        formattingScore: formatScore,
       },
       matchedKeywords: this.getMatchedKeywords(resumeKeywords, jobKeywords),
       missingKeywords: this.getMissingKeywords(resumeKeywords, jobKeywords),
-      suggestions: this.generateSuggestions(
+      recommendations: this.generateSuggestions(
         resumeText,
         jobDescription,
         keywordMatchScore,
@@ -105,19 +107,17 @@ export class ATSScorer {
 
     return {
       overallScore,
+      summary: 'Manual local scan completed. Narrative and tone analyzed based on heuristics.',
       breakdown: {
-        keywordMatch: keywordMatchScore,
-        skillsAlignment: skillsScore,
-        formatCompliance: formatScore,
-        jobTitleMatch: 100, // Not applicable for CL
-        experienceRelevance: 100, // Not applicable for CL
-        narrativeQuality: narrativeScore,
-        personalizationScore: personalizationScore,
-        toneProfessionalism: toneScore,
+        keywordDensityScore: keywordMatchScore,
+        jobTitleScore: 100, // Not applicable for CL
+        semanticScore: skillsScore,
+        educationExperienceScore: 100, // Not applicable for CL
+        formattingScore: formatScore,
       },
       matchedKeywords: this.getMatchedKeywords(coverLetterKeywords, jobKeywords),
       missingKeywords: this.getMissingKeywords(coverLetterKeywords, jobKeywords),
-      suggestions: this.generateCoverLetterSuggestions(
+      recommendations: this.generateCoverLetterSuggestions(
         coverLetterText,
         jobDescription,
         placementScore,

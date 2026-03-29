@@ -44,8 +44,15 @@ const slotOpacity: Record<SlotDef['zLayer'], number> = {
   'Z-3': 0.22,
 };
 
+/** Controls which auth flow is surfaced. Drives default title/subtitle when
+ *  explicit props are not provided. LoginPage passes mode="login";
+ *  RegisterPage passes mode="register". */
+export type AuthModalMode = 'login' | 'register';
+
 export interface AuthModalProps {
   className?: ClassValue;
+  /** @default 'login' */
+  mode?: AuthModalMode;
   title?: string;
   subtitle?: string;
   primaryLabel?: string;
@@ -56,21 +63,28 @@ export interface AuthModalProps {
 }
 
 const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const _springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
 const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
 
 export const AuthModal = memo(function AuthModal({
   className,
-  title = 'Sign In / Register',
-  subtitle = 'Secure access to your CareerCopilot workspace.',
+  mode = 'login',
+  title,
+  subtitle,
   primaryLabel = 'Continue',
   secondaryLabel = 'Use OAuth',
   slotAssets,
   onPrimaryAction,
   onSecondaryAction,
 }: AuthModalProps) {
-  const mode = useModeStore((state) => state.mode);
+  const themeMode = useModeStore((state) => state.mode);
   const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
+
+  const resolvedTitle = title ?? (mode === 'register' ? 'Create Account' : 'Sign In');
+  const resolvedSubtitle =
+    subtitle ??
+    (mode === 'register'
+      ? 'Join the vanguard and build your portfolio.'
+      : 'Secure access to your CareerCopilot workspace.');
 
   return (
     <motion.section
@@ -79,7 +93,7 @@ export const AuthModal = memo(function AuthModal({
       animate={{ opacity: 1, y: 0 }}
       transition={undefined}
       className={clsx(
-        "relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-8 font-['Work_Sans'] text-base min-h-[75vh] flex flex-col justify-center",
+        'font-primary relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-8 text-base min-h-[75vh] flex flex-col justify-center',
         className
       )}
       style={{
@@ -87,7 +101,7 @@ export const AuthModal = memo(function AuthModal({
         color: 'var(--sys-color-worker-ash-base)',
         border: '1px solid var(--sys-color-concreteGrey-base)',
       }}
-      data-mode={mode}
+      data-mode={themeMode}
       data-testid="authmodal"
       data-motion-audit="true"
       data-density-ratio="0.36"
@@ -126,22 +140,16 @@ export const AuthModal = memo(function AuthModal({
         className="relative z-10 max-w-2xl"
       >
         <h1
-          className="text-5xl md:text-6xl font-black"
-          style={{
-            fontFamily: 'var(--sys-type-font-fraunces)',
-            color: 'var(--sys-color-paperWhite)',
-          }}
+          className="font-display text-5xl md:text-6xl font-black"
+          style={{ color: 'var(--sys-color-paperWhite)' }}
         >
-          {title}
+          {resolvedTitle}
         </h1>
         <p
           className="mt-4 max-w-2xl text-base md:text-xl"
-          style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            color: 'var(--sys-color-worker-ash-base)',
-          }}
+          style={{ color: 'var(--sys-color-worker-ash-base)' }}
         >
-          {subtitle}
+          {resolvedSubtitle}
         </p>
       </motion.header>
 
@@ -159,7 +167,6 @@ export const AuthModal = memo(function AuthModal({
           onClick={onPrimaryAction}
           className="rounded-[var(--sys-shape-blockRiot03)] px-8 py-4 font-semibold text-lg"
           style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
             backgroundColor: 'var(--sys-color-inkGold-base)',
             color: 'var(--sys-color-charcoalBackground-base)',
           }}
@@ -170,22 +177,12 @@ export const AuthModal = memo(function AuthModal({
         <button
           type="button"
           onClick={onSecondaryAction}
-          className="font-['JetBrains_Mono'] text-sm opacity-80 px-2 py-1"
+          className="font-mono text-sm opacity-80 px-2 py-1"
           style={{ color: 'var(--sys-color-worker-ash-base)', backgroundColor: 'transparent' }}
         >
           {secondaryLabel}
         </button>
       </motion.div>
-
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={undefined}
-        className="relative z-10 mt-8 font-['JetBrains_Mono'] text-sm opacity-80"
-        style={{ color: 'var(--sys-color-concreteGrey-base)' }}
-      >
-        Slots: {SLOT_DEFS.length} | Density ratio: 0.36 | Max focal CTA: 1
-      </motion.p>
     </motion.section>
   );
 });

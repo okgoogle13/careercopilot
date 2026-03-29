@@ -1,64 +1,81 @@
-import React from 'react';
-import { useLocation, useNavigate, Outlet } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useLocation, Outlet } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { KrDarkDock } from './KrDarkShell/components/KrDarkDock';
+import { Menu } from 'lucide-react';
+import { SolidaritySidebar } from './shared/SolidaritySidebar';
 import { Footer } from './shared/Footer';
-import { NAVIGATION_SCHEMA } from '../config/navigation.schema';
+import { BannerTexture } from '@/components/kerala-rage/BannerTexture';
+import { ActionButton } from '@/components/kerala-rage/ActionButton';
+import { Logo } from '@/components/ui/Logo';
 
 /**
  * MigratedRouteLayout
  *
- * A clean, authenticated shell for routes that have been promoted to KR Solidarity v6.0 standards.
- * It removes the legacy sidebar and utilizes the floating KrDarkDock for navigation.
+ * KR Solidarity v6.0 Canonical Layout Shell.
+ * Replaces legacy bottom-dock with fixed-left SolidaritySidebar and BannerTexture.
  */
 export const MigratedRouteLayout = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-
-  const handleViewChange = (viewId: string) => {
-    const item = NAVIGATION_SCHEMA.find((i) => i.id === viewId);
-    if (item) {
-      navigate(item.route);
-    } else {
-      // Fallback for known specific logic if needed, otherwise dashboard
-      navigate('/dashboard');
-    }
-  };
-
-  // Determine current view from pathname
-  const getCurrentView = () => {
-    const { pathname } = location;
-    // Find the best match in NAVIGATION_SCHEMA
-    const match = NAVIGATION_SCHEMA.find(
-      (item) => item.route === pathname || (item.route !== '/' && pathname.startsWith(item.route))
-    );
-    return match ? match.id : 'nav-dashboard';
-  };
+  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-surface text-on-surface relative flex flex-col">
-      <KrDarkDock
-        currentView={getCurrentView()}
-        onViewChange={handleViewChange}
+    <div className="min-h-screen bg-charcoalBackground-base text-worker-ash-base relative flex">
+      {/* Global Texture Layer */}
+      <BannerTexture />
+
+      {/* Persistent Sidebar (Desktop) */}
+      <SolidaritySidebar />
+
+      {/* Mobile Drawer Sidebar */}
+      <SolidaritySidebar
+        isMobileDrawer={true}
+        isOpen={isMobileDrawerOpen}
+        onClose={() => setIsMobileDrawerOpen(false)}
       />
-      <div className="flex-1">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={location.pathname}
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{
-              duration: 0.35,
-              ease: [0.175, 0.885, 0.32, 1.1],
-            }}
-            className="min-h-screen"
+
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Mobile Top Header */}
+        <header className="md:hidden flex items-center justify-between p-4 border-b border-concreteGrey-steps-1 bg-charcoalBackground-base/80 backdrop-blur-md sticky top-0 z-40">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-march bg-charcoalBackground-steps-2 border border-concreteGrey-steps-1 flex items-center justify-center">
+              <Logo
+                size="sm"
+                showText={false}
+                className="mb-0"
+              />
+            </div>
+            <span className="text-xs font-black uppercase tracking-tight">CareerCopilot</span>
+          </div>
+
+          <button
+            onClick={() => setIsMobileDrawerOpen(true)}
+            className="p-2 rounded-march bg-white/5 hover:bg-white/10 active:scale-95 transition-all text-worker-ash-base"
           >
-            <Outlet />
-          </motion.div>
-        </AnimatePresence>
+            <Menu className="w-6 h-6" />
+          </button>
+        </header>
+
+        <main className="flex-1 relative z-10 overflow-x-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0, scale: 0.98, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 1.02, y: -12 }}
+              transition={{
+                duration: 0.45,
+                ease: [0.175, 0.885, 0.32, 1.1],
+              }}
+              className="p-6 md:p-10"
+            >
+              <Outlet />
+            </motion.div>
+          </AnimatePresence>
+        </main>
+
+        <Footer className="relative z-10 border-concreteGrey-steps-1" />
       </div>
-      <Footer />
     </div>
   );
 };

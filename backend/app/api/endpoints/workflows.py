@@ -34,6 +34,8 @@ COLLECTION_NAME = "workflow_runs"
 class GenerateApplicationRequest(BaseModel):
     job_description: str = Field(min_length=50)
     url: str | None = Field(default=None)
+    job_title: str | None = Field(default=None)
+    company_name: str | None = Field(default=None)
     user_profile: dict[str, Any] = Field(default_factory=dict)
 
 
@@ -112,6 +114,8 @@ async def create_application_package(
     payload = AnalyzeJobFromUrlRequest(
         url=request.url,
         job_description=request.job_description,
+        job_title=request.job_title,
+        company_name=request.company_name,
     )
 
     try:

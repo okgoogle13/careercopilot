@@ -1,58 +1,55 @@
-import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
-import { ApplyQuick } from '../ApplyQuick';
-import { API_ENDPOINTS } from '@/config/api';
+import { MemoryRouter } from 'react-router-dom';
+import React from 'react';
+import '@testing-library/jest-dom';
 import type { AnalyzeJobFromUrlResponse } from '@/types/masterResume';
 
 const mockNavigate = jest.fn();
+const mockQuickApply = jest.fn() as jest.MockedFunction<(...args: any[]) => any>;
 
-global.fetch = jest.fn();
-
-jest.mock('@careercopilot/ui', () => ({
-  Button: ({ children, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
-    <button {...props}>{children}</button>
-  ),
-  Input: (props: React.InputHTMLAttributes<HTMLInputElement>) => <input {...props} />,
-  Textarea: (props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) => <textarea {...props} />,
+// ESM-compatible mocks — all must precede dynamic imports
+(jest as any).unstable_mockModule('@/api/workflowService', () => ({
+  workflowService: {
+    quickApply: mockQuickApply,
+  },
 }));
 
-jest.mock('react-router-dom', () => {
-  const actual = jest.requireActual('react-router-dom');
+(jest as any).unstable_mockModule('react-router-dom', async () => {
+  const actual = await import('react-router-dom');
   return {
     ...actual,
     useNavigate: () => mockNavigate,
   };
 });
 
-jest.mock('framer-motion', () => ({
+(jest as any).unstable_mockModule('framer-motion', () => ({
   motion: {
-    section: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => (
-      <section {...props}>{children}</section>
-    ),
+    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
+    section: ({ children, ...props }: any) => <section {...props}>{children}</section>,
+    header: ({ children, ...props }: any) => <header {...props}>{children}</header>,
   },
+  AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
 
-jest.mock('lucide-react', () => ({
-  ArrowRight: (props: React.SVGProps<SVGSVGElement>) => (
-    <svg
-      {...props}
-      data-testid="icon-arrow"
-    />
-  ),
-  Loader2: (props: React.SVGProps<SVGSVGElement>) => (
-    <svg
-      {...props}
-      data-testid="icon-loader"
-    />
-  ),
-  Link2: (props: React.SVGProps<SVGSVGElement>) => (
-    <svg
-      {...props}
-      data-testid="icon-link"
-    />
-  ),
-}));
+(jest as any).unstable_mockModule('lucide-react', () => {
+  const cache = new Map<string, any>();
+  return new Proxy(
+    {},
+    {
+      get: (_t, prop) => {
+        if (typeof prop !== 'string') return undefined;
+        if (!cache.has(prop)) {
+          const Icon = ({ className }: any) =>
+            React.createElement('span', { 'data-testid': `icon-${prop.toLowerCase()}`, className });
+          cache.set(prop, Icon);
+        }
+        return cache.get(prop);
+      },
+    }
+  );
+});
+
+const { ApplyQuick } = (await import('../ApplyQuick')) as any;
 
 const mockResult: AnalyzeJobFromUrlResponse = {
   job_title: 'Case Management Lead',
@@ -73,18 +70,19 @@ const mockResult: AnalyzeJobFromUrlResponse = {
     },
   ],
   artifacts: {
-    tailored_resume: 'resume',
-    cover_letter: 'cover-letter',
-    ksc_response: 'ksc',
+    tailored_resume: 'resume content',
+    cover_letter: 'cover letter content',
+    ksc_response: 'ksc content',
   },
   export_pack: {},
 };
 
 function renderPage() {
+  const Page = ApplyQuick as React.ComponentType;
   return render(
-    <BrowserRouter>
-      <ApplyQuick />
-    </BrowserRouter>
+    <MemoryRouter>
+      <Page />
+    </MemoryRouter>
   );
 }
 
@@ -92,77 +90,76 @@ describe('ApplyQuick', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockNavigate.mockReset();
-    (global.fetch as jest.Mock).mockResolvedValue({
-      ok: true,
-      json: async () => mockResult,
-    });
+    mockQuickApply.mockResolvedValue(mockResult);
   });
 
   it('renders the entry form and keeps analyze disabled until input exists', () => {
     renderPage();
 
-    expect(screen.getByText(/Apply Quick/i)).toBeInTheDocument();
-    expect(
-      screen.getByPlaceholderText(/https:\/\/company.com\/careers\/role/i)
-    ).toBeInTheDocument();
-    expect(screen.getByText(/Live JD preview will appear here as you type./i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /analyze & build pack/i })).toBeDisabled();
+    expect(screen.getByText('Target')).toBeInTheDocument();
+    expect(screen.getByText('Job')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'How It Works' })).toBeInTheDocument();
+    expect(screen.getByLabelText(/Job URL/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Job Description/i)).toBeInTheDocument();
 
-    fireEvent.change(screen.getByPlaceholderText(/Paste the role description/i), {
+    const submitBtn = screen.getByRole('button', { name: /Start My Application/i });
+    expect(submitBtn).toBeDisabled();
+
+    fireEvent.change(screen.getByLabelText(/Job Description/i), {
       target: { value: 'Support clients with application workflows.' },
     });
 
-    expect(screen.getByRole('button', { name: /analyze & build pack/i })).toBeEnabled();
+    expect(submitBtn).toBeEnabled();
   });
 
-  it('submits job analysis and renders the extracted results panel', async () => {
+  it('submits job analysis and renders the results panel', async () => {
     renderPage();
 
-    fireEvent.change(screen.getByPlaceholderText(/Paste the role description/i), {
+    fireEvent.change(screen.getByLabelText(/Job Description/i), {
       target: { value: 'Coordinate applications and service delivery.' },
     });
 
-    fireEvent.click(screen.getByRole('button', { name: /analyze & build pack/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Start My Application/i }));
 
     await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledWith(
-        API_ENDPOINTS.generateApplication,
-        expect.objectContaining({
-          method: 'POST',
-          headers: expect.objectContaining({
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer dev-token',
-          }),
-        })
-      );
-    });
-
-    expect(JSON.parse((global.fetch as jest.Mock).mock.calls[0][1].body)).toEqual({
-      job_description: 'Coordinate applications and service delivery.',
-      url: undefined,
+      expect(mockQuickApply).toHaveBeenCalledWith({
+        jobDescription: 'Coordinate applications and service delivery.',
+        jobUrl: undefined,
+      });
     });
 
     await waitFor(() => {
       expect(screen.getByText('92')).toBeInTheDocument();
       expect(screen.getByText('Case Management Lead')).toBeInTheDocument();
       expect(screen.getByText('Worker Centre')).toBeInTheDocument();
-      expect(screen.getByText('Applications workflow')).toBeInTheDocument();
     });
   });
 
   it('shows an error message when analysis fails', async () => {
-    (global.fetch as jest.Mock).mockResolvedValue({ ok: false });
+    mockQuickApply.mockRejectedValue(new Error('API Malfunction'));
 
     renderPage();
 
-    fireEvent.change(screen.getByPlaceholderText(/https:\/\/company.com\/careers\/role/i), {
+    fireEvent.change(screen.getByLabelText(/Job URL/i), {
       target: { value: 'https://worker-centre.example/jobs/123' },
     });
 
-    fireEvent.click(screen.getByRole('button', { name: /analyze & build pack/i }));
+    fireEvent.click(screen.getByRole('button', { name: /Start My Application/i }));
 
     await waitFor(() => {
-      expect(screen.getByText(/Quick apply analysis failed./i)).toBeInTheDocument();
+      expect(screen.getByText(/API Malfunction/i)).toBeInTheDocument();
     });
+  });
+
+  it('toggles the step guide visibility', () => {
+    renderPage();
+
+    expect(screen.queryByText(/identify critical skill gaps instantly/i)).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByText(/How It Works/i));
+    expect(screen.getByText(/identify critical skill gaps instantly/i)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText(/Hide Guide/i));
+    expect(screen.queryByText(/identify critical skill gaps instantly/i)).not.toBeInTheDocument();
   });
 });

@@ -36,7 +36,59 @@ import userEvent from '@testing-library/user-event';
   AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
 
-import { Documents } from '../Documents';
+(jest as any).unstable_mockModule('@/utils/exportEngine', () => ({
+  exportToPdf: jest.fn().mockResolvedValue(undefined),
+}));
+
+(jest as any).unstable_mockModule('html2canvas', () => ({
+  default: jest.fn().mockResolvedValue({ toDataURL: jest.fn(() => 'data:image/png;base64,') }),
+}));
+
+(jest as any).unstable_mockModule('jspdf', () => ({
+  default: jest.fn().mockImplementation(() => ({
+    addImage: jest.fn(),
+    save: jest.fn(),
+    output: jest.fn(() => new Blob()),
+  })),
+}));
+
+(jest as any).unstable_mockModule('file-saver', () => ({
+  saveAs: jest.fn(),
+  default: { saveAs: jest.fn() },
+}));
+
+(jest as any).unstable_mockModule('docx', () => ({
+  Document: jest.fn(),
+  HeadingLevel: {},
+  Packer: { toBlob: jest.fn() },
+  Paragraph: jest.fn(),
+  TextRun: jest.fn(),
+}));
+
+(jest as any).unstable_mockModule('@/features/documents/services/docxExport', () => ({
+  exportDocumentAsDocx: jest.fn(),
+}));
+
+(jest as any).unstable_mockModule('@/features/documents/hooks/useDocumentExport', () => ({
+  useDocumentExport: () => ({ exportDocx: jest.fn() }),
+}));
+
+(jest as any).unstable_mockModule('zustand', async () => jest.requireActual('zustand'));
+
+(jest as any).unstable_mockModule('@/stores/useModeStore', () => ({
+  useModeStore: jest.fn(() => 'KrDark'),
+  default: jest.fn(() => 'KrDark'),
+}));
+
+(jest as any).unstable_mockModule('@/api/documentService', () => ({
+  documentService: {
+    uploadDocumentForRedline: jest.fn(),
+    applyRedlineEdits: jest.fn(),
+    exportTrackedChanges: jest.fn(),
+  },
+}));
+
+const { Documents } = (await import('../Documents')) as any;
 
 // ---------------------------------------------------------------------------
 // Helpers
