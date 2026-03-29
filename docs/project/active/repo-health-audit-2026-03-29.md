@@ -12,7 +12,7 @@ All active branches ranked by last commit date (most recent first).
 
 | Branch | Last Commit | Open PR | Ahead of `develop` | Behind `develop` | Recommended Action | Justification |
 |--------|------------|---------|-------------------|------------------|--------------------|---------------|
-| `copilot/audit-branch-activity` | 2026-03-29 | PR #132 (WIP→`feat/prototype-harvest-ready-prep`) | +6 | 0 | **MERGE** | Active audit branch; CI fixes + audit doc included |
+| `copilot/audit-branch-activity` | 2026-03-29 | PR #132 (WIP→`feat/prototype-harvest-ready-prep`) | +6 vs `develop` | 0 (develop has none of these CI fixes) | **MERGE** | Active audit branch; CI fixes + audit doc included; these 6 commits are not in `develop` |
 | `feat/prototype-harvest-ready-prep` | 2026-03-25 | None (receives PR #132) | +many | 0 | **MERGE** | Identical to `feat/prototype-harvest-prep`; should merge to `develop` after PR #132 lands |
 | `feat/prototype-harvest-prep` | 2026-03-25 | None | +many | 0 | **DELETE** | Exact duplicate of `feat/prototype-harvest-ready-prep` (same SHA `c4692afd`); no PR |
 | `feat/frontend-source-of-truth-migration` | 2026-03-20 | PR #126 (open→`develop`) | Ahead | Slightly | **MERGE AFTER CLEANUP** | Large migration doc branch; CI mostly passing (Deploy to Vercel + secret-scanning fail); needs Vercel config fix before merge |
