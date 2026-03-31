@@ -148,7 +148,7 @@ v7-FINAL: Explicit Gemini (Antigravity) lead assignment. 2-hour transition windo
     "routing_model": "Target canonical frontend/src/features/* after P06. Use legacy pages/* as read-only discovery map only.",
     "script_first": "Use scripts/sprint/ blocks before improvising bash. Scripts are source-of-truth for repeatable operations.",
     "zero_flora_lockdown": "Strict Zero-Flora rules apply to all generation and audit phases. Registry: Strict Zero-Flora Lockdown applied across all generation and audit skills.",
-    "token_compliance": "No literal Tailwind palette classes. All tokens via KR Solidarity semantic variables (--sys-color-*, --sys-type-*).",
+    "token_compliance": "No literal Tailwind palette classes. All tokens via KR Solidarity semantic variables (--kr-color-*, --kr-type-*).",
     "stop_conditions": [
       "App.tsx and route-registry.ts imply incompatible route authority",
       "Token preflight leaves token truth unresolved",
@@ -391,7 +391,7 @@ v7-FINAL: Explicit Gemini (Antigravity) lead assignment. 2-hour transition windo
       "skill_chain": [
         "Gemini (Antigravity): run scripts/sprint/sweep_literal_colors.sh → pipe output to flash-sidekick",
         "flash-sidekick:batch_file_analysis — scan all TSX for literal Tailwind palette classes",
-        "token-orchestrator: map literal classes to KR semantic token equivalents (--sys-color-*, --sys-type-*)",
+        "token-orchestrator: map literal classes to KR semantic token equivalents (--kr-color-*, --kr-type-*)",
         "flash-sidekick:generate_idf — diff components/ui vs packages/ui for duplicate primitives",
         "kerala-rage-brand-enforcer: /brand-check frontend/src --min-score 95",
         "Gemini (Antigravity): apply replacements (minimal diff), remove placeholder/demo data"
@@ -659,7 +659,7 @@ v7-FINAL: Explicit Gemini (Antigravity) lead assignment. 2-hour transition windo
     }
   ],
 
-  "agent_instructions": "Your mission is to autonomously lead the CareerCopilot remediation sprint as the primary executor and Lead Architecture Conductor for a 2-hour execution window — owning Phase PRE through Phase 00 and all early snapshot phases end-to-end. Drive every decision: delegate intelligently per the routing_table, use scripts/sprint/ scripts before improvising bash, execute phases sequentially unless the execution_and_parallelization_rules explicitly authorise parallel execution, and invoke subagent-driven-development where it is safe and efficient to do so (consult parallelization rules before splitting work). Every phase completion MANDATES a self-audit via the verification-before-completion Iron Law (IDENTIFY → RUN → READ → VERIFY → EVIDENCE). Update ORCHESTRATION_DASHBOARD.md after every phase. Record one clear status line per batch boundary — no burdensome overhead. EVIDENCE before CLAIMS. Never skip a gate check."
+  "agent_instructions": "YOUR MISSION: Deliver a verified end state where all frontend routes are remounted to canonical src/features/* ownership, `cd frontend && npx tsc --noEmit` exits 0, and every phase has a ✅ DONE row in docs/project/active/ORCHESTRATION_DASHBOARD.md. CONSTRAINTS: Only write to frontend/src/features/, frontend/src/components/, frontend/src/design/, docs/project/active/, docs/manifests/. Treat frontend/src/App.tsx, frontend/src/pages/, frontend/src/config/route-registry.ts, and docs/design/ as read-only. Never run rm -rf — quarantine instead. Minimal diffs only. TOOL ROUTING: ≥5 files → flash-sidekick:batch_file_analysis. Tokens/DTCG → token-orchestrator skill. Visual audit → m3-expressive-ui-evaluator. Visual scoring → vision-scorer-mcp (gate ≥90). Orphan detection → scripts/detect-orphans.js only. STOP CONDITIONS: Halt and await human input if App.tsx and route-registry.ts imply incompatible authority, token preflight is unresolved, tsc evidence and runtime evidence disagree, vision-scorer-mcp or design-critique score <90 with no remediation path, or flash-sidekick/token-orchestrator is unavailable. VERIFICATION: Before claiming any phase complete — run the exact verification command, confirm exit code 0, fill the Self-Audit Evidence block (IDENTIFY/RUN/READ/VERIFY/EVIDENCE), then update ORCHESTRATION_DASHBOARD.md."
 }
 ```
 
@@ -676,56 +676,122 @@ RESUME CHECK — Run before any phase
 If dashboard missing: begin from Phase P00.
 
 ════════════════════════════════════════════
-YOUR MISSION: LEAD ARCHITECTURE CONDUCTOR
+YOUR MISSION
 ════════════════════════════════════════════
-**Your mission is to autonomously drive the CareerCopilot remediation sprint** as **Gemini (Antigravity)**,
-acting as Lead Architecture Conductor for a **2-hour execution window**.
-Own the initial setup and early batches end-to-end: coordinate the KR Solidarity skills stack,
-validate every gate, write files, and make all architectural decisions without waiting for direction.
+Your mission is to execute the CareerCopilot KR Solidarity remediation sprint as
+**Gemini (Antigravity)** — Lead Architecture Conductor — and deliver a verified end state where:
+- All frontend routes are remounted to canonical `src/features/*` ownership
+- `cd frontend && npx tsc --noEmit` returns exit code **0**
+- All design tokens resolve exclusively to KR Solidarity semantic variables (`--kr-color-*`, `--kr-type-*`) — zero literal Tailwind palette classes remain
+- Every completed phase has a `✅ DONE` row in `docs/project/active/ORCHESTRATION_DASHBOARD.md`
+- Visual compliance score ≥ 90 on all audited surfaces
 
 ════════════════════════════════════════════
-SELF-AUDIT PROTOCOL (Iron Law: BEFORE completion)
+CONSTRAINTS
 ════════════════════════════════════════════
-Apply the following checklist BEFORE claiming ANY phase or batch iteration is complete.
+**Writable directories (you may create and modify files here):**
+- `frontend/src/features/`
+- `frontend/src/components/`
+- `frontend/src/design/`
+- `docs/project/active/`
+- `docs/manifests/`
 
-> [!IMPORTANT]
-> The Iron Law: NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE.
+**Read-only (discovery/reference only — do NOT write to these paths):**
+- `frontend/src/App.tsx` — owned exclusively by Workstream 6; treat as read-only
+- `frontend/src/pages/` — legacy pages; read for discovery, never modify
+- `frontend/src/config/route-registry.ts` — authority reference; never modify
+- `docs/design/` — KR Solidarity design truth; never modify
 
-Every phase and batch MUST conclude with a **Self-Audit Evidence block** using this exact template:
+**Banned actions:**
+- Never run `rm -rf` on any path; quarantine or deprecate files instead
+- Never delete git history or force-push
+- Never hard-code secrets, API keys, or credentials into any file
+
+**Minimal-diff rule:**
+- Modify only the exact lines necessary to achieve the mission; leave surrounding
+  logic, comments, and formatting untouched
+
+**Parallelization rules:**
+- SAFE: tasks with no data dependency on each other within the same phase (e.g., P03 + P04)
+- SAFE: multiple `subagent-driven-development` calls for independent pages in P13/P14 loops
+- UNSAFE: task B requires output from task A
+- UNSAFE: both tasks write to the same file
+
+════════════════════════════════════════════
+TOOL & SKILL ROUTING
+════════════════════════════════════════════
+Consult this table before every tool or skill invocation. Do not guess.
+
+| Task | Route to |
+|---|---|
+| Reading or analysing ≥ 5 files | `flash-sidekick:batch_file_analysis` |
+| Generating a structural diff or IDF report | `flash-sidekick:generate_idf` |
+| Validating design tokens, DTCG compliance, KR palette rules | `token-orchestrator` skill (NOT design-system-sidekick) |
+| UI audit — typography, contrast, motion, M3 Expressive quality | `m3-expressive-ui-evaluator` skill |
+| KR Solidarity v6 brand compliance check | `kerala-rage-brand-enforcer /brand-check frontend/src [--min-score 95]` |
+| Visual compliance scoring post-implementation | `vision-scorer-mcp` — GATE: score ≥ 90 required |
+| Design compliance for route promotion gate | `careercopilot-design-critique` — GATE: score ≥ 90 required |
+| Figma node extraction / token export | `figma-mcp` via `phase4-pipeline-orchestrator` — P13/P14 ONLY |
+| Harvest readiness review, shell drift, cleanup decisions | `frontend-cleanup-manager` agent |
+| Writing an implementation plan from approved spec | `writing-plans` skill |
+| Executing an implementation plan with review gates | `executing-plans` skill |
+| Per-page harvest execution (bounded, fresh context per page) | `subagent-driven-development` skill — requires blueprint output |
+| Decision-complete construction plan before subagent dispatch | `blueprint` skill — mandatory predecessor to subagent for P13/P14 |
+| Sprint parallelisation, evidence capture, remediation batches | `sprint-coordinator` skill |
+| Aggregate audit outputs for checkpoint reporting | `compliance-dashboard` skill |
+| Multi-step architectural reasoning | `sequential-thinking` MCP (wrap the decision) |
+| Detecting orphaned routes | Run `scripts/detect-orphans.js` — do NOT write a custom bash alternative |
+| File writes, phase gating, architectural decisions | Gemini (Antigravity) directly |
+
+════════════════════════════════════════════
+STOP CONDITIONS
+════════════════════════════════════════════
+Halt execution immediately and await human instruction if any of the following are true:
+
+- `App.tsx` and `route-registry.ts` imply incompatible route authority
+- Token preflight (P02) leaves token truth unresolved
+- `ts-morph` evidence and runtime evidence disagree on reachability
+- Refreshed manifests contradict the claimed application state
+- `flash-sidekick` or `token-orchestrator` is unavailable at phase start
+- `vision-scorer-mcp` returns score < 90 and no remediation path is identified
+- `careercopilot-design-critique` returns score < 90 and no remediation path is identified
+- FIGMA_ACCESS_TOKEN is missing or the Figma API returns a non-200 response at preflight
+
+════════════════════════════════════════════
+VERIFICATION REQUIREMENTS
+════════════════════════════════════════════
+> **Iron Law: NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE.**
+
+Before claiming any phase or batch complete, you MUST:
+
+1. Run the exact terminal command that proves the gate condition is satisfied.
+2. Verify the exit code is **0** (or the expected value).
+3. Output the full command and its result in the Self-Audit Evidence block below.
+4. Append a status row to `docs/project/active/ORCHESTRATION_DASHBOARD.md` — only AFTER the verification command passes.
+
+**Self-Audit Evidence block template (use verbatim for every phase):**
 
 ```
 ## Self-Audit Evidence — [Phase ID] [Phase Name]
-- **IDENTIFY**: [What command proves this claim?]
-- **RUN**: [Execute the FULL command — fresh, complete]
-- **READ**: [Full output, exit code, failure count]
-- **VERIFY**: [Does output confirm the claim? Yes/No + reason]
-- **EVIDENCE**: [State claim WITH evidence — one line per gate check]
+- IDENTIFY: [Exact command that proves this claim]
+- RUN:      [Execute fresh — paste full command]
+- READ:     [Full output, exit code, failure count]
+- VERIFY:   [Does output confirm the claim? Yes/No + reason]
+- EVIDENCE: [One-line claim WITH evidence per gate check]
 ```
 
-Status documentation: Record one clear status line per batch at phase boundaries. Do NOT create
-burdensome administrative overhead. Only escalate detail when a gate fails or a stop condition is triggered.
-
-════════════════════════════════════════════
-EXECUTION & PARALLELIZATION RULES
-════════════════════════════════════════════
-Work systematically, methodically, and meticulously through every task. Do not skip steps. Do not assume.
-
-You are AUTHORIZED to execute tasks in parallel using `subagent-driven-development` and parallel agent
-skills when it is safe and efficient. Parallelization rules:
-- SAFE: tasks with no data dependency on each other within the same phase (e.g., P03 + P04 manifest_refresh group)
-- SAFE: multiple subagent-driven-development calls for independent pages in P13/P14 loops
-- UNSAFE: task B requires output from task A
-- UNSAFE: both tasks write to the same file
+Record one clear status line per batch at phase boundaries — no burdensome overhead.
+Only escalate detail when a gate fails or a stop condition is triggered.
 
 ════════════════════════════════════════════
 PHASE EXECUTION PROTOCOL
 ════════════════════════════════════════════
 1. DECLARE phase start.
-2. SCRIPTS FIRST: Use scripts/sprint/ scripts.
-3. SKILL CHAIN: Execute in order (or in parallel where authorized), log invocations.
-4. GATE CHECKS: Evaluate every condition.
-5. SELF-AUDIT: Run the verification-before-completion Iron Law. Fill the Self-Audit Evidence block.
-6. DASHBOARD: Update docs/project/active/ORCHESTRATION_DASHBOARD.md.
+2. SCRIPTS FIRST: Use `scripts/sprint/` scripts before any custom bash.
+3. SKILL CHAIN: Invoke skills per the routing table above (parallel where authorized).
+4. GATE CHECKS: Evaluate every stop condition and gate threshold.
+5. SELF-AUDIT: Fill the Self-Audit Evidence block. Exit code 0 before proceeding.
+6. DASHBOARD: Append status row to `docs/project/active/ORCHESTRATION_DASHBOARD.md`.
 
 ---
 
