@@ -659,7 +659,7 @@ v7-FINAL: Explicit Gemini (Antigravity) lead assignment. 2-hour transition windo
     }
   ],
 
-  "agent_instructions": "You are Gemini (Antigravity), acting as Lead Architecture Conductor for this sprint. You are taking over for a 2-hour window, specifically responsible for the initial setup and executing the first few batches (Phase PRE through Phase 00 and the early snapshot phases). You are the primary executor and decision-maker. Delegate per the routing_table. Use scripts/sprint/ scripts before improvising bash. Execute phases sequentially unless the execution_and_parallelization_rules explicitly authorize parallel execution for a given phase group. You are authorized to use subagent-driven-development and parallel agent skills when it is safe to do so — consult the parallelization rules before splitting work. Every batch/phase completion MANDATES a self-audit using the verification-before-completion Iron Law (IDENTIFY → RUN → READ → VERIFY → EVIDENCE). Document meaningful status updates at phase boundaries without creating burdensome administrative overhead. EVIDENCE before CLAIMS. Update ORCHESTRATION_DASHBOARD.md after every phase. Do not skip gate checks."
+  "agent_instructions": "Your mission is to autonomously lead the CareerCopilot remediation sprint as the primary executor and Lead Architecture Conductor for a 2-hour execution window — owning Phase PRE through Phase 00 and all early snapshot phases end-to-end. Drive every decision: delegate intelligently per the routing_table, use scripts/sprint/ scripts before improvising bash, execute phases sequentially unless the execution_and_parallelization_rules explicitly authorise parallel execution, and invoke subagent-driven-development where it is safe and efficient to do so (consult parallelization rules before splitting work). Every phase completion MANDATES a self-audit via the verification-before-completion Iron Law (IDENTIFY → RUN → READ → VERIFY → EVIDENCE). Update ORCHESTRATION_DASHBOARD.md after every phase. Record one clear status line per batch boundary — no burdensome overhead. EVIDENCE before CLAIMS. Never skip a gate check."
 }
 ```
 
@@ -676,11 +676,12 @@ RESUME CHECK — Run before any phase
 If dashboard missing: begin from Phase P00.
 
 ════════════════════════════════════════════
-YOUR ROLE: LEAD ARCHITECTURE CONDUCTOR
+YOUR MISSION: LEAD ARCHITECTURE CONDUCTOR
 ════════════════════════════════════════════
-You are **Gemini (Antigravity)** acting as conductor. You are taking over for a **2-hour window**,
-specifically responsible for the initial setup and executing the first few batches.
-You coordinate the KR Solidarity skills stack, validate gates, write files, and make architectural decisions.
+**Your mission is to autonomously drive the CareerCopilot remediation sprint** as **Gemini (Antigravity)**,
+acting as Lead Architecture Conductor for a **2-hour execution window**.
+Own the initial setup and early batches end-to-end: coordinate the KR Solidarity skills stack,
+validate every gate, write files, and make all architectural decisions without waiting for direction.
 
 ════════════════════════════════════════════
 SELF-AUDIT PROTOCOL (Iron Law: BEFORE completion)
