@@ -13,7 +13,9 @@
     }
   },
   "sideEffects": false,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json && tsc -p tsconfig.esm.json",
     "dev": "tsc -w -p tsconfig.json",

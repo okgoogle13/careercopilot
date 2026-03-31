@@ -1,98 +1,13 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { post as axiosPost } from 'axios';
 
-// ---------------------------------------------------------------------------
-// Module-level mocks (must be before component import)
-// ---------------------------------------------------------------------------
+let Documents: React.ComponentType;
 
-(jest as any).unstable_mockModule('@/components/shared/PageHeader', () => ({
-  PageHeader: ({ title, description }: { title: string; description?: string }) => (
-    <div data-testid="page-header">
-      <div>{title}</div>
-      {description ? <div>{description}</div> : null}
-    </div>
-  ),
-}));
-
-(jest as any).unstable_mockModule('@/components/ui/EmptyState', () => ({
-  EmptyState: () => <div data-testid="empty-state" />,
-}));
-
-(jest as any).unstable_mockModule('@/utils/exportEngine', () => ({
-  exportToPdf: jest.fn().mockResolvedValue(undefined),
-}));
-
-(jest as any).unstable_mockModule('@/stores/useModeStore', () => ({
-  useModeStore: () => 'light',
-}));
-
-(jest as any).unstable_mockModule('framer-motion', () => ({
-  motion: {
-    div: ({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-      <div {...props}>{children}</div>
-    ),
-  },
-  AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-}));
-
-(jest as any).unstable_mockModule('@/utils/exportEngine', () => ({
-  exportToPdf: jest.fn().mockResolvedValue(undefined),
-}));
-
-(jest as any).unstable_mockModule('html2canvas', () => ({
-  default: jest.fn().mockResolvedValue({ toDataURL: jest.fn(() => 'data:image/png;base64,') }),
-}));
-
-(jest as any).unstable_mockModule('jspdf', () => ({
-  default: jest.fn().mockImplementation(() => ({
-    addImage: jest.fn(),
-    save: jest.fn(),
-    output: jest.fn(() => new Blob()),
-  })),
-}));
-
-(jest as any).unstable_mockModule('file-saver', () => ({
-  saveAs: jest.fn(),
-  default: { saveAs: jest.fn() },
-}));
-
-(jest as any).unstable_mockModule('docx', () => ({
-  Document: jest.fn(),
-  HeadingLevel: {},
-  Packer: { toBlob: jest.fn() },
-  Paragraph: jest.fn(),
-  TextRun: jest.fn(),
-}));
-
-(jest as any).unstable_mockModule('@/features/documents/services/docxExport', () => ({
-  exportDocumentAsDocx: jest.fn(),
-}));
-
-(jest as any).unstable_mockModule('@/features/documents/hooks/useDocumentExport', () => ({
-  useDocumentExport: () => ({ exportDocx: jest.fn() }),
-}));
-
-(jest as any).unstable_mockModule('zustand', async () => jest.requireActual('zustand'));
-
-(jest as any).unstable_mockModule('@/stores/useModeStore', () => ({
-  useModeStore: jest.fn(() => 'KrDark'),
-  default: jest.fn(() => 'KrDark'),
-}));
-
-(jest as any).unstable_mockModule('@/api/documentService', () => ({
-  documentService: {
-    uploadDocumentForRedline: jest.fn(),
-    applyRedlineEdits: jest.fn(),
-    exportTrackedChanges: jest.fn(),
-  },
-}));
-
-const { Documents } = (await import('../Documents')) as any;
-
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
+beforeAll(async () => {
+  ({ Documents } = (await import('../Documents')) as any);
+});
 
 function getRedlineBtn(docId = 1) {
   return screen.getByTestId(`redline-btn-${docId}`);
@@ -116,29 +31,20 @@ function makeDocxFile(name = 'test.docx') {
   });
 }
 
-// ---------------------------------------------------------------------------
-// Tests
-// ---------------------------------------------------------------------------
-
 describe('Documents — Redline overlay', () => {
   beforeEach(() => {
-    jest.restoreAllMocks();
-    global.URL.createObjectURL = jest.fn(() => 'blob:test-url');
-    global.URL.revokeObjectURL = jest.fn();
-    (global as any).fetch = jest.fn();
-  });
-
-  afterEach(() => {
-    jest.restoreAllMocks();
+    (axiosPost as jest.Mock).mockReset();
+    URL.createObjectURL = jest.fn(() => 'blob:test-url');
+    URL.revokeObjectURL = jest.fn();
   });
 
   it('shows the overlay when the Redline button on a card is clicked', async () => {
     render(<Documents />);
 
-    const btn = getRedlineBtn(1);
-    await userEvent.click(btn);
+    await userEvent.click(getRedlineBtn(1));
 
     expect(getOverlay()).toBeInTheDocument();
+    expect(getFileInput()).toBeInTheDocument();
   });
 
   it('renders archive-first copy in the page header', () => {
@@ -157,78 +63,84 @@ describe('Documents — Redline overlay', () => {
     expect(getOverlay()).toBeInTheDocument();
 
     await userEvent.click(screen.getByTestId('redline-close-btn'));
+
     await waitFor(() => {
       expect(screen.queryByTestId('redline-overlay')).not.toBeInTheDocument();
     });
   });
 
-  it('shows an error and does not call fetch when JSON is invalid', async () => {
-    const fetchSpy = global.fetch as jest.Mock;
+  it('shows an error and does not call processRedline when JSON is invalid', async () => {
     render(<Documents />);
 
     await userEvent.click(getRedlineBtn(1));
-
-    const file = makeDocxFile();
-    await userEvent.upload(getFileInput(), file);
+    await userEvent.upload(getFileInput(), makeDocxFile());
     fireEvent.change(getEditsInput(), { target: { value: 'NOT VALID JSON {{{' } });
 
-    await userEvent.click(screen.getByText('Apply Redlines'));
+    await userEvent.click(screen.getByRole('button', { name: 'Apply Redlines' }));
 
-    expect(screen.getByTestId('redline-error')).toBeInTheDocument();
-    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(screen.getByTestId('redline-error')).toHaveTextContent(
+      'Edits field contains invalid JSON. Fix it before submitting.'
+    );
+    expect(axiosPost).not.toHaveBeenCalled();
   });
 
-  it('shows TrackedChangesWorkspace after a successful submission', async () => {
+  it('shows tracked changes after a successful submission', async () => {
     const mockBlob = new Blob(['docx'], {
       type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     });
-    (global.fetch as jest.Mock).mockResolvedValue({
-      ok: true,
-      blob: async () => mockBlob,
+    (axiosPost as jest.Mock).mockResolvedValue({
+      blob: mockBlob,
+      data: mockBlob,
       headers: {
-        get: (key: string) =>
-          key === 'content-disposition' ? 'attachment; filename=redlined_test.docx' : null,
+        'content-disposition': 'attachment; filename=redlined_test.docx',
       },
     });
 
     render(<Documents />);
 
     await userEvent.click(getRedlineBtn(1));
-
-    const file = makeDocxFile();
-    await userEvent.upload(getFileInput(), file);
+    await userEvent.upload(getFileInput(), makeDocxFile());
     fireEvent.change(getEditsInput(), {
       target: { value: '[{"find":"old","replace":"new"}]' },
     });
 
-    await userEvent.click(screen.getByText('Apply Redlines'));
+    await userEvent.click(screen.getByRole('button', { name: 'Apply Redlines' }));
 
     await waitFor(() => {
       expect(screen.getByText('Redlines Applied')).toBeInTheDocument();
     });
+    expect(screen.getByText('Redlines Applied')).toBeInTheDocument();
+    expect(screen.getByText('redlined_test.docx')).toBeInTheDocument();
+    expect(axiosPost).toHaveBeenCalledWith(
+      '/process/redline',
+      expect.any(FormData),
+      expect.objectContaining({
+        responseType: 'blob',
+      })
+    );
   });
 
-  it('shows an error when the backend returns a 400', async () => {
-    (global.fetch as jest.Mock).mockResolvedValue({
-      ok: false,
-      text: async () => 'invalid edits format',
-    });
+  it('shows an error when processRedline rejects', async () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => undefined);
+    (axiosPost as jest.Mock).mockRejectedValue(new Error('invalid edits format'));
 
-    render(<Documents />);
+    try {
+      render(<Documents />);
 
-    await userEvent.click(getRedlineBtn(1));
+      await userEvent.click(getRedlineBtn(1));
+      await userEvent.upload(getFileInput(), makeDocxFile());
+      fireEvent.change(getEditsInput(), {
+        target: { value: '[{"find":"x","replace":"y"}]' },
+      });
 
-    const file = makeDocxFile();
-    await userEvent.upload(getFileInput(), file);
-    fireEvent.change(getEditsInput(), {
-      target: { value: '[{"find":"x","replace":"y"}]' },
-    });
+      await userEvent.click(screen.getByRole('button', { name: 'Apply Redlines' }));
 
-    await userEvent.click(screen.getByText('Apply Redlines'));
-
-    await waitFor(() => {
-      expect(screen.getByTestId('redline-error')).toBeInTheDocument();
-    });
+      await waitFor(() => {
+        expect(screen.getByTestId('redline-error')).toHaveTextContent('invalid edits format');
+      });
+    } finally {
+      consoleErrorSpy.mockRestore();
+    }
   });
 
   it('closes the overlay when Cancel is clicked from the upload panel', async () => {
@@ -237,7 +149,7 @@ describe('Documents — Redline overlay', () => {
     await userEvent.click(getRedlineBtn(2));
     expect(getOverlay()).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Cancel'));
+    await userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
 
     await waitFor(() => {
       expect(screen.queryByTestId('redline-overlay')).not.toBeInTheDocument();

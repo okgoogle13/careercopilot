@@ -18,18 +18,18 @@ import { useAuth } from './context/AuthContext';
 import { Layout } from './layouts/Layout';
 import { useModeStore } from './stores/useModeStore';
 
-// Canonical Pages
-import LandingPage from './pages/LandingPage';
-import OnboardingPage from './pages/OnboardingPage';
-import DashboardPage from './pages/DashboardPage';
-import ProfilePage from './pages/ProfilePage';
-import LookoutPage from './pages/LookoutPage';
-import ApplicationsPage from './pages/ApplicationsPage';
-import AnalysisPage from './pages/AnalysisPage';
-import DocsPage from './pages/DocsPage';
-import ApplyPage from './pages/ApplyPage';
-import GenerationPage from './pages/GenerationPage';
-import SettingsPage from './pages/SettingsPage';
+// Canonical Pages (Migrated to Features)
+import { LandingPage } from './features/landing/LandingPage';
+import { OnboardingPage } from './features/onboarding/OnboardingPage';
+import { Dashboard as DashboardPage } from './features/dashboard/Dashboard';
+import { ProfileView as ProfilePage } from './features/profile/ProfileView';
+import { LookoutDiscovery as LookoutPage } from './screens/06_lookout/LookoutDiscovery';
+import { ApplicationTracker as ApplicationsPage } from './features/applications/ApplicationTracker';
+import { AnalysisPage } from './features/analysis/AnalysisPage';
+import { Documents as DocsPage } from './features/documents/Documents';
+import { ApplyQuick as ApplyPage } from './features/applications/ApplyQuick';
+import { TabbedGenerationPanel as GenerationPage } from './features/documents/components/TabbedGenerationPanel';
+import { Settings as SettingsPage } from './features/settings/Settings';
 import AuthModal from './screens/02_auth/AuthModal';
 import { Scaffold } from './components/archetypes';
 

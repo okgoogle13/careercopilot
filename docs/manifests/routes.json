@@ -1,25 +1,32 @@
 {
-  "generatedAt": "2026-03-28T06:31:55.672Z",
-  "count": 31,
+  "generatedAt": "2026-03-30T18:43:18.014Z",
+  "count": 35,
   "routes": [
     {
       "path": "/",
       "component": "LandingPage",
-      "importSource": "./features/landing/LandingPage",
+      "importSource": "./pages/LandingPage",
+      "auth": false,
+      "layout": "public"
+    },
+    {
+      "path": "/auth",
+      "component": "AuthPage",
+      "importSource": "UNKNOWN",
       "auth": false,
       "layout": "public"
     },
     {
       "path": "/login",
-      "component": "Login",
-      "importSource": "./features/auth/Login",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
       "auth": false,
       "layout": "public"
     },
     {
       "path": "/register",
-      "component": "Register",
-      "importSource": "./features/auth/Register",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
       "auth": false,
       "layout": "public"
     },
@@ -38,13 +45,6 @@
       "layout": "public"
     },
     {
-      "path": "/auth",
-      "component": "Navigate",
-      "importSource": "react-router-dom",
-      "auth": false,
-      "layout": "public"
-    },
-    {
       "path": "/animation-test",
       "component": "AnimationTestPage",
       "importSource": "./pages/AnimationTest",
@@ -59,107 +59,128 @@
       "layout": "public"
     },
     {
-      "path": "/prototype/*",
-      "component": "PrototypeRoutes",
-      "importSource": "./prototype-features/prototype-routes",
-      "auth": false,
-      "layout": "public"
-    },
-    {
-      "path": "/tracker",
-      "component": "ApplicationTracker",
-      "importSource": "./features/applications/ApplicationTracker",
+      "path": "/dashboard",
+      "component": "DashboardPage",
+      "importSource": "./pages/DashboardPage",
       "auth": true,
       "layout": "migrated"
     },
     {
-      "path": "/dashboard",
-      "component": "Dashboard",
-      "importSource": "./features/dashboard/Dashboard",
+      "path": "/profile",
+      "component": "ProfilePage",
+      "importSource": "./pages/ProfilePage",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/lookout",
+      "component": "LookoutPage",
+      "importSource": "./pages/LookoutPage",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/applications",
+      "component": "ApplicationsPage",
+      "importSource": "./pages/ApplicationsPage",
       "auth": true,
       "layout": "migrated"
     },
     {
       "path": "/analysis",
       "component": "AnalysisPage",
-      "importSource": "./features/analysis/AnalysisPage",
+      "importSource": "./pages/AnalysisPage",
       "auth": true,
       "layout": "migrated"
     },
     {
-      "path": "/opportunities",
-      "component": "Opportunities",
-      "importSource": "./features/opportunities/Opportunities",
+      "path": "/docs",
+      "component": "DocsPage",
+      "importSource": "./pages/DocsPage",
       "auth": true,
       "layout": "migrated"
     },
     {
-      "path": "/career/ingest",
-      "component": "SmartIngestion",
-      "importSource": "./features/ingestion/SmartIngestion",
+      "path": "/apply",
+      "component": "ApplyPage",
+      "importSource": "./pages/ApplyPage",
       "auth": true,
       "layout": "migrated"
     },
     {
-      "path": "/apply/quick",
-      "component": "ApplyQuick",
-      "importSource": "./features/applications/ApplyQuick",
+      "path": "/generation",
+      "component": "GenerationPage",
+      "importSource": "./pages/GenerationPage",
       "auth": true,
       "layout": "migrated"
     },
     {
       "path": "/settings",
-      "component": "Settings",
-      "importSource": "./features/settings/Settings",
-      "auth": true,
-      "layout": "migrated"
-    },
-    {
-      "path": "/profile",
-      "component": "ProfileView",
-      "importSource": "./features/profile/ProfileView",
+      "component": "SettingsPage",
+      "importSource": "./pages/SettingsPage",
       "auth": true,
       "layout": "migrated"
     },
     {
       "path": "/onboarding",
-      "component": "OnboardingRoute",
-      "importSource": "./features/onboarding/OnboardingRoute",
+      "component": "OnboardingPage",
+      "importSource": "./pages/OnboardingPage",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/tracker",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/opportunities",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/career/ingest",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/apply/quick",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
       "auth": true,
       "layout": "migrated"
     },
     {
       "path": "/ksc-generator",
-      "component": "KSCGenerator",
-      "importSource": "./features/ksc-generator/KSCGenerator",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
       "auth": true,
       "layout": "migrated"
     },
     {
       "path": "/cover-letter-generator",
-      "component": "CoverLetterGenerator",
-      "importSource": "./features/applications/CoverLetterGenerator",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
       "auth": true,
       "layout": "migrated"
     },
     {
       "path": "/job-queue",
-      "component": "JobQueue",
-      "importSource": "./features/jobs/JobQueue",
-      "auth": true,
-      "layout": "migrated"
-    },
-    {
-      "path": "/welcome",
-      "component": "WelcomeScreen",
-      "importSource": "./features/onboarding/WelcomeScreen",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
       "auth": true,
       "layout": "migrated"
     },
     {
       "path": "/documents",
-      "component": "Documents",
-      "importSource": "./features/documents/Documents",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
       "auth": true,
       "layout": "migrated"
     },
@@ -200,6 +221,13 @@
     },
     {
       "path": "/editor",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated"
+    },
+    {
+      "path": "/welcome",
       "component": "Navigate",
       "importSource": "react-router-dom",
       "auth": true,

@@ -70,47 +70,36 @@ cd frontend && yarn test:e2e
 
 ### Design System
 
-- **Name**: KR Solidarity v6.0 – Manifesto-Driven Design System
+- **Name**: KR Solidarity v6.1 – Gold Standard Edition
 - **Foundation**: Material 3 Expressive, dark theme only ("Solidarity Mode")
-- **Canon Docs** (read these before any design work):
+- **Canon Docs**:
   - [`docs/design/01_CANON.md`](docs/design/01_CANON.md) — Identity, Non-Negotiables, Zero-Flora Rule
   - [`docs/design/02_SYSTEM.md`](docs/design/02_SYSTEM.md) — Palette, Typography, Shape Archetypes
-  - [`docs/design/03_COMPONENTS.md`](docs/design/03_COMPONENTS.md) — Component Catalog
-  - [`docs/design/04_ASSETS.md`](docs/design/04_ASSETS.md) — Asset IDs, Manifest, Naming
-  - [`docs/design/05_FLOWS.md`](docs/design/05_FLOWS.md) — Page-level UX Flows
-  - [`.claude/skills/SKILL_REGISTRY.md`](.claude/skills/SKILL_REGISTRY.md) — 67 agent skills
-- **Palette (v3.2):**
-  - Background/surface: **Solidarity Charcoal** `#1A1714` (`--sys-color-charcoalBackground-base`)
-  - Text: **Worker Ash** `#DAF6B3` (`--sys-color-worker-ash-base`)
-  - Primary actions: **Solidarity Crimson** `#F14714` (`--sys-color-solidarityRed-base`)
-  - Halo/focus: **Ink Gold** `#DAF674` (`--sys-color-inkGold-base`)
-  - Growth accents: **Activist Smoke** `#48DA8B` (`--sys-color-kr-activistSmokeGreen-base`)
-  - Attention: **Stencil Yellow** `#F6E748` (`--sys-color-stencilYellow-base`)
-  - Cool accents: **Protest Metal Blue** `#48B3DA` (`--sys-color-protestMetalBlue-base`)
-  - Structural: **Concrete Grey** `#A39B8F` (`--sys-color-concreteGrey-base`)
-  - **DEPRECATED/PURGED:** `labWrenMetalBlue`, `GumLeafGreen`, `WattleGold`, `inkGreen`
+- **Palette (v4.0):**
+  - Background/surface: **Solidarity Charcoal** `#1A1714` (`--kr-color-charcoal-background-base`)
+  - Text: **Worker Ash** `#DAF6B3` (`--kr-color-worker-ash-base`)
+  - Primary actions: **Solidarity Crimson** `#F14714` (`--kr-color-solidarity-red-base`)
+  - Halo/focus: **Ink Gold** `#DAF674` (`--kr-color-ink-gold-base`)
+  - Growth accents: **Activist Smoke** `#48DA8B` (`--kr-color-kr-activist-smoke-green-base`)
+  - Attention: **Stencil Yellow** `#F6E748` (`--kr-color-stencil-yellow-base`)
+  - Signal: **Signal Green** `#48F0E5` (`--kr-color-signal-green-base`)
 - **Tokens**:
-  - Source of truth: `frontend/src/design/tokens/tokens.json` (complete KR Solidarity v6.0 system)
+  - Source of truth: `frontend/src/design/tokens/tokens.json` (DTCG compliant)
   - CSS variables: `frontend/src/design/styles/design-tokens.css` (auto-generated via `python3 scripts/build-m3-tokens.py`)
-  - Deprecated legacy file: `design-system/tokens.json` (Material Design 3 only — do not use)
-  - All UI must use semantic tokens (`--sys-color-*`); no hardcoded hex values
+  - Validation: Enforced via `python3 scripts/design-validation/validate-tokens.py`
+  - All UI must use semantic tokens (`--kr-color-*`); no hardcoded hex values
 - **Aesthetic**:
   - Screenprint manifesto + street-art wheat-paste + Kerala diaspora identity
-  - **STRICT ZERO-FLORA LOCKDOWN**: No flora, no Australian endemic species, no gum leaves
-  - No bureaucratic motifs (passports, borders, visas, government seals)
-  - No perfect geometry (`border-radius: 50%` banned); use KR Solidarity archetypes and `shape.*` tokens only
-- **Components** (reference implementations; canonical names):
-  - `Strike` (primary action)
-  - `Placard` (content container)
-  - `Scaffold` (layout panels)
-  - `ScaffoldInput` (form inputs)
-  - `March` (select / flow elements)
-  - `Megaphone` (modal / announcement)
-  - `NativeAnchor` (symbolic anchor)
-- **Deprecated Names / Compat Aliases (do not use in new code)**:
-  - Component names: `Pebble`, `Stone`, `Slab`, `Jar`, `Cabinet`, `Lens`, `Signal`, `HaloPulses`
-  - Shape aliases (still present in `frontend/src/design/styles/design-tokens.css` for compat): `--sys-shape-pebble01`, `--sys-shape-stone01`, `--sys-shape-slab01`, `--sys-shape-pebbleSurge01`, `--sys-shape-scaffoldSlab01`
-  - Shape library compat aliases: see the `=== DEPRECATED v6.0 COMPAT ALIASES ===` block in `frontend/src/design/styles/design-tokens.css`
+  - **SOLIDARITY FLORA POLICY**: Absolutely NO native Australian flora (gum leaves, wattle, eucalyptus).
+  - No perfect geometry; use KR Solidarity archetypes and `shape.*` tokens only
+- **Components**:
+  - `Strike` (primary action), `Placard` (container), `Scaffold` (layout), `March` (select), `Megaphone` (modal)
+- **Deprecated Names**:
+  - `Pebble`, `Stone`, `Slab`, `Jar`, `Cabinet`, `Lens`, `Signal`, `HaloPulses`
+  - Shape aliases (compat only): `--sys-shape-pebble01`, etc.
+
+> [!NOTE]
+> **Legacy Migration (v6.0 → v6.1)**: As of the Gold Standard update, the project has transitioned from the `--sys-` prefix to the `--kr-` prefix for all CSS variables. While many `--sys-` variables remain in the generated CSS for backward compatibility with legacy components, all **new** development must use the `--kr-` semantic tokens.
 
 ## Key Technologies
 
@@ -201,7 +190,7 @@ Rules:
 - ✅ Include confidence scores where the response schema supports it
 - ✅ Use async/await in FastAPI endpoints and Genkit flows
 - ✅ Use TypeScript strict mode (`tsconfig.json: "strict": true`)
-- ✅ Apply KR Solidarity v6.0 design tokens for all UI (no hardcoded colors, **zero-flora**, Strike/March/Megaphone/Placard/Scaffold/Substrate archetypes only)
+- ✅ Apply KR Solidarity v6.1 design tokens for all UI (no hardcoded colors, **zero-flora**, Strike/March/Megaphone/Placard/Scaffold archetypes only)
 - ✅ Validate all AI agent inputs before processing
 - ✅ Test AI agents with sample user data before deployment
 - ✅ Use environment variables for API keys, model configs, and secrets
@@ -264,6 +253,23 @@ Rules:
 - Pre-commit hooks verify no secrets leak; if hook fails, fix issues and recommit (never skip with `--no-verify`)
 - Genkit flows inherit request auth context; always validate user ownership via JWT claims and DB records
 - API auth and DB least-privilege policies are primary defenses; Firestore rules apply only to legacy tests
+
+
+### Graduated Design Audit Flow (BR-DESIGN-XXX)
+
+When performing visual or design audits, follow this graduated flow to preserve tokens:
+
+1.  **AX-First Audit**: Always start with Playwright's `accessibility.snapshot()` or `AxeBuilder`.
+    - Verify structural rules (BR-DESIGN-001, BR-DESIGN-002, BR-DESIGN-006) via text/tree analysis first.
+2.  **Two-Tier Accessibility (BR-DESIGN-007)**:
+    - **Warning**: Low contrast on decorative/secondary elements.
+    - **Critical**: Low contrast blocking primary actions (Strike buttons) or core text.
+3.  **Targeted Vision Escalation**: Only escalate to `vision-scorer-mcp` or `design-system-sidekick` screenshots for rules requiring pixel-level confirmation (e.g., BR-DESIGN-003 Shape Archetypes).
+4.  **Orchestrated Sampling**: Use the bridge script (`scripts/run-visual-audit.sh`) for all audits. It enforces:
+    - **Circuit Breaker**: Hard limit of 5 screenshots.
+    - **Memoization**: Skips redundant checks if commit SHA matches cache.
+    - **Subtree Scanning**: Capture only specific components (`.include()`) rather than full viewports.
+5.  **Budget as Signal**: Treat token budget exhaustion as a **blocking failure**, not a silent skip. Explain the exhaustion to the user and suggest manual verification or caching.
 
 ## Token Efficiency & MCP Delegation
 
@@ -470,7 +476,7 @@ Include timing in agent metadata for monitoring.
 - [ ] Linting passes: `cd frontend && yarn lint` and `cd backend && ruff check .`
 - [ ] Code follows KR Solidarity v6.0 design system (if UI changes) — check `docs/design/01_CANON.md`
 - [ ] Design: Zero-Flora confirmed — no botanical/endemic references
-- [ ] Design: Only semantic tokens used (`--sys-color-*`, `--sys-shape-*`, `--sys-type-*`)
+- [ ] Design: Only semantic tokens used (`--kr-color-*`, `--kr-shape-*`, `--kr-type-*`)
 - [ ] AI agent I/O matches documented contracts
 - [ ] No secrets committed (check `.gitignore`)
 - [ ] Commit message format: `feat(scope): description` or `fix(scope): description`

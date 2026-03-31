@@ -1,253 +1,448 @@
-import { memo, type ReactNode } from 'react';
+import { memo, useState } from 'react';
 import { motion } from 'framer-motion';
-import clsx, { type ClassValue } from 'clsx';
-import { useModeStore } from '../../stores/useModeStore';
+import { MapPin, Clock } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { NexusInput } from '../../components/kerala-rage/NexusInput';
 
-type SlotDef = {
-  name: string;
-  zLayer: 'Z-0' | 'Z-1' | 'Z-2' | 'Z-3';
-  token: `--sys-${string}`;
-  assetCompat: `KR-${string}`;
-};
+// ─── Types ────────────────────────────────────────────────────────────────────
 
-const SLOT_DEFS: SlotDef[] = [
-  {
-    name: 'auto_kr_solid_003',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_solid_010',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_solid_025',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_solid_007',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_brutalist_mask_001',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_ui_013',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_ui_025',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_ui_036',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_solid_044',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-];
-const DEFAULT_SLOT_ASSETS: Partial<Record<string, string>> = {
-  auto_kr_solid_003: 'KR-UI-019',
-  auto_kr_solid_010: 'KR-UI-020',
-  auto_kr_solid_025: 'KR-UI-021',
-  auto_kr_solid_007: 'KR-UI-022',
-  auto_kr_brutalist_mask_001: 'KR-UI-023',
-  auto_kr_ui_013: 'KR-UI-024',
-  auto_kr_ui_025: 'KR-UI-025',
-  auto_kr_ui_036: 'KR-UI-026',
-  auto_kr_solid_044: 'KR-UI-027',
-};
+type InterceptStatus = 'VERIFIED' | 'URGENT' | 'CLASSIFIED' | 'SAVED';
+type FilterTab = 'ALL INTERCEPTS' | 'VERIFIED' | 'URGENT' | 'UNCONFIRMED' | 'CLASSIFIED' | 'SAVED';
 
-export interface LookoutDiscoveryProps {
-  className?: ClassValue;
-  children?: ReactNode;
-  title?: string;
-  subtitle?: string;
-  primaryLabel?: string;
-  secondaryLabel?: string;
-  showActions?: boolean;
-  slotAssets?: Partial<Record<string, string>>;
-  onPrimaryAction?: () => void;
-  onSecondaryAction?: () => void;
+interface Intercept {
+  id: string;
+  status: InterceptStatus;
+  signalBars: number; // 1-5
+  dispatch: string;
+  title: string;
+  company: string;
+  description: string;
+  tags: string[];
+  location: string;
+  salary: string;
+  interceptedAgo: string;
+  score: number;
+  saved?: boolean;
 }
 
-const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
-const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+// ─── Figma-accurate token map ─────────────────────────────────────────────────
+// VERIFIED badge/bars → protest-metal-blue (#48b3da)
+// URGENT badge/bars  → solidarity-red (#f14714)
+// Score 94           → stencil-yellow (#daf674)
+// Score 89           → activist-smoke-green (#48da8b)
+// Score 78           → stencil-yellow-warm (#f6e748)
+// Salary             → solidarity-smoke-orange (#da8b48)
+// Description/title  → #8daf75 (medium green) / #daf6b3 (light green for top score)
+// Muted text/tags    → #627a4f
 
-export const LookoutDiscovery = memo(function LookoutDiscovery({
-  className,
-  children,
-  title = 'Job Discovery',
-  subtitle = 'Filter opportunities and evaluate job-fit quickly.',
-  primaryLabel = 'Apply Filters',
-  secondaryLabel = 'Load More',
-  showActions = true,
-  slotAssets,
-  onPrimaryAction,
-  onSecondaryAction,
-}: LookoutDiscoveryProps) {
-  const mode = useModeStore((state) => state.mode);
-  const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
-  const isKrDark = mode === 'KrDark';
+const STATUS_COLORS: Record<InterceptStatus, { badge: string; bar: string }> = {
+  VERIFIED: {
+    badge: 'bg-[#1e2a2e] border border-[#48b3da] text-[#48b3da]',
+    bar: 'bg-[#48b3da]',
+  },
+  URGENT: {
+    badge: 'bg-[#2a1a18] border border-[#f14714] text-[#f14714]',
+    bar: 'bg-[#f14714]',
+  },
+  CLASSIFIED: {
+    badge: 'bg-[var(--kr-color-ink-gold-base)]/20 border border-[var(--kr-color-ink-gold-base)]/50 text-[var(--kr-color-ink-gold-base)]',
+    bar: 'bg-[var(--kr-color-ink-gold-base)]',
+  },
+  SAVED: {
+    badge: 'bg-transparent border border-[#daf674] text-[#daf674]',
+    bar: 'bg-[#daf674]',
+  },
+};
+
+const DECRYPT_BUTTON_COLORS: Record<InterceptStatus, string> = {
+  VERIFIED: 'bg-[#48b3da]',
+  URGENT: 'bg-[#f14714]',
+  CLASSIFIED: 'bg-[var(--kr-color-ink-gold-base)]',
+  SAVED: 'bg-white/20',
+};
+
+function getScoreColor(score: number): string {
+  if (score >= 92) return '#daf674';
+  if (score >= 85) return '#48da8b';
+  return '#f6e748';
+}
+
+// ─── Mock data (matches Figma exactly) ───────────────────────────────────────
+
+const INTERCEPTS: Intercept[] = [
+  {
+    id: '1',
+    status: 'VERIFIED',
+    signalBars: 5,
+    dispatch: 'KR-0427',
+    title: 'Senior Case Manager',
+    company: 'Berry Street',
+    description:
+      'Confirmed opening. Lead case management across family services portfolio. Senior practitioner required for case supervision and systemic advocacy.',
+    tags: ['Case Management', 'MARAM', 'Family Violence'],
+    location: 'Inner North, Melbourne VIC',
+    salary: '$95K–$105K',
+    interceptedAgo: '1d',
+    score: 94,
+    saved: true,
+  },
+  {
+    id: '2',
+    status: 'URGENT',
+    signalBars: 4,
+    dispatch: 'KR-0391',
+    title: 'Family Violence Practitioner',
+    company: 'Safe Steps',
+    description:
+      'Critical intercept. High-priority family violence intervention role. Court support capacity required. Closing in 72 hours — immediate action advised.',
+    tags: ['Crisis Support', 'Risk Assessment', 'Court Support'],
+    location: 'Melbourne CBD',
+    salary: '$88K–$98K',
+    interceptedAgo: '3d',
+    score: 89,
+  },
+  {
+    id: '3',
+    status: 'VERIFIED',
+    signalBars: 3,
+    dispatch: 'KR-0379',
+    title: 'NDIS Support Coordinator',
+    company: 'genU',
+    description:
+      'Verified lead in NDIS sector. Full scheme implementation experience preferred. Registered provider with strong support network. Partial skill alignment detected.',
+    tags: ['NDIS', 'Disability', 'Care Planning'],
+    location: 'Eastern Suburbs VIC',
+    salary: '$80K–$90K',
+    interceptedAgo: '4d',
+    score: 78,
+    saved: true,
+  },
+  {
+    id: '4',
+    status: 'VERIFIED',
+    signalBars: 3,
+    dispatch: 'KR-0412',
+    title: 'Mental Health Clinician',
+    company: 'Beyond Blue',
+    description:
+      'Confirmed CAMHS-adjacent role. Early intervention focus for 15–25 age cohort. Strong evidence-based practice framework required.',
+    tags: ['Mental Health', 'DBT', 'Youth Assessment'],
+    location: 'Footscray VIC',
+    salary: '$88K–$98K',
+    interceptedAgo: '5d',
+    score: 91,
+  },
+];
+
+const FILTER_TABS: FilterTab[] = [
+  'ALL INTERCEPTS',
+  'VERIFIED',
+  'URGENT',
+  'UNCONFIRMED',
+  'CLASSIFIED',
+  'SAVED',
+];
+
+const TAB_COUNTS: Record<FilterTab, number> = {
+  'ALL INTERCEPTS': 8,
+  VERIFIED: 4,
+  URGENT: 1,
+  UNCONFIRMED: 2,
+  CLASSIFIED: 1,
+  SAVED: 2,
+};
+
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+/** 5-bar signal indicator, coloured by status */
+const SignalBars = ({ bars, status }: { bars: number; status: InterceptStatus }) => {
+  const barHeights = [5, 8, 11, 14, 18];
+  const activeClass = STATUS_COLORS[status].bar;
 
   return (
-    <motion.section
-      role="main"
+    <div className="flex items-end gap-[2px]" aria-label={`Signal strength ${bars} of 5`}>
+      {barHeights.map((h, i) => (
+        <div
+          key={i}
+          className={cn(
+            'w-[3px] rounded-t-[1px] transition-colors',
+            i < bars ? activeClass : 'bg-[#323232]'
+          )}
+          style={{ height: `${h}px` }}
+        />
+      ))}
+    </div>
+  );
+};
+
+/** Pill-left class badge — matches Figma ClassBadge shape */
+const StatusBadge = ({ status }: { status: InterceptStatus }) => (
+  <span
+    className={cn(
+      'px-2 py-0.5 text-[8px] font-mono font-extrabold tracking-[0.08em] uppercase',
+      'rounded-l-full rounded-r-[2px]',
+      STATUS_COLORS[status].badge
+    )}
+  >
+    {status}
+  </span>
+);
+
+/** Top-right SAVED pill — stencil-yellow outline, matches Figma */
+const SavedBadge = () => (
+  <span className="absolute top-4 right-4 border border-[#daf674] text-[#daf674] text-[8px] font-mono font-thin tracking-[0.06em] uppercase px-2 py-0.5 rounded-tl-[8px] rounded-tr-[2px] rounded-bl-[2px] rounded-br-[8px]">
+    SAVED
+  </span>
+);
+
+const InterceptCard = ({ intercept }: { intercept: Intercept }) => {
+  const scoreColor = getScoreColor(intercept.score);
+  const titleColor = intercept.score >= 92 ? '#daf6b3' : '#8daf75';
+  const decryptBg = DECRYPT_BUTTON_COLORS[intercept.status];
+
+  return (
+    <motion.article
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={undefined}
-      className={clsx(
-        'relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8',
-        className
+      className={cn(
+        'relative flex flex-col gap-0 overflow-hidden',
+        'bg-[#1a1a1a]',
+        'border-[#2a2a2a] border border-t-[3px]',
+        'rounded-tl-[20px] rounded-tr-[4px] rounded-bl-[2px] rounded-br-[12px]',
+        'shadow-[2px_2px_0px_0px_#323232]'
       )}
-      style={{
-        backgroundColor: 'var(--sys-color-charcoalBackground-base)',
-        color: 'var(--sys-color-worker-ash-base)',
-        border: '1px solid var(--sys-color-concreteGrey-base)',
-      }}
-      data-mode={mode}
-      data-testid="lookoutdiscovery"
-      data-motion-audit="true"
     >
-      <style>{`
-         @media (prefers-reduced-motion: reduce) {
-          [data-motion-audit="true"] *,
-          [data-motion-audit="true"]::before,
-          [data-motion-audit="true"]::after {
-            transition: none !important;
-            animation: none !important;
-          }
-        }
-      `}</style>
+      {intercept.saved && <SavedBadge />}
 
-      <div
-        className="pointer-events-none absolute inset-0"
-        aria-hidden="true"
-      >
-        {SLOT_DEFS.map((slot) => (
-          <div
-            key={slot.name}
-            data-slot={slot.name}
-            data-asset-compat={slot.assetCompat}
-            data-asset-id={resolvedSlotAssets[slot.name] ?? ''}
-            data-z-layer={slot.zLayer}
-            style={{ color: `var(${slot.token})` }}
-          />
-        ))}
+      <div className="flex flex-col gap-0 p-5">
+        {/* Card header: badge + dispatch + signal */}
+        <div className="flex items-center justify-between gap-2 mb-[14px]">
+          <div className="flex items-center gap-2">
+            <StatusBadge status={intercept.status} />
+            <span className="text-[9px] font-mono font-thin tracking-[0.08em] text-[#627a4f] uppercase">
+              DISPATCH #{intercept.dispatch}
+            </span>
+          </div>
+          <SignalBars bars={intercept.signalBars} status={intercept.status} />
+        </div>
+
+        {/* Title */}
+        <h3
+          className="text-[15px] font-mono font-bold tracking-[0.02em] mb-[6px]"
+          style={{ color: titleColor }}
+        >
+          {intercept.title}
+        </h3>
+
+        {/* Company */}
+        <p className="text-[10px] font-mono font-thin tracking-[0.06em] uppercase text-[#627a4f] mb-[14px]">
+          {intercept.company}
+        </p>
+
+        {/* Divider */}
+        <div className="h-px bg-[#2a2a2a] mb-[14px]" />
+
+        {/* Description */}
+        <p className="text-[11px] font-mono font-light leading-[1.65] text-[#8daf75] line-clamp-3 mb-[14px]">
+          {intercept.description}
+        </p>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-[6px] mb-[14px]">
+          {intercept.tags.map((tag) => (
+            <span
+              key={tag}
+              className="px-2 py-0.5 text-[8px] font-mono font-bold tracking-[0.07em] uppercase text-[#627a4f] bg-[#242424] border border-[#323232] rounded-tl-[8px] rounded-tr-[2px] rounded-bl-[2px] rounded-br-[8px]"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Divider */}
+        <div className="h-px bg-[#2a2a2a] mb-[14px]" />
+
+        {/* Footer row */}
+        <div className="flex items-start justify-between gap-4">
+          {/* Left: location, time, salary */}
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center gap-3 text-[9px] font-mono font-thin text-[#627a4f]">
+              <span className="flex items-center gap-1">
+                <MapPin className="w-[9px] h-[9px]" />
+                {intercept.location}
+              </span>
+              <span className="flex items-center gap-1">
+                <Clock className="w-[9px] h-[9px]" />
+                INTERCEPTED {intercept.interceptedAgo} AGO
+              </span>
+            </div>
+            <p
+              className="text-[11px] font-mono font-bold"
+              style={{ color: '#da8b48' }}
+            >
+              {intercept.salary}
+            </p>
+          </div>
+
+          {/* Right: score + DECRYPT */}
+          <div className="flex items-center gap-3 shrink-0">
+            <div className="flex flex-col items-end">
+              <span
+                className="text-[22px] font-mono font-extrabold leading-none tabular-nums"
+                style={{ color: scoreColor }}
+              >
+                {intercept.score}
+              </span>
+              <span className="text-[7px] font-mono font-thin tracking-[0.08em] text-[#627a4f] uppercase">
+                ATS MATCH
+              </span>
+            </div>
+            <button
+              className={cn(
+                'px-4 py-[7px] text-[9px] font-mono font-extrabold tracking-[0.1em] uppercase',
+                'text-[#0f0f0f]',
+                'rounded-tl-[32px] rounded-tr-[2px] rounded-bl-[2px] rounded-br-[2px]',
+                'shadow-[2px_2px_0px_0px_#323232]',
+                'transition-opacity hover:opacity-90',
+                decryptBg
+              )}
+            >
+              DECRYPT →
+            </button>
+          </div>
+        </div>
       </div>
+    </motion.article>
+  );
+};
 
+// ─── Main component ───────────────────────────────────────────────────────────
+
+export const LookoutDiscovery = memo(function LookoutDiscovery() {
+  const [activeFilter, setActiveFilter] = useState<FilterTab>('ALL INTERCEPTS');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filtered =
+    activeFilter === 'ALL INTERCEPTS'
+      ? INTERCEPTS
+      : activeFilter === 'SAVED'
+      ? INTERCEPTS.filter((i) => i.saved)
+      : INTERCEPTS.filter((i) => i.status === (activeFilter as InterceptStatus));
+
+  const displayed = searchQuery
+    ? filtered.filter(
+        (i) =>
+          i.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          i.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()))
+      )
+    : filtered;
+
+  return (
+    <div
+      className="flex flex-col gap-6 min-h-full px-8 py-8"
+      style={{ backgroundColor: 'var(--kr-color-charcoal-background-steps-1)' }}
+    >
+      {/* ── Hero ── */}
       <motion.header
-        initial={{ opacity: 0, y: 6 }}
+        initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ ...springHero, delay: 0.04 }}
-        className="relative z-10"
+        transition={{ duration: 0.3 }}
+        className="flex flex-col gap-2"
       >
-        <h1
-          className="text-3xl font-black md:text-5xl"
-          style={{
-            fontFamily: 'var(--sys-type-font-fraunces)',
-            color: 'var(--sys-color-paperWhite)',
-          }}
-        >
-          {title}
+        <p className="text-[11px] font-mono tracking-[0.25em] uppercase text-[var(--kr-color-signal-green-base)]">
+          THE LOOKOUT // CLANDESTINE INTELLIGENCE FEED
+        </p>
+
+        <h1 className="flex flex-wrap items-baseline gap-x-3 leading-none">
+          <span className="text-[72px] font-black text-white tracking-tight uppercase">
+            THE
+          </span>
+          <span
+            className="text-[72px] font-black uppercase italic tracking-tight"
+            style={{ color: 'var(--kr-color-signal-green-base)' }}
+          >
+            LOOKOUT
+          </span>
         </h1>
-        <p
-          className="mt-3 max-w-4xl text-base md:text-lg"
-          style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            color: 'var(--sys-color-worker-ash-base)',
-          }}
-        >
-          {subtitle}
+
+        <p className="max-w-xl text-[13px] text-white/45 leading-relaxed">
+          Intercepted job dispatches, classified by signal strength and ATS alignment.
+          Hover unreviewed leads to initiate decrypt sequence.
         </p>
       </motion.header>
 
-      {showActions && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={undefined}
-          className="relative z-10 mt-6 flex flex-wrap gap-3"
-        >
-          <motion.button
-            type="button"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            transition={springButton}
-            onClick={onPrimaryAction}
-            className="rounded-[var(--sys-shape-blockRiot03)] px-5 py-3 font-semibold"
-            style={{
-              fontFamily: 'var(--sys-type-font-work-sans)',
-              backgroundColor: 'var(--sys-color-inkGold-base)',
-              color: 'var(--sys-color-charcoalBackground-base)',
-            }}
-          >
-            {primaryLabel}
-          </motion.button>
-          <motion.button
-            type="button"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            transition={springButton}
-            onClick={onSecondaryAction}
-            className="rounded-[var(--sys-shape-blockRiot01)] border px-5 py-3 font-medium"
-            style={{
-              fontFamily: 'var(--sys-type-font-work-sans)',
-              borderColor: 'var(--sys-color-protestMetalBlue-base)',
-              color: isKrDark ? 'var(--sys-color-worker-ash-base)' : 'var(--sys-color-paperWhite)',
-              backgroundColor: 'transparent',
-            }}
-          >
-            {secondaryLabel}
-          </motion.button>
-        </motion.div>
-      )}
-
-      {children ? (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ ...springCard, delay: 0.08 }}
-          className="relative z-10 mt-8"
-        >
-          {children}
-        </motion.div>
-      ) : null}
-
-      <motion.p
+      {/* ── Stats ── */}
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={undefined}
-        className="relative z-10 mt-6 text-xs"
-        style={{
-          fontFamily: 'var(--sys-type-font-mono)',
-          color: 'var(--sys-color-concreteGrey-base)',
-        }}
+        transition={{ delay: 0.1 }}
+        className="flex items-center gap-8"
       >
-        Slots: {SLOT_DEFS.length} | Motion: spring-only | Tokens: --sys-* | Zustand: useModeStore
-      </motion.p>
-    </motion.section>
+        {[
+          { value: 8, label: 'TOTAL INTERCEPTS' },
+          { value: 4, label: 'VERIFIED LEADS' },
+          { value: 1, label: 'URGENT' },
+          { value: 5, label: 'UNVIEWED' },
+        ].map(({ value, label }) => (
+          <div key={label} className="flex items-baseline gap-2">
+            <span className="text-[28px] font-black text-white tabular-nums leading-none">
+              {value}
+            </span>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-white/35">
+              {label}
+            </span>
+          </div>
+        ))}
+      </motion.div>
+
+      {/* ── Search ── */}
+      <NexusInput
+        icon="search"
+        placeholder="SEARCH INTERCEPTS..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        label="Search intercepts"
+        className="uppercase tracking-wider text-sm"
+      />
+
+      {/* ── Filter tabs ── */}
+      <div className="flex flex-wrap gap-2">
+        {FILTER_TABS.map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveFilter(tab)}
+            className={cn(
+              'px-3 py-1.5 text-[11px] font-mono uppercase tracking-widest rounded-sm border transition-colors duration-150',
+              activeFilter === tab
+                ? 'bg-[var(--kr-color-signal-green-base)]/10 border-[var(--kr-color-signal-green-base)]/60 text-[var(--kr-color-signal-green-base)]'
+                : 'bg-transparent border-white/15 text-white/40 hover:border-white/30 hover:text-white/60'
+            )}
+          >
+            {tab} {TAB_COUNTS[tab]}
+          </button>
+        ))}
+      </div>
+
+      {/* ── Card grid ── */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {displayed.map((intercept, i) => (
+          <motion.div
+            key={intercept.id}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.06 }}
+          >
+            <InterceptCard intercept={intercept} />
+          </motion.div>
+        ))}
+
+        {displayed.length === 0 && (
+          <div className="col-span-2 py-16 text-center text-[12px] font-mono uppercase tracking-widest text-white/25">
+            NO INTERCEPTS MATCH CURRENT FILTER
+          </div>
+        )}
+      </div>
+    </div>
   );
 });
 

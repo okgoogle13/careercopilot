@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-15T05:58:20.162635+00:00",
+  "generatedAt": "2026-03-30T14:06:51.360892+00:00",
   "mainRouters": [
     {
       "router_ref": "api_router",
@@ -99,7 +99,7 @@
       "tag": "Resume Audit"
     }
   ],
-  "endpointCount": 57,
+  "endpointCount": 59,
   "filesScanned": 21,
   "endpoints": [
     {
@@ -211,6 +211,13 @@
       "method": "GET",
       "localPath": "/me",
       "fullPath": "/api/auth/me",
+      "module": "auth",
+      "file": "auth.py"
+    },
+    {
+      "method": "GET",
+      "localPath": "/voice-profile",
+      "fullPath": "/api/auth/voice-profile",
       "module": "auth",
       "file": "auth.py"
     },
@@ -342,6 +349,13 @@
     },
     {
       "method": "POST",
+      "localPath": "/ingest/career-history",
+      "fullPath": "/api/genkit/ingest/career-history",
+      "module": "genkit",
+      "file": "genkit.py"
+    },
+    {
+      "method": "POST",
       "localPath": "/artifacts/upload",
       "fullPath": "/api/ingest/artifacts/upload",
       "module": "ingest",
@@ -446,6 +460,13 @@
       "file": "resume_audit.py"
     },
     {
+      "method": "GET",
+      "localPath": "/history",
+      "fullPath": "/api/resume-audit/history",
+      "module": "resume_audit",
+      "file": "resume_audit.py"
+    },
+    {
       "method": "POST",
       "localPath": "/upload-and-tag",
       "fullPath": "/api/smart-ingestion/upload-and-tag",
@@ -481,9 +502,9 @@
       "file": "workflows.py"
     },
     {
-      "method": "POST",
-      "localPath": "/scan-email-opportunities",
-      "fullPath": "/api/workflows/scan-email-opportunities",
+      "method": "GET",
+      "localPath": "/status/{workflow_id}",
+      "fullPath": "/api/workflows/status/{workflow_id}",
       "module": "workflows",
       "file": "workflows.py"
     },
@@ -491,13 +512,6 @@
       "method": "GET",
       "localPath": "/health",
       "fullPath": "/api/workflows/health",
-      "module": "workflows",
-      "file": "workflows.py"
-    },
-    {
-      "method": "GET",
-      "localPath": "/status/{workflow_id}",
-      "fullPath": "/api/workflows/status/{workflow_id}",
       "module": "workflows",
       "file": "workflows.py"
     }
