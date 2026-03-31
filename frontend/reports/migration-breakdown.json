@@ -1,63 +1,63 @@
 {
   "overall": {
-    "migrated": 221,
-    "mixed": 0,
+    "migrated": 43,
+    "mixed": 1,
     "not_migrated": 0,
     "expressive": 0,
-    "unknown": 0
+    "unknown": 4
   },
   "byCategory": {
-    "ui_package": {
-      "migrated": 53,
+    "other": {
+      "migrated": 14,
       "mixed": 0,
       "not_migrated": 0,
       "expressive": 0,
       "unknown": 0
     },
     "components": {
-      "migrated": 37,
-      "mixed": 0,
-      "not_migrated": 0,
-      "expressive": 0,
-      "unknown": 0
-    },
-    "core": {
-      "migrated": 2,
+      "migrated": 6,
       "mixed": 0,
       "not_migrated": 0,
       "expressive": 0,
       "unknown": 0
     },
     "shared": {
-      "migrated": 17,
+      "migrated": 0,
       "mixed": 0,
       "not_migrated": 0,
       "expressive": 0,
-      "unknown": 0
+      "unknown": 1
     },
     "ui": {
-      "migrated": 32,
+      "migrated": 4,
       "mixed": 0,
       "not_migrated": 0,
       "expressive": 0,
       "unknown": 0
     },
-    "features": {
-      "migrated": 49,
+    "core": {
+      "migrated": 0,
       "mixed": 0,
+      "not_migrated": 0,
+      "expressive": 0,
+      "unknown": 1
+    },
+    "features": {
+      "migrated": 4,
+      "mixed": 1,
       "not_migrated": 0,
       "expressive": 0,
       "unknown": 0
     },
     "layout": {
-      "migrated": 27,
+      "migrated": 3,
       "mixed": 0,
       "not_migrated": 0,
       "expressive": 0,
-      "unknown": 0
+      "unknown": 2
     },
     "pages": {
-      "migrated": 4,
+      "migrated": 12,
       "mixed": 0,
       "not_migrated": 0,
       "expressive": 0,
@@ -65,5 +65,51 @@
     }
   },
   "topNotMigrated": [],
-  "topMixed": []
+  "topMixed": [
+    {
+      "name": "StyleGuide",
+      "path": "/Users/okgoogle13/Projects/careercopilot/frontend/src/features/style-guide/StyleGuide.tsx",
+      "relativePath": "src/features/style-guide/StyleGuide.tsx",
+      "category": "features",
+      "usageCount": 1,
+      "importedBy": [
+        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
+      ],
+      "exports": [
+        "StyleGuide"
+      ],
+      "hasTests": false,
+      "hasStories": false,
+      "hasDocs": false,
+      "linesOfCode": 993,
+      "complexity": "complex",
+      "dependencies": [
+        "../../components/ui",
+        "../../components/kerala-rage/SolidarityProgress",
+        "../../components/shared/PageHeader",
+        "./M3ExpressiveComponents",
+        "../../lib/utils"
+      ],
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "usesLegacyM3": true,
+      "isDemo": false,
+      "migrationStatus": "mixed",
+      "usesDesignTokens": true,
+      "usesModeSystem": false,
+      "expressiveStatus": "done",
+      "designLevel": "unknown",
+      "hasA11yPassed": true,
+      "bundleImpact": "low",
+      "visualRegression": "pending",
+      "layerTruth": "runtime",
+      "canonicalStatus": "canonical",
+      "targetStateDecision": "unknown",
+      "mockBacked": false,
+      "capabilityDependencies": [],
+      "deadCodeCandidate": false,
+      "prototypeStatus": "runtime"
+    }
+  ]
 }

@@ -16,7 +16,7 @@ const config: Config = {
     colors: {
       ...(solidarityTokens?.theme?.extend?.colors || {}),
       // Lab Wren Metal Blue - Ripples & accents
-      'lab-wren-metal-blue': 'var(--sys-color-labWrenMetalBlue-base)',
+      'lab-wren-metal-blue': 'var(--kr-color-protest-metal-blue-base)',
 
       // Semantic Mappings (Kerala Rage KrSolidarity)
       border: 'var(--color-concrete-grey)',
@@ -28,7 +28,7 @@ const config: Config = {
       primary: {
         DEFAULT: 'var(--color-ink-gold)',
         foreground: 'var(--color-asphalt-black)',
-        container: 'var(--sys-color-inkGold-container)',
+        container: 'var(--kr-color-ink-gold-steps-2)',
       },
       secondary: {
         DEFAULT: 'var(--color-concrete-grey)',

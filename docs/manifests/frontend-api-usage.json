@@ -1,38 +1,32 @@
 {
-  "generatedAt": "2026-03-15T05:18:49.784Z",
-  "totalCalls": 98,
-  "uniqueEndpoints": 69,
-  "filesScanned": 22,
+  "generatedAt": "2026-03-30T14:06:51.201Z",
+  "totalCalls": 99,
+  "uniqueEndpoints": 76,
+  "filesScanned": 24,
   "calls": [
     {
       "method": "POST",
-      "pathPattern": "/ats-score",
+      "pathPattern": "/analysis/ats-score",
       "sourceFile": "analysisService.ts",
-      "lineNumber": 74
+      "lineNumber": 87
     },
     {
       "method": "POST",
-      "pathPattern": "/analyze-document",
+      "pathPattern": "/analysis/optimize-content",
       "sourceFile": "analysisService.ts",
-      "lineNumber": 90
+      "lineNumber": 103
     },
     {
       "method": "POST",
-      "pathPattern": "/optimize-content",
+      "pathPattern": "/analysis/resume-intelligence",
       "sourceFile": "analysisService.ts",
-      "lineNumber": 108
+      "lineNumber": 116
     },
     {
       "method": "POST",
-      "pathPattern": "/resume-intelligence",
+      "pathPattern": "/analysis/strategy",
       "sourceFile": "analysisService.ts",
-      "lineNumber": 124
-    },
-    {
-      "method": "POST",
-      "pathPattern": "/keywords",
-      "sourceFile": "analysisService.ts",
-      "lineNumber": 146
+      "lineNumber": 132
     },
     {
       "method": "GET",
@@ -72,63 +66,45 @@
     },
     {
       "method": "POST",
-      "pathPattern": "/",
+      "pathPattern": ":param/",
       "sourceFile": "applicationService.ts",
-      "lineNumber": 113
+      "lineNumber": 100
     },
     {
       "method": "GET",
-      "pathPattern": "/",
+      "pathPattern": ":param/",
       "sourceFile": "applicationService.ts",
-      "lineNumber": 129
+      "lineNumber": 116
     },
     {
       "method": "GET",
-      "pathPattern": "/:param",
+      "pathPattern": ":param/:param",
       "sourceFile": "applicationService.ts",
-      "lineNumber": 144
-    },
-    {
-      "method": "PUT",
-      "pathPattern": "/:param",
-      "sourceFile": "applicationService.ts",
-      "lineNumber": 157
+      "lineNumber": 131
     },
     {
       "method": "DELETE",
-      "pathPattern": "/:param",
+      "pathPattern": ":param/:param",
       "sourceFile": "applicationService.ts",
-      "lineNumber": 170
+      "lineNumber": 160
     },
     {
       "method": "POST",
-      "pathPattern": "/bulk-update",
+      "pathPattern": ":param/bulk-update",
       "sourceFile": "applicationService.ts",
-      "lineNumber": 186
-    },
-    {
-      "method": "POST",
-      "pathPattern": "/:param/contacts",
-      "sourceFile": "applicationService.ts",
-      "lineNumber": 202
-    },
-    {
-      "method": "POST",
-      "pathPattern": "/:param/interviews",
-      "sourceFile": "applicationService.ts",
-      "lineNumber": 218
+      "lineNumber": 176
     },
     {
       "method": "GET",
-      "pathPattern": "/",
+      "pathPattern": ":param/",
       "sourceFile": "applicationService.ts",
-      "lineNumber": 231
+      "lineNumber": 227
     },
     {
       "method": "GET",
-      "pathPattern": "/export",
+      "pathPattern": ":param/export",
       "sourceFile": "applicationService.ts",
-      "lineNumber": 246
+      "lineNumber": 242
     },
     {
       "method": "POST",
@@ -294,6 +270,12 @@
     },
     {
       "method": "POST",
+      "pathPattern": "/process/redline",
+      "sourceFile": "documentService.ts",
+      "lineNumber": 161
+    },
+    {
+      "method": "POST",
       "pathPattern": "/connect-gmail",
       "sourceFile": "emailService.ts",
       "lineNumber": 64
@@ -330,15 +312,33 @@
     },
     {
       "method": "POST",
+      "pathPattern": "/genkit/cover-letter/generate",
+      "sourceFile": "genkitService.ts",
+      "lineNumber": 7
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/genkit/ksc/generate",
+      "sourceFile": "genkitService.ts",
+      "lineNumber": 31
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/genkit/resume/optimize",
+      "sourceFile": "genkitService.ts",
+      "lineNumber": 49
+    },
+    {
+      "method": "POST",
       "pathPattern": "/api/ingestion/upload-and-tag",
       "sourceFile": "ingestion.service.ts",
-      "lineNumber": 56
+      "lineNumber": 62
     },
     {
       "method": "POST",
       "pathPattern": "/api/ingestion/extract-and-save",
       "sourceFile": "ingestion.service.ts",
-      "lineNumber": 106
+      "lineNumber": 112
     },
     {
       "method": "POST",
@@ -572,51 +572,52 @@
       "method": "POST",
       "pathPattern": "/generate-application",
       "sourceFile": "workflowService.ts",
-      "lineNumber": 74
+      "lineNumber": 75
     },
     {
       "method": "GET",
       "pathPattern": "/status/:param",
       "sourceFile": "workflowService.ts",
-      "lineNumber": 87
+      "lineNumber": 88
     },
     {
       "method": "GET",
       "pathPattern": "/",
       "sourceFile": "workflowService.ts",
-      "lineNumber": 100
+      "lineNumber": 101
     },
     {
       "method": "POST",
       "pathPattern": "/:param/cancel",
       "sourceFile": "workflowService.ts",
-      "lineNumber": 115
+      "lineNumber": 116
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/generate-application",
+      "sourceFile": "workflowService.ts",
+      "lineNumber": 166
     }
   ],
   "unique": [
     {
       "method": "POST",
-      "pathPattern": "/ats-score",
+      "pathPattern": "/analysis/ats-score",
       "firstSeenIn": "analysisService.ts"
     },
     {
       "method": "POST",
-      "pathPattern": "/analyze-document",
+      "pathPattern": "/analysis/optimize-content",
       "firstSeenIn": "analysisService.ts"
     },
     {
       "method": "POST",
-      "pathPattern": "/optimize-content",
+      "pathPattern": "/analysis/resume-intelligence",
       "firstSeenIn": "analysisService.ts"
     },
     {
       "method": "POST",
-      "pathPattern": "/resume-intelligence",
-      "firstSeenIn": "analysisService.ts"
-    },
-    {
-      "method": "POST",
-      "pathPattern": "/keywords",
+      "pathPattern": "/analysis/strategy",
       "firstSeenIn": "analysisService.ts"
     },
     {
@@ -651,47 +652,32 @@
     },
     {
       "method": "POST",
-      "pathPattern": "/",
+      "pathPattern": ":param/",
       "firstSeenIn": "applicationService.ts"
     },
     {
       "method": "GET",
-      "pathPattern": "/",
+      "pathPattern": ":param/",
       "firstSeenIn": "applicationService.ts"
     },
     {
       "method": "GET",
-      "pathPattern": "/:param",
-      "firstSeenIn": "applicationService.ts"
-    },
-    {
-      "method": "PUT",
-      "pathPattern": "/:param",
+      "pathPattern": ":param/:param",
       "firstSeenIn": "applicationService.ts"
     },
     {
       "method": "DELETE",
-      "pathPattern": "/:param",
+      "pathPattern": ":param/:param",
       "firstSeenIn": "applicationService.ts"
     },
     {
       "method": "POST",
-      "pathPattern": "/bulk-update",
-      "firstSeenIn": "applicationService.ts"
-    },
-    {
-      "method": "POST",
-      "pathPattern": "/:param/contacts",
-      "firstSeenIn": "applicationService.ts"
-    },
-    {
-      "method": "POST",
-      "pathPattern": "/:param/interviews",
+      "pathPattern": ":param/bulk-update",
       "firstSeenIn": "applicationService.ts"
     },
     {
       "method": "GET",
-      "pathPattern": "/export",
+      "pathPattern": ":param/export",
       "firstSeenIn": "applicationService.ts"
     },
     {
@@ -713,6 +699,31 @@
       "method": "GET",
       "pathPattern": "/auth/me",
       "firstSeenIn": "authService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/",
+      "firstSeenIn": "calendarService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/",
+      "firstSeenIn": "calendarService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/:param",
+      "firstSeenIn": "calendarService.ts"
+    },
+    {
+      "method": "PUT",
+      "pathPattern": "/:param",
+      "firstSeenIn": "calendarService.ts"
+    },
+    {
+      "method": "DELETE",
+      "pathPattern": "/:param",
+      "firstSeenIn": "calendarService.ts"
     },
     {
       "method": "POST",
@@ -766,7 +777,17 @@
     },
     {
       "method": "POST",
+      "pathPattern": "/optimize-content",
+      "firstSeenIn": "documentService.ts"
+    },
+    {
+      "method": "POST",
       "pathPattern": "/generate-ksc-response",
+      "firstSeenIn": "documentService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/process/redline",
       "firstSeenIn": "documentService.ts"
     },
     {
@@ -798,6 +819,21 @@
       "method": "POST",
       "pathPattern": "/setup-monitoring",
       "firstSeenIn": "emailService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/genkit/cover-letter/generate",
+      "firstSeenIn": "genkitService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/genkit/ksc/generate",
+      "firstSeenIn": "genkitService.ts"
+    },
+    {
+      "method": "POST",
+      "pathPattern": "/genkit/resume/optimize",
+      "firstSeenIn": "genkitService.ts"
     },
     {
       "method": "POST",
@@ -892,6 +928,11 @@
     {
       "method": "PUT",
       "pathPattern": "/integrations",
+      "firstSeenIn": "settingsService.ts"
+    },
+    {
+      "method": "GET",
+      "pathPattern": "/export",
       "firstSeenIn": "settingsService.ts"
     },
     {

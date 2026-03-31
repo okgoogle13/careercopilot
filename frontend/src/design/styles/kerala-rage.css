@@ -23,43 +23,50 @@
 @source "../../**/*.{ts,tsx,js,jsx,html}";
 
 :root {
-  --color-asphalt-black-lightest: var(--sys-color-charcoalBackground-steps-4);
-  --color-asphalt-black-light: var(--sys-color-charcoalBackground-steps-2);
-  --color-asphalt-black-base: var(--sys-color-charcoalBackground-base);
-  --color-asphalt-black-dark: var(--sys-color-charcoalBackground-steps-0);
+  --color-asphalt-black-lightest: var(--kr-color-charcoal-background-steps-4);
+  --color-asphalt-black-light: var(--kr-color-charcoal-background-steps-2);
+  --color-asphalt-black-base: var(--kr-color-charcoal-background-base);
+  --color-asphalt-black-dark: var(--kr-color-charcoal-background-steps-0);
   --color-asphalt-black-darkest: #050403; /* Deepest black fallback */
-  --color-asphalt-black: var(--sys-color-charcoalBackground-base);
-  --color-ink-gold-lightest: var(--sys-color-inkGold-steps-5);
-  --color-ink-gold-light: var(--sys-color-inkGold-steps-4);
-  --color-ink-gold-base: var(--sys-color-inkGold-base);
-  --color-ink-gold-dark: var(--sys-color-inkGold-steps-1);
-  --color-ink-gold-darkest: var(--sys-color-inkGold-steps-0);
-  --color-ink-gold: var(--sys-color-inkGold-base);
-  --color-solidarity-red-lightest: var(--sys-color-solidarityRed-steps-5);
-  --color-solidarity-red-light: var(--sys-color-solidarityRed-steps-4);
-  --color-solidarity-red-base: var(--sys-color-solidarityRed-base);
-  --color-solidarity-red-dark: var(--sys-color-solidarityRed-steps-1);
-  --color-solidarity-red-darkest: var(--sys-color-solidarityRed-steps-0);
-  --color-solidarity-red: var(--sys-color-solidarityRed-base);
-  --color-concrete-grey-lightest: var(--sys-color-worker-ash-steps-6);
-  --color-concrete-grey-light: var(--sys-color-worker-ash-steps-5);
-  --color-concrete-grey-base: var(--sys-color-worker-ash-base);
-  --color-concrete-grey-dark: var(--sys-color-worker-ash-steps-2);
-  --color-concrete-grey-darkest: var(--sys-color-worker-ash-steps-1);
-  --color-concrete-grey: var(--sys-color-worker-ash-base);
-  --color-paper-white: var(--sys-color-worker-ash-steps-6);
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 12px;
-  --spacing-lg: 16px;
-  --spacing-xl: 24px;
-  --spacing-xxl: 32px;
-  --spacing-xxxl: 48px;
-  --radius-march-open: 20px 6px 16px 28px;
-  --radius-megaphone-base: 16px 4px 12px 24px;
-  --radius-organic: 24px 8px 20px 4px;
-  --radius-compact: 8px 4px 10px 6px;
-  --radius-sentry: 98%;
+  --color-asphalt-black: var(--kr-color-charcoal-background-base);
+  --color-ink-gold-lightest: var(--kr-color-ink-gold-steps-5);
+  --color-ink-gold-light: var(--kr-color-ink-gold-steps-4);
+  --color-ink-gold-base: var(--kr-color-ink-gold-base);
+  --color-ink-gold-dark: var(--kr-color-ink-gold-steps-1);
+  --color-ink-gold-darkest: var(--kr-color-ink-gold-steps-0);
+  --color-ink-gold: var(--kr-color-ink-gold-base);
+  --color-solidarity-red-lightest: var(--kr-color-solidarity-red-steps-5);
+  --color-solidarity-red-light: var(--kr-color-solidarity-red-steps-4);
+  --color-solidarity-red-base: var(--kr-color-solidarity-red-base);
+  --color-solidarity-red-dark: var(--kr-color-solidarity-red-steps-1);
+  --color-solidarity-red-darkest: var(--kr-color-solidarity-red-steps-0);
+  --color-solidarity-red: var(--kr-color-solidarity-red-base);
+  --color-concrete-grey-lightest: var(--kr-color-worker-ash-steps-6);
+  --color-concrete-grey-light: var(--kr-color-worker-ash-steps-5);
+  --color-concrete-grey-base: var(--kr-color-worker-ash-base);
+  --color-concrete-grey-dark: var(--kr-color-worker-ash-steps-2);
+  --color-concrete-grey-darkest: var(--kr-color-worker-ash-steps-1);
+  --color-concrete-grey: var(--kr-color-worker-ash-base);
+  --color-paper-white: var(--kr-color-worker-ash-steps-6);
+  --spacing-xs: var(--kr-space-xs);
+  --spacing-sm: var(--kr-space-sm);
+  --spacing-md: var(--kr-space-md);
+  --spacing-lg: var(--kr-space-lg);
+  --spacing-xl: var(--kr-space-xl);
+  --spacing-xxl: var(--kr-space-xxl);
+  --spacing-xxxl: var(--kr-space-xxxl);
+  /* ─── v6.1 Archetype Mappings (Gold Standard) ───────────── */
+  --shape-archetype-strike: var(--kr-shape-block-03);
+  --shape-archetype-march: var(--kr-shape-pill-01);
+  --shape-archetype-scaffold: var(--kr-shape-scaffold-frame-01);
+  --shape-archetype-placard: var(--kr-shape-placard-base-01);
+  --shape-archetype-megaphone: var(--kr-shape-megaphone-base-01);
+  --shape-archetype-substrate: var(--kr-shape-block-01);
+
+  /* Radius scale aliases for components */
+  --radius-strike: var(--shape-archetype-strike);
+  --radius-march: var(--shape-archetype-march);
+  --radius-placard: var(--shape-archetype-placard);
   /* Shadow Variables */
   --shadow-subtle: 0 2px 4px rgba(0, 0, 0, 0.15);
   --shadow-standard: 0 4px 8px rgba(0, 0, 0, 0.2);

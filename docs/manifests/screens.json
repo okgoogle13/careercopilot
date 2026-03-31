@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-03-17T17:21:37.809Z",
-  "count": 11,
-  "paired": 11,
+  "generatedAt": "2026-03-30T14:06:49.864Z",
+  "count": 12,
+  "paired": 12,
   "unpaired": 0,
   "screens": [
     {
@@ -125,7 +125,7 @@
         "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
         "local_wireframe_path": "frontend/src/screens/06_lookout/06_lookout.wireframe.xml"
       },
-      "wireframePath": "06_lookout/06_lookout.wireframe.xml",
+      "wireframePath": "06_lookout/06_job_queue.wireframe.xml",
       "tsxFiles": [
         "LookoutDiscovery.tsx"
       ]
@@ -209,7 +209,7 @@
         "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
         "local_wireframe_path": "frontend/src/screens/10_settings/10_settings.wireframe.xml"
       },
-      "wireframePath": "10_settings/10_settings.wireframe.xml",
+      "wireframePath": "10_settings/10_profile.wireframe.xml",
       "tsxFiles": [
         "SettingsControl.tsx"
       ]
@@ -233,6 +233,27 @@
       "wireframePath": "11_dashboard/11_dashboard.wireframe.xml",
       "tsxFiles": [
         "DashboardOverview.tsx"
+      ]
+    },
+    {
+      "screenId": "12_generation",
+      "dirPath": "frontend/src/screens/12_generation",
+      "hasMapping": true,
+      "hasWireframe": true,
+      "hasTsx": true,
+      "isPaired": true,
+      "mapping": {
+        "wireframe_id": "12_generation",
+        "wireframe_path": "frontend/src/screens/12_generation/12_generation.wireframe.xml",
+        "source_component_path": "frontend/src/features/ksc-generator/KSCGenerator.tsx",
+        "screen_component_path": "frontend/src/screens/12_generation/GenerationWorkbench.tsx",
+        "route": "/ksc-generator, /cover-letter-generator",
+        "notes": "Shared layout for generative AI document generation",
+        "local_wireframe_path": "frontend/src/screens/12_generation/12_generation.wireframe.xml"
+      },
+      "wireframePath": "12_generation/12_cover_letter_generator.wireframe.xml",
+      "tsxFiles": [
+        "GenerationWorkbench.tsx"
       ]
     }
   ]

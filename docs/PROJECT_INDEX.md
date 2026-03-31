@@ -4883,7 +4883,6 @@
           - `tabs/`
             - [Tabs.tsx](./frontend/src/components/atomic/tabs/Tabs.tsx)
         - `core/`
-          - [Leaf.figma.tsx](./frontend/src/components/core/Leaf.figma.tsx)
           - [Leaf.tsx](./frontend/src/components/core/Leaf.tsx)
         - `electric/`
           - `tabs/`
@@ -4915,7 +4914,6 @@
           - [SplitHeader.tsx](./frontend/src/components/shared/SplitHeader.tsx)
           - [StatCard.tsx](./frontend/src/components/shared/StatCard.tsx)
           - [StatusChip.tsx](./frontend/src/components/shared/StatusChip.tsx)
-          - [TechCard.figma.tsx](./frontend/src/components/shared/TechCard.figma.tsx)
           - [TechCard.tsx](./frontend/src/components/shared/TechCard.tsx)
           - [index.ts](./frontend/src/components/shared/index.ts)
         - `ui/`
@@ -4928,13 +4926,11 @@
           - [NativeAnchor.tsx](./frontend/src/components/ui/NativeAnchor.tsx)
           - [kerala-rageButton.tsx](./frontend/src/components/ui/kerala-rageButton.tsx)
           - [Pebble.figma 2.tsx](./frontend/src/components/ui/Pebble.figma 2.tsx)
-          - [Pebble.figma.tsx](./frontend/src/components/ui/Pebble.figma.tsx)
           - [Pebble.tsx](./frontend/src/components/ui/Pebble.tsx)
           - [Seed.tsx](./frontend/src/components/ui/Seed.tsx)
           - [Signal.tsx](./frontend/src/components/ui/Signal.tsx)
           - [SplitHeader.tsx](./frontend/src/components/ui/SplitHeader.tsx)
           - [Stone.figma 2.tsx](./frontend/src/components/ui/Stone.figma 2.tsx)
-          - [Stone.figma.tsx](./frontend/src/components/ui/Stone.figma.tsx)
           - [Stone.tsx](./frontend/src/components/ui/Stone.tsx)
           - [Valve.tsx](./frontend/src/components/ui/Valve.tsx)
           - [Vessel.tsx](./frontend/src/components/ui/Vessel.tsx)
@@ -5100,7 +5096,6 @@
           - [MetricCard.tsx](./frontend/src/legacy/ui/MetricCard.tsx)
           - [button 2.tsx](./frontend/src/legacy/ui/button 2.tsx)
           - [button.figma 2.tsx](./frontend/src/legacy/ui/button.figma 2.tsx)
-          - [button.figma.tsx](./frontend/src/legacy/ui/button.figma.tsx)
           - [button.tsx](./frontend/src/legacy/ui/button.tsx)
           - [chart.tsx](./frontend/src/legacy/ui/chart.tsx)
           - [collapsible.tsx](./frontend/src/legacy/ui/collapsible.tsx)
@@ -5207,7 +5202,6 @@
         - [ai.ts](./frontend/src/types/ai.ts)
         - [aiServices.d.ts](./frontend/src/types/aiServices.d.ts)
         - [api.ts](./frontend/src/types/api.ts)
-        - [figma-code-connect.d.ts](./frontend/src/types/figma-code-connect.d.ts)
         - [index.ts](./frontend/src/types/index.ts)
         - [intelligence.ts](./frontend/src/types/intelligence.ts)
         - [test-types.ts](./frontend/src/types/test-types.ts)

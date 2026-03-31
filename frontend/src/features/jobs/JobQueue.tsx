@@ -9,8 +9,6 @@ import { LayeredHero } from '@/components/kerala-rage/LayeredHero';
 import { loadHeroRegistry } from '@/design/hero/heroRegistry';
 import { composeHero } from '@/lib/composeHero';
 import type { SolidarityManifest } from '@/design/hero/heroTypes';
-import { LookoutDiscovery } from '@/screens/06_lookout/LookoutDiscovery';
-
 interface JobQueueItem {
   id: string;
   title: string;
@@ -241,12 +239,15 @@ export function JobQueue() {
   }
 
   return (
-    <LookoutDiscovery
-      className="max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500"
-      title="Intelligence Pipeline"
-      subtitle="Synthesize clipped opportunities into tactical application strategies."
-      showActions={false}
-    >
+    <div className="max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500 min-h-screen p-8">
+      <header className="mb-12">
+        <h1 className="font-display text-6xl font-black text-paper-white tracking-tighter uppercase leading-none">
+          Intelligence <span className="text-ink-gold">Pipeline</span>
+        </h1>
+        <p className="font-primary text-lg text-concrete-grey opacity-70 mt-4 italic">
+          "Synthesize clipped opportunities into tactical application strategies."
+        </p>
+      </header>
       {heroData && (
         <div className="absolute top-0 right-0 w-[400px] h-full pointer-events-none opacity-10 mask-gradient-to-left">
           <LayeredHero
@@ -412,6 +413,6 @@ export function JobQueue() {
           </div>
         </div>
       </Megaphone>
-    </LookoutDiscovery>
+    </div>
   );
 }

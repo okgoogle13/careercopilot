@@ -2,6 +2,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createRoot } from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
 
+document.documentElement.dataset.theme = 'solidarity';
+
 const queryClient = new QueryClient();
 
 // KeralaRage KrSolidarity consolidated theme
