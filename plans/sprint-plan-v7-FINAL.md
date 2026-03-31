@@ -1,6 +1,6 @@
 # CareerCopilot — Final Sprint: Remediation + Figma Sync
 ## Execution Plan v7-FINAL (Gemini Antigravity Lead Transition)
-**Status:** Ready for execution. Conducted by **Gemini (Antigravity)** per engineering lead directive.
+**Status:** Ready for execution. To be conducted by **Gemini (Antigravity)** per engineering lead directive.
 **Changelog:** v6 → v7-FINAL. Transitioned Lead Architecture Conductor from Claude Code to **Gemini (Antigravity)**. Gemini is taking over for a 2-hour window, specifically responsible for the initial setup and executing the first few batches. Applied FIX-17 (Gemini-Driven Orchestration), Self-Audit Evidence block protocol, Execution & Parallelization Rules, and Deployment & Review Prep phase.
 
 ---
@@ -38,7 +38,7 @@ v7-FINAL: Explicit Gemini (Antigravity) lead assignment. 2-hour transition windo
   "execution_and_parallelization_rules": {
     "description": "Binding rules for how Gemini (Antigravity) works through tasks.",
     "methodology": "Work systematically, methodically, and meticulously through every task. Do not skip steps. Do not assume. Verify before claiming completion.",
-    "parallelization": "Gemini (Antigravity) is explicitly authorized to execute tasks in parallel using the subagent-driven-development skill and parallel agent skills where it is safe and efficient to do so. Parallelization is SAFE when tasks have no data dependency on each other within the same phase. Parallelization is UNSAFE when task B requires output from task A, or when both tasks write to the same file.",
+    "parallelization": "Gemini (Antigravity) is explicitly authorized to execute tasks in parallel using the subagent-driven-development skill and parallel agent skills where it is safe and efficient to do so. Parallelization is SAFE when tasks have no data dependency on each other within the same phase (concurrent reads of the same file are safe). Parallelization is UNSAFE when task B requires output from task A, or when both tasks perform concurrent writes to the same file.",
     "parallel_examples": [
       "P03 and P04 (manifest_refresh group) MAY be executed in parallel — they share no file write targets",
       "Multiple subagent-driven-development skill invocations for independent pages in P13/P14 loops MAY be parallelized",
@@ -670,7 +670,7 @@ v7-FINAL: Explicit Gemini (Antigravity) lead assignment. 2-hour transition windo
 ════════════════════════════════════════════
 RESUME CHECK — Run before any phase
 ════════════════════════════════════════════
-1. Run: grep -E "^\|" docs/project/active/ORCHESTRATION_DASHBOARD.md | tail -r
+1. Run: grep -E "^\|" docs/project/active/ORCHESTRATION_DASHBOARD.md | tac
 2. Read the Status column from bottom to top.
 3. Resume at the first Phase ID whose Status column is not EXACTLY "✅ DONE".
 If dashboard missing: begin from Phase P00.
