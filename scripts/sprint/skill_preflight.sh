@@ -8,4 +8,4 @@ for skill in token-orchestrator phase4-pipeline-orchestrator migration-audit vis
     echo "  ✗ $skill — NOT FOUND"
   fi
 done
-echo '=== MCP preflight requires manual Claude Code ping ==='
+echo '=== MCP preflight requires manual Gemini (Antigravity) ping ==='
