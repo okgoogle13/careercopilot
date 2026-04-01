@@ -1,5 +1,5 @@
 import { ScaffoldInput, Strike, Placard, ScaffoldArea } from '@/components/ui';
-import { EvidenceUploader } from '@/features/ingestion/components/EvidenceUploader';
+import { EvidenceUploader } from './components/EvidenceUploader';
 import { ATSScoreCard } from './components/ATSScoreCard';
 import { AuditDisplay } from './components/AuditDisplay';
 import type { ATSScoreResult, DocumentAudit } from '@/types/analysis';

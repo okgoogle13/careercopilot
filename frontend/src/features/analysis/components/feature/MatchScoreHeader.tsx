@@ -19,9 +19,10 @@ export const MatchScoreHeader: React.FC<Props> = ({ analysis, job }) => {
             cy="50"
             r="45"
             fill="none"
-            stroke="#374151"
+            stroke="#383632"
             strokeWidth="10"
           />
+          {/* Score arc: green=#48DA8B (kr-activist-smoke-green-base), amber=#F6E748 (stencil-yellow-base), red=#F14844 (kr-charcoal-red-base) */}
           <circle
             cx="50"
             cy="50"
@@ -29,10 +30,10 @@ export const MatchScoreHeader: React.FC<Props> = ({ analysis, job }) => {
             fill="none"
             stroke={
               analysis.Overall_Fit_Score >= 80
-                ? '#10B981'
+                ? '#48DA8B'
                 : analysis.Overall_Fit_Score >= 60
-                  ? '#F59E0B'
-                  : '#EF4444'
+                  ? '#F6E748'
+                  : '#F14844'
             }
             strokeWidth="10"
             strokeDasharray={`${analysis.Overall_Fit_Score * 2.827} 282.7`}

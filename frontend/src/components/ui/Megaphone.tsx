@@ -69,7 +69,7 @@ export const Megaphone: React.FC<MegaphoneProps> = ({
   return createPortal(
     <div
       data-archetype="megaphone"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[var(--sys-color-charcoalBackground-base)]/80 backdrop-blur-md animate-in fade-in duration-300"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[var(--kr-color-charcoal-background-base)]/80 backdrop-blur-md animate-in fade-in duration-300"
     >
       <div
         className="fixed inset-0"
@@ -77,13 +77,21 @@ export const Megaphone: React.FC<MegaphoneProps> = ({
       />
       <Placard
         elevation="floating"
-        className={`relative w-full ${maxWidthClasses[maxWidth]} shadow-2xl animate-in zoom-in-95 duration-600`}
-        style={{ animationTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)' }}
+        className={`relative w-full ${maxWidthClasses[maxWidth]} shadow-2xl animate-in zoom-in-95`}
+        style={{
+          animationDuration: 'var(--kr-archetypes-megaphone-motion-duration)',
+          animationTimingFunction: 'var(--kr-archetypes-megaphone-motion-easing)',
+          WebkitClipPath: 'var(--kr-archetypes-megaphone-shape-base)',
+          clipPath: 'var(--kr-archetypes-megaphone-shape-base)',
+        }}
       >
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-white/5">
           {title ? (
-            <h3 className="font-display text-2xl font-bold text-[var(--sys-color-worker-ash-base)]">
+            <h3
+              className="font-display text-2xl font-bold text-[var(--kr-color-worker-ash-base)]"
+              style={{ fontFamily: 'var(--kr-typography-family-display)' }}
+            >
               {title}
             </h3>
           ) : (

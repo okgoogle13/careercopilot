@@ -1,0 +1,186 @@
+{
+  "generatedAt": "2026-04-01T00:00:00.000Z",
+  "phase": "P05",
+  "description": "Ordered list of routes requiring remediation before Figma sync. Grouped by action type. P1 = highest priority (blocks Figma sync); P3 = lowest (cleanup only).",
+  "candidates": [
+    {
+      "group": "NEEDS_MIGRATION",
+      "priority": "P1",
+      "description": "Routes live in App.tsx pointing to pages/* — must be remounted to features/* in P06",
+      "items": [
+        {
+          "path": "/",
+          "currentSource": "pages/LandingPage",
+          "targetOwner": "features/landing",
+          "targetComponent": "features/landing/LandingPage",
+          "action": "UPDATE_APP_TSX_IMPORT",
+          "blocker": null
+        },
+        {
+          "path": "/dashboard",
+          "currentSource": "pages/DashboardPage",
+          "targetOwner": "features/dashboard",
+          "targetComponent": "features/dashboard/Dashboard",
+          "action": "UPDATE_APP_TSX_IMPORT",
+          "blocker": null
+        },
+        {
+          "path": "/profile",
+          "currentSource": "pages/ProfilePage",
+          "targetOwner": "features/profile",
+          "targetComponent": "features/profile/ProfileView",
+          "action": "UPDATE_APP_TSX_IMPORT",
+          "blocker": null
+        },
+        {
+          "path": "/analysis",
+          "currentSource": "pages/AnalysisPage",
+          "targetOwner": "features/analysis",
+          "targetComponent": "features/analysis/AnalysisPage",
+          "action": "UPDATE_APP_TSX_IMPORT",
+          "blocker": null
+        },
+        {
+          "path": "/docs",
+          "currentSource": "pages/DocsPage",
+          "targetOwner": "features/documents",
+          "targetComponent": "features/documents/Documents",
+          "action": "UPDATE_APP_TSX_IMPORT_AND_PATH",
+          "note": "Path /docs should become /documents canonical; /docs becomes redirect",
+          "blocker": null
+        },
+        {
+          "path": "/generation",
+          "currentSource": "pages/GenerationPage",
+          "targetOwner": "features/documents",
+          "targetComponent": "features/documents/components/TabbedGenerationPanel",
+          "action": "UPDATE_APP_TSX_IMPORT",
+          "blocker": null
+        },
+        {
+          "path": "/settings",
+          "currentSource": "pages/SettingsPage",
+          "targetOwner": "features/settings",
+          "targetComponent": "features/settings/Settings",
+          "action": "UPDATE_APP_TSX_IMPORT",
+          "blocker": null
+        },
+        {
+          "path": "/onboarding",
+          "currentSource": "pages/OnboardingPage",
+          "targetOwner": "features/onboarding",
+          "targetComponent": "features/onboarding/OnboardingPage",
+          "action": "UPDATE_APP_TSX_IMPORT",
+          "blocker": null
+        }
+      ]
+    },
+    {
+      "group": "NEEDS_REGISTRY_ENTRY",
+      "priority": "P2",
+      "description": "Routes in App.tsx with no entry in route-registry.ts — add registry entry to close authority gap",
+      "items": [
+        {
+          "path": "/lookout",
+          "currentOwner": "screens/06_lookout/LookoutDiscovery",
+          "targetOwner": "features/opportunities",
+          "action": "ADD_REGISTRY_ENTRY",
+          "registryEntry": {
+            "path": "/lookout",
+            "name": "Lookout Discovery",
+            "auth": true,
+            "layout": "migrated",
+            "mode": "KrDark",
+            "screenId": "06_lookout",
+            "apiDeps": ["jobService"]
+          }
+        },
+        {
+          "path": "/applications",
+          "currentOwner": "features/applications/ApplicationTracker",
+          "targetOwner": "features/applications",
+          "action": "ADD_REGISTRY_ENTRY",
+          "note": "Already canonical source — just missing registry entry",
+          "registryEntry": {
+            "path": "/applications",
+            "name": "Applications",
+            "auth": true,
+            "layout": "migrated",
+            "mode": "KrDark",
+            "screenId": "07_kanban",
+            "apiDeps": ["applicationService"]
+          }
+        },
+        {
+          "path": "/apply",
+          "currentOwner": "pages/ApplyPage",
+          "targetOwner": "features/applications",
+          "action": "ADD_REGISTRY_ENTRY_AND_MIGRATE",
+          "registryEntry": {
+            "path": "/apply",
+            "name": "Apply Redirect",
+            "auth": true,
+            "layout": "migrated",
+            "mode": "KrDark",
+            "isRedirect": true,
+            "apiDeps": ["applicationService"]
+          }
+        },
+        {
+          "path": "/opportunities",
+          "currentOwner": "react-router-dom/Navigate",
+          "targetOwner": "features/opportunities",
+          "action": "ADD_REGISTRY_ENTRY",
+          "registryEntry": {
+            "path": "/opportunities",
+            "name": "Opportunities",
+            "auth": true,
+            "layout": "migrated",
+            "mode": "KrDark",
+            "isRedirect": true,
+            "apiDeps": ["jobService"]
+          }
+        }
+      ]
+    },
+    {
+      "group": "QUARANTINE_CANDIDATES",
+      "priority": "P3",
+      "description": "Dev utilities with no production feature owner — quarantine in P06",
+      "items": [
+        {
+          "path": "/animation-test",
+          "currentSource": "pages/AnimationTest",
+          "action": "QUARANTINE",
+          "reason": "Dev utility page with no feature owner and no registry entry"
+        },
+        {
+          "path": "/test-tokens",
+          "currentSource": "components/debug/TokenTest",
+          "action": "QUARANTINE",
+          "reason": "Token debug utility. Marked prototype:true in registry."
+        }
+      ]
+    },
+    {
+      "group": "DUPLICATE_PRIMITIVES",
+      "priority": "P2",
+      "description": "Component names appearing in both components/ui/ and packages/ui/ — resolve in P07",
+      "items": [
+        {
+          "name": "Button",
+          "path_1": "frontend/packages/ui/src/components/Button",
+          "path_2": "frontend/src/components/ui/button.tsx",
+          "action": "CONSOLIDATE_TO_PACKAGES_UI",
+          "note": "packages/ui is the canonical shared lib. components/ui/button.tsx should be removed or made a re-export."
+        },
+        {
+          "name": "metric-card",
+          "path_1": "frontend/packages/ui/src/components/metric-card",
+          "path_2": "frontend/src/components/ui/metric-card.tsx",
+          "action": "CONSOLIDATE_TO_PACKAGES_UI"
+        }
+      ]
+    }
+  ]
+}

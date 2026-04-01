@@ -74,23 +74,24 @@ const ATS_SCORE_DATA: ATSScoreDataPoint[] = [
   { month: 'Jun', score: 87 },
 ];
 
-// Map token colors for Recharts (must be hex)
+// Map token colors for Recharts (must be hex — CSS vars not supported in SVG/canvas context)
+// All values resolved from KR Solidarity design tokens (design-tokens.css)
 const CHART_COLORS = {
-  primary: '#D1C4E9', // primary-80
-  secondary: '#C7FFF4', // secondary-80
-  tertiary: '#FFD9E8', // tertiary-80
-  error: '#FFB4AB', // error-80
-  surface: '#1C1B1F', // surface-container-low
-  onSurface: '#E6E1E5', // neutral-90
-  grid: '#484649', // neutral-30
-  heroHighlight: '#D0BCFF', // Electric Violet for hero moment
+  primary: '#48B3DA', // kr-color-protest-metal-blue-steps-3
+  secondary: '#6BE5A8', // kr-color-kr-activist-smoke-green-steps-4
+  tertiary: '#E8A96F', // kr-color-solidarity-smoke-orange-steps-4
+  error: '#FF9490', // kr-color-kr-charcoal-red-steps-4
+  surface: '#1A1A1A', // kr-color-charcoal-background-steps-1
+  onSurface: '#D4CEC3', // kr-color-paper-white-steps-1
+  grid: '#444444', // kr-color-charcoal-background-steps-6
+  heroHighlight: '#DAF674', // kr-color-ink-gold-base
 };
 
 const APPLICATION_STATUS_DATA: ApplicationStatusData[] = [
   { name: 'Applied', value: 40, color: CHART_COLORS.primary },
   { name: 'Interviewing', value: 30, color: CHART_COLORS.secondary },
   { name: 'Rejected', value: 20, color: CHART_COLORS.error },
-  { name: 'Offered', value: 10, color: '#FFD700' }, // Gold for offer
+  { name: 'Offered', value: 10, color: '#DAF674' }, // kr-color-ink-gold-base
 ];
 
 // ... (keep keyword data)
@@ -441,7 +442,7 @@ export function Analysis() {
               <Tooltip
                 contentStyle={{
                   backgroundColor: CHART_COLORS.surface,
-                  border: '1px solid #484649',
+                  border: '1px solid #444444', // kr-color-charcoal-background-steps-6
                   borderRadius: 'var(--shape-blockRiot03)',
                   color: CHART_COLORS.onSurface,
                 }}
@@ -487,7 +488,7 @@ export function Analysis() {
                 <Tooltip
                   contentStyle={{
                     backgroundColor: CHART_COLORS.surface,
-                    border: '1px solid #484649',
+                    border: '1px solid #444444', // kr-color-charcoal-background-steps-6
                     borderRadius: 'var(--shape-blockRiot03)',
                     color: CHART_COLORS.onSurface,
                   }}
@@ -522,7 +523,7 @@ export function Analysis() {
                 <Tooltip
                   contentStyle={{
                     backgroundColor: CHART_COLORS.surface,
-                    border: '1px solid #484649',
+                    border: '1px solid #444444', // kr-color-charcoal-background-steps-6
                     borderRadius: 'var(--shape-blockRiot03)',
                     color: CHART_COLORS.onSurface,
                   }}

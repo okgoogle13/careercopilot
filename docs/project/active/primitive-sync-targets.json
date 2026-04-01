@@ -1,0 +1,109 @@
+{
+  "generatedAt": "2026-04-01T02:15:00.000Z",
+  "phase": "P10",
+  "description": "Shared primitive components requiring sync before page-level Figma work. Each target lists its Figma equivalent (or NONE) and blocking issues.",
+  "targets": [
+    {
+      "id": "prim-01",
+      "component": "KeralaRageButton",
+      "path": "frontend/src/components/ui/KeralaRageButton.tsx",
+      "figma_equivalent": "KR Button / Action Button",
+      "figma_node_id": "MISSING",
+      "token_gaps": [],
+      "issues": [],
+      "priority": "P1",
+      "status": "READY_FOR_SYNC"
+    },
+    {
+      "id": "prim-02",
+      "component": "Logo",
+      "path": "frontend/src/components/ui/Logo.tsx",
+      "figma_equivalent": "CareerCopilot Logo",
+      "figma_node_id": "MISSING",
+      "token_gaps": [],
+      "issues": [
+        "Compass icon missing aria-hidden — a11y gap (non-blocking)"
+      ],
+      "priority": "P1",
+      "status": "READY_FOR_SYNC"
+    },
+    {
+      "id": "prim-03",
+      "component": "BannerTexture",
+      "path": "frontend/src/components/kerala-rage/BannerTexture.tsx",
+      "figma_equivalent": "Global Texture / Substrate Layer",
+      "figma_node_id": "MISSING",
+      "token_gaps": [],
+      "issues": [],
+      "priority": "P2",
+      "status": "READY_FOR_SYNC"
+    },
+    {
+      "id": "prim-04",
+      "component": "StatusBadge",
+      "path": "frontend/src/components/ui/StatusBadge/",
+      "figma_equivalent": "Status Badge",
+      "figma_node_id": "MISSING",
+      "token_gaps": [],
+      "issues": [],
+      "priority": "P2",
+      "status": "READY_FOR_SYNC"
+    },
+    {
+      "id": "prim-05",
+      "component": "Scaffold / ScaffoldInput",
+      "path": "frontend/src/components/ui/ScaffoldInput.tsx",
+      "figma_equivalent": "Scaffold Input",
+      "figma_node_id": "MISSING",
+      "token_gaps": [],
+      "issues": [],
+      "priority": "P2",
+      "status": "READY_FOR_SYNC"
+    },
+    {
+      "id": "prim-06",
+      "component": "M3ExpressiveComponents",
+      "path": "frontend/src/components/ui/M3ExpressiveComponents.tsx",
+      "figma_equivalent": "M3 Expressive / Material 3 Component Set",
+      "figma_node_id": "MISSING",
+      "token_gaps": [
+        "M3 components may use --md-sys-color-* tokens; needs mapping to --kr-color-* equivalents"
+      ],
+      "issues": [
+        "Token gap: M3 token namespace diverges from KR namespace — requires explicit mapping table"
+      ],
+      "priority": "P2",
+      "status": "NEEDS_TOKEN_MAPPING"
+    },
+    {
+      "id": "prim-07",
+      "component": "Placard",
+      "path": "frontend/src/components/ui/Placard.tsx",
+      "figma_equivalent": "Placard",
+      "figma_node_id": "MISSING",
+      "token_gaps": [],
+      "issues": [],
+      "priority": "P2",
+      "status": "READY_FOR_SYNC"
+    },
+    {
+      "id": "prim-08",
+      "component": "ActionButton (kerala-rage)",
+      "path": "frontend/src/components/kerala-rage/ActionButton.tsx",
+      "figma_equivalent": "KR Action Button",
+      "figma_node_id": "MISSING",
+      "token_gaps": [],
+      "issues": [
+        "Imported but UNUSED in MigratedRouteLayout — remove dead import (P11 fix)"
+      ],
+      "priority": "P2",
+      "status": "READY_FOR_SYNC"
+    }
+  ],
+  "gate_check": {
+    "all_targets_have_figma_equivalent_or_NONE": true,
+    "blocking_token_gaps": 1,
+    "blocking_token_gap_ids": ["prim-06"],
+    "note": "prim-06 M3 token mapping must be resolved before P13/P14 sync for any route using M3 components"
+  }
+}

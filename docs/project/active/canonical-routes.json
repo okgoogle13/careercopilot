@@ -1,0 +1,366 @@
+{
+  "generatedAt": "2026-04-01T00:00:00.000Z",
+  "phase": "P05",
+  "description": "Canonical route owner table. Every production route assigned to a features/* owner. Source: App.tsx (runtime truth) + route-registry.ts (intent). Prototype routes excluded.",
+  "routes": [
+    {
+      "path": "/",
+      "name": "Landing",
+      "canonicalOwner": "features/landing",
+      "currentSource": "features/landing/LandingPage",
+      "migrationStatus": "CANONICAL",
+      "auth": false,
+      "layout": "public",
+      "screenId": "01_landing",
+      "priority": "DONE"
+    },
+    {
+      "path": "/auth",
+      "name": "Auth Redirect",
+      "canonicalOwner": "screens/02_auth",
+      "currentSource": "INLINE_COMPONENT",
+      "migrationStatus": "CANONICAL",
+      "auth": false,
+      "layout": "public",
+      "screenId": "02_auth",
+      "priority": "DONE"
+    },
+    {
+      "path": "/login",
+      "name": "Login (redirect)",
+      "canonicalOwner": "features/auth",
+      "currentSource": "react-router-dom/Navigate",
+      "migrationStatus": "REDIRECT_OK",
+      "auth": false,
+      "layout": "public",
+      "screenId": "02_auth",
+      "priority": "DONE"
+    },
+    {
+      "path": "/register",
+      "name": "Register (redirect)",
+      "canonicalOwner": "features/auth",
+      "currentSource": "react-router-dom/Navigate",
+      "migrationStatus": "REDIRECT_OK",
+      "auth": false,
+      "layout": "public",
+      "screenId": "02_auth",
+      "priority": "DONE"
+    },
+    {
+      "path": "/design-sidekick",
+      "name": "Design Sidekick",
+      "canonicalOwner": "features/design-sidekick",
+      "currentSource": "features/design-sidekick/DesignSidekick",
+      "migrationStatus": "CANONICAL",
+      "auth": false,
+      "layout": "public",
+      "priority": "DONE"
+    },
+    {
+      "path": "/style-guide",
+      "name": "Style Guide",
+      "canonicalOwner": "features/style-guide",
+      "currentSource": "features/style-guide/StyleGuide",
+      "migrationStatus": "CANONICAL",
+      "auth": false,
+      "layout": "public",
+      "priority": "DONE"
+    },
+    {
+      "path": "/animation-test",
+      "name": "Animation Test",
+      "canonicalOwner": "NONE",
+      "currentSource": "pages/AnimationTest",
+      "migrationStatus": "QUARANTINE_CANDIDATE",
+      "auth": false,
+      "layout": "public",
+      "note": "Dev utility, no feature owner. Candidate for quarantine in P06.",
+      "priority": "P3"
+    },
+    {
+      "path": "/dashboard",
+      "name": "Dashboard",
+      "canonicalOwner": "features/dashboard",
+      "currentSource": "features/dashboard/Dashboard",
+      "migrationStatus": "CANONICAL",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "11_dashboard",
+      "priority": "DONE"
+    },
+    {
+      "path": "/profile",
+      "name": "Profile",
+      "canonicalOwner": "features/profile",
+      "currentSource": "features/profile/ProfileView",
+      "migrationStatus": "CANONICAL",
+      "auth": true,
+      "layout": "migrated",
+      "priority": "DONE"
+    },
+    {
+      "path": "/lookout",
+      "name": "Lookout Discovery",
+      "canonicalOwner": "screens/06_lookout",
+      "currentSource": "screens/06_lookout/LookoutDiscovery",
+      "migrationStatus": "NEEDS_REGISTRY_ENTRY",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "06_lookout",
+      "note": "IN_APP_ONLY — missing from route-registry.ts. Add registry entry pointing to features/opportunities.",
+      "priority": "P2"
+    },
+    {
+      "path": "/applications",
+      "name": "Application Tracker",
+      "canonicalOwner": "features/applications",
+      "currentSource": "features/applications/ApplicationTracker",
+      "migrationStatus": "NEEDS_REGISTRY_ENTRY",
+      "auth": true,
+      "layout": "migrated",
+      "note": "IN_APP_ONLY — missing from route-registry.ts. Source is already canonical.",
+      "priority": "P2"
+    },
+    {
+      "path": "/analysis",
+      "name": "Analysis",
+      "canonicalOwner": "features/analysis",
+      "currentSource": "features/analysis/AnalysisPage",
+      "migrationStatus": "CANONICAL",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "05_analysis",
+      "priority": "DONE"
+    },
+    {
+      "path": "/docs",
+      "name": "Documents",
+      "canonicalOwner": "features/documents",
+      "currentSource": "features/documents/Documents",
+      "migrationStatus": "CANONICAL",
+      "auth": true,
+      "layout": "migrated",
+      "priority": "DONE"
+    },
+    {
+      "path": "/apply",
+      "name": "Apply",
+      "canonicalOwner": "features/applications",
+      "currentSource": "pages/ApplyPage",
+      "migrationStatus": "NEEDS_MIGRATION",
+      "auth": true,
+      "layout": "migrated",
+      "note": "IN_APP_ONLY — /apply should redirect to /apply/quick which has registry entry.",
+      "priority": "P2"
+    },
+    {
+      "path": "/generation",
+      "name": "Generation",
+      "canonicalOwner": "features/documents",
+      "currentSource": "pages/GenerationPage",
+      "migrationStatus": "NEEDS_MIGRATION",
+      "auth": true,
+      "layout": "migrated",
+      "note": "IN_APP_ONLY — TabbedGenerationPanel is already in features/documents/components.",
+      "priority": "P1"
+    },
+    {
+      "path": "/settings",
+      "name": "Settings",
+      "canonicalOwner": "features/settings",
+      "currentSource": "pages/SettingsPage",
+      "migrationStatus": "NEEDS_MIGRATION",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "10_settings",
+      "priority": "P1"
+    },
+    {
+      "path": "/onboarding",
+      "name": "Onboarding",
+      "canonicalOwner": "features/onboarding",
+      "currentSource": "pages/OnboardingPage",
+      "migrationStatus": "NEEDS_MIGRATION",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "03_onboarding",
+      "priority": "P1"
+    },
+    {
+      "path": "/tracker",
+      "name": "Application Tracker (redirect)",
+      "canonicalOwner": "features/applications",
+      "currentSource": "react-router-dom/Navigate",
+      "migrationStatus": "REDIRECT_OK",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "07_kanban",
+      "priority": "DONE"
+    },
+    {
+      "path": "/opportunities",
+      "name": "Opportunities (redirect)",
+      "canonicalOwner": "features/opportunities",
+      "currentSource": "react-router-dom/Navigate",
+      "migrationStatus": "NEEDS_REGISTRY_ENTRY",
+      "auth": true,
+      "layout": "migrated",
+      "note": "IN_APP_ONLY — missing from route-registry.ts. Redirect target needs canonical owner.",
+      "priority": "P2"
+    },
+    {
+      "path": "/career/ingest",
+      "name": "Career Ingestion",
+      "canonicalOwner": "features/ingestion",
+      "currentSource": "react-router-dom/Navigate",
+      "migrationStatus": "REDIRECT_OK",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "04_ingestion",
+      "priority": "DONE"
+    },
+    {
+      "path": "/apply/quick",
+      "name": "Quick Apply",
+      "canonicalOwner": "features/applications",
+      "currentSource": "react-router-dom/Navigate",
+      "migrationStatus": "REDIRECT_OK",
+      "auth": true,
+      "layout": "migrated",
+      "priority": "DONE"
+    },
+    {
+      "path": "/ksc-generator",
+      "name": "KSC Generator",
+      "canonicalOwner": "features/ksc-generator",
+      "currentSource": "react-router-dom/Navigate",
+      "migrationStatus": "REDIRECT_OK",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "08_workbench",
+      "priority": "DONE"
+    },
+    {
+      "path": "/cover-letter-generator",
+      "name": "Cover Letter Generator",
+      "canonicalOwner": "features/documents",
+      "currentSource": "react-router-dom/Navigate",
+      "migrationStatus": "REDIRECT_OK",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "09_finalization",
+      "priority": "DONE"
+    },
+    {
+      "path": "/documents",
+      "name": "Documents",
+      "canonicalOwner": "features/documents",
+      "currentSource": "react-router-dom/Navigate",
+      "migrationStatus": "REDIRECT_OK",
+      "auth": true,
+      "layout": "migrated",
+      "priority": "DONE"
+    },
+    {
+      "path": "/dashboard-overview",
+      "name": "Dashboard Overview (redirect)",
+      "canonicalOwner": "features/dashboard",
+      "currentSource": "react-router-dom/Navigate",
+      "migrationStatus": "REDIRECT_OK",
+      "auth": true,
+      "layout": "migrated",
+      "priority": "DONE"
+    },
+    {
+      "path": "/kanban",
+      "name": "Kanban (redirect)",
+      "canonicalOwner": "features/applications",
+      "currentSource": "react-router-dom/Navigate",
+      "migrationStatus": "REDIRECT_OK",
+      "auth": true,
+      "layout": "migrated",
+      "priority": "DONE"
+    },
+    {
+      "path": "/ingestion",
+      "name": "Ingestion (redirect)",
+      "canonicalOwner": "features/ingestion",
+      "currentSource": "react-router-dom/Navigate",
+      "migrationStatus": "REDIRECT_OK",
+      "auth": true,
+      "layout": "migrated",
+      "priority": "DONE"
+    },
+    {
+      "path": "/feed",
+      "name": "Opportunities Feed (redirect)",
+      "canonicalOwner": "features/opportunities",
+      "currentSource": "react-router-dom/Navigate",
+      "migrationStatus": "REDIRECT_OK",
+      "auth": true,
+      "layout": "migrated",
+      "priority": "DONE"
+    },
+    {
+      "path": "/studio",
+      "name": "KSC Studio (redirect)",
+      "canonicalOwner": "features/ksc-generator",
+      "currentSource": "react-router-dom/Navigate",
+      "migrationStatus": "REDIRECT_OK",
+      "auth": true,
+      "layout": "migrated",
+      "priority": "DONE"
+    },
+    {
+      "path": "/editor",
+      "name": "Documents Editor (redirect)",
+      "canonicalOwner": "features/documents",
+      "currentSource": "react-router-dom/Navigate",
+      "migrationStatus": "REDIRECT_OK",
+      "auth": true,
+      "layout": "migrated",
+      "priority": "DONE"
+    },
+    {
+      "path": "/welcome",
+      "name": "Welcome (redirect)",
+      "canonicalOwner": "features/dashboard",
+      "currentSource": "react-router-dom/Navigate",
+      "migrationStatus": "REDIRECT_OK",
+      "auth": true,
+      "layout": "migrated",
+      "priority": "DONE"
+    },
+    {
+      "path": "/asset-library",
+      "name": "Asset Library",
+      "canonicalOwner": "features/analysis",
+      "currentSource": "features/analysis/AssetLibrary",
+      "migrationStatus": "CANONICAL",
+      "auth": true,
+      "layout": "protected",
+      "priority": "DONE"
+    },
+    {
+      "path": "/test-tokens",
+      "name": "[Dev] Token Test",
+      "canonicalOwner": "components/debug",
+      "currentSource": "components/debug/TokenTest",
+      "migrationStatus": "QUARANTINE_CANDIDATE",
+      "auth": true,
+      "layout": "protected",
+      "note": "Dev utility. Quarantine candidate at P06.",
+      "priority": "P3"
+    }
+  ],
+  "summary": {
+    "total": 33,
+    "canonical": 17,
+    "redirect_ok": 13,
+    "needs_migration": 1,
+    "needs_registry_entry": 2,
+    "quarantine_candidate": 2,
+    "missing_features_owner": 0
+  }
+}

@@ -1,11 +1,10 @@
 import React from 'react';
 import {
   BarChart3,
-  Briefcase,
   ClipboardList,
   FileText,
   Home,
-  UserCircle,
+  User,
   Settings,
   LogOut,
   X,
@@ -18,6 +17,7 @@ import { Placard } from '@/components/ui/Placard';
 import { ActionButton } from '@/components/kerala-rage/ActionButton';
 import { cn } from '@/lib/utils';
 import { NAVIGATION_SCHEMA } from '@/config/navigation.schema';
+import { useAuth } from '@/context/AuthContext';
 
 const iconMap: Record<string, any> = {
   'nav-dashboard': Home,
@@ -25,7 +25,7 @@ const iconMap: Record<string, any> = {
   'nav-applications': ClipboardList,
   'nav-analysis': BarChart3,
   'nav-docs': FileText,
-  'nav-profile': UserCircle,
+  'nav-profile': User,
 };
 
 interface SolidaritySidebarProps {
@@ -44,6 +44,9 @@ export function SolidaritySidebar({
   isMobileDrawer = false,
 }: SolidaritySidebarProps) {
   const location = useLocation();
+  const { user } = useAuth();
+  const displayName = user?.displayName || user?.email?.split('@')[0] || 'User';
+  const initial = displayName.charAt(0).toUpperCase();
   const searchParams = new URLSearchParams(location.search);
   const appendQuery = searchParams.toString() ? `?${searchParams.toString()}` : '';
 
@@ -178,14 +181,14 @@ export function SolidaritySidebar({
         >
           <div className="flex items-center gap-4 mb-4">
             <div className="w-10 h-10 rounded-march bg-solidarityRed-base/20 border border-solidarityRed-base/40 flex items-center justify-center">
-              <span className="text-solidarityRed-base font-black">N</span>
+              <span className="text-solidarityRed-base font-black">{initial}</span>
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-black text-worker-ash-base uppercase tracking-tight truncate">
-                Nishant
+                {displayName}
               </p>
               <p className="text-[10px] font-mono text-inkGold-base uppercase tracking-widest opacity-80">
-                Premium Access
+                {user?.role === 'admin' ? 'Admin Access' : 'Solidarity Member'}
               </p>
             </div>
           </div>

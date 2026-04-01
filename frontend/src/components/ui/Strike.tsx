@@ -40,10 +40,10 @@ export interface StrikeProps extends HTMLMotionProps<'button'> {
  * **THE STRIKE**
  *
  * Archetype: Strike — Primary action, decisive CTA. Defiance and finality.
- * Shape palette: `shape.block03` (base) → `shape.block02` (active/hover)
+ * Shape palette: `var(--kr-archetypes-strike-shape-base)` (base)
  * Motion coupling: `typeSpringSlam` (600ms, cubic-bezier(0.34, 1.56, 0.64, 1))
  *
- * KR Shape Token: `--sys-shape-block03` default → `--sys-shape-block02` on active.
+ * KR Token: `--kr-archetypes-strike-shape-base`
  * A sharp corner is a refusal. A Strike button does not apologize for its presence.
  *
  * @example
@@ -65,14 +65,14 @@ export const Strike = React.forwardRef<HTMLButtonElement, StrikeProps>(
     ref
   ) => {
     const baseStyles =
-      'relative overflow-hidden inline-flex items-center justify-center font-body font-medium transition-colors duration-short disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2';
+      'relative overflow-hidden inline-flex items-center justify-center font-body font-medium transition-all disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2';
 
     const variants = {
       primary: 'bg-primary text-primary-foreground shadow-ink-rest rounded-strike',
       secondary:
-        'bg-surface-elevated text-secondary border border-white/10 shadow-sm rounded-scaffold',
+        'bg-surface-elevated text-secondary border border-border shadow-sm rounded-scaffold',
       ghost: 'hover:bg-surface-elevated hover:text-primary rounded-scaffold',
-      destructive: 'bg-accent text-white rounded-strike shadow-ink-rest',
+      destructive: 'bg-destructive text-destructive-foreground rounded-strike shadow-ink-rest',
     };
 
     const sizes = {
@@ -94,8 +94,11 @@ export const Strike = React.forwardRef<HTMLButtonElement, StrikeProps>(
             ? {
                 y: -2,
                 scale: 1.02,
-                boxShadow: variant === 'primary' ? 'var(--sys-shadow-glow-gold)' : undefined,
-                transition: { type: 'spring', stiffness: 400, damping: 15, mass: 1 },
+                boxShadow: variant === 'primary' ? 'var(--kr-shadow-ink-offset)' : undefined,
+                transition: {
+                  duration: 0.6,
+                  ease: [0.34, 1.56, 0.64, 1],
+                },
               }
             : undefined
         }
