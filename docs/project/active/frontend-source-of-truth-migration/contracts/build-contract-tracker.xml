@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build_contract route_id="tracker" generated_at="2026-03-14" prompt_artifact="wireframe-build-contract-prompt.md" supplementary_briefs="tracker-supplementary-component-briefs.xml">
+
+  <decision_log>
+    <decision id="D-001">Route status is "expand" with component_library_action "extend". ApplicationTracker keeps route ownership and gains new support components for CRUD behavior.</decision>
+    <decision id="D-002">ApplicationTracker is both the canonical route_shell_owner and page_component_owner. It matches route_matrix_row.target_runtime_owner and component_gap_entry.owner_surface.</decision>
+    <decision id="D-003">KanbanTracker is classified as reference_only per component_gap_entry.reference_components. It appears in route_matrix_row.target_component_surfaces but the gap entry takes priority for role assignment. Screen reference patterns may be mined but KanbanTracker is not an implementation target.</decision>
+    <decision id="D-004">wireframe_coverage is "route_specific_wireframe" and xml_wireframe_path matches the supplied wireframe identity (frontend/src/screens/07_kanban/07_kanban.wireframe.xml). No path mismatch.</decision>
+    <decision id="D-005">backend_capabilities contains "applications_crud" and component_gap_entry is present. No blocking gap for missing gap entry.</decision>
+    <decision id="D-006">backend_status is "mounted_active" and frontend_status is "mock_only". The contract targets replacing mock data with real CRUD integration.</decision>
+    <decision id="D-007">KanbanColumn resolved as support_component. Added to component_gap_entry.new_components (gap map updated 2026-03-14). Wireframe elements kanban-column-applied, kanban-column-interview, kanban-column-offered, kanban-column-rejected, kanban-column-archived all map to this single parameterized component.</decision>
+    <decision id="D-008">ApplicationDetailPanel, ApplicationEditForm, ApplicationStatusActions, and ApplicationArchiveAction resolved via: (a) dedicated wireframe elements added to 07_kanban.wireframe.xml (kanban-detail-panel, kanban-edit-form, kanban-status-actions, kanban-archive-action); (b) supplementary component briefs in 2026-03-14-tracker-supplementary-component-briefs.xml providing full prop/state/event/test contracts.</decision>
+    <decision id="D-009">TopNav (kanban-topnav) is classified as shared_shell_reference. It is owned by App.tsx layout, not by /tracker. Documented in wireframe for layout completeness with ownership_note. No route-level component entry required.</decision>
+    <decision id="D-010">Archived column (kanban-column-archived) added as a wireframe element. Maps to KanbanColumn with variant="archived". ApplicationArchiveAction triggers card movement to/from this column.</decision>
+    <decision id="D-011">Wireframe upgraded with layout_structure, layout_binding, responsive_rules, accessibility_overview, breakpoints, and storybook blocks. Structural schema gap resolved.</decision>
+    <decision id="D-012">Asset resolution (9 TODO[asset] slots) deferred to asset-placement-strategy and manifest-reconciler pipeline. Documented in wireframe assets block. Does not block build contract or component implementation — asset slots will be filled before visual compliance audit.</decision>
+
+    <!-- All blocking gaps resolved. Remaining informational notes only. -->
+    <resolved_gap original_severity="blocking" area="mapping" resolution="D-007">
+      KanbanColumn added to component_gap_entry.new_components. Ownership role assigned as support_component. All 5 kanban column wireframe elements now have valid target_component_name and ownership_role.
+    </resolved_gap>
+    <resolved_gap original_severity="blocking" area="wireframe_data" resolution="D-008">
+      Wireframe elements added for all 4 new CRUD support components. Supplementary component briefs provide full contracts. Source of truth chain: wireframe_xml (structure) + supplementary_briefs (detailed contracts) + component_gap_entry (ownership classification).
+    </resolved_gap>
+    <resolved_gap original_severity="non_blocking" area="wireframe_data" resolution="D-009">
+      TopNav classified as shared shell. Not a contract_gap — it is outside /tracker route ownership.
+    </resolved_gap>
+    <resolved_gap original_severity="non_blocking" area="wireframe_data" resolution="D-010">
+      Archived column wireframe element added. Maps to KanbanColumn variant="archived".
+    </resolved_gap>
+    <resolved_gap original_severity="non_blocking" area="wireframe_data" resolution="D-011">
+      Structural schema blocks (layout_structure, layout_binding, responsive_rules) added to wireframe.
+    </resolved_gap>
+    <resolved_gap original_severity="non_blocking" area="dependency" resolution="D-012">
+      Asset resolution deferred to pipeline execution. Build contract and component implementation can proceed without resolved assets.
+    </resolved_gap>
+  </decision_log>
+
+  <route_contract>
+    <route_id>tracker</route_id>
+    <current_route>/tracker</current_route>
+    <target_route>/tracker</target_route>
+    <route_class>product</route_class>
+    <family>applications</family>
+    <route_status>expand</route_status>
+    <implementation_status>planned</implementation_status>
+    <wireframe_coverage>route_specific_wireframe</wireframe_coverage>
+    <canonical_runtime_owner>ApplicationTracker</canonical_runtime_owner>
+    <route_shell_owner>ApplicationTracker</route_shell_owner>
+    <page_component_owner>ApplicationTracker</page_component_owner>
+    <component_library_action>extend</component_library_action>
+    <paired_runtime_surface>frontend/src/features/applications/ApplicationTracker.tsx</paired_runtime_surface>
+    <backend_capabilities>
+      <capability>applications_crud</capability>
+    </backend_capabilities>
+  </route_contract>
+
+  <mapping_registry>
+    <!-- Shared shell: TopNav — not route-owned, documented for layout completeness -->
+    <entry>
+      <source_node_id>kanban-topnav</source_node_id>
+      <source_node_type>navigation</source_node_type>
+      <source_layout_role>shared-shell-navigation</source_layout_role>
+      <mapped_code_component>TopNav</mapped_code_component>
+      <ownership_role>shared_shell_reference</ownership_role>
+      <target_component_name>TopNav</target_component_name>
+      <target_component_status>shared_shell_not_route_owned</target_component_status>
+      <prop_contract />
+      <state_contract />
+      <event_contract />
+      <dependency_contract>
+        <dependency type="design_token" ref="--sys-shape-scaffoldSlab01" />
+        <dependency type="design_token" ref="--sys-color-charcoalBackground-base" />
+      </dependency_contract>
+      <source_of_truth>wireframe_xml (layout completeness only — App.tsx owns this component)</source_of_truth>
+    </entry>
+
+    <!-- Kanban columns: all map to KanbanColumn support_component -->
+    <entry>
+      <source_node_id>kanban-column-applied</source_node_id>
+      <source_node_type>region</source_node_type>
+      <source_layout_role>kanban-column</source_layout_role>
+      <mapped_code_component>KanbanColumn</mapped_code_component>
+      <ownership_role>support_component</ownership_role>
+      <target_component_name>KanbanColumn</target_component_name>
+      <target_component_status>new_component</target_component_status>
+      <prop_contract>
+        <prop name="stage" type="ApplicationStage" value="applied" />
+        <prop name="count" type="number" source="dynamic" />
+        <prop name="label" type="string" i18n_key="kanban.column.applied" />
+        <prop name="applications" type="Application[]" source="filtered from query" />
+        <prop name="onDrop" type="(applicationId: string, targetStage: ApplicationStage) => void" />
+        <prop name="onCardClick" type="(applicationId: string) => void" />
+      </prop_contract>
+      <state_contract>
+        <state name="isDragOver" type="boolean" default="false" />
+      </state_contract>
+      <event_contract>
+        <event name="onDragOver" description="Card dragged over column boundary" />
+        <event name="onDragLeave" description="Card leaves column boundary" />
+        <event name="onDrop" description="Card dropped into column, triggers stage transition via props.onDrop" />
+      </event_contract>
+      <dependency_contract>
+        <dependency type="design_token" ref="--sys-shape-scaffoldSlab01" />
+        <dependency type="design_token" ref="--sys-color-charcoalBackground-base" />
+        <dependency type="design_token" ref="--sys-color-inkGold-base" usage="drop highlight" />
+      </dependency_contract>
+      <source_of_truth>wireframe_xml + component_gap_entry + supplementary_briefs</source_of_truth>
+    </entry>
+
+    <entry>
+      <source_node_id>kanban-column-interview</source_node_id>
+      <source_node_type>region</source_node_type>
+      <source_layout_role>kanban-column</source_layout_role>
+      <mapped_code_component>KanbanColumn</mapped_code_component>
+      <ownership_role>support_component</ownership_role>
+      <target_component_name>KanbanColumn</target_component_name>
+      <target_component_status>new_component</target_component_status>
+      <prop_contract>
+        <prop name="stage" type="ApplicationStage" value="interviewing" />
+        <prop name="count" type="number" source="dynamic" />
+        <prop name="label" type="string" i18n_key="kanban.column.interview" />
+      </prop_contract>
+      <state_contract>
+        <state name="isDragOver" type="boolean" default="false" />
+      </state_contract>
+      <event_contract>
+        <event name="onDragOver" />
+        <event name="onDragLeave" />
+        <event name="onDrop" />
+      </event_contract>
+      <dependency_contract>
+        <dependency type="design_token" ref="--sys-shape-scaffoldSlab01" />
+        <dependency type="design_token" ref="--sys-color-charcoalBackground-base" />
+        <dependency type="design_token" ref="--sys-color-inkGold-base" usage="drop highlight" />
+      </dependency_contract>
+      <source_of_truth>wireframe_xml + component_gap_entry + supplementary_briefs</source_of_truth>
+    </entry>
+
+    <entry>
+      <source_node_id>kanban-column-offered</source_node_id>
+      <source_node_type>region</source_node_type>
+      <source_layout_role>kanban-column</source_layout_role>
+      <mapped_code_component>KanbanColumn</mapped_code_component>
+      <ownership_role>support_component</ownership_role>
+      <target_component_name>KanbanColumn</target_component_name>
+      <target_component_status>new_component</target_component_status>
+      <prop_contract>
+        <prop name="stage" type="ApplicationStage" value="offered" />
+        <prop name="count" type="number" source="dynamic" />
+        <prop name="label" type="string" i18n_key="kanban.column.offered" />
+      </prop_contract>
+      <state_contract>
+        <state name="isDragOver" type="boolean" default="false" />
+      </state_contract>
+      <event_contract>
+        <event name="onDragOver" />
+        <event name="onDragLeave" />
+        <event name="onDrop" />
+      </event_contract>
+      <dependency_contract>
+        <dependency type="design_token" ref="--sys-shape-scaffoldSlab01" />
+        <dependency type="design_token" ref="--sys-color-charcoalBackground-base" />
+        <dependency type="design_token" ref="--sys-color-inkGold-base" usage="drop highlight" />
+      </dependency_contract>
+      <source_of_truth>wireframe_xml + component_gap_entry + supplementary_briefs</source_of_truth>
+    </entry>
+
+    <entry>
+      <source_node_id>kanban-column-rejected</source_node_id>
+      <source_node_type>region</source_node_type>
+      <source_layout_role>kanban-column</source_layout_role>
+      <mapped_code_component>KanbanColumn</mapped_code_component>
+      <ownership_role>support_component</ownership_role>
+      <target_component_name>KanbanColumn</target_component_name>
+      <target_component_status>new_component</target_component_status>
+      <prop_contract>
+        <prop name="stage" type="ApplicationStage" value="rejected" />
+        <prop name="count" type="number" source="dynamic" />
+        <prop name="label" type="string" i18n_key="kanban.column.rejected" />
+      </prop_contract>
+      <state_contract>
+        <state name="isDragOver" type="boolean" default="false" />
+      </state_contract>
+      <event_contract>
+        <event name="onDragOver" />
+        <event name="onDragLeave" />
+        <event name="onDrop" />
+      </event_contract>
+      <dependency_contract>
+        <dependency type="design_token" ref="--sys-shape-scaffoldSlab01" />
+        <dependency type="design_token" ref="--sys-color-charcoalBackground-base" />
+        <dependency type="design_token" ref="--sys-color-inkGold-base" usage="drop highlight" />
+      </dependency_contract>
+      <source_of_truth>wireframe_xml + component_gap_entry + supplementary_briefs</source_of_truth>
+    </entry>
+
+    <entry>
+      <source_node_id>kanban-column-archived</source_node_id>
+      <source_node_type>region</source_node_type>
+      <source_layout_role>kanban-column</source_layout_role>
+      <mapped_code_component>KanbanColumn</mapped_code_component>
+      <ownership_role>support_component</ownership_role>
+      <target_component_name>KanbanColumn</target_component_name>
+      <target_component_status>new_component</target_component_status>
+      <prop_contract>
+        <prop name="stage" type="ApplicationStage" value="archived" />
+        <prop name="count" type="number" source="dynamic" />
+        <prop name="label" type="string" i18n_key="kanban.column.archived" />
+        <prop name="variant" type="string" value="archived" />
+      </prop_contract>
+      <state_contract>
+        <state name="isDragOver" type="boolean" default="false" />
+        <state name="isCollapsed" type="boolean" default="false" />
+      </state_contract>
+      <event_contract>
+        <event name="onDragOver" />
+        <event name="onDragLeave" />
+        <event name="onDrop" />
+        <event name="onToggleCollapse" description="Expand or collapse the archived column" />
+      </event_contract>
+      <dependency_contract>
+        <dependency type="design_token" ref="--sys-shape-scaffoldSlab01" />
+        <dependency type="design_token" ref="--sys-color-charcoalBackground-base" />
+      </dependency_contract>
+      <source_of_truth>wireframe_xml + component_gap_entry + supplementary_briefs</source_of_truth>
+    </entry>
+
+    <!-- Application cards: map to Placard UI primitive -->
+    <entry>
+      <source_node_id>kanban-card-1</source_node_id>
+      <source_node_type>card</source_node_type>
+      <source_layout_role>application-card</source_layout_role>
+      <mapped_code_component>Placard</mapped_code_component>
+      <ownership_role>ui_primitive</ownership_role>
+      <target_component_name>Placard</target_component_name>
+      <target_component_status>existing_ui_primitive</target_component_status>
+      <prop_contract>
+        <prop name="variant" type="string" value="kanban-item" />
+        <prop name="title" type="string" source="dynamic" domain_field="application.job_title + ' at ' + application.company" />
+        <prop name="subtitle" type="string" source="dynamic" domain_field="application.applied_date, application.match_score" />
+      </prop_contract>
+      <state_contract>
+        <state name="default" />
+        <state name="dragging" description="Card being dragged, opacity 0.6, spring transform" />
+        <state name="hover" description="Card hovered, action menu visible" />
+      </state_contract>
+      <event_contract>
+        <event name="onDragStart" description="Begin drag operation, set dataTransfer with applicationId" />
+        <event name="onDragEnd" description="Complete drag operation" />
+        <event name="onClick" description="Open card detail modal via parent onCardClick" />
+      </event_contract>
+      <dependency_contract>
+        <dependency type="design_token" ref="--sys-shape-placardTorn01" />
+        <dependency type="design_token" ref="--sys-color-charcoalBackground-base" />
+        <dependency type="ui_primitive" ref="frontend/src/components/ui/Placard.tsx" />
+      </dependency_contract>
+      <source_of_truth>wireframe_xml (Placard is UI primitive, card data driven by applications_crud)</source_of_truth>
+    </entry>
+
+    <entry>
+      <source_node_id>kanban-card-2</source_node_id>
+      <source_node_type>card</source_node_type>
+      <source_layout_role>application-card</source_layout_role>
+      <mapped_code_component>Placard</mapped_code_component>
+      <ownership_role>ui_primitive</ownership_role>
+      <target_component_name>Placard</target_component_name>
+      <target_component_status>existing_ui_primitive</target_component_status>
+      <prop_contract>
+        <prop name="variant" type="string" value="kanban-item" />
+        <prop name="title" type="string" source="dynamic" domain_field="application.job_title + ' at ' + application.company" />
+        <prop name="subtitle" type="string" source="dynamic" domain_field="application.next_event" />
+      </prop_contract>
+      <state_contract>
+        <state name="default" />
+        <state name="dragging" />
+        <state name="hover" />
+      </state_contract>
+      <event_contract>
+        <event name="onDragStart" />
+        <event name="onDragEnd" />
+        <event name="onClick" />
+      </event_contract>
+      <dependency_contract>
+        <dependency type="design_token" ref="--sys-shape-placardTorn01" />
+        <dependency type="ui_primitive" ref="frontend/src/components/ui/Placard.tsx" />
+      </dependency_contract>
+      <source_of_truth>wireframe_xml</source_of_truth>
+    </entry>
+
+    <entry>
+      <source_node_id>kanban-card-3</source_node_id>
+      <source_node_type>card</source_node_type>
+      <source_layout_role>application-card</source_layout_role>
+      <mapped_code_component>Placard</mapped_code_component>
+      <ownership_role>ui_primitive</ownership_role>
+      <target_component_name>Placard</target_component_name>
+      <target_component_status>existing_ui_primitive</target_component_status>
+      <prop_contract>
+        <prop name="variant" type="string" value="kanban-item" />
+        <prop name="title" type="string" source="dynamic" domain_field="application.job_title + ' at ' + application.company" />
+        <prop name="subtitle" type="string" source="dynamic" domain_field="application.offer_deadline, application.salary" />
+      </prop_contract>
+      <state_contract>
+        <state name="default" />
+        <state name="dragging" />
+        <state name="hover" />
+      </state_contract>
+      <event_contract>
+        <event name="onDragStart" />
+        <event name="onDragEnd" />
+        <event name="onClick" />
+      </event_contract>
+      <dependency_contract>
+        <dependency type="design_token" ref="--sys-shape-placardTorn01" />
+        <dependency type="ui_primitive" ref="frontend/src/components/ui/Placard.tsx" />
+      </dependency_contract>
+      <source_of_truth>wireframe_xml</source_of_truth>
+    </entry>
+
+    <!-- Detail modal and CRUD sub-components -->
+    <entry>
+      <source_node_id>kanban-detail-panel</source_node_id>
+      <source_node_type>dialog</source_node_type>
+      <source_layout_role>application-detail-modal</source_layout_role>
+      <mapped_code_component>ApplicationDetailPanel</mapped_code_component>
+      <ownership_role>support_component</ownership_role>
+      <target_component_name>ApplicationDetailPanel</target_component_name>
+      <target_component_status>new_component</target_component_status>
+      <prop_contract>
+        <prop name="applicationId" type="string" source="dynamic" />
+        <prop name="isOpen" type="boolean" source="state" />
+        <prop name="onClose" type="() => void" />
+        <prop name="onStatusChange" type="(applicationId: string, newStatus: ApplicationStage) => void" />
+        <prop name="onArchive" type="(applicationId: string) => void" />
+      </prop_contract>
+      <state_contract>
+        <state name="activeTab" type="'timeline' | 'notes' | 'details'" default="timeline" />
+      </state_contract>
+      <event_contract>
+        <event name="onTabChange" description="Switch active tab" />
+        <event name="onClose" description="Escape key, backdrop click, or close button" />
+        <event name="onStatusChange" description="Delegated from ApplicationStatusActions child" />
+        <event name="onArchive" description="Delegated from ApplicationArchiveAction child" />
+        <event name="onEditSave" description="Delegated from ApplicationEditForm child, triggers query invalidation" />
+      </event_contract>
+      <dependency_contract>
+        <dependency type="design_token" ref="--sys-shape-megaphoneCut01" />
+        <dependency type="design_token" ref="--sys-color-charcoalBackground-base" />
+        <dependency type="backend_capability" ref="applications_crud" endpoint="GET /api/v1/applications/{id}" />
+        <dependency type="child_component" ref="ApplicationEditForm" />
+        <dependency type="child_component" ref="ApplicationStatusActions" />
+        <dependency type="child_component" ref="ApplicationArchiveAction" />
+      </dependency_contract>
+      <source_of_truth>wireframe_xml + component_gap_entry + supplementary_briefs</source_of_truth>
+    </entry>
+
+    <entry>
+      <source_node_id>kanban-edit-form</source_node_id>
+      <source_node_type>form</source_node_type>
+      <source_layout_role>application-edit-form</source_layout_role>
+      <mapped_code_component>ApplicationEditForm</mapped_code_component>
+      <ownership_role>support_component</ownership_role>
+      <target_component_name>ApplicationEditForm</target_component_name>
+      <target_component_status>new_component</target_component_status>
+      <prop_contract>
+        <prop name="applicationId" type="string" />
+        <prop name="initialData" type="ApplicationEditPayload" source="parent query" />
+        <prop name="onSave" type="(data: ApplicationEditPayload) => void" />
+      </prop_contract>
+      <state_contract>
+        <state name="formState" type="ApplicationEditPayload" />
+        <state name="isDirty" type="boolean" default="false" />
+        <state name="fieldErrors" type="Record&lt;string, string&gt;" default="{}" />
+      </state_contract>
+      <event_contract>
+        <event name="onChange" description="Field input change" />
+        <event name="onSubmit" description="Form save" />
+        <event name="onCancel" description="Reset form to initialData" />
+      </event_contract>
+      <dependency_contract>
+        <dependency type="design_token" ref="--sys-shape-scaffoldSlab01" />
+        <dependency type="design_token" ref="--sys-color-charcoalBackground-base" />
+        <dependency type="backend_capability" ref="applications_crud" endpoint="PATCH /api/v1/applications/{id}" />
+        <dependency type="ui_primitive" ref="ScaffoldInput" />
+        <dependency type="ui_primitive" ref="ScaffoldArea" />
+      </dependency_contract>
+      <source_of_truth>wireframe_xml + supplementary_briefs</source_of_truth>
+    </entry>
+
+    <entry>
+      <source_node_id>kanban-status-actions</source_node_id>
+      <source_node_type>toolbar</source_node_type>
+      <source_layout_role>application-status-actions</source_layout_role>
+      <mapped_code_component>ApplicationStatusActions</mapped_code_component>
+      <ownership_role>support_component</ownership_role>
+      <target_component_name>ApplicationStatusActions</target_component_name>
+      <target_component_status>new_component</target_component_status>
+      <prop_contract>
+        <prop name="applicationId" type="string" />
+        <prop name="currentStatus" type="ApplicationStage" />
+        <prop name="onStatusChange" type="(newStatus: ApplicationStage) => void" />
+      </prop_contract>
+      <state_contract>
+        <state name="confirmingAction" type="ApplicationStage | null" default="null" />
+        <state name="pendingMutation" type="ApplicationStage | null" default="null" />
+      </state_contract>
+      <event_contract>
+        <event name="onActionClick" description="Show confirmation for selected action" />
+        <event name="onConfirm" description="Execute status mutation" />
+        <event name="onCancel" description="Cancel confirmation" />
+      </event_contract>
+      <dependency_contract>
+        <dependency type="design_token" ref="--sys-shape-blockRiot03" />
+        <dependency type="design_token" ref="--sys-color-inkGold-base" />
+        <dependency type="design_token" ref="--sys-color-protestMetalBlue-base" />
+        <dependency type="backend_capability" ref="applications_crud" endpoint="PATCH /api/v1/applications/{id}/status" />
+        <dependency type="ui_primitive" ref="Strike" />
+      </dependency_contract>
+      <source_of_truth>wireframe_xml + supplementary_briefs</source_of_truth>
+    </entry>
+
+    <entry>
+      <source_node_id>kanban-archive-action</source_node_id>
+      <source_node_type>button</source_node_type>
+      <source_layout_role>application-archive-action</source_layout_role>
+      <mapped_code_component>ApplicationArchiveAction</mapped_code_component>
+      <ownership_role>support_component</ownership_role>
+      <target_component_name>ApplicationArchiveAction</target_component_name>
+      <target_component_status>new_component</target_component_status>
+      <prop_contract>
+        <prop name="applicationId" type="string" />
+        <prop name="isArchived" type="boolean" />
+        <prop name="onArchive" type="() => void" />
+        <prop name="onRestore" type="() => void" />
+      </prop_contract>
+      <state_contract>
+        <state name="isConfirming" type="boolean" default="false" />
+        <state name="isPending" type="boolean" default="false" />
+      </state_contract>
+      <event_contract>
+        <event name="onClick" description="Show archive/restore confirmation" />
+        <event name="onConfirm" description="Execute archive or restore mutation" />
+        <event name="onCancel" description="Cancel confirmation" />
+      </event_contract>
+      <dependency_contract>
+        <dependency type="design_token" ref="--sys-shape-blockRiot03" />
+        <dependency type="design_token" ref="--sys-color-protestMetalBlue-base" usage="archive" />
+        <dependency type="design_token" ref="--sys-color-inkGold-base" usage="restore" />
+        <dependency type="backend_capability" ref="applications_crud" endpoint="POST /api/v1/applications/{id}/archive" />
+        <dependency type="backend_capability" ref="applications_crud" endpoint="POST /api/v1/applications/{id}/restore" />
+        <dependency type="ui_primitive" ref="Strike" />
+      </dependency_contract>
+      <source_of_truth>wireframe_xml + supplementary_briefs</source_of_truth>
+    </entry>
+  </mapping_registry>
+
+  <component_manifest>
+    <component>
+      <component_name>ApplicationTracker</component_name>
+      <role>page_component</role>
+      <canonical_status>reuse</canonical_status>
+      <source_classification>component_gap_entry.reuse_components + route_matrix_row.target_runtime_owner</source_classification>
+      <file_owner_type>page</file_owner_type>
+      <derived_from_xml_nodes>all (owns route-level composition)</derived_from_xml_nodes>
+      <required_props>
+        <prop name="userId" type="string" />
+      </required_props>
+      <optional_props />
+      <local_state>
+        <state name="selectedApplicationId" type="string | null" />
+        <state name="isDetailModalOpen" type="boolean" />
+        <state name="dragState" type="DragState | null" />
+      </local_state>
+      <external_state>
+        <state name="applications" type="Application[]" source="TanStack Query via applications_crud API" />
+        <state name="applicationStages" type="Record&lt;ApplicationStage, Application[]&gt;" source="derived from applications" />
+      </external_state>
+      <child_components>
+        <child>KanbanColumn (support_component, parameterized per stage)</child>
+        <child>Placard (ui_primitive)</child>
+        <child>ApplicationDetailPanel (support_component)</child>
+      </child_components>
+      <upstream_dependencies>
+        <dependency>applications_crud backend API</dependency>
+        <dependency>React Router /tracker route</dependency>
+      </upstream_dependencies>
+      <downstream_dependencies>
+        <dependency>KanbanColumn</dependency>
+        <dependency>ApplicationDetailPanel</dependency>
+        <dependency>ApplicationEditForm (via ApplicationDetailPanel)</dependency>
+        <dependency>ApplicationStatusActions (via ApplicationDetailPanel)</dependency>
+        <dependency>ApplicationArchiveAction (via ApplicationDetailPanel)</dependency>
+      </downstream_dependencies>
+      <blocked_by />
+    </component>
+
+    <component>
+      <component_name>KanbanTracker</component_name>
+      <role>reference_only</role>
+      <canonical_status>reference</canonical_status>
+      <source_classification>component_gap_entry.reference_components</source_classification>
+      <file_owner_type>screen_reference</file_owner_type>
+      <derived_from_xml_nodes>none (reference material only)</derived_from_xml_nodes>
+      <required_props />
+      <optional_props />
+      <local_state />
+      <external_state />
+      <child_components />
+      <upstream_dependencies />
+      <downstream_dependencies />
+      <blocked_by />
+    </component>
+
+    <component>
+      <component_name>KanbanColumn</component_name>
+      <role>support_component</role>
+      <canonical_status>new</canonical_status>
+      <source_classification>component_gap_entry.new_components (added 2026-03-14)</source_classification>
+      <file_owner_type>support</file_owner_type>
+      <derived_from_xml_nodes>kanban-column-applied, kanban-column-interview, kanban-column-offered, kanban-column-rejected, kanban-column-archived</derived_from_xml_nodes>
+      <required_props>
+        <prop name="stage" type="ApplicationStage" />
+        <prop name="label" type="string" />
+        <prop name="count" type="number" />
+        <prop name="applications" type="Application[]" />
+        <prop name="onDrop" type="(applicationId: string, targetStage: ApplicationStage) => void" />
+        <prop name="onCardClick" type="(applicationId: string) => void" />
+      </required_props>
+      <optional_props>
+        <prop name="variant" type="'default' | 'archived'" default="default" />
+      </optional_props>
+      <local_state>
+        <state name="isDragOver" type="boolean" default="false" />
+        <state name="isCollapsed" type="boolean" default="false" description="archived variant only" />
+      </local_state>
+      <external_state />
+      <child_components>
+        <child>Placard (ui_primitive, rendered per application)</child>
+      </child_components>
+      <upstream_dependencies>
+        <dependency>ApplicationTracker (parent)</dependency>
+      </upstream_dependencies>
+      <downstream_dependencies />
+      <blocked_by />
+    </component>
+
+    <component>
+      <component_name>ApplicationDetailPanel</component_name>
+      <role>support_component</role>
+      <canonical_status>new</canonical_status>
+      <source_classification>component_gap_entry.new_components</source_classification>
+      <file_owner_type>support</file_owner_type>
+      <derived_from_xml_nodes>kanban-detail-panel</derived_from_xml_nodes>
+      <required_props>
+        <prop name="applicationId" type="string" />
+        <prop name="isOpen" type="boolean" />
+        <prop name="onClose" type="() => void" />
+      </required_props>
+      <optional_props>
+        <prop name="onStatusChange" type="(applicationId: string, newStatus: ApplicationStage) => void" />
+        <prop name="onArchive" type="(applicationId: string) => void" />
+      </optional_props>
+      <local_state>
+        <state name="activeTab" type="'timeline' | 'notes' | 'details'" default="timeline" />
+      </local_state>
+      <external_state>
+        <state name="applicationDetail" type="ApplicationDetail" source="TanStack Query: GET /api/v1/applications/{applicationId}" />
+      </external_state>
+      <child_components>
+        <child>ApplicationEditForm</child>
+        <child>ApplicationStatusActions</child>
+        <child>ApplicationArchiveAction</child>
+      </child_components>
+      <upstream_dependencies>
+        <dependency>ApplicationTracker (parent)</dependency>
+        <dependency>applications_crud backend API</dependency>
+      </upstream_dependencies>
+      <downstream_dependencies />
+      <blocked_by />
+    </component>
+
+    <component>
+      <component_name>ApplicationEditForm</component_name>
+      <role>support_component</role>
+      <canonical_status>new</canonical_status>
+      <source_classification>component_gap_entry.new_components</source_classification>
+      <file_owner_type>support</file_owner_type>
+      <derived_from_xml_nodes>kanban-edit-form</derived_from_xml_nodes>
+      <required_props>
+        <prop name="applicationId" type="string" />
+        <prop name="onSave" type="(data: ApplicationEditPayload) => void" />
+      </required_props>
+      <optional_props>
+        <prop name="initialData" type="ApplicationEditPayload" />
+      </optional_props>
+      <local_state>
+        <state name="formState" type="ApplicationEditPayload" />
+        <state name="isDirty" type="boolean" default="false" />
+        <state name="fieldErrors" type="Record&lt;string, string&gt;" default="{}" />
+      </local_state>
+      <external_state />
+      <child_components />
+      <upstream_dependencies>
+        <dependency>ApplicationDetailPanel (parent)</dependency>
+        <dependency>applications_crud backend API: PATCH /api/v1/applications/{id}</dependency>
+      </upstream_dependencies>
+      <downstream_dependencies />
+      <blocked_by />
+    </component>
+
+    <component>
+      <component_name>ApplicationStatusActions</component_name>
+      <role>support_component</role>
+      <canonical_status>new</canonical_status>
+      <source_classification>component_gap_entry.new_components</source_classification>
+      <file_owner_type>support</file_owner_type>
+      <derived_from_xml_nodes>kanban-status-actions</derived_from_xml_nodes>
+      <required_props>
+        <prop name="applicationId" type="string" />
+        <prop name="currentStatus" type="ApplicationStage" />
+        <prop name="onStatusChange" type="(newStatus: ApplicationStage) => void" />
+      </required_props>
+      <optional_props />
+      <local_state>
+        <state name="confirmingAction" type="ApplicationStage | null" default="null" />
+        <state name="pendingMutation" type="ApplicationStage | null" default="null" />
+      </local_state>
+      <external_state />
+      <child_components />
+      <upstream_dependencies>
+        <dependency>ApplicationDetailPanel (parent)</dependency>
+        <dependency>applications_crud backend API: PATCH /api/v1/applications/{id}/status</dependency>
+      </upstream_dependencies>
+      <downstream_dependencies />
+      <blocked_by />
+    </component>
+
+    <component>
+      <component_name>ApplicationArchiveAction</component_name>
+      <role>support_component</role>
+      <canonical_status>new</canonical_status>
+      <source_classification>component_gap_entry.new_components</source_classification>
+      <file_owner_type>support</file_owner_type>
+      <derived_from_xml_nodes>kanban-archive-action</derived_from_xml_nodes>
+      <required_props>
+        <prop name="applicationId" type="string" />
+        <prop name="isArchived" type="boolean" />
+        <prop name="onArchive" type="() => void" />
+        <prop name="onRestore" type="() => void" />
+      </required_props>
+      <optional_props />
+      <local_state>
+        <state name="isConfirming" type="boolean" default="false" />
+        <state name="isPending" type="boolean" default="false" />
+      </local_state>
+      <external_state />
+      <child_components />
+      <upstream_dependencies>
+        <dependency>ApplicationDetailPanel (parent)</dependency>
+        <dependency>applications_crud backend API: POST /api/v1/applications/{id}/archive</dependency>
+        <dependency>applications_crud backend API: POST /api/v1/applications/{id}/restore</dependency>
+      </upstream_dependencies>
+      <downstream_dependencies />
+      <blocked_by />
+    </component>
+  </component_manifest>
+
+  <file_system_mapping>
+    <route_shell_path>frontend/src/features/applications/ApplicationTracker.tsx</route_shell_path>
+    <page_component_path>frontend/src/features/applications/ApplicationTracker.tsx</page_component_path>
+    <support_component_paths>
+      <path component="KanbanColumn">frontend/src/features/applications/components/KanbanColumn.tsx</path>
+      <path component="ApplicationDetailPanel">frontend/src/features/applications/components/ApplicationDetailPanel.tsx</path>
+      <path component="ApplicationEditForm">frontend/src/features/applications/components/ApplicationEditForm.tsx</path>
+      <path component="ApplicationStatusActions">frontend/src/features/applications/components/ApplicationStatusActions.tsx</path>
+      <path component="ApplicationArchiveAction">frontend/src/features/applications/components/ApplicationArchiveAction.tsx</path>
+    </support_component_paths>
+    <reference_only_source_path>
+      <path component="KanbanTracker">frontend/src/screens/07_kanban/KanbanTracker.tsx</path>
+    </reference_only_source_path>
+    <deferred_placeholder_paths />
+  </file_system_mapping>
+
+  <state_transition_contract>
+    <transition id="ST-001" flow_step="1">
+      <event_source>Route mount (/tracker)</event_source>
+      <state_owner_component>ApplicationTracker</state_owner_component>
+      <hook_responsibility>useQuery for applications_crud — fetch all applications grouped by stage</hook_responsibility>
+      <async_boundary>TanStack Query manages fetch lifecycle</async_boundary>
+      <loading_state_owner>ApplicationTracker</loading_state_owner>
+      <error_state_owner>ApplicationTracker</error_state_owner>
+      <empty_state_owner>ApplicationTracker</empty_state_owner>
+      <completion_state_owner>ApplicationTracker</completion_state_owner>
+    </transition>
+
+    <transition id="ST-002" flow_step="2">
+      <event_source>Card click (kanban-card-* onClick via KanbanColumn.onCardClick)</event_source>
+      <state_owner_component>ApplicationTracker</state_owner_component>
+      <hook_responsibility>setState for selectedApplicationId and isDetailModalOpen</hook_responsibility>
+      <async_boundary>none (local state toggle)</async_boundary>
+      <loading_state_owner>ApplicationDetailPanel (fetches detail on mount)</loading_state_owner>
+      <error_state_owner>ApplicationDetailPanel</error_state_owner>
+      <empty_state_owner>ApplicationDetailPanel</empty_state_owner>
+      <completion_state_owner>ApplicationDetailPanel</completion_state_owner>
+    </transition>
+
+    <transition id="ST-003" flow_step="3">
+      <event_source>Card drag-and-drop (KanbanColumn.onDrop)</event_source>
+      <state_owner_component>ApplicationTracker</state_owner_component>
+      <hook_responsibility>useMutation for applications_crud — update application stage</hook_responsibility>
+      <async_boundary>Optimistic update via TanStack Query mutation with rollback</async_boundary>
+      <loading_state_owner>ApplicationTracker (optimistic — card moves immediately)</loading_state_owner>
+      <error_state_owner>ApplicationTracker (rollback on failure, show error toast)</error_state_owner>
+      <empty_state_owner>N/A</empty_state_owner>
+      <completion_state_owner>ApplicationTracker (query invalidation refreshes board)</completion_state_owner>
+    </transition>
+
+    <transition id="ST-004" flow_step="4">
+      <event_source>Status action from ApplicationStatusActions (schedule, accept, reject)</event_source>
+      <state_owner_component>ApplicationDetailPanel</state_owner_component>
+      <hook_responsibility>useMutation for applications_crud — update application status</hook_responsibility>
+      <async_boundary>TanStack Query mutation with confirmation step</async_boundary>
+      <loading_state_owner>ApplicationStatusActions (button loading state)</loading_state_owner>
+      <error_state_owner>ApplicationDetailPanel (inline error)</error_state_owner>
+      <empty_state_owner>N/A</empty_state_owner>
+      <completion_state_owner>ApplicationTracker (board refreshes after modal action)</completion_state_owner>
+    </transition>
+
+    <transition id="ST-005" flow_step="5">
+      <event_source>Archive action from ApplicationArchiveAction</event_source>
+      <state_owner_component>ApplicationDetailPanel</state_owner_component>
+      <hook_responsibility>useMutation for applications_crud — archive or restore application</hook_responsibility>
+      <async_boundary>TanStack Query mutation with confirmation step</async_boundary>
+      <loading_state_owner>ApplicationArchiveAction</loading_state_owner>
+      <error_state_owner>ApplicationDetailPanel</error_state_owner>
+      <empty_state_owner>N/A</empty_state_owner>
+      <completion_state_owner>ApplicationTracker (card moves to/from archived column)</completion_state_owner>
+    </transition>
+
+    <transition id="ST-006" flow_step="6">
+      <event_source>Edit save from ApplicationEditForm</event_source>
+      <state_owner_component>ApplicationEditForm</state_owner_component>
+      <hook_responsibility>useMutation for applications_crud — PATCH application metadata</hook_responsibility>
+      <async_boundary>TanStack Query mutation</async_boundary>
+      <loading_state_owner>ApplicationEditForm (submit button loading)</loading_state_owner>
+      <error_state_owner>ApplicationEditForm (field-level errors)</error_state_owner>
+      <empty_state_owner>N/A</empty_state_owner>
+      <completion_state_owner>ApplicationDetailPanel (query invalidation refreshes detail view)</completion_state_owner>
+    </transition>
+  </state_transition_contract>
+
+  <acceptance_criteria>
+    <criterion id="AC-001" type="route_ownership">React Router renders ApplicationTracker at /tracker.</criterion>
+    <criterion id="AC-002" type="component_ownership">ApplicationTracker is the sole page_component owner for /tracker. No other component registers as a route-level owner.</criterion>
+    <criterion id="AC-003" type="reference_only_boundary">KanbanTracker is not imported or rendered in the /tracker route tree. It exists only as a screen reference at frontend/src/screens/07_kanban/KanbanTracker.tsx.</criterion>
+    <criterion id="AC-004" type="component_ownership">KanbanColumn, ApplicationDetailPanel, ApplicationEditForm, ApplicationStatusActions, and ApplicationArchiveAction are implemented as support_components under frontend/src/features/applications/components/.</criterion>
+    <criterion id="AC-005" type="wireframe_to_component_coverage">All 14 wireframe elements have mapping_registry entries with resolved ownership_role and target_component_name. No entry may have ownership_role="unresolved".</criterion>
+    <criterion id="AC-006" type="ownership_role_validity">Every mapping_registry entry must have an ownership_role from the allowed set: page_component, support_component, ui_primitive, reference_only, deferred_component, shared_shell_reference. No entry may have an ownership_role outside this set.</criterion>
+    <criterion id="AC-007" type="token_guardrail">No hardcoded hex colors, rgba(), or hsla() values. All color assignments use --sys-color-* tokens. All shape assignments use --sys-shape-* tokens.</criterion>
+    <criterion id="AC-008" type="deferred_component">No deferred_components exist for this route. All new_components from component_gap_entry are implemented.</criterion>
+    <criterion id="AC-009" type="backend_integration">ApplicationTracker replaces mock data with real applications_crud API calls via TanStack Query. Mock-backed behavior is fully removed.</criterion>
+    <criterion id="AC-010" type="gap_resolution">Zero blocking contract_gaps remain. All former blocking gaps have resolved_gap entries in the decision_log with specific resolution decisions.</criterion>
+    <criterion id="AC-011" type="shared_shell_boundary">TopNav (kanban-topnav) is not implemented as part of the /tracker route. It is owned by the application shell and must not be modified by this route's implementation.</criterion>
+    <criterion id="AC-012" type="source_of_truth_chain">Every support_component and new_component has a traceable source chain: wireframe element (structure) + supplementary brief (detailed contract) + component_gap_entry (ownership classification). No component relies solely on inferred wireframe intent.</criterion>
+    <criterion id="AC-013" type="motion_contract">All drag-and-drop interactions and modal transitions use spring-based easing per wireframe motion_contract blocks. No CSS ease/linear transitions for interactive elements.</criterion>
+    <criterion id="AC-014" type="accessibility">Detail modal traps focus when open. Kanban columns use aria role="region" with heading_level="h3". Toolbar actions are keyboard-navigable. Archived column supports expand/collapse with appropriate ARIA state.</criterion>
+  </acceptance_criteria>
+
+</build_contract>
