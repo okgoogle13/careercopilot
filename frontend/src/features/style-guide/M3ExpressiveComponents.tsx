@@ -5,10 +5,10 @@ import { Strike } from '../../components/ui/Strike';
 import { cn } from '../../lib/utils';
 
 const MOTION_CONTRACTS = {
-  easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
-  strike: '600ms',
-  march: '800ms',
-  substrate: '3000ms',
+  easing: 'var(--kr-motion-easing-strike)',
+  strike: 'var(--kr-motion-duration-strike)',
+  march: 'var(--kr-motion-duration-march)',
+  substrate: 'var(--kr-motion-duration-placard)', // Using placard as slow substrate
 };
 
 export function ArchetypeMorphPreviewer({ onInteraction }: { onInteraction?: () => void }) {
@@ -24,16 +24,16 @@ export function ArchetypeMorphPreviewer({ onInteraction }: { onInteraction?: () 
 
   const shapes = {
     strike: {
-      base: 'var(--shape-blockRiot03)',
-      active: 'var(--shape-blockRiot02)',
+      base: 'var(--kr-archetypes-strike-shape-base)',
+      active: 'var(--kr-archetypes-strike-shape-active)',
     },
     march: {
-      base: 'var(--shape-pillMarch01)',
-      active: 'var(--shape-marchSurge01)',
+      base: 'var(--kr-archetypes-march-shape-base)',
+      active: 'var(--kr-archetypes-march-shape-active)',
     },
     placard: {
-      base: 'var(--shape-placardTorn01)',
-      active: 'var(--shape-placardTorn01-selected)',
+      base: 'var(--kr-archetypes-placard-shape-base)',
+      active: 'var(--kr-archetypes-placard-shape-base)', // Placards are currently immutable
     },
   };
 
@@ -146,7 +146,7 @@ export function TypographyAxisValidator({ onInteraction }: { onInteraction?: () 
           <motion.h2
             className="text-6xl text-center px-4"
             style={{
-              fontFamily: 'var(--sys-type-fontFamilies-primary)',
+              fontFamily: 'var(--kr-type-font-primary)',
               fontVariationSettings: settings,
             }}
             animate={{ fontVariationSettings: settings }}
@@ -438,7 +438,7 @@ export function MotionContractPanel() {
         </div>
       </div>
       <div className="bg-surface-dim p-3 rounded-strike border border-outline text-xs font-mono">
-        easing: {MOTION_CONTRACTS.easing}
+        easing: var(--kr-motion-easing-strike)
       </div>
     </div>
   );

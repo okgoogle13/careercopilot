@@ -1,0 +1,250 @@
+{
+  "generatedAt": "2026-04-01T02:10:00.000Z",
+  "phase": "P08",
+  "figma_file_key": "YPDj0edchIDXykYChSmCUd",
+  "description": "Ordered construction plan for Figma sync. Shared layout components appear first to minimise page-level rework. Each page entry includes its canonical owner, current migration status, and figma_node_id where known.",
+  "execution_order": [
+    {
+      "batch": 1,
+      "type": "shared_layout",
+      "description": "Shared chrome and layout wrappers — sync these first to unblock all page-level work",
+      "items": [
+        {
+          "id": "page-style-guide",
+          "path": "/style-guide",
+          "name": "Living Style Guide",
+          "canonical_owner": "features/style-guide/StyleGuide",
+          "migration_status": "CANONICAL",
+          "figma_node_id": "MISSING",
+          "priority": "CRITICAL",
+          "notes": "Source of truth for all KR Solidarity primitives (Strike, Placard, etc.) — Sync FIRST to verify baseline token implementation"
+        },
+        {
+          "id": "shared-01",
+          "path": "frontend/src/layouts/MigratedRouteLayout.tsx",
+          "name": "MigratedRouteLayout",
+          "canonical_owner": "layouts",
+          "figma_node_id": "MISSING",
+          "priority": "CRITICAL",
+          "notes": "Wraps all protected canonical routes — token gaps here propagate to every page"
+        },
+        {
+          "id": "shared-02",
+          "path": "frontend/src/layouts/Layout.tsx",
+          "name": "Layout (legacy sidebar shell)",
+          "canonical_owner": "layouts",
+          "figma_node_id": "MISSING",
+          "priority": "HIGH",
+          "notes": "ProtectedLayout fallback — used by /asset-library"
+        },
+        {
+          "id": "shared-03",
+          "path": "frontend/src/components/shared/",
+          "name": "Navigation / Sidebar",
+          "canonical_owner": "components/shared",
+          "figma_node_id": "MISSING",
+          "priority": "HIGH",
+          "notes": "Nav chrome shared across all protected routes"
+        }
+      ]
+    },
+    {
+      "batch": 2,
+      "type": "canonical_public",
+      "description": "Public canonical routes — no auth required, high visibility",
+      "items": [
+        {
+          "id": "page-01",
+          "path": "/",
+          "name": "Landing",
+          "canonical_owner": "features/landing/LandingPage",
+          "migration_status": "CANONICAL",
+          "figma_node_id": "1:10",
+          "screenshot": "landing-page-canonical.png",
+          "priority": "P1"
+        },
+        {
+          "id": "page-02",
+          "path": "/auth",
+          "name": "Auth (Login / Register)",
+          "canonical_owner": "screens/02_auth/AuthModal",
+          "migration_status": "CANONICAL",
+          "figma_node_id": "MISSING",
+          "priority": "P1"
+        }
+      ]
+    },
+    {
+      "batch": 3,
+      "type": "canonical_protected_core",
+      "description": "Core protected routes — primary user journeys",
+      "items": [
+        {
+          "id": "page-03",
+          "path": "/dashboard",
+          "name": "Dashboard / Solidarity Hub",
+          "canonical_owner": "features/dashboard/Dashboard",
+          "migration_status": "CANONICAL",
+          "figma_node_id": "1:166",
+          "screenshot": "dashboard-canonical.png",
+          "priority": "P1"
+        },
+        {
+          "id": "page-04",
+          "path": "/profile",
+          "name": "Profile",
+          "canonical_owner": "features/profile/ProfileView",
+          "migration_status": "CANONICAL",
+          "figma_node_id": "MISSING",
+          "priority": "P1"
+        },
+        {
+          "id": "page-05",
+          "path": "/analysis",
+          "name": "Analysis / ATS Scoring",
+          "canonical_owner": "features/analysis/AnalysisPage",
+          "migration_status": "CANONICAL",
+          "figma_node_id": "1:1720",
+          "priority": "P1"
+        },
+        {
+          "id": "page-06",
+          "path": "/docs",
+          "name": "Documents",
+          "canonical_owner": "features/documents/Documents",
+          "migration_status": "CANONICAL",
+          "figma_node_id": "MISSING",
+          "priority": "P1"
+        },
+        {
+          "id": "page-07",
+          "path": "/applications",
+          "name": "Applications Tracker",
+          "canonical_owner": "features/applications/ApplicationTracker",
+          "migration_status": "NEEDS_REGISTRY_ENTRY",
+          "figma_node_id": "1:1323",
+          "priority": "P2"
+        },
+        {
+          "id": "page-08",
+          "path": "/lookout",
+          "name": "Lookout / Opportunities",
+          "canonical_owner": "screens/06_lookout/LookoutDiscovery",
+          "migration_status": "NEEDS_REGISTRY_ENTRY",
+          "figma_node_id": "1:579",
+          "priority": "P2"
+        },
+        {
+          "id": "page-core-ingest",
+          "path": "/ingestion",
+          "name": "Ingestion / Document Parsing",
+          "canonical_owner": "features/ingestion/IngestionPage",
+          "migration_status": "NEEDS_REGISTRY_ENTRY",
+          "figma_node_id": "1:1683",
+          "priority": "P1"
+        }
+      ]
+    },
+    {
+      "batch": 4,
+      "type": "canonical_protected_secondary",
+      "description": "Secondary protected routes — important but lower traffic",
+      "items": [
+        {
+          "id": "page-09",
+          "path": "/settings",
+          "name": "Settings",
+          "canonical_owner": "features/settings/Settings",
+          "migration_status": "NEEDS_MIGRATION",
+          "figma_node_id": "1:2125",
+          "priority": "P2"
+        },
+        {
+          "id": "page-10",
+          "path": "/onboarding",
+          "name": "Onboarding",
+          "canonical_owner": "features/onboarding/OnboardingPage",
+          "migration_status": "NEEDS_MIGRATION",
+          "figma_node_id": "MISSING",
+          "priority": "P2"
+        },
+        {
+          "id": "page-11",
+          "path": "/apply",
+          "name": "Quick Apply",
+          "canonical_owner": "features/applications/ApplyQuick",
+          "migration_status": "NEEDS_MIGRATION",
+          "figma_node_id": "MISSING",
+          "priority": "P2"
+        },
+        {
+          "id": "page-12",
+          "path": "/generation",
+          "name": "Document Generation / Studio",
+          "canonical_owner": "features/documents/components/TabbedGenerationPanel",
+          "migration_status": "NEEDS_MIGRATION",
+          "figma_node_id": "MISSING",
+          "priority": "P2"
+        }
+      ]
+    },
+    {
+      "batch": 5,
+      "type": "dev_internal",
+      "description": "Internal / dev-only surfaces — sync only for design system reference",
+      "items": [
+        {
+          "id": "page-14",
+          "path": "/design-sidekick",
+          "name": "Design Sidekick",
+          "canonical_owner": "features/design-sidekick/DesignSidekick",
+          "migration_status": "CANONICAL",
+          "figma_node_id": "MISSING",
+          "priority": "P3"
+        },
+        {
+          "id": "page-15",
+          "path": "/asset-library",
+          "name": "Asset Library",
+          "canonical_owner": "features/analysis/AssetLibrary",
+          "migration_status": "CANONICAL",
+          "figma_node_id": "MISSING",
+          "priority": "P3"
+        }
+      ]
+    },
+    {
+      "batch": 6,
+      "type": "quarantine",
+      "description": "Quarantine candidates — do NOT sync to Figma, flag for removal",
+      "items": [
+        {
+          "id": "quar-01",
+          "path": "/animation-test",
+          "name": "Animation Test",
+          "canonical_owner": "NONE",
+          "migration_status": "QUARANTINE_CANDIDATE",
+          "figma_node_id": "NONE",
+          "priority": "SKIP",
+          "notes": "Dev utility — no feature owner, no Figma sync"
+        },
+        {
+          "id": "quar-02",
+          "path": "/test-tokens",
+          "name": "Token Test",
+          "canonical_owner": "components/debug",
+          "migration_status": "QUARANTINE_CANDIDATE",
+          "figma_node_id": "NONE",
+          "priority": "SKIP",
+          "notes": "Dev utility — no Figma sync"
+        }
+      ]
+    }
+  ],
+  "gate_checks": {
+    "shared_layout_before_pages": true,
+    "len_pages": 15,
+    "all_items_have_figma_node_id_or_MISSING_flag": true,
+    "quarantine_items_excluded_from_sync": true
+  }
+}

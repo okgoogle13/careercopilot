@@ -92,30 +92,30 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
     };
 
     const containerStyle = {
-      borderRadius: 'var(--sys-shape-blockRiot02)', // shape.blockRiot02 — Scaffold archetype
+      borderRadius: 'var(--kr-archetypes-scaffold-shape-base)', // shape.blockRiot02 — Scaffold archetype
       backgroundColor:
-        variant === 'filled' ? 'var(--sys-color-charcoalBackground-steps-3)' : 'transparent',
+        variant === 'filled' ? 'var(--kr-color-charcoal-background-steps-3)' : 'transparent',
       border: '2px solid',
       borderColor: error
-        ? 'var(--sys-color-solidarityRed-base)'
+        ? 'var(--kr-color-solidarity-red-base)'
         : isFocused
-          ? 'var(--sys-color-inkGold-base)'
-          : 'var(--sys-color-concreteGrey-base)',
-      color: 'var(--sys-color-worker-ash-base)',
-      transition: 'border-color var(--duration-standard) cubic-bezier(0.34, 1.56, 0.64, 1)',
+          ? 'var(--kr-color-ink-gold-base)'
+          : 'var(--kr-color-worker-ash-steps-2)',
+      color: 'var(--kr-color-worker-ash-base)',
+      transition: 'border-color 300ms cubic-bezier(0.34, 1.56, 0.64, 1)',
     };
 
     const containerClasses = `
     ${fullWidth ? 'w-full' : 'w-auto'}
     ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
-    ${isFocused && !error ? 'shadow-[0_0_15px_var(--sys-color-inkGold-steps-0)]' : ''}
+    ${isFocused && !error ? 'shadow-[0_0_15px_var(--kr-color-ink-gold-steps-0)]' : ''}
     ${containerClassName}
   `;
 
     const inputClasses = `
     ${sizeClasses[size].input}
     w-full bg-transparent text-inherit placeholder:opacity-50
-    focus:outline-none disabled:cursor-not-allowed font-primary
+    focus:outline-none disabled:cursor-not-allowed
     ${className}
   `;
 
@@ -131,12 +131,13 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
             htmlFor={inputId}
             className={`
           mb-2 text-sm font-medium transition-colors duration-200
-          ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base)]'}
-          ${isFocused && !error ? 'text-[var(--sys-color-inkGold-base)]' : ''}
+          ${error ? 'text-[var(--kr-color-solidarity-red-base)]' : 'text-[var(--kr-color-worker-ash-steps-2)]'}
+          ${isFocused && !error ? 'text-[var(--kr-color-ink-gold-base)]' : ''}
         `}
+            style={{ fontFamily: 'var(--kr-typography-family-primary)' }}
           >
             {label}
-            {required && <span className="text-[var(--sys-color-solidarityRed-base)] ml-1">*</span>}
+            {required && <span className="text-[var(--kr-color-solidarity-red-base)] ml-1">*</span>}
           </label>
         )}
 
@@ -150,7 +151,7 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
               <div
                 className={`
               flex-shrink-0 ml-3 ${sizeClasses[size].adornment}
-              ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-steps-4)]'}
+              ${error ? 'text-[var(--kr-color-solidarity-red-base)]' : 'text-[var(--kr-color-worker-ash-steps-2)]'}
             `}
               >
                 {startAdornment}
@@ -160,6 +161,7 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
               ref={ref}
               id={inputId}
               className={inputClasses}
+              style={{ fontFamily: 'var(--kr-typography-family-primary)' }}
               disabled={disabled}
               maxLength={maxLength}
               value={value}
@@ -174,7 +176,7 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
               <div
                 className={`
               flex-shrink-0 mr-3 ${sizeClasses[size].adornment}
-              ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-steps-4)]'}
+              ${error ? 'text-[var(--kr-color-solidarity-red-base)]' : 'text-[var(--kr-color-worker-ash-steps-2)]'}
             `}
               >
                 {endAdornment}
@@ -185,7 +187,7 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
             {!disabled && (
               <div
                 className="absolute inset-0 opacity-0 group-focus-within:opacity-[0.05] pointer-events-none transition-opacity bg-[url('/assets/kr-solidarity/ui-kit/svg/kr-solidarity__ui-kit__ui--kr-ui-019--v1.svg')]"
-                style={{ borderRadius: 'var(--sys-shape-blockRiot02)' }}
+                style={{ borderRadius: 'var(--kr-archetypes-scaffold-shape-base)' }}
               />
             )}
           </div>
@@ -198,7 +200,7 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
                 id={helperId}
                 className={`
                 text-xs
-                ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-steps-4)]'}
+                ${error ? 'text-[var(--kr-color-solidarity-red-base)]' : 'text-[var(--kr-color-worker-ash-steps-2)]'}
               `}
               >
                 {displayHelperText}
@@ -208,7 +210,7 @@ export const ScaffoldInput = forwardRef<HTMLInputElement, ScaffoldInputProps>(
               <p
                 className={`
               text-xs
-              ${charCount > maxLength ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-steps-4)]'}
+              ${charCount > maxLength ? 'text-[var(--kr-color-solidarity-red-base)]' : 'text-[var(--kr-color-worker-ash-steps-2)]'}
               ml-auto
             `}
               >
@@ -279,17 +281,17 @@ export const ScaffoldArea = forwardRef<HTMLTextAreaElement, ScaffoldAreaProps>(
     };
 
     const containerStyle = {
-      borderRadius: 'var(--sys-shape-blockRiot02)', // shape.blockRiot02 — Scaffold archetype
+      borderRadius: 'var(--kr-archetypes-scaffold-shape-base)', // shape.blockRiot02 — Scaffold archetype
       backgroundColor:
-        variant === 'filled' ? 'var(--sys-color-charcoalBackground-steps-3)' : 'transparent',
+        variant === 'filled' ? 'var(--kr-color-charcoal-background-steps-3)' : 'transparent',
       border: '2px solid',
       borderColor: error
-        ? 'var(--sys-color-solidarityRed-base)'
+        ? 'var(--kr-color-solidarity-red-base)'
         : isFocused
-          ? 'var(--sys-color-inkGold-base)'
-          : 'var(--sys-color-concreteGrey-base)',
-      color: 'var(--sys-color-worker-ash-base)',
-      transition: 'border-color var(--duration-standard) cubic-bezier(0.34, 1.56, 0.64, 1)',
+          ? 'var(--kr-color-ink-gold-base)'
+          : 'var(--kr-color-worker-ash-steps-2)',
+      color: 'var(--kr-color-worker-ash-base)',
+      transition: 'border-color 300ms cubic-bezier(0.34, 1.56, 0.64, 1)',
     };
 
     const showError = error && errorMessage;
@@ -304,12 +306,13 @@ export const ScaffoldArea = forwardRef<HTMLTextAreaElement, ScaffoldAreaProps>(
             htmlFor={areaId}
             className={`
           mb-2 text-sm font-medium transition-colors duration-200
-          ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-base)]'}
-          ${isFocused && !error ? 'text-[var(--sys-color-inkGold-base)]' : ''}
+          ${error ? 'text-[var(--kr-color-solidarity-red-base)]' : 'text-[var(--kr-color-worker-ash-steps-2)]'}
+          ${isFocused && !error ? 'text-[var(--kr-color-ink-gold-base)]' : ''}
         `}
+            style={{ fontFamily: 'var(--kr-typography-family-primary)' }}
           >
             {label}
-            {required && <span className="text-[var(--sys-color-solidarityRed-base)] ml-1">*</span>}
+            {required && <span className="text-[var(--kr-color-solidarity-red-base)] ml-1">*</span>}
           </label>
         )}
 
@@ -323,8 +326,8 @@ export const ScaffoldArea = forwardRef<HTMLTextAreaElement, ScaffoldAreaProps>(
           ${fullWidth ? 'w-full' : 'w-auto'}
           ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
           px-4 py-3 text-base bg-transparent text-inherit
-          placeholder:opacity-50 focus:outline-none resize-vertical font-primary
-          ${isFocused && !error ? 'shadow-[0_0_15px_var(--sys-color-inkGold-steps-0)]' : ''}
+          placeholder:opacity-50 focus:outline-none resize-vertical
+          ${isFocused && !error ? 'shadow-[0_0_15px_var(--kr-color-ink-gold-steps-0)]' : ''}
           ${containerClassName}
           ${className}
         `}
@@ -346,7 +349,7 @@ export const ScaffoldArea = forwardRef<HTMLTextAreaElement, ScaffoldAreaProps>(
                 id={helperId}
                 className={`
                 text-xs
-                ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-steps-4)]'}
+                ${error ? 'text-[var(--kr-color-solidarity-red-base)]' : 'text-[var(--kr-color-worker-ash-steps-2)]'}
               `}
               >
                 {displayHelperText}
@@ -356,7 +359,7 @@ export const ScaffoldArea = forwardRef<HTMLTextAreaElement, ScaffoldAreaProps>(
               <p
                 className={`
               text-xs
-              ${charCount > maxLength ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-concreteGrey-steps-4)]'}
+              ${charCount > maxLength ? 'text-[var(--kr-color-solidarity-red-base)]' : 'text-[var(--kr-color-worker-ash-steps-2)]'}
               ml-auto
             `}
               >

@@ -3,6 +3,50 @@
 **Status:** Ready for execution. To be conducted by **Gemini (Antigravity)** per engineering lead directive.
 **Changelog:** v6 → v7-FINAL. Transitioned Lead Architecture Conductor from Claude Code to **Gemini (Antigravity)**. Gemini is taking over for a 2-hour window, specifically responsible for the initial setup and executing the first few batches. Applied FIX-17 (Gemini-Driven Orchestration), Self-Audit Evidence block protocol, Execution & Parallelization Rules, and Deployment & Review Prep phase.
 
+## Route Sync Addendum — 2026-04-01
+
+This plan now treats the live frontend router as the authority for Figma sync and route remediation scope.
+
+- Live route authority is [`frontend/src/App.tsx`] plus the mounted shells it uses today.
+- Current canonical migrated shell is `MigratedRouteLayout` for product routes.
+- `ProtectedLayout` is not the main protected shell; it is currently reserved for support-only legacy surfaces such as `/asset-library` and `/test-tokens`.
+- Current runtime product routes mounted under the migrated shell are:
+  - `/dashboard`
+  - `/profile`
+  - `/opportunities`
+  - `/applications`
+  - `/analysis`
+  - `/apply`
+  - `/generation`
+  - `/settings`
+  - `/onboarding`
+- Current public/internal routes are:
+  - `/`
+  - `/auth`
+  - `/login`
+  - `/register`
+  - `/style-guide`
+  - `/design-sidekick`
+  - `/animation-test`
+- Current legacy redirects still intentionally present in runtime are:
+  - `/tracker` -> `/applications`
+  - `/kanban` -> `/applications`
+  - `/lookout` -> `/opportunities`
+  - `/feed` -> `/opportunities`
+  - `/career/ingest` -> `/ingestion` -> `/profile`
+  - `/apply/quick` -> `/apply`
+  - `/ksc-generator` -> `/generation`
+  - `/cover-letter-generator` -> `/generation`
+  - `/job-queue` -> `/dashboard`
+  - `/identity` -> `/profile`
+  - `/dossier` -> `/profile`
+  - `/welcome` -> `/onboarding`
+- Known unresolved route drift that must be preserved in evidence and not silently normalized:
+  - Runtime and nav use `/applications`, while `route-registry.ts` still records `/tracker`.
+  - Runtime redirects `/documents` to `/docs`, while `route-registry.ts` and design docs still describe `/documents`, and navigation schema points at `/docs`.
+  - The imported `DocsPage` route owner exists in code but is not currently mounted in `App.tsx`.
+- For all Figma sync work in this sprint, mirror the live runtime route map first and record registry/doc drift explicitly as remediation debt.
+
 ---
 
 ## Part 1 — Change History
@@ -133,12 +177,14 @@ v7-FINAL: Explicit Gemini (Antigravity) lead assignment. 2-hour transition windo
 
   "authority_stack": [
     "1. frontend/src/App.tsx — Runtime truth",
-    "2. frontend/src/config/route-registry.ts — Route intent",
-    "3. frontend/src/screens/** + docs/manifests/screens.json — Design pairing truth",
-    "4. docs/manifests/frontend-api-usage.json + backend-endpoints.json — Capability truth",
-    "5. frontend/component-inventory.json — Ownership signals",
-    "6. docs/manifests/routes.json + orphans.json — Derived drift evidence",
-    "7. docs/design/{01..05}_*.md — KR Solidarity design truth (DTCG + M3 Expressive + Zero-Flora)"
+    "2. frontend/src/layouts/MigratedRouteLayout.tsx + frontend/src/layouts/ProtectedLayout boundary in App.tsx — Shell truth",
+    "3. frontend/src/config/navigation.schema.ts — Current migrated navigation truth",
+    "4. frontend/src/config/route-registry.ts — Route intent (may lag runtime and must be audited, not assumed)",
+    "5. frontend/src/screens/** + docs/manifests/screens.json — Design pairing truth",
+    "6. docs/manifests/frontend-api-usage.json + backend-endpoints.json — Capability truth",
+    "7. frontend/component-inventory.json — Ownership signals",
+    "8. docs/manifests/routes.json + orphans.json — Derived drift evidence",
+    "9. docs/design/{01..05}_*.md — KR Solidarity design truth (DTCG + M3 Expressive + Zero-Flora)"
   ],
 
   "core_rules": {
@@ -151,6 +197,8 @@ v7-FINAL: Explicit Gemini (Antigravity) lead assignment. 2-hour transition windo
     "token_compliance": "No literal Tailwind palette classes. All tokens via KR Solidarity semantic variables (--kr-color-*, --kr-type-*).",
     "stop_conditions": [
       "App.tsx and route-registry.ts imply incompatible route authority",
+      "Runtime route map and navigation schema disagree on user-facing primary destinations",
+      "The /documents vs /docs split remains unresolved but a phase attempts to treat one as canonical without evidence",
       "Token preflight leaves token truth unresolved",
       "ts-morph evidence and runtime evidence disagree on reachability",
       "Refreshed manifests contradict claimed app state",

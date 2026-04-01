@@ -6,7 +6,7 @@ import { useModeStore } from '../../stores/useModeStore';
 type SlotDef = {
   name: string;
   zLayer: 'Z-0' | 'Z-1' | 'Z-2' | 'Z-3';
-  token: `--sys-${string}`;
+  token: `--kr-color-${string}`;
   assetCompat: `KR-${string}`;
 };
 
@@ -14,58 +14,59 @@ const SLOT_DEFS: SlotDef[] = [
   {
     name: 'auto_kr_solid_005',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
     name: 'auto_kr_solid_012',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
     name: 'auto_kr_solid_027',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
     name: 'auto_kr_solid_022',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
     name: 'auto_kr_ui_001',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
     name: 'auto_kr_ui_015',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
     name: 'auto_kr_ui_027',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
     name: 'auto_kr_ui_038',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
     name: 'auto_kr_solid_046',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
 ];
+
 const DEFAULT_SLOT_ASSETS: Partial<Record<string, string>> = {
   auto_kr_solid_005: 'KR-SOLID-031',
   auto_kr_solid_012: 'KR-SOLID-032',
@@ -103,31 +104,16 @@ export const DocumentWorkbench = memo(function DocumentWorkbench({
       role="main"
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={undefined}
-      className={clsx(
-        'relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8',
-        className
-      )}
+      transition={{ duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }} // v7.0 overshoot
+      className={clsx('relative overflow-hidden rounded-blockRiot03 p-6 md:p-8', className)}
       style={{
-        backgroundColor: 'var(--sys-color-charcoalBackground-base)',
-        color: 'var(--sys-color-worker-ash-base)',
-        border: '1px solid var(--sys-color-concreteGrey-base)',
+        backgroundColor: 'var(--kr-color-charcoal-background-base)',
+        color: 'var(--kr-color-worker-ash-base)',
+        border: '1px solid var(--kr-color-concrete-grey-base)',
       }}
       data-mode={mode}
       data-testid="documentworkbench"
-      data-motion-audit="true"
     >
-      <style>{`
-         @media (prefers-reduced-motion: reduce) {
-          [data-motion-audit="true"] *,
-          [data-motion-audit="true"]::before,
-          [data-motion-audit="true"]::after {
-            transition: none !important;
-            animation: none !important;
-          }
-        }
-      `}</style>
-
       <div
         className="pointer-events-none absolute inset-0"
         aria-hidden="true"
@@ -153,8 +139,8 @@ export const DocumentWorkbench = memo(function DocumentWorkbench({
         <h1
           className="text-3xl font-black md:text-5xl"
           style={{
-            fontFamily: 'var(--sys-type-font-fraunces)',
-            color: 'var(--sys-color-paperWhite)',
+            fontFamily: 'var(--kr-type-font-fraunces)',
+            color: 'var(--kr-color-paper-white-base)',
           }}
         >
           {title}
@@ -162,8 +148,8 @@ export const DocumentWorkbench = memo(function DocumentWorkbench({
         <p
           className="mt-3 max-w-4xl text-base md:text-lg"
           style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            color: 'var(--sys-color-worker-ash-base)',
+            fontFamily: 'var(--kr-type-font-work-sans)',
+            color: 'var(--kr-color-worker-ash-base)',
           }}
         >
           {subtitle}
@@ -175,14 +161,16 @@ export const DocumentWorkbench = memo(function DocumentWorkbench({
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={undefined}
+        transition={{ delay: 0.5 }}
         className="relative z-10 mt-6 text-xs"
         style={{
-          fontFamily: 'var(--sys-type-font-mono)',
-          color: 'var(--sys-color-concreteGrey-base)',
+          fontFamily: 'var(--kr-type-font-mono)',
+          color: 'var(--kr-color-concrete-grey-base)',
+          letterSpacing: '0.2em',
+          textTransform: 'uppercase',
         }}
       >
-        Slots: {SLOT_DEFS.length} | Motion: spring-only | Tokens: --sys-* | Zustand: useModeStore
+        WORKBENCH.v7 // DNA ARCHIVE // GOLD STANDARD
       </motion.p>
     </motion.section>
   );

@@ -1,2 +1,210 @@
-/* Deprecated: consolidated into theme/kerala-rage.css. */
-@import './design/styles/kerala-rage.css';
+/* ============================================
+   KERALA RAGE — SOLIDARITY MODE
+   globals.css v4.0 (Gold Standard — v7.0 Sync)
+
+   Using --kr- tokens. Anti-Slop Protocol: ENFORCED.
+   Strategy: 2.5D Physicality (The Slam / The Bloom)
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Nabla&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Canonical Design Tokens */
+@import './design/styles/design-tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   BASE LAYER (v7.0 Hardening)
+   ============================================ */
+@layer base {
+  :root {
+    --font-opsz: 12;
+    --font-grad: 0;
+    --font-wdth: 100;
+    --kr-motion-easing-slam: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  body {
+    background-color: var(--kr-color-charcoal-background-base);
+    color: var(--kr-color-worker-ash-base);
+    font-family: var(--kr-type-font-families-primary), system-ui, sans-serif;
+    font-weight: 400;
+    font-variation-settings:
+      'wght' 400,
+      'opsz' var(--font-opsz);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
+    /* Anti-Slop: Ban pure white */
+    --paper-white: var(--kr-color-paper-white-base);
+  }
+
+  /* ---- THE SOLIDARITY SLAM (Headers) ---- */
+
+  h1 {
+    font-family: var(--kr-type-font-families-proclamation), serif;
+    font-size: var(--kr-type-scale-hero);
+    font-weight: 900;
+    font-variation-settings:
+      'wght' 900,
+      'wdth' 125;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    text-transform: uppercase;
+    /* 2.5D Physicality: The Slam */
+    transition: transform var(--kr-motion-duration-slow) var(--kr-motion-easing-slam);
+  }
+
+  h2 {
+    font-family: var(--kr-type-font-families-display), serif;
+    font-size: var(--kr-type-scale-display);
+    font-variation-settings:
+      'wght' 800,
+      'wdth' 100,
+      'SOFT' 50,
+      'WONK' 1;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
+    font-family: var(--kr-type-font-families-display), serif;
+    font-size: var(--kr-type-scale-headline);
+    font-variation-settings:
+      'wght' 700,
+      'wdth' 100,
+      'SOFT' 30,
+      'WONK' 1;
+    line-height: 1.1;
+  }
+
+  button,
+  .btn {
+    font-family: var(--kr-type-font-families-primary), system-ui, sans-serif;
+    font-weight: 600;
+    /* 2.5D Motion: The Solidarity Spring */
+    transition: all var(--kr-motion-duration-standard) var(--kr-motion-easing-slam);
+    cursor: pointer;
+  }
+
+  a {
+    color: var(--kr-color-protest-metal-blue-base);
+    text-decoration: none;
+    transition: color var(--kr-motion-duration-fast) var(--kr-motion-easing-precise);
+  }
+
+  /* Anti-Slop: No generic rounding */
+  * {
+    border-radius: inherit;
+  }
+}
+
+/* ============================================
+   ARCHETYPE CLASSES (v7.0 2.5D State Morphs)
+   ============================================ */
+@layer components {
+  /* STRIKE (Primary Action) */
+  .strike {
+    border-radius: var(--kr-archetypes-strike-shape-base);
+    background-color: var(--kr-color-ink-gold-base);
+    color: var(--kr-color-charcoal-background-base);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: var(--kr-shadow-elevation-1-strike);
+    /* The Bloom Transition */
+    transition:
+      border-radius var(--kr-motion-duration-standard) var(--kr-motion-easing-slam),
+      transform var(--kr-motion-duration-fast) var(--kr-motion-easing-slam),
+      background-color var(--kr-motion-duration-fast) linear;
+  }
+
+  .strike:hover {
+    border-radius: var(--kr-archetypes-strike-shape-active);
+    transform: scale(var(--kr-motion-interactions-hover-button-scale));
+    box-shadow: var(--kr-shadow-elevation-3-hover-lift), var(--kr-shadow-ink-offset);
+  }
+
+  .strike:active {
+    transform: scale(var(--kr-motion-interactions-press-button-scale));
+    border-radius: var(--kr-archetypes-strike-shape-pressed);
+  }
+
+  /* PLACARD (Container) */
+  .placard {
+    border-radius: var(--kr-archetypes-placard-shape-base);
+    background-color: var(--kr-color-charcoal-background-steps-1);
+    box-shadow: var(--kr-shadow-elevation-2-placard);
+    /* Drag Settle Physics */
+    transition: all var(--kr-motion-duration-slow) var(--kr-motion-easing-slam);
+  }
+
+  .placard:hover {
+    transform: translateY(var(--kr-motion-interactions-hover-card-transform));
+    box-shadow: var(--kr-shadow-elevation-4-float);
+    border-radius: var(--kr-archetypes-placard-shape-selected);
+  }
+
+  /* MARCH (Flow/Select) */
+  .march {
+    border-radius: var(--kr-archetypes-march-shape-base);
+    border: 1px solid var(--kr-color-concrete-grey-steps-0);
+    transition: all var(--kr-motion-duration-standard) var(--kr-motion-easing-slam);
+  }
+
+  .march:hover,
+  .march.is-open {
+    border-radius: var(--kr-archetypes-march-shape-open);
+    background-color: var(--kr-color-charcoal-background-steps-2);
+  }
+
+  /* MEGAPHONE (Modal) */
+  .megaphone {
+    border-radius: var(--kr-archetypes-megaphone-shape-base);
+    background-color: var(--kr-color-charcoal-background-base);
+    border: 2px solid var(--kr-color-solidarity-red-base);
+    box-shadow: var(--kr-shadow-solidarity-bleed);
+    /* The Slam Entrance */
+    animation: megaphone-slam var(--kr-motion-duration-slow) var(--kr-motion-easing-slam);
+  }
+
+  /* ---- EMOTIONAL TYPOGRAPHY AGENTS ---- */
+
+  .type-solidarity-slam {
+    font-variation-settings:
+      'wght' 900,
+      'wdth' 125;
+    letter-spacing: -0.02em;
+  }
+
+  .type-labor-pressure {
+    font-variation-settings:
+      'wght' 900,
+      'wdth' 75;
+    letter-spacing: -0.01em;
+  }
+
+  .type-melancholy-breath {
+    font-variation-settings:
+      'wght' 475,
+      'wdth' 98;
+    letter-spacing: 0.05em;
+  }
+}
+
+/* ============================================
+   ANIMATIONS (2.5D Physics)
+   ============================================ */
+@keyframes megaphone-slam {
+  0% {
+    transform: scale(1.1) translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}

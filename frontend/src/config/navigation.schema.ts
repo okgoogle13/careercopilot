@@ -23,7 +23,7 @@ export const NAVIGATION_SCHEMA: NavigationItem[] = [
   {
     id: 'nav-lookout',
     label: 'Opportunities',
-    route: '/lookout',
+    route: '/opportunities',
     modeAvailability: 'KrDark',
   },
   {
@@ -41,7 +41,7 @@ export const NAVIGATION_SCHEMA: NavigationItem[] = [
   {
     id: 'nav-docs',
     label: 'My Docs',
-    route: '/docs',
+    route: '/documents',
     modeAvailability: 'KrDark',
   },
 ];

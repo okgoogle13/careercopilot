@@ -204,9 +204,9 @@ export function March({
 
   // Shape morphs: block01 (closed) → marchOpen01 (open) — March archetype interaction morph
   const buttonStyle: React.CSSProperties = {
-    backgroundColor: 'var(--sys-color-charcoalBackground-steps-3)',
+    backgroundColor: 'var(--kr-color-charcoal-background-steps-3)',
     border: '2px solid',
-    color: 'var(--sys-color-worker-ash-base)',
+    color: 'var(--kr-color-worker-ash-base)',
   };
 
   return (
@@ -218,13 +218,14 @@ export function March({
         <label
           id={labelId}
           className={`
-          mb-2 text-sm font-medium transition-colors duration-[var(--duration-standard)]
-          ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-base)]'}
-          ${isOpen && !error ? 'text-[var(--sys-color-inkGold-base)]' : ''}
+          mb-2 text-sm font-medium transition-colors duration-300
+          ${error ? 'text-[var(--kr-color-solidarity-red-base)]' : 'text-[var(--kr-color-worker-ash-base)]'}
+          ${isOpen && !error ? 'text-[var(--kr-color-ink-gold-base)]' : ''}
         `}
+          style={{ fontFamily: 'var(--kr-typography-family-primary)' }}
         >
           {label}
-          {required && <span className="text-[var(--sys-color-solidarityRed-base)] ml-1">*</span>}
+          {required && <span className="text-[var(--kr-color-solidarity-red-base)] ml-1">*</span>}
         </label>
       )}
 
@@ -233,12 +234,14 @@ export function March({
         id={selectId}
         style={buttonStyle}
         animate={{
-          borderRadius: isOpen ? 'var(--sys-shape-marchSurge01)' : 'var(--sys-shape-blockRiot01)',
+          borderRadius: isOpen
+            ? 'var(--kr-archetypes-march-shape-open)'
+            : 'var(--kr-archetypes-march-shape-base)',
           borderColor: error
-            ? 'var(--sys-color-solidarityRed-base)'
+            ? 'var(--kr-color-solidarity-red-base)'
             : isOpen
-              ? 'var(--sys-color-inkGold-base)'
-              : 'var(--sys-color-worker-ash-base)',
+              ? 'var(--kr-color-ink-gold-base)'
+              : 'var(--kr-color-worker-ash-base)',
         }}
         transition={{
           type: 'spring',
@@ -251,8 +254,8 @@ export function March({
           ${fullWidth ? 'w-full' : 'w-auto min-w-[200px]'}
           px-4 py-3
           flex items-center justify-between gap-3
-          ${isOpen && !error ? 'shadow-[0_0_15px_var(--sys-color-inkGold-steps-0)]' : ''}
-          ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:border-[var(--sys-color-concreteGrey-steps-4)]'}
+          ${isOpen && !error ? 'shadow-[0_0_15px_var(--kr-color-ink-gold-steps-0)]' : ''}
+          ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:border-[var(--kr-color-worker-ash-steps-2)]'}
           ${className}
         `}
         onClick={() => {
@@ -278,16 +281,17 @@ export function March({
         <span
           className={
             selectedOption
-              ? 'text-[var(--sys-color-worker-ash-base)]'
-              : 'text-[var(--sys-color-worker-ash-steps-2)]'
+              ? 'text-[var(--kr-color-worker-ash-base)]'
+              : 'text-[var(--kr-color-worker-ash-steps-2)]'
           }
+          style={{ fontFamily: 'var(--kr-typography-family-primary)' }}
         >
           {selectedOption ? selectedOption.label : placeholder}
         </span>
         <ChevronDown
           className={`
-            w-5 h-5 text-[var(--sys-color-concreteGrey-steps-4)]
-            transition-transform duration-[var(--duration-standard)]
+            w-5 h-5 text-[var(--kr-color-worker-ash-steps-2)]
+            transition-transform duration-300
             ${isOpen ? 'rotate-180' : 'rotate-0'}
           `}
         />
@@ -297,10 +301,10 @@ export function March({
         <div
           className="absolute top-full left-0 right-0 mt-3 z-50 overflow-hidden"
           style={{
-            borderRadius: 'var(--sys-shape-blockRiot02)', // shape.block02 for dropdown
-            backgroundColor: 'var(--sys-color-charcoalBackground-base)',
-            border: '1px solid var(--sys-color-worker-ash-base)',
-            boxShadow: 'var(--sys-shadow-elevation4Float)',
+            borderRadius: 'var(--kr-shape-block-riot-02)', // shape.block02 for dropdown
+            backgroundColor: 'var(--kr-color-charcoal-background-base)',
+            border: '1px solid var(--kr-color-worker-ash-base)',
+            boxShadow: 'var(--kr-shadow-elevation-4-float)',
             animation: 'fadeIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
           }}
           id={listboxId}
@@ -322,18 +326,20 @@ export function March({
                   tabIndex={isDisabled ? -1 : 0}
                   className={`
                     px-4 py-3 flex items-center justify-between gap-2 cursor-pointer
-                    ${isSelected ? 'bg-white/10 text-[var(--sys-color-inkGold-base)]' : 'text-[var(--sys-color-worker-ash-base)]'}
-                    ${isActive ? 'outline-none ring-1 ring-[var(--sys-color-inkGold-base)]' : ''}
+                    ${isSelected ? 'bg-white/10 text-[var(--kr-color-ink-gold-base)]' : 'text-[var(--kr-color-worker-ash-base)]'}
+                    ${isActive ? 'outline-none ring-1 ring-[var(--kr-color-ink-gold-base)]' : ''}
                     ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white/5'}
-                    transition-colors duration-[var(--duration-fast)]
+                    transition-colors duration-150
                   `}
                   onClick={() => !isDisabled && handleSelect(option.value)}
                   onMouseEnter={() => !isDisabled && setActiveIndex(index)}
                   onKeyDown={(e) => !isDisabled && handleOptionKeyDown(e, option.value, index)}
                 >
-                  <span className="font-primary">{option.label}</span>
+                  <span style={{ fontFamily: 'var(--kr-typography-family-primary)' }}>
+                    {option.label}
+                  </span>
                   {isSelected && (
-                    <Check className="w-5 h-5 flex-shrink-0 text-[var(--sys-color-inkGold-base)]" />
+                    <Check className="w-5 h-5 flex-shrink-0 text-[var(--kr-color-ink-gold-base)]" />
                   )}
                 </div>
               );
@@ -347,8 +353,9 @@ export function March({
           id={helperId}
           className={`
           mt-1 px-1 text-xs
-          ${error ? 'text-[var(--sys-color-solidarityRed-base)]' : 'text-[var(--sys-color-worker-ash-base)]'}
+          ${error ? 'text-[var(--kr-color-solidarity-red-base)]' : 'text-[var(--kr-color-worker-ash-base)]'}
         `}
+          style={{ fontFamily: 'var(--kr-typography-family-primary)' }}
         >
           {displayHelperText}
         </p>

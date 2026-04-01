@@ -1,0 +1,162 @@
+{
+  "generatedAt": "2026-04-01T02:20:00.000Z",
+  "phase": "P12",
+  "figma_file_key": "YPDj0edchIDXykYChSmCUd",
+  "description": "Per-page implementation plans for Figma sync. Each entry has task_checklist and verification_commands.",
+  "pages": [
+    {
+      "id": "page-style-guide",
+      "path": "/style-guide",
+      "figma_node_id": "MISSING",
+      "name": "Living Style Guide — FOUNDATIONAL PRIMITIVES",
+      "canonical_owner": "features/style-guide/StyleGuide.tsx",
+      "current_state": "Basic list of tokens and dummy component instances.",
+      "target_state": "Comprehensive visual menu of all KR Solidarity archetypes (Strike, Placard, Scaffold, March, Megaphone) verified against Figma typography/color axes.",
+      "task_checklist": [
+        "Sync design tokens from Figma (palette, shapes, typography)",
+        "Map tokens to --sys- and --kr- CSS variables",
+        "Implement 'Archetype Gallery' in StyleGuide.tsx showing all states (idle, hover, pressed, disabled)",
+        "Pass visual audit via vision-scorer-mcp (Score >= 95)"
+      ],
+      "verification_commands": [
+        "npx tsc --noEmit",
+        "python3 scripts/design-validation/validate-tokens.py"
+      ],
+      "priority": "CRITICAL",
+      "status": "READY"
+    },
+    {
+      "id": "page-landing",
+      "path": "/",
+      "figma_node_id": "1:10",
+      "name": "Landing Page — THE SOLIDARITY MANIFESTO",
+      "canonical_owner": "features/landing/LandingPage.tsx",
+      "current_state": "LayeredHero manifest-driven composition. Renders 'Intersectional Resistance' copy from manifest JSON.",
+      "target_state": "Figma-aligned layout: hero (THE SOLIDARITY MANIFESTO) + stat bar (127/45/98%/3×) + 3-column feature cards + evidence section + footer links. Token-compliant throughout.",
+      "approach": "ADD sections below LayeredHero in LandingPage.tsx. Do NOT replace LayeredHero — it is the brand identity layer. Add stat bar, feature cards, evidence CTA, and update footer links as sibling sections.",
+      "delta": {
+        "new_sections": ["StatBar", "FeatureCards", "EvidenceSection"],
+        "copy_update": "Defer hero copy to manifest — Figma copy is target for static sections",
+        "tokens_to_use": {
+          "colors": ["--sys-color-solidarityRed-base (#f14714)", "--sys-color-inkGold-base (#daf674)", "--sys-color-worker-ash-base (#daf6b3)", "--sys-color-charcoalBackground-steps-1 (#1a1a1a)", "--sys-color-concreteGrey-steps-0 (#2a2a2a)", "--sys-color-protestMetalBlue-base (#48f0e5)", "--sys-color-stencilYellow-base (#daf674)"],
+          "shapes": ["--sys-shape-pebble01", "--sys-shape-stone01", "--sys-shape-slab01"],
+          "typography": ["Fraunces (headings)", "JetBrains Mono (labels/mono)", "Work Sans (body)", "Caveat (accent/handwritten)"]
+        },
+        "literal_colors_to_avoid": ["#0f0f0f (use charcoalBackground-base)", "#1a1a1a (use charcoalBackground-steps-1)", "#2a2a2a (use concreteGrey-steps-0)", "#f14714 (use solidarityRed-base)", "#daf674 (use stencilYellow-base / inkGold-base)", "#daf6b3 (use worker-ash-base)", "#48f0e5 (use protestMetalBlue-base)"]
+      },
+      "task_checklist": [
+        "Add StatBar section: 4 stats (Stories Archived / Orgs Represented / KSC Match Rate / Faster Applications) with KR token colors",
+        "Add FeatureCards section: 3 cards (Build Your Story / Archive Evidence / Resist Slop) with icon badges and color-coded top border",
+        "Add EvidenceSection: full-width image section with 'YOUR STORY IS EVIDENCE.' headline + CTA button",
+        "All colors must use CSS custom properties (--sys-color-* or --kr-color-*), never literal hex",
+        "All shapes must use --sys-shape-* tokens for border-radius",
+        "tsc --noEmit must pass after changes",
+        "yarn test --passWithNoTests must pass"
+      ],
+      "verification_commands": [
+        "npx tsc --noEmit",
+        "yarn test --passWithNoTests",
+        "npx vite build 2>&1 | tail -10"
+      ],
+      "priority": "P1",
+      "status": "READY"
+    },
+    {
+      "id": "page-dashboard",
+      "path": "/dashboard",
+      "figma_node_id": "1:166",
+      "name": "Dashboard — Solidarity Hub",
+      "canonical_owner": "features/dashboard/Dashboard.tsx",
+      "current_state": "Renders with MigratedRouteLayout, shows SOLIDARITY HUB heading, metric cards, BUILD MASTER RESUME CTA",
+      "target_state": "Figma-aligned layout with metric-cards, quick-actions, and feed-items as per Node 1:166",
+      "task_checklist": ["Compare Figma (1:166) vs live screenshot", "Identify delta in metric layout", "Update Placard styles to match Figma archetypes"],
+      "verification_commands": ["npx tsc --noEmit", "yarn test --passWithNoTests"],
+      "priority": "P1",
+      "status": "READY"
+    },
+    {
+      "id": "page-auth",
+      "path": "/auth",
+      "figma_node_id": "MISSING",
+      "name": "Auth — Login / Register",
+      "canonical_owner": "screens/02_auth/AuthModal.tsx",
+      "current_state": "AuthModal with mode detection via ?mode= query param",
+      "target_state": "Needs Figma node extraction",
+      "task_checklist": ["Extract Figma node ID", "Compare, apply minimal diff"],
+      "verification_commands": ["npx tsc --noEmit"],
+      "priority": "P2",
+      "status": "BLOCKED_MISSING_NODE_ID"
+    },
+    {
+      "id": "page-opportunities",
+      "path": "/lookout",
+      "figma_node_id": "1:579",
+      "name": "Opportunities — Lookout Discovery",
+      "canonical_owner": "screens/06_lookout/LookoutDiscovery.tsx",
+      "current_state": "Tabbed view with job cards and search bar",
+      "target_state": "Figma-aligned grid layout with enhanced card archetypes per Node 1:579",
+      "task_checklist": ["Compare Figma (1:579) vs live screenshot", "Update card spacing and typography tokens"],
+      "verification_commands": ["npx tsc --noEmit"],
+      "priority": "P1",
+      "status": "READY"
+    },
+    {
+      "id": "page-applications",
+      "path": "/applications",
+      "figma_node_id": "1:1323",
+      "name": "Applications — Tracker",
+      "canonical_owner": "features/applications/ApplicationTracker.tsx",
+      "current_state": "Kanban board with application cards",
+      "target_state": "High-density Kanban board with KR Solidarity visual archetypes per Node 1:1323",
+      "task_checklist": ["Verify Kanban column density against Figma", "Update card status indicators"],
+      "verification_commands": ["npx tsc --noEmit"],
+      "priority": "P1",
+      "status": "READY"
+    },
+    {
+      "id": "page-ingestion",
+      "path": "/ingestion",
+      "figma_node_id": "1:1683",
+      "name": "Ingestion — Document Parsing",
+      "canonical_owner": "features/ingestion/IngestionPage.tsx",
+      "current_state": "File upload dropzone with processing state",
+      "target_state": "Figma-aligned upload interface with manifesto-style feedback per Node 1:1683",
+      "task_checklist": ["Audit dropzone visuals against Figma", "Ensure token compliance for progress bars"],
+      "verification_commands": ["npx tsc --noEmit"],
+      "priority": "P1",
+      "status": "READY"
+    },
+    {
+      "id": "page-analysis",
+      "path": "/analysis",
+      "figma_node_id": "1:1720",
+      "name": "Analysis — ATS Scoring",
+      "canonical_owner": "features/analysis/AnalysisPage.tsx",
+      "current_state": "Scoring dashboard with breakdown charts",
+      "target_state": "Enhanced analysis report with KR Solidarity typography and charts per Node 1:1720",
+      "task_checklist": ["Verify chart colors match design tokens", "Audit typography hierarchy"],
+      "verification_commands": ["npx tsc --noEmit"],
+      "priority": "P1",
+      "status": "READY"
+    },
+    {
+      "id": "page-settings",
+      "path": "/settings",
+      "figma_node_id": "1:2125",
+      "name": "Settings",
+      "canonical_owner": "features/settings/Settings.tsx",
+      "current_state": "Form layout with profile and app settings",
+      "target_state": "Clean form layout with KR-compliant ScaffoldInput and March components per Node 1:2125",
+      "task_checklist": ["Audit input component tokens against Figma", "Verify alignment of form groups"],
+      "verification_commands": ["npx tsc --noEmit"],
+      "priority": "P2",
+      "status": "READY"
+    }
+  ],
+  "gate_checks": {
+    "all_pages_have_task_checklist": true,
+    "all_pages_have_verification_commands": true,
+    "p1_pages_count": 5,
+    "total_pages": 9
+  }
+}

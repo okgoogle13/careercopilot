@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect } from 'react';
-import AnimationTestPage from './pages/AnimationTest';
+import AnimationTestPage from './components/debug/AnimationTest';
 import {
   Navigate,
   Outlet,
@@ -22,8 +22,8 @@ import { useModeStore } from './stores/useModeStore';
 import { LandingPage } from './features/landing/LandingPage';
 import { OnboardingPage } from './features/onboarding/OnboardingPage';
 import { Dashboard as DashboardPage } from './features/dashboard/Dashboard';
-import { ProfileView as ProfilePage } from './features/profile/ProfileView';
-import { LookoutDiscovery as LookoutPage } from './screens/06_lookout/LookoutDiscovery';
+import { ProfilePage } from './features/profile/ProfilePage';
+import { OpportunitiesDiscovery as OpportunitiesPage } from './screens/06_opportunities/OpportunitiesDiscovery';
 import { ApplicationTracker as ApplicationsPage } from './features/applications/ApplicationTracker';
 import { AnalysisPage } from './features/analysis/AnalysisPage';
 import { Documents as DocsPage } from './features/documents/Documents';
@@ -219,8 +219,8 @@ export default function App() {
               element={<ProfilePage />}
             />
             <Route
-              path="/lookout"
-              element={<LookoutPage />}
+              path="/opportunities"
+              element={<OpportunitiesPage />}
             />
             <Route
               path="/applications"
@@ -231,8 +231,13 @@ export default function App() {
               element={<AnalysisPage />}
             />
             <Route
-              path="/docs"
-              element={<DocsPage />}
+              path="/ingestion"
+              element={
+                <Navigate
+                  to="/profile"
+                  replace
+                />
+              }
             />
             <Route
               path="/apply"
@@ -262,10 +267,10 @@ export default function App() {
               }
             />
             <Route
-              path="/opportunities"
+              path="/lookout"
               element={
                 <Navigate
-                  to="/lookout"
+                  to="/opportunities"
                   replace
                 />
               }
@@ -274,7 +279,7 @@ export default function App() {
               path="/career/ingest"
               element={
                 <Navigate
-                  to="/profile"
+                  to="/ingestion"
                   replace
                 />
               }
@@ -317,9 +322,13 @@ export default function App() {
             />
             <Route
               path="/documents"
+              element={<DocsPage />}
+            />
+            <Route
+              path="/docs"
               element={
                 <Navigate
-                  to="/docs"
+                  to="/documents"
                   replace
                 />
               }
@@ -343,7 +352,16 @@ export default function App() {
               }
             />
             <Route
-              path="/ingestion"
+              path="/identity"
+              element={
+                <Navigate
+                  to="/profile"
+                  replace
+                />
+              }
+            />
+            <Route
+              path="/dossier"
               element={
                 <Navigate
                   to="/profile"
@@ -355,7 +373,7 @@ export default function App() {
               path="/feed"
               element={
                 <Navigate
-                  to="/lookout"
+                  to="/opportunities"
                   replace
                 />
               }
@@ -373,7 +391,7 @@ export default function App() {
               path="/editor"
               element={
                 <Navigate
-                  to="/docs"
+                  to="/documents"
                   replace
                 />
               }

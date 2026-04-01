@@ -1,0 +1,91 @@
+{
+  "generatedAt": "2026-04-01T02:15:00.000Z",
+  "phase": "P10",
+  "description": "Shared layout wrappers requiring sync before page-level Figma work. Distinct from primitives — these are full layout shells that wrap route content.",
+  "targets": [
+    {
+      "id": "wrap-01",
+      "component": "MigratedRouteLayout",
+      "path": "frontend/src/layouts/MigratedRouteLayout.tsx",
+      "figma_equivalent": "KR Solidarity Shell / Canonical Layout",
+      "figma_node_id": "MISSING",
+      "token_gaps": [],
+      "issues": [
+        "DEAD IMPORT: ActionButton imported but never rendered — remove (P11 fix)",
+        "Motion transition hardcoded: [0.175, 0.885, 0.32, 1.1] — could use --kr-motion-easing-viscous token"
+      ],
+      "priority": "CRITICAL",
+      "status": "MINOR_FIXES_NEEDED",
+      "p11_fixes": [
+        {
+          "type": "remove_dead_import",
+          "description": "Remove `import { ActionButton } from '@/components/kerala-rage/ActionButton'` — unused",
+          "file": "frontend/src/layouts/MigratedRouteLayout.tsx",
+          "line_approx": 8
+        }
+      ]
+    },
+    {
+      "id": "wrap-02",
+      "component": "SolidaritySidebar",
+      "path": "frontend/src/layouts/shared/SolidaritySidebar.tsx",
+      "figma_equivalent": "Solidarity Sidebar / Nav Shell",
+      "figma_node_id": "MISSING",
+      "token_gaps": [],
+      "issues": [
+        "HARDCODED USER DATA: 'NISHANT', 'Premium Access', avatar 'N' — must connect to AuthContext",
+        "DRY VIOLATION: NavItem JSX duplicated 3x — extract to NavItem component (P11 optional)",
+        "UNUSED IMPORTS: Briefcase, UserCircle icons imported but not rendered"
+      ],
+      "priority": "HIGH",
+      "status": "FIXES_NEEDED",
+      "p11_fixes": [
+        {
+          "type": "connect_auth_context",
+          "description": "Replace hardcoded user data with useAuth() hook — user.name, user.plan, user.initial",
+          "file": "frontend/src/layouts/shared/SolidaritySidebar.tsx",
+          "blocking": true
+        },
+        {
+          "type": "remove_unused_imports",
+          "description": "Remove Briefcase and UserCircle icon imports",
+          "file": "frontend/src/layouts/shared/SolidaritySidebar.tsx",
+          "blocking": false
+        }
+      ]
+    },
+    {
+      "id": "wrap-03",
+      "component": "Footer",
+      "path": "frontend/src/layouts/shared/Footer.tsx",
+      "figma_equivalent": "App Footer / Status Footer",
+      "figma_node_id": "MISSING",
+      "token_gaps": [],
+      "issues": [
+        "Arbitrary Tailwind values: text-[10px], tracking-[0.28em] — should be in tailwind.config theme",
+        "Hardcoded copy: 'CareerCopilot Solidarity Shell' — acceptable for canonical footer"
+      ],
+      "priority": "P2",
+      "status": "READY_FOR_SYNC"
+    },
+    {
+      "id": "wrap-04",
+      "component": "PublicLayout",
+      "path": "frontend/src/App.tsx",
+      "figma_equivalent": "Public Route Shell",
+      "figma_node_id": "MISSING",
+      "token_gaps": [],
+      "issues": [
+        "Defined inline in App.tsx — consider extracting to layouts/PublicLayout.tsx for consistency"
+      ],
+      "priority": "P3",
+      "status": "READY_FOR_SYNC"
+    }
+  ],
+  "gate_check": {
+    "all_targets_have_figma_equivalent_or_NONE": true,
+    "blocking_fixes": 1,
+    "blocking_fix_ids": ["wrap-02 (auth context)"],
+    "note": "wrap-02 hardcoded user data is a production correctness issue — must fix before Figma sync or deployed demo will show 'NISHANT' for all users"
+  }
+}

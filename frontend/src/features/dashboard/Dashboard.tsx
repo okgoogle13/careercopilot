@@ -230,7 +230,7 @@ export function Dashboard() {
                     <span className="text-7xl font-black text-paper-white leading-none tracking-tighter">
                       08
                     </span>
-                    <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-[var(--sys-color-kr-activistSmokeGreen-base)] border border-[var(--sys-color-kr-activistSmokeGreen-base)]/30 bg-[var(--sys-color-kr-activistSmokeGreen-base)]/10 rounded-march">
+                    <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-[var(--kr-color-kr-activist-smoke-green-base)] border border-[var(--kr-color-kr-activist-smoke-green-base)]/30 bg-[var(--kr-color-kr-activist-smoke-green-base)]/10 rounded-march">
                       STABLE
                     </span>
                   </div>
@@ -414,7 +414,7 @@ export function Dashboard() {
                             <span
                               className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded-march ${
                                 profile.status === 'EXCELLENT'
-                                  ? 'text-[var(--sys-color-kr-activistSmokeGreen-base)] border border-[var(--sys-color-kr-activistSmokeGreen-base)]/30 bg-[var(--sys-color-kr-activistSmokeGreen-base)]/10'
+                                  ? 'text-[var(--kr-color-kr-activist-smoke-green-base)] border border-[var(--kr-color-kr-activist-smoke-green-base)]/30 bg-[var(--kr-color-kr-activist-smoke-green-base)]/10'
                                   : 'text-[var(--sys-color-stencilYellow-base)] border border-[var(--sys-color-stencilYellow-base)]/30 bg-[var(--sys-color-stencilYellow-base)]/10'
                               }`}
                             >
