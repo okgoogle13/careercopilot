@@ -13,7 +13,10 @@
       "mcp__plugin_playwright_playwright__browser_take_screenshot",
       "mcp__plugin_playwright_playwright__browser_evaluate",
       "mcp__figma__get_design_context",
-      "mcp__figma__get_screenshot"
+      "mcp__figma__get_screenshot",
+      "mcp__design-system-sidekick__validate_asset_compliance",
+      "mcp__flash-sidekick__batch_file_analysis",
+      "mcp__figma__get_metadata"
     ],
     "deny": [],
     "ask": []
