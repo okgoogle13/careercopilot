@@ -1,0 +1,32 @@
+- generic [ref=e2]:
+  - region "Notifications alt+T"
+  - generic [ref=e5]:
+    - navigation [ref=e6]:
+      - button "Dashboard" [ref=e7]
+      - button "Profile" [ref=e8]
+      - button "Opportunities" [ref=e9]
+      - button "Applications" [ref=e10]
+      - button "ATS Scoring" [ref=e11]
+      - button "My Docs" [ref=e12]
+    - main [ref=e13]:
+      - link "Switch to KrDark →" [ref=e15] [cursor=pointer]:
+        - /url: /lab
+      - generic [ref=e16]:
+        - generic [ref=e17]:
+          - generic [ref=e24]:
+            - heading "Intersectional Resistance" [level=1] [ref=e25]
+            - paragraph [ref=e26]: Solidarity is Our Weapon
+          - 'button "Switch Register (Current: A)" [ref=e27]'
+        - generic [ref=e28]:
+          - generic [ref=e30]:
+            - img "KR-SOLID-033" [ref=e31]
+            - generic [ref=e33]: "REF: KR-SOLID-033"
+          - article [ref=e35]:
+            - heading "Career Resurrection" [level=2] [ref=e37]
+            - paragraph [ref=e38]: Your professional history is ready for structured review. Build stronger applications with clear evidence, targeted analysis, and deliberate drafting.
+            - button "SECURE ACCESS" [ref=e39]
+            - generic:
+              - img
+        - generic [ref=e41]:
+          - generic [ref=e42]: EST. 2026
+          - generic [ref=e44]: SYS_V4.0

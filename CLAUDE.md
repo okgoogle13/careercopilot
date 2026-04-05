@@ -1,112 +1,112 @@
-# CLAUDE.md — Branch Override: feat/prototype-harvest-prep
+# CLAUDE.md
 
-This file overrides `CLAUDE.md` for the duration of this branch.
-This branch is a prototype-harvest quarantine lane, but it still defers to the active harvest control docs.
+This file provides guidance to Claude Code (claude.ai/code) and other agentic assistants when working with this repository.
 
 > **Output**: Code first. No preamble.
 
 <output_constraints>
-- NO PREAMBLE: Lead with direct action verbs.
-- NO UNNECESSARY REPORTS: Status updates under 2 sentences.
-- PLAN LOCATION: Save plans to `.claude/plans/`.
-- REPORT LOCATION: Save reports to `.claude/reports/`.
+- NO PREAMBLE: Skip all introductory phrases, conversational fillers, and verbose status updates. Lead with direct action verbs.
+- NO UNNECESSARY REPORTS: Status updates must be kept strictly under 2 sentences. Only generate markdown reports if explicitly requested.
+- TOKEN GUARDIAN ACTIVE: Adhere to `.claude/TOKEN_GUARDIAN.md`. Track usage and mandate sidekick routing if session usage exceeds 80%.
+- PLAN LOCATION: **ALWAYS** save implementation plans to `.claude/plans/`.
+- REPORT LOCATION: Save reports and documentation to `.claude/reports/`.
 </output_constraints>
 
 ---
 
-## Stack
+## Technical Stack
 
 - **Frontend**: React 18 + TS + Vite + Tailwind v4 + Zustand + TanStack Query
 - **Backend**: FastAPI + SQLAlchemy + Genkit + Python 3.10+
+- **Cloud**: GCP (us-central1) · Firebase · Cloud Run
+- **Design**: **KR Solidarity v6.1** (M3 Expressive)
 - **Tests**: Jest, Playwright (e2e), pytest
 
 ---
 
-## Branch Objective
+## Active Initiative: Frontend Source-of-Truth Migration
 
-Harvest and isolate AI Studio prototype logic into `frontend/src/prototype-features/`
-without promoting prototype shell ownership into canonical product routing.
+**Current Phase**: M1 (Planning Gates)
+**Control Plan**: `docs/project/active/frontend-source-of-truth-migration/`
+
+### Critical M1 Gates (In Progress)
+- [ ] MIG-001: Fix capability matrix (`resolution_status`, `blocked_by`, `resolved_commit`)
+- [ ] MIG-002: Align `validate-governance-artifacts.mjs` with Python tests
+- [ ] MIG-003: Approve 5 migration skills (sprint-coordinator, frontend-backend-mapper, api-contract-validator, migration-audit, verification-before-completion)
+- [ ] MIG-004: Ad-hoc component-inventory review
+- [ ] MIG-005: Define token-enforcement gate (regex scan hardcoded colors)
 
 ---
 
-## Harvest Authority
+## Branch Override Context: feat/prototype-harvest-prep
 
-Use these as the active decision stack:
+**Current focus**: Harvesting AI Studio prototype logic into `frontend/src/prototype-features/`.
 
-1. `docs/project/active/frontend-source-of-truth-migration/control/workflow.md`
-2. `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.md`
-3. `docs/project/active/frontend-source-of-truth-migration/control/COMET-MANIFEST.md`
-4. `docs/project/active/frontend-source-of-truth-migration/control/harvest-spec.md`
-5. `docs/project/active/frontend-source-of-truth-migration/control/fit-for-purpose.md`
-
-Prototype code is support/reference input only unless a route-owned port decision explicitly promotes a pattern.
-
-## Quarantine Rules (ENFORCED)
-
+### Quarantine Rules (STRICT ENFORCEMENT)
 | Rule | Detail |
 |---|---|
-| Quarantine boundary | All work inside `frontend/src/prototype-features/` only |
-| Protected paths | Do NOT touch `src/features/`, `src/components/ui/`, `src/api/` |
-| UI imports | Must resolve to `@/components/PrototypeAdapter` — not `@/components/ui` |
-| Lint suppression | `/* eslint-disable */` at top of every harvested `.ts` / `.tsx` file — keep it |
-| Routes | All prototype routes under `/prototype/*` with `prototype: true` in route-registry |
+| Quarantine boundary | All logic confined to `frontend/src/prototype-features/` only. |
+| Protected paths | **DO NOT TOUCH** `src/features/`, `src/components/ui/`, or `src/api/`. |
+| UI imports | Must resolve to `@/components/PrototypeAdapter` — **never** `@/components/ui`. |
+| Lint suppression | `/* eslint-disable */` at top of every harvested `.ts` / `.tsx` file. |
+| Routes | All prototype routes under `/prototype/*` with `prototype: true`. |
 
 ---
 
-## Branch-Specific Limits
+## Task Delegation & Token Efficiency ⚡
 
-- Do not run late-stage canonical closure gates on prototype-only files unless the task explicitly asks for a port-readiness audit.
-- Do not treat the prototype shell, tab labels, or local `activeTab` state as canonical route authority.
-- Do not introduce `react-router-dom` or new dependencies into prototype surfaces.
+**RULE: Default to lean local execution plus targeted MCP offload. Use `task-router` for orchestration sesssions.**
 
----
-
-## Active Skills
-
-| Role | Skill |
-|---|---|
-| Harvest orchestration | `prototype-harvest-manager` |
-| Harvest review | `frontend-cleanup-manager` |
-| Planning | `blueprint` |
-| Execution engine | `subagent-driven-development` |
-| Crash/gap diagnosis | `systematic-debugging` |
-| Canonical late-stage gates | `token-enforcement`, `migration-audit`, `route-migration` |
+- **Efficiency Mandates**:
+  - **MCP-First**: Never read files > 300 lines or search directly. Use `flash-sidekick.quick_summarize`.
+  - **Thinking Bursts**: Use Thinking Mode ONLY for architecture (Phase 4) and identity gates.
+  - **Persistent Session Status**: End every session with a `status.md` update.
+- **Delegate Heavy Tasks (>15K tokens)**:
+  - Scaffolding, test generation (>50 lines), security/coverage analysis, refactoring.
+  - Route to `flash-sidekick` first, then escalate to `task-router` for multi-worker handoffs.
+- **Keep Local**:
+  - Code review, architectural decisions, git operations, critical integration fixes.
 
 ---
 
-## Workspace Commands
+## Workspace Structure & Quick Commands
 
-```bash
-# Frontend
-cd frontend && yarn dev
-cd frontend && yarn type-check
-cd frontend && yarn test
-
-# Backend
-cd backend && source venv/bin/activate && uvicorn app.main:app --reload --port 8000
-cd backend && pytest
-```
+- **Frontend**: `cd frontend` -> `yarn dev`, `yarn test`, `yarn build`.
+  - UI Primitives: `src/components/ui/`
+  - Design Tokens: `src/design/tokens/tokens.json` (**Source of Truth**)
+- **Backend**: `cd backend && source venv/bin/activate` -> `uvicorn app.main:app --reload --port 8000`, `pytest`.
+- **Rebuild Tokens**: `python3 scripts/build-m3-tokens.py` (rebuilds CSS variables from `tokens.json`).
 
 ---
 
-## Task Delegation
+## Design System: KR Solidarity v6.1 (M3 Expressive)
 
-- **Task delegation (>15K tokens)**: delegate via `task-router` MCP.
-- **File analysis (>300 lines)**: use `flash-sidekick.quick_summarize`.
-- **Deep reasoning**: use `flash-sidekick.consult_pro`.
-- **Visual compliance**: use `design-system-sidekick.validate_asset_compliance`.
-- **Token validation**: use `python3 scripts/design-validation/validate-tokens.py`.
-- **Token build**: use `python3 scripts/build-m3-tokens.py`.
+**Strict Rules**:
+- **Zero-Flora Lockdown**: Absolutely **NO** flora or Australian endemic fauna.
+- **Dark-only**: No white backgrounds. All backgrounds use `--sys-color-charcoalBackground-base`.
+- **No generic shapes**: Use asymmetric `shape.*` tokens (e.g., `shape.blockRiot03`).
+- **Semantic Colors Only**: Use `--sys-color-{name}-base` CSS variables.
+- **Extreme Contrast**: Variable fonts (`Work Sans`, `Fraunces`, `Libre Bodoni`, `JetBrains Mono`) with 9x weight ratios.
+
+### Active v6.1 Archetypes
+| Archetype | Component | Shape Token | Role |
+| --- | --- | --- | --- |
+| **Strike** | `Strike.tsx` | `shape.blockRiot03` | Primary active buttons. |
+| **Placard** | `Placard.tsx` | `shape.placardTorn01` | Content containers/feeds. |
+| **Scaffold** | `ScaffoldInput.tsx` | `shape.blockRiot02` | Immutable structural framing. |
+| **March** | `March.tsx` | `shape.blockRiot01` | Sequential select flows. |
+| **Megaphone** | `Megaphone.tsx` | `shape.megaphoneCut01` | High-intensity modals/focus parts. |
 
 ---
 
 ## Code Review Standards
+- Functions > 30 lines: Likely doing too much.
+- Logic duplicated > 2×: Extract to utility.
+- No `any` type in TypeScript: Use strict types.
+- Missing error handling: Async operations must have catch/error handling.
+- Grouping props: Components with > 3 props should group them into an object if logical.
 
-- Functions > 30 lines: likely doing too much
-- Logic duplicated > 2×: extract to utility
-- No `any` type in TypeScript
-- Missing error handling on async ops
+Run `/simplify` before presenting code results.
 
 ---
-
-*Delete this file and `.claude/BRANCH_CONTEXT.md` before merging to `main`.*
+*Tokens are law. Semantic CSS variables are truth. Zero-Flora enforced.*

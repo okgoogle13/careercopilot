@@ -162,8 +162,7 @@ async def _call_gemini_async(engine_type, prompt, sys_instruct="", use_search=Fa
             full = f"System: {sys_instruct}\n\nUser: {prompt}"
             runtime_tools = []
             if use_search:
-                from google.generativeai.types import Tool, GoogleSearchRetrieval
-                runtime_tools = [Tool(google_search_retrieval=GoogleSearchRetrieval())]
+                runtime_tools = [{"google_search_retrieval": {}}]
 
             gen_config = {}
             if json_mode:
