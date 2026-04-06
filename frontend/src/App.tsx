@@ -99,7 +99,7 @@ export const RequireAuth = () => {
 
   // Allow access if authenticated OR in demo mode
   if (!user && !isDemoMode) {
-    const returnTo = encodeURIComponent(location.pathname + location.search);
+    const returnTo = encodeURIComponent(location.pathname + location.search + location.hash);
     return (
       <Navigate
         to={`/auth?returnTo=${returnTo}`}

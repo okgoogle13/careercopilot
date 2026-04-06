@@ -61,6 +61,7 @@ export function ApplyQuick() {
   const [companyName, setCompanyName] = useState('');
   const [jobDescription, setJobDescription] = useState('');
   const [loading, setLoading] = useState(false);
+  const [prefilled, setPrefilled] = useState(false);
   const [result, setResult] = useState<AnalyzeJobFromUrlResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showGuide, setShowGuide] = useState(false);
@@ -77,6 +78,8 @@ export function ApplyQuick() {
       if (job.company) setCompanyName(job.company);
       if (job.description) setJobDescription(job.description);
       if (job.url) setJobUrl(job.url);
+      setError(null);
+      setPrefilled(true);
     }).catch(() => {
       // Pre-fill failure is non-fatal — user can still fill manually
     });
@@ -146,6 +149,14 @@ export function ApplyQuick() {
             </button>
           </div>
         </header>
+
+        {/* Pre-fill confirmation banner */}
+        {prefilled && (
+          <div className="flex items-center gap-2 px-4 py-2 text-[11px] font-mono uppercase tracking-widest border border-[var(--sys-color-inkGold-base)]/40 bg-[var(--sys-color-inkGold-base)]/8 text-[var(--sys-color-inkGold-base)]"
+            style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}>
+            <Sparkles size={11} /> Job details pre-filled from intercept — review and adjust as needed.
+          </div>
+        )}
 
         {/* Step guide (expandable) */}
         <AnimatePresence>

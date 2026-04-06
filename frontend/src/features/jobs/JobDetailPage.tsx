@@ -19,13 +19,14 @@ export function JobDetailPage() {
       return;
     }
 
+    const safeId = id;
     let cancelled = false;
 
     async function load() {
       try {
         const [job, jobAnalysis] = await Promise.allSettled([
-          jobService.getJob(id!),
-          jobService.advancedJobAnalysis(id!),
+          jobService.getJob(safeId),
+          jobService.advancedJobAnalysis(safeId),
         ]);
 
         if (cancelled) return;
