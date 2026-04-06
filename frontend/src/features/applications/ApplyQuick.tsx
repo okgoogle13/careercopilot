@@ -9,9 +9,10 @@ import type { AnalyzeJobFromUrlResponse } from '@/types/masterResume';
 import { JobAnalysisResultsPanel } from '@/features/applications/components/JobAnalysisResultsPanel';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Loader2, Zap, Target, Sparkles, LayoutDashboard } from 'lucide-react';
-import { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { workflowService } from '@/api/workflowService';
+import { jobService } from '@/api/jobService';
 
 // ─── Step guide cards (shown before analysis) ─────────────────────────────────
 
@@ -54,6 +55,7 @@ function StepCard({ number, Icon, label, desc }: StepCardProps) {
 
 export function ApplyQuick() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [jobUrl, setJobUrl] = useState('');
   const [jobTitle, setJobTitle] = useState('');
   const [companyName, setCompanyName] = useState('');
@@ -62,6 +64,25 @@ export function ApplyQuick() {
   const [result, setResult] = useState<AnalyzeJobFromUrlResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showGuide, setShowGuide] = useState(false);
+
+  // Pre-fill form fields when ?jobId is present in URL
+  useEffect(() => {
+    const jobId = searchParams.get('jobId');
+    if (!jobId) return;
+
+    let cancelled = false;
+    jobService.getJob(jobId).then((job) => {
+      if (cancelled) return;
+      if (job.title) setJobTitle(job.title);
+      if (job.company) setCompanyName(job.company);
+      if (job.description) setJobDescription(job.description);
+      if (job.url) setJobUrl(job.url);
+    }).catch(() => {
+      // Pre-fill failure is non-fatal — user can still fill manually
+    });
+
+    return () => { cancelled = true; };
+  }, [searchParams]);
 
   const jdPreview = useMemo(() => {
     const text = jobDescription.trim();

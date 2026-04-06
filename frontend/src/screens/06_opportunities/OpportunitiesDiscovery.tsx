@@ -200,7 +200,7 @@ const SavedBadge = () => (
   </span>
 );
 
-const InterceptCard = ({ intercept }: { intercept: Intercept }) => {
+const InterceptCard = ({ intercept, onDecrypt }: { intercept: Intercept; onDecrypt: (id: string) => void }) => {
   const scoreColor = getScoreColor(intercept.score);
   const titleColor = intercept.score >= 92 ? '#daf6b3' : '#8daf75';
   const decryptBg = DECRYPT_BUTTON_COLORS[intercept.status];
@@ -306,6 +306,7 @@ const InterceptCard = ({ intercept }: { intercept: Intercept }) => {
               </span>
             </div>
             <button
+              onClick={() => onDecrypt(intercept.id)}
               className={cn(
                 'px-4 py-[7px] text-[9px] font-mono font-extrabold tracking-[0.1em] uppercase',
                 'text-[#0f0f0f]',
@@ -329,6 +330,7 @@ const InterceptCard = ({ intercept }: { intercept: Intercept }) => {
 export const OpportunitiesDiscovery = memo(function OpportunitiesDiscovery() {
   const [activeFilter, setActiveFilter] = useState<FilterTab>('ALL INTERCEPTS');
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
   const filtered =
     activeFilter === 'ALL INTERCEPTS'
@@ -441,7 +443,10 @@ export const OpportunitiesDiscovery = memo(function OpportunitiesDiscovery() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.06 }}
           >
-            <InterceptCard intercept={intercept} />
+            <InterceptCard
+              intercept={intercept}
+              onDecrypt={(id) => navigate(`/job/${id}`)}
+            />
           </motion.div>
         ))}
 
