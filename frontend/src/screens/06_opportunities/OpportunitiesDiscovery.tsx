@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { MapPin, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { NexusInput } from '../../components/kerala-rage/NexusInput';
+import { useNavigate } from 'react-router-dom';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
