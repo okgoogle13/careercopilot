@@ -6,6 +6,7 @@
 import * as React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '../../../lib/cn';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 export interface Tab {
   id: string;
@@ -56,11 +57,7 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultTab, onChange, classNam
                 <motion.div
                   layoutId="active-pill"
                   className="absolute inset-0 bg-primary-container/20 rounded-t-button"
-                  transition={{
-                    type: 'spring',
-                    stiffness: 500,
-                    damping: 27,
-                  }}
+                  transition={KrDarkSpring}
                 />
               )}
 
@@ -72,11 +69,7 @@ export const Tabs: React.FC<TabsProps> = ({ tabs, defaultTab, onChange, classNam
                 <motion.div
                   className="absolute bottom-0 left-0 right-0 h-0.5 bg-tertiary"
                   layoutId="active-indicator"
-                  transition={{
-                    type: 'spring',
-                    stiffness: 500,
-                    damping: 27,
-                  }}
+                  transition={KrDarkSpring}
                 />
               )}
             </button>

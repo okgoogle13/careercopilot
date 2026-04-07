@@ -18,6 +18,7 @@ import { ActionButton } from '@/components/kerala-rage/ActionButton';
 import { cn } from '@/lib/utils';
 import { NAVIGATION_SCHEMA } from '@/config/navigation.schema';
 import { useAuth } from '@/context/AuthContext';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 const iconMap: Record<string, any> = {
   'nav-dashboard': Home,
@@ -112,7 +113,7 @@ export function SolidaritySidebar({
                   className="absolute left-0 w-1 h-6 bg-solidarityRed-base rounded-full"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                  transition={KrDarkSpring}
                 />
               )}
               <Icon
@@ -160,7 +161,7 @@ export function SolidaritySidebar({
               className="absolute left-0 w-1 h-6 bg-solidarityRed-base rounded-full"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+              transition={KrDarkSpring}
             />
           )}
           <Settings
@@ -231,7 +232,7 @@ export function SolidaritySidebar({
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              transition={KrDarkSpring}
               className="fixed top-0 left-0 bottom-0 w-[280px] z-[101]"
             >
               {sidebarContent}

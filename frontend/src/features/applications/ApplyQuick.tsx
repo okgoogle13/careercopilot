@@ -12,6 +12,7 @@ import { ArrowRight, Loader2, Zap, Target, Sparkles, LayoutDashboard } from 'luc
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { workflowService } from '@/api/workflowService';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 // ─── Step guide cards (shown before analysis) ─────────────────────────────────
 
@@ -166,7 +167,7 @@ export function ApplyQuick() {
           <motion.section
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ type: 'spring', stiffness: 220, damping: 22 }}
+            transition={KrDarkSpring}
             className="border border-[var(--sys-color-outline-variant)] bg-[var(--sys-color-charcoalBackground-steps-1)] p-6 space-y-5"
             style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
           >
@@ -268,7 +269,7 @@ export function ApplyQuick() {
           <motion.section
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ type: 'spring', stiffness: 220, damping: 24, delay: 0.06 }}
+            transition={KrDarkSpring}
             className="border border-[var(--sys-color-inkGold-base)]/22 bg-[var(--sys-color-charcoalBackground-base)]/55 p-6"
             style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
           >
@@ -289,7 +290,7 @@ export function ApplyQuick() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 220, damping: 24 }}
+              transition={KrDarkSpring}
             >
               <JobAnalysisResultsPanel
                 result={result}

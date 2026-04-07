@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { AlertTriangle, CheckCircle, Shapes, Type, Waves } from 'lucide-react';
 import { Strike } from '../../components/ui/Strike';
 import { cn } from '../../lib/utils';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 const MOTION_CONTRACTS = {
   easing: 'var(--kr-motion-easing-strike)',
@@ -65,7 +66,7 @@ export function ArchetypeMorphPreviewer({ onInteraction }: { onInteraction?: () 
               className="h-56 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border border-outline/30"
               style={{ borderRadius: clipPath }}
               animate={{ borderRadius: clipPath }}
-              transition={{ type: 'spring', stiffness: 120, damping: 20 }}
+              transition={KrDarkSpring}
             >
               <div className="text-center p-6 bg-charcoalBackground/40 backdrop-blur-sm rounded-lg border border-white/5">
                 <div className="text-3xl font-black uppercase tracking-tighter text-worker-ash">
@@ -150,7 +151,7 @@ export function TypographyAxisValidator({ onInteraction }: { onInteraction?: () 
               fontVariationSettings: settings,
             }}
             animate={{ fontVariationSettings: settings }}
-            transition={{ type: 'spring', stiffness: 200, damping: 25 }}
+            transition={KrDarkSpring}
           >
             KR Type
           </motion.h2>
@@ -340,7 +341,7 @@ export function LayoutSlopAuditor({ onInteraction }: { onInteraction?: () => voi
                   ? "'wght' 400, 'GRAD' 150'"
                   : "'wght' 400, 'GRAD' 0'",
               }}
-              transition={{ type: 'spring', stiffness: 200, damping: 25 }}
+              transition={KrDarkSpring}
             >
               Stable Layout
             </motion.div>
@@ -350,7 +351,7 @@ export function LayoutSlopAuditor({ onInteraction }: { onInteraction?: () => voi
               className="text-2xl font-display text-solidarity-crimson cursor-help"
               initial={{ fontWeight: 400 }}
               animate={{ fontWeight: isHovered ? 800 : 400 }}
-              transition={{ type: 'spring', stiffness: 200, damping: 10 }}
+              transition={KrDarkSpring}
             >
               Reflow Risk
             </motion.div>

@@ -1,5 +1,6 @@
 import React, { forwardRef, useId, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 export interface ValveProps extends Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -139,12 +140,7 @@ export const Valve = forwardRef<HTMLInputElement, ValveProps>(
                 borderRadius: 'var(--sys-shape-toggleSlide01)', // Kinetic "Stretch" morph on drag/tap
                 scaleX: 1.2,
               }}
-              transition={{
-                type: 'spring',
-                stiffness: 600,
-                damping: 35,
-                mass: 0.8,
-              }}
+              transition={KrDarkSpring}
               className={`
                         absolute top-0.5 left-0.5
                         ${currentSize.thumb}

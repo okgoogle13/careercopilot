@@ -10,6 +10,7 @@ import type { SolidarityManifest } from '../../design/hero/heroTypes';
 import { OnboardingChecklist, CHECKLIST_DISMISSED_KEY } from './OnboardingChecklist';
 import { ATSTrendChart } from './components/ATSTrendChart';
 import { useUserStore } from '@/stores/userStore';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -116,11 +117,7 @@ export function Dashboard() {
     show: {
       opacity: 1,
       y: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 300,
-        damping: 30,
-      },
+      transition: KrDarkSpring,
     },
   };
 

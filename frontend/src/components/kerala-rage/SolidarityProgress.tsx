@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 interface SolidarityProgressProps {
   progress: number;
@@ -27,7 +28,7 @@ export const SolidarityProgress: React.FC<SolidarityProgressProps> = ({
           width: `${progress}%`,
           backgroundColor: color,
         }}
-        transition={{ type: 'spring', stiffness: 50, damping: 20 }}
+        transition={KrDarkSpring}
       >
         {/* Kinetic "Blob" overlay that morphs as it moves */}
         <motion.div

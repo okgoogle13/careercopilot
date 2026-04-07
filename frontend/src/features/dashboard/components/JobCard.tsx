@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 interface JobCardProps {
   id: string;
@@ -48,11 +49,7 @@ export const JobCard: React.FC<JobCardProps> = ({
         scale: 1.01,
         y: -4,
       }}
-      transition={{
-        type: 'spring',
-        stiffness: 500,
-        damping: 27,
-      }}
+      transition={KrDarkSpring}
       data-testid={`kanban-card-${id}`}
       style={{
         backgroundImage:

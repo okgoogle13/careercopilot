@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Placard } from '@/components/ui';
 import { useUserStore } from '@/stores/userStore';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 const STORAGE_KEY = 'cc_onboarding_checklist';
 /** Single key that stores both progress and dismissed flag. */
@@ -146,7 +147,7 @@ export function OnboardingChecklist({ onDismiss }: OnboardingChecklistProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
-      transition={{ type: 'spring', stiffness: 260, damping: 28 }}
+      transition={KrDarkSpring}
     >
       <Placard
         elevation="raised"

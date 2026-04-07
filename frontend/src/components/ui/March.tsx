@@ -1,6 +1,7 @@
 import { Check, ChevronDown } from 'lucide-react';
 import React, { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 export interface MarchOption {
   value: string;
@@ -243,12 +244,7 @@ export function March({
               ? 'var(--kr-color-ink-gold-base)'
               : 'var(--kr-color-worker-ash-base)',
         }}
-        transition={{
-          type: 'spring',
-          stiffness: 300,
-          damping: 25,
-          mass: 1.2,
-        }}
+        transition={KrDarkSpring}
         data-archetype="march"
         className={`
           ${fullWidth ? 'w-full' : 'w-auto min-w-[200px]'}

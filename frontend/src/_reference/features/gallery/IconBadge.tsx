@@ -1,5 +1,6 @@
 import { LucideIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 interface IconBadgeProps {
   icon: LucideIcon;
@@ -38,7 +39,7 @@ export function IconBadge({
     `}
       style={{ clipPath: 'var(--md-ref-shape-gem)' }}
       whileHover={{ scale: 1.1 }}
-      transition={{ type: 'spring', stiffness: 500, damping: 27 }}
+      transition={KrDarkSpring}
     >
       <Icon className={`${iconSizeClasses[size]} ${color}`} />
     </motion.div>

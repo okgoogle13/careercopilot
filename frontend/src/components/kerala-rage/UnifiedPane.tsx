@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, HTMLMotionProps, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 export interface UnifiedPaneProps extends HTMLMotionProps<'section'> {
   title?: string;
@@ -25,7 +26,7 @@ export const UnifiedPane = React.forwardRef<HTMLElement, UnifiedPaneProps>(
       : {
           initial: { opacity: 0, y: 20 },
           animate: { opacity: 1, y: 0 },
-          transition: { type: 'spring' as const, stiffness: 300, damping: 30 },
+          transition: KrDarkSpring,
         };
 
     return (

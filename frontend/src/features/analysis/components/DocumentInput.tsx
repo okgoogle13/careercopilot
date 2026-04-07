@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { UploadIcon } from './icons/UploadIcon';
 import { FileIcon } from './icons/FileIcon';
 import { TrashIcon } from './icons/TrashIcon';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 interface DocumentInputProps {
   onProcess: (
@@ -180,7 +181,7 @@ export const DocumentInput: React.FC<DocumentInputProps> = ({
             <div className="flex flex-col items-center text-[var(--sys-color-paperWhite-base)]">
               <motion.div
                 animate={{ scale: isDragging ? 1.2 : 1 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                transition={KrDarkSpring}
               >
                 <UploadIcon className="w-16 h-16 mb-6 text-[var(--sys-color-solidarityRed-base)]" />
               </motion.div>

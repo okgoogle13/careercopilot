@@ -1,5 +1,6 @@
 import { LucideIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 interface MetricCardProps {
   icon: LucideIcon;
@@ -55,7 +56,7 @@ export function MetricCard({
         <motion.div
           className="w-10 h-10 bg-[var(--sys-color-solidarityAsphaltBlack)] rounded-compact flex items-center justify-center text-ink-gold"
           whileHover={{ scale: 1.05 }}
-          transition={{ type: 'spring', stiffness: 500, damping: 27 }}
+          transition={KrDarkSpring}
         >
           <Icon className={`w-5 h-5`} />
         </motion.div>
