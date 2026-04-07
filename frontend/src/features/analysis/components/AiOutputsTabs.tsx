@@ -9,6 +9,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Placard, StatusBadge } from '@/components/ui';
 import { useAiOutputs, type AiCriterion } from '../hooks/useAiOutputs';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 export interface ResumeKeyword {
   label: string;
@@ -58,7 +59,7 @@ export function AiOutputsTabs({
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+            transition={KrDarkSpring}
           >
             {activeTab === 'ksc' && (
               <div className="space-y-6">
@@ -115,7 +116,7 @@ export function AiOutputsTabs({
                           <motion.div
                             className="w-4 h-4 rounded-full bg-[var(--sys-color-paperWhite-base)] shadow-sm"
                             animate={{ x: !ignoredCriteria.includes(c.id) ? 24 : 0 }}
-                            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                            transition={KrDarkSpring}
                           />
                         </div>
                       </div>
@@ -226,7 +227,7 @@ function TabButton({
           layoutId="activeTabIndicator"
           className="absolute inset-0 bg-[var(--sys-color-solidarityRed-base)] border border-[var(--sys-color-solidarityRed-base)] -z-10"
           style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
-          transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+          transition={KrDarkSpring}
         />
       )}
       {label}

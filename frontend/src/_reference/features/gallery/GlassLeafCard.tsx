@@ -2,6 +2,7 @@ import * as React from 'react';
 import { motion, type HTMLMotionProps } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useMode } from '@/hooks/use-mode';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 interface GlassLeafCardProps extends Omit<HTMLMotionProps<'div'>, 'ref'> {
   children: React.ReactNode;
@@ -54,7 +55,7 @@ const GlassLeafCard = React.forwardRef<HTMLDivElement, GlassLeafCardProps>(
         whileHover={{
           y: -6,
           scale: 1.02,
-          transition: { type: 'spring', stiffness: 300, damping: 20 },
+          transition: KrDarkSpring,
         }}
         {...props}
       >

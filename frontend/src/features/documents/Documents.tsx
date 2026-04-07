@@ -10,6 +10,7 @@ import type { ExportableDocument } from './services/docxExport';
 import { DocumentWorkbench } from '../../screens/08_workbench/DocumentWorkbench';
 import { DocumentRedlineUploadPanel } from './components/DocumentRedlineUploadPanel';
 import { TrackedChangesWorkspace } from './components/TrackedChangesWorkspace';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -222,7 +223,7 @@ export function Documents() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 16 }}
-            transition={{ type: 'spring', stiffness: 420, damping: 30 }}
+            transition={KrDarkSpring}
             style={{
               position: 'fixed',
               inset: 0,

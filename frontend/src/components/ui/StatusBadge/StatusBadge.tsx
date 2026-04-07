@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 export type StatusBadgeVariant = 'success' | 'warning' | 'error' | 'info' | 'neutral';
 export type StatusBadgeMode = 'KrDark' | 'KrLight';
@@ -100,12 +101,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
             }
           : {}
       }
-      transition={{
-        type: 'spring',
-        stiffness: 400,
-        damping: 25,
-        mass: 0.5,
-      }}
+      transition={KrDarkSpring}
       className={`
                 inline-flex items-center gap-2
                 px-3 py-1

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { SolidarityCard, ActionButton } from '../../../components/kerala-rage';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 /**
  * KrDarkSettings (Hi-Fi)
@@ -102,11 +103,7 @@ export const KrDarkSettings: React.FC = () => {
                       <motion.div
                         animate={setting.active ? { x: 28 } : { x: 4 }}
                         className={`absolute top-1 w-5 h-5 rounded-march shadow-viscous ${setting.active ? 'bg-asphalt-black' : 'bg-paper-white/20'}`}
-                        transition={
-                          shouldReduceMotion
-                            ? { duration: 0 }
-                            : { type: 'spring', stiffness: 500, damping: 30 }
-                        }
+                        transition={shouldReduceMotion ? { duration: 0 } : KrDarkSpring}
                       />
                     </div>
                   </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, HTMLMotionProps, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 /**
  * ManifestoSlabProps
@@ -39,11 +40,7 @@ export const ManifestoSlab: React.FC<ManifestoSlabProps> = ({
     : {
         initial: { opacity: 0, scale: 0.95 },
         animate: { opacity: 1, scale: 1 },
-        transition: {
-          type: 'spring',
-          stiffness: 400,
-          damping: 30,
-        },
+        transition: KrDarkSpring,
       };
 
   return (

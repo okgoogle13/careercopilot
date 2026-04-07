@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 interface EvidenceCardProps {
   content: string;
@@ -36,11 +37,7 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
         scale: 1.01,
         y: -2,
       }}
-      transition={{
-        type: 'spring',
-        stiffness: 500,
-        damping: 27,
-      }}
+      transition={KrDarkSpring}
       style={{
         backgroundImage: 'radial-gradient(circle, rgba(255, 255, 255, 0.02) 1px, transparent 1px)',
         backgroundSize: '16px 16px',
@@ -80,7 +77,7 @@ export const EvidenceCard: React.FC<EvidenceCardProps> = ({
           className="absolute right-4 top-4"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          transition={{ type: 'spring', stiffness: 500, damping: 20 }}
+          transition={KrDarkSpring}
         >
           <div className="flex h-6 w-6 items-center justify-center rounded-march bg-sage">
             <svg

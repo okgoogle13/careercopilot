@@ -10,6 +10,7 @@ import {
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { Logo } from '@/components/ui/Logo';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 const mainNavItems = [
   { path: '/dashboard', icon: Home, label: 'Dashboard' },
@@ -57,7 +58,7 @@ export function Sidebar() {
             <motion.div
               key={item.path}
               whileHover={{ scale: 1.04, x: 6 }}
-              transition={{ type: 'spring', stiffness: 500, damping: 27 }}
+              transition={KrDarkSpring}
             >
               <Link
                 to={`${item.path}${appendQuery}`}

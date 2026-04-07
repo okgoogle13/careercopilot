@@ -12,6 +12,7 @@ interface ApplicationCardProps {
 import { StatusBadge, type StatusBadgeVariant } from '@/components/ui/StatusBadge/StatusBadge';
 import { KeralaRageButton } from '@/components/ui/KeralaRageButton';
 import { motion } from 'framer-motion';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 /**
  * ApplicationCard - M3 Compliant Job Application Tracker Card
@@ -100,7 +101,7 @@ export function ApplicationCard({
               style={{ clipPath: 'var(--md-ref-shape-pebble)' }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              transition={{ type: 'spring', stiffness: 500, damping: 27 }}
+              transition={KrDarkSpring}
             >
               <p className="text-label-medium">{step}</p>
             </motion.div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 /**
  * Register types for the symbolic anchors as defined in SOLIDARITY_SPEC_V5.md
@@ -70,13 +71,7 @@ export const NativeAnchor: React.FC<NativeAnchorProps> = ({
   const currentAssetPath = assetPaths[assetId] || '';
 
   // Motion Settings: The Solidarity Spring
-  const springTransition: any = {
-    type: 'spring',
-    stiffness: 100,
-    damping: 15,
-    mass: 1,
-    restDelta: 0.001,
-  };
+  const springTransition: any = KrDarkSpring;
 
   // Archetype Radii
   const stoneRadius = 'var(--sys-shape-radius-megaphoneBase)';

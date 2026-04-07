@@ -2,6 +2,7 @@ import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { ActionButton } from './ActionButton';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 export interface ManifestoCardProps {
   title: string;
@@ -41,11 +42,7 @@ export const ManifestoCard: React.FC<ManifestoCardProps> = ({
     : {
         initial: { opacity: 0, y: 10 },
         animate: { opacity: 1, y: 0 },
-        transition: {
-          type: 'spring' as const,
-          stiffness: 320,
-          damping: 26,
-        },
+        transition: KrDarkSpring,
       };
 
   const toneStyles = {

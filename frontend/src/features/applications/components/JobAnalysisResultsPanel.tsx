@@ -8,6 +8,7 @@ import type { AnalyzeJobFromUrlResponse } from '@/types/masterResume';
 import { Link2, Copy, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 export interface JobAnalysisResultsPanelProps {
   result: AnalyzeJobFromUrlResponse;
@@ -65,7 +66,7 @@ export function JobAnalysisResultsPanel({
     <motion.section
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ type: 'spring', stiffness: 220, damping: 24 }}
+      transition={KrDarkSpring}
       className="space-y-6"
     >
       {/* Row 1: ATS Score + Target job */}

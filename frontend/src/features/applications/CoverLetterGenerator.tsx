@@ -194,7 +194,7 @@ export function CoverLetterGenerator() {
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ type: 'spring', stiffness: 210, damping: 24 }}
+        transition={KrDarkSpring}
         className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1 relative overflow-hidden"
       >
         <AnimatePresence mode="wait">

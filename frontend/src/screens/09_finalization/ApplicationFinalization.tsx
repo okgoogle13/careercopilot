@@ -1,3 +1,4 @@
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 import { memo } from 'react';
 import { motion } from 'framer-motion';
 import clsx, { type ClassValue } from 'clsx';
@@ -79,7 +80,7 @@ export interface ApplicationFinalizationProps {
   slotAssets?: Partial<Record<string, string>>;
 }
 
-const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
+const springHero = KrDarkSpring;
 
 export const ApplicationFinalization = memo(function ApplicationFinalization({
   children,
