@@ -1,15 +1,16 @@
-# Codex CLI MCP Server Configuration
-# This file configures MCP servers for use with Codex CLI
-# Documentation: https://github.com/okgoogle13/careercopilot/docs/guides/CODEX_CLI_SETUP.md
+# CareerCopilot Codex CLI MCP configuration
+#
+# This file is the repo-local source of truth for Codex CLI MCP servers.
+# Keep repo-specific servers here so they do not have to live in ~/.codex/config.toml.
+# Documentation: docs/guides/CODEX_CLI_SETUP.md
 
-# GitHub MCP Server Configuration
-# The GitHub MCP server provides access to GitHub repositories, issues, PRs, and more
+# GitHub MCP server
 [mcp_servers.github]
 command = "/bin/zsh"
 args = ["-lc", "export GITHUB_PERSONAL_ACCESS_TOKEN=\"${GITHUB_PERSONAL_ACCESS_TOKEN:-$CODEX_GITHUB_PERSONAL_ACCESS_TOKEN}\"; export GITHUB_TOKEN=\"${GITHUB_TOKEN:-$GITHUB_PERSONAL_ACCESS_TOKEN}\"; exec npx -y @modelcontextprotocol/server-github@0.6.2"]
 startup_timeout_sec = 45
 
-# Flash Sidekick MCP Server
+# Flash Sidekick
 [mcp_servers.flash-sidekick]
 command = "python3"
 args = ["servers/flash_sidekick.py"]
@@ -21,25 +22,48 @@ command = "python3"
 args = ["servers/design_system_sidekick.py"]
 env = { GEMINI_API_KEY = "GEMINI_API_KEY" }
 
-# Vision Scorer MCP (v3.1)
+# Vision Scorer
 [mcp_servers.vision-scorer-mcp]
 command = "python3"
 args = ["servers/vision_scorer_mcp.py"]
 env = { GEMINI_API_KEY = "GEMINI_API_KEY" }
 
-# Test Coverage Sprint (Saturation Gate)
+# Sequential Thinking
+[mcp_servers.sequential-thinking]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+
+# Task Router
+[mcp_servers.task-router]
+command = "python3"
+args = ["servers/task_router_mcp.py"]
+
+# Genkit
+[mcp_servers.genkit]
+command = "/usr/bin/env"
+args = ["-u", "NODE_OPTIONS", "node", "node_modules/.bin/tsx", "functions/src/mcp_server.ts"]
+env = { NODE_ENV = "development" }
+
+# Test Coverage Sprint
 [mcp_servers.test-coverage-sprint]
 command = "python3"
 args = ["servers/test_coverage_sprint.py"]
 
-# Playwright (Efficiency Audit Only)
+# Playwright
 [mcp_servers.playwright]
 command = "npx"
 args = ["-y", "@playwright/mcp"]
 disabled_tools = ["resize", "drag", "hover", "press_key", "console_messages", "network_requests", "file_upload"]
 startup_timeout_sec = 45
 
-# --- DEPRIORITIZED (Commented out to reduce noise) ---
+# Optional: Figma dev-mode MCP.
+# Enable only when the local Figma MCP bridge is running on 127.0.0.1:3845.
+# [mcp_servers.figma-dev-mode-mcp-server]
+# command = "npx"
+# args = ["mcp-remote", "http://127.0.0.1:3845/mcp"]
+# startup_timeout_sec = 20
+
+# Deprioritized examples
 # [mcp_servers.firebase-mcp-server]
 # command = "npx"
 # args = ["-y", "firebase-tools@latest", "mcp"]

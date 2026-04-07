@@ -27,9 +27,9 @@ ANTIGRAVITY_LINK = HOME / ".gemini" / "antigravity" / "mcp_config.json"
 CLAUDE_CONFIG = HOME / "Library" / "Application Support" / "Claude" / "claude_desktop_config.json"
 CLAUDE_INTERNAL_CONFIG = HOME / ".claude.json"
 
-# Claude already exposes native Filesystem tooling, so keep the generated
-# config lean to reduce duplicate tool catalogs and initialization chatter.
-CLAUDE_EXCLUDE_SERVERS = {"filesystem", "task-router"}
+# Claude already exposes native Filesystem tooling, and sequential-thinking is
+# better kept off the default Claude Desktop profile to limit catalog churn.
+CLAUDE_EXCLUDE_SERVERS = {"filesystem", "task-router", "sequential-thinking"}
 
 # Context-heavy servers to disable for the CareerCopilot project to save tokens.
 CLAUDE_HEAVY_SERVERS = {"notion", "canva", "figma", "gcalendar", "claude_ai_Google_Calendar"}
@@ -100,16 +100,17 @@ def load_jsonc(path: Path) -> dict:
     return json.loads(strip_jsonc_comments(path.read_text(encoding="utf-8")))
 
 
-def resolve_value(value: str, env_vars: dict[str, str]) -> str:
+def resolve_value(value: str, env_vars: dict[str, str], *, resolve_env_placeholders: bool = True) -> str:
     value = value.replace("${workspaceFolder}", str(ROOT))
 
     # Resolve ${VAR} from env_vars
-    placeholders = re.findall(r"\${([^}]+)}", value)
-    for ph in placeholders:
-        if ph in env_vars:
-            value = value.replace(f"${{{ph}}}", env_vars[ph])
-        elif ph == "workspaceFolder": # Already handled but for safety
-             pass
+    if resolve_env_placeholders:
+        placeholders = re.findall(r"\${([^}]+)}", value)
+        for ph in placeholders:
+            if ph in env_vars:
+                value = value.replace(f"${{{ph}}}", env_vars[ph])
+            elif ph == "workspaceFolder":  # Already handled but for safety
+                pass
 
     if value == "venv/bin/python":
         # Prefer the repo-local venv with current server dependencies.
@@ -131,11 +132,16 @@ def apply_server_defaults(name: str, server: dict, env_vars: dict[str, str]) -> 
     env = dict(normalized.get("env", {}))
     # Merge defaults from the script
     env.update(SERVER_ENV_DEFAULTS.get(name, {}))
-    # Resolve env values
+    # Preserve env placeholders in generated configs so secrets stay out of
+    # the generated JSON. Only resolve workspace-relative command paths.
     if env:
         resolved_env = {}
         for k, v in env.items():
-            resolved_env[k] = resolve_value(v, env_vars) if isinstance(v, str) else v
+            resolved_env[k] = (
+                resolve_value(v, env_vars, resolve_env_placeholders=False)
+                if isinstance(v, str)
+                else v
+            )
         normalized["env"] = resolved_env
     return normalized
 
@@ -214,7 +220,11 @@ def patch_internal_claude_config(env_vars: dict[str, str]) -> None:
                 if "env" in server:
                     for k, v in server["env"].items():
                         if isinstance(v, str):
-                            server["env"][k] = resolve_value(v, env_vars)
+                            server["env"][k] = resolve_value(
+                                v,
+                                env_vars,
+                                resolve_env_placeholders=False,
+                            )
 
         # Disable heavy servers to save context
         disabled = set(project.get("disabledMcpServers", []))
