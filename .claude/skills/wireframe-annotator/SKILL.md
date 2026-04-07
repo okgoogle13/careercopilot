@@ -3,12 +3,11 @@ name: wireframe-annotator
 description: Generate annotated ASCII wireframes based on the "Annotated Wireframe
   Protocol". Bridges the gap between high-level specs and developer-ready implementation
   guidance. Outputs structured XML blocks — layout, tokens, accessibility, states,
-  asset placement, breakpoints, user flows, component specs, motion contracts,
-  test ID anchors, content strategy, design rationale, Storybook story specs,
-  error boundary mapping, i18n slots, visual regression baselines, and pipeline
-  linkage — aligned to Kerala Rage kr-solidarity v6.0 design system.
+  orchestration (screen logic), asset placement, breakpoints, user flows, component specs,
+  motion contracts, test ID anchors, and pipeline linkage — aligned to
+  Kerala Rage kr-solidarity v6.1 design system.
 metadata:
-  version: 6.0.0
+  version: 6.1.0
   tags:
     - wireframing
     - design
@@ -41,13 +40,13 @@ outputs:
     type: string
 ---
 
-# Wireframe Annotator Skill (v6.0)
+# Wireframe Annotator Skill (v6.1)
 
 ## Purpose
 
 Consume high-level feature briefs or the **Annotated Wireframe Protocol** (from `design-system-doc-generator`) and output detailed, developer-ready annotated wireframes. Translates design intent into concrete ASCII layout diagrams with explicit Kerala Rage kr-solidarity token mappings, component archetype assignments, and asset placement slots.
 
-**Design System:** Kerala Rage kr-solidarity v6.0 (Strike / March / Megaphone / Placard / Scaffold / Substrate)
+**Design System:** Kerala Rage kr-solidarity v6.1 (Strike / March / Megaphone / Placard / Scaffold / Substrate)
 
 ---
 
@@ -74,12 +73,12 @@ Consume high-level feature briefs or the **Annotated Wireframe Protocol** (from 
 
 ---
 
-## Kerala Rage Component Archetypes (v6.0)
+## Kerala Rage Component Archetypes (v6.1)
 
 Every element in the wireframe MUST be assigned one of the six semantic action archetypes:
 
 | Archetype | Role | Emotional Register | Component Examples | Shape Token |
-|---|---|---|---|---|
+| :--- | :--- | :--- | :--- | :--- |
 | **Strike** | Primary action, decisive CTA | Defiance, finality | Button (primary/secondary/ghost/destructive), chip, icon button | `--sys-shape-blockRiot03` |
 | **March** | Sequential selection, flow elements | Collective momentum | Select/dropdown, progress bar, breadcrumb, step indicator | `--sys-shape-blockRiot01` |
 | **Megaphone** | Announcement, focal interruption | Urgency, voice | Modal dialog, drawer, high-priority alert | `--sys-shape-megaphoneCut01` |
@@ -88,6 +87,7 @@ Every element in the wireframe MUST be assigned one of the six semantic action a
 | **Substrate** | Decorative background, atmospheric | Organic, environmental | Background canvas, hero texture, ambient overlay, avatar mask | `--sys-shape-substrateTile02` |
 
 **Decision Logic:**
+
 1. Is it a primary tap/click action? → **Strike**
 2. Does it select from a sequence of options? → **March**
 3. Does it interrupt with urgency (modal, alarm)? → **Megaphone**
@@ -97,13 +97,13 @@ Every element in the wireframe MUST be assigned one of the six semantic action a
 
 ---
 
-## Token Reference for Annotations (v6.0 Canonical)
+## Token Reference for Annotations (v6.1 Canonical)
 
 ### Colors (`--sys-color-*` only — no hardcoded hex)
 
-**v6.0 canonical semantic tokens** — use exactly these:
+**v6.1 canonical semantic tokens** — use exactly these:
 
-```
+```text
 --sys-color-charcoalBackground-base  → Global floor, dark backgrounds
 --sys-color-paperWhite-base          → High-contrast poster/text on dark
 --sys-color-inkGold-base             → Primary brand accent, CTAs
@@ -123,7 +123,7 @@ Every element in the wireframe MUST be assigned one of the six semantic action a
 
 ### Typography (Font families)
 
-```
+```text
 --sys-type-fontFamilies-display        → Headlines, hero (Fraunces)
 --sys-type-fontFamilies-primary        → Body, UI labels (Work Sans)
 --sys-type-fontFamilies-proclamation   → Proclamation, authoritative (Libre Bodoni)
@@ -134,7 +134,7 @@ Every element in the wireframe MUST be assigned one of the six semantic action a
 
 ### Shape Tokens (`--sys-shape-*`)
 
-```
+```text
 --sys-shape-blockRiot03          → Strike archetype (buttons, chips)
 --sys-shape-blockRiot01          → March archetype (selects, progress)
 --sys-shape-megaphoneCut01       → Megaphone archetype (modals, alerts)
@@ -145,12 +145,16 @@ Every element in the wireframe MUST be assigned one of the six semantic action a
 
 ### Asset Z-Index Layers
 
-```
+```text
 Z-0    → Substrate / base texture (background canvas)
 Z-1    → Atmospheric / motif overlays
 Z-2    → Secondary atmospheric layers
 Z-3+   → UI foreground accents and focal cues
 ```
+
+### Orchestration Tokens (`--sys-space-*`, `--sys-logic-*`)
+
+Refer to `references/orchestration-tokens.md` for full layout grid, spacing, and screen logic definitions.
 
 ---
 
@@ -162,7 +166,7 @@ MUST output well-formed XML. One `<wireframe>` per screen.
 
 ```xml
 <wireframe
-  version="6.0.0"
+  version="6.1.0"
   screen_id="apply-job-form"
   design_system="kr-solidarity"
   mode="solidarity-only"
@@ -208,6 +212,12 @@ MUST output well-formed XML. One `<wireframe>` per screen.
     <disabled><![CDATA[...]]></disabled>
   </states>
 
+  <orchestration>
+    <entry_logic token="--sys-logic-entry">spring-up (200ms)</entry_logic>
+    <exit_logic token="--sys-logic-exit">fade-down</exit_logic>
+    <loading_state token="--sys-logic-loading">skeleton-substrate</loading_state>
+  </orchestration>
+
   <assets>
     <slot name="hero-illustration" z_layer="Z-1" token="--sys-color-inkGold-base">
       TODO[asset] hero_social_work_scene
@@ -241,7 +251,7 @@ MUST output well-formed XML. One `<wireframe>` per screen.
 
 ---
 
-### Detailed Schema & Examples
+## Detailed Schema & Examples
 
 To keep this skill concise and reduce token drift, the full schema and long-form examples live under `references/`:
 
@@ -252,7 +262,7 @@ To keep this skill concise and reduce token drift, the full schema and long-form
 
 ## Usage
 
-```
+```text
 "Generate annotated wireframe for [Screen Name] using [feature brief / Protocol File]"
 
 Examples:
@@ -266,10 +276,12 @@ Examples:
 ## Integration
 
 **Upstream (what feeds into this skill):**
+
 - `design-system-doc-generator` — Produces Annotated Wireframe Protocol
 - Feature briefs and user flow docs
 
 **Downstream (what consumes this output):**
+
 - `asset-placement-strategy` — Resolves `TODO[asset]` slots (`<assets>` block)
 - `m3-expressive-ui-evaluator` — Validates M3 Expressive motion + typography (`<motion>`, `<score>` blocks)
 - `ui-design-evaluator` — Generates HiFi mockup from annotated wireframe
@@ -280,7 +292,8 @@ Examples:
 - `component-visual-audit` — Uses `<visualregression>` block for baseline captures
 
 **Full pipeline:**
-```
+
+```text
 design-system-doc-generator
   → wireframe-annotator (this skill)
       → asset-placement-strategy   (resolve <assets> TODO[asset] slots)
@@ -306,4 +319,4 @@ design-system-doc-generator
 
 ---
 
-**Version:** 6.0.0 | **Last Updated:** 2026-03-07 | **Mode:** Solidarity Only | **Archetypes:** v6.0 (Strike/March/Megaphone/Placard/Scaffold/Substrate)
+**Version:** 6.1.0 | **Last Updated:** 2026-03-07 | **Mode:** Solidarity Only | **Archetypes:** v6.1 (Strike/March/Megaphone/Placard/Scaffold/Substrate)

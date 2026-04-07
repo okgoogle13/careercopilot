@@ -6,11 +6,15 @@ commands:
   - /enforce-brand
   - /kr-check
 metadata:
-  version: 6.2.0
+  version: 6.3.0
   tags:
     - brand
     - compliance
     - kr-solidarity
+    - kr-solidarity-v6.1
+    - archetypes
+    - motion-tokens
+    - shape-tokens
 ---
 
 # KR Solidarity Brand Enforcer
@@ -42,9 +46,13 @@ Severity configuration:
 Deterministic rule IDs:
 - `BR-COLOR-001` hardcoded hex values
 - `BR-COLOR-002` disallowed white background usage
-- `BR-TYPE-001` banned fonts
+- `BR-COLOR-003` non-semantic color tokens
+- `BR-TYPE-001` non-approved variable font stack (Work Sans, Fraunces, Libre Bodoni, JetBrains Mono)
 - `BR-SHAPE-001` disallowed `border-radius: 50%`
+- `BR-ARCH-001` non-archetype shape tokens (Strike, Placard, Scaffold, March, Megaphone, Substrate)
 - `BR-MOTIF-001` flora motif drift
+- `BR-MOTION-001` motion pattern token validation (dragSettle, typeSpringSlam, waterRipple, windFlutter, pulseThrob, melancholyBreath)
+- `BR-MOTION-002` hardcoded animation durations outside archetype mappings
 
 ## Process
 

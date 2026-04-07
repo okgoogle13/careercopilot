@@ -1,39 +1,43 @@
 ---
 name: design-token-validator
-description: Validate CareerCopilot design tokens for DTCG compliance, kerala-rage
-  palette rules, circular references, and WCAG contrast. Use before wireframing or
-  deployment.
+description: Validate CareerCopilot design tokens for KR Solidarity v6.1 compliance,
+  semantic color tokens, archetype shapes, motion patterns, WCAG contrast, and zero-flora
+  rules. Use before deployment or component authoring.
 metadata:
-  legacy_frontmatter:
-    tags:
+  version: 3.0.0
+  tags:
     - design-tokens
     - validation
-    - kerala-rage
+    - kr-solidarity-v6.1
+    - semantic-colors
+    - archetype-shapes
+    - motion-patterns
     - accessibility
-    version: 2.0.0
+    - zero-flora
 ---
 
 # Design Token Validator
 
 ## Quick Decision Tree
 
-- **Build failing with getValue() errors?** → `python scripts/audit_tailwind.py`
-- **Adding new tokens?** → `python scripts/audit_structure.py`
-- **Checking aesthetic compliance?** → `python scripts/validate_palette_mcp.py`
-- **Pre-commit validation?** → `bash scripts/run_full_audit.sh`
+- **Checking semantic color tokens?** → Verify all colors use `--sys-color-*` format
+- **Adding archetype shapes?** → Validate against Strike, Placard, Scaffold, March, Megaphone, Substrate shape tokens
+- **Using motion patterns?** → Ensure duration compliance with archetype mappings (march/placard=800ms, strike/megaphone=600ms, substrate=3000ms)
+- **Pre-deployment validation?** → Run brand enforcer + token validator together
+- **Checking flora/botanical refs?** → Zero-flora lockdown active—no Australian endemic fauna
 
 ## Purpose
 
-Ensures design token integrity by validating DTCG compliance, kerala-rage palette rules, circular references, and WCAG contrast ratios before deployment or wireframing. This skill consolidates all kerala-rage kr-solidarity and M3 token validation logic.
+Ensures design token integrity by validating KR Solidarity v6.1 compliance: semantic color tokens (`--sys-color-*`), archetype-specific shape tokens (Strike, Placard, Scaffold, March, Megaphone, Substrate), motion pattern durations, WCAG contrast ratios, and zero-flora brand lockdown. Use before component authoring or deployment.
 
 ## Process
 
-1. **DTCG Compliance**: Verify `$value` and `$type` fields via `audit_structure.py`.
-2. **Tailwind Integration**: Resolve `getValue()` paths via `audit_tailwind.py`.
-3. **Palette Compliance**: Audit against the 6-dimension scorecard ([DEPRECATED_STYLE] Authenticity, Translucency, etc.) via `validate_palette_mcp.py`.
-4. **Mode Parity**: SKIPPED (Single Mode Enforced).
-5. **Accessibility**: Verify WCAG AA contrast ratios (4.5:1 minimum).
-6. **Full Audit**: Run `run_full_audit.sh` for pre-commit verification.
+1. **Semantic Color Compliance**: Verify all color tokens use `--sys-color-{name}-base` naming.
+2. **Archetype Shape Validation**: Confirm shape tokens map to valid archetypes (Strike, Placard, Scaffold, March, Megaphone, Substrate).
+3. **Motion Pattern Duration**: Validate motion durations align with archetype mappings (march/placard=800ms, strike/megaphone=600ms, substrate=3000ms, scaffold=0ms).
+4. **Zero-Flora Lockdown**: Scan for banned flora/botanical references and Australian endemic fauna.
+5. **WCAG 2.2 AA Contrast**: Verify color contrast ratios meet 4.5:1 minimum.
+6. **Typography Validation**: Confirm font stack uses approved variables (Work Sans, Fraunces, Libre Bodoni, JetBrains Mono).
 
 ## When to Use
 
@@ -44,35 +48,57 @@ Ensures design token integrity by validating DTCG compliance, kerala-rage palett
 
 ## Validation Checks
 
-1. ✅ **DTCG Schema**: Validates `$value`, `$type`, and unit compliance.
-2. ✅ **Circular Refs**: Ensures no infinite alias loops.
-3. ✅ **WCAG 2.2 AA**: Contrast checks for all token pairs.
-4. ✅ **Mode Parity**: SKIPPED.
-5. ✅ **6-Dimension Scorecard**:
-   - [DEPRECATED_STYLE] Authenticity (Australian [DEPRECATED_STYLE] references)
-   - Translucency Physics (kr-screenprint/ink pools)
-   - Scale Hierarchy (display→body typography)
-   - Density Zones (Mode-specific contrast)
-   - Background Compliance (#1A1714)
-   - Typography (Fraunces, kr-serif-bold, Work Sans)
+1. ✅ **Semantic Color Tokens**: All colors must use `--sys-color-{name}-base` format.
+2. ✅ **Archetype Shape Tokens**: Shapes must map to approved archetypes (Strike, Placard, Scaffold, March, Megaphone, Substrate).
+3. ✅ **Motion Pattern Duration**: Duration values align with archetype mappings.
+4. ✅ **Zero-Flora Lockdown**: No flora/botanical references; no Australian endemic fauna.
+5. ✅ **WCAG 2.2 AA Contrast**: All color pairs meet 4.5:1 minimum ratio.
+6. ✅ **Typography Compliance**: Only approved variable fonts (Work Sans, Fraunces, Libre Bodoni, JetBrains Mono).
+7. ✅ **Circular References**: No infinite alias loops.
 
-## File Locations
+## Semantic Color Token Format
 
-- Tokens: `src/design/tokens/tokens.json`
-- Theme: `src/theme/kerala-rage-theme.js`
-- Validator: `scripts/design-validation/validate-tokens.py`
+All color tokens must use this naming:
 
-## Usage
-
-```bash
-python3 scripts/design-validation/validate-tokens.py
-# Exit code 0 = pass, 1 = fail
+```json
+{
+  "--sys-color-{name}-base": "hex-value",
+  "--sys-color-{name}-on": "hex-value"
+}
 ```
+
+Examples: `--sys-color-primary-base`, `--sys-color-charcoalBackground-base`
+
+## Archetype Shape Tokens
+
+Map shape tokens to archetypes:
+
+| Archetype | Valid Shape Tokens |
+| --- | --- |
+| Strike | `shape.blockRiot03`, `shape.blockRiot02`, `shape.blockRiot03-loading`, `shape.blockRiot03-pressed`, `shape.alertShard01` |
+| Placard | `shape.placardTorn01`, `shape.placardTorn01-loading`, `shape.placardTorn01-selected` |
+| Scaffold | `shape.scaffoldFrame01`, `shape.scaffoldFrame01-focus` |
+| March | `shape.pillMarch01`, `shape.pillMarch01-pressed`, `shape.marchSurge01`, `shape.marchSurge01-expanded` |
+| Megaphone | `shape.megaphoneCut01`, `shape.megaphoneCut01-loading`, `shape.substrateTile01` |
+| Substrate | `shape.substrateTile02`, `shape.substrateTile01`, `shape.substrateTile01-hover` |
+
+## Motion Duration Compliance
+
+Archetype-specific motion durations:
+
+| Archetype | Duration |
+| --- | --- |
+| march | 800ms |
+| placard | 800ms |
+| strike | 600ms |
+| megaphone | 600ms |
+| substrate | 3000ms |
+| scaffold | 0ms |
 
 ## Integration
 
 Runs automatically before:
 
-- wireframe-annotator (ensures valid token references)
-- design-system-doc-generator (validates source data)
-- component-spec-generator (confirms token availability)
+- Component authoring (validates token availability)
+- Brand enforcement (works alongside `kerala-rage-brand-enforcer`)
+- Deployment (pre-build verification)

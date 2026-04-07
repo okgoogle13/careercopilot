@@ -59,6 +59,7 @@ This file provides guidance to Claude Code (claude.ai/code) and other agentic as
 
 - **Efficiency Mandates**:
   - **MCP-First**: Never read files > 300 lines or search directly. Use `flash-sidekick.quick_summarize`.
+  - **Distill Pipeline**: CRITICAL: Pipe every non-interactive shell command through `distill` unless raw output is explicitly required.
   - **Thinking Bursts**: Use Thinking Mode ONLY for architecture (Phase 4) and identity gates.
   - **Persistent Session Status**: End every session with a `status.md` update.
 - **Delegate Heavy Tasks (>15K tokens)**:
@@ -66,6 +67,41 @@ This file provides guidance to Claude Code (claude.ai/code) and other agentic as
   - Route to `flash-sidekick` first, then escalate to `task-router` for multi-worker handoffs.
 - **Keep Local**:
   - Code review, architectural decisions, git operations, critical integration fixes.
+
+---
+
+### Token Preservation Strategy (3-Layer Defense)
+
+**Layer 1: Written Rules (Self-Enforced by Claude)**
+
+- Always ask `flash-sidekick.quick_summarize` before reading files > 300 lines
+- Never sequential grep + read workflows — batch with `batch_file_analysis` instead
+- Route all visual/screenshot analysis to `design-system-sidekick` (never read as text)
+- When token usage approaches 60% of session budget, warn before each expensive operation
+- Mandatory sidekick routing when usage ≥ 80% (see TOKEN_GUARDIAN.md)
+
+## Distill Rule (ENFORCED)
+CRITICAL: Pipe every non-interactive shell command through `distill` unless raw output is explicitly required.
+Examples:
+- `pytest output`     → `| distill "Did tests pass? Return PASS/FAIL + failing test names only."`
+- `tsc --noEmit`      → `| distill "TypeScript errors? Return PASS/FAIL + file:line:error only."`
+- `yarn lint` / `ruff`  → `| distill "Lint errors? Return PASS/FAIL + file:line:rule only."`
+- `yarn build`        → `| distill "Build succeeded? Return PASS/FAIL + errors only."`
+- `git diff`          → `| distill "What changed? Return file path + one-line summary per file."`
+This single rule applied consistently eliminates ~95% of token cost from command output in every Claude Code session on this repo.
+
+**Layer 2: MCP Budget Check (Call Before Expansion)**
+
+- `flash-sidekick` includes `check_token_budget` tool (to be implemented):
+  - Input: current token usage %, operation type, estimated cost
+  - Output: safe-to-proceed (bool), recommended routing (sidekick vs direct)
+  - Call this before large file reads, multi-file analysis, or document generation
+
+**Layer 3: max_tokens API Parameter (Programmatic Limits)**
+
+- Remote calls and agent invocations set `max_tokens=<budget>` to enforce hard ceiling
+- Prevents single operation from consuming entire session budget
+- Example: `Agent(description, prompt, max_tokens=40000)` caps completion to 40K tokens max
 
 ---
 
