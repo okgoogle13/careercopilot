@@ -2,23 +2,6 @@
 
 Career Copilot is an AI-powered job application assistant built with React 18, TypeScript, FastAPI, Google Genkit, Postgres, and Firebase hosting/auth integrations. This file is the single operational instruction source for coding agents working in this repo.
 
-## Distill-First Operating Mode
-
-`distill` is not just an output filter in this repo. It is the default operating mentality.
-
-- Pipe every non-interactive shell command through `distill` unless exact raw output is required or the command is interactive/TUI.
-- Prompts to `distill` must be explicit: say exactly what you need to know and exactly how the answer should be compressed.
-- Wait for `distill` to finish before taking the next step.
-- Think the same way you use `distill`: start from the smallest authoritative artifact, compress noisy evidence early, avoid broad speculative reads, and prefer short verified summaries over raw dumps.
-- Never dump raw build, test, grep, or audit logs into agent context when a distilled result will do.
-
-Examples:
-
-```bash
-(cd frontend && yarn type-check) | distill "Did the frontend type check pass? Return PASS/FAIL and only failing file:line:error entries."
-(cd backend && pytest) | distill "Did backend tests pass? Return PASS/FAIL, failing test names, and first actionable error only."
-rg -n "figma:asset|--sys-|#[0-9A-Fa-f]{3,6}" frontend/src | distill "List only real violations with file:line and a one-line reason."
-```
 
 ## Current Stage
 
@@ -157,14 +140,14 @@ Non-negotiables:
 Use repo-root-safe commands and keep them distilled.
 
 ```bash
-(cd frontend && yarn test) | distill "Did frontend tests pass? Return PASS/FAIL and failing tests only."
-(cd backend && pytest) | distill "Did backend tests pass? Return PASS/FAIL and failing tests only."
-(cd frontend && yarn type-check) | distill "Did frontend type check pass? Return PASS/FAIL and file:line:error only."
-(cd backend && mypy .) | distill "Did backend mypy pass? Return PASS/FAIL and file:line:error only."
-(cd frontend && yarn lint) | distill "Did frontend lint pass? Return PASS/FAIL and actionable failures only."
-(cd backend && ruff check .) | distill "Did backend Ruff pass? Return PASS/FAIL and actionable failures only."
-node frontend/scripts/validate-governance-artifacts.mjs | distill "Did governance validation pass? Return PASS/FAIL and failing checks only."
-python3 scripts/design-validation/validate-tokens.py | distill "Did design token validation pass? Return PASS/FAIL and violations only."
+(cd frontend && yarn test)
+(cd backend && pytest)
+(cd frontend && yarn type-check)
+(cd backend && mypy .)
+(cd frontend && yarn lint)
+(cd backend && ruff check .)
+node frontend/scripts/validate-governance-artifacts.mjs
+python3 scripts/design-validation/validate-tokens.py
 ```
 
 ## Ask First
@@ -195,7 +178,7 @@ Never:
 
 Before saying work is done:
 
-1. Run the narrowest relevant validation commands through `distill`.
+1. Run the narrowest relevant validation commands.
 2. Verify touched design-integration artifacts still agree:
    - mapping metadata
    - paired wireframe/component
@@ -203,6 +186,37 @@ Before saying work is done:
 3. If UI styling changed, confirm token hygiene and zero-flora compliance.
 4. If route exposure changed, confirm `App.tsx` and `route-registry.ts` intentionally agree.
 5. If backend contracts changed, confirm mounted endpoints and schemas agree.
+
+## Claude Model Ladder
+
+When you ask the human to run Claude Code, follow this model policy:
+
+- Use **Haiku** for:
+  - Inventory, classification, presence checks, PM/status reshaping.
+- Use **Sonnet** for:
+  - Most implementation work (multi-file token fixes, script edits, per-screen parity updates, validation scripts).
+- Use **Opus** only for:
+  - Architectural decisions, route-promotion decisions, and final go/no-go review.
+
+## MCP Health Check — flash-sidekick and vision-scorer-mcp
+
+Goal: Confirm that `flash-sidekick` and `vision-scorer-mcp` are available, behaving correctly, and actually saving Claude tokens.
+
+### Step 1 — Server Presence and Status
+- Run: `claude mcp list`
+- Expect an entry for `flash-sidekick` and `vision-scorer-mcp` with status ✓ or `Connected`.
+
+### Step 2 — flash-sidekick Functional Test (Text-Only)
+- Run `flash-sidekick.quick_summarize`. Validate the output is succinct.
+
+### Step 3 — flash-sidekick Batch Test (Context Savings)
+- Run `flash-sidekick.batch_file_analysis` on 5–10 representative files and inspect JSON size.
+
+### Step 4 — vision-scorer-mcp Functional Test (Scoped Vision)
+- Pick a single, known-good Figma frame and invoke `/vision-scorer-mcp` to get KR Solidarity score.
+
+### Step 5 — Token-Saving Behaviour Check
+- Compare tokens used per turn with and without MCP assistance.
 
 ## Domain Context
 

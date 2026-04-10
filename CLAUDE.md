@@ -21,6 +21,7 @@ This file provides guidance to Claude Code (claude.ai/code) and other agentic as
 - **Cloud**: GCP (us-central1) · Firebase · Cloud Run
 - **Design**: **KR Solidarity v6.1** (M3 Expressive)
 - **Tests**: Jest, Playwright (e2e), pytest
+- **IDE**: Antigravity IDE (antigravity.google) — VS Code-compatible; default for all edits.
 
 ---
 
@@ -103,6 +104,35 @@ This single rule applied consistently eliminates ~95% of token cost from command
 - Prevents single operation from consuming entire session budget
 - Example: `Agent(description, prompt, max_tokens=40000)` caps completion to 40K tokens max
 
+## Claude Model Ladder
+
+- Use **Haiku** for:
+  - Inventory, classification, presence checks, PM/status reshaping.
+- Use **Sonnet** for:
+  - Most implementation work (multi-file token fixes, script edits, per-screen parity updates, validation scripts).
+- Use **Opus** only for:
+  - Architectural decisions, route-promotion decisions, and final go/no-go review.
+
+## MCP Health Check — flash-sidekick and vision-scorer-mcp
+
+Goal: Confirm that `flash-sidekick` and `vision-scorer-mcp` are available, behaving correctly, and actually saving Claude tokens.
+
+### Step 1 — Server Presence and Status
+- Run: `claude mcp list`
+- Expect an entry for `flash-sidekick` and `vision-scorer-mcp` with status ✓ or `Connected`.
+
+### Step 2 — flash-sidekick Functional Test (Text-Only)
+- Run `flash-sidekick.quick_summarize`. Validate the output is succinct.
+
+### Step 3 — flash-sidekick Batch Test (Context Savings)
+- Run `flash-sidekick.batch_file_analysis` on 5–10 representative files and inspect JSON size.
+
+### Step 4 — vision-scorer-mcp Functional Test (Scoped Vision)
+- Pick a single, known-good Figma frame and invoke `/vision-scorer-mcp` to get KR Solidarity score.
+
+### Step 5 — Token-Saving Behaviour Check
+- Compare tokens used per turn with and without MCP assistance.
+
 ---
 
 ## Workspace Structure & Quick Commands
@@ -132,6 +162,14 @@ This single rule applied consistently eliminates ~95% of token cost from command
 | **Scaffold** | `ScaffoldInput.tsx` | `shape.blockRiot02` | Immutable structural framing. |
 | **March** | `March.tsx` | `shape.blockRiot01` | Sequential select flows. |
 | **Megaphone** | `Megaphone.tsx` | `shape.megaphoneCut01` | High-intensity modals/focus parts. |
+
+---
+
+## Hooks
+**Status**: Not yet configured. Known gap for future automation:
+- `PreToolUse(Read)` → route to `flash-sidekick` if file >300 lines
+- `PostToolUse(Edit)` → run `ruff` for `.py`, `tsc --noEmit` for `.ts`
+- Configure via `.claude/settings.local.json` when ready.
 
 ---
 

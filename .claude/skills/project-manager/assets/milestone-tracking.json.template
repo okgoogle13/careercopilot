@@ -1,8 +1,0 @@
-{
-  "milestone_id": "{{milestone_id}}",
-  "name": "{{milestone_name}}",
-  "status": "PENDING",
-  "target_date": "{{target_date}}",
-  "assigned_to": "{{executor_id}}",
-  "dependencies": []
-}
