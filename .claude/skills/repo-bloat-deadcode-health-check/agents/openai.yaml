@@ -1,4 +1,0 @@
-interface:
-  display_name: "Repo Health Pruner"
-  short_description: "Find bloat, dead code, and health risks fast."
-  default_prompt: "Audit this GitHub repository for bloat, dead code candidates, and health risks. Return prioritized findings, a safe cleanup plan, and validation commands."

@@ -1,0 +1,44 @@
+{
+  "name": "button",
+  "type": "registry:component",
+  "category": "ui",
+  "publicName": "Button",
+  "internalArchetype": "Strike",
+  "description": "Primary KR Solidarity action button with token-driven styling and expressive variants.",
+  "dependencies": [
+    "react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "type": "registry:component",
+      "path": "frontend/src/components/ui/Strike.tsx",
+      "target": "src/components/ui/Strike.tsx"
+    }
+  ],
+  "metadata": {
+    "artifactType": "component",
+    "ownerLayer": "components/ui",
+    "supportsAsChild": false,
+    "compositionModel": "single-surface",
+    "slots": [
+      "children",
+      "leadingIcon",
+      "trailingIcon"
+    ],
+    "stateModel": {
+      "supportsControlled": false,
+      "supportsUncontrolled": false
+    },
+    "stylingModel": {
+      "tokenDriven": true,
+      "variantDriven": true
+    },
+    "tokenStatus": "kr-native",
+    "accessibilityStatus": "expected-accessible",
+    "docs": [
+      "docs/design/03_COMPONENTS.md",
+      "docs/design/03b_COMPONENT_LIBRARY_INVENTORY.md"
+    ]
+  }
+}

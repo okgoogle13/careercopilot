@@ -100,29 +100,16 @@ Files successfully integrated into kerala-rage-branch via cherry-pick. The imple
 
 ### Summary
 
-Configures Codex CLI MCP server for GitHub with Personal Access Token (PAT) authentication. Resolves "MCP startup incomplete (failed: github)" error by providing proper authentication configuration.
+Configured a repo-local Codex CLI MCP server for GitHub with Personal Access Token (PAT) authentication. That setup has since been removed from the repository and will need to be reconfigured manually if reintroduced later.
 
 ### Key Changes
 
 #### Configuration Infrastructure
-- **TOML Configuration Template** (`.codex/config.toml`):
-  - `[mcp_servers.github]` section configured
-  - Environment variable-based PAT authentication
-  - `bearer_token_env_var = "CODEX_GITHUB_PERSONAL_ACCESS_TOKEN"`
-
-- **Automated Setup Script** (`scripts/setup-codex-github-mcp.sh`):
-  - Interactive bash script with token validation
-  - GitHub API testing
-  - Shell configuration injection (~/.zshrc, ~/.bashrc)
-  - Backup of existing configurations
-  - Optional global config setup (~/.config/codex/)
+- Repo-local Codex CLI MCP configuration and helper automation were added in the PR being summarized here.
+- Those setup artifacts are no longer present in the repository.
 
 #### Documentation Suite
-- `docs/guides/CODEX_CLI_SETUP.md` - Comprehensive guide (327 lines) with macOS/Linux/Windows instructions
-- `docs/guides/MCP_CONFIGURATION.md` - MCP configuration overview
-- `docs/implementation/CODEX_MCP_IMPLEMENTATION.md` - Implementation summary
-- `.codex/README.md` - Directory-level documentation
-- `.env.mcp.example` - Updated with `CODEX_GITHUB_PERSONAL_ACCESS_TOKEN`
+- `docs/guides/MCP_CONFIGURATION.md` remains as the general MCP configuration overview.
 
 ### Expected Impact
 
