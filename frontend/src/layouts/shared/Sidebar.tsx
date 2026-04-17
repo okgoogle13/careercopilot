@@ -15,7 +15,7 @@ import { KrDarkSpring } from '@/design/tokens/motion-presets';
 const mainNavItems = [
   { path: '/dashboard', icon: Home, label: 'Dashboard' },
   { path: '/opportunities', icon: Briefcase, label: 'Jobs' },
-  { path: '/tracker', icon: ClipboardList, label: 'Applications' },
+  { path: '/applications', icon: ClipboardList, label: 'Applications' },
   { path: '/analysis', icon: BarChart3, label: 'Analysis' },
   { path: '/documents', icon: FileText, label: 'Documents' },
   { path: '/profile', icon: UserCircle, label: 'Profile' },

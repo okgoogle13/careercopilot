@@ -3,7 +3,7 @@
   "wireframe_path": ".claude/wireframes/09_finalization.xml",
   "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/ApplicationFinalization.tsx",
   "screen_component_path": "frontend/src/screens/09_finalization/ApplicationFinalization.tsx",
-  "route": "/kr/finalization",
-  "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+  "route": "/apply",
+  "notes": "Paired package for wireframe-to-TSX comparison. Runtime canonical route is /apply.",
   "local_wireframe_path": "frontend/src/screens/09_finalization/09_finalization.wireframe.xml"
 }

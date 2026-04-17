@@ -18,7 +18,7 @@ export interface KanbanTrackerProps {
 /**
  * KanbanTracker (High-Fidelity Screen)
  *
- * Replaces the legacy ApplicationTracker at /tracker.
+ * Paired high-fidelity reference for the canonical /applications surface.
  * Fulfils the wireframe design truth for screen 07_kanban.
  */
 export const KanbanTracker = memo(function KanbanTracker({ className }: KanbanTrackerProps) {
@@ -66,7 +66,7 @@ export const KanbanTracker = memo(function KanbanTracker({ className }: KanbanTr
             variant="primary"
             label="NEW_MISSION"
             size="sm"
-            onClick={() => window.location.assign('/apply/quick')}
+            onClick={() => window.location.assign('/apply')}
             className="px-6 py-2 text-[9px]"
           />
         </div>

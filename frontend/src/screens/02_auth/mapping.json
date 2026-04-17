@@ -3,7 +3,7 @@
   "wireframe_path": ".claude/wireframes/02_auth.xml",
   "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch2/AuthModal.tsx",
   "screen_component_path": "frontend/src/screens/02_auth/AuthModal.tsx",
-  "route": "/kr/auth",
-  "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+  "route": "/auth",
+  "notes": "Paired package for wireframe-to-TSX comparison. Runtime canonical route is /auth with mode handled via query params.",
   "local_wireframe_path": "frontend/src/screens/02_auth/02_auth.wireframe.xml"
 }

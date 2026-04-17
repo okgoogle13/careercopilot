@@ -75,7 +75,7 @@ export const HeroLanding = memo(function HeroLanding({
   const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
 
   const handlePrimary = onPrimaryAction ?? (() => navigate('/auth'));
-  const handleSecondary = onSecondaryAction ?? (() => navigate('/docs'));
+  const handleSecondary = onSecondaryAction ?? (() => navigate('/documents'));
 
   return (
     <motion.section

@@ -308,7 +308,7 @@ export function Dashboard() {
         <motion.div variants={item as any}>
           {!hasMaster ? (
             <Link
-              to="/career/ingest"
+              to="/profile"
               className="block w-full rounded-placard border border-[--sys-color-inkGold-base]/35 bg-[--sys-color-inkGold-base] text-[--sys-color-charcoalBackground-base] px-8 py-6 font-black uppercase tracking-wide text-center transition-all duration-300"
             >
               <span className="inline-flex items-center justify-center gap-3">
@@ -318,7 +318,7 @@ export function Dashboard() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Link
-                to="/apply/quick"
+                to="/apply"
                 className="rounded-placard px-7 py-5 font-black uppercase tracking-wide text-center transition-all duration-300 hover:-translate-y-0.5"
                 style={{
                   backgroundColor: 'var(--sys-color-solidarityRed-base)',
@@ -330,7 +330,7 @@ export function Dashboard() {
                 <span className="inline-flex items-center justify-center gap-2">🎯 Apply Now</span>
               </Link>
               <Link
-                to="/career/ingest"
+                to="/profile"
                 className="rounded-placard border border-concrete-grey/25 bg-asphalt-black/40 text-paper-white px-7 py-5 font-bold uppercase tracking-wide text-center transition-all duration-300 hover:border-ink-gold/35"
               >
                 Update Master

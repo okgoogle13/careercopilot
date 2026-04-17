@@ -209,7 +209,7 @@ export function Documents() {
             title="Your generated documents will appear here."
             description="Start with a tailored cover letter or KSC draft and we will archive it automatically."
             ctaLabel="Start with Cover Letter →"
-            ctaHref="/cover-letter-generator"
+            ctaHref="/generation"
           />
         )}
       </div>
@@ -228,7 +228,7 @@ export function Documents() {
               position: 'fixed',
               inset: 0,
               zIndex: 50,
-              backgroundColor: 'var(--sys-color-charcoalBackground-base)',
+              backgroundColor: 'var(--kr-color-charcoal-background-base)',
               opacity: 0.95,
               display: 'flex',
               alignItems: 'center',
@@ -252,7 +252,7 @@ export function Documents() {
                     background: 'none',
                     border: 'none',
                     cursor: 'pointer',
-                    color: 'var(--sys-color-worker-ash-base)',
+                    color: 'var(--kr-color-worker-ash-base)',
                     zIndex: 20,
                   }}
                   data-testid="redline-close-btn"
@@ -367,9 +367,9 @@ function DocumentCard({ document, onRedline, onDocxExport }: DocumentCardProps) 
             onClick={handleRedlineClick}
             className="px-2 py-1 rounded-blockRiot01 text-xs font-medium transition-all"
             style={{
-              backgroundColor: 'var(--sys-color-charcoalBackground-steps-3)',
-              color: 'var(--sys-color-inkGold-base)',
-              border: '1px solid var(--sys-color-inkGold-base)',
+              backgroundColor: 'var(--kr-color-charcoal-background-steps-3)',
+              color: 'var(--kr-color-ink-gold-base)',
+              border: '1px solid var(--kr-color-ink-gold-base)',
             }}
             title="Open Redline Workspace"
             data-testid={`redline-btn-${document.id}`}

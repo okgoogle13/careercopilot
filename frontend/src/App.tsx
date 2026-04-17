@@ -169,24 +169,6 @@ export default function App() {
             path="/auth"
             element={<AuthPage />}
           />
-          <Route
-            path="/login"
-            element={
-              <Navigate
-                to="/auth?mode=login"
-                replace
-              />
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <Navigate
-                to="/auth?mode=register"
-                replace
-              />
-            }
-          />
 
           {/* Developer / Internal Routes */}
           <Route
@@ -231,15 +213,6 @@ export default function App() {
               element={<AnalysisPage />}
             />
             <Route
-              path="/ingestion"
-              element={
-                <Navigate
-                  to="/profile"
-                  replace
-                />
-              }
-            />
-            <Route
               path="/apply"
               element={<ApplyPage />}
             />
@@ -255,155 +228,9 @@ export default function App() {
               path="/onboarding"
               element={<OnboardingPage />}
             />
-
-            {/* Legacy Redirects */}
-            <Route
-              path="/tracker"
-              element={
-                <Navigate
-                  to="/applications"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/lookout"
-              element={
-                <Navigate
-                  to="/opportunities"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/career/ingest"
-              element={
-                <Navigate
-                  to="/ingestion"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/apply/quick"
-              element={
-                <Navigate
-                  to="/apply"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/ksc-generator"
-              element={
-                <Navigate
-                  to="/generation"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/cover-letter-generator"
-              element={
-                <Navigate
-                  to="/generation"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/job-queue"
-              element={
-                <Navigate
-                  to="/dashboard"
-                  replace
-                />
-              }
-            />
             <Route
               path="/documents"
               element={<DocsPage />}
-            />
-            <Route
-              path="/docs"
-              element={
-                <Navigate
-                  to="/documents"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/dashboard-overview"
-              element={
-                <Navigate
-                  to="/dashboard"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/kanban"
-              element={
-                <Navigate
-                  to="/applications"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/identity"
-              element={
-                <Navigate
-                  to="/profile"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/dossier"
-              element={
-                <Navigate
-                  to="/profile"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/feed"
-              element={
-                <Navigate
-                  to="/opportunities"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/studio"
-              element={
-                <Navigate
-                  to="/generation"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/editor"
-              element={
-                <Navigate
-                  to="/documents"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/welcome"
-              element={
-                <Navigate
-                  to="/onboarding"
-                  replace
-                />
-              }
             />
           </Route>
 

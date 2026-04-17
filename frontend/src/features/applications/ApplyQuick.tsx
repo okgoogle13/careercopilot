@@ -294,7 +294,7 @@ export function ApplyQuick() {
             >
               <JobAnalysisResultsPanel
                 result={result}
-                onNavigateToTracker={() => navigate('/tracker')}
+                onNavigateToTracker={() => navigate('/applications')}
               />
             </motion.div>
           )}
