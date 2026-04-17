@@ -114,7 +114,7 @@ export const KrDarkLanding: React.FC = () => {
             title="Career Resurrection"
             content="Your professional history is ready for structured review. Build stronger applications with clear evidence, targeted analysis, and deliberate drafting."
             actionLabel="SECURE ACCESS"
-            onAction={() => (window.location.href = '/login')}
+            onAction={() => (window.location.href = '/auth?mode=login')}
             className="w-full"
           />
         </motion.div>

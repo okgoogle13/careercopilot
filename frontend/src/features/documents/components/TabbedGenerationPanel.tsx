@@ -4,18 +4,17 @@
  *
  * Steps + Tabbed Generation pattern harvested from:
  * sources/prototype_v2.0/src/pages/LibraryReferencePage.tsx
- * Route owner: /documents (AI Interaction harvest)
+ * Runtime owner: /generation
  *
  * Patterns extracted:
  * - Tab navigation (Resume, Cover Letter, KSC, Interview, Networking)
  * - 3-step progress header (Tailor → Generate → Review)
  * - AnimatePresence content transitions per tab+step
  *
- * KR Solidarity v6.1 compliance:
- * - --sys-color-* tokens only (no hex)
- * - --sys-shape-* for border geometry
- * - Zero-Flora: no botanical motifs
- * - No Firebase, no react-router-dom, no activeTab shell
+ * Current convergence note:
+ * - Runtime route is canonical at /generation
+ * - This harvested panel still carries older token usage and should be migrated
+ *   to semantic --kr-* tokens in a dedicated design-system cleanup pass.
  */
 
 import { useState } from 'react';

@@ -13,10 +13,6 @@ const mockUserStore = {
   OnboardingPage: () => <div data-testid="onboarding-page" />,
 }));
 
-(jest as any).unstable_mockModule('react-router-dom', () => ({
-  Navigate: ({ to }: { to: string }) => <div data-testid="navigate">{to}</div>,
-}));
-
 const { OnboardingRoute } = await import('../OnboardingRoute');
 
 describe('OnboardingRoute', () => {
@@ -24,10 +20,10 @@ describe('OnboardingRoute', () => {
     mockUserStore.isNewUser = true;
   });
 
-  it('redirects brand-new users to the welcome step', () => {
+  it('renders the onboarding flow for brand-new users', () => {
     render(<OnboardingRoute />);
 
-    expect(screen.getByTestId('navigate')).toHaveTextContent('/welcome');
+    expect(screen.getByTestId('onboarding-page')).toBeInTheDocument();
   });
 
   it('renders the onboarding flow for returning users', () => {

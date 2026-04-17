@@ -1,16 +1,33 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) and other agentic assistants when working with this repository.
-
 > **Output**: Code first. No preamble.
 
 <output_constraints>
-- NO PREAMBLE: Skip all introductory phrases, conversational fillers, and verbose status updates. Lead with direct action verbs.
-- NO UNNECESSARY REPORTS: Status updates must be kept strictly under 2 sentences. Only generate markdown reports if explicitly requested.
-- TOKEN GUARDIAN ACTIVE: Adhere to `.claude/TOKEN_GUARDIAN.md`. Track usage and mandate sidekick routing if session usage exceeds 80%.
-- PLAN LOCATION: **ALWAYS** save implementation plans to `.claude/plans/`.
+- NO PREAMBLE: Skip all introductory phrases and verbose status updates. Lead with direct action verbs.
+- NO UNNECESSARY REPORTS: Status updates strictly under 2 sentences. Only generate markdown reports if explicitly requested.
+- PLAN LOCATION: Save implementation plans to `.claude/plans/`.
 - REPORT LOCATION: Save reports and documentation to `.claude/reports/`.
 </output_constraints>
+
+## Planning Governance
+
+Four canonical surfaces. No others without explicit approval.
+
+| Surface | File | Rule |
+|---|---|---|
+| Repo instructions | `CLAUDE.md` | Evergreen only. Keep under 200 lines. |
+| Sprint brief | `SPRINT_BRIEF.md` | One file. Replace, don't multiply. |
+| Task queue | `TASKS.md` + `dashboard.html` | One task board. No shadow trackers. |
+| Decision log | `DECISIONS.md` | Short entries: what, why, tradeoff, follow-up. |
+| Velocity log | `SPRINT_LOG.md` | One row per sprint close. |
+
+**Rules:**
+- Do not create new `.md` planning files without user approval
+- Do not create parallel sprint plans, status trackers, or strategy notes
+- Every kept artifact must drive execution, report status, or record a durable decision
+- `dashboard.html` is the status view — open locally in browser, reads/writes `TASKS.md`
+- `SPRINT_LOG.md` updated at sprint close only (tasks planned vs done + notes)
+- Codex and Claude Code both operate off `TASKS.md` directly
 
 ---
 
@@ -21,166 +38,158 @@ This file provides guidance to Claude Code (claude.ai/code) and other agentic as
 - **Cloud**: GCP (us-central1) · Firebase · Cloud Run
 - **Design**: **KR Solidarity v6.1** (M3 Expressive)
 - **Tests**: Jest, Playwright (e2e), pytest
-- **IDE**: Antigravity IDE (antigravity.google) — VS Code-compatible; default for all edits.
 
 ---
 
-## Active Initiative: Frontend Source-of-Truth Migration
+## Workspace Commands
 
-**Current Phase**: M1 (Planning Gates)
-**Control Plan**: `docs/project/active/frontend-source-of-truth-migration/`
+```bash
+# Frontend
+cd frontend && yarn dev        # dev server
+cd frontend && yarn test       # Jest
+cd frontend && yarn build      # production build
+python3 scripts/build-m3-tokens.py  # rebuild CSS vars from tokens.json
 
-### Critical M1 Gates (In Progress)
-- [ ] MIG-001: Fix capability matrix (`resolution_status`, `blocked_by`, `resolved_commit`)
-- [ ] MIG-002: Align `validate-governance-artifacts.mjs` with Python tests
-- [ ] MIG-003: Approve 5 migration skills (sprint-coordinator, frontend-backend-mapper, api-contract-validator, migration-audit, verification-before-completion)
-- [ ] MIG-004: Ad-hoc component-inventory review
-- [ ] MIG-005: Define token-enforcement gate (regex scan hardcoded colors)
+# Backend
+cd backend && source venv/bin/activate
+uvicorn app.main:app --reload --port 8000
+pytest
+```
 
----
-
-## Branch Override Context: feat/prototype-harvest-prep
-
-**Current focus**: Harvesting AI Studio prototype logic into `frontend/src/prototype-features/`.
-
-### Quarantine Rules (STRICT ENFORCEMENT)
-| Rule | Detail |
-|---|---|
-| Quarantine boundary | All logic confined to `frontend/src/prototype-features/` only. |
-| Protected paths | **DO NOT TOUCH** `src/features/`, `src/components/ui/`, or `src/api/`. |
-| UI imports | Must resolve to `@/components/PrototypeAdapter` — **never** `@/components/ui`. |
-| Lint suppression | `/* eslint-disable */` at top of every harvested `.ts` / `.tsx` file. |
-| Routes | All prototype routes under `/prototype/*` with `prototype: true`. |
+**Key paths:**
+- UI primitives: `frontend/src/components/ui/`
+- Design tokens (source of truth): `frontend/src/design/tokens/tokens.json`
 
 ---
 
-## Task Delegation & Token Efficiency ⚡
+## Routing Conventions
 
-**RULE: Default to lean local execution plus targeted MCP offload. Use `task-router` for orchestration sesssions.**
+**Single source of truth**: `frontend/src/config/route-registry.ts` — every route lives here. `App.tsx` and `routeModeMap.ts` derive from it; no manual duplication.
 
-- **Efficiency Mandates**:
-  - **MCP-First**: Never read files > 300 lines or search directly. Use `flash-sidekick.quick_summarize`.
-  - **Distill Pipeline**: CRITICAL: Pipe every non-interactive shell command through `distill` unless raw output is explicitly required.
-  - **Thinking Bursts**: Use Thinking Mode ONLY for architecture (Phase 4) and identity gates.
-  - **Persistent Session Status**: End every session with a `status.md` update.
-- **Delegate Heavy Tasks (>15K tokens)**:
-  - Scaffolding, test generation (>50 lines), security/coverage analysis, refactoring.
-  - Route to `flash-sidekick` first, then escalate to `task-router` for multi-worker handoffs.
-- **Keep Local**:
-  - Code review, architectural decisions, git operations, critical integration fixes.
+**Import alias pattern** (in `App.tsx`):
+```ts
+import { ComponentName as RouteName } from './features/feature/ComponentName';
+// e.g. import { Dashboard as DashboardPage } from './features/dashboard/Dashboard';
+```
 
----
+**Route entry shape**:
+```ts
+{ path, name, auth, layout: 'public' | 'migrated' | 'protected', mode: 'KrDark', screenId?, apiDeps[], prototype? }
+```
 
-### Token Preservation Strategy (3-Layer Defense)
+**Layout tiers**:
+| Layout | Shell | Use for |
+|---|---|---|
+| `public` | None | Landing, auth, dev tools |
+| `migrated` | `MigratedRouteLayout` | All production screens |
+| `protected` | `ProtectedLayout` (legacy sidebar) | Support-only surfaces |
 
-**Layer 1: Written Rules (Self-Enforced by Claude)**
-
-- Always ask `flash-sidekick.quick_summarize` before reading files > 300 lines
-- Never sequential grep + read workflows — batch with `batch_file_analysis` instead
-- Route all visual/screenshot analysis to `design-system-sidekick` (never read as text)
-- When token usage approaches 60% of session budget, warn before each expensive operation
-- Mandatory sidekick routing when usage ≥ 80% (see TOKEN_GUARDIAN.md)
-
-## Distill Rule (ENFORCED)
-CRITICAL: Pipe every non-interactive shell command through `distill` unless raw output is explicitly required.
-Examples:
-- `pytest output`     → `| distill "Did tests pass? Return PASS/FAIL + failing test names only."`
-- `tsc --noEmit`      → `| distill "TypeScript errors? Return PASS/FAIL + file:line:error only."`
-- `yarn lint` / `ruff`  → `| distill "Lint errors? Return PASS/FAIL + file:line:rule only."`
-- `yarn build`        → `| distill "Build succeeded? Return PASS/FAIL + errors only."`
-- `git diff`          → `| distill "What changed? Return file path + one-line summary per file."`
-This single rule applied consistently eliminates ~95% of token cost from command output in every Claude Code session on this repo.
-
-**Layer 2: MCP Budget Check (Call Before Expansion)**
-
-- `flash-sidekick` includes `check_token_budget` tool (to be implemented):
-  - Input: current token usage %, operation type, estimated cost
-  - Output: safe-to-proceed (bool), recommended routing (sidekick vs direct)
-  - Call this before large file reads, multi-file analysis, or document generation
-
-**Layer 3: max_tokens API Parameter (Programmatic Limits)**
-
-- Remote calls and agent invocations set `max_tokens=<budget>` to enforce hard ceiling
-- Prevents single operation from consuming entire session budget
-- Example: `Agent(description, prompt, max_tokens=40000)` caps completion to 40K tokens max
-
-## Claude Model Ladder
-
-- Use **Haiku** for:
-  - Inventory, classification, presence checks, PM/status reshaping.
-- Use **Sonnet** for:
-  - Most implementation work (multi-file token fixes, script edits, per-screen parity updates, validation scripts).
-- Use **Opus** only for:
-  - Architectural decisions, route-promotion decisions, and final go/no-go review.
-
-## MCP Health Check — flash-sidekick and vision-scorer-mcp
-
-Goal: Confirm that `flash-sidekick` and `vision-scorer-mcp` are available, behaving correctly, and actually saving Claude tokens.
-
-### Step 1 — Server Presence and Status
-- Run: `claude mcp list`
-- Expect an entry for `flash-sidekick` and `vision-scorer-mcp` with status ✓ or `Connected`.
-
-### Step 2 — flash-sidekick Functional Test (Text-Only)
-- Run `flash-sidekick.quick_summarize`. Validate the output is succinct.
-
-### Step 3 — flash-sidekick Batch Test (Context Savings)
-- Run `flash-sidekick.batch_file_analysis` on 5–10 representative files and inspect JSON size.
-
-### Step 4 — vision-scorer-mcp Functional Test (Scoped Vision)
-- Pick a single, known-good Figma frame and invoke `/vision-scorer-mcp` to get KR Solidarity score.
-
-### Step 5 — Token-Saving Behaviour Check
-- Compare tokens used per turn with and without MCP assistance.
+**Rules**:
+- Production routes source from `features/`, not `components/` or `pages/`
+- Prototype routes go under `/prototype/*` with `prototype: true`
+- `screenId` must match `screens/NN_name/` directory if one exists
+- CI enforced via `tools/ci/check-route-integrity.ts` and `check-screen-pairs.ts`
 
 ---
 
-## Workspace Structure & Quick Commands
+## Figma MCP Workflow
 
-- **Frontend**: `cd frontend` -> `yarn dev`, `yarn test`, `yarn build`.
-  - UI Primitives: `src/components/ui/`
-  - Design Tokens: `src/design/tokens/tokens.json` (**Source of Truth**)
-- **Backend**: `cd backend && source venv/bin/activate` -> `uvicorn app.main:app --reload --port 8000`, `pytest`.
-- **Rebuild Tokens**: `python3 scripts/build-m3-tokens.py` (rebuilds CSS variables from `tokens.json`).
+**URL parsing** — extract `fileKey` and `nodeId`:
+```
+figma.com/design/:fileKey/:name?node-id=:nodeId   ← convert "-" to ":" in nodeId
+figma.com/board/:fileKey/:name                     ← FigJam, use get_figjam
+figma.com/design/:fileKey/branch/:branchKey/...   ← use branchKey as fileKey
+```
+
+**Design-to-code steps**:
+1. `get_design_context(fileKey, nodeId)` — primary tool; returns code + screenshot + hints
+2. Adapt output to project stack (React + Tailwind v4 + KR Solidarity tokens)
+3. Map CSS vars from Figma → `--sys-color-{name}-base` tokens
+4. Replace raw hex / absolute positioning with semantic tokens and KR archetypes
+
+**Dev Mode**:
+- Use `get_design_context` with dev mode node IDs for spec-accurate measurements
+- Code Connect mappings: `get_code_connect_map` / `send_code_connect_mappings`
+- Design system search: `search_design_system` before creating new components
+
+**Never**: raw hex colours, white backgrounds, flora, generic shapes.
 
 ---
 
-## Design System: KR Solidarity v6.1 (M3 Expressive)
+## Design System: KR Solidarity v6.1
 
-**Strict Rules**:
-- **Zero-Flora Lockdown**: Absolutely **NO** flora or Australian endemic fauna.
-- **Dark-only**: No white backgrounds. All backgrounds use `--sys-color-charcoalBackground-base`.
-- **No generic shapes**: Use asymmetric `shape.*` tokens (e.g., `shape.blockRiot03`).
-- **Semantic Colors Only**: Use `--sys-color-{name}-base` CSS variables.
-- **Extreme Contrast**: Variable fonts (`Work Sans`, `Fraunces`, `Libre Bodoni`, `JetBrains Mono`) with 9x weight ratios.
+**Hard rules**:
+- **Dark-only**: all backgrounds → `--sys-color-charcoalBackground-base`
+- **Semantic colours only**: `--sys-color-{name}-base` CSS variables
+- **Zero-Flora Lockdown**: no flora or Australian endemic fauna
+- **No generic shapes**: use asymmetric `shape.*` tokens
 
-### Active v6.1 Archetypes
+**Archetypes**:
 | Archetype | Component | Shape Token | Role |
-| --- | --- | --- | --- |
-| **Strike** | `Strike.tsx` | `shape.blockRiot03` | Primary active buttons. |
-| **Placard** | `Placard.tsx` | `shape.placardTorn01` | Content containers/feeds. |
-| **Scaffold** | `ScaffoldInput.tsx` | `shape.blockRiot02` | Immutable structural framing. |
-| **March** | `March.tsx` | `shape.blockRiot01` | Sequential select flows. |
-| **Megaphone** | `Megaphone.tsx` | `shape.megaphoneCut01` | High-intensity modals/focus parts. |
+|---|---|---|---|
+| Strike | `Strike.tsx` | `shape.blockRiot03` | Primary active buttons |
+| Placard | `Placard.tsx` | `shape.placardTorn01` | Content containers/feeds |
+| Scaffold | `ScaffoldInput.tsx` | `shape.blockRiot02` | Structural framing |
+| March | `March.tsx` | `shape.blockRiot01` | Sequential select flows |
+| Megaphone | `Megaphone.tsx` | `shape.megaphoneCut01` | High-intensity modals |
+
+**Variable fonts**: `Work Sans`, `Fraunces`, `Libre Bodoni`, `JetBrains Mono` — 9× weight ratios.
 
 ---
 
-## Hooks
-**Status**: Not yet configured. Known gap for future automation:
-- `PreToolUse(Read)` → route to `flash-sidekick` if file >300 lines
-- `PostToolUse(Edit)` → run `ruff` for `.py`, `tsc --noEmit` for `.ts`
-- Configure via `.claude/settings.local.json` when ready.
+## Model Ladder
+
+| Model | Use for |
+|---|---|
+| Haiku | Inventory, classification, presence checks, PM/status reshaping |
+| Sonnet | Most implementation (multi-file edits, validation scripts, per-screen parity) |
+| Opus | Architectural decisions, route-promotion decisions, final go/no-go |
 
 ---
 
 ## Code Review Standards
-- Functions > 30 lines: Likely doing too much.
-- Logic duplicated > 2×: Extract to utility.
-- No `any` type in TypeScript: Use strict types.
-- Missing error handling: Async operations must have catch/error handling.
-- Grouping props: Components with > 3 props should group them into an object if logical.
+
+- Functions > 30 lines: likely doing too much
+- Logic duplicated > 2×: extract to utility
+- No `any` in TypeScript
+- Async operations must have catch/error handling
+- Components with > 3 props: group into an object if logical
 
 Run `/simplify` before presenting code results.
 
 ---
-*Tokens are law. Semantic CSS variables are truth. Zero-Flora enforced.*
+*Semantic CSS variables are truth. Zero-Flora enforced.*
+
+---
+
+## Memory (Hot Cache)
+
+### Me
+Jonas Dougall — solo founder, lead engineer + designer on CareerCopilot.
+
+### People
+| Who | Role |
+|-----|------|
+→ Full profiles: memory/people/
+
+### Terms
+| Term | Meaning |
+|------|---------|
+| KR Solidarity | Design system v6.1, M3 Expressive, dark-only |
+| canonical shell | Sidebar + page chrome header + content frame, stable node IDs |
+| sync-contract | `figma-sync-order.json` + `figma-agent-tasks.md` — Figma↔code mapping source of truth |
+| redirect-history | Legacy route aliases — traceability only, not active product surfaces |
+| node ID | Figma frame identifier used for code targeting (e.g. `1:4411`) |
+| route family | Group of related routes (e.g. `/applications` = `/tracker` + `/kanban`) |
+→ Full glossary: memory/glossary.md
+
+### Projects
+| Name | What |
+|------|------|
+| **CareerCopilot** | AI job application assistant — Figma-to-code convergence phase |
+→ Details: memory/projects/
+
+### Preferences
+- Terse, action-first. No preamble. Code first.
+- Plans → `.claude/plans/` · Reports → `.claude/reports/`
+- No broad Figma-to-code until sync-contract repair + shared shell anchors done

@@ -407,7 +407,7 @@ export const AnalysisPage: React.FC = () => {
                       Export Pack
                     </Strike>
                   </Link>
-                  <Link to="/apply/quick">
+                  <Link to="/apply">
                     <Strike>
                       <Sparkles className="h-4 w-4" />
                       Continue to Quick Apply

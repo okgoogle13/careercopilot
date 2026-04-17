@@ -107,7 +107,7 @@ export function OnboardingPage() {
     if (selected && segment) {
       track('onboarding_jtbd_segment_selected', { segment });
       setUserSegment(segment);
-      navigate('/career/ingest');
+      navigate('/profile');
     }
   };
 
