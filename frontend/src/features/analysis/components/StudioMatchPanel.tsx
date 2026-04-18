@@ -329,7 +329,7 @@ export const StudioMatchPanel: React.FC<MatchDashboardProps> = (props) => {
             <div className="flex justify-end gap-4">
               <button
                 onClick={() => unlockStep('export')}
-                className="bg-transparent hover:bg-[var(--sys-color-charcoalBackground-steps-2)] text-[var(--sys-color-worker-ash-base)] font-bold py-3 px-6 rounded-[var(--sys-shape-radius-lg)] transition-colors text-lg border border-[var(--sys-color-outline-variant)]"
+                className="bg-transparent hover:bg-[var(--sys-color-charcoalBackground-steps-2)] text-[var(--sys-color-worker-ash-base)] font-bold py-3 px-6 rounded-[var(--sys-shape-radius-lg)] transition-colors text-lg border border-[var(--kr-color-concrete-grey-steps-0)]"
               >
                 Skip to Export
               </button>

@@ -96,6 +96,36 @@ export default [
       '@typescript-eslint/no-explicit-any': 'off',
     },
   },
+  // Design system drift: ban legacy token strings in production source
+  {
+    files: ['src/**/*.{ts,tsx}'],
+    ignores: [
+      '**/__tests__/**',
+      '**/*.test.{ts,tsx}',
+      '**/*.spec.{ts,tsx}',
+      '**/*.stories.{ts,tsx}',
+      '**/*.story.{ts,tsx}',
+      '**/_reference/**',
+    ],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'Literal[value=/text-parchment/]',
+          message: 'Banned legacy token: text-parchment. Use a canonical --kr-* semantic token.',
+        },
+        {
+          selector: 'Literal[value=/surface-KrDark-/]',
+          message:
+            'Banned legacy token: surface-KrDark-. Use canonical --kr-color-charcoal-background-* tokens.',
+        },
+        {
+          selector: 'Literal[value=/outline-variant/]',
+          message: 'Banned legacy token: outline-variant. Use a canonical --kr-* semantic token.',
+        },
+      ],
+    },
+  },
   // TODO: Add storybook configuration when flat config is properly supported
   {
     files: ['**/*.stories.{ts,tsx}', '**/*.story.{ts,tsx}'],

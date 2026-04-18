@@ -42,7 +42,7 @@ export function ApplicationCard({
 }: ApplicationCardProps) {
   return (
     <div
-      className={`bg-surface-container rounded-pebble p-space-xl border border-outline-variant shadow-elevation-1 hover:shadow-elevation-2 transition-all duration-medium-1 ease-spring ${className}`}
+      className={`bg-surface-container rounded-pebble p-space-xl border border-[var(--kr-color-concrete-grey-steps-0)] shadow-elevation-1 hover:shadow-elevation-2 transition-all duration-medium-1 ease-spring ${className}`}
     >
       {/* Header Section */}
       <div className="flex items-start justify-between mb-12">

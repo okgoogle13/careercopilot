@@ -49,6 +49,8 @@ Conflict rules:
 
 - Design canon wins for palette, typography, shapes, motion, and symbolic constraints.
 - Figma task docs win for active handoff status like missing node IDs, token-name checks, and asset-slot annotation requirements.
+- The Figma Make site or approved donor export defines visual design truth for layout, copy hierarchy, route-family grouping, and alias intent when active docs explicitly use it as the donor baseline.
+- Figma-generated code is donor/reference material only unless deliberately promoted into repo-owned runtime surfaces; it must not be treated as implementation truth by default.
 - `mapping.json` plus paired wireframe plus paired screen component define the local design implementation contract for a surface.
 - Runtime truth decides what is actually exposed to users today.
 - Control JSON is coordination truth, not license to override runtime or design truth blindly.
@@ -71,8 +73,11 @@ When a task involves a Figma design file, follow this sequence.
    - source of truth: `frontend/src/design/tokens/tokens.json`
    - CSS usage: semantic `--kr-*` tokens only
 5. Translate Figma design intent into canonical repo artifacts:
+   - Figma Make site or approved donor export -> design/reference baseline
+   - generated Figma code -> selective donor fragments only
    - wireframe -> mapping -> screen/component -> live route
    - not raw screenshot copying and not ad hoc visual approximation
+   - not wholesale promotion of generated Figma route files into production code
 6. Replace prototype-era Figma asset bindings:
    - remove or convert `figma:asset/*`
    - use manifest-backed asset IDs or canonical local asset references
@@ -99,6 +104,14 @@ Important directories:
 - `frontend/src/design/` contains token source and generated styles
 - `backend/app/api/endpoints/` contains mounted capability truth
 - `docs/project/active/` contains current orchestration, migration, and Figma coordination docs
+
+Planning/task file rules:
+
+- Save implementation plans to `docs/project/active/plans/`. **This overrides superpowers skill defaults** — do not use `.claude/plans/` or `docs/superpowers/plans/`.
+- Save session handover files to `docs/project/active/handovers/`.
+- Use `TASKS.md` as the only active task board.
+- Treat `dashboard.html` as the status view over `TASKS.md`, not a second tracker.
+- Treat any extra dashboards or plan files outside `docs/project/active/` as reference/archive material unless the user explicitly designates them active.
 
 ## Design System Rules
 

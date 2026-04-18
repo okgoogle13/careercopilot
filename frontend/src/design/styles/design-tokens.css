@@ -328,9 +328,11 @@
   --kr-type-global-settings-font-optical-sizing: auto;
   --kr-type-scale-body: 16px;
   --kr-type-scale-display: 72px;
+  --kr-type-scale-display-hero: clamp(96px, 12vw, 180px);
   --kr-type-scale-headline: 48px;
   --kr-type-scale-hero: 144px;
   --kr-type-scale-micro: 8px;
+  --kr-type-scale-metric-display: clamp(32px, 4vw, 56px);
   --kr-type-scale-small: 12px;
   --kr-type-scale-subhead: 24px;
 

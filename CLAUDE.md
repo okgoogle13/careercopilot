@@ -5,8 +5,8 @@
 <output_constraints>
 - NO PREAMBLE: Skip all introductory phrases and verbose status updates. Lead with direct action verbs.
 - NO UNNECESSARY REPORTS: Status updates strictly under 2 sentences. Only generate markdown reports if explicitly requested.
-- PLAN LOCATION: Save implementation plans to `.claude/plans/`.
-- REPORT LOCATION: Save reports and documentation to `.claude/reports/`.
+- PLAN LOCATION: Save implementation plans to `docs/project/active/plans/`. **This overrides any superpowers skill default** — do not use `.claude/plans/` or `docs/superpowers/plans/`.
+- REPORT LOCATION: Save reports and documentation to `.claude/reports/`. Handovers go to `docs/project/active/handovers/`.
 </output_constraints>
 
 ## Planning Governance
@@ -36,7 +36,7 @@ Four canonical surfaces. No others without explicit approval.
 - **Frontend**: React 18 + TS + Vite + Tailwind v4 + Zustand + TanStack Query
 - **Backend**: FastAPI + SQLAlchemy + Genkit + Python 3.10+
 - **Cloud**: GCP (us-central1) · Firebase · Cloud Run
-- **Design**: **KR Solidarity v6.1** (M3 Expressive)
+- **Design**: **KR Solidarity v6.0** (M3 Expressive)
 - **Tests**: Jest, Playwright (e2e), pytest
 
 ---
@@ -104,7 +104,7 @@ figma.com/design/:fileKey/branch/:branchKey/...   ← use branchKey as fileKey
 **Design-to-code steps**:
 1. `get_design_context(fileKey, nodeId)` — primary tool; returns code + screenshot + hints
 2. Adapt output to project stack (React + Tailwind v4 + KR Solidarity tokens)
-3. Map CSS vars from Figma → `--sys-color-{name}-base` tokens
+3. Map CSS vars from Figma into the repo’s canonical semantic KR token surface (`--kr-*`)
 4. Replace raw hex / absolute positioning with semantic tokens and KR archetypes
 
 **Dev Mode**:
@@ -116,11 +116,11 @@ figma.com/design/:fileKey/branch/:branchKey/...   ← use branchKey as fileKey
 
 ---
 
-## Design System: KR Solidarity v6.1
+## Design System: KR Solidarity v6.0
 
 **Hard rules**:
-- **Dark-only**: all backgrounds → `--sys-color-charcoalBackground-base`
-- **Semantic colours only**: `--sys-color-{name}-base` CSS variables
+- **Dark-only**: all backgrounds → canonical `--kr-color-charcoal-background-*`
+- **Semantic colours only**: canonical `--kr-*` CSS variables
 - **Zero-Flora Lockdown**: no flora or Australian endemic fauna
 - **No generic shapes**: use asymmetric `shape.*` tokens
 
@@ -156,6 +156,10 @@ figma.com/design/:fileKey/branch/:branchKey/...   ← use branchKey as fileKey
 - Components with > 3 props: group into an object if logical
 
 Run `/simplify` before presenting code results.
+- Think before coding: state assumptions, surface tradeoffs, ask before implementing
+- Simplicity first: minimum code that solves the problem — no speculative features
+- Surgical changes: touch only what the request requires; don't improve adjacent code
+- Goal-driven: define verifiable success criteria before starting multi-step tasks
 
 ---
 *Semantic CSS variables are truth. Zero-Flora enforced.*
@@ -191,5 +195,5 @@ Jonas Dougall — solo founder, lead engineer + designer on CareerCopilot.
 
 ### Preferences
 - Terse, action-first. No preamble. Code first.
-- Plans → `.claude/plans/` · Reports → `.claude/reports/`
+- Plans → `docs/project/active/plans/` · Handovers → `docs/project/active/handovers/` · Reports → `.claude/reports/`
 - No broad Figma-to-code until sync-contract repair + shared shell anchors done

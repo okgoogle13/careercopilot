@@ -19,12 +19,12 @@ export function CoverLetterSpecificMetrics({ score, wordCount }: CoverLetterSpec
   };
 
   return (
-    <div className="bg-[var(--sys-color-charcoalBackground-steps-1)] p-8 rounded-2xl border border-[var(--sys-color-outline-variant)] shadow-2xl space-y-8">
+    <div className="bg-[var(--sys-color-charcoalBackground-steps-1)] p-8 rounded-2xl border border-[var(--kr-color-concrete-grey-steps-0)] shadow-2xl space-y-8">
       <div className="flex items-center justify-between">
         <h4 className="font-bold text-lg text-[var(--sys-color-stencilYellow-base)] uppercase tracking-[0.2em] type-solidarityProtest">
           Cover Letter Analysis
         </h4>
-        <div className="px-4 py-1.5 bg-[var(--sys-color-charcoalBackground-steps-2)] border border-[var(--sys-color-outline-variant)] rounded-full">
+        <div className="px-4 py-1.5 bg-[var(--sys-color-charcoalBackground-steps-2)] border border-[var(--kr-color-concrete-grey-steps-0)] rounded-full">
           <span className="text-xs font-bold text-[var(--sys-color-worker-ash-base)] uppercase tracking-widest">
             {wordCount} Words
           </span>
@@ -65,7 +65,7 @@ export function CoverLetterSpecificMetrics({ score, wordCount }: CoverLetterSpec
         />
       </div>
 
-      <div className="flex items-center justify-between p-4 bg-[var(--sys-color-charcoalBackground-steps-2)] border border-[var(--sys-color-outline-variant)] rounded-xl">
+      <div className="flex items-center justify-between p-4 bg-[var(--sys-color-charcoalBackground-steps-2)] border border-[var(--kr-color-concrete-grey-steps-0)] rounded-xl">
         <div className="flex items-center gap-3">
           <div
             className={`w-3 h-3 rounded-full ${score.callToActionPresent ? 'bg-[var(--sys-color-kr-activistSmokeGreen-base)]' : 'bg-[var(--sys-color-solidarityRed-base)]'}`}

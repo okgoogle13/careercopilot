@@ -86,10 +86,10 @@ export const ResumeAuditEntryPoint: React.FC<ResumeAuditEntryPointProps> = ({
 
   return (
     <div
-      className="bg-charcoal-background-steps-2 rounded-placardTorn01 p-6 border border-outline-variant shadow-elevation-1"
+      className="bg-charcoal-background-steps-2 rounded-placardTorn01 p-6 border border-[var(--kr-color-concrete-grey-steps-0)] shadow-elevation-1"
       style={{
         backgroundColor: 'var(--sys-color-charcoalBackground-base)',
-        borderColor: 'var(--sys-color-outline-variant)',
+        borderColor: 'var(--kr-color-concrete-grey-steps-0)',
       }}
     >
       {/* Header */}

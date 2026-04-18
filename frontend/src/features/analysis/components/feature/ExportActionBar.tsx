@@ -34,7 +34,7 @@ export const ExportActionBar: React.FC<Props> = ({
   completedSteps,
 }) => {
   return (
-    <div className="flex flex-col md:flex-row justify-between items-end border-b border-[var(--sys-color-outline-variant)] pb-0 sticky top-0 bg-[var(--sys-color-charcoalBackground-base)] z-40 pt-4">
+    <div className="flex flex-col md:flex-row justify-between items-end border-b border-[var(--kr-color-concrete-grey-steps-0)] pb-0 sticky top-0 bg-[var(--sys-color-charcoalBackground-base)] z-40 pt-4">
       <div className="flex w-full md:w-auto overflow-x-auto scrollbar-hide">
         {completedSteps.includes('analysis') && (
           <button
@@ -116,7 +116,7 @@ export const ExportActionBar: React.FC<Props> = ({
       <div className="flex flex-wrap items-center gap-3 mt-4 md:mt-0 w-full md:w-auto justify-end pb-3 md:pb-2 pr-2">
         <button
           onClick={handleAnalyze}
-          className="fixed bottom-20 right-4 md:static md:bottom-auto md:right-auto z-50 flex items-center gap-2 bg-[var(--sys-color-charcoalBackground-steps-3)] hover:bg-[var(--sys-color-charcoalBackground-steps-4)] text-[var(--sys-color-paperWhite-base)] font-bold py-4 px-6 md:py-2 md:px-4 rounded-2xl md:rounded-full transition-colors shadow-lg md:shadow-none border border-[var(--sys-color-outline-variant)]"
+          className="fixed bottom-20 right-4 md:static md:bottom-auto md:right-auto z-50 flex items-center gap-2 bg-[var(--sys-color-charcoalBackground-steps-3)] hover:bg-[var(--sys-color-charcoalBackground-steps-4)] text-[var(--sys-color-paperWhite-base)] font-bold py-4 px-6 md:py-2 md:px-4 rounded-2xl md:rounded-full transition-colors shadow-lg md:shadow-none border border-[var(--kr-color-concrete-grey-steps-0)]"
         >
           <svg
             className="w-5 h-5 md:hidden"
@@ -142,7 +142,7 @@ export const ExportActionBar: React.FC<Props> = ({
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium transition-colors border ${
                   showAudit
                     ? 'bg-[var(--sys-color-solidarityRed-base)] text-[var(--sys-color-paperWhite-base)] border-[var(--sys-color-solidarityRed-base)]'
-                    : 'bg-transparent text-[var(--sys-color-paperWhite-base)] border-[var(--sys-color-outline-variant)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)]'
+                    : 'bg-transparent text-[var(--sys-color-paperWhite-base)] border-[var(--kr-color-concrete-grey-steps-0)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)]'
                 }`}
               >
                 <svg
@@ -169,7 +169,7 @@ export const ExportActionBar: React.FC<Props> = ({
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium transition-colors border ${
                   saveSuccess
                     ? 'bg-[var(--sys-color-solidarityRed-base)] text-[var(--sys-color-paperWhite-base)] border-[var(--sys-color-solidarityRed-base)]'
-                    : 'bg-transparent text-[var(--sys-color-paperWhite-base)] border-[var(--sys-color-outline-variant)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)]'
+                    : 'bg-transparent text-[var(--sys-color-paperWhite-base)] border-[var(--kr-color-concrete-grey-steps-0)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)]'
                 }`}
               >
                 {isSaving ? (
@@ -235,20 +235,20 @@ export const ExportActionBar: React.FC<Props> = ({
             )}
             <button
               onClick={handleCopyToClipboard}
-              className="border border-[var(--sys-color-outline-variant)] text-[var(--sys-color-paperWhite-base)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)] px-4 py-2 rounded-full text-sm font-medium transition-colors"
+              className="border border-[var(--kr-color-concrete-grey-steps-0)] text-[var(--sys-color-paperWhite-base)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)] px-4 py-2 rounded-full text-sm font-medium transition-colors"
               title="Copy Text"
             >
               Copy to Clipboard for ATS
             </button>
             <button
               onClick={() => exportToPDF()}
-              className="border border-[var(--sys-color-outline-variant)] text-[var(--sys-color-paperWhite-base)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)] px-3 py-2 rounded-full text-sm font-medium transition-colors"
+              className="border border-[var(--kr-color-concrete-grey-steps-0)] text-[var(--sys-color-paperWhite-base)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)] px-3 py-2 rounded-full text-sm font-medium transition-colors"
             >
               PDF
             </button>
             <button
               onClick={() => exportToDOCX()}
-              className="border border-[var(--sys-color-outline-variant)] text-[var(--sys-color-paperWhite-base)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)] px-3 py-2 rounded-full text-sm font-medium transition-colors"
+              className="border border-[var(--kr-color-concrete-grey-steps-0)] text-[var(--sys-color-paperWhite-base)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)] px-3 py-2 rounded-full text-sm font-medium transition-colors"
             >
               DOCX
             </button>

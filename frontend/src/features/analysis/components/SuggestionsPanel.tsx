@@ -18,7 +18,7 @@ export function SuggestionsPanel({ score, documentType }: SuggestionsPanelProps)
   return (
     <Placard
       elevation="raised"
-      className="p-8 border-[var(--sys-color-outline-variant)] bg-[var(--sys-color-charcoalBackground-steps-1)] space-y-6"
+      className="p-8 border-[var(--kr-color-concrete-grey-steps-0)] bg-[var(--sys-color-charcoalBackground-steps-1)] space-y-6"
     >
       <header className="flex items-center gap-3">
         <Target className="w-5 h-5 text-[var(--sys-color-inkGold-base)]" />
@@ -31,7 +31,7 @@ export function SuggestionsPanel({ score, documentType }: SuggestionsPanelProps)
         {score.recommendations.map((suggestion, i) => (
           <li
             key={i}
-            className="flex gap-4 text-sm text-[var(--sys-color-worker-ash-base)] bg-[var(--sys-color-charcoalBackground-base)]/50 p-4 border border-[var(--sys-color-outline-variant)]"
+            className="flex gap-4 text-sm text-[var(--sys-color-worker-ash-base)] bg-[var(--sys-color-charcoalBackground-base)]/50 p-4 border border-[var(--kr-color-concrete-grey-steps-0)]"
             style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
           >
             <AlertTriangle className="w-5 h-5 text-[var(--sys-color-stencilYellow-base)] shrink-0" />
@@ -41,7 +41,7 @@ export function SuggestionsPanel({ score, documentType }: SuggestionsPanelProps)
       </ul>
 
       {documentType === 'resume' && score.missingKeywords.length > 0 && (
-        <div className="pt-6 border-t border-[var(--sys-color-outline-variant)]">
+        <div className="pt-6 border-t border-[var(--kr-color-concrete-grey-steps-0)]">
           <h5 className="font-mono text-[10px] font-bold text-[var(--sys-color-concreteGrey-base)] uppercase tracking-[0.2em] mb-4">
             [ CRITICAL MISSING KEYWORDS ]
           </h5>

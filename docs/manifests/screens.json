@@ -1,8 +1,15 @@
 {
-  "generatedAt": "2026-03-30T14:06:49.864Z",
+  "generatedAt": "2026-04-18T12:30:00.000Z",
   "count": 12,
   "paired": 12,
   "unpaired": 0,
+  "activeFigmaFileKey": "eoNJnwvDZ64OUgSthE20WW",
+  "donorBaseline": {
+    "figmaMakeFileKey": "IryuGDWixbuDc3RVhC6llE",
+    "publishedSiteUrl": "https://fake-pound-31010647.figma.site/",
+    "localExportDir": null,
+    "localExportNote": "Machine-local donor export path intentionally omitted from active manifests."
+  },
   "screens": [
     {
       "screenId": "01_landing",
@@ -11,13 +18,14 @@
       "hasWireframe": true,
       "hasTsx": true,
       "isPaired": true,
+      "surfaceStatus": "canonical",
       "mapping": {
         "wireframe_id": "01_landing",
         "wireframe_path": ".claude/wireframes/01_landing.xml",
         "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch2/HeroLanding.tsx",
         "screen_component_path": "frontend/src/screens/01_landing/HeroLanding.tsx",
-        "route": "/kr/landing",
-        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "route": "/",
+        "notes": "Paired package for wireframe-to-TSX comparison. Runtime canonical route is /.",
         "local_wireframe_path": "frontend/src/screens/01_landing/01_landing.wireframe.xml"
       },
       "wireframePath": "01_landing/01_landing.wireframe.xml",
@@ -32,13 +40,18 @@
       "hasWireframe": true,
       "hasTsx": true,
       "isPaired": true,
+      "surfaceStatus": "canonical",
+      "aliasRoutes": [
+        "/login",
+        "/register"
+      ],
       "mapping": {
         "wireframe_id": "02_auth",
         "wireframe_path": ".claude/wireframes/02_auth.xml",
         "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch2/AuthModal.tsx",
         "screen_component_path": "frontend/src/screens/02_auth/AuthModal.tsx",
-        "route": "/kr/auth",
-        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "route": "/auth",
+        "notes": "Paired package for wireframe-to-TSX comparison. Runtime canonical route is /auth with mode handled via query params.",
         "local_wireframe_path": "frontend/src/screens/02_auth/02_auth.wireframe.xml"
       },
       "wireframePath": "02_auth/02_auth.wireframe.xml",
@@ -53,13 +66,17 @@
       "hasWireframe": true,
       "hasTsx": true,
       "isPaired": true,
+      "surfaceStatus": "canonical",
+      "aliasRoutes": [
+        "/welcome"
+      ],
       "mapping": {
         "wireframe_id": "03_onboarding",
         "wireframe_path": ".claude/wireframes/03_onboarding.xml",
         "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch2/OnboardFlow.tsx",
         "screen_component_path": "frontend/src/screens/03_onboarding/OnboardFlow.tsx",
-        "route": "/kr/onboarding",
-        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "route": "/onboarding",
+        "notes": "Paired package for wireframe-to-TSX comparison. Runtime canonical route is /onboarding.",
         "local_wireframe_path": "frontend/src/screens/03_onboarding/03_onboarding.wireframe.xml"
       },
       "wireframePath": "03_onboarding/03_onboarding.wireframe.xml",
@@ -74,13 +91,18 @@
       "hasWireframe": true,
       "hasTsx": true,
       "isPaired": true,
+      "surfaceStatus": "redirect_history",
+      "redirectTarget": "/profile",
+      "aliasRoutes": [
+        "/career/ingest"
+      ],
       "mapping": {
         "wireframe_id": "04_ingestion",
         "wireframe_path": ".claude/wireframes/04_ingestion.xml",
         "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/IngestionFlow.tsx",
         "screen_component_path": "frontend/src/screens/04_ingestion/IngestionFlow.tsx",
-        "route": "/kr/ingestion",
-        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "route": "/ingestion",
+        "notes": "Redirect-history screen package. Runtime capability is folded into /profile; paired screen remains as donor/reference material.",
         "local_wireframe_path": "frontend/src/screens/04_ingestion/04_ingestion.wireframe.xml"
       },
       "wireframePath": "04_ingestion/04_ingestion.wireframe.xml",
@@ -95,13 +117,14 @@
       "hasWireframe": true,
       "hasTsx": true,
       "isPaired": true,
+      "surfaceStatus": "canonical",
       "mapping": {
         "wireframe_id": "05_analysis",
         "wireframe_path": ".claude/wireframes/05_analysis.xml",
         "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/AnalysisWorkbench.tsx",
         "screen_component_path": "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx",
-        "route": "/kr/analysis",
-        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "route": "/analysis",
+        "notes": "Paired package for wireframe-to-TSX comparison. Runtime canonical route is /analysis.",
         "local_wireframe_path": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml"
       },
       "wireframePath": "05_analysis/05_analysis.wireframe.xml",
@@ -110,24 +133,29 @@
       ]
     },
     {
-      "screenId": "06_lookout",
-      "dirPath": "frontend/src/screens/06_lookout",
+      "screenId": "06_opportunities",
+      "dirPath": "frontend/src/screens/06_opportunities",
       "hasMapping": true,
       "hasWireframe": true,
       "hasTsx": true,
       "isPaired": true,
+      "surfaceStatus": "canonical",
+      "aliasRoutes": [
+        "/lookout",
+        "/feed"
+      ],
       "mapping": {
         "wireframe_id": "06_lookout",
         "wireframe_path": ".claude/wireframes/06_lookout.xml",
-        "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/LookoutDiscovery.tsx",
-        "screen_component_path": "frontend/src/screens/06_lookout/LookoutDiscovery.tsx",
-        "route": "/kr/lookout",
-        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
-        "local_wireframe_path": "frontend/src/screens/06_lookout/06_lookout.wireframe.xml"
+        "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/OpportunitiesDiscovery.tsx",
+        "screen_component_path": "frontend/src/screens/06_opportunities/OpportunitiesDiscovery.tsx",
+        "route": "/opportunities",
+        "notes": "Paired package for wireframe-to-TSX comparison. Runtime canonical route is /opportunities. 06_lookout remains wireframe residue only.",
+        "local_wireframe_path": "frontend/src/screens/06_opportunities/06_opportunities.wireframe.xml"
       },
-      "wireframePath": "06_lookout/06_job_queue.wireframe.xml",
+      "wireframePath": "06_opportunities/06_opportunities.wireframe.xml",
       "tsxFiles": [
-        "LookoutDiscovery.tsx"
+        "OpportunitiesDiscovery.tsx"
       ]
     },
     {
@@ -137,13 +165,18 @@
       "hasWireframe": true,
       "hasTsx": true,
       "isPaired": true,
+      "surfaceStatus": "canonical",
+      "aliasRoutes": [
+        "/tracker",
+        "/kanban"
+      ],
       "mapping": {
         "wireframe_id": "07_kanban",
         "wireframe_path": ".claude/wireframes/07_kanban.xml",
         "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/KanbanTracker.tsx",
         "screen_component_path": "frontend/src/screens/07_kanban/KanbanTracker.tsx",
-        "route": "/kr/kanban",
-        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "route": "/applications",
+        "notes": "Paired package for wireframe-to-TSX comparison. Runtime canonical route is /applications.",
         "local_wireframe_path": "frontend/src/screens/07_kanban/07_kanban.wireframe.xml"
       },
       "wireframePath": "07_kanban/07_kanban.wireframe.xml",
@@ -158,13 +191,18 @@
       "hasWireframe": true,
       "hasTsx": true,
       "isPaired": true,
+      "surfaceStatus": "canonical",
+      "aliasRoutes": [
+        "/docs",
+        "/editor"
+      ],
       "mapping": {
         "wireframe_id": "08_workbench",
         "wireframe_path": ".claude/wireframes/08_workbench.xml",
         "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/DocumentWorkbench.tsx",
         "screen_component_path": "frontend/src/screens/08_workbench/DocumentWorkbench.tsx",
-        "route": "/kr/workbench",
-        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "route": "/documents",
+        "notes": "Paired package for wireframe-to-TSX comparison. Runtime canonical route is /documents.",
         "local_wireframe_path": "frontend/src/screens/08_workbench/08_workbench.wireframe.xml"
       },
       "wireframePath": "08_workbench/08_workbench.wireframe.xml",
@@ -179,13 +217,17 @@
       "hasWireframe": true,
       "hasTsx": true,
       "isPaired": true,
+      "surfaceStatus": "canonical",
+      "aliasRoutes": [
+        "/apply/quick"
+      ],
       "mapping": {
         "wireframe_id": "09_finalization",
         "wireframe_path": ".claude/wireframes/09_finalization.xml",
         "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/ApplicationFinalization.tsx",
         "screen_component_path": "frontend/src/screens/09_finalization/ApplicationFinalization.tsx",
-        "route": "/kr/finalization",
-        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "route": "/apply",
+        "notes": "Paired package for wireframe-to-TSX comparison. Runtime canonical route is /apply.",
         "local_wireframe_path": "frontend/src/screens/09_finalization/09_finalization.wireframe.xml"
       },
       "wireframePath": "09_finalization/09_finalization.wireframe.xml",
@@ -200,16 +242,17 @@
       "hasWireframe": true,
       "hasTsx": true,
       "isPaired": true,
+      "surfaceStatus": "canonical",
       "mapping": {
         "wireframe_id": "10_settings",
         "wireframe_path": ".claude/wireframes/10_settings.xml",
         "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/SettingsControl.tsx",
         "screen_component_path": "frontend/src/screens/10_settings/SettingsControl.tsx",
-        "route": "/kr/settings",
-        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "route": "/settings",
+        "notes": "Paired package for wireframe-to-TSX comparison. Runtime canonical route is /settings.",
         "local_wireframe_path": "frontend/src/screens/10_settings/10_settings.wireframe.xml"
       },
-      "wireframePath": "10_settings/10_profile.wireframe.xml",
+      "wireframePath": "10_settings/10_settings.wireframe.xml",
       "tsxFiles": [
         "SettingsControl.tsx"
       ]
@@ -221,13 +264,18 @@
       "hasWireframe": true,
       "hasTsx": true,
       "isPaired": true,
+      "surfaceStatus": "canonical",
+      "aliasRoutes": [
+        "/dashboard-overview",
+        "/job-queue"
+      ],
       "mapping": {
         "wireframe_id": "11_dashboard",
         "wireframe_path": ".claude/wireframes/11_dashboard.xml",
         "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/DashboardOverview.tsx",
         "screen_component_path": "frontend/src/screens/11_dashboard/DashboardOverview.tsx",
-        "route": "/kr/dashboard",
-        "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+        "route": "/dashboard",
+        "notes": "Paired package for wireframe-to-TSX comparison. Runtime canonical route is /dashboard; active Figma frame remains blocked on redesign.",
         "local_wireframe_path": "frontend/src/screens/11_dashboard/11_dashboard.wireframe.xml"
       },
       "wireframePath": "11_dashboard/11_dashboard.wireframe.xml",
@@ -242,16 +290,22 @@
       "hasWireframe": true,
       "hasTsx": true,
       "isPaired": true,
+      "surfaceStatus": "canonical",
+      "aliasRoutes": [
+        "/ksc-generator",
+        "/cover-letter-generator",
+        "/studio"
+      ],
       "mapping": {
         "wireframe_id": "12_generation",
         "wireframe_path": "frontend/src/screens/12_generation/12_generation.wireframe.xml",
-        "source_component_path": "frontend/src/features/ksc-generator/KSCGenerator.tsx",
+        "source_component_path": "frontend/src/features/documents/components/TabbedGenerationPanel.tsx",
         "screen_component_path": "frontend/src/screens/12_generation/GenerationWorkbench.tsx",
-        "route": "/ksc-generator, /cover-letter-generator",
-        "notes": "Shared layout for generative AI document generation",
+        "route": "/generation",
+        "notes": "Shared layout for the canonical generation workspace. Runtime canonical route is /generation.",
         "local_wireframe_path": "frontend/src/screens/12_generation/12_generation.wireframe.xml"
       },
-      "wireframePath": "12_generation/12_cover_letter_generator.wireframe.xml",
+      "wireframePath": "12_generation/12_generation.wireframe.xml",
       "tsxFiles": [
         "GenerationWorkbench.tsx"
       ]

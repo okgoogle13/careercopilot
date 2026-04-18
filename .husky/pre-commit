@@ -2,8 +2,6 @@
 # Pre-commit hook: Design token validation and rebuild
 # Ensures design tokens remain complete and consistent
 
-set -e  # Exit on first error
-
 # Check if tokens have changed
 if git diff --cached --name-only | grep -q "frontend/src/design/tokens/tokens\.json"; then
   echo "📋 Design tokens changed. Running validation and rebuild..."
@@ -22,6 +20,20 @@ if git diff --cached --name-only | grep -q "frontend/src/design/tokens/tokens\.j
   # Re-stage the rebuilt CSS file
   git add frontend/src/design/styles/design-tokens.css
   echo "✅ CSS variables rebuilt and validated. Added to staging."
+fi
+
+# Run design drift check when frontend files are staged
+if git diff --cached --name-only | grep -q "^frontend/src/"; then
+  STAGED_FRONTEND_FILES=$(git diff --cached --name-only --diff-filter=ACMR | grep "^frontend/src/" || true)
+  echo "🎨 Frontend source staged. Running design drift check..."
+  # Only check the staged frontend files here; the full-tree backlog remains visible in CI.
+  (cd frontend && yarn design:drift-check -- $STAGED_FRONTEND_FILES)
+  DRIFT_EXIT=$?
+  if [ $DRIFT_EXIT -ne 0 ]; then
+    echo "❌ Design drift detected in staged files. Fix violations before committing."
+    exit 1
+  fi
+  echo "✅ Design drift check passed for staged files."
 fi
 
 # Run Python pre-commit hooks for the actual pre-commit stage.

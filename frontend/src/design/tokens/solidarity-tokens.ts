@@ -214,9 +214,11 @@ export default {
       fontSize: {
         body: 'var(--kr-type-scale-body)',
         display: 'var(--kr-type-scale-display)',
+        'display-hero': 'var(--kr-type-scale-display-hero)',
         headline: 'var(--kr-type-scale-headline)',
         hero: 'var(--kr-type-scale-hero)',
         micro: 'var(--kr-type-scale-micro)',
+        'metric-display': 'var(--kr-type-scale-metric-display)',
         small: 'var(--kr-type-scale-small)',
         subhead: 'var(--kr-type-scale-subhead)',
       },

@@ -272,11 +272,10 @@ export const LandingPage: React.FC = () => {
           {FEATURE_CARDS.map((card) => (
             <div
               key={card.id}
-              className="relative overflow-hidden flex flex-col gap-4 p-8 shadow-[0px_4px_8px_0px_rgba(0,0,0,0.35)]"
+              className="relative overflow-hidden rounded-placard flex flex-col gap-4 p-8 shadow-[0px_4px_8px_0px_rgba(0,0,0,0.35)]"
               style={{
                 backgroundColor: 'var(--kr-color-charcoal-background-steps-1)',
                 border: '1px solid var(--kr-color-charcoal-background-steps-3)',
-                borderRadius: 'var(--sys-shape-slab01)',
               }}
             >
               {/* Top color bar */}
@@ -287,7 +286,7 @@ export const LandingPage: React.FC = () => {
               {/* Icon badge */}
               <div
                 className="w-12 h-12 flex items-center justify-center flex-shrink-0"
-                style={{ background: card.iconBg, borderRadius: 'var(--sys-shape-pebble01)' }}
+                style={{ background: card.iconBg, borderRadius: 'var(--kr-shape-march-open01)' }}
               />
               <h3
                 className="font-['Fraunces'] text-2xl uppercase tracking-wide"
@@ -311,9 +310,8 @@ export const LandingPage: React.FC = () => {
 
       {/* Evidence Section — Figma node 1:148 */}
       <section
-        className="relative z-10 mx-8 mb-12 overflow-hidden"
+        className="relative z-10 mx-8 mb-12 overflow-hidden rounded-placard"
         style={{
-          borderRadius: 'var(--sys-shape-slab01)',
           border: '1px solid var(--kr-color-charcoal-background-steps-3)',
         }}
       >
@@ -333,7 +331,7 @@ export const LandingPage: React.FC = () => {
         <div className="relative flex flex-col items-center justify-center py-24 px-8 gap-6">
           <p
             className="font-['Caveat'] text-lg italic opacity-65 -rotate-3"
-            style={{ color: 'var(--kr-color-ink-bronze-base, #da8b48)' }}
+            style={{ color: 'var(--kr-color-solidarity-smoke-orange-base)' }}
           >
             no neutral canvas.
           </p>
@@ -396,7 +394,7 @@ export const LandingPage: React.FC = () => {
           </Link>
           <span
             className="font-['Caveat'] text-[15px] opacity-65"
-            style={{ color: 'var(--kr-color-ink-bronze-base, #da8b48)' }}
+            style={{ color: 'var(--kr-color-solidarity-smoke-orange-base)' }}
           >
             no neutral canvas
           </span>

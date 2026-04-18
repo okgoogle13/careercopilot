@@ -1,46 +1,44 @@
-# PR Summary — Sprint v7-FINAL: Figma Sync + Design System Hardening
+# PR Summary — P16 Donor Documentation Parity
 
-**Branch**: `copilot/update-sprint-plan-transition` → `develop`
-**Date**: 2026-04-01
-
----
+**Date**: 2026-04-18
 
 ## Summary
 
-- Full Figma sync for Landing page (node `1:10`, file `YPDj0edchIDXykYChSmCUd`)
-- KR Solidarity token compliance enforced across modified surfaces
-- SolidaritySidebar wired to AuthContext (removes hardcoded user strings)
-- PrototypeAdapter corrected to only re-export components that exist
-- Sprint planning artifacts created for P08–P15 phases
+- Updates active planning docs to use the current active Figma file for sync truth and the Figma Make donor as the documentation parity baseline.
+- Rewrites stale reporting artifacts that still described the old rescue file and older route model.
+- Refreshes screen manifests so canonical routes, redirect-history surfaces, and donor-aligned screen naming no longer contradict each other.
+- Aligns token/governance enforcement and a few directly-related frontend surfaces with the same parity pass so docs, lint messaging, and runtime token usage no longer disagree.
 
 ## Changes
 
-### Frontend
-- **LandingPage.tsx** — Replaced KrDarkShell with self-contained dark layout. Added: top nav (Logo + Sign In), hero section ("THE SOLIDARITY MANIFESTO" headline, Caveat subtext, dual CTAs, hero image with badges), stat bar, feature cards, evidence section, footer. All tokens use `--kr-color-*` / `--sys-shape-*`.
-- **SolidaritySidebar.tsx** — Wired `useAuth()` for `displayName`, avatar initial, and role label. Removed unused `Briefcase`/`UserCircle` imports.
-- **MigratedRouteLayout.tsx** — Removed dead `ActionButton` import.
-- **PrototypeAdapter/index.ts** — Rewrote to only export components that exist (`button`, `KeralaRageButton`, `Logo`, `Placard`, `ScaffoldInput`, `KrIcon`, `Separator`, `EmptyState`, `metric-card`).
+### Planning docs
+- `TASKS.md` — narrows near-ready confirmation work, removes `/dashboard` from that queue, fixes `/profile` task-state inconsistency, and records donor-doc parity as completed.
+- `docs/project/active/implementation-plan.json` — replaced old rescue-file page plan with a donor-documentation parity plan covering route-model parity, screen-manifest parity, and reporting parity.
+- `docs/project/active/compliance-report.md` — replaced the old P15 branch-specific report with a doc-parity compliance record.
+- `docs/project/active/pr-summary.md` — updated to reflect the actual mixed docs/governance scope of this branch.
 
-### Docs / Artifacts
-- `docs/project/active/canonical-routes.json` — 5 routes promoted CANONICAL (17 total)
-- `docs/project/active/figma-sync-order.json` — 6 batches, 15 pages
-- `docs/project/active/sprint-frame.md` — milestones + readiness gates
-- `docs/project/active/primitive-sync-targets.json` — 8 primitives
-- `docs/project/active/shared-wrapper-targets.json` — 4 wrappers
-- `docs/project/active/implementation-plan.json` — Landing (DONE), Dashboard/Auth (blocked — no node ID)
-- `docs/project/active/compliance-report.md` — P15 gate record
-- `docs/manifests/orphans-final.json` — generated via detect-orphans.js
+### Screen manifests
+- `docs/design/screen-map.json` — updated to current screen directories, canonical route names, and redirect-history notes.
+- `docs/manifests/screens.json` — updated to current paired screen mappings and donor-aligned route metadata.
+
+### Governance and frontend alignment
+- `.github/workflows/ci.yml` and `.husky/pre-commit` — wire design drift checks so CI still shows the backlog while pre-commit checks are scoped to staged frontend files.
+- `scripts/design-validation/check-design-drift.py` and `frontend/package.json` — add and expose the drift checker consistently.
+- `frontend/eslint.config.mjs` and `CLAUDE.md` — align messaging and guidance to canonical `--kr-*` token usage.
+- `frontend/src/features/analysis/components/feature/MatchScoreHeader.tsx`, `frontend/src/features/documents/DocumentStack.tsx`, and `frontend/src/features/landing/LandingPage.tsx` — repair small token/interaction/typography regressions directly tied to the parity review.
 
 ## Verification
 
-| Check | Result |
-|-------|--------|
-| `tsc --noEmit` | ✅ PASS |
-| Token compliance | ✅ PASS — no bare hex |
-| Figma sync (Landing) | ✅ PASS |
-| Jest (34 suite failures) | ⚠️ PRE-EXISTING — html2pdf.js issue, not introduced here |
+Run:
+
+- `python3 -m json.tool docs/project/active/implementation-plan.json >/dev/null`
+- `python3 -m json.tool docs/design/screen-map.json >/dev/null`
+- `python3 -m json.tool docs/manifests/screens.json >/dev/null`
+- `python3 scripts/design-validation/check-design-drift.py frontend/src/features/analysis/components/feature/MatchScoreHeader.tsx frontend/src/features/documents/DocumentStack.tsx frontend/src/features/landing/LandingPage.tsx >/dev/null`
+- `node frontend/scripts/validate-governance-artifacts.mjs`
 
 ## Deferred
 
-- Dashboard + Auth Figma sync: node IDs missing — next loop
-- `generate_implementation_package` MCP: vision models unavailable
+- Archive and analysis docs outside the active planning set still contain older `/kr/*` and `06_lookout` references.
+- `frontend/src/screens/04_ingestion/mapping.json` remains a redirect-history pairing artifact and is not changed in this pass.
+- `/dashboard` still needs an actual redesign in the active Figma file before any code-target confirmation work can proceed.

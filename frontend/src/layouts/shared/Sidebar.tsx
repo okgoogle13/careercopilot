@@ -36,11 +36,11 @@ export function Sidebar() {
         height: '100vh',
         position: 'sticky',
         top: 0,
-        backgroundColor: 'var(--sys-color-surface-container-low, #1D1B18)',
+        backgroundColor: 'var(--kr-color-charcoal-background-steps-1)',
         display: 'flex',
         flexDirection: 'column',
         zIndex: 40,
-        borderRight: '1px solid var(--sys-color-outline-variant, #4D4639)',
+        borderRight: '1px solid var(--kr-color-concrete-grey-steps-0)',
       }}
     >
       {/* Logo Area */}
@@ -74,12 +74,12 @@ export function Sidebar() {
                 style={
                   isActive
                     ? {
-                        backgroundColor: 'var(--sys-color-nav-active-container)',
-                        color: 'var(--sys-color-on-nav-active)',
-                        borderRadius: 'var(--sys-shape-blockRiot02)',
+                        backgroundColor: 'var(--kr-color-kr-activist-smoke-green-steps-0)',
+                        color: 'var(--kr-color-paper-white-base)',
+                        borderRadius: 'var(--kr-shape-block-riot02)',
                       }
                     : {
-                        borderRadius: 'var(--sys-shape-blockRiot01)',
+                        borderRadius: 'var(--kr-shape-block-riot01)',
                       }
                 }
               >
@@ -92,11 +92,14 @@ export function Sidebar() {
       </nav>
 
       {/* User Profile */}
-      <div className="p-4 m-4 bg-surface-container rounded-placard flex-shrink-0 border border-outline-variant">
+      <div
+        className="m-4 flex-shrink-0 rounded-placard border bg-surface-container p-4"
+        style={{ borderColor: 'var(--kr-color-concrete-grey-steps-0)' }}
+      >
         <div className="flex items-center gap-3">
           <div
             className="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-tertiary-container text-on-tertiary-container font-black text-sm"
-            style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
+            style={{ borderRadius: 'var(--kr-shape-block-riot01)' }}
           >
             N
           </div>

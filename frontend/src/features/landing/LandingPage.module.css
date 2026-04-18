@@ -2,13 +2,13 @@
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-color: var(--color-asphalt-black-darkest, #050403);
+  background-color: var(--kr-color-asphalt-black-steps-0);
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   font-family: var(--font-primary, sans-serif);
-  color: var(--color-paper-white, #f0ead6);
+  color: var(--kr-color-paper-white-base);
 }
 
 /* ==========================================
@@ -48,7 +48,7 @@
 .blobA {
   width: 50vw;
   height: 50vh;
-  background: radial-gradient(circle, var(--color-ink-gold, #d4a84b) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--kr-color-ink-gold-base) 0%, transparent 70%);
   top: -10%;
   left: -10%;
   animation: floating var(--duration-slow) infinite alternate ease-in-out;
@@ -57,7 +57,7 @@
 .blobB {
   width: 40vw;
   height: 40vh;
-  background: radial-gradient(circle, var(--color-solidarity-red, #c45c4b) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--kr-color-solidarity-red-base) 0%, transparent 70%);
   bottom: -5%;
   right: -5%;
   animation: floating 8s infinite alternate-reverse ease-in-out;
@@ -66,7 +66,7 @@
 .blobC {
   width: 30vw;
   height: 30vh;
-  background: radial-gradient(circle, var(--color-ink-gold-lightest, #e8c77a) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--kr-color-ink-gold-base) 0%, transparent 70%);
   top: 40%;
   left: 40%;
   animation: floating 12s infinite alternate ease-in-out;
@@ -145,7 +145,7 @@
   font-variation-settings:
     'SOFT' 80,
     'WONK' 1;
-  color: var(--color-concrete-grey, #e6e1d6);
+  color: var(--kr-color-concrete-grey-base);
   margin-top: 2rem;
   opacity: 0.9;
 }
