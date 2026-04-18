@@ -2,8 +2,9 @@
 
 ## Active
 
-- [ ] **Execute delegated drift-cleanup batches** — use `docs/project/active/plans/2026-04-18-agent-delegation-execution-plan.md`; handoff packets are staged for Gemini inventory, Claude semantic review, Claude Code Workstreams A/B/D, and Codex Workstream C (2026-04-18)
-  Claude Code semantic review is still pending; no completion memo is recorded yet in `docs/project/active/handovers/`.
+- [x] ~~**Execute delegated drift-cleanup batches (Workstreams A, B, D)**~~ — completed 2026-04-19: resume-constants.ts (35 violations → 0), LandingPage.module.css (6 → 0), outline-variant across 35 files (186 → 0), KanbanCard hex (3 → 0), AssetLibrary surface-KrDark (4 → 0). Total: 408 → 213 violations. commit 30005bc4.
+- [ ] **Execute delegated drift-cleanup: Workstream C** — `OpportunitiesDiscovery.tsx` (37 violations, includes do-not-migrate `#1e2a2e` case); requires per-file semantic review before replacement
+- [ ] **Execute drift cleanup: WorkflowDiagram.tsx** — 34 violations in `frontend/src/components/ui/WorkflowDiagram.tsx`; not in original workstream scope, needs triage
 - [x] ~~**Complete `/style-guide` Figma reference frame**~~ — rebuilt 2026-04-18: Route/StyleGuide (Desktop) 1440×900, node 372:2; sections: Shell Primitives, Archetypes, Governance Rules, Typography, Footer. Replaces 441px mobile-only frame.
 - [x] ~~**Implement CI/CD checks for Token/Design drift**~~ — created `scripts/design-validation/check-design-drift.py`; wired into Husky pre-commit and CI `frontend-brand-compliance` job; ESLint `no-restricted-syntax` rule added for banned token strings (2026-04-18)
 - [x] ~~**Execute Broad Code Extraction & Sync**~~ — structural shell-compliance verification pass complete 2026-04-18: all 12 routes (public/auth, workflow, desktop canonical) confirmed compliant; no PageCanvas violations; type-check clean; governance artifacts pass. Noted debt: hex drift in /opportunities, Tailwind aliases in /profile, `any` heroData types — tracked by drift checker.
@@ -11,6 +12,9 @@
 ## Waiting On
 
 - [ ] **Collapse redirect-history pages** — for each alias: archive, fold into canonical state/tab, convert to annotation, or remove — *waiting on: canonical shell work per route family*
+- [ ] **surface-KrDark-* violations in legacy shells** — ~91 violations in `layouts/KrDarkShell/` and `layouts/LaboratoryShell/` (not imported by App.tsx/route-registry); deferred — requires design decision on whether to migrate or delete these shells
+- [ ] **Redirect-history Figma cleanup** — archive/rename deprecated redirect nodes inside Figma. Owner: design. Unblocked by: design decision on which nodes are retired.
+- [ ] **Doc cleanup: remove deprecated redirects from sync context** — clean `figma-sync-order.json` and planning docs. Owner: Codex. Unblocked by: Figma cleanup or explicit "skip" decision in TASKS.md.
 
 ## Someday
 
