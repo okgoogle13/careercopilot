@@ -86,7 +86,7 @@ export const KrDarkLanding: React.FC = () => {
           {/* Debug Variant Toggle */}
           <button
             onClick={toggleVariant}
-            className="absolute bottom-4 right-4 z-[100] rounded px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-paper-white/60 transition-all bg-surface-KrDark-slate-smoke-high/80 border border-ink-gold/20 hover:text-paper-white hover:bg-surface-KrDark-slate-smoke-highest/90"
+            className="absolute bottom-4 right-4 z-[100] rounded px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-paper-white/60 transition-all bg-[var(--kr-color-charcoal-background-steps-3)]/80 border border-ink-gold/20 hover:text-paper-white hover:bg-[var(--kr-color-charcoal-background-steps-4)]/90"
           >
             Switch Register (Current: {variant})
           </button>
@@ -125,13 +125,13 @@ export const KrDarkLanding: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.4 }}
         transition={{ delay: 2 }}
-        className="text-center space-y-6 pt-12 border-t border-surface-KrDark-concrete-grey-high/20 w-full max-w-xs"
+        className="text-center space-y-6 pt-12 border-t border-[var(--kr-color-charcoal-background-steps-3)]/20 w-full max-w-xs"
       >
         <div className="flex justify-between items-center px-4">
           <span className="font-mono text-[9px] uppercase tracking-tighter text-paper-white/40">
             EST. 2026
           </span>
-          <div className="h-px flex-1 bg-surface-KrDark-concrete-grey-high/25 mx-4" />
+          <div className="h-px flex-1 bg-[var(--kr-color-charcoal-background-steps-3)]/25 mx-4" />
           <span className="font-mono text-[9px] uppercase tracking-tighter text-paper-white/40">
             SYS_V4.0
           </span>

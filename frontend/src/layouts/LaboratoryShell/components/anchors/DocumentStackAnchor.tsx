@@ -9,7 +9,7 @@ const DOCUMENTS = [
 
 export const DocumentStackAnchor: React.FC = () => {
   return (
-    <div className="flex flex-col h-full bg-surface-KrDark-glass-low border border-white/5 rounded-pebble p-4 backdrop-blur-sm">
+    <div className="flex flex-col h-full bg-[var(--kr-color-charcoal-background-steps-1)] border border-white/5 rounded-pebble p-4 backdrop-blur-sm">
       <div className="flex justify-between items-center mb-4 border-b border-white/5 pb-2">
         <h3 className="font-primary text-sm text-secondary-concrete-grey uppercase tracking-wider">
           Evidence Locker
@@ -31,7 +31,7 @@ export const DocumentStackAnchor: React.FC = () => {
             <div className="flex items-center gap-3">
               <FileText className="w-4 h-4 text-ink-gold opacity-70 group-hover:opacity-100" />
               <div>
-                <div className="text-sm text-on-surface-KrDark-paper-white font-medium">
+                <div className="text-sm text-on-[var(--kr-color-paper-white-base)] font-medium">
                   {doc.name}
                 </div>
                 <div className="text-xs text-secondary-concrete-grey opacity-60">{doc.size}</div>

@@ -10,9 +10,9 @@ interface IconBadgeProps {
 
 export function IconBadge({
   icon: Icon,
-  color = 'text-[#D0BCFF]',
+  color = 'text-[var(--kr-color-protest-metal-blue-base)]',
   size = 'md',
-  background = 'bg-[#36343B]',
+  background = 'bg-[var(--kr-color-charcoal-background-steps-3)]',
   className = '',
 }: IconBadgeProps) {
   const sizeClasses = {

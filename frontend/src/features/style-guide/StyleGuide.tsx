@@ -90,14 +90,14 @@ const ARCHETYPE_MATRIX = [
 ] as const;
 
 const COLOR_TOKENS = [
-  { token: '--kr-color-charcoal-background-base', swatch: '#1A1714', usage: 'substrate' },
-  { token: '--kr-color-worker-ash-base', swatch: '#DAF6B3', usage: 'primary text' },
-  { token: '--kr-color-solidarity-red-base', swatch: '#F14714', usage: 'critical actions' },
-  { token: '--kr-color-ink-gold-base', swatch: '#DAF674', usage: 'focus and halo' },
-  { token: '--kr-color-kr-activist-smoke-green-base', swatch: '#48DA8B', usage: 'success/growth' },
-  { token: '--kr-color-stencil-yellow-base', swatch: '#F6E748', usage: 'attention' },
-  { token: '--kr-color-protest-metal-blue-base', swatch: '#48B3DA', usage: 'cool accent' },
-  { token: '--kr-color-worker-ash-steps-2', swatch: '#A39B8F', usage: 'structure/dividers' },
+  { token: '--kr-color-charcoal-background-base', usage: 'substrate' },
+  { token: '--kr-color-worker-ash-base', usage: 'primary text' },
+  { token: '--kr-color-solidarity-red-base', usage: 'critical actions' },
+  { token: '--kr-color-ink-gold-base', usage: 'focus and halo' },
+  { token: '--kr-color-kr-activist-smoke-green-base', usage: 'success/growth' },
+  { token: '--kr-color-stencil-yellow-base', usage: 'attention' },
+  { token: '--kr-color-protest-metal-blue-base', usage: 'cool accent' },
+  { token: '--kr-color-worker-ash-steps-2', usage: 'structure/dividers' },
 ] as const;
 
 const TYPE_SAMPLES = [
@@ -722,7 +722,6 @@ export function StyleGuide() {
                         </p>
                         <div className="flex justify-between items-center">
                           <p className="text-[10px] text-on-surface-variant italic">{item.usage}</p>
-                          <p className="text-[10px] font-mono opacity-40">{item.swatch}</p>
                         </div>
                       </div>
                     </motion.div>

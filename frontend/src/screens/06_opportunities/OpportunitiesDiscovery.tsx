@@ -37,12 +37,14 @@ interface Intercept {
 
 const STATUS_COLORS: Record<InterceptStatus, { badge: string; bar: string }> = {
   VERIFIED: {
-    badge: 'bg-[#1e2a2e] border border-[#48b3da] text-[#48b3da]',
-    bar: 'bg-[#48b3da]',
+    badge:
+      'bg-[var(--kr-color-charcoal-background-steps-1)] border border-[var(--kr-color-protest-metal-blue-base)] text-[var(--kr-color-protest-metal-blue-base)]',
+    bar: 'bg-[var(--kr-color-protest-metal-blue-base)]',
   },
   URGENT: {
-    badge: 'bg-[#2a1a18] border border-[#f14714] text-[#f14714]',
-    bar: 'bg-[#f14714]',
+    badge:
+      'bg-[var(--kr-color-charcoal-background-steps-0)] border border-[var(--kr-color-solidarity-red-base)] text-[var(--kr-color-solidarity-red-base)]',
+    bar: 'bg-[var(--kr-color-solidarity-red-base)]',
   },
   CLASSIFIED: {
     badge:
@@ -50,22 +52,23 @@ const STATUS_COLORS: Record<InterceptStatus, { badge: string; bar: string }> = {
     bar: 'bg-[var(--kr-color-ink-gold-base)]',
   },
   SAVED: {
-    badge: 'bg-transparent border border-[#daf674] text-[#daf674]',
-    bar: 'bg-[#daf674]',
+    badge:
+      'bg-transparent border border-[var(--kr-color-ink-gold-base)] text-[var(--kr-color-ink-gold-base)]',
+    bar: 'bg-[var(--kr-color-ink-gold-base)]',
   },
 };
 
 const DECRYPT_BUTTON_COLORS: Record<InterceptStatus, string> = {
-  VERIFIED: 'bg-[#48b3da]',
-  URGENT: 'bg-[#f14714]',
+  VERIFIED: 'bg-[var(--kr-color-protest-metal-blue-base)]',
+  URGENT: 'bg-[var(--kr-color-solidarity-red-base)]',
   CLASSIFIED: 'bg-[var(--kr-color-ink-gold-base)]',
   SAVED: 'bg-white/20',
 };
 
 function getScoreColor(score: number): string {
-  if (score >= 92) return '#daf674';
-  if (score >= 85) return '#48da8b';
-  return '#f6e748';
+  if (score >= 92) return 'var(--kr-color-ink-gold-base)';
+  if (score >= 85) return 'var(--kr-color-kr-activist-smoke-green-base)';
+  return 'var(--kr-color-stencil-yellow-base)';
 }
 
 // ─── Mock data (matches Figma exactly) ───────────────────────────────────────
@@ -170,7 +173,7 @@ const SignalBars = ({ bars, status }: { bars: number; status: InterceptStatus })
           key={i}
           className={cn(
             'w-[3px] rounded-t-[1px] transition-colors',
-            i < bars ? activeClass : 'bg-[#323232]'
+            i < bars ? activeClass : 'bg-[var(--kr-color-charcoal-background-steps-4)]'
           )}
           style={{ height: `${h}px` }}
         />
@@ -194,14 +197,17 @@ const StatusBadge = ({ status }: { status: InterceptStatus }) => (
 
 /** Top-right SAVED pill — stencil-yellow outline, matches Figma */
 const SavedBadge = () => (
-  <span className="absolute top-4 right-4 border border-[#daf674] text-[#daf674] text-[8px] font-mono font-thin tracking-[0.06em] uppercase px-2 py-0.5 rounded-tl-[8px] rounded-tr-[2px] rounded-bl-[2px] rounded-br-[8px]">
+  <span className="absolute top-4 right-4 border border-[var(--kr-color-ink-gold-base)] text-[var(--kr-color-ink-gold-base)] text-[8px] font-mono font-thin tracking-[0.06em] uppercase px-2 py-0.5 rounded-tl-[8px] rounded-tr-[2px] rounded-bl-[2px] rounded-br-[8px]">
     SAVED
   </span>
 );
 
 const InterceptCard = ({ intercept }: { intercept: Intercept }) => {
   const scoreColor = getScoreColor(intercept.score);
-  const titleColor = intercept.score >= 92 ? '#daf6b3' : '#8daf75';
+  const titleColor =
+    intercept.score >= 92
+      ? 'var(--kr-color-worker-ash-base)'
+      : 'var(--kr-color-worker-ash-steps-1)';
   const decryptBg = DECRYPT_BUTTON_COLORS[intercept.status];
 
   return (
@@ -210,10 +216,10 @@ const InterceptCard = ({ intercept }: { intercept: Intercept }) => {
       animate={{ opacity: 1, y: 0 }}
       className={cn(
         'relative flex flex-col gap-0 overflow-hidden',
-        'bg-[#1a1a1a]',
-        'border-[#2a2a2a] border border-t-[3px]',
+        'bg-[var(--kr-color-charcoal-background-steps-1)]',
+        'border-[var(--kr-color-charcoal-background-steps-2)] border border-t-[3px]',
         'rounded-tl-[20px] rounded-tr-[4px] rounded-bl-[2px] rounded-br-[12px]',
-        'shadow-[2px_2px_0px_0px_#323232]'
+        'shadow-[2px_2px_0px_0px_var(--kr-color-charcoal-background-steps-4)]'
       )}
     >
       {intercept.saved && <SavedBadge />}
@@ -223,7 +229,7 @@ const InterceptCard = ({ intercept }: { intercept: Intercept }) => {
         <div className="flex items-center justify-between gap-2 mb-[14px]">
           <div className="flex items-center gap-2">
             <StatusBadge status={intercept.status} />
-            <span className="text-[9px] font-mono font-thin tracking-[0.08em] text-[#627a4f] uppercase">
+            <span className="text-[9px] font-mono font-thin tracking-[0.08em] text-[var(--kr-color-worker-ash-steps-0)] uppercase">
               DISPATCH #{intercept.dispatch}
             </span>
           </div>
@@ -242,15 +248,15 @@ const InterceptCard = ({ intercept }: { intercept: Intercept }) => {
         </h3>
 
         {/* Company */}
-        <p className="text-[10px] font-mono font-thin tracking-[0.06em] uppercase text-[#627a4f] mb-[14px]">
+        <p className="text-[10px] font-mono font-thin tracking-[0.06em] uppercase text-[var(--kr-color-worker-ash-steps-0)] mb-[14px]">
           {intercept.company}
         </p>
 
         {/* Divider */}
-        <div className="h-px bg-[#2a2a2a] mb-[14px]" />
+        <div className="h-px bg-[var(--kr-color-charcoal-background-steps-2)] mb-[14px]" />
 
         {/* Description */}
-        <p className="text-[11px] font-mono font-light leading-[1.65] text-[#8daf75] line-clamp-3 mb-[14px]">
+        <p className="text-[11px] font-mono font-light leading-[1.65] text-[var(--kr-color-worker-ash-steps-1)] line-clamp-3 mb-[14px]">
           {intercept.description}
         </p>
 
@@ -259,7 +265,7 @@ const InterceptCard = ({ intercept }: { intercept: Intercept }) => {
           {intercept.tags.map((tag) => (
             <span
               key={tag}
-              className="px-2 py-0.5 text-[8px] font-mono font-bold tracking-[0.07em] uppercase text-[#627a4f] bg-[#242424] border border-[#323232] rounded-tl-[8px] rounded-tr-[2px] rounded-bl-[2px] rounded-br-[8px]"
+              className="px-2 py-0.5 text-[8px] font-mono font-bold tracking-[0.07em] uppercase text-[var(--kr-color-worker-ash-steps-0)] bg-[var(--kr-color-charcoal-background-steps-2)] border border-[var(--kr-color-charcoal-background-steps-4)] rounded-tl-[8px] rounded-tr-[2px] rounded-bl-[2px] rounded-br-[8px]"
             >
               {tag}
             </span>
@@ -267,13 +273,13 @@ const InterceptCard = ({ intercept }: { intercept: Intercept }) => {
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-[#2a2a2a] mb-[14px]" />
+        <div className="h-px bg-[var(--kr-color-charcoal-background-steps-2)] mb-[14px]" />
 
         {/* Footer row */}
         <div className="flex items-start justify-between gap-4">
           {/* Left: location, time, salary */}
           <div className="flex flex-col gap-1">
-            <div className="flex items-center gap-3 text-[9px] font-mono font-thin text-[#627a4f]">
+            <div className="flex items-center gap-3 text-[9px] font-mono font-thin text-[var(--kr-color-worker-ash-steps-0)]">
               <span className="flex items-center gap-1">
                 <MapPin className="w-[9px] h-[9px]" />
                 {intercept.location}
@@ -285,7 +291,7 @@ const InterceptCard = ({ intercept }: { intercept: Intercept }) => {
             </div>
             <p
               className="text-[11px] font-mono font-bold"
-              style={{ color: '#da8b48' }}
+              style={{ color: 'var(--kr-color-solidarity-smoke-orange-base)' }}
             >
               {intercept.salary}
             </p>
@@ -300,16 +306,16 @@ const InterceptCard = ({ intercept }: { intercept: Intercept }) => {
               >
                 {intercept.score}
               </span>
-              <span className="text-[7px] font-mono font-thin tracking-[0.08em] text-[#627a4f] uppercase">
+              <span className="text-[7px] font-mono font-thin tracking-[0.08em] text-[var(--kr-color-worker-ash-steps-0)] uppercase">
                 ATS MATCH
               </span>
             </div>
             <button
               className={cn(
                 'px-4 py-[7px] text-[9px] font-mono font-extrabold tracking-[0.1em] uppercase',
-                'text-[#0f0f0f]',
+                'text-[var(--kr-color-charcoal-background-steps-0)]',
                 'rounded-tl-[32px] rounded-tr-[2px] rounded-bl-[2px] rounded-br-[2px]',
-                'shadow-[2px_2px_0px_0px_#323232]',
+                'shadow-[2px_2px_0px_0px_var(--kr-color-charcoal-background-steps-4)]',
                 'transition-opacity hover:opacity-90',
                 decryptBg
               )}

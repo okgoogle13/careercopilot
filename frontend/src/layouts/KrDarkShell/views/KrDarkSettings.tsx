@@ -77,14 +77,14 @@ export const KrDarkSettings: React.FC = () => {
               <h2 className="font-proclamation text-2xl uppercase text-paper-white/80 shrink-0">
                 {cat.title}
               </h2>
-              <div className="h-px flex-1 bg-surface-KrDark-concrete-grey-high/20" />
+              <div className="h-px flex-1 bg-[var(--kr-color-charcoal-background-steps-3)]/20" />
             </div>
 
             <div className="space-y-4">
               {cat.settings.map((setting) => (
                 <SolidarityCard
                   key={setting.label}
-                  className="p-10 group hover:border-surface-KrDark-concrete-grey-high/30 transition-colors"
+                  className="p-10 group hover:border-[var(--kr-color-charcoal-background-steps-3)]/30 transition-colors"
                 >
                   <div className="flex items-center justify-between gap-12">
                     <div className="space-y-2">
@@ -98,7 +98,7 @@ export const KrDarkSettings: React.FC = () => {
 
                     {/* Toggle Interaction */}
                     <div
-                      className={`w-14 h-7 rounded-march relative cursor-pointer transition-colors duration-500 pb-px ${setting.active ? 'bg-ink-gold' : 'bg-surface-KrDark-concrete-grey-high/10 border border-surface-KrDark-concrete-grey-high/20 shadow-inner'}`}
+                      className={`w-14 h-7 rounded-march relative cursor-pointer transition-colors duration-500 pb-px ${setting.active ? 'bg-ink-gold' : 'bg-[var(--kr-color-charcoal-background-steps-3)]/10 border border-[var(--kr-color-charcoal-background-steps-3)]/20 shadow-inner'}`}
                     >
                       <motion.div
                         animate={setting.active ? { x: 28 } : { x: 4 }}
@@ -140,7 +140,7 @@ export const KrDarkSettings: React.FC = () => {
       </div>
 
       {/* SECTION 3: The Command Linkage */}
-      <div className="flex justify-end items-center gap-8 mt-12 py-10 border-t border-surface-KrDark-concrete-grey-high/20">
+      <div className="flex justify-end items-center gap-8 mt-12 py-10 border-t border-[var(--kr-color-charcoal-background-steps-3)]/20">
         <ActionButton
           variant="secondary"
           label="RESET DEFAULTS"

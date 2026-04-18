@@ -16,7 +16,7 @@ interface BlobConfig {
 const BLOB_CONFIGS: BlobConfig[] = [
   {
     id: 1,
-    color: '#8A9A5B', // Sage
+    color: 'var(--kr-color-worker-ash-steps-1)',
     size: 'w-80 h-80 md:w-96 md:h-96',
     initialPosition: { x: '15%', y: '20%' },
     animationPath: { x: [0, 200, -150, 100, 0], y: [0, -120, 80, -50, 0] },
@@ -26,7 +26,7 @@ const BLOB_CONFIGS: BlobConfig[] = [
   },
   {
     id: 2,
-    color: '#6B4C9A', // Purple
+    color: 'var(--kr-color-protest-metal-blue-base)',
     size: 'w-72 h-72 md:w-[22rem] md:h-[22rem]',
     initialPosition: { x: '60%', y: '15%' },
     animationPath: { x: [0, -180, 120, -80, 0], y: [0, 100, -60, 120, 0] },
@@ -36,7 +36,7 @@ const BLOB_CONFIGS: BlobConfig[] = [
   },
   {
     id: 3,
-    color: '#E2725B', // Terracotta
+    color: 'var(--kr-color-solidarity-smoke-orange-base)',
     size: 'w-64 h-64 md:w-80 md:h-80',
     initialPosition: { x: '35%', y: '55%' },
     animationPath: { x: [0, 150, -100, 50, 0], y: [0, -80, 150, -100, 0] },
@@ -46,7 +46,7 @@ const BLOB_CONFIGS: BlobConfig[] = [
   },
   {
     id: 4,
-    color: '#FFD700', // Gold highlight
+    color: 'var(--kr-color-ink-gold-base)',
     size: 'w-56 h-56 md:w-72 md:h-72',
     initialPosition: { x: '70%', y: '60%' },
     animationPath: { x: [0, -120, 80, -150, 0], y: [0, 60, -120, 80, 0] },
@@ -56,7 +56,7 @@ const BLOB_CONFIGS: BlobConfig[] = [
   },
   {
     id: 5,
-    color: '#8A9A5B', // Second Sage for more merging
+    color: 'var(--kr-color-worker-ash-steps-1)',
     size: 'w-60 h-60 md:w-[18rem] md:h-[18rem]',
     initialPosition: { x: '25%', y: '70%' },
     animationPath: { x: [0, 100, -180, 120, 0], y: [0, -150, 60, -80, 0] },
@@ -134,7 +134,7 @@ export const PlasmaBackground = () => {
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
       {/* Base background color */}
-      <div className="absolute inset-0 bg-[#121212]" />
+      <div className="absolute inset-0 bg-[var(--kr-color-charcoal-background-steps-0)]" />
 
       {/*
                 SVG Filter Definition - THE MAGIC GOOEY EFFECT
@@ -182,7 +182,7 @@ export const PlasmaBackground = () => {
         className="absolute inset-0 z-10"
         style={{
           background:
-            'radial-gradient(ellipse at center, transparent 20%, rgba(18, 18, 18, 0.6) 60%, #121212 100%)',
+            'radial-gradient(ellipse at center, transparent 20%, rgba(18, 18, 18, 0.6) 60%, var(--kr-color-charcoal-background-steps-0) 100%)',
           pointerEvents: 'none',
         }}
       />
