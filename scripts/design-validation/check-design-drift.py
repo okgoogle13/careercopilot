@@ -23,6 +23,11 @@ EXCLUDE_PATH_FRAGMENTS = [
     "node_modules",
     "/design/tokens/",
     "/design/styles/design-tokens.css",
+    "/styles/design-tokens.css",  # legacy sys-color alias file — hex values are definitions, not usage
+    "/stories/",  # Storybook standalone CSS — not rendered in app
+    "exportEngine.ts",  # html2canvas boundary: backgroundColor requires resolved hex for canvas API
+    "WorkflowDiagram.tsx",  # Mermaid themeVariables and diagram strings require hex, not CSS vars
+    "kerala-rage.css",  # KR token definition file — hex values are canonical definitions, not usage
 ]
 
 EXTENSIONS = {".ts", ".tsx", ".css"}

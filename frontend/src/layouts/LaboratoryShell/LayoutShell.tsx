@@ -16,7 +16,7 @@ const KR_LOGO_SRC =
  */
 export const LayoutShell: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-surface-KrDark-slate-smoke-high text-on-surface-paper-white font-primary antialiased">
+    <div className="flex h-screen w-screen overflow-hidden bg-[var(--kr-color-charcoal-background-steps-3)] text-on-surface-paper-white font-primary antialiased">
       {/* Nav Rail - Fixed Width Left */}
       <div className="flex-none z-30">
         <NavRail />
@@ -35,12 +35,12 @@ export const LayoutShell: React.FC<{ children?: React.ReactNode }> = ({ children
           <main className="flex-1 overflow-auto relative z-0">{children || <MainCanvas />}</main>
 
           {/* Side Panel - Fixed Width Right (Collapsible logic to be added later) */}
-          <aside className="flex-none w-80 border-l border-surface-KrDark-slate-smoke-highest bg-surface-KrDark-slate-smoke-high z-10 hidden lg:block">
+          <aside className="flex-none w-80 border-l border-[var(--kr-color-charcoal-background-steps-4)] bg-[var(--kr-color-charcoal-background-steps-3)] z-10 hidden lg:block">
             <SidePanel />
           </aside>
         </div>
 
-        <footer className="flex-none border-t border-surface-KrDark-slate-smoke-highest bg-surface-KrDark-slate-smoke-high px-6 py-4">
+        <footer className="flex-none border-t border-[var(--kr-color-charcoal-background-steps-4)] bg-[var(--kr-color-charcoal-background-steps-3)] px-6 py-4">
           <Link
             to="/"
             aria-label="Kerala Rage CareerCopilot"

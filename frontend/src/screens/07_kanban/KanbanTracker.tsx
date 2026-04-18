@@ -80,7 +80,7 @@ export const KanbanTracker = memo(function KanbanTracker({ className }: KanbanTr
             <UnifiedColumn
               key={col}
               title={col}
-              className="group/col border-r border-surface-KrDark-concrete-grey-high/10 pr-6 last:border-0 min-w-[300px]"
+              className="group/col border-r border-[var(--kr-color-charcoal-background-steps-3)]/10 pr-6 last:border-0 min-w-[300px]"
             >
               <div className="space-y-6">
                 {colApps.map((app, appIdx) => (
@@ -91,7 +91,7 @@ export const KanbanTracker = memo(function KanbanTracker({ className }: KanbanTr
                     transition={{ delay: idx * 0.1 + appIdx * 0.05 }}
                   >
                     <SolidarityCard
-                      className="p-6 group/card cursor-pointer border-surface-KrDark-concrete-grey-high/20 hover:border-ink-gold/30 transition-all duration-500 relative overflow-hidden bg-surface-KrDark-slate-smoke-high/30"
+                      className="p-6 group/card cursor-pointer border-[var(--kr-color-charcoal-background-steps-3)]/20 hover:border-ink-gold/30 transition-all duration-500 relative overflow-hidden bg-[var(--kr-color-charcoal-background-steps-3)]/30"
                       onClick={() => console.log('Opening mission:', app.id)}
                     >
                       <div className="flex flex-col gap-4 relative z-10">
@@ -108,7 +108,7 @@ export const KanbanTracker = memo(function KanbanTracker({ className }: KanbanTr
                           {app.company}
                         </p>
 
-                        <div className="flex items-center gap-4 pt-4 border-t border-surface-KrDark-concrete-grey-high/10 text-[9px] text-paper-white/30 font-mono tracking-tighter">
+                        <div className="flex items-center gap-4 pt-4 border-t border-[var(--kr-color-charcoal-background-steps-3)]/10 text-[9px] text-paper-white/30 font-mono tracking-tighter">
                           <div className="flex items-center gap-1.5 whitespace-nowrap">
                             <MapPin className="w-2.5 h-2.5 text-solidarity-red/40" />
                             {app.location}
@@ -121,7 +121,7 @@ export const KanbanTracker = memo(function KanbanTracker({ className }: KanbanTr
                       </div>
 
                       {/* Asymmetric shape motifs per Zero-Flora archetypes */}
-                      <div className="absolute bottom-0 right-0 w-16 h-16 bg-surface-KrDark-concrete-grey-high/5 blur-2xl rounded-march -mr-8 -mb-8" />
+                      <div className="absolute bottom-0 right-0 w-16 h-16 bg-[var(--kr-color-charcoal-background-steps-3)]/5 blur-2xl rounded-march -mr-8 -mb-8" />
                     </SolidarityCard>
                   </motion.div>
                 ))}

@@ -47,7 +47,7 @@ export const KrDarkApplication: React.FC = () => {
 
             <div className="relative">
               <textarea
-                className="w-full h-64 bg-asphalt-black/50 border border-surface-KrDark-concrete-grey-high/20 rounded-megaphone p-8 font-body text-lg leading-relaxed text-paper-white placeholder:text-paper-white/10 focus:outline-none focus:border-ink-gold/40 focus:ring-1 focus:ring-ink-gold/10 transition-all duration-500 resize-none shadow-viscous"
+                className="w-full h-64 bg-asphalt-black/50 border border-[var(--kr-color-charcoal-background-steps-3)]/20 rounded-megaphone p-8 font-body text-lg leading-relaxed text-paper-white placeholder:text-paper-white/10 focus:outline-none focus:border-ink-gold/40 focus:ring-1 focus:ring-ink-gold/10 transition-all duration-500 resize-none shadow-viscous"
                 placeholder="Declare why your extracted mastery aligns with this specific tactical front line..."
               />
               <div className="absolute bottom-4 right-6 pointer-events-none opacity-20">
@@ -58,15 +58,15 @@ export const KrDarkApplication: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-10 border-t border-surface-KrDark-concrete-grey-high/20">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-10 border-t border-[var(--kr-color-charcoal-background-steps-3)]/20">
             <div className="flex items-center gap-4">
               <span className="font-mono text-[9px] text-paper-white/30 uppercase tracking-widest mr-4">
                 SEQUENCE:
               </span>
               <div className="flex gap-3">
                 <div className="w-5 h-1 bg-ink-gold rounded-march shadow-ink-glow" />
-                <div className="w-5 h-1 bg-surface-KrDark-concrete-grey-high/25 rounded-march" />
-                <div className="w-5 h-1 bg-surface-KrDark-concrete-grey-high/25 rounded-march" />
+                <div className="w-5 h-1 bg-[var(--kr-color-charcoal-background-steps-3)]/25 rounded-march" />
+                <div className="w-5 h-1 bg-[var(--kr-color-charcoal-background-steps-3)]/25 rounded-march" />
               </div>
               <span className="font-mono text-[10px] text-paper-white/40 ml-4 group-hover:text-ink-gold transition-colors">
                 01 / 03

@@ -11,7 +11,7 @@ export const NavRail: React.FC = () => {
   );
 
   return (
-    <nav className="w-16 h-full border-r border-surface-KrDark-slate-smoke-highest bg-surface-KrDark-slate-smoke-high flex flex-col items-center py-4 gap-4 z-30 relative">
+    <nav className="w-16 h-full border-r border-[var(--kr-color-charcoal-background-steps-4)] bg-[var(--kr-color-charcoal-background-steps-3)] flex flex-col items-center py-4 gap-4 z-30 relative">
       {/* Tool Icons Placeholder */}
       <div className="flex flex-col gap-3 w-full px-2">
         {navItems.map((item) => {
@@ -36,7 +36,7 @@ export const NavRail: React.FC = () => {
       </div>
 
       <div className="mt-auto mb-4">
-        <div className="w-8 h-8 rounded-march bg-surface-KrDark-slate-smoke-highest border border-surface-KrDark-slate-smoke-highest" />
+        <div className="w-8 h-8 rounded-march bg-[var(--kr-color-charcoal-background-steps-4)] border border-[var(--kr-color-charcoal-background-steps-4)]" />
       </div>
     </nav>
   );

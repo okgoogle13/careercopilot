@@ -7,12 +7,12 @@ const KR_LOGO_SRC =
 
 export const GlobalHeader: React.FC = () => {
   return (
-    <header className="h-16 border-b border-surface-KrDark-slate-smoke-highest bg-surface-KrDark-slate-smoke-high flex items-center justify-between px-6 shadow-sm z-20 relative">
+    <header className="h-16 border-b border-[var(--kr-color-charcoal-background-steps-4)] bg-[var(--kr-color-charcoal-background-steps-3)] flex items-center justify-between px-6 shadow-sm z-20 relative">
       <div className="flex items-center gap-4">
         <Link
           to="/"
           aria-label="Kerala Rage CareerCopilot"
-          className="flex items-center gap-3 rounded-strike px-2 py-1 transition-colors hover:bg-surface-KrDark-slate-smoke-highest/70"
+          className="flex items-center gap-3 rounded-strike px-2 py-1 transition-colors hover:bg-[var(--kr-color-charcoal-background-steps-4)]/70"
         >
           <img
             src={KR_LOGO_SRC}
@@ -31,7 +31,7 @@ export const GlobalHeader: React.FC = () => {
       </div>
 
       <div className="flex items-center gap-3">
-        <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-megaphone bg-surface-KrDark-concrete-grey-high text-ink-gold shadow-sm">
+        <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-megaphone bg-[var(--kr-color-charcoal-background-steps-3)] text-ink-gold shadow-sm">
           Solidarity Mode
         </div>
 

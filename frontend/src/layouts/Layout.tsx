@@ -16,7 +16,7 @@ export function Layout({ children }: { children: ReactNode }) {
         minHeight: '100vh',
         width: '100%',
         minWidth: '1024px',
-        background: 'var(--sys-color-charcoalBackground-base, #0F0F0F)',
+        background: 'var(--kr-color-charcoal-background-base)',
         position: 'relative',
       }}
     >

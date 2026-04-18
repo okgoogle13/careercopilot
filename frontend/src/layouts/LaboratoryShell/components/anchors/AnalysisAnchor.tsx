@@ -80,7 +80,7 @@ export const AnalysisAnchor: React.FC = () => {
       </div>
 
       {/* Detailed Breakdown */}
-      <div className="flex-1 bg-surface-KrDark-glass-low border border-white/5 rounded-pebble p-6 backdrop-blur-sm flex flex-col gap-4">
+      <div className="flex-1 bg-[var(--kr-color-charcoal-background-steps-1)] border border-white/5 rounded-pebble p-6 backdrop-blur-sm flex flex-col gap-4">
         <div className="flex justify-between items-end border-b border-white/10 pb-2">
           <h3 className="font-primary text-lg text-ink-gold">Analysis Insights</h3>
           <span className="text-xs font-mono text-secondary-concrete-grey opacity-50">
@@ -97,7 +97,7 @@ export const AnalysisAnchor: React.FC = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 10 }}
                 transition={{ delay: idx * 0.1 }}
-                className="flex items-start gap-3 p-3 rounded bg-surface-KrDark-plate/30 border border-white/5 group hover:border-white/10 transition-colors"
+                className="flex items-start gap-3 p-3 rounded bg-[var(--kr-color-charcoal-background-steps-2)]/30 border border-white/5 group hover:border-white/10 transition-colors"
               >
                 <span
                   className={`mt-1.5 w-2 h-2 rounded-march shrink-0 ${
@@ -108,7 +108,7 @@ export const AnalysisAnchor: React.FC = () => {
                         : 'bg-ink-gold'
                   }`}
                 />
-                <span className="text-sm font-body text-secondary-concrete-grey group-hover:text-on-surface-KrDark-paper-white transition-colors">
+                <span className="text-sm font-body text-secondary-concrete-grey group-hover:text-on-[var(--kr-color-paper-white-base)] transition-colors">
                   {insight.text}
                 </span>
               </motion.div>
