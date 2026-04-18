@@ -1,250 +1,556 @@
 {
-  "generatedAt": "2026-04-01T02:10:00.000Z",
-  "phase": "P08",
-  "figma_file_key": "YPDj0edchIDXykYChSmCUd",
-  "description": "Ordered construction plan for Figma sync. Shared layout components appear first to minimise page-level rework. Each page entry includes its canonical owner, current migration status, and figma_node_id where known.",
+  "generatedAt": "2026-04-18T00:00:00.000Z",
+  "phase": "P08-shell-anchors-confirmed",
+  "figma_file_key": "eoNJnwvDZ64OUgSthE20WW",
+  "legacy_figma_file_keys": [
+    "YPDj0edchIDXykYChSmCUd"
+  ],
+  "description": "Repaired Figma sync contract aligned to current runtime truth. The active working design file is eoNJnwvDZ64OUgSthE20WW. The older YPDj0edchIDXykYChSmCUd file is rescue/history only and must not be treated as the active sync target.",
+  "authority_notes": [
+    "Canonical route inventory comes from frontend/src/App.tsx and frontend/src/config/route-registry.ts.",
+    "Route naming and page separation follow docs/project/active/2026-04-12-target-route-inventory-dashboard.md.",
+    "The April 12 audit supersedes the older April 1 sync contract wherever they disagree."
+  ],
   "execution_order": [
     {
       "batch": 1,
       "type": "shared_layout",
-      "description": "Shared chrome and layout wrappers — sync these first to unblock all page-level work",
+      "description": "Shared shell anchors in the active eoNJnwvDZ64OUgSthE20WW file. Record these before deeper page extraction.",
       "items": [
         {
-          "id": "page-style-guide",
-          "path": "/style-guide",
-          "name": "Living Style Guide",
-          "canonical_owner": "features/style-guide/StyleGuide",
-          "migration_status": "CANONICAL",
-          "figma_node_id": "MISSING",
+          "id": "shared-app-shell",
+          "path": "shared / AppShell",
+          "name": "AppShell",
+          "canonical_owner": "frontend/src/layouts/AppShell.tsx",
+          "figma_node_id": "216:3",
+          "reference_page": "/generation",
+          "frame_status": "present_confirmed",
           "priority": "CRITICAL",
-          "notes": "Source of truth for all KR Solidarity primitives (Strike, Placard, etc.) — Sync FIRST to verify baseline token implementation"
+          "notes": "Canonical shell container: AppShell > Sidebar + MainContent. Confirmed in /generation (page 19:3). Older pages (analysis, documents, applications) wrap AppShell inside a PageCanvas — treat PageCanvas as legacy wrapper. New pages (generation, apply, settings, opportunities) use AppShell directly under PageBackground."
         },
         {
-          "id": "shared-01",
-          "path": "frontend/src/layouts/MigratedRouteLayout.tsx",
-          "name": "MigratedRouteLayout",
-          "canonical_owner": "layouts",
-          "figma_node_id": "MISSING",
+          "id": "shared-sidebar",
+          "path": "shared / Sidebar",
+          "name": "Sidebar",
+          "canonical_owner": "frontend/src/layouts/shared/Sidebar.tsx",
+          "figma_node_id": "216:4",
+          "reference_page": "/generation",
+          "frame_status": "present_confirmed",
           "priority": "CRITICAL",
-          "notes": "Wraps all protected canonical routes — token gaps here propagate to every page"
+          "notes": "Child of AppShell. Contains: Logo, Container (spacer), SidebarNavigation (NavSection/Primary + NavSection/Workflow + NavSection/Profile + NavDivider + NavUtilityLink), SidebarSpacer, SidebarAccountCard."
         },
         {
-          "id": "shared-02",
-          "path": "frontend/src/layouts/Layout.tsx",
-          "name": "Layout (legacy sidebar shell)",
-          "canonical_owner": "layouts",
-          "figma_node_id": "MISSING",
+          "id": "shared-sidebar-navigation",
+          "path": "shared / SidebarNavigation",
+          "name": "SidebarNavigation",
+          "canonical_owner": "frontend/src/layouts/shared/SidebarNavigation.tsx",
+          "figma_node_id": "216:22",
+          "reference_page": "/generation",
+          "frame_status": "present_confirmed",
           "priority": "HIGH",
-          "notes": "ProtectedLayout fallback — used by /asset-library"
+          "notes": "Child of Sidebar. Nav sections: NavSection/Primary (216:23), NavSection/Workflow (216:51), NavSection/Profile (216:80), NavDivider (216:107), NavUtilityLink (216:108)."
         },
         {
-          "id": "shared-03",
-          "path": "frontend/src/components/shared/",
-          "name": "Navigation / Sidebar",
-          "canonical_owner": "components/shared",
-          "figma_node_id": "MISSING",
+          "id": "shared-page-chrome-header",
+          "path": "shared / PageChromeHeader",
+          "name": "PageChromeHeader",
+          "canonical_owner": "layout primitive",
+          "figma_node_id": "216:124",
+          "reference_page": "/generation",
+          "frame_status": "present_confirmed",
           "priority": "HIGH",
-          "notes": "Nav chrome shared across all protected routes"
+          "notes": "Child of MainContent (216:123), sibling of page-specific content frame. Used as the per-route title/chrome bar."
+        },
+        {
+          "id": "shared-main-content",
+          "path": "shared / MainContent",
+          "name": "MainContent",
+          "canonical_owner": "layout primitive",
+          "figma_node_id": "216:123",
+          "reference_page": "/generation",
+          "frame_status": "present_confirmed",
+          "priority": "HIGH",
+          "notes": "Child of AppShell, sibling of Sidebar. Contains PageChromeHeader + page-specific content frame."
+        },
+        {
+          "id": "shared-page-canvas",
+          "path": "shared / PageCanvas",
+          "name": "PageCanvas",
+          "canonical_owner": "layout primitive (legacy wrapper)",
+          "figma_node_id": "1:5117",
+          "reference_page": "/analysis",
+          "frame_status": "present_confirmed",
+          "priority": "LOW",
+          "notes": "Legacy wrapper used in older pages (analysis 1:5117, documents 1:5491, applications 1:3178). Wraps AppShell + optional SideSheet panels. Not used in newer pages. Do not propagate this pattern — new pages use AppShell directly."
         }
       ]
     },
     {
       "batch": 2,
-      "type": "canonical_public",
-      "description": "Public canonical routes — no auth required, high visibility",
+      "type": "canonical_product_routes",
+      "description": "Canonical product routes only. These are the only route pages that should block code sync.",
       "items": [
         {
-          "id": "page-01",
+          "id": "route-landing",
           "path": "/",
           "name": "Landing",
-          "canonical_owner": "features/landing/LandingPage",
-          "migration_status": "CANONICAL",
-          "figma_node_id": "1:10",
-          "screenshot": "landing-page-canonical.png",
-          "priority": "P1"
+          "canonical_owner": "frontend/src/features/landing/LandingPage.tsx",
+          "design_reference": "frontend/src/screens/01_landing/HeroLanding.tsx",
+          "top_level_frame_name": "Route / Landing",
+          "figma_node_id": "1:6751",
+          "frame_status": "present_confirmed",
+          "priority": "P1",
+          "shell_pattern": "public",
+          "code_target_node_id": "1:6756",
+          "code_target_name": "LandingContent",
+          "notes": "Public layout — no AppShell. LandingLayout>LandingContent (1:6756) is the code-target. Confirmed 2026-04-18."
         },
         {
-          "id": "page-02",
+          "id": "route-auth",
           "path": "/auth",
-          "name": "Auth (Login / Register)",
-          "canonical_owner": "screens/02_auth/AuthModal",
-          "migration_status": "CANONICAL",
-          "figma_node_id": "MISSING",
-          "priority": "P1"
+          "name": "Auth",
+          "canonical_owner": "frontend/src/screens/02_auth/AuthModal.tsx",
+          "design_reference": "frontend/src/screens/02_auth/AuthModal.tsx",
+          "top_level_frame_name": "Route / Auth",
+          "figma_node_id": "1:147",
+          "frame_status": "present_confirmed",
+          "priority": "P1",
+          "shell_pattern": "public",
+          "code_target_node_id": "1:150",
+          "code_target_name": "AuthCard",
+          "notes": "Public layout — no AppShell. AuthLayout>AuthCard (1:150) is the code-target. Confirmed 2026-04-18."
+        },
+        {
+          "id": "route-onboarding",
+          "path": "/onboarding",
+          "name": "Onboarding",
+          "canonical_owner": "frontend/src/features/onboarding/OnboardingPage.tsx",
+          "design_reference": "frontend/src/screens/03_onboarding/OnboardFlow.tsx",
+          "top_level_frame_name": "Route / Onboarding",
+          "figma_node_id": "1:330",
+          "frame_status": "present_confirmed",
+          "priority": "P2",
+          "shell_pattern": "appshell",
+          "shell_node_id": "224:3",
+          "main_content_node_id": "224:123",
+          "page_chrome_header_node_id": "224:124",
+          "code_target_node_id": "224:130",
+          "code_target_name": "OnboardingContent",
+          "notes": "AppShell pattern. OnboardingContent (224:130) is 431×874 — narrower than desktop; may need width audit. Do not use /welcome as sync target. Confirmed 2026-04-18."
+        },
+        {
+          "id": "route-dashboard",
+          "path": "/dashboard",
+          "name": "Dashboard",
+          "canonical_owner": "frontend/src/features/dashboard/Dashboard.tsx",
+          "design_reference": "frontend/src/screens/11_dashboard/DashboardOverview.tsx",
+          "top_level_frame_name": "Route / Dashboard",
+          "figma_node_id": "1:1277",
+          "frame_status": "present_confirmed",
+          "priority": "P1",
+          "shell_node_id": "351:3",
+          "sidebar_node_id": "351:4",
+          "main_content_node_id": "351:27",
+          "page_chrome_header_node_id": "351:28",
+          "code_target_node_id": "351:30",
+          "code_target_name": "DashboardContent",
+          "notes": "Rebuilt 2026-04-18 — was empty MainBoard. Now follows canonical PageBackground+AppShell pattern (ref /generation). Shell: AppShell=351:3, Sidebar=351:4, MainContent=351:27, PageChromeHeader=351:28, DashboardContent=351:30."
+        },
+        {
+          "id": "route-profile",
+          "path": "/profile",
+          "name": "Profile",
+          "canonical_owner": "frontend/src/features/profile/ProfilePage.tsx",
+          "design_reference": "mixed / convergence exception",
+          "top_level_frame_name": "Route / Profile",
+          "figma_node_id": "1:4411",
+          "frame_status": "present_confirmed",
+          "priority": "P1",
+          "shell_pattern": "appshell",
+          "shell_node_id": "1:4413",
+          "main_content_node_id": "1:4414",
+          "page_chrome_header_node_id": "1:4682",
+          "code_target_node_id": "1:4415",
+          "code_target_name": "ProfileContent",
+          "notes": "AppShell pattern. Frame is 1440×3150 (tall scroll — acceptable for profile). ProfileContent (1:4415) resized to 1100×1385 at 2026-04-18 cleanup. Inner content containers remain at ~361px mobile width — a separate content-lane design pass is needed before code extraction. Do not sync against /ingestion."
+        },
+        {
+          "id": "route-opportunities",
+          "path": "/opportunities",
+          "name": "Opportunities",
+          "canonical_owner": "frontend/src/screens/06_opportunities/OpportunitiesDiscovery.tsx",
+          "design_reference": "frontend/src/screens/06_opportunities/OpportunitiesDiscovery.tsx",
+          "top_level_frame_name": "Route / Opportunities",
+          "figma_node_id": "1:2333",
+          "frame_status": "present_confirmed",
+          "priority": "P1",
+          "canonical_form": "mobile_reference_only",
+          "desktop_canonical_frame_id": "358:2",
+          "desktop_canonical_frame_name": "Route / Opportunities (Desktop)",
+          "shell_pattern": "appshell",
+          "shell_node_id": "358:3",
+          "main_content_node_id": "358:28",
+          "page_chrome_header_node_id": "358:29",
+          "code_target_node_id": "358:31",
+          "code_target_name": "OpportunitiesContent",
+          "notes": "Mobile reference: 1:2333 (441px scroll, do not use for code sync). Desktop canonical: 358:2 created 2026-04-18, 1440×900, AppShell pattern. OpportunitiesContent (358:31) contains FilterSidebar (358:32, 280px) + JobFeed (358:42, 790px) per wireframe 06_opportunities.wireframe.xml. Placard job cards, Strike apply CTAs, March filter chips."
+        },
+        {
+          "id": "route-applications",
+          "path": "/applications",
+          "name": "Applications",
+          "canonical_owner": "frontend/src/features/applications/ApplicationTracker.tsx",
+          "design_reference": "frontend/src/screens/07_kanban/KanbanTracker.tsx",
+          "top_level_frame_name": "Route / Applications",
+          "figma_node_id": "1:3176",
+          "frame_status": "present_confirmed",
+          "priority": "P1",
+          "canonical_form": "legacy_broken_archive",
+          "desktop_canonical_frame_id": "359:2",
+          "desktop_canonical_frame_name": "Route / Applications",
+          "shell_pattern": "appshell",
+          "shell_node_id": "359:3",
+          "main_content_node_id": "359:28",
+          "page_chrome_header_node_id": "359:29",
+          "code_target_node_id": "359:31",
+          "code_target_name": "ApplicationsContent",
+          "notes": "Legacy mobile frame 1:3176 is broken archive (441px). Desktop canonical 359:2 created 2026-04-18, 1440×900. KanbanBoard (359:32) inside ApplicationsContent (359:31): 5 columns Applied/Interviewing/Offered/Rejected/Archived. Placard cards, Strike CTAs per wireframe 07_kanban.wireframe.xml. /tracker and /kanban are redirect-history only."
+        },
+        {
+          "id": "route-analysis",
+          "path": "/analysis",
+          "name": "Analysis",
+          "canonical_owner": "frontend/src/features/analysis/AnalysisPage.tsx",
+          "design_reference": "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx",
+          "top_level_frame_name": "Route / Analysis",
+          "figma_node_id": "1:5116",
+          "frame_status": "present_confirmed",
+          "priority": "P1",
+          "canonical_form": "legacy_broken_archive",
+          "desktop_canonical_frame_id": "360:2",
+          "desktop_canonical_frame_name": "Route / Analysis",
+          "shell_pattern": "appshell",
+          "shell_node_id": "360:3",
+          "main_content_node_id": "360:28",
+          "page_chrome_header_node_id": "360:29",
+          "code_target_node_id": "360:31",
+          "code_target_name": "AnalysisContent",
+          "notes": "Legacy mobile frame 1:5116 is broken archive (441px). Desktop canonical 360:2 created 2026-04-18, 1440×900. AnalysisContent (360:31): ScoreCardRow (3 Placard cards ATS/Skills/Format), AnalysisTabs (March), AnalysisDetailPanel. Per wireframe 05_analysis.wireframe.xml."
+        },
+        {
+          "id": "route-documents",
+          "path": "/documents",
+          "name": "Documents",
+          "canonical_owner": "frontend/src/features/documents/Documents.tsx",
+          "design_reference": "frontend/src/screens/08_workbench/DocumentWorkbench.tsx",
+          "top_level_frame_name": "Route / Documents",
+          "figma_node_id": "1:5490",
+          "frame_status": "present_confirmed",
+          "priority": "P1",
+          "canonical_form": "legacy_broken_archive",
+          "desktop_canonical_frame_id": "361:2",
+          "desktop_canonical_frame_name": "Route / Documents",
+          "shell_pattern": "appshell",
+          "shell_node_id": "361:3",
+          "main_content_node_id": "361:28",
+          "page_chrome_header_node_id": "361:29",
+          "code_target_node_id": "361:31",
+          "code_target_name": "DocumentsContent",
+          "notes": "Legacy mobile frame 1:5490 is broken archive (441px). Desktop canonical 361:2 created 2026-04-18, 1440×900. DocumentsContent (361:31): DocumentSelector, EditorPane (Scaffold textarea), PreviewPane (Substrate) + Export panel (Strike PDF/DOCX/TXT). Per wireframe 08_workbench.wireframe.xml. /docs and /editor are history only."
+        },
+        {
+          "id": "route-apply",
+          "path": "/apply",
+          "name": "Apply",
+          "canonical_owner": "frontend/src/features/applications/ApplyQuick.tsx",
+          "design_reference": "frontend/src/screens/09_finalization/ApplicationFinalization.tsx",
+          "top_level_frame_name": "Route / Apply",
+          "figma_node_id": "20:13",
+          "frame_status": "present_confirmed",
+          "priority": "P1",
+          "shell_pattern": "appshell",
+          "shell_node_id": "216:387",
+          "main_content_node_id": "216:507",
+          "page_chrome_header_node_id": "216:508",
+          "code_target_node_id": "230:2",
+          "code_target_name": "ApplyContent",
+          "notes": "AppShell pattern. ApplyContent (230:2) 1100×786. /apply/quick is historical only. Confirmed 2026-04-18."
+        },
+        {
+          "id": "route-generation",
+          "path": "/generation",
+          "name": "Generation",
+          "canonical_owner": "frontend/src/features/documents/components/TabbedGenerationPanel.tsx",
+          "design_reference": "frontend/src/screens/12_generation/GenerationWorkbench.tsx",
+          "top_level_frame_name": "Route / Generation",
+          "figma_node_id": "20:10",
+          "frame_status": "present_confirmed",
+          "priority": "P1",
+          "shell_pattern": "appshell",
+          "shell_node_id": "216:3",
+          "main_content_node_id": "216:123",
+          "page_chrome_header_node_id": "216:124",
+          "code_target_node_id": "228:2",
+          "code_target_name": "GenerationContent",
+          "notes": "AppShell pattern. GenerationContent (228:2) 1100×754. Canonical shell reference page. /ksc-generator, /cover-letter-generator, /studio are history only. Confirmed 2026-04-18."
+        },
+        {
+          "id": "route-settings",
+          "path": "/settings",
+          "name": "Settings",
+          "canonical_owner": "frontend/src/features/settings/Settings.tsx",
+          "design_reference": "frontend/src/screens/10_settings/SettingsControl.tsx",
+          "top_level_frame_name": "Route / Settings",
+          "figma_node_id": "20:14",
+          "frame_status": "present_confirmed",
+          "priority": "P2",
+          "shell_pattern": "appshell",
+          "shell_node_id": "216:515",
+          "main_content_node_id": "216:635",
+          "page_chrome_header_node_id": "216:636",
+          "code_target_node_id": "231:2",
+          "code_target_name": "SettingsContent",
+          "notes": "AppShell pattern. SettingsContent (231:2) 1100×782. Confirmed 2026-04-18."
         }
       ]
     },
     {
       "batch": 3,
-      "type": "canonical_protected_core",
-      "description": "Core protected routes — primary user journeys",
+      "type": "redirect_history",
+      "description": "Historical route pages and aliases. These must not block code sync or be treated as canonical page targets.",
       "items": [
         {
-          "id": "page-03",
-          "path": "/dashboard",
-          "name": "Dashboard / Solidarity Hub",
-          "canonical_owner": "features/dashboard/Dashboard",
-          "migration_status": "CANONICAL",
-          "figma_node_id": "1:166",
-          "screenshot": "dashboard-canonical.png",
-          "priority": "P1"
+          "id": "redir-auth-login",
+          "path": "/login",
+          "redirect_target": "/auth?mode=login",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "Keep only as an annotated history label if the page still exists in Figma."
         },
         {
-          "id": "page-04",
-          "path": "/profile",
-          "name": "Profile",
-          "canonical_owner": "features/profile/ProfileView",
-          "migration_status": "CANONICAL",
-          "figma_node_id": "MISSING",
-          "priority": "P1"
+          "id": "redir-auth-register",
+          "path": "/register",
+          "redirect_target": "/auth?mode=register",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "No standalone sync target."
         },
         {
-          "id": "page-05",
-          "path": "/analysis",
-          "name": "Analysis / ATS Scoring",
-          "canonical_owner": "features/analysis/AnalysisPage",
-          "migration_status": "CANONICAL",
-          "figma_node_id": "1:1720",
-          "priority": "P1"
+          "id": "redir-onboarding-welcome",
+          "path": "/welcome",
+          "redirect_target": "/onboarding",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "Historical alias only."
         },
         {
-          "id": "page-06",
-          "path": "/docs",
-          "name": "Documents",
-          "canonical_owner": "features/documents/Documents",
-          "migration_status": "CANONICAL",
-          "figma_node_id": "MISSING",
-          "priority": "P1"
+          "id": "redir-dashboard-overview",
+          "path": "/dashboard-overview",
+          "redirect_target": "/dashboard",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "Fold into dashboard notes or archive."
         },
         {
-          "id": "page-07",
-          "path": "/applications",
-          "name": "Applications Tracker",
-          "canonical_owner": "features/applications/ApplicationTracker",
-          "migration_status": "NEEDS_REGISTRY_ENTRY",
-          "figma_node_id": "1:1323",
-          "priority": "P2"
+          "id": "redir-dashboard-job-queue",
+          "path": "/job-queue",
+          "redirect_target": "/dashboard",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "Do not treat as a standalone canonical frame."
         },
         {
-          "id": "page-08",
+          "id": "redir-opportunities-lookout",
           "path": "/lookout",
-          "name": "Lookout / Opportunities",
-          "canonical_owner": "screens/06_lookout/LookoutDiscovery",
-          "migration_status": "NEEDS_REGISTRY_ENTRY",
-          "figma_node_id": "1:579",
-          "priority": "P2"
+          "redirect_target": "/opportunities",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "Old route language. Keep only if explicitly labeled [redirect]."
         },
         {
-          "id": "page-core-ingest",
+          "id": "redir-opportunities-feed",
+          "path": "/feed",
+          "redirect_target": "/opportunities",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "Historical jobs alias."
+        },
+        {
+          "id": "redir-applications-tracker",
+          "path": "/tracker",
+          "redirect_target": "/applications",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "History only."
+        },
+        {
+          "id": "redir-applications-kanban",
+          "path": "/kanban",
+          "redirect_target": "/applications",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "History only."
+        },
+        {
+          "id": "redir-documents-docs",
+          "path": "/docs",
+          "redirect_target": "/documents",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "History only."
+        },
+        {
+          "id": "redir-documents-editor",
+          "path": "/editor",
+          "redirect_target": "/documents",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "History only."
+        },
+        {
+          "id": "redir-generation-applyquick",
+          "path": "/apply/quick",
+          "redirect_target": "/apply",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "Old quick-apply route retained only as history."
+        },
+        {
+          "id": "redir-generation-ksc",
+          "path": "/ksc-generator",
+          "redirect_target": "/generation",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "History only."
+        },
+        {
+          "id": "redir-generation-cover-letter",
+          "path": "/cover-letter-generator",
+          "redirect_target": "/generation",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "History only."
+        },
+        {
+          "id": "redir-generation-studio",
+          "path": "/studio",
+          "redirect_target": "/generation",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "History only."
+        },
+        {
+          "id": "redir-profile-identity",
+          "path": "/identity",
+          "redirect_target": "/profile",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "History only."
+        },
+        {
+          "id": "redir-profile-dossier",
+          "path": "/dossier",
+          "redirect_target": "/profile",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "History only."
+        },
+        {
+          "id": "redir-profile-career-ingest",
+          "path": "/career/ingest",
+          "redirect_target": "/profile",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "Previously chained through /ingestion. Treat as historical alias only."
+        },
+        {
+          "id": "redir-profile-ingestion",
           "path": "/ingestion",
-          "name": "Ingestion / Document Parsing",
-          "canonical_owner": "features/ingestion/IngestionPage",
-          "migration_status": "NEEDS_REGISTRY_ENTRY",
-          "figma_node_id": "1:1683",
-          "priority": "P1"
+          "redirect_target": "/profile",
+          "figma_node_id": "NOT_REQUIRED",
+          "priority": "ARCHIVE",
+          "notes": "Canonical ingestion capability is folded into /profile."
         }
       ]
     },
     {
       "batch": 4,
-      "type": "canonical_protected_secondary",
-      "description": "Secondary protected routes — important but lower traffic",
+      "type": "utility_internal",
+      "description": "Support and internal pages. Track separately from canonical product surfaces.",
       "items": [
         {
-          "id": "page-09",
-          "path": "/settings",
-          "name": "Settings",
-          "canonical_owner": "features/settings/Settings",
-          "migration_status": "NEEDS_MIGRATION",
-          "figma_node_id": "1:2125",
-          "priority": "P2"
-        },
-        {
-          "id": "page-10",
-          "path": "/onboarding",
-          "name": "Onboarding",
-          "canonical_owner": "features/onboarding/OnboardingPage",
-          "migration_status": "NEEDS_MIGRATION",
-          "figma_node_id": "MISSING",
-          "priority": "P2"
-        },
-        {
-          "id": "page-11",
-          "path": "/apply",
-          "name": "Quick Apply",
-          "canonical_owner": "features/applications/ApplyQuick",
-          "migration_status": "NEEDS_MIGRATION",
-          "figma_node_id": "MISSING",
-          "priority": "P2"
-        },
-        {
-          "id": "page-12",
-          "path": "/generation",
-          "name": "Document Generation / Studio",
-          "canonical_owner": "features/documents/components/TabbedGenerationPanel",
-          "migration_status": "NEEDS_MIGRATION",
-          "figma_node_id": "MISSING",
-          "priority": "P2"
-        }
-      ]
-    },
-    {
-      "batch": 5,
-      "type": "dev_internal",
-      "description": "Internal / dev-only surfaces — sync only for design system reference",
-      "items": [
-        {
-          "id": "page-14",
-          "path": "/design-sidekick",
-          "name": "Design Sidekick",
-          "canonical_owner": "features/design-sidekick/DesignSidekick",
-          "migration_status": "CANONICAL",
-          "figma_node_id": "MISSING",
-          "priority": "P3"
-        },
-        {
-          "id": "page-15",
+          "id": "utility-asset-library",
           "path": "/asset-library",
           "name": "Asset Library",
-          "canonical_owner": "features/analysis/AssetLibrary",
-          "migration_status": "CANONICAL",
-          "figma_node_id": "MISSING",
-          "priority": "P3"
-        }
-      ]
-    },
-    {
-      "batch": 6,
-      "type": "quarantine",
-      "description": "Quarantine candidates — do NOT sync to Figma, flag for removal",
-      "items": [
-        {
-          "id": "quar-01",
-          "path": "/animation-test",
-          "name": "Animation Test",
-          "canonical_owner": "NONE",
-          "migration_status": "QUARANTINE_CANDIDATE",
-          "figma_node_id": "NONE",
-          "priority": "SKIP",
-          "notes": "Dev utility — no feature owner, no Figma sync"
+          "surface_class": "support_surface",
+          "canonical_owner": "frontend/src/features/analysis/AssetLibrary.tsx",
+          "figma_node_id": "20:15",
+          "frame_status": "present_confirmed",
+          "priority": "P3",
+          "notes": "Confirmed 2026-04-18: Utility / Asset Library 1440×900, has PageBackground+AppShell shell. Support page — keep out of product route counts."
         },
         {
-          "id": "quar-02",
+          "id": "utility-design-sidekick",
+          "path": "/design-sidekick",
+          "name": "Design Sidekick",
+          "surface_class": "internal_reference",
+          "canonical_owner": "frontend/src/features/design-sidekick/DesignSidekick.tsx",
+          "figma_node_id": "1:7398",
+          "frame_status": "present_confirmed",
+          "priority": "P3",
+          "notes": "Confirmed 2026-04-18: Utility / Design Sidekick 451×1079 — mobile-width internal tool. Track reference only."
+        },
+        {
+          "id": "utility-style-guide",
+          "path": "/style-guide",
+          "name": "Style Guide",
+          "surface_class": "internal_reference",
+          "canonical_owner": "frontend/src/features/style-guide/StyleGuide.tsx",
+          "figma_node_id": "372:2",
+          "frame_status": "present_confirmed",
+          "readiness": "complete",
+          "priority": "P2",
+          "notes": "Rebuilt 2026-04-18: Route/StyleGuide (Desktop) 1440×900. Sections: Header, Shell Primitives (PageBackground/AppShell/Sidebar/MainContent/PageChromeHeader + PageCanvas legacy note), Archetypes (Strike/Placard/Scaffold/March/Megaphone), Governance Rules, Typography Scale, Footer. Replaces stale 441px mobile-only frame. Serves as design-system verification anchor before broad code extraction."
+        },
+        {
+          "id": "utility-animation-test",
+          "path": "/animation-test",
+          "name": "Animation Test",
+          "surface_class": "internal_debug",
+          "canonical_owner": "frontend/src/components/debug/AnimationTest.tsx",
+          "figma_node_id": "NOT_REQUIRED",
+          "frame_status": "not_required",
+          "priority": "SKIP",
+          "notes": "Do not create or maintain a Figma page for this debug surface."
+        },
+        {
+          "id": "utility-test-tokens",
           "path": "/test-tokens",
           "name": "Token Test",
-          "canonical_owner": "components/debug",
-          "migration_status": "QUARANTINE_CANDIDATE",
-          "figma_node_id": "NONE",
+          "surface_class": "internal_debug",
+          "canonical_owner": "frontend/src/components/debug/TokenTest.tsx",
+          "figma_node_id": "NOT_REQUIRED",
+          "frame_status": "not_required",
           "priority": "SKIP",
-          "notes": "Dev utility — no Figma sync"
+          "notes": "Do not create or maintain a Figma page for this debug surface."
         }
       ]
     }
   ],
+  "missing_contract_work": {
+    "needs_node_id_extraction": [],
+    "needs_desktop_rebuild": [],
+    "code_token_violations": [
+      "frontend/src/features/analysis/components/feature/MatchScoreHeader.tsx — hardcoded hex #48DA8B, #F6E748, #F14844, #383632 in SVG stroke/fill; replace with CSS var() references",
+      "frontend/src/features/landing/LandingPage.tsx:336,399 — fallback hex #da8b48 in var() is acceptable but token --kr-color-ink-bronze-base must be verified in tokens.json"
+    ],
+    "redirect_history_policy": "Archive, annotate, or remove redirect pages; do not keep them in the blocking sync queue.",
+    "rescue_file_policy": "The older YPDj0edchIDXykYChSmCUd file may be used as a donor/reference, but never as the active sync target."
+  },
   "gate_checks": {
-    "shared_layout_before_pages": true,
-    "len_pages": 15,
-    "all_items_have_figma_node_id_or_MISSING_flag": true,
-    "quarantine_items_excluded_from_sync": true
+    "active_file_key_matches_april12_audit": true,
+    "canonical_product_routes_separated_from_redirect_history": true,
+    "utility_internal_surfaces_separated_from_product_routes": true,
+    "redirect_history_items_marked_not_required_for_node_id_sync": true
   }
 }

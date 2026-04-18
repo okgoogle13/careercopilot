@@ -11,7 +11,7 @@ export const MotionContractPanel = ({ onInteraction }: { onInteraction?: () => v
     onInteraction?.();
   }, [onInteraction]);
   return (
-    <div className="p-4 border border-[var(--sys-color-outline-variant)] rounded-xl bg-[var(--sys-color-charcoalBackground-steps-3)] text-[var(--sys-color-paperWhite-base)]">
+    <div className="p-4 border border-[var(--kr-color-concrete-grey-steps-0)] rounded-xl bg-[var(--sys-color-charcoalBackground-steps-3)] text-[var(--sys-color-paperWhite-base)]">
       MotionContractPanel Stub
     </div>
   );
@@ -22,7 +22,7 @@ export const ArchetypeMorphPreviewer = ({ onInteraction }: { onInteraction?: () 
     onInteraction?.();
   }, [onInteraction]);
   return (
-    <div className="p-4 border border-[var(--sys-color-outline-variant)] rounded-xl bg-[var(--sys-color-charcoalBackground-steps-3)] text-[var(--sys-color-paperWhite-base)]">
+    <div className="p-4 border border-[var(--kr-color-concrete-grey-steps-0)] rounded-xl bg-[var(--sys-color-charcoalBackground-steps-3)] text-[var(--sys-color-paperWhite-base)]">
       ArchetypeMorphPreviewer Stub
     </div>
   );
@@ -33,7 +33,7 @@ export const TypographyAxisValidator = ({ onInteraction }: { onInteraction?: () 
     onInteraction?.();
   }, [onInteraction]);
   return (
-    <div className="p-4 border border-[var(--sys-color-outline-variant)] rounded-xl bg-[var(--sys-color-charcoalBackground-steps-3)] text-[var(--sys-color-paperWhite-base)]">
+    <div className="p-4 border border-[var(--kr-color-concrete-grey-steps-0)] rounded-xl bg-[var(--sys-color-charcoalBackground-steps-3)] text-[var(--sys-color-paperWhite-base)]">
       TypographyAxisValidator Stub
     </div>
   );
@@ -44,7 +44,7 @@ export const LayoutSlopAuditor = ({ onInteraction }: { onInteraction?: () => voi
     onInteraction?.();
   }, [onInteraction]);
   return (
-    <div className="p-4 border border-[var(--sys-color-outline-variant)] rounded-xl bg-[var(--sys-color-charcoalBackground-steps-3)] text-[var(--sys-color-paperWhite-base)]">
+    <div className="p-4 border border-[var(--kr-color-concrete-grey-steps-0)] rounded-xl bg-[var(--sys-color-charcoalBackground-steps-3)] text-[var(--sys-color-paperWhite-base)]">
       LayoutSlopAuditor Stub
     </div>
   );

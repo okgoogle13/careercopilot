@@ -40,7 +40,7 @@ export const KeralaRageTabs: React.FC<KeralaRageTabsProps> = ({
   return (
     <div className={cn('w-full', className)}>
       {/* Tab List */}
-      <div className="flex gap-1 border-b border-outline-variant mb-6">
+      <div className="flex gap-1 border-b border-[var(--kr-color-concrete-grey-steps-0)] mb-6">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
 

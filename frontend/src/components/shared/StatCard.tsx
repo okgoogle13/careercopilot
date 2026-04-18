@@ -31,7 +31,7 @@ export function StatCard({
         bg-surface-container rounded-tech p-8
         flex flex-col items-center justify-center
         relative overflow-hidden
-        shadow-elevation-1 border border-outline-variant
+        shadow-elevation-1 border border-[var(--kr-color-concrete-grey-steps-0)]
         ${className}
       `}
       style={{

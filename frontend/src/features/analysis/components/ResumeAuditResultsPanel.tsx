@@ -61,10 +61,10 @@ export const ResumeAuditResultsPanel: React.FC<ResumeAuditResultsPanelProps> = (
 
   return (
     <div
-      className="rounded-placardTorn01 border border-outline-variant shadow-elevation-2 overflow-hidden"
+      className="rounded-placardTorn01 border border-[var(--kr-color-concrete-grey-steps-0)] shadow-elevation-2 overflow-hidden"
       style={{
         backgroundColor: 'var(--sys-color-charcoalBackground-base)',
-        borderColor: 'var(--sys-color-outline-variant)',
+        borderColor: 'var(--kr-color-concrete-grey-steps-0)',
         borderRadius: 'var(--shape-placardTorn01)',
       }}
     >
@@ -73,7 +73,7 @@ export const ResumeAuditResultsPanel: React.FC<ResumeAuditResultsPanelProps> = (
         className="p-6 border-b"
         style={{
           backgroundColor: 'var(--sys-color-surface-container)',
-          borderColor: 'var(--sys-color-outline-variant)',
+          borderColor: 'var(--kr-color-concrete-grey-steps-0)',
         }}
       >
         <div className="flex items-center justify-between gap-4">
@@ -119,7 +119,7 @@ export const ResumeAuditResultsPanel: React.FC<ResumeAuditResultsPanelProps> = (
         className="grid grid-cols-3 gap-4 p-6 border-b"
         style={{
           backgroundColor: 'var(--sys-color-charcoalBackground-base)',
-          borderColor: 'var(--sys-color-outline-variant)',
+          borderColor: 'var(--kr-color-concrete-grey-steps-0)',
         }}
       >
         <div
@@ -192,7 +192,7 @@ export const ResumeAuditResultsPanel: React.FC<ResumeAuditResultsPanelProps> = (
           className="p-6 border-b"
           style={{
             backgroundColor: 'var(--sys-color-surface-container-low)',
-            borderColor: 'var(--sys-color-outline-variant)',
+            borderColor: 'var(--kr-color-concrete-grey-steps-0)',
           }}
         >
           <div className="flex items-start gap-3">
@@ -224,7 +224,7 @@ export const ResumeAuditResultsPanel: React.FC<ResumeAuditResultsPanelProps> = (
           className="p-6 border-b"
           style={{
             backgroundColor: 'var(--sys-color-charcoalBackground-base)',
-            borderColor: 'var(--sys-color-outline-variant)',
+            borderColor: 'var(--kr-color-concrete-grey-steps-0)',
           }}
         >
           <h4
@@ -322,7 +322,7 @@ export const ResumeAuditResultsPanel: React.FC<ResumeAuditResultsPanelProps> = (
         className="p-6 flex gap-3 border-t"
         style={{
           backgroundColor: 'var(--sys-color-surface-container-low)',
-          borderColor: 'var(--sys-color-outline-variant)',
+          borderColor: 'var(--kr-color-concrete-grey-steps-0)',
         }}
       >
         {onDismiss && (

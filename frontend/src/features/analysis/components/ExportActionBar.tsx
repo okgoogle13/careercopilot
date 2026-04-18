@@ -54,7 +54,7 @@ export const ExportActionBar: React.FC<ExportActionBarProps> = ({
   completedSteps,
 }) => {
   return (
-    <div className="flex flex-col md:flex-row justify-between items-end border-b border-[var(--sys-color-outline-variant)] pb-0 sticky top-0 bg-[var(--sys-color-charcoalBackground-base)] z-40 pt-4">
+    <div className="flex flex-col md:flex-row justify-between items-end border-b border-[var(--kr-color-concrete-grey-steps-0)] pb-0 sticky top-0 bg-[var(--sys-color-charcoalBackground-base)] z-40 pt-4">
       {/* Tab navigation */}
       <div className="flex w-full md:w-auto overflow-x-auto scrollbar-hide">
         {TAB_DEFS.map((tab) => {
@@ -90,7 +90,7 @@ export const ExportActionBar: React.FC<ExportActionBarProps> = ({
         <button
           id="workbench-action-rescore"
           onClick={handleAnalyze}
-          className="fixed bottom-20 right-4 md:static md:bottom-auto md:right-auto z-50 flex items-center gap-2 bg-[var(--sys-color-charcoalBackground-steps-3)] hover:bg-[var(--sys-color-charcoalBackground-steps-4)] text-[var(--sys-color-paperWhite-base)] font-bold py-4 px-6 md:py-2 md:px-4 transition-colors shadow-lg md:shadow-none border border-[var(--sys-color-outline-variant)]"
+          className="fixed bottom-20 right-4 md:static md:bottom-auto md:right-auto z-50 flex items-center gap-2 bg-[var(--sys-color-charcoalBackground-steps-3)] hover:bg-[var(--sys-color-charcoalBackground-steps-4)] text-[var(--sys-color-paperWhite-base)] font-bold py-4 px-6 md:py-2 md:px-4 transition-colors shadow-lg md:shadow-none border border-[var(--kr-color-concrete-grey-steps-0)]"
           style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
         >
           Save &amp; Rescore
@@ -107,7 +107,7 @@ export const ExportActionBar: React.FC<ExportActionBarProps> = ({
                 className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors border ${
                   showAudit
                     ? 'bg-[var(--sys-color-solidarityRed-base)] text-[var(--sys-color-paperWhite-base)] border-[var(--sys-color-solidarityRed-base)]'
-                    : 'bg-transparent text-[var(--sys-color-paperWhite-base)] border-[var(--sys-color-outline-variant)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)]'
+                    : 'bg-transparent text-[var(--sys-color-paperWhite-base)] border-[var(--kr-color-concrete-grey-steps-0)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)]'
                 }`}
                 style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
               >
@@ -138,7 +138,7 @@ export const ExportActionBar: React.FC<ExportActionBarProps> = ({
                 className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors border ${
                   saveSuccess
                     ? 'bg-[var(--sys-color-solidarityRed-base)] text-[var(--sys-color-paperWhite-base)] border-[var(--sys-color-solidarityRed-base)]'
-                    : 'bg-transparent text-[var(--sys-color-paperWhite-base)] border-[var(--sys-color-outline-variant)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)]'
+                    : 'bg-transparent text-[var(--sys-color-paperWhite-base)] border-[var(--kr-color-concrete-grey-steps-0)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)]'
                 }`}
                 style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
               >
@@ -208,7 +208,7 @@ export const ExportActionBar: React.FC<ExportActionBarProps> = ({
             <button
               id="workbench-action-copy-clipboard"
               onClick={handleCopyToClipboard}
-              className="border border-[var(--sys-color-outline-variant)] text-[var(--sys-color-paperWhite-base)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)] px-4 py-2 text-sm font-medium transition-colors"
+              className="border border-[var(--kr-color-concrete-grey-steps-0)] text-[var(--sys-color-paperWhite-base)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)] px-4 py-2 text-sm font-medium transition-colors"
               style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
             >
               Copy to Clipboard
@@ -216,7 +216,7 @@ export const ExportActionBar: React.FC<ExportActionBarProps> = ({
             <button
               id="workbench-action-export-pdf"
               onClick={exportToPDF}
-              className="border border-[var(--sys-color-outline-variant)] text-[var(--sys-color-paperWhite-base)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)] px-3 py-2 text-sm font-medium transition-colors"
+              className="border border-[var(--kr-color-concrete-grey-steps-0)] text-[var(--sys-color-paperWhite-base)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)] px-3 py-2 text-sm font-medium transition-colors"
               style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
             >
               PDF
@@ -224,7 +224,7 @@ export const ExportActionBar: React.FC<ExportActionBarProps> = ({
             <button
               id="workbench-action-export-docx"
               onClick={exportToDOCX}
-              className="border border-[var(--sys-color-outline-variant)] text-[var(--sys-color-paperWhite-base)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)] px-3 py-2 text-sm font-medium transition-colors"
+              className="border border-[var(--kr-color-concrete-grey-steps-0)] text-[var(--sys-color-paperWhite-base)] hover:bg-[var(--sys-color-charcoalBackground-steps-2)] px-3 py-2 text-sm font-medium transition-colors"
               style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
             >
               DOCX

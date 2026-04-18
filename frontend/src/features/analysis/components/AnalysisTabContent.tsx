@@ -53,10 +53,10 @@ export const AnalysisTabContent: React.FC<AnalysisTabContentProps> = ({
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       {/* Skill Gap Analysis */}
       <div
-        className="bg-[var(--sys-color-charcoalBackground-steps-1)] p-6 border border-[var(--sys-color-outline-variant)]"
+        className="bg-[var(--sys-color-charcoalBackground-steps-1)] p-6 border border-[var(--kr-color-concrete-grey-steps-0)]"
         style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
       >
-        <h3 className="text-xl font-bold text-[var(--sys-color-inkGold-base)] mb-4 border-b border-[var(--sys-color-outline-variant)] pb-2 uppercase tracking-tight">
+        <h3 className="text-xl font-bold text-[var(--sys-color-inkGold-base)] mb-4 border-b border-[var(--kr-color-concrete-grey-steps-0)] pb-2 uppercase tracking-tight">
           Skill Gap Analysis
         </h3>
         <div className="space-y-3">
@@ -89,7 +89,7 @@ export const AnalysisTabContent: React.FC<AnalysisTabContentProps> = ({
                     {getDisplayLevel(gap.Match_Level)}
                   </span>
                 </div>
-                <p className="text-sm text-[var(--sys-color-worker-ash-base)] pl-5 border-l-2 border-[var(--sys-color-outline-variant)] ml-1.5 py-1">
+                <p className="text-sm text-[var(--sys-color-worker-ash-base)] pl-5 border-l-2 border-[var(--kr-color-concrete-grey-steps-0)] ml-1.5 py-1">
                   {gap.Evidence || 'No direct evidence found in the provided documents.'}
                 </p>
               </div>
@@ -101,15 +101,15 @@ export const AnalysisTabContent: React.FC<AnalysisTabContentProps> = ({
       {/* Tailored Summary + CTA */}
       <div className="space-y-8">
         <div
-          className="bg-[var(--sys-color-charcoalBackground-steps-1)] p-6 border border-[var(--sys-color-outline-variant)] flex flex-col h-full"
+          className="bg-[var(--sys-color-charcoalBackground-steps-1)] p-6 border border-[var(--kr-color-concrete-grey-steps-0)] flex flex-col h-full"
           style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
         >
           <div>
-            <h3 className="text-xl font-bold text-[var(--sys-color-inkGold-base)] mb-4 border-b border-[var(--sys-color-outline-variant)] pb-2 uppercase tracking-tight">
+            <h3 className="text-xl font-bold text-[var(--sys-color-inkGold-base)] mb-4 border-b border-[var(--kr-color-concrete-grey-steps-0)] pb-2 uppercase tracking-tight">
               Tailored Resume Summary
             </h3>
             <p
-              className="text-[var(--sys-color-paperWhite-base)] leading-relaxed bg-[var(--sys-color-charcoalBackground-base)] p-4 border border-[var(--sys-color-outline-variant)] mb-4"
+              className="text-[var(--sys-color-paperWhite-base)] leading-relaxed bg-[var(--sys-color-charcoalBackground-base)] p-4 border border-[var(--kr-color-concrete-grey-steps-0)] mb-4"
               style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
             >
               {analysis.Tailored_Summary}

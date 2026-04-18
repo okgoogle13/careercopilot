@@ -158,7 +158,7 @@ export function Documents() {
         />
 
         {/* Search Bar */}
-        <div className="bg-surface-container-high rounded-placard p-4 mb-8 flex items-center gap-3 border border-outline-variant focus-within:border-primary focus-within:ring-2 ring-primary/20 transition-all">
+        <div className="bg-surface-container-high rounded-placard p-4 mb-8 flex items-center gap-3 border border-[var(--kr-color-concrete-grey-steps-0)] focus-within:border-primary focus-within:ring-2 ring-primary/20 transition-all">
           <Search className="w-5 h-5 text-on-surface-variant" />
           <input
             type="text"
@@ -168,7 +168,7 @@ export function Documents() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-2 mb-8 bg-surface-container rounded-tech p-2 w-fit border border-outline-variant">
+        <div className="flex gap-2 mb-8 bg-surface-container rounded-tech p-2 w-fit border border-[var(--kr-color-concrete-grey-steps-0)]">
           <TabButton
             label="All Files"
             isActive={activeTab === 'all'}
@@ -346,7 +346,7 @@ function DocumentCard({ document, onRedline, onDocxExport }: DocumentCardProps) 
   return (
     <div
       id={`document-card-${document.id}`}
-      className={`bg-surface-container-low border border-outline-variant ${cardShapeClass} p-6 hover:bg-surface-container hover:border-primary hover:scale-[1.02] hover:shadow-elevation-2 transition-all duration-medium-1 ease-spring cursor-pointer group backdrop-blur-md relative`}
+      className={`bg-surface-container-low border border-[var(--kr-color-concrete-grey-steps-0)] ${cardShapeClass} p-6 hover:bg-surface-container hover:border-primary hover:scale-[1.02] hover:shadow-elevation-2 transition-all duration-medium-1 ease-spring cursor-pointer group backdrop-blur-md relative`}
     >
       <div className="w-12 h-12 bg-surface-container-high rounded-tech flex items-center justify-center mb-4 group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
         <Icon className={`w-5 h-5 ${typeBadge.iconClass}`} />
@@ -360,7 +360,7 @@ function DocumentCard({ document, onRedline, onDocxExport }: DocumentCardProps) 
           </span>
         </div>
         <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-          <span className="px-2 py-1 rounded-blockRiot01 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant border border-outline-variant">
+          <span className="px-2 py-1 rounded-blockRiot01 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant border border-[var(--kr-color-concrete-grey-steps-0)]">
             {typeBadge.label}
           </span>
           <button

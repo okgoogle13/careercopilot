@@ -58,7 +58,8 @@
     "kr:inject-layers": "node scripts/kr/inject-ui-kit-layers.mjs",
     "kr:stage2": "bash ../scripts/orchestrate-stage2.sh",
     "validate:kr-hero-token-map": "npx tsx src/scripts/validate-kr-hero-token-map.ts",
-    "visual:audit:3-pages": "npx playwright test tests/e2e/visual/visual-audit.spec.ts --project=chromium"
+    "visual:audit:3-pages": "npx playwright test tests/e2e/visual/visual-audit.spec.ts --project=chromium",
+    "design:drift-check": "python3 ../scripts/design-validation/check-design-drift.py"
   },
   "engines": {
     "node": ">=16.0.0"

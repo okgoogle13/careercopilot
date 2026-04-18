@@ -9,7 +9,7 @@ interface ChartPaneProps {
 export function ChartPane({ title, children, className = '' }: ChartPaneProps) {
   return (
     <div
-      className={`bg-surface-container rounded-tech p-8 relative overflow-hidden border border-outline-variant shadow-elevation-1 ${className}`}
+      className={`bg-surface-container rounded-tech p-8 relative overflow-hidden border border-[var(--kr-color-concrete-grey-steps-0)] shadow-elevation-1 ${className}`}
     >
       {/* Dotted Grid Background Pattern */}
       <div

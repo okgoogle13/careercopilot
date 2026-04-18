@@ -44,7 +44,7 @@ export function ArchetypeMorphPreviewer({ onInteraction }: { onInteraction?: () 
     currentArchetype === 'march' ? MOTION_CONTRACTS.march : MOTION_CONTRACTS.strike;
 
   return (
-    <div className="p-8 bg-surface-container rounded-strike border border-outline-variant space-y-6">
+    <div className="p-8 bg-surface-container rounded-strike border border-[var(--kr-color-concrete-grey-steps-0)] space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h3 className="text-title-large font-bold flex items-center gap-2">
           <Shapes className="w-6 h-6 text-primary" />
@@ -133,7 +133,7 @@ export function TypographyAxisValidator({ onInteraction }: { onInteraction?: () 
   const settings = `'wght' ${axes.wght}, 'wdth' ${axes.wdth}, 'GRAD' ${axes.GRAD}`;
 
   return (
-    <div className="p-8 bg-surface-container rounded-strike border border-outline-variant space-y-6">
+    <div className="p-8 bg-surface-container rounded-strike border border-[var(--kr-color-concrete-grey-steps-0)] space-y-6">
       <h3 className="text-title-large font-bold flex items-center gap-2">
         <Type className="w-6 h-6 text-secondary" />
         Typography Axis Validator
@@ -176,7 +176,7 @@ export function TypographyAxisValidator({ onInteraction }: { onInteraction?: () 
                 step="1"
                 value={axes.wght}
                 onChange={(e) => handleAxisChange('wght', parseInt(e.target.value))}
-                className="w-full h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-secondary"
+                className="w-full h-1.5 bg-[var(--kr-color-concrete-grey-steps-0)] rounded-lg appearance-none cursor-pointer accent-secondary"
               />
             </div>
 
@@ -194,7 +194,7 @@ export function TypographyAxisValidator({ onInteraction }: { onInteraction?: () 
                 step="1"
                 value={axes.wdth}
                 onChange={(e) => handleAxisChange('wdth', parseInt(e.target.value))}
-                className="w-full h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-secondary"
+                className="w-full h-1.5 bg-[var(--kr-color-concrete-grey-steps-0)] rounded-lg appearance-none cursor-pointer accent-secondary"
               />
             </div>
 
@@ -212,7 +212,7 @@ export function TypographyAxisValidator({ onInteraction }: { onInteraction?: () 
                 step="1"
                 value={axes.GRAD}
                 onChange={(e) => handleAxisChange('GRAD', parseInt(e.target.value))}
-                className="w-full h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-secondary"
+                className="w-full h-1.5 bg-[var(--kr-color-concrete-grey-steps-0)] rounded-lg appearance-none cursor-pointer accent-secondary"
               />
             </div>
           </div>
@@ -281,7 +281,7 @@ export function LayoutSlopAuditor({ onInteraction }: { onInteraction?: () => voi
   };
 
   return (
-    <div className="p-8 bg-surface-container rounded-strike border border-outline-variant space-y-6 shadow-xl">
+    <div className="p-8 bg-surface-container rounded-strike border border-[var(--kr-color-concrete-grey-steps-0)] space-y-6 shadow-xl">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <h3 className="text-title-large font-bold flex items-center gap-2">
           <AlertTriangle className="w-6 h-6 text-warning" />
@@ -422,7 +422,7 @@ export function LayoutSlopAuditor({ onInteraction }: { onInteraction?: () => voi
 
 export function MotionContractPanel() {
   return (
-    <div className="p-8 bg-surface-container rounded-strike border border-outline-variant space-y-4">
+    <div className="p-8 bg-surface-container rounded-strike border border-[var(--kr-color-concrete-grey-steps-0)] space-y-4">
       <h3 className="text-title-large font-bold flex items-center gap-2">
         <Waves className="w-6 h-6 text-tertiary" />
         Canonical Motion Contracts

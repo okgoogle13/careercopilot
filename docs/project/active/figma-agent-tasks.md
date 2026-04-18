@@ -1,202 +1,165 @@
-# Figma ↔ Code Sync — Split Task List
-**Generated**: 2026-04-01  
-**Branch**: `copilot/update-sprint-plan-transition`  
-**Figma File Key**: `YPDj0edchIDXykYChSmCUd`
+# Figma ↔ Code Sync — Repaired Task List
+**Updated**: 2026-04-17
+**Active Figma File Key**: `eoNJnwvDZ64OUgSthE20WW`
+**Rescue / historical donor file key**: `YPDj0edchIDXykYChSmCUd`
+
+This task list repairs the broken April 1 sync contract.
+
+Use this file together with:
+- `docs/project/active/figma-sync-order.json`
+- `frontend/src/App.tsx`
+- `frontend/src/config/route-registry.ts`
+- `docs/project/active/2026-04-12-target-route-inventory-dashboard.md`
+
+## Contract Repairs Made
+
+- The active sync target is now the newer Figma design file: `eoNJnwvDZ64OUgSthE20WW`.
+- The older `YPDj0edchIDXykYChSmCUd` file is rescue/history only.
+- Canonical product routes are now separated from redirect-history pages.
+- Support and internal surfaces are now tracked separately from product route pages.
+- `MISSING` now means `frame exists or is expected in the active file, but the node ID is not yet recorded`.
+- Redirect-history pages now use `NOT_REQUIRED` and must not block code sync.
+
+## Lane A — Figma Tasks
+
+These tasks happen in Figma and unblock accurate sync from the active `eoNJnwvDZ64OUgSthE20WW` file.
+
+### A-1 · DONE — Record stable node IDs for shared shell anchors
+
+Shell anchors confirmed 2026-04-18 via Figma MCP. Reference page: `/generation` (page `19:3`).
+
+| Surface | Node ID | Notes |
+| --- | --- | --- |
+| `AppShell` | `216:3` | Canonical shell container (Sidebar + MainContent) |
+| `Sidebar` | `216:4` | Child of AppShell |
+| `SidebarNavigation` | `216:22` | Child of Sidebar |
+| `MainContent` | `216:123` | Child of AppShell, sibling of Sidebar |
+| `PageChromeHeader` | `216:124` | Child of MainContent |
+| `PageCanvas` (legacy) | `1:5117` | Older wrapper used in analysis/documents/applications — do not propagate |
+
+**Shell pattern**: `PageBackground > AppShell > [Sidebar, MainContent > [PageChromeHeader, <RouteContent>]]`
 
-Splits all remaining sprint work into exactly two lanes so both agents can proceed with zero overlap friction.
+**Deliverable**: ✅ `figma-sync-order.json` updated with confirmed node IDs.
+
+### A-2 · DONE — Record node IDs for canonical product pages only
 
----
+All canonical route node IDs confirmed 2026-04-18 via Figma MCP.
 
-## 🎨 LANE A — Figma Make Assistant Tasks
+| Route | Frame name | Node ID | Shell pattern |
+| --- | --- | --- | --- |
+| `/` | `Route / Landing` | `1:6752` | Public (no shell) |
+| `/auth` | `Route / Auth` | `1:147` | AuthLayout (no shell) |
+| `/onboarding` | `Route / Onboarding` | `1:330` | 3 children (check structure) |
+| `/dashboard` | `MainBoard` | `1:1277` | **EMPTY** — needs redesign |
+| `/profile` | `Route / Profile` | `1:4411` | PageBackground + AppShell |
+| `/opportunities` | `Route / Opportunities` | `1:2333` | PageBackground + AppShell |
+| `/applications` | `Route / Applications` | `1:3176` | Legacy PageCanvas wrapper |
+| `/analysis` | `Route / Analysis` | `1:5116` | Legacy PageCanvas wrapper |
+| `/documents` | `Route / Documents` | `1:5490` | Legacy PageCanvas wrapper |
+| `/apply` | `Route / Apply` | `20:13` | PageBackground + AppShell |
+| `/generation` | `Route / Generation` | `20:10` | PageBackground + AppShell ✅ canonical |
+| `/settings` | `Route / Settings` | `20:14` | PageBackground + AppShell |
 
-These tasks must be done **inside Figma** before the coding agent can unblock the corresponding code work.  
-All items are ordered by urgency (blocking > high > medium).
+**Deliverable**: ✅ `figma-sync-order.json` updated.
 
-### A-1 · BLOCKING — Export missing node IDs (7 surfaces)
+### A-3 · HIGH — Separate redirect-history pages from canonical pages in Figma
+
+If old alias pages still exist in the active file, do one of these:
+- archive them
+- collapse them into annotations attached to the canonical page
+- rename them explicitly as `[redirect-history]`
+
+Redirect-history pages:
+- `/login`
+- `/register`
+- `/welcome`
+- `/dashboard-overview`
+- `/job-queue`
+- `/lookout`
+- `/feed`
+- `/tracker`
+- `/kanban`
+- `/docs`
+- `/editor`
+- `/apply/quick`
+- `/ksc-generator`
+- `/cover-letter-generator`
+- `/studio`
+- `/identity`
+- `/dossier`
+- `/career/ingest`
+- `/ingestion`
+
+**Rule**: redirect-history pages must not block code sync and must not stay mixed into the canonical sync queue.
+
+### A-4 · HIGH — Separate utility and internal pages from product route tabs
+
+These should be kept distinct from the canonical route pages:
+
+| Surface | Target label |
+| --- | --- |
+| `/asset-library` | `support /asset-library` |
+| `/design-sidekick` | `internal /design-sidekick` |
+| `/style-guide` | `internal /style-guide` |
+| `/animation-test` | archive or remove from design file |
+| `/test-tokens` | archive or remove from design file |
 
-The code agent cannot run any Figma sync or visual-compliance pass until these node IDs are in `docs/project/active/figma-sync-order.json`.
+**Deliverable**: either keep them with explicit labels or remove/archive them if they are no longer needed in the main file.
 
-| Surface | Current `figma_node_id` | What to do in Figma |
-|---------|------------------------|---------------------|
-| `/auth` (AuthModal) | `MISSING` | Open file `YPDj0edchIDXykYChSmCUd` → select Auth page frame → copy node ID |
-| `/profile` (ProfilePage) | `MISSING` | Select Profile page frame → copy node ID |
-| `/docs` (Documents) | `MISSING` | Select Documents page frame → copy node ID |
-| `/onboarding` | `MISSING` | Select Onboarding page frame → copy node ID |
-| `/apply` (Quick Apply) | `MISSING` | Select Quick Apply frame → copy node ID |
-| `/generation` (Studio) | `MISSING` | Select Generation/Studio frame → copy node ID |
-| `/style-guide` | `MISSING` | Select Style Guide frame → copy node ID |
-| `MigratedRouteLayout` (shared layout) | `MISSING` | Select Layout component → copy node ID |
-| `Navigation / SolidaritySidebar` | `MISSING` | Select Sidebar component → copy node ID |
+### A-5 · HIGH — Confirm route-family shell policy for broken legacy pages
 
-**Deliverable**: Paste all 9 node IDs into a comment on this PR OR update `figma-sync-order.json` directly.
+The April 12 audit flagged older pages like `/opportunities`, `/profile`, `/analysis`, and `/documents` as structurally inconsistent.
 
----
+For each of these route families, confirm one of:
+- `desktop_canonical`
+- `mobile_reference_only`
+- `legacy_broken_archive`
 
-### A-2 · HIGH — Verify token variable names match `--kr-color-*` CSS variables
+**Deliverable**: add that decision into the frame description or the task notes before deep extraction work starts.
 
-The code uses these exact CSS variable names. Confirm they match your Figma variable names 1:1:
+## Lane B — Code / Contract Tasks
 
-| CSS variable | Expected Figma variable |
-|---|---|
-| `--kr-color-charcoal-background-base` | `kr/color/charcoal/background/base` |
-| `--kr-color-worker-ash-base` | `kr/color/worker-ash/base` |
-| `--kr-color-solidarity-red-base` | `kr/color/solidarity-red/base` |
-| `--kr-color-ink-gold-base` | `kr/color/ink-gold/base` |
-| `--kr-color-kr-activist-smoke-green-base` | `kr/color/activist-smoke/green/base` |
-| `--kr-color-stencil-yellow-base` | `kr/color/stencil-yellow/base` |
-| `--kr-color-signal-green-base` | `kr/color/signal-green/base` |
+These tasks happen in the repo after or alongside Lane A updates.
 
-**If any Figma variable name differs**, post the diff in a PR comment so the code agent can update `tokens.json` accordingly.  
-**Source of truth**: `frontend/src/design/tokens/tokens.json` (DTCG format).
+### B-1 · DONE — Repair the sync contract
 
----
+- `figma-sync-order.json` now points at `eoNJnwvDZ64OUgSthE20WW`
+- redirect-history and utility/internal pages are separated
+- rescue file is marked historical-only
 
-### A-3 · HIGH — Annotate Dashboard frame with asset slot IDs
+### B-2 · NEXT — Update downstream docs that still point at the old file key or old route model
 
-`Dashboard.tsx` (`1:166`) has Figma-bound asset imports that must be replaced before code promotion.  
-For each asset slot in the Dashboard Figma frame, add an annotation with the `asset_id` from `docs/manifests/kr-manifest.json`.
+Audit and update:
+- `docs/project/active/implementation-plan.json`
+- `docs/project/active/compliance-report.md`
+- `docs/project/active/pr-summary.md`
+- `docs/design/screen-map.json` if it is still treated as active
 
-Slots to annotate:
-- Hero illustration (currently `figma:asset/dashboard-hero-illustration.png`)
-- Stats card background (currently `figma:asset/dashboard-stats-card.svg`)
+### B-3 · NEXT — Normalize stale paired-screen route language
 
-**Deliverable**: Screenshot of annotated frame OR updated Figma component description with `kr-asset-id` values.
+High-value cleanup targets after the sync contract repair:
+- `frontend/src/screens/04_ingestion/*`
+- any remaining `06_lookout` naming residue in active docs
+- any docs that still treat redirect pages as canonical targets
 
----
+### B-4 · BLOCKED ON A-1/A-2 — Replace `MISSING` canonical node IDs with real active-file IDs
 
-### A-4 · MEDIUM — Create/verify missing page frames for Batch 4 routes
+Only after Lane A extracts the actual IDs from the active file:
+1. update `figma-sync-order.json`
+2. use those IDs in follow-up sync or parity tasks
+3. stop using old rescue-file IDs as placeholders
 
-These routes have `NEEDS_MIGRATION` status and no Figma frame yet:
+## Working Interpretation Rules
 
-| Route | Missing frame |
-|---|---|
-| `/onboarding` | Onboarding flow (multi-step) |
-| `/apply` | Quick Apply single-page form |
-| `/generation` | Tabbed Generation Panel (Cover Letter / KSC / Resume tabs) |
+- A canonical product route with `figma_node_id: "MISSING"` is blocked on node extraction, not proof that the page frame does not exist.
+- A redirect-history route with `figma_node_id: "NOT_REQUIRED"` must never block code work.
+- A utility or internal route is tracked for reference only unless explicitly promoted.
+- If a page exists in the rescue file but not the active file, treat it as donor/reference material, not active sync truth.
 
-If frames already exist but with a different name, just share the node ID (see A-1 above).  
-If frames need to be created, use the KR Solidarity template set:
-- Placard for containers, Strike for primary CTAs, March for selects, Megaphone for modal overlays.
+## Current Priority Order
 
----
-
-### A-5 · LOW — Add `figma_node_id` to `/design-sidekick` and `/asset-library` (Batch 5)
-
-These are P3 dev surfaces — low urgency but needed before final M6 closeout.
-
----
-
-## 💻 LANE B — Next Coding Agent Tasks
-
-These are ordered by dependency (earlier = unblocked, later = needs Lane A items first).  
-**Do NOT touch** `frontend/src/App.tsx` or `frontend/src/config/route-registry.ts` (Workstream 6 only).
-
-### B-1 · UNBLOCKED — Resolve 3 NEEDS_MIGRATION routes (M4 Sprint)
-
-Complete migration for `/apply`, `/generation`, `/onboarding`. These are blocked on App.tsx verification, not Figma.
-
-**For each route**:
-1. Verify the import in `frontend/src/App.tsx` points to the correct canonical feature file
-2. Confirm `frontend/src/config/route-registry.ts` has the route entry with `prototype: false`
-3. Run `cd frontend && npx tsc --noEmit` — must exit 0
-4. Update `docs/project/active/canonical-routes.json` to set `status: "CANONICAL"` for that route
-5. Update `docs/project/active/ORCHESTRATION_DASHBOARD.md` — add P11 row ✅ DONE
-
-Files to check:
-```
-frontend/src/features/applications/ApplyQuick.tsx          → /apply
-frontend/src/features/documents/components/TabbedGenerationPanel.tsx  → /generation
-frontend/src/features/onboarding/OnboardingPage.tsx        → /onboarding
-```
-
-**Stop condition**: If tsc errors appear in files you did NOT modify, halt and document the blocker.
-
----
-
-### B-2 · UNBLOCKED — Register 3 NEEDS_REGISTRY_ENTRY routes
-
-These routes exist in App.tsx but are missing a `route-registry.ts` entry:
-
-| Route | Owner component | Action |
-|---|---|---|
-| `/applications` | `features/applications/ApplicationTracker` | Add registry entry |
-| `/lookout` | `screens/06_opportunities/OpportunitiesDiscovery` | Add registry entry |
-| `/ingestion` | `features/ingestion/SmartIngestion` (or replacement) | Add registry entry |
-
-After registering: run `node scripts/extract-routes.js` to verify the registry is in sync.
-
----
-
-### B-3 · UNBLOCKED — Fix hardcoded hex in analysis feature
-
-From P04 snapshot: `frontend/src/features/analysis/` has 1 file with hardcoded hex values.
-
-1. Run `grep -rn '#[0-9a-fA-F]\{3,6\}' frontend/src/features/analysis/` to find it
-2. Replace with the correct `--kr-color-*` token from `frontend/src/design/tokens/tokens.json`
-3. Run `python3 scripts/design-validation/validate-tokens.py` to confirm clean
-4. Run `cd frontend && npx tsc --noEmit`
-
----
-
-### B-4 · BLOCKED ON A-1 — Update `figma-sync-order.json` with node IDs from Figma
-
-Once Lane A task A-1 delivers the 9 missing node IDs:
-
-1. Edit `docs/project/active/figma-sync-order.json` — replace each `"figma_node_id": "MISSING"` with the real ID
-2. Run `node frontend/scripts/validate-governance-artifacts.mjs` — must return `ok: true`
-3. Update `docs/project/active/implementation-plan.json` — mark blocked pages as `"status": "READY"`
-
----
-
-### B-5 · BLOCKED ON A-2 — Sync token variables if any name mismatch found
-
-If Lane A task A-2 reports Figma variable name mismatches:
-
-1. Update `frontend/src/design/tokens/tokens.json` with the corrected variable name
-2. Regenerate CSS: `python3 scripts/build-m3-tokens.py`
-3. Verify output: `python3 scripts/design-validation/validate-tokens.py`
-4. Run `cd frontend && npx tsc --noEmit`
-
----
-
-### B-6 · BLOCKED ON A-3 — Replace Dashboard Figma asset imports with KR manifest IDs
-
-Once Lane A task A-3 delivers the KR asset IDs:
-
-1. Update `docs/project/active/frontend-source-of-truth-migration/sources/consolidated-reference/components/Dashboard.tsx` — replace `figma:asset/` comments with `kr-asset-id:` comments
-2. Re-run `python3 scripts/derive-gap-fill-plan.py --route-id dashboard --json-out /tmp/dashboard.json`
-3. Verify `promotion_eligibility` is now `eligible` (not `behavior_only`) if the assets are clean
-4. Run governance tests: `python3 -m pytest tests/plans/ -v` — must be 18/18
-
----
-
-### B-7 · FINAL — M6 Closeout verification (unblocked after B-1..B-3 complete)
-
-1. `cd frontend && npx tsc --noEmit` — zero errors
-2. `python3 -m pytest tests/plans/ -v` — 18/18
-3. `node frontend/scripts/validate-governance-artifacts.mjs` — `ok: true`
-4. `node scripts/kr/validate-manifest.mjs` — manifest valid
-5. Update `docs/project/active/compliance-report.md` — add M6 gate result row
-6. Update `docs/project/active/ORCHESTRATION_DASHBOARD.md` — add P15 final ✅ row
-
----
-
-## Dependency Map
-
-```
-A-1 (node IDs) ──────────────────────────────────────────► B-4
-A-2 (token names) ───────────────────────────────────────► B-5
-A-3 (asset IDs) ─────────────────────────────────────────► B-6
-A-4 (missing frames) ─────────────────────────────────────► B-1 (unblocks /onboarding /apply /generation)
-
-B-1 (migrations) ─┐
-B-2 (registry)    ├──────────────────────────────────────► B-7 (M6 closeout)
-B-3 (hex fix)     ─┘
-```
-
-## Quick Handoff Summary
-
-| Who | Do now (no blockers) | Wait for |
-|-----|---------------------|----------|
-| **Figma Make** | A-1 export node IDs · A-2 verify token names · A-3 annotate asset slots | Nothing |
-| **Next Agent** | B-1 route migrations · B-2 registry entries · B-3 hex fix | A-1 for B-4 · A-2 for B-5 · A-3 for B-6 |
+1. shared shell anchors
+2. canonical node IDs for `/auth`, `/onboarding`, `/profile`, `/opportunities`, `/applications`, `/analysis`, `/documents`, `/apply`, `/generation`, `/settings`
+3. redirect-history cleanup
+4. utility/internal separation
+5. route-family shell decisions for older broken pages

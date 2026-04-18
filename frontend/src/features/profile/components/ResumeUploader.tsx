@@ -102,7 +102,7 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
           'relative border-2 border-dashed rounded-tech min-h-[300px] flex flex-col items-center justify-center p-8 transition-colors cursor-pointer overflow-hidden',
           isDragging
             ? 'border-primary bg-primary-container/20'
-            : 'border-outline-variant bg-surface-container'
+            : 'border-[var(--kr-color-concrete-grey-steps-0)] bg-surface-container'
         )}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
