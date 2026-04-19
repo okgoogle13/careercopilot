@@ -275,8 +275,8 @@
     },
     {
       "id": "textless-protest-hero",
-      "name": "Textless Protest Hero (Uncategorised)",
-      "description": "Uncategorised textless protest cinematic tram scene",
+      "name": "Textless Protest Hero",
+      "description": "Textless protest cinematic tram scene — categorised under kr-solidarity/street/",
       "layers": [
         {
           "type": "substrate",

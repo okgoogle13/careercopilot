@@ -10,3 +10,6 @@ frontend/public/assets/** filter=lfs diff=lfs merge=lfs -text
 # Override: JSON and SVG manifests/primitives are text—version as regular git objects
 frontend/public/assets/**/*.json -filter -diff -merge text
 frontend/public/assets/**/*.svg -filter -diff -merge text
+# Override: Markdown and text docs are not binary assets
+frontend/public/assets/**/*.md -filter -diff -merge text
+frontend/public/assets/**/README -filter -diff -merge text
