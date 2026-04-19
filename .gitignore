@@ -118,6 +118,8 @@ tools/scripts/workflow/run_northcote_workflow.py
 .claude*/
 !.claude/skills/
 .codex/
+.codex-review/
+codex-skills/
 .windsurf/
 .idx/
 .agent/

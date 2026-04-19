@@ -8,6 +8,7 @@
     "local_export_note": "Machine-local donor export path intentionally omitted from active docs."
   },
   "notes": "Screen pairing map for active planning docs. Routes use current runtime naming; donor parity notes record whether a paired screen remains canonical or redirect-history.",
+  "alias_route_policy": "Alias routes are historical/reference only and are excluded from the active Figma sync queue. Canonical sync targets come from docs/project/active/figma-sync-order.json and current runtime routes.",
   "screens": {
     "01_landing": {
       "wireframe": ".claude/wireframes/01_landing.xml",

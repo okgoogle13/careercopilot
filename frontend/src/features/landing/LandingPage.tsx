@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { Logo } from '../../components/ui/Logo';
 
 // Figma node 1:10 — KR-Solidarity-CAREERCOPILOT, 2026-04-01
-// Hero image from Figma asset
-const imgHero = 'https://www.figma.com/api/mcp/asset/2feb6739-5134-4d2b-a829-951b213d5392';
-// Evidence section background from Figma asset
-const imgEvidence = 'https://www.figma.com/api/mcp/asset/c9202fd6-a5e0-41f5-b419-1e9c0858cc78';
+// Hero image placeholder — replace with /public/kr-hero-001.webp once asset is exported from Figma
+const imgHero = '';
+// Evidence section background placeholder
+const imgEvidence = '';
 
 const STATS = [
   { value: '127', label: 'Stories Archived', color: 'var(--kr-color-stencil-yellow-base)' },
@@ -153,15 +153,26 @@ export const LandingPage: React.FC = () => {
         {/* Right — hero image + badges */}
         <div className="relative w-full md:w-[420px] flex-shrink-0">
           {/* Hero image — Figma node 1:63 */}
+          {/* Replace imgHero with /public/kr-hero-001.webp once exported from Figma */}
           <div
             className="relative overflow-hidden w-full h-[420px] md:h-[560px]"
             style={{ borderRadius: '20px 8px 12px 32px' }}
           >
-            <img
-              src={imgHero}
-              alt="Solidarity collective"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
+            {imgHero ? (
+              <img
+                src={imgHero}
+                alt="Solidarity collective"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            ) : (
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    'linear-gradient(135deg, var(--kr-color-charcoal-background-base) 0%, var(--kr-color-solidarity-smoke-orange-steps-4) 25%, var(--kr-color-protest-metal-blue-steps-3) 60%, var(--kr-color-charcoal-background-steps-6) 100%)',
+                }}
+              />
+            )}
             {/* Gradient overlay */}
             <div
               className="absolute inset-0"
@@ -315,12 +326,14 @@ export const LandingPage: React.FC = () => {
           border: '1px solid var(--kr-color-charcoal-background-steps-3)',
         }}
       >
-        <img
-          src={imgEvidence}
-          alt=""
-          aria-hidden
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-        />
+        {imgEvidence && (
+          <img
+            src={imgEvidence}
+            alt=""
+            aria-hidden
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          />
+        )}
         <div
           className="absolute inset-0"
           style={{

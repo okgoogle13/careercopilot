@@ -1,5 +1,7 @@
 # Tasks
 
+Completed agent execution and post-agent Figma cleanup are recorded below; no open coordination items remain on the active board.
+
 ## Active
 
 - [x] ~~**Execute delegated drift-cleanup batches (Workstreams A, B, D)**~~ — completed 2026-04-19: resume-constants.ts (35 violations → 0), LandingPage.module.css (6 → 0), outline-variant across 35 files (186 → 0), KanbanCard hex (3 → 0), AssetLibrary surface-KrDark (4 → 0). Total: 408 → 213 violations. commit 30005bc4.
@@ -11,14 +13,14 @@
 
 ## Waiting On
 
-- [ ] **Collapse redirect-history pages** — for each alias: archive, fold into canonical state/tab, convert to annotation, or remove — *waiting on: canonical shell work per route family*
 - [x] ~~**surface-KrDark-* violations in legacy shells**~~ — resolved 2026-04-19: all 91 violations replaced with charcoal-background step equivalents in KrDarkShell and LaboratoryShell files.
-- [ ] **Redirect-history Figma cleanup** — archive/rename deprecated redirect nodes inside Figma. Owner: design. Unblocked by: design decision on which nodes are retired.
-- [ ] **Doc cleanup: remove deprecated redirects from sync context** — clean `figma-sync-order.json` and planning docs. Owner: Codex. Unblocked by: Figma cleanup or explicit "skip" decision in TASKS.md.
 
 ## Someday
 
 ## Done
+
+- [x] ~~**Execute redirect-history Figma cleanup**~~ — completed 2026-04-19: redirect-history pages in the active file were archived, annotated on canonical frames, or explicitly labeled as historical so they no longer read as canonical sync targets.
+- [x] ~~**Remove deprecated redirects from repo sync context**~~ — completed 2026-04-19: active Figma coordination docs and manifests now keep alias routes as historical/reference-only, non-blocking context.
 
 - [x] ~~**Stage multi-agent cleanup handoffs**~~ — drafted the delegated execution plan, token translation table, external-agent packets, and copy-paste invocation index under `docs/project/active/` (2026-04-18)
 - [x] ~~**Execute UI fixes for DOC-009 and enforce Zero-Flora governance**~~ — stripped banned motifs, patched metrics typography, and enforced geometric structural replacements over fauna (2026-04-18)

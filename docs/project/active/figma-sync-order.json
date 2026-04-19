@@ -317,7 +317,7 @@
     {
       "batch": 3,
       "type": "redirect_history",
-      "description": "Historical route pages and aliases. These must not block code sync or be treated as canonical page targets.",
+      "description": "Historical route pages and aliases. These must not block code sync or be treated as canonical page targets. Active-file cleanup completed 2026-04-19.",
       "items": [
         {
           "id": "redir-auth-login",
@@ -325,7 +325,7 @@
           "redirect_target": "/auth?mode=login",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "Keep only as an annotated history label if the page still exists in Figma."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-auth-register",
@@ -333,7 +333,7 @@
           "redirect_target": "/auth?mode=register",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "No standalone sync target."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-onboarding-welcome",
@@ -341,7 +341,7 @@
           "redirect_target": "/onboarding",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "Historical alias only."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-dashboard-overview",
@@ -349,7 +349,7 @@
           "redirect_target": "/dashboard",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "Fold into dashboard notes or archive."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-dashboard-job-queue",
@@ -357,7 +357,7 @@
           "redirect_target": "/dashboard",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "Do not treat as a standalone canonical frame."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-opportunities-lookout",
@@ -365,7 +365,7 @@
           "redirect_target": "/opportunities",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "Old route language. Keep only if explicitly labeled [redirect]."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-opportunities-feed",
@@ -373,7 +373,7 @@
           "redirect_target": "/opportunities",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "Historical jobs alias."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-applications-tracker",
@@ -381,7 +381,7 @@
           "redirect_target": "/applications",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "History only."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-applications-kanban",
@@ -389,7 +389,7 @@
           "redirect_target": "/applications",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "History only."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-documents-docs",
@@ -397,7 +397,7 @@
           "redirect_target": "/documents",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "History only."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-documents-editor",
@@ -405,7 +405,7 @@
           "redirect_target": "/documents",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "History only."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-generation-applyquick",
@@ -413,7 +413,7 @@
           "redirect_target": "/apply",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "Old quick-apply route retained only as history."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-generation-ksc",
@@ -421,7 +421,7 @@
           "redirect_target": "/generation",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "History only."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-generation-cover-letter",
@@ -429,7 +429,7 @@
           "redirect_target": "/generation",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "History only."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-generation-studio",
@@ -437,7 +437,7 @@
           "redirect_target": "/generation",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "History only."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-profile-identity",
@@ -445,7 +445,7 @@
           "redirect_target": "/profile",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "History only."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-profile-dossier",
@@ -453,7 +453,7 @@
           "redirect_target": "/profile",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "History only."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-profile-career-ingest",
@@ -461,7 +461,7 @@
           "redirect_target": "/profile",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "Previously chained through /ingestion. Treat as historical alias only."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         },
         {
           "id": "redir-profile-ingestion",
@@ -469,14 +469,14 @@
           "redirect_target": "/profile",
           "figma_node_id": "NOT_REQUIRED",
           "priority": "ARCHIVE",
-          "notes": "Canonical ingestion capability is folded into /profile."
+          "notes": "Archived or explicitly labeled as redirect-history in the active file; not part of the canonical sync queue."
         }
       ]
     },
     {
       "batch": 4,
       "type": "utility_internal",
-      "description": "Support and internal pages. Track separately from canonical product surfaces.",
+      "description": "Support and internal pages. Track separately from canonical product surfaces. Active-file separation confirmed 2026-04-19.",
       "items": [
         {
           "id": "utility-asset-library",
@@ -487,7 +487,7 @@
           "figma_node_id": "20:15",
           "frame_status": "present_confirmed",
           "priority": "P3",
-          "notes": "Confirmed 2026-04-18: Utility / Asset Library 1440×900, has PageBackground+AppShell shell. Support page — keep out of product route counts."
+          "notes": "Support surface retained with explicit non-product labeling in the active file; keep out of canonical product-route counts."
         },
         {
           "id": "utility-design-sidekick",
@@ -498,7 +498,7 @@
           "figma_node_id": "1:7398",
           "frame_status": "present_confirmed",
           "priority": "P3",
-          "notes": "Confirmed 2026-04-18: Utility / Design Sidekick 451×1079 — mobile-width internal tool. Track reference only."
+          "notes": "Internal reference surface retained with explicit non-product labeling in the active file; track reference only."
         },
         {
           "id": "utility-style-guide",
@@ -510,7 +510,7 @@
           "frame_status": "present_confirmed",
           "readiness": "complete",
           "priority": "P2",
-          "notes": "Rebuilt 2026-04-18: Route/StyleGuide (Desktop) 1440×900. Sections: Header, Shell Primitives (PageBackground/AppShell/Sidebar/MainContent/PageChromeHeader + PageCanvas legacy note), Archetypes (Strike/Placard/Scaffold/March/Megaphone), Governance Rules, Typography Scale, Footer. Replaces stale 441px mobile-only frame. Serves as design-system verification anchor before broad code extraction."
+          "notes": "Internal reference surface retained with explicit non-product labeling in the active file. Rebuilt 2026-04-18: Route/StyleGuide (Desktop) 1440×900. Sections: Header, Shell Primitives (PageBackground/AppShell/Sidebar/MainContent/PageChromeHeader + PageCanvas legacy note), Archetypes (Strike/Placard/Scaffold/March/Megaphone), Governance Rules, Typography Scale, Footer. Replaces stale 441px mobile-only frame. Serves as design-system verification anchor before broad code extraction."
         },
         {
           "id": "utility-animation-test",
@@ -521,7 +521,7 @@
           "figma_node_id": "NOT_REQUIRED",
           "frame_status": "not_required",
           "priority": "SKIP",
-          "notes": "Do not create or maintain a Figma page for this debug surface."
+          "notes": "Internal debug surface only. Do not create or maintain a canonical Figma page for this route."
         },
         {
           "id": "utility-test-tokens",
@@ -532,7 +532,7 @@
           "figma_node_id": "NOT_REQUIRED",
           "frame_status": "not_required",
           "priority": "SKIP",
-          "notes": "Do not create or maintain a Figma page for this debug surface."
+          "notes": "Internal debug surface only. Do not create or maintain a canonical Figma page for this route."
         }
       ]
     }
@@ -544,7 +544,7 @@
       "frontend/src/features/analysis/components/feature/MatchScoreHeader.tsx — hardcoded hex #48DA8B, #F6E748, #F14844, #383632 in SVG stroke/fill; replace with CSS var() references",
       "frontend/src/features/landing/LandingPage.tsx:336,399 — fallback hex #da8b48 in var() is acceptable but token --kr-color-ink-bronze-base must be verified in tokens.json"
     ],
-    "redirect_history_policy": "Archive, annotate, or remove redirect pages; do not keep them in the blocking sync queue.",
+    "redirect_history_policy": "Archive, annotate, or remove redirect pages; do not keep them in the blocking sync queue. Active-file cleanup recorded 2026-04-19.",
     "rescue_file_policy": "The older YPDj0edchIDXykYChSmCUd file may be used as a donor/reference, but never as the active sync target."
   },
   "gate_checks": {

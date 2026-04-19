@@ -62,7 +62,7 @@ All canonical route node IDs confirmed 2026-04-18 via Figma MCP.
 
 **Deliverable**: ✅ `figma-sync-order.json` updated.
 
-### A-3 · HIGH — Separate redirect-history pages from canonical pages in Figma
+### A-3 · DONE — Redirect-history pages separated from canonical pages in Figma
 
 If old alias pages still exist in the active file, do one of these:
 - archive them
@@ -92,7 +92,11 @@ Redirect-history pages:
 
 **Rule**: redirect-history pages must not block code sync and must not stay mixed into the canonical sync queue.
 
-### A-4 · HIGH — Separate utility and internal pages from product route tabs
+**Result (2026-04-19)**:
+- redirect-history pages were archived, annotated on canonical frames, or explicitly renamed with a historical label in the active file
+- redirect-history pages remain reference-only and outside the canonical sync queue
+
+### A-4 · DONE — Utility and internal pages separated from product route tabs
 
 These should be kept distinct from the canonical route pages:
 
@@ -105,6 +109,10 @@ These should be kept distinct from the canonical route pages:
 | `/test-tokens` | archive or remove from design file |
 
 **Deliverable**: either keep them with explicit labels or remove/archive them if they are no longer needed in the main file.
+
+**Result (2026-04-19)**:
+- retained utility/internal surfaces are explicitly labeled as support or internal in the active file
+- debug-only surfaces remain excluded from the canonical product-route lane
 
 ### A-5 · HIGH — Confirm route-family shell policy for broken legacy pages
 
