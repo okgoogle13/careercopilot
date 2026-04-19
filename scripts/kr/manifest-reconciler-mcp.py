@@ -13,7 +13,7 @@ from typing import Dict, List, Set
 class ManifestReconciler:
     def __init__(self):
         self.repo_root = Path(__file__).parent.parent.parent
-        self.manifest_path = self.repo_root / 'frontend/public/assets/kerala-rage-kr-solidarity-manifest.json'
+        self.manifest_path = self.repo_root / 'frontend/public/assets/kr-solidarity-manifest.json'
         self.hero_registry_path = self.repo_root / 'frontend/public/assets/kr-solidarity-hero-registry.json'
         self.token_map_candidates = [
             self.repo_root / 'frontend/public/assets/kr-solidarity-hero-token-map.v2.json',

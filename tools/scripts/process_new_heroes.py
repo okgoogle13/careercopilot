@@ -14,7 +14,7 @@ DEST_DIR2 = PROJECT_ROOT / "frontend" / "public" / "assets" / "kr-solidarity" / 
 FILE1 = "kr-solidarity__uncategorized__uncategorized--textless-protest-tram--v1.png"
 FILE2 = "kr-solidarity__spiritual__devotional--textless-deity-poster--v1.png"
 
-MANIFEST_FILE = PROJECT_ROOT / "frontend" / "public" / "assets" / "kerala-rage-kr-solidarity-manifest.json"
+MANIFEST_FILE = PROJECT_ROOT / "frontend" / "public" / "assets" / "kr-solidarity-manifest.json"
 REGISTRY_FILE = PROJECT_ROOT / "frontend" / "public" / "assets" / "kr-solidarity-hero-registry.json"
 
 def main():

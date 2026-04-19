@@ -116,7 +116,7 @@ def main():
     print("\n🎨 DESIGN SYSTEM")
     print("-" * 80)
     project_root = Path(__file__).parent.parent
-    manifest_path = project_root / "frontend" / "public" / "assets" / "kerala-rage-kr-solidarity-manifest.json"
+    manifest_path = project_root / "frontend" / "public" / "assets" / "kr-solidarity-manifest.json"
     all_passed &= check_file_exists(
         manifest_path,
         "kr-solidarity v3.0.0 Asset Manifest"

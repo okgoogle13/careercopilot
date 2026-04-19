@@ -446,7 +446,7 @@ def process_batch(
     errors = []
 
     # Get starting ID from manifest
-    manifest_path = Path("frontend/public/assets/kerala-rage-kr-solidarity-manifest.json")
+    manifest_path = Path("frontend/public/assets/kr-solidarity-manifest.json")
     existing_count = 12
     if manifest_path.exists():
         try:
@@ -614,7 +614,7 @@ if __name__ == "__main__":
 
     # Handle Curation Logic (Legacy Integration)
     if curate:
-        manifest_path = "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json"
+        manifest_path = "frontend/public/assets/kr-solidarity-manifest.json"
         print(f"\n🔍 RUNNING ASSET CURATION (Triaging {source_path})...")
         curator = AssetCurator(manifest_path)
         curation_report = curator.curate_batch(source_path)

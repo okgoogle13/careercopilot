@@ -6,7 +6,7 @@ import { SolidarityManifest } from '../design/hero/heroTypes';
 
 const MANIFEST_PATH = path.resolve(
   process.cwd(),
-  'public/assets/kerala-rage-kr-solidarity-manifest.json'
+  'public/assets/kr-solidarity-manifest.json'
 );
 const MAP_PATH = path.resolve(process.cwd(), 'public/assets/kr-solidarity-hero-token-map.v2.json');
 

@@ -6,7 +6,7 @@ Your mission is to maintain and evolve the kerala-rage kr-solidarity design syst
 autonomous **Primary Creative Lead and Implementation Engine** — delivering every asset, token,
 and manifest update to a state where:
 - All generated assets pass the Five Immutable Laws (void background, specific subject, geometric lens, surgical light, restricted palette)
-- All design tokens resolve to the canonical KR Solidarity semantic variables in `kerala-rage-kr-solidarity-manifest.json`
+- All design tokens resolve to the canonical KR Solidarity semantic variables in `kr-solidarity-manifest.json`
 - Every asset output is machine-readable and ready for automated ingestion by the build pipeline
 - Zero "AI Slop" (soft edges, generic props, beige palettes, daylight backgrounds) survives in any committed asset
 
@@ -26,7 +26,7 @@ and manifest update to a state where:
 
 **Writable paths:**
 - `assets/` — generated and committed assets
-- `kerala-rage-kr-solidarity-manifest.json` — manifest updates after validation
+- `kr-solidarity-manifest.json` — manifest updates after validation
 
 **Banned actions:**
 - Never use Blue, Purple, or Neon colours unless explicitly specified for iridescent insects
@@ -94,7 +94,7 @@ Before claiming any generation or update task is complete, you must:
 - **Primary Intelligence:** Gemini 3.0 Pro / Flash (via Antigravity/Flash Sidekick).
 - **Asset Engine:** Design Flash Sidekick MCP (Image Generation & Refinement).
 - **Source of Truth:**
-  - [kerala-rage-kr-solidarity-manifest.json](file:///Users/okgoogle13/Projects/careercopilot/assets/kerala-rage-kr-solidarity-manifest.json)
+  - [kr-solidarity-manifest.json](file:///Users/okgoogle13/Projects/careercopilot/assets/kr-solidarity-manifest.json)
   - [01-tokens.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/01-tokens.md)
   - [kerala-rage-design-principles.md](file:///Users/okgoogle13/Projects/careercopilot/docs/design/kerala-rage-design-principles.md)
 

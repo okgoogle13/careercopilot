@@ -66,7 +66,7 @@ export function Dashboard() {
     async function loadHero() {
       try {
         const [manifest, registry] = await Promise.all([
-          fetch('/assets/kerala-rage-kr-solidarity-manifest.json').then((r) => r.json()),
+          fetch('/assets/kr-solidarity-manifest.json').then((r) => r.json()),
           loadHeroRegistry(),
         ]);
 

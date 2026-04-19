@@ -6,7 +6,7 @@ import { normalizeManifest } from '../design/hero/normalizeManifest';
 
 const MANIFEST_PATH = path.resolve(
   process.cwd(),
-  'public/assets/kerala-rage-kr-solidarity-manifest.json'
+  'public/assets/kr-solidarity-manifest.json'
 );
 const REGISTRY_PATH = path.resolve(process.cwd(), 'public/assets/kr-solidarity-hero-registry.json');
 

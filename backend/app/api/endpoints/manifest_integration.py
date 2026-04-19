@@ -22,7 +22,7 @@ from app.schemas.manifest_integration import (
 router = APIRouter()
 
 # Manifest file path (update as needed)
-MANIFEST_PATH = Path("frontend/public/assets/kerala-rage-kr-solidarity-manifest.json")
+MANIFEST_PATH = Path("frontend/public/assets/kr-solidarity-manifest.json")
 ASSET_PACKAGES_DIR = Path("./asset-packages")
 
 

@@ -357,7 +357,7 @@ Place the asset at the canonical path:
 ```
 
 ### 2. Manifest Entry
-Add this entry to `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`:
+Add this entry to `frontend/public/assets/kr-solidarity-manifest.json`:
 
 ```json
 {json.dumps(manifest_entry, indent=2)}

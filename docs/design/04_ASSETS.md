@@ -66,7 +66,7 @@ When a symbolic anchor (e.g., Shiva or Elephant) is used, it must be accompanied
 
 ---
 
-**Registry Reference:** `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`
+**Registry Reference:** `frontend/public/assets/kr-solidarity-manifest.json`
 ---
 
 ## 5. Decorative Shape Assets

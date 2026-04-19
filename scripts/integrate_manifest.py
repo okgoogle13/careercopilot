@@ -6,7 +6,7 @@ from datetime import datetime
 
 def integrate_manifests(packages_dir):
     root_dir = Path(packages_dir).parent
-    manifest_path = root_dir / 'frontend/public/assets/kerala-rage-kr-solidarity-manifest.json'
+    manifest_path = root_dir / 'frontend/public/assets/kr-solidarity-manifest.json'
 
     if not manifest_path.exists():
         print(f"Error: Global manifest not found at {manifest_path}")

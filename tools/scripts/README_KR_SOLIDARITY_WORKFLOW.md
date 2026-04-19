@@ -171,7 +171,7 @@ files = export_package(package, output_dir="./asset-packages")
 
 **Generated Files:**
 
-1. **manifest-entry.json** – Add directly to `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`:
+1. **manifest-entry.json** – Add directly to `frontend/public/assets/kr-solidarity-manifest.json`:
 ```json
 {
   "id": "KR-SOLID-013",
@@ -383,7 +383,7 @@ After successful batch processing:
 # Extract all manifest entries
 jq '.manifest_entry' asset-packages/*/metadata.json > new-assets.jsonl
 
-# Manually add to frontend/public/assets/kerala-rage-kr-solidarity-manifest.json
+# Manually add to frontend/public/assets/kr-solidarity-manifest.json
 # Update asset count and asset_summary
 ```
 
@@ -493,7 +493,7 @@ pip install google-generativeai Pillow
 ## References
 
 - **Design System:** `design-system/tokens.json`
-- **Current Manifest:** `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`
+- **Current Manifest:** `frontend/public/assets/kr-solidarity-manifest.json`
 - **Governance Rules:** See `FORBIDDEN_KEYWORDS` in `validate_kr_solidarity_governance.py`
 - **Component Usage:** See `usage.md` in generated asset packages
 

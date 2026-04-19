@@ -4,9 +4,9 @@
   "phase_gate_input": {
     "phase4_gate_status": "PASS",
     "evidence": [
-      "frontend/public/assets/ASSET-REPORT.json",
-      "frontend/public/assets/VISUAL-REPORT.json",
-      "frontend/public/assets/batch4c-hero.json"
+      "frontend/public/assets/asset-report.json",
+      "frontend/public/assets/visual-report.json",
+      "frontend/public/assets/kr-solidarity-hero-batch-4c.json"
     ]
   },
   "tasks": [
