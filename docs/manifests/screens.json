@@ -10,6 +10,7 @@
     "localExportDir": null,
     "localExportNote": "Machine-local donor export path intentionally omitted from active manifests."
   },
+  "aliasRoutePolicy": "Alias routes are historical/reference only and are excluded from the active Figma sync queue. Canonical sync targets come from docs/project/active/figma-sync-order.json and current runtime routes.",
   "screens": [
     {
       "screenId": "01_landing",

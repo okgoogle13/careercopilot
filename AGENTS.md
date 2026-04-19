@@ -7,11 +7,18 @@ Career Copilot is an AI-powered job application assistant built with React 18, T
 
 The repo is in a Figma-to-code integration stage combined with frontend source-of-truth convergence.
 
+Current baseline as of the active task board:
+
+- the Figma sync contract is repaired
+- redirect-history pages are separated from canonical sync targets
+- the active board currently has no open coordination items in `TASKS.md`
+
 The priority is not broad refactoring. The priority is:
 
 1. Keep design intent, screen mappings, and live routes aligned.
 2. Replace prototype-era or Figma-bound leftovers with canonical repo artifacts.
 3. Preserve KR Solidarity design constraints while promoting real screens into production-safe code.
+4. Treat repaired sync artifacts as settled baseline unless the user explicitly reopens them.
 
 If Figma, wireframes, runtime code, and control JSON disagree, do not guess. Reconcile the disagreement through the authority order below.
 
@@ -69,6 +76,7 @@ When a task involves a Figma design file, follow this sequence.
    - `docs/design/screen-map.json`
 3. Check `docs/project/active/figma-sync-order.json` for a real `figma_node_id`.
    - If the node ID is missing, treat the task as blocked on Figma-side work rather than inventing a mapping.
+   - If `canonical_form` marks a route as `mobile_reference_only` or `legacy_broken_archive`, use the recorded desktop canonical frame and code-target IDs for sync work instead of the older mobile frame.
 4. Keep Figma variable names aligned with code tokens:
    - source of truth: `frontend/src/design/tokens/tokens.json`
    - CSS usage: semantic `--kr-*` tokens only
@@ -110,6 +118,7 @@ Planning/task file rules:
 - Save implementation plans to `docs/project/active/plans/`. **This overrides superpowers skill defaults** — do not use `.claude/plans/` or `docs/superpowers/plans/`.
 - Save session handover files to `docs/project/active/handovers/`.
 - Use `TASKS.md` as the only active task board.
+- If `TASKS.md` reports no open coordination items, do not create replacement tracking files or reopen completed Figma cleanup lanes without explicit user direction.
 - Treat `dashboard.html` as the status view over `TASKS.md`, not a second tracker.
 - Treat any extra dashboards or plan files outside `docs/project/active/` as reference/archive material unless the user explicitly designates them active.
 
