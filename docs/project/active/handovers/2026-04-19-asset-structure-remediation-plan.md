@@ -63,11 +63,11 @@ WORKSTREAM 3 — Standardise file naming (frontend/public/assets/)
 
 For each pair: git mv old new, then grep and patch all references before the next rename.
 
-  ASSET-REPORT.json                       → asset-report.json
-  VISUAL-REPORT.json                      → visual-report.json
-  asset_catalog.json                      → asset-catalog.json
-  batch4c-hero.json                       → kr-solidarity-hero-batch-4c.json
-  kerala-rage-kr-solidarity-manifest.json → kr-solidarity-manifest.json
+  asset-report.json                       → asset-report.json
+  visual-report.json                      → visual-report.json
+  asset-catalog.json                      → asset-catalog.json
+  kr-solidarity-hero-batch-4c.json                       → kr-solidarity-hero-batch-4c.json
+  kr-solidarity-manifest.json → kr-solidarity-manifest.json
 
 Final verify: grep -r "ASSET-REPORT|VISUAL-REPORT|asset_catalog|batch4c-hero|kerala-rage" . --exclude-dir=node_modules → 0 results
 Commit: "fix(assets): WS3 — standardise file naming in public/assets/"

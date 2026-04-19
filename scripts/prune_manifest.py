@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 def prune_manifest():
-    manifest_path = Path('frontend/public/assets/kerala-rage-kr-solidarity-manifest.json')
+    manifest_path = Path('frontend/public/assets/kr-solidarity-manifest.json')
     if not manifest_path.exists():
         print("Manifest not found.")
         return

@@ -66,7 +66,7 @@ bash scripts/complete-triage-migration.sh
 **Verify**:
 ```bash
 ls -la frontend/public/assets/_triage/keep/  # Should be empty
-cat frontend/src/design/tokens/kerala-rage-kr-solidarity-manifest.json | jq '.assets | length'
+cat frontend/src/design/tokens/kr-solidarity-manifest.json | jq '.assets | length'
 # Should show 41 + 42 = 83 assets
 ```
 
@@ -351,7 +351,7 @@ frontend/src/styles/
 └── design-tokens.css
 
 frontend/src/design/tokens/
-└── kerala-rage-kr-solidarity-manifest.json
+└── kr-solidarity-manifest.json
 ```
 
 ---

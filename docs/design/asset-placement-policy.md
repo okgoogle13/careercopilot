@@ -76,7 +76,7 @@ hero_accent [Z-3]:
 **Input Sources**:
 1. Wireframe `<assets>` block (layer intent, z-index, placement hints)
 2. Page-by-page asset guide (`docs/design/06b-asset-placement.md`): emotional register, asset density
-3. Kerala Rage manifest (`kerala-rage-kr-solidarity-manifest.json`): available assets, categories, aspect ratios
+3. Kerala Rage manifest (`kr-solidarity-manifest.json`): available assets, categories, aspect ratios
 4. Hero registry (`kr-solidarity-hero-registry.json`): pre-composed hero stacks
 
 **Output**: Fully specified asset_id assignments with:
@@ -132,7 +132,7 @@ Asset selection uses a **100-point scoring rubric** to ensure deterministic, rep
 
 This rule is **mandatory** for all runs of `asset-placement-strategy`.
 
-1. Every asset in `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json` must be accounted for.
+1. Every asset in `frontend/public/assets/kr-solidarity-manifest.json` must be accounted for.
 2. An asset is accounted for only if it is either:
    - placed in at least one `<slot>` across the 11 wireframes, or
    - listed in `unused_assets` with an explicit reason.
@@ -548,7 +548,7 @@ Layer Distribution:
 
 **Manifest sources of truth**:
 
-- `/frontend/public/assets/kerala-rage-kr-solidarity-manifest.json` (v6.0.0, 87 assets)
+- `/frontend/public/assets/kr-solidarity-manifest.json` (v6.0.0, 87 assets)
 - `/frontend/public/assets/kr-solidarity-hero-registry.json` (v2.0.0, 7 compositions)
 
 ---

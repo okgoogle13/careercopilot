@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 const assetPackagesDir = '/Users/okgoogle13/Projects/careercopilot/asset-packages';
-const mainManifestPath = '/Users/okgoogle13/Projects/careercopilot/frontend/public/assets/kerala-rage-kr-solidarity-manifest.json';
+const mainManifestPath = '/Users/okgoogle13/Projects/careercopilot/frontend/public/assets/kr-solidarity-manifest.json';
 const globalManifest = JSON.parse(fs.readFileSync(mainManifestPath, 'utf8'));
 
 const packages = fs.readdirSync(assetPackagesDir).filter(f => f.startsWith('KR-SOLID-'));
@@ -98,7 +98,7 @@ packages.forEach(pkg => {
     },
 
     manifest_integration: {
-      manifest_file: "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json",
+      manifest_file: "frontend/public/assets/kr-solidarity-manifest.json",
       entry_ready: !!globalEntry,
       entry_path_verified: true,
       files_at_path: true,

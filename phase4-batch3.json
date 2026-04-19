@@ -12,7 +12,7 @@
     "/Users/okgoogle13/Projects/careercopilot/frontend/src/components/phase3-batch3/SettingsControl.tsx"
   ],
   "output_dir": "frontend/src/components/phase4-filled-batch3/",
-  "manifest": "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json",
+  "manifest": "frontend/public/assets/kr-solidarity-manifest.json",
   "hero_registry": "frontend/public/assets/kr-solidarity-hero-registry.json",
   "target_coverage": 75,
   "target_score": 92

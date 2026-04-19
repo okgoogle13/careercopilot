@@ -44,6 +44,6 @@ Every asset must be scored against the immutable laws before entering the manife
 
 ## 4. Manifest Registration
 
-Update `kerala-rage-kr-solidarity-manifest.json` with entry:
+Update `kr-solidarity-manifest.json` with entry:
 
 - ID, Category, Motif Type, Translucency Band, Compliance Score.

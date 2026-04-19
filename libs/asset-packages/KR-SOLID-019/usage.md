@@ -15,7 +15,7 @@ kr-solidarity/devotional/kr-solidarity__devotional__kr-solidarity--devotional--s
 ```
 
 ### 2. Manifest Entry
-Add this entry to `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`:
+Add this entry to `frontend/public/assets/kr-solidarity-manifest.json`:
 
 ```json
 {

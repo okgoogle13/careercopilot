@@ -2,7 +2,7 @@
 import json
 import os
 
-MANIFEST_PATH = '/Users/okgoogle13/Projects/careercopilot/frontend/public/assets/kerala-rage-kr-solidarity-manifest.json'
+MANIFEST_PATH = '/Users/okgoogle13/Projects/careercopilot/frontend/public/assets/kr-solidarity-manifest.json'
 TOKEN_MAP_PATH = '/Users/okgoogle13/Projects/careercopilot/frontend/public/assets/kr-solidarity-ui-token-map.json'
 
 def sync_token_map():

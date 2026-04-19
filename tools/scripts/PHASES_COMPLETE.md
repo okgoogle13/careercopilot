@@ -332,7 +332,7 @@ cat asset-packages/*/manifest-entry.json > new-entries.json
 cp -r asset-packages/KR-SOLID-*/metadata.json frontend/public/assets/...
 
 # Update manifest version
-# Edit: frontend/public/assets/kerala-rage-kr-solidarity-manifest.json
+# Edit: frontend/public/assets/kr-solidarity-manifest.json
 ```
 
 ---
@@ -363,7 +363,7 @@ scripts/
 ## Integration Points
 
 ### Frontend Manifest
-**File:** `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`
+**File:** `frontend/public/assets/kr-solidarity-manifest.json`
 
 **Action:** Add each `manifest-entry.json` to assets array
 

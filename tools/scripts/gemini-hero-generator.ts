@@ -41,7 +41,7 @@ const PROJECT_ROOT = process.cwd();
 
 const PROMPTS_PATH = path.resolve(PROJECT_ROOT, 'scripts/gemini-prompts/hero-composer.json');
 const REGISTRY_PATH = path.resolve(PROJECT_ROOT, 'frontend/public/assets/kr-solidarity-hero-registry.json');
-const MANIFEST_PATH = path.resolve(PROJECT_ROOT, 'frontend/public/assets/kerala-rage-kr-solidarity-manifest.json');
+const MANIFEST_PATH = path.resolve(PROJECT_ROOT, 'frontend/public/assets/kr-solidarity-manifest.json');
 
 async function generateHero(promptId: string, context = '') {
   const promptsData = JSON.parse(fs.readFileSync(PROMPTS_PATH, 'utf-8'));

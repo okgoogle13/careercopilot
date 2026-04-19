@@ -5,7 +5,7 @@ from pathlib import Path
 
 def full_reconciliation():
     repo_root = Path('/Users/okgoogle13/Projects/careercopilot')
-    manifest_path = repo_root / 'frontend/public/assets/kerala-rage-kr-solidarity-manifest.json'
+    manifest_path = repo_root / 'frontend/public/assets/kr-solidarity-manifest.json'
     token_map_path = repo_root / 'frontend/public/assets/kr-solidarity-ui-token-map.json'
     hero_registry_path = repo_root / 'frontend/public/assets/kr-solidarity/kr-solidarity.hero-registry.json'
 

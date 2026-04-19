@@ -256,7 +256,7 @@ python integrate_manifest.py --deployment-plan
 
 ## Manifest Structure
 
-### File: `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`
+### File: `frontend/public/assets/kr-solidarity-manifest.json`
 
 **Version 3.0.1 Example:**
 
@@ -561,8 +561,8 @@ curl -X POST http://localhost:8000/api/manifest-integration/deployment-plan \
 
 1. **Create backup**
    ```bash
-   cp frontend/public/assets/kerala-rage-kr-solidarity-manifest.json \
-      frontend/public/assets/kerala-rage-kr-solidarity-manifest.backup.json
+   cp frontend/public/assets/kr-solidarity-manifest.json \
+      frontend/public/assets/kr-solidarity-manifest.backup.json
    ```
 
 2. **Validate new manifest**
@@ -625,8 +625,8 @@ curl -X POST http://localhost:8000/api/manifest-integration/deployment-plan \
 
 1. **Revert manifest**
    ```bash
-   cp frontend/public/assets/kerala-rage-kr-solidarity-manifest.backup.json \
-      frontend/public/assets/kerala-rage-kr-solidarity-manifest.json
+   cp frontend/public/assets/kr-solidarity-manifest.backup.json \
+      frontend/public/assets/kr-solidarity-manifest.json
    ```
 
 2. **Redeploy frontend**
@@ -707,7 +707,7 @@ ls -la frontend/public/assets/
 chmod 755 frontend/public/assets/
 
 # Validate JSON syntax
-python -m json.tool frontend/public/assets/kerala-rage-kr-solidarity-manifest.json
+python -m json.tool frontend/public/assets/kr-solidarity-manifest.json
 ```
 
 ### Issue: Assets not loading
@@ -719,7 +719,7 @@ python -m json.tool frontend/public/assets/kerala-rage-kr-solidarity-manifest.js
 ls -la frontend/public/assets/kr-solidarity/*/
 
 # Check manifest paths
-grep file_path frontend/public/assets/kerala-rage-kr-solidarity-manifest.json
+grep file_path frontend/public/assets/kr-solidarity-manifest.json
 ```
 
 ### Issue: Validation fails
@@ -740,7 +740,7 @@ python integrate_manifest.py --validate
 ```bash
 # Find duplicates
 jq '.assets | map(.id) | group_by(.) | map(select(length > 1))' \
-   frontend/public/assets/kerala-rage-kr-solidarity-manifest.json
+   frontend/public/assets/kr-solidarity-manifest.json
 
 # Remove manually or reset manifest
 ```

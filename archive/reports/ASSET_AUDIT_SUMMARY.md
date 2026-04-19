@@ -301,7 +301,7 @@ careercopilot/
         └── design/tokens/
             ├── tokens.json         ✅ 100% DTCG compliant
             ├── hero-registry.json  ✅ Valid
-            └── kerala-rage-kr-solidarity-manifest.json  ⚠️ 12 assets missing
+            └── kr-solidarity-manifest.json  ⚠️ 12 assets missing
 ```
 
 ---
