@@ -1,5 +1,5 @@
 {
-  "id": "KR-SOLID-0101",
+  "id": "KR-SOLID-101",
   "title": "System Reserved Gap",
   "description": "Intentionally reserved ID to preserve historical sequence. No asset associated with this ID.",
   "status": "RESERVED",

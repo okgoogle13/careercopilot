@@ -1,5 +1,5 @@
 {
-  "asset_id": "KR-SOLID-0103",
+  "asset_id": "KR-SOLID-105",
   "asset_name": "System Reserved Gap",
   "packaging_version": "1.0",
   "packaged_at": "2026-02-23T18:51:36.928Z",
@@ -52,7 +52,7 @@
     }
   },
   "deployment_info": {
-    "asset_id": "KR-SOLID-0103",
+    "asset_id": "KR-SOLID-105",
     "canonical_path": "",
     "category": "uncategorized",
     "priority": "MEDIUM",
@@ -100,7 +100,7 @@
     "5. [RECOMMENDED] Test component integration"
   ],
   "deployment_commands": {
-    "add_to_manifest": "python scripts/integrate_manifest.py ./asset-packages/KR-SOLID-0103/",
+    "add_to_manifest": "python scripts/integrate_manifest.py ./asset-packages/KR-SOLID-105/",
     "validate_manifest": "python scripts/integrate_manifest.py --validate",
     "generate_variants": "convert src.png -resize 200% dest@2x.png && cwebp src.png -o dest.webp"
   },
