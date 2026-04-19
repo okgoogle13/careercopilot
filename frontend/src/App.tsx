@@ -11,7 +11,6 @@ import {
 } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { BannerTexture } from './components/kerala-rage/BannerTexture';
-import './design/styles/design-tokens.css';
 import { MigratedRouteLayout } from './layouts/MigratedRouteLayout';
 import { getModeForRoute } from './config/routeModeMap';
 import { useAuth } from './context/AuthContext';
