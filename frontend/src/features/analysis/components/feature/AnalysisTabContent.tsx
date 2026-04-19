@@ -28,10 +28,10 @@ export const AnalysisTabContent: React.FC<Props> = ({ analysis, careerData, onNe
           {analysis.Skill_Gaps.map((gap, i) => {
             const levelStyles = {
               Strong: {
-                bg: 'bg-green-900/40',
-                border: 'border-green-500/30',
-                text: 'text-green-300',
-                dot: 'bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.5)]',
+                bg: 'bg-[color-mix(in_srgb,var(--kr-color-signal-green-steps-0)_40%,transparent)]',
+                border: 'border-[color-mix(in_srgb,var(--kr-color-signal-green-base)_30%,transparent)]',
+                text: 'text-[var(--kr-color-signal-green-steps-4)]',
+                dot: 'bg-[var(--kr-color-signal-green-base)] shadow-[0_0_8px_color-mix(in_srgb,var(--kr-color-signal-green-base)_50%,transparent)]',
               },
               Partial: {
                 bg: 'bg-amber-900/40',
