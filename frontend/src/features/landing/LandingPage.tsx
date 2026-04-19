@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 import { Logo } from '../../components/ui/Logo';
 
 // Figma node 1:10 — KR-Solidarity-CAREERCOPILOT, 2026-04-01
-// Hero image placeholder — replace with /public/kr-hero-001.webp once asset is exported from Figma
-const imgHero = '';
-// Evidence section background placeholder
-const imgEvidence = '';
+const imgHero = '/assets/uncategorized/kr-solidarity__uncategorized__uncategorized--textless-protest-tram--v1.png';
+const imgEvidence = '/assets/kr-solidarity/devotional/kr-solidarity__spiritual__devotional--textless-deity-poster--v1.png';
 
 const STATS = [
   { value: '127', label: 'Stories Archived', color: 'var(--kr-color-stencil-yellow-base)' },
@@ -68,8 +66,8 @@ export const LandingPage: React.FC = () => {
           to="/auth?mode=login"
           className="flex items-center justify-center px-5 h-[30px] font-mono text-[8px] uppercase tracking-[0.8px] border rounded-full transition-colors"
           style={{
-            color: 'var(--kr-color-kr-activist-smoke-green-base)',
-            borderColor: 'var(--kr-color-kr-activist-smoke-green-base)',
+            color: 'var(--kr-color-protest-metal-blue-base)',
+            borderColor: 'var(--kr-color-protest-metal-blue-base)',
           }}
         >
           Sign In
@@ -144,7 +142,7 @@ export const LandingPage: React.FC = () => {
           {/* Country acknowledgement — Figma node 1:61 */}
           <p
             className="font-['Caveat'] text-[13px] opacity-70"
-            style={{ color: 'var(--kr-color-kr-activist-smoke-green-base)' }}
+            style={{ color: 'var(--kr-color-protest-metal-blue-base)' }}
           >
             Always was, always will be — built on unceded Wurundjeri Country.
           </p>
@@ -208,7 +206,7 @@ export const LandingPage: React.FC = () => {
             </span>
             <span
               className="font-mono font-bold text-[10px] uppercase tracking-[0.8px]"
-              style={{ color: 'var(--kr-color-kr-activist-smoke-green-base)' }}
+              style={{ color: 'var(--kr-color-protest-metal-blue-base)' }}
             >
               STORIES ARCHIVED
             </span>
@@ -261,7 +259,7 @@ export const LandingPage: React.FC = () => {
                 </span>
                 <span
                   className="font-mono font-thin text-[9px] uppercase tracking-[1.08px] opacity-75 text-center"
-                  style={{ color: 'var(--kr-color-kr-activist-smoke-green-base)' }}
+                  style={{ color: 'var(--kr-color-protest-metal-blue-base)' }}
                 >
                   {stat.label}
                 </span>
@@ -275,7 +273,7 @@ export const LandingPage: React.FC = () => {
       <section className="relative z-10 px-8 py-12 flex flex-col gap-8">
         <p
           className="font-mono font-bold text-[10px] uppercase tracking-[1px]"
-          style={{ color: 'var(--kr-color-kr-activist-smoke-green-base)' }}
+          style={{ color: 'var(--kr-color-protest-metal-blue-base)' }}
         >
           THE SOLIDARITY TOOLKIT
         </p>
@@ -386,13 +384,13 @@ export const LandingPage: React.FC = () => {
         <div className="flex flex-col gap-1">
           <p
             className="font-mono text-[10px] uppercase tracking-[0.8px]"
-            style={{ color: 'var(--kr-color-kr-activist-smoke-green-base)' }}
+            style={{ color: 'var(--kr-color-protest-metal-blue-base)' }}
           >
             BUILT WITH SOLIDARITY // CAREER COPILOT v2.0
           </p>
           <p
             className="font-mono text-[9px] uppercase tracking-[0.54px] opacity-60"
-            style={{ color: 'var(--kr-color-kr-activist-smoke-green-base)' }}
+            style={{ color: 'var(--kr-color-protest-metal-blue-base)' }}
           >
             TOKEN SYNC v2.0 · SHAPE SYSTEM v6.1 · ANTI-SLOP ACTIVE
           </p>
@@ -401,7 +399,7 @@ export const LandingPage: React.FC = () => {
           <Link
             to="/style-guide"
             className="font-mono text-[10px] uppercase tracking-[0.6px] hover:opacity-100 opacity-80 transition-opacity"
-            style={{ color: 'var(--kr-color-kr-activist-smoke-green-base)' }}
+            style={{ color: 'var(--kr-color-protest-metal-blue-base)' }}
           >
             STYLE GUIDE
           </Link>
