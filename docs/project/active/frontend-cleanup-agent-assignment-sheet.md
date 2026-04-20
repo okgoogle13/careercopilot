@@ -21,7 +21,7 @@
 5. **Historical closure notes:** advisory only. Do not trust any older “terminal governance closure” claim unless it matches current manifests and current verification output.
 
 **Operational Constraints:**
-- **Zero-Flora Lockdown:** Strictly enforce `docs/design/01_CANON.md`. Absolutely NO native Australian flora (gum, wattle, eucalyptus).
+- **Selective Flora/Fauna Rule:** Strictly enforce `docs/design/01_CANON.md`. Absolutely NO native Australian flora (gum, wattle, eucalyptus) or endemic-fauna mascots. Elephants remain allowed as intentional cultural anchors.
 - **Hardened Hierarchy:** Gemini *cannot* modify `App.tsx` or `route-registry.ts` without explicit Claude Code "Execution Directives."
 - **MCP Delegation:** Use `flash-sidekick` for all files > 300 lines. Use `design-system-sidekick` for visual compliance verification prior to any batch sign-off.
 - **Tokens Studio Preflight:** If `/Users/okgoogle13/Downloads/dtcg-tokens (1).zip` is available, Claude Code must run a token preflight before route cleanup begins. Do not start route cleanup against a drifting token source of truth.

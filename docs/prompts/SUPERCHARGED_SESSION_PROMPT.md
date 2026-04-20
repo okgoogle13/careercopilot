@@ -92,7 +92,7 @@ At the end of every significant step, emit:
 
 ## Hard constraints
 - PLANNING phase: read-only. Do not edit or create files.
-- No hardcoded hex · no white backgrounds · no flora · no generic shapes.
+- No hardcoded hex · no white backgrounds · no Australian native flora · no generic shapes.
 - Token source of truth: frontend/src/design/tokens/tokens.json
 - KR Solidarity compliance target: design-system-sidekick score > 0.9 on modified canonical views.
 - flash-sidekick.batch_file_analysis for any sweep across 3+ files.

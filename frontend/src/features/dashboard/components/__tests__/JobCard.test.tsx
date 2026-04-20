@@ -37,8 +37,10 @@ describe('JobCard', () => {
 
   it('renders job details correctly', () => {
     render(<JobCard {...defaultProps} />);
-    expect(screen.getByText('Senior React Developer')).toBeInTheDocument();
-    expect(screen.getByText('Tech Corp')).toBeInTheDocument();
+    expect(screen.getByText('Senior React Developer')).toHaveClass('font-primary');
+    expect(screen.getByText('Senior React Developer')).not.toHaveClass('font-trunk');
+    expect(screen.getByText('Tech Corp')).toHaveClass('font-proclamation');
+    expect(screen.getByText('Tech Corp')).not.toHaveClass('font-leaf');
     expect(screen.getByText('85%')).toBeInTheDocument();
     expect(screen.getByText('applied')).toBeInTheDocument();
   });
@@ -47,6 +49,8 @@ describe('JobCard', () => {
     render(<JobCard {...defaultProps} />);
     const button = screen.getByText('View Application');
     expect(button).toBeInTheDocument();
+    expect(button).toHaveClass('rounded-march', 'bg-solidarity-red-base', 'font-primary');
+    expect(button).not.toHaveClass('rounded-pebble', 'bg-terracotta');
     fireEvent.click(button);
     expect(onApply).toHaveBeenCalled();
   });
@@ -84,7 +88,8 @@ describe('JobCard', () => {
         matchScore={50}
       />
     );
-    expect(screen.getByText('50%')).toHaveClass('bg-terracotta');
+    expect(screen.getByText('50%')).toHaveClass('bg-solidarity-red-base');
+    expect(screen.getByText('50%')).not.toHaveClass('bg-terracotta');
   });
 
   it('applies correct status pill colors', () => {
@@ -110,7 +115,8 @@ describe('JobCard', () => {
         status="rejected"
       />
     );
-    expect(screen.getByText('rejected')).toHaveClass('bg-terracotta');
+    expect(screen.getByText('rejected')).toHaveClass('bg-solidarity-red-base');
+    expect(screen.getByText('rejected')).not.toHaveClass('bg-terracotta');
   });
 
   it('renders the deadline when provided', () => {

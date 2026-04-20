@@ -1,30 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 120" width="800" height="120" role="img" aria-label="KR-UI-038 Cultural Binding Border — Kerala Rage kr-solidarity">
-  <title>KR-UI-038 Cultural Binding Border — Kerala Vine Scroll Motif</title>
+  <title>KR-UI-038 Cultural Binding Border — Kerala Scroll Motif</title>
   <defs>
     <style>
       :root {
         --sys-color-asphaltBlack: #1A1714;
         --sys-color-kr-ink-gold: #D4A84B;
         --sys-color-ochreEarth: #B8733D;
-        --sys-color-gumLeafGreen: #6B7F6E;
+        --sys-color-kr-activistSmokeGreen-base: #48da8b;
         --sys-color-paperWhite: #F5F0E8;
       }
     </style>
-    <!-- Vine gradient — warm earth to gold -->
-    <linearGradient id="vine-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+    <!-- Primary scroll gradient — warm earth to gold -->
+    <linearGradient id="scroll-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%"   stop-color="var(--sys-color-ochreEarth, #B8733D)"  stop-opacity="0.3"/>
       <stop offset="25%"  stop-color="var(--sys-color-kr-ink-gold, #D4A84B)" stop-opacity="0.9"/>
       <stop offset="50%"  stop-color="var(--sys-color-ochreEarth, #B8733D)"  stop-opacity="0.8"/>
       <stop offset="75%"  stop-color="var(--sys-color-kr-ink-gold, #D4A84B)" stop-opacity="0.9"/>
       <stop offset="100%" stop-color="var(--sys-color-ochreEarth, #B8733D)"  stop-opacity="0.3"/>
     </linearGradient>
-    <!-- Leaf fill -->
-    <linearGradient id="leaf-fill" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%"   stop-color="var(--sys-color-gumLeafGreen, #6B7F6E)" stop-opacity="1"/>
+    <!-- Motif accent fill -->
+    <linearGradient id="motif-accent-fill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="var(--sys-color-kr-activistSmokeGreen-base, #48da8b)" stop-opacity="1"/>
       <stop offset="100%" stop-color="var(--sys-color-kr-ink-gold, #D4A84B)"  stop-opacity="0.6"/>
     </linearGradient>
-    <!-- Bloom fill -->
-    <radialGradient id="bloom-fill" cx="50%" cy="50%" r="50%">
+    <!-- Cultural anchor fill -->
+    <radialGradient id="cultural-anchor-fill" cx="50%" cy="50%" r="50%">
       <stop offset="0%"   stop-color="var(--sys-color-paperWhite, #F5F0E8)"  stop-opacity="1"/>
       <stop offset="60%"  stop-color="var(--sys-color-kr-ink-gold, #D4A84B)" stop-opacity="0.9"/>
       <stop offset="100%" stop-color="var(--sys-color-ochreEarth, #B8733D)"  stop-opacity="0.7"/>
@@ -34,9 +34,9 @@
   <!-- Cultural binding border — Z-1 mid-layer (ui-kit) -->
   <g id="cultural-binding-border">
 
-    <!-- Main spine vine — asymmetric wave, never perfectly horizontal -->
+    <!-- Main spine scroll — asymmetric wave, never perfectly horizontal -->
     <path d="M 0,62 Q 40,48 80,60 Q 120,72 160,56 Q 200,40 240,58 Q 280,76 320,60 Q 360,44 400,62 Q 440,80 480,60 Q 520,42 560,58 Q 600,74 640,56 Q 680,40 720,60 Q 760,78 800,62"
-          stroke="url(#vine-gradient)" stroke-width="2.5" fill="none"/>
+          stroke="url(#scroll-gradient)" stroke-width="2.5" fill="none"/>
 
     <!-- Secondary tendril — upper -->
     <path d="M 60,62 Q 80,38 100,46 Q 120,54 140,38 Q 160,22 180,40" stroke="var(--sys-color-kr-ink-gold, #D4A84B)" stroke-width="1" fill="none" opacity="0.5"/>
@@ -50,41 +50,41 @@
     <path d="M 480,62 Q 500,84 520,76 Q 540,68 560,84 Q 580,100 600,80" stroke="var(--sys-color-ochreEarth, #B8733D)" stroke-width="1" fill="none" opacity="0.45"/>
     <path d="M 680,62 Q 700,84 720,76 Q 740,68 760,84 Q 780,100 800,82" stroke="var(--sys-color-ochreEarth, #B8733D)" stroke-width="1" fill="none" opacity="0.45"/>
 
-    <!-- Kerala leaves — asymmetric, organic, placed at vine nodes -->
-    <!-- Leaf cluster 1 @ x=120 -->
+    <!-- Kerala motifs — asymmetric, organic, placed at scroll nodes -->
+    <!-- Kerala Leaf Cluster 1 @ x=120 -->
     <g transform="translate(120,54) rotate(-18)">
-      <ellipse rx="12" ry="6" fill="url(#leaf-fill)" opacity="0.88"/>
+      <ellipse rx="12" ry="6" fill="url(#motif-accent-fill)" opacity="0.88"/>
       <line x1="0" y1="0" x2="0" y2="-6" stroke="var(--sys-color-kr-ink-gold, #D4A84B)" stroke-width="0.6" opacity="0.6"/>
     </g>
     <g transform="translate(128,70) rotate(14)">
-      <ellipse rx="9" ry="4.5" fill="url(#leaf-fill)" opacity="0.72"/>
+      <ellipse rx="9" ry="4.5" fill="url(#motif-accent-fill)" opacity="0.72"/>
     </g>
-    <!-- Leaf cluster 2 @ x=320 -->
+    <!-- Kerala Leaf Cluster 2 @ x=320 -->
     <g transform="translate(320,58) rotate(-22)">
-      <ellipse rx="13" ry="6.5" fill="url(#leaf-fill)" opacity="0.88"/>
+      <ellipse rx="13" ry="6.5" fill="url(#motif-accent-fill)" opacity="0.88"/>
       <line x1="0" y1="0" x2="0" y2="-6" stroke="var(--sys-color-kr-ink-gold, #D4A84B)" stroke-width="0.6" opacity="0.6"/>
     </g>
     <g transform="translate(330,73) rotate(10)">
-      <ellipse rx="8" ry="4" fill="url(#leaf-fill)" opacity="0.7"/>
+      <ellipse rx="8" ry="4" fill="url(#motif-accent-fill)" opacity="0.7"/>
     </g>
-    <!-- Leaf cluster 3 @ x=520 -->
+    <!-- Kerala Leaf Cluster 3 @ x=520 -->
     <g transform="translate(520,58) rotate(-16)">
-      <ellipse rx="12" ry="6" fill="url(#leaf-fill)" opacity="0.88"/>
+      <ellipse rx="12" ry="6" fill="url(#motif-accent-fill)" opacity="0.88"/>
       <line x1="0" y1="0" x2="0" y2="-6" stroke="var(--sys-color-kr-ink-gold, #D4A84B)" stroke-width="0.6" opacity="0.6"/>
     </g>
     <g transform="translate(530,72) rotate(18)">
-      <ellipse rx="10" ry="5" fill="url(#leaf-fill)" opacity="0.72"/>
+      <ellipse rx="10" ry="5" fill="url(#motif-accent-fill)" opacity="0.72"/>
     </g>
-    <!-- Leaf cluster 4 @ x=720 -->
+    <!-- Kerala Leaf Cluster 4 @ x=720 -->
     <g transform="translate(720,57) rotate(-20)">
-      <ellipse rx="11" ry="5.5" fill="url(#leaf-fill)" opacity="0.88"/>
+      <ellipse rx="11" ry="5.5" fill="url(#motif-accent-fill)" opacity="0.88"/>
       <line x1="0" y1="0" x2="0" y2="-6" stroke="var(--sys-color-kr-ink-gold, #D4A84B)" stroke-width="0.6" opacity="0.6"/>
     </g>
 
-    <!-- Blooms — cultural anchor points, 5-petal Kerala flower -->
-    <!-- Bloom @ center x=400 -->
-    <g transform="translate(400,60)" id="bloom-center">
-      <circle r="8" fill="url(#bloom-fill)"/>
+    <!-- Anchors — cultural anchor points, 5-petal Kerala flower -->
+    <!-- Kerala Bloom @ center x=400 -->
+<g transform="translate(400,60)" id="anchor-center">
+      <circle r="8" fill="url(#cultural-anchor-fill)"/>
       <g stroke="var(--sys-color-kr-ink-gold, #D4A84B)" stroke-width="0.8" fill="var(--sys-color-ochreEarth, #B8733D)" fill-opacity="0.6">
         <ellipse rx="5" ry="9" transform="rotate(0)"  opacity="0.8"/>
         <ellipse rx="5" ry="9" transform="rotate(72)" opacity="0.8"/>
@@ -94,9 +94,9 @@
       </g>
       <circle r="3.5" fill="var(--sys-color-paperWhite, #F5F0E8)" opacity="0.9"/>
     </g>
-    <!-- Bloom @ x=200 -->
+    <!-- Kerala Bloom @ x=200 -->
     <g transform="translate(200,61) scale(0.8)">
-      <circle r="8" fill="url(#bloom-fill)"/>
+      <circle r="8" fill="url(#cultural-anchor-fill)"/>
       <g stroke="var(--sys-color-kr-ink-gold, #D4A84B)" stroke-width="0.8" fill="var(--sys-color-ochreEarth, #B8733D)" fill-opacity="0.6">
         <ellipse rx="5" ry="9" transform="rotate(36)"/>
         <ellipse rx="5" ry="9" transform="rotate(108)"/>
@@ -106,9 +106,9 @@
       </g>
       <circle r="3" fill="var(--sys-color-paperWhite, #F5F0E8)" opacity="0.9"/>
     </g>
-    <!-- Bloom @ x=600 -->
+    <!-- Kerala Bloom @ x=600 -->
     <g transform="translate(600,60) scale(0.8)">
-      <circle r="8" fill="url(#bloom-fill)"/>
+      <circle r="8" fill="url(#cultural-anchor-fill)"/>
       <g stroke="var(--sys-color-kr-ink-gold, #D4A84B)" stroke-width="0.8" fill="var(--sys-color-ochreEarth, #B8733D)" fill-opacity="0.6">
         <ellipse rx="5" ry="9" transform="rotate(18)"/>
         <ellipse rx="5" ry="9" transform="rotate(90)"/>

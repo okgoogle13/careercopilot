@@ -6,7 +6,7 @@
         --sys-color-asphaltBlack: #1A1714;
         --sys-color-kr-ink-gold: #D4A84B;
         --sys-color-concreteGrey: #A39B8F;
-        --sys-color-gumLeafGreen: #6B7F6E;
+        --sys-color-kr-activistSmokeGreen-base: #48da8b;
       }
     </style>
     <filter id="grain-noise" x="0%" y="0%" width="100%" height="100%">
@@ -62,8 +62,8 @@
     </g>
     <!-- Vignette for depth -->
     <rect width="400" height="400" fill="url(#substrate-vignette)" filter="url(#grain-noise)"/>
-    <!-- Gum leaf green accent seam — solidarity undercurrent -->
-    <path d="M 0,400 Q 80,388 160,394 Q 240,400 320,391 Q 370,385 400,392 L 400,400 Z" fill="var(--sys-color-gumLeafGreen, #6B7F6E)" opacity="0.22"/>
+    <!-- Activist smoke green accent seam — solidarity undercurrent -->
+    <path d="M 0,400 Q 80,388 160,394 Q 240,400 320,391 Q 370,385 400,392 L 400,400 Z" fill="var(--sys-color-kr-activistSmokeGreen-base, #48da8b)" opacity="0.22"/>
   </g>
   <!-- Semantic label (hidden, screen reader) -->
   <text x="-9999" y="-9999" font-size="1">Substrate grain overlay — KR-UI-036 — Kerala Rage kr-solidarity</text>

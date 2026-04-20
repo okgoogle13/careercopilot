@@ -858,5 +858,5 @@
     "priority_routes_unresolved_count": 0,
     "priority_routes_clear": true
   },
-  "summary": "PASS \u2014 aggregate score 94.55/100 across 11 screens. All 49 unresolved slots resolved (49 ID-mapping fixes + 5 z-layer fixes applied to wireframes). 71/95 manifest assets placed. Zero unresolved slots on priority routes 1(/), 5(/dashboard), 9(/analysis), 16(/career/ingest). Zero flora violations. Token compliance 100%. 8 new urban-gallery assets (KR-SOLID-042 through KR-SOLID-049) confirmed in manifest and placed."
+  "summary": "PASS \u2014 aggregate score 94.55/100 across 11 screens. All 49 unresolved slots resolved (49 ID-mapping fixes + 5 z-layer fixes applied to wireframes). 71/95 manifest assets placed. Zero unresolved slots on priority routes 1(/), 5(/dashboard), 9(/analysis), 16(/career/ingest). No banned Australian native flora violations. Token compliance 100%. 8 new urban-gallery assets (KR-SOLID-042 through KR-SOLID-049) confirmed in manifest and placed."
 }

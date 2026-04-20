@@ -29,7 +29,7 @@ function getValue(tokenPath) {
 
 // Test common Tailwind paths from config
 const testPaths = [
-  'color.semantic.wattle-gold',
+  'color.semantic.baru-gold',
   'color.semantic.[DEPRECATED_STYLE]-crimson',
   'spacing.xs',
   'spacing.sm',

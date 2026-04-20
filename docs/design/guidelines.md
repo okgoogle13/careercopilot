@@ -72,5 +72,5 @@ UI that violates these rules is classified as **Institutional Slop** and must be
 1. **Zero Bare Hex**: Every color must map to a `--kr-color-*` token.
 2. **The #FFFFFF Ban**: Pure white is prohibited. Use `--kr-color-paper-white-base` (`#F5F0E8`).
 3. **The 8px Radii Ban**: Generic uniform radii (the "Institutional Squelch") are prohibited.
-4. **Zero-Flora Guardrail**: Absolutely no Australian native flora (wattle, eucalyptus). Coconut palms and elephants only.
+4. **Selective Flora/Fauna Guardrail**: Absolutely no Australian native flora (wattle, eucalyptus) or endemic-fauna mascots. Canonical diaspora flora and elephants are allowed when used intentionally.
 5. **No Corporate Blue**: Any blue must be `--kr-color-protest-metal-blue-base`.

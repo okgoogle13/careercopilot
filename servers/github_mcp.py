@@ -51,7 +51,7 @@ async def github_rest(
         return resp.text
 
 
-@mcp.tool()
+# @mcp.tool()
 async def github_graphql(
     query: str,
     variables: Optional[dict[str, Any]] = None,

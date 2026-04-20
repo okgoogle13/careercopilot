@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { Logo } from '../../components/ui/Logo';
 
 // Figma node 1:10 — KR-Solidarity-CAREERCOPILOT, 2026-04-01
-const imgHero = '/assets/uncategorized/kr-solidarity__uncategorized__uncategorized--textless-protest-tram--v1.png';
+const imgHero =
+  '/assets/kr-solidarity/street/kr-solidarity__street__protest--textless-protest-tram--v1.png';
 const imgEvidence = '/assets/kr-solidarity/devotional/kr-solidarity__spiritual__devotional--textless-deity-poster--v1.png';
 
 const STATS = [
@@ -13,7 +14,7 @@ const STATS = [
   {
     value: '3×',
     label: 'Faster Applications',
-    color: 'var(--kr-color-ink-bronze-base, var(--kr-color-ink-gold-base))',
+    color: 'var(--kr-color-ink-gold-base)',
   },
 ] as const;
 
@@ -102,13 +103,14 @@ export const LandingPage: React.FC = () => {
             MANIFESTO
           </h1>
 
-          {/* Subtext — Caveat, Figma node 1:50 */}
+          {/* Subtext — donor-aligned display treatment, Figma node 1:50 */}
           <p
-            className="font-['Caveat'] text-[22px] leading-relaxed mb-10 max-w-[480px]"
-            style={{ color: 'var(--kr-color-stencil-yellow-base)' }}
+            className="font-display text-ink-gold-base text-[22px] leading-relaxed mb-10 max-w-[480px]"
+            style={{
+              fontVariationSettings: "'SOFT' 100, 'WONK' 1, 'wght' 700",
+            }}
           >
-            Your professional history, re-documented for the{' '}
-            <span className="font-bold">collective</span> future.
+            Your career, re-documented for the collective future.
           </p>
 
           {/* CTAs — Figma node 1:52 */}
@@ -120,7 +122,7 @@ export const LandingPage: React.FC = () => {
                 height: '56px',
                 backgroundColor: 'var(--kr-color-solidarity-red-base)',
                 color: 'var(--kr-color-charcoal-background-base)',
-                borderRadius: '32px 8px 12px 20px',
+                borderRadius: 'var(--kr-archetypes-strike-shape-base)',
               }}
             >
               BUILD YOUR STORY →
@@ -132,7 +134,7 @@ export const LandingPage: React.FC = () => {
                 height: '55px',
                 color: 'var(--kr-color-stencil-yellow-base)',
                 borderColor: 'rgba(218,246,116,0.3)',
-                borderRadius: '32px 8px 12px 20px',
+                borderRadius: 'var(--kr-archetypes-strike-shape-base)',
               }}
             >
               VIEW THE COLLECTIVE
@@ -212,22 +214,24 @@ export const LandingPage: React.FC = () => {
             </span>
           </div>
 
-          {/* Anti-slop badge — Figma node 1:72 */}
-          <div
-            className="absolute top-[-12px] right-0 flex items-center px-4 h-[34px]"
-            style={{
-              backgroundColor: 'rgba(72,240,229,0.1)',
-              border: '1px solid rgba(72,240,229,0.3)',
-              borderRadius: '20px 8px 12px 32px',
-            }}
-          >
-            <span
-              className="font-mono font-extrabold text-[10px] uppercase tracking-[1px] whitespace-nowrap"
-              style={{ color: 'var(--kr-color-protest-metal-blue-base)' }}
+          {/* Anti-slop badge — Figma node 1:72 — dev only */}
+          {import.meta.env.DEV && (
+            <div
+              className="absolute top-[-12px] right-0 flex items-center px-4 h-[34px]"
+              style={{
+                backgroundColor: 'rgba(72,240,229,0.1)',
+                border: '1px solid rgba(72,240,229,0.3)',
+                borderRadius: '20px 8px 12px 32px',
+              }}
             >
-              ANTI-SLOP ACTIVE
-            </span>
-          </div>
+              <span
+                className="font-mono font-extrabold text-[10px] uppercase tracking-[1px] whitespace-nowrap"
+                style={{ color: 'var(--kr-color-protest-metal-blue-base)' }}
+              >
+                ANTI-SLOP ACTIVE
+              </span>
+            </div>
+          )}
         </div>
       </section>
 
@@ -252,8 +256,8 @@ export const LandingPage: React.FC = () => {
               )}
               <div className="flex flex-col items-center gap-2">
                 <span
-                  className="font-['Fraunces'] text-[clamp(32px,4vw,56px)] font-normal leading-none tracking-tight"
-                  style={{ color: stat.color, fontVariationSettings: "'SOFT' 0, 'WONK' 1" }}
+                  className="font-display-ultra text-[clamp(32px,4vw,56px)] leading-none tracking-tight"
+                  style={{ color: stat.color }}
                 >
                   {stat.value}
                 </span>
@@ -368,7 +372,7 @@ export const LandingPage: React.FC = () => {
               height: '53px',
               backgroundColor: 'var(--kr-color-solidarity-red-base)',
               color: 'var(--kr-color-charcoal-background-base)',
-              borderRadius: '20px 8px 12px 32px',
+              borderRadius: 'var(--kr-archetypes-strike-shape-base)',
             }}
           >
             START YOUR ARCHIVE →
@@ -388,12 +392,14 @@ export const LandingPage: React.FC = () => {
           >
             BUILT WITH SOLIDARITY // CAREER COPILOT v2.0
           </p>
-          <p
-            className="font-mono text-[9px] uppercase tracking-[0.54px] opacity-60"
-            style={{ color: 'var(--kr-color-protest-metal-blue-base)' }}
-          >
-            TOKEN SYNC v2.0 · SHAPE SYSTEM v6.1 · ANTI-SLOP ACTIVE
-          </p>
+          {import.meta.env.DEV && (
+            <p
+              className="font-mono text-[9px] uppercase tracking-[0.54px] opacity-60"
+              style={{ color: 'var(--kr-color-protest-metal-blue-base)' }}
+            >
+              TOKEN SYNC v2.0 · SHAPE SYSTEM v6.1 · ANTI-SLOP ACTIVE
+            </p>
+          )}
         </div>
         <div className="flex items-center gap-6">
           <Link

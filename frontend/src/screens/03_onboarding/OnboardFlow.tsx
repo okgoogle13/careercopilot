@@ -84,13 +84,13 @@ export const OnboardFlow = memo(function OnboardFlow({
       animate={{ opacity: 1, y: 0 }}
       transition={undefined}
       className={clsx(
-        "relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-8 font-['Work_Sans'] text-base min-h-[75vh] flex flex-col justify-center",
+        "relative overflow-hidden rounded-[var(--shape-blockRiot03)] p-8 font-['Work_Sans'] text-base min-h-[75vh] flex flex-col justify-center",
         className
       )}
       style={{
-        backgroundColor: 'var(--sys-color-charcoalBackground-base)',
-        color: 'var(--sys-color-worker-ash-base)',
-        border: '1px solid var(--sys-color-concreteGrey-base)',
+        backgroundColor: 'var(--kr-color-charcoal-background-base)',
+        color: 'var(--kr-color-semantic-parchment)',
+        border: '1px solid var(--kr-color-concrete-grey-steps-0)',
       }}
       data-mode={mode}
       data-testid="onboardflow"
@@ -133,8 +133,8 @@ export const OnboardFlow = memo(function OnboardFlow({
         <h1
           className="text-5xl md:text-6xl font-black"
           style={{
-            fontFamily: 'var(--sys-type-font-fraunces)',
-            color: 'var(--sys-color-paperWhite)',
+            fontFamily: 'var(--kr-type-font-families-display)',
+            color: 'var(--kr-color-parchment-base)',
           }}
         >
           {title}
@@ -142,8 +142,8 @@ export const OnboardFlow = memo(function OnboardFlow({
         <p
           className="mt-4 max-w-2xl text-base md:text-xl"
           style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            color: 'var(--sys-color-worker-ash-base)',
+            fontFamily: 'var(--kr-type-font-families-primary)',
+            color: 'var(--kr-color-semantic-parchment)',
           }}
         >
           {subtitle}
@@ -163,11 +163,11 @@ export const OnboardFlow = memo(function OnboardFlow({
             whileTap={{ scale: 0.98 }}
             transition={springButton}
             onClick={onPrimaryAction}
-            className="rounded-[var(--sys-shape-blockRiot03)] px-8 py-4 font-semibold text-lg"
+            className="rounded-[var(--shape-blockRiot03)] px-8 py-4 font-semibold text-lg"
             style={{
-              fontFamily: 'var(--sys-type-font-work-sans)',
-              backgroundColor: 'var(--sys-color-inkGold-base)',
-              color: 'var(--sys-color-charcoalBackground-base)',
+              fontFamily: 'var(--kr-type-font-families-primary)',
+              backgroundColor: 'var(--kr-color-ink-gold-base)',
+              color: 'var(--kr-color-charcoal-background-base)',
             }}
           >
             {primaryLabel}
@@ -177,7 +177,7 @@ export const OnboardFlow = memo(function OnboardFlow({
             type="button"
             onClick={onSecondaryAction}
             className="font-['JetBrains_Mono'] text-sm opacity-80 px-2 py-1"
-            style={{ color: 'var(--sys-color-worker-ash-base)', backgroundColor: 'transparent' }}
+            style={{ color: 'var(--kr-color-semantic-parchment)', backgroundColor: 'transparent', opacity: 0.7 }}
           >
             {secondaryLabel}
           </button>
@@ -195,15 +195,6 @@ export const OnboardFlow = memo(function OnboardFlow({
         </motion.div>
       ) : null}
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={undefined}
-        className="relative z-10 mt-8 font-['JetBrains_Mono'] text-sm opacity-80"
-        style={{ color: 'var(--sys-color-concreteGrey-base)' }}
-      >
-        Slots: {SLOT_DEFS.length} | Density ratio: 0.36 | Max focal CTA: 1
-      </motion.p>
     </motion.section>
   );
 });

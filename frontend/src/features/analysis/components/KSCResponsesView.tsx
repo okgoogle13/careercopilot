@@ -29,7 +29,7 @@ export const KSCResponsesView: React.FC<KSCResponsesViewProps> = ({ analysis, te
 
   if (!responses || responses.length === 0) {
     return (
-      <div className="bg-white p-10 shadow-lg max-w-4xl mx-auto text-center text-[var(--sys-color-worker-ash-base)] italic">
+      <div className="bg-canvas p-10 shadow-lg max-w-4xl mx-auto text-center text-worker-ash italic">
         No Key Selection Criteria responses generated for this role.
       </div>
     );
@@ -37,7 +37,7 @@ export const KSCResponsesView: React.FC<KSCResponsesViewProps> = ({ analysis, te
 
   return (
     <div
-      className="bg-white p-10 shadow-lg max-w-4xl mx-auto"
+      className="bg-canvas p-10 shadow-lg max-w-4xl mx-auto"
       style={{
         fontFamily: template.fontSans,
         color: template.textColor,

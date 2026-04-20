@@ -36,7 +36,7 @@ export const PageHeader = ({ title, subtitle, highlightedWord, description }: Pa
     return (
       <>
         {before}
-        <span className="text-[var(--sys-color-inkGold-base)]">{highlightedWord}</span>
+        <span className="text-[var(--kr-color-semantic-parchment)]">{highlightedWord}</span>
         {after}
       </>
     );

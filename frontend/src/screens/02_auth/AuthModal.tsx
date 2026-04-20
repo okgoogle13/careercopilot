@@ -1,8 +1,9 @@
 import { KrDarkSpring } from '@/design/tokens/motion-presets';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { motion } from 'framer-motion';
 import clsx, { type ClassValue } from 'clsx';
 import { useModeStore } from '../../stores/useModeStore';
+import { useAuth } from '../../context/AuthContext';
 
 type SlotDef = {
   name: string;
@@ -59,7 +60,7 @@ export interface AuthModalProps {
   primaryLabel?: string;
   secondaryLabel?: string;
   slotAssets?: Partial<Record<string, string>>;
-  onPrimaryAction?: () => void;
+  onPrimaryAction?: (email: string, password: string) => void;
   onSecondaryAction?: () => void;
 }
 
@@ -71,14 +72,17 @@ export const AuthModal = memo(function AuthModal({
   mode = 'login',
   title,
   subtitle,
-  primaryLabel = 'Continue',
-  secondaryLabel = 'Use OAuth',
+  primaryLabel,
+  secondaryLabel = 'Continue with OAuth',
   slotAssets,
   onPrimaryAction,
   onSecondaryAction,
 }: AuthModalProps) {
   const themeMode = useModeStore((state) => state.mode);
+  const { login, register } = useAuth();
   const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const resolvedTitle = title ?? (mode === 'register' ? 'Create Account' : 'Sign In');
   const resolvedSubtitle =
@@ -86,6 +90,7 @@ export const AuthModal = memo(function AuthModal({
     (mode === 'register'
       ? 'Join the vanguard and build your portfolio.'
       : 'Secure access to your CareerCopilot workspace.');
+  const resolvedPrimaryLabel = primaryLabel ?? 'Continue';
 
   return (
     <motion.section
@@ -94,13 +99,12 @@ export const AuthModal = memo(function AuthModal({
       animate={{ opacity: 1, y: 0 }}
       transition={undefined}
       className={clsx(
-        'font-primary relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-8 text-base min-h-[75vh] flex flex-col justify-center',
+        'relative overflow-hidden rounded-[var(--kr-shape-block-riot03)] text-base min-h-screen flex flex-col items-center justify-center p-8 bg-solidarity-charcoal-base',
         className
       )}
       style={{
-        backgroundColor: 'var(--sys-color-charcoalBackground-base)',
-        color: 'var(--sys-color-worker-ash-base)',
-        border: '1px solid var(--sys-color-concreteGrey-base)',
+        color: 'var(--kr-color-semantic-parchment)',
+        border: '1px solid var(--kr-color-concrete-grey-steps-0)',
       }}
       data-mode={themeMode}
       data-testid="authmodal"
@@ -118,10 +122,7 @@ export const AuthModal = memo(function AuthModal({
         }
       `}</style>
 
-      <div
-        className="pointer-events-none absolute inset-0"
-        aria-hidden="true"
-      >
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         {SLOT_DEFS.map((slot) => (
           <div
             key={slot.name}
@@ -134,52 +135,134 @@ export const AuthModal = memo(function AuthModal({
         ))}
       </div>
 
-      <motion.header
-        initial={{ opacity: 0, y: 6 }}
+      {/* Centered auth card */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ ...springHero, delay: 0.04 }}
-        className="relative z-10 max-w-2xl"
+        className="relative z-10 w-full max-w-md"
+        style={{
+          backgroundColor: 'var(--kr-color-charcoal-background-steps-1)',
+          border: '1px solid var(--kr-color-concrete-grey-steps-1)',
+          borderRadius: 'var(--kr-shape-march-open01)',
+          padding: '2.5rem',
+        }}
       >
-        <h1
-          className="font-display text-5xl md:text-6xl font-black"
-          style={{ color: 'var(--sys-color-paperWhite)' }}
-        >
-          {resolvedTitle}
-        </h1>
-        <p
-          className="mt-4 max-w-2xl text-base md:text-xl"
-          style={{ color: 'var(--sys-color-worker-ash-base)' }}
-        >
-          {resolvedSubtitle}
-        </p>
-      </motion.header>
+        <header className="mb-8">
+          <h1
+            className="font-display text-4xl font-black mb-2"
+            style={{
+              color: 'var(--kr-color-semantic-parchment)',
+              fontVariationSettings: "'wght' 800, 'wdth' 120",
+              fontSize: '28px',
+              textTransform: 'uppercase',
+              letterSpacing: '0.02em',
+            }}
+          >
+            {resolvedTitle}
+          </h1>
+          <p
+            className="text-sm opacity-70"
+            style={{ color: 'var(--kr-color-semantic-parchment)' }}
+          >
+            {resolvedSubtitle}
+          </p>
+        </header>
 
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={undefined}
-        className="relative z-10 mt-8 flex flex-wrap gap-4 items-center"
-      >
-        <motion.button
-          type="button"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          transition={springButton}
-          onClick={onPrimaryAction}
-          className="rounded-[var(--sys-shape-blockRiot03)] px-8 py-4 font-semibold text-lg"
-          style={{
-            backgroundColor: 'var(--sys-color-inkGold-base)',
-            color: 'var(--sys-color-charcoalBackground-base)',
+        <form
+          className="flex flex-col gap-4"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            if (mode === 'register') {
+              await register(email, password, '');
+            } else {
+              await login(email, password);
+            }
+            onPrimaryAction?.(email, password);
           }}
         >
-          {primaryLabel}
-        </motion.button>
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="auth-email"
+              className="font-mono text-[10px] uppercase tracking-widest"
+              style={{ color: 'var(--kr-color-semantic-parchment)', opacity: 0.6 }}
+            >
+              Email Address
+            </label>
+            <input
+              id="auth-email"
+              type="email"
+              autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full px-4 py-3 text-sm outline-none transition-colors"
+              style={{
+                backgroundColor: 'var(--kr-color-charcoal-background-steps-2)',
+                border: '1px solid var(--kr-color-concrete-grey-steps-1)',
+                borderRadius: 'var(--kr-shape-block-riot01)',
+                color: 'var(--kr-color-semantic-parchment)',
+              }}
+            />
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label
+              htmlFor="auth-password"
+              className="font-mono text-[10px] uppercase tracking-widest"
+              style={{ color: 'var(--kr-color-semantic-parchment)', opacity: 0.6 }}
+            >
+              Password
+            </label>
+            <input
+              id="auth-password"
+              type="password"
+              autoComplete={mode === 'register' ? 'new-password' : 'current-password'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full px-4 py-3 text-sm outline-none transition-colors"
+              style={{
+                backgroundColor: 'var(--kr-color-charcoal-background-steps-2)',
+                border: '1px solid var(--kr-color-concrete-grey-steps-1)',
+                borderRadius: 'var(--kr-shape-block-riot01)',
+                color: 'var(--kr-color-semantic-parchment)',
+              }}
+            />
+          </div>
+
+          <motion.button
+            type="submit"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={springButton}
+            className="mt-2 w-full px-8 py-4 font-semibold text-base"
+            style={{
+              backgroundColor: 'var(--kr-color-ink-gold-base)',
+              color: 'var(--kr-color-charcoal-background-base)',
+              borderRadius: 'var(--kr-shape-block-riot03)',
+            }}
+          >
+            {resolvedPrimaryLabel}
+          </motion.button>
+        </form>
+
+        <div className="mt-6 flex items-center gap-4">
+          <div className="flex-1 h-px" style={{ backgroundColor: 'var(--kr-color-concrete-grey-steps-0)' }} />
+          <span className="font-mono text-[10px] uppercase tracking-widest opacity-40">or</span>
+          <div className="flex-1 h-px" style={{ backgroundColor: 'var(--kr-color-concrete-grey-steps-0)' }} />
+        </div>
 
         <button
           type="button"
           onClick={onSecondaryAction}
-          className="font-mono text-sm opacity-80 px-2 py-1"
-          style={{ color: 'var(--sys-color-worker-ash-base)', backgroundColor: 'transparent' }}
+          className="mt-4 w-full px-8 py-3 font-mono text-sm font-semibold tracking-wider transition-opacity hover:opacity-100 opacity-70"
+          style={{
+            border: '1px solid var(--kr-color-concrete-grey-steps-1)',
+            borderRadius: 'var(--kr-shape-block-riot01)',
+            color: 'var(--kr-color-semantic-parchment)',
+            backgroundColor: 'transparent',
+          }}
         >
           {secondaryLabel}
         </button>

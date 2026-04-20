@@ -1,33 +1,14 @@
 <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-  <title>Native Flora Leaf</title>
-  <desc>Endemic Australian flora motif for organic UI accents and growth states</desc>
-
+  <title>Tactical Diamond Mark</title>
+  <desc>Structural tactical mark for UI state indicators (Zero-Flora compliant)</desc>
   <g id="base">
-    <ellipse cx="252" cy="258" rx="78" ry="92" fill="var(--sys-color-charcoalBackground-base)" opacity="0.6"/>
+    <rect x="156" y="156" width="200" height="200" transform="rotate(45 256 256)" fill="var(--sys-color-charcoalBackground-base)" opacity="0.6"/>
   </g>
-
   <g id="content">
-    <!-- Main leaf shape -->
-    <path d="M 256 150 Q 298 180 310 220 Q 318 250 312 285 Q 305 320 285 348 Q 265 372 240 385 Q 220 375 205 355 Q 185 325 178 290 Q 172 255 180 220 Q 192 180 234 150 Q 245 145 256 150 Z" fill="var(--sys-color-kr-activistSmokeGreen-base)" stroke="var(--sys-color-kr-activistSmokeGreen-base)" stroke-width="3" stroke-linejoin="round"/>
-
-    <!-- Central vein -->
-    <path d="M 254 152 Q 250 200 248 250 Q 246 300 243 355" stroke="var(--sys-color-charcoalBackground-base)" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.7"/>
-
-    <!-- Left veins -->
-    <path d="M 245 200 Q 220 215 200 225" stroke="var(--sys-color-charcoalBackground-base)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
-    <path d="M 242 250 Q 215 260 195 268" stroke="var(--sys-color-charcoalBackground-base)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
-    <path d="M 240 300 Q 218 310 205 318" stroke="var(--sys-color-charcoalBackground-base)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
-
-    <!-- Right veins -->
-    <path d="M 252 200 Q 278 212 298 222" stroke="var(--sys-color-charcoalBackground-base)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
-    <path d="M 250 250 Q 275 258 295 265" stroke="var(--sys-color-charcoalBackground-base)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
-    <path d="M 248 300 Q 270 308 288 315" stroke="var(--sys-color-charcoalBackground-base)" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+    <path d="M 256 128 L 384 256 L 256 384 L 128 256 Z" fill="var(--sys-color-kr-activistSmokeGreen-base)" stroke="var(--sys-color-kr-activistSmokeGreen-base)" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M 256 160 L 352 256 L 256 352 L 160 256 Z" fill="none" stroke="var(--sys-color-charcoalBackground-base)" stroke-width="2" opacity="0.5"/>
   </g>
-
   <g id="accent">
-    <!-- Organic accent spots (screenprint texture suggestion) -->
-    <circle cx="265" cy="195" r="5" fill="var(--sys-color-inkGold-base)" opacity="0.8"/>
-    <circle cx="225" cy="275" r="4" fill="var(--sys-color-inkGold-base)" opacity="0.6"/>
-    <ellipse cx="280" cy="310" rx="6" ry="4" fill="var(--sys-color-stencilYellow-base)" opacity="0.5"/>
+    <rect x="240" y="240" width="32" height="32" transform="rotate(45 256 256)" fill="var(--sys-color-inkGold-base)" opacity="0.8"/>
   </g>
 </svg>

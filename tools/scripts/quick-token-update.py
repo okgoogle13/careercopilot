@@ -17,7 +17,7 @@ TOKEN_MAPPINGS = {
     "parchment": "paper-white",
     "[DEPRECATED_STYLE] Crimson": "[DEPRECATED_STYLE] Red",
     "[DEPRECATED_STYLE]-crimson": "[DEPRECATED_STYLE]-red",
-    "waratah_crimson": "waratah_red",
+    "solidarity_crimson": "solidarity_red",
     "Eucalypt Smoke": "Concrete Grey",
     "eucalypt-smoke": "concrete-grey",
     "eucalypt_smoke": "concrete_grey",
@@ -92,7 +92,7 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="Migrate Northcote design tokens from [DEPRECATED_STYLE] [DEPRECATED_STYLE] to Contemporary Australian naming"
+        description="Migrate deprecated Northcote token names into the current KR Solidarity naming"
     )
     parser.add_argument("--dry-run", action="store_true", help="Preview changes without applying them")
     parser.add_argument("--apply", action="store_true", help="Apply all changes")

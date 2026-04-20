@@ -19,7 +19,7 @@ ASSET_MAP = {
     "northcote-kookaburra-mascot.png": "https://fal.media/files/panda/3g55g224g2h135636h71.png",
     "northcote-vertical-echidna.png": "https://fal.media/files/kangaroo/2g6324g134c2152g71g7.png",
     "northcote-vertical-beetle.png": "https://fal.media/files/tiger/2g23g231c2g171176g61.png",
-    "northcote-banksia-spinner.png": "https://fal.media/files/monkey/5g141g571c1133g26g16.png",
+    "northcote-geometric-spinner.png": "https://fal.media/files/monkey/5g141g571c1133g26g16.png",
     "northcote-nav-icons.png": "https://fal.media/files/elephant/1g26g6743c172g5g65g.png",
     "northcote-pattern-tile.png": "https://fal.media/files/panda/3g466g711c52g1g13343.png",
     "northcote-footer-still-life.png": "https://fal.media/files/tiger/1g1523g446g747463765.png",

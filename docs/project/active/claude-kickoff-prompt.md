@@ -13,7 +13,7 @@ Before taking any action, read and absorb these canonical documents:
 1.  **Handoff Sheet:** `docs/project/active/frontend-cleanup-agent-assignment-sheet.md` (The Master Plan).
 2.  **Snapshot Methodology:** `docs/project/active/frontend-snapshot-methodology.md` (How to verify state).
 3.  **High-Fidelity methodology:** `docs/project/active/PR126-high-fidelity-methodology.md` (Data quality rules).
-4.  **Design Canon:** `docs/design/01_CANON.md` (Identity, Zero-Flora, and Solidarity archetypes).
+4.  **Design Canon:** `docs/design/01_CANON.md` (Identity, selective flora/fauna canon, and Solidarity archetypes).
 
 ### 🏛️ Authority Hierarchy (The "Tri-Layered Truth")
 Always resolve disagreements in this order:

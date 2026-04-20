@@ -14,7 +14,7 @@
 ## Design System Rules
 - Dark-only: all backgrounds → `--sys-color-charcoalBackground-base`
 - Semantic colours only: `--sys-color-{name}-base` CSS variables
-- Zero-Flora Lockdown: no flora or Australian endemic fauna
+- Selective Flora/Fauna Rule: allow diaspora or non-Australian flora plus intentional cultural fauna such as elephants; ban Australian native flora and Australian endemic fauna
 - No generic shapes: use asymmetric `shape.*` tokens
 
 ## Preferences

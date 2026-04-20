@@ -112,7 +112,7 @@ figma.com/design/:fileKey/branch/:branchKey/...   ← use branchKey as fileKey
 - Code Connect mappings: `get_code_connect_map` / `send_code_connect_mappings`
 - Design system search: `search_design_system` before creating new components
 
-**Never**: raw hex colours, white backgrounds, flora, generic shapes.
+**Never**: raw hex colours, white backgrounds, Australian native plants, generic shapes.
 
 ---
 
@@ -121,7 +121,7 @@ figma.com/design/:fileKey/branch/:branchKey/...   ← use branchKey as fileKey
 **Hard rules**:
 - **Dark-only**: all backgrounds → canonical `--kr-color-charcoal-background-*`
 - **Semantic colours only**: canonical `--kr-*` CSS variables
-- **Zero-Flora Lockdown**: no flora or Australian endemic fauna
+- **Selective Flora/Fauna Rule**: allow diaspora or non-Australian flora plus intentional cultural fauna such as elephants; ban Australian native flora and Australian endemic fauna
 - **No generic shapes**: use asymmetric `shape.*` tokens
 
 **Archetypes**:
@@ -162,7 +162,7 @@ Run `/simplify` before presenting code results.
 - Goal-driven: define verifiable success criteria before starting multi-step tasks
 
 ---
-*Semantic CSS variables are truth. Zero-Flora enforced.*
+*Semantic CSS variables are truth. Follow the selective flora/fauna canon in `docs/design/01_CANON.md`.*
 
 ---
 

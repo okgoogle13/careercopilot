@@ -12,7 +12,7 @@ export interface LogoProps {
  * **THE KR SOLIDARITY EMBLEM**
  *
  * Canonical logo for CareerCopilot.
- * Replaces the Zero-Flora 🦄 with the Sentry Compass.
+ * Replaces the stock unicorn mascot with the Sentry Compass.
  */
 export function Logo({ className, size = 'md', showText = true }: LogoProps) {
   const sizeMap = {

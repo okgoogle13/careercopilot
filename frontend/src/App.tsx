@@ -79,7 +79,8 @@ export const RequireAuth = () => {
   const { user, loading } = useAuth();
   const location = useLocation();
 
-  // Check for demo/guest mode
+  // Check for demo/guest mode. 
+  // NOTE: '?dev=bypass' override is handled centrally in AuthContext.tsx for dev simulation.
   const searchParams = new URLSearchParams(location.search);
   const isDemoMode = searchParams.get('demo') === 'true';
 
@@ -103,6 +104,7 @@ export const RequireAuth = () => {
 
   return <Outlet />;
 };
+
 
 // Protected Layout with legacy sidebar shell
 export const ProtectedLayout = () => {
@@ -129,7 +131,6 @@ export const ProtectedLayout = () => {
     </Layout>
   );
 };
-
 // Public Layout (Login/Register/Landing)
 export const PublicLayout = () => {
   return (

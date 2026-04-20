@@ -38,7 +38,7 @@
 │  │  "Start Your Journey"                                  │ │
 │  │  bg: --sys-color-inkGold-base                         │ │
 │  │  hover: shadow-hover-rise (8px elevation)             │ │
-│  │  radius: 40px 12px 40px 12px (wattle shape)           │ │
+│  │  radius: 40px 12px 40px 12px (solidarity-gold shape)           │ │
 │  │                                                         │ │
 │  │  [Torn Edge Texture: bottom edge, full-width]         │ │
 │  └────────────────────────────────────────────────────────┘ │
@@ -118,7 +118,7 @@
 
 | Component | Border Radius | Shape Identity |
 |-----------|---------------|----------------|
-| **Primary CTA Button** | `40px 12px 40px 12px` | Wattle shape (organic) |
+| **Primary CTA Button** | `40px 12px 40px 12px` | Solidarity Gold shape (organic) |
 | **Search Input** | `32px 8px 28px 12px` | kr-motif shape (dynamic) |
 | **ManifestoCard** | `32px 8px 28px 12px` | kr-motif shape (consistency) |
 | **Navigation Container** | `0px` | Architectural (sharp edges) |

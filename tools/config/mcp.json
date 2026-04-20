@@ -49,6 +49,34 @@
     "github": {
       "command": "/ABSOLUTE/PATH/TO/PROJECT/venv/bin/python",
       "args": ["/ABSOLUTE/PATH/TO/PROJECT/servers/github_mcp.py"]
+    },
+    "perplexity": {
+      "command": "bash",
+      "args": [
+        "-c",
+        "export PATH=\"/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin:/usr/local/bin:$PATH\" && export NPM_CONFIG_CACHE=/tmp/npm_cache && set -a && source /Users/okgoogle13/Projects/careercopilot/.env.mcp && set +a && cd /tmp && npx -y @perplexity-ai/mcp-server"
+      ]
+    },
+    "sequential-thinking": {
+      "command": "bash",
+      "args": [
+        "-c",
+        "export PATH=\"/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin:/usr/local/bin:$PATH\" && export NPM_CONFIG_CACHE=/tmp/npm_cache && cd /tmp && npx -y @modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "stitch": {
+      "command": "bash",
+      "args": [
+        "-c",
+        "export PATH=\"/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin:/usr/local/bin:$PATH\" && export NPM_CONFIG_CACHE=/tmp/npm_cache && set -a && source /Users/okgoogle13/Projects/careercopilot/.env.mcp && set +a && cd /tmp && npx -y stitch-mcp"
+      ]
+    },
+    "repomix": {
+      "command": "bash",
+      "args": [
+        "-c",
+        "export PATH=\"/Users/okgoogle13/.nvm/versions/node/v20.19.5/bin:/usr/local/bin:$PATH\" && export NPM_CONFIG_CACHE=/tmp/npm_cache && cd /tmp && npx -y repomix --mcp"
+      ]
     }
   }
 }

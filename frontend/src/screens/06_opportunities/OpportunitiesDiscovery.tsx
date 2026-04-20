@@ -62,7 +62,7 @@ const DECRYPT_BUTTON_COLORS: Record<InterceptStatus, string> = {
   VERIFIED: 'bg-[var(--kr-color-protest-metal-blue-base)]',
   URGENT: 'bg-[var(--kr-color-solidarity-red-base)]',
   CLASSIFIED: 'bg-[var(--kr-color-ink-gold-base)]',
-  SAVED: 'bg-white/20',
+  SAVED: 'bg-[var(--kr-color-charcoal-background-steps-2)]',
 };
 
 function getScoreColor(score: number): string {
@@ -241,7 +241,7 @@ const InterceptCard = ({ intercept }: { intercept: Intercept }) => {
 
         {/* Title */}
         <h3
-          className="text-[15px] font-mono font-bold tracking-[0.02em] mb-[6px]"
+          className="text-[15px] font-primary font-bold tracking-[0.02em] mb-[6px]"
           style={{ color: titleColor }}
         >
           {intercept.title}
@@ -301,7 +301,7 @@ const InterceptCard = ({ intercept }: { intercept: Intercept }) => {
           <div className="flex items-center gap-3 shrink-0">
             <div className="flex flex-col items-end">
               <span
-                className="text-[22px] font-mono font-extrabold leading-none tabular-nums"
+                className="text-[22px] font-['Work_Sans'] font-thin leading-none tabular-nums"
                 style={{ color: scoreColor }}
               >
                 {intercept.score}
@@ -367,7 +367,7 @@ export const OpportunitiesDiscovery = memo(function OpportunitiesDiscovery() {
         </p>
 
         <h1 className="flex flex-wrap items-baseline gap-x-3 leading-none">
-          <span className="text-[72px] font-black text-white tracking-tight uppercase">THE</span>
+          <span className="text-[72px] font-black text-worker-ash tracking-tight uppercase">THE</span>
           <span
             className="text-[72px] font-black uppercase italic tracking-tight"
             style={{ color: 'var(--kr-color-signal-green-base)' }}
@@ -376,7 +376,7 @@ export const OpportunitiesDiscovery = memo(function OpportunitiesDiscovery() {
           </span>
         </h1>
 
-        <p className="max-w-xl text-[13px] text-white/45 leading-relaxed">
+        <p className="max-w-xl text-[13px] text-worker-ash-muted leading-relaxed">
           Intercepted job dispatches, classified by signal strength and ATS alignment. Hover
           unreviewed leads to initiate decrypt sequence.
         </p>
@@ -399,10 +399,10 @@ export const OpportunitiesDiscovery = memo(function OpportunitiesDiscovery() {
             key={label}
             className="flex items-baseline gap-2"
           >
-            <span className="text-[28px] font-black text-white tabular-nums leading-none">
+            <span className="text-[28px] font-['Work_Sans'] font-thin text-worker-ash tabular-nums leading-none">
               {value}
             </span>
-            <span className="text-[10px] font-mono uppercase tracking-widest text-white/35">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-worker-ash-muted">
               {label}
             </span>
           </div>
@@ -428,8 +428,8 @@ export const OpportunitiesDiscovery = memo(function OpportunitiesDiscovery() {
             className={cn(
               'px-3 py-1.5 text-[11px] font-mono uppercase tracking-widest rounded-sm border transition-colors duration-150',
               activeFilter === tab
-                ? 'bg-[var(--kr-color-signal-green-base)]/10 border-[var(--kr-color-signal-green-base)]/60 text-[var(--kr-color-signal-green-base)]'
-                : 'bg-transparent border-white/15 text-white/40 hover:border-white/30 hover:text-white/60'
+                ? 'bg-[var(--kr-color-ink-gold-base)]/10 border-[var(--kr-color-ink-gold-base)]/60 text-[var(--kr-color-ink-gold-base)]'
+                : 'bg-transparent border-surface-gutter text-worker-ash-muted hover:border-[var(--kr-color-concrete-grey-steps-0)] hover:text-[var(--kr-color-worker-ash-steps-1)]'
             )}
           >
             {tab} {TAB_COUNTS[tab]}
@@ -451,7 +451,7 @@ export const OpportunitiesDiscovery = memo(function OpportunitiesDiscovery() {
         ))}
 
         {displayed.length === 0 && (
-          <div className="col-span-2 py-16 text-center text-[12px] font-mono uppercase tracking-widest text-white/25">
+          <div className="col-span-2 py-16 text-center text-[12px] font-mono uppercase tracking-widest text-worker-ash-muted">
             NO INTERCEPTS MATCH CURRENT FILTER
           </div>
         )}

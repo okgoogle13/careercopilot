@@ -1,5 +1,5 @@
 import React, { forwardRef, useId, useMemo, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 export interface ValveProps extends Omit<
