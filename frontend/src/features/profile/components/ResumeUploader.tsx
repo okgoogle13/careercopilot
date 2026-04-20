@@ -166,7 +166,9 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
               <div className="w-20 h-20 rounded-march bg-[var(--kr-color-charcoal-background-steps-2)] flex items-center justify-center mb-4">
                 <CheckCircle2 className="w-10 h-10 text-[var(--kr-color-ink-gold-base)]" />
               </div>
-              <p className="text-title-medium font-bold text-[var(--kr-color-ink-gold-base)]">Analysis Complete!</p>
+              <p className="text-title-medium font-bold text-[var(--kr-color-ink-gold-base)]">
+                Analysis Complete!
+              </p>
               <Button
                 className="mt-6"
                 variant="outlined"

@@ -122,7 +122,10 @@ export const AuthModal = memo(function AuthModal({
         }
       `}</style>
 
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+      <div
+        className="pointer-events-none absolute inset-0"
+        aria-hidden="true"
+      >
         {SLOT_DEFS.map((slot) => (
           <div
             key={slot.name}
@@ -248,9 +251,15 @@ export const AuthModal = memo(function AuthModal({
         </form>
 
         <div className="mt-6 flex items-center gap-4">
-          <div className="flex-1 h-px" style={{ backgroundColor: 'var(--kr-color-concrete-grey-steps-0)' }} />
+          <div
+            className="flex-1 h-px"
+            style={{ backgroundColor: 'var(--kr-color-concrete-grey-steps-0)' }}
+          />
           <span className="font-mono text-[10px] uppercase tracking-widest opacity-40">or</span>
-          <div className="flex-1 h-px" style={{ backgroundColor: 'var(--kr-color-concrete-grey-steps-0)' }} />
+          <div
+            className="flex-1 h-px"
+            style={{ backgroundColor: 'var(--kr-color-concrete-grey-steps-0)' }}
+          />
         </div>
 
         <button

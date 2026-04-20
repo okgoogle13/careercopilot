@@ -5,7 +5,8 @@ import { Logo } from '../../components/ui/Logo';
 // Figma node 1:10 — KR-Solidarity-CAREERCOPILOT, 2026-04-01
 const imgHero =
   '/assets/kr-solidarity/street/kr-solidarity__street__protest--textless-protest-tram--v1.png';
-const imgEvidence = '/assets/kr-solidarity/devotional/kr-solidarity__spiritual__devotional--textless-deity-poster--v1.png';
+const imgEvidence =
+  '/assets/kr-solidarity/devotional/kr-solidarity__spiritual__devotional--textless-deity-poster--v1.png';
 
 const STATS = [
   { value: '127', label: 'Stories Archived', color: 'var(--kr-color-stencil-yellow-base)' },

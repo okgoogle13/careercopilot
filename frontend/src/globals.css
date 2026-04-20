@@ -11,7 +11,7 @@
 /* Canonical Design Tokens */
 @import './design/styles/design-tokens.css';
 
-@import "tailwindcss";
+@import 'tailwindcss';
 @config "../tailwind.config.ts";
 
 /* ============================================

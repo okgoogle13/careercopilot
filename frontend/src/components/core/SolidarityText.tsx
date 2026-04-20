@@ -60,14 +60,17 @@ export const SolidarityText = React.forwardRef<HTMLDivElement, SolidarityTextPro
     }
 
     // Determine default tag
-    const Component = as || (role === 'headline' ? 'h2' : role === 'subhead' ? 'h3' : role === 'metric' ? 'code' : 'p');
+    const Component =
+      as ||
+      (role === 'headline' ? 'h2' : role === 'subhead' ? 'h3' : role === 'metric' ? 'code' : 'p');
 
     // Mapped Styles based on Laboratory scale
     const styles = {
       headline: 'text-headline text-3xl md:text-5xl text-text-primary mb-6 font-bold',
       subhead: 'text-subhead text-xl md:text-2xl text-text-primary mb-4 font-semibold',
       body: 'text-base md:text-lg text-text-secondary leading-relaxed max-w-prose',
-      metric: "text-metric-display font-['Work_Sans'] font-thin tracking-widest text-primary/90 uppercase bg-surface-elevated/50 px-2 py-1 rounded-sm",
+      metric:
+        "text-metric-display font-['Work_Sans'] font-thin tracking-widest text-primary/90 uppercase bg-surface-elevated/50 px-2 py-1 rounded-sm",
       hero: '', // Handled above
     };
 

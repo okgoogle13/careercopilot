@@ -177,7 +177,11 @@ export const OnboardFlow = memo(function OnboardFlow({
             type="button"
             onClick={onSecondaryAction}
             className="font-['JetBrains_Mono'] text-sm opacity-80 px-2 py-1"
-            style={{ color: 'var(--kr-color-semantic-parchment)', backgroundColor: 'transparent', opacity: 0.7 }}
+            style={{
+              color: 'var(--kr-color-semantic-parchment)',
+              backgroundColor: 'transparent',
+              opacity: 0.7,
+            }}
           >
             {secondaryLabel}
           </button>
@@ -194,7 +198,6 @@ export const OnboardFlow = memo(function OnboardFlow({
           {children}
         </motion.div>
       ) : null}
-
     </motion.section>
   );
 });

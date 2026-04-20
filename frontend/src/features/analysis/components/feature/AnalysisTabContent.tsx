@@ -29,7 +29,8 @@ export const AnalysisTabContent: React.FC<Props> = ({ analysis, careerData, onNe
             const levelStyles = {
               Strong: {
                 bg: 'bg-[color-mix(in_srgb,var(--kr-color-signal-green-steps-0)_40%,transparent)]',
-                border: 'border-[color-mix(in_srgb,var(--kr-color-signal-green-base)_30%,transparent)]',
+                border:
+                  'border-[color-mix(in_srgb,var(--kr-color-signal-green-base)_30%,transparent)]',
                 text: 'text-[var(--kr-color-signal-green-steps-4)]',
                 dot: 'bg-[var(--kr-color-signal-green-base)] shadow-[0_0_8px_color-mix(in_srgb,var(--kr-color-signal-green-base)_50%,transparent)]',
               },
