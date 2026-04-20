@@ -4,7 +4,7 @@
 **Date**: 2026-02-24
 **Brand Rules**: kerala-rage-asset-prompter + kr-svg combined spec
 **Motif Language**: Melbourne laneway grit, industrial solidarity, activist resistance, Kerala diaspora, urban infrastructure
-**BANNED**: Floral, botanical, flowers, leaves, branches, flora of any kind
+**BANNED**: Australian native flora, eucalyptus/wattle/gum-leaf motifs, and Northcote Curio botanical specimen styling
 
 ---
 
@@ -339,7 +339,7 @@ Each prompt below is a complete `/kr-svg` input specification. Execute by passin
 
 ## Brand Compliance Checklist
 
-- [ ] Zero floral/botanical/leaf/flower references
+- [ ] No Australian native plant motifs or Northcote Curio botanical specimen references
 - [ ] All colors: only `var(--sys-color-*)` approved variables
 - [ ] All shapes: asymmetric radii, no `border-radius: 50%`, no perfect circles
 - [ ] All stroke-widths: 2 | 3 | 4 | 6 only

@@ -5,16 +5,16 @@
       :root {
         --sys-color-asphaltBlack: #1A1714;
         --sys-color-kr-ink-gold: #D4A84B;
-        --sys-color-waratahRed: #C45C4B;
+        --sys-color-solidarityRed-base: #f14714;
         --sys-color-paperWhite: #F5F0E8;
-        --sys-color-gumLeafGreen: #6B7F6E;
+        --sys-color-kr-activistSmokeGreen-base: #48da8b;
       }
     </style>
     <!-- Radiant halo gradient — temple gold emanation -->
     <radialGradient id="halo-radiance" cx="50%" cy="42%" r="52%">
       <stop offset="0%"  stop-color="var(--sys-color-kr-ink-gold, #D4A84B)" stop-opacity="0.88"/>
       <stop offset="30%" stop-color="var(--sys-color-kr-ink-gold, #D4A84B)" stop-opacity="0.44"/>
-      <stop offset="60%" stop-color="var(--sys-color-waratahRed, #C45C4B)"  stop-opacity="0.18"/>
+      <stop offset="60%" stop-color="var(--sys-color-solidarityRed-base, #f14714)"  stop-opacity="0.18"/>
       <stop offset="100%" stop-color="var(--sys-color-asphaltBlack, #1A1714)" stop-opacity="0"/>
     </radialGradient>
     <!-- Fist silhouette fill -->
@@ -84,9 +84,9 @@
       SOLIDARITY
     </text>
 
-    <!-- Gum leaf green base accent -->
+    <!-- Activist smoke green base accent -->
     <path d="M 100,388 Q 160,380 200,382 Q 240,380 300,388 L 300,396 Q 240,392 200,394 Q 160,392 100,396 Z"
-          fill="var(--sys-color-gumLeafGreen, #6B7F6E)" opacity="0.5"/>
+          fill="var(--sys-color-kr-activistSmokeGreen-base, #48da8b)" opacity="0.5"/>
   </g>
 
   <text x="-9999" y="-9999" font-size="1">Hero anchor halo — KR-UI-037 — Kerala Rage kr-solidarity</text>

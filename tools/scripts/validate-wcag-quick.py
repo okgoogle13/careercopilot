@@ -39,8 +39,8 @@ def contrast_ratio(fg, bg):
 TESTS = [
     ("paperWhite", "asphaltBlack", "4.5"),    # Text on background
     ("kr-ink-gold", "asphaltBlack", "3.0"),   # UI component on background
-    ("waratahRed", "asphaltBlack", "3.0"),    # Error/alert on background
-    ("gumLeafGreen", "asphaltBlack", "3.0"),  # Success/accent on background
+    ("solidarityRed", "asphaltBlack", "3.0"),    # Error/alert on background
+    ("activistSmokeGreen", "asphaltBlack", "3.0"),  # Success/accent on background
 ]
 
 # Token values from /design-system/tokens.json (top-level colors)
@@ -48,8 +48,8 @@ TOKENS = {
     "asphaltBlack": "#1A1714",
     "paperWhite": "#F5F0E8",
     "kr-ink-gold": "#D4A84B",
-    "waratahRed": "#C45C4B",
-    "gumLeafGreen": "#6B7F6E",
+    "solidarityRed": "#C45C4B",
+    "activistSmokeGreen": "#6B7F6E",
 }
 
 

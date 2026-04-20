@@ -36,7 +36,7 @@
 
 ### Issue 1: Unicorn mascot — RESOLVED
 
-**Verification**: `frontend/src/layouts/Sidebar.tsx` contains zero mascot elements. The `<Logo>` component renders a Lucide `Compass` icon only. Logo.tsx JSDoc explicitly states it "Replaces the Zero-Flora unicorn with the Sentry Compass." ✅
+**Verification**: `frontend/src/layouts/Sidebar.tsx` contains zero mascot elements. The `<Logo>` component renders a Lucide `Compass` icon only. Logo.tsx JSDoc explicitly states it "Replaces the stock unicorn mascot with the Sentry Compass." ✅
 
 ---
 
@@ -114,7 +114,7 @@ Fresh screenshots captured via `agent-browser` at 1440×900. Scored with `m3-vis
 
 ### /register — 78/100 (needs_refinement)
 
-**Strengths**: Dark substrate correct; ink-gold accent correct; protest-weight headline typography correct; Melbourne laneway texture correct; Zero-Flora compliant; all 5 hard gates PASS.
+**Strengths**: Dark substrate correct; ink-gold accent correct; protest-weight headline typography correct; Melbourne laneway texture correct; selective flora/fauna rule compliant; all 5 hard gates PASS.
 
 **Top 3 high-priority refinements**:
 
@@ -128,7 +128,7 @@ Fresh screenshots captured via `agent-browser` at 1440×900. Scored with `m3-vis
 
 ### /analysis — 66/100 (needs_refinement)
 
-**Strengths**: Dark charcoal substrate correct; ink-gold accent correct; KR archetype components (Strike, Placard) in use; Zero-Flora compliant; token gate PASS; noise gate PASS.
+**Strengths**: Dark charcoal substrate correct; ink-gold accent correct; KR archetype components (Strike, Placard) in use; selective flora/fauna rule compliant; token gate PASS; noise gate PASS.
 
 **Critical issue**: `EmptyState` component renders with near-white/light background in the dominant right panel — hard violation of dark-only mandate. This single issue drives the most score loss.
 

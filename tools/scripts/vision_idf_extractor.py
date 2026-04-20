@@ -33,14 +33,14 @@ except ImportError:
 
 # Design token color mapping (hex to token name)
 COLOR_TOKEN_MAP = {
-    "#D4A84B": "wattle-gold",
-    "#d4a84b": "wattle-gold",
+    "#D4A84B": "baru-gold",
+    "#d4a84b": "baru-gold",
     "#C45C4B": "[DEPRECATED_STYLE]-red",
     "#c45c4b": "[DEPRECATED_STYLE]-red",
     "#B8733D": "ochre-earth",
     "#b8733d": "ochre-earth",
-    "#7A9E82": "gum-leaf-green",
-    "#7a9e82": "gum-leaf-green",
+    "#7A9E82": "activist-smoke-green",
+    "#7a9e82": "activist-smoke-green",
     "#1A1714": "asphalt-black",
     "#1a1714": "asphalt-black",
     "#F5F0E8": "paper-white",
@@ -49,16 +49,16 @@ COLOR_TOKEN_MAP = {
 
 # Australian endemic flora (kr-motifs whitelist)
 KR_MOTIFS_WHITELIST = {
-    "wattle",
+    "baru",
     "acacia",
-    "eucalyptus",
+    "activist",
     "gum",
     "gum leaf",
-    "eucalyptus leaf",
+    "activist leaf",
     "leaf",
     "leaves",
     "[DEPRECATED_STYLE]",
-    "banksia",
+    "geometric",
     "fern",
     "native fern",
     "spider web",
@@ -216,8 +216,8 @@ def extract_idf_from_image(image_path: str, client: Optional[vision.ImageAnnotat
     Returns:
         Dictionary with IDF metadata:
         {
-            "colors": {"primary": ["wattle-gold"], "secondary": ["asphalt-black"]},
-            "kr_motifs": ["wattle", "leaf"],
+            "colors": {"primary": ["baru-gold"], "secondary": ["asphalt-black"]},
+            "kr_motifs": ["baru", "leaf"],
             "dimensions": {"width": 1024, "height": 1024, "format": "PNG"},
             "mode": "kr-dark",
             "purpose": "[DEPRECATED_STYLE]-accent",
@@ -270,7 +270,7 @@ def extract_idf_from_image(image_path: str, client: Optional[vision.ImageAnnotat
         print(f"  ❌ Extraction failed: {e}")
         # Return safe fallback
         return {
-            "colors": {"primary": ["wattle-gold"], "secondary": ["asphalt-black"]},
+            "colors": {"primary": ["baru-gold"], "secondary": ["asphalt-black"]},
             "kr_motifs": ["[DEPRECATED_STYLE]"],
             "dimensions": get_image_dimensions(image_path),
             "mode": "kr-dark",

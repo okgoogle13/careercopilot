@@ -55,11 +55,11 @@ def load_tokens(tokens_path: str = "frontend/src/design/tokens/tokens.json") -> 
             "color": {
                 "asphaltBlack": "#1A1714",
                 "paperWhite": "#F5F0E8",
-                "wattleGold": "#D4A84B",
-                "waratahRed": "#C45C4B",
+                "baruGold": "#D4A84B",
+                "solidarityRed": "#C45C4B",
                 "ochreEarth": "#B8733D",
                 "concreteGrey": "#A39B8F",
-                "gumLeafGreen": "#6B7F6E"
+                "activistSmokeGreen": "#6B7F6E"
             }
         }
 
@@ -90,7 +90,7 @@ def validate_prompt_text(prompt: str) -> ValidationResult:
 
     if not found_colors:
         warnings.append("⚠️ No explicit color tokens found in prompt")
-        recommendations.append("Include hex like #1A1714 (Asphalt Black) or #D4A84B (Wattle Gold)")
+        recommendations.append("Include hex like #1A1714 (Asphalt Black) or #D4A84B (Baru Gold)")
         score -= 10
 
     for old in FORBIDDEN_COLORS_OLD:

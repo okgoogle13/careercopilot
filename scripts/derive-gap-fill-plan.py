@@ -35,7 +35,7 @@ SRC_ROOT = REPO_ROOT / "frontend" / "src"
 CONSOLIDATED_REFERENCE_ROOT = DOCS_ROOT / "sources" / "consolidated-reference"
 
 ALLOWED_TOKEN_PREFIXES = ("--sys-color-", "--sys-shape-", "--sys-type-")
-BANNED_TOKEN_NAMES = ("labWrenMetalBlue", "GumLeafGreen", "WattleGold", "inkGreen")
+BANNED_TOKEN_NAMES = ("labWrenMetalBlue", "GumLeafGreen", "WattleGold", "inkGreen", "WaratahRed", "nocturnalCanopy")
 BANNED_ARCHETYPES = ("Seed", "Pebble", "Lens", "Jar", "Cabinet")
 HARD_CODED_COLOR_RE = re.compile(
     r"#[0-9A-Fa-f]{3,8}\b|rgba?\(|hsla?\(",
@@ -47,7 +47,7 @@ FIGMA_ASSET_RE = re.compile(r"figma:asset/")
 REMOTE_ASSET_RE = re.compile(r"https?://", re.IGNORECASE)
 LOCAL_ASSET_RE = re.compile(r"(?:from|src=)[^\n]*assets?/", re.IGNORECASE)
 NON_COMPLIANT_MOTIF_RE = re.compile(
-    r"\b(elephant|palm(?:\s+tree)?|gum\s*leaf|eucalyptus)\b",
+    r"\b(gum\s*leaf|eucalyptus|wattle|waratah)\b",
     re.IGNORECASE,
 )
 

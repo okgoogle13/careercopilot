@@ -299,7 +299,7 @@ function TabButton({ label, isActive, onClick }: TabButtonProps) {
       onClick={onClick}
       className={`
         px-8 py-3 transition-all duration-short-2 ease-spring font-medium text-label-large
-        ${isActive ? 'rounded-strike bg-primary-container text-on-primary-container shadow-sm' : 'rounded-scaffold text-on-surface-variant hover:text-on-surface hover:bg-surface-dim'}
+        ${isActive ? 'rounded-strike bg-[var(--kr-color-charcoal-background-steps-3)] text-semantic-parchment shadow-sm border border-parchment-base/30' : 'rounded-scaffold text-worker-ash-base hover:text-semantic-parchment hover:bg-charcoalBackground-steps-2'}
       `}
     >
       {label}

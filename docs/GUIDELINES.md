@@ -10,7 +10,7 @@ We use the **kerala-rage KR Solidarity v6.1 (Neon Tandava)** design system, comb
 - Material 3 Expressive motion and structure (exact bezier spring physics)
 - A strictly dark UI anchored in True Void Black (`#0A0A0A`)
 - High-contrast neon accents (Neon Crimson, Acid Marigold, Volt Lime, Cyber Blue)
-- Strict Zero-Flora geometry (no organic shapes, no leaves, highly geometric brutalism)
+- Selective flora/fauna discipline (no Australian native plants, no endemic-fauna mascots, highly geometric brutalism)
 
 We deliberately avoid nostalgic aesthetics or generic components. The interface centers present-tense, living context with aggressive, unignorable high-contrast typography and motion.
 

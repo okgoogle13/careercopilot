@@ -5,6 +5,7 @@ Scans frontend/src/ for hardcoded hex colors, banned token patterns, and flora/f
 Exit 0 = clean. Exit 1 = violations found.
 """
 
+from __future__ import annotations
 import os
 import re
 import sys
@@ -35,6 +36,9 @@ EXTENSIONS = {".ts", ".tsx", ".css"}
 # Patterns: (name, compiled_regex, extensions_to_apply or None for all)
 HEX_RE = re.compile(r"#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]{3}\b|#[0-9a-fA-F]{8}\b")
 BANNED_TOKENS_RE = re.compile(r"text-parchment|surface-KrDark-|outline-variant")
+# FLORA_RE targets Australian native flora and "Northcote Curio" aesthetics.
+# Note: 'fern' and 'kookaburra' remain banned under Victorian naturalist aesthetics,
+# which is distinct from the explicitly allowed Kerala/Diaspora flora subset.
 FLORA_RE = re.compile(
     r"\b(wattle|eucalyptus|gum\s+leaf|fern|kookaburra)\b",
     re.IGNORECASE,

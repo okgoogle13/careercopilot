@@ -44,7 +44,7 @@ export const KanbanTracker = memo(function KanbanTracker({ className }: KanbanTr
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className={clsx(
-        'relative min-h-screen w-full flex flex-col p-8 md:p-12 overflow-hidden bg-surface',
+        'relative min-h-screen w-full flex flex-col p-8 md:p-12 overflow-hidden bg-solidarity-charcoal-base',
         className
       )}
       data-testid="kanban-tracker-screen"
@@ -120,7 +120,7 @@ export const KanbanTracker = memo(function KanbanTracker({ className }: KanbanTr
                         </div>
                       </div>
 
-                      {/* Asymmetric shape motifs per Zero-Flora archetypes */}
+                      {/* Asymmetric shape motifs per KR Solidarity archetypes */}
                       <div className="absolute bottom-0 right-0 w-16 h-16 bg-[var(--kr-color-charcoal-background-steps-3)]/5 blur-2xl rounded-march -mr-8 -mb-8" />
                     </SolidarityCard>
                   </motion.div>

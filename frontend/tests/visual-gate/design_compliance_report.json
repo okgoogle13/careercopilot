@@ -14,7 +14,7 @@
         "Display headline 'Intersectional Resistance' at ultra-black weight — correct KR pressure state",
         "Lime/chartreuse accent on CTA — correct KR primary action color",
         "Protest-vocabulary navigation labels (Sol, Dashboard, Lab, Analysis, Overview)",
-        "Zero-Flora confirmed — no botanical/eucalyptus motifs",
+        "Selective flora/fauna rule confirmed — no Australian native botanical/eucalyptus motifs",
         "No colonial, bureaucratic, or passport motifs detected"
       ],
       "issues": [
@@ -33,7 +33,7 @@
         "CTA 'ENTER ARCHIVE' — excellent resistance vocabulary for auth action",
         "Footer 'CREATE COLLECTIVE 20' — collective solidarity framing",
         "No light mode contamination",
-        "Zero-Flora confirmed"
+        "Selective flora/fauna rule confirmed"
       ],
       "issues": [
         "Form card corners appear uniform — borderline Institutional Squelch, requires code audit of border-radius token usage",
@@ -51,7 +51,7 @@
         "Placeholder text 'Field Investigator Jones' — non-generic, KR-aligned",
         "Green/lime 'REGISTER' CTA — correct accent color",
         "Dark background throughout",
-        "Zero-Flora confirmed"
+        "Selective flora/fauna rule confirmed"
       ],
       "issues": [
         "Display heading clipped ('NEW COLLE') — overflow/responsive issue same as Landing",
@@ -65,7 +65,7 @@
       "compliance_score": 85,
       "strengths": [
         "Dark background — Dark-Only Territory rule satisfied",
-        "No flora, no colonial motifs",
+        "No Australian native flora, no colonial motifs",
         "Minimal clean layout — avoids corporate clutter"
       ],
       "issues": [
@@ -87,7 +87,7 @@
         "Lime accent on metric data (+14%, 42) — correct token color usage",
         "ATS score cards with numeric scoring and status badge tiers (EXCELLENT/BLOCK) — correct KR analytical framing",
         "Sidebar dark charcoal with correct substrate treatment",
-        "No flora, no light contamination, no bureaucratic motifs",
+        "No Australian native flora, no light contamination, no bureaucratic motifs",
         "Weight/size contrast in typography — heading vs subheading correctly differentiated"
       ],
       "issues": [
@@ -105,7 +105,7 @@
         "Domain options include marginalized sector focus: Social Work, Mental Health, Disability Services — anti-corporate domain framing",
         "Repeated phrase 'through the lens of Kerala Rage autonomy' — strong brand vocabulary",
         "Dark background throughout",
-        "Zero-Flora confirmed"
+        "Selective flora/fauna rule confirmed"
       ],
       "issues": [
         "9-card grid uses uniform corner radii — Institutional Squelch risk across all sector cards",
@@ -125,7 +125,7 @@
         "Dark background, no light contamination",
         "Card metadata uses monospace styling — correct KR treatment",
         "Status badges with color-tier differentiation",
-        "Zero-Flora confirmed (botanical phase labels are metaphorical, not decorative imagery)"
+        "Selective flora/fauna rule confirmed (botanical phase labels are metaphorical, not decorative imagery)"
       ],
       "issues": [
         "Column label typography could push to higher contrast weight for KR pressure state expression"
@@ -138,7 +138,7 @@
       "compliance_score": 72,
       "strengths": [
         "Dark background on sidebar and content area — Dark-Only Territory partially satisfied",
-        "Zero-Flora confirmed — no botanical motifs"
+        "Selective flora/fauna rule confirmed — no Australian native botanical motifs"
       ],
       "issues": [
         "Generic admin vocabulary throughout: 'YOUR DOCUMENTS', 'Manage your career documents'",
@@ -165,7 +165,7 @@
         "CTA labels 'SYNTHESIZE STRATEGY', 'CALIBRATION CHECK' — strong KR action vocabulary",
         "Input labels use KR vocabulary: 'Job ID', 'Primary KMotif', 'Secondary Context'",
         "Dark background throughout — M3 token contamination confirmed resolved",
-        "Zero-Flora confirmed"
+        "Selective flora/fauna rule confirmed"
       ],
       "issues": [
         "Form layout dense and utilitarian — component geometry lacks expressive KR shape treatment",
@@ -184,7 +184,7 @@
         "CTA 'BEGIN SCOUT' — KR action vocabulary",
         "Placeholder state 'LOOKOUT THEN CLEAR / AWAITING TARGET COORDINATES' — strong tactical copy",
         "Dark background throughout",
-        "Zero-Flora confirmed"
+        "Selective flora/fauna rule confirmed"
       ],
       "issues": [
         "No atmospheric or cultural asset layers deployed — screen feels visually sparse",
@@ -201,7 +201,7 @@
         "Heading 'KSC GENERATOR WIZARD' uses heavy weight display treatment",
         "Section content card has dark surface — correct",
         "Lime accent on active step indicator",
-        "Zero-Flora confirmed"
+        "Selective flora/fauna rule confirmed"
       ],
       "issues": [
         "Heading subtitle 'Craft perfect selection criteria responses using the STAR method' — corporate/instructional vocabulary",
@@ -221,7 +221,7 @@
         "Dark background throughout",
         "Heavy display typography for 'Job Details' heading",
         "Lime accent on active step indicator",
-        "Zero-Flora confirmed"
+        "Selective flora/fauna rule confirmed"
       ],
       "issues": [
         "Subheading 'Create tailored, high-impact cover letters in seconds' — pure corporate SaaS copy",
@@ -244,7 +244,7 @@
         "Dark background — Dark-Only Territory partially satisfied",
         "Heavy weight heading font",
         "Lime accent on Save Changes CTA — correct token color",
-        "Zero-Flora confirmed"
+        "Selective flora/fauna rule confirmed"
       ],
       "issues": [
         "Heading 'SETTINGS' — completely generic admin vocabulary",
@@ -274,7 +274,7 @@
         "'Career DNA profile' framing — KR identity vocabulary",
         "Dark background throughout",
         "Typography contrast: ultra-black name at top vs metadata weight below — correct 9x ratio expression",
-        "Zero-Flora confirmed"
+        "Selective flora/fauna rule confirmed"
       ],
       "issues": [
         "Resume drop zone has standard dashed border with fairly uniform radius",
@@ -289,7 +289,7 @@
       "strengths": [
         "Dark background — Dark-Only Territory partially satisfied",
         "Large display serif typography for 'Asset / Library' headings — scale is correct",
-        "Zero-Flora confirmed"
+        "Selective flora/fauna rule confirmed"
       ],
       "issues": [
         "Display font for 'Asset Library' appears to be system/generic serif — requires code audit for Fraunces token confirmation",
@@ -318,7 +318,7 @@
         "Footer compliance note uses 'industrial-grade', 'secure identity archival' — KR vocabulary without AI-hype",
         "Drop zone 'DROP PDF HERE FOR ANALYSIS' — functional monospace label",
         "Dark substrate throughout",
-        "Zero-Flora confirmed"
+        "Selective flora/fauna rule confirmed"
       ],
       "issues": [
         "Drop zone container has fairly uniform dashed border — shape geometry could be more expressive",
@@ -334,7 +334,7 @@
         "Heading 'INTELLIGENCE PIPELINE' — strong KR vocabulary",
         "Subheading uses operational/tactical framing",
         "Dark background with subtle atmospheric texture — correct substrate intent",
-        "Zero-Flora confirmed"
+        "Selective flora/fauna rule confirmed"
       ],
       "issues": [
         "Error state copy 'Failed to load job queue. Ensure backend is running.' — generic admin error vocabulary",
@@ -358,7 +358,7 @@
         "Interactive tools: Archetype Morph Previewer, Typography Axis Validator, Layout Slop Auditor",
         "Validation checklist present",
         "Dark throughout",
-        "Zero-Flora confirmed"
+        "Selective flora/fauna rule confirmed"
       ],
       "issues": [
         "Minor: Screenshot resolution makes fine detail difficult to fully audit — content confirmed correct at section level"
@@ -373,7 +373,7 @@
         "KrDark mode confirmed active — token system loading correctly",
         "Dark background — correct",
         "Dev-utility page — lower design expression expected",
-        "Zero-Flora confirmed"
+        "Selective flora/fauna rule confirmed"
       ],
       "issues": [
         "Heading 'Token System Test' — dev-tool vocabulary acceptable for QA route",
@@ -393,7 +393,7 @@
         "Code panel shows layer composition definitions — correct registry output",
         "Header 'NEGATIVE BRANE [OFF]' — KR operational vocabulary",
         "Dark substrate throughout",
-        "Zero-Flora confirmed",
+        "Selective flora/fauna rule confirmed",
         "Devotional imagery is separate from protest slogans — Devotional Integrity separation rule satisfied"
       ],
       "issues": ["Minor: 'LIVE PREVIEW' button text is generic — could use KR vocabulary"],

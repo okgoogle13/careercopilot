@@ -5,11 +5,11 @@
 
 ## 1. Static Validation (Step 2)
 **Status: PASS**
-The repository was swept for invalid legacy shapes and Zero-Flora violations.
+The repository was swept for invalid legacy shapes and Australian native plant and deprecated botanical specimen violations.
 
 ### Fixes Applied
 
-#### A. Zero-Flora Violations
+#### A. Australian Native Plant and Deprecated Botanical Specimen Violations
 *   **File:** `frontend/tailwind.config.ts`
     *   **Before:** `ring-wattle-gold` (Flora violation in focus ring utility)
     *   **After:** `ring-primary` (KR Solidarity semantic token)

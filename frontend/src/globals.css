@@ -11,9 +11,8 @@
 /* Canonical Design Tokens */
 @import './design/styles/design-tokens.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.ts";
 
 /* ============================================
    BASE LAYER (v7.0 Hardening)
@@ -192,6 +191,36 @@
       'wght' 475,
       'wdth' 98;
     letter-spacing: 0.05em;
+  }
+
+  /* SOLIDARITY CHARCOAL (v6.1 Governance) */
+  .bg-solidarity-charcoal-base {
+    background-color: rgba(26, 23, 20, 0.25);
+    backdrop-filter: blur(8px);
+  }
+
+  .bg-canvas {
+    background-color: var(--kr-color-charcoal-background-steps-0);
+  }
+
+  .text-worker-ash {
+    color: var(--kr-color-worker-ash-base);
+  }
+
+  .text-worker-ash-muted {
+    color: var(--kr-color-worker-ash-steps-0);
+  }
+
+  .border-surface-gutter {
+    border-color: var(--kr-color-charcoal-background-steps-3);
+  }
+
+  .font-display-ultra {
+    font-family: var(--kr-type-font-families-display), serif;
+    font-variation-settings:
+      'wght' 900,
+      'SOFT' 100,
+      'WONK' 1;
   }
 }
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "🌾 Northcote Contemporary Australian Design System – Setup"
+echo "🌾 KR Solidarity Design System – Setup"
 echo "--------------------------------------------------------"
 
 # 1. Ensure Python env
@@ -23,11 +23,11 @@ cat > design-system/tokens.json << 'EOF'
   "color": {
     "asphaltBlack": "#1A1714",
     "paperWhite": "#F5F0E8",
-    "wattleGold": "#D4A84B",
-    "waratahRed": "#C45C4B",
+    "baruGold": "#D4A84B",
+    "solidarityRed": "#C45C4B",
     "ochreEarth": "#B8733D",
     "concreteGrey": "#A39B8F",
-    "gumLeafGreen": "#6B7F6E",
+    "activistSmokeGreen": "#6B7F6E",
     "primary": {
       "DEFAULT": "#D4A84B",
       "container": "#8B7A35",
@@ -187,7 +187,7 @@ TOKEN_MAPPINGS = {
     "parchment": "paper-white",
     "[DEPRECATED_STYLE] Crimson": "[DEPRECATED_STYLE] Red",
     "[DEPRECATED_STYLE]-crimson": "[DEPRECATED_STYLE]-red",
-    "waratah_crimson": "waratah_red",
+    "solidarity_crimson": "solidarity_red",
     "Eucalypt Smoke": "Concrete Grey",
     "eucalypt-smoke": "concrete-grey",
     "eucalypt_smoke": "concrete_grey",
@@ -262,7 +262,7 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="Migrate Northcote design tokens from [DEPRECATED_STYLE] [DEPRECATED_STYLE] to Contemporary Australian naming"
+        description="Migrate deprecated Northcote token names into the current KR Solidarity naming"
     )
     parser.add_argument("--dry-run", action="store_true", help="Preview changes without applying them")
     parser.add_argument("--apply", action="store_true", help="Apply all changes")
@@ -376,11 +376,11 @@ def load_tokens(tokens_path: str = "design-system/tokens.json") -> Dict:
             "color": {
                 "asphaltBlack": "#1A1714",
                 "paperWhite": "#F5F0E8",
-                "wattleGold": "#D4A84B",
-                "waratahRed": "#C45C4B",
+                "baruGold": "#D4A84B",
+                "solidarityRed": "#C45C4B",
                 "ochreEarth": "#B8733D",
                 "concreteGrey": "#A39B8F",
-                "gumLeafGreen": "#6B7F6E"
+                "activistSmokeGreen": "#6B7F6E"
             }
         }
 
@@ -411,7 +411,7 @@ def validate_prompt_text(prompt: str) -> ValidationResult:
 
     if not found_colors:
         warnings.append("⚠️ No explicit color tokens found in prompt")
-        recommendations.append("Include hex like #1A1714 (Asphalt Black) or #D4A84B (Wattle Gold)")
+        recommendations.append("Include hex like #1A1714 (Asphalt Black) or #D4A84B (Baru Gold)")
         score -= 10
 
     for old in FORBIDDEN_COLORS_OLD:
@@ -525,7 +525,7 @@ Use these as authoritative design files:
 
 Core rules:
 - Dark UI base: Asphalt Black #1A1714, text Paper White #F5F0E8.
-- Primary: Wattle Gold #D4A84B; Secondary: [DEPRECATED_STYLE] Red #C45C4B; Tertiary: Ochre Earth #B8733D; neutrals Concrete Grey #A39B8F and Gum Leaf Green #6B7F6E.
+- Primary: Baru Gold #D4A84B; Secondary: [DEPRECATED_STYLE] Red #C45C4B; Tertiary: Ochre Earth #B8733D; neutrals Concrete Grey #A39B8F and Gum Leaf Green #6B7F6E.
 - Use tokens, not raw hex, in UI code.
 - No [DEPRECATED_STYLE] museum/[DEPRECATED_STYLE]/sepia/colonial nostalgia.
 - Species graphics: Peter Drew street art, contemporary Melbourne, living not preserved.

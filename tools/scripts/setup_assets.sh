@@ -39,15 +39,15 @@ cat > "$BASE_DIR/_manifest.json" <<EOF
         "desc": "The Sentry Kookaburra (Mascot)",
         "source": "Archive (94/100)"
       },
-      "asset_04_wattle": {
+      "asset_04_baru": {
         "status": "READY",
-        "file": "wattle_study_master.png",
-        "desc": "Wattle Branch Base",
+        "file": "baru_study_master.png",
+        "desc": "Baru Branch Base",
         "source": "Claude Archive (90/100)"
       },
-      "asset_09_waratah": {
+      "asset_09_solidarity": {
         "status": "READY",
-        "file": "waratah_hero_master.png",
+        "file": "solidarity_hero_master.png",
         "desc": "[DEPRECATED_STYLE] Hero Closeup",
         "source": "Claude Archive (92/100)"
       }
@@ -62,7 +62,7 @@ cat > "$BASE_DIR/_manifest.json" <<EOF
     "ui": {
       "asset_06_spinner": {
         "status": "MISSING",
-        "desc": "Banksia Geometric Spinner",
+        "desc": "Geometric Geometric Spinner",
         "source": "Gemini Asset 6"
       }
     }

@@ -21,7 +21,7 @@
 
 2.  **Validate the Palette**
     *   **Skill**: `m3-expressive-token-orchestrator`
-    *   **Action**: Audit the colors defined in `docs/design/00-overview.md` (Wattle Gold, [DEPRECATED_STYLE] Red, etc.).
+    *   **Action**: Audit the colors defined in `docs/design/00-overview.md` (Solidarity Gold Gold, [DEPRECATED_STYLE] Red, etc.).
     *   **Focus**: Ensure they meet **M3 Expressive Vibrant** standards (40-80% saturation). Confirm they are *not* muted colonial earth tones but *vibrant* contemporary tones.
     *   **Output**: Confirmation of palette compliance or hex code adjustments.
 

@@ -22,7 +22,7 @@ and manifest update to a state where:
 **Read-only sources (reference only — do NOT modify):**
 - `docs/design/01-tokens.md` — KR Solidarity token truth
 - `kerala-rage-design-principles.md` — aesthetic principles
-- `docs/design/01_CANON.md` — Zero-Flora lockdown and identity non-negotiables
+- `docs/design/01_CANON.md` — selective flora/fauna canon and identity non-negotiables
 
 **Writable paths:**
 - `assets/` — generated and committed assets
@@ -60,7 +60,7 @@ Halt execution and await human instruction immediately if:
 - An asset fails the Five Immutable Laws AND a second-pass high-precision regeneration also fails
 - A token update would remove a semantic variable currently referenced by production components
 - The KR Solidarity manifest and the canonical token file (`docs/design/01-tokens.md`) become inconsistent with each other
-- A Zero-Flora violation is detected in any asset flagged for production use (`STATUS: PASS` in the QA audit)
+- A banned Australian native flora or endemic-fauna violation is detected in any asset flagged for production use (`STATUS: PASS` in the QA audit)
 - `design-system-sidekick` returns a compliance score < 90 with no identified remediation path
 
 ---

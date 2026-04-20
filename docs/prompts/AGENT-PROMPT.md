@@ -41,6 +41,6 @@ Enforce the "Specimen Night" (#1A1714) and "Surgical Chiaroscuro" lighting witho
 
 ## 4. Interaction with Other Agents
 
-- **Claude (Reviewer Role):** Use Claude for "Historical Oracle" queries—e.g., "What was the original justification for the Waratah's translucency band in the early design sessions?"
+- **Claude (Reviewer Role):** Use Claude for "Historical Oracle" queries—e.g., "What was the original justification for the Solidarity Crimson's translucency band in the early design sessions?"
 - **GitHub MCP:** Use for staging and branch management, but you define the content of the commits.
 - **Playwright/Storybook:** Use for visual regression testing of your design system implementation.

@@ -20,13 +20,13 @@ COLOR_MIGRATIONS = {
     r'--sys-color-error': '--color-[DEPRECATED_STYLE]-red-primary', # Urgent/Error -> [DEPRECATED_STYLE] Red
 
     # Gold / Optimism -> Baru Gold (Optimistic Resistance)
-    r'--color-wattle-gold-base': '--color-baru-gold-primary',
-    r'--color-wattle-gold': '--color-baru-gold-primary',
+    r'--color-baru-gold-base': '--color-baru-gold-primary',
+    r'--color-baru-gold': '--color-baru-gold-primary',
     r'--sys-color-secondary': '--color-baru-gold-primary',
-    r'--sys-color-tertiary': '--color-eucalyptus-smoke-primary', # Tertiary often distinct, mapping to Green
+    r'--sys-color-tertiary': '--color-activist-smoke-primary', # Tertiary often distinct, mapping to Green
 
-    # Green / Nature -> Eucalyptus Smoke / Parrot (Melbourne)
-    r'--northcote-green': '--color-eucalyptus-smoke-primary',
+    # Green / Nature -> Activist Smoke / Parrot (Melbourne)
+    r'--northcote-green': '--color-activist-smoke-primary',
 
     # Backgrounds / Surface -> Charcoal (Dark UI Mandatory)
     r'--sys-color-surface': '--color-charcoal-primary',
@@ -37,9 +37,9 @@ COLOR_MIGRATIONS = {
     r'#FFFFFF': '#1a1a1a',
 
     # Text / Content
-    r'--sys-color-onSurface': '--color-eucalyptus-ash-primary',
-    r'--sys-color-onBackground': '--color-eucalyptus-ash-primary',
-    r'--color-paper-white': '--color-eucalyptus-ash-primary',
+    r'--sys-color-onSurface': '--color-activist-ash-primary',
+    r'--sys-color-onBackground': '--color-activist-ash-primary',
+    r'--color-paper-white': '--color-activist-ash-primary',
 }
 
 # New Variable Definitions to inject into CSS
@@ -58,10 +58,10 @@ NEW_CSS_VARIABLES = """
   --color-[DEPRECATED_STYLE]-red-primary: #F14844;
   --color-[DEPRECATED_STYLE]-red-light: #FF6B66;
 
-  /* Eucalyptus Smoke Green (Melancholy/Landscape) */
-  --color-eucalyptus-smoke-dark: #42C47D;
-  --color-eucalyptus-smoke-primary: #48DA8B;
-  --color-eucalyptus-smoke-light: #6BE5A8;
+  /* Activist Smoke Green (Melancholy/Landscape) */
+  --color-activist-smoke-dark: #42C47D;
+  --color-activist-smoke-primary: #48DA8B;
+  --color-activist-smoke-light: #6BE5A8;
 
   /* Parrot Green (Melbourne/Hybrid) */
   --color-parrot-primary: #48F0E5;
@@ -72,12 +72,12 @@ NEW_CSS_VARIABLES = """
   --color-baru-gold-light: #E6FF90;
 
   /* Gum Leaf Yellow (Solidarity/Economics) */
-  --color-gum-leaf-primary: #F6E748;
+  --color-activist-smoke-primary: #F6E748;
 
-  /* Eucalyptus Ash (Skin/Structure/Text) */
-  --color-eucalyptus-ash-dark: #C8E8A7;
-  --color-eucalyptus-ash-primary: #DAF6B3;
-  --color-eucalyptus-ash-light: #E8FBCC;
+  /* Activist Ash (Skin/Structure/Text) */
+  --color-activist-ash-dark: #C8E8A7;
+  --color-activist-ash-primary: #DAF6B3;
+  --color-activist-ash-light: #E8FBCC;
 
   /* Charcoal (Mandatory Dark Base) */
   --color-charcoal-shadow: #000000;
@@ -90,10 +90,10 @@ NEW_CSS_VARIABLES = """
   --sys-color-surface: var(--color-charcoal-surface);
   --sys-color-primary: var(--color-[DEPRECATED_STYLE]-primary);
   --sys-color-secondary: var(--color-baru-gold-primary);
-  --sys-color-tertiary: var(--color-eucalyptus-smoke-primary);
+  --sys-color-tertiary: var(--color-activist-smoke-primary);
   --sys-color-error: var(--color-[DEPRECATED_STYLE]-red-primary);
-  --sys-color-onBackground: var(--color-eucalyptus-ash-primary);
-  --sys-color-onSurface: var(--color-eucalyptus-ash-primary);
+  --sys-color-onBackground: var(--color-activist-ash-primary);
+  --sys-color-onSurface: var(--color-activist-ash-primary);
   --sys-color-onPrimary: var(--color-charcoal-primary);
 """
 
@@ -186,7 +186,7 @@ class MigrationAutomator:
                 "standard": { "$value": "0 4px 8px rgba(0, 0, 0, 0.35)", "$type": "shadow" },
                 "hover": { "$value": "0 8px 16px rgba(0, 0, 0, 0.45)", "$type": "shadow" },
                 "maximum": { "$value": "0 16px 32px rgba(0, 0, 0, 0.55)", "$type": "shadow" },
-                "wattle-offset": { "$value": "2px 2px 0px #DAF674", "$type": "shadow" },
+                "baru-offset": { "$value": "2px 2px 0px #DAF674", "$type": "shadow" },
                 "[DEPRECATED_STYLE]-bleed": { "$value": "0 0 12px #F14714", "$type": "shadow" }
             }
         }
@@ -204,7 +204,7 @@ class MigrationAutomator:
 
                 # Update semantic colors if possible (naive update)
                 if 'color' in existing and 'semantic' in existing['color']:
-                     existing['color']['semantic']['wattle-gold']['$value'] = "#DAF674" # Baru Gold
+                     existing['color']['semantic']['baru-gold']['$value'] = "#DAF674" # Baru Gold
                      existing['color']['semantic']['[DEPRECATED_STYLE]-red']['$value'] = "#F14714" # [DEPRECATED_STYLE]
                      existing['color']['semantic']['asphalt-black']['$value'] = "#1a1a1a" # Charcoal
 

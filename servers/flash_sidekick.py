@@ -383,17 +383,17 @@ async def catalog_assets_task(args):
         logger.info(f"Processing {filename}...")
 
         prompt = """
-        Analyze this asset for the Northcote catalog.
+        Analyze this asset for the legacy Curio catalog under current KR Solidarity rules.
         1. Identify type (motif, texture, pattern, icon).
         2. Determine mode (gallery vs laboratory) - Gallery is high-art, Lab is technical/schematic.
         3. Suggest a filename following: {type}-{mode}-{category}-{variant}.png
         4. Extract dominant colors and dimensions.
-        5. Check compliance with Northcote Design Philosophy.
+        5. Check compliance with the current KR Solidarity canon and flag deprecated Northcote Curio traits.
 
-        Return JSON with keys: original_path, suggested_name, mode, category, dimensions, dominant_colors, compliance (object with northcote_philosophy boolean), duplicate_of (null if new).
+        Return JSON with keys: original_path, suggested_name, mode, category, dimensions, dominant_colors, compliance (object with kr_solidarity_canon boolean and deprecated_northcote_curio_traits boolean), duplicate_of (null if new).
         """
 
-        result_json = await _analyze_image_async(file_path, prompt, sys_instruct=f"You are the Northcote Design System Sidekick.\n{design_philosophy}")
+        result_json = await _analyze_image_async(file_path, prompt, sys_instruct=f"You are the KR Solidarity asset sidekick. Treat Northcote Curio references as deprecated legacy context.\n{design_philosophy}")
 
         if result_json:
             try:

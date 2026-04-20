@@ -49,7 +49,7 @@
   "compliance_score": 92,
   "idf_data": {
     "colors": {"primary": "#D4A84B", "background": "#1A1714"},
-    "kr-motifs": ["wattle", "leaf"],
+    "kr-motifs": ["baru", "leaf"],
     "dimensions": {"width": 1024, "height": 1024},
     "mode": "kr-dark",
     "purpose": "Background texture"
@@ -100,7 +100,7 @@
 ├── assets/
 │   ├── uncategorized/              # Incoming, unvalidated assets
 │   │   └── [staging-png].png
-│   ├── ASSET-1-wattle-burst/       # PACKAGED (metadata bundle)
+│   ├── ASSET-1-baru-burst/       # PACKAGED (metadata bundle)
 │   │   ├── context.md
 │   │   ├── tokens.json
 │   │   ├── usage.md
@@ -114,7 +114,7 @@
 │   └── public/
 │       └── assets/
 │           ├── kr-motifs/          # PRODUCTION (referenced in UI)
-│           │   ├── kerala-rage-wattle-burst-1024.png
+│           │   ├── kerala-rage-baru-burst-1024.png
 │           │   └── kerala-rage-leaf-canopy-512.png
 │           ├── textures/
 │           │   ├── texture-kr-dark-lab-grid-512.png
@@ -126,7 +126,7 @@
 │   └── design/
 │       ├── assets/
 │       │   ├── asset-workflow.md   # This doc
-│       │   ├── ASSET-1-wattle.md   # Detailed asset specs
+│       │   ├── ASSET-1-baru.md   # Detailed asset specs
 │       │   └── placement-reference.md
 │       └── wireframes/
 │           └── hifi-specs.md
@@ -146,7 +146,7 @@
 **Pattern**: `[prefix]-[descriptor]-[variant]-[size].png`
 
 **Examples**:
-- `kerala-rage-wattle-burst-1024.png` (kr-motif)
+- `kerala-rage-baru-burst-1024.png` (kr-motif)
 - `texture-kr-dark-lab-grid-512.png` (texture)
 - `pattern-[DEPRECATED_STYLE]-tile-256.png` (pattern)
 - `background-hero-kr-dark-night-2048.jpg` (hero banner)
@@ -163,7 +163,7 @@
 **Pattern**: `ASSET-[N]-[kebab-case-name]/`
 
 **Examples**:
-- `ASSET-1-wattle-burst/`
+- `ASSET-1-baru-burst/`
 - `ASSET-2-leaf-canopy/`
 - `ASSET-3-lab-grid-mesh/`
 
