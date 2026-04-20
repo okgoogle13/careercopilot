@@ -7,10 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Configuration
-const MANIFEST_PATH = join(
-  __dirname,
-  '../../public/assets/kr-solidarity-manifest.json'
-);
+const MANIFEST_PATH = join(__dirname, '../../public/assets/kr-solidarity-manifest.json');
 const ASSET_BASE = join(__dirname, '../../public/assets/kr-solidarity');
 
 // Valid layers

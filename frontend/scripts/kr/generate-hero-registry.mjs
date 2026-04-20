@@ -7,10 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Configuration
-const MANIFEST_PATH = join(
-  __dirname,
-  '../../public/assets/kr-solidarity-manifest.json'
-);
+const MANIFEST_PATH = join(__dirname, '../../public/assets/kr-solidarity-manifest.json');
 const OUTPUT_PATH = join(__dirname, '../../public/assets/kr-solidarity-hero-registry.json');
 const REGISTRY_VERSION = '2.0.0';
 

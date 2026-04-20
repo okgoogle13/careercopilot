@@ -1,5 +1,5 @@
-import "./HeroArt.css";
-import layers from "../hero/hero.layers.json";
+import './HeroArt.css';
+import layers from '../hero/hero.layers.json';
 
 type Layer = {
   id: string;
@@ -19,7 +19,10 @@ export default function HeroArt() {
   const ordered = [...(layers as Layer[])].sort((a, b) => a.z - b.z);
 
   return (
-    <div className="hero-art" aria-hidden="true">
+    <div
+      className="hero-art"
+      aria-hidden="true"
+    >
       {ordered.map((layer) => (
         <img
           key={layer.id}
@@ -32,7 +35,7 @@ export default function HeroArt() {
             top: layer.y,
             width: layer.w,
             opacity: layer.opacity,
-            mixBlendMode: layer.blend as React.CSSProperties["mixBlendMode"],
+            mixBlendMode: layer.blend as React.CSSProperties['mixBlendMode'],
             transform: `rotate(${layer.rotate})`,
           }}
         />

@@ -6,7 +6,7 @@ I have completed the visual and structural verification of the five canonical ro
 
 ### 1. Authentication (`/auth?mode=login` & `/auth?mode=register`)
 - **Requirement**: Centered card, inputs visible.
-- **Result**: **PASS**. 
+- **Result**: **PASS**.
 - **Details**: The `AuthModal` uses a centered `max-w-md` card layout. Email and Password fields are clearly visible and use standard design system inputs.
 
 ### 2. Opportunities (`/opportunities`)
@@ -17,14 +17,14 @@ I have completed the visual and structural verification of the five canonical ro
 ### 3. Documents (`/documents`)
 - **Requirement**: "Working Papers" highlight and tab active state use parchment tones.
 - **Result**: **PASS**.
-- **Details**: 
+- **Details**:
   - The "Papers" highlight in the header uses `var(--kr-color-semantic-parchment)`.
   - Active tabs use `var(--kr-color-semantic-parchment)` for text and `var(--kr-color-parchment-base)` for border-based highlights.
 
 ### 4. Onboarding (`/onboarding`)
 - **Requirement**: Body text is parchment, no debug bar.
 - **Result**: **PASS**.
-- **Details**: 
+- **Details**:
   - The `OnboardFlow` component sets the global text color to `var(--kr-color-semantic-parchment)`.
   - No debug bars or developer overlays were identified in the component tree or rendered output.
 

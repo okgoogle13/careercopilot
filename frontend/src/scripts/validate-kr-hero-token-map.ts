@@ -4,10 +4,7 @@ import { normalizeManifest } from '../design/hero/normalizeManifest';
 import { HeroTokenMapV2 } from '../design/hero/heroTokenResolver';
 import { SolidarityManifest } from '../design/hero/heroTypes';
 
-const MANIFEST_PATH = path.resolve(
-  process.cwd(),
-  'public/assets/kr-solidarity-manifest.json'
-);
+const MANIFEST_PATH = path.resolve(process.cwd(), 'public/assets/kr-solidarity-manifest.json');
 const MAP_PATH = path.resolve(process.cwd(), 'public/assets/kr-solidarity-hero-token-map.v2.json');
 
 function main() {

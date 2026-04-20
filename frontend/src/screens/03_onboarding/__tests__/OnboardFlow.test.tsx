@@ -2,8 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 (jest as any).unstable_mockModule('@/stores/useModeStore', () => ({
-  useModeStore: (selector: (state: { mode: 'KrDark' }) => unknown) =>
-    selector({ mode: 'KrDark' }),
+  useModeStore: (selector: (state: { mode: 'KrDark' }) => unknown) => selector({ mode: 'KrDark' }),
 }));
 
 const { OnboardFlow } = await import('../OnboardFlow');

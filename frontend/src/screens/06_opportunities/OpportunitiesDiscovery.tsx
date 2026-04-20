@@ -367,7 +367,9 @@ export const OpportunitiesDiscovery = memo(function OpportunitiesDiscovery() {
         </p>
 
         <h1 className="flex flex-wrap items-baseline gap-x-3 leading-none">
-          <span className="text-[72px] font-black text-worker-ash tracking-tight uppercase">THE</span>
+          <span className="text-[72px] font-black text-worker-ash tracking-tight uppercase">
+            THE
+          </span>
           <span
             className="text-[72px] font-black uppercase italic tracking-tight"
             style={{ color: 'var(--kr-color-signal-green-base)' }}
