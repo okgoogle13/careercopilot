@@ -4,6 +4,30 @@ Short entries only: what changed, why, tradeoff, follow-up.
 
 ---
 
+## 2026-04-21 — F-01/F-02: Match Figma donor landing copy
+
+**Decision:** Update landing page copy to match Figma donor text.
+
+**Why:** Runtime had diverged with custom copy ("THE SOLIDARITY MANIFESTO", "Stories Archived", "VIEW THE COLLECTIVE") that didn't match the Figma design file. User confirmed donor text is canonical.
+
+**Tradeoff:** Resets any custom copy that had been written for the runtime. Figma is now source of truth for all visible text.
+
+**Follow-up:** Keep Figma file updated when copy evolves — runtime text must not drift from it again.
+
+---
+
+## 2026-04-21 — F-06: Inline auth tab-switcher (not route-separated)
+
+**Decision:** Implement a single `/auth` route with an inline SIGN IN / CREATE ACCOUNT tab-switcher inside the auth card. Remove reliance on `title`, `subtitle`, `primaryLabel`, `secondaryLabel` props for mode switching.
+
+**Why:** Figma donor shows a self-contained tab-switcher at node 1:168. Route-separated login/register was a runtime deviation. User confirmed donor interaction pattern is canonical.
+
+**Tradeoff:** `AuthModalProps` loses title/subtitle/primaryLabel/secondaryLabel props (breaking change if any callers used them). The `/auth?mode=login` and `/auth?mode=register` query params still set the initial tab but the user can switch without navigating.
+
+**Follow-up:** Verified 2026-04-21: the only active caller is `frontend/src/App.tsx`; no active caller passes the removed props. Focused `AuthModal` tests now cover login/register default mode plus inline tab switching.
+
+---
+
 ## 2026-04-20 — Treat the Gemini sidebar finding as desktop-unconfirmed
 
 **Decision:** Keep the Gemini sidebar `P0` closed as a mobile-viewport false positive unless a desktop-width rerun reproduces it.

@@ -18,12 +18,17 @@ describe('LandingPage', () => {
       </MemoryRouter>
     );
 
-    const subtitle = screen.getByText('Your career, re-documented for the collective future.');
+    const subtitle = screen.getByText(
+      'For social workers. Advocates. People who change systems, not just survive them.'
+    );
     expect(subtitle.className).toContain('font-display');
-    expect(subtitle.className).toContain('text-ink-gold-base');
 
-    const primaryCta = screen.getByRole('link', { name: /build your story/i });
+    const primaryCta = screen.getByRole('link', { name: /create account/i });
     expect(primaryCta).toHaveStyle({
+      borderRadius: 'var(--kr-archetypes-strike-shape-base)',
+    });
+
+    expect(screen.getByRole('link', { name: /explore opportunities/i })).toHaveStyle({
       borderRadius: 'var(--kr-archetypes-strike-shape-base)',
     });
 
@@ -33,7 +38,24 @@ describe('LandingPage', () => {
     expect(statValue).toBeDefined();
     expect(statValue.className).toContain('font-display-ultra');
 
-    const statAccent = screen.getByText('3×');
+    const statAccent = screen.getByText('1:1');
     expect(statAccent.style.color).toContain('var(--kr-color-ink-gold-base)');
+
+    expect(screen.getByText('ADVOCACY STORIES')).toBeInTheDocument();
+  });
+
+  it('uses March archetype styling for landing feature cards', () => {
+    const { container } = render(
+      <MemoryRouter>
+        <LandingPage />
+      </MemoryRouter>
+    );
+
+    const featureCard = screen.getByText('Build Your Story').closest('div');
+    expect(featureCard).not.toBeNull();
+    expect(featureCard?.className).toContain('rounded-march');
+    expect(featureCard?.className).not.toContain('rounded-placard');
+
+    expect(container.querySelectorAll('.rounded-march').length).toBeGreaterThan(0);
   });
 });

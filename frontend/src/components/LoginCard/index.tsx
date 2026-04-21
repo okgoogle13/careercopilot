@@ -25,7 +25,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({ onLogin, onRegisterClick, 
       className="w-full max-w-md p-8 rounded-[var(--sys-shape-placard01,8px)] border"
       style={{
         background: 'var(--sys-color-charcoalBackground-base)',
-        borderColor: 'rgba(163,155,143,0.2)',
+        borderColor: 'color-mix(in srgb, var(--kr-color-concrete-grey-base) 20%, transparent)',
       }}
     >
       <h2
@@ -54,7 +54,8 @@ export const LoginCard: React.FC<LoginCardProps> = ({ onLogin, onRegisterClick, 
             required
             className="w-full p-3 rounded-sm border bg-transparent text-sm outline-none"
             style={{
-              borderColor: 'rgba(163,155,143,0.2)',
+              borderColor:
+                'color-mix(in srgb, var(--kr-color-concrete-grey-base) 20%, transparent)',
               color: 'var(--sys-color-worker-ash-base)',
             }}
           />
@@ -75,7 +76,8 @@ export const LoginCard: React.FC<LoginCardProps> = ({ onLogin, onRegisterClick, 
             required
             className="w-full p-3 rounded-sm border bg-transparent text-sm outline-none"
             style={{
-              borderColor: 'rgba(163,155,143,0.2)',
+              borderColor:
+                'color-mix(in srgb, var(--kr-color-concrete-grey-base) 20%, transparent)',
               color: 'var(--sys-color-worker-ash-base)',
             }}
           />

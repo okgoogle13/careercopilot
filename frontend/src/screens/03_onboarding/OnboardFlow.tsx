@@ -7,7 +7,7 @@ import { useModeStore } from '../../stores/useModeStore';
 type SlotDef = {
   name: string;
   zLayer: 'Z-0' | 'Z-1' | 'Z-2' | 'Z-3';
-  token: `--sys-${string}`;
+  token: `--kr-${string}`;
   assetCompat: `KR-${string}`;
 };
 
@@ -15,19 +15,19 @@ const SLOT_DEFS: SlotDef[] = [
   {
     name: 'step1_background',
     zLayer: 'Z-0',
-    token: '--sys-color-charcoalBackground-base',
+    token: '--kr-color-charcoal-background-base',
     assetCompat: 'KR-SOLID-SUBSTRATE',
   },
   {
     name: 'step1_accent',
     zLayer: 'Z-1',
-    token: '--sys-color-protestMetalBlue-base',
+    token: '--kr-color-protest-metal-blue-base',
     assetCompat: 'KR-SOLID-ATMOS',
   },
   {
     name: 'cta_icon',
     zLayer: 'Z-3',
-    token: '--sys-color-worker-ash-base',
+    token: '--kr-color-worker-ash-base',
     assetCompat: 'KR-SOLID-UIKIT',
   },
 ];
@@ -84,7 +84,7 @@ export const OnboardFlow = memo(function OnboardFlow({
       animate={{ opacity: 1, y: 0 }}
       transition={undefined}
       className={clsx(
-        "relative overflow-hidden rounded-[var(--shape-blockRiot03)] p-8 font-['Work_Sans'] text-base min-h-[75vh] flex flex-col justify-center",
+        "relative overflow-hidden rounded-[var(--kr-shape-block-riot03)] p-8 font-['Work_Sans'] text-base min-h-[75vh] flex flex-col justify-center",
         className
       )}
       style={{
@@ -163,7 +163,7 @@ export const OnboardFlow = memo(function OnboardFlow({
             whileTap={{ scale: 0.98 }}
             transition={springButton}
             onClick={onPrimaryAction}
-            className="rounded-[var(--shape-blockRiot03)] px-8 py-4 font-semibold text-lg"
+            className="rounded-[var(--kr-shape-block-riot03)] px-8 py-4 font-semibold text-lg"
             style={{
               fontFamily: 'var(--kr-type-font-families-primary)',
               backgroundColor: 'var(--kr-color-ink-gold-base)',
