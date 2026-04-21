@@ -27,13 +27,17 @@ describe('AuthModal', () => {
   it('submits the login form through useAuth login in login mode', async () => {
     render(<AuthModal mode="login" />);
 
+    expect(
+      screen.getByText('Sign in to access your dashboard and continue your job search.')
+    ).toBeInTheDocument();
+
     fireEvent.change(screen.getByLabelText(/email address/i), {
       target: { value: 'test@example.com' },
     });
     fireEvent.change(screen.getByLabelText(/password/i), {
       target: { value: 'password123' },
     });
-    fireEvent.click(screen.getByRole('button', { name: /^continue$/i }));
+    fireEvent.click(screen.getByRole('button', { name: /sign in →/i }));
 
     await waitFor(() => {
       expect(loginMock).toHaveBeenCalledWith('test@example.com', 'password123');
@@ -43,32 +47,48 @@ describe('AuthModal', () => {
   it('submits the register form through useAuth register in register mode', async () => {
     render(<AuthModal mode="register" />);
 
+    expect(
+      screen.getByText(
+        'Create an account to start building your evidence archive and find aligned opportunities.'
+      )
+    ).toBeInTheDocument();
+
     fireEvent.change(screen.getByLabelText(/email address/i), {
       target: { value: 'new@example.com' },
     });
     fireEvent.change(screen.getByLabelText(/password/i), {
       target: { value: 'password123' },
     });
-    fireEvent.click(screen.getByRole('button', { name: /^continue$/i }));
+    fireEvent.click(screen.getByRole('button', { name: /create account →/i }));
 
     await waitFor(() => {
       expect(registerMock).toHaveBeenCalledWith('new@example.com', 'password123', '');
     });
   });
 
-  it('uses canonical KR shape tokens and donor auth heading typography', () => {
+  it('uses canonical KR shape tokens and lets the inline tab switcher change modes', async () => {
     render(<AuthModal mode="login" />);
 
     const shell = screen.getByTestId('authmodal');
     expect(shell.className).toContain('--kr-shape-block-riot03');
     expect(shell.className).not.toContain('--shape-blockRiot03');
 
-    const heading = screen.getByRole('heading', { name: /sign in/i });
-    expect(heading).toHaveStyle({
-      fontVariationSettings: "'wght' 800, 'wdth' 120",
-      fontSize: '28px',
-      textTransform: 'uppercase',
-      letterSpacing: '0.02em',
+    fireEvent.click(screen.getByRole('button', { name: /^create account$/i }));
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(
+          'Create an account to start building your evidence archive and find aligned opportunities.'
+        )
+      ).toBeInTheDocument();
+    });
+
+    fireEvent.click(screen.getAllByRole('button', { name: /^sign in$/i })[0]);
+
+    await waitFor(() => {
+      expect(
+        screen.getByText('Sign in to access your dashboard and continue your job search.')
+      ).toBeInTheDocument();
     });
   });
 });

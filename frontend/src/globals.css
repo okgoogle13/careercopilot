@@ -222,6 +222,11 @@
       'SOFT' 100,
       'WONK' 1;
   }
+
+  .font-nabla-hero {
+    font-family: var(--kr-type-font-families-color-accent), cursive;
+    font-palette: --nabla-solidarity;
+  }
 }
 
 /* ============================================

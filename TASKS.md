@@ -1,18 +1,38 @@
 # Tasks
 
-Figma site audit board compacted on 2026-04-21. Most originally listed fixes were already present in the codebase by commit `65f4819b`; the board had gone stale.
+Figma site audit board re-audited against current runtime files on 2026-04-21. Most original Sprint 2 findings were already fixed in code; this board now tracks only the items that are still genuinely open.
 
 ## Active
 
-- [ ] **[F-07a] Replace remaining `bg-white/20` token drift in `OpportunitiesDiscovery.tsx`** — `DECRYPT_BUTTON_COLORS.SAVED` still uses `bg-white/20` at `frontend/src/screens/06_opportunities/OpportunitiesDiscovery.tsx:65`; replace with a canonical `--kr-*` surface token.
+- None.
 
 ## Waiting On
 
-- Re-run narrow verification after the final `OpportunitiesDiscovery.tsx` token cleanup and then archive the compacted audit board.
+- None.
 
 ## Someday
 
 ## Done
+
+- [x] ~~**Control-surface cleanup**~~ — completed 2026-04-21: `TASKS.md` has one authoritative section set and now agrees with `DECISIONS.md`.
+- [x] ~~**Final KR hygiene sweep**~~ — completed 2026-04-21: active-surface residue removed from `LandingPage.tsx`, `Dashboard.tsx`, and `OnboardFlow.tsx`; verified with focused tests, lint, type-check, residue grep, and drift check.
+- [x] ~~**Auth decision follow-through**~~ — completed 2026-04-21: `AuthModal` callers verified, inline tab-switcher tests updated, lint debt cleared, and `DECISIONS.md` follow-up closed.
+- [x] ~~**[F-07a] Replace remaining `bg-white/20` token drift in `OpportunitiesDiscovery.tsx`**~~ — completed 2026-04-21: `DECRYPT_BUTTON_COLORS.SAVED` now uses `bg-[var(--kr-color-charcoal-background-steps-2)]`; verified with targeted test + drift check.
+- [x] ~~**[F-01/F-02] Record donor landing-copy decision**~~ — completed 2026-04-21 in `DECISIONS.md`; runtime copy consistency verified in the final KR hygiene sweep.
+- [x] ~~**[F-06] Record inline auth tab-switcher decision**~~ — completed 2026-04-21 in `DECISIONS.md`; runtime follow-through verified in the auth decision cleanup.
+- [x] ~~**[F-11] Change landing feature card archetype from `rounded-placard` → `march`**~~ — completed 2026-04-21: landing feature cards now render with `rounded-march`; verified with focused landing tests, type-check, and drift check.
+- [x] ~~**[F-13] Add Dashboard "THE COLLECTIVE" stat section**~~ — completed 2026-04-21: dashboard hero metric bar now includes the collective stat section with `font-nabla-hero` heading and `font-display-ultra` count; verified with focused dashboard tests, type-check, and drift check.
+- [x] ~~**[F-14] Fix `--shape-blockRiot*` token aliases in `AuthModal.tsx`**~~ — current runtime uses `--kr-shape-block-riot*` tokens.
+- [x] ~~**[F-09] Remove `font-trunk`, `font-leaf`, `bg-terracotta`, `rounded-pebble` from `JobCard.tsx`**~~ — current runtime uses canonical typography/color/shape classes.
+- [x] ~~**[F-10] Replace `bg-white` in `KSCResponsesView.tsx`**~~ — current runtime uses `bg-canvas`.
+- [x] ~~**[F-05] Resolve auth card shape token**~~ — auth card now uses canonical shape tokens and `--kr-shape-march-open01`.
+- [x] ~~**[F-07] Replace raw white text/borders in `OpportunitiesDiscovery.tsx`**~~ — hero summary, stat row, filters, and title styling now use KR semantic tokens.
+- [x] ~~**[F-12] Replace hardcoded CTA radius in `LandingPage.tsx`**~~ — landing CTAs now use `var(--kr-archetypes-strike-shape-base)`.
+- [x] ~~**[F-02b] Remove `--kr-color-ink-bronze-base` from landing stat color**~~ — landing stats now use direct `var(--kr-color-ink-gold-base)`.
+- [x] ~~**[F-15] Change landing hero subtext font from Caveat → Fraunces**~~ — hero subtext now uses `font-display` styling.
+- [x] ~~**[F-03] Register `font-display-ultra` and apply to landing stat numbers**~~ — utility exists and is applied to the stat bar.
+- [x] ~~**[F-04] Fix auth card h1 typography**~~ — current heading uses the audited `wght/wdth/size/spacing` treatment.
+- [x] ~~**[F-08] Change `InterceptCard` job title from `font-mono` to `font-primary`**~~ — opportunities card title now uses `font-primary`.
 
 - [x] ~~**Figma site audit (2026-04-21)**~~ — 16 findings; full report in conversation context. Source: `https://fake-pound-31010647.figma.site` JS bundle + runtime code cross-check.
 - [x] ~~**Re-run desktop-width parity audit before unblocking code extraction**~~ — completed 2026-04-20. Clean narrow-scope rerun at 1440px+ confirms the baseline is restored and P1/P2/P3 fixes are precise. Evidence: `/Users/okgoogle13/.gemini/antigravity/brain/2a102e1a-93c9-43d3-a68e-b2e2a45aa5bd/narrow_parity_rerun_v2_clean_1776663974186.webp`.
@@ -30,14 +50,6 @@ Figma site audit board compacted on 2026-04-21. Most originally listed fixes wer
 - [x] ~~**Complete `/style-guide` Figma reference frame**~~ — rebuilt 2026-04-18: Route/StyleGuide (Desktop) 1440×900, node 372:2; sections: Shell Primitives, Archetypes, Governance Rules, Typography, Footer. Replaces 441px mobile-only frame.
 - [x] ~~**Implement CI/CD checks for Token/Design drift**~~ — created `scripts/design-validation/check-design-drift.py`; wired into Husky pre-commit and CI `frontend-brand-compliance` job; ESLint `no-restricted-syntax` rule added for banned token strings (2026-04-18)
 - [x] ~~**Execute Broad Code Extraction & Sync**~~ — structural shell-compliance verification pass complete 2026-04-18: all 12 routes (public/auth, workflow, desktop canonical) confirmed compliant; no PageCanvas violations; type-check clean; governance artifacts pass. Noted debt: hex drift in /opportunities, Tailwind aliases in /profile, `any` heroData types — tracked by drift checker.
-
-## Waiting On
-
-- None.
-
-## Someday
-
-## Done
 
 - [x] ~~**Execute redirect-history Figma cleanup**~~ — completed 2026-04-19: redirect-history pages in the active file were archived, annotated on canonical frames, or explicitly labeled as historical so they no longer read as canonical sync targets.
 - [x] ~~**Remove deprecated redirects from repo sync context**~~ — completed 2026-04-19: active Figma coordination docs and manifests now keep alias routes as historical/reference-only, non-blocking context.

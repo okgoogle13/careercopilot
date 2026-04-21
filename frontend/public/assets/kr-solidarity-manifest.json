@@ -2099,10 +2099,10 @@
     {
       "id": "KR-SOLID-096",
       "name": "Hero Textless-protest-tram V1",
-      "category": "uncategorized",
-      "layer": "uncategorized",
+      "category": "street",
+      "layer": "resistance",
       "aspect_ratio": "16:9",
-      "file_path": "/assets/uncategorized/kr-solidarity__uncategorized__uncategorized--textless-protest-tram--v1.png",
+      "file_path": "/assets/kr-solidarity/street/kr-solidarity__street__protest--textless-protest-tram--v1.png",
       "priority": "HIGH",
       "semantics": {
         "functional_role": "editorial-hero",

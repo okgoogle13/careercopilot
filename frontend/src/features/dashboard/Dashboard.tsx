@@ -260,7 +260,13 @@ export function Dashboard() {
                     </span>
                   </div>
                   <div className="relative pt-4">
-                    <div className="h-1.5 w-full bg-white/5 rounded-march overflow-hidden">
+                    <div
+                      className="h-1.5 w-full rounded-march overflow-hidden"
+                      style={{
+                        backgroundColor:
+                          'color-mix(in srgb, var(--kr-color-worker-ash-base) 5%, transparent)',
+                      }}
+                    >
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: '75%' }}
@@ -271,6 +277,29 @@ export function Dashboard() {
                     <p className="text-[9px] font-mono text-paper-white opacity-40 mt-3 uppercase tracking-widest text-right">
                       Applications moving forward
                     </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-10 border-t border-concrete-grey/10 pt-8 relative z-10">
+                <div className="rounded-march border border-ink-gold/20 bg-asphalt-black/35 px-6 py-5 md:px-8">
+                  <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                    <div className="space-y-2">
+                      <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-concrete-grey opacity-70">
+                        Network Signal
+                      </p>
+                      <h3 className="font-nabla-hero text-2xl leading-none text-stencil-yellow">
+                        THE COLLECTIVE
+                      </h3>
+                    </div>
+                    <div className="text-left md:text-right">
+                      <span className="font-display-ultra text-[clamp(42px,7vw,72px)] leading-none tracking-tight text-paper-white">
+                        1,204
+                      </span>
+                      <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.28em] text-concrete-grey opacity-70">
+                        shared wins archived
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -287,7 +316,7 @@ export function Dashboard() {
 
         {!hasCompletedIngestion && showIngestionReminder && (
           <motion.div variants={item as any}>
-            <div className="rounded-placard border border-[var(--sys-color-solidarityRed-base)]/45 bg-[var(--sys-color-solidarityRed-base)]/12 px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div className="rounded-placard border border-[var(--kr-color-solidarity-red-base)]/45 bg-[var(--kr-color-solidarity-red-base)]/12 px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <p className="font-primary text-sm text-paper-white">
                 Add your master resume to unlock personalized analysis, quick apply, and
                 high-fidelity tailoring.
@@ -309,7 +338,7 @@ export function Dashboard() {
           {!hasMaster ? (
             <Link
               to="/profile"
-              className="block w-full rounded-placard border border-[--sys-color-inkGold-base]/35 bg-[--sys-color-inkGold-base] text-[--sys-color-charcoalBackground-base] px-8 py-6 font-black uppercase tracking-wide text-center transition-all duration-300"
+              className="block w-full rounded-placard border border-[var(--kr-color-ink-gold-base)]/35 bg-[var(--kr-color-ink-gold-base)] text-[var(--kr-color-charcoal-background-base)] px-8 py-6 font-black uppercase tracking-wide text-center transition-all duration-300"
             >
               <span className="inline-flex items-center justify-center gap-3">
                 <Rocket className="w-5 h-5" /> Build Master Resume
@@ -321,10 +350,10 @@ export function Dashboard() {
                 to="/apply"
                 className="rounded-placard px-7 py-5 font-black uppercase tracking-wide text-center transition-all duration-300 hover:-translate-y-0.5"
                 style={{
-                  backgroundColor: 'var(--sys-color-solidarityRed-base)',
-                  color: 'var(--sys-color-charcoalBackground-base)',
+                  backgroundColor: 'var(--kr-color-solidarity-red-base)',
+                  color: 'var(--kr-color-charcoal-background-base)',
                   boxShadow:
-                    '0 16px 42px color-mix(in srgb, var(--sys-color-solidarityRed-base) 36%, transparent)',
+                    '0 16px 42px color-mix(in srgb, var(--kr-color-solidarity-red-base) 36%, transparent)',
                 }}
               >
                 <span className="inline-flex items-center justify-center gap-2">🎯 Apply Now</span>
@@ -412,7 +441,7 @@ export function Dashboard() {
                               className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest rounded-march ${
                                 profile.status === 'EXCELLENT'
                                   ? 'text-[var(--kr-color-kr-activist-smoke-green-base)] border border-[var(--kr-color-kr-activist-smoke-green-base)]/30 bg-[var(--kr-color-kr-activist-smoke-green-base)]/10'
-                                  : 'text-[var(--sys-color-stencilYellow-base)] border border-[var(--sys-color-stencilYellow-base)]/30 bg-[var(--sys-color-stencilYellow-base)]/10'
+                                  : 'text-[var(--kr-color-stencil-yellow-base)] border border-[var(--kr-color-stencil-yellow-base)]/30 bg-[var(--kr-color-stencil-yellow-base)]/10'
                               }`}
                             >
                               {profile.status}
