@@ -1,7 +1,8 @@
 import { KrDarkSpring } from '@/design/tokens/motion-presets';
-import { memo } from 'react';
+import { memo, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import clsx, { type ClassValue } from 'clsx';
+import { useAuth } from '@/context/AuthContext';
 import { useModeStore } from '../../stores/useModeStore';
 
 type SlotDef = {
@@ -65,27 +66,69 @@ export interface AuthModalProps {
 
 const springHero = KrDarkSpring;
 const springButton = KrDarkSpring;
+const FIELD_CLASSNAME =
+  'w-full rounded-[var(--sys-shape-blockRiot02)] border bg-[var(--sys-color-charcoalBackground-steps-1)] px-4 py-3 text-sm outline-none transition-colors';
+const FIELD_STYLE = {
+  borderColor: 'var(--sys-color-concreteGrey-base)',
+  color: 'var(--sys-color-worker-ash-base)',
+} satisfies React.CSSProperties;
 
 export const AuthModal = memo(function AuthModal({
   className,
   mode = 'login',
   title,
   subtitle,
-  primaryLabel = 'Continue',
-  secondaryLabel = 'Use OAuth',
+  primaryLabel,
+  secondaryLabel,
   slotAssets,
   onPrimaryAction,
   onSecondaryAction,
 }: AuthModalProps) {
   const themeMode = useModeStore((state) => state.mode);
+  const { login, register } = useAuth();
+  const [displayName, setDisplayName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
+  const isRegisterMode = mode === 'register';
+  const resolvedPrimaryLabel = primaryLabel ?? (isRegisterMode ? 'Create Account' : 'Sign In');
+  const resolvedSecondaryLabel =
+    secondaryLabel ?? (isRegisterMode ? 'Back to Sign In' : 'Create Account');
 
-  const resolvedTitle = title ?? (mode === 'register' ? 'Create Account' : 'Sign In');
+  const resolvedTitle = title ?? (isRegisterMode ? 'Create Account' : 'Sign In');
   const resolvedSubtitle =
     subtitle ??
-    (mode === 'register'
+    (isRegisterMode
       ? 'Join the vanguard and build your portfolio.'
       : 'Secure access to your CareerCopilot workspace.');
+  const footerCopy = useMemo(
+    () =>
+      isRegisterMode
+        ? 'Already have a collective ID?'
+        : 'Need a collective ID to start your archive?',
+    [isRegisterMode]
+  );
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    try {
+      if (isRegisterMode) {
+        await register(email, password, displayName);
+      } else {
+        await login(email, password);
+      }
+      onPrimaryAction?.();
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : 'Authentication failed');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <motion.section
@@ -154,36 +197,106 @@ export const AuthModal = memo(function AuthModal({
         </p>
       </motion.header>
 
-      <motion.div
+      <motion.form
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={undefined}
-        className="relative z-10 mt-8 flex flex-wrap gap-4 items-center"
+        onSubmit={handleSubmit}
+        className="relative z-10 mt-8 w-full max-w-xl space-y-5"
       >
-        <motion.button
-          type="button"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          transition={springButton}
-          onClick={onPrimaryAction}
-          className="rounded-[var(--sys-shape-blockRiot03)] px-8 py-4 font-semibold text-lg"
-          style={{
-            backgroundColor: 'var(--sys-color-inkGold-base)',
-            color: 'var(--sys-color-charcoalBackground-base)',
-          }}
-        >
-          {primaryLabel}
-        </motion.button>
+        {isRegisterMode && (
+          <label className="block space-y-2">
+            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--sys-color-concreteGrey-base)]">
+              Display Name
+            </span>
+            <input
+              type="text"
+              name="displayName"
+              autoComplete="name"
+              value={displayName}
+              onChange={(event) => setDisplayName(event.target.value)}
+              className={FIELD_CLASSNAME}
+              style={FIELD_STYLE}
+              required={isRegisterMode}
+            />
+          </label>
+        )}
 
-        <button
-          type="button"
-          onClick={onSecondaryAction}
-          className="font-mono text-sm opacity-80 px-2 py-1"
-          style={{ color: 'var(--sys-color-worker-ash-base)', backgroundColor: 'transparent' }}
+        <label className="block space-y-2">
+          <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--sys-color-concreteGrey-base)]">
+            Email
+          </span>
+          <input
+            type="email"
+            name="email"
+            autoComplete="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            className={FIELD_CLASSNAME}
+            style={FIELD_STYLE}
+            required
+          />
+        </label>
+
+        <label className="block space-y-2">
+          <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--sys-color-concreteGrey-base)]">
+            Password
+          </span>
+          <input
+            type="password"
+            name="password"
+            autoComplete={isRegisterMode ? 'new-password' : 'current-password'}
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            className={FIELD_CLASSNAME}
+            style={FIELD_STYLE}
+            required
+          />
+        </label>
+
+        {errorMessage && (
+          <p
+            role="alert"
+            className="font-mono text-xs uppercase tracking-[0.15em]"
+            style={{ color: 'var(--sys-color-solidarityRed-base)' }}
+          >
+            {errorMessage}
+          </p>
+        )}
+
+        <div className="flex flex-wrap gap-4 items-center">
+          <motion.button
+            type="submit"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={springButton}
+            disabled={isSubmitting}
+            className="rounded-[var(--sys-shape-blockRiot03)] px-8 py-4 font-semibold text-lg disabled:opacity-60"
+            style={{
+              backgroundColor: 'var(--sys-color-inkGold-base)',
+              color: 'var(--sys-color-charcoalBackground-base)',
+            }}
+          >
+            {isSubmitting ? 'Working...' : resolvedPrimaryLabel}
+          </motion.button>
+
+          <button
+            type="button"
+            onClick={onSecondaryAction}
+            className="font-mono text-sm opacity-80 px-2 py-1"
+            style={{ color: 'var(--sys-color-worker-ash-base)', backgroundColor: 'transparent' }}
+          >
+            {resolvedSecondaryLabel}
+          </button>
+        </div>
+
+        <p
+          className="font-mono text-xs uppercase tracking-[0.14em]"
+          style={{ color: 'var(--sys-color-concreteGrey-base)' }}
         >
-          {secondaryLabel}
-        </button>
-      </motion.div>
+          {footerCopy}
+        </p>
+      </motion.form>
     </motion.section>
   );
 });

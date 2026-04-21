@@ -362,7 +362,7 @@ export const OpportunitiesDiscovery = memo(function OpportunitiesDiscovery() {
         transition={{ duration: 0.3 }}
         className="flex flex-col gap-2"
       >
-        <p className="text-[11px] font-mono tracking-[0.25em] uppercase text-[var(--kr-color-signal-green-base)]">
+        <p className="text-[11px] font-mono tracking-[0.25em] uppercase text-[var(--kr-color-worker-ash-base)]">
           OPPORTUNITIES // CLANDESTINE INTELLIGENCE FEED
         </p>
 
@@ -370,7 +370,7 @@ export const OpportunitiesDiscovery = memo(function OpportunitiesDiscovery() {
           <span className="text-[72px] font-black text-white tracking-tight uppercase">THE</span>
           <span
             className="text-[72px] font-black uppercase italic tracking-tight"
-            style={{ color: 'var(--kr-color-signal-green-base)' }}
+            style={{ color: 'var(--kr-color-ink-gold-base)' }}
           >
             OPPORTUNITIES
           </span>
@@ -428,7 +428,7 @@ export const OpportunitiesDiscovery = memo(function OpportunitiesDiscovery() {
             className={cn(
               'px-3 py-1.5 text-[11px] font-mono uppercase tracking-widest rounded-sm border transition-colors duration-150',
               activeFilter === tab
-                ? 'bg-[var(--kr-color-signal-green-base)]/10 border-[var(--kr-color-signal-green-base)]/60 text-[var(--kr-color-signal-green-base)]'
+                ? 'bg-[var(--kr-color-ink-gold-base)]/10 border-[var(--kr-color-ink-gold-base)]/60 text-[var(--kr-color-ink-gold-base)]'
                 : 'bg-transparent border-white/15 text-white/40 hover:border-white/30 hover:text-white/60'
             )}
           >

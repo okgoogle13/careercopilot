@@ -195,15 +195,6 @@ export const OnboardFlow = memo(function OnboardFlow({
         </motion.div>
       ) : null}
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={undefined}
-        className="relative z-10 mt-8 font-['JetBrains_Mono'] text-sm opacity-80"
-        style={{ color: 'var(--sys-color-concreteGrey-base)' }}
-      >
-        Slots: {SLOT_DEFS.length} | Density ratio: 0.36 | Max focal CTA: 1
-      </motion.p>
     </motion.section>
   );
 });
