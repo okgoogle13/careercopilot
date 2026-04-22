@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import { Building, Compass, Copy, Gauge, Sparkles, Target } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import { LayeredHero } from '@/components/kerala-rage/LayeredHero';
 import { loadHeroRegistry } from '@/design/hero/heroRegistry';
 import { composeHero } from '@/lib/composeHero';
@@ -20,6 +21,7 @@ import {
   type AtsScoreResponse,
   type StrategyResponse,
 } from '@/api/analysisService';
+import { useAnalysisPipelineStore, type AtsResult } from '@/stores/analysisPipelineStore';
 import { StudioMatchPanel } from './components/StudioMatchPanel';
 import { SuggestionsPanel } from './components/SuggestionsPanel';
 import type { CareerDatabase, JobOpportunity, MatchAnalysis } from '@/types/career';
@@ -32,6 +34,8 @@ const paperGrain =
 export const AnalysisPage: React.FC = () => {
   const { user } = useAuth();
   const { track } = useAnalytics();
+  const pipelineStore = useAnalysisPipelineStore();
+  const [assetId, setAssetId] = useState<string>('');
   const [heroData, setHeroData] = useState<{
     layers: any[];
     typography: any;
@@ -67,6 +71,12 @@ export const AnalysisPage: React.FC = () => {
     }
     loadHero();
   }, []);
+
+  useEffect(() => {
+    if (!assetId) {
+      setAssetId(uuidv4());
+    }
+  }, [assetId]);
 
   const [jobUrl, setJobUrl] = useState('');
   const [jobDescription, setJobDescription] = useState('');
@@ -135,28 +145,42 @@ export const AnalysisPage: React.FC = () => {
       return;
     }
 
-    // Convert flat state to structured CareerDatabase for the Studio engine
-    setCareerData((prev) => ({
-      ...prev,
-      Personal_Information: {
-        ...prev.Personal_Information,
-        FullName: user?.displayName || 'Candidate',
-        Email: user?.email || '',
-      },
-    }));
+    setIsAnalyzing(true);
+    try {
+      // Persist ingestion to pipeline store
+      const fileType = resumeText.length > 1000 ? 'pdf' : 'txt';
+      pipelineStore.setIngestion(assetId, {
+        fileType: fileType as 'pdf' | 'docx' | 'txt',
+        fileName: 'resume',
+        extractedText: resumeText,
+        uploadedAt: new Date(),
+      });
 
-    // Extract basic job info from text for the initial studio view
-    const jobLines = jobDescription.split('\n').filter((l) => l.trim());
-    setJobOpportunity((prev) => ({
-      ...prev,
-      Job_Title: jobLines[0] || 'Target Role',
-      Company_Name: 'Prospect',
-      Key_Responsibilities: [jobDescription],
-    }));
+      // Convert flat state to structured CareerDatabase for the Studio engine
+      setCareerData((prev) => ({
+        ...prev,
+        Personal_Information: {
+          ...prev.Personal_Information,
+          FullName: user?.displayName || 'Candidate',
+          Email: user?.email || '',
+        },
+      }));
 
-    setShowStudioMatch(true);
-    track('studio_match_gate_open', { has_resume: true });
-    m3Toast.info('Studio Initialized', 'Start the analysis to begin tailoring your application.');
+      // Extract basic job info from text for the initial studio view
+      const jobLines = jobDescription.split('\n').filter((l) => l.trim());
+      setJobOpportunity((prev) => ({
+        ...prev,
+        Job_Title: jobLines[0] || 'Target Role',
+        Company_Name: 'Prospect',
+        Key_Responsibilities: [jobDescription],
+      }));
+
+      setShowStudioMatch(true);
+      track('studio_match_gate_open', { has_resume: true });
+      m3Toast.info('Studio Initialized', 'Start the analysis to begin tailoring your application.');
+    } finally {
+      setIsAnalyzing(false);
+    }
   };
 
   const handleStudioAnalyze = async (
@@ -167,6 +191,16 @@ export const AnalysisPage: React.FC = () => {
 
     // Orchestrator Decision: Backend /ats-score is the Source of Truth
     const result = await analysisService.getATSScore(resumeText, jobDescription);
+
+    // Persist ATS result to pipeline store
+    pipelineStore.setAtsResult(assetId, {
+      overallScore: result.overallScore,
+      keywordMatch: result.keywordMatches.matched.length,
+      semanticScore: 0,
+      formattingScore: 0,
+      extractionFlags: result.keywordMatches.missing,
+      scoredAt: new Date(),
+    });
 
     // Map AtsScoreResponse to MatchAnalysis (KR Solidarity v6.1)
     return {
