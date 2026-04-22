@@ -5,6 +5,7 @@ interface ExportRequest {
   jobTitle?: string;
   companyName?: string;
   expirationHours?: number;
+  theme?: 'minimal' | 'creative' | 'modern' | 'professional';
 }
 
 interface ExportResponse {
@@ -38,6 +39,7 @@ export const exportService = {
           job_title: jobTitle,
           format: request.format,
           expiration_hours: request.expirationHours || 24,
+          theme_id: request.theme || 'minimal',
         }),
       });
 
@@ -85,6 +87,7 @@ export const exportService = {
           company_name: companyName,
           format: request.format,
           expiration_hours: request.expirationHours || 24,
+          theme_id: request.theme || 'minimal',
         }),
       });
 

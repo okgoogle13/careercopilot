@@ -232,7 +232,7 @@ export const AnalysisPage: React.FC = () => {
     m3Toast.success('Saved', 'Application data synced to your Career Collective ID.');
   };
 
-  const handleExportResume = async () => {
+  const handleExportResume = async (theme: 'minimal' | 'creative' | 'modern' | 'professional' = 'minimal') => {
     if (!resumeText) {
       m3Toast.error('Missing Resume', 'Please paste resume text before exporting');
       return;
@@ -240,10 +240,11 @@ export const AnalysisPage: React.FC = () => {
     await exportService.exportResume(resumeText, jobOpportunity.Job_Title || 'Resume', {
       format: 'pdf',
       expirationHours: 24,
+      theme,
     });
   };
 
-  const handleExportCoverLetter = async () => {
+  const handleExportCoverLetter = async (theme: 'minimal' | 'creative' | 'modern' | 'professional' = 'minimal') => {
     const pipeline = pipelineStore.getPipeline(assetId);
     if (!pipeline?.atsResult) {
       m3Toast.error('Missing Analysis', 'Run analysis before exporting cover letter');
@@ -255,7 +256,7 @@ export const AnalysisPage: React.FC = () => {
       coverLetterText,
       jobOpportunity.Job_Title || 'Application',
       jobOpportunity.Company_Name || 'Prospect',
-      { format: 'pdf', expirationHours: 24 }
+      { format: 'pdf', expirationHours: 24, theme }
     );
   };
 
