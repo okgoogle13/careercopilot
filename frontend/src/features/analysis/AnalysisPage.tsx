@@ -21,6 +21,7 @@ import {
   type AtsScoreResponse,
   type StrategyResponse,
 } from '@/api/analysisService';
+import { exportService } from '@/api/exportService';
 import { useAnalysisPipelineStore, type AtsResult } from '@/stores/analysisPipelineStore';
 import { StudioMatchPanel } from './components/StudioMatchPanel';
 import { SuggestionsPanel } from './components/SuggestionsPanel';
@@ -228,6 +229,33 @@ export const AnalysisPage: React.FC = () => {
   const handleSaveToProfile = async (uid: string, data: CareerDatabase) => {
     // Placeholder for profile service integration
     m3Toast.success('Saved', 'Application data synced to your Career Collective ID.');
+  };
+
+  const handleExportResume = async () => {
+    if (!resumeText) {
+      m3Toast.error('Missing Resume', 'Please paste resume text before exporting');
+      return;
+    }
+    await exportService.exportResume(resumeText, jobOpportunity.Job_Title || 'Resume', {
+      format: 'pdf',
+      expirationHours: 24,
+    });
+  };
+
+  const handleExportCoverLetter = async () => {
+    const pipeline = pipelineStore.getPipeline(assetId);
+    if (!pipeline?.atsResult) {
+      m3Toast.error('Missing Analysis', 'Run analysis before exporting cover letter');
+      return;
+    }
+    // For now, export placeholder text; in Task 4+ this will be populated
+    const coverLetterText = strategyResult?.optimized_resume.resume_text || 'Cover letter content pending generation';
+    await exportService.exportCoverLetter(
+      coverLetterText,
+      jobOpportunity.Job_Title || 'Application',
+      jobOpportunity.Company_Name || 'Prospect',
+      { format: 'pdf', expirationHours: 24 }
+    );
   };
 
   const handleHolisticStrategy = async () => {
