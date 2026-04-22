@@ -4,6 +4,8 @@ import { TemplateStyle } from '../../../config/resume-constants';
 import { Document, Packer, Paragraph, TextRun, HeadingLevel, ColumnBreak } from 'docx';
 import html2pdf from 'html2pdf.js';
 import { saveAs } from 'file-saver';
+import { exportService } from '@/api/exportService';
+import { useAnalysisPipelineStore } from '@/stores/analysisPipelineStore';
 
 interface UseDocumentExportProps {
   activeTab: 'resume' | 'coverLetter' | 'ksc' | 'analysis' | string;
@@ -13,6 +15,8 @@ interface UseDocumentExportProps {
   coverLetterContent: string;
   resumeRef: RefObject<HTMLDivElement | null>;
   kscRef: RefObject<HTMLDivElement | null>;
+  assetId?: string;
+  jobTitle?: string;
 }
 
 export function useDocumentExport({
@@ -23,9 +27,51 @@ export function useDocumentExport({
   coverLetterContent,
   resumeRef,
   kscRef,
+  assetId,
+  jobTitle,
 }: UseDocumentExportProps) {
-  const exportToPDF = (documentType?: 'resume' | 'coverLetter' | 'ksc') => {
+  const { setExportUrl } = useAnalysisPipelineStore();
+
+  const exportToPDF = async (documentType?: 'resume' | 'coverLetter' | 'ksc') => {
     const target = documentType || activeTab;
+
+    // Attempt server-rendered export for resume and cover letter
+    if (target === 'resume' && assetId) {
+      try {
+        const result = await exportService.exportResume({
+          content: { career_data: careerData, analysis },
+          job_title: jobTitle,
+          format: 'pdf',
+        });
+        if (result.success && result.download_url) {
+          setExportUrl(assetId, 'resume', result.download_url);
+          window.open(result.download_url, '_blank');
+          return;
+        }
+      } catch {
+        // fall through to client-side export
+      }
+    }
+
+    if (target === 'coverLetter' && assetId) {
+      try {
+        const content = coverLetterContent || analysis?.Cover_Letter_Draft || '';
+        const result = await exportService.exportCoverLetter({
+          content,
+          job_title: jobTitle,
+          format: 'pdf',
+        });
+        if (result.success && result.download_url) {
+          setExportUrl(assetId, 'cover-letter', result.download_url);
+          window.open(result.download_url, '_blank');
+          return;
+        }
+      } catch {
+        // fall through to client-side export
+      }
+    }
+
+    // Client-side fallback
     let element: HTMLElement | null = null;
     let filename = 'Document.pdf';
 
@@ -109,6 +155,43 @@ export function useDocumentExport({
 
   const exportToDOCX = async (documentType?: 'resume' | 'coverLetter' | 'ksc') => {
     const target = documentType || activeTab;
+
+    // Attempt server-rendered DOCX for resume and cover letter
+    if (target === 'resume' && assetId) {
+      try {
+        const result = await exportService.exportResume({
+          content: { career_data: careerData, analysis },
+          job_title: jobTitle,
+          format: 'docx',
+        });
+        if (result.success && result.download_url) {
+          setExportUrl(assetId, 'resume', result.download_url);
+          window.open(result.download_url, '_blank');
+          return;
+        }
+      } catch {
+        // fall through to client-side export
+      }
+    }
+
+    if (target === 'coverLetter' && assetId) {
+      try {
+        const content = coverLetterContent || analysis?.Cover_Letter_Draft || '';
+        const result = await exportService.exportCoverLetter({
+          content,
+          job_title: jobTitle,
+          format: 'docx',
+        });
+        if (result.success && result.download_url) {
+          setExportUrl(assetId, 'cover-letter', result.download_url);
+          window.open(result.download_url, '_blank');
+          return;
+        }
+      } catch {
+        // fall through to client-side export
+      }
+    }
+
     if (target === 'resume' && analysis) {
       const isTwoColumn = selectedTemplate.layout === 'two-column';
 
