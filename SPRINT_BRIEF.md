@@ -2,41 +2,46 @@
 
 ## Sprint Window
 
-- **Sprint:** Sprint 2
-- **Dates:** 2026-04-21 → TBD
-- **Status:** Active — Figma site audit complete, remediation in progress
+- **Sprint:** Sprint 4
+- **Dates:** 2026-04-29 → TBD
+- **Status:** Staged — awaiting Sprint 3 PR (#134) merge to develop
 - **Status view:** `dashboard.html` is the UI over `TASKS.md`; no separate dashboard tracker is maintained
 
 ## Objective
 
-Remediate the 16 findings from the Figma site audit (`https://fake-pound-31010647.figma.site`). Priority order: rendering failures first, then token hygiene, then typography fidelity. Two copy/interaction decisions must be made before those tasks start.
+Wire durable state for analysis pipeline (ingestion → ATS → export) via Zustand, retire client-side jsPDF, integrate server-side templating, and verify end-to-end persistence. Stage 1 gate task for the templating-refactor sprint.
 
 ## Current State
 
-- Sprint 1 closed 2026-04-21: all parity validation gates passed, drift-cleanup complete, design-drift CI wired.
-- Figma site audit completed 2026-04-21: 16 findings across 8 files.
-  - 4 rendering failures (undefined CSS tokens causing invisible styles)
-  - 5 token hygiene gaps (hardcoded values, wrong namespace)
-  - 7 typography/copy mismatches vs. Figma donor
-- Active board: 15 remediation tasks in `TASKS.md` + 2 decisions required before last 4 tasks.
+- Sprint 3 closed 2026-04-28: 12 tasks completed end-to-end. PR #134 awaiting merge.
+  - **Phase 1 (Tasks 1-3)**: Doc consolidation + sync infrastructure — 1,308 files audited, 150 consolidated, CI sync job created
+  - **Phase 2 (Tasks 4-6)**: Abstraction layer + Notion + Linear implementations — DocumentStore/IssueTracker interfaces, 32 test suites, 105+ assertions
+  - **Phase 3 (Tasks 7-12)**: Perplexity integration + self-hosted migration path — hallucination guard, decorator pattern, sync automation, PostgreSQL migration guide, execution prompts, team onboarding
+- Sprint 4 staged: 6 tasks focused on pipeline state wiring and templating integration.
 
-## Findings Summary (from 2026-04-21 audit)
+## Sprint 4 Scope
 
-| Severity | Count | Key files |
-|---|---|---|
-| Rendering failure | 4 | `AuthModal.tsx`, `JobCard.tsx`, `KSCResponsesView.tsx` |
-| Token hygiene | 3 | `LandingPage.tsx`, `OpportunitiesDiscovery.tsx` |
-| Typography | 4 | `LandingPage.tsx`, `AuthModal.tsx`, `OpportunitiesDiscovery.tsx` |
-| Copy/interaction | 4 | `LandingPage.tsx`, `AuthModal.tsx`, `Dashboard.tsx` (decision-gated) |
+**Primary Goal:** Wire durable state for analysis pipeline (ingestion → ATS → export) so ATS scores persist across page refresh, retire client-side jsPDF, and integrate themed document rendering.
+
+**Key Deliverables:**
+1. analysisPipelineStore Zustand slice (keyed by assetId)
+2. Refactored AnalysisPage (read/write store instead of useState)
+3. Server-rendered exports (retire jsPDF client path)
+4. ATS Signal Breakdown panel (expose 4 sub-signals)
+5. E2E test (upload → score → export → reload → score-persists)
+6. Themed document rendering integration
+
+**Unblocks:** Templating-refactor sprint (depends on durable pipeline state and server-side export wiring).
 
 ## Active Board Contract
 
-`TASKS.md` is the only active board. Tasks are ordered: rendering failures → token hygiene → typography → copy/interaction decisions.
+`TASKS.md` is the only active board. Sprint 4 tasks are ordered: state → refactor → export → signals → tests → templating.
 
 ## Acceptance Gate For Sprint Close
 
-- All rendering-failure tasks resolved and verified
-- All token hygiene tasks resolved
-- Typography tasks resolved or explicitly deferred with rationale in `DECISIONS.md`
-- Copy/interaction decisions recorded in `DECISIONS.md`
-- No new route-shell regressions introduced
+- analysisPipelineStore wired and tested
+- AnalysisPage refactored to use store (useState removed)
+- Server export endpoints verified (jsPDF client path retired)
+- E2E test passing (score persists across reload)
+- ATS Signal Breakdown panel rendering with 4 sub-signals
+- No regressions in analysis flow, export, or related features

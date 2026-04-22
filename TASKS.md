@@ -4,31 +4,23 @@ Figma site audit board re-audited against current runtime files on 2026-04-21. M
 
 ## Active
 
-- [ ] **Sprint 3: Notion + Linear + Perplexity Automation** — 7-day sprint (2026-04-22 → 2026-04-28) to consolidate fragmented docs, build modular automation layer (DocumentStore + IssueTracker abstractions), integrate Perplexity reasoning with hallucination guards, enable Task→Linear→Notion sync, and provide self-hosted PostgreSQL migration path. Execution: subagent-driven via superpowers:executing-plans.
-  - [ ] **Phase 1 (Days 1-2):** Doc consolidation + sync infrastructure
-    - [ ] **Task 1:** Audit + inventory fragmented docs (scripts/doc-audit.py)
-    - [ ] **Task 2:** Consolidate fragmented docs into docs/ structure
-    - [ ] **Task 3:** Create doc sync infrastructure (git → Notion CI job)
-  - [ ] **Phase 2 (Days 3-5):** Notion + Linear automation + abstraction layer
-    - [ ] **Task 4:** Create abstraction layer interfaces (DocumentStore, IssueTracker)
-    - [ ] **Task 5:** Implement NotionDocumentStore with CRUD
-    - [ ] **Task 6:** Implement LinearIssueTracker with GraphQL
-  - [ ] **Phase 3 (Days 6-7):** Perplexity integration + self-hosted path
-    - [ ] **Task 7:** Implement hallucination guard (guardAgainstHallucinations)
-    - [ ] **Task 8:** Implement PerplexityDocumentStore decorator
-    - [ ] **Task 9:** Create Task → Linear → Notion sync automation
-    - [ ] **Task 10:** Create self-hosted PostgreSQL migration guide
-    - [ ] **Task 11:** Create execution prompts for all tools (IDE, Perplexity, Notion, Linear, CI)
-    - [ ] **Task 12:** Sprint handoff summary + final documentation
+- [ ] **Sprint 4: Pipeline State Wiring + Templating Integration** — 5-day sprint to wire durable state for analysis pipeline (ingestion → ATS → export) via Zustand store keyed by assetId, retire client-side jsPDF/html2canvas, integrate themed document rendering with server-side templates, and verify ATS score survives page refresh. Stage 1 gate task for templating-refactor sprint.
+  - [ ] **Task 1:** Create analysisPipelineStore Zustand slice (ingestion + atsResult + exports keyed by assetId)
+  - [ ] **Task 2:** Refactor AnalysisPage to read/write analysisPipelineStore instead of useState
+  - [ ] **Task 3:** Route ExportActionBar to server-rendered /export/* endpoints (retire jsPDF path)
+  - [ ] **Task 4:** Implement ATS Signal Breakdown panel (expose 4 sub-signals: keyword, semantic, formatting, extraction)
+  - [ ] **Task 5:** Create e2e test: upload → score → export → reload → score-persists
+  - [ ] **Task 6:** Integrate themed_document_renderer with export endpoints (validate via ats_rules in strict mode)
 
 ## Waiting On
 
-- None.
+- Sprint 3 PR (#134) merge to develop
 
 ## Someday
 
 ## Done
 
+- [x] ~~**Sprint 3: Notion + Linear + Perplexity Automation**~~ — completed 2026-04-28: 12 tasks delivered end-to-end (doc consolidation, abstraction layer, Perplexity integration, self-hosted migration path). PR #134 awaiting merge. Deliverables: 32 test suites (105+ assertions), complete architecture documentation, execution prompts for all tools, team onboarding guide.
 - [x] ~~**Control-surface cleanup**~~ — completed 2026-04-21: `TASKS.md` has one authoritative section set and now agrees with `DECISIONS.md`.
 - [x] ~~**Final KR hygiene sweep**~~ — completed 2026-04-21: active-surface residue removed from `LandingPage.tsx`, `Dashboard.tsx`, and `OnboardFlow.tsx`; verified with focused tests, lint, type-check, residue grep, and drift check.
 - [x] ~~**Auth decision follow-through**~~ — completed 2026-04-21: `AuthModal` callers verified, inline tab-switcher tests updated, lint debt cleared, and `DECISIONS.md` follow-up closed.
