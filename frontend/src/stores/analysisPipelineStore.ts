@@ -8,12 +8,20 @@ export interface IngestionData {
   uploadedAt?: Date;
 }
 
+export interface AtsBreakdown {
+  keywordDensityScore: number;
+  semanticScore: number;
+  educationExperienceScore: number;
+  formattingScore: number;
+}
+
 export interface AtsResult {
   overallScore: number;
   keywordMatch: number;
   semanticScore: number;
   formattingScore: number;
   extractionFlags: string[];
+  breakdown?: AtsBreakdown;
   scoredAt?: Date;
 }
 

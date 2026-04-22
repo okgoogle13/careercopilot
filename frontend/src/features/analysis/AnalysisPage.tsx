@@ -190,6 +190,7 @@ export const AnalysisPage: React.FC = () => {
       semanticScore: result.breakdown?.semanticScore ?? 0,
       formattingScore: result.breakdown?.formattingScore ?? 0,
       extractionFlags: result.keywordMatches?.missing ?? [],
+      breakdown: result.breakdown,
       scoredAt: new Date(),
     });
 

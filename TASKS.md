@@ -4,13 +4,21 @@ Figma site audit board re-audited against current runtime files on 2026-04-21. M
 
 ## Active
 
-- None.
+- [ ] **Sprint 4: Pipeline State Wiring + Templating Integration** — 5-day sprint to wire durable state for analysis pipeline (ingestion → ATS → export) via Zustand store, retire client-side jsPDF, integrate themed document rendering, verify ATS score survives page refresh. Stage 1 gate task for templating-refactor sprint.
+  - [x] **Task 1:** Create analysisPipelineStore Zustand slice (6 tests passing, committed)
+  - [ ] **Task 2:** Refactor AnalysisPage to use analysisPipelineStore (remove useState)
+  - [ ] **Task 3:** Route ExportActionBar to server-rendered /export/* endpoints
+  - [ ] **Task 4:** Implement ATS Signal Breakdown panel (expose 4 sub-signals)
+  - [ ] **Task 5:** Create e2e test: upload → score → export → reload → score-persists
+  - [ ] **Task 6:** Integrate themed_document_renderer with export endpoints
 
 ## Waiting On
 
-- None.
+- Sprint 4: Task 2–6 execution pending
 
 ## Someday
+
+- [ ] **Chrome Extension: Separate Repository Migration** — Defer to future sprint (Q2+). Currently in `feature/chrome-extension` (1 commit). When ready: create independent `careercopilot-chrome-extension` repo, wire as npm dependency consumer, enable independent CI/CD and release cycle. **Strategy:** Keep in web app repo for now (safe, isolated); spin to separate repo at next extension milestone. **Why:** Extension updates shouldn't block web app releases; enables parallel development and independent testing (faster iteration with mocks).
 
 ## Done
 

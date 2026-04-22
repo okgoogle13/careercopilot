@@ -1,5 +1,5 @@
 #!/bin/sh
-# Post-commit hook: Perplexity-driven Notion + Linear sync
+# Post-commit hook: Claude-driven Notion + Linear sync (via MCP)
 # Runs after every commit. Non-blocking — failures do not affect git.
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
