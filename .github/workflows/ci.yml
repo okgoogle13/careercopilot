@@ -47,6 +47,7 @@ jobs:
       e2e: ${{ steps.filter.outputs.e2e }}
       performance: ${{ steps.filter.outputs.performance }}
       extension: ${{ steps.filter.outputs.extension }}
+      governance: ${{ steps.filter.outputs.governance }}
     if: github.event_name != 'workflow_dispatch'
     steps:
       - name: Checkout
@@ -78,6 +79,11 @@ jobs:
               - *backend-paths
             extension:
               - 'chrome-extension/**'
+            governance:
+              - 'tests/plans/**'
+              - 'AGENTS.md'
+              - 'CLAUDE.md'
+              - 'docs/project/active/**'
 
   codeql:
     name: CodeQL Security Analysis
@@ -323,6 +329,23 @@ jobs:
           file: backend/coverage.xml
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: false
+
+  governance-tests:
+    name: Governance Tests
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || needs.changes.outputs.governance == 'true'
+    needs: [changes]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Install pytest
+        run: pip install "pytest>=7.0.0"
+      - name: Run governance tests
+        run: python -m pytest tests/plans/ -v --tb=short
 
   test-firestore-rules:
     name: Test Firestore Rules
@@ -710,6 +733,7 @@ jobs:
         frontend-brand-compliance,
         backend-static-checks,
         backend-tests,
+        governance-tests,
         functions,
         e2e-tests,
         test-firestore-rules,
@@ -731,6 +755,7 @@ jobs:
           if [[ "${{ needs.frontend-brand-compliance.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.backend-static-checks.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.backend-tests.result }}" == "failure" ]]; then exit 1; fi
+          if [[ "${{ needs.governance-tests.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.functions.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.e2e-tests.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.test-firestore-rules.result }}" == "failure" ]]; then exit 1; fi
@@ -751,6 +776,7 @@ jobs:
             if ('${{ needs.frontend-brand-compliance.result }}' === 'failure') failedJobs.push('Frontend Brand Compliance');
             if ('${{ needs.backend-static-checks.result }}' === 'failure') failedJobs.push('Backend Static Checks');
             if ('${{ needs.backend-tests.result }}' === 'failure') failedJobs.push('Backend Tests');
+            if ('${{ needs.governance-tests.result }}' === 'failure') failedJobs.push('Governance Tests');
             if ('${{ needs.functions.result }}' === 'failure') failedJobs.push('Functions Tests');
             if ('${{ needs.e2e-tests.result }}' === 'failure') failedJobs.push('E2E Tests');
             if ('${{ needs.test-firestore-rules.result }}' === 'failure') failedJobs.push('Firestore Rules Tests');

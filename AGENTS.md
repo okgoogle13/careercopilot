@@ -25,6 +25,7 @@ If Figma, wireframes, runtime code, and control JSON disagree, do not guess. Rec
 ## Authority Order
 
 Use these sources in this order.
+Governance labels: design truth is established by the design canon and active Figma coordination, runtime truth is established by mounted app routes and feature code, and capability truth is established by backend endpoints, schemas, and services.
 
 1. Design canon:
    - `docs/design/01_CANON.md`

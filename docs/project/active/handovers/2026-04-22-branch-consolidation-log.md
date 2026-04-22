@@ -33,6 +33,10 @@
 - Fixed TypeScript errors in document sync helpers:
   - Commit: `ffbd4770`.
   - Files: `frontend/src/lib/document-store/notion.ts`, `frontend/src/lib/document-store/perplexity.ts`, `frontend/src/lib/issue-tracker/linear.ts`.
+- Integrated approved CI/governance slice:
+  - Added a dedicated CI governance test job for `tests/plans/`.
+  - Restored `.claude/route-family-map.json` from the archived root-file copy because active governance tests still reference that canonical location.
+  - Clarified lowercase governance labels in `AGENTS.md` for the existing layer-authority test contract.
 
 ## Reviewed and Deferred
 
@@ -84,3 +88,6 @@ Not staged by this execution unless explicitly reviewed:
   - `src/lib/issue-tracker/__tests__/linear.test.ts`
   - These tests currently expect in-memory behavior, while the implementations call external APIs.
   - `src/lib/document-store/__tests__/perplexity.test.ts` passed.
+- Governance validation passed:
+  - `python3 -m pytest tests/plans/ -v --tb=short`
+  - `python3` YAML parse check for `.github/workflows/ci.yml`
