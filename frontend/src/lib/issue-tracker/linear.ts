@@ -64,9 +64,9 @@ export class LinearIssueTracker implements IssueTracker {
           priority: this.priorityToLinear(data.priority || 'none'),
           dueDate: data.dueDate?.toISOString().split('T')[0],
           ...(data.assignee && {
-            assigneeId: data.assignee
-          })
-        }
+            assigneeId: data.assignee,
+          }),
+        },
       };
 
       const response = await this.gqlQuery(query, variables);
@@ -75,10 +75,7 @@ export class LinearIssueTracker implements IssueTracker {
       return issue;
     } catch (error) {
       if (error instanceof IssueTrackerError) throw error;
-      throw new IssueTrackerError(
-        `Error creating issue: ${String(error)}`,
-        'LINEAR_CREATE_ERROR'
-      );
+      throw new IssueTrackerError(`Error creating issue: ${String(error)}`, 'LINEAR_CREATE_ERROR');
     }
   }
 
@@ -124,10 +121,7 @@ export class LinearIssueTracker implements IssueTracker {
       if (String(error).includes('not found')) {
         return null;
       }
-      throw new IssueTrackerError(
-        `Error fetching issue: ${String(error)}`,
-        'LINEAR_FETCH_ERROR'
-      );
+      throw new IssueTrackerError(`Error fetching issue: ${String(error)}`, 'LINEAR_FETCH_ERROR');
     }
   }
 
@@ -136,10 +130,7 @@ export class LinearIssueTracker implements IssueTracker {
       // Verify issue exists
       const existing = await this.getIssue(issueId);
       if (!existing) {
-        throw new IssueTrackerError(
-          `Issue not found: ${issueId}`,
-          'ISSUE_NOT_FOUND'
-        );
+        throw new IssueTrackerError(`Issue not found: ${issueId}`, 'ISSUE_NOT_FOUND');
       }
 
       const query = `
@@ -168,7 +159,7 @@ export class LinearIssueTracker implements IssueTracker {
       const linearStatus = this.statusToLinear(status);
       const response = await this.gqlQuery(query, {
         id: issueId,
-        status: linearStatus
+        status: linearStatus,
       });
 
       const issue = this.linearToIssue(response.data.issueUpdate.issue);
@@ -187,10 +178,7 @@ export class LinearIssueTracker implements IssueTracker {
     try {
       const issue = await this.getIssue(issueId);
       if (!issue) {
-        throw new IssueTrackerError(
-          `Issue not found: ${issueId}`,
-          'ISSUE_NOT_FOUND'
-        );
+        throw new IssueTrackerError(`Issue not found: ${issueId}`, 'ISSUE_NOT_FOUND');
       }
 
       // Store document link in issue metadata (description append or custom field)
@@ -205,10 +193,7 @@ export class LinearIssueTracker implements IssueTracker {
       }
     } catch (error) {
       if (error instanceof IssueTrackerError) throw error;
-      throw new IssueTrackerError(
-        `Error linking document: ${String(error)}`,
-        'LINEAR_LINK_ERROR'
-      );
+      throw new IssueTrackerError(`Error linking document: ${String(error)}`, 'LINEAR_LINK_ERROR');
     }
   }
 
@@ -255,23 +240,18 @@ export class LinearIssueTracker implements IssueTracker {
 
       const response = await this.gqlQuery(query, {
         filter: filterString,
-        limit: filters.limit || 50
+        limit: filters.limit || 50,
       });
 
-      const issues = response.data.issues.nodes.map((node: any) =>
-        this.linearToIssue(node)
-      );
+      const issues = response.data.issues.nodes.map((node: any) => this.linearToIssue(node));
 
       // Cache all results
-      issues.forEach(issue => this.issueCache.set(issue.id, issue));
+      issues.forEach((issue) => this.issueCache.set(issue.id, issue));
 
       return issues;
     } catch (error) {
       if (error instanceof IssueTrackerError) throw error;
-      throw new IssueTrackerError(
-        `Error listing issues: ${String(error)}`,
-        'LINEAR_LIST_ERROR'
-      );
+      throw new IssueTrackerError(`Error listing issues: ${String(error)}`, 'LINEAR_LIST_ERROR');
     }
   }
 
@@ -283,16 +263,13 @@ export class LinearIssueTracker implements IssueTracker {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${this.apiKey}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ query, variables })
+      body: JSON.stringify({ query, variables }),
     });
 
     if (!response.ok) {
-      throw new IssueTrackerError(
-        `Linear API error: ${response.statusText}`,
-        'LINEAR_API_ERROR'
-      );
+      throw new IssueTrackerError(`Linear API error: ${response.statusText}`, 'LINEAR_API_ERROR');
     }
 
     const result = await response.json();
@@ -312,12 +289,12 @@ export class LinearIssueTracker implements IssueTracker {
    */
   private linearStateToStatus(stateName: string): Issue['status'] {
     const mapping: Record<string, Issue['status']> = {
-      'Todo': 'todo',
+      Todo: 'todo',
       'In Progress': 'in_progress',
       'In Review': 'in_progress',
-      'Done': 'done',
-      'Canceled': 'archived',
-      'Duplicate': 'archived'
+      Done: 'done',
+      Canceled: 'archived',
+      Duplicate: 'archived',
     };
     return mapping[stateName] || 'todo';
   }
@@ -327,10 +304,10 @@ export class LinearIssueTracker implements IssueTracker {
    */
   private statusToLinear(status: Issue['status']): string {
     const mapping: Record<Issue['status'], string> = {
-      'todo': 'linear_todo_state_id',
-      'in_progress': 'linear_in_progress_state_id',
-      'done': 'linear_done_state_id',
-      'archived': 'linear_archived_state_id'
+      todo: 'linear_todo_state_id',
+      in_progress: 'linear_in_progress_state_id',
+      done: 'linear_done_state_id',
+      archived: 'linear_archived_state_id',
     };
     return mapping[status];
   }
@@ -340,11 +317,11 @@ export class LinearIssueTracker implements IssueTracker {
    */
   private priorityToLinear(priority: Issue['priority']): number {
     const mapping: Record<Issue['priority'], number> = {
-      'none': 0,
-      'low': 4,
-      'medium': 3,
-      'high': 2,
-      'urgent': 1
+      none: 0,
+      low: 4,
+      medium: 3,
+      high: 2,
+      urgent: 1,
     };
     return mapping[priority];
   }
@@ -358,7 +335,7 @@ export class LinearIssueTracker implements IssueTracker {
       1: 'urgent',
       2: 'high',
       3: 'medium',
-      4: 'low'
+      4: 'low',
     };
     return mapping[linearPriority] || 'none';
   }
@@ -378,7 +355,7 @@ export class LinearIssueTracker implements IssueTracker {
       dueDate: linearIssue.dueDate ? new Date(linearIssue.dueDate) : undefined,
       createdAt: new Date(linearIssue.createdAt),
       updatedAt: new Date(linearIssue.updatedAt),
-      linkedDocumentIds: []
+      linkedDocumentIds: [],
     };
   }
 }

@@ -56,7 +56,10 @@ export interface DocumentStore {
 }
 
 export class DocumentStoreError extends Error {
-  constructor(message: string, public code: string = 'DOCUMENT_STORE_ERROR') {
+  constructor(
+    message: string,
+    public code: string = 'DOCUMENT_STORE_ERROR'
+  ) {
     super(message);
     this.name = 'DocumentStoreError';
   }

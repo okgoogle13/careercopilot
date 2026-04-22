@@ -16,7 +16,7 @@ describe('LinearIssueTracker', () => {
         title: 'Test Issue',
         description: 'This is a test issue',
         priority: 'high',
-        dueDate: new Date('2026-04-30')
+        dueDate: new Date('2026-04-30'),
       });
 
       expect(issue.id).toBeDefined();
@@ -32,7 +32,7 @@ describe('LinearIssueTracker', () => {
 
     it('creates issue with minimal data', async () => {
       const issue = await tracker.createIssue({
-        title: 'Minimal Issue'
+        title: 'Minimal Issue',
       });
 
       expect(issue.title).toBe('Minimal Issue');
@@ -45,7 +45,7 @@ describe('LinearIssueTracker', () => {
     it('retrieves a created issue by id', async () => {
       const created = await tracker.createIssue({
         title: 'Get Test',
-        priority: 'medium'
+        priority: 'medium',
       });
 
       const retrieved = await tracker.getIssue(created.id);
@@ -64,7 +64,7 @@ describe('LinearIssueTracker', () => {
   describe('updateIssueStatus', () => {
     it('updates issue status', async () => {
       const created = await tracker.createIssue({
-        title: 'Status Test'
+        title: 'Status Test',
       });
 
       const updated = await tracker.updateIssueStatus(created.id, 'in_progress');
@@ -74,7 +74,7 @@ describe('LinearIssueTracker', () => {
 
     it('supports all status transitions', async () => {
       const created = await tracker.createIssue({
-        title: 'Transition Test'
+        title: 'Transition Test',
       });
 
       const statuses: Array<Issue['status']> = ['todo', 'in_progress', 'done', 'archived'];
@@ -89,7 +89,7 @@ describe('LinearIssueTracker', () => {
   describe('linkToDocument', () => {
     it('links an issue to a document', async () => {
       const issue = await tracker.createIssue({
-        title: 'Link Test'
+        title: 'Link Test',
       });
 
       const documentId = 'doc_abc123';
@@ -101,7 +101,7 @@ describe('LinearIssueTracker', () => {
 
     it('supports multiple document links', async () => {
       const issue = await tracker.createIssue({
-        title: 'Multi Link Test'
+        title: 'Multi Link Test',
       });
 
       const docIds = ['doc_1', 'doc_2', 'doc_3'];
@@ -111,7 +111,7 @@ describe('LinearIssueTracker', () => {
 
       const retrieved = await tracker.getIssue(issue.id);
       expect(retrieved?.linkedDocumentIds?.length).toBe(3);
-      docIds.forEach(id => {
+      docIds.forEach((id) => {
         expect(retrieved?.linkedDocumentIds).toContain(id);
       });
     });
@@ -134,7 +134,7 @@ describe('LinearIssueTracker', () => {
       await tracker.updateIssueStatus(issue2.id, 'done');
 
       const results = await tracker.listIssues({ status: 'done' });
-      expect(results.every(i => i.status === 'done')).toBe(true);
+      expect(results.every((i) => i.status === 'done')).toBe(true);
     });
 
     it('filters issues by priority', async () => {
@@ -142,31 +142,27 @@ describe('LinearIssueTracker', () => {
       await tracker.createIssue({ title: 'Low', priority: 'low' });
 
       const results = await tracker.listIssues({ priority: 'urgent' });
-      expect(results.every(i => i.priority === 'urgent')).toBe(true);
+      expect(results.every((i) => i.priority === 'urgent')).toBe(true);
     });
 
     it('filters issues by assignee', async () => {
       const issue = await tracker.createIssue({
         title: 'Assigned',
-        assignee: 'user@example.com'
+        assignee: 'user@example.com',
       });
 
       const results = await tracker.listIssues({ assignee: 'user@example.com' });
-      expect(results.some(i => i.id === issue.id)).toBe(true);
+      expect(results.some((i) => i.id === issue.id)).toBe(true);
     });
   });
 
   describe('error handling', () => {
     it('throws error when updating non-existent issue', async () => {
-      await expect(
-        tracker.updateIssueStatus('non_existent_id', 'done')
-      ).rejects.toThrow();
+      await expect(tracker.updateIssueStatus('non_existent_id', 'done')).rejects.toThrow();
     });
 
     it('throws error when linking non-existent issue', async () => {
-      await expect(
-        tracker.linkToDocument('non_existent_id', 'doc_123')
-      ).rejects.toThrow();
+      await expect(tracker.linkToDocument('non_existent_id', 'doc_123')).rejects.toThrow();
     });
   });
 });

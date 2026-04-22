@@ -23,7 +23,7 @@ class MockDocumentStore implements DocumentStore {
       ...doc,
       id,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
     this.documents.set(id, newDoc);
     return newDoc;
@@ -36,7 +36,7 @@ class MockDocumentStore implements DocumentStore {
     const updated: Document = {
       ...doc,
       ...updates,
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
     this.documents.set(id, updated);
     return updated;
@@ -71,7 +71,7 @@ describe('PerplexityDocumentStore', () => {
         title: 'Test',
         content: 'Content',
         category: 'task',
-        status: 'active'
+        status: 'active',
       });
 
       const retrieved = await perplexityStore.getDocument(created.id);
@@ -84,7 +84,7 @@ describe('PerplexityDocumentStore', () => {
         title: 'Doc 1',
         content: 'Content 1',
         category: 'task',
-        status: 'active'
+        status: 'active',
       });
 
       const results = await perplexityStore.listDocuments({});
@@ -96,7 +96,7 @@ describe('PerplexityDocumentStore', () => {
         title: 'To Summarize',
         content: 'This is some content to summarize',
         category: 'guide',
-        status: 'active'
+        status: 'active',
       });
 
       const summary = await perplexityStore.summarize(doc.id);
@@ -111,7 +111,7 @@ describe('PerplexityDocumentStore', () => {
         title: 'New Doc',
         content: 'New content',
         category: 'decision',
-        status: 'draft'
+        status: 'draft',
       });
 
       expect(doc.id).toBeDefined();
@@ -128,7 +128,7 @@ describe('PerplexityDocumentStore', () => {
           title: 'Bad Doc',
           content: 'Content',
           category: 'task',
-          status: 'published' as any // Invalid
+          status: 'published' as any, // Invalid
         })
       ).rejects.toThrow(PerplexityValidationError);
     });
@@ -139,7 +139,7 @@ describe('PerplexityDocumentStore', () => {
           title: 'Bad Doc',
           content: 'Content',
           category: 'blog' as any, // Invalid
-          status: 'active'
+          status: 'active',
         })
       ).rejects.toThrow(PerplexityValidationError);
     });
@@ -151,7 +151,7 @@ describe('PerplexityDocumentStore', () => {
           content: 'Content',
           category: 'task',
           status: 'active',
-          atsScore: 150 // Out of range
+          atsScore: 150, // Out of range
         })
       ).rejects.toThrow(PerplexityValidationError);
     });
@@ -162,7 +162,7 @@ describe('PerplexityDocumentStore', () => {
           title: 'a'.repeat(501), // > 500 chars
           content: 'Content',
           category: 'task',
-          status: 'active'
+          status: 'active',
         })
       ).rejects.toThrow(PerplexityValidationError);
     });
@@ -173,7 +173,7 @@ describe('PerplexityDocumentStore', () => {
           title: 'Title',
           content: 'a'.repeat(50001), // > 50000 chars
           category: 'task',
-          status: 'active'
+          status: 'active',
         })
       ).rejects.toThrow(PerplexityValidationError);
     });
@@ -185,12 +185,12 @@ describe('PerplexityDocumentStore', () => {
         title: 'Original',
         content: 'Original content',
         category: 'task',
-        status: 'draft'
+        status: 'draft',
       });
 
       const updated = await perplexityStore.updateDocument(created.id, {
         title: 'Updated',
-        status: 'active'
+        status: 'active',
       });
 
       expect(updated.title).toBe('Updated');
@@ -206,12 +206,12 @@ describe('PerplexityDocumentStore', () => {
         title: 'Title',
         content: 'Content',
         category: 'task',
-        status: 'draft'
+        status: 'draft',
       });
 
       await expect(
         perplexityStore.updateDocument(created.id, {
-          status: 'invalid' as any
+          status: 'invalid' as any,
         })
       ).rejects.toThrow(PerplexityValidationError);
     });
@@ -221,13 +221,13 @@ describe('PerplexityDocumentStore', () => {
         title: 'Title',
         content: 'Content',
         category: 'task',
-        status: 'draft'
+        status: 'draft',
       });
 
       await expect(
         perplexityStore.updateDocument(created.id, {
           title: 'New Title',
-          atsScore: 150 // Invalid
+          atsScore: 150, // Invalid
         })
       ).rejects.toThrow(PerplexityValidationError);
     });
@@ -237,11 +237,11 @@ describe('PerplexityDocumentStore', () => {
         title: 'Title',
         content: 'Content',
         category: 'task',
-        status: 'draft'
+        status: 'draft',
       });
 
       const updated = await perplexityStore.updateDocument(created.id, {
-        atsScore: 75 // Valid partial
+        atsScore: 75, // Valid partial
       });
 
       expect(updated.atsScore).toBe(75);
@@ -255,7 +255,7 @@ describe('PerplexityDocumentStore', () => {
         title: 'To Archive',
         content: 'Content',
         category: 'task',
-        status: 'active'
+        status: 'active',
       });
 
       await perplexityStore.archiveDocument(doc.id);
@@ -272,7 +272,7 @@ describe('PerplexityDocumentStore', () => {
           title: 'Title',
           content: 'Content',
           category: 'task',
-          status: 'bad' as any
+          status: 'bad' as any,
         });
         fail('Should have thrown');
       } catch (e) {
@@ -292,7 +292,7 @@ describe('PerplexityDocumentStore', () => {
           throw new Error('Base store error');
         },
         archiveDocument: async () => {},
-        summarize: async () => ''
+        summarize: async () => '',
       };
 
       const failingPerplexity = new PerplexityDocumentStore(failingStore, 'key');
@@ -302,7 +302,7 @@ describe('PerplexityDocumentStore', () => {
           title: 'Title',
           content: 'Content',
           category: 'task',
-          status: 'active'
+          status: 'active',
         })
       ).rejects.toThrow('Base store error');
     });
@@ -318,13 +318,13 @@ describe('PerplexityDocumentStore', () => {
           ...doc,
           id: 'notion_' + Math.random(),
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: new Date(),
         }),
         updateDocument: async (id, updates) => {
           throw new Error('Not implemented');
         },
         archiveDocument: async () => {},
-        summarize: async () => 'Summary'
+        summarize: async () => 'Summary',
       };
 
       const decorated = new PerplexityDocumentStore(notionLike, 'key');
@@ -332,7 +332,7 @@ describe('PerplexityDocumentStore', () => {
         title: 'Test',
         content: 'Content',
         category: 'task',
-        status: 'active'
+        status: 'active',
       });
 
       expect(doc.id.startsWith('notion_')).toBe(true);

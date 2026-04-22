@@ -60,7 +60,10 @@ export interface IssueTracker {
 }
 
 export class IssueTrackerError extends Error {
-  constructor(message: string, public code: string = 'ISSUE_TRACKER_ERROR') {
+  constructor(
+    message: string,
+    public code: string = 'ISSUE_TRACKER_ERROR'
+  ) {
     super(message);
     this.name = 'IssueTrackerError';
   }

@@ -30,7 +30,7 @@ export class NotionDocumentStore implements DocumentStore {
     this.headers = {
       Authorization: `Bearer ${apiToken}`,
       'Notion-Version': this.apiVersion,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     };
   }
 
@@ -43,7 +43,7 @@ export class NotionDocumentStore implements DocumentStore {
     try {
       const response = await fetch(`${this.apiUrl}/pages/${id}`, {
         method: 'GET',
-        headers: this.headers
+        headers: this.headers,
       });
 
       if (response.status === 404) {
@@ -76,7 +76,7 @@ export class NotionDocumentStore implements DocumentStore {
       const response = await fetch(`${this.apiUrl}/databases/${this.databaseId}/query`, {
         method: 'POST',
         headers: this.headers,
-        body: JSON.stringify(filterPayload)
+        body: JSON.stringify(filterPayload),
       });
 
       if (!response.ok) {
@@ -87,10 +87,10 @@ export class NotionDocumentStore implements DocumentStore {
       }
 
       const data = (await response.json()) as { results: NotionPage[] };
-      const documents = data.results.map(page => this.pageToDocument(page));
+      const documents = data.results.map((page) => this.pageToDocument(page));
 
       // Cache all results
-      documents.forEach(doc => this.pageCache.set(doc.id, doc));
+      documents.forEach((doc) => this.pageCache.set(doc.id, doc));
 
       return documents;
     } catch (error) {
@@ -102,37 +102,35 @@ export class NotionDocumentStore implements DocumentStore {
     }
   }
 
-  async createDocument(
-    doc: Omit<Document, 'id' | 'createdAt' | 'updatedAt'>
-  ): Promise<Document> {
+  async createDocument(doc: Omit<Document, 'id' | 'createdAt' | 'updatedAt'>): Promise<Document> {
     try {
       const payload = {
         parent: { database_id: this.databaseId },
         properties: {
           Name: {
-            title: [{ text: { content: doc.title } }]
+            title: [{ text: { content: doc.title } }],
           },
           Category: {
-            select: { name: doc.category }
+            select: { name: doc.category },
           },
           Status: {
-            select: { name: doc.status }
+            select: { name: doc.status },
           },
           ...(doc.atsScore !== undefined && {
             'ATS Score': {
-              number: doc.atsScore
-            }
+              number: doc.atsScore,
+            },
           }),
           Content: {
-            rich_text: [{ text: { content: doc.content } }]
-          }
-        }
+            rich_text: [{ text: { content: doc.content } }],
+          },
+        },
       };
 
       const response = await fetch(`${this.apiUrl}/pages`, {
         method: 'POST',
         headers: this.headers,
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
@@ -159,10 +157,7 @@ export class NotionDocumentStore implements DocumentStore {
     // Verify document exists
     const existing = await this.getDocument(id);
     if (!existing) {
-      throw new DocumentStoreError(
-        `Document not found: ${id}`,
-        'DOCUMENT_NOT_FOUND'
-      );
+      throw new DocumentStoreError(`Document not found: ${id}`, 'DOCUMENT_NOT_FOUND');
     }
 
     try {
@@ -170,38 +165,38 @@ export class NotionDocumentStore implements DocumentStore {
 
       if (updates.title !== undefined) {
         (payload.properties as Record<string, unknown>).Name = {
-          title: [{ text: { content: updates.title } }]
+          title: [{ text: { content: updates.title } }],
         };
       }
 
       if (updates.status !== undefined) {
         (payload.properties as Record<string, unknown>).Status = {
-          select: { name: updates.status }
+          select: { name: updates.status },
         };
       }
 
       if (updates.category !== undefined) {
         (payload.properties as Record<string, unknown>).Category = {
-          select: { name: updates.category }
+          select: { name: updates.category },
         };
       }
 
       if (updates.atsScore !== undefined) {
         (payload.properties as Record<string, unknown>)['ATS Score'] = {
-          number: updates.atsScore
+          number: updates.atsScore,
         };
       }
 
       if (updates.content !== undefined) {
         (payload.properties as Record<string, unknown>).Content = {
-          rich_text: [{ text: { content: updates.content } }]
+          rich_text: [{ text: { content: updates.content } }],
         };
       }
 
       const response = await fetch(`${this.apiUrl}/pages/${id}`, {
         method: 'PATCH',
         headers: this.headers,
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
@@ -239,10 +234,7 @@ export class NotionDocumentStore implements DocumentStore {
   async summarize(documentId: string, context?: string): Promise<string> {
     const doc = await this.getDocument(documentId);
     if (!doc) {
-      throw new DocumentStoreError(
-        `Document not found: ${documentId}`,
-        'DOCUMENT_NOT_FOUND'
-      );
+      throw new DocumentStoreError(`Document not found: ${documentId}`, 'DOCUMENT_NOT_FOUND');
     }
 
     // Simple summarization: first 300 chars of content
@@ -266,7 +258,7 @@ export class NotionDocumentStore implements DocumentStore {
       atsScore: props['ATS Score']?.number,
       createdAt: new Date(page.created_time),
       updatedAt: new Date(page.last_edited_time),
-      metadata: { notionPageId: page.id }
+      metadata: { notionPageId: page.id },
     };
   }
 
@@ -306,14 +298,14 @@ export class NotionDocumentStore implements DocumentStore {
     if (filters.status) {
       andConditions.push({
         property: 'Status',
-        select: { equals: filters.status }
+        select: { equals: filters.status },
       });
     }
 
     if (filters.category) {
       andConditions.push({
         property: 'Category',
-        select: { equals: filters.category }
+        select: { equals: filters.category },
       });
     }
 
@@ -321,7 +313,7 @@ export class NotionDocumentStore implements DocumentStore {
 
     if (andConditions.length > 0) {
       payload.filter = {
-        and: andConditions
+        and: andConditions,
       };
     }
 

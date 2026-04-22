@@ -16,7 +16,7 @@ describe('NotionDocumentStore', () => {
         title: 'Test Document',
         content: 'This is a test',
         category: 'task',
-        status: 'draft'
+        status: 'draft',
       });
 
       expect(doc.id).toBeDefined();
@@ -35,7 +35,7 @@ describe('NotionDocumentStore', () => {
         title: 'Get Test',
         content: 'Content here',
         category: 'decision',
-        status: 'active'
+        status: 'active',
       });
 
       const retrieved = await store.getDocument(created.id);
@@ -56,14 +56,14 @@ describe('NotionDocumentStore', () => {
         title: 'Doc 1',
         content: 'Content 1',
         category: 'task',
-        status: 'active'
+        status: 'active',
       });
 
       await store.createDocument({
         title: 'Doc 2',
         content: 'Content 2',
         category: 'decision',
-        status: 'draft'
+        status: 'draft',
       });
 
       const results = await store.listDocuments({});
@@ -75,18 +75,18 @@ describe('NotionDocumentStore', () => {
         title: 'Active Doc',
         content: 'Active content',
         category: 'task',
-        status: 'active'
+        status: 'active',
       });
 
       await store.createDocument({
         title: 'Draft Doc',
         content: 'Draft content',
         category: 'task',
-        status: 'draft'
+        status: 'draft',
       });
 
       const results = await store.listDocuments({ status: 'active' });
-      expect(results.every(d => d.status === 'active')).toBe(true);
+      expect(results.every((d) => d.status === 'active')).toBe(true);
     });
 
     it('filters documents by category', async () => {
@@ -94,18 +94,18 @@ describe('NotionDocumentStore', () => {
         title: 'Task Doc',
         content: 'Task content',
         category: 'task',
-        status: 'active'
+        status: 'active',
       });
 
       await store.createDocument({
         title: 'Decision Doc',
         content: 'Decision content',
         category: 'decision',
-        status: 'active'
+        status: 'active',
       });
 
       const results = await store.listDocuments({ category: 'task' });
-      expect(results.every(d => d.category === 'task')).toBe(true);
+      expect(results.every((d) => d.category === 'task')).toBe(true);
     });
   });
 
@@ -115,12 +115,12 @@ describe('NotionDocumentStore', () => {
         title: 'Original Title',
         content: 'Original content',
         category: 'task',
-        status: 'draft'
+        status: 'draft',
       });
 
       const updated = await store.updateDocument(created.id, {
         title: 'Updated Title',
-        status: 'active'
+        status: 'active',
       });
 
       expect(updated.title).toBe('Updated Title');
@@ -142,7 +142,7 @@ describe('NotionDocumentStore', () => {
         title: 'To Archive',
         content: 'Content',
         category: 'task',
-        status: 'active'
+        status: 'active',
       });
 
       await store.archiveDocument(created.id);
@@ -158,7 +158,7 @@ describe('NotionDocumentStore', () => {
         title: 'Long Document',
         content: 'This is a long document with lots of content that needs summarizing',
         category: 'guide',
-        status: 'active'
+        status: 'active',
       });
 
       const summary = await store.summarize(created.id);

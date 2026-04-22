@@ -24,6 +24,9 @@ import { StudioMatchPanel } from './components/StudioMatchPanel';
 import { SuggestionsPanel } from './components/SuggestionsPanel';
 import type { CareerDatabase, JobOpportunity, MatchAnalysis } from '@/types/career';
 import { useAuth } from '@/context/AuthContext';
+import { useAnalysisPipelineStore } from '@/stores/analysisPipelineStore';
+
+const SESSION_ASSET_ID = 'current-session';
 
 // KrDark Assets
 const paperGrain =
@@ -32,6 +35,9 @@ const paperGrain =
 export const AnalysisPage: React.FC = () => {
   const { user } = useAuth();
   const { track } = useAnalytics();
+  const { setAtsResult: storeAtsResult, getPipeline } = useAnalysisPipelineStore();
+  const pipeline = getPipeline(SESSION_ASSET_ID);
+
   const [heroData, setHeroData] = useState<{
     layers: any[];
     typography: any;
@@ -71,8 +77,10 @@ export const AnalysisPage: React.FC = () => {
   const [jobUrl, setJobUrl] = useState('');
   const [jobDescription, setJobDescription] = useState('');
   const [resumeText, setResumeText] = useState('');
-  const [atsResult, setAtsResult] = useState<AtsScoreResponse | null>(null);
   const [strategyResult, setStrategyResult] = useState<StrategyResponse | null>(null);
+
+  // atsRawResult is read from persisted store; raw API response cached for display
+  const [atsRawResult, setAtsRawResult] = useState<AtsScoreResponse | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isGeneratingStrategy, setIsGeneratingStrategy] = useState(false);
   const [showStudioMatch, setShowStudioMatch] = useState(false);
@@ -122,10 +130,16 @@ export const AnalysisPage: React.FC = () => {
       required: true,
     })) ?? [];
 
-  const resumeKeywords: ResumeKeyword[] = atsResult
+  const resumeKeywords: ResumeKeyword[] = atsRawResult
     ? [
-        ...atsResult.keywordMatches.matched.map((label) => ({ label, match: 'strong' as const })),
-        ...atsResult.keywordMatches.missing.map((label) => ({ label, match: 'missing' as const })),
+        ...atsRawResult.keywordMatches.matched.map((label) => ({
+          label,
+          match: 'strong' as const,
+        })),
+        ...atsRawResult.keywordMatches.missing.map((label) => ({
+          label,
+          match: 'missing' as const,
+        })),
       ]
     : [];
 
@@ -168,6 +182,17 @@ export const AnalysisPage: React.FC = () => {
     // Orchestrator Decision: Backend /ats-score is the Source of Truth
     const result = await analysisService.getATSScore(resumeText, jobDescription);
 
+    // Persist to store so score survives page refresh
+    setAtsRawResult(result);
+    storeAtsResult(SESSION_ASSET_ID, {
+      overallScore: result.overallScore,
+      keywordMatch: result.breakdown?.keywordDensityScore ?? 0,
+      semanticScore: result.breakdown?.semanticScore ?? 0,
+      formattingScore: result.breakdown?.formattingScore ?? 0,
+      extractionFlags: result.keywordMatches?.missing ?? [],
+      scoredAt: new Date(),
+    });
+
     // Map AtsScoreResponse to MatchAnalysis (KR Solidarity v6.1)
     return {
       Overall_Fit_Score: result.overallScore,
@@ -207,7 +232,7 @@ export const AnalysisPage: React.FC = () => {
       const result = await analysisService.getStrategy({
         jobUrl,
         resumeText,
-        missingKeywords: atsResult?.keywordMatches.missing,
+        missingKeywords: atsRawResult?.keywordMatches.missing,
       });
       setStrategyResult(result);
       m3Toast.success('Done', 'Resume strategy generated.');
@@ -316,16 +341,16 @@ export const AnalysisPage: React.FC = () => {
                 onUpdate={setCareerData}
               />
             </div>
-          ) : atsResult ? (
+          ) : atsRawResult ? (
             <div className="space-y-6">
               <ATSScoreCard
                 score={{
-                  overallScore: atsResult.overallScore,
-                  summary: atsResult.summary,
-                  breakdown: atsResult.breakdown,
-                  matchedKeywords: atsResult.keywordMatches.matched,
-                  missingKeywords: atsResult.keywordMatches.missing,
-                  recommendations: atsResult.recommendations,
+                  overallScore: atsRawResult.overallScore,
+                  summary: atsRawResult.summary,
+                  breakdown: atsRawResult.breakdown,
+                  matchedKeywords: atsRawResult.keywordMatches.matched,
+                  missingKeywords: atsRawResult.keywordMatches.missing,
+                  recommendations: atsRawResult.recommendations,
                 }}
                 isCalculating={isAnalyzing}
                 documentType="resume"
@@ -334,10 +359,10 @@ export const AnalysisPage: React.FC = () => {
               <AuditDisplay
                 title="Resume"
                 audit={{
-                  overallScore: atsResult.overallScore,
+                  overallScore: atsRawResult.overallScore,
                   scanSimulation:
                     "The recruiter's eye is drawn to your skills section first. Ensure your core competencies are prominent.",
-                  violations: atsResult.categories.flatMap((c) =>
+                  violations: atsRawResult.categories.flatMap((c) =>
                     c.suggestions.map((s) => ({
                       ruleId: c.name,
                       severity:
@@ -349,18 +374,18 @@ export const AnalysisPage: React.FC = () => {
                       message: s,
                     }))
                   ),
-                  recommendations: atsResult.categories.flatMap((c) => c.suggestions),
+                  recommendations: atsRawResult.categories.flatMap((c) => c.suggestions),
                 }}
               />
 
               <SuggestionsPanel
                 score={{
-                  overallScore: atsResult.overallScore,
-                  summary: atsResult.summary,
-                  breakdown: atsResult.breakdown,
-                  matchedKeywords: atsResult.keywordMatches.matched,
-                  missingKeywords: atsResult.keywordMatches.missing,
-                  recommendations: atsResult.recommendations,
+                  overallScore: atsRawResult.overallScore,
+                  summary: atsRawResult.summary,
+                  breakdown: atsRawResult.breakdown,
+                  matchedKeywords: atsRawResult.keywordMatches.matched,
+                  missingKeywords: atsRawResult.keywordMatches.missing,
+                  recommendations: atsRawResult.recommendations,
                 }}
                 documentType="resume"
               />
@@ -418,7 +443,7 @@ export const AnalysisPage: React.FC = () => {
             </Placard>
           )}
 
-          {(strategyResult || atsResult) && (
+          {(strategyResult || atsRawResult) && (
             <AiOutputsTabs
               criteria={aiCriteria}
               resumeKeywords={resumeKeywords}

@@ -46,9 +46,7 @@ export class PerplexityDocumentStore implements DocumentStore {
   /**
    * Write: guard against hallucinations, then delegate to base store.
    */
-  async createDocument(
-    doc: Omit<Document, 'id' | 'createdAt' | 'updatedAt'>
-  ): Promise<Document> {
+  async createDocument(doc: Omit<Document, 'id' | 'createdAt' | 'updatedAt'>): Promise<Document> {
     // Guard: validate all fields before writing
     guardAgainstHallucinations(doc);
 
@@ -114,24 +112,25 @@ Provide a concise summary of this document in 2-3 sentences. Focus on key insigh
         method: 'POST',
         headers: {
           Authorization: `Bearer ${this.perplexityApiKey}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           model: 'sonar',
           messages: [
             {
               role: 'system',
-              content: 'You are a helpful assistant that provides concise, actionable summaries of documents.'
+              content:
+                'You are a helpful assistant that provides concise, actionable summaries of documents.',
             },
             {
               role: 'user',
-              content: prompt
-            }
+              content: prompt,
+            },
           ],
           max_tokens: 500,
           temperature: 0.7,
-          top_p: 0.9
-        })
+          top_p: 0.9,
+        }),
       });
 
       if (!response.ok) {
@@ -142,13 +141,15 @@ Provide a concise summary of this document in 2-3 sentences. Focus on key insigh
         return this.baseStore.summarize(documentId);
       }
 
-      const data = await response.json() as any;
+      const data = (await response.json()) as any;
       const summary = data.choices?.[0]?.message?.content || '';
 
       return summary || 'Summary unavailable';
     } catch (error) {
       // Network error or other failure: fall back to base store
-      console.warn(`Perplexity request failed: ${String(error)}, falling back to base store summary`);
+      console.warn(
+        `Perplexity request failed: ${String(error)}, falling back to base store summary`
+      );
       // Note: documentId isn't in scope here, but we can't call baseStore.summarize without it
       // In production, pass documentId as a parameter or store it as a field
       return `Error getting summary: ${String(error)}`;

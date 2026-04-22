@@ -27,9 +27,7 @@ export class PerplexityValidationError extends Error {
  * Throws PerplexityValidationError if any constraint violated.
  * Returns updates unchanged if validation passes.
  */
-export function guardAgainstHallucinations(
-  updates: Partial<Document>
-): Partial<Document> {
+export function guardAgainstHallucinations(updates: Partial<Document>): Partial<Document> {
   // Validate status
   if (updates.status !== undefined) {
     const validStatuses: Array<Document['status']> = ['draft', 'active', 'archived'];
@@ -48,7 +46,7 @@ export function guardAgainstHallucinations(
       'decision',
       'spec',
       'guide',
-      'note'
+      'note',
     ];
     if (!validCategories.includes(updates.category)) {
       throw new PerplexityValidationError(
@@ -88,10 +86,7 @@ export function guardAgainstHallucinations(
   // Validate title length
   if (updates.title !== undefined) {
     if (typeof updates.title !== 'string') {
-      throw new PerplexityValidationError(
-        `Invalid title: must be a string`,
-        'title'
-      );
+      throw new PerplexityValidationError(`Invalid title: must be a string`, 'title');
     }
 
     if (updates.title.length > 500) {
@@ -105,10 +100,7 @@ export function guardAgainstHallucinations(
   // Validate content length
   if (updates.content !== undefined) {
     if (typeof updates.content !== 'string') {
-      throw new PerplexityValidationError(
-        `Invalid content: must be a string`,
-        'content'
-      );
+      throw new PerplexityValidationError(`Invalid content: must be a string`, 'content');
     }
 
     if (updates.content.length > 50000) {
@@ -132,7 +124,7 @@ export function validateDocument(doc: Document): Document {
     category: doc.category,
     atsScore: doc.atsScore,
     title: doc.title,
-    content: doc.content
+    content: doc.content,
   });
 
   return doc;
