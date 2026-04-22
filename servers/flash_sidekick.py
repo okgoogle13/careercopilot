@@ -38,8 +38,8 @@ try:
     # Explicitly load .env from project root
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
-    env_path = os.path.join(project_root, '.env')
-    load_dotenv(env_path, override=True)
+    for env_name in ('.env.mcp', '.env'):
+        load_dotenv(os.path.join(project_root, env_name), override=True)
 except ImportError:
     pass
 
@@ -52,9 +52,10 @@ logging.basicConfig(
 logger = logging.getLogger("FlashSidekick")
 
 # Initialize Sentry
-if os.getenv("SENTRY_DSN"):
+sentry_dsn = os.getenv("SENTRY_DSN")
+if sentry_dsn and sentry_dsn.startswith("http") and not sentry_dsn.startswith("${"):
     sentry_sdk.init(
-        dsn=os.getenv("SENTRY_DSN"),
+        dsn=sentry_dsn,
         send_default_pii=True,
         traces_sample_rate=1.0,
         profiles_sample_rate=1.0,
@@ -110,11 +111,11 @@ _models_cache = {}
 
 # Candidates
 # Verified available models from list_models()
-FAST_CANDIDATES = ["models/gemini-2.0-flash", "models/gemini-1.5-flash"]
+FAST_CANDIDATES = ["models/gemini-3-flash-preview", "models/gemini-2.0-flash", "models/gemini-1.5-flash"]
 env_fast = os.getenv("GEMINI_MODEL")
 if env_fast and env_fast not in FAST_CANDIDATES: FAST_CANDIDATES.insert(0, env_fast)
 
-PRO_CANDIDATES = ["models/gemini-2.0-pro-exp-02-05", "models/gemini-1.5-pro"]
+PRO_CANDIDATES = ["models/gemini-2.5-pro", "models/gemini-2.0-pro-exp-02-05", "models/gemini-1.5-pro"]
 env_pro = os.getenv("GEMINI_PRO_MODEL")
 if env_pro and env_pro not in PRO_CANDIDATES: PRO_CANDIDATES.insert(0, env_pro)
 
@@ -161,8 +162,7 @@ async def _call_gemini_async(engine_type, prompt, sys_instruct="", use_search=Fa
             full = f"System: {sys_instruct}\n\nUser: {prompt}"
             runtime_tools = []
             if use_search:
-                from google.generativeai.types import Tool, GoogleSearchRetrieval
-                runtime_tools = [Tool(google_search_retrieval=GoogleSearchRetrieval())]
+                runtime_tools = [{"google_search_retrieval": {}}]
 
             gen_config = {}
             if json_mode:
@@ -212,7 +212,7 @@ async def _analyze_image_async(image_path: str, prompt: str, sys_instruct: str =
     loop = asyncio.get_event_loop()
 
     def blocking_call():
-        model = _get_model(FAST_CANDIDATES) 
+        model = _get_model(FAST_CANDIDATES)
         if not model: return None
         try:
             if not os.path.exists(image_path):
@@ -383,17 +383,17 @@ async def catalog_assets_task(args):
         logger.info(f"Processing {filename}...")
 
         prompt = """
-        Analyze this asset for the Northcote catalog.
+        Analyze this asset for the legacy Curio catalog under current KR Solidarity rules.
         1. Identify type (motif, texture, pattern, icon).
         2. Determine mode (gallery vs laboratory) - Gallery is high-art, Lab is technical/schematic.
         3. Suggest a filename following: {type}-{mode}-{category}-{variant}.png
         4. Extract dominant colors and dimensions.
-        5. Check compliance with Northcote Design Philosophy.
+        5. Check compliance with the current KR Solidarity canon and flag deprecated Northcote Curio traits.
 
-        Return JSON with keys: original_path, suggested_name, mode, category, dimensions, dominant_colors, compliance (object with northcote_philosophy boolean), duplicate_of (null if new).
+        Return JSON with keys: original_path, suggested_name, mode, category, dimensions, dominant_colors, compliance (object with kr_solidarity_canon boolean and deprecated_northcote_curio_traits boolean), duplicate_of (null if new).
         """
 
-        result_json = await _analyze_image_async(file_path, prompt, sys_instruct=f"You are the Northcote Design System Sidekick.\n{design_philosophy}")
+        result_json = await _analyze_image_async(file_path, prompt, sys_instruct=f"You are the KR Solidarity asset sidekick. Treat Northcote Curio references as deprecated legacy context.\n{design_philosophy}")
 
         if result_json:
             try:
@@ -401,7 +401,7 @@ async def catalog_assets_task(args):
                 if cleaned_json.startswith("```json"):
                     cleaned_json = cleaned_json[7:]
                 if cleaned_json.startswith("```"):
-                    cleaned_json = cleaned_json.strip("`") 
+                    cleaned_json = cleaned_json.strip("`")
                 if cleaned_json.endswith("```"):
                     cleaned_json = cleaned_json[:-3]
 

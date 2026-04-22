@@ -1,0 +1,9 @@
+{
+  "wireframe_id": "06_lookout",
+  "wireframe_path": ".claude/wireframes/06_lookout.xml",
+  "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/OpportunitiesDiscovery.tsx",
+  "screen_component_path": "frontend/src/screens/06_opportunities/OpportunitiesDiscovery.tsx",
+  "route": "/opportunities",
+  "notes": "Paired package for wireframe-to-TSX comparison. Runtime canonical route is /opportunities.",
+  "local_wireframe_path": "frontend/src/screens/06_opportunities/06_opportunities.wireframe.xml"
+}

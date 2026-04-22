@@ -230,7 +230,7 @@ export const hoverEffects = {
   glow: {
     transition: shadowTransitions.hover,
     '&:hover': {
-      boxShadow: '0 0 24px rgba(168, 85, 247, 0.3)',
+      boxShadow: '0 0 24px color-mix(in srgb, var(--kr-color-ink-gold-base) 30%, transparent)',
     },
   },
 
@@ -260,7 +260,8 @@ export const focusEffects = {
 
   ring: {
     '&:focus-visible': {
-      boxShadow: '0 0 0 3px rgba(168, 85, 247, 0.1), 0 0 0 5px rgba(168, 85, 247, 0.3)',
+      boxShadow:
+        '0 0 0 3px color-mix(in srgb, var(--kr-color-ink-gold-base) 10%, transparent), 0 0 0 5px color-mix(in srgb, var(--kr-color-ink-gold-base) 30%, transparent)',
     },
   },
 

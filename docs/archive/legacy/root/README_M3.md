@@ -1,6 +1,6 @@
 # M3 Design System Documentation Index
 
-**Last Updated**: 2026-01-03  
+**Last Updated**: 2026-01-03
 **Status**: Week 1 Complete - 88-90% Compliance ✅
 
 ---
@@ -8,7 +8,7 @@
 ## 📚 Quick Navigation
 
 ### 🚀 **START HERE**
-**[M3 Implementation Guide](./M3_IMPLEMENTATION_GUIDE.md)** ⭐  
+**[M3 Implementation Guide](./M3_IMPLEMENTATION_GUIDE.md)** ⭐
 Visual guide showing what was done, before/after comparisons, and how to use new components.
 
 ---
@@ -151,7 +151,7 @@ Complete M3 token definitions:
   ```tsx
   import { ThemeProvider } from '@mui/material/styles';
   import { m3Theme } from './theme/mui-theme';
-  
+
   <ThemeProvider theme={m3Theme}>
     <App />
   </ThemeProvider>
@@ -191,7 +191,7 @@ Complete M3 token definitions:
 ### Week 2 (Upcoming)
 - **Goal**: 88% → 95%
 - **Estimated**: 4 hours
-- **Tasks**: 
+- **Tasks**:
   - Extend component library
   - Final refinements
   - Documentation & testing
@@ -312,16 +312,16 @@ frontend/src/
 
 ## ❓ FAQ
 
-**Q: Do I need to replace all MUI components?**  
+**Q: Do I need to replace all MUI components?**
 A: No! The MUI theme configuration makes existing MUI components use M3 tokens automatically. But for maximum control and 100% compliance, use M3 components where possible.
 
-**Q: Can I mix MUI and M3 components?**  
+**Q: Can I mix MUI and M3 components?**
 A: Yes! They work together seamlessly thanks to the shared theme.
 
-**Q: What if I need a component that doesn't exist yet?**  
+**Q: What if I need a component that doesn't exist yet?**
 A: Use the themed MUI component temporarily, or create a new M3 component following the patterns in M3Card/M3Button.
 
-**Q: How do I test the changes?**  
+**Q: How do I test the changes?**
 A: Run `npm run dev`, navigate to `/job-queue`, and visually inspect the [DEPRECATED_STYLE] shapes, colors, and animations.
 
 ---

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, HTMLMotionProps, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 /**
  * SolidarityCardProps
@@ -70,11 +71,7 @@ export const SolidarityCard: React.FC<SolidarityCardProps> = ({
         initial: { opacity: 0, y: 10 },
         animate: { opacity: 1, y: 0 },
         whileHover: variant !== 'active' ? { y: -4, scale: 1.01 } : undefined,
-        transition: {
-          type: 'spring' as const,
-          stiffness: 320,
-          damping: 26,
-        },
+        transition: KrDarkSpring,
       };
 
   return (
@@ -83,7 +80,7 @@ export const SolidarityCard: React.FC<SolidarityCardProps> = ({
       style={{
         backgroundColor:
           variant === 'ghost' ? 'transparent' : 'var(--sys-color-charcoalBackground-base)',
-        borderRadius: 'var(--shape-placardTorn01)', // Placard archetype asymmetric radius
+        borderRadius: 'var(--sys-shape-placardTorn01)', // Placard archetype asymmetric radius
         boxShadow:
           variant === 'standard'
             ? '0 4px 16px rgba(0, 0, 0, 0.25)'

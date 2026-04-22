@@ -1,94 +1,199 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 > **Output**: Code first. No preamble.
 
 <output_constraints>
-- NO PREAMBLE: Skip all introductory phrases, conversational fillers, and verbose status updates. Lead with direct action verbs.
-- NO UNNECESSARY REPORTS: DO NOT generate comprehensive markdown reports summarizing your tasks unless explicitly instructed by the user. Status updates must be kept strictly under 2 sentences.
-- TOKEN GUARDIAN ACTIVE: You must adhere to the rules in `.claude/TOKEN_GUARDIAN.md`. Track token usage and mandate sidekick routing if usage exceeds 80%.
-- PLAN LOCATION: **ALWAYS** save implementation plans to `/Users/okgoogle13/Projects/careercopilot/.claude/plans/`. NEVER save plans to worktree directories or global user home folder.
-- REPORT LOCATION: Save reports and documentation to `.claude/reports/` within the project repository.
+- NO PREAMBLE: Skip all introductory phrases and verbose status updates. Lead with direct action verbs.
+- NO UNNECESSARY REPORTS: Status updates strictly under 2 sentences. Only generate markdown reports if explicitly requested.
+- PLAN LOCATION: Save implementation plans to `docs/project/active/plans/`. **This overrides any superpowers skill default** — do not use `.claude/plans/` or `docs/superpowers/plans/`.
+- REPORT LOCATION: Save reports and documentation to `.claude/reports/`. Handovers go to `docs/project/active/handovers/`.
 </output_constraints>
+
+## Planning Governance
+
+Four canonical surfaces. No others without explicit approval.
+
+| Surface | File | Rule |
+|---|---|---|
+| Repo instructions | `CLAUDE.md` | Evergreen only. Keep under 200 lines. |
+| Sprint brief | `SPRINT_BRIEF.md` | One file. Replace, don't multiply. |
+| Task queue | `TASKS.md` + `dashboard.html` | One task board. No shadow trackers. |
+| Decision log | `DECISIONS.md` | Short entries: what, why, tradeoff, follow-up. |
+| Velocity log | `SPRINT_LOG.md` | One row per sprint close. |
+
+**Rules:**
+- Do not create new `.md` planning files without user approval
+- Do not create parallel sprint plans, status trackers, or strategy notes
+- Every kept artifact must drive execution, report status, or record a durable decision
+- `dashboard.html` is the status view — open locally in browser, reads/writes `TASKS.md`
+- `SPRINT_LOG.md` updated at sprint close only (tasks planned vs done + notes)
+- Codex and Claude Code both operate off `TASKS.md` directly
 
 ---
 
-## Stack
+## Technical Stack
+
 - **Frontend**: React 18 + TS + Vite + Tailwind v4 + Zustand + TanStack Query
 - **Backend**: FastAPI + SQLAlchemy + Genkit + Python 3.10+
-- **Cloud**: GCP us-central1 · Firebase · Cloud Run
-- **Design**: **KR Solidarity v6.1** (M3 Expressive)
+- **Cloud**: GCP (us-central1) · Firebase · Cloud Run
+- **Design**: **KR Solidarity v6.0** (M3 Expressive)
 - **Tests**: Jest, Playwright (e2e), pytest
 
 ---
 
-## Task Delegation (Token Conservation) ⚡
+## Workspace Commands
 
-**RULE: Default to delegation via the task-router MCP, NOT local execution.**
+```bash
+# Frontend
+cd frontend && yarn dev        # dev server
+cd frontend && yarn test       # Jest
+cd frontend && yarn build      # production build
+python3 scripts/build-m3-tokens.py  # rebuild CSS vars from tokens.json
 
-- **Delegate Heavy Tasks**:
-  - Test generation (>50 lines), security/coverage analysis, refactoring, report generation, documentation.
-  - If it takes >15K tokens or is an autonomous task, DELEGATE to the `task-router` MCP server (e.g., use the `create_task` tool to assign tasks to other agents like `gemini` or `flash-sidekick`).
-- **Keep Local**:
-  - Code review, bug fixes with architectural decisions, git operations, and integration/deployment.
-- **Token Budget Target**:
-  - Max 150K per sprint (Claude Code).
-  - Use Sidekick tools aggressively to preserve tokens per `.claude/TOKEN_GUARDIAN.md`.
+# Backend
+cd backend && source venv/bin/activate
+uvicorn app.main:app --reload --port 8000
+pytest
+```
 
----
-
-## Workspace Structure & Quick Commands
-
-- **Frontend**: `cd frontend` -> `yarn dev`, `yarn test`, `yarn build`.
-  - UI Primitives: `src/components/ui/`
-  - Design Tokens: `src/design/tokens/tokens.json` (Source of truth, DTCG format)
-- **Backend**: `cd backend && source venv/bin/activate` -> `uvicorn app.main:app --reload --port 8000`, `pytest`.
-- **Scripts**: Run `python3 scripts/build-m3-tokens.py` to rebuild CSS variables from `tokens.json`.
+**Key paths:**
+- UI primitives: `frontend/src/components/ui/`
+- Design tokens (source of truth): `frontend/src/design/tokens/tokens.json`
 
 ---
 
-## Design System: KR Solidarity v6.1 (M3 Expressive)
+## Routing Conventions
 
-**Strict Rules**:
-- **Zero-Flora Lockdown**: Absolutely NO flora or Australian endemic fauna.
-- **Dark-only territory**: No white backgrounds. All backgrounds use `--sys-color-charcoalBackground-base`.
-- **No generic shapes**: Use asymmetric `shape.*` radii tokens (e.g. `shape.blockRiot03`).
-- **Semantic Colors Only**: Use `--sys-color-{name}-base` variable tokens for assignments.
-- **Extreme Contrast**: Variable fonts (`Work Sans`, `Fraunces`, `Libre Bodoni`, `JetBrains Mono`, `Caveat`, `Nabla`) with strict optical sizing and 9x weight ratios.
+**Single source of truth**: `frontend/src/config/route-registry.ts` — every route lives here. `App.tsx` and `routeModeMap.ts` derive from it; no manual duplication.
 
-### Canonical Archetypes (v6.1) & Gold Standard Components
-*Note: Pebble, Stone, Slab, Jar, Lens, and Cabinet are deprecated.*
+**Import alias pattern** (in `App.tsx`):
+```ts
+import { ComponentName as RouteName } from './features/feature/ComponentName';
+// e.g. import { Dashboard as DashboardPage } from './features/dashboard/Dashboard';
+```
 
+**Route entry shape**:
+```ts
+{ path, name, auth, layout: 'public' | 'migrated' | 'protected', mode: 'KrDark', screenId?, apiDeps[], prototype? }
+```
+
+**Layout tiers**:
+| Layout | Shell | Use for |
+|---|---|---|
+| `public` | None | Landing, auth, dev tools |
+| `migrated` | `MigratedRouteLayout` | All production screens |
+| `protected` | `ProtectedLayout` (legacy sidebar) | Support-only surfaces |
+
+**Rules**:
+- Production routes source from `features/`, not `components/` or `pages/`
+- Prototype routes go under `/prototype/*` with `prototype: true`
+- `screenId` must match `screens/NN_name/` directory if one exists
+- CI enforced via `tools/ci/check-route-integrity.ts` and `check-screen-pairs.ts`
+
+---
+
+## Figma MCP Workflow
+
+**URL parsing** — extract `fileKey` and `nodeId`:
+```
+figma.com/design/:fileKey/:name?node-id=:nodeId   ← convert "-" to ":" in nodeId
+figma.com/board/:fileKey/:name                     ← FigJam, use get_figjam
+figma.com/design/:fileKey/branch/:branchKey/...   ← use branchKey as fileKey
+```
+
+**Design-to-code steps**:
+1. `get_design_context(fileKey, nodeId)` — primary tool; returns code + screenshot + hints
+2. Adapt output to project stack (React + Tailwind v4 + KR Solidarity tokens)
+3. Map CSS vars from Figma into the repo’s canonical semantic KR token surface (`--kr-*`)
+4. Replace raw hex / absolute positioning with semantic tokens and KR archetypes
+
+**Dev Mode**:
+- Use `get_design_context` with dev mode node IDs for spec-accurate measurements
+- Code Connect mappings: `get_code_connect_map` / `send_code_connect_mappings`
+- Design system search: `search_design_system` before creating new components
+
+**Never**: raw hex colours, white backgrounds, Australian native plants, generic shapes.
+
+---
+
+## Design System: KR Solidarity v6.0
+
+**Hard rules**:
+- **Dark-only**: all backgrounds → canonical `--kr-color-charcoal-background-*`
+- **Semantic colours only**: canonical `--kr-*` CSS variables
+- **Selective Flora/Fauna Rule**: allow diaspora or non-Australian flora plus intentional cultural fauna such as elephants; ban Australian native flora and Australian endemic fauna
+- **No generic shapes**: use asymmetric `shape.*` tokens
+
+**Archetypes**:
 | Archetype | Component | Shape Token | Role |
-| --- | --- | --- | --- |
-| **Strike** | `Strike.tsx` | `shape.blockRiot03` | Primary active buttons, decisive actions. |
-| **Placard** | `Placard.tsx` | `shape.placardTorn01` | Content containers, opportunity logic feeds. |
-| **Scaffold** | `ScaffoldInput.tsx` / `ScaffoldArea.tsx` | `shape.blockRiot02` | Immutable structural layout framing, inputs. |
-| **March** | `March.tsx` | `shape.blockRiot01` -> `pebbleSurge01` | Sequential select flows, collective progress. |
-| **Megaphone** | `Megaphone.tsx` | `shape.megaphoneCut01` | Modals, intense announcement focus. |
+|---|---|---|---|
+| Strike | `Strike.tsx` | `shape.blockRiot03` | Primary active buttons |
+| Placard | `Placard.tsx` | `shape.placardTorn01` | Content containers/feeds |
+| Scaffold | `ScaffoldInput.tsx` | `shape.blockRiot02` | Structural framing |
+| March | `March.tsx` | `shape.blockRiot01` | Sequential select flows |
+| Megaphone | `Megaphone.tsx` | `shape.megaphoneCut01` | High-intensity modals |
 
-**Component Source**: `frontend/src/components/ui/*.tsx`
-
-### Sources of Truth
-1. **Canon**: `docs/design/01_CANON.md` (Identity, Rules)
-2. **System**: `docs/design/02_SYSTEM.md` (Palette, Typography)
-3. **Components**: `docs/design/03_COMPONENTS.md` (Archetypes)
-4. **Assets**: `docs/design/04_ASSETS.md`
-5. **Tokens**: `frontend/src/design/tokens/tokens.json`
+**Variable fonts**: `Work Sans`, `Fraunces`, `Libre Bodoni`, `JetBrains Mono` — 9× weight ratios.
 
 ---
 
-## Design Workflow (Design Workflow 2026)
+## Model Ladder
 
-Follow `/.agent/workflows/design-workflow-2026.md` and use available skills:
-- `/figma-to-page`
-- `/kr-svg`
-- `/ui-design-evaluator`
-- `/m3-expressive-ui-evaluator`
-- `/kerala-rage-brand-enforcer`
-- `/token-orchestrator`
-- `/wireframe-annotator`
+| Model | Use for |
+|---|---|
+| Haiku | Inventory, classification, presence checks, PM/status reshaping |
+| Sonnet | Most implementation (multi-file edits, validation scripts, per-screen parity) |
+| Opus | Architectural decisions, route-promotion decisions, final go/no-go |
 
 ---
-*Tokens are law. Semantic CSS variables are truth. Zero-Flora enforced.*
+
+## Code Review Standards
+
+- Functions > 30 lines: likely doing too much
+- Logic duplicated > 2×: extract to utility
+- No `any` in TypeScript
+- Async operations must have catch/error handling
+- Components with > 3 props: group into an object if logical
+
+Run `/simplify` before presenting code results.
+- Think before coding: state assumptions, surface tradeoffs, ask before implementing
+- Simplicity first: minimum code that solves the problem — no speculative features
+- Surgical changes: touch only what the request requires; don't improve adjacent code
+- Goal-driven: define verifiable success criteria before starting multi-step tasks
+
+---
+*Semantic CSS variables are truth. Follow the selective flora/fauna canon in `docs/design/01_CANON.md`.*
+
+---
+
+## Memory (Hot Cache)
+
+### Me
+Jonas Dougall — solo founder, lead engineer + designer on CareerCopilot.
+
+### People
+| Who | Role |
+|-----|------|
+→ Full profiles: memory/people/
+
+### Terms
+| Term | Meaning |
+|------|---------|
+| KR Solidarity | Design system v6.1, M3 Expressive, dark-only |
+| canonical shell | Sidebar + page chrome header + content frame, stable node IDs |
+| sync-contract | `figma-sync-order.json` + `figma-agent-tasks.md` — Figma↔code mapping source of truth |
+| redirect-history | Legacy route aliases — traceability only, not active product surfaces |
+| node ID | Figma frame identifier used for code targeting (e.g. `1:4411`) |
+| route family | Group of related routes (e.g. `/applications` = `/tracker` + `/kanban`) |
+→ Full glossary: memory/glossary.md
+
+### Projects
+| Name | What |
+|------|------|
+| **CareerCopilot** | AI job application assistant — Figma-to-code convergence phase |
+→ Details: memory/projects/
+
+### Preferences
+- Terse, action-first. No preamble. Code first.
+- Plans → `docs/project/active/plans/` · Handovers → `docs/project/active/handovers/` · Reports → `.claude/reports/`
+- No broad Figma-to-code until sync-contract repair + shared shell anchors done

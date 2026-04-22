@@ -1,11 +1,6 @@
 {
-  "$schema": "https://design-tokens.org/schema.json",
-  "name": "kerala-rage kr-solidarity Motion Library",
-  "version": "1.0.0",
-  "description": "Comprehensive motion token library quantifying 'Viscous Breeze' physics for kr-dark and kr-dark modes",
   "motion": {
     "physics": {
-      "$description": "Spring physics parameters for natural, physics-based animations",
       "kr-dark": {
         "stiffness": {
           "$value": 500,
@@ -28,16 +23,16 @@
           "$description": "Initial velocity"
         }
       },
-      "kr-dark": {
+      "standard": {
         "stiffness": {
           "$value": 800,
           "$type": "number",
-          "$description": "kr-dark mode spring stiffness — precise, controlled"
+          "$description": "Standard mode spring stiffness — precise, controlled"
         },
         "damping": {
           "$value": 40,
           "$type": "number",
-          "$description": "kr-dark mode damping — minimal overshoot, clinical precision"
+          "$description": "Standard mode damping — minimal overshoot, clinical precision"
         },
         "mass": {
           "$value": 1,
@@ -52,40 +47,38 @@
       }
     },
     "easing": {
-      "$description": "Cubic bezier easing curves for different motion personalities",
       "viscous": {
-        "$value": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        "$value": "0.34, 1.56, 0.64, 1",
         "$type": "cubicBezier",
-        "$description": "Viscous Breeze — kr-dark mode primary, gentle overshoot"
+        "$description": "Viscous Breeze — kr-dark mode primary"
       },
       "precise": {
-        "$value": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        "$value": "0.25, 0.46, 0.45, 0.94",
         "$type": "cubicBezier",
-        "$description": "kr-dark mode — no overshoot, controlled"
+        "$description": "kr-dark mode — no overshoot"
       },
       "settle": {
-        "$value": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        "$value": "0.25, 0.46, 0.45, 0.94",
         "$type": "cubicBezier",
-        "$description": "Finding rest position, smooth deceleration"
+        "$description": "Finding rest position"
       },
       "snap": {
-        "$value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "$value": "0.4, 0, 0.2, 1",
         "$type": "cubicBezier",
-        "$description": "Quick, decisive movements"
+        "$description": "Quick movements"
       },
       "elastic": {
-        "$value": "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+        "$value": "0.68, -0.55, 0.265, 1.55",
         "$type": "cubicBezier",
-        "$description": "Pronounced bounce — kr-dark mode accents only"
+        "$description": "Pronounced bounce"
       },
       "linear": {
-        "$value": "linear",
+        "$value": "0, 0, 1, 1",
         "$type": "cubicBezier",
         "$description": "Reduced motion fallback"
       }
     },
     "duration": {
-      "$description": "Semantic duration scale for consistent timing",
       "instant": {
         "$value": "100ms",
         "$type": "duration",
@@ -118,16 +111,11 @@
       }
     },
     "interactions": {
-      "$description": "Pre-defined interaction patterns for common UI elements",
       "hover": {
         "card": {
           "transform": {
-            "$value": "translateY(-4px)",
+            "$value": "-4px",
             "$type": "string"
-          },
-          "shadow": {
-            "$value": "0 8px 40px rgba(20, 18, 16, 0.6), 0 2px 8px rgba(0, 0, 0, 0.25)",
-            "$type": "shadow"
           },
           "duration": {
             "$value": "{motion.duration.standard}",
@@ -136,16 +124,16 @@
           "easing": {
             "$value": "{motion.easing.viscous}",
             "$type": "cubicBezier"
+          },
+          "shadow": {
+            "$value": "{shadow.card.motion}",
+            "$type": "shadow"
           }
         },
         "button": {
           "scale": {
             "$value": "1.02",
             "$type": "number"
-          },
-          "shadow": {
-            "$value": "0 0 40px rgba(212, 168, 75, 0.15)",
-            "$type": "shadow"
           },
           "duration": {
             "$value": "{motion.duration.fast}",
@@ -154,11 +142,15 @@
           "easing": {
             "$value": "{motion.easing.viscous}",
             "$type": "cubicBezier"
+          },
+          "shadow": {
+            "$value": "{shadow.card.motion}",
+            "$type": "shadow"
           }
         },
         "link": {
           "color": {
-            "$value": "{color.primary.inkGlow}",
+            "$value": "#D4A84B",
             "$type": "color"
           },
           "underlineOffset": {
@@ -182,7 +174,7 @@
             "$type": "number"
           },
           "shadow": {
-            "$value": "0 2px 8px rgba(20, 18, 16, 0.4)",
+            "$value": "{shadow.card.motion}",
             "$type": "shadow"
           },
           "duration": {
@@ -216,11 +208,11 @@
       "focus": {
         "input": {
           "ring": {
-            "$value": "0 0 0 3px rgba(212, 168, 75, 0.3)",
+            "$value": "{shadow.card.motion}",
             "$type": "shadow"
           },
           "borderColor": {
-            "$value": "{color.primary.kr-ink-gold}",
+            "$value": "#FFC800",
             "$type": "color"
           },
           "duration": {
@@ -234,7 +226,7 @@
         },
         "button": {
           "ring": {
-            "$value": "0 0 0 3px rgba(212, 168, 75, 0.3)",
+            "$value": "{shadow.card.motion}",
             "$type": "shadow"
           },
           "duration": {
@@ -257,13 +249,13 @@
             "$value": "0.9",
             "$type": "number"
           },
-          "shadow": {
-            "$value": "0 16px 48px rgba(20, 18, 16, 0.7)",
-            "$type": "shadow"
-          },
           "easing": {
             "$value": "{motion.easing.viscous}",
             "$type": "cubicBezier"
+          },
+          "shadow": {
+            "$value": "{shadow.card.motion}",
+            "$type": "shadow"
           }
         },
         "modal": {
@@ -306,11 +298,11 @@
           },
           "transform": {
             "from": {
-              "$value": "translateY(24px)",
+              "$value": "24px",
               "$type": "string"
             },
             "to": {
-              "$value": "translateY(0)",
+              "$value": "0px",
               "$type": "string"
             }
           },
@@ -326,7 +318,6 @@
       }
     },
     "modeSpecific": {
-      "$description": "Mode-specific motion overrides",
       "kr-dark": {
         "defaultEasing": {
           "$value": "{motion.easing.viscous}",
@@ -341,7 +332,7 @@
           "$type": "boolean"
         }
       },
-      "kr-dark": {
+      "kr-precise": {
         "defaultEasing": {
           "$value": "{motion.easing.precise}",
           "$type": "cubicBezier"
@@ -357,7 +348,6 @@
       }
     },
     "accessibility": {
-      "$description": "Reduced motion support for accessibility",
       "reducedMotion": {
         "duration": {
           "$value": "50ms",

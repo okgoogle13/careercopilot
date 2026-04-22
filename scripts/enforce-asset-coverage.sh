@@ -5,7 +5,7 @@ ROOT="/Users/okgoogle13/Projects/careercopilot"
 cd "$ROOT"
 
 REPORT=".claude/wireframes/placement_report.json"
-MANIFEST="frontend/public/assets/kerala-rage-kr-solidarity-manifest.json"
+MANIFEST="frontend/public/assets/kr-solidarity-manifest.json"
 WIREFRAMES=".claude/wireframes"
 RUNNER=".claude/skills/asset-placement-strategy/scripts/run_asset_placement.py"
 

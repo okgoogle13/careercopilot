@@ -2,8 +2,6 @@
 
 from unittest.mock import ANY, AsyncMock, MagicMock, patch
 
-import pytest
-
 
 class TestIngestDocumentsEndpoint:
     def test_ingest_happy_path(self, client):

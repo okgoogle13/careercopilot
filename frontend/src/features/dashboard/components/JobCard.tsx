@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 interface JobCardProps {
   id: string;
@@ -27,16 +28,16 @@ export const JobCard: React.FC<JobCardProps> = ({
       case 'interview':
         return 'bg-ink text-surface';
       case 'rejected':
-        return 'bg-terracotta text-white';
+        return 'bg-solidarity-red-base text-charcoal-background-base';
       default:
-        return 'bg-surface-container text-white/60';
+        return 'bg-surface-container text-worker-ash-muted';
     }
   };
 
   const getMatchBadgeColor = () => {
     if (matchScore >= 80) return 'bg-sage text-surface';
     if (matchScore >= 60) return 'bg-ink text-surface';
-    return 'bg-terracotta text-white';
+    return 'bg-solidarity-red-base text-charcoal-background-base';
   };
 
   return (
@@ -48,24 +49,21 @@ export const JobCard: React.FC<JobCardProps> = ({
         scale: 1.01,
         y: -4,
       }}
-      transition={{
-        type: 'spring',
-        stiffness: 500,
-        damping: 27,
-      }}
+      transition={KrDarkSpring}
       data-testid={`kanban-card-${id}`}
       style={{
-        backgroundImage: 'radial-gradient(circle, rgba(255, 255, 255, 0.02) 1px, transparent 1px)',
+        backgroundImage:
+          'radial-gradient(circle, color-mix(in srgb, var(--sys-color-paperWhite-base) 2%, transparent) 1px, transparent 1px)',
         backgroundSize: '16px 16px',
       }}
     >
       {/* Header */}
       <div className="mb-4 flex items-start justify-between">
         <div className="flex-1">
-          <h3 className="font-trunk mb-1 text-xl font-black uppercase tracking-tight text-white">
+          <h3 className="font-primary mb-1 text-xl font-black uppercase tracking-tight text-worker-ash-base">
             {jobTitle}
           </h3>
-          <p className="font-leaf text-sm text-white/60">{company}</p>
+          <p className="font-proclamation text-sm text-worker-ash-muted">{company}</p>
         </div>
 
         {/* Match Score Badge */}
@@ -79,12 +77,12 @@ export const JobCard: React.FC<JobCardProps> = ({
       {/* Status Pill */}
       <div className="mb-4 flex items-center gap-2">
         <span
-          className={`inline-block rounded-march px-3 py-1 font-leaf text-xs font-medium capitalize ${getStatusColor()}`}
+          className={`inline-block rounded-march px-3 py-1 font-primary text-xs font-medium capitalize ${getStatusColor()}`}
         >
           {status}
         </span>
         {deadline && (
-          <span className="font-mono text-xs uppercase tracking-wide text-white/40">
+          <span className="font-mono text-xs uppercase tracking-wide text-worker-ash-muted">
             Due: {deadline.toLocaleDateString()}
           </span>
         )}
@@ -94,7 +92,7 @@ export const JobCard: React.FC<JobCardProps> = ({
       {onApply && status === 'applied' && (
         <motion.button
           onClick={onApply}
-          className="w-full rounded-pebble bg-terracotta py-3 font-leaf text-sm font-medium text-white transition-all hover:brightness-110"
+          className="w-full rounded-march bg-solidarity-red-base py-3 font-primary text-sm font-medium text-charcoal-background-base transition-all hover:brightness-110"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >

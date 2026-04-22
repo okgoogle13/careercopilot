@@ -21,12 +21,12 @@ import {
   Placard,
   ScaffoldArea,
   ScaffoldInput,
-  Signal,
   StatusBadge,
   Strike,
   KrIcon,
   Valve,
 } from '../../components/ui';
+import { SolidarityProgress } from '../../components/kerala-rage/SolidarityProgress';
 import { PageHeader } from '../../components/shared/PageHeader';
 import {
   ArchetypeMorphPreviewer,
@@ -38,108 +38,98 @@ import { cn } from '../../lib/utils';
 
 const ARCHETYPE_MATRIX = [
   {
-    archetype: 'Strike',
+    archetype: 'Button (Strike)',
     purpose: 'Primary actions and irreversible commits',
-    base: 'shape.blockRiot03',
-    active: 'shape.blockRiot02',
-    loading: 'shape.blockRiot03-loading',
+    base: '--kr-archetypes-strike-shape-base',
+    active: '--kr-archetypes-strike-shape-active',
+    loading: '--kr-archetypes-strike-shape-loading',
     ambient: '—',
-    motion: 'typeSpringSlam (600ms)',
-    components: 'Strike, KeralaRageButton',
+    motion: 'var(--kr-motion-duration-strike) var(--kr-motion-easing-strike)',
+    components: 'Strike, ActionButton',
   },
   {
-    archetype: 'March',
+    archetype: 'Select (March)',
     purpose: 'Sequential selection and progression controls',
-    base: 'shape.blockRiot01',
-    active: 'shape.marchSurge01',
-    loading: 'shape.blockRiot02',
+    base: '--kr-archetypes-march-shape-base',
+    active: '--kr-archetypes-march-shape-active',
+    loading: '—',
     ambient: '—',
-    motion: 'dragSettle (800ms)',
+    motion: 'var(--kr-motion-duration-march) var(--kr-motion-easing-march)',
     components: 'March',
   },
   {
-    archetype: 'Megaphone',
+    archetype: 'Dialog (Megaphone)',
     purpose: 'Interruption, announcement, priority focus',
-    base: 'shape.megaphoneCut01',
-    active: 'shape.megaphoneCut01',
-    loading: 'shape.megaphoneCut01-loading',
-    ambient: 'shape.substrateTile01',
-    motion: 'typeSpringSlam (600ms)',
-    components: 'Megaphone, Signal',
+    base: '--kr-archetypes-megaphone-shape-base',
+    active: '—',
+    loading: '—',
+    ambient: '—',
+    motion: 'var(--kr-motion-duration-megaphone) var(--kr-motion-easing-megaphone)',
+    components: 'Megaphone',
   },
   {
-    archetype: 'Placard',
+    archetype: 'Card (Placard)',
     purpose: 'Content framing and narrative containers',
-    base: 'shape.placardTorn01',
-    active: 'shape.placardTorn01-selected',
-    loading: 'shape.blockRiot03',
+    base: '--kr-archetypes-placard-shape-base',
+    active: '—',
+    loading: '—',
     ambient: '—',
-    motion: 'dragSettle (800ms)',
+    motion: 'var(--kr-motion-duration-placard) var(--kr-motion-easing-placard)',
     components: 'Placard',
   },
   {
-    archetype: 'Scaffold',
+    archetype: 'Input / Textarea / Panel (Scaffold)',
     purpose: 'Structural layout and form infrastructure',
-    base: 'shape.scaffoldFrame01 / shape.blockRiot02',
+    base: '--kr-archetypes-scaffold-shape-base',
     active: 'immutable',
     loading: 'immutable',
     ambient: '—',
     motion: 'none (static)',
     components: 'ScaffoldInput, ScaffoldArea',
   },
-  {
-    archetype: 'Substrate',
-    purpose: 'Atmospheric background and environmental texture',
-    base: 'shape.substrateTile02',
-    active: '—',
-    loading: '—',
-    ambient: 'shape.substrateTile01',
-    motion: 'waterRipple (3000ms)',
-    components: 'Background motifs only',
-  },
 ] as const;
 
 const COLOR_TOKENS = [
-  { token: '--sys-color-charcoalBackground-base', swatch: '#1A1714', usage: 'substrate' },
-  { token: '--sys-color-worker-ash-base', swatch: '#DAF6B3', usage: 'primary text' },
-  { token: '--sys-color-solidarityRed-base', swatch: '#F14714', usage: 'critical actions' },
-  { token: '--sys-color-inkGold-base', swatch: '#DAF674', usage: 'focus and halo' },
-  { token: '--sys-color-kr-activistSmokeGreen-base', swatch: '#48DA8B', usage: 'success/growth' },
-  { token: '--sys-color-stencilYellow-base', swatch: '#F6E748', usage: 'attention' },
-  { token: '--sys-color-protestMetalBlue-base', swatch: '#48B3DA', usage: 'cool accent' },
-  { token: '--sys-color-concreteGrey-base', swatch: '#A39B8F', usage: 'structure/dividers' },
+  { token: '--kr-color-charcoal-background-base', usage: 'substrate' },
+  { token: '--kr-color-worker-ash-base', usage: 'primary text' },
+  { token: '--kr-color-solidarity-red-base', usage: 'critical actions' },
+  { token: '--kr-color-ink-gold-base', usage: 'focus and halo' },
+  { token: '--kr-color-kr-activist-smoke-green-base', usage: 'success/growth' },
+  { token: '--kr-color-stencil-yellow-base', usage: 'attention' },
+  { token: '--kr-color-protest-metal-blue-base', usage: 'cool accent' },
+  { token: '--kr-color-worker-ash-steps-2', usage: 'structure/dividers' },
 ] as const;
 
 const TYPE_SAMPLES = [
   {
     label: 'Proclamation',
-    familyVar: '--sys-type-fontFamilies-proclamation',
+    familyVar: '--kr-type-font-proclamation',
     fallback: 'Libre Bodoni',
-    sizeVar: '--sys-type-scale-headline',
+    sizeVar: '--kr-type-scale-headline',
     text: 'COLLECTIVE DEMAND',
     style: { fontWeight: 800, letterSpacing: '-0.02em' },
   },
   {
     label: 'Primary UI',
-    familyVar: '--sys-type-fontFamilies-primary',
+    familyVar: '--kr-type-font-families-primary',
     fallback: 'Work Sans',
-    sizeVar: '--sys-type-scale-body',
+    sizeVar: '--kr-type-scale-body',
     text: 'Operational copy optimized for dense interface reading.',
     style: { fontWeight: 500 },
   },
   {
     label: 'Display Editorial',
-    familyVar: '--sys-type-fontFamilies-display',
+    familyVar: '--kr-type-font-families-display',
     fallback: 'Fraunces',
-    sizeVar: '--sys-type-scale-subhead',
+    sizeVar: '--kr-type-scale-subhead',
     text: 'Resistance has a signature rhythm.',
     style: { fontWeight: 700, fontVariationSettings: "'wght' 700, 'wdth' 108" },
   },
   {
     label: 'Field-Note',
-    familyVar: '--sys-type-fontFamilies-mono',
+    familyVar: '--kr-type-font-mono',
     fallback: 'JetBrains Mono',
-    sizeVar: '--sys-type-scale-small',
+    sizeVar: '--kr-type-scale-small',
     text: 'pipeline_status=green  coverage=96  regressions=0',
     style: { fontWeight: 500, letterSpacing: '0.01em' },
   },
@@ -147,12 +137,12 @@ const TYPE_SAMPLES = [
 
 const SPACING_SCALE = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'] as const;
 const SHAPE_TOKENS = [
-  '--sys-shape-blockRiot01',
-  '--sys-shape-blockRiot02',
-  '--sys-shape-blockRiot03',
-  '--sys-shape-marchSurge01',
-  '--sys-shape-megaphoneCut01',
-  '--sys-shape-placardTorn01',
+  '--kr-shape-block-riot01',
+  '--kr-shape-block-riot02',
+  '--kr-shape-block-riot03',
+  '--kr-shape-march-surge01',
+  '--kr-shape-megaphone-cut01',
+  '--kr-shape-placard-torn01',
 ] as const;
 
 const MARCH_OPTIONS = [
@@ -286,14 +276,10 @@ export function StyleGuide() {
                     showDot
                   />
                 </div>
-                <div className="h-1.5 bg-outline-variant rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full bg-primary"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${progress}%` }}
-                    transition={{ type: 'spring', stiffness: 50, damping: 20 }}
-                  />
-                </div>
+                <SolidarityProgress
+                  progress={progress}
+                  color="var(--kr-color-solidarity-red-base)"
+                />
                 <p className="text-[9px] font-mono opacity-40 uppercase text-center">
                   {Math.round(progress)}% Validation Complete
                 </p>
@@ -328,15 +314,15 @@ export function StyleGuide() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-[10px] font-mono uppercase tracking-widest">
               <div className="bg-surface-dim border border-outline rounded-strike p-4 flex flex-col gap-1">
                 <span className="opacity-40">Contract A</span>
-                <span className="text-primary font-bold">typeSpringSlam = 600ms</span>
+                <span className="text-primary font-bold">SLAM = 600ms</span>
               </div>
               <div className="bg-surface-dim border border-outline rounded-strike p-4 flex flex-col gap-1">
                 <span className="opacity-40">Contract B</span>
-                <span className="text-secondary font-bold">dragSettle = 800ms</span>
+                <span className="text-secondary font-bold">SETTLE = 800ms</span>
               </div>
               <div className="bg-surface-dim border border-outline rounded-strike p-4 flex flex-col gap-1">
                 <span className="opacity-40">Contract C</span>
-                <span className="text-tertiary font-bold">waterRipple = 3000ms</span>
+                <span className="text-tertiary font-bold">RIPPLE = 3000ms</span>
               </div>
             </div>
           </section>
@@ -436,7 +422,7 @@ export function StyleGuide() {
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
               <Placard
                 elevation="raised"
-                header={<h3 className="text-title-medium font-black uppercase">Strike Variants</h3>}
+                header={<h3 className="text-title-medium font-black uppercase">Button Variants</h3>}
               >
                 <div className="space-y-6">
                   <div className="flex flex-wrap gap-4">
@@ -444,7 +430,7 @@ export function StyleGuide() {
                       variant="primary"
                       onClick={() => handleInteraction('components')}
                     >
-                      Primary Strike
+                      Primary Button
                     </Strike>
                     <Strike variant="secondary">Secondary</Strike>
                     <Strike variant="ghost">Ghost</Strike>
@@ -472,25 +458,8 @@ export function StyleGuide() {
                 </div>
               </Placard>
 
-              <Placard
-                elevation="raised"
-                header={
-                  <h3 className="text-title-medium font-black uppercase">Status and Signals</h3>
-                }
-              >
+              <Placard elevation="raised">
                 <div className="space-y-4">
-                  <Signal
-                    severity="info"
-                    title="COLLECTIVE SIGNAL"
-                  >
-                    Token synchronization complete. All systems following v6.0.
-                  </Signal>
-                  <Signal
-                    severity="success"
-                    title="GO FOR SHIP"
-                  >
-                    Validation checks are green. Institutional Squelch suppressed.
-                  </Signal>
                   <div className="flex flex-wrap gap-2 pt-2">
                     <StatusBadge
                       label="Ready"
@@ -518,7 +487,9 @@ export function StyleGuide() {
 
               <Placard
                 elevation="raised"
-                header={<h3 className="text-title-medium font-black uppercase">Scaffold Inputs</h3>}
+                header={
+                  <h3 className="text-title-medium font-black uppercase">Input and Textarea</h3>
+                }
               >
                 <div className="space-y-6">
                   <ScaffoldInput
@@ -529,7 +500,7 @@ export function StyleGuide() {
                       setScaffoldInput(e.target.value);
                       handleInteraction('components');
                     }}
-                    helperText="Scaffold archetype is immutable."
+                    helperText="Structural input geometry is immutable."
                     fullWidth
                   />
                   <ScaffoldArea
@@ -550,7 +521,7 @@ export function StyleGuide() {
               <Placard
                 elevation="raised"
                 header={
-                  <h3 className="text-title-medium font-black uppercase">Scaffold Error States</h3>
+                  <h3 className="text-title-medium font-black uppercase">Input Error States</h3>
                 }
               >
                 <div className="space-y-6">
@@ -560,7 +531,7 @@ export function StyleGuide() {
                     value=""
                     error={true}
                     errorMessage="This field is required"
-                    helperText="Scaffold shows error state with red border and alert message"
+                    helperText="Input shows error state with red border and alert message"
                     fullWidth
                   />
                   <ScaffoldArea
@@ -579,7 +550,7 @@ export function StyleGuide() {
               <Placard
                 elevation="raised"
                 header={
-                  <h3 className="text-title-medium font-black uppercase">March and Megaphone</h3>
+                  <h3 className="text-title-medium font-black uppercase">Select and Dialog</h3>
                 }
                 footer={
                   <div className="flex justify-end pt-4">
@@ -587,7 +558,7 @@ export function StyleGuide() {
                       variant="secondary"
                       onClick={() => setShowMegaphone(true)}
                     >
-                      Open Megaphone
+                      Open Dialog
                     </Strike>
                   </div>
                 }
@@ -677,7 +648,7 @@ export function StyleGuide() {
                           className="absolute inset-0 opacity-10 pointer-events-none"
                           style={{
                             backgroundImage:
-                              'repeating-linear-gradient(45deg, var(--sys-color-solidarityRed-base) 0, var(--sys-color-solidarityRed-base) 1px, transparent 0, transparent 10px)',
+                              'repeating-linear-gradient(45deg, var(--kr-color-solidarity-red-base) 0, var(--kr-color-solidarity-red-base) 1px, transparent 0, transparent 10px)',
                           }}
                         />
                       </div>
@@ -751,7 +722,6 @@ export function StyleGuide() {
                         </p>
                         <div className="flex justify-between items-center">
                           <p className="text-[10px] text-on-surface-variant italic">{item.usage}</p>
-                          <p className="text-[10px] font-mono opacity-40">{item.swatch}</p>
                         </div>
                       </div>
                     </motion.div>
@@ -771,13 +741,13 @@ export function StyleGuide() {
                         className="bg-surface-dim border border-outline rounded-pebble p-4 text-xs font-mono group hover:bg-white/5 transition-colors"
                       >
                         <div className="flex justify-between items-center mb-3">
-                          <div className="text-primary font-bold">{`--sys-spacing-${s}`}</div>
+                          <div className="text-primary font-bold">{`--kr-space-${s}`}</div>
                           <Strike
                             size="sm"
                             variant="ghost"
                             className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100"
                             onClick={() => {
-                              navigator.clipboard.writeText(`var(--sys-spacing-${s})`);
+                              navigator.clipboard.writeText(`var(--kr-space-${s})`);
                               toast.success(`Copied spacing token: ${s}`);
                             }}
                           >
@@ -786,7 +756,7 @@ export function StyleGuide() {
                         </div>
                         <div className="flex items-center gap-4">
                           <div
-                            style={{ width: `var(--sys-spacing-${s})` }}
+                            style={{ width: `var(--kr-space-${s})` }}
                             className="h-4 bg-primary rounded-sm shadow-glow-gold/20"
                           />
                           <span className="opacity-30 text-[10px]">{s.toUpperCase()}</span>
@@ -828,8 +798,6 @@ export function StyleGuide() {
                 <div className="text-[10px] font-mono opacity-40 uppercase">
                   Stone & Float Physics v6.0
                 </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="space-y-4">
                   <Placard
                     elevation="flat"
@@ -840,7 +808,7 @@ export function StyleGuide() {
                     </span>
                   </Placard>
                   <div className="text-[10px] font-mono space-y-1 px-2">
-                    <p className="text-secondary font-bold">--sys-elevation0</p>
+                    <p className="text-secondary font-bold">ELEVATION 0</p>
                     <p className="opacity-40 italic">
                       Structural baseline. No shadow. Border only.
                     </p>
@@ -857,37 +825,31 @@ export function StyleGuide() {
                     </span>
                   </Placard>
                   <div className="text-[10px] font-mono space-y-1 px-2">
-                    <p className="text-primary font-bold">--sys-elevation2Placard</p>
+                    <p className="text-primary font-bold">--kr-shadow-elevation2-placard</p>
                     <p className="opacity-40 italic text-on-surface">
                       Standard interactive focus. Stone-like presence.
-                    </p>
-                    <p className="text-[8px] opacity-30 mt-1">
-                      SHADOW: 0 4px 20px -2px rgba(0,0,0,0.4)
                     </p>
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <div className="relative pt-4">
-                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-ink-gold text-charcoalBackground rounded-full text-[8px] font-black z-10 animate-pulse">
+                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-primary text-charcoal-background-base rounded-full text-[8px] font-black z-10 animate-pulse">
                       FLOATING
                     </div>
                     <Placard
                       elevation="floating"
                       className="h-40 flex items-center justify-center bg-white/5 border-primary/20"
                     >
-                      <span className="text-sm font-black uppercase tracking-[0.2em] text-ink-gold drop-shadow-lg">
+                      <span className="text-sm font-black uppercase tracking-[0.2em] text-primary drop-shadow-lg">
                         FLOAT
                       </span>
                     </Placard>
                   </div>
                   <div className="text-[10px] font-mono space-y-1 px-2">
-                    <p className="text-ink-gold font-bold">--sys-elevation4Float</p>
+                    <p className="text-primary font-bold">--kr-shadow-elevation4-float</p>
                     <p className="opacity-40 italic">
                       Modal/Interruption depth. Detached from substrate.
-                    </p>
-                    <p className="text-[8px] opacity-30 mt-1">
-                      SHADOW: 0 15px 45px -10px rgba(0,0,0,0.6)
                     </p>
                   </div>
                 </div>
@@ -1017,15 +979,15 @@ export function StyleGuide() {
           >
             <div className="space-y-6">
               <p className="text-lg font-display leading-snug text-worker-ash-base">
-                This modal demonstrates the <strong>Megaphone archetype</strong> using{' '}
+                This dialog demonstrates the <strong>Megaphone</strong> internal mapping using{' '}
                 <em>typeSpringSlam</em> entry physics.
               </p>
               <div className="p-4 bg-white/5 rounded-strike border border-white/10 space-y-2">
                 <p className="text-[10px] font-mono uppercase opacity-40">Contract Validation</p>
                 <ul className="text-xs space-y-1 text-on-surface-variant">
-                  <li>• Entry: spring(600ms, stiffness 180, damping 15)</li>
-                  <li>• Backdrop: viscous-breeze blur (12px)</li>
-                  <li>• Shape: immutable megaphoneCut01</li>
+                  <li>• Motion: SLAM (var(--kr-archetypes-megaphone-motion-duration))</li>
+                  <li>• Easing: Expressive (var(--kr-archetypes-megaphone-motion-easing))</li>
+                  <li>• Shape: Base (var(--kr-archetypes-megaphone-shape-base))</li>
                 </ul>
               </div>
               <div className="flex justify-end gap-3">

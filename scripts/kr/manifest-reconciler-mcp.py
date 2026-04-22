@@ -13,20 +13,32 @@ from typing import Dict, List, Set
 class ManifestReconciler:
     def __init__(self):
         self.repo_root = Path(__file__).parent.parent.parent
-        self.manifest_path = self.repo_root / 'frontend/public/assets/kerala-rage-kr-solidarity-manifest.json'
-        self.token_map_path = self.repo_root / 'frontend/public/assets/kr-solidarity-hero-token-map.v2.json'
+        self.manifest_path = self.repo_root / 'frontend/public/assets/kr-solidarity-manifest.json'
         self.hero_registry_path = self.repo_root / 'frontend/public/assets/kr-solidarity-hero-registry.json'
+        self.token_map_candidates = [
+            self.repo_root / 'frontend/public/assets/kr-solidarity-hero-token-map.v2.json',
+            self.repo_root / 'frontend/public/assets/kr-solidarity-ui-token-map.json',
+        ]
 
     def load_json(self, path: Path) -> Dict:
         with open(path, 'r') as f:
             return json.load(f)
+
+    def resolve_token_map_path(self) -> Path | None:
+        for candidate in self.token_map_candidates:
+            if candidate.exists():
+                return candidate
+        return None
 
     def get_manifest_ids(self) -> Set[str]:
         manifest = self.load_json(self.manifest_path)
         return {asset['id'] for asset in manifest.get('assets', [])}
 
     def get_token_map_ids(self) -> Set[str]:
-        token_map = self.load_json(self.token_map_path)
+        token_map_path = self.resolve_token_map_path()
+        if token_map_path is None:
+            return set()
+        token_map = self.load_json(token_map_path)
         ids = set()
         for token in token_map.get('tokens', {}).values():
             if token.get('ref'):
@@ -48,8 +60,9 @@ class ManifestReconciler:
     def validate_file_paths(self) -> List[str]:
         """Check if all asset file paths in token map and manifest exist"""
         errors = []
-        token_map = self.load_json(self.token_map_path)
         manifest_data = self.load_json(self.manifest_path)
+        token_map_path = self.resolve_token_map_path()
+        token_map = self.load_json(token_map_path) if token_map_path else {"tokens": {}, "ui_kit_gaps": []}
 
         # Check token map paths
         for token_name, token_data in token_map.get('tokens', {}).items():
@@ -85,6 +98,7 @@ class ManifestReconciler:
         token_map_ids = self.get_token_map_ids()
         hero_registry_ids = self.get_hero_registry_ids()
         disk_paths = self.get_disk_files()
+        token_map_path = self.resolve_token_map_path()
 
         result = {
             'timestamp': str(Path.cwd()),
@@ -94,8 +108,17 @@ class ManifestReconciler:
                 'manifest_assets': len(manifest_ids),
                 'token_map_entries': len(token_map_ids),
                 'hero_registry_refs': len(hero_registry_ids),
+                'token_map_path': str(token_map_path) if token_map_path else None,
             }
         }
+
+        if token_map_path is None:
+            result['status'] = 'invalid'
+            result['issues'].append({
+                'type': 'missing_token_map',
+                'count': 1,
+                'items': [str(candidate) for candidate in self.token_map_candidates],
+            })
 
         # Orphaned references (in hero registry but not in manifest)
         orphaned = hero_registry_ids - manifest_ids - token_map_ids

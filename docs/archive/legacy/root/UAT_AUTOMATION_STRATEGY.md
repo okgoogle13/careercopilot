@@ -1,8 +1,8 @@
 # 🤖 AUTOMATED UAT STRATEGY
 ## Career Database Pre-processor Ingestion Flow
 
-**Version:** 1.0  
-**Last Updated:** 2025-12-26  
+**Version:** 1.0
+**Last Updated:** 2025-12-26
 **Owner:** Engineering Team
 
 ---
@@ -148,7 +148,7 @@ npx playwright test --ui
 test('ValidationDashboard visual regression', async ({ page }) => {
   await page.goto('/career/ingest');
   // ... navigate to dashboard
-  
+
   // Take screenshot
   await expect(page).toHaveScreenshot('validation-dashboard.png');
 });
@@ -399,7 +399,7 @@ npx playwright codegen http://localhost:5173
    - Error: Timeout waiting for suggestion chip
    - Browser: Firefox
    - Screenshot: [View](link)
-   
+
 2. UAT-013: Persistence Check
    - Error: Data not persisted after reload
    - Browser: All
@@ -419,7 +419,7 @@ npx playwright codegen http://localhost:5173
 ## ✅ BEST PRACTICES
 
 ### 1. Test Independence
-✅ **DO:** Each test should be fully independent  
+✅ **DO:** Each test should be fully independent
 ❌ **DON'T:** Rely on previous test state
 
 ```typescript
@@ -438,12 +438,12 @@ test('standalone test', async () => { /* test */ });
 // pages/IngestionPage.ts
 export class IngestionPage {
   constructor(private page: Page) {}
-  
+
   async uploadFile(filePath: string) {
     const fileInput = this.page.locator('input[type="file"]');
     await fileInput.setInputFiles(filePath);
   }
-  
+
   async clickUpload() {
     await this.page.click('button:has-text("Upload & Analyze")');
   }
@@ -536,6 +536,6 @@ CI=true npx playwright test
 
 ---
 
-**Status:** ✅ PRODUCTION READY  
-**Last Review:** 2025-12-26  
+**Status:** ✅ PRODUCTION READY
+**Last Review:** 2025-12-26
 **Next Review:** 2026-01-26

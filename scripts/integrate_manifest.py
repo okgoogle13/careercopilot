@@ -6,8 +6,8 @@ from datetime import datetime
 
 def integrate_manifests(packages_dir):
     root_dir = Path(packages_dir).parent
-    manifest_path = root_dir / 'frontend/public/assets/kerala-rage-kr-solidarity-manifest.json'
-    
+    manifest_path = root_dir / 'frontend/public/assets/kr-solidarity-manifest.json'
+
     if not manifest_path.exists():
         print(f"Error: Global manifest not found at {manifest_path}")
         return
@@ -23,18 +23,18 @@ def integrate_manifests(packages_dir):
     for pkg_dir in sorted(packages_path.iterdir()):
         if not pkg_dir.is_dir() or not pkg_dir.name.startswith('KR-SOLID-'):
             continue
-        
+
         manifest_file = pkg_dir / 'PACKAGING_MANIFEST.json'
         if not manifest_file.exists():
             continue
-            
+
         with open(manifest_file, 'r') as f:
             pkg_manifest = json.load(f)
-            
+
         asset_id = pkg_manifest.get('asset_id')
         if not asset_id:
             continue
-            
+
         # Prepare the entry for the global manifest
         entry = {
             "id": asset_id,
@@ -65,7 +65,7 @@ def integrate_manifests(packages_dir):
             if asset['id'] == asset_id:
                 existing_idx = i
                 break
-        
+
         if existing_idx is not None:
             global_manifest['assets'][existing_idx] = entry
             updated_entries += 1
@@ -76,7 +76,7 @@ def integrate_manifests(packages_dir):
     # Update summary
     global_manifest['total_assets'] = len(global_manifest['assets'])
     global_manifest['last_updated'] = datetime.now().strftime('%Y-%m-%d')
-    
+
     # Sort assets by ID
     global_manifest['assets'].sort(key=lambda x: x['id'])
 
@@ -92,14 +92,14 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python scripts/integrate_manifest.py <packages_dir>")
         sys.exit(1)
-        
+
     if '--validate' in sys.argv:
         print("Validation only mode is not yet implemented in Python integrating script, but validation logic is in JS script")
         sys.exit(0)
-        
+
     packages_dir = sys.argv[1]
     # Filter out any flags if present
     if packages_dir.startswith('--'):
         sys.exit(0)
-        
+
     integrate_manifests(packages_dir)

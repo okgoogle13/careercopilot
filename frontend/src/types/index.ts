@@ -28,3 +28,5 @@ export type {
   ResumeThemeConfig,
   TypographyConfig,
 } from './themeConfig';
+
+export * from './career';

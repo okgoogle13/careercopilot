@@ -10,7 +10,7 @@ CareerCopilot is an AI-powered career management platform designed to automate j
 
 - **Frontend**: Vite-based React application with modern UI components.
 - **Backend API**: Python FastAPI service for AI analysis and data processing.
-- **AI Engine**: Powered by Gemini Pro 2.0 (and Flash) for high-performance job analysis.
+- **AI Engine**: Powered by Gemini 3.0 Pro (and 3.0 Flash) for high-performance job analysis.
 - **Infrastructure**: Fully containerized with Docker and modular architecture.
 
 ## 🚀 Quickstart
@@ -59,6 +59,16 @@ This repository uses a unified MCP configuration for AI-assisted coding.
 | `npm run build` | Build both frontend and functions |
 | `npm run test` | Run frontend test suite |
 | `python3 tools/doctor.py` | Run system health check |
+| `python3 scripts/build-m3-tokens.py` | Rebuild design tokens (CSS/Tailwind) |
+| `python3 scripts/design-validation/validate-tokens.py` | Validate token compliance |
+
+## 🎨 Design System
+
+CareerCopilot uses the **KR Solidarity v6.1 (Gold Standard Edition)** design system.
+
+- **Source**: `frontend/src/design/tokens/tokens.json` (DTCG compliant)
+- **CSS Variables**: `--kr-color-*`, `--kr-type-*`, `--kr-shape-*`
+- **Build**: Tokens are automatically processed into CSS and Tailwind patches during the build phase.
 
 ## Git Lock Recovery
 

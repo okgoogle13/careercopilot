@@ -118,6 +118,8 @@ tools/scripts/workflow/run_northcote_workflow.py
 .claude*/
 !.claude/skills/
 .codex/
+.codex-review/
+codex-skills/
 .windsurf/
 .idx/
 .agent/
@@ -129,6 +131,10 @@ tools/scripts/workflow/run_northcote_workflow.py
 purge/
 _backup_*/
 cleanup_backup_*/
+
+# Nested source snapshots with their own .git history
+docs/project/active/frontend-source-of-truth-migration/sources/prototype_v2.0/
+docs/project/active/frontend-source-of-truth-migration/sources/prototype_v2.0-upstream/
 
 # Python
 **/__pycache__/
@@ -160,8 +166,12 @@ var/
 *.sqlite3
 
 # Logs
+*.log
 pip-log.txt
 pip-delete-this-directory.txt
+*~HEAD
+repomix-output.xml
+style_guide_final.png
 
 # Coverage
 .tox/
@@ -177,3 +187,24 @@ coverage.xml
 .DS_Store
 Thumbs.db
 careercopilot-migration-kit-v3/.yarn/install-state.gz
+
+# Large Figma artifacts
+frontend/KR SOLIDAIRTY FROM FIGMA.make
+frontend/KR Solidarity CAREERCOPILOT.zip
+docs/project/active/frontend-source-of-truth-migration/evidence/KR SOLIDAIRTY FROM FIGMA.make
+docs/project/active/frontend-source-of-truth-migration/evidence/KR Solidarity CAREERCOPILOT.zip
+
+careercopilot_-_CLI_Quickstart-oauth-credentials.txt
+
+# Build artifacts (generated, never commit)
+frontend/dist-extension/
+frontend/dev-dist/
+frontend/coverage/
+frontend/playwright-report/
+frontend/test-results/
+backend/logs/
+.playwright-mcp/
+
+# Temp outputs
+frontend/component-inventory.json
+frontend/component-library.csv

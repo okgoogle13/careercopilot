@@ -1,3 +1,4 @@
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 import { memo } from 'react';
 import { motion } from 'framer-motion';
 import clsx, { type ClassValue } from 'clsx';
@@ -75,9 +76,9 @@ export interface DashboardOverviewProps {
   onSecondaryAction?: () => void;
 }
 
-const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
-const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+const springHero = KrDarkSpring;
+const _springCard = KrDarkSpring;
+const springButton = KrDarkSpring;
 
 export const DashboardOverview = memo(function DashboardOverview({
   className,

@@ -22,7 +22,13 @@ class IngestionService:
     def __init__(self):
         self.vector_store = VectorStore()
 
-    def process_file(self, file_content: bytes, filename: str, source_type: Literal["resume", "cover_letter", "ksc_response"], user_id: str = "legacy_user"):
+    def process_file(
+        self,
+        file_content: bytes,
+        filename: str,
+        source_type: Literal["resume", "cover_letter", "ksc_response"],
+        user_id: str = "legacy_user",
+    ):
         """
         Parses file content and adds it to the vector store.
         """
@@ -47,11 +53,11 @@ class IngestionService:
         chunks = self._semantic_chunking(text)
 
         for chunk in chunks:
-            if len(chunk.strip()) > 50: # Ignore tiny nonsense chunks
+            if len(chunk.strip()) > 50:  # Ignore tiny nonsense chunks
                 artifact = CareerArtifact(
                     content=chunk,
                     source_type=source_type,
-                    source_filename=filename
+                    source_filename=filename,
                     # derived_skills could be added here via a lightweight Gemini call if we wanted active enrichment
                 )
                 self.vector_store.add_artifact(artifact, user_id=user_id)

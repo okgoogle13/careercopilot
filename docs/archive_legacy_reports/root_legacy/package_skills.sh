@@ -8,14 +8,14 @@ for skill_dir in .claude/skills/*/; do
   if [ -f "${skill_dir}SKILL.md" ]; then
     skill_name=$(basename "$skill_dir")
     echo "Packaging $skill_name..."
-    
+
     # Create a temporary directory
     temp_dir=$(mktemp -d)
     cp -r "$skill_dir"* "$temp_dir/"
-    
+
     # Create the .skill file (which is just a zip file)
     (cd "$temp_dir" && zip -r "../../dist/skills/${skill_name}.skill" ./*)
-    
+
     echo "✅ Created dist/skills/${skill_name}.skill"
   fi
 done

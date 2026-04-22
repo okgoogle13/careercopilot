@@ -1,0 +1,84 @@
+{
+  "metadata": {
+    "generated_at": "2026-03-09T03:23:21Z",
+    "source_asset_report": "/Users/okgoogle13/Projects/careercopilot/frontend/public/assets/asset-report.json"
+  },
+  "skill_chain": [
+    {
+      "skill": "compliance-dashboard",
+      "mode": "script",
+      "status": "executed_wrapper"
+    },
+    {
+      "skill": "m3-visual-audit",
+      "mode": "governance_wrapper",
+      "status": "executed"
+    },
+    {
+      "skill": "component-visual-audit",
+      "mode": "governance_wrapper",
+      "status": "executed"
+    },
+    {
+      "skill": "ui-design-evaluator",
+      "mode": "governance_wrapper",
+      "status": "executed"
+    },
+    {
+      "skill": "asset-token-replacer",
+      "mode": "governance_wrapper",
+      "status": "executed"
+    },
+    {
+      "skill": "m3-expressive-token-orchestrator",
+      "mode": "governance_wrapper",
+      "status": "executed"
+    },
+    {
+      "skill": "kerala-rage-brand-enforcer",
+      "mode": "governance_wrapper",
+      "status": "executed"
+    },
+    {
+      "skill": "kerala-rage-typography-strategy",
+      "mode": "governance_wrapper",
+      "status": "executed"
+    },
+    {
+      "skill": "m3-expressive-compliance-dashboard",
+      "mode": "governance_wrapper",
+      "status": "executed"
+    }
+  ],
+  "audits": [
+    {
+      "name": "compliance-dashboard",
+      "status": "executed_wrapper",
+      "source": "compliance-dashboard"
+    }
+  ],
+  "summary": {
+    "hierarchy_pass_rate": 0.94,
+    "noise_pass_rate": 1.0,
+    "token_compliance_rate": 1.0,
+    "overall_pass": true
+  },
+  "decision_log": [
+    {
+      "step": "load_asset_report",
+      "status": "executed"
+    },
+    {
+      "step": "compliance_dashboard",
+      "status": "executed_wrapper"
+    },
+    {
+      "step": "governance_wrappers_4b",
+      "status": "executed"
+    },
+    {
+      "step": "visual_contract_synthesis",
+      "status": "executed"
+    }
+  ]
+}

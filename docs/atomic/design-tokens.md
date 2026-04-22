@@ -37,4 +37,3 @@ Use typography tokens / classes defined in `frontend/src/globals.css`:
 - Avoid hex/rgb values in component styles.
 - Avoid hardcoded `border-radius` and `box-shadow`.
 - Prefer design-system classes and CSS variables.
-

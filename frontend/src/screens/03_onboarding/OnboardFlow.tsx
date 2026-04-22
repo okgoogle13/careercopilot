@@ -1,4 +1,5 @@
-import { memo } from 'react';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
+import { memo, type ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import clsx, { type ClassValue } from 'clsx';
 import { useModeStore } from '../../stores/useModeStore';
@@ -6,7 +7,7 @@ import { useModeStore } from '../../stores/useModeStore';
 type SlotDef = {
   name: string;
   zLayer: 'Z-0' | 'Z-1' | 'Z-2' | 'Z-3';
-  token: `--sys-${string}`;
+  token: `--kr-${string}`;
   assetCompat: `KR-${string}`;
 };
 
@@ -14,19 +15,19 @@ const SLOT_DEFS: SlotDef[] = [
   {
     name: 'step1_background',
     zLayer: 'Z-0',
-    token: '--sys-color-charcoalBackground-base',
+    token: '--kr-color-charcoal-background-base',
     assetCompat: 'KR-SOLID-SUBSTRATE',
   },
   {
     name: 'step1_accent',
     zLayer: 'Z-1',
-    token: '--sys-color-protestMetalBlue-base',
+    token: '--kr-color-protest-metal-blue-base',
     assetCompat: 'KR-SOLID-ATMOS',
   },
   {
     name: 'cta_icon',
     zLayer: 'Z-3',
-    token: '--sys-color-worker-ash-base',
+    token: '--kr-color-worker-ash-base',
     assetCompat: 'KR-SOLID-UIKIT',
   },
 ];
@@ -46,25 +47,29 @@ const slotOpacity: Record<SlotDef['zLayer'], number> = {
 
 export interface OnboardFlowProps {
   className?: ClassValue;
+  children?: ReactNode;
   title?: string;
   subtitle?: string;
   primaryLabel?: string;
   secondaryLabel?: string;
+  showActions?: boolean;
   slotAssets?: Partial<Record<string, string>>;
   onPrimaryAction?: () => void;
   onSecondaryAction?: () => void;
 }
 
-const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
-const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+const springHero = KrDarkSpring;
+const springCard = KrDarkSpring;
+const springButton = KrDarkSpring;
 
 export const OnboardFlow = memo(function OnboardFlow({
   className,
+  children,
   title = 'Onboarding Flow',
   subtitle = 'Set role preferences and skills to personalize guidance.',
   primaryLabel = 'Next Step',
   secondaryLabel = 'Back',
+  showActions = true,
   slotAssets,
   onPrimaryAction,
   onSecondaryAction,
@@ -79,13 +84,13 @@ export const OnboardFlow = memo(function OnboardFlow({
       animate={{ opacity: 1, y: 0 }}
       transition={undefined}
       className={clsx(
-        "relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-8 font-['Work_Sans'] text-base min-h-[75vh] flex flex-col justify-center",
+        "relative overflow-hidden rounded-[var(--kr-shape-block-riot03)] p-8 font-['Work_Sans'] text-base min-h-[75vh] flex flex-col justify-center",
         className
       )}
       style={{
-        backgroundColor: 'var(--sys-color-charcoalBackground-base)',
-        color: 'var(--sys-color-worker-ash-base)',
-        border: '1px solid var(--sys-color-concreteGrey-base)',
+        backgroundColor: 'var(--kr-color-charcoal-background-base)',
+        color: 'var(--kr-color-semantic-parchment)',
+        border: '1px solid var(--kr-color-concrete-grey-steps-0)',
       }}
       data-mode={mode}
       data-testid="onboardflow"
@@ -128,8 +133,8 @@ export const OnboardFlow = memo(function OnboardFlow({
         <h1
           className="text-5xl md:text-6xl font-black"
           style={{
-            fontFamily: 'var(--sys-type-font-fraunces)',
-            color: 'var(--sys-color-paperWhite)',
+            fontFamily: 'var(--kr-type-font-families-display)',
+            color: 'var(--kr-color-parchment-base)',
           }}
         >
           {title}
@@ -137,55 +142,62 @@ export const OnboardFlow = memo(function OnboardFlow({
         <p
           className="mt-4 max-w-2xl text-base md:text-xl"
           style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            color: 'var(--sys-color-worker-ash-base)',
+            fontFamily: 'var(--kr-type-font-families-primary)',
+            color: 'var(--kr-color-semantic-parchment)',
           }}
         >
           {subtitle}
         </p>
       </motion.header>
 
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={undefined}
-        className="relative z-10 mt-8 flex flex-wrap gap-4 items-center"
-      >
-        <motion.button
-          type="button"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          transition={springButton}
-          onClick={onPrimaryAction}
-          className="rounded-[var(--sys-shape-blockRiot03)] px-8 py-4 font-semibold text-lg"
-          style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            backgroundColor: 'var(--sys-color-inkGold-base)',
-            color: 'var(--sys-color-charcoalBackground-base)',
-          }}
+      {showActions && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={undefined}
+          className="relative z-10 mt-8 flex flex-wrap gap-4 items-center"
         >
-          {primaryLabel}
-        </motion.button>
+          <motion.button
+            type="button"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={springButton}
+            onClick={onPrimaryAction}
+            className="rounded-[var(--kr-shape-block-riot03)] px-8 py-4 font-semibold text-lg"
+            style={{
+              fontFamily: 'var(--kr-type-font-families-primary)',
+              backgroundColor: 'var(--kr-color-ink-gold-base)',
+              color: 'var(--kr-color-charcoal-background-base)',
+            }}
+          >
+            {primaryLabel}
+          </motion.button>
 
-        <button
-          type="button"
-          onClick={onSecondaryAction}
-          className="font-['JetBrains_Mono'] text-sm opacity-80 px-2 py-1"
-          style={{ color: 'var(--sys-color-worker-ash-base)', backgroundColor: 'transparent' }}
+          <button
+            type="button"
+            onClick={onSecondaryAction}
+            className="font-['JetBrains_Mono'] text-sm opacity-80 px-2 py-1"
+            style={{
+              color: 'var(--kr-color-semantic-parchment)',
+              backgroundColor: 'transparent',
+              opacity: 0.7,
+            }}
+          >
+            {secondaryLabel}
+          </button>
+        </motion.div>
+      )}
+
+      {children ? (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...springCard, delay: 0.08 }}
+          className="relative z-10 mt-8"
         >
-          {secondaryLabel}
-        </button>
-      </motion.div>
-
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={undefined}
-        className="relative z-10 mt-8 font-['JetBrains_Mono'] text-sm opacity-80"
-        style={{ color: 'var(--sys-color-concreteGrey-base)' }}
-      >
-        Slots: {SLOT_DEFS.length} | Density ratio: 0.36 | Max focal CTA: 1
-      </motion.p>
+          {children}
+        </motion.div>
+      ) : null}
     </motion.section>
   );
 });

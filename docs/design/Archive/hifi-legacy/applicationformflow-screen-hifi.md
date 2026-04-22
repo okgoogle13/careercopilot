@@ -119,7 +119,7 @@ interface FormContainerProps {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('/assets/textures/noise-subtle.png');
+  background-image: url('/assets/textures/noise-grain.png');
   opacity: 0.05;
   pointer-events: none;
 }

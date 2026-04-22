@@ -23,4 +23,3 @@
 ## Claude Desktop Prompt (Token-Efficient)
 
 “Confirm MCP servers are reachable (filesystem, playwright, flash-sidekick-fast, flash-sidekick). Report any disconnects and log hints.”
-

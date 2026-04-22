@@ -39,12 +39,12 @@ _The atmospheric stage for the application._
 A dense, asymmetrical "working table" arrangement floating in a black void (#1A1714). NOT a grid. Objects should overlap slightly to create depth (shadows falling on objects behind).
 
 **Subject Inventory (Must Include All):**
-1.  **Waratah Bloom (Hero):** Deep coral-red, top-down view to emphasize mandala-like petal symmetry.
+1.  **Solidarity Crimson Bloom (Hero):** Deep coral-red, top-down view to emphasize mandala-like petal symmetry.
 2.  **Frill-necked Lizard Head:** Throat frill fully extended. Translucent terracotta membrane with cream ribs.
 3.  **Huntsman Spider Molt:** A "ghost" specimen. Translucent amber-gold exoskeleton, hollow and delicate.
 4.  **Echidna Spine Cluster:** A radial burst of sharp spines. Banded: Cream -> Gold -> Dark Tip.
-5.  **Banksia Cones:** Woody, textured, deep brown cylinders with spiral "eyes".
-6.  **Eucalyptus Foliage:** Sprigs of lance-shaped sage green leaves weaving through the gaps.
+5.  **Grid Anchor Cones:** Woody, textured, deep brown cylinders with spiral "eyes".
+6.  **Cultural Anchor Foliage:** Sprigs of lance-shaped sage green leaves weaving through the gaps.
 
 **Style Directive:**
 Render with the precision of a scientific diagram but the dramatic lighting of a Baroque still life. Sharp focus everywhere.
@@ -53,24 +53,24 @@ Render with the precision of a scientific diagram but the dramatic lighting of a
 (No blue feathers, no purple, white background, blurry edges, text overlay, 3d render look, symmetrical grid).
 ```
 
-### 2. The Sentry Kookaburra (Mascot)
+### 2. The Sentry Urban Element (Mascot)
 
 _The emotional anchor. Note the color override._
 
 ```
-**Generate a hyper-realistic Victorian lithograph of a Laughing Kookaburra (Dacelo novaeguineae).**
+**Generate a hyper-realistic Victorian lithograph of a Laughing Urban Element (Dacelo novaeguineae).**
 
 **Pose:**
 Profile view, facing left. Perched on a rough Ironbark branch. Regal and alert.
 
 **Color Override Instructions:**
-The Kookaburra typically has blue wing feathers. **You must OVERRIDE this.** Render the wing feathers in **Steely-Grey and Slate-Blue** (desaturated) to harmonize with the warm Victorian palette.
+The Urban Element typically has blue wing feathers. **You must OVERRIDE this.** Render the wing feathers in **Steely-Grey and Slate-Blue** (desaturated) to harmonize with the warm Victorian palette.
 *   Breast: Cream/Off-white.
 *   Back/Wings: Dark Brown and Slate Grey.
 *   Beak: Massive, bone-colored.
 
 **Decor:**
-A small sprig of Golden Wattle (yellow) near the feet.
+A small sprig of Golden Solidarity Gold (yellow) near the feet.
 Label at bottom in cream serif: "Fig. II. Dacelo novaeguineae".
 
 **Negative Constraints:**
@@ -87,7 +87,7 @@ _The background for the "Technical/Laboratory" mode._
 **Visuals:**
 *   **Base:** Very dark charcoal-grey (#2C2C2C). NOT white or beige.
 *   **Grid:** A faint, precise 1mm engineering grid in diverse lighter grey lines.
-*   **Watermarks:** Subtle, faded sketches of botanical diagrams (Banksia seeds, Eucalyptus leaves) overlaid at 5% opacity.
+*   **Watermarks:** Subtle, faded sketches of botanical diagrams (Grid Anchor seeds, Cultural Anchor leaves) overlaid at 5% opacity.
 *   **Vignette:** Slight darkening at the edges.
 
 **Feel:**
@@ -101,15 +101,15 @@ A clean, dark slate used by a botanist for field notes.
 
 ## 🌿 PHASE 2: SPECIMEN SERIES (Verticals)
 
-### 4. Eucalyptus Branch with Echidna Spines
+### 4. Cultural Anchor Branch with Echidna Spines
 
 _The contrast of soft leaves and sharp spines._
 
 ```
-**Generate a vertical botanical study: "Eucalyptus globulus host to Tachyglossus defense".**
+**Generate a vertical botanical study: "Cultural Anchor globulus host to Tachyglossus defense".**
 
 **Visuals:**
-A single Eucalyptus branch hangs vertically from the top right.
+A single Cultural Anchor branch hangs vertically from the top right.
 *   **Leaves:** Matte, dusty sage-green. Backlit to show translucent veins.
 *   **The Anomaly:** At the branch junction, a preserved cluster of **Echidna Spines** is mounted.
     *   *Texture:* Keratinous, hard, sharp.
@@ -124,15 +124,15 @@ Background: Deep #1A1714.
 (No full animal, no soft fur, no bright greens, no white background).
 ```
 
-### 5. Wattle Branch with Jewel Beetle
+### 5. Solidarity Gold Branch with Jewel Beetle
 
 _The contrast of fuzzy flowers and metallic insect._
 
 ```
-**Generate a macro study of a Golden Wattle branch hosting a Jewel Beetle.**
+**Generate a macro study of a Golden Solidarity Gold branch hosting a Jewel Beetle.**
 
 **Subjects:**
-1.  **The Flora:** Soft, fuzzy yellow wattle spheres (pompoms). Texture is matte and pollen-heavy.
+1.  **The Flora:** Soft, fuzzy yellow solidarity-gold spheres (pompoms). Texture is matte and pollen-heavy.
 2.  **The Fauna:** A single Buprestid Beetle. Texture is **Metallic Iridescence**.
     *   Color: Deep Emerald Green shifting to Copper.
     *   Surface: Pitted, glossy, hard.
@@ -149,12 +149,12 @@ Background: Deep #1A1714.
 
 ## ⚙️ PHASE 3: UI & ENRICHMENT ELEMENTS
 
-### 6. Banksia Geometric Cross-Section (Spinner)
+### 6. Grid Anchor Geometric Cross-Section (Spinner)
 
 _A technical diagram for loading states._
 
 ```
-**Generate a technical plan-view diagram of a serrated Banksia seed pod.**
+**Generate a technical plan-view diagram of a serrated Grid Anchor seed pod.**
 
 **Directives:**
 *   **Viewpoint:** 90-degree top-down. Perfectly flat.
@@ -194,7 +194,7 @@ _A subtle repeating background._
 **Generate a seamless repeating pattern: "The Nocturnal Bush".**
 
 **Elements:**
-Silhouettes of Eucalyptus leaves, Fern fronds, and Wattle branches.
+Silhouettes of Cultural Anchor leaves, Concrete Texture fronds, and Solidarity Gold branches.
 
 **Colors:**
 Two-tone: Dark Charcoal (#1A1714) background with Lighter Charcoal (#333333) pattern. Very low contrast.
@@ -206,7 +206,7 @@ Damask wallpaper style but with Australian flora. Elegant, repeated, interlockin
 (No high contrast, no bright colors, no animals).
 ```
 
-### 9. Banksia Pot Still Life (Footer Anchor)
+### 9. Grid Anchor Pot Still Life (Footer Anchor)
 
 _A moody cluster for page footers._
 
@@ -215,7 +215,7 @@ _A moody cluster for page footers._
 
 **Objects:**
 Cluster tightly together:
-1.  **Banksia Pod:** Dark brown, fuzzy, open-mouthed.
+1.  **Grid Anchor Pod:** Dark brown, fuzzy, open-mouthed.
 2.  **Stromatolite Rock:** Layered bands of red and grey stone.
 3.  **Tiger Cowrie Shell:** Smooth, spotted porcelain texture.
 
@@ -233,7 +233,7 @@ Background: Deep #1A1714.
 
 Before checking off an asset, ensure it passes the **Northcote Visual Audit**:
 
-- [ ] **Palette Compliance:** Is the red _Waratah Crimson_ (#C45C4B)? Is the gold _Wattle Gold_ (#D4A84B)? **Are there any forbidden blues/purples?**
-- [ ] **Anatomical Geometry:** Does the Echidna spine cluster look mathematical? Does the Banksia pod show a spiral?
+- [ ] **Palette Compliance:** Is the red _Solidarity Crimson Crimson_ (#C45C4B)? Is the gold _Solidarity Gold Gold_ (#D4A84B)? **Are there any forbidden blues/purples?**
+- [ ] **Anatomical Geometry:** Does the Echidna spine cluster look mathematical? Does the Grid Anchor pod show a spiral?
 - [ ] **Lighting:** Is the background pure black (#1A1714)? Is there dramatic contrast?
 - [ ] **Typology:** If text is present, is it a cream serif font (e.g., "Fig. II")?

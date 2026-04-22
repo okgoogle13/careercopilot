@@ -3,13 +3,14 @@ Critical path tests for JobsService.
 Priority: HIGH - 35% coverage, core service layer
 """
 
-import pytest
 import json
-from unittest.mock import Mock, AsyncMock, patch
+from unittest.mock import AsyncMock, Mock, patch
+
+import pytest
 from sqlalchemy.orm import Session
 
-from app.services.jobs_service import JobsService
 from app.models.user_asset import UserAsset
+from app.services.jobs_service import JobsService
 
 
 @pytest.fixture
@@ -27,7 +28,7 @@ def test_user_asset():
         document_type="resume",
         extracted_data={
             "fullText": "Senior Software Engineer with 5+ years experience in Python and React"
-        }
+        },
     )
 
 
@@ -47,21 +48,31 @@ class TestCompareResumeToJob:
         - System design knowledge
         """
 
-        with patch('app.services.jobs_service.analyze_job_description', new_callable=AsyncMock) as mock_analyze, \
-             patch('app.services.jobs_service.compare_resume_to_job', new_callable=AsyncMock) as mock_compare:
+        with (
+            patch(
+                "app.services.jobs_service.analyze_job_description", new_callable=AsyncMock
+            ) as mock_analyze,
+            patch(
+                "app.services.jobs_service.compare_resume_to_job", new_callable=AsyncMock
+            ) as mock_compare,
+        ):
 
-            mock_analyze.return_value = json.dumps({
-                "title": "Senior Software Engineer",
-                "required_skills": ["Python", "React", "System Design"],
-                "experience_level": "Senior"
-            })
+            mock_analyze.return_value = json.dumps(
+                {
+                    "title": "Senior Software Engineer",
+                    "required_skills": ["Python", "React", "System Design"],
+                    "experience_level": "Senior",
+                }
+            )
 
-            mock_compare.return_value = json.dumps({
-                "match_score": 92,
-                "matched_skills": ["Python", "React"],
-                "missing_skills": ["System Design"],
-                "overall_fit": "Excellent"
-            })
+            mock_compare.return_value = json.dumps(
+                {
+                    "match_score": 92,
+                    "matched_skills": ["Python", "React"],
+                    "missing_skills": ["System Design"],
+                    "overall_fit": "Excellent",
+                }
+            )
 
             result = await JobsService.compare_resume_to_job(
                 mock_db, "user-123", "asset-123", job_description
@@ -87,7 +98,7 @@ class TestCompareResumeToJob:
             id="asset-123",
             user_id="user-123",
             document_type="resume",
-            extracted_data={}  # No fullText
+            extracted_data={},  # No fullText
         )
         mock_db.query.return_value.filter.return_value.first.return_value = asset_no_text
 
@@ -101,7 +112,9 @@ class TestCompareResumeToJob:
         """Test handling of JSON decode error from Genkit."""
         mock_db.query.return_value.filter.return_value.first.return_value = test_user_asset
 
-        with patch('app.services.jobs_service.analyze_job_description', new_callable=AsyncMock) as mock_analyze:
+        with patch(
+            "app.services.jobs_service.analyze_job_description", new_callable=AsyncMock
+        ) as mock_analyze:
             mock_analyze.return_value = "Invalid JSON{{"
 
             with pytest.raises(Exception):
@@ -114,7 +127,9 @@ class TestCompareResumeToJob:
         """Test handling of Genkit timeout."""
         mock_db.query.return_value.filter.return_value.first.return_value = test_user_asset
 
-        with patch('app.services.jobs_service.analyze_job_description', new_callable=AsyncMock) as mock_analyze:
+        with patch(
+            "app.services.jobs_service.analyze_job_description", new_callable=AsyncMock
+        ) as mock_analyze:
             mock_analyze.side_effect = TimeoutError("Genkit timeout")
 
             with pytest.raises(Exception):
@@ -133,21 +148,31 @@ class TestJobsServiceIntegration:
 
         job_description = "Senior Software Engineer - Python, React, System Design"
 
-        with patch('app.services.jobs_service.analyze_job_description', new_callable=AsyncMock) as mock_analyze, \
-             patch('app.services.jobs_service.compare_resume_to_job', new_callable=AsyncMock) as mock_compare:
+        with (
+            patch(
+                "app.services.jobs_service.analyze_job_description", new_callable=AsyncMock
+            ) as mock_analyze,
+            patch(
+                "app.services.jobs_service.compare_resume_to_job", new_callable=AsyncMock
+            ) as mock_compare,
+        ):
 
-            mock_analyze.return_value = json.dumps({
-                "title": "Senior Software Engineer",
-                "required_skills": ["Python", "React"],
-                "seniority_level": 4
-            })
+            mock_analyze.return_value = json.dumps(
+                {
+                    "title": "Senior Software Engineer",
+                    "required_skills": ["Python", "React"],
+                    "seniority_level": 4,
+                }
+            )
 
-            mock_compare.return_value = json.dumps({
-                "match_score": 85,
-                "skill_match": 0.9,
-                "experience_match": 0.8,
-                "recommendation": "Strong candidate"
-            })
+            mock_compare.return_value = json.dumps(
+                {
+                    "match_score": 85,
+                    "skill_match": 0.9,
+                    "experience_match": 0.8,
+                    "recommendation": "Strong candidate",
+                }
+            )
 
             result = await JobsService.compare_resume_to_job(
                 mock_db, "user-123", "asset-123", job_description
@@ -164,7 +189,7 @@ class TestJobsServiceIntegration:
                 id=f"asset-{i}",
                 user_id="user-123",
                 document_type="resume",
-                extracted_data={"fullText": f"Resume {i}"}
+                extracted_data={"fullText": f"Resume {i}"},
             )
             for i in range(3)
         ]
@@ -175,8 +200,14 @@ class TestJobsServiceIntegration:
         for asset in assets:
             mock_db.query.return_value.filter.return_value.first.return_value = asset
 
-            with patch('app.services.jobs_service.analyze_job_description', new_callable=AsyncMock) as mock_analyze, \
-                 patch('app.services.jobs_service.compare_resume_to_job', new_callable=AsyncMock) as mock_compare:
+            with (
+                patch(
+                    "app.services.jobs_service.analyze_job_description", new_callable=AsyncMock
+                ) as mock_analyze,
+                patch(
+                    "app.services.jobs_service.compare_resume_to_job", new_callable=AsyncMock
+                ) as mock_compare,
+            ):
 
                 mock_analyze.return_value = json.dumps({"title": "Senior Engineer"})
                 mock_compare.return_value = json.dumps({"match_score": 75 + i for i in range(3)})

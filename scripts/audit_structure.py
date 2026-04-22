@@ -140,14 +140,14 @@ def main():
     # I'll keep the logic from the original script but adapt paths
     semantic_colors = tokens.get('color', {}).get('semantic', {})
     if semantic_colors:
-        # Example: wattle-gold on specimen-night
-        wattle = semantic_colors.get('wattle-gold', {}).get('value') or semantic_colors.get('wattle-gold', {}).get('$value')
-        night = semantic_colors.get('specimen-night', {}).get('value') or semantic_colors.get('specimen-night', {}).get('$value')
-        if wattle and night:
-            result = check_contrast('Wattle Gold', wattle, 'Specimen Night', night)
+        # Example: solidarity-gold on charcoal-background
+        solidarity_gold = semantic_colors.get('solidarity-gold', {}).get('value') or semantic_colors.get('solidarity-gold', {}).get('$value')
+        charcoal_bg = semantic_colors.get('charcoal-background-base', {}).get('value') or semantic_colors.get('charcoal-background-base', {}).get('$value')
+        if solidarity_gold and charcoal_bg:
+            result = check_contrast('Solidarity Gold', solidarity_gold, 'Charcoal Background', charcoal_bg)
             print(result)
             if "[FAIL]" in result:
-                warnings.append(f"Contrast FAIL: Wattle Gold on Specimen Night ({result})")
+                warnings.append(f"Contrast FAIL: Solidarity Gold on Charcoal Background ({result})")
 
     # Output Report
     if not critical_issues and not warnings:

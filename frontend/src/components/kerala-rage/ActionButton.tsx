@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, HTMLMotionProps, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 /**
  * ActionButtonProps
@@ -16,9 +17,9 @@ export interface ActionButtonProps extends HTMLMotionProps<'button'> {
 }
 
 /**
- * ActionButton (Seed Archetype)
+ * ActionButton (Strike Archetype)
  *
- * Kerala Rage kr-solidarity button component implementing the Seed archetype.
+ * Kerala Rage kr-solidarity button component implementing the Strike archetype.
  * Foundational interaction primitive with semantic token support.
  *
  * Design Principles:
@@ -64,13 +65,16 @@ export const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProp
     const motionProps = shouldReduceMotion
       ? { whileHover: { opacity: 0.8 }, whileTap: { opacity: 0.6 } }
       : {
-          whileHover: { y: -4, scale: 1.02 },
-          whileTap: { scale: 0.98 },
-          transition: {
-            type: 'spring',
-            stiffness: 400,
-            damping: 20,
+          whileHover: {
+            y: -2,
+            scale: 1.01,
+            borderRadius: 'var(--sys-shape-blockRiot02)', // Active/Hover morph
           },
+          whileTap: {
+            scale: 0.98,
+            borderRadius: 'var(--sys-shape-strikePuff01)', // 'Puff' morph on press
+          },
+          transition: KrDarkSpring,
         };
 
     return (
@@ -78,12 +82,12 @@ export const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProp
         ref={ref}
         type="button"
         style={{
-          fontFamily: 'var(--sys-type-font-work-sans, "Work Sans", sans-serif)',
-          borderRadius: 'var(--shape-marchSurge01)', // March archetype asymmetric radius
+          fontFamily: 'var(--sys-type-fontFamilies-primary)',
+          borderRadius: 'var(--sys-shape-blockRiot03)', // Strike archetype asymmetric radius
           ...variantStyles[variant],
         }}
         className={cn(
-          'font-bold uppercase tracking-wider',
+          'type-solidarityProtest uppercase',
           'transition-colors duration-150',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sys-color-inkGold-base)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sys-color-charcoalBackground-base)]',
           'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',

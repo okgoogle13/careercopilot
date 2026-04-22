@@ -1,9 +1,0 @@
-[ 2052646ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://127.0.0.1:5173/src/features/style-guide/StyleGuide.tsx?t=1773043691170:0
-[ 2052653ms] [ERROR] [vite] Failed to reload /src/features/style-guide/StyleGuide.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://127.0.0.1:5173/@vite/client:808
-[ 2513452ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://127.0.0.1:5173/src/features/style-guide/StyleGuide.tsx?t=1773043691170:0
-[ 2540534ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://127.0.0.1:5173/src/features/style-guide/StyleGuide.tsx?t=1773043691170:0
-[ 2542523ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://127.0.0.1:5173/src/features/style-guide/StyleGuide.tsx?t=1773043691170:0
-[ 2565326ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://127.0.0.1:5173/src/features/style-guide/StyleGuide.tsx?t=1773043691170:0
-[ 2572139ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://127.0.0.1:5173/src/features/style-guide/StyleGuide.tsx?t=1773044210046:0
-[ 2576735ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://127.0.0.1:5173/src/features/style-guide/StyleGuide.tsx?t=1773044214424:0
-[ 8736733ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:5173/?token=H4AH99hsPxtd' failed:  @ http://127.0.0.1:5173/@vite/client:744

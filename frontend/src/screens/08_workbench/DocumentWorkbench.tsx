@@ -1,3 +1,4 @@
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 import { memo } from 'react';
 import { motion } from 'framer-motion';
 import clsx, { type ClassValue } from 'clsx';
@@ -6,7 +7,7 @@ import { useModeStore } from '../../stores/useModeStore';
 type SlotDef = {
   name: string;
   zLayer: 'Z-0' | 'Z-1' | 'Z-2' | 'Z-3';
-  token: `--sys-${string}`;
+  token: `--kr-color-${string}`;
   assetCompat: `KR-${string}`;
 };
 
@@ -14,58 +15,59 @@ const SLOT_DEFS: SlotDef[] = [
   {
     name: 'auto_kr_solid_005',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
     name: 'auto_kr_solid_012',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
     name: 'auto_kr_solid_027',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
     name: 'auto_kr_solid_022',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
     name: 'auto_kr_ui_001',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
     name: 'auto_kr_ui_015',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
     name: 'auto_kr_ui_027',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
     name: 'auto_kr_ui_038',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
   {
     name: 'auto_kr_solid_046',
     zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
+    token: '--kr-color-ink-gold-base',
     assetCompat: 'KR-SOLID-GENERAL',
   },
 ];
+
 const DEFAULT_SLOT_ASSETS: Partial<Record<string, string>> = {
   auto_kr_solid_005: 'KR-SOLID-031',
   auto_kr_solid_012: 'KR-SOLID-032',
@@ -79,64 +81,40 @@ const DEFAULT_SLOT_ASSETS: Partial<Record<string, string>> = {
 };
 
 export interface DocumentWorkbenchProps {
+  children?: React.ReactNode;
   className?: ClassValue;
   title?: string;
   subtitle?: string;
-  primaryLabel?: string;
-  secondaryLabel?: string;
   slotAssets?: Partial<Record<string, string>>;
-  onPrimaryAction?: () => void;
-  onSecondaryAction?: () => void;
 }
 
-const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
-const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+const springHero = KrDarkSpring;
 
 export const DocumentWorkbench = memo(function DocumentWorkbench({
+  children,
   className,
   title = 'Document Workbench',
   subtitle = 'Edit resume/cover letter and preview export output.',
-  primaryLabel = 'Save Draft',
-  secondaryLabel = 'Export PDF',
   slotAssets,
-  onPrimaryAction,
-  onSecondaryAction,
 }: DocumentWorkbenchProps) {
   const mode = useModeStore((state) => state.mode);
   const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
-  const isKrDark = mode === 'KrDark';
 
   return (
     <motion.section
       role="main"
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={undefined}
-      className={clsx(
-        'relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8',
-        className
-      )}
+      transition={{ duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }} // v7.0 overshoot
+      className={clsx('relative overflow-hidden rounded-blockRiot03 p-6 md:p-8', className)}
       style={{
-        backgroundColor: 'var(--sys-color-charcoalBackground-base)',
-        color: 'var(--sys-color-worker-ash-base)',
-        border: '1px solid var(--sys-color-concreteGrey-base)',
+        backgroundColor: 'var(--kr-color-charcoal-background-base)',
+        color: 'var(--kr-color-worker-ash-base)',
+        border: '1px solid var(--kr-color-concrete-grey-base)',
       }}
       data-mode={mode}
       data-testid="documentworkbench"
-      data-motion-audit="true"
     >
-      <style>{`
-         @media (prefers-reduced-motion: reduce) {
-          [data-motion-audit="true"] *,
-          [data-motion-audit="true"]::before,
-          [data-motion-audit="true"]::after {
-            transition: none !important;
-            animation: none !important;
-          }
-        }
-      `}</style>
-
       <div
         className="pointer-events-none absolute inset-0"
         aria-hidden="true"
@@ -157,13 +135,13 @@ export const DocumentWorkbench = memo(function DocumentWorkbench({
         initial={{ opacity: 0, y: 6 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ ...springHero, delay: 0.04 }}
-        className="relative z-10"
+        className="relative z-10 mb-8"
       >
         <h1
           className="text-3xl font-black md:text-5xl"
           style={{
-            fontFamily: 'var(--sys-type-font-fraunces)',
-            color: 'var(--sys-color-paperWhite)',
+            fontFamily: 'var(--kr-type-font-fraunces)',
+            color: 'var(--kr-color-paper-white-base)',
           }}
         >
           {title}
@@ -171,64 +149,29 @@ export const DocumentWorkbench = memo(function DocumentWorkbench({
         <p
           className="mt-3 max-w-4xl text-base md:text-lg"
           style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            color: 'var(--sys-color-worker-ash-base)',
+            fontFamily: 'var(--kr-type-font-work-sans)',
+            color: 'var(--kr-color-worker-ash-base)',
           }}
         >
           {subtitle}
         </p>
       </motion.header>
 
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={undefined}
-        className="relative z-10 mt-6 flex flex-wrap gap-3"
-      >
-        <motion.button
-          type="button"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          transition={springButton}
-          onClick={onPrimaryAction}
-          className="rounded-[var(--sys-shape-blockRiot03)] px-5 py-3 font-semibold"
-          style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            backgroundColor: 'var(--sys-color-inkGold-base)',
-            color: 'var(--sys-color-charcoalBackground-base)',
-          }}
-        >
-          {primaryLabel}
-        </motion.button>
-        <motion.button
-          type="button"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          transition={springButton}
-          onClick={onSecondaryAction}
-          className="rounded-[var(--sys-shape-blockRiot01)] border px-5 py-3 font-medium"
-          style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            borderColor: 'var(--sys-color-protestMetalBlue-base)',
-            color: isKrDark ? 'var(--sys-color-worker-ash-base)' : 'var(--sys-color-paperWhite)',
-            backgroundColor: 'transparent',
-          }}
-        >
-          {secondaryLabel}
-        </motion.button>
-      </motion.div>
+      <div className="relative z-10">{children}</div>
 
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={undefined}
+        transition={{ delay: 0.5 }}
         className="relative z-10 mt-6 text-xs"
         style={{
-          fontFamily: 'var(--sys-type-font-mono)',
-          color: 'var(--sys-color-concreteGrey-base)',
+          fontFamily: 'var(--kr-type-font-mono)',
+          color: 'var(--kr-color-concrete-grey-base)',
+          letterSpacing: '0.2em',
+          textTransform: 'uppercase',
         }}
       >
-        Slots: {SLOT_DEFS.length} | Motion: spring-only | Tokens: --sys-* | Zustand: useModeStore
+        WORKBENCH.v7 // DNA ARCHIVE // GOLD STANDARD
       </motion.p>
     </motion.section>
   );

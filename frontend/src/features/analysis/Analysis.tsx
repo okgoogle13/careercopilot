@@ -13,6 +13,8 @@ import {
   BookOpen,
   AlertCircle,
 } from 'lucide-react';
+import { ResumeAuditEntryPoint } from './components/ResumeAuditEntryPoint';
+import { ResumeAuditResultsPanel } from './components/ResumeAuditResultsPanel';
 import {
   LineChart,
   Line,
@@ -28,7 +30,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { toast } from 'sonner';
-import { MetricCard } from '../../components/shared/MetricCard';
+import { SolidarityMetric } from '../../components/kerala-rage/SolidarityMetric';
 import { KeywordTag } from '../../components/shared/KeywordTag';
 import { PageHeader } from '../../components/shared/PageHeader';
 import { ChartPane } from '../../components/shared/ChartPane';
@@ -72,23 +74,23 @@ const ATS_SCORE_DATA: ATSScoreDataPoint[] = [
   { month: 'Jun', score: 87 },
 ];
 
-// Map token colors for Recharts (must be hex)
+// Map token colors for Recharts directly to canonical KR CSS variables.
 const CHART_COLORS = {
-  primary: '#D1C4E9', // primary-80
-  secondary: '#C7FFF4', // secondary-80
-  tertiary: '#FFD9E8', // tertiary-80
-  error: '#FFB4AB', // error-80
-  surface: '#1C1B1F', // surface-container-low
-  onSurface: '#E6E1E5', // neutral-90
-  grid: '#484649', // neutral-30
-  heroHighlight: '#D0BCFF', // Electric Violet for hero moment
+  primary: 'var(--kr-color-protest-metal-blue-steps-3)',
+  secondary: 'var(--kr-color-kr-activist-smoke-green-steps-4)',
+  tertiary: 'var(--kr-color-solidarity-smoke-orange-steps-4)',
+  error: 'var(--kr-color-kr-charcoal-red-steps-4)',
+  surface: 'var(--kr-color-charcoal-background-steps-1)',
+  onSurface: 'var(--kr-color-paper-white-steps-1)',
+  grid: 'var(--kr-color-charcoal-background-steps-6)',
+  heroHighlight: 'var(--kr-color-ink-gold-base)',
 };
 
 const APPLICATION_STATUS_DATA: ApplicationStatusData[] = [
   { name: 'Applied', value: 40, color: CHART_COLORS.primary },
   { name: 'Interviewing', value: 30, color: CHART_COLORS.secondary },
   { name: 'Rejected', value: 20, color: CHART_COLORS.error },
-  { name: 'Offered', value: 10, color: '#FFD700' }, // Gold for offer
+  { name: 'Offered', value: 10, color: CHART_COLORS.heroHighlight },
 ];
 
 // ... (keep keyword data)
@@ -134,6 +136,8 @@ export function Analysis() {
   const [urlError, setUrlError] = useState('');
   const [showInputs, setShowInputs] = useState(true);
   const [loadingJobUrl, setLoadingJobUrl] = useState(false);
+  const [auditResults, setAuditResults] = useState<any>(null);
+  const [showAuditResults, setShowAuditResults] = useState(false);
 
   const validateUrl = (url: string) => {
     try {
@@ -241,7 +245,10 @@ export function Analysis() {
 
         {/* Intelligence Trigger UI */}
         {showInputs && (
-          <div className="bg-surface-container rounded-leaf p-8 border border-outline-variant shadow-elevation-1 mb-8">
+          <div
+            className="mb-8 rounded-leaf bg-surface-container p-8 shadow-elevation-1"
+            style={{ border: '1px solid var(--kr-color-concrete-grey-steps-0)' }}
+          >
             <div className="flex items-center gap-3 mb-6">
               <Sparkles className="w-6 h-6 text-primary" />
               <h2 className="text-title-large font-bold text-on-surface">Run Intelligence Audit</h2>
@@ -261,7 +268,10 @@ export function Analysis() {
                     if (urlError) setUrlError('');
                   }}
                   placeholder="https://seek.com.au/job/..."
-                  className={`flex-1 bg-surface-container-high rounded-tech px-4 py-3 text-on-surface border focus:outline-none ${urlError ? 'border-tertiary focus:border-tertiary' : 'border-outline-variant focus:border-primary'}`}
+                  className={`flex-1 bg-surface-container-high rounded-tech px-4 py-3 text-on-surface border focus:outline-none ${urlError ? 'border-tertiary focus:border-tertiary' : 'focus:border-primary'}`}
+                  style={
+                    urlError ? undefined : { borderColor: 'var(--kr-color-concrete-grey-steps-0)' }
+                  }
                 />
                 <Button
                   onClick={handleAnalyzeJobUrl}
@@ -336,35 +346,74 @@ export function Analysis() {
           </div>
         )}
 
+        {/* Resume Audit Section */}
+        <div className="mb-8">
+          <ResumeAuditEntryPoint
+            resumeText={documentText}
+            jobDescription={jobDescription}
+            onAuditComplete={(results) => {
+              setAuditResults(results);
+              setShowAuditResults(true);
+            }}
+            disabled={!documentText}
+          />
+        </div>
+
+        {/* Resume Audit Results */}
+        {showAuditResults && auditResults && (
+          <div className="mb-8">
+            <ResumeAuditResultsPanel
+              data={auditResults}
+              onDismiss={() => setShowAuditResults(false)}
+            />
+          </div>
+        )}
+
         {/* 4-Quadrant Metric Cards with Hero Highlighting */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <MetricCard
+          <SolidarityMetric
             icon={Award}
             label="Hard Skills Match"
             value={`${scores.hardSkills}%`}
-            iconColor={heroQuadrant.name === 'Hard Skills' ? 'text-[#D0BCFF]' : 'text-primary'}
-            variant={heroQuadrant.name === 'Hard Skills' ? 'filled' : 'outlined'}
+            iconColor={heroQuadrant.name === 'Hard Skills' ? 'text-primary-base' : undefined}
+            elevation={heroQuadrant.name === 'Hard Skills' ? 'floating' : 'raised'}
+            className={
+              heroQuadrant.name === 'Hard Skills'
+                ? 'ring-2 ring-primary-base border-primary-base'
+                : ''
+            }
           />
-          <MetricCard
+          <SolidarityMetric
             icon={TrendingUp}
             label="Soft Skills & Verbs"
             value={`${scores.softSkills}%`}
-            iconColor={heroQuadrant.name === 'Soft Skills' ? 'text-[#D0BCFF]' : 'text-secondary'}
-            variant={heroQuadrant.name === 'Soft Skills' ? 'filled' : 'outlined'}
+            iconColor={heroQuadrant.name === 'Soft Skills' ? 'text-primary-base' : undefined}
+            elevation={heroQuadrant.name === 'Soft Skills' ? 'floating' : 'raised'}
+            className={
+              heroQuadrant.name === 'Soft Skills'
+                ? 'ring-2 ring-primary-base border-primary-base'
+                : ''
+            }
           />
-          <MetricCard
+          <SolidarityMetric
             icon={Target}
             label="Quantifiable Impact"
             value={`${scores.impact}%`}
-            iconColor={heroQuadrant.name === 'Impact' ? 'text-[#D0BCFF]' : 'text-tertiary'}
-            variant={heroQuadrant.name === 'Impact' ? 'filled' : 'outlined'}
+            iconColor={heroQuadrant.name === 'Impact' ? 'text-primary-base' : undefined}
+            elevation={heroQuadrant.name === 'Impact' ? 'floating' : 'raised'}
+            className={
+              heroQuadrant.name === 'Impact' ? 'ring-2 ring-primary-base border-primary-base' : ''
+            }
           />
-          <MetricCard
+          <SolidarityMetric
             icon={Award}
             label="ATS Readability"
             value={`${scores.atsReadability}%`}
-            iconColor={heroQuadrant.name === 'ATS' ? 'text-[#D0BCFF]' : 'text-error'}
-            variant={heroQuadrant.name === 'ATS' ? 'filled' : 'outlined'}
+            iconColor={heroQuadrant.name === 'ATS' ? 'text-primary-base' : undefined}
+            elevation={heroQuadrant.name === 'ATS' ? 'floating' : 'raised'}
+            className={
+              heroQuadrant.name === 'ATS' ? 'ring-2 ring-primary-base border-primary-base' : ''
+            }
           />
         </div>
 
@@ -398,7 +447,7 @@ export function Analysis() {
               <Tooltip
                 contentStyle={{
                   backgroundColor: CHART_COLORS.surface,
-                  border: '1px solid #484649',
+                  border: `1px solid ${CHART_COLORS.grid}`,
                   borderRadius: 'var(--shape-blockRiot03)',
                   color: CHART_COLORS.onSurface,
                 }}
@@ -444,7 +493,7 @@ export function Analysis() {
                 <Tooltip
                   contentStyle={{
                     backgroundColor: CHART_COLORS.surface,
-                    border: '1px solid #484649',
+                    border: `1px solid ${CHART_COLORS.grid}`,
                     borderRadius: 'var(--shape-blockRiot03)',
                     color: CHART_COLORS.onSurface,
                   }}
@@ -479,7 +528,7 @@ export function Analysis() {
                 <Tooltip
                   contentStyle={{
                     backgroundColor: CHART_COLORS.surface,
-                    border: '1px solid #484649',
+                    border: `1px solid ${CHART_COLORS.grid}`,
                     borderRadius: 'var(--shape-blockRiot03)',
                     color: CHART_COLORS.onSurface,
                   }}
@@ -540,7 +589,10 @@ export function Analysis() {
 
         {/* Verified Sources - Citations from Google Search Grounding */}
         {jobAnalysis?.sources && (
-          <div className="mt-8 bg-surface-container rounded-tech p-8 border border-outline-variant shadow-elevation-1">
+          <div
+            className="mt-8 rounded-tech bg-surface-container p-8 shadow-elevation-1"
+            style={{ border: '1px solid var(--kr-color-concrete-grey-steps-0)' }}
+          >
             <div className="flex items-center gap-3 mb-6">
               <Link2 className="w-6 h-6 text-tertiary" />
               <h2 className="text-title-large font-bold text-on-surface">Verified Sources</h2>
@@ -589,7 +641,10 @@ export function Analysis() {
                 </div>
               </>
             ) : (
-              <div className="text-center py-6 bg-surface-container-low rounded-tech border border-outline-variant border-dashed">
+              <div
+                className="text-center py-6 bg-surface-container-low rounded-tech border border-dashed"
+                style={{ borderColor: 'var(--kr-color-concrete-grey-steps-0)' }}
+              >
                 <Link2 className="w-12 h-12 text-on-surface-variant mx-auto mb-4 opacity-50" />
                 <h3 className="text-title-medium font-bold text-on-surface mb-2">
                   No Verified Sources Found

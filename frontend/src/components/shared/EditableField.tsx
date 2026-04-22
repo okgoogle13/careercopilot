@@ -1,4 +1,5 @@
-import { Lens, Pebble } from '@/components/ui';
+import { ScaffoldInput } from '../ui/ScaffoldInput';
+import { Strike } from '../ui/Strike';
 import { Check, Edit, Sparkles, X } from 'lucide-react';
 import React, { useState } from 'react';
 
@@ -45,7 +46,7 @@ export const EditableField: React.FC<EditableFieldProps> = ({
         <label className="text-[10px] uppercase tracking-widest text-[var(--color-concrete-grey-dark)] mb-2 block">
           {label}
         </label>
-        <Lens
+        <ScaffoldInput
           className="w-full mb-3"
           value={editValue}
           onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
@@ -55,14 +56,14 @@ export const EditableField: React.FC<EditableFieldProps> = ({
           {...(multiline ? { rows: 4 } : {})}
         />
         <div className="flex items-center gap-3">
-          <Pebble
+          <Strike
             iconLeft={<Check className="w-4 h-4" />}
             onClick={handleSave}
             size="md"
             className="bg-[var(--color-ink-gold)]/20 text-[var(--color-ink-gold)] hover:bg-[var(--color-ink-gold)] hover:text-white"
             aria-label="save"
           />
-          <Pebble
+          <Strike
             iconLeft={<X className="w-4 h-4" />}
             onClick={handleCancel}
             size="md"

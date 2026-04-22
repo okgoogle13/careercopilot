@@ -2,6 +2,7 @@ import { useMode } from '@/hooks/use-mode';
 import { motion, type HTMLMotionProps } from 'framer-motion';
 import React from 'react';
 import { cn } from '../../lib/utils';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 export interface KeralaRageButtonProps extends Omit<HTMLMotionProps<'button'>, 'ref'> {
   variant?: 'primary' | 'secondary' | 'tertiary' | 'defiance';
@@ -111,12 +112,7 @@ export const KeralaRageButton = React.forwardRef<HTMLButtonElement, KeralaRageBu
             ? {
                 scale: 1.03,
                 '--grad': 100,
-                transition: {
-                  type: 'spring',
-                  stiffness: 400,
-                  damping: 15,
-                  mass: 1,
-                },
+                transition: KrDarkSpring,
               }
             : undefined
         }

@@ -34,7 +34,7 @@ def repair_file(path):
         content = f.read()
 
     original = content
-    
+
     # 1. Handle Duplicate Keys 'kr-dark' in objects
     # We look for the second occurrence of 'kr-dark': and change it to 'kr-light':
     # This is a bit risky but usually these files have two mode definitions
@@ -50,17 +50,17 @@ def repair_file(path):
     # We look for [a-zA-Z0-9]+-[a-zA-Z0-9-]+ in places that should be identifiers
     # For simplicity, we just replace our known terms with their Pascal versions
     # when they are part of a larger word or start of a line/identifier
-    
+
     for old, new in PASCAL_MAP.items():
         # Replace if it's start of identifier or preceded by something that makes it Pascal
         # e.g. usekr-darkData -> useKrDarkData
         # kr-darkFeed -> KrDarkFeed
         # but NOT in strings (handled by ripgrep later if needed)
-        
+
         # We'll use a regex that matches the term when it's part of an identifier
         # i.e. preceded by [a-zA-Z0-9] or start of word
         # and NOT surrounded by quotes (vague but better)
-        
+
         # Replace usekr-dark -> useKrDark
         content = re.sub(r'([a-z])' + re.escape(old), r'\1' + new, content)
         # Replace at start of word (PascalCase components/types)

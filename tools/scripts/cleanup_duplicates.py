@@ -22,7 +22,7 @@ def cleanup_duplicates(root_dir, dry_run=True):
     total_files_removed = 0
     total_dirs_removed = 0
     total_size_recovered = 0
-    
+
     print(f"{' [DRY RUN] ' if dry_run else ' [EXECUTION] '} Scanning: {root_dir}")
     print("-" * 60)
 
@@ -30,7 +30,7 @@ def cleanup_duplicates(root_dir, dry_run=True):
     for root, dirs, files in os.walk(root_dir, topdown=True):
         # Skip search/system directories for speed and safety
         dirs[:] = [d for d in dirs if d not in ['.git', 'node_modules', '.venv', '__pycache__', '.next']]
-        
+
         # Check files
         for name in files:
             if is_duplicate(name):
@@ -57,10 +57,10 @@ def cleanup_duplicates(root_dir, dry_run=True):
                     for d_root, d_dirs, d_files in os.walk(dirpath):
                         for f in d_files:
                             dir_size += os.path.getsize(os.path.join(d_root, f))
-                    
+
                     total_size_recovered += dir_size
                     total_dirs_removed += 1
-                    
+
                     if dry_run:
                         print(f"Dir  (Dry-run): {dirpath} ({dir_size/1024:.1f} KB)")
                     else:
@@ -74,7 +74,7 @@ def cleanup_duplicates(root_dir, dry_run=True):
     print(f"  Files identified/removed: {total_files_removed}")
     print(f"  Dirs identified/removed:  {total_dirs_removed}")
     print(f"  Total space recovery:     {total_size_recovered / (1024*1024):.2f} MB")
-    
+
     if dry_run and (total_files_removed > 0 or total_dirs_removed > 0):
         print("\nTo actually delete these files, run:")
         print(f"python3 {os.path.basename(__file__)} --execute")
@@ -83,8 +83,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Cleanup macOS/Sync duplicate files and folders")
     parser.add_argument("--execute", action="store_true", help="Actually perform deletion")
     parser.add_argument("--path", default=".", help="Root directory to scan (default: current)")
-    
+
     args = parser.parse_args()
-    
+
     root_path = os.path.abspath(args.path)
     cleanup_duplicates(root_path, dry_run=not args.execute)

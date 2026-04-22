@@ -32,9 +32,6 @@ export type { MegaphoneProps } from './Megaphone';
 // SHARED / UTILITY COMPONENTS (no archetype role)
 // =============================================================================
 
-export { Signal } from './Signal';
-export type { SignalProps, SignalSeverity } from './Signal';
-
 export { Vessel } from './Vessel';
 export type { VesselProps } from './Vessel';
 
@@ -47,45 +44,10 @@ export { KrIcon } from './KrIcon';
 export type { KrIconName, KrIconProps } from './KrIcon';
 
 export { AuroraHeader } from './AuroraHeader';
+export { Footer } from '../../layouts/shared/Footer';
+export type { FooterProps } from '../../layouts/shared/Footer';
 export { Mark } from './Mark';
 export { SplitHeader } from './SplitHeader';
 export { Valve } from './Valve';
 export { NativeAnchor } from './NativeAnchor';
 export type { NativeAnchorProps, AnchorRegister } from './NativeAnchor';
-
-// =============================================================================
-// @deprecated BACKWARD COMPATIBILITY EXPORTS
-// These re-export from new archetype files. Migrate to the new names above.
-// Will be removed in KR Solidarity v7.0.
-// =============================================================================
-
-/** @deprecated Use Strike instead */
-export { Strike as Pebble } from './Strike';
-export type { StrikeProps as PebbleProps } from './Strike';
-
-/** @deprecated Use Placard instead */
-export { Placard as Stone } from './Placard';
-export type { PlacardProps as StoneProps } from './Placard';
-
-/** @deprecated Use ScaffoldInput instead */
-export {
-  ScaffoldInput as Lens,
-  ScaffoldArea as LensArea,
-  ScaffoldArea as M3TextArea,
-} from './ScaffoldInput';
-export type {
-  ScaffoldInputProps as LensProps,
-  ScaffoldInputVariant as LensVariant,
-  ScaffoldInputSize as LensSize,
-} from './ScaffoldInput';
-
-/** @deprecated Use March instead */
-export { March as Jar } from './March';
-export type { MarchProps as JarProps, MarchOption as JarOption } from './March';
-
-/** @deprecated Use Megaphone instead */
-export { Megaphone as Cabinet, Megaphone as M3Modal } from './Megaphone';
-export type { MegaphoneProps as CabinetProps } from './Megaphone';
-
-/** @deprecated Use Signal instead (Seed was a notification badge — now Signal) */
-export { Signal as Seed } from './Signal';

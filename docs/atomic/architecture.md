@@ -19,4 +19,3 @@
 ## MCP Tooling
 - MCP servers in `servers/` (flash-sidekick + docker)
 - MCP config: `mcp_config.json`
-

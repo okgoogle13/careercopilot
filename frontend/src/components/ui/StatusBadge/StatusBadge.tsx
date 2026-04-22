@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 export type StatusBadgeVariant = 'success' | 'warning' | 'error' | 'info' | 'neutral';
 export type StatusBadgeMode = 'KrDark' | 'KrLight';
@@ -14,6 +16,8 @@ export interface StatusBadgeProps {
   showDot?: boolean;
   /** Additional CSS classes */
   className?: string;
+  /** If true, the badge is treated as a selectable/interactive chip */
+  interactive?: boolean;
 }
 
 /**
@@ -40,6 +44,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
   mode: _mode = 'KrDark',
   showDot = false,
   className = '',
+  interactive = true, // Default to interactive for kinetic strategy
 }) => {
   // KeralaRage KrSolidarity Palette Mappings
   const getVariantStyles = () => {
@@ -86,17 +91,26 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
   const currentStyle = getVariantStyles();
 
   return (
-    <div
+    <motion.div
+      whileHover={
+        interactive
+          ? {
+              scale: 1.05,
+              filter: 'brightness(1.1)',
+              borderRadius: 'var(--sys-shape-marchOrganic01)', // Kinetic "Organic" morph
+            }
+          : {}
+      }
+      transition={KrDarkSpring}
       className={`
                 inline-flex items-center gap-2
                 px-3 py-1
                 border
-                transition-all duration-300 ease-viscous var(--ease-viscous-breeze)
-                hover:scale-105 hover:brightness-110
+                cursor-pointer
                 ${className}
             `}
       style={{
-        borderRadius: 'var(--shape-megaphoneCut01)',
+        borderRadius: 'var(--sys-shape-pillMarch01)', // Foundational March shape
         backgroundColor: currentStyle.bg,
         color: currentStyle.text,
         borderColor: currentStyle.border,
@@ -104,11 +118,11 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     >
       {showDot && (
         <div
-          className="w-2 h-2 rounded-march"
+          className="w-2 h-2 rounded-full"
           style={{ backgroundColor: currentStyle.dot }}
         />
       )}
       <span className="text-xs font-mono font-bold tracking-widest uppercase">{label}</span>
-    </div>
+    </motion.div>
   );
 };

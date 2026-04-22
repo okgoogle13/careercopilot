@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, HTMLMotionProps, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 /**
  * ManifestoSlabProps
@@ -16,7 +17,7 @@ export interface ManifestoSlabProps extends HTMLMotionProps<'div'> {
 /**
  * ManifestoSlab (Scaffold Archetype)
  *
- * Kerala Rage kr-solidarity hero section component implementing the Scaffold archetype.
+ * Kerala Rage kr-solidarity headline section component implementing the Scaffold archetype.
  * Structural primitive for high-impact headlines and manifestos.
  *
  * Design Principles:
@@ -39,11 +40,7 @@ export const ManifestoSlab: React.FC<ManifestoSlabProps> = ({
     : {
         initial: { opacity: 0, scale: 0.95 },
         animate: { opacity: 1, scale: 1 },
-        transition: {
-          type: 'spring',
-          stiffness: 400,
-          damping: 30,
-        },
+        transition: KrDarkSpring,
       };
 
   return (
@@ -51,7 +48,7 @@ export const ManifestoSlab: React.FC<ManifestoSlabProps> = ({
       style={{
         backgroundColor: 'var(--sys-color-charcoalBackground-base)',
         borderLeft: '6px solid var(--sys-color-solidarityRed-steps-2)',
-        borderRadius: 'var(--shape-scaffoldFrame01)', // Scaffold archetype minimal structural radius
+        borderRadius: 'var(--sys-shape-scaffoldFrame01)', // Scaffold archetype minimal structural radius
         boxShadow: '0 12px 32px rgba(0, 0, 0, 0.35)',
       }}
       className={cn('p-10 md:p-16 relative overflow-hidden z-20', className)}
@@ -65,7 +62,7 @@ export const ManifestoSlab: React.FC<ManifestoSlabProps> = ({
         {subtitle && (
           <span
             style={{
-              fontFamily: 'var(--sys-type-font-work-sans, "Work Sans", sans-serif)',
+              fontFamily: 'var(--sys-type-fontFamilies-primary)',
               color: 'var(--sys-color-solidarityRed-base)',
             }}
             className="text-2xl font-semibold"
@@ -76,7 +73,7 @@ export const ManifestoSlab: React.FC<ManifestoSlabProps> = ({
         )}
         <h1
           style={{
-            fontFamily: 'var(--sys-type-font-fraunces, "Fraunces", serif)',
+            fontFamily: 'var(--sys-type-fontFamilies-display)',
             color: 'var(--sys-color-worker-ash-base)',
             fontWeight: 700,
             fontVariationSettings: '"wght" 700, "SOFT" 0, "WONK" 1',

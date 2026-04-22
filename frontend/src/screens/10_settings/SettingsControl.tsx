@@ -1,4 +1,5 @@
-import { memo } from 'react';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
+import { memo, type ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import clsx, { type ClassValue } from 'clsx';
 import { useModeStore } from '../../stores/useModeStore';
@@ -73,25 +74,29 @@ const DEFAULT_SLOT_ASSETS: Partial<Record<string, string>> = {
 
 export interface SettingsControlProps {
   className?: ClassValue;
+  children?: ReactNode;
   title?: string;
   subtitle?: string;
   primaryLabel?: string;
   secondaryLabel?: string;
+  showActions?: boolean;
   slotAssets?: Partial<Record<string, string>>;
   onPrimaryAction?: () => void;
   onSecondaryAction?: () => void;
 }
 
-const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
-const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+const springHero = KrDarkSpring;
+const springCard = KrDarkSpring;
+const springButton = KrDarkSpring;
 
 export const SettingsControl = memo(function SettingsControl({
   className,
+  children,
   title = 'Settings',
   subtitle = 'Manage preferences, integrations, and account options.',
   primaryLabel = 'Save Settings',
   secondaryLabel = 'Reset Changes',
+  showActions = true,
   slotAssets,
   onPrimaryAction,
   onSecondaryAction,
@@ -172,44 +177,57 @@ export const SettingsControl = memo(function SettingsControl({
         </p>
       </motion.header>
 
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={undefined}
-        className="relative z-10 mt-6 flex flex-wrap gap-3"
-      >
-        <motion.button
-          type="button"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          transition={springButton}
-          onClick={onPrimaryAction}
-          className="rounded-[var(--sys-shape-blockRiot03)] px-5 py-3 font-semibold"
-          style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            backgroundColor: 'var(--sys-color-inkGold-base)',
-            color: 'var(--sys-color-charcoalBackground-base)',
-          }}
+      {showActions && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={undefined}
+          className="relative z-10 mt-6 flex flex-wrap gap-3"
         >
-          {primaryLabel}
-        </motion.button>
-        <motion.button
-          type="button"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          transition={springButton}
-          onClick={onSecondaryAction}
-          className="rounded-[var(--sys-shape-blockRiot01)] border px-5 py-3 font-medium"
-          style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            borderColor: 'var(--sys-color-protestMetalBlue-base)',
-            color: isKrDark ? 'var(--sys-color-worker-ash-base)' : 'var(--sys-color-paperWhite)',
-            backgroundColor: 'transparent',
-          }}
+          <motion.button
+            type="button"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={springButton}
+            onClick={onPrimaryAction}
+            className="rounded-[var(--sys-shape-blockRiot03)] px-5 py-3 font-semibold"
+            style={{
+              fontFamily: 'var(--sys-type-font-work-sans)',
+              backgroundColor: 'var(--sys-color-inkGold-base)',
+              color: 'var(--sys-color-charcoalBackground-base)',
+            }}
+          >
+            {primaryLabel}
+          </motion.button>
+          <motion.button
+            type="button"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            transition={springButton}
+            onClick={onSecondaryAction}
+            className="rounded-[var(--sys-shape-blockRiot01)] border px-5 py-3 font-medium"
+            style={{
+              fontFamily: 'var(--sys-type-font-work-sans)',
+              borderColor: 'var(--sys-color-protestMetalBlue-base)',
+              color: isKrDark ? 'var(--sys-color-worker-ash-base)' : 'var(--sys-color-paperWhite)',
+              backgroundColor: 'transparent',
+            }}
+          >
+            {secondaryLabel}
+          </motion.button>
+        </motion.div>
+      )}
+
+      {children ? (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...springCard, delay: 0.08 }}
+          className="relative z-10 mt-8"
         >
-          {secondaryLabel}
-        </motion.button>
-      </motion.div>
+          {children}
+        </motion.div>
+      ) : null}
 
       <motion.p
         initial={{ opacity: 0 }}

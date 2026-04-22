@@ -35,6 +35,13 @@ export const SHAPE_TOKENS = [
   // Core UI — Alert Shard (Strike error/selected)
   'alertShard01',
   'alertShard01-pressed',
+  // Kinetic Morph series (v6.1 strategy)
+  'strikePuff01',
+  'marchOrganic01',
+  'waveTectonic01',
+  'waveTectonic02',
+  'toggleSlide01',
+  'maskAsymmetric01',
   // Core UI — Scaffold Frame (Scaffold — immutable)
   'scaffoldFrame01',
   'scaffoldFrame01-focus',
@@ -44,6 +51,7 @@ export const SHAPE_TOKENS = [
   // Core UI — Placard Torn (Placard content cards)
   'placardTorn01',
   'placardTorn01-selected',
+  'placardTorn01-loading',
   // Decorative — Substrate Tile (Substrate/hero only)
   'substrateTile01',
   'substrateTile01-hover',
@@ -69,8 +77,8 @@ export type ShapeToken = (typeof SHAPE_TOKENS)[number];
 export const archetypes = {
   Strike: {
     shapes: {
-      base: 'blockRiot03', // 32px 2px 2px 2px — CTA default
-      pressed: 'blockRiot03-pressed', // = blockRiot02 on press
+      base: 'blockRiot03', // 32px 4px 4px 32px — CTA default
+      pressed: 'strikePuff01', // 48px 12px 12px 48px 'puff' morph
       active: 'blockRiot02', // 20px 4px 12px 2px hover
       selected: 'alertShard01', // 32px 2px 2px 32px error/selected
       loading: 'blockRiot03-loading', // pill collapse during async
@@ -80,18 +88,19 @@ export const archetypes = {
   },
   March: {
     shapes: {
-      base: 'pillMarch01', // 9999px full pill (closed)
-      pressed: 'pillMarch01-pressed', // pill w/ side notch
-      open: 'marchSurge01', // 20px 8px 12px 32px open
-      expanded: 'marchSurge01-expanded', // 32px 12px 8px 48px fully open
+      base: 'pillMarch01', // 9999px 8px 9999px 8px notch
+      pressed: 'pillMarch01-pressed', // 9999px 24px 9999px 24px expand
+      selected: 'marchOrganic01', // 9999px 48px 4px 9999px organic morph
+      open: 'marchSurge01', // 48px 12px 12px 48px open
+      expanded: 'marchSurge01-expanded', // 0px fully open (snapped)
     },
     motion: 'dragSettle',
     motionDuration: '800ms',
   },
   Megaphone: {
     shapes: {
-      base: 'megaphoneCut01', // 42% 58% 45% 55% organic
-      loading: 'megaphoneCut01-loading', // morphs to placardTorn01 values
+      base: 'megaphoneCut01', // 64px 0px 64px 0px tension cut
+      loading: 'megaphoneCut01-loading', // 32px 32px 32px 32px relaxed shape
       ambient: 'substrateTile01', // ambient background layer
     },
     motion: 'typeSpringSlam',
@@ -99,9 +108,9 @@ export const archetypes = {
   },
   Placard: {
     shapes: {
-      base: 'placardTorn01', // 48% 52% 58% organic
-      selected: 'placardTorn01-selected', // = blockRiot02 on select
-      loading: 'blockRiot03', // blockRiot03 loading morph
+      base: 'placardTorn01', // 48px 4px 48px 4px structural tension
+      selected: 'placardTorn01-selected', // 12px 32px 12px 32px invert
+      loading: 'placardTorn01-loading', // 24px relaxed load
     },
     motion: 'dragSettle',
     motionDuration: '800ms',
@@ -116,12 +125,20 @@ export const archetypes = {
   },
   Substrate: {
     shapes: {
-      base: 'substrateTile02', // 40% 60% 70% 30% base canvas
-      ambient: 'substrateTile01', // 60% 40% 30% 70% ambient drift
-      hover: 'substrateTile01-hover', // 70% 30% 40% drift morph
+      base: 'waveTectonic02', // base tectonic canvas
+      ambient: 'waveTectonic01', // ambient plate drift
+      hover: 'substrateTile01-hover', // normalized plate
     },
     motion: 'waterRipple',
     motionDuration: '3000ms',
+  },
+  Avatar: {
+    shapes: {
+      base: 'maskAsymmetric01', // branded silhouette
+      presence: 'substrateTile01-hover', // morphing presence indicator
+    },
+    motion: 'dragSettle',
+    motionDuration: '400ms',
   },
 } as const;
 

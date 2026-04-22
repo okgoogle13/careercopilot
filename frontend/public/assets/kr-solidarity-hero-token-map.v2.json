@@ -1,0 +1,84 @@
+{
+  "version": "2.0",
+  "token_schema": "HeroTokenMapV2",
+  "tokens": {
+    "urban_wall_base": {
+      "ref": "KR-SOLID-042",
+      "status": "ready",
+      "path": "/assets/kr-solidarity/urban-gallery/kr-solidarity__substrate__urban--wall-base--v1.png",
+      "description": "Dark distressed asphalt wall texture"
+    },
+    "urban_grain_overlay": {
+      "ref": "KR-SOLID-043",
+      "status": "ready",
+      "path": "/assets/kr-solidarity/urban-gallery/kr-solidarity__atmospheric__urban--grain-overlay--v1.png",
+      "description": "Soft analog screenprint grain overlay"
+    },
+    "urban_main_poster": {
+      "ref": "KR-SOLID-044",
+      "status": "ready",
+      "path": "/assets/kr-solidarity/urban-gallery/kr-solidarity__resistance__urban--main-poster--v1.png",
+      "description": "Primary archival portrait poster"
+    },
+    "urban_secondary_poster_upper": {
+      "ref": "KR-SOLID-045",
+      "status": "ready",
+      "path": "/assets/kr-solidarity/urban-gallery/kr-solidarity__resistance__urban--secondary-poster-upper--v1.png",
+      "description": "Secondary upper-left poster"
+    },
+    "urban_secondary_poster_lower": {
+      "ref": "KR-SOLID-046",
+      "status": "ready",
+      "path": "/assets/kr-solidarity/urban-gallery/kr-solidarity__resistance__urban--secondary-poster-lower--v1.png",
+      "description": "Secondary lower-left poster"
+    },
+    "urban_splatter_accent": {
+      "ref": "KR-SOLID-047",
+      "status": "ready",
+      "path": "/assets/kr-solidarity/urban-gallery/kr-solidarity__atmospheric__urban--splatter-accent--v1.png",
+      "description": "Graffiti splatter accent"
+    },
+    "urban_mist_drips": {
+      "ref": "KR-SOLID-048",
+      "status": "ready",
+      "path": "/assets/kr-solidarity/urban-gallery/kr-solidarity__atmospheric__urban--mist-drips--v1.png",
+      "description": "Soft urban mist and drips"
+    },
+    "urban_shadow_paste_fx": {
+      "ref": "KR-SOLID-049",
+      "status": "ready",
+      "path": "/assets/kr-solidarity/urban-gallery/kr-solidarity__atmospheric__urban--shadow-paste-fx--v1.png",
+      "description": "Poster paste shadow and grime effect"
+    },
+    "hero_substrate_base": {
+      "ref": "KR-SOLID-021",
+      "status": "ready",
+      "path": "/assets/kr-solidarity/heroes/kr-solidarity__substrate__hero--melbourne-solidarity--v1.png",
+      "description": "Melbourne solidarity substrate"
+    },
+    "hero_devotional_anchor": {
+      "ref": "KR-SOLID-009",
+      "status": "ready",
+      "path": "/assets/kr-solidarity/devotional/kr-solidarity__spiritual__devotional--cultural-anchor--v1.png",
+      "description": "Devotional cultural anchor"
+    },
+    "hero_shiva_statue": {
+      "ref": "KR-SOLID-010",
+      "status": "ready",
+      "path": "/assets/kr-solidarity/devotional/kr-solidarity__spiritual__devotional--shiva-statue--v1.png",
+      "description": "Shiva statue spiritual asset"
+    },
+    "hero_cultural_v3": {
+      "ref": "KR-SOLID-015",
+      "status": "ready",
+      "path": "/assets/kr-solidarity/heroes/kr-solidarity__cultural__hero--cultural-anchor--v3.png",
+      "description": "Cultural heritage asset V3"
+    },
+    "hero_kerala_elephant": {
+      "ref": "KR-SOLID-034",
+      "status": "ready",
+      "path": "/assets/kr-solidarity/symbol/kr-solidarity__cultural__symbol--kerala-elephant--v1.png",
+      "description": "Kerala elephant cultural asset"
+    }
+  }
+}

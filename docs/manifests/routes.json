@@ -1,0 +1,402 @@
+{
+  "generatedAt": "2026-04-01T04:04:08.326Z",
+  "count": 44,
+  "routes": [
+    {
+      "path": "/",
+      "component": "LandingPage",
+      "importSource": "./features/landing/LandingPage",
+      "auth": false,
+      "layout": "public",
+      "screenId": "01_landing",
+      "prototype": false
+    },
+    {
+      "path": "/auth",
+      "component": "AuthPage",
+      "importSource": "UNKNOWN",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/login",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": false,
+      "layout": "public",
+      "screenId": "02_auth",
+      "prototype": false
+    },
+    {
+      "path": "/register",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": false,
+      "layout": "public",
+      "screenId": "02_auth",
+      "prototype": false
+    },
+    {
+      "path": "/design-sidekick",
+      "component": "DesignSidekick",
+      "importSource": "./features/design-sidekick/DesignSidekick",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/style-guide",
+      "component": "StyleGuide",
+      "importSource": "./features/style-guide/StyleGuide",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/animation-test",
+      "component": "AnimationTestPage",
+      "importSource": "./components/debug/AnimationTest",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "*",
+      "component": "NotFound",
+      "importSource": "./features/not-found/NotFound",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/dashboard",
+      "component": "DashboardPage",
+      "importSource": "./features/dashboard/Dashboard",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "11_dashboard",
+      "prototype": false
+    },
+    {
+      "path": "/profile",
+      "component": "ProfilePage",
+      "importSource": "./features/profile/ProfileView",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/lookout",
+      "component": "LookoutPage",
+      "importSource": "./screens/06_lookout/LookoutDiscovery",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/applications",
+      "component": "ApplicationsPage",
+      "importSource": "./features/applications/ApplicationTracker",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/analysis",
+      "component": "AnalysisPage",
+      "importSource": "./features/analysis/AnalysisPage",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "05_analysis",
+      "prototype": false
+    },
+    {
+      "path": "/docs",
+      "component": "DocsPage",
+      "importSource": "./features/documents/Documents",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/apply",
+      "component": "ApplyPage",
+      "importSource": "./features/applications/ApplyQuick",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/generation",
+      "component": "GenerationPage",
+      "importSource": "./features/documents/components/TabbedGenerationPanel",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/settings",
+      "component": "SettingsPage",
+      "importSource": "./features/settings/Settings",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "10_settings",
+      "prototype": false
+    },
+    {
+      "path": "/onboarding",
+      "component": "OnboardingPage",
+      "importSource": "./features/onboarding/OnboardingPage",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "03_onboarding",
+      "prototype": false
+    },
+    {
+      "path": "/tracker",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "07_kanban",
+      "prototype": false
+    },
+    {
+      "path": "/opportunities",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "06_lookout",
+      "prototype": false
+    },
+    {
+      "path": "/career/ingest",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "04_ingestion",
+      "prototype": false
+    },
+    {
+      "path": "/apply/quick",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/ksc-generator",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "08_workbench",
+      "prototype": false
+    },
+    {
+      "path": "/cover-letter-generator",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": "09_finalization",
+      "prototype": false
+    },
+    {
+      "path": "/job-queue",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/documents",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/dashboard-overview",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/kanban",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/ingestion",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/feed",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/studio",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/editor",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/welcome",
+      "component": "Navigate",
+      "importSource": "react-router-dom",
+      "auth": true,
+      "layout": "migrated",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/asset-library",
+      "component": "AssetLibrary",
+      "importSource": "./features/analysis/AssetLibrary",
+      "auth": true,
+      "layout": "protected",
+      "screenId": null,
+      "prototype": false
+    },
+    {
+      "path": "/test-tokens",
+      "component": "TokenTest",
+      "importSource": "./components/debug/TokenTest",
+      "auth": true,
+      "layout": "protected",
+      "screenId": null,
+      "prototype": true
+    },
+    {
+      "path": "/prototype",
+      "component": "UNRESOLVED",
+      "importSource": "UNKNOWN",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": true
+    },
+    {
+      "path": "/prototype/apply-quick",
+      "component": "UNRESOLVED",
+      "importSource": "UNKNOWN",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": true
+    },
+    {
+      "path": "/prototype/library",
+      "component": "UNRESOLVED",
+      "importSource": "UNKNOWN",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": true
+    },
+    {
+      "path": "/prototype/past-applications",
+      "component": "UNRESOLVED",
+      "importSource": "UNKNOWN",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": true
+    },
+    {
+      "path": "/prototype/profile",
+      "component": "UNRESOLVED",
+      "importSource": "UNKNOWN",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": true
+    },
+    {
+      "path": "/prototype/image-studio",
+      "component": "UNRESOLVED",
+      "importSource": "UNKNOWN",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": true
+    },
+    {
+      "path": "/prototype/settings-harvest",
+      "component": "UNRESOLVED",
+      "importSource": "UNKNOWN",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": true
+    },
+    {
+      "path": "/prototype/resume",
+      "component": "UNRESOLVED",
+      "importSource": "UNKNOWN",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": true
+    },
+    {
+      "path": "/prototype/cover-letter",
+      "component": "UNRESOLVED",
+      "importSource": "UNKNOWN",
+      "auth": false,
+      "layout": "public",
+      "screenId": null,
+      "prototype": true
+    }
+  ]
+}

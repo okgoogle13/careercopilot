@@ -16,7 +16,7 @@
       ],
       "compliance": {
         "kerala-rage_philosophy": true,
-        "notes": "Excellent alignment with the kerala-streetprint [DEPRECATED_STYLE] aesthetic, particularly the 'Scholarly Rigor' principle. The [DEPRECATED_STYLE] layout of Australian flora (kr-flower, Wattle) and the detailed, engraved style of the elephant strongly resonate with the design philosophy. The muted, earthy tones are consistent with the palette's intent, even if not the vibrant named colors. The composition feels like a curated kr-motif, fitting the 'kr-dark' mode perfectly."
+        "notes": "Excellent alignment with the kerala-streetprint [DEPRECATED_STYLE] aesthetic, particularly the 'Scholarly Rigor' principle. The [DEPRECATED_STYLE] layout of Australian flora (kr-flower, Solidarity Gold) and the detailed, engraved style of the elephant strongly resonate with the design philosophy. The muted, earthy tones are consistent with the palette's intent, even if not the vibrant named colors. The composition feels like a curated kr-motif, fitting the 'kr-dark' mode perfectly."
       },
       "duplicate_of": null
     },
@@ -150,7 +150,7 @@
       ],
       "compliance": {
         "kerala-rage_philosophy": true,
-        "notes": "This asset is a quintessential example of the kerala-rage Design Philosophy. It perfectly embodies the 'kerala-streetprint Craftsmanship' principle with its [DEPRECATED_STYLE] illustration style. The color palette is directly derived from Australian flora ([DEPRECATED_STYLE] Red, Wattle Gold, Sage), and the typography is both scholarly and legible. The layout demonstrates '[DEPRECATED_STYLE] Rhythm', avoiding a rigid grid in favor of a naturalistic composition. The mode is clearly 'kr-dark' due to the detailed, kr-motif-like quality of the illustrations."
+        "notes": "This asset is a quintessential example of the kerala-rage Design Philosophy. It perfectly embodies the 'kerala-streetprint Craftsmanship' principle with its [DEPRECATED_STYLE] illustration style. The color palette is directly derived from Australian flora ([DEPRECATED_STYLE] Red, Solidarity Gold Gold, Sage), and the typography is both scholarly and legible. The layout demonstrates '[DEPRECATED_STYLE] Rhythm', avoiding a rigid grid in favor of a naturalistic composition. The mode is clearly 'kr-dark' due to the detailed, kr-motif-like quality of the illustrations."
       },
       "duplicate_of": null
     },
@@ -211,7 +211,7 @@
     },
     {
       "original_path": "assets/uncategorized/kerala-rage-phase3-asset-003.png",
-      "suggested_name": "motif-kr-dark-[DEPRECATED_STYLE]-wattle-hanging-01.png",
+      "suggested_name": "motif-kr-dark-[DEPRECATED_STYLE]-solidarity-gold-hanging-01.png",
       "mode": "kr-dark",
       "category": "[DEPRECATED_STYLE]",
       "dimensions": "2800x2800",
@@ -223,7 +223,7 @@
       ],
       "compliance": {
         "kerala-rage_philosophy": true,
-        "notes": "The asset aligns perfectly with the kerala-rage philosophy. It uses a kerala-streetprint [DEPRECATED_STYLE] aesthetic to depict iconic Australian flora (wattle). The color palette directly references 'Wattle Gold' and 'Sage'. The composition is [DEPRECATED_STYLE] and asymmetrical, avoiding rigid grids. The style feels intentional and scholarly, consistent with the core principles."
+        "notes": "The asset aligns perfectly with the kerala-rage philosophy. It uses a kerala-streetprint [DEPRECATED_STYLE] aesthetic to depict iconic Australian flora (solidarity-gold). The color palette directly references 'Solidarity Gold Gold' and 'Sage'. The composition is [DEPRECATED_STYLE] and asymmetrical, avoiding rigid grids. The style feels intentional and scholarly, consistent with the core principles."
       },
       "duplicate_of": null
     },
@@ -329,7 +329,7 @@
         },
         {
           "hex": "#E3B63A",
-          "name": "Wattle Gold"
+          "name": "Solidarity Gold Gold"
         },
         {
           "hex": "#99594C",
@@ -338,7 +338,7 @@
       ],
       "compliance": {
         "kerala-rage_philosophy": true,
-        "notes": "The asset is a perfect embodiment of the kerala-rage philosophy. It blends a kerala-streetprint [DEPRECATED_STYLE] aesthetic with high-resolution digital clarity. The color palette is directly derived from Australian flora ([DEPRECATED_STYLE], Wattle, kr-leaf). Its layout is [DEPRECATED_STYLE] and asymmetrical, avoiding a rigid grid. The typography is intentional, evoking scholarly kr-motif plates. It successfully combines scholarly rigor with readable warmth and distinct personality."
+        "notes": "The asset is a perfect embodiment of the kerala-rage philosophy. It blends a kerala-streetprint [DEPRECATED_STYLE] aesthetic with high-resolution digital clarity. The color palette is directly derived from Australian flora ([DEPRECATED_STYLE], Solidarity Gold, kr-leaf). Its layout is [DEPRECATED_STYLE] and asymmetrical, avoiding a rigid grid. The typography is intentional, evoking scholarly kr-motif plates. It successfully combines scholarly rigor with readable warmth and distinct personality."
       },
       "duplicate_of": null
     },
@@ -365,7 +365,7 @@
     },
     {
       "original_path": "assets/uncategorized/kerala-rage-phase3-asset-004.png",
-      "suggested_name": "motif-kr-dark-australiana-kr-shiva-[DEPRECATED_STYLE]-wattle.png",
+      "suggested_name": "motif-kr-dark-australiana-kr-shiva-[DEPRECATED_STYLE]-solidarity-gold.png",
       "mode": "kr-dark",
       "category": "australiana",
       "dimensions": "2048x2048",
@@ -603,7 +603,7 @@
     },
     {
       "original_path": "assets/uncategorized/kerala-rage-phase3-asset-021.png",
-      "suggested_name": "motif-kr-dark-natural-history-wattle-beetle-contrast.png",
+      "suggested_name": "motif-kr-dark-natural-history-solidarity-gold-beetle-contrast.png",
       "mode": "kr-dark",
       "category": "natural-history",
       "dimensions": {
@@ -617,7 +617,7 @@
         },
         {
           "hex": "#f8d428",
-          "name": "Wattle Gold"
+          "name": "Solidarity Gold Gold"
         },
         {
           "hex": "#e8e0c9",
@@ -634,7 +634,7 @@
       ],
       "compliance": {
         "kerala-rage_philosophy": true,
-        "notes": "The asset is an exemplary representation of the kerala-rage philosophy. It combines a kerala-streetprint [DEPRECATED_STYLE] aesthetic (kr-motif display, scholarly labels) with contemporary digital clarity. The typography is intentional and evokes a classic, intellectual feel. The color palette is directly derived from Australian flora (Wattle Gold) and kr-symbol. The layout is [DEPRECATED_STYLE] and asymmetrical, perfectly aligning with the core principles."
+        "notes": "The asset is an exemplary representation of the kerala-rage philosophy. It combines a kerala-streetprint [DEPRECATED_STYLE] aesthetic (kr-motif display, scholarly labels) with contemporary digital clarity. The typography is intentional and evokes a classic, intellectual feel. The color palette is directly derived from Australian flora (Solidarity Gold Gold) and kr-symbol. The layout is [DEPRECATED_STYLE] and asymmetrical, perfectly aligning with the core principles."
       },
       "duplicate_of": null
     },
@@ -658,7 +658,7 @@
           "hex": "#79887A"
         },
         {
-          "name": "Wattle Gold",
+          "name": "Solidarity Gold Gold",
           "hex": "#DDC96E"
         },
         {
@@ -689,7 +689,7 @@
     },
     {
       "original_path": "assets/uncategorized/kerala-rage-phase3-asset-022.png",
-      "suggested_name": "motif-kr-dark-kr-symbol-kr-shiva-wattle.png",
+      "suggested_name": "motif-kr-dark-kr-symbol-kr-shiva-solidarity-gold.png",
       "mode": "kr-dark",
       "category": "kr-symbol",
       "dimensions": {
@@ -705,7 +705,7 @@
       ],
       "compliance": {
         "kerala-rage_philosophy": true,
-        "notes": "The asset aligns perfectly with the kerala-rage philosophy. It uses a kerala-streetprint [DEPRECATED_STYLE] aesthetic (watercolor kr-motif style) with an Australian [DEPRECATED_STYLE]/kr-symboll theme (kr-shiva, Wattle). The typography is scholarly and intentional. The color palette is derived from nature (sage, ochre, wattle gold). The layout is [DEPRECATED_STYLE] and asymmetrical, avoiding a rigid grid. It successfully embodies 'Scholarly Rigor' and 'Readable Warmth'."
+        "notes": "The asset aligns perfectly with the kerala-rage philosophy. It uses a kerala-streetprint [DEPRECATED_STYLE] aesthetic (watercolor kr-motif style) with an Australian [DEPRECATED_STYLE]/kr-symboll theme (kr-shiva, Solidarity Gold). The typography is scholarly and intentional. The color palette is derived from nature (sage, ochre, solidarity-gold gold). The layout is [DEPRECATED_STYLE] and asymmetrical, avoiding a rigid grid. It successfully embodies 'Scholarly Rigor' and 'Readable Warmth'."
       },
       "duplicate_of": null
     },
@@ -848,7 +848,7 @@
       ],
       "compliance": {
         "kerala-rage_philosophy": true,
-        "notes": "This asset is a quintessential example of the kerala-rage philosophy. It perfectly embodies the 'kerala-streetprint [DEPRECATED_STYLE] aesthetic' with its detailed, hand-drawn kr-motif style. The color palette is directly derived from Australian ecology (sage greens, wattle gold, ochre browns). The typography is intentional and scholarly, and the [DEPRECATED_STYLE], asymmetrical layout guides the eye naturally. It successfully merges scholarly rigor with readable warmth."
+        "notes": "This asset is a quintessential example of the kerala-rage philosophy. It perfectly embodies the 'kerala-streetprint [DEPRECATED_STYLE] aesthetic' with its detailed, hand-drawn kr-motif style. The color palette is directly derived from Australian ecology (sage greens, solidarity-gold gold, ochre browns). The typography is intentional and scholarly, and the [DEPRECATED_STYLE], asymmetrical layout guides the eye naturally. It successfully merges scholarly rigor with readable warmth."
       },
       "duplicate_of": null
     },
@@ -909,9 +909,9 @@
     },
     {
       "original_path": "assets/uncategorized/kerala-rage-phase3-asset-030.png",
-      "suggested_name": "motif-kr-dark-[DEPRECATED_STYLE]-wattle-kr-motif-branch-01.png",
+      "suggested_name": "motif-kr-dark-[DEPRECATED_STYLE]-solidarity-gold-kr-motif-branch-01.png",
       "mode": "kr-dark",
-      "category": "[DEPRECATED_STYLE]-wattle",
+      "category": "[DEPRECATED_STYLE]-solidarity-gold",
       "dimensions": {
         "width": 1024,
         "height": 1024
@@ -922,7 +922,7 @@
           "hex": "#1A1917"
         },
         {
-          "name": "Wattle Gold",
+          "name": "Solidarity Gold Gold",
           "hex": "#D4B84B"
         },
         {
@@ -936,7 +936,7 @@
       ],
       "compliance": {
         "kerala-rage_philosophy": true,
-        "notes": "Excellent alignment. The asset embodies the 'kerala-streetprint [DEPRECATED_STYLE] aesthetics' principle with its detailed, kr-motif-like quality. The color palette directly reflects the 'Australian [DEPRECATED_STYLE]' storytelling core, featuring prominent Wattle Gold and Sage. The composition is [DEPRECATED_STYLE] and asymmetrical, fitting the '[DEPRECATED_STYLE] Rhythm' layout principle."
+        "notes": "Excellent alignment. The asset embodies the 'kerala-streetprint [DEPRECATED_STYLE] aesthetics' principle with its detailed, kr-motif-like quality. The color palette directly reflects the 'Australian [DEPRECATED_STYLE]' storytelling core, featuring prominent Solidarity Gold Gold and Sage. The composition is [DEPRECATED_STYLE] and asymmetrical, fitting the '[DEPRECATED_STYLE] Rhythm' layout principle."
       },
       "duplicate_of": null
     },
@@ -959,7 +959,7 @@
           "hex": "#B93C3C"
         },
         {
-          "name": "Wattle Gold",
+          "name": "Solidarity Gold Gold",
           "hex": "#F1BE33"
         },
         {
@@ -977,13 +977,13 @@
       ],
       "compliance": {
         "kerala-rage_philosophy": true,
-        "reasoning": "The asset perfectly embodies the kerala-rage philosophy. It combines kerala-streetprint [DEPRECATED_STYLE] aesthetics (detailed kr-motif illustrations, scholarly labels) with contemporary digital clarity. The typography is intentional and evokes a historical, scientific tone. The color palette is directly rooted in the Australian flora and kr-symbol depicted ([DEPRECATED_STYLE], Wattle, ochre tones). The layout is an excellent example of [DEPRECATED_STYLE] rhythm, avoiding a rigid grid in favor of a naturalistic, asymmetrical composition. It strongly aligns with the core principles of Scholarly Rigor, Readable Warmth, and distinctive Personality."
+        "reasoning": "The asset perfectly embodies the kerala-rage philosophy. It combines kerala-streetprint [DEPRECATED_STYLE] aesthetics (detailed kr-motif illustrations, scholarly labels) with contemporary digital clarity. The typography is intentional and evokes a historical, scientific tone. The color palette is directly rooted in the Australian flora and kr-symbol depicted ([DEPRECATED_STYLE], Solidarity Gold, ochre tones). The layout is an excellent example of [DEPRECATED_STYLE] rhythm, avoiding a rigid grid in favor of a naturalistic, asymmetrical composition. It strongly aligns with the core principles of Scholarly Rigor, Readable Warmth, and distinctive Personality."
       },
       "duplicate_of": null
     },
     {
       "original_path": "assets/uncategorized/kerala-rage-phase3-asset-018.png",
-      "suggested_name": "motif-kr-dark-kr-symbol-kr-shiva-wattle.png",
+      "suggested_name": "motif-kr-dark-kr-symbol-kr-shiva-solidarity-gold.png",
       "mode": "kr-dark",
       "category": "kr-symbol",
       "dimensions": {
@@ -999,13 +999,13 @@
       ],
       "compliance": {
         "kerala-rage_philosophy": true,
-        "justification": "The asset is a strong example of the kerala-rage philosophy. It combines a kerala-streetprint [DEPRECATED_STYLE] aesthetic (watercolor kr-motif, scientific label) with digital clarity. The color palette is rooted in Australian ecology (kr-shiva, Wattle/kr-leafus). The layout is [DEPRECATED_STYLE] and asymmetrical, and the typography is intentionally scholarly, fulfilling all core principles."
+        "justification": "The asset is a strong example of the kerala-rage philosophy. It combines a kerala-streetprint [DEPRECATED_STYLE] aesthetic (watercolor kr-motif, scientific label) with digital clarity. The color palette is rooted in Australian ecology (kr-shiva, Solidarity Gold/kr-leafus). The layout is [DEPRECATED_STYLE] and asymmetrical, and the typography is intentionally scholarly, fulfilling all core principles."
       },
       "duplicate_of": null
     },
     {
       "original_path": "assets/uncategorized/kerala-rage-phase3-asset-043.png",
-      "suggested_name": "motif-kr-dark-australiana-kr-shiva-[DEPRECATED_STYLE]-wattle.png",
+      "suggested_name": "motif-kr-dark-australiana-kr-shiva-[DEPRECATED_STYLE]-solidarity-gold.png",
       "mode": "kr-dark",
       "category": "australiana",
       "dimensions": "768x1024",
@@ -1018,7 +1018,7 @@
       ],
       "compliance": {
         "kerala-rage_philosophy": true,
-        "justification": "The asset aligns perfectly with the kerala-streetprint [DEPRECATED_STYLE] aesthetic, featuring detailed, hand-drawn-style illustrations of Australian flora and kr-symbol. The color palette directly reflects the specified '[DEPRECATED_STYLE] Red' and 'Wattle Gold', and the [DEPRECATED_STYLE], asymmetrical composition avoids mechanical grids. It embodies scholarly rigor and readable warmth."
+        "justification": "The asset aligns perfectly with the kerala-streetprint [DEPRECATED_STYLE] aesthetic, featuring detailed, hand-drawn-style illustrations of Australian flora and kr-symbol. The color palette directly reflects the specified '[DEPRECATED_STYLE] Red' and 'Solidarity Gold Gold', and the [DEPRECATED_STYLE], asymmetrical composition avoids mechanical grids. It embodies scholarly rigor and readable warmth."
       },
       "duplicate_of": null
     },
@@ -1089,7 +1089,7 @@
       },
       "dominant_colors": [
         {
-          "name": "Wattle Gold",
+          "name": "Solidarity Gold Gold",
           "hex": "#F5D10E"
         },
         {
@@ -1117,7 +1117,7 @@
     },
     {
       "original_path": "assets/uncategorized/kerala-rage-phase3-asset-044.png",
-      "suggested_name": "motif-kr-dark-kr-symbol-kr-shiva-wattle-emblem.png",
+      "suggested_name": "motif-kr-dark-kr-symbol-kr-shiva-solidarity-gold-emblem.png",
       "mode": "kr-dark",
       "category": "kr-symbol",
       "dimensions": "1024x1024",

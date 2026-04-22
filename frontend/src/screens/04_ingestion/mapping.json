@@ -1,7 +1,7 @@
 {
   "wireframe_id": "04_ingestion",
   "wireframe_path": ".claude/wireframes/04_ingestion.xml",
-  "source_component_path": "frontend/src/components/phase3-batch3/IngestionFlow.tsx",
+  "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/IngestionFlow.tsx",
   "screen_component_path": "frontend/src/screens/04_ingestion/IngestionFlow.tsx",
   "route": "/kr/ingestion",
   "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",

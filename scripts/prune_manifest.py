@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 def prune_manifest():
-    manifest_path = Path('frontend/public/assets/kerala-rage-kr-solidarity-manifest.json')
+    manifest_path = Path('frontend/public/assets/kr-solidarity-manifest.json')
     if not manifest_path.exists():
         print("Manifest not found.")
         return
@@ -42,7 +42,7 @@ def prune_manifest():
     print(f"Original Assets: {original_count}")
     print(f"Remaining Assets: {len(remaining_assets)}")
     print(f"Purged Assets: {len(purged_ids)}")
-    
+
     # Optionally clean up asset-packages
     # But let's just do the manifest for now as requested.
 

@@ -1,6 +1,5 @@
 """Focused tests for the document processor."""
 
-import io
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
@@ -48,6 +47,7 @@ async def test_process_document_pdf(document_processor, tmp_path):
 
     assert chunks == expected
 
+
 @pytest.mark.asyncio
 async def test_process_document_pdf_path(document_processor, tmp_path):
     pdf_file = tmp_path / "test.pdf"
@@ -71,6 +71,7 @@ async def test_process_document_text(document_processor):
     assert isinstance(chunks, list)
     assert len(chunks) > 0
     assert all(isinstance(chunk, DocumentChunk) for chunk in chunks)
+
 
 @pytest.mark.asyncio
 async def test_process_document_markdown(document_processor):
@@ -129,21 +130,26 @@ def test_chunk_text(document_processor):
     assert len(chunks) > 1
     assert all(isinstance(chunk, DocumentChunk) for chunk in chunks)
 
+
 def test_chunk_text_overlap(document_processor):
     # chunk_size is 100, chunk_overlap is 10
-    text = "a " * 50 # 100 chars
-    text += "b " * 50 # 200 chars total
+    text = "a " * 50  # 100 chars
+    text += "b " * 50  # 200 chars total
     chunks = document_processor._chunk_text(text, {})
     assert len(chunks) > 1
     # Check that overlap happens
 
+
 def test_chunk_text_small_overlap(document_processor):
-    document_processor.chunk_overlap = 150 # Larger than chunk size 100? No wait, overlap can be smaller
+    document_processor.chunk_overlap = (
+        150  # Larger than chunk size 100? No wait, overlap can be smaller
+    )
     document_processor.chunk_size = 20
     document_processor.chunk_overlap = 10
-    text = "123456789012345678901234567890" # 30 chars
+    text = "123456789012345678901234567890"  # 30 chars
     chunks = document_processor._chunk_text(text, {})
     assert len(chunks) > 1
+
 
 def test_chunk_text_empty_chunk(document_processor):
     document_processor.chunk_size = 5
@@ -152,6 +158,7 @@ def test_chunk_text_empty_chunk(document_processor):
     text = "a " * 20
     chunks = document_processor._chunk_text(text, {})
     assert len(chunks) > 1
+
 
 def test_chunk_text_empty(document_processor):
     assert document_processor._chunk_text("   \n ", {}) == []
@@ -175,13 +182,17 @@ def test_detect_content_type(document_processor, tmp_path):
     unknown_file.write_text("test", encoding="utf-8")
     assert document_processor._detect_content_type(unknown_file) == "text/plain"
 
+
 @pytest.mark.asyncio
 async def test_process_html_error(document_processor):
-    with patch("app.ai.document_processor.BeautifulSoup", side_effect=Exception("HTML parse error")):
+    with patch(
+        "app.ai.document_processor.BeautifulSoup", side_effect=Exception("HTML parse error")
+    ):
         with pytest.raises(AIError) as exc_info:
             await document_processor._process_html(b"bad html", {})
 
         assert "HTML parse error" in str(exc_info.value)
+
 
 @pytest.mark.asyncio
 async def test_process_pdf_pypdfium2_success(document_processor):
@@ -199,6 +210,7 @@ async def test_process_pdf_pypdfium2_success(document_processor):
     assert chunks[0].page_number == 1
     assert chunks[0].metadata["meta"] == "data"
 
+
 @pytest.mark.asyncio
 async def test_process_pdf_pypdfium2_empty_page(document_processor):
     mock_pdf = MagicMock()
@@ -212,10 +224,13 @@ async def test_process_pdf_pypdfium2_empty_page(document_processor):
 
     assert len(chunks) == 0
 
+
 @pytest.mark.asyncio
 async def test_process_pdf_fallback_to_pdfplumber(document_processor):
     # Make pypdfium2 raise an exception
-    with patch("app.ai.document_processor.pypdfium2.PdfDocument", side_effect=Exception("pypdfium2 failed")):
+    with patch(
+        "app.ai.document_processor.pypdfium2.PdfDocument", side_effect=Exception("pypdfium2 failed")
+    ):
         # Mock pdfplumber
         mock_pdf = MagicMock()
         mock_page = MagicMock()
@@ -232,9 +247,12 @@ async def test_process_pdf_fallback_to_pdfplumber(document_processor):
     assert chunks[0].text == "Fallback text."
     assert chunks[0].page_number == 1
 
+
 @pytest.mark.asyncio
 async def test_process_pdf_fallback_empty_page(document_processor):
-    with patch("app.ai.document_processor.pypdfium2.PdfDocument", side_effect=Exception("pypdfium2 failed")):
+    with patch(
+        "app.ai.document_processor.pypdfium2.PdfDocument", side_effect=Exception("pypdfium2 failed")
+    ):
         mock_pdf = MagicMock()
         mock_page = MagicMock()
         mock_page.extract_text.return_value = "   "
@@ -248,10 +266,15 @@ async def test_process_pdf_fallback_empty_page(document_processor):
 
     assert len(chunks) == 0
 
+
 @pytest.mark.asyncio
 async def test_process_pdf_total_failure(document_processor):
-    with patch("app.ai.document_processor.pypdfium2.PdfDocument", side_effect=Exception("pypdfium2 failed")):
-        with patch("app.ai.document_processor.pdfplumber.open", side_effect=Exception("pdfplumber failed")):
+    with patch(
+        "app.ai.document_processor.pypdfium2.PdfDocument", side_effect=Exception("pypdfium2 failed")
+    ):
+        with patch(
+            "app.ai.document_processor.pdfplumber.open", side_effect=Exception("pdfplumber failed")
+        ):
             with pytest.raises(AIError) as exc_info:
                 await document_processor._process_pdf(b"dummy content", {})
 

@@ -1,6 +1,5 @@
 """Tests for Resume Intelligence Pipeline."""
 
-import asyncio
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest

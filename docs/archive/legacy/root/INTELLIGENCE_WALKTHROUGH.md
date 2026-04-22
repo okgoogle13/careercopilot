@@ -17,7 +17,7 @@ The Portable Intelligence Engine is now fully integrated into the CareerCopilot 
 2. **Input Your Content**
    - **Left Panel:** Paste your resume/profile text
    - **Right Panel:** Paste the target job description
-   
+
 3. **Trigger Analysis**
    - Click the **"Analyze with AI"** button (purple with Sparkles icon)
    - Toast notification appears: *"Analyzing with 4-Quadrant Intelligence..."*
@@ -29,7 +29,7 @@ The Portable Intelligence Engine is now fully integrated into the CareerCopilot 
      - Quantifiable Impact (%)
      - ATS Readability (%)
    - **Hero Highlighting:** The highest-scoring quadrant uses Electric Violet (#D0BCFF)
-   
+
 5. **Review Impact Enhancements**
    - Scroll down to see **"Impact Enhancements"** section
    - Each suggestion shows:

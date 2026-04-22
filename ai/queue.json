@@ -1,0 +1,144 @@
+{
+  "project_slug": "urban_gallery_wall",
+  "global_style_lock": {
+    "art_style": "premium gritty editorial street-poster collage, archival portrait energy, distressed but curated, cinematic contrast",
+    "background_rules": "dark asphalt wall, no clean studio backdrops, no glossy surfaces",
+    "palette": [
+      "charcoal",
+      "soot black",
+      "dusty beige",
+      "faded tan paper",
+      "muted teal",
+      "oxidized yellow",
+      "brick red",
+      "restrained green"
+    ],
+    "texture_rules": [
+      "screenprint grain",
+      "paper wear",
+      "paste-shadow",
+      "soft mist",
+      "light paint splatter",
+      "mild surface erosion"
+    ],
+    "typography_rules": "no typography baked into generated assets unless part of source-poster look; keep website copy live in HTML",
+    "hard_exclusions": [
+      "neon cyberpunk",
+      "glossy 3D",
+      "modern fashion models",
+      "collage grids",
+      "heavy face obstruction",
+      "clean corporate minimalism",
+      "extra objects",
+      "stickers",
+      "logos",
+      "white backgrounds"
+    ]
+  },
+  "assets": [
+    {
+      "id": "A01",
+      "name": "wall_base",
+      "filename": "kr-solidarity__substrate__urban--wall-base--v1.png",
+      "size": "1920x1080",
+      "aspect_ratio": "16:9",
+      "image_size": "2K",
+      "usage": "full-bleed background base",
+      "alt": "Dark distressed asphalt wall texture with cinematic wear",
+      "prompt": "Create a full-width hero background base for a landing page. Global Style Lock: premium gritty editorial street-poster collage, archival portrait energy, distressed but curated, cinematic contrast; dark asphalt wall only, palette of charcoal, soot black, dusty beige, faded tan paper, muted teal, oxidized yellow, brick red, restrained green; screenprint grain and wall erosion allowed; no glossy surfaces. Generate a dark asphalt wall texture with subtle tonal variation, natural grime, worn plaster traces, faint city-wall distress, and a cinematic vignette. Keep the right 40 percent slightly calmer for website copy. No posters, no paint splatter, no text, no logos, no objects.",
+      "negative_prompt": "white wall, brick wall, glossy texture, neon colors, graffiti letters, posters, people, modern objects, clean studio backdrop, symmetrical pattern",
+      "status": "PENDING"
+    },
+    {
+      "id": "A02",
+      "name": "grain_overlay",
+      "filename": "kr-solidarity__atmospheric__urban--grain-overlay--v1.png",
+      "size": "1920x1080",
+      "aspect_ratio": "16:9",
+      "image_size": "2K",
+      "usage": "low-opacity full-frame print texture overlay",
+      "alt": "Soft analog screenprint grain overlay",
+      "prompt": "Create a transparent-style overlay asset for a landing page hero. Global Style Lock: premium gritty editorial street-poster collage, archival portrait energy, distressed but curated, cinematic contrast; dark urban texture language; palette limited to soft charcoal, dusty beige, faint oxidized yellow, muted teal traces; screenprint grain required. Generate a subtle full-frame distressed screenprint grain texture with irregular ink noise, soft mottling, and analog print wear. Keep it soft and usable as an overlay across the entire hero. No focal shapes, no posters, no drips, no text.",
+      "negative_prompt": "large stains, obvious objects, graffiti letters, hard edges, heavy blobs, poster shapes, white background, clean digital noise, geometric patterns",
+      "status": "PENDING"
+    },
+    {
+      "id": "A03",
+      "name": "main_poster",
+      "filename": "kr-solidarity__resistance__urban--main-poster--v1.png",
+      "size": "900x1400",
+      "aspect_ratio": "9:14",
+      "image_size": "2K",
+      "usage": "primary portrait poster, center-left focal layer",
+      "alt": "Aged archival portrait poster with worn paper edges",
+      "prompt": "Create a single vintage archival portrait poster asset with transparent or isolated edges for compositing into a landing page hero. Global Style Lock: premium gritty editorial street-poster collage, archival portrait energy, distressed but curated, cinematic contrast; palette of faded tan paper, dusty beige, muted teal, soft brick red accents, soot black; paper wear and screenprint texture required. One tall portrait poster, frontal composition, aged paper, slight fading, subtle edge wear, lightly sun-bleached, soft pasted-paper realism, no modern styling, no extra props. Keep the portrait readable and dignified. No added typography except minimal source-poster feel if unavoidable.",
+      "negative_prompt": "modern fashion, sharp glossy photo, high-saturation colors, cartoon face, text-heavy poster, logo, frame border, multiple people, collage",
+      "status": "PENDING"
+    },
+    {
+      "id": "A04",
+      "name": "secondary_poster_upper",
+      "filename": "kr-solidarity__resistance__urban--secondary-poster-upper--v1.png",
+      "size": "780x1220",
+      "aspect_ratio": "39:61",
+      "image_size": "2K",
+      "usage": "secondary poster behind main, upper-left",
+      "alt": "Distressed vintage portrait poster with faded print texture",
+      "prompt": "Create a second vintage archival portrait poster asset for compositing. Global Style Lock: premium gritty editorial street-poster collage, archival portrait energy, distressed but curated, cinematic contrast; faded tan paper, muted teal field, dusty beige, soot black, light wear, analog print texture. One tall portrait poster with slightly different facial composition and paper aging from the primary poster. The poster should feel authentic, worn, and screenprinted, with softened corners and subtle paste-shadow realism. No modern styling, no bold typography, no frame.",
+      "negative_prompt": "glossy finish, bright neon colors, modern portrait retouching, poster frame, heavy text, multiple faces, collage grid",
+      "status": "PENDING"
+    },
+    {
+      "id": "A05",
+      "name": "secondary_poster_lower",
+      "filename": "kr-solidarity__resistance__urban--secondary-poster-lower--v1.png",
+      "size": "760x1180",
+      "aspect_ratio": "38:59",
+      "image_size": "2K",
+      "usage": "secondary poster behind main, lower-left or mid-left",
+      "alt": "Weathered archival poster with muted color aging",
+      "prompt": "Create a third vintage archival portrait poster asset for compositing into a street-gallery landing page hero. Global Style Lock: premium gritty editorial street-poster collage, archival portrait energy, distressed but curated, cinematic contrast; faded tan paper, dusty beige, oxidized yellow traces, muted green accents, soot black, screenprint grain, paper wear. One tall portrait poster with distinctive age, subtle damage, worn edges, and authentic printed texture. Keep the face readable, serious, and timeless. No modern clothing cues, no extra objects, no decorative border.",
+      "negative_prompt": "fashion editorial glamour, glossy print, bright clean background, text-heavy poster, logos, collage, surreal distortion",
+      "status": "PENDING"
+    },
+    {
+      "id": "A06",
+      "name": "splatter_left_accent",
+      "filename": "kr-solidarity__atmospheric__urban--splatter-accent--v1.png",
+      "size": "1200x900",
+      "aspect_ratio": "4:3",
+      "image_size": "2K",
+      "usage": "accent overlay on far-left / lower-left",
+      "alt": "Restrained red yellow and green graffiti splatter accent",
+      "prompt": "Create a compositing accent asset with transparent-style edges. Global Style Lock: premium gritty editorial street-poster collage, archival portrait energy, distressed but curated, cinematic contrast; palette restricted to brick red, oxidized yellow, restrained green, soot black; graffiti energy used sparingly. Generate an abstract graffiti splatter texture concentrated toward the lower-left and far-left side, with paint bursts, dusted spray, and organic speckling. Keep it expressive but restrained, suitable for layering under or around posters. No letters, no symbols, no faces, no text.",
+      "negative_prompt": "graffiti words, tags, logos, giant paint blobs, rainbow colors, centered composition, white background, drips covering the whole frame",
+      "status": "PENDING"
+    },
+    {
+      "id": "A07",
+      "name": "mist_drips_back",
+      "filename": "kr-solidarity__atmospheric__urban--mist-drips--v1.png",
+      "size": "1600x1000",
+      "aspect_ratio": "16:10",
+      "image_size": "2K",
+      "usage": "atmospheric layer behind poster cluster",
+      "alt": "Soft urban mist with subtle paint drips",
+      "prompt": "Create a soft atmospheric overlay asset for a landing page hero. Global Style Lock: premium gritty editorial street-poster collage, archival portrait energy, distressed but curated, cinematic contrast; dark asphalt world; muted brick red, oxidized yellow, restrained green, soot black; soft mist and occasional drips allowed. Generate a hazy mist-and-drip texture that sits behind a poster cluster, with softened transitions, distressed urban atmosphere, and only a few downward paint drips. Keep the center-right area quiet for website copy. No letters, no faces, no strong focal object.",
+      "negative_prompt": "heavy dripping everywhere, readable graffiti tag, bright neon smoke, centered bright blob, text, poster shapes, white fog background",
+      "status": "PENDING"
+    },
+    {
+      "id": "A08",
+      "name": "shadow_paste_fx",
+      "filename": "kr-solidarity__atmospheric__urban--shadow-paste-fx--v1.png",
+      "size": "1400x900",
+      "aspect_ratio": "14:9",
+      "image_size": "2K",
+      "usage": "subtle shadow / adhesion layer behind poster stack",
+      "alt": "Realistic pasted-poster shadow and adhesive grime effect",
+      "prompt": "Create a subtle compositing utility asset for a landing page hero. Global Style Lock: premium gritty editorial street-poster collage, archival portrait energy, distressed but curated, cinematic contrast; dark urban texture language only. Generate soft irregular poster-paste shadows and faint adhesive grime suitable for placing behind a cluster of three overlapping posters on a wall. Keep the effect understated, realistic, and non-directional. No posters, no text, no paint splatter.",
+      "negative_prompt": "hard drop shadows, obvious shapes, glossy reflections, geometric design, text, heavy stains, white background",
+      "status": "PENDING"
+    }
+  ]
+}

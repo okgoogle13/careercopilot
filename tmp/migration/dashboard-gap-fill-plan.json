@@ -1,0 +1,116 @@
+{
+  "artifact": "tokens_first_gap_fill_plan",
+  "generated_at": "2026-03-23T16:01:27.505856+00:00",
+  "route_id": "dashboard",
+  "target_route": "/dashboard",
+  "family": "dashboard",
+  "component_library_action": "merge",
+  "route_status": "merge",
+  "build_contract": "docs/project/active/frontend-source-of-truth-migration/contracts/build-contract-dashboard.xml",
+  "summary": {
+    "canonical_owner": "Dashboard",
+    "screen_reference": "frontend/src/screens/11_dashboard/DashboardOverview.tsx",
+    "paired_runtime_surface": "frontend/src/features/dashboard/Dashboard.tsx",
+    "token_rule": "reuse behavior and ownership from runtime; reuse presentation only if token-clean; otherwise rewrite styling to semantic tokens"
+  },
+  "candidate_token_list": [],
+  "candidate_token_drift": {
+    "description": "Tokens declared in wireframe XML but absent from build contract dependency_contract blocks. Review and add if applicable.",
+    "tokens": [],
+    "count": 0
+  },
+  "components": [
+    {
+      "component_name": "Dashboard",
+      "owner_route": "/dashboard",
+      "owner_surface": "Dashboard",
+      "canonical_status": "canonical",
+      "selected_base": "frontend/src/features/dashboard/Dashboard.tsx",
+      "reuse_mode": "keep_behavior_rewrite_styling",
+      "token_state": "clean",
+      "existing_candidates": [
+        {
+          "path": "frontend/src/features/dashboard/Dashboard.tsx",
+          "layer": "runtime",
+          "behavior_score": 40,
+          "ownership_score": 25,
+          "design_alignment_score": 6,
+          "drift_penalty": 0,
+          "total_score": 71,
+          "token_state": "clean",
+          "asset_state": "clean",
+          "promotion_eligibility": "eligible",
+          "required_actions": []
+        },
+        {
+          "path": "docs/project/active/frontend-source-of-truth-migration/sources/consolidated-reference/components/Dashboard.tsx",
+          "layer": "support_reference",
+          "behavior_score": 18,
+          "ownership_score": 25,
+          "design_alignment_score": 6,
+          "drift_penalty": 40,
+          "total_score": 9,
+          "token_state": "dirty",
+          "asset_state": "figma_bound",
+          "promotion_eligibility": "behavior_only",
+          "required_actions": [
+            "replace_figma_asset_imports",
+            "replace_hardcoded_colors"
+          ]
+        }
+      ],
+      "required_actions": [],
+      "source_of_truth": [
+        "route_matrix",
+        "runtime_or_reference_tsx"
+      ],
+      "blocking_gaps": []
+    },
+    {
+      "component_name": "DashboardOverview",
+      "owner_route": "/dashboard",
+      "owner_surface": "Dashboard",
+      "canonical_status": "support",
+      "selected_base": "frontend/src/screens/11_dashboard/DashboardOverview.tsx",
+      "reuse_mode": "blocked",
+      "token_state": "clean",
+      "existing_candidates": [
+        {
+          "path": "frontend/src/screens/11_dashboard/DashboardOverview.tsx",
+          "layer": "design_reference",
+          "behavior_score": 10,
+          "ownership_score": 18,
+          "design_alignment_score": 10,
+          "drift_penalty": 0,
+          "total_score": 38,
+          "token_state": "clean",
+          "asset_state": "clean",
+          "promotion_eligibility": "eligible",
+          "required_actions": []
+        },
+        {
+          "path": "frontend/src/_reference/migration/phase3/phase3-batch3/DashboardOverview.tsx",
+          "layer": "batch_reference",
+          "behavior_score": 0,
+          "ownership_score": 18,
+          "design_alignment_score": 10,
+          "drift_penalty": 0,
+          "total_score": 28,
+          "token_state": "clean",
+          "asset_state": "clean",
+          "promotion_eligibility": "eligible",
+          "required_actions": []
+        }
+      ],
+      "required_actions": [
+        "insufficient_runtime_base"
+      ],
+      "source_of_truth": [
+        "route_matrix",
+        "screen_reference",
+        "runtime_or_reference_tsx"
+      ],
+      "blocking_gaps": []
+    }
+  ]
+}

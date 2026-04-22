@@ -64,7 +64,7 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
         headers['Authorization'] = `Bearer ${token}`;
       }
 
-      const response = await fetch('/api/career/ingest', {
+      const response = await fetch('/api/v1/ingest', {
         method: 'POST',
         body: formData,
         headers: headers,
@@ -102,7 +102,7 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
           'relative border-2 border-dashed rounded-tech min-h-[300px] flex flex-col items-center justify-center p-8 transition-colors cursor-pointer overflow-hidden',
           isDragging
             ? 'border-primary bg-primary-container/20'
-            : 'border-outline-variant bg-surface-container'
+            : 'border-[var(--kr-color-concrete-grey-steps-0)] bg-surface-container'
         )}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
@@ -163,10 +163,12 @@ export default function ResumeUploader({ onUploadSuccess }: ResumeUploaderProps)
               animate={{ opacity: 1, scale: 1 }}
               className="flex flex-col items-center"
             >
-              <div className="w-20 h-20 rounded-march bg-green-100 flex items-center justify-center mb-4">
-                <CheckCircle2 className="w-10 h-10 text-green-600" />
+              <div className="w-20 h-20 rounded-march bg-[var(--kr-color-charcoal-background-steps-2)] flex items-center justify-center mb-4">
+                <CheckCircle2 className="w-10 h-10 text-[var(--kr-color-ink-gold-base)]" />
               </div>
-              <p className="text-title-medium font-bold text-green-700">Analysis Complete!</p>
+              <p className="text-title-medium font-bold text-[var(--kr-color-ink-gold-base)]">
+                Analysis Complete!
+              </p>
               <Button
                 className="mt-6"
                 variant="outlined"

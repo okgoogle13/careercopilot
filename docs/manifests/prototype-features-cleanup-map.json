@@ -1,0 +1,834 @@
+{
+  "generated_at": "2026-03-26T09:59:44.934Z",
+  "scope": "frontend/src/prototype-features",
+  "runtime_truth": "frontend/src/App.tsx",
+  "prototype_route_mount": "/prototype/*",
+  "summary": {
+    "total_files": 27,
+    "runtime_reachable": 27,
+    "direct_route_entries": 5,
+    "definitely_unused": 0,
+    "delete_candidates": 0,
+    "keep_support_only": 24,
+    "merge_candidates": 3,
+    "quarantine_reference": 0,
+    "review_needed": 0
+  },
+  "records": [
+    {
+      "file_path": "frontend/src/prototype-features/components/DocumentInput.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "DocumentInput"
+      ],
+      "imported_by": [
+        "prototype-features/src/components/feature/JobInputPanel.tsx",
+        "prototype-features/src/pages/ProfileView.tsx"
+      ],
+      "imported_by_count": 2,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 2 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/components/icons/FileIcon.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "FileIcon"
+      ],
+      "imported_by": [
+        "prototype-features/components/DocumentInput.tsx"
+      ],
+      "imported_by_count": 1,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 1 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/components/icons/TrashIcon.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "TrashIcon"
+      ],
+      "imported_by": [
+        "prototype-features/components/DocumentInput.tsx"
+      ],
+      "imported_by_count": 1,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 1 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/components/icons/UploadIcon.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "UploadIcon"
+      ],
+      "imported_by": [
+        "prototype-features/components/DocumentInput.tsx"
+      ],
+      "imported_by_count": 1,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 1 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/image-studio/ImageStudio.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "ImageStudio"
+      ],
+      "imported_by": [
+        "prototype-features/image-studio/ImageStudioPage.tsx"
+      ],
+      "imported_by_count": 1,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 1 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/image-studio/ImageStudioPage.tsx",
+      "file_kind": "page",
+      "exported_symbols": [
+        "ImageStudioPage"
+      ],
+      "imported_by": [
+        "prototype-features/prototype-routes.tsx"
+      ],
+      "imported_by_count": 1,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": true,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "directly imported by prototype-routes.tsx",
+        "reachable from App.tsx via /prototype/*",
+        "imported by 1 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/prototype-routes.tsx",
+      "file_kind": "route_manifest",
+      "exported_symbols": [
+        "PrototypeRoutes"
+      ],
+      "imported_by": [
+        "App.tsx"
+      ],
+      "imported_by_count": 1,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 1 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/components/feature/AiOutputsTabs.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "AiOutputsTabs"
+      ],
+      "imported_by": [
+        "prototype-features/src/pages/ApplyQuickWorkspaceReference.tsx"
+      ],
+      "imported_by_count": 1,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 1 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/components/feature/JobInputPanel.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "JobInputPanel"
+      ],
+      "imported_by": [
+        "prototype-features/src/pages/ApplyQuickWorkspaceReference.tsx"
+      ],
+      "imported_by_count": 1,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 1 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/components/feature/SaveApplicationBar.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "SaveApplicationBar"
+      ],
+      "imported_by": [
+        "prototype-features/src/pages/ApplyQuickWorkspaceReference.tsx"
+      ],
+      "imported_by_count": 1,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 1 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/components/layout/LayeredHero.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "LayeredHero",
+        "LayeredHeroProps"
+      ],
+      "imported_by": [
+        "prototype-features/image-studio/ImageStudioPage.tsx",
+        "prototype-features/src/pages/ApplyQuickWorkspaceReference.tsx",
+        "prototype-features/src/pages/LibraryReferencePage.tsx",
+        "prototype-features/src/pages/PastApplicationsReference.tsx",
+        "prototype-features/src/pages/ProfileView.tsx"
+      ],
+      "imported_by_count": 5,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 5 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/components/layout/SolidarityPageLayout.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "SolidarityPageLayout",
+        "SolidarityPageLayoutProps"
+      ],
+      "imported_by": [
+        "prototype-features/image-studio/ImageStudioPage.tsx",
+        "prototype-features/src/pages/ApplyQuickWorkspaceReference.tsx",
+        "prototype-features/src/pages/LibraryReferencePage.tsx",
+        "prototype-features/src/pages/PastApplicationsReference.tsx",
+        "prototype-features/src/pages/ProfileView.tsx"
+      ],
+      "imported_by_count": 5,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 5 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/components/layout/WorkspaceLayout.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "WorkspaceLayout"
+      ],
+      "imported_by": [
+        "prototype-features/image-studio/ImageStudioPage.tsx",
+        "prototype-features/src/pages/ApplyQuickWorkspaceReference.tsx",
+        "prototype-features/src/pages/LibraryReferencePage.tsx",
+        "prototype-features/src/pages/PastApplicationsReference.tsx",
+        "prototype-features/src/pages/ProfileView.tsx"
+      ],
+      "imported_by_count": 5,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 5 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/components/ui/Badge.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "Badge"
+      ],
+      "imported_by": [
+        "prototype-features/src/components/feature/AiOutputsTabs.tsx",
+        "prototype-features/src/pages/LibraryReferencePage.tsx",
+        "prototype-features/src/pages/PastApplicationsReference.tsx"
+      ],
+      "imported_by_count": 3,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 3 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/components/ui/Card.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "Card"
+      ],
+      "imported_by": [
+        "prototype-features/src/components/feature/AiOutputsTabs.tsx",
+        "prototype-features/src/pages/LibraryReferencePage.tsx",
+        "prototype-features/src/pages/PastApplicationsReference.tsx"
+      ],
+      "imported_by_count": 3,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 3 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/components/ui/Checkbox.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "Checkbox"
+      ],
+      "imported_by": [
+        "prototype-features/src/pages/LibraryReferencePage.tsx"
+      ],
+      "imported_by_count": 1,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 1 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/components/ui/Loader.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "Loader"
+      ],
+      "imported_by": [
+        "prototype-features/src/pages/LibraryReferencePage.tsx"
+      ],
+      "imported_by_count": 1,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 1 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/components/ui/Modal.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "Modal"
+      ],
+      "imported_by": [
+        "prototype-features/src/pages/LibraryReferencePage.tsx",
+        "prototype-features/src/pages/ProfileView.tsx"
+      ],
+      "imported_by_count": 2,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 2 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/components/ui/PrimaryButton.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "PrimaryButton"
+      ],
+      "imported_by": [
+        "prototype-features/image-studio/ImageStudio.tsx",
+        "prototype-features/src/components/feature/JobInputPanel.tsx",
+        "prototype-features/src/components/feature/SaveApplicationBar.tsx",
+        "prototype-features/src/pages/ApplyQuickWorkspaceReference.tsx",
+        "prototype-features/src/pages/LibraryReferencePage.tsx",
+        "prototype-features/src/pages/ProfileView.tsx"
+      ],
+      "imported_by_count": 6,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 6 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/components/ui/SectionHeader.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "SectionHeader"
+      ],
+      "imported_by": [
+        "prototype-features/image-studio/ImageStudio.tsx",
+        "prototype-features/src/components/feature/JobInputPanel.tsx",
+        "prototype-features/src/pages/LibraryReferencePage.tsx",
+        "prototype-features/src/pages/PastApplicationsReference.tsx",
+        "prototype-features/src/pages/ProfileView.tsx"
+      ],
+      "imported_by_count": 5,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 5 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/components/ui/StatusSpecificLoadingState.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "StatusSpecificLoadingState"
+      ],
+      "imported_by": [
+        "prototype-features/src/components/feature/JobInputPanel.tsx"
+      ],
+      "imported_by_count": 1,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 1 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/components/ui/Textarea.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "Textarea"
+      ],
+      "imported_by": [
+        "prototype-features/src/pages/LibraryReferencePage.tsx"
+      ],
+      "imported_by_count": 1,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 1 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/components/ui/TextInput.tsx",
+      "file_kind": "component",
+      "exported_symbols": [
+        "TextInput"
+      ],
+      "imported_by": [
+        "prototype-features/image-studio/ImageStudio.tsx",
+        "prototype-features/src/components/feature/JobInputPanel.tsx",
+        "prototype-features/src/pages/LibraryReferencePage.tsx",
+        "prototype-features/src/pages/ProfileView.tsx"
+      ],
+      "imported_by_count": 4,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": false,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "reachable from App.tsx via /prototype/*",
+        "imported by 4 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/pages/ApplyQuickWorkspaceReference.tsx",
+      "file_kind": "page",
+      "exported_symbols": [
+        "ApplyQuickWorkspaceReference"
+      ],
+      "imported_by": [
+        "prototype-features/prototype-routes.tsx"
+      ],
+      "imported_by_count": 1,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": true,
+      "canonical_route_owner": "/apply/quick",
+      "canonical_owner_family": "applications",
+      "target_state_status": "expand",
+      "target_runtime_owner": "ApplyQuick",
+      "target_component_surfaces": [
+        "ApplyQuick",
+        "ApplicationFinalization"
+      ],
+      "gap_feature_refs": [
+        "genkit_job_analysis",
+        "workflow_orchestration"
+      ],
+      "usage_class": "harvest_candidate",
+      "recommended_action": "merge_candidate",
+      "delete_safe_now": false,
+      "evidence": [
+        "directly imported by prototype-routes.tsx",
+        "reachable from App.tsx via /prototype/*",
+        "declares canonical owner /apply/quick",
+        "target runtime owner ApplyQuick",
+        "imported by 1 file(s)",
+        "support-only runtime surface mapped to canonical route"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/pages/LibraryReferencePage.tsx",
+      "file_kind": "page",
+      "exported_symbols": [
+        "LibraryReferencePage"
+      ],
+      "imported_by": [
+        "prototype-features/prototype-routes.tsx"
+      ],
+      "imported_by_count": 1,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": true,
+      "canonical_route_owner": null,
+      "canonical_owner_family": null,
+      "target_state_status": null,
+      "target_runtime_owner": null,
+      "target_component_surfaces": [],
+      "gap_feature_refs": [],
+      "usage_class": "runtime_support_route",
+      "recommended_action": "keep_support_only",
+      "delete_safe_now": false,
+      "evidence": [
+        "directly imported by prototype-routes.tsx",
+        "reachable from App.tsx via /prototype/*",
+        "imported by 1 file(s)",
+        "mounted support-only runtime surface"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/pages/PastApplicationsReference.tsx",
+      "file_kind": "page",
+      "exported_symbols": [
+        "PastApplicationsReference"
+      ],
+      "imported_by": [
+        "prototype-features/prototype-routes.tsx"
+      ],
+      "imported_by_count": 1,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": true,
+      "canonical_route_owner": "/tracker",
+      "canonical_owner_family": "applications",
+      "target_state_status": "expand",
+      "target_runtime_owner": "ApplicationTracker",
+      "target_component_surfaces": [
+        "ApplicationTracker",
+        "KanbanTracker"
+      ],
+      "gap_feature_refs": [
+        "applications_crud"
+      ],
+      "usage_class": "harvest_candidate",
+      "recommended_action": "merge_candidate",
+      "delete_safe_now": false,
+      "evidence": [
+        "directly imported by prototype-routes.tsx",
+        "reachable from App.tsx via /prototype/*",
+        "declares canonical owner /tracker",
+        "target runtime owner ApplicationTracker",
+        "imported by 1 file(s)",
+        "support-only runtime surface mapped to canonical route"
+      ]
+    },
+    {
+      "file_path": "frontend/src/prototype-features/src/pages/ProfileView.tsx",
+      "file_kind": "page",
+      "exported_symbols": [
+        "ProfileView"
+      ],
+      "imported_by": [
+        "prototype-features/prototype-routes.tsx"
+      ],
+      "imported_by_count": 1,
+      "runtime_reachable": true,
+      "reachable_from_prototype_routes": true,
+      "direct_prototype_route_entry": true,
+      "canonical_route_owner": "/profile",
+      "canonical_owner_family": "account",
+      "target_state_status": "expand",
+      "target_runtime_owner": "ProfileView",
+      "target_component_surfaces": [
+        "ProfileView",
+        "SettingsControl"
+      ],
+      "gap_feature_refs": [
+        "voice_profile_capture"
+      ],
+      "usage_class": "harvest_candidate",
+      "recommended_action": "merge_candidate",
+      "delete_safe_now": false,
+      "evidence": [
+        "directly imported by prototype-routes.tsx",
+        "reachable from App.tsx via /prototype/*",
+        "declares canonical owner /profile",
+        "target runtime owner ProfileView",
+        "imported by 1 file(s)",
+        "support-only runtime surface mapped to canonical route"
+      ]
+    }
+  ]
+}

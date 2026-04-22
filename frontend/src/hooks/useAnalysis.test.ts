@@ -1,11 +1,18 @@
-import { renderHook, act } from '@testing-library/react';
-import { useAnalysis, type AnalysisResult } from './useAnalysis';
+import { jest } from '@jest/globals';
 
-jest.mock('@/services/aiInterface', () => ({
-  analyzeJobDescription: jest.fn(),
-  analyzeJobFromUrl: jest.fn(),
-  generateIntelligencePackage: jest.fn(),
+// Must register mocks before dynamic import of the module under test
+const mockAnalyzeJobDescription = jest.fn();
+const mockAnalyzeJobFromUrl = jest.fn();
+const mockGenerateIntelligencePackage = jest.fn();
+
+(jest as any).unstable_mockModule('@/services/aiInterface', () => ({
+  analyzeJobDescription: mockAnalyzeJobDescription,
+  analyzeJobFromUrl: mockAnalyzeJobFromUrl,
+  generateIntelligencePackage: mockGenerateIntelligencePackage,
 }));
+
+const { renderHook, act } = await import('@testing-library/react');
+const { useAnalysis } = await import('./useAnalysis');
 
 describe('useAnalysis', () => {
   beforeEach(() => {
@@ -20,7 +27,7 @@ describe('useAnalysis', () => {
     const { result } = renderHook(() => useAnalysis());
     const documentText = 'Led the team and led delivery. Managed budgets and delivered outcomes.';
     const jobCriteria = 'leadership management budgeting';
-    let analysis: AnalysisResult | undefined;
+    let analysis: any;
 
     await act(async () => {
       const analysisPromise = result.current.analyzeDocument(documentText, jobCriteria, false);
@@ -35,7 +42,7 @@ describe('useAnalysis', () => {
     const { result } = renderHook(() => useAnalysis());
     const documentText = 'Led the team. Led delivery.';
     const jobCriteria = 'leadership management budgeting';
-    let analysis: AnalysisResult | undefined;
+    let analysis: any;
 
     await act(async () => {
       const analysisPromise = result.current.analyzeDocument(documentText, jobCriteria, false);
@@ -48,7 +55,7 @@ describe('useAnalysis', () => {
 
   it('generates quantifier suggestions for impact language', async () => {
     const { result } = renderHook(() => useAnalysis());
-    let analysis: AnalysisResult | undefined;
+    let analysis: any;
 
     await act(async () => {
       const analysisPromise = result.current.analyzeDocument(
@@ -61,13 +68,13 @@ describe('useAnalysis', () => {
     });
 
     expect(analysis?.quantifiers.length).toBeGreaterThan(0);
-    expect(analysis?.quantifiers.some((q) => q.type === 'number')).toBe(true);
-    expect(analysis?.quantifiers.some((q) => q.type === 'percentage')).toBe(true);
+    expect(analysis?.quantifiers.some((q: any) => q.type === 'number')).toBe(true);
+    expect(analysis?.quantifiers.some((q: any) => q.type === 'percentage')).toBe(true);
   });
 
   it('recommends ATS formatting improvements when sections are missing', async () => {
     const { result } = renderHook(() => useAnalysis());
-    let analysis: AnalysisResult | undefined;
+    let analysis: any;
 
     await act(async () => {
       const analysisPromise = result.current.analyzeDocument(
@@ -87,7 +94,7 @@ describe('useAnalysis', () => {
 
   it('returns strong recommendations when document is well structured', async () => {
     const { result } = renderHook(() => useAnalysis());
-    let analysis: AnalysisResult | undefined;
+    let analysis: any;
     const longContent = `
       Summary
       Led teams, managed projects, developed systems, implemented improvements, optimized process.

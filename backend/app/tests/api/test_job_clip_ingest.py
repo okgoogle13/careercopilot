@@ -1,6 +1,5 @@
 """Tests for Job Clip Ingestion API endpoints in app/api/ingest.py."""
 
-from datetime import datetime
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest

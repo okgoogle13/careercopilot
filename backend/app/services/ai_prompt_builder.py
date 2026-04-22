@@ -78,9 +78,7 @@ class AIPromptBuilder:
         """
         try:
             # Prepare context data for the flow
-            context_data = {
-                "career_context": self.career_context
-            }
+            context_data = {"career_context": self.career_context}
 
             if context:
                 if context.job_context:
@@ -94,7 +92,7 @@ class AIPromptBuilder:
                 prompt_type=prompt_type.value,
                 task_prompt=task_prompt,
                 user_id="personal_user",
-                context_data=context_data
+                context_data=context_data,
             )
 
             # Execute Genkit Flow

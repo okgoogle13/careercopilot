@@ -15,7 +15,7 @@ kr-solidarity/symbol/kr-solidarity__symbol__kr-solidarity--symbol--kerala-elepha
 ```
 
 ### 2. Manifest Entry
-Add this entry to `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`:
+Add this entry to `frontend/public/assets/kr-solidarity-manifest.json`:
 
 ```json
 {

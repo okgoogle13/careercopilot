@@ -8,7 +8,8 @@ Handles AI model initialization, flow registration, and provides health monitori
 import importlib
 import logging
 import warnings
-from typing import Any, Callable, Dict, List, Optional, cast
+from collections.abc import Callable
+from typing import Any, cast
 
 from app.core.google_genai_compat import (
     GOOGLE_GENERATIVEAI_AVAILABLE,
@@ -38,7 +39,7 @@ logger = logging.getLogger(__name__)
 # --- Global State ---
 initialized: bool = False
 genkit_instance: Any | None = None
-registered_flows: Dict[str, Any] = {}
+registered_flows: dict[str, Any] = {}
 
 
 def _get_settings() -> Any:
@@ -48,7 +49,7 @@ def _get_settings() -> Any:
     return secure_settings
 
 
-def _get_gemini_api_key() -> Optional[str]:
+def _get_gemini_api_key() -> str | None:
     """Resolve the Gemini API key from centralized settings."""
     settings = _get_settings()
     api_key = getattr(settings, "GEMINI_API_KEY", None)
@@ -103,7 +104,7 @@ def init_genkit() -> bool:
                 return True
 
         except Exception as e:
-            logger.warning(f"Genkit plugin initialization failed: {str(e)}")
+            logger.warning(f"Genkit plugin initialization failed: {e!s}")
             logger.info("Falling back to google-generativeai library")
 
     # Fallback to google-generativeai (more reliable)
@@ -139,7 +140,7 @@ def init_genkit() -> bool:
             return True
 
         except Exception as e:
-            logger.error(f"Failed to initialize with google-generativeai: {str(e)}", exc_info=True)
+            logger.error(f"Failed to initialize with google-generativeai: {e!s}", exc_info=True)
             return False
 
     logger.error("Neither Genkit nor google-generativeai available")
@@ -174,7 +175,7 @@ def is_genkit_enabled() -> bool:
     )
 
 
-def check_genkit_health() -> Dict[str, Any]:
+def check_genkit_health() -> dict[str, Any]:
     """
     Check the health of the Genkit framework and registered flows.
 
@@ -183,8 +184,8 @@ def check_genkit_health() -> Dict[str, Any]:
     """
     # API key is present if either the env var is set OR the model is successfully initialized
     api_key_present = bool(_get_gemini_api_key()) or initialized
-    errors: List[str] = []
-    health_status: Dict[str, Any] = {
+    errors: list[str] = []
+    health_status: dict[str, Any] = {
         "available": GENKIT_AVAILABLE or GOOGLE_GENERATIVEAI_AVAILABLE,
         "initialized": initialized,
         "gemini_api_key_present": api_key_present,
@@ -222,9 +223,7 @@ def startup_genkit() -> None:
         logger.info("Genkit initialization skipped (ENABLE_GENKIT_FLOWS is not 'true')")
 
 
-def register_flow_function(
-    func: Callable[..., Any], name: Optional[str] = None
-) -> Callable[..., Any]:
+def register_flow_function(func: Callable[..., Any], name: str | None = None) -> Callable[..., Any]:
     """
     Register a flow function for tracking purposes.
 
@@ -241,7 +240,7 @@ def register_flow_function(
     return func
 
 
-def get_registered_flows() -> Dict[str, Any]:
+def get_registered_flows() -> dict[str, Any]:
     """
     Get all registered flow functions.
 
@@ -260,10 +259,10 @@ from pydantic import BaseModel
 
 
 def genkit_flow(
-    _func: Optional[Callable[..., Any]] = None,
+    _func: Callable[..., Any] | None = None,
     *,
-    name: Optional[str] = None,
-    output_schema: Optional[type[BaseModel]] = None,
+    name: str | None = None,
+    output_schema: type[BaseModel] | None = None,
     **kwargs: Any,
 ) -> Callable[[Callable[..., Any]], Any]:
     """
@@ -309,15 +308,15 @@ async_genkit_flow = genkit_flow
 
 
 def simple_genkit_flow(
-    output_schema: Optional[type[BaseModel]] = None,
+    output_schema: type[BaseModel] | None = None,
 ) -> Callable[[Callable[..., Any]], Any]:
     return genkit_flow(output_schema=output_schema)
 
 
 def create_flow_wrapper(
     func: Callable[..., Any],
-    name: Optional[str] = None,
-    output_schema: Optional[type[BaseModel]] = None,
+    name: str | None = None,
+    output_schema: type[BaseModel] | None = None,
 ) -> Callable[..., Any]:
     return genkit_flow(name=name, output_schema=output_schema)(func)
 

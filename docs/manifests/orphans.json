@@ -1,0 +1,168 @@
+{
+  "generatedAt": "2026-03-30T14:06:52.552Z",
+  "orphanedFeatures": [
+    "KrDark",
+    "applications",
+    "auth",
+    "dashboard",
+    "documents",
+    "ingestion",
+    "jobs",
+    "ksc-generator",
+    "landing",
+    "onboarding",
+    "opportunities",
+    "profile",
+    "settings"
+  ],
+  "orphanedPages": [
+    "AnimationTest.tsx"
+  ],
+  "unroutedScreens": [
+    "01_landing",
+    "02_auth",
+    "03_onboarding",
+    "04_ingestion",
+    "05_analysis",
+    "06_lookout",
+    "07_kanban",
+    "08_workbench",
+    "09_finalization",
+    "10_settings",
+    "11_dashboard",
+    "12_generation"
+  ],
+  "nonFeatureRoutes": [
+    {
+      "path": "/",
+      "source": "./pages/LandingPage"
+    },
+    {
+      "path": "/auth",
+      "source": "UNKNOWN"
+    },
+    {
+      "path": "/login",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/register",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/animation-test",
+      "source": "./pages/AnimationTest"
+    },
+    {
+      "path": "/dashboard",
+      "source": "./pages/DashboardPage"
+    },
+    {
+      "path": "/profile",
+      "source": "./pages/ProfilePage"
+    },
+    {
+      "path": "/lookout",
+      "source": "./pages/LookoutPage"
+    },
+    {
+      "path": "/applications",
+      "source": "./pages/ApplicationsPage"
+    },
+    {
+      "path": "/analysis",
+      "source": "./pages/AnalysisPage"
+    },
+    {
+      "path": "/docs",
+      "source": "./pages/DocsPage"
+    },
+    {
+      "path": "/apply",
+      "source": "./pages/ApplyPage"
+    },
+    {
+      "path": "/generation",
+      "source": "./pages/GenerationPage"
+    },
+    {
+      "path": "/settings",
+      "source": "./pages/SettingsPage"
+    },
+    {
+      "path": "/onboarding",
+      "source": "./pages/OnboardingPage"
+    },
+    {
+      "path": "/tracker",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/opportunities",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/career/ingest",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/apply/quick",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/ksc-generator",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/cover-letter-generator",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/job-queue",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/documents",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/dashboard-overview",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/kanban",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/ingestion",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/feed",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/studio",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/editor",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/welcome",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/test-tokens",
+      "source": "./components/debug/TokenTest"
+    }
+  ],
+  "summary": {
+    "totalOrphans": 57,
+    "featureOrphans": 13,
+    "pageOrphans": 1,
+    "screenOrphans": 12,
+    "nonFeatureRoutes": 31
+  }
+}

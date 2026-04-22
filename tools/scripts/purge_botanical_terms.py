@@ -5,17 +5,17 @@ MAPPINGS = {
     # [DEPRECATED_STYLE] -> Urban/Political
     r'[DEPRECATED_STYLE][- ]?red': 'solidarity-red',
     r'[DEPRECATED_STYLE][- ]?Red': 'Solidarity Red',
-    r'waratahRed': 'solidarityRed',
+    r'solidarityRed': 'solidarityRed',
     r'WARATAH_RED': 'SOLIDARITY_RED',
     r'[DEPRECATED_STYLE]': 'solidarity',
     r'[DEPRECATED_STYLE]': 'Solidarity',
 
-    r'wattle[- ]?gold': 'ink-gold',
-    r'Wattle[- ]?Gold': 'Ink Gold',
-    r'wattleGold': 'inkGold',
+    r'baru[- ]?gold': 'ink-gold',
+    r'Baru[- ]?Gold': 'Ink Gold',
+    r'baruGold': 'inkGold',
     r'WATTLE_GOLD': 'INK_GOLD',
-    r'wattle': 'ink',
-    r'Wattle': 'Ink',
+    r'baru': 'ink',
+    r'Baru': 'Ink',
 
     r'baru[- ]?gold': 'ink-gold',
     r'Baru[- ]?Gold': 'Ink Gold',
@@ -26,7 +26,7 @@ MAPPINGS = {
 
     r'gum[- ]?leaf[- ]?yellow': 'stencil-yellow',
     r'Gum[- ]?Leaf[- ]?Yellow': 'Stencil Yellow',
-    r'gumLeafYellow': 'stencilYellow',
+    r'activistSmokeYellow': 'stencilYellow',
     r'gum[- ]?leaf': 'stencil',
     r'Gum[- ]?Leaf': 'Stencil',
 
@@ -59,11 +59,11 @@ def purge_in_file(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
-        
+
         new_content = content
         for pattern, replacement in MAPPINGS.items():
             new_content = re.sub(pattern, replacement, new_content)
-        
+
         if new_content != content:
             with open(file_path, 'w', encoding='utf-8') as f:
                 f.write(new_content)

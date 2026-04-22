@@ -46,6 +46,8 @@ class QuickApplyArtifacts(BaseModel):
 class AnalyzeJobFromUrlRequest(BaseModel):
     url: str | None = None
     job_description: str | None = None
+    job_title: str | None = None
+    company_name: str | None = None
 
 
 class AnalyzeJobFromUrlResponse(BaseModel):
@@ -184,8 +186,8 @@ async def analyzeJobFromUrl(
     chunks = _extract_master_chunks(snapshot)
     master_text = "\n\n".join(chunk["text"] for chunk in chunks)
 
-    job_title = "Target Role"
-    company_name = "Target Company"
+    job_title = payload.job_title or "Target Role"
+    company_name = payload.company_name or "Target Company"
     job_text = (payload.job_description or "").strip()
 
     if payload.url:

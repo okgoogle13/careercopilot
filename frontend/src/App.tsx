@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import AnimationTestPage from './components/debug/AnimationTest';
 import {
   Navigate,
   Outlet,
@@ -9,47 +10,56 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { Toaster } from 'sonner';
-const texturePattern =
-  '/assets/kr-solidarity/texture/kr-solidarity__substrate__landmark--melbourne-laneway--v1.png';
-import './design/styles/design-tokens.css';
-import { TokenTest } from './components/debug/TokenTest';
+import { BannerTexture } from './components/kerala-rage/BannerTexture';
+import { MigratedRouteLayout } from './layouts/MigratedRouteLayout';
 import { getModeForRoute } from './config/routeModeMap';
 import { useAuth } from './context/AuthContext';
-import { AssetLibrary } from './features/analysis/AssetLibrary';
-import { ApplicationTracker } from './features/applications/ApplicationTracker';
-import { CoverLetterGenerator } from './features/applications/CoverLetterGenerator';
-import { Login } from './features/auth/Login';
-import { Register } from './features/auth/Register';
-import { Dashboard } from './features/dashboard/Dashboard';
-import { Documents } from './features/documents/Documents';
-import { KSCGenerator } from './features/ksc-generator/KSCGenerator';
-import { LandingPage } from './features/landing/LandingPage';
-import { NotFound } from './features/not-found/NotFound';
-import { OnboardingPage } from './features/onboarding/OnboardingPage';
-import { WelcomeScreen } from './features/onboarding/WelcomeScreen';
-import { Opportunities } from './features/opportunities/Opportunities';
-import { ProfileView } from './features/profile/components/ProfileView';
-import { Settings } from './features/settings/Settings';
-import { StyleGuide } from './features/style-guide/StyleGuide';
 import { Layout } from './layouts/Layout';
-import { AnalysisPage } from './pages/AnalysisPage';
-import { IngestionPage } from './pages/IngestionPage';
-import { JobQueue } from './pages/JobQueue';
-import { ApplyQuick } from './pages/ApplyQuick';
-import { AuthModal } from './components/phase3-batch2/AuthModal';
-import { HeroLanding } from './components/phase3-batch2/HeroLanding';
-import { OnboardFlow } from './components/phase3-batch2/OnboardFlow';
-import { AnalysisWorkbench } from './components/phase3-batch3/AnalysisWorkbench';
-import { DashboardOverview } from './components/phase3-batch3/DashboardOverview';
 import { useModeStore } from './stores/useModeStore';
-import { useUserStore } from './stores/userStore';
+
+// Canonical Pages (Migrated to Features)
+import { LandingPage } from './features/landing/LandingPage';
+import { OnboardingPage } from './features/onboarding/OnboardingPage';
+import { Dashboard as DashboardPage } from './features/dashboard/Dashboard';
+import { ProfilePage } from './features/profile/ProfilePage';
+import { OpportunitiesDiscovery as OpportunitiesPage } from './screens/06_opportunities/OpportunitiesDiscovery';
+import { ApplicationTracker as ApplicationsPage } from './features/applications/ApplicationTracker';
+import { AnalysisPage } from './features/analysis/AnalysisPage';
+import { Documents as DocsPage } from './features/documents/Documents';
+import { ApplyQuick as ApplyPage } from './features/applications/ApplyQuick';
+import { TabbedGenerationPanel as GenerationPage } from './features/documents/components/TabbedGenerationPanel';
+import { Settings as SettingsPage } from './features/settings/Settings';
+import AuthModal from './screens/02_auth/AuthModal';
+import { Scaffold } from './components/archetypes';
+
+// Preserved non-canonical / utility
+import { NotFound } from './features/not-found/NotFound';
+import { StyleGuide } from './features/style-guide/StyleGuide';
 import DesignSidekick from './features/design-sidekick/DesignSidekick';
+import { TokenTest } from './components/debug/TokenTest';
+import { AssetLibrary } from './features/analysis/AssetLibrary';
+
+/**
+ * AuthPage Bridge
+ * Handles /auth canonical route with mode detection
+ */
+function AuthPage() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const mode = (searchParams.get('mode') as 'login' | 'register') || 'login';
+
+  return (
+    <Scaffold>
+      <AuthModal mode={mode} />
+    </Scaffold>
+  );
+}
 
 /**
  * ModeSync Component
- * Automatically switches between KrDark and KrDark modes based on the current route
+ * Automatically switches between modes based on the current route
  */
-function ModeSync() {
+export function ModeSync() {
   const location = useLocation();
   const setMode = useModeStore((state) => state.setMode);
 
@@ -65,18 +75,18 @@ function ModeSync() {
   return null; // Logic-only component
 }
 
-// Protected Layout with animations
-const ProtectedLayout = () => {
+export const RequireAuth = () => {
   const { user, loading } = useAuth();
   const location = useLocation();
 
-  // Check for demo/guest mode
+  // Check for demo/guest mode.
+  // NOTE: '?dev=bypass' override is handled centrally in AuthContext.tsx for dev simulation.
   const searchParams = new URLSearchParams(location.search);
   const isDemoMode = searchParams.get('demo') === 'true';
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#1A1714] flex items-center justify-center text-[#E6E1E5]">
+      <div className="min-h-screen bg-[var(--sys-color-charcoalBackground-base)] flex items-center justify-center text-[var(--sys-color-worker-ash-base)]">
         Loading...
       </div>
     );
@@ -86,25 +96,33 @@ const ProtectedLayout = () => {
   if (!user && !isDemoMode) {
     return (
       <Navigate
-        to="/login"
+        to="/auth"
         replace
       />
     );
   }
 
+  return <Outlet />;
+};
+
+// Protected Layout with legacy sidebar shell
+export const ProtectedLayout = () => {
+  const location = useLocation();
+
   return (
     <Layout>
+      <BannerTexture />
       <AnimatePresence>
         <motion.div
           key={location.pathname}
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.98, y: 12 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0 }}
           transition={{
-            duration: 0.5,
-            ease: [0.175, 0.885, 0.32, 1.275], // expressive-spring
+            duration: 0.45,
+            ease: [0.175, 0.885, 0.32, 1.1],
           }}
-          className="min-h-screen"
+          className="min-h-screen relative z-10"
         >
           <Outlet />
         </motion.div>
@@ -112,60 +130,12 @@ const ProtectedLayout = () => {
     </Layout>
   );
 };
-
-const OnboardingRoute = () => {
-  const isNewUser = useUserStore((state) => state.isNewUser);
-  if (isNewUser) {
-    return (
-      <Navigate
-        to="/welcome"
-        replace
-      />
-    );
-  }
-  return <OnboardingPage />;
-};
-
 // Public Layout (Login/Register/Landing)
-const PublicLayout = () => {
-  const showSentryTestButton =
-    import.meta.env.DEV && import.meta.env.VITE_SHOW_SENTRY_TEST_BUTTON === 'true';
-
+export const PublicLayout = () => {
   return (
-    <div className="min-h-screen bg-[#1A1714] relative">
-      {/* Textured Background */}
-      <div
-        className="fixed inset-0 pointer-events-none z-0 opacity-30 mix-blend-overlay"
-        style={{
-          backgroundImage: `url(${texturePattern})`,
-          backgroundRepeat: 'repeat',
-          backgroundSize: 'auto',
-        }}
-      />
+    <div className="min-h-screen bg-charcoalBackground-base text-worker-ash-base relative">
+      <BannerTexture />
       <div className="relative z-10">
-        {/* Temporary Sentry Test Button */}
-        {showSentryTestButton && (
-          <button
-            onClick={() => {
-              throw new Error('Sentry Frontend Test Error');
-            }}
-            style={{
-              position: 'fixed',
-              bottom: '20px',
-              right: '20px',
-              padding: '10px',
-              background: '#D0BCFE',
-              color: '#381E72',
-              borderRadius: '8px',
-              zIndex: 9999,
-              cursor: 'pointer',
-              fontWeight: 'bold',
-              border: 'none',
-            }}
-          >
-            Trigger Sentry Error
-          </button>
-        )}
         <Outlet />
       </div>
     </div>
@@ -195,13 +165,11 @@ export default function App() {
             element={<LandingPage />}
           />
           <Route
-            path="/login"
-            element={<Login />}
+            path="/auth"
+            element={<AuthPage />}
           />
-          <Route
-            path="/register"
-            element={<Register />}
-          />
+
+          {/* Developer / Internal Routes */}
           <Route
             path="/design-sidekick"
             element={<DesignSidekick />}
@@ -211,24 +179,8 @@ export default function App() {
             element={<StyleGuide />}
           />
           <Route
-            path="/kr/landing"
-            element={<HeroLanding className="m-6" />}
-          />
-          <Route
-            path="/kr/auth"
-            element={<AuthModal className="m-6" />}
-          />
-          <Route
-            path="/kr/onboarding"
-            element={<OnboardFlow className="m-6" />}
-          />
-          <Route
-            path="/kr/analysis"
-            element={<AnalysisWorkbench className="m-6" />}
-          />
-          <Route
-            path="/kr/dashboard"
-            element={<DashboardOverview className="m-6" />}
+            path="/animation-test"
+            element={<AnimationTestPage />}
           />
           <Route
             path="*"
@@ -236,72 +188,62 @@ export default function App() {
           />
         </Route>
 
-        {/* Protected Routes */}
-        <Route element={<ProtectedLayout />}>
-          <Route
-            path="/dashboard"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/onboarding"
-            element={<OnboardingRoute />}
-          />
-          <Route
-            path="/welcome"
-            element={<WelcomeScreen />}
-          />
-          <Route
-            path="/tracker"
-            element={<ApplicationTracker />}
-          />
-          <Route
-            path="/documents"
-            element={<Documents />}
-          />
-          <Route
-            path="/analysis"
-            element={<AnalysisPage />}
-          />
-          <Route
-            path="/opportunities"
-            element={<Opportunities />}
-          />
-          <Route
-            path="/ksc-generator"
-            element={<KSCGenerator />}
-          />
-          <Route
-            path="/cover-letter-generator"
-            element={<CoverLetterGenerator />}
-          />
-          <Route
-            path="/settings"
-            element={<Settings />}
-          />
-          <Route
-            path="/profile"
-            element={<ProfileView />}
-          />
-          <Route
-            path="/asset-library"
-            element={<AssetLibrary />}
-          />
-          <Route
-            path="/career/ingest"
-            element={<IngestionPage />}
-          />
-          <Route
-            path="/job-queue"
-            element={<JobQueue />}
-          />
-          <Route
-            path="/apply/quick"
-            element={<ApplyQuick />}
-          />
-          <Route
-            path="/test-tokens"
-            element={<TokenTest />}
-          />
+        {/* Protected Canonical Routes */}
+        <Route element={<RequireAuth />}>
+          <Route element={<MigratedRouteLayout />}>
+            <Route
+              path="/dashboard"
+              element={<DashboardPage />}
+            />
+            <Route
+              path="/profile"
+              element={<ProfilePage />}
+            />
+            <Route
+              path="/opportunities"
+              element={<OpportunitiesPage />}
+            />
+            <Route
+              path="/applications"
+              element={<ApplicationsPage />}
+            />
+            <Route
+              path="/analysis"
+              element={<AnalysisPage />}
+            />
+            <Route
+              path="/apply"
+              element={<ApplyPage />}
+            />
+            <Route
+              path="/generation"
+              element={<GenerationPage />}
+            />
+            <Route
+              path="/settings"
+              element={<SettingsPage />}
+            />
+            <Route
+              path="/onboarding"
+              element={<OnboardingPage />}
+            />
+            <Route
+              path="/documents"
+              element={<DocsPage />}
+            />
+          </Route>
+
+          {/* ProtectedLayout: support-only surfaces that intentionally remain on the legacy shell. */}
+          <Route element={<ProtectedLayout />}>
+            <Route
+              path="/asset-library"
+              element={<AssetLibrary />}
+            />
+            <Route
+              path="/test-tokens"
+              element={<TokenTest />}
+            />
+          </Route>
         </Route>
       </Routes>
     </Router>

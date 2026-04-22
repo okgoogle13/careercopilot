@@ -33,7 +33,7 @@ import argparse
 # CONSTANTS
 # ============================================================================
 
-MANIFEST_PATH = Path("./frontend/public/assets/kerala-rage-kr-solidarity-manifest.json")
+MANIFEST_PATH = Path("./frontend/public/assets/kr-solidarity-manifest.json")
 
 # Existing 12 kr-solidarity assets (v3.0.0)
 EXISTING_ASSETS = [

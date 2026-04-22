@@ -27,7 +27,8 @@ try:
     from dotenv import load_dotenv
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
-    load_dotenv(os.path.join(project_root, '.env'), override=True)
+    for env_name in ('.env.mcp', '.env'):
+        load_dotenv(os.path.join(project_root, env_name), override=True)
 except ImportError:
     pass
 
@@ -39,9 +40,10 @@ logging.basicConfig(
 logger = logging.getLogger("DesignSystemSidekick")
 
 # Initialize Sentry
-if os.getenv("SENTRY_DSN"):
+sentry_dsn = os.getenv("SENTRY_DSN")
+if sentry_dsn and sentry_dsn.startswith("http") and not sentry_dsn.startswith("${"):
     sentry_sdk.init(
-        dsn=os.getenv("SENTRY_DSN"),
+        dsn=sentry_dsn,
         send_default_pii=True,
         environment=os.getenv("ENV", "development"),
     )
@@ -49,10 +51,10 @@ if os.getenv("SENTRY_DSN"):
 
 # Model Tiers (March 2026)
 MODEL_TIERS = {
-    "Frontier": "gemini-3.1-pro",
-    "Performance": "gemini-3.1-flash",
-    "Utility": "gemini-3.1-flash-lite",
-    "LTS": "gemini-1.5-pro"
+    "Frontier": os.getenv("GEMINI_FRONTIER_MODEL", "models/gemini-3.1-pro-preview"),
+    "Performance": os.getenv("GEMINI_PERFORMANCE_MODEL", "models/gemini-3-flash-preview"),
+    "Utility": os.getenv("GEMINI_UTILITY_MODEL", "models/gemini-3.1-flash-lite-preview"),
+    "LTS": os.getenv("GEMINI_LTS_MODEL", "models/gemini-2.5-pro")
 }
 
 class DesignSystemSidekickServer:
@@ -96,6 +98,84 @@ class DesignSystemSidekickServer:
                         "asset_metadata": {"type": "object"}
                     },
                     "required": ["asset_id"]
+                }
+            },
+            {
+                "name": "lookup_token",
+                "description": "Programmatically lookup a single token value without LLM parsing.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "name": {"type": "string", "description": "Token name (e.g. --sys-color-charcoalBackground-base)"}
+                    },
+                    "required": ["name"]
+                }
+            },
+            {
+                "name": "validate_file_tokens",
+                "description": "Validates design tokens in a file using the programmatic script, returning only PASS/FAIL and violations.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "filepath": {"type": "string", "description": "Path to the file to validate"}
+                    },
+                    "required": ["filepath"]
+                }
+            },
+            {
+                "name": "get_archetype",
+                "description": "Fetch the canonical archetype shape token and rules without full document reads.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "name": {"type": "string", "description": "Archetype name (e.g. Strike, Megaphone)"}
+                    },
+                    "required": ["name"]
+                }
+            },
+            {
+                "name": "check_zero_flora",
+                "description": "Checks text deterministically for Australian flora/fauna terms.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "text": {"type": "string", "description": "Text to scan"}
+                    },
+                    "required": ["text"]
+                }
+            },
+            {
+                "name": "extract_component_tokens",
+                "description": "Extracts all semantic token variables used in a given file.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "filepath": {"type": "string", "description": "Path to the component file"}
+                    },
+                    "required": ["filepath"]
+                }
+            },
+            {
+                "name": "diff_tokens",
+                "description": "Diff tokens usage between two code commits.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "commit_a": {"type": "string"},
+                        "commit_b": {"type": "string"}
+                    },
+                    "required": ["commit_a", "commit_b"]
+                }
+            },
+            {
+                "name": "scan_hardcoded_colors",
+                "description": "Scan a file for hardcoded hex colors, returning only violating lines.",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "filepath": {"type": "string"}
+                    },
+                    "required": ["filepath"]
                 }
             }
         ]
@@ -223,6 +303,87 @@ class DesignSystemSidekickServer:
             prompt = f"Generate KR Solidarity implementation package for {asset_id}. Metadata: {json.dumps(metadata)}"
             result_text = await self._call_llm_async(prompt)
             return [{"type": "text", "text": result_text}]
+
+        elif name == "lookup_token":
+            token_name = args.get("name")
+            tokens_path = os.path.join(project_root, "frontend/src/design/tokens/tokens.json")
+            if not os.path.exists(tokens_path):
+                return [{"type": "text", "text": "Tokens file not found."}]
+            try:
+                with open(tokens_path, "r") as f:
+                    data = json.load(f)
+                # Naive nested search:
+                def find_token(obj, key):
+                    if isinstance(obj, dict):
+                        if key in obj: return obj[key]
+                        for k, v in obj.items():
+                            res = find_token(v, key)
+                            if res: return res
+                    return None
+                val = find_token(data, token_name) or "Not found"
+                return [{"type": "text", "text": f"Token: {token_name} -> {json.dumps(val)}"}]
+            except Exception as e:
+                return [{"type": "text", "text": f"Error parsing tokens: {str(e)}"}]
+
+        elif name == "validate_file_tokens":
+            filepath = args.get("filepath")
+            script = os.path.join(project_root, "scripts/design-validation/validate-tokens.py")
+            if not os.path.exists(script): return [{"type": "text", "text": "Validation script not found."}]
+            try:
+                import subprocess
+                res = subprocess.run(["python3", script, filepath], capture_output=True, text=True)
+                lines = [l for l in res.stdout.split("\\n") if "FAIL" in l or "PASS" in l or "Violation" in l]
+                return [{"type": "text", "text": "\\n".join(lines) or "PASS"}]
+            except Exception as e:
+                return [{"type": "text", "text": f"Error running validation: {str(e)}"}]
+
+        elif name == "get_archetype":
+            arch_name = args.get("name", "").lower()
+            mapping = {
+                "strike": "--sys-shape-blockRiot03",
+                "march": "--sys-shape-blockRiot01",
+                "megaphone": "--sys-shape-megaphoneCut01",
+                "placard": "--sys-shape-placardTorn01",
+                "scaffold": "--sys-shape-scaffoldFrame01",
+                "substrate": "--sys-shape-substrateTile02"
+            }
+            res = mapping.get(arch_name, "Archetype not found.")
+            return [{"type": "text", "text": res}]
+
+        elif name == "check_zero_flora":
+            import re
+            text = args.get("text", "").lower()
+            flora_terms = ["wattle", "gum tree", "eucalyptus", "banksia", "waratah", "koala", "kangaroo"]
+            flagged = [term for term in flora_terms if term in text]
+            if flagged:
+                return [{"type": "text", "text": f"FAIL: Zero-flora violations found: {', '.join(flagged)}"}]
+            return [{"type": "text", "text": "PASS: No flora violations."}]
+
+        elif name == "extract_component_tokens":
+            filepath = args.get("filepath")
+            if not os.path.exists(filepath): return [{"type": "text", "text": "File not found."}]
+            import re
+            with open(filepath, "r") as f:
+                content = f.read()
+            tokens = set(re.findall(r"--(?:sys|kr)-(?:color|shape|type)[A-Za-z0-9_-]+", content))
+            return [{"type": "text", "text": f"Tokens used: {', '.join(tokens)}"}]
+
+        elif name == "diff_tokens":
+            # Stub for diff tokens
+            return [{"type": "text", "text": "diff_tokens not fully implemented. Please use fallback."}]
+
+        elif name == "scan_hardcoded_colors":
+            filepath = args.get("filepath")
+            if not os.path.exists(filepath): return [{"type": "text", "text": "File not found."}]
+            import re
+            lines_with_hex = []
+            with open(filepath, "r") as f:
+                for i, line in enumerate(f, 1):
+                    if re.search(r"#(?:[0-9a-fA-F]{3}){1,2}\\b", line):
+                        lines_with_hex.append(f"L{i}: {line.strip()}")
+            if lines_with_hex:
+                return [{"type": "text", "text": "FAIL: Hardcoded hex colors found:\\n" + "\\n".join(lines_with_hex)}]
+            return [{"type": "text", "text": "PASS: No hardcoded colors found."}]
 
         return [{"type": "text", "text": f"Unknown tool: {name}"}]
 

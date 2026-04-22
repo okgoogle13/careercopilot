@@ -8,3 +8,5 @@ export * from './UnifiedColumn';
 export * from './KanbanBoard';
 export * from './EditorSplitPane';
 export * from './ManifestoCard';
+export * from './BannerTexture';
+export * from './SolidarityMetric';

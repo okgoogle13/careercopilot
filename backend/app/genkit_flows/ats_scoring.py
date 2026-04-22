@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, cast
 
 from pydantic import BaseModel, Field
 
@@ -58,13 +58,13 @@ async def _perform_semantic_analysis(resume_text: str, job_description: str) -> 
 
 
 def _generate_recommendations(
-    keyword_analysis: Dict[str, Any],
+    keyword_analysis: dict[str, Any],
     semantic_analysis: SemanticAnalysis,
     formatting_score: float,
     job_extraction_success: bool,
     resume_extraction_success: bool,
     semantic_analysis_success: bool,
-) -> List[str]:
+) -> list[str]:
     """Generate actionable recommendations with fallback handling"""
     recommendations = []
 
@@ -115,41 +115,53 @@ def _generate_recommendations(
 
 
 def _calculate_keyword_score(
-    resume_skills: List[str],
+    resume_text: str,
+    resume_skills: list[str],
     job_reqs: JobRequirements,
-    profile_keywords: Optional[List[str]] = None,
-) -> Dict[str, Any]:
-    """Calculates a score based on keyword matching."""
-    required_matched = [
-        skill
-        for skill in job_reqs.requiredSkills
-        if skill.lower() in (s.lower() for s in resume_skills)
-    ]
-    preferred_matched = [
-        skill
-        for skill in job_reqs.preferredSkills
-        if skill.lower() in (s.lower() for s in resume_skills)
-    ]
+    profile_keywords: list[str] | None = None,
+) -> dict[str, Any]:
+    """Calculates a score based on keyword matching and basic density (occurrences)."""
+    text_lower = resume_text.lower()
 
-    missing_required = [
-        skill
-        for skill in job_reqs.requiredSkills
-        if skill.lower() not in (s.lower() for s in resume_skills)
-    ]
-    missing_preferred = [
-        skill
-        for skill in job_reqs.preferredSkills
-        if skill.lower() not in (s.lower() for s in resume_skills)
-    ]
+    required_matched = []
+    required_score_raw = 0.0
+    for skill in job_reqs.requiredSkills:
+        count = text_lower.count(skill.lower())
+        # Check against parsed skills array AND raw text (fallback)
+        if skill.lower() in (s.lower() for s in resume_skills) or count > 0:
+            required_matched.append(skill)
+        # 1 match gives some score, >1 match (density) gives full score
+        score_pts = (
+            min(1.0, 0.5 + (count * 0.25))
+            if count > 0
+            else (0.5 if skill.lower() in (s.lower() for s in resume_skills) else 0.0)
+        )
+        required_score_raw += score_pts
+
+    preferred_matched = []
+    preferred_score_raw = 0.0
+    for skill in job_reqs.preferredSkills:
+        count = text_lower.count(skill.lower())
+        if skill.lower() in (s.lower() for s in resume_skills) or count > 0:
+            preferred_matched.append(skill)
+        score_pts = (
+            min(1.0, 0.5 + (count * 0.25))
+            if count > 0
+            else (0.5 if skill.lower() in (s.lower() for s in resume_skills) else 0.0)
+        )
+        preferred_score_raw += score_pts
+
+    missing_required = [s for s in job_reqs.requiredSkills if s not in required_matched]
+    missing_preferred = [s for s in job_reqs.preferredSkills if s not in preferred_matched]
 
     # Scoring logic: 80% weight for required, 20% for preferred
     required_score = (
-        (len(required_matched) / len(job_reqs.requiredSkills)) * 0.8
+        (required_score_raw / len(job_reqs.requiredSkills)) * 0.8
         if job_reqs.requiredSkills
         else 0.8
     )
     preferred_score = (
-        (len(preferred_matched) / len(job_reqs.preferredSkills)) * 0.2
+        (preferred_score_raw / len(job_reqs.preferredSkills)) * 0.2
         if job_reqs.preferredSkills
         else 0.2
     )
@@ -160,6 +172,75 @@ def _calculate_keyword_score(
         "score": min(score, 100),
         "matchedKeywords": required_matched + preferred_matched,
         "missingKeywords": missing_required + missing_preferred,
+    }
+
+
+def _calculate_job_title_score(resume_entities: ResumeEntities, job_reqs: JobRequirements) -> float:
+    """Checks if the target job title exists in the user's experience."""
+    if not job_reqs.jobTitle or job_reqs.jobTitle.lower() == "unknown role":
+        return 50.0  # Neutral score if missing
+
+    job_title_lower = job_reqs.jobTitle.lower()
+
+    for exp in resume_entities.experience:
+        exp_title = exp.get("title", "").lower()
+        if exp_title and (job_title_lower in exp_title or exp_title in job_title_lower):
+            return 100.0  # Exact/partial substring match
+
+    # Fuzzy match threshold logic could go here, but for now fallback to 0
+    return 0.0
+
+
+def _calculate_education_experience_score(
+    resume_entities: ResumeEntities, job_reqs: JobRequirements
+) -> dict[str, Any]:
+    """Calculates generic match for total tenure and degree requirement."""
+    # Simple parse for years of experience assuming `start_year` and `end_year`
+    total_years = 0
+    try:
+        from datetime import datetime
+
+        current_year = datetime.now().year
+        for exp in resume_entities.experience:
+            start_year = int(str(exp.get("start_year", current_year - 1)))
+            end_year = int(str(exp.get("end_year", current_year)))
+            total_years += max(1, end_year - start_year)
+    except Exception:
+        pass  # Fallback to 0 if parsing fails
+
+    # Simplified parsing for required experience level against total tenure
+    # (assuming job_reqs.experienceLevel like '5+ years')
+    required_years = 0
+    import re
+
+    match = re.search(r"(\d+)", job_reqs.experienceLevel)
+    if match:
+        required_years = int(match.group(1))
+
+    exp_match = total_years >= required_years if required_years > 0 else True
+
+    # Handle Degree Match
+    education_match = True
+    if getattr(job_reqs, "degreeRequirement", None):
+        required_degree = job_reqs.degreeRequirement.lower()
+        education_match = False
+        for edu in resume_entities.education:
+            degree_type = edu.get("degree_type", "").lower()
+            if degree_type and required_degree in degree_type:
+                education_match = True
+                break
+
+    score = 0.0
+    if exp_match:
+        score += 50.0
+    if education_match:
+        score += 50.0
+
+    return {
+        "score": score,
+        "experienceMatch": exp_match,
+        "educationMatch": education_match,
+        "totalYearsCalculated": total_years,
     }
 
 
@@ -179,8 +260,10 @@ def _calculate_formatting_score(resume_entities: ResumeEntities) -> float:
 
 
 class ScoreBreakdown(BaseModel):
-    keywordScore: float
+    keywordDensityScore: float
+    jobTitleScore: float
     semanticScore: float
+    educationExperienceScore: float
     formattingScore: float
 
 
@@ -188,22 +271,26 @@ class CategoryAnalysis(BaseModel):
     name: str
     score: float
     status: str  # 'good', 'warning', 'poor'
-    suggestions: List[str]
+    suggestions: list[str]
 
 
 class KeywordMatches(BaseModel):
-    matched: List[str]
-    missing: List[str]
+    matched: list[str]
+    missing: list[str]
 
 
 class AtsResult(BaseModel):
     overallScore: float
+    summary: str = Field(description="A brief summary of the overall match.")
     breakdown: ScoreBreakdown
-    categories: List[CategoryAnalysis]
+    categories: list[CategoryAnalysis]
     keywordMatches: KeywordMatches
-    formatIssues: List[str]
-    recommendations: List[str]
-    keyword_placement_suggestions: Optional[List[KeywordPlacementSuggestion]] = None
+    formatIssues: list[str]
+    jobTitleMatch: float
+    educationMatch: bool
+    experienceMatch: bool
+    recommendations: list[str]
+    keyword_placement_suggestions: list[KeywordPlacementSuggestion] | None = None
 
 
 # The decorator handles all the setup logic including model validation
@@ -211,7 +298,7 @@ class AtsResult(BaseModel):
 async def atsScoring(
     resumeText: str,
     jobDescription: str,
-    profileKeywords: Optional[List[str]] = None,
+    profileKeywords: list[str] | None = None,
     user_id: str = "anonymous",
 ) -> AtsResult:
     """
@@ -289,7 +376,9 @@ async def atsScoring(
 
     # Step 4: Perform Keyword Matching (local operation - always succeeds)
     keyword_analysis_result = await enhanced_ai_handler.execute_ai_operation(
-        lambda: _calculate_keyword_score(resume_entities.skills, job_reqs, profileKeywords),
+        lambda: _calculate_keyword_score(
+            resumeText, resume_entities.skills, job_reqs, profileKeywords
+        ),
         AIOperationContext(
             operation_name="keyword_matching",
             service_type=AIServiceType.KEYWORD_MATCHING,
@@ -316,12 +405,27 @@ async def atsScoring(
 
     formatting_score = formatting_score_result.data if formatting_score_result.success else 50.0
 
+    # Step 5b: Extra Scoring for Job Title and Education/Experience
+    job_title_score = _calculate_job_title_score(resume_entities, job_reqs)
+    edu_exp_result = _calculate_education_experience_score(resume_entities, job_reqs)
+    edu_exp_score = edu_exp_result["score"]
+
     # Step 6: Combine scores using weighted average from configuration
     weights = settings.ats_scoring_weights
+
+    # Fallback to configured defaults if not all properties exist
+    w_keyword = weights.get("keyword_density", 0.30)
+    w_job = weights.get("job_title", 0.20)
+    w_semantic = weights.get("semantic", 0.25)
+    w_edu_exp = weights.get("education_experience", 0.15)
+    w_fmt = weights.get("formatting", 0.10)
+
     overall_score = (
-        keyword_analysis["score"] * weights["keyword"]
-        + semantic_analysis.similarityScore * weights["semantic"]
-        + formatting_score * weights["formatting"]
+        keyword_analysis["score"] * w_keyword
+        + job_title_score * w_job
+        + semantic_analysis.similarityScore * w_semantic
+        + edu_exp_score * w_edu_exp
+        + formatting_score * w_fmt
     )
 
     # Step 7: Get keyword placement suggestions with error handling
@@ -439,9 +543,12 @@ async def atsScoring(
     # Construct the final output
     return AtsResult(
         overallScore=round(overall_score, 2),
+        summary=semantic_analysis.explanation,
         breakdown=ScoreBreakdown(
-            keywordScore=round(keyword_analysis["score"], 2),
+            keywordDensityScore=round(keyword_analysis["score"], 2),
+            jobTitleScore=round(job_title_score, 2),
             semanticScore=semantic_analysis.similarityScore,
+            educationExperienceScore=round(edu_exp_score, 2),
             formattingScore=round(formatting_score, 2),
         ),
         categories=categories,
@@ -450,6 +557,9 @@ async def atsScoring(
             missing=keyword_analysis["missingKeywords"],
         ),
         formatIssues=format_issues,
+        jobTitleMatch=job_title_score,
+        educationMatch=edu_exp_result.get("educationMatch", False),
+        experienceMatch=edu_exp_result.get("experienceMatch", False),
         recommendations=recommendations,
         keyword_placement_suggestions=placement_suggestions,
     )

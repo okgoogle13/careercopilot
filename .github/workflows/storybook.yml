@@ -183,7 +183,7 @@ jobs:
           cd frontend
           yarn storybook:start &
           echo $! > storybook.pid
-          
+
           # Wait for Storybook to be ready
           timeout 60 bash -c 'until curl -s http://localhost:6006 > /dev/null; do sleep 2; done' || {
             echo "❌ Storybook failed to start"

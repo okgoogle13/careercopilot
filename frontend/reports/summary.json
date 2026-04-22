@@ -1,31 +1,31 @@
 {
-  "generatedAt": "2026-03-09T02:04:37.657Z",
-  "totalComponents": 221,
-  "nonDemoCount": 221,
+  "generatedAt": "2026-03-30T14:07:06.364Z",
+  "totalComponents": 48,
+  "nonDemoCount": 48,
   "migrationSummary": {
-    "migrated": 221,
-    "mixed": 0,
+    "migrated": 43,
+    "mixed": 1,
     "not_migrated": 0,
     "expressive": 0,
-    "unknown": 0
+    "unknown": 4
   },
   "topEssential": [
     {
-      "name": "KeralaRageButton",
-      "path": "src/components/ui/KeralaRageButton.tsx",
+      "name": "Placard",
+      "path": "src/components/ui/Placard.tsx",
       "category": "ui",
-      "usageCount": 9,
+      "usageCount": 14,
       "migrationStatus": "migrated",
       "usesMUI": false,
       "usesCustomUI": false,
       "hasTests": false,
-      "hasStories": true
+      "hasStories": false
     },
     {
       "name": "Strike",
       "path": "src/components/ui/Strike.tsx",
       "category": "ui",
-      "usageCount": 6,
+      "usageCount": 12,
       "migrationStatus": "migrated",
       "usesMUI": false,
       "usesCustomUI": false,
@@ -33,54 +33,10 @@
       "hasStories": false
     },
     {
-      "name": "Pebble",
-      "path": "src/components/ui/Pebble.tsx",
+      "name": "KeralaRageButton",
+      "path": "src/components/ui/KeralaRageButton.tsx",
       "category": "ui",
-      "usageCount": 5,
-      "migrationStatus": "migrated",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "StatusBadge",
-      "path": "src/components/ui/StatusBadge/StatusBadge.tsx",
-      "category": "ui",
-      "usageCount": 5,
-      "migrationStatus": "migrated",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": true,
-      "hasStories": false
-    },
-    {
-      "name": "Placard",
-      "path": "src/components/ui/Placard.tsx",
-      "category": "ui",
-      "usageCount": 4,
-      "migrationStatus": "migrated",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "Stone",
-      "path": "src/components/ui/Stone.tsx",
-      "category": "ui",
-      "usageCount": 4,
-      "migrationStatus": "migrated",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "Lens",
-      "path": "src/components/ui/Lens.tsx",
-      "category": "ui",
-      "usageCount": 2,
+      "usageCount": 8,
       "migrationStatus": "migrated",
       "usesMUI": false,
       "usesCustomUI": false,
@@ -88,21 +44,10 @@
       "hasStories": true
     },
     {
-      "name": "AuroraHeader",
-      "path": "src/components/ui/AuroraHeader.tsx",
+      "name": "Logo",
+      "path": "src/components/ui/Logo.tsx",
       "category": "ui",
-      "usageCount": 1,
-      "migrationStatus": "migrated",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "ScaffoldInput",
-      "path": "src/components/ui/ScaffoldInput.tsx",
-      "category": "ui",
-      "usageCount": 1,
+      "usageCount": 3,
       "migrationStatus": "migrated",
       "usesMUI": false,
       "usesCustomUI": false,
@@ -112,72 +57,6 @@
     {
       "name": "AssetLibrary",
       "path": "src/features/analysis/AssetLibrary.tsx",
-      "category": "features",
-      "usageCount": 1,
-      "migrationStatus": "migrated",
-      "usesMUI": false,
-      "usesCustomUI": true,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "TechCard",
-      "path": "src/features/analysis/TechCard.tsx",
-      "category": "features",
-      "usageCount": 1,
-      "migrationStatus": "migrated",
-      "usesMUI": false,
-      "usesCustomUI": false,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "ApplicationTracker",
-      "path": "src/features/applications/ApplicationTracker.tsx",
-      "category": "features",
-      "usageCount": 1,
-      "migrationStatus": "migrated",
-      "usesMUI": false,
-      "usesCustomUI": true,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "CoverLetterGenerator",
-      "path": "src/features/applications/CoverLetterGenerator.tsx",
-      "category": "features",
-      "usageCount": 1,
-      "migrationStatus": "migrated",
-      "usesMUI": false,
-      "usesCustomUI": true,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "Login",
-      "path": "src/features/auth/Login.tsx",
-      "category": "features",
-      "usageCount": 1,
-      "migrationStatus": "migrated",
-      "usesMUI": false,
-      "usesCustomUI": true,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "Register",
-      "path": "src/features/auth/Register.tsx",
-      "category": "features",
-      "usageCount": 1,
-      "migrationStatus": "migrated",
-      "usesMUI": false,
-      "usesCustomUI": true,
-      "hasTests": false,
-      "hasStories": false
-    },
-    {
-      "name": "Dashboard",
-      "path": "src/features/dashboard/Dashboard.tsx",
       "category": "features",
       "usageCount": 1,
       "migrationStatus": "migrated",
@@ -198,8 +77,19 @@
       "hasStories": false
     },
     {
-      "name": "Documents",
-      "path": "src/features/documents/Documents.tsx",
+      "name": "NotFound",
+      "path": "src/features/not-found/NotFound.tsx",
+      "category": "features",
+      "usageCount": 1,
+      "migrationStatus": "migrated",
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "hasTests": false,
+      "hasStories": false
+    },
+    {
+      "name": "M3ExpressiveComponents",
+      "path": "src/features/style-guide/M3ExpressiveComponents.tsx",
       "category": "features",
       "usageCount": 1,
       "migrationStatus": "migrated",
@@ -209,9 +99,31 @@
       "hasStories": false
     },
     {
-      "name": "EvidenceUploader",
-      "path": "src/features/ingestion/components/EvidenceUploader.tsx",
+      "name": "StyleGuide",
+      "path": "src/features/style-guide/StyleGuide.tsx",
       "category": "features",
+      "usageCount": 1,
+      "migrationStatus": "mixed",
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "hasTests": false,
+      "hasStories": false
+    },
+    {
+      "name": "Layout",
+      "path": "src/layouts/Layout.tsx",
+      "category": "layout",
+      "usageCount": 1,
+      "migrationStatus": "unknown",
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "hasTests": false,
+      "hasStories": true
+    },
+    {
+      "name": "MigratedRouteLayout",
+      "path": "src/layouts/MigratedRouteLayout.tsx",
+      "category": "layout",
       "usageCount": 1,
       "migrationStatus": "migrated",
       "usesMUI": false,
@@ -220,9 +132,31 @@
       "hasStories": false
     },
     {
-      "name": "KSCGenerator",
-      "path": "src/features/ksc-generator/KSCGenerator.tsx",
-      "category": "features",
+      "name": "Footer",
+      "path": "src/layouts/shared/Footer.tsx",
+      "category": "layout",
+      "usageCount": 1,
+      "migrationStatus": "unknown",
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "hasTests": false,
+      "hasStories": false
+    },
+    {
+      "name": "Sidebar",
+      "path": "src/layouts/shared/Sidebar.tsx",
+      "category": "layout",
+      "usageCount": 1,
+      "migrationStatus": "migrated",
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "hasTests": false,
+      "hasStories": false
+    },
+    {
+      "name": "SolidaritySidebar",
+      "path": "src/layouts/shared/SolidaritySidebar.tsx",
+      "category": "layout",
       "usageCount": 1,
       "migrationStatus": "migrated",
       "usesMUI": false,
@@ -232,5 +166,17 @@
     }
   ],
   "topNotMigrated": [],
-  "topMixed": []
+  "topMixed": [
+    {
+      "name": "StyleGuide",
+      "path": "src/features/style-guide/StyleGuide.tsx",
+      "category": "features",
+      "usageCount": 1,
+      "migrationStatus": "mixed",
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "hasTests": false,
+      "hasStories": false
+    }
+  ]
 }

@@ -49,7 +49,7 @@ export const KrDarkKanban: React.FC = () => {
             <UnifiedColumn
               key={col}
               title={col}
-              className="group/col border-r border-surface-KrDark-concrete-grey-high/20 pr-4 last:border-0"
+              className="group/col border-r border-[var(--kr-color-charcoal-background-steps-3)]/20 pr-4 last:border-0"
             >
               <div className="space-y-6">
                 {colApps.map((app, appIdx) => (
@@ -60,7 +60,7 @@ export const KrDarkKanban: React.FC = () => {
                     transition={{ delay: idx * 0.1 + appIdx * 0.05 }}
                   >
                     <SolidarityCard
-                      className="p-8 group/card cursor-pointer border-surface-KrDark-concrete-grey-high/20 hover:border-ink-gold/20 transition-all duration-500 relative overflow-hidden"
+                      className="p-8 group/card cursor-pointer border-[var(--kr-color-charcoal-background-steps-3)]/20 hover:border-ink-gold/20 transition-all duration-500 relative overflow-hidden"
                       onClick={() => console.log('Opening mission:', app.id)}
                     >
                       <div className="flex flex-col gap-5 relative z-10">
@@ -77,7 +77,7 @@ export const KrDarkKanban: React.FC = () => {
                           {app.company}
                         </p>
 
-                        <div className="flex items-center gap-6 pt-4 border-t border-surface-KrDark-concrete-grey-high/20 text-[10px] text-paper-white/30 font-mono tracking-tighter">
+                        <div className="flex items-center gap-6 pt-4 border-t border-[var(--kr-color-charcoal-background-steps-3)]/20 text-[10px] text-paper-white/30 font-mono tracking-tighter">
                           <div className="flex items-center gap-2">
                             <MapPin className="w-3 h-3 text-solidarity-red/40" />
                             {app.location}
@@ -96,7 +96,7 @@ export const KrDarkKanban: React.FC = () => {
                       </div>
 
                       {/* TODO[asset]: Assembly Grid Motif substrate overlay (Z-1) */}
-                      <div className="absolute bottom-0 right-0 w-24 h-24 bg-surface-KrDark-concrete-grey-high/5 blur-3xl rounded-march -mr-12 -mb-12" />
+                      <div className="absolute bottom-0 right-0 w-24 h-24 bg-[var(--kr-color-charcoal-background-steps-3)]/5 blur-3xl rounded-march -mr-12 -mb-12" />
                     </SolidarityCard>
                   </motion.div>
                 ))}
@@ -105,7 +105,7 @@ export const KrDarkKanban: React.FC = () => {
                   <motion.div
                     initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
                     animate={{ opacity: 0.15, y: 0 }}
-                    className="h-64 border border-dashed border-surface-KrDark-concrete-grey-high/25 rounded-megaphone flex flex-col items-center justify-center text-center p-8"
+                    className="h-64 border border-dashed border-[var(--kr-color-charcoal-background-steps-3)]/25 rounded-megaphone flex flex-col items-center justify-center text-center p-8"
                   >
                     <span className="font-proclamation text-3xl text-paper-white/20 -rotate-3 mb-4 uppercase">
                       Silent Station...
@@ -121,7 +121,7 @@ export const KrDarkKanban: React.FC = () => {
         })}
       </KanbanBoard>
 
-      <div className="mt-8 flex justify-between items-center opacity-20 border-t border-surface-KrDark-concrete-grey-high/20 pt-6">
+      <div className="mt-8 flex justify-between items-center opacity-20 border-t border-[var(--kr-color-charcoal-background-steps-3)]/20 pt-6">
         <span className="font-mono text-[9px] uppercase tracking-widest">
           Archive Integrity: Verified
         </span>

@@ -32,7 +32,7 @@ echo ""
 # Environment-based setup
 echo -e "${BLUE}Environment Setup:${NC}"
 echo "  ./scripts/setup-secrets.sh all development    # Development environment"
-echo "  ./scripts/setup-secrets.sh all staging        # Staging environment"  
+echo "  ./scripts/setup-secrets.sh all staging        # Staging environment"
 echo "  ./scripts/setup-secrets.sh all production     # Production environment"
 echo ""
 

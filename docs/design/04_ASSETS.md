@@ -38,13 +38,17 @@ To avoid "Flat Black" syndrome, backgrounds must use layered textures.
 
 ---
 
-## 3. The Zero-Flora Lockdown
+## 3. The Selective Flora/Fauna Guardrail
 
 As per the **Migrant Rage** update, the following motifs are **STRICTLY BANNED** and must be purged from all AI prompts and UI iterations:
 - ❌ No Kangaroo, Koala, or endemic fauna as icons/mascots.
 - ❌ No Eucalyptus, Gum leaves, Wattle, or generic "forest" aesthetics.
 - ❌ No "Greenhouse" or "Ecosystem" biological metaphors in copy.
 - ❌ No Lilies, Lotus, or floral devotional décor.
+
+Allowed exceptions:
+- ✅ Non-Australian diaspora flora may appear when it aligns with the canon.
+- ✅ Elephants remain allowed as intentional cultural anchors, not mascots.
 
 **Replacement Strategy:**
 - Use **Concrete, Brick, Asphalt, and Paper** for substrate.
@@ -66,7 +70,7 @@ When a symbolic anchor (e.g., Shiva or Elephant) is used, it must be accompanied
 
 ---
 
-**Registry Reference:** `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`
+**Registry Reference:** `frontend/public/assets/kr-solidarity-manifest.json`
 ---
 
 ## 5. Decorative Shape Assets

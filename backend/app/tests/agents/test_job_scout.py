@@ -2,12 +2,9 @@
 Tests for the JobScoutAgent class.
 """
 
-import json
-import logging
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock
 
 import pytest
-from fastapi.testclient import TestClient
 
 from app.agents.job_scout import JobScoutAgent
 from app.services.flash_sidekick_service import FlashSidekickService

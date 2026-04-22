@@ -137,7 +137,7 @@ creating a "found" rather than "built" aesthetic.
 
 ## kr-motifs
 
-- Wattle (iconic Australian acacia)
+- Baru (iconic Australian acacia)
 - Leaf structures (native [DEPRECATED_STYLE] form)
 - [DEPRECATED_STYLE] density zones (theatrical void + [DEPRECATED_STYLE] central)
 
@@ -173,7 +173,7 @@ Use with opacity 0.65-0.85 (Solidarity Mode standard).
             "central": {"coverage": "65%", "density": "[DEPRECATED_STYLE]"},
             "lower_right": {"coverage": "20%", "empty_space": "150x150px"},
         },
-        "kr_motifs": ["wattle", "leaf", "endemic_flora"],
+        "kr_motifs": ["baru", "leaf", "endemic_flora"],
         "mode": "kr-dark",
         "compliance_score": score,
         "validation_timestamp": datetime.now().isoformat(),
@@ -262,27 +262,27 @@ Use with opacity 0.65-0.85 (Solidarity Mode standard).
 
     # Move from triage/keep to triage/discard if applicable
     is_from_keep = "_triage/keep" in str(png_file.absolute())
-    
+
     # In test mode: create a marker file instead of copying (to avoid duplicating large PNG)
     # But if we were doing a real copy/move:
     if is_from_keep:
         discard_dir = png_file.parent.parent / "discard"
         discard_dir.mkdir(exist_ok=True)
         discard_path = discard_dir / png_file.name
-        
+
         # Real world would be shutil.copy2(png_path, production_path) then shutil.move(png_path, discard_path)
         # For this script's mock purpose, we will simulate the move by creating a marker in discard and production
         print(f"  📦 Triage Cleanup: Moving {png_file.name} to discard/")
         with open(discard_path, 'w') as f:
             f.write(f"[MOVED FROM KEEP] {datetime.now().isoformat()}\n")
             f.write(f"Integrated as: {production_filename}\n")
-        
+
         # In this specific script's mock logic, it creates a placeholder in production
         with open(production_path, 'w') as f:
             f.write(f"[PRODUCTION ASSET] Link to {png_file.name}\n")
             f.write(f"Original: {png_path}\n")
             f.write(f"Status: MOVED TO DISCARD\n")
-            
+
         # Optional: remove original if this weren't a mock-style script
         # png_file.unlink()
     else:

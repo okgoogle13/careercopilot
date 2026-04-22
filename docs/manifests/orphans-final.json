@@ -1,0 +1,137 @@
+{
+  "generatedAt": "2026-04-01T04:04:08.397Z",
+  "orphanedFeatures": [],
+  "orphanedPages": [],
+  "unroutedScreens": [
+    "12_generation"
+  ],
+  "nonFeatureRoutes": [
+    {
+      "path": "/auth",
+      "source": "UNKNOWN"
+    },
+    {
+      "path": "/login",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/register",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/animation-test",
+      "source": "./components/debug/AnimationTest"
+    },
+    {
+      "path": "/lookout",
+      "source": "./screens/06_lookout/LookoutDiscovery"
+    },
+    {
+      "path": "/tracker",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/opportunities",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/career/ingest",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/apply/quick",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/ksc-generator",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/cover-letter-generator",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/job-queue",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/documents",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/dashboard-overview",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/kanban",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/ingestion",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/feed",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/studio",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/editor",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/welcome",
+      "source": "react-router-dom"
+    },
+    {
+      "path": "/test-tokens",
+      "source": "./components/debug/TokenTest"
+    },
+    {
+      "path": "/prototype",
+      "source": "UNKNOWN"
+    },
+    {
+      "path": "/prototype/apply-quick",
+      "source": "UNKNOWN"
+    },
+    {
+      "path": "/prototype/library",
+      "source": "UNKNOWN"
+    },
+    {
+      "path": "/prototype/past-applications",
+      "source": "UNKNOWN"
+    },
+    {
+      "path": "/prototype/profile",
+      "source": "UNKNOWN"
+    },
+    {
+      "path": "/prototype/image-studio",
+      "source": "UNKNOWN"
+    },
+    {
+      "path": "/prototype/settings-harvest",
+      "source": "UNKNOWN"
+    },
+    {
+      "path": "/prototype/resume",
+      "source": "UNKNOWN"
+    },
+    {
+      "path": "/prototype/cover-letter",
+      "source": "UNKNOWN"
+    }
+  ],
+  "summary": {
+    "totalOrphans": 31,
+    "featureOrphans": 0,
+    "pageOrphans": 0,
+    "screenOrphans": 1,
+    "nonFeatureRoutes": 30
+  }
+}

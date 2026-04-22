@@ -1,0 +1,340 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-04-07",
+  "designSystem": "KR Solidarity v6.1",
+  "purpose": "Machine-readable target-state component library inventory aligned to building-components taxonomy and registry planning.",
+  "authorityOrder": [
+    "docs/design/01_CANON.md",
+    "docs/design/02_SYSTEM.md",
+    "docs/design/03_COMPONENTS.md",
+    "docs/design/03b_COMPONENT_LIBRARY_INVENTORY.md",
+    "frontend/src/components/**",
+    "frontend/src/layouts/**",
+    "frontend/src/features/**"
+  ],
+  "statusVocabulary": {
+    "canonical": "Approved target-state library surface",
+    "transitional": "Still in use, but expected to be renamed, merged, or normalized",
+    "prototype-only": "Reference or experimental surface, not promoted to the runtime library",
+    "deprecated": "Compatibility-only surface; do not use in new work",
+    "support-only": "Internal helper, atmospheric asset, or non-public implementation detail",
+    "feature-owned": "Reusable only within a bounded feature domain"
+  },
+  "artifactTypes": [
+    "primitive",
+    "component",
+    "pattern",
+    "block",
+    "page",
+    "template",
+    "utility",
+    "layout-shell"
+  ],
+  "entries": [
+    {
+      "id": "ui-button",
+      "publicName": "Button",
+      "internalArchetype": "Strike",
+      "artifactType": "component",
+      "path": "frontend/src/components/ui/Strike.tsx",
+      "ownerLayer": "components/ui",
+      "targetStateStatus": "canonical",
+      "registryEligible": true,
+      "compositionModel": {
+        "kind": "single-surface",
+        "subcomponents": []
+      },
+      "supportsAsChild": false,
+      "slots": [
+        "children",
+        "leadingIcon",
+        "trailingIcon"
+      ],
+      "stateModel": {
+        "supportsControlled": false,
+        "supportsUncontrolled": false
+      },
+      "stylingModel": {
+        "headless": false,
+        "tokenDriven": true,
+        "variantDriven": true
+      },
+      "tokenStatus": "kr-native",
+      "accessibilityStatus": "expected-accessible",
+      "docsStatus": "documented",
+      "notes": [
+        "Canonical public name replaces KeralaRageButton in new docs and new code."
+      ]
+    },
+    {
+      "id": "ui-card",
+      "publicName": "Card",
+      "internalArchetype": "Placard",
+      "artifactType": "component",
+      "path": "frontend/src/components/ui/Placard.tsx",
+      "ownerLayer": "components/ui",
+      "targetStateStatus": "canonical",
+      "registryEligible": true,
+      "compositionModel": {
+        "kind": "compound",
+        "subcomponents": [
+          "Header",
+          "Body",
+          "Footer"
+        ]
+      },
+      "supportsAsChild": false,
+      "slots": [
+        "children",
+        "header",
+        "footer"
+      ],
+      "stateModel": {
+        "supportsControlled": false,
+        "supportsUncontrolled": false
+      },
+      "stylingModel": {
+        "headless": false,
+        "tokenDriven": true,
+        "variantDriven": true
+      },
+      "tokenStatus": "kr-native",
+      "accessibilityStatus": "expected-accessible",
+      "docsStatus": "documented",
+      "notes": [
+        "Use for reusable emphasis and content containers, not route-level feature ownership."
+      ]
+    },
+    {
+      "id": "ui-input",
+      "publicName": "Input",
+      "internalArchetype": "Scaffold",
+      "artifactType": "component",
+      "path": "frontend/src/components/ui/ScaffoldInput.tsx",
+      "ownerLayer": "components/ui",
+      "targetStateStatus": "canonical",
+      "registryEligible": true,
+      "compositionModel": {
+        "kind": "single-surface",
+        "subcomponents": [
+          "Input",
+          "Textarea"
+        ]
+      },
+      "supportsAsChild": false,
+      "slots": [
+        "label",
+        "description",
+        "errorMessage"
+      ],
+      "stateModel": {
+        "supportsControlled": true,
+        "supportsUncontrolled": true
+      },
+      "stylingModel": {
+        "headless": false,
+        "tokenDriven": true,
+        "variantDriven": false
+      },
+      "tokenStatus": "kr-native",
+      "accessibilityStatus": "expected-accessible",
+      "docsStatus": "documented",
+      "notes": [
+        "Inventory groups Input and Textarea under the same runtime surface."
+      ]
+    },
+    {
+      "id": "ui-select",
+      "publicName": "Select",
+      "internalArchetype": "March",
+      "artifactType": "component",
+      "path": "frontend/src/components/ui/March.tsx",
+      "ownerLayer": "components/ui",
+      "targetStateStatus": "canonical",
+      "registryEligible": true,
+      "compositionModel": {
+        "kind": "compound",
+        "subcomponents": [
+          "Root",
+          "Trigger",
+          "Content",
+          "Item"
+        ]
+      },
+      "supportsAsChild": true,
+      "slots": [
+        "trigger",
+        "content",
+        "item"
+      ],
+      "stateModel": {
+        "supportsControlled": true,
+        "supportsUncontrolled": true
+      },
+      "stylingModel": {
+        "headless": false,
+        "tokenDriven": true,
+        "variantDriven": true
+      },
+      "tokenStatus": "kr-native",
+      "accessibilityStatus": "expected-accessible",
+      "docsStatus": "documented",
+      "notes": [
+        "Inventory assumes compound composition conventions from the building-components references."
+      ]
+    },
+    {
+      "id": "ui-dialog",
+      "publicName": "Dialog",
+      "internalArchetype": "Megaphone",
+      "artifactType": "component",
+      "path": "frontend/src/components/ui/Megaphone.tsx",
+      "ownerLayer": "components/ui",
+      "targetStateStatus": "canonical",
+      "registryEligible": true,
+      "compositionModel": {
+        "kind": "compound",
+        "subcomponents": [
+          "Root",
+          "Trigger",
+          "Content",
+          "Header",
+          "Footer"
+        ]
+      },
+      "supportsAsChild": true,
+      "slots": [
+        "trigger",
+        "title",
+        "description",
+        "footer"
+      ],
+      "stateModel": {
+        "supportsControlled": true,
+        "supportsUncontrolled": true
+      },
+      "stylingModel": {
+        "headless": false,
+        "tokenDriven": true,
+        "variantDriven": true
+      },
+      "tokenStatus": "kr-native",
+      "accessibilityStatus": "expected-accessible",
+      "docsStatus": "documented",
+      "notes": [
+        "Public docs should use Dialog or Modal; Megaphone remains internal archetype terminology."
+      ]
+    },
+    {
+      "id": "ui-kerala-rage-button",
+      "publicName": "KeralaRageButton",
+      "internalArchetype": "Strike",
+      "artifactType": "component",
+      "path": "frontend/src/components/ui/KeralaRageButton.tsx",
+      "ownerLayer": "components/ui",
+      "targetStateStatus": "transitional",
+      "registryEligible": false,
+      "compositionModel": {
+        "kind": "single-surface",
+        "subcomponents": []
+      },
+      "supportsAsChild": false,
+      "slots": [
+        "children"
+      ],
+      "stateModel": {
+        "supportsControlled": false,
+        "supportsUncontrolled": false
+      },
+      "stylingModel": {
+        "headless": false,
+        "tokenDriven": true,
+        "variantDriven": true
+      },
+      "tokenStatus": "kr-native",
+      "accessibilityStatus": "expected-accessible",
+      "docsStatus": "compat-only",
+      "notes": [
+        "Compatibility surface. Should phase out of public documentation in favor of Button."
+      ]
+    },
+    {
+      "id": "layout-migrated-route-layout",
+      "publicName": "MigratedRouteLayout",
+      "internalArchetype": null,
+      "artifactType": "layout-shell",
+      "path": "frontend/src/layouts/MigratedRouteLayout.tsx",
+      "ownerLayer": "layouts",
+      "targetStateStatus": "canonical",
+      "registryEligible": false,
+      "compositionModel": {
+        "kind": "layout-shell",
+        "subcomponents": [
+          "SidebarSlot",
+          "HeaderSlot",
+          "ContentSlot",
+          "FooterSlot"
+        ]
+      },
+      "supportsAsChild": false,
+      "slots": [
+        "navigation",
+        "content",
+        "footer"
+      ],
+      "stateModel": {
+        "supportsControlled": false,
+        "supportsUncontrolled": false
+      },
+      "stylingModel": {
+        "headless": false,
+        "tokenDriven": true,
+        "variantDriven": false
+      },
+      "tokenStatus": "kr-native-with-motion-cleanup",
+      "accessibilityStatus": "needs-review",
+      "docsStatus": "tracked-in-project-docs",
+      "notes": [
+        "Library-owned layout shell, but not a publishable registry primitive."
+      ]
+    },
+    {
+      "id": "layout-solidarity-sidebar",
+      "publicName": "SolidaritySidebar",
+      "internalArchetype": null,
+      "artifactType": "layout-shell",
+      "path": "frontend/src/layouts/shared/SolidaritySidebar.tsx",
+      "ownerLayer": "layouts/shared",
+      "targetStateStatus": "canonical",
+      "registryEligible": false,
+      "compositionModel": {
+        "kind": "compound",
+        "subcomponents": [
+          "NavItem",
+          "UserPanel"
+        ]
+      },
+      "supportsAsChild": false,
+      "slots": [
+        "brand",
+        "navigation",
+        "userPanel"
+      ],
+      "stateModel": {
+        "supportsControlled": false,
+        "supportsUncontrolled": false
+      },
+      "stylingModel": {
+        "headless": false,
+        "tokenDriven": true,
+        "variantDriven": false
+      },
+      "tokenStatus": "kr-native",
+      "accessibilityStatus": "needs-review",
+      "docsStatus": "tracked-in-project-docs",
+      "notes": [
+        "Must remove hardcoded user data before claiming runtime-ready correctness."
+      ]
+    }
+  ]
+}

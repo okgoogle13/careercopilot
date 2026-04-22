@@ -2,22 +2,17 @@
 Tests for security.py, covering JWT, Firebase auth, and OIDC token verification.
 """
 
-import os
-from datetime import datetime, timedelta, timezone
+from datetime import timedelta
 from unittest.mock import patch
 
 import jwt
 import pytest
-from fastapi import Header, HTTPException, status
-from fastapi.testclient import TestClient
+from fastapi import HTTPException, status
 from firebase_admin import auth
 
 from app.core import security
 from app.core.security import (
     AuthenticationError,
-    create_access_token,
-    verify_firebase_token,
-    verify_google_oidc_token,
 )
 
 

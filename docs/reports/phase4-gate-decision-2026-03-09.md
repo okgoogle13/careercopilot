@@ -9,9 +9,9 @@
 - Preflight: `PASS`
 - Dry-run resolution: `PASS`
 - Full pipeline run: `PASS`
-  - `frontend/public/assets/ASSET-REPORT.json`
-  - `frontend/public/assets/VISUAL-REPORT.json`
-  - `frontend/public/assets/batch4c-hero.json`
+  - `frontend/public/assets/asset-report.json`
+  - `frontend/public/assets/visual-report.json`
+  - `frontend/public/assets/kr-solidarity-hero-batch-4c.json`
 - `PIPELINE-ERROR.json`: not present after successful run
 
 ## Gate Metrics

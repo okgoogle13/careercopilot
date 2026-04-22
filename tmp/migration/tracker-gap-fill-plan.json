@@ -1,0 +1,278 @@
+{
+  "artifact": "tokens_first_gap_fill_plan",
+  "generated_at": "2026-03-23T16:01:27.505113+00:00",
+  "route_id": "tracker",
+  "target_route": "/tracker",
+  "family": "applications",
+  "component_library_action": "extend",
+  "route_status": "expand",
+  "build_contract": "docs/project/active/frontend-source-of-truth-migration/contracts/build-contract-tracker.xml",
+  "summary": {
+    "canonical_owner": "ApplicationTracker",
+    "screen_reference": "frontend/src/screens/07_kanban/KanbanTracker.tsx",
+    "paired_runtime_surface": "frontend/src/features/applications/ApplicationTracker.tsx",
+    "token_rule": "reuse behavior and ownership from runtime; reuse presentation only if token-clean; otherwise rewrite styling to semantic tokens"
+  },
+  "candidate_token_list": [],
+  "candidate_token_drift": {
+    "description": "Tokens declared in wireframe XML but absent from build contract dependency_contract blocks. Review and add if applicable.",
+    "tokens": [],
+    "count": 0
+  },
+  "components": [
+    {
+      "component_name": "ApplicationTracker",
+      "owner_route": "/tracker",
+      "owner_surface": "ApplicationTracker",
+      "canonical_status": "canonical",
+      "selected_base": "frontend/src/features/applications/ApplicationTracker.tsx",
+      "reuse_mode": "keep_behavior_rewrite_styling",
+      "token_state": "clean",
+      "existing_candidates": [
+        {
+          "path": "frontend/src/features/applications/ApplicationTracker.tsx",
+          "layer": "runtime",
+          "behavior_score": 40,
+          "ownership_score": 25,
+          "design_alignment_score": 6,
+          "drift_penalty": 0,
+          "total_score": 71,
+          "token_state": "clean",
+          "asset_state": "clean",
+          "promotion_eligibility": "eligible",
+          "required_actions": []
+        },
+        {
+          "path": "frontend/src/features/applications/components/ApplicationTracker.tsx",
+          "layer": "runtime",
+          "behavior_score": 35,
+          "ownership_score": 25,
+          "design_alignment_score": 6,
+          "drift_penalty": 0,
+          "total_score": 66,
+          "token_state": "clean",
+          "asset_state": "clean",
+          "promotion_eligibility": "eligible",
+          "required_actions": []
+        }
+      ],
+      "required_actions": [],
+      "source_of_truth": [
+        "route_matrix",
+        "component_gap_map",
+        "runtime_or_reference_tsx"
+      ],
+      "blocking_gaps": []
+    },
+    {
+      "component_name": "KanbanTracker",
+      "owner_route": "/tracker",
+      "owner_surface": "ApplicationTracker",
+      "canonical_status": "reference",
+      "selected_base": "frontend/src/_reference/migration/phase3/phase3-batch3/KanbanTracker.tsx",
+      "reuse_mode": "reference_only",
+      "token_state": "n/a",
+      "existing_candidates": [
+        {
+          "path": "frontend/src/_reference/migration/phase3/phase3-batch3/KanbanTracker.tsx",
+          "layer": "batch_reference",
+          "behavior_score": 0,
+          "ownership_score": 18,
+          "design_alignment_score": 10,
+          "drift_penalty": 0,
+          "total_score": 28,
+          "token_state": "clean",
+          "asset_state": "clean",
+          "promotion_eligibility": "eligible",
+          "required_actions": []
+        },
+        {
+          "path": "frontend/src/screens/07_kanban/KanbanTracker.tsx",
+          "layer": "design_reference",
+          "behavior_score": 10,
+          "ownership_score": 18,
+          "design_alignment_score": 10,
+          "drift_penalty": 10,
+          "total_score": 28,
+          "token_state": "unknown",
+          "asset_state": "clean",
+          "promotion_eligibility": "behavior_only",
+          "required_actions": []
+        }
+      ],
+      "required_actions": [],
+      "source_of_truth": [
+        "route_matrix",
+        "component_gap_map",
+        "screen_reference",
+        "runtime_or_reference_tsx"
+      ],
+      "blocking_gaps": []
+    },
+    {
+      "component_name": "KanbanColumn",
+      "owner_route": "/tracker",
+      "owner_surface": "ApplicationTracker",
+      "canonical_status": "support",
+      "selected_base": "frontend/src/features/applications/components/KanbanColumn.tsx",
+      "reuse_mode": "keep_behavior_extend_tokens",
+      "token_state": "clean",
+      "existing_candidates": [
+        {
+          "path": "frontend/src/features/applications/components/KanbanColumn.tsx",
+          "layer": "runtime",
+          "behavior_score": 25,
+          "ownership_score": 18,
+          "design_alignment_score": 6,
+          "drift_penalty": 0,
+          "total_score": 49,
+          "token_state": "clean",
+          "asset_state": "clean",
+          "promotion_eligibility": "eligible",
+          "required_actions": []
+        }
+      ],
+      "required_actions": [
+        "extend_token_coverage"
+      ],
+      "source_of_truth": [
+        "route_matrix",
+        "component_gap_map",
+        "runtime_or_reference_tsx"
+      ],
+      "blocking_gaps": []
+    },
+    {
+      "component_name": "ApplicationDetailPanel",
+      "owner_route": "/tracker",
+      "owner_surface": "ApplicationTracker",
+      "canonical_status": "support",
+      "selected_base": "frontend/src/features/applications/components/ApplicationDetailPanel.tsx",
+      "reuse_mode": "keep_behavior_extend_tokens",
+      "token_state": "clean",
+      "existing_candidates": [
+        {
+          "path": "frontend/src/features/applications/components/ApplicationDetailPanel.tsx",
+          "layer": "runtime",
+          "behavior_score": 25,
+          "ownership_score": 18,
+          "design_alignment_score": 6,
+          "drift_penalty": 0,
+          "total_score": 49,
+          "token_state": "clean",
+          "asset_state": "clean",
+          "promotion_eligibility": "eligible",
+          "required_actions": []
+        }
+      ],
+      "required_actions": [
+        "extend_token_coverage"
+      ],
+      "source_of_truth": [
+        "route_matrix",
+        "component_gap_map",
+        "runtime_or_reference_tsx"
+      ],
+      "blocking_gaps": []
+    },
+    {
+      "component_name": "ApplicationEditForm",
+      "owner_route": "/tracker",
+      "owner_surface": "ApplicationTracker",
+      "canonical_status": "support",
+      "selected_base": "frontend/src/features/applications/components/ApplicationEditForm.tsx",
+      "reuse_mode": "blocked",
+      "token_state": "unknown",
+      "existing_candidates": [
+        {
+          "path": "frontend/src/features/applications/components/ApplicationEditForm.tsx",
+          "layer": "runtime",
+          "behavior_score": 25,
+          "ownership_score": 18,
+          "design_alignment_score": 6,
+          "drift_penalty": 10,
+          "total_score": 39,
+          "token_state": "unknown",
+          "asset_state": "clean",
+          "promotion_eligibility": "behavior_only",
+          "required_actions": []
+        }
+      ],
+      "required_actions": [
+        "insufficient_runtime_base"
+      ],
+      "source_of_truth": [
+        "route_matrix",
+        "component_gap_map",
+        "runtime_or_reference_tsx"
+      ],
+      "blocking_gaps": []
+    },
+    {
+      "component_name": "ApplicationStatusActions",
+      "owner_route": "/tracker",
+      "owner_surface": "ApplicationTracker",
+      "canonical_status": "support",
+      "selected_base": "frontend/src/features/applications/components/ApplicationStatusActions.tsx",
+      "reuse_mode": "blocked",
+      "token_state": "unknown",
+      "existing_candidates": [
+        {
+          "path": "frontend/src/features/applications/components/ApplicationStatusActions.tsx",
+          "layer": "runtime",
+          "behavior_score": 25,
+          "ownership_score": 18,
+          "design_alignment_score": 6,
+          "drift_penalty": 10,
+          "total_score": 39,
+          "token_state": "unknown",
+          "asset_state": "clean",
+          "promotion_eligibility": "behavior_only",
+          "required_actions": []
+        }
+      ],
+      "required_actions": [
+        "insufficient_runtime_base"
+      ],
+      "source_of_truth": [
+        "route_matrix",
+        "component_gap_map",
+        "runtime_or_reference_tsx"
+      ],
+      "blocking_gaps": []
+    },
+    {
+      "component_name": "ApplicationArchiveAction",
+      "owner_route": "/tracker",
+      "owner_surface": "ApplicationTracker",
+      "canonical_status": "support",
+      "selected_base": "frontend/src/features/applications/components/ApplicationArchiveAction.tsx",
+      "reuse_mode": "blocked",
+      "token_state": "unknown",
+      "existing_candidates": [
+        {
+          "path": "frontend/src/features/applications/components/ApplicationArchiveAction.tsx",
+          "layer": "runtime",
+          "behavior_score": 25,
+          "ownership_score": 18,
+          "design_alignment_score": 6,
+          "drift_penalty": 10,
+          "total_score": 39,
+          "token_state": "unknown",
+          "asset_state": "clean",
+          "promotion_eligibility": "behavior_only",
+          "required_actions": []
+        }
+      ],
+      "required_actions": [
+        "insufficient_runtime_base"
+      ],
+      "source_of_truth": [
+        "route_matrix",
+        "component_gap_map",
+        "runtime_or_reference_tsx"
+      ],
+      "blocking_gaps": []
+    }
+  ]
+}

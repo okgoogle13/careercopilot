@@ -1,0 +1,547 @@
+{
+  "generated": "2026-03-21",
+  "evaluator": "claude-sonnet-4-6",
+  "standard": "KR Solidarity v6.1",
+  "screens": [
+    {
+      "asset_id": "screen-001-landing",
+      "screen": "Landing Page",
+      "route": "/",
+      "score": 94,
+      "decision": "PACKAGE",
+      "breakdown": {
+        "token_color_compliance": 23,
+        "typography_compliance": 19,
+        "dark_only_territory": 20,
+        "zero_flora": 14,
+        "brand_voice_activist": 9,
+        "component_structure": 9
+      },
+      "critical_issues": [],
+      "notes": [
+        "Strong dark substrate (#1A1714 range) throughout",
+        "Hero section uses urban resistance layering — atmospheric embers + resistance imagery visible",
+        "Kerala elephant cultural asset correctly deployed at center",
+        "Typography: large display headline 'Intersectional Resistance' at ultra-high weight, correct KR pressure state",
+        "'SECURE ACCESS' CTA uses lime/chartreuse KR accent, correct shape (not pill, not perfectly rounded)",
+        "Navigation bar present with protest-vocabulary route labels (Sol, Read, Dashboard, Lab, Analysis, Overview)",
+        "Minor: 'CAREER RESURRECT' truncation visible — display overflow not ideal but not a token violation",
+        "Minor: 'YOUR AI JOB PARTNER' subtitle visible in sidebar — borderline AI-hype adjacent but not blacklisted"
+      ]
+    },
+    {
+      "asset_id": "screen-002-login",
+      "screen": "Login",
+      "route": "/login",
+      "score": 91,
+      "decision": "PACKAGE",
+      "breakdown": {
+        "token_color_compliance": 22,
+        "typography_compliance": 19,
+        "dark_only_territory": 20,
+        "zero_flora": 15,
+        "brand_voice_activist": 8,
+        "component_structure": 7
+      },
+      "critical_issues": [],
+      "notes": [
+        "Dark brick/charcoal background with atmospheric texture overlay — correct substrate",
+        "Heading 'VERIFY IDENTITY' — strong KR vocabulary, resistance framing",
+        "Form card has visible dark background, no light mode contamination",
+        "Labels: 'EMAIL ADDRESS', 'PASSWORD' — uppercase monospace style consistent",
+        "CTA 'ENTER ARCHIVE' — excellent resistance vocabulary",
+        "Footer link 'CREATE COLLECTIVE 20' — good collective-solidarity framing",
+        "Minor: Card has a fairly uniform corner radius — approaches Institutional Squelch territory but acceptable at this scale",
+        "Minor: No explicit asymmetric shape token usage visible on form card",
+        "Sentry trigger button visible bottom-right — dev artifact, not a design violation"
+      ]
+    },
+    {
+      "asset_id": "screen-003-register",
+      "screen": "Register",
+      "route": "/register",
+      "score": 90,
+      "decision": "PACKAGE",
+      "breakdown": {
+        "token_color_compliance": 22,
+        "typography_compliance": 18,
+        "dark_only_territory": 20,
+        "zero_flora": 15,
+        "brand_voice_activist": 8,
+        "component_structure": 7
+      },
+      "critical_issues": [],
+      "notes": [
+        "Dark atmospheric background with urban texture — correct substrate treatment",
+        "Heading 'NEW COLLE[CTIVE]' — truncated but resistance vocabulary confirmed",
+        "Field labels: 'COMMON NAME (DISPLAY NAME)', 'STATION ID (EMAIL)', 'KEYCHAIN', 'VERIFY' — strong KR operational vocabulary",
+        "Placeholder: 'Field Investigator Jones' — excellent non-generic placeholder text",
+        "Green 'REGISTER' CTA button — lime accent, consistent with KR brand",
+        "Footer: 'Already registered? Log in.' — acceptable neutral copy",
+        "Same minor card shape uniformity concern as Login — borderline acceptable",
+        "Typography display weight is appropriately heavy for KR pressure state"
+      ]
+    },
+    {
+      "asset_id": "screen-004-404",
+      "screen": "404 Not Found",
+      "route": "/404",
+      "score": 85,
+      "decision": "REVIEW",
+      "breakdown": {
+        "token_color_compliance": 20,
+        "typography_compliance": 17,
+        "dark_only_territory": 19,
+        "zero_flora": 15,
+        "brand_voice_activist": 7,
+        "component_structure": 7
+      },
+      "critical_issues": [],
+      "notes": [
+        "Dark background correct — no light mode contamination",
+        "Heading 'LOST IN SPACE?' — passable but drifts toward generic tech metaphor rather than KR resistance vocabulary",
+        "Copy 'THE PAGE YOU ARE LOOKING FOR HAS DRIFTED INTO A BLACK HOLE. DON'T WORRY, WE CAN NAVIGATE YOU BACK TO SAFETY.' — reads corporate/apologetic, not KR defiant",
+        "Navigation icon at top center is minimal, no cultural/resistance assets",
+        "CTA 'Return Home' — uses standard navigation icon + plain text, lacks protest vocabulary",
+        "No KR cultural assets deployed — page feels generic dark rather than intentionally KR",
+        "Recommend: Replace copy with resistance vocabulary, add atmospheric asset layer, reframe CTA with KR vocabulary (e.g. 'RETURN TO COLLECTIVE')"
+      ]
+    },
+    {
+      "asset_id": "screen-005-dashboard",
+      "screen": "Dashboard",
+      "route": "/dashboard",
+      "score": 95,
+      "decision": "PACKAGE",
+      "breakdown": {
+        "token_color_compliance": 24,
+        "typography_compliance": 19,
+        "dark_only_territory": 20,
+        "zero_flora": 15,
+        "brand_voice_activist": 9,
+        "component_structure": 8
+      },
+      "critical_issues": [],
+      "notes": [
+        "Sidebar: dark charcoal, correct KR substrate treatment",
+        "Page heading 'SOLIDARITY HUB' — strong KR vocabulary at ultra-black weight",
+        "Subheading uses italic/lighter weight — correct 9x weight ratio expression",
+        "Metric cards: dark background, lime green accent data values (+14%, 42) — correct token accent usage",
+        "Status badges with color coding (ENABLE, etc.) visible, correct dark treatment",
+        "CTA buttons: 'DEPOSIT KRMOTIF', 'VIEW ARCHIVE', 'AUTOMATED SYNTHESIS' — excellent KR vocabulary",
+        "Cards grid: 'RECENT SYNTHESIS' section shows ATS score cards with numeric scores (92, 85, 78, 88)",
+        "Score badges use distinct color tiers (green EXCELLENT vs red BLOCK visible)",
+        "Minor: 'ANIMATE ARTIFACT' link text visible on cards — acceptable",
+        "No Australian native flora, no light mode, no bureaucratic motifs"
+      ]
+    },
+    {
+      "asset_id": "screen-006-onboarding",
+      "screen": "Onboarding",
+      "route": "/onboarding",
+      "score": 88,
+      "decision": "REVIEW",
+      "breakdown": {
+        "token_color_compliance": 21,
+        "typography_compliance": 18,
+        "dark_only_territory": 19,
+        "zero_flora": 15,
+        "brand_voice_activist": 8,
+        "component_structure": 7
+      },
+      "critical_issues": [],
+      "notes": [
+        "Page title 'Choosing the Soil' — good earthy/resistance metaphor",
+        "Dark background with cultural asset (elephant/Nataraja variant) partially visible behind cards — correct substrate treatment",
+        "9-sector grid: SOCIAL WORK, HEALTHCARE, EDUCATION, GOVERNMENT, COMMUNITY SERVICES, NON-PROFIT, MENTAL HEALTH, DISABILITY SERVICES, YOUTH SUPPORT — excellent anti-corporate domain framing",
+        "Cards: dark background, heavy-weight display text per card, 'CHOOSE THIS PATH' CTA",
+        "Subheading: 'Specialise in X through the lens of Kerala Rage autonomy' — strong brand vocabulary repeated",
+        "Minor: Cards appear to use fairly uniform corner radii — Institutional Squelch risk",
+        "Minor: Page feels grid-heavy/form-like; could benefit from more atmospheric asset presence",
+        "'Select your domain to begin the renovation' — 'renovation' is good KR vocabulary"
+      ]
+    },
+    {
+      "asset_id": "screen-007-tracker",
+      "screen": "Tracker",
+      "route": "/tracker",
+      "score": 92,
+      "decision": "PACKAGE",
+      "breakdown": {
+        "token_color_compliance": 22,
+        "typography_compliance": 18,
+        "dark_only_territory": 20,
+        "zero_flora": 14,
+        "brand_voice_activist": 9,
+        "component_structure": 9
+      },
+      "critical_issues": [],
+      "notes": [
+        "Page heading 'THE GREENHOUSE TRACKER' — excellent KR vocabulary fusion (growth metaphor within resistance frame)",
+        "Background: dark with large 'TREA[T NOW]' text visible as substrate layer — strong protest typography treatment",
+        "Kanban columns labeled: 'THE NURSERY', 'THE SUNLIGHT', 'NEXT', 'THE TRANSPLANT' — botanical metaphor BUT used as phase names in a resistance framing, not decorative flora",
+        "Status badges: 'ACTIVE', 'REVIEW' with color differentiation",
+        "Cards: dark surface, monospace metadata, job titles with score indicators",
+        "Column headers use asymmetric color/weight treatment",
+        "Minor: 'THE NURSERY' / 'THE TRANSPLANT' column names are botanical — note this does NOT violate the selective flora/fauna rule because these are metaphorical phase labels rather than decorative Australian native flora imagery",
+        "No light contamination, strong protest copy visible in background"
+      ]
+    },
+    {
+      "asset_id": "screen-008-documents",
+      "screen": "Documents",
+      "route": "/documents",
+      "score": 72,
+      "decision": "BLOCK",
+      "breakdown": {
+        "token_color_compliance": 17,
+        "typography_compliance": 14,
+        "dark_only_territory": 18,
+        "zero_flora": 15,
+        "brand_voice_activist": 4,
+        "component_structure": 4
+      },
+      "critical_issues": [
+        "Unicorn logo/emoji visible in sidebar — violates the No-Slop protocol (stock mascot aesthetic)",
+        "Heading 'YOUR DOCUMENTS' — generic admin vocabulary, no KR resistance framing",
+        "Subheading 'Manage your career documents and generate tailored versions' — corporate SaaS copy, violates KR voice",
+        "Tab bar: 'All', 'Resumes', 'Cover Letters', 'KSC Responses' — plain uniform rounded pill tabs, Institutional Squelch shape",
+        "Document cards: all have identical corner radii (uniform rounded, ~8px equivalent) — Institutional Squelch violation",
+        "File icons are generic system document emojis — stock aesthetic violation",
+        "Card titles: 'Software Engineer Resume', 'Cover Letter - TechCorp' — generic job-board vocabulary, not KR framing",
+        "Search bar: generic pill shape with uniform radius — Institutional Squelch",
+        "No KR cultural assets, atmospheric layers, or resistance imagery present",
+        "Sidebar shows 'YOUR AI JOB PARTNER' — AI-hype adjacent copy"
+      ]
+    },
+    {
+      "asset_id": "screen-009-analysis",
+      "screen": "Analysis",
+      "route": "/analysis",
+      "score": 91,
+      "decision": "PACKAGE",
+      "breakdown": {
+        "token_color_compliance": 22,
+        "typography_compliance": 18,
+        "dark_only_territory": 20,
+        "zero_flora": 15,
+        "brand_voice_activist": 9,
+        "component_structure": 7
+      },
+      "critical_issues": [],
+      "notes": [
+        "Page heading 'AUDIT MICROSCOPE' — strong KR tactical vocabulary",
+        "Subheading uses smaller weight italic for contrast — correct KR weight ratio expression",
+        "Section 'TACTICAL INPUTS' — resistance operational vocabulary",
+        "Upload widget: 'Strategic Evidence Uploader' with 'Upload historical artifacts to enrich your professional vector' — excellent KR copy",
+        "Input labels: 'Job ID (Listing URL)', 'Primary KMotif (Resume Text)', 'Secondary Context (Manual JD)' — KR vocabulary integration",
+        "CTAs: 'SYNTHESIZE STRATEGY', 'CALIBRATION CHECK' — strong KR action vocabulary",
+        "Dark background throughout, correct token treatment post-fix (M3 contamination resolved)",
+        "Knowledge Domain selector with KSC Response option — correct",
+        "Minor: Form layout is fairly dense/utilitarian — component geometry is functional but lacks expressive shape treatment"
+      ]
+    },
+    {
+      "asset_id": "screen-010-opportunities",
+      "screen": "Opportunities",
+      "route": "/opportunities",
+      "score": 89,
+      "decision": "REVIEW",
+      "breakdown": {
+        "token_color_compliance": 22,
+        "typography_compliance": 17,
+        "dark_only_territory": 20,
+        "zero_flora": 15,
+        "brand_voice_activist": 8,
+        "component_structure": 7
+      },
+      "critical_issues": [],
+      "notes": [
+        "Page heading 'THE SENTRY LOOKOUT' — excellent KR tactical vocabulary",
+        "Subheading 'High-altitude reconnaissance for master career paths' — strong resistance framing",
+        "Form fields: 'TARGET TRAJECTORY' and 'GEOGRAPHICAL BASE' — KR operational vocabulary",
+        "Active filter: 'Social Worker' / 'Melbourne' — correct geographic/domain specificity",
+        "CTA 'BEGIN SCOUT' — good KR action word",
+        "Dark background, correct substrate treatment",
+        "Content area shows 'LOOKOUT THEN CLEAR / AWAITING TARGET COORDINATES' — strong tactical placeholder copy",
+        "Minor: Page has minimal visual complexity — no atmospheric layers or cultural assets present",
+        "Minor: Score is 89 — atmospheric asset deployment would push this to PACKAGE"
+      ]
+    },
+    {
+      "asset_id": "screen-011-ksc-generator",
+      "screen": "KSC Generator",
+      "route": "/ksc-generator",
+      "score": 78,
+      "decision": "REVIEW",
+      "breakdown": {
+        "token_color_compliance": 19,
+        "typography_compliance": 16,
+        "dark_only_territory": 19,
+        "zero_flora": 15,
+        "brand_voice_activist": 5,
+        "component_structure": 4
+      },
+      "critical_issues": [
+        "Unicorn logo/emoji in sidebar — same stock mascot violation as Documents screen",
+        "Heading 'KSC GENERATOR WIZARD' — WIZARD is borderline generic tech vocabulary",
+        "Card: 'Target Selection Criteria' uses plain Serif (looks like Georgia/Times) — not confirmed as Fraunces token usage, requires code verification",
+        "Form card has very uniform rounded corners (near 8px equivalent) — Institutional Squelch",
+        "Field 'Paste job listing URL...' with 'Extract Criteria' — functional but vocabulary not KR-coded",
+        "Step progress indicator: plain numbered boxes 1-2-3 with uniform shape — lacks KR protest geometry",
+        "CTA 'Next Step ->' — generic navigation copy, could use KR vocabulary",
+        "Sidebar 'YOUR AI JOB PARTNER' — AI-hype copy present"
+      ]
+    },
+    {
+      "asset_id": "screen-012-cover-letter",
+      "screen": "Cover Letter Generator",
+      "route": "/cover-letter-generator",
+      "score": 77,
+      "decision": "REVIEW",
+      "breakdown": {
+        "token_color_compliance": 19,
+        "typography_compliance": 16,
+        "dark_only_territory": 19,
+        "zero_flora": 15,
+        "brand_voice_activist": 4,
+        "component_structure": 4
+      },
+      "critical_issues": [
+        "Unicorn emoji in sidebar — mascot violation",
+        "Page heading reads 'COVER LETTER GENERATOR GENIUS' — GENIUS is generic/AI-hype vocabulary",
+        "Subheading 'Create tailored, high-impact cover letters in seconds' — pure corporate SaaS copy, no KR framing",
+        "Form card: 'Job Details' heading in heavy serif is fine, but field labels ('Import from URL (Optional)', 'Paste Job Description') are generic admin vocabulary",
+        "Placeholder text 'Paste the full job description here...' — no KR vocabulary",
+        "Card uniform corner radius — Institutional Squelch",
+        "Step counter 1-2-3-4: identical uniform pill shapes — lacks KR protest geometry",
+        "CTA 'Next Step ->' — same generic copy as KSC Generator"
+      ]
+    },
+    {
+      "asset_id": "screen-013-settings",
+      "screen": "Settings",
+      "route": "/settings",
+      "score": 70,
+      "decision": "BLOCK",
+      "breakdown": {
+        "token_color_compliance": 17,
+        "typography_compliance": 15,
+        "dark_only_territory": 18,
+        "zero_flora": 15,
+        "brand_voice_activist": 3,
+        "component_structure": 2
+      },
+      "critical_issues": [
+        "Unicorn emoji in sidebar — mascot violation",
+        "Heading 'SETTINGS' — completely generic admin vocabulary, zero KR framing",
+        "Subheading 'Manage your account preferences and settings' — corporate SaaS copy",
+        "Tab bar: Profile / Preferences / Notifications / Security — generic utility tab labels with fully uniform rounded-pill shape — severe Institutional Squelch violation",
+        "Section heading 'Profile Settings' — heavy font but zero KR vocabulary",
+        "Form fields: First Name / Last Name / Email / Bio — pure admin form vocabulary",
+        "All form inputs have identical uniform border-radius — systematic Institutional Squelch",
+        "CTA 'Save Changes' — generic action word, lime color is correct but vocabulary is not KR",
+        "No KR cultural assets, no atmospheric layers, no resistance framing anywhere on screen"
+      ]
+    },
+    {
+      "asset_id": "screen-014-profile",
+      "screen": "Profile",
+      "route": "/profile",
+      "score": 92,
+      "decision": "PACKAGE",
+      "breakdown": {
+        "token_color_compliance": 22,
+        "typography_compliance": 19,
+        "dark_only_territory": 20,
+        "zero_flora": 15,
+        "brand_voice_activist": 9,
+        "component_structure": 7
+      },
+      "critical_issues": [],
+      "notes": [
+        "Strong resistance asset visible: 'TREATY NOW' placard/text overlay in background — correct First Nations solidarity framing",
+        "User name and title rendered at high weight with good typographic contrast",
+        "Skill tags: 'REACT TSX', 'NEURAL SFX', 'ARCHIVAL DESIGN' — KR vocabulary integration in metadata",
+        "Section 'STRATUM CHRONOLOGY' — excellent KR geological/archaeological framing for work history",
+        "Upload drop zone: 'Drop your PDF here to build your Career DNA profile' — DNA framing is KR-aligned",
+        "Right panel: 'EXTRACTED INTELLIGENCE' section with tag cloud of skills",
+        "Section 'CALIBRATION' panel visible — KR operational vocabulary",
+        "Note visible at bottom of right panel — collectively framed copy",
+        "Dark background throughout, 'TREATY NOW' makes First Nations solidarity requirement explicit"
+      ]
+    },
+    {
+      "asset_id": "screen-015-asset-library",
+      "screen": "Asset Library",
+      "route": "/asset-library",
+      "score": 74,
+      "decision": "BLOCK",
+      "breakdown": {
+        "token_color_compliance": 18,
+        "typography_compliance": 17,
+        "dark_only_territory": 19,
+        "zero_flora": 15,
+        "brand_voice_activist": 3,
+        "component_structure": 2
+      },
+      "critical_issues": [
+        "Unicorn emoji in sidebar — mascot violation",
+        "Display heading 'Asset Library' uses serif font at very large size — font appears to be a system/generic serif (possibly Georgia), not confirmed Fraunces token",
+        "Subheading 'Store and manage your career documents and media' — corporate SaaS copy, zero KR vocabulary",
+        "Upload button 'UPLOAD ASSET' — acceptable vocabulary but button shape appears fully uniform rounded",
+        "File cards: all have identical rounded corners (~16px uniform) — severe Institutional Squelch violation",
+        "Card content: generic file names (Portfolio PDF.pdf, Certifications.pdf, References.docx, Cover Letter Te...) — no KR vocabulary in content",
+        "File type icons are generic system document icons — stock aesthetic",
+        "No KR cultural assets, no atmospheric layers deployed",
+        "Metadata display ('1 DAY AGO', '2 DAYS AGO') uses plain monospace — acceptable but no KR styling"
+      ]
+    },
+    {
+      "asset_id": "screen-016-career-ingest",
+      "screen": "Career Ingest",
+      "route": "/career/ingest",
+      "score": 93,
+      "decision": "PACKAGE",
+      "breakdown": {
+        "token_color_compliance": 23,
+        "typography_compliance": 19,
+        "dark_only_territory": 20,
+        "zero_flora": 15,
+        "brand_voice_activist": 9,
+        "component_structure": 7
+      },
+      "critical_issues": [],
+      "notes": [
+        "Heading 'DEPOSIT IDENTITY' in ultra-black weight — strong KR vocabulary",
+        "Subtitle '[PHASE.01: SEMANTIC_ARCHIVAL]' — excellent KR operational framing",
+        "Large display text 'DEPO[SIT] / HIST[ORY]' clipped by container — intentional brutalist treatment, correct",
+        "Drop zone: 'DROP PDF HERE FOR ANALYSIS' with monospace label — KR operational vocabulary",
+        "CTA 'Initialize Archival' — excellent KR vocabulary",
+        "Footer note: 'COMPLIANCE AUDIT: Professional vectors are extracted via industrial-grade LLM processing. This process mandates time for secure identity archival.' — strong resistance framing, avoids AI-hype",
+        "Station label 'STATION: COLLECTIVE_V01' — excellent collective vocabulary",
+        "Dark substrate throughout with correct treatment",
+        "Minor: Drop zone has fairly uniform dashed border radius — acceptable within context"
+      ]
+    },
+    {
+      "asset_id": "screen-017-job-queue",
+      "screen": "Job Queue",
+      "route": "/job-queue",
+      "score": 82,
+      "decision": "REVIEW",
+      "breakdown": {
+        "token_color_compliance": 20,
+        "typography_compliance": 17,
+        "dark_only_territory": 19,
+        "zero_flora": 15,
+        "brand_voice_activist": 6,
+        "component_structure": 5
+      },
+      "critical_issues": [],
+      "notes": [
+        "Heading 'INTELLIGENCE PIPELINE' — strong KR vocabulary",
+        "Subheading 'Synthesize clipped opportunities into tactical application strategies' — correct KR framing",
+        "Dark background with subtle atmospheric texture visible — correct substrate",
+        "Page shows error state: 'Failed to load job queue. Ensure backend is running.' — error message is functional but uses generic admin vocabulary",
+        "Error state renders with minimal visual presence — no KR styling applied to error state",
+        "Refresh/Dismiss actions visible — acceptable vocabulary",
+        "Note: Page is captured in error state — actual data-populated state likely scores higher",
+        "Recommend: Re-capture after backend is running; error state vocabulary could also adopt KR framing"
+      ]
+    },
+    {
+      "asset_id": "screen-018-style-guide",
+      "screen": "Style Guide",
+      "route": "/style-guide",
+      "score": 96,
+      "decision": "PACKAGE",
+      "breakdown": {
+        "token_color_compliance": 24,
+        "typography_compliance": 20,
+        "dark_only_territory": 20,
+        "zero_flora": 15,
+        "brand_voice_activist": 9,
+        "component_structure": 8
+      },
+      "critical_issues": [],
+      "notes": [
+        "This IS the KR Solidarity design system reference — it must score highest",
+        "Dark background throughout — correct KR substrate",
+        "Typography system section: 'COLLECTIVE DEMAND' at ultra-black weight — correct pressure state display",
+        "Archetype matrix visible: STRIKE VARIANTS, STATUS AND SIGNALS, SCAFFOLD INPUTS, MARCH AND MEGAPHONE, STRUCTURAL CONTROL (VALVE), 'THE 'GRITY' PROTOCOL' — full archetype vocabulary present",
+        "Semantic Color Registry swatch grid visible with proper KR token colors",
+        "Spacing & Layout Tension section present",
+        "Shape Signatures section present",
+        "Motion & Quality Diagnostics with Solidarity Spring bezier reference",
+        "Archetype Morph Previewer interactive widget visible",
+        "Typography Axis Validator: 'KR Type' display",
+        "Layout Slop Auditor section visible",
+        "Validation checklist at bottom",
+        "This screen is the canonical design reference — all token, shape, motion standards present"
+      ]
+    },
+    {
+      "asset_id": "screen-019-test-tokens",
+      "screen": "Test Tokens",
+      "route": "/test-tokens",
+      "score": 80,
+      "decision": "REVIEW",
+      "breakdown": {
+        "token_color_compliance": 20,
+        "typography_compliance": 17,
+        "dark_only_territory": 19,
+        "zero_flora": 15,
+        "brand_voice_activist": 5,
+        "component_structure": 4
+      },
+      "critical_issues": [],
+      "notes": [
+        "Page heading 'Token System Test' — utilitarian/dev-tool naming, not KR-vocabulary but acceptable for a dev utility page",
+        "Dark background correct — KrDark mode confirmed active (checkmark visible)",
+        "Status line: 'Current Mode: KrDark / KrDark Mode: ✓' — confirms token system is loading correctly",
+        "Only two elements rendered: 'Primary Button' and 'Tertiary Button' — buttons themselves are not visible/rendered in the screenshot (no visible button UI components below labels)",
+        "Large empty dark space — this is a dev diagnostic page, limited visual presence expected",
+        "Score reflects that this is a functional QA route, not a user-facing designed screen",
+        "No violations present, but no KR design expression either beyond dark mode confirmation"
+      ]
+    },
+    {
+      "asset_id": "screen-020-design-sidekick",
+      "screen": "Design Sidekick",
+      "route": "/design-sidekick",
+      "score": 95,
+      "decision": "PACKAGE",
+      "breakdown": {
+        "token_color_compliance": 23,
+        "typography_compliance": 19,
+        "dark_only_territory": 20,
+        "zero_flora": 15,
+        "brand_voice_activist": 9,
+        "component_structure": 9
+      },
+      "critical_issues": [],
+      "notes": [
+        "Tool interface header 'SIDEKICK' with navigation controls — correct dark header treatment",
+        "Hero composition preview: 'Solidarity Across Borders' headline at ultra-black weight over Kali/Durga deity imagery — correct devotional anchor hero composition from registry",
+        "Deity image: reverent statue-inspired framing, devotional context only — compliant with Devotional Integrity rule",
+        "Left panel: composition selector showing named hero compositions (Devotional Anchor Hero 1/2, Layered Solidarity Hero, Cultural Symbol Hero 1/2) — correct registry vocabulary",
+        "Right panel: 'COMPOSITION CONTEXT' with code output showing layer definitions",
+        "Dark substrate throughout",
+        "NEGATIVE BRANE [OFF] toggle visible in header — operational KR vocabulary",
+        "LIVE PREVIEW button — acceptable",
+        "This screen is a designer tool — its own compliance is inherently high as it IS the design system tooling"
+      ]
+    }
+  ],
+  "summary": {
+    "min_score": 70,
+    "max_score": 96,
+    "avg_score": 85.7,
+    "package_count": 11,
+    "review_count": 6,
+    "block_count": 3
+  },
+  "gate": "FAIL",
+  "gate_failure_reason": "3 screens scored below 75 (Documents: 72, Settings: 70, Asset Library: 74). Gate requires minimum ≥ 90 across all 20 screens with all decisions PACKAGE. 9 screens remain below the 90-point threshold."
+}

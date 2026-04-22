@@ -57,10 +57,9 @@ export function useKanban() {
 
     const mapStatus = (status: Application['status']): ApplicationStatus => {
       switch (status) {
-        case 'interview':
+        case 'interviewing':
           return 'Interview';
         case 'offer':
-        case 'accepted':
           return 'Offer';
         case 'rejected':
           return 'Rejected';

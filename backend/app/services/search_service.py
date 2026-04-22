@@ -1,15 +1,16 @@
 import logging
 import os
 
-import httpx
 from dotenv import load_dotenv
 from pydantic import BaseModel
 
 load_dotenv()
 
+
 class SearchResult(BaseModel):
     content: str
     citations: list[str] = []
+
 
 class SearchService:
     """
@@ -24,70 +25,14 @@ class SearchService:
         self.logger = logging.getLogger(__name__)
 
         if not self.api_key:
-            self.logger.warning("PERPLEXITY_API_KEY is not set. Search capabilities will be disabled.")
+            self.logger.warning(
+                "PERPLEXITY_API_KEY is not set. Search capabilities will be disabled."
+            )
 
     async def research_company(self, company_name: str) -> str | None:
         """
-        Conduct deep research on a company to extract intelligence for job applications.
-        returns a synthesized text summary of the company's mission, values, and culture.
+        [DECOMMISSIONED] Research functionality via Perplexity has been removed.
+        Returns a placeholder indicating capability retirement.
         """
-        if not self.api_key:
-            return None
-
-        # System prompt to guide Perplexity's research behavior
-        messages = [
-            {
-                "role": "system",
-                "content": (
-                    "You are an expert Corporate Intelligence Analyst helping a job seeker. "
-                    "Your goal is to research a target company and provide a detailed briefing. "
-                    "Focus on identifying their Mission, Core Values, Strategic Focus, "
-                    "and Communication Style. Be specific and cite sources if possible."
-                ),
-            },
-            {
-                "role": "user",
-                "content": (
-                    f"Conduct a deep research analysis on the company: {company_name}. "
-                    "Find their official mission statement, core values (often found on 'About Us' or 'Careers' pages), "
-                    "recent strategic initiatives, and describe their overall brand tone. "
-                    "Return the data as a detailed summary."
-                ),
-            },
-        ]
-
-        payload = {
-            "model": "sonar-pro",
-            "messages": messages,
-            "temperature": 0.2,
-            "max_tokens": 1000,
-        }
-
-        headers = {
-            "Authorization": f"Bearer {self.api_key}",
-            "Content-Type": "application/json"
-        }
-
-        try:
-            self.logger.info(f"Sending Perplexity request for: {company_name}")
-            # Use async httpx client instead of synchronous requests for better performance
-            async with httpx.AsyncClient() as client:
-                response = await client.post(
-                    self.base_url, 
-                    json=payload, 
-                    headers=headers, 
-                    timeout=60.0
-                )
-                response.raise_for_status()
-
-                data = response.json()
-                # Extract the content from the first choice
-                content = data["choices"][0]["message"]["content"]
-                return content
-
-        except httpx.HTTPError as e:
-            self.logger.error(f"Perplexity API request failed for {company_name}: {e!s}")
-            return None
-        except (KeyError, IndexError) as e:
-             self.logger.error(f"Failed to parse Perplexity response: {e!s}")
-             return None
+        self.logger.info(f"Research requested for {company_name} - [CAPABILITY RETIRED]")
+        return f"Research capability for '{company_name}' is currently offline (Perplexity decommissioning in progress)."

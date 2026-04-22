@@ -4,6 +4,7 @@
  */
 
 import axios from 'axios';
+import type { AnalyzeJobFromUrlResponse } from '@/types/masterResume';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
 
@@ -150,5 +151,29 @@ export const workflowService = {
         }
       }, intervalMs);
     });
+  },
+
+  /**
+   * Quick apply helper that reuses the generate-application endpoint
+   */
+  async quickApply(request: {
+    jobDescription: string;
+    jobUrl?: string;
+    jobTitle?: string;
+    companyName?: string;
+  }): Promise<AnalyzeJobFromUrlResponse> {
+    try {
+      const response = await apiClient.post('/generate-application', {
+        job_description: request.jobDescription,
+        url: request.jobUrl,
+        job_title: request.jobTitle,
+        company_name: request.companyName,
+      });
+      const payload = response.data.result ?? response.data;
+      return payload;
+    } catch (error) {
+      console.error('Quick apply error:', error);
+      throw error;
+    }
   },
 };

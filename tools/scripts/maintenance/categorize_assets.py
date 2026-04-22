@@ -30,19 +30,19 @@ LEGACY_TO_MANIFEST_MAP = {
     'texture-gallery-nocturnal-tile.png': 'northcote-canopy-pattern.png',
     'northcote-pattern-tile.png': 'northcote-canopy-pattern.png',
 
-    # Asset 4: Wattle Beetle
-    'northcote-vertical-beetle.png': 'northcote-wattle-beetle.png',
-    'beetle-scarab.png': 'northcote-wattle-beetle.png',
+    # Asset 4: Baru Beetle
+    'northcote-vertical-beetle.png': 'northcote-baru-beetle.png',
+    'beetle-scarab.png': 'northcote-baru-beetle.png',
 
-    # Asset 5: Eucalyptus Echidna
-    'northcote-vertical-echidna.png': 'northcote-eucalyptus-echidna.png',
-    'motif-gallery-eucalyptus-[DEPRECATED_STYLE].png': 'northcote-eucalyptus-echidna.png',
+    # Asset 5: Activist Echidna
+    'northcote-vertical-echidna.png': 'northcote-activist-echidna.png',
+    'motif-gallery-activist-[DEPRECATED_STYLE].png': 'northcote-activist-echidna.png',
 
     # Asset 6: Still Life
     'northcote-footer-still-life.png': 'northcote-temporal-still-life.png',
 
     # Asset 10: Spinner
-    'northcote-banksia-spinner.png': 'northcote-banksia-spinner.png'
+    'northcote-geometric-spinner.png': 'northcote-geometric-spinner.png'
 }
 
 # Regex mapping for Categories

@@ -59,30 +59,32 @@ class ErrorBoundary extends Component<Props, State> {
 
       // Default error UI
       return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
-          <div className="max-w-md w-full bg-white rounded-pebble shadow-lg p-8 text-center">
+        <div className="min-h-screen bg-[var(--sys-color-charcoalBackground-base)] flex items-center justify-center p-4">
+          <div className="max-w-md w-full bg-[var(--sys-color-charcoalBackground-steps-2)] rounded-placard border border-[var(--sys-color-concreteGrey-base)]/20 shadow-elevation2Placard p-8 text-center ring-1 ring-[var(--sys-color-solidarityRed-base)]/10">
             <div className="mb-6">
-              <Warning className="w-16 h-16 mx-auto text-red-500 mb-4" />
-              <h1 className="text-2xl font-bold text-gray-900 mb-2">Oops! Something went wrong</h1>
-              <p className="text-gray-600">
+              <Warning className="w-16 h-16 mx-auto text-[var(--sys-color-solidarityRed-base)] mb-4" />
+              <h1 className="text-2xl font-bold text-[var(--sys-color-worker-ash-base)] mb-2 font-display">
+                Oops! Something went wrong
+              </h1>
+              <p className="text-[var(--sys-color-worker-ash-steps-1)]">
                 We&apos;re sorry, but something unexpected happened. Our team has been notified.
               </p>
             </div>
 
             {process.env.NODE_ENV === 'development' && this.state.error && (
               <details className="mb-6 text-left">
-                <summary className="cursor-pointer text-sm font-medium text-gray-700 mb-2">
+                <summary className="cursor-pointer text-sm font-medium text-[var(--sys-color-worker-ash-base)] mb-2 hover:text-[var(--sys-color-inkGold-base)] transition-colors">
                   Error Details (Development Only)
                 </summary>
-                <div className="bg-red-50 border border-red-200 rounded p-3 text-xs">
-                  <p className="font-medium text-red-800 mb-1">
+                <div className="bg-[var(--sys-color-kr-charcoalRed-steps-0)]/20 border border-[var(--sys-color-kr-charcoalRed-steps-0)]/30 rounded-pebble p-3 text-xs font-mono">
+                  <p className="font-medium text-[var(--sys-color-kr-charcoalRed-base)] mb-1">
                     {this.state.error.name}: {this.state.error.message}
                   </p>
-                  <pre className="text-red-700 whitespace-pre-wrap overflow-auto max-h-32">
+                  <pre className="text-[var(--sys-color-kr-charcoalRed-steps-3)] whitespace-pre-wrap overflow-auto max-h-32">
                     {this.state.error.stack}
                   </pre>
                   {this.state.errorInfo && (
-                    <pre className="text-red-700 whitespace-pre-wrap overflow-auto max-h-32 mt-2">
+                    <pre className="text-[var(--sys-color-kr-charcoalRed-steps-3)] whitespace-pre-wrap overflow-auto max-h-32 mt-2">
                       {this.state.errorInfo.componentStack}
                     </pre>
                   )}
@@ -90,24 +92,24 @@ class ErrorBoundary extends Component<Props, State> {
               </details>
             )}
 
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={this.handleRefresh}
-                className="flex-1 inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-megaphone text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                className="flex-1 inline-flex items-center justify-center px-4 py-3 text-sm font-bold rounded-strike text-[var(--sys-color-paperWhite-base)] bg-[var(--sys-color-solidarityRed-base)] hover:bg-[var(--sys-color-solidarityRed-steps-0)] transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-elevation1Strike uppercase tracking-widest"
               >
                 <Refresh className="w-4 h-4 mr-2" />
                 Try Again
               </button>
               <button
                 onClick={this.handleGoHome}
-                className="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-megaphone text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                className="flex-1 inline-flex items-center justify-center px-4 py-3 text-sm font-bold rounded-march text-[var(--sys-color-charcoalBackground-base)] bg-[var(--sys-color-inkGold-base)] hover:bg-[var(--sys-color-inkGold-steps-2)] transition-all transform hover:scale-[1.02] active:scale-[0.98] uppercase tracking-widest"
               >
                 <Home className="w-4 h-4 mr-2" />
                 Go Home
               </button>
             </div>
 
-            <p className="mt-4 text-xs text-gray-500">
+            <p className="mt-6 text-[10px] text-[var(--sys-color-concreteGrey-base)] uppercase tracking-tighter">
               If this problem persists, please contact support.
             </p>
           </div>

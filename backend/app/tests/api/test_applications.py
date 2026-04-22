@@ -1,7 +1,6 @@
 """Tests for /applications API endpoints."""
 
 from types import SimpleNamespace
-from unittest.mock import MagicMock, patch
 
 import pytest
 
@@ -88,12 +87,14 @@ class TestApplicationsEndpoints:
             f"/api/applications/{app_id}",
             json={
                 "jobTitle": "New Title",
-                "companyName": "X",
-                "jobDescription": "New description that is long enough to pass the validation check of fifty characters.",
+                "status": "interviewing",
+                "notes": "Phone screen booked",
             },
         )
         assert response.status_code == 200
         assert response.json()["jobTitle"] == "New Title"
+        assert response.json()["status"] == "interviewing"
+        assert response.json()["notes"] == "Phone screen booked"
 
     def test_delete_application(self, auth_client):
         """Should remove application from DB."""

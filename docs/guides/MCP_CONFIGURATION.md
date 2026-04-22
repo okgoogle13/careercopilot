@@ -277,11 +277,9 @@ curl -H "Authorization: token YOUR_TOKEN" https://api.github.com/user
 
 ---
 
-- [Codex CLI Setup Guide](./CODEX_CLI_SETUP.md) ⭐ NEW
-
 ---
 
-**Generated:** 2026-01-06  
-**Updated:** 2026-02-14 (Added Codex CLI configuration)  
-**Project:** CareerCopilot Frontend  
+**Generated:** 2026-01-06
+**Updated:** 2026-04-10
+**Project:** CareerCopilot Frontend
 **Status:** Configuration Ready ✅

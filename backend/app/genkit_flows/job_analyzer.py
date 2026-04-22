@@ -1,13 +1,14 @@
-import logging
 import json
-from pydantic import BaseModel, Field
-from typing import Dict, Any, Optional
+import logging
+
+from pydantic import BaseModel
 
 from app.core.genkit_init import get_model
 from app.core.prompt_service import format_prompt
 from app.genkit_flows.flow_decorator import async_genkit_flow
 
 logger = logging.getLogger(__name__)
+
 
 class JobAnalysisSchema(BaseModel):
     title: str
@@ -18,7 +19,8 @@ class JobAnalysisSchema(BaseModel):
     technical_skills: list[str]
     soft_skills: list[str]
     experience_level: str
-    match_score: Optional[int] = None
+    match_score: int | None = None
+
 
 @async_genkit_flow()
 async def analyze_job_description(job_description: str) -> str:
@@ -26,7 +28,7 @@ async def analyze_job_description(job_description: str) -> str:
     Analyzes a job description to extract key information using Genkit.
     """
     logger.info("Running analyze_job_description flow")
-    
+
     # Default fallback data
     fallback_data = {
         "title": "Unknown Title",
@@ -36,7 +38,7 @@ async def analyze_job_description(job_description: str) -> str:
         "key_requirements": [],
         "technical_skills": [],
         "soft_skills": [],
-        "experience_level": "Unknown"
+        "experience_level": "Unknown",
     }
 
     try:
@@ -60,11 +62,11 @@ async def analyze_job_description(job_description: str) -> str:
         output = response.output()
         if not output:
             return json.dumps(fallback_data)
-            
+
         if isinstance(output, str):
             return output
         return json.dumps(output)
-        
+
     except Exception as e:
         logger.error(f"Error in analyze_job_description: {e}")
         return json.dumps(fallback_data)

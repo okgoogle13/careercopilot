@@ -118,15 +118,12 @@
       - [branch-manager.md](./.claude/agents/branch-manager.md)
       - [code-reviewer.md](./.claude/agents/code-reviewer.md)
       - [debugger.md](./.claude/agents/debugger.md)
-      - [design-project-manager.md](./.claude/agents/design-project-manager.md)
       - [design-system-validator.md](./.claude/agents/design-system-validator.md)
       - [design-systems-architect.md](./.claude/agents/design-systems-architect.md)
       - [devops-specialist.md](./.claude/agents/devops-specialist.md)
       - [firestore-caching-specialist.md](./.claude/agents/firestore-caching-specialist.md)
-      - [frontend-specialist.md](./.claude/agents/frontend-specialist.md)
-      - [fullstack-integration-specialist.md](./.claude/agents/fullstack-integration-specialist.md)
-      - [m3-migration-architect.md](./.claude/agents/m3-migration-architect.md)
-      - [mcp-orchestrator.md](./.claude/agents/mcp-orchestrator.md)
+      - [frontend-cleanup-manager.md](./.claude/agents/frontend-cleanup-manager.md)
+      - [prototype-harvest-manager.md](./.claude/agents/prototype-harvest-manager.md)
       - [security-analyst.md](./.claude/agents/security-analyst.md)
       - [test-automation-specialist.md](./.claude/agents/test-automation-specialist.md)
       - [test-runner.md](./.claude/agents/test-runner.md)
@@ -273,18 +270,8 @@
         - `references/`
           - [example-config.md](./.claude/skills/example-skill/references/example-config.md)
           - [yaml-style-guide.md](./.claude/skills/example-skill/references/yaml-style-guide.md)
-      - `figma-to-page/`
-        - [SKILL.md](./.claude/skills/figma-to-page/SKILL.md)
-        - `references/`
-          - [figma-inspect-guide.md](./.claude/skills/figma-to-page/references/figma-inspect-guide.md)
       - `frontend-backend-mapper/`
         - [SKILL.md](./.claude/skills/frontend-backend-mapper/SKILL.md)
-      - `frontend-migration/`
-        - [batch-migration-orchestrator.md](./.claude/skills/frontend-migration/batch-migration-orchestrator.md)
-        - [m3-interaction-tokens.md](./.claude/skills/frontend-migration/m3-interaction-tokens.md)
-        - [m3-layout-tokens.md](./.claude/skills/frontend-migration/m3-layout-tokens.md)
-        - [m3-typography-tokens.md](./.claude/skills/frontend-migration/m3-typography-tokens.md)
-        - [m3-visual-tokens.md](./.claude/skills/frontend-migration/m3-visual-tokens.md)
       - `jest-test-scaffolder/`
         - [SKILL.md](./.claude/skills/jest-test-scaffolder/SKILL.md)
         - `templates/`
@@ -309,14 +296,6 @@
         - `references/`
           - [backend-test-patterns.md](./.claude/skills/pytest-test-scaffolder/references/backend-test-patterns.md)
           - [quick-reference.md](./.claude/skills/pytest-test-scaffolder/references/quick-reference.md)
-      - `react-component-scaffolder/`
-        - [SKILL.md](./.claude/skills/react-component-scaffolder/SKILL.md)
-        - `scripts/`
-          - [create-component.sh](./.claude/skills/react-component-scaffolder/scripts/create-component.sh)
-      - `react-page-scaffolder/`
-        - [SKILL.md](./.claude/skills/react-page-scaffolder/SKILL.md)
-        - `scripts/`
-          - [create-page.sh](./.claude/skills/react-page-scaffolder/scripts/create-page.sh)
       - `skill-reviewer/`
         - [SKILL.md](./.claude/skills/skill-reviewer/SKILL.md)
       - `storybook-scaffolder/`
@@ -4904,7 +4883,6 @@
           - `tabs/`
             - [Tabs.tsx](./frontend/src/components/atomic/tabs/Tabs.tsx)
         - `core/`
-          - [Leaf.figma.tsx](./frontend/src/components/core/Leaf.figma.tsx)
           - [Leaf.tsx](./frontend/src/components/core/Leaf.tsx)
         - `electric/`
           - `tabs/`
@@ -4936,7 +4914,6 @@
           - [SplitHeader.tsx](./frontend/src/components/shared/SplitHeader.tsx)
           - [StatCard.tsx](./frontend/src/components/shared/StatCard.tsx)
           - [StatusChip.tsx](./frontend/src/components/shared/StatusChip.tsx)
-          - [TechCard.figma.tsx](./frontend/src/components/shared/TechCard.figma.tsx)
           - [TechCard.tsx](./frontend/src/components/shared/TechCard.tsx)
           - [index.ts](./frontend/src/components/shared/index.ts)
         - `ui/`
@@ -4949,13 +4926,11 @@
           - [NativeAnchor.tsx](./frontend/src/components/ui/NativeAnchor.tsx)
           - [kerala-rageButton.tsx](./frontend/src/components/ui/kerala-rageButton.tsx)
           - [Pebble.figma 2.tsx](./frontend/src/components/ui/Pebble.figma 2.tsx)
-          - [Pebble.figma.tsx](./frontend/src/components/ui/Pebble.figma.tsx)
           - [Pebble.tsx](./frontend/src/components/ui/Pebble.tsx)
           - [Seed.tsx](./frontend/src/components/ui/Seed.tsx)
           - [Signal.tsx](./frontend/src/components/ui/Signal.tsx)
           - [SplitHeader.tsx](./frontend/src/components/ui/SplitHeader.tsx)
           - [Stone.figma 2.tsx](./frontend/src/components/ui/Stone.figma 2.tsx)
-          - [Stone.figma.tsx](./frontend/src/components/ui/Stone.figma.tsx)
           - [Stone.tsx](./frontend/src/components/ui/Stone.tsx)
           - [Valve.tsx](./frontend/src/components/ui/Valve.tsx)
           - [Vessel.tsx](./frontend/src/components/ui/Vessel.tsx)
@@ -5121,7 +5096,6 @@
           - [MetricCard.tsx](./frontend/src/legacy/ui/MetricCard.tsx)
           - [button 2.tsx](./frontend/src/legacy/ui/button 2.tsx)
           - [button.figma 2.tsx](./frontend/src/legacy/ui/button.figma 2.tsx)
-          - [button.figma.tsx](./frontend/src/legacy/ui/button.figma.tsx)
           - [button.tsx](./frontend/src/legacy/ui/button.tsx)
           - [chart.tsx](./frontend/src/legacy/ui/chart.tsx)
           - [collapsible.tsx](./frontend/src/legacy/ui/collapsible.tsx)
@@ -5228,7 +5202,6 @@
         - [ai.ts](./frontend/src/types/ai.ts)
         - [aiServices.d.ts](./frontend/src/types/aiServices.d.ts)
         - [api.ts](./frontend/src/types/api.ts)
-        - [figma-code-connect.d.ts](./frontend/src/types/figma-code-connect.d.ts)
         - [index.ts](./frontend/src/types/index.ts)
         - [intelligence.ts](./frontend/src/types/intelligence.ts)
         - [test-types.ts](./frontend/src/types/test-types.ts)

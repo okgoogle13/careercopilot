@@ -72,8 +72,8 @@ echo "📚 Phase 2: Creating documentation generator..."
 cat > "$SKILLS_DIR/design-system-doc-generator/SKILL.md" << 'EOF'
 ---
 name: design-system-doc-generator
-description: Extract design system from CareerCopilot codebase and generate comprehensive design guidelines (MD) + interactive reference style guide (HTML). Uses Northcote Contemporary Australian aesthetic.
-tags: [design-system, documentation, style-guide, northcote]
+description: Extract design system from CareerCopilot codebase and generate comprehensive design guidelines (MD) + interactive reference style guide (HTML). Uses the current KR Solidarity aesthetic and treats Northcote Curio as deprecated legacy context.
+tags: [design-system, documentation, style-guide, kr-solidarity]
 version: 1.0.0
 ---
 
@@ -124,8 +124,8 @@ echo "🖼️  Phase 3: Creating wireframe annotator..."
 cat > "$SKILLS_DIR/wireframe-annotator/SKILL.md" << 'EOF'
 ---
 name: wireframe-annotator
-description: Generate annotated ASCII wireframes with Northcote design tokens, responsive breakpoints, and M3 Expressive patterns.
-tags: [wireframing, design, northcote, spec]
+description: Generate annotated ASCII wireframes with KR Solidarity design tokens, responsive breakpoints, and M3 Expressive patterns.
+tags: [wireframing, design, kr-solidarity, spec]
 version: 1.0.0
 ---
 
@@ -143,9 +143,9 @@ Generate annotated wireframes for CareerCopilot screens using ASCII layout diagr
 - **Developer Handoff Notes**: Data requirements, edge cases
 
 ## Design Context
-- **System**: Northcote Contemporary Australian
+- **System**: KR Solidarity
 - **Typography**: Bebas Neue (display), Space Grotesk (headers)
-- **Colors**: Dark ironbark (#1A1410), eucalyptus green (#8FB8A0)
+- **Colors**: Dark ironbark (#1A1410), activist green (#8FB8A0)
 - **Framework**: Material 3 Expressive
 
 ## Usage
@@ -199,18 +199,18 @@ echo "🛡️  Phase 5: Creating brand enforcer..."
 cat > "$SKILLS_DIR/northcote-brand-enforcer/SKILL.md" << 'EOF'
 ---
 name: northcote-brand-enforcer
-description: Auto-applies Northcote brand guidelines (Melbourne laneway aesthetic, endemic flora) to ensure design consistency.
-tags: [brand, compliance, northcote, design]
+description: Auto-applies KR Solidarity brand guidelines while treating Northcote Curio references as deprecated legacy context.
+tags: [brand, compliance, kr-solidarity, design]
 version: 1.0.0
 ---
 
 # Northcote Brand Enforcer skill
 
 ## Purpose
-Guardrails to ensure all AI-generated content matches the Northcote Contemporary Australian aesthetic.
+Guardrails to ensure all AI-generated content matches the KR Solidarity aesthetic.
 
 ## Enforcement Rules
-- **Colors**: Dark ironbark bg, eucalyptus accent, soft white text
+- **Colors**: Dark ironbark bg, activist accent, soft white text
 - **Typography**: Bebas Neue (display), Space Grotesk (headers), NO Roboto/Arial
 - **Layout**: 8px grid, sharp corners (0px) or subtle (4-8px), M3 shadows
 - **Visual**: Melbourne laneway aesthetic, Australian endemic flora motifs

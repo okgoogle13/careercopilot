@@ -1,8 +1,5 @@
 import json
 import logging
-from typing import Any, Dict, List, Optional
-
-from pydantic import BaseModel, Field
 
 from app.core.genkit_init import async_genkit_flow, get_model
 from app.schemas.ai import (

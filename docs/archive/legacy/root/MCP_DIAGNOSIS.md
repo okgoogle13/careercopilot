@@ -90,7 +90,7 @@ This script contained **FATAL CONFIGURATION ERRORS** on lines 347-357:
 1. **Non-existent Packages**: The packages `@modelcontextprotocol/server-playwright` and `@modelcontextprotocol/server-docker` **DO NOT EXIST** on npm.
 
 2. **Correct Packages**:
-   - Playwright: `@playwright/mcp` 
+   - Playwright: `@playwright/mcp`
    - Docker: `@thelord/mcp-server-docker-npx` or `mcp-server-docker`
 
 3. **Cache Persistence**: Even after fixing the config files, VS Code/Antigravity cached the broken configurations internally, causing persistent errors.

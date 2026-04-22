@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           version="1.0"
+           id="build_contract">
+
+  <!--
+    KR Solidarity — Build Contract Schema v1.0
+    Date: 2026-03-14
+    Purpose: Validates build_contract.xml files used in the frontend source-of-truth migration.
+    Enforces: ownership_role enum, required fields on all mapping entries and component manifest
+              entries, state_transition_contract structure, and acceptance_criteria format.
+    Usage:
+      xmllint ~~schema docs/schema/build_contract.xsd <contract_file.xml> ~~noout
+  -->
+
+  <!-- ============================================================
+       Root Element
+  ================================================================ -->
+  <xs:element name="build_contract">
+    <xs:complexType>
+      <xs:sequence>
+        <!-- review_metadata: optional governance header added post-schema-v1 -->
+        <xs:element name="review_metadata"        type="ReviewMetadataType"      minOccurs="0" />
+        <xs:element name="decision_log"           type="DecisionLogType" />
+        <xs:element name="route_contract"         type="RouteContractType" />
+        <xs:element name="mapping_registry"       type="MappingRegistryType" />
+        <xs:element name="component_manifest"     type="ComponentManifestType"  minOccurs="0" />
+        <xs:element name="file_system_mapping"    type="FileSystemMappingType"  minOccurs="0" />
+        <!-- state_transition_contract: required for new-component contracts; optional for governance-only contracts -->
+        <xs:element name="state_transition_contract" type="StateTransitionContractType" minOccurs="0" />
+        <xs:element name="backend_integration_contract" type="BackendIntegrationContractType" minOccurs="0" />
+        <!-- acceptance_criteria: required for build contracts; optional for pairing-verification contracts -->
+        <xs:element name="acceptance_criteria"    type="AcceptanceCriteriaType"  minOccurs="0" />
+        <!-- execution_checklist and contract_notes: optional governance annotations -->
+        <xs:element name="execution_checklist"    type="ExecutionChecklistType"  minOccurs="0" />
+        <xs:element name="contract_notes"         type="ContractNotesType"       minOccurs="0" />
+        <!-- Extensible: allow any additional non-standard sections (api_contract, state_management_contract, etc.) -->
+        <xs:any minOccurs="0" maxOccurs="unbounded" processContents="skip" />
+      </xs:sequence>
+      <xs:attribute name="route_id"          type="xs:string"  use="required" />
+      <xs:attribute name="generated_at"      type="xs:string"  use="required" />
+      <xs:attribute name="prompt_artifact"   type="xs:string"  use="required" />
+      <xs:attribute name="supplementary_briefs" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <!-- ============================================================
+       Allowed Value Types
+  ================================================================ -->
+
+  <!-- ownership_role -->
+  <xs:simpleType name="OwnershipRoleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="page_component" />
+      <xs:enumeration value="support_component" />
+      <xs:enumeration value="ui_primitive" />
+      <xs:enumeration value="reference_only" />
+      <xs:enumeration value="deferred_component" />
+      <xs:enumeration value="shared_shell_reference" />
+      <xs:enumeration value="route_shell_owner" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- canonical_status for component manifest entries -->
+  <xs:simpleType name="CanonicalStatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="reuse" />
+      <xs:enumeration value="new" />
+      <xs:enumeration value="reference" />
+      <xs:enumeration value="deferred" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- route_status — aligned with route-matrix status values -->
+  <xs:simpleType name="RouteStatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="expand" />
+      <xs:enumeration value="rewrite" />
+      <xs:enumeration value="migrate" />
+      <xs:enumeration value="defer" />
+      <xs:enumeration value="keep" />
+      <xs:enumeration value="merge" />
+      <xs:enumeration value="complete" />
+      <xs:enumeration value="retire" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- dependency type -->
+  <xs:simpleType name="DependencyTypeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="design_token" />
+      <xs:enumeration value="ui_primitive" />
+      <xs:enumeration value="backend_capability" />
+      <xs:enumeration value="child_component" />
+      <xs:enumeration value="web_api" />
+      <xs:enumeration value="type" />
+      <xs:enumeration value="ui_component" />
+      <xs:enumeration value="animation" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ============================================================
+       Shared Subtypes
+  ================================================================ -->
+
+  <xs:complexType name="PropType">
+    <xs:attribute name="name"         type="xs:string" use="required" />
+    <xs:attribute name="type"         type="xs:string" use="required" />
+    <xs:attribute name="value"        type="xs:string" use="optional" />
+    <xs:attribute name="default"      type="xs:string" use="optional" />
+    <xs:attribute name="source"       type="xs:string" use="optional" />
+    <xs:attribute name="domain_field" type="xs:string" use="optional" />
+    <xs:attribute name="i18n_key"     type="xs:string" use="optional" />
+    <xs:attribute name="description"  type="xs:string" use="optional" />
+  </xs:complexType>
+
+  <xs:complexType name="StateType">
+    <xs:attribute name="name"        type="xs:string" use="required" />
+    <xs:attribute name="type"        type="xs:string" use="optional" />
+    <xs:attribute name="default"     type="xs:string" use="optional" />
+    <xs:attribute name="source"      type="xs:string" use="optional" />
+    <xs:attribute name="description" type="xs:string" use="optional" />
+  </xs:complexType>
+
+  <xs:complexType name="EventType">
+    <xs:attribute name="name"        type="xs:string" use="required" />
+    <xs:attribute name="description" type="xs:string" use="optional" />
+  </xs:complexType>
+
+  <xs:complexType name="DependencyType">
+    <xs:attribute name="type"     type="DependencyTypeType" use="required" />
+    <xs:attribute name="ref"      type="xs:string"          use="required" />
+    <xs:attribute name="usage"    type="xs:string"          use="optional" />
+    <xs:attribute name="endpoint" type="xs:string"          use="optional" />
+  </xs:complexType>
+
+  <xs:complexType name="PropContractType">
+    <xs:sequence>
+      <xs:element name="prop" type="PropType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="StateContractType">
+    <xs:sequence>
+      <xs:element name="state" type="StateType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="EventContractType">
+    <xs:sequence>
+      <xs:element name="event" type="EventType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DependencyContractType">
+    <xs:sequence>
+      <xs:element name="dependency" type="DependencyType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ============================================================
+       Decision Log
+  ================================================================ -->
+
+  <xs:complexType name="DecisionLogType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="decision">
+        <xs:complexType mixed="true">
+          <xs:attribute name="id" type="xs:string" use="required" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="resolved_gap">
+        <xs:complexType mixed="true">
+          <xs:attribute name="original_severity" type="xs:string" use="required" />
+          <xs:attribute name="area"              type="xs:string" use="required" />
+          <xs:attribute name="resolution"        type="xs:string" use="required" />
+        </xs:complexType>
+      </xs:element>
+      <!-- status_update: optional session-level progress notes in decision_log -->
+      <xs:element name="status_update">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:any minOccurs="0" maxOccurs="unbounded" processContents="skip" />
+          </xs:sequence>
+          <xs:attribute name="date" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+
+  <!-- ============================================================
+       Route Contract
+  ================================================================ -->
+
+  <xs:complexType name="RouteContractType">
+    <xs:sequence>
+      <xs:element name="route_id"                type="xs:string" />
+      <xs:element name="current_route"           type="xs:string" />
+      <xs:element name="target_route"            type="xs:string" />
+      <xs:element name="route_class"             type="xs:string" />
+      <xs:element name="family"                  type="xs:string" />
+      <xs:element name="route_status"            type="RouteStatusType" />
+      <xs:element name="implementation_status"   type="xs:string" />
+      <xs:element name="wireframe_coverage"      type="xs:string" />
+      <xs:element name="canonical_runtime_owner" type="xs:string" />
+      <xs:element name="route_shell_owner"       type="xs:string" />
+      <xs:element name="page_component_owner"    type="xs:string" />
+      <xs:element name="component_library_action" type="xs:string" />
+      <xs:element name="paired_runtime_surface"  type="xs:string" />
+      <!-- screen_reference: optional reference to screen component file (apply-quick pattern) -->
+      <xs:element name="screen_reference" type="xs:string" minOccurs="0" />
+      <xs:element name="backend_capabilities">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="capability"          type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="capability_deferred" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ============================================================
+       Mapping Registry
+  ================================================================ -->
+
+  <xs:complexType name="MappingEntryType">
+    <xs:sequence>
+      <!-- REQUIRED fields per AC-005 and AC-006 -->
+      <xs:element name="source_node_id"       type="xs:string" />
+      <xs:element name="source_node_type"     type="xs:string" />
+      <xs:element name="source_layout_role"   type="xs:string" />
+      <xs:element name="mapped_code_component" type="xs:string" />
+      <xs:element name="ownership_role"       type="OwnershipRoleType" />
+      <xs:element name="target_component_name" type="xs:string" />
+      <xs:element name="target_component_status" type="xs:string" />
+      <!-- component_file_path: optional explicit path for new components -->
+      <xs:element name="component_file_path"  type="xs:string"           minOccurs="0" />
+      <xs:element name="prop_contract"        type="PropContractType"    minOccurs="0" />
+      <xs:element name="state_contract"       type="StateContractType"   minOccurs="0" />
+      <xs:element name="event_contract"       type="EventContractType"   minOccurs="0" />
+      <!-- internal_structure: optional for complex components -->
+      <xs:element name="internal_structure"   minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:any minOccurs="0" maxOccurs="unbounded" processContents="skip" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="dependency_contract"  type="DependencyContractType" minOccurs="0" />
+      <xs:element name="source_of_truth"      type="xs:string"           minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="MappingRegistryType">
+    <xs:sequence>
+      <xs:element name="entry" type="MappingEntryType" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ============================================================
+       Component Manifest
+  ================================================================ -->
+
+  <xs:complexType name="ComponentType">
+    <xs:sequence>
+      <xs:element name="component_name"         type="xs:string" />
+      <xs:element name="role"                   type="OwnershipRoleType" />
+      <xs:element name="canonical_status"       type="CanonicalStatusType" />
+      <xs:element name="source_classification"  type="xs:string" />
+      <xs:element name="file_owner_type"        type="xs:string" />
+      <xs:element name="derived_from_xml_nodes" type="xs:string" />
+      <xs:element name="required_props"         type="PropContractType" minOccurs="0" />
+      <xs:element name="optional_props"         type="PropContractType" minOccurs="0" />
+      <xs:element name="local_state"            type="StateContractType" minOccurs="0" />
+      <xs:element name="external_state"         type="StateContractType" minOccurs="0" />
+      <xs:element name="child_components" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="child" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="upstream_dependencies" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="dependency" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="downstream_dependencies" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="dependency" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="blocked_by" minOccurs="0">
+        <xs:complexType mixed="true" />
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ComponentManifestType">
+    <xs:sequence>
+      <xs:element name="component" type="ComponentType" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ============================================================
+       File System Mapping
+  ================================================================ -->
+
+  <xs:complexType name="FileSystemMappingType">
+    <xs:sequence>
+      <xs:element name="route_shell_path"    type="xs:string" />
+      <xs:element name="page_component_path" type="xs:string" />
+      <xs:element name="support_component_paths" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="path" minOccurs="0" maxOccurs="unbounded">
+              <xs:complexType mixed="true">
+                <xs:attribute name="component" type="xs:string" use="required" />
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="reference_only_source_path" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="path" minOccurs="0" maxOccurs="unbounded">
+              <xs:complexType mixed="true">
+                <xs:attribute name="component" type="xs:string" use="required" />
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deferred_placeholder_paths" minOccurs="0">
+        <xs:complexType mixed="true" />
+      </xs:element>
+      <xs:element name="test_paths" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="path" minOccurs="0" maxOccurs="unbounded">
+              <xs:complexType mixed="true">
+                <xs:attribute name="component" type="xs:string" use="optional" />
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ============================================================
+       State Transition Contract
+  ================================================================ -->
+
+  <xs:complexType name="TransitionType">
+    <xs:sequence>
+      <xs:element name="event_source"          type="xs:string" />
+      <xs:element name="state_owner_component" type="xs:string" />
+      <xs:element name="hook_responsibility"   type="xs:string" />
+      <xs:element name="async_boundary"        type="xs:string" />
+      <xs:element name="loading_state_owner"   type="xs:string" />
+      <xs:element name="error_state_owner"     type="xs:string" />
+      <xs:element name="empty_state_owner"     type="xs:string" />
+      <xs:element name="completion_state_owner" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="id"        type="xs:string"  use="required" />
+    <xs:attribute name="flow_step" type="xs:integer" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="StateTransitionContractType">
+    <xs:sequence>
+      <xs:element name="transition" type="TransitionType" minOccurs="1" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ============================================================
+       Acceptance Criteria
+  ================================================================ -->
+
+  <xs:complexType name="AcceptanceCriteriaType">
+    <xs:sequence>
+      <xs:element name="criterion" minOccurs="1" maxOccurs="unbounded">
+        <xs:complexType mixed="true">
+          <xs:attribute name="id"   type="xs:string" use="required" />
+          <xs:attribute name="type" type="xs:string" use="required" />
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ============================================================
+       Review Metadata (governance header — added post-schema-v1)
+  ================================================================ -->
+
+  <xs:complexType name="ReviewMetadataType">
+    <xs:sequence>
+      <xs:element name="gate_status"              type="xs:string" minOccurs="0" />
+      <xs:element name="human_approval_recorded"  type="xs:string" minOccurs="0" />
+      <xs:element name="approved_by"              type="xs:string" minOccurs="0" />
+      <xs:element name="approved_on"              type="xs:string" minOccurs="0" />
+      <xs:element name="approval_note"            type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ============================================================
+       Backend Integration Contract (optional for non-backend routes)
+  ================================================================ -->
+
+  <xs:complexType name="EndpointType">
+    <xs:sequence>
+      <xs:element name="http_method"        type="xs:string" minOccurs="0" />
+      <xs:element name="path"               type="xs:string" minOccurs="0" />
+      <xs:element name="auth_required"      type="xs:string" minOccurs="0" />
+      <xs:element name="auth_mechanism"     type="xs:string" minOccurs="0" />
+      <xs:element name="request_body"       type="xs:string" minOccurs="0" />
+      <xs:element name="request_shape"      type="xs:string" minOccurs="0" />
+      <xs:element name="response_type"      type="xs:string" minOccurs="0" />
+      <xs:element name="response_shape"     type="xs:string" minOccurs="0" />
+      <xs:element name="integration_point"  type="xs:string" minOccurs="0" />
+      <xs:element name="client_side_validation" type="xs:string" minOccurs="0" />
+      <xs:element name="error_handling"     type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="BackendIntegrationContractType">
+    <xs:sequence>
+      <xs:element name="endpoint" type="EndpointType" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ============================================================
+       Execution Checklist (optional governance annotation)
+  ================================================================ -->
+
+  <xs:complexType name="ExecutionChecklistType">
+    <xs:sequence>
+      <xs:element name="item" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType mixed="true">
+          <xs:attribute name="status" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ============================================================
+       Contract Notes (optional governance annotation)
+  ================================================================ -->
+
+  <xs:complexType name="ContractNotesType">
+    <xs:sequence>
+      <xs:element name="note" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType mixed="true">
+          <xs:attribute name="type" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

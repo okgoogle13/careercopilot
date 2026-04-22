@@ -31,7 +31,7 @@ Primary focal kr-motif (largest, center-left):
 
 Supporting kr-motifs:
 - Chlamydosaurus kingii (Frill-necked Lizard) — displaying frill in terracotta/ochre
-- Acacia pycnantha (Golden Wattle) — clusters of golden-yellow pompom flowers
+- Acacia pycnantha (Golden Solidarity Gold) — clusters of golden-yellow pompom flowers
 - kr-flower serrata (Old Man kr-flower) — seed cone with spiky brown texture
 - Tachyglossus aculeatus (Echidna) — spine detail or full kr-motif
 - Sparassidae (Huntsman Spider) — honey-brown translucent
@@ -46,7 +46,7 @@ Additional elements:
 Strict Australian [DEPRECATED_STYLE] palette only:
 - Coral-red: [DEPRECATED_STYLE] flower (#C94A4A)
 - Terracotta: Lizard frill, earth tones (#B8623B)
-- Ochre/Gold: Wattle, accents (#D4A435)
+- Ochre/Gold: Solidarity Gold, accents (#D4A435)
 - Sage green: kr-leafus leaves (#7A8B6E)
 - Warm brown: kr-flower, spider, pods (#8B6B4E)
 - Cream/Bone: kr-motif labels (#D4C4A8)
@@ -71,7 +71,7 @@ Fig. [Roman numeral]. [Scientific binomial name in italics]
 Examples:
 "Fig. I. Telopea speciosissima ([DEPRECATED_STYLE])"
 "Fig. II. Chlamydosaurus kingii (Frill-necked Lizard)"
-"Fig. III. Acacia pycnantha (Golden Wattle)"
+"Fig. III. Acacia pycnantha (Golden Solidarity Gold)"
 
 Label styling:
 - Font: Elegant serif (similar to Lora or Crimson Text)
@@ -110,7 +110,7 @@ Label styling:
 ## Quick Copy Version
 
 ```
-kerala-streetprint [DEPRECATED_STYLE] [DEPRECATED_STYLE] illustration plate. Dark charcoal-black kr-dark wall background (#1A1A1A). Australian native kr-motifs: [DEPRECATED_STYLE] (coral-red, center-left focal point), Frill-necked Lizard (terracotta, displaying frill), Golden Wattle (yellow clusters), kr-flower cone (brown, spiky), Huntsman spider (honey-brown), kr-leafus leaves (sage green), agate cross-section slice.
+kerala-streetprint [DEPRECATED_STYLE] [DEPRECATED_STYLE] illustration plate. Dark charcoal-black kr-dark wall background (#1A1A1A). Australian native kr-motifs: [DEPRECATED_STYLE] (coral-red, center-left focal point), Frill-necked Lizard (terracotta, displaying frill), Golden Solidarity Gold (yellow clusters), kr-flower cone (brown, spiky), Huntsman spider (honey-brown), kr-leafus leaves (sage green), agate cross-section slice.
 
 [DEPRECATED_STYLE] asymmetrical composition like a cabinet of kr-solidaritysities. No grid alignment. kerala-streetprint scientific labeling on each kr-motif: "Fig. I. Telopea speciosissima ([DEPRECATED_STYLE])" in elegant serif font, warm cream color (#D4C4A8), positioned bottom-right of each kr-motif.
 

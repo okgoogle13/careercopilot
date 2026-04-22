@@ -8,8 +8,9 @@ package by coordinating multiple specialized flows.
 from __future__ import annotations
 
 import json
+from collections.abc import Callable
 from datetime import datetime
-from typing import Any, Callable, Dict, List, Optional, Protocol, TypeVar, Union, cast
+from typing import Any, Protocol, TypeVar, cast
 
 from pydantic import BaseModel, Field
 from typing_extensions import ParamSpec
@@ -31,7 +32,8 @@ R = TypeVar("R")
 class ModelConfigProtocol(Protocol):
     """Protocol for model configuration."""
 
-    def generate(self, prompt: str, **kwargs: Any) -> Any: ...
+    def generate(self, prompt: str, **kwargs: Any) -> Any:
+        pass
 
 
 def _get_generation_model() -> ModelConfigProtocol:
@@ -46,34 +48,34 @@ def _get_generation_model() -> ModelConfigProtocol:
 class ApplicationPackage(BaseModel):
     """Represents a complete job application package."""
 
-    tailored_resume: Dict[str, Any] = Field(
+    tailored_resume: dict[str, Any] = Field(
         default_factory=dict, description="Optimized resume content and analysis"
     )
-    cover_letter: Dict[str, Any] = Field(
+    cover_letter: dict[str, Any] = Field(
         default_factory=dict, description="Personalized cover letter with analysis"
     )
-    ksc_responses: Optional[List[Dict[str, Any]]] = Field(
+    ksc_responses: list[dict[str, Any]] | None = Field(
         default=None, description="Key Selection Criteria responses if applicable"
     )
-    application_strategy: Dict[str, Any] = Field(
+    application_strategy: dict[str, Any] = Field(
         default_factory=dict, description="Strategic guidance for this application"
     )
-    submission_checklist: List[str] = Field(
+    submission_checklist: list[str] = Field(
         default_factory=list, description="Final submission checklist"
     )
-    follow_up_plan: Dict[str, Any] = Field(
+    follow_up_plan: dict[str, Any] = Field(
         default_factory=dict, description="Post-application follow-up strategy"
     )
-    package_metadata: Dict[str, Any] = Field(
+    package_metadata: dict[str, Any] = Field(
         default_factory=dict, description="Package generation metadata"
     )
 
 
 class KscDetectionResult(BaseModel):
     has_ksc_requirements: bool = Field(description="Whether KSC responses are required")
-    detected_criteria: List[str] = Field(description="List of detected KSC statements")
+    detected_criteria: list[str] = Field(description="List of detected KSC statements")
     confidence_score: int = Field(description="Confidence in KSC detection (0-100)", ge=0, le=100)
-    extraction_notes: List[str] = Field(description="Notes about the extraction process")
+    extraction_notes: list[str] = Field(description="Notes about the extraction process")
 
 
 @genkit_flow  # type: ignore[call-arg]
@@ -151,7 +153,7 @@ Respond with valid JSON matching the KscDetectionResult schema.
 
     except Exception as e:
         raise AIError(
-            message=f"KSC detection failed: {str(e)}",
+            message=f"KSC detection failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
@@ -161,9 +163,9 @@ Respond with valid JSON matching the KscDetectionResult schema.
 @with_ai_error_handling()
 def prepare_full_application(
     job_description: str,
-    user_profile: Dict[str, Any],
-    application_preferences: Optional[Dict[str, Any]] = None,
-    company_research: Optional[Dict[str, Any]] = None,
+    user_profile: dict[str, Any],
+    application_preferences: dict[str, Any] | None = None,
+    company_research: dict[str, Any] | None = None,
 ) -> ApplicationPackage:
     """
     Orchestrates the complete application preparation process by coordinating
@@ -373,7 +375,7 @@ Respond with a JSON object containing these strategic insights.
 
     except Exception as e:
         raise AIError(
-            message=f"Application preparation workflow failed: {str(e)}",
+            message=f"Application preparation workflow failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
@@ -383,8 +385,8 @@ Respond with a JSON object containing these strategic insights.
 @genkit_flow  # type: ignore[call-arg]
 @with_ai_error_handling()
 def assess_application_readiness(
-    user_profile: Dict[str, Any], job_description: str
-) -> Dict[str, Any]:
+    user_profile: dict[str, Any], job_description: str
+) -> dict[str, Any]:
     """
     Quick assessment of application readiness without full generation.
 
@@ -456,7 +458,7 @@ Respond with valid JSON containing the assessment results.
 
     except Exception as e:
         raise AIError(
-            message=f"Application readiness assessment failed: {str(e)}",
+            message=f"Application readiness assessment failed: {e!s}",
             error_type=AIErrorType.GENERATION_FAILED,
             original_error=e,
         )
@@ -464,9 +466,9 @@ Respond with valid JSON containing the assessment results.
 
 # Export main functions
 __all__ = [
-    "prepare_full_application",
-    "detect_ksc_requirements",
-    "assess_application_readiness",
     "ApplicationPackage",
     "KscDetectionResult",
+    "assess_application_readiness",
+    "detect_ksc_requirements",
+    "prepare_full_application",
 ]

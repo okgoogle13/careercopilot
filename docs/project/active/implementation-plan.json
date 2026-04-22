@@ -1,0 +1,117 @@
+{
+  "generatedAt": "2026-04-18T12:30:00.000Z",
+  "phase": "P16-donor-doc-parity",
+  "active_figma_file_key": "eoNJnwvDZ64OUgSthE20WW",
+  "donor_baseline": {
+    "figma_make_file_key": "IryuGDWixbuDc3RVhC6llE",
+    "figma_make_url": "https://www.figma.com/make/IryuGDWixbuDc3RVhC6llE/KR-Solidarity-CAREERCOPILOT?t=5XwXrW2DJDMtSsdW-6",
+    "published_site_url": "https://fake-pound-31010647.figma.site/",
+    "local_export_dir": "/Users/okgoogle13/Downloads/KR Solidarity CAREERCOPILOT 3"
+  },
+  "description": "Active planning, governance, and targeted frontend reconciliation pass. Align active planning docs and screen manifests to the Figma Make donor route model and guideline language, wire the KR design-drift governance checks into hook/CI, and clean the touched runtime surfaces back to canonical --kr-* token and shape usage while preserving the active eoNJnwvDZ64OUgSthE20WW design file as node-ID truth and frontend runtime files as exposure truth.",
+  "authority_notes": [
+    "Design canon remains authoritative for token policy, typography bans, flora restrictions, motion, and KR Solidarity vocabulary.",
+    "The active Figma design file eoNJnwvDZ64OUgSthE20WW remains authoritative for frame existence, shell anchors, and figma_node_id recording.",
+    "The donor Figma Make export is the preferred documentation baseline for intended route families, alias policy, and donor-authored guideline wording.",
+    "frontend/src/App.tsx and frontend/src/config/route-registry.ts remain authoritative for what users can actually reach today."
+  ],
+  "parity_rules": {
+    "doc_baseline": "Use donor route grouping and alias policy in planning docs unless that would conflict with runtime truth or canon.",
+    "active_figma_usage": "Use the active design file for node extraction and shell-repair sequencing only; do not treat rescue/history files as active sync targets.",
+    "runtime_override": "When donor intent and runtime exposure differ, document both explicitly as intended baseline vs current runtime truth.",
+    "canon_override": "When donor wording conflicts with KR design canon, canon wins and the doc must say so directly."
+  },
+  "workstreams": [
+    {
+      "id": "route-model-parity",
+      "status": "READY",
+      "deliverables": [
+        "Replace stale rescue-file references in active planning docs.",
+        "Document donor canonical routes, redirect-history aliases, and support/internal surfaces using current runtime naming.",
+        "Remove /dashboard from any near-ready confirmation queue until redesign exists in the active file."
+      ],
+      "verification_commands": [
+        "python3 -m json.tool docs/project/active/implementation-plan.json >/dev/null"
+      ]
+    },
+    {
+      "id": "screen-manifest-parity",
+      "status": "READY",
+      "deliverables": [
+        "Update docs/design/screen-map.json to current screen directories and canonical routes.",
+        "Update docs/manifests/screens.json to mirror current paired screen mappings and donor parity notes.",
+        "Mark redirect-history screen surfaces explicitly where runtime has folded them into canonical routes."
+      ],
+      "verification_commands": [
+        "python3 -m json.tool docs/design/screen-map.json >/dev/null",
+        "python3 -m json.tool docs/manifests/screens.json >/dev/null"
+      ]
+    },
+    {
+      "id": "reporting-parity",
+      "status": "READY",
+      "deliverables": [
+        "Replace the old 2026-04-01 rescue-file implementation summary with a donor-doc parity summary.",
+        "Record that this pass updates active docs, governance wiring, and a bounded set of frontend token/shape fixes without changing runtime routing or Figma node IDs."
+      ],
+      "verification_commands": [
+        "node frontend/scripts/validate-governance-artifacts.mjs"
+      ]
+    }
+  ],
+  "donor_route_model": {
+    "canonical_routes": [
+      "/",
+      "/auth",
+      "/onboarding",
+      "/dashboard",
+      "/opportunities",
+      "/applications",
+      "/profile",
+      "/analysis",
+      "/documents",
+      "/generation",
+      "/apply",
+      "/settings"
+    ],
+    "redirect_history": [
+      "/login",
+      "/register",
+      "/welcome",
+      "/dashboard-overview",
+      "/job-queue",
+      "/feed",
+      "/tracker",
+      "/kanban",
+      "/docs",
+      "/editor",
+      "/ksc-generator",
+      "/studio",
+      "/identity",
+      "/dossier",
+      "/career/ingest",
+      "/ingestion"
+    ],
+    "support_internal": [
+      "/asset-library",
+      "/style-guide",
+      "/design-sidekick",
+      "/animation-test",
+      "/test-tokens",
+      "/dev-map"
+    ]
+  },
+  "doc_targets": [
+    "TASKS.md",
+    "docs/project/active/implementation-plan.json",
+    "docs/project/active/compliance-report.md",
+    "docs/project/active/pr-summary.md",
+    "docs/design/screen-map.json",
+    "docs/manifests/screens.json"
+  ],
+  "known_follow_up_items": [
+    "Many archive and analysis docs still contain /kr/* and 06_lookout residue; this pass only updates active planning and manifest artifacts.",
+    "frontend/src/screens/04_ingestion/mapping.json still points at /kr/ingestion and should be reconciled separately if screen-pair artifacts are promoted back into active authority.",
+    "The active Figma dashboard frame 1:1277 remains empty and still blocks any real dashboard code-target confirmation."
+  ]
+}

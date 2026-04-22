@@ -1,83 +1,28 @@
 /**
  * Route-to-Mode Mapping Configuration
  *
- * Defines which pages use KrDark mode (emotional, user-facing)
- * versus KrDark mode (clinical tools, configuration)
- *
- * KrDark Mode: Landing, Auth, Onboarding, Opportunities, Dashboard, Kanban
- * KrDark Mode: Analysis, Ingestion, Documents, Settings, Generation tools
+ * ⚠️  DO NOT EDIT MANUALLY.
+ * This map is derived automatically from ROUTE_REGISTRY in route-registry.ts.
+ * To change a route's mode, update the `mode` field there.
  */
 
+import { ROUTE_REGISTRY } from './route-registry';
 import type { AppMode } from '../stores/useModeStore';
 
 export interface RouteModeConfig {
   path: string;
   mode: AppMode;
-  exact?: boolean; // For exact path matching (future enhancement)
+  exact?: boolean;
 }
 
 /**
- * Complete route-to-mode mapping
- * Sorted by specificity (longest paths first) for matching algorithm
+ * Route-to-mode mapping derived from ROUTE_REGISTRY.
+ * Sorted by path length descending (longest/most specific first).
  */
-export const ROUTE_MODE_MAP: RouteModeConfig[] = [
-  // ============== KrDark MODE ROUTES ==============
-  // Emotional, user-facing experiences
-
-  // Public landing pages
-  { path: '/', mode: 'KrDark' },
-
-  // Authentication flows
-  { path: '/login', mode: 'KrDark' },
-  { path: '/register', mode: 'KrDark' },
-
-  // Onboarding experience
-  { path: '/onboarding', mode: 'KrDark' },
-
-  // Discovery & opportunity viewing
-  { path: '/opportunities', mode: 'KrDark' },
-
-  // Dashboard overview
-  { path: '/dashboard', mode: 'KrDark' },
-
-  // Application tracking (Kanban view)
-  { path: '/tracker', mode: 'KrDark' },
-
-  // Profile viewing (not editing)
-  { path: '/profile', mode: 'KrDark', exact: true },
-
-  // ============== KrDark MODE ROUTES ==============
-  // Clinical tools, analysis, configuration
-
-  // Analysis & insights dashboard
-  { path: '/analysis', mode: 'KrDark' },
-
-  // Data ingestion/import
-  { path: '/career/ingest', mode: 'KrDark' },
-  { path: '/ingestion', mode: 'KrDark' },
-
-  // Document management & editing
-  { path: '/documents', mode: 'KrDark' },
-
-  // Generation tools
-  { path: '/ksc-generator', mode: 'KrDark' },
-  { path: '/cover-letter-generator', mode: 'KrDark' },
-
-  // Asset library (archive vault)
-  { path: '/asset-library', mode: 'KrDark' },
-
-  // Settings & configuration
-  { path: '/settings', mode: 'KrDark' },
-
-  // Job queue & background processing
-  { path: '/job-queue', mode: 'KrDark' },
-
-  // Design sidekick (orchestration tool)
-  { path: '/design-sidekick', mode: 'KrDark' },
-
-  // Development & style guide
-  { path: '/style-guide', mode: 'KrDark' },
-];
+export const ROUTE_MODE_MAP: RouteModeConfig[] = ROUTE_REGISTRY.map((r) => ({
+  path: r.path,
+  mode: r.mode,
+}));
 
 /**
  * Determine the appropriate mode for a given pathname

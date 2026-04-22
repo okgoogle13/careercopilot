@@ -6,7 +6,6 @@ opportunities from email, ranks them, and creates calendar tasks for the best ma
 """
 
 from datetime import datetime
-from typing import Any, Dict, List
 
 from pydantic import BaseModel, Field
 
@@ -44,7 +43,7 @@ class WorkflowResult(BaseModel):
     opportunities_processed: int = Field(description="Number of opportunities processed")
     high_scoring_opportunities: int = Field(description="Opportunities with score > 80")
     tasks_created: int = Field(description="Number of calendar tasks created")
-    processing_results: List[OpportunityTaskResult] = Field(
+    processing_results: list[OpportunityTaskResult] = Field(
         description="Individual processing results"
     )
     workflow_timestamp: str = Field(description="Workflow execution timestamp")
@@ -145,12 +144,12 @@ async def scan_inbox_for_opportunities(user_id: str) -> WorkflowResult:
         workflow_result.error_message = str(e)
         workflow_result.execution_time_seconds = (datetime.now() - start_time).total_seconds()
 
-        print(f"Workflow failed for user {user_id}: {str(e)}")
+        print(f"Workflow failed for user {user_id}: {e!s}")
         return workflow_result
 
 
 async def _process_opportunity(
-    user_id: str, opportunity: Dict, user_profile: Dict
+    user_id: str, opportunity: dict, user_profile: dict
 ) -> OpportunityTaskResult:
     """
     Process a single opportunity: analyze match score and create calendar task if high-scoring.
@@ -198,9 +197,9 @@ async def _process_opportunity(
                     opportunity_result.calendar_event_id = calendar_event_id
                     print(f"Calendar task created with ID: {calendar_event_id}")
                 except Exception as calendar_error:
-                    print(f"Failed to create calendar task: {str(calendar_error)}")
+                    print(f"Failed to create calendar task: {calendar_error!s}")
                     opportunity_result.error_message = (
-                        f"Calendar task creation failed: {str(calendar_error)}"
+                        f"Calendar task creation failed: {calendar_error!s}"
                     )
             else:
                 print("No deadline found - skipping calendar task creation")
@@ -211,12 +210,12 @@ async def _process_opportunity(
     except Exception as e:
         opportunity_result.error_message = str(e)
         opportunity_result.processing_status = "failed"
-        print(f"Failed to process opportunity {opportunity_result.job_title}: {str(e)}")
+        print(f"Failed to process opportunity {opportunity_result.job_title}: {e!s}")
 
     return opportunity_result
 
 
-async def _get_user_profile(user_id: str) -> Dict:
+async def _get_user_profile(user_id: str) -> dict:
     """
     Retrieve user profile from Database for job matching.
     """
@@ -245,13 +244,13 @@ async def _get_user_profile(user_id: str) -> Dict:
         return profile
 
     except Exception as e:
-        print(f"Failed to retrieve user profile: {str(e)}")
+        print(f"Failed to retrieve user profile: {e!s}")
         return _get_default_user_profile()
     finally:
         db.close()
 
 
-def _get_default_user_profile() -> Dict:
+def _get_default_user_profile() -> dict:
     """
     Return a default user profile structure for matching.
 
@@ -270,7 +269,7 @@ def _get_default_user_profile() -> Dict:
     }
 
 
-def _create_job_description_text(opportunity: Dict) -> str:
+def _create_job_description_text(opportunity: dict) -> str:
     """
     Create a comprehensive job description text from opportunity data.
 
@@ -293,4 +292,4 @@ Source URL: {opportunity.get('source_url', 'Not specified')}
 
 
 # Export main functions
-__all__ = ["scan_inbox_for_opportunities", "WorkflowResult", "OpportunityTaskResult"]
+__all__ = ["OpportunityTaskResult", "WorkflowResult", "scan_inbox_for_opportunities"]

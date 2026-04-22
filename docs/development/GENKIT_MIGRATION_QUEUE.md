@@ -1,6 +1,6 @@
 # Genkit Migration Queue
 
-**Last Updated:** 2026-01-19  
+**Last Updated:** 2026-01-19
 **Scope:** Backend AI logic still outside `backend/app/genkit_flows`.
 
 ## Findings
@@ -61,4 +61,3 @@
 2) Implement Genkit flows with tracing spans.
 3) Add bridges in `backend/app/bridges/` if any workers use legacy paths.
 4) Remove or deprecate legacy modules after bridge cutover.
-

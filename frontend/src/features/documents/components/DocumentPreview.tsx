@@ -1,6 +1,5 @@
-import { Pebble } from '@/components/ui/Pebble';
-import { StatusBadge } from '@/components/ui/StatusBadge/StatusBadge';
-import { Stone } from '@/components/ui/Stone';
+import { StatusBadge, Strike, Placard } from '@/components/ui';
+
 import {
   ArrowLeft,
   Clock,
@@ -43,24 +42,24 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
   const handleResetZoom = () => setZoomLevel(100);
 
   return (
-    <div className="min-h-screen bg-[var(--color-background-base)] py-8 px-4">
+    <div className="min-h-screen bg-[var(--sys-color-charcoalBackground-base)] py-8 px-4">
       <div className="max-w-[1600px] mx-auto">
         {/* Header */}
-        <div className="mb-8 border-b border-[var(--color-surface-container-high)] pb-6">
+        <div className="mb-8 border-b border-[var(--sys-color-charcoalBackground-steps-3)] pb-6">
           <div className="flex flex-col xl:flex-row justify-between items-start gap-4">
             <div>
-              <Pebble
+              <Strike
                 variant="ghost"
                 iconLeft={<ArrowLeft size={16} />}
                 onClick={onBack}
                 className="mb-4"
               >
                 Back to Templates
-              </Pebble>
-              <h1 className="text-display-medium font-bold text-[var(--color-text-primary)] mb-1">
+              </Strike>
+              <h1 className="text-[var(--sys-type-scale-headline)] font-bold text-[var(--sys-color-worker-ash-base)] mb-1">
                 Document Preview
               </h1>
-              <div className="flex items-center gap-2 text-body-medium text-[var(--color-text-secondary)]">
+              <div className="flex items-center gap-2 text-body-medium text-[var(--sys-color-concreteGrey-base)]">
                 <FileText size={16} />
                 <span>{mockDocument.title}</span>
                 <span>•</span>
@@ -69,31 +68,31 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
             </div>
 
             <div className="flex gap-2 flex-wrap">
-              <Pebble
+              <Strike
                 variant="ghost"
                 iconLeft={<Edit3 size={16} />}
                 onClick={onEdit}
               >
                 Edit
-              </Pebble>
-              <Pebble
+              </Strike>
+              <Strike
                 variant="ghost"
                 iconLeft={<Share2 size={16} />}
               >
                 Share
-              </Pebble>
-              <Pebble
+              </Strike>
+              <Strike
                 variant="ghost"
                 iconLeft={<Printer size={16} />}
               >
                 Print
-              </Pebble>
-              <Pebble
+              </Strike>
+              <Strike
                 variant="primary"
                 iconLeft={<Download size={16} />}
               >
                 Download PDF
-              </Pebble>
+              </Strike>
             </div>
           </div>
         </div>
@@ -102,14 +101,14 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
           {/* Sidebar */}
           <div className="lg:col-span-3 flex flex-col gap-6">
             {/* Document Info */}
-            <Stone elevation="flat">
+            <Placard elevation="flat">
               <div className="p-4">
-                <h3 className="text-title-small font-bold text-[var(--color-text-primary)] mb-4 border-b border-[var(--color-surface-container)] pb-2">
+                <h3 className="text-title-small font-bold text-[var(--sys-color-worker-ash-base)] mb-4 border-b border-[var(--sys-color-charcoalBackground-steps-4)] pb-2">
                   Document Info
                 </h3>
                 <div className="flex flex-col gap-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-body-small text-[var(--color-text-secondary)]">
+                    <span className="text-body-small text-[var(--sys-color-concreteGrey-base)]">
                       Type:
                     </span>
                     <StatusBadge
@@ -119,100 +118,104 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                     />
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-body-small text-[var(--color-text-secondary)]">
+                    <span className="text-body-small text-[var(--sys-color-concreteGrey-base)]">
                       Template:
                     </span>
-                    <span className="text-body-small font-semibold text-[var(--color-text-primary)]">
+                    <span className="text-body-small font-semibold text-[var(--sys-color-worker-ash-base)]">
                       {templateName}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-body-small text-[var(--color-text-secondary)]">
+                    <span className="text-body-small text-[var(--sys-color-concreteGrey-base)]">
                       Pages:
                     </span>
-                    <span className="text-body-small font-semibold text-[var(--color-text-primary)]">
+                    <span className="text-body-small font-semibold text-[var(--sys-color-worker-ash-base)]">
                       {mockDocument.pages}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-body-small text-[var(--color-text-secondary)]">
+                    <span className="text-body-small text-[var(--sys-color-concreteGrey-base)]">
                       Modified:
                     </span>
-                    <div className="flex items-center gap-1 text-body-small font-semibold text-[var(--color-text-primary)]">
+                    <div className="flex items-center gap-1 text-body-small font-semibold text-[var(--sys-color-worker-ash-base)]">
                       <Clock size={12} />
                       <span>{mockDocument.lastModified}</span>
                     </div>
                   </div>
                 </div>
               </div>
-            </Stone>
+            </Placard>
 
             {/* Zoom Controls */}
-            <Stone elevation="flat">
+            <Placard elevation="flat">
               <div className="p-4">
-                <h3 className="text-title-small font-bold text-[var(--color-text-primary)] mb-4 border-b border-[var(--color-surface-container)] pb-2">
+                <h3 className="text-title-small font-bold text-[var(--sys-color-worker-ash-base)] mb-4 border-b border-[var(--sys-color-charcoalBackground-steps-4)] pb-2">
                   Zoom Controls
                 </h3>
                 <div className="flex flex-col gap-3 items-center">
-                  <div className="flex items-center gap-2 bg-[var(--color-surface-container)] rounded-pebble p-1">
+                  <div className="flex items-center gap-2 bg-[var(--sys-color-charcoalBackground-steps-2)] rounded-pebble p-1">
                     <button
                       onClick={handleZoomOut}
                       disabled={zoomLevel <= 50}
-                      className="p-2 rounded-megaphone hover:bg-[var(--color-surface-base)] disabled:opacity-50 transition-colors"
+                      className="p-2 rounded-megaphone hover:bg-[var(--sys-color-charcoalBackground-base)] disabled:opacity-50 transition-colors"
                     >
                       <ZoomOut size={16} />
                     </button>
-                    <span className="w-12 text-center text-label-small font-mono">
+                    <span className="w-12 text-center text-label-small font-mono text-[var(--sys-color-worker-ash-base)]">
                       {zoomLevel}%
                     </span>
                     <button
                       onClick={handleZoomIn}
                       disabled={zoomLevel >= 200}
-                      className="p-2 rounded-megaphone hover:bg-[var(--color-surface-base)] disabled:opacity-50 transition-colors"
+                      className="p-2 rounded-megaphone hover:bg-[var(--sys-color-charcoalBackground-base)] disabled:opacity-50 transition-colors"
                     >
                       <ZoomIn size={16} />
                     </button>
                   </div>
-                  <Pebble
+                  <Strike
                     variant="ghost"
                     size="sm"
                     iconLeft={<RotateCcw size={14} />}
                     onClick={handleResetZoom}
                   >
                     Reset Zoom
-                  </Pebble>
+                  </Strike>
                 </div>
               </div>
-            </Stone>
+            </Placard>
           </div>
 
           {/* Preview Area */}
           <div className="lg:col-span-9">
-            <div className="bg-[#E5E7EB] rounded-placard p-8 min-h-[800px] flex justify-center items-start overflow-auto">
+            <div
+              className="rounded-placard p-8 min-h-[800px] flex justify-center items-start overflow-auto"
+              style={{ backgroundColor: 'var(--sys-color-concreteGrey-base)' }}
+            >
               {/* Document Page */}
               <div
-                className="bg-white shadow-xl transition-all duration-300 origin-top"
+                className="bg-[var(--sys-color-charcoalBackground-base)] shadow-[var(--sys-shadow-elevation2Placard)] transition-all duration-300 origin-top border border-[var(--sys-color-charcoalBackground-steps-4)]"
                 style={{
                   width: `${zoomLevel}%`,
                   maxWidth: '850px',
                   aspectRatio: '8.5 / 11',
                 }}
               >
-                <div className="p-[8%] h-full flex flex-col">
+                <div className="p-[8%] h-full flex flex-col text-[var(--sys-color-worker-ash-base)]">
                   {/* Mock Resume Content */}
-                  <div className="border-b-2 border-gray-800 pb-6 mb-8">
-                    <h1 className="text-4xl font-bold text-gray-900 mb-2 font-display">
+                  <div className="border-b-2 border-[var(--sys-color-charcoalBackground-steps-6)] pb-6 mb-8">
+                    <h1 className="text-4xl font-bold text-[var(--sys-color-worker-ash-base)] mb-2 font-display">
                       Nishant Dougall
                     </h1>
-                    <p className="text-xl text-gray-600 font-medium">Community Support Worker</p>
-                  </div>
-
+                    <p className="text-xl text-[var(--sys-color-concreteGrey-base)] font-medium">
+                      Community Support Worker
+                    </p>
+                  </div>{' '}
                   <div className="flex-1 space-y-8">
                     <section>
-                      <h3 className="text-lg font-bold uppercase tracking-wider text-gray-900 border-b border-gray-200 pb-2 mb-4">
+                      <h3 className="text-lg font-bold uppercase tracking-wider text-[var(--sys-color-worker-ash-base)] border-b border-[var(--sys-color-charcoalBackground-steps-4)] pb-2 mb-4">
                         Professional Summary
                       </h3>
-                      <p className="text-gray-700 leading-relaxed">
+                      <p className="text-[var(--sys-color-concreteGrey-base)] leading-relaxed">
                         Dedicated community support worker with 5+ years of experience providing
                         person-centered care and support to individuals with disabilities and mental
                         health challenges.
@@ -220,16 +223,22 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                     </section>
 
                     <section>
-                      <h3 className="text-lg font-bold uppercase tracking-wider text-gray-900 border-b border-gray-200 pb-2 mb-4">
+                      <h3 className="text-lg font-bold uppercase tracking-wider text-[var(--sys-color-worker-ash-base)] border-b border-[var(--sys-color-charcoalBackground-steps-4)] pb-2 mb-4">
                         Experience
                       </h3>
                       <div className="mb-4">
                         <div className="flex justify-between items-baseline mb-1">
-                          <h4 className="font-bold text-gray-800">Senior Support Worker</h4>
-                          <span className="text-sm text-gray-500">Jan 2020 - Present</span>
+                          <h4 className="font-bold text-[var(--sys-color-worker-ash-base)]">
+                            Senior Support Worker
+                          </h4>
+                          <span className="text-sm text-[var(--sys-color-concreteGrey-base)]">
+                            Jan 2020 - Present
+                          </span>
                         </div>
-                        <p className="text-gray-600 italic mb-2">Community Care Australia</p>
-                        <ul className="list-disc list-inside text-gray-700 space-y-1">
+                        <p className="text-[var(--sys-color-concreteGrey-base)] italic mb-2">
+                          Community Care Australia
+                        </p>
+                        <ul className="list-disc list-inside text-[var(--sys-color-worker-ash-base)] space-y-1">
                           <li>
                             Provided personalized support to 15+ clients with varying support needs
                           </li>
@@ -240,15 +249,19 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                     </section>
 
                     <section>
-                      <h3 className="text-lg font-bold uppercase tracking-wider text-gray-900 border-b border-gray-200 pb-2 mb-4">
+                      <h3 className="text-lg font-bold uppercase tracking-wider text-[var(--sys-color-worker-ash-base)] border-b border-[var(--sys-color-charcoalBackground-steps-4)] pb-2 mb-4">
                         Education
                       </h3>
                       <div>
                         <div className="flex justify-between items-baseline">
-                          <h4 className="font-bold text-gray-800">Certificate IV in Disability</h4>
-                          <span className="text-sm text-gray-500">2019</span>
+                          <h4 className="font-bold text-[var(--sys-color-worker-ash-base)]">
+                            Certificate IV in Disability
+                          </h4>
+                          <span className="text-sm text-[var(--sys-color-concreteGrey-base)]">
+                            2019
+                          </span>
                         </div>
-                        <p className="text-gray-600">TAFE Queensland</p>
+                        <p className="text-[var(--sys-color-concreteGrey-base)]">TAFE Queensland</p>
                       </div>
                     </section>
                   </div>

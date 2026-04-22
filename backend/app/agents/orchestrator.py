@@ -19,7 +19,6 @@ from datetime import datetime, timedelta
 from enum import Enum
 from typing import Any
 
-from app.core.ai_client import get_ai_client
 from app.core.cache_decorators import cached_ai_operation
 from app.core.database import get_db_session
 from app.models.database import AgentSession

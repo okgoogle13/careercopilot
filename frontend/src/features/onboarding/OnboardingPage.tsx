@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PathSelectionCard } from '@/components/PathSelectionCard';
 import { useAnalytics } from '@/hooks/useAnalytics';
+import { OnboardFlow } from '@/screens/03_onboarding/OnboardFlow';
 import { useUserStore } from '@/stores/userStore';
 import { LayeredHero } from '../../components/kerala-rage/LayeredHero';
 import type { SolidarityManifest } from '../../design/hero/heroTypes';
@@ -77,7 +78,7 @@ export function OnboardingPage() {
     async function loadHero() {
       try {
         const [manifest, registry] = await Promise.all([
-          fetch('/assets/kerala-rage-kr-solidarity-manifest.json').then((r) => r.json()),
+          fetch('/assets/kr-solidarity-manifest.json').then((r) => r.json()),
           loadHeroRegistry(),
         ]);
 
@@ -106,19 +107,29 @@ export function OnboardingPage() {
     if (selected && segment) {
       track('onboarding_jtbd_segment_selected', { segment });
       setUserSegment(segment);
-      navigate('/career/ingest');
+      navigate('/profile');
     }
   };
 
   const getCardSpan = (index: number): string => {
-    // Enforce 2-3-2-2 cadence on desktop (lg:grid-cols-6).
     if (index <= 1) return 'lg:col-span-3';
     if (index <= 4) return 'lg:col-span-2';
     return 'lg:col-span-3';
   };
 
   return (
-    <div className={styles.container}>
+    <OnboardFlow
+      className="max-w-7xl mx-auto w-full"
+      showActions={false}
+      title={
+        onboardingStep === 1 ? 'Choose Your Focus Area' : 'What Best Describes Your Situation?'
+      }
+      subtitle={
+        onboardingStep === 1
+          ? 'Select your domain to personalize job matching and drafting quality.'
+          : 'We use this to tune examples, prompts, and recommendations in your dashboard.'
+      }
+    >
       {heroData && (
         <div className="absolute inset-0 pointer-events-none opacity-25">
           <LayeredHero
@@ -132,25 +143,13 @@ export function OnboardingPage() {
       )}
 
       <div className="relative z-10 w-full">
-        <header className={styles.header}>
-          <div className="mb-6">
-            <OnboardingProgress
-              currentStep={onboardingStep === 1 ? 2 : 3}
-              totalSteps={4}
-              steps={ONBOARDING_STEPS}
-            />
-          </div>
-          <h1 className="text-display-ultra">
-            {onboardingStep === 1
-              ? 'Choose Your Focus Area'
-              : 'What Best Describes Your Situation?'}
-          </h1>
-          <p className="text-curator-accent">
-            {onboardingStep === 1
-              ? 'Select your domain to personalize job matching and drafting quality.'
-              : 'We use this to tune examples, prompts, and recommendations in your dashboard.'}
-          </p>
-        </header>
+        <div className="mb-8">
+          <OnboardingProgress
+            currentStep={onboardingStep === 1 ? 2 : 3}
+            totalSteps={4}
+            steps={ONBOARDING_STEPS}
+          />
+        </div>
 
         {onboardingStep === 1 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 p-12 max-w-7xl mx-auto">
@@ -176,8 +175,8 @@ export function OnboardingPage() {
                 onClick={() => setSegment(item.id)}
                 className={`text-left rounded-placard border px-6 py-5 transition-all ${
                   segment === item.id
-                    ? 'border-ink-gold bg-ink-gold/10 text-paper-white'
-                    : 'border-concrete-grey/20 bg-asphalt-black/45 text-concrete-grey hover:border-ink-gold/40'
+                    ? 'border-inkGold-base bg-inkGold-base/10 text-worker-ash-base'
+                    : 'border-concreteGrey-base/20 bg-charcoalBackground-base/45 text-concreteGrey-base hover:border-inkGold-base/40'
                 }`}
               >
                 <p className="font-display text-xl">{item.title}</p>
@@ -189,7 +188,7 @@ export function OnboardingPage() {
         <footer className={styles.footer}>
           {onboardingStep === 1 ? (
             <button
-              className="btn-strike bg-ink-gold text-asphalt-black px-12 py-4 disabled:opacity-30 disabled:cursor-not-allowed"
+              className="btn-strike bg-inkGold-base text-charcoalBackground-base px-12 py-4 disabled:opacity-30 disabled:cursor-not-allowed"
               disabled={!selected}
               onClick={() => setOnboardingStep(2)}
             >
@@ -198,13 +197,13 @@ export function OnboardingPage() {
           ) : (
             <div className="flex items-center gap-4">
               <button
-                className="btn-strike bg-concrete-grey/20 text-paper-white px-8 py-4"
+                className="btn-strike bg-concreteGrey-base/20 text-worker-ash-base px-8 py-4"
                 onClick={() => setOnboardingStep(1)}
               >
                 Back
               </button>
               <button
-                className="btn-strike bg-ink-gold text-asphalt-black px-12 py-4 disabled:opacity-30 disabled:cursor-not-allowed"
+                className="btn-strike bg-inkGold-base text-charcoalBackground-base px-12 py-4 disabled:opacity-30 disabled:cursor-not-allowed"
                 disabled={!segment}
                 onClick={handleProceed}
               >
@@ -214,7 +213,7 @@ export function OnboardingPage() {
           )}
         </footer>
       </div>
-    </div>
+    </OnboardFlow>
   );
 }
 

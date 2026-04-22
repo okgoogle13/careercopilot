@@ -31,6 +31,17 @@ export const KrDarkSpring: Transition = {
 };
 
 /**
+ * Uprising Tension Spring — High Stiffness
+ * Tense, vibrating, rapid oscillations
+ */
+export const uprisingTension: Transition = {
+  type: 'spring',
+  stiffness: 1200,
+  damping: 10,
+  mass: 0.5,
+};
+
+/**
  * KrDark Mode Spring — Precise Control
  * Clinical, minimal overshoot, controlled
  */

@@ -118,7 +118,8 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ onNext, onBack }) 
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
-          backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)',
+          backgroundImage:
+            'radial-gradient(circle, var(--kr-color-charcoal-background-steps-0) 1px, transparent 1px)',
           backgroundSize: '24px 24px',
         }}
       />

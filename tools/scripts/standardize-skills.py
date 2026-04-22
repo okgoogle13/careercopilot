@@ -21,7 +21,7 @@ def standardize_skill(skill_path):
         content = f.read()
 
     metadata, body = get_frontmatter(content)
-    
+
     # Extract name and description from Markdown if not present in YAML
     if not metadata.get("name"):
         name_match = re.search(r"^#\s+(.+)$", body, re.MULTILINE)
@@ -43,13 +43,13 @@ def standardize_skill(skill_path):
 
     with open(skill_file, "w") as f:
         f.write(new_content)
-    
+
     # Cleanup duplicate directories
     for legacy_dir in ["references 2", "scripts 2", "assets 2"]:
         legacy_path = skill_path / legacy_dir
         target_dir = legacy_dir.replace(" 2", "")
         target_path = skill_path / target_dir
-        
+
         if legacy_path.is_dir():
             print(f"Cleaning up {legacy_path} -> {target_path}")
             if not target_path.exists():

@@ -18,7 +18,7 @@ const __dirname = dirname(__filename);
 // Configuration
 const MANIFEST_VERSION = '6.0.0';
 const BASE_DIR = join(__dirname, '../../public/assets/kr-solidarity');
-const OUTPUT_PATH = join(__dirname, '../../public/assets/kerala-rage-kr-solidarity-manifest.json');
+const OUTPUT_PATH = join(__dirname, '../../public/assets/kr-solidarity-manifest.json');
 
 // Layer mapping based on category
 // Supports both direct layer names (from filename encoding) and legacy subdirectory names

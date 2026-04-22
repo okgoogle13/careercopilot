@@ -1,4 +1,4 @@
-import admin from "firebase-admin";
+import admin from "../firebase";
 import {z} from "genkit";
 import https from "https";
 import {ai} from "../genkit";
@@ -8,6 +8,7 @@ import {JobListing} from "../types/job_listing";
 export class JobListingExtractor {
   private vectorSearch: FirebaseVectorSearch<JobListing>;
   private db = admin.firestore();
+  extract = JobListingExtractor.extractFlow;
 
   constructor() {
     this.db = admin.firestore();
@@ -17,7 +18,7 @@ export class JobListingExtractor {
   /**
    * Extract job listing data from a source (text or URL)
    */
-  extract = ai.defineFlow(
+  static extractFlow = ai.defineFlow(
     {
       name: "extractJobListing",
       inputSchema: z.object({
@@ -49,6 +50,9 @@ export class JobListingExtractor {
       }),
     },
     async (input) => {
+      // Create an instance to access the methods
+      const extractor = new JobListingExtractor();
+
       // Cast input to expected type since inference might be failing
       const typedInput = input as {
         source: string | { url: string };
@@ -63,24 +67,24 @@ export class JobListingExtractor {
         source,
         options = {extractSkills: true, extractSalary: true, extractLocation: true},
       } = typedInput;
-      const text = typeof source === "string" ? source : await this.fetchUrl(source.url);
+      const text = typeof source === "string" ? source : await extractor.fetchUrl(source.url);
 
       // Basic job listing extraction
       const jobListing: JobListing = {
-        id: this.generateId(),
-        title: this.extractTitle(text),
-        company: this.extractCompany(text),
+        id: extractor.generateId(),
+        title: extractor.extractTitle(text),
+        company: extractor.extractCompany(text),
         description: text,
-        skills: options?.extractSkills ? this.extractSkills(text) : [],
-        salary: options?.extractSalary ? this.extractSalary(text) : undefined,
-        location: options?.extractLocation ? this.extractLocation(text) : undefined,
-        source: typeof source === "string" ? "text" : source.url,
+        skills: options?.extractSkills ? extractor.extractSkills(text) : [],
+        salary: options?.extractSalary ? extractor.extractSalary(text) : undefined,
+        location: options?.extractLocation ? extractor.extractLocation(text) : undefined,
+        source: typeof source === "string" ? "text" : (source as { url: string }).url,
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
       };
 
       // Generate and store embedding
-      const embedding = await this.generateEmbedding(jobListing);
-      await this.vectorSearch.upsert(jobListing.id, embedding, jobListing);
+      const embedding = await extractor.generateEmbedding(jobListing);
+      await extractor.vectorSearch.upsert(jobListing.id, embedding, jobListing);
 
       return jobListing;
     },

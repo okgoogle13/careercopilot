@@ -1,7 +1,6 @@
 """Compatibility tests for ingestion service behavior."""
 
 import importlib
-import io
 import sys
 import types
 

@@ -5,27 +5,27 @@
 
 ---
 
-## 1. Product Screen Matrix
+## 1. Product Screen Matrix (Target Alignment)
 
-The application is structured into 11 core functional views, categorized by emotional depth and data density.
+The application is structured into 11 core functional views, mapped to the canonical [Route Matrix](../project/active/frontend-source-of-truth-migration/control/route-matrix.md).
 
-| ID | View | Emotional Register | Density | Status |
-| :--- | :--- | :--- | :--- | :--- |
-| **01** | Landing | **Defiance** | High Drama | 100% |
-| **02** | Auth | **Trust** | Minimal | 95% |
-| **03** | Onboarding | **Possibility** | Standard | 90% |
-| **04** | Ingestion | **Gravity** | High Clarity | 100% |
-| **05** | Analysis | **Revelation** | High Clarity | 95% |
-| **06** | Lookout | **Discovery** | Standard | 85% |
-| **07** | Kanban | **Control** | Standard | 80% |
-| **08** | Workbench | **Craft** | Minimal | 70% |
-| **09** | Finalization | **Refinement** | Structural | 65% |
-| **10** | Settings | **Archive Vault** | Structural | 60% |
-| **11** | Dashboard | **Altitude** | High Drama | 90% |
+| ID | View | Canonical Route | Emotional Register | Density | Status |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **01** | Landing | `/` | **Possibility** | High Drama | 100% |
+| **02** | Auth | `/login`, `/register` | **Reflection** | Minimal | 95% |
+| **03** | Onboarding | `/onboarding` | **Possibility** | Standard | 90% |
+| **04** | Ingestion | `/career/ingest` | **Direct Action** | High Clarity | 100% |
+| **05** | Analysis | `/analysis` | **Revelation** | High Clarity | 95% |
+| **06** | Lookout | `/opportunities` | **Possibility** | Standard | 85% |
+| **07** | Tracker | `/tracker` | **Direct Action** | Standard | 80% |
+| **08** | Workbench | `/documents` | **Craft** | Minimal | 70% |
+| **09** | Finalization | `/apply/quick` | **Direct Action** | Structural | 65% |
+| **10** | Profile / Settings | `/profile`, `/settings` | **Reflection** | Structural | 60% |
+| **11** | Dashboard | `/dashboard` | **Possibility** | High Drama | 90% |
 
 ---
 
-## 3. Interaction Playbook
+## 2. Interaction Playbook
 
 | Interaction | Trigger | M3 Motion Name | Visual Effect |
 | :--- | :--- | :--- | :--- |
@@ -36,30 +36,39 @@ The application is structured into 11 core functional views, categorized by emot
 
 ---
 
-**Wireframe Artifact:** `docs/design/Archive/wireframe-status.md` (Legacy Source)
+### Register Rules
+
+- **Possibility**: strongest headline energy, optimistic CTA framing, assertive display typography allowed
+- **Direct Action**: shorter commands, compact labels, moderate expressive typography only
+- **Revelation**: explanatory summaries, diagnostic callouts, expressive emphasis only around insight hierarchy
+- **Craft**: editorial sectioning, instructional helper text, moderate typography with strong readability
+- **Reflection**: calm copy, sparse formatting, restrained typography
+
+**Archive Artifact:** `docs/design/Archive/wireframe-status.md` (reference only)
+
 ---
 
-## 5. Archetype & Shape Flow Map
+## 3. Primitive & Shape Flow Map
 
-Key screens annotated with dominant archetype and shape transitions as users move through the application.
+Key surfaces annotated with dominant public UI primitives and their internal archetype mappings.
 
-| Screen | Dominant Archetypes | Primary Flow Transition |
+| Surface / Flow | Dominant UI Primitives | Primary Flow Transition |
 | :--- | :--- | :--- |
-| **Landing / Onboarding** | Substrate (bg) + Strike (CTA) | Substrate `blob02` drift → Strike `block03` slam on tap |
-| **Job Search** | Scaffold (input) + March (filter) | ScaffoldInput static → March morph on open |
-| **Opportunity Feed** | Placard (cards) + Strike (apply) | Placard `placardBase01` → Strike `block03` on card CTA |
-| **Job Apply Flow** | Strike (submit) → Megaphone (confirm) | Strike `block03` → loading `pill01` → Megaphone slam |
-| **Resume Builder** | Scaffold (inputs) + Placard (sections) | All Scaffold immutable; Placard active morph to `block02` |
-| **Analysis Results** | Placard (tiles) + Strike (actions) | Placard swaps to `block02` on selected state |
-| **Profile Edit** | Scaffold (fields) + Strike (save) | Scaffold never morphs; Strike confirms with `typeSpringSlam` |
+| **Landing / Onboarding** | Surface (`Substrate`) + Button (`Strike`) | Substrate `blob02` drift → Button `block03` slam on tap |
+| **Lookout / Search** | Input (`Scaffold`) + Select (`March`) | Input remains static → Select morph on open |
+| **Job Discovery Card** | Card (`Placard`) + Button (`Strike`) | Card `placardBase01` → Button `block03` on card CTA |
+| **Finalization Flow** | Button (`Strike`) → Dialog (`Megaphone`) | Button `block03` → loading `pill01` → Dialog slam |
+| **Workbench / Builder** | Input (`Scaffold`) + Card (`Placard`) | Input remains immutable; Card active morph to `block02` |
+| **Analysis Results** | Card (`Placard`) + Button (`Strike`) | Card swaps to `block02` on selected state |
+| **Profile Management** | Input (`Scaffold`) + Button (`Strike`) | Input never morphs; Button confirms with `typeSpringSlam` |
 
 **Shape morphing flow annotations:**
-- **Progress (async):** Strike morphs `block03` → `pill01` (loading) → `block02` (success). Shape morph is the loading indicator.
-- **Ambient (backgrounds):** Substrate blob drifts slowly via `waterRipple` (3000ms). Never blocks UI.
-- **Environmental change:** Megaphone entrance — Placard zooms via `typeSpringSlam` 600ms. Background Substrate ambient dims.
-- **Scaffold invariance:** Text inputs and form panels NEVER change shape. Users depend on structural stability for data entry.
+- **Progress (async):** Button (`Strike`) morphs `block03` → `pill01` (loading) → `block02` (success). Shape morph is the loading indicator.
+- **Ambient (backgrounds):** Surface (`Substrate`) blob drifts slowly via `waterRipple` (3000ms). Never blocks UI.
+- **Environmental change:** Dialog (`Megaphone`) entrance — Card (`Placard`) zooms via `typeSpringSlam` 600ms. Background surface ambient dims.
+- **Structural invariance:** Inputs, textareas, and form panels (`Scaffold`) NEVER change shape. Users depend on structural stability for data entry.
 
 ---
 
-**Last Updated:** 2026-03-07
+**Last Updated:** 2026-03-22
 **Design System Version:** v6.1 (Shape System)

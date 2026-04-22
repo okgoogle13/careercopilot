@@ -6,10 +6,10 @@ export type HeroPageKey =
   | 'onboarding';
 
 export const PAGE_HERO_MAP: Record<HeroPageKey, string> = {
-  'landing-page': 'resistance-portrait-hero',
+  'landing-page': 'urban-gallery-wall-composition',
   'lens-dashboard': 'layered-solidarity-hero',
   'jar-flow': 'kr-hero-industrial-collective-005',
-  'applications-board': 'cultural-symbol-hero-2',
+  'applications-board': 'layered-solidarity-hero',
   onboarding: 'devotional-anchor-hero-1',
 };
 

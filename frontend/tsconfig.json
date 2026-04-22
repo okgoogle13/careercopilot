@@ -11,8 +11,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "strict": true,
-    "noUnusedLocals": false, // Temporarily disable to handle unused variables later
-    "noUnusedParameters": false, // Temporarily disable
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
     "baseUrl": ".",
@@ -31,6 +31,10 @@
     "**/*.test.tsx",
     "**/*.spec.tsx",
     "**/__mocks__",
+    "src/_reference",
+    "src/_reference/**",
+    "QUARANTINE - HARVESTED PROTOTYPE FEATURES",
+    "QUARANTINE - HARVESTED PROTOTYPE FEATURES/**",
     "src/components/library",
     "src/components/m3-expressive",
     "functions",

@@ -44,5 +44,7 @@ test-results
 *.md
 *.svg
 public/assets/asset_catalog.json
+public/assets/asset-catalog.json
+dist-extension/assets/asset_catalog.json
 src/design/styles/design-tokens.css
 tailwind-m3-patch.ts

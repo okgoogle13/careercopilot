@@ -1,4 +1,0 @@
-interface:
-  display_name: "Project Manager"
-  short_description: "Coordinate multi-phase project delivery"
-  default_prompt: "Use $project-manager to build a phase-based project plan with milestones, dependencies, risks, and reporting."

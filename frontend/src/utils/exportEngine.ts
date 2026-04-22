@@ -24,7 +24,7 @@ export const exportToPdf = async (
   try {
     const {
       scale = 2,
-      backgroundColor = '#ffffff',
+      backgroundColor = 'var(--kr-color-charcoal-background-base)',
       orientation = 'portrait',
       format = 'a4',
     } = options;

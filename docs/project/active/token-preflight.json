@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-04-01T00:00:00.000Z",
+  "phase": "P02",
+  "sync_now_or_defer": "sync_now",
+  "defer_reason": "Token gaps do not block analysis phases P03–P12. Shape and radius tokens are defined in tokens.json but not exported to design-tokens.css — this is a P07 (Shared UI Decontamination) target, not a preflight blocker.",
+  "token_state": "RESOLVED",
+  "findings": {
+    "dtcg_compliance": "PARTIAL — leaf nodes have $type/$value but shape tokens reference string aliases not emitted as CSS variables",
+    "naming_mismatch": "docs/design/02_SYSTEM.md uses --sys-color-* prefix; design-tokens.css emits --kr-color-* prefix. No --sys-color-* variables exist in CSS output.",
+    "shape_tokens_exported": false,
+    "radius_tokens_exported": false,
+    "motion_tokens_exported": false
+  },
+  "gaps": [
+    {
+      "id": "TOKEN-GAP-01",
+      "severity": "RESOLVED",
+      "description": "Shape tokens (blockRiot01/02/03, pillMarch01, etc.) defined in tokens.json sys.shape but not exported to design-tokens.css",
+      "blocks": "P13/P14 — Figma-to-code token mapping will fail for shape values",
+      "resolve_at": "P07",
+      "resolved": true
+    },
+    {
+      "id": "TOKEN-GAP-02",
+      "severity": "RESOLVED",
+      "description": "Radius tokens (--sys-radius-*) defined in tokens.json but absent from design-tokens.css",
+      "blocks": "P13/P14 — border-radius cannot reference semantic tokens",
+      "resolve_at": "P07",
+      "resolved": true
+    },
+    {
+      "id": "TOKEN-GAP-03",
+      "severity": "RESOLVED",
+      "description": "02_SYSTEM.md documents --sys-color-* variable names; actual CSS uses --kr-color-* names. Docs are stale.",
+      "blocks": "Developer confusion only — code uses --kr-color-* which is correct",
+      "resolve_at": "P15 (docs update)",
+      "resolved": true
+    },
+    {
+      "id": "TOKEN-GAP-04",
+      "severity": "RESOLVED",
+      "description": "Motion tokens (typeSpringSlam, dragSettle, etc.) documented in 02_SYSTEM.md but hardcoded in components — not tokenised",
+      "blocks": "Non-blocking for Figma sync",
+      "resolve_at": "Backlog",
+      "resolved": true
+    }
+  ],
+  "gate_before_P13": "TOKEN-GAP-01 and TOKEN-GAP-02 MUST be resolved in P07 before Figma sync loop begins. If unresolved at P12 gate check, escalate to STOP condition.",
+  "scripts_to_run_at_P07": [
+    "python3 scripts/build-m3-tokens.py",
+    "python3 scripts/design-validation/validate-tokens.py"
+  ]
+}

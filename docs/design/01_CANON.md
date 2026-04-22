@@ -7,6 +7,46 @@
 
 ---
 
+## Naming Layers
+
+To keep the design system legible:
+
+- **Routes and product surfaces** use plain product language such as `/dashboard`, `/analysis`, `/tracker`, and `/documents`
+- **Public UI primitives** use plain component names such as `Button`, `Card`, `Dialog`, `Input`, `Textarea`, `Select`, and `Surface`
+- **Internal design semantics** use KR archetype names such as `Strike`, `Placard`, `Megaphone`, `Scaffold`, `March`, and `Substrate`
+
+Rule:
+- route and product docs should use plain route names
+- component docs should lead with plain UI names
+- archetype names are internal design mappings, not the primary public interface
+- live route authority comes from `frontend/src/App.tsx` plus `frontend/src/config/route-registry.ts`
+- `/prototype/*` is a support-reference quarantine surface, not canonical product truth
+
+## Emotional Register System
+
+The design system uses a compact emotional-register model to keep copy, text formatting, and expressive typography aligned across routes.
+
+Each register controls three things:
+- **UX copy**: sentence pressure, CTA tone, and error/success voice
+- **text format style**: heading treatment, label density, and helper-text directness
+- **expressive typography level**: how far display contrast and variable-axis emphasis are allowed to go
+
+| Register | Default Use | UX Copy | Text Format Style | Expressive Typography |
+| :--- | :--- | :--- | :--- | :--- |
+| **Direct Action** | applications, ingestion, execution flows | directive, concise, high-confidence | short labels, compact helper text, explicit next-step CTAs | `moderate` |
+| **Possibility** | dashboard, jobs, discovery | forward-looking, energizing, not hypey | stronger headlines, slightly more narrative support text | `assertive` at headline level |
+| **Revelation** | ATS check, diagnostics, score interpretation | diagnostic, explanatory, insight-led | clear summaries, evidence-first callouts, restrained body copy | `moderate` |
+| **Craft** | submitted docs, templates, generation workspaces | editorial, supportive, precise | structured labels, instructional helper text, format-aware sectioning | `moderate` |
+| **Reflection** | profile, settings, trust-heavy account surfaces | calm, grounded, reassuring | simpler headings, lower density, least performative formatting | `restrained` |
+
+Rules:
+- body text remains readability-first in every register
+- expressive typography belongs mainly in headings, key summaries, and state markers
+- transactional and trust-heavy flows must favor clarity over flourish
+- when a page inherits from a route family, the route register wins unless an explicit override is documented
+
+---
+
 ## 1. Identity & Manifesto
 
 We are not building a dashboard. We are building a living manifesto for migrants, POC, and career-changers moving through systems not built for them.
@@ -17,7 +57,7 @@ We are not building a dashboard. We are building a living manifesto for migrants
 
 1.  **Dark-Only Territory:** Every interface uses `#1A1714` (Solidarity Charcoal) as the foundational substrate. No white backgrounds. No light modes.
 2.  **Anti-Bureaucracy Protocol:** Explicitly ban all motifs of borders, passports, visas, government forms, or official state documentation. We speak peer-to-peer, not authority-to-subject.
-3.  **Zero-Flora Rule:** Absolutely NO flora (gum leaves, eucalyptus, etc.) or Australian endemic fauna (non-human species as mascots). The environment is strictly Urban/Human/Cultural.
+3.  **Solidarity Flora:** Allow flora that aligns with Kerala/Diaspora themes (e.g., coconut palms, jasmine, tropical urban flora). Strictly BAN all native Australian flora (gum leaves, eucalyptus, wattle) and "Northcote Curio" style (Victorian naturalist/botanical specimen) aesthetics. (Exception: elephants remain explicitly allowed).
 4.  **No Monarchy/Colonialism:** No crowns, no scepters, no bureaucratic seals. Colonial defeat is implicit and final.
 5.  **Screenprint Logic:** Visual elements behave like ink layers on paper—high contrast, visible grain, deliberate registration errors, and "wet ink" expansion.
 
@@ -53,21 +93,28 @@ Each archetype uses a **shape palette** — a set of approved shapes for default
 - Shapes may appear in multiple archetype contexts if they pass validator rules.
 - `shape.substrateTile*` shapes are restricted to **Substrate** (decorative backgrounds) and explicitly whitelisted avatar/hero frame contexts.
 
-#### Semantic Action Archetypes (KR v6.0)
+#### Internal Semantic Archetypes (KR v6.0)
 
-Six archetypes define the emotional and political role of UI elements:
+Six internal archetypes define the emotional and political role of UI elements. They are design-layer semantics, not route names and not the preferred public component names.
 
-| Archetype | Role | Emotional Register | Shape Palette |
+| Internal Archetype | Public UI Language | Role | Shape Palette |
 | :--- | :--- | :--- | :--- |
-| **Strike** | Primary action, decisive CTA | Defiance, finality | `shape.blockRiot03` → `shape.blockRiot02` (active) |
-| **March** | Sequential progress, flow elements | Collective momentum | `shape.blockRiot01` → `shape.marchSurge01` (active) |
-| **Megaphone** | Announcement, focal emphasis | Urgency, voice | `shape.megaphoneCut01` → `shape.substrateTile01` (ambient) |
-| **Placard** | Content container, framing | Solidarity structure | `shape.placardTorn01` → `shape.blockRiot02` (active) |
-| **Scaffold** | Layout structure, navigation | Neutral, load-bearing | `shape.blockRiot01` (immutable — no morph) |
-| **Substrate** | Decorative background, atmospheric | Organic, environmental | `shape.substrateTile02` → `shape.substrateTile01` (ambient) |
+| **Strike** | `Button`, action CTA | Primary action, decisive CTA | `shape.blockRiot03` → `shape.blockRiot02` (active) |
+| **March** | `Select`, segmented control, progressive filter | Sequential progress, flow elements | `shape.blockRiot01` → `shape.marchSurge01` (active) |
+| **Megaphone** | `Dialog`, modal, announcement surface | Announcement, focal emphasis | `shape.megaphoneCut01` → `shape.substrateTile01` (ambient) |
+| **Placard** | `Card`, content panel | Content container, framing | `shape.placardTorn01` → `shape.blockRiot02` (active) |
+| **Scaffold** | `Panel`, `Input`, `Textarea`, structural shell | Layout structure, navigation | `shape.blockRiot01` (immutable — no morph) |
+| **Substrate** | `Surface`, background layer | Decorative background, atmospheric | `shape.substrateTile02` → `shape.substrateTile01` (ambient) |
+
+Public-facing docs and engineering guidance should prefer the plain UI language column unless archetype mapping is the point of the discussion.
 
 ### D. Extreme Variable Contrast
 Typography behaves as pressure and relief. We enforce a **9× weight ratio** (Hairline 100 vs Ultra-Black 900) and **6× size ratio** (12px metadata vs 72px+ display) to create expressive tension.
+
+The emotional register controls how much of that contrast is visible on a given screen:
+- `assertive`: dramatic display contrast allowed at headline level
+- `moderate`: expressive emphasis only in key hierarchy moments
+- `restrained`: minimal display drama; prioritize trust and legibility
 
 ### E. M3 Expressive Motion (The Solidarity Spring)
 All motion uses the M3 Expressive overshoot curve: `cubic-bezier(0.34, 1.56, 0.64, 1)`.

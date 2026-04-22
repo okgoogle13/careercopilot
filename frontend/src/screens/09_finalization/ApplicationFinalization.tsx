@@ -1,3 +1,4 @@
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 import { memo } from 'react';
 import { motion } from 'framer-motion';
 import clsx, { type ClassValue } from 'clsx';
@@ -72,33 +73,24 @@ const DEFAULT_SLOT_ASSETS: Partial<Record<string, string>> = {
 };
 
 export interface ApplicationFinalizationProps {
+  children?: React.ReactNode;
   className?: ClassValue;
   title?: string;
   subtitle?: string;
-  primaryLabel?: string;
-  secondaryLabel?: string;
   slotAssets?: Partial<Record<string, string>>;
-  onPrimaryAction?: () => void;
-  onSecondaryAction?: () => void;
 }
 
-const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
-const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+const springHero = KrDarkSpring;
 
 export const ApplicationFinalization = memo(function ApplicationFinalization({
+  children,
   className,
   title = 'Application Finalization',
   subtitle = 'Run checklist and submit with confidence.',
-  primaryLabel = 'Submit Application',
-  secondaryLabel = 'Save Draft',
   slotAssets,
-  onPrimaryAction,
-  onSecondaryAction,
 }: ApplicationFinalizationProps) {
   const mode = useModeStore((state) => state.mode);
   const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
-  const isKrDark = mode === 'KrDark';
 
   return (
     <motion.section
@@ -150,7 +142,7 @@ export const ApplicationFinalization = memo(function ApplicationFinalization({
         initial={{ opacity: 0, y: 6 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ ...springHero, delay: 0.04 }}
-        className="relative z-10"
+        className="relative z-10 mb-8"
       >
         <h1
           className="text-3xl font-black md:text-5xl"
@@ -172,44 +164,7 @@ export const ApplicationFinalization = memo(function ApplicationFinalization({
         </p>
       </motion.header>
 
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={undefined}
-        className="relative z-10 mt-6 flex flex-wrap gap-3"
-      >
-        <motion.button
-          type="button"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          transition={springButton}
-          onClick={onPrimaryAction}
-          className="rounded-[var(--sys-shape-blockRiot03)] px-5 py-3 font-semibold"
-          style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            backgroundColor: 'var(--sys-color-inkGold-base)',
-            color: 'var(--sys-color-charcoalBackground-base)',
-          }}
-        >
-          {primaryLabel}
-        </motion.button>
-        <motion.button
-          type="button"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          transition={springButton}
-          onClick={onSecondaryAction}
-          className="rounded-[var(--sys-shape-blockRiot01)] border px-5 py-3 font-medium"
-          style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            borderColor: 'var(--sys-color-protestMetalBlue-base)',
-            color: isKrDark ? 'var(--sys-color-worker-ash-base)' : 'var(--sys-color-paperWhite)',
-            backgroundColor: 'transparent',
-          }}
-        >
-          {secondaryLabel}
-        </motion.button>
-      </motion.div>
+      <div className="relative z-10">{children}</div>
 
       <motion.p
         initial={{ opacity: 0 }}

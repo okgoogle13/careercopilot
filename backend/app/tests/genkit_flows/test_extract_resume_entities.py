@@ -2,19 +2,16 @@
 Tests for extract_resume_entities flow.
 """
 
-from typing import Any, Dict, List
 from unittest.mock import patch
 
 import pytest
 from fastapi.testclient import TestClient
-from pydantic import BaseModel
 
 from app.core import dependencies  # Import dependencies for mocking
 from app.genkit_flows.extract_resume_entities import (
     ResumeEntities,
     extractResumeEntities,
 )
-from app.genkit_flows.shared import create_extraction_flow
 
 
 # Mock User class for mocking current user

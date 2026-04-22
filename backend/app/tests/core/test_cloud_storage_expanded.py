@@ -7,7 +7,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from app.core.cloud_storage import CloudStorageClient, cloud_storage_client
+from app.core.cloud_storage import CloudStorageClient
 
 
 @pytest.fixture

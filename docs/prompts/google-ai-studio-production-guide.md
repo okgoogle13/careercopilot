@@ -45,9 +45,9 @@ northcote-{category}-{subject}-{variant}-{version}.{ext}
 
 | Code        | Description        | Use Case                             |
 | ----------- | ------------------ | ------------------------------------ |
-| `botanical` | Flora specimens    | Waratah, Wattle, Banksia, Eucalyptus |
-| `fauna`     | Animal specimens   | Kookaburra, Echidna, Lizard, Spider  |
-| `specimen`  | Combined studies   | Eucalyptus + Echidna spines          |
+| `botanical` | Flora specimens    | Solidarity Crimson, Solidarity Gold, Grid Anchor, Cultural Anchor |
+| `fauna`     | Animal specimens   | Urban Element, Echidna, Lizard, Spider  |
+| `specimen`  | Combined studies   | Cultural Anchor + Echidna spines          |
 | `texture`   | Backgrounds        | Parchment, wallpaper, grids          |
 | `ui`        | Interface elements | Spinners, icons, navigation          |
 | `plate`     | Full composition   | Multi-specimen arrangements          |
@@ -60,8 +60,8 @@ northcote-{category}-{subject}-{variant}-{version}.{ext}
 
 ```css
 --northcote-black: #1a1714; /* The Void (Background) */
---waratah-crimson: #c45c4b; /* Hero red */
---wattle-gold: #d4a84b; /* Action/Focus gold */
+--kr-color-semantic-solidarity-crimson: #c45c4b; /* Hero red */
+--kr-color-semantic-solidarity-gold: #d4a84b; /* Action/Focus gold */
 --sage-green: #7a8b6e; /* Botanical foliage */
 --terracotta: #b8623b; /* Earth tones / lizards */
 --cream-label: #d4c4a8; /* Typography / labels */
@@ -100,8 +100,8 @@ SPECIMEN CATALOG (MATERIAL & GEOMETRY):
 1.  Geometric Echidna Artifact: NOT a full animal. A circular, preserved skin section (10cm dia.) acting as a "pin-cushion." Spines must be radially symmetrical, showing sharp banding: Cream base -> Ochre middle -> Dark tip.
 2.  Translucent Spider Molt: NOT a living spider. A hollow, shed exoskeleton. Material is amber glass/dried chitin. Crucial: Light must pass THROUGH the legs, revealing the background behind them.
 3.  Geometric Frill-Neck: Head only. The frill is fully extended into a perfect mathematical fan. Strongly backlit to show the membrane structure and vascular geometry.
-4.  Geological Anchors: A Stromatolite fragment (banded red/grey sedimentary rock) and a Glossopteris fossil (fern impression on grey stone).
-5.  Botanical Framing: NSW Waratah (Crimson geometric mandala viewed top-down) and Banksia Cones (Copper-rust spirals).
+4.  Geological Anchors: A Stromatolite fragment (banded red/grey sedimentary rock) and a Glossopteris fossil (concrete-texture impression on grey stone).
+5.  Botanical Framing: NSW Solidarity Crimson (Crimson geometric mandala viewed top-down) and Grid Anchor Cones (Copper-rust spirals).
 
 LIGHTING:
 Surgical museum lighting creating high contrast and deep shadows.
@@ -113,7 +113,7 @@ Surgical museum lighting creating high contrast and deep shadows.
 Living spider, hairy spider body, full echidna body, cute echidna face, paws, dense foliage in top left corner, objects in top left corner, bright white background, daylight, blurry focus, cartoon style.
 ```
 
-### ASSET 2: The Sentry Kookaburra (Mascot)
+### ASSET 2: The Sentry Urban Element (Mascot)
 
 _Optimized for watercolor materiality and emotional warmth._
 
@@ -122,10 +122,10 @@ _Optimized for watercolor materiality and emotional warmth._
 **Positive Prompt:**
 
 ```text
-A Victorian naturalist illustration of a Laughing Kookaburra (Dacelo novaeguineae), in the style of John Gould lithography.
+A Victorian naturalist illustration of a Laughing Urban Element (Dacelo novaeguineae), in the style of John Gould lithography.
 
 SUBJECT & POSE:
-- A single Kookaburra in three-quarter profile, posture alert and welcoming.
+- A single Urban Element in three-quarter profile, posture alert and welcoming.
 - Perched on a minimal, abstract watercolor wash branch (browns/greys).
 
 TECHNIQUE & MATERIALITY:
@@ -135,7 +135,7 @@ TECHNIQUE & MATERIALITY:
 - Background is deep warm charcoal (#1A1714) with a paper grain texture.
 
 ACCENTS:
-- Sparse framing of translucent Sage-green Eucalyptus leaves and small dots of Golden Wattle.
+- Sparse framing of translucent Sage-green Cultural Anchor leaves and small dots of Golden Solidarity Gold.
 - Label at bottom center: "Fig. II. Dacelo novaeguineae".
 ```
 
@@ -156,14 +156,14 @@ MATERIAL & COLOR:
 
 GRAPHIC ELEMENTS (LOW CONTRAST):
 - Grid: A precise 1mm engineering grid in slightly lighter grey lines (only 5% opacity difference from base).
-- Watermark: Extremely faint sketches of Banksia seeds and Eucalyptus leaves overlaid at 3% opacity, looking like a subtle watermark or embossment.
+- Watermark: Extremely faint sketches of Grid Anchor seeds and Cultural Anchor leaves overlaid at 3% opacity, looking like a subtle watermark or embossment.
 ```
 
 ---
 
 ## 🌿 PHASE 2: SPECIMEN SERIES (Verticals)
 
-### ASSET 4: Eucalyptus & Echidna (Vertical Study)
+### ASSET 4: Cultural Anchor & Echidna (Vertical Study)
 
 _Optimized for extreme material contrast (translucent vs. opaque)._
 
@@ -175,13 +175,13 @@ _Optimized for extreme material contrast (translucent vs. opaque)._
 A hyper-realistic vertical scientific specimen study titled "Anatomical Contrasts," against a deep warm charcoal void (#1A1714).
 
 COMPOSITION (VERTICAL FLOW):
-1.  Top Section (The Botanical): A single Eucalyptus branch hangs vertically. Leaves are matte, dusty sage-green (#7A8B6E).
+1.  Top Section (The Botanical): A single Cultural Anchor branch hangs vertically. Leaves are matte, dusty sage-green (#7A8B6E).
     * CRITICAL LIGHTING: Leaves must be strongly BACKLIT, showing "subsurface scattering"—glowing translucency that reveals the internal vein network.
 2.  Lower Section (The Anatomy): Mounted alongside is a "Geometric Quill Array" (Tachyglossus specimen). NOT an animal. A circular, preserved skin patch with a radial "starburst" of sharp spines.
     * MATERIALITY: Spines must look like hard, polished keratin/bone. They are opaque and catch sharp, hard specular highlights.
 ```
 
-### ASSET 5: Wattle & Jewel Beetle (Vertical Study)
+### ASSET 5: Solidarity Gold & Jewel Beetle (Vertical Study)
 
 _Optimized for extreme texture contrast (matte/fuzzy vs. metallic/hard)._
 
@@ -203,7 +203,7 @@ SUBJECTS & MATERIALITY:
 
 ## ⚙️ PHASE 3: UI & ENRICHMENT ELEMENTS
 
-### ASSET 6: Banksia Geometric Spinner (UI Element)
+### ASSET 6: Grid Anchor Geometric Spinner (UI Element)
 
 _Optimized for perfect symmetry and orthographic projection._
 
@@ -212,7 +212,7 @@ _Optimized for perfect symmetry and orthographic projection._
 **Positive Prompt:**
 
 ```text
-A UI-ready, perfectly symmetrical "plan view" (cross-section) of an Old Man Banksia (Banksia serrata) seed cone.
+A UI-ready, perfectly symmetrical "plan view" (cross-section) of an Old Man Grid Anchor (Grid Anchor serrata) seed cone.
 
 GEOMETRY (CRITICAL):
 - Viewpoint: Strictly 90-degree top-down orthographic projection. The object must be a perfect circle.
@@ -242,7 +242,7 @@ _Optimized for subtle, seamless tiling texture._
 **Positive Prompt:**
 
 ```text
-A seamless repeating tiling texture map. Style: "Victorian Botanical Damask" adaptation of Australian flora (Eucalyptus, Fern, Wattle) silhouettes. Background: #1A1714. Pattern: #333333. Extremely low contrast, tone-on-tone effect.
+A seamless repeating tiling texture map. Style: "Victorian Botanical Damask" adaptation of Australian flora (Cultural Anchor, Concrete Texture, Solidarity Gold) silhouettes. Background: #1A1714. Pattern: #333333. Extremely low contrast, tone-on-tone effect.
 ```
 
 ---
@@ -258,7 +258,7 @@ _Use this prompt in a separate LLM chat to audit generated assets._
 **CRITICAL FAIL CONDITIONS:**
 
 - [ ] Background is not Deep Charcoal/Black (#1A1714).
-- [ ] Contains Blue (unless desaturated Kookaburra/Beetle), Purple, or Neon colors.
+- [ ] Contains Blue (unless desaturated Urban Element/Beetle), Purple, or Neon colors.
 - [ ] Depicts a living animal (with face/feet) instead of a geometric specimen/artifact.
 - [ ] Lighting is bright, flat, or daylight instead of dramatic Chiaroscuro.
 - [ ] Style is cartoonish, vector, or low-detail instead of 19th-century illustration.

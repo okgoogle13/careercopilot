@@ -1,7 +1,5 @@
 """Tests for /opportunities API endpoints."""
 
-import pytest
-
 
 class TestOpportunitiesEndpoints:
     def test_get_opportunities_happy_path(self, client):

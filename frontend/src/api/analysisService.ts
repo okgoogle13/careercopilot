@@ -3,28 +3,55 @@
  * Handles ATS scoring, document analysis, and resume intelligence
  */
 
-import axios from 'axios';
+import { axiosInstance } from '@/api/axiosConfig';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
-
-export interface ATSScoreResponse {
-  score: number;
+export interface AtsScoreResponse {
+  overallScore: number;
+  summary: string;
   breakdown: {
-    keywordMatch: number;
-    formatting: number;
-    structure: number;
-    relevance: number;
+    keywordDensityScore: number;
+    jobTitleScore: number;
+    semanticScore: number;
+    educationExperienceScore: number;
+    formattingScore: number;
   };
-  matchedKeywords: string[];
-  missingKeywords: string[];
+  categories: Array<{
+    name: string;
+    score: number;
+    status: string;
+    suggestions: string[];
+  }>;
+  keywordMatches: {
+    matched: string[];
+    missing: string[];
+  };
   recommendations: string[];
 }
 
-export interface DocumentAnalysis {
-  documentId: string;
-  analysisType: string;
-  results: Record<string, any>;
-  timestamp: string;
+export interface CorporateProfile {
+  name: string;
+  mission_statement: string;
+  core_values: string[];
+  strategic_focus: string;
+  communication_style: string;
+  known_for: string;
+}
+
+export interface StrategyResponse {
+  job_details: {
+    role_title?: string;
+    key_responsibilities?: string[];
+  };
+  corporate_profile: CorporateProfile | null;
+  optimized_resume: {
+    resume_text: string;
+  };
+  strategy_summary: string;
+  gap_analysis?: {
+    missing_skills: string[];
+    evidence_found: string[];
+    strategy_advice: string;
+  };
 }
 
 export interface OptimizationSuggestions {
@@ -52,28 +79,14 @@ export interface IntelligenceReport {
   generatedAt: string;
 }
 
-const apiClient = axios.create({
-  baseURL: `${API_BASE_URL}/analysis`,
-});
-
-// Add auth token interceptor
-apiClient.interceptors.request.use((config) => {
-  const token = localStorage.getItem('auth_token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+const apiClient = axiosInstance;
 
 export const analysisService = {
-  /**
-   * Get ATS score for a document against a job description
-   */
-  async getATSScore(documentId: string, jobDescription: string): Promise<ATSScoreResponse> {
+  async getATSScore(resumeText: string, jobDescription: string): Promise<AtsScoreResponse> {
     try {
-      const response = await apiClient.post('/ats-score', {
-        documentId,
-        jobDescription,
+      const response = await apiClient.post('/analysis/ats-score', {
+        resume_text: resumeText,
+        job_description: jobDescription,
       });
       return response.data;
     } catch (error) {
@@ -82,30 +95,12 @@ export const analysisService = {
     }
   },
 
-  /**
-   * Analyze document content
-   */
-  async analyzeDocument(documentId: string): Promise<DocumentAnalysis> {
-    try {
-      const response = await apiClient.post('/analyze-document', {
-        documentId,
-      });
-      return response.data;
-    } catch (error) {
-      console.error('Analyze document error:', error);
-      throw error;
-    }
-  },
-
-  /**
-   * Get content optimization suggestions
-   */
   async getContentOptimization(
     content: string,
     jobDescription: string
   ): Promise<OptimizationSuggestions> {
     try {
-      const response = await apiClient.post('/optimize-content', {
+      const response = await apiClient.post('/analysis/optimize-content', {
         content,
         jobDescription,
       });
@@ -116,12 +111,9 @@ export const analysisService = {
     }
   },
 
-  /**
-   * Generate resume intelligence report
-   */
   async getResumeIntelligence(resumeId: string): Promise<IntelligenceReport> {
     try {
-      const response = await apiClient.post('/resume-intelligence', {
+      const response = await apiClient.post('/analysis/resume-intelligence', {
         resumeId,
       });
       return response.data;
@@ -131,25 +123,20 @@ export const analysisService = {
     }
   },
 
-  /**
-   * Get keyword analysis
-   */
-  async getKeywordAnalysis(
-    documentText: string,
-    jobDescription: string
-  ): Promise<{
-    matched: string[];
-    missing: string[];
-    suggestions: Array<{ keyword: string; frequency: number }>;
-  }> {
+  async getStrategy(request: {
+    resumeText: string;
+    jobUrl: string;
+    missingKeywords?: string[];
+  }): Promise<StrategyResponse> {
     try {
-      const response = await apiClient.post('/keywords', {
-        documentText,
-        jobDescription,
+      const response = await apiClient.post('/analysis/strategy', {
+        resume_text: request.resumeText,
+        job_url: request.jobUrl,
+        missing_keywords: request.missingKeywords,
       });
       return response.data;
     } catch (error) {
-      console.error('Get keyword analysis error:', error);
+      console.error('Get strategy error:', error);
       throw error;
     }
   },

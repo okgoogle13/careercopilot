@@ -129,6 +129,6 @@ Use these specific token groups defined in `design-tokens.css`:
 ---
 
 **Source References**:
-- Manifest: `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json` (v6.0.0)
+- Manifest: `frontend/public/assets/kr-solidarity-manifest.json` (v6.0.0)
 - Registry: `frontend/public/assets/kr-solidarity-hero-registry.json` (v3.1.0)
 - Design Tokens: `frontend/src/design/tokens/tokens.json`

@@ -3,7 +3,7 @@ import {Document, HeadingLevel, Packer, Paragraph, TextRun} from "docx";
 import type {Request, Response} from "express";
 import admin from "firebase-admin";
 import type {QueryDocumentSnapshot} from "firebase-admin/firestore";
-import functions from "firebase-functions";
+import * as functions from "firebase-functions";
 import {validateFirebaseIdToken} from "../middleware/auth.middleware";
 import {handleError, sendResponse} from "../utils/api.utils";
 import PDFDocument = require("pdfkit");
@@ -425,7 +425,7 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
         const buffers: Buffer[] = [];
 
         doc.on("data", buffers.push.bind(buffers));
-        
+
         doc.fontSize(20).text("Job Applications", {align: "center"});
         doc.moveDown();
 

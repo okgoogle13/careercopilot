@@ -1,5 +1,4 @@
-import { Pebble } from '@/components/ui/Pebble';
-import { Stone } from '@/components/ui/Stone';
+import { Placard, Strike } from '@/components/ui';
 import { Check, Clock, Edit2, Plus } from 'lucide-react';
 
 export function ApplicationTracker() {
@@ -43,50 +42,50 @@ export function ApplicationTracker() {
   ];
 
   return (
-    <div className="p-8 max-w-6xl mx-auto bg-[var(--color-background-base)] min-h-screen">
+    <div className="p-8 max-w-6xl mx-auto bg-[var(--sys-color-charcoalBackground-base)] min-h-screen">
       {/* Header */}
       <div className="mb-10 text-center md:text-left">
-        <h1 className="text-display-large font-bold text-[var(--color-text-primary)] mb-2">
+        <h1 className="text-display-large font-bold text-[var(--sys-color-worker-ash-base)] mb-2">
           Application{' '}
-          <span className="font-serif italic font-light text-[var(--color-leaf-base)]">
+          <span className="font-serif italic font-light text-[var(--sys-color-inkGold-base)]">
             Tracker
           </span>
         </h1>
-        <p className="text-body-large text-[var(--color-text-secondary)]">
-          Track your job applications through every stage
+        <p className="text-body-large text-[var(--sys-color-concreteGrey-base)]">
+          Manage your struggle. Track every tactical advancement.
         </p>
       </div>
 
       {/* Applications List */}
       <div className="flex flex-col gap-6">
         {applications.map((app) => (
-          <Stone
+          <Placard
             key={app.id}
-            elevation="flat"
-            className="group transition-all duration-300 hover:border-[var(--color-leaf-base)] hover:shadow-md"
+            elevation="raised"
+            className="group transition-all duration-300 hover:border-[var(--sys-color-inkGold-base)]"
           >
             <div className="p-6">
               <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-8">
                 <div className="flex-1">
-                  <h3 className="text-display-small font-bold text-[var(--color-text-primary)] mb-1">
+                  <h3 className="text-display-small font-bold text-[var(--sys-color-worker-ash-base)] mb-1">
                     {app.title}
                   </h3>
-                  <p className="text-title-medium font-serif italic text-[var(--color-text-secondary)] mb-2">
+                  <p className="text-title-medium font-serif italic text-[var(--sys-color-concreteGrey-base)] mb-2">
                     {app.company}
                   </p>
-                  <div className="flex items-center gap-2 text-label-small uppercase tracking-wider text-[var(--color-text-tertiary)]">
+                  <div className="flex items-center gap-2 text-label-small uppercase tracking-wider text-[var(--sys-color-concreteGrey-steps-4)]">
                     <span>{app.location}</span>
                     <span>•</span>
                     <span>Applied {app.appliedDate}</span>
                   </div>
                 </div>
-                <Pebble
+                <Strike
                   variant="secondary"
                   size="sm"
                   iconLeft={<Edit2 size={16} />}
                 >
                   Update Status
-                </Pebble>
+                </Strike>
               </div>
 
               {/* Progress Stepper */}
@@ -96,16 +95,19 @@ export function ApplicationTracker() {
                   const isCurrent = idx === app.currentStep;
 
                   // Determine variants and styling based on state
-                  let variant: 'neutral' | 'primary' | 'secondary' = 'neutral';
-                  let className =
-                    'text-[var(--color-text-tertiary)] bg-[var(--color-surface-container)] opacity-60';
+                  let statusStyle =
+                    'text-[var(--sys-color-concreteGrey-steps-4)] bg-[var(--sys-color-charcoalBackground-steps-1)] opacity-60';
+                  let barStyle = 'bg-[var(--sys-color-charcoalBackground-steps-2)]';
 
                   if (isCurrent) {
-                    variant = 'primary'; // KeralaRage primary (Leaf)
-                    className = 'font-bold shadow-sm scale-105 border-[var(--color-leaf-base)]';
+                    statusStyle =
+                      'font-bold scale-105 border-[var(--sys-color-inkGold-base)] text-[var(--sys-color-inkGold-base)] bg-[var(--sys-color-charcoalBackground-steps-2)] outline outline-1 outline-[var(--sys-color-inkGold-base)]';
+                    barStyle =
+                      'bg-[var(--sys-color-inkGold-base)] shadow-[0_0_10px_var(--sys-color-inkGold-steps-0)]';
                   } else if (isCompleted) {
-                    variant = 'secondary'; // KeralaRage secondary (Ink) for completed
-                    className = 'opacity-100';
+                    statusStyle =
+                      'opacity-100 text-[var(--sys-color-activistSmokeGreen-base)] bg-[var(--sys-color-charcoalBackground-steps-1)]';
+                    barStyle = 'bg-[var(--sys-color-activistSmokeGreen-base)]';
                   }
 
                   return (
@@ -113,19 +115,16 @@ export function ApplicationTracker() {
                       key={idx}
                       className="flex flex-col gap-2"
                     >
-                      {/* Mobile/Compact Label for small screens could be added here if needed, but keeping it simple for now */}
-                      <div className={`flex items-center gap-2 p-2 rounded-seed ${className}`}>
+                      <div
+                        className={`flex items-center gap-2 p-2 rounded-seed transition-all duration-300 ${statusStyle}`}
+                      >
                         {isCompleted ? <Check size={14} /> : isCurrent ? <Clock size={14} /> : null}
-                        <span className="text-label-small">{step}</span>
+                        <span className="text-label-small uppercase tracking-tight">{step}</span>
                       </div>
-                      {/* Connector Line (Visual only, simple version) */}
+                      {/* Connector Line */}
                       {idx < app.steps.length - 1 && (
                         <div
-                          className={`hidden md:block h-1 w-full rounded-march mt-1 ${
-                            idx < app.currentStep
-                              ? 'bg-[var(--color-leaf-light)]'
-                              : 'bg-[var(--color-surface-container-high)]'
-                          }`}
+                          className={`hidden md:block h-1.5 w-full rounded-march mt-1 transition-all duration-500 ${barStyle}`}
                         />
                       )}
                     </div>
@@ -133,16 +132,18 @@ export function ApplicationTracker() {
                 })}
               </div>
             </div>
-          </Stone>
+          </Placard>
         ))}
       </div>
 
       {/* Add New Application */}
-      <button className="mt-8 w-full py-8 border-2 border-dashed border-[var(--color-surface-container-high)] rounded-placard text-[var(--color-text-secondary)] hover:border-[var(--color-leaf-base)] hover:text-[var(--color-leaf-base)] hover:bg-[var(--color-leaf-light)]/5 transition-all flex flex-col items-center justify-center gap-2 group">
-        <div className="p-3 bg-[var(--color-surface-container)] rounded-march group-hover:bg-[var(--color-leaf-base)] group-hover:text-white transition-colors">
-          <Plus size={24} />
+      <button className="mt-8 w-full py-12 border-2 border-dashed border-[var(--sys-color-concreteGrey-steps-2)] rounded-placard text-[var(--sys-color-concreteGrey-base)] hover:border-[var(--sys-color-inkGold-base)] hover:text-[var(--sys-color-inkGold-base)] hover:bg-[var(--sys-color-inkGold-steps-0)]/5 transition-all flex flex-col items-center justify-center gap-4 group">
+        <div className="p-4 bg-[var(--sys-color-charcoalBackground-steps-1)] rounded-march group-hover:bg-[var(--sys-color-inkGold-base)] group-hover:text-[var(--sys-color-charcoalBackground-base)] transition-all duration-300">
+          <Plus size={32} />
         </div>
-        <span className="text-title-medium font-medium">Add New Application</span>
+        <span className="text-display-tiny font-bold uppercase tracking-widest">
+          Strike New Ground
+        </span>
       </button>
     </div>
   );

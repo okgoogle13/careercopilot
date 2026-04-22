@@ -1,5 +1,6 @@
 import { LucideIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 interface StatCardProps {
   icon: LucideIcon | React.ComponentType<{ className?: string }>;
@@ -25,16 +26,12 @@ export function StatCard({
         scale: 1.01,
         boxShadow: 'var(--sys-elevation-level3)',
       }}
-      transition={{
-        type: 'spring',
-        stiffness: 250,
-        damping: 20,
-      }}
+      transition={KrDarkSpring}
       className={`
-        bg-surface-container rounded-tech p-8 
-        flex flex-col items-center justify-center 
+        bg-surface-container rounded-tech p-8
+        flex flex-col items-center justify-center
         relative overflow-hidden
-        shadow-elevation-1 border border-outline-variant
+        shadow-elevation-1 border border-[var(--kr-color-concrete-grey-steps-0)]
         ${className}
       `}
       style={{

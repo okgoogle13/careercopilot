@@ -21,12 +21,12 @@ export interface KanbanCardProps {
   onSelect?: () => void;
 }
 
-/**
- * KanbanCard
- *
- * The "Command Center" task unit.
- * Features heavy tactile physics and high-contrast priority markers.
- */
+const priorityColors: Record<string, string> = {
+  low: 'var(--kr-color-kr-activist-smoke-green-base)',
+  medium: 'var(--kr-color-ink-gold-base)',
+  high: 'var(--kr-color-solidarity-red-base)',
+};
+
 export const KanbanCard: React.FC<KanbanCardProps> = ({
   id,
   title,
@@ -37,61 +37,51 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({
   onDragStart,
   onSelect,
 }) => {
-  const priorityColor =
-    priority === 'high'
-      ? 'text-solidarity-red'
-      : priority === 'medium'
-        ? 'text-ink-gold'
-        : 'text-smoke-green';
-
   return (
     <motion.div
-      layout
-      whileHover={{ y: -2, scale: 1.01 }}
-      whileTap={{ scale: 0.98, rotateZ: 1 }}
-      drag
-      dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+      layoutId={id}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      draggable
       onDragStart={onDragStart}
       onClick={onSelect}
       className={cn(
-        'p-6 bg-charcoal-100 border border-blueprint-grey/20',
-        'rounded-megaphone shadow-viscous cursor-grab active:cursor-grabbing',
-        'relative flex flex-col gap-4 overflow-hidden'
+        'relative rounded-[var(--sys-shape-placard01,8px)] border cursor-pointer select-none',
+        'bg-[var(--sys-color-charcoalBackground-base)] border-[var(--kr-color-concrete-grey-steps-0)]',
+        'p-4 space-y-2 transition-all'
       )}
-      role="listitem"
-      aria-label={`Kanban Task: ${title}`}
+      style={{
+        borderLeft: `3px solid ${priorityColors[priority] ?? priorityColors.medium}`,
+      }}
     >
-      <div className="flex justify-between items-center relative z-10">
-        <span className="font-jetbrains-mono text-[10px] text-blueprint-grey/40 uppercase tracking-widest">
-          ID: {id}
-        </span>
-        <span className="px-2 py-0.5 bg-blueprint-grey/10 text-blueprint-grey rounded-seed text-[10px] uppercase font-bold">
+      <div className="flex items-start justify-between gap-2">
+        <p className="text-sm font-semibold text-[var(--sys-color-worker-ash-base)] leading-tight line-clamp-2">
+          {title}
+        </p>
+        <span
+          className="text-[10px] font-mono uppercase tracking-widest px-2 py-0.5 rounded shrink-0"
+          style={{
+            background: 'rgba(163,155,143,0.1)',
+            color: 'var(--sys-color-concreteGrey-base)',
+          }}
+        >
           {status}
         </span>
       </div>
 
-      <div className="relative z-10">
-        <h3 className="text-xl font-bold text-paper-white uppercase tracking-tight mb-2">
-          {title}
-        </h3>
-        <p className="text-[10px] text-paper-white/60 font-mono uppercase tracking-widest line-clamp-2">
+      {description && (
+        <p className="text-xs text-[var(--sys-color-concreteGrey-base)] line-clamp-2">
           {description}
         </p>
-      </div>
+      )}
 
-      <div className="flex justify-between items-end mt-4 relative z-10">
-        <div className={cn('text-xs font-bold uppercase tracking-widest', priorityColor)}>
-          {priority}
-        </div>
-        {dueDate && (
-          <div className="text-[10px] font-jetbrains-mono text-blueprint-grey uppercase">
-            Due: {dueDate}
-          </div>
-        )}
-      </div>
-
-      {/* Subtle screenprint substrate */}
-      <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('/assets/kr-solidarity/texture/kr-solidarity__atmospheric__texture--asphalt-grain--v2.png')] mix-blend-overlay" />
+      {dueDate && (
+        <p className="text-[10px] font-mono text-[var(--sys-color-concreteGrey-base)] opacity-60">
+          {dueDate}
+        </p>
+      )}
     </motion.div>
   );
 };
+
+export default KanbanCard;

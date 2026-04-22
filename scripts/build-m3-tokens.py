@@ -2,71 +2,120 @@
 # scripts/build-m3-tokens.py
 """
 Build Kerala Rage design tokens into CSS variables and Tailwind configuration.
+DTCG (W3C) Compliant "Gold Standard" implementation.
 """
 import json
 import os
+import shutil
+import subprocess
 import sys
+import re
 from typing import Any
 
 # Define I/O paths (Kerala Rage locations)
 TOKEN_SOURCE_FILE = 'frontend/src/design/tokens/tokens.json'
+MOTION_SOURCE_FILE = 'frontend/src/design/tokens/motion-tokens.json'
 CSS_OUTPUT_FILE = 'frontend/src/design/styles/design-tokens.css'
-TAILWIND_CONFIG_PATCH = 'frontend/tailwind-m3-patch.ts'
+TAILWIND_CONFIG_PATCH = 'frontend/src/design/tokens/solidarity-tokens.ts'
 
+# CSS Variable Configuration
+CSS_VAR_PREFIX = 'kr'
+CSS_SELECTOR = ':root[data-theme="solidarity"]'
+
+# Legacy Mapping for Backward Compatibility
 LEGACY_SHAPE_ALIASES = {
-    'pebble01': 'marchOpen01',
-    'stone01': 'megaphoneBase01',
-    'slab01': 'placardBase01',
-    'pebbleSurge01': 'marchSurge01',
-    'pebbleSurge01-expanded': 'marchSurge01-expanded',
-    'scaffoldSlab01': 'scaffoldFrame01',
-    'scaffoldSlab01-focus': 'scaffoldFrame01-focus',
-    'radius-pebble': 'radius-marchOpen',
-    'radius-stone': 'radius-megaphoneBase',
-    'radius-slab': 'radius-placardBase',
+    'pebble01': 'march-open-01',
+    'stone01': 'megaphone-base-01',
+    'slab01': 'placard-base-01',
+    'pebbleSurge01': 'march-surge-01',
+    'pebbleSurge01-expanded': 'march-surge-01-expanded',
+    'scaffoldSlab01': 'scaffold-frame-01',
+    'scaffoldSlab01-focus': 'scaffold-frame-01-focus',
+    'radius-pebble': 'radius-march-open',
+    'radius-stone': 'radius-megaphone-base',
+    'radius-slab': 'radius-placard-base',
 }
 
 LEGACY_SHADOW_ALIASES = {
-    'elevation1Pebble': 'elevation1Strike',
-    'elevation2Stone': 'elevation2Placard',
+    'elevation1Pebble': 'elevation-1-strike',
+    'elevation2Stone': 'elevation-2-placard',
 }
 
-def load_tokens():
-    """Loads the Kerala Rage JSON tokens."""
-    print(f"Loading tokens from {TOKEN_SOURCE_FILE}...")
-    if not os.path.exists(TOKEN_SOURCE_FILE):
-        print(f"Error: Token source file not found at {TOKEN_SOURCE_FILE}")
+LEGACY_COLOR_ALIASES = {
+    'concrete-grey': 'concrete-grey-base',
+    'ink-gold': 'ink-gold-base',
+    'asphalt-black': 'asphalt-black-base',
+    'paper-white': 'paper-white-base',
+    'solidarity-red': 'solidarity-red-base',
+    'concrete-grey-dark': 'concrete-grey-steps-0',
+    'concrete-grey-lightest': 'concrete-grey-steps-4',
+    'asphalt-black-light': 'asphalt-black-steps-3',
+}
+
+def to_kebab_case(name):
+    """Normalize camelCase or PascalCase to kebab-case, preserving leading hyphens."""
+    if not isinstance(name, str): return str(name)
+    if '-' in name and name.islower(): return name
+    name = re.sub('(.)([A-Z][a-z]+)', r'\1-\2', name)
+    return re.sub('([a-z0-9])([A-Z])', r'\1-\2', name).lower()
+
+def load_tokens(path):
+    """Loads a Kerala Rage JSON tokens file."""
+    if not os.path.exists(path):
+        print(f"⚠️  Warning: Token source file not found at {path}")
         return None
-    with open(TOKEN_SOURCE_FILE, 'r') as f:
+    with open(path, 'r') as f:
         try:
             return json.load(f)
         except json.JSONDecodeError as e:
-            print(f"Error: Invalid JSON in token file. {e}")
+            print(f"❌ Error: Invalid JSON in {path}. {e}")
             sys.exit(1)
 
+def parse_value(val: Any) -> str:
+    """Converts DTCG values (including structured color objects) into CSS-ready strings."""
+    if isinstance(val, list):
+        return " ".join([parse_value(x) for x in val])
+    if isinstance(val, dict):
+        # Handle RGB Color Object: { "channels": [r, g, b], "colorSpace": "srgb", "alpha": 1 }
+        if 'channels' in val and 'colorSpace' in val:
+            r, g, b = [int(c * 255) for c in val['channels']]
+            a = val.get('alpha', 1)
+            if a < 1:
+                return f"rgba({r}, {g}, {b}, {a:.3f})"
+            return f"#{r:02x}{g:02x}{b:02x}".upper()
+        # Handle Dimension Object: { "unit": "ms", "value": 800 }
+        if 'unit' in val and 'value' in val:
+            return f"{val['value']}{val['unit']}"
+        return str(val)
+    return str(val)
+
 def resolve_values(node):
-    """Recursively extracts $value from DTCG nodes."""
+    """Recursively extracts $value from DTCG nodes and parses them."""
     if isinstance(node, dict):
         if '$value' in node:
-            return resolve_values(node['$value'])
-        # Filter out metadata keys starting with $ (like $description, $type) unless it's the value itself
+            return parse_value(resolve_aliases(node['$value'], node)) # Simplified; recursion handled via aliases
         return {k: resolve_values(v) for k, v in node.items() if not k.startswith('$')}
     elif isinstance(node, list):
         return [resolve_values(x) for x in node]
     return node
 
-def get_by_path(node: dict[str, Any], path: str) -> Any:
-    """Resolve a dot-separated path from a nested dictionary."""
+def get_by_path(node: Any, path: str) -> Any:
+    """Resolve a dot-separated path from a nested dictionary with normalization."""
     parts = path.split('.')
-    # Allow aliases that still reference the pre-unwrapped "sys" root.
-    if parts and parts[0] == 'sys' and isinstance(node, dict) and 'sys' not in node:
-        parts = parts[1:]
-
-    current: Any = node
+    current = node
     for part in parts:
-        if not isinstance(current, dict) or part not in current:
+        if not isinstance(current, dict):
             return None
-        current = current[part]
+
+        target = to_kebab_case(part)
+        found = False
+        for k in current.keys():
+            if to_kebab_case(k) == target:
+                current = current[k]
+                found = True
+                break
+        if not found:
+            return None
     return current
 
 def resolve_aliases(node: Any, root: dict[str, Any]) -> Any:
@@ -75,203 +124,201 @@ def resolve_aliases(node: Any, root: dict[str, Any]) -> Any:
         return {k: resolve_aliases(v, root) for k, v in node.items()}
     if isinstance(node, list):
         return [resolve_aliases(item, root) for item in node]
-    if isinstance(node, str) and node.startswith('{') and node.endswith('}'):
-        alias_path = node[1:-1].strip()
-        alias_value = get_by_path(root, alias_path)
-        if alias_value is None:
-            return node
-        if isinstance(alias_value, dict) and '$value' in alias_value:
-            return resolve_aliases(resolve_values(alias_value), root)
-        if isinstance(alias_value, (dict, list)):
-            return resolve_aliases(alias_value, root)
-        return alias_value
+    if isinstance(node, str):
+        pattern = r"\{([^}]+)\}"
+        def replace_match(match):
+            alias_path = match.group(1).strip()
+            # Canonicalize path: remove sys. prefix if root was unwrapped
+            if alias_path.startswith('sys.'):
+                alias_path = alias_path[4:]
+
+            val = get_by_path(root, alias_path)
+            if val is None:
+                return match.group(0) # Keep original if not found
+
+            # If the resolved value is still a DTCG node with $value, resolve it
+            if isinstance(val, dict) and '$value' in val:
+                return parse_value(resolve_aliases(val['$value'], root))
+            return parse_value(val)
+
+        if isinstance(node, str) and '{' in node:
+            return re.sub(pattern, replace_match, node)
+        return node
     return node
 
 def flatten_dict(d, parent_key='', sep='-'):
-    """Flattens a dictionary into CSS variable friendly keys."""
+    """Recursive flatten designed for DTCG tokens."""
     items = []
+    if not isinstance(d, dict):
+        return []
+
     for k, v in d.items():
-        new_key = f"{parent_key}{sep}{k}" if parent_key else k
+        if k.startswith('$'): continue
+        new_key = parent_key + sep + to_kebab_case(k) if parent_key else to_kebab_case(k)
+
         if isinstance(v, dict):
-            items.extend(flatten_dict(v, new_key, sep=sep).items())
+            if '$value' in v:
+                val = v['$value']
+                if isinstance(val, dict):
+                    items.extend(flatten_dict(val, new_key, sep))
+                else:
+                    items.append((new_key, val))
+            else:
+                items.extend(flatten_dict(v, new_key, sep))
         else:
             items.append((new_key, v))
-    return dict(items)
+
+    return items
 
 def generate_css_variables(tokens):
     """Generates CSS variables for Kerala Rage tokens."""
-    print(f"Generating Kerala Rage CSS variables at {CSS_OUTPUT_FILE}...")
+    print(f"🎨 Generating CSS variables at {CSS_OUTPUT_FILE}...")
     os.makedirs(os.path.dirname(CSS_OUTPUT_FILE), exist_ok=True)
-    content = [
-        "/* Kerala Rage Design Tokens */\n",
-        "/* Auto-generated by scripts/build-m3-tokens.py */\n",
-        "/* Do not edit this file directly */\n\n",
-        ":root {\n",
+
+    lines = [
+        "/* kr-solidarity DESIGN TOKENS (GOLD STANDARD) */",
+        f"/* Generated from {TOKEN_SOURCE_FILE} */",
+        "",
+        f"{CSS_SELECTOR} {{"
     ]
-    flat_tokens = flatten_dict(tokens)
-    for key, value in flat_tokens.items():
-        if isinstance(value, list):
-            for i, item in enumerate(value):
-                var_name = f"--sys-{key}-{i}"
-                content.append(f"  {var_name}: {item};\n")
-        else:
-            var_name = f"--sys-{key}"
-            content.append(f"  {var_name}: {value};\n")
-    content.append("}\n")
 
-    content.extend([
-        "\n/* ===== LEGACY ARCHETYPE ALIASES (ONE RELEASE ONLY) ===== */\n",
-        ":root {\n",
+    categories = ['color', 'shape', 'spacing', 'motion', 'shadow', 'type', 'archetypes']
+    for cat in categories:
+        cat_tokens = tokens.get(cat, {})
+        if not cat_tokens: continue
+
+        lines.append(f"  /* --- {cat.capitalize()} --- */")
+        flat = flatten_dict(cat_tokens)
+
+        # Determine variable mapping based on category
+        var_type = cat
+        if cat == 'spacing': var_type = 'space'
+
+        for name, value in flat:
+            # Handle multi-line values or special cases if needed
+            lines.append(f"  --{CSS_VAR_PREFIX}-{var_type}-{name}: {value};")
+        lines.append("")
+
+    lines.append("}")
+
+    # Add Legacy Aliases
+    lines.extend([
+        "",
+        "/* ===== LEGACY COMPATIBILITY LAYER ===== */",
+        ":root {"
     ])
+
     for legacy, canonical in LEGACY_SHAPE_ALIASES.items():
-        content.append(f"  --sys-shape-{legacy}: var(--sys-shape-{canonical});\n")
+        lines.append(f"  --sys-shape-{legacy}: var(--{CSS_VAR_PREFIX}-shape-{canonical});")
     for legacy, canonical in LEGACY_SHADOW_ALIASES.items():
-        content.append(f"  --sys-shadow-{legacy}: var(--sys-shadow-{canonical});\n")
-    content.append("}\n")
+        lines.append(f"  --sys-shadow-{legacy}: var(--{CSS_VAR_PREFIX}-shadow-{canonical});")
+    for legacy, canonical in LEGACY_COLOR_ALIASES.items():
+        lines.append(f"  --color-{legacy}: var(--{CSS_VAR_PREFIX}-color-{canonical});")
 
-    # Utility classes based on actual Kerala Rage tokens
-    content.extend([
-        "\n/* ===== KERALA RAGE UTILITY CLASSES ===== */\n",
-        ".surface {\n",
-        "  background-color: var(--sys-color-charcoalBackground-base);\n",
-        "  color: var(--sys-color-worker-ash-base);\n",
-        "}\n\n",
-        ".surface-container {\n",
-        "  background-color: var(--sys-color-charcoalBackground-steps-2);\n",
-        "}\n\n",
-        ".primary {\n",
-        "  background-color: var(--sys-color-solidarityRed-base);\n",
-        "  color: var(--sys-color-paperWhite-base);\n",
-        "}\n\n",
-        ".tertiary {\n",
-        "  background-color: var(--sys-color-inkGold-base);\n",
-        "  color: var(--sys-color-charcoalBackground-base);\n",
-        "}\n",
-    ])
+    lines.append("}")
+
     with open(CSS_OUTPUT_FILE, 'w') as f:
-        f.writelines(content)
-    print(f"✅ Generated {len(content)} lines of CSS variables")
+        f.write("\n".join(lines) + "\n")
+    print(f"✅ Generated {len(lines)} lines of CSS.")
     return True
 
 def generate_tailwind_patch(tokens):
-    """Generates Tailwind config patch for Kerala Rage tokens."""
-    print(f"Generating Tailwind patch at {TAILWIND_CONFIG_PATCH}...")
-    os.makedirs(os.path.dirname(TAILWIND_CONFIG_PATCH), exist_ok=True)
+    """Generates a Tailwind configuration patch."""
+    print(f"🌊 Generating Tailwind patch at {TAILWIND_CONFIG_PATCH}...")
 
-    # Build Tailwind color palette
-    tw_colors = {}
-    colors = tokens.get('color', {})
-    for color_role, value_node in colors.items():
-        if isinstance(value_node, dict):
-            # Map subkeys like base, steps (list), etc.
-            role_dict = {}
-            for subkey, subvalue in value_node.items():
-                if isinstance(subvalue, list):
-                    for i, _ in enumerate(subvalue):
-                        role_dict[f"{subkey}-{i}"] = f"var(--sys-color-{color_role}-{subkey}-{i})"
-                else:
-                    role_dict[subkey] = f"var(--sys-color-{color_role}-{subkey})"
-            tw_colors[color_role] = role_dict
-        else:
-            tw_colors[color_role] = f"var(--sys-color-{color_role})"
-
-    # Build Tailwind font families
-    type_tokens = tokens.get('type', {})
-    tw_fonts = {
-        name: [value]
-        for name, value in type_tokens.get('fontFamilies', {}).items()
+    tw_theme = {
+        "theme": {
+            "extend": {
+                "colors": {},
+                "borderRadius": {},
+                "boxShadow": {},
+                "fontSize": {},
+                "transitionTimingFunction": {
+                    "m3-expressive": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+                    "standard": "cubic-bezier(0.2, 0, 0, 1)"
+                },
+                "transitionDuration": {
+                    "short1": "100ms", "short2": "200ms", "medium1": "400ms", "long1": "600ms"
+                },
+                "fontFamily": {}
+            }
+        }
     }
 
-    # Build Tailwind font sizes (scale)
-    tw_font_sizes = {
-        name: f"var(--sys-type-scale-{name})"
-        for name in type_tokens.get('scale', {}).keys()
-    }
+    # Populate groups
+    mappings = [
+        ('color', 'colors', 'color'),
+        ('shape', 'borderRadius', 'shape'),
+        ('shadow', 'boxShadow', 'shadow'),
+    ]
 
-    # Build Tailwind border radius
-    tw_radius = {
-        name.replace('radius-', ''): f"var(--sys-shape-{name})"
-        for name in tokens.get('shape', {}).keys()
-    }
-    for legacy, canonical in LEGACY_SHAPE_ALIASES.items():
-        tw_radius[legacy.replace('radius-', '')] = f"var(--sys-shape-{canonical})"
+    for src_cat, tw_path, var_cat in mappings:
+        flat = flatten_dict(tokens.get(src_cat, {}))
+        for name, _ in flat:
+            tw_theme["theme"]["extend"][tw_path][name] = f"var(--{CSS_VAR_PREFIX}-{var_cat}-{name})"
 
-    # Build Tailwind shadows
-    tw_shadows = {
-        name: f"var(--sys-shadow-{name})"
-        for name in tokens.get('shadow', {}).keys()
-    }
-    for legacy, canonical in LEGACY_SHADOW_ALIASES.items():
-        tw_shadows[legacy] = f"var(--sys-shadow-{canonical})"
+    # Handle font sizes specially (strip 'scale-')
+    type_scale = flatten_dict(tokens.get('type', {}).get('scale', {}))
+    for name, _ in type_scale:
+        clean_name = name.replace('scale-', '')
+        tw_theme["theme"]["extend"]["fontSize"][clean_name] = f"var(--{CSS_VAR_PREFIX}-type-scale-{clean_name})"
 
-    patch_content = f"""// Kerala Rage Tailwind Patch
-// Auto-generated by scripts/build-m3-tokens.py
-export default {{
-  theme: {{
-    extend: {{
-      colors: {json.dumps(tw_colors, indent=2, sort_keys=True)},
-      borderRadius: {json.dumps(tw_radius, indent=2, sort_keys=True)},
-      boxShadow: {json.dumps(tw_shadows, indent=2, sort_keys=True)},
-      fontFamily: {json.dumps(tw_fonts, indent=2, sort_keys=True)},
-      fontSize: {json.dumps(tw_font_sizes, indent=2, sort_keys=True)},
-      transitionTimingFunction: {{
-        'm3-expressive': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
-        'standard': 'cubic-bezier(0.2, 0, 0, 1)',
-      }},
-      transitionDuration: {{
-        'short1': '100ms',
-        'short2': '200ms',
-        'medium1': '400ms',
-        'long1': '600ms',
-      }}
-    }}
-  }}
-}};"""
+    # Ensure font families are present (even if empty) to satisfy Tailwind config types
+    fonts = tokens.get('type', {}).get('fontFamilies', {})
+    if fonts:
+        for name, _ in flatten_dict(fonts):
+            tw_theme["theme"]["extend"]["fontFamily"][name] = [f"var(--{CSS_VAR_PREFIX}-type-font-{name})"]
+    else:
+        # Fallback if no fonts are defined
+        tw_theme["theme"]["extend"]["fontFamily"] = {}
+
+    patch_content = f"// Kerala Rage Tailwind Patch\n// Auto-generated by scripts/build-m3-tokens.py\nexport default {json.dumps(tw_theme, indent=2)};\n"
+
     with open(TAILWIND_CONFIG_PATCH, 'w') as f:
-        # Ensure deterministic trailing newline so EOF fixer does not mutate on every commit.
-        f.write(patch_content if patch_content.endswith('\n') else patch_content + '\n')
-    print("✅ Tailwind config patch generated")
+        f.write(patch_content)
+
+    # Format with Prettier if possible
+    prettier = shutil.which('prettier')
+    if prettier:
+        try:
+            subprocess.run([prettier, '--write', TAILWIND_CONFIG_PATCH], capture_output=True)
+        except: pass
+
+    print("✅ Tailwind patch generated.")
     return True
 
 def main():
-    """Kerala Rage Token Builder (DTCG)"""
     print("=" * 60)
-    print("Kerala Rage Token Builder (DTCG)")
+    print("Kerala Rage Token Builder: Gold Standard DTCG Edition")
     print("=" * 60)
-    raw_tokens = load_tokens()
-    if not raw_tokens:
-        sys.exit(1)
+
+    raw_tokens = load_tokens(TOKEN_SOURCE_FILE)
+    if not raw_tokens: return
+
+    motion_tokens = load_tokens(MOTION_SOURCE_FILE)
+
     # Unwrap 'sys' if present
-    root = raw_tokens
-    if 'sys' in root:
-        print("ℹ️  Unwrapping 'sys' token group.")
-        root = root['sys']
-    # Resolve $value references
-    print("RESOLVING DTCG values...")
-    tokens = resolve_values(root)
-    tokens = resolve_aliases(tokens, root)
-    # Filter out top-level compliance or documentation keys
+    root = raw_tokens.get('sys', raw_tokens)
+
+    # Merge motion
+    if motion_tokens:
+        root['motion'] = motion_tokens.get('sys', {}).get('motion', motion_tokens.get('motion', motion_tokens))
+
+    # Resolve
+    print("🔍 Resolving DTCG references and aliases...")
+    resolved = resolve_values(root)
+    tokens = resolve_aliases(resolved, resolved)
+
+    # Filter metadata
     if isinstance(tokens, dict):
         tokens = {k: v for k, v in tokens.items() if k not in ['compliance', 'documentation', 'metadata']}
-    if not tokens:
-        print("❌ No tokens found after resolution")
-        sys.exit(1)
-    # Build outputs
-    success_css = generate_css_variables(tokens)
-    success_tw = generate_tailwind_patch(tokens)
-    if success_css and success_tw:
-        print("\n" + "=" * 60)
-        print("✨ Kerala Rage token build complete!")
-        print("=" * 60)
-        print("\nGenerated files:")
-        print(f"  1. {CSS_OUTPUT_FILE}")
-        print(f"  2. {TAILWIND_CONFIG_PATCH}")
-        print("\nNext steps:")
-        print("  - Import CSS: Add to frontend/src/App.tsx or main.tsx")
-        print("  - Merge Tailwind patch into tailwind.config.js")
-        print("  - Start using tokens in components!")
+
+    # Build
+    if generate_css_variables(tokens) and generate_tailwind_patch(tokens):
+        print("✨ Build successful!")
     else:
-        print("❌ Token build failed")
+        print("❌ Build failed.")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

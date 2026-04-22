@@ -445,5 +445,5 @@ When refactoring a page, ensure:
 
 ---
 
-**Last Updated:** December 2025  
+**Last Updated:** December 2025
 **Version:** 1.0.0

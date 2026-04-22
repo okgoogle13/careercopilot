@@ -1,6 +1,6 @@
 # CI Coverage Audit
 
-**Last Updated:** 2026-01-19  
+**Last Updated:** 2026-01-19
 **Scope:** `.github/workflows/*` coverage vs required test strategy.
 
 ## Present Coverage
@@ -39,4 +39,3 @@
 - `.github/workflows/unit-test.yml`
 - `.github/workflows/deploy.yml`
 - `.github/workflows/docker-publish.yml`
-

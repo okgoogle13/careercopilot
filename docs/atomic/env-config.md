@@ -15,4 +15,3 @@
 ## CI Secrets
 
 - Check GitHub repo secrets used in `.github/workflows/deploy.yml`
-

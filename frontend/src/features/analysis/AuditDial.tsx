@@ -24,9 +24,9 @@ export const AuditDial: React.FC<AuditDialProps> = ({
   const stateColor = getStateColor();
 
   const colorMap = {
-    sage: '#B4D8AE',
-    terracotta: '#E09F7D',
-    plasma: '#F0C419',
+    sage: 'var(--sys-color-kr-activistSmokeGreen-base)',
+    terracotta: 'var(--sys-color-solidaritySmokeOrange-base)',
+    plasma: 'var(--sys-color-solidarityYellow-base)',
   };
 
   const currentColor = colorMap[stateColor as keyof typeof colorMap];
@@ -53,15 +53,15 @@ export const AuditDial: React.FC<AuditDialProps> = ({
           >
             <stop
               offset="0%"
-              stopColor="#E09F7D"
+              stopColor="var(--sys-color-solidaritySmokeOrange-base)"
             />
             <stop
               offset="50%"
-              stopColor="#F0C419"
+              stopColor="var(--sys-color-solidarityYellow-base)"
             />
             <stop
               offset="100%"
-              stopColor="#B4D8AE"
+              stopColor="var(--sys-color-kr-activistSmokeGreen-base)"
             />
           </linearGradient>
         </defs>
@@ -72,7 +72,7 @@ export const AuditDial: React.FC<AuditDialProps> = ({
           cy="100"
           r="80"
           fill="none"
-          stroke="#1E1E1E"
+          stroke="var(--sys-color-solidarityAsphaltBlack)"
           strokeWidth="12"
         />
 

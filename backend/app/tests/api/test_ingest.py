@@ -1,8 +1,6 @@
 """Tests for /ingest API endpoints."""
 
-from unittest.mock import ANY, MagicMock, patch
-
-import pytest
+from unittest.mock import patch
 
 
 class TestUploadArtifact:

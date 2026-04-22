@@ -108,4 +108,18 @@ describe('Dashboard Component', () => {
     expect(screen.getByText(/Add Application/i)).toBeInTheDocument();
     expect(screen.getByText(/View Archive/i)).toBeInTheDocument();
   });
+
+  it('renders the collective stat block with Nabla heading and display count', () => {
+    render(
+      <MemoryRouter>
+        <Dashboard />
+      </MemoryRouter>
+    );
+
+    const collectiveHeading = screen.getByText('THE COLLECTIVE');
+    expect(collectiveHeading.className).toContain('font-nabla-hero');
+
+    const collectiveCount = screen.getByText('1,204');
+    expect(collectiveCount.className).toContain('font-display-ultra');
+  });
 });

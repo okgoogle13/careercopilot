@@ -1,9 +1,9 @@
 {
   "wireframe_id": "05_analysis",
   "wireframe_path": ".claude/wireframes/05_analysis.xml",
-  "source_component_path": "frontend/src/components/phase3-batch3/AnalysisWorkbench.tsx",
+  "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/AnalysisWorkbench.tsx",
   "screen_component_path": "frontend/src/screens/05_analysis/AnalysisWorkbench.tsx",
-  "route": "/kr/analysis",
-  "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+  "route": "/analysis",
+  "notes": "Paired package for wireframe-to-TSX comparison. Runtime canonical route is /analysis.",
   "local_wireframe_path": "frontend/src/screens/05_analysis/05_analysis.wireframe.xml"
 }

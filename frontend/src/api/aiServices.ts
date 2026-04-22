@@ -515,3 +515,42 @@ export async function getDocumentPreview(templateId: string): Promise<unknown> {
 
 // Export the API client for use in other modules
 export { apiClient };
+
+// ---------------------------------------------------------------------------
+// Prototype: Achievement refinement (replaces direct geminiService calls)
+// ---------------------------------------------------------------------------
+
+export interface RefineAchievementRequest {
+  achievementId: string;
+  field: string;
+  originalText: string;
+  actionVerb: string;
+  nounTask: string;
+  metric: string;
+  strategy: string;
+  outcome: string;
+}
+
+export interface RefineAchievementResponse {
+  refined: string;
+}
+
+/**
+ * Refine a single achievement field via the backend AI endpoint.
+ * Replaces the prototype's direct @google/genai call in TailoredResumeView.
+ */
+export async function refineAchievement(request: RefineAchievementRequest): Promise<string> {
+  try {
+    const response = await apiClient.post<RefineAchievementResponse>(
+      '/ai/refine-achievement',
+      request
+    );
+    return response.refined;
+  } catch (error) {
+    console.error('Refine Achievement Error:', error);
+    if (error instanceof Error) {
+      throw new Error(`Failed to refine achievement: ${error.message}`);
+    }
+    throw new Error('Failed to refine achievement: Unknown error occurred');
+  }
+}

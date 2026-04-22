@@ -47,27 +47,27 @@ create_archive_dir() {
 should_exclude() {
     local file="$1"
     local filename="$(basename "$file")"
-    
+
     # Exclude README.md and CLAUDE.md
     if [[ "$filename" == "README.md" ]] || [[ "$filename" == "CLAUDE.md" ]]; then
         return 0  # Exclude
     fi
-    
+
     # Exclude files in docs/ directory
     if [[ "$file" == "$PROJECT_ROOT/docs/"* ]]; then
         return 0  # Exclude
     fi
-    
+
     # Exclude files already in archive
     if [[ "$file" == "$PROJECT_ROOT/archive/"* ]]; then
         return 0  # Exclude
     fi
-    
+
     # Exclude the script itself
     if [[ "$file" == "${BASH_SOURCE[0]}" ]]; then
         return 0  # Exclude
     fi
-    
+
     return 1  # Don't exclude
 }
 
@@ -76,9 +76,9 @@ is_referenced() {
     local file="$1"
     local filename="$(basename "$file")"
     local filename_no_ext="${filename%.md}"
-    
+
     log "  Checking references for: $filename"
-    
+
     # Search for references to the filename (with and without .md extension)
     local references
     references=$(grep -r -l --exclude-dir=".git" --exclude-dir="node_modules" --exclude-dir=".next" \
@@ -86,10 +86,10 @@ is_referenced() {
         -e "$filename" \
         -e "$filename_no_ext" \
         "$PROJECT_ROOT" 2>/dev/null || true)
-    
+
     # Remove self-reference
     references=$(echo "$references" | grep -v "^${file}$" || true)
-    
+
     if [[ -n "$references" ]]; then
         log "    Found $(echo "$references" | wc -l) references"
         return 0  # Referenced
@@ -102,11 +102,11 @@ is_referenced() {
 # Check if file is older than threshold days
 is_old() {
     local file="$1"
-    
+
     # Check file modification time
     local file_age
     file_age=$(find "$file" -mtime +$DAYS_THRESHOLD -print 2>/dev/null || true)
-    
+
     if [[ -n "$file_age" ]]; then
         return 0  # Old
     else
@@ -119,7 +119,7 @@ archive_file() {
     local file="$1"
     local filename="$(basename "$file")"
     local archive_path="$ARCHIVE_DIR/$filename"
-    
+
     # Handle filename conflicts
     local counter=1
     while [[ -f "$archive_path" ]]; do
@@ -127,7 +127,7 @@ archive_file() {
         local archive_path="$ARCHIVE_DIR/${name_without_ext}_$counter.md"
         ((counter++))
     done
-    
+
     log "Archiving: $file -> $archive_path"
     mv "$file" "$archive_path"
 }
@@ -137,55 +137,55 @@ scan_and_archive() {
     log "Starting scan for stale markdown files"
     log "Age threshold: $DAYS_THRESHOLD days"
     log "Archive directory: $ARCHIVE_DIR"
-    
+
     # Create archive directory
     create_archive_dir
-    
+
     # Find all .md files in the project
     local total_files=0
     local excluded_files=0
     local old_files=0
     local referenced_files=0
     local archived_files=0
-    
+
     log "Scanning for .md files..."
-    
+
     while IFS= read -r -d '' file; do
         ((total_files++))
-        
+
         local filename="$(basename "$file")"
         log "Processing: $filename"
-        
+
         # Check if should be excluded
         if should_exclude "$file"; then
             log "  Excluded (protected file)"
             ((excluded_files++))
             continue
         fi
-        
+
         # Check if file is old
         if ! is_old "$file"; then
             log "  Not old enough (modified within $DAYS_THRESHOLD days)"
             continue
         fi
-        
+
         ((old_files++))
         log "  File is old enough"
-        
+
         # Check if referenced
         if is_referenced "$file"; then
             log "  File is referenced - keeping"
             ((referenced_files++))
             continue
         fi
-        
+
         # Archive the file
         log "  File is unreferenced and old - archiving"
         archive_file "$file"
         ((archived_files++))
-        
+
     done < <(find "$PROJECT_ROOT" -name "*.md" -type f -print0 2>/dev/null | grep -z -v "$PROJECT_ROOT/.git" | grep -z -v "$PROJECT_ROOT/node_modules" | grep -z -v "$PROJECT_ROOT/archive" || true)
-    
+
     # Summary
     echo ""
     echo "=========================================="
@@ -195,7 +195,7 @@ scan_and_archive() {
     echo "Files old enough ($DAYS_THRESHOLD+ days): $old_files"
     echo "Files referenced by others: $referenced_files"
     echo "Files archived: $archived_files"
-    
+
     if [[ $archived_files -gt 0 ]]; then
         echo ""
         log "Archived files are now in: $ARCHIVE_DIR"
@@ -212,7 +212,7 @@ Scans for unreferenced .md files outside docs/ and archives old ones.
 
 Protected files (NEVER archived):
 - README.md
-- CLAUDE.md  
+- CLAUDE.md
 - Files in ./docs/ directory
 - Files already in ./archive/
 - This script itself
@@ -270,7 +270,7 @@ done
 # Override archive function for dry run
 if [[ "$DRY_RUN" == "true" ]]; then
     log "DRY RUN MODE - No files will actually be archived"
-    
+
     # Override mv command
     mv() {
         local src="$1"

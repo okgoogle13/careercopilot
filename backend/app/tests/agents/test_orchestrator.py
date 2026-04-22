@@ -7,7 +7,6 @@ import pytest
 
 from app.agents.orchestrator import (
     AgentOrchestrator,
-    AgentPriority,
     AgentStatus,
     ApplicationAgent,
     BaseAgent,
@@ -86,6 +85,7 @@ class TestBaseAgent:
         info = agent.get_status_info()
         assert info["duration_ms"] is None
 
+
 class TestSpecializedAgents:
     @pytest.mark.asyncio
     async def test_job_scout_run_task(self):
@@ -120,7 +120,7 @@ class TestSpecializedAgents:
         context = {
             "job_scout_results": {"all_jobs": mock_jobs},
             "user_profile": {},
-            "target_roles": ["Dev"]
+            "target_roles": ["Dev"],
         }
 
         result = await agent._run_task(context)
@@ -144,7 +144,6 @@ class TestSpecializedAgents:
         context = {"job_scout_results": {"all_jobs": [{"title": "no salary"}]}}
         result = await agent._run_task(context)
         assert "error" in result["salary_trends"]
-
 
     @pytest.mark.asyncio
     async def test_application_agent_run_task(self):
@@ -204,7 +203,9 @@ class TestAgentOrchestrator:
         for name in orchestrator.agents:
             orchestrator.agents[name].agent_id = name
             # Mock can_run to follow order
-            orchestrator.agents[name].can_run.side_effect = lambda deps: True if not deps else True # simplified
+            orchestrator.agents[name].can_run.side_effect = lambda deps: (
+                True if not deps else True
+            )  # simplified
             orchestrator.agents[name].execute = AsyncMock(return_value={"status": "completed"})
 
         with patch("app.agents.orchestrator.get_db_session") as mock_db:
@@ -233,7 +234,9 @@ class TestAgentOrchestrator:
 
         # market_analyst fails
         orchestrator.agents["market_analyst"].can_run.return_value = True
-        orchestrator.agents["market_analyst"].execute = AsyncMock(side_effect=ValueError("Test Error"))
+        orchestrator.agents["market_analyst"].execute = AsyncMock(
+            side_effect=ValueError("Test Error")
+        )
 
         with patch("app.agents.orchestrator.get_db_session") as mock_db:
             mock_session = MagicMock()

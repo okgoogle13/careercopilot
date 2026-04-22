@@ -1,235 +1,158 @@
 import { memo } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { MapPin, Clock } from 'lucide-react';
 import clsx, { type ClassValue } from 'clsx';
-import { useModeStore } from '../../stores/useModeStore';
-
-type SlotDef = {
-  name: string;
-  zLayer: 'Z-0' | 'Z-1' | 'Z-2' | 'Z-3';
-  token: `--sys-${string}`;
-  assetCompat: `KR-${string}`;
-};
-
-const SLOT_DEFS: SlotDef[] = [
-  {
-    name: 'auto_kr_solid_004',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_solid_011',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_solid_026',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_solid_009',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_ui_017',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_ui_014',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_ui_026',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_ui_037',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-  {
-    name: 'auto_kr_solid_045',
-    zLayer: 'Z-3',
-    token: '--sys-color-inkGold-base',
-    assetCompat: 'KR-SOLID-GENERAL',
-  },
-];
-const DEFAULT_SLOT_ASSETS: Partial<Record<string, string>> = {
-  auto_kr_solid_004: 'KR-UI-008',
-  auto_kr_solid_011: 'KR-UI-009',
-  auto_kr_solid_026: 'KR-UI-010',
-  auto_kr_solid_009: 'KR-UI-011',
-  auto_kr_ui_017: 'KR-UI-012',
-  auto_kr_ui_014: 'KR-UI-013',
-  auto_kr_ui_026: 'KR-UI-014',
-  auto_kr_ui_037: 'KR-UI-015',
-  auto_kr_solid_045: 'KR-UI-018',
-};
+import { useKanban, ApplicationStatus } from '../../hooks/useKanban';
+import {
+  KanbanBoard,
+  UnifiedColumn,
+  SolidarityCard,
+  ManifestoSlab,
+  ActionButton,
+} from '../../components/kerala-rage';
 
 export interface KanbanTrackerProps {
   className?: ClassValue;
-  title?: string;
-  subtitle?: string;
-  primaryLabel?: string;
-  secondaryLabel?: string;
-  slotAssets?: Partial<Record<string, string>>;
-  onPrimaryAction?: () => void;
-  onSecondaryAction?: () => void;
 }
 
-const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
-const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+/**
+ * KanbanTracker (High-Fidelity Screen)
+ *
+ * Paired high-fidelity reference for the canonical /applications surface.
+ * Fulfils the wireframe design truth for screen 07_kanban.
+ */
+export const KanbanTracker = memo(function KanbanTracker({ className }: KanbanTrackerProps) {
+  const shouldReduceMotion = useReducedMotion() ?? false;
+  const { applications, columns, isLoading } = useKanban();
 
-export const KanbanTracker = memo(function KanbanTracker({
-  className,
-  title = 'Application Kanban',
-  subtitle = 'Track application state transitions in one board.',
-  primaryLabel = 'Open Card',
-  secondaryLabel = 'View Timeline',
-  slotAssets,
-  onPrimaryAction,
-  onSecondaryAction,
-}: KanbanTrackerProps) {
-  const mode = useModeStore((state) => state.mode);
-  const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
-  const isKrDark = mode === 'KrDark';
+  const getColumnApplications = (status: ApplicationStatus) =>
+    applications.filter((app) => app.status === status);
+
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-surface text-on-surface">
+        <span className="font-mono text-xs uppercase tracking-widest animate-pulse">
+          Syncing Mission Data...
+        </span>
+      </div>
+    );
+  }
 
   return (
     <motion.section
       role="main"
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={undefined}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       className={clsx(
-        'relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-6 md:p-8',
+        'relative min-h-screen w-full flex flex-col p-8 md:p-12 overflow-hidden bg-solidarity-charcoal-base',
         className
       )}
-      style={{
-        backgroundColor: 'var(--sys-color-charcoalBackground-base)',
-        color: 'var(--sys-color-worker-ash-base)',
-        border: '1px solid var(--sys-color-concreteGrey-base)',
-      }}
-      data-mode={mode}
-      data-testid="kanbantracker"
-      data-motion-audit="true"
+      data-testid="kanban-tracker-screen"
     >
-      <style>{`
-         @media (prefers-reduced-motion: reduce) {
-          [data-motion-audit="true"] *,
-          [data-motion-audit="true"]::before,
-          [data-motion-audit="true"]::after {
-            transition: none !important;
-            animation: none !important;
-          }
-        }
-      `}</style>
-
-      <div
-        className="pointer-events-none absolute inset-0"
-        aria-hidden="true"
-      >
-        {SLOT_DEFS.map((slot) => (
-          <div
-            key={slot.name}
-            data-slot={slot.name}
-            data-asset-compat={slot.assetCompat}
-            data-asset-id={resolvedSlotAssets[slot.name] ?? ''}
-            data-z-layer={slot.zLayer}
-            style={{ color: `var(${slot.token})` }}
+      <header className="mb-14 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+        <ManifestoSlab
+          title="Application Kanban"
+          subtitle="Active Role Resurrections // Tactical State Transitions"
+          className="max-w-3xl"
+        />
+        <div className="flex gap-4 pb-2">
+          <ActionButton
+            variant="secondary"
+            label="ARCHIVE_INTEGRITY"
+            size="sm"
+            className="px-6 py-2 text-[9px]"
           />
-        ))}
-      </div>
+          <ActionButton
+            variant="primary"
+            label="NEW_MISSION"
+            size="sm"
+            onClick={() => window.location.assign('/apply')}
+            className="px-6 py-2 text-[9px]"
+          />
+        </div>
+      </header>
 
-      <motion.header
-        initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ ...springHero, delay: 0.04 }}
-        className="relative z-10"
-      >
-        <h1
-          className="text-3xl font-black md:text-5xl"
-          style={{
-            fontFamily: 'var(--sys-type-font-fraunces)',
-            color: 'var(--sys-color-paperWhite)',
-          }}
-        >
-          {title}
-        </h1>
-        <p
-          className="mt-3 max-w-4xl text-base md:text-lg"
-          style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            color: 'var(--sys-color-worker-ash-base)',
-          }}
-        >
-          {subtitle}
-        </p>
-      </motion.header>
+      <KanbanBoard className="flex-1 gap-8 md:gap-12 overflow-x-auto pb-12">
+        {columns.map((col, idx) => {
+          const colApps = getColumnApplications(col);
 
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={undefined}
-        className="relative z-10 mt-6 flex flex-wrap gap-3"
-      >
-        <motion.button
-          type="button"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          transition={springButton}
-          onClick={onPrimaryAction}
-          className="rounded-[var(--sys-shape-blockRiot03)] px-5 py-3 font-semibold"
-          style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            backgroundColor: 'var(--sys-color-inkGold-base)',
-            color: 'var(--sys-color-charcoalBackground-base)',
-          }}
-        >
-          {primaryLabel}
-        </motion.button>
-        <motion.button
-          type="button"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          transition={springButton}
-          onClick={onSecondaryAction}
-          className="rounded-[var(--sys-shape-blockRiot01)] border px-5 py-3 font-medium"
-          style={{
-            fontFamily: 'var(--sys-type-font-work-sans)',
-            borderColor: 'var(--sys-color-protestMetalBlue-base)',
-            color: isKrDark ? 'var(--sys-color-worker-ash-base)' : 'var(--sys-color-paperWhite)',
-            backgroundColor: 'transparent',
-          }}
-        >
-          {secondaryLabel}
-        </motion.button>
-      </motion.div>
+          return (
+            <UnifiedColumn
+              key={col}
+              title={col}
+              className="group/col border-r border-[var(--kr-color-charcoal-background-steps-3)]/10 pr-6 last:border-0 min-w-[300px]"
+            >
+              <div className="space-y-6">
+                {colApps.map((app, appIdx) => (
+                  <motion.div
+                    key={app.id}
+                    initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.1 + appIdx * 0.05 }}
+                  >
+                    <SolidarityCard
+                      className="p-6 group/card cursor-pointer border-[var(--kr-color-charcoal-background-steps-3)]/20 hover:border-ink-gold/30 transition-all duration-500 relative overflow-hidden bg-[var(--kr-color-charcoal-background-steps-3)]/30"
+                      onClick={() => console.log('Opening mission:', app.id)}
+                    >
+                      <div className="flex flex-col gap-4 relative z-10">
+                        <div className="space-y-1">
+                          <span className="font-mono text-[8px] text-paper-white/20 uppercase tracking-widest">
+                            STATION_ID: {app.id.slice(0, 8)}
+                          </span>
+                          <h4 className="font-proclamation text-xl uppercase text-paper-white group-hover/card:text-ink-gold transition-colors duration-500 leading-tight">
+                            {app.role}
+                          </h4>
+                        </div>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={undefined}
-        className="relative z-10 mt-6 text-xs"
-        style={{
-          fontFamily: 'var(--sys-type-font-mono)',
-          color: 'var(--sys-color-concreteGrey-base)',
-        }}
-      >
-        Slots: {SLOT_DEFS.length} | Motion: spring-only | Tokens: --sys-* | Zustand: useModeStore
-      </motion.p>
+                        <p className="font-body text-xs text-paper-white/40 italic">
+                          {app.company}
+                        </p>
+
+                        <div className="flex items-center gap-4 pt-4 border-t border-[var(--kr-color-charcoal-background-steps-3)]/10 text-[9px] text-paper-white/30 font-mono tracking-tighter">
+                          <div className="flex items-center gap-1.5 whitespace-nowrap">
+                            <MapPin className="w-2.5 h-2.5 text-solidarity-red/40" />
+                            {app.location}
+                          </div>
+                          <div className="flex items-center gap-1.5 whitespace-nowrap">
+                            <Clock className="w-2.5 h-2.5 text-ink-gold/40" />
+                            {app.updatedAt}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Asymmetric shape motifs per KR Solidarity archetypes */}
+                      <div className="absolute bottom-0 right-0 w-16 h-16 bg-[var(--kr-color-charcoal-background-steps-3)]/5 blur-2xl rounded-march -mr-8 -mb-8" />
+                    </SolidarityCard>
+                  </motion.div>
+                ))}
+
+                {colApps.length === 0 && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.1 }}
+                    className="h-48 border border-dashed border-concrete-grey/25 rounded-megaphone flex flex-col items-center justify-center text-center p-6"
+                  >
+                    <span className="font-mono text-xs uppercase tracking-widest text-concrete-grey">
+                      Station Idle
+                    </span>
+                  </motion.div>
+                )}
+              </div>
+            </UnifiedColumn>
+          );
+        })}
+      </KanbanBoard>
+
+      <footer className="mt-8 flex justify-between items-center opacity-30 border-t border-concrete-grey/10 pt-6">
+        <span className="font-mono text-[8px] uppercase tracking-widest">
+          Evidence Archive: v6.0.0
+        </span>
+        <div className="flex gap-4">
+          <span className="font-mono text-[8px] uppercase tracking-widest">
+            Station: Kerala_Rage_Consolidated
+          </span>
+        </div>
+      </footer>
     </motion.section>
   );
 });
