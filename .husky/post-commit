@@ -1,0 +1,8 @@
+#!/bin/sh
+# Post-commit hook: Perplexity-driven Notion + Linear sync
+# Runs after every commit. Non-blocking — failures do not affect git.
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+
+# Run sync detection in background to avoid blocking terminal
+"$REPO_ROOT/scripts/sync/detect-trigger.sh" &
