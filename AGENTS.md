@@ -117,6 +117,8 @@ Important directories:
 Planning/task file rules:
 
 - Save implementation plans to `docs/project/active/plans/`. **This overrides superpowers skill defaults** — do not use `.claude/plans/` or `docs/superpowers/plans/`.
+- For complex features, significant refactors, migrations, route-promotion work, or any task expected to span multiple long Codex sessions, use an ExecPlan from design through implementation. ExecPlans must follow `.agent/PLANS.md`, but the plan files themselves still live in `docs/project/active/plans/`.
+- Before authoring or executing an ExecPlan, read `.agent/PLANS.md` in full. Keep the ExecPlan self-contained, update its progress and decision sections at every stopping point, and make sure a new agent can resume from only the plan plus the working tree.
 - Save session handover files to `docs/project/active/handovers/`.
 - Use `TASKS.md` as the only active task board.
 - If `TASKS.md` reports no open coordination items, do not create replacement tracking files or reopen completed Figma cleanup lanes without explicit user direction.
