@@ -25,6 +25,7 @@ import { exportService } from '@/api/exportService';
 import { useAnalysisPipelineStore, type AtsResult } from '@/stores/analysisPipelineStore';
 import { StudioMatchPanel } from './components/StudioMatchPanel';
 import { SuggestionsPanel } from './components/SuggestionsPanel';
+import { ATSSignalBreakdown } from './components/ATSSignalBreakdown';
 import type { CareerDatabase, JobOpportunity, MatchAnalysis } from '@/types/career';
 import { useAuth } from '@/context/AuthContext';
 
@@ -391,6 +392,10 @@ export const AnalysisPage: React.FC = () => {
                 }}
                 isCalculating={isAnalyzing}
                 documentType="resume"
+              />
+
+              <ATSSignalBreakdown
+                atsResult={pipelineStore.getPipeline(assetId)?.atsResult}
               />
 
               <AuditDisplay
