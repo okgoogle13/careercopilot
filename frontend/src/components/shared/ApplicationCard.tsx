@@ -17,7 +17,7 @@ import { StatusBadge, type StatusBadgeVariant } from '../ui/StatusBadge';
  * Displays job application information with a multi-step progress indicator.
  *
  * **KeralaRage KrSolidarity V3.1 Usage:**
- * - Shape: `rounded-pebble` → [DEPRECATED_STYLE] asymmetric corners ✅
+ * - Shape: `rounded-march` → [DEPRECATED_STYLE] asymmetric corners ✅
  * - Elevation: `shadow-standard` → `shadow-maximum` on hover
  * - Typography: `text-bloom-KrDark` (SOFT=100) for titles
  * - Annotations: `text-curator-annotation` for curator notes
@@ -34,7 +34,7 @@ export function ApplicationCard({
 }: ApplicationCardProps) {
   return (
     <div
-      className={`bg-surface-container rounded-pebble p-space-xl border border-[var(--kr-color-concrete-grey-steps-0)] shadow-standard hover:shadow-maximum transition-all duration-300 ease-viscous-breeze ${className}`}
+      className={`bg-surface-container rounded-march p-space-xl border border-[var(--kr-color-concrete-grey-steps-0)] shadow-standard hover:shadow-maximum transition-all duration-300 ease-viscous-breeze ${className}`}
     >
       {/* Header Section */}
       <div className="flex items-start justify-between mb-8">

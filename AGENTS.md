@@ -1,261 +1,149 @@
 # AGENTS.md
 
-Career Copilot is an AI-powered job application assistant built with React 18, TypeScript, FastAPI, Google Genkit, Postgres, and Firebase hosting/auth integrations. This file is the single operational instruction source for coding agents working in this repo.
+Single source of truth for all coding agents working in this repo (Claude Code, Codex, Gemini). Routing, procedures, authority order, and go-live criteria live here. Agent-specific model selection is handled by each CLI internally.
 
+---
 
-## Current Stage
+## Project
 
-The repo is in a Figma-to-code integration stage combined with frontend source-of-truth convergence.
+CareerCopilot — AI-powered job application assistant.
+Stack: React 18 + TS + Vite + Tailwind v4 + Zustand + TanStack Query · FastAPI + SQLAlchemy + Genkit + Python 3.10+ · GCP / Firebase / Cloud Run.
 
-Current baseline as of the active task board:
+---
 
-- the Figma sync contract is repaired
-- redirect-history pages are separated from canonical sync targets
-- the active board currently has no open coordination items in `TASKS.md`
+## Current Phase
 
-The priority is not broad refactoring. The priority is:
+**Post-Figma: Backend wiring + product hardening.**
 
-1. Keep design intent, screen mappings, and live routes aligned.
-2. Replace prototype-era or Figma-bound leftovers with canonical repo artifacts.
-3. Preserve KR Solidarity design constraints while promoting real screens into production-safe code.
-4. Treat repaired sync artifacts as settled baseline unless the user explicitly reopens them.
+Figma/design convergence is complete. Active workstreams:
 
-If Figma, wireframes, runtime code, and control JSON disagree, do not guess. Reconcile the disagreement through the authority order below.
+1. **Templating refactor** — `DocumentPipeline`, `CareerProfile` contract, theme renderer (`backend/app/renderers/themed_document_renderer.py`)
+2. **Pipeline state wiring** — durable `analysisPipelineStore` (ingestion → ATS score → export), retire client-side jsPDF path
+3. **API layer consolidation** — collapse `src/services/` into `src/api/`, extend TanStack Query adoption beyond `features/applications/`
+
+---
+
+## Go-Live Stages
+
+**Stage 1 — Go-Live Gate** (ship this first):
+All core features working end-to-end. Rough UI acceptable. Incomplete test coverage acceptable. Goal: real users can use it.
+- Resume ingest → ATS score → cover letter generate → export (server-rendered PDF)
+- Application CRUD + Kanban tracker
+- Auth + profile
+
+**Stage 2 — Polish Gate**:
+Full test coverage, UI finesse, production-hardened error handling, performance.
+
+Tasks in plans and TASKS.md are tagged Stage 1 or Stage 2. Always complete all Stage 1 tasks before starting Stage 2.
+
+---
+
+## Inter-CLI Routing (ask first, both triggers)
+
+| Trigger | Route to |
+|---------|----------|
+| Task is browser visual verification, screenshot comparison | Gemini |
+| Task is pure mechanical file edits, CRUD stubs, test scaffolding, lint/CI fix loops | Codex |
+| Token pressure: after `/compact` fires OR cache writes exceed ~500K in session | Offer Codex handoff |
+| Everything else | Claude Code |
+
+**Protocol**: Claude Code identifies the trigger, tells the user "this looks like a [Codex/Gemini] task — route there?", waits for go-ahead before handing off.
+
+---
 
 ## Authority Order
 
-Use these sources in this order.
+When sources conflict, resolve in this order:
 
-1. Design canon:
-   - `docs/design/01_CANON.md`
-   - `docs/design/02_SYSTEM.md`
-2. Active Figma coordination:
-   - `docs/project/active/figma-agent-tasks.md`
-   - `docs/project/active/figma-sync-order.json`
-3. Migration control artifacts:
-   - `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.json`
-   - `docs/design/screen-map.json`
-4. Screen pairing inside the repo:
-   - `frontend/src/screens/mapping.schema.json`
-   - `frontend/src/screens/*/mapping.json`
-   - `frontend/src/screens/*/*.wireframe.xml`
-   - `frontend/src/screens/*/*.tsx`
-5. Runtime truth:
-   - `frontend/src/App.tsx`
-   - `frontend/src/config/route-registry.ts`
-   - `frontend/src/features/**`
-   - `frontend/src/pages/**`
-6. Capability truth:
-   - `backend/app/api/endpoints/**`
-   - backend schemas and service contracts used by mounted routes
-7. Asset truth:
-   - `docs/manifests/kr-manifest.json`
-   - canonical asset registries/manifests referenced by active docs
+1. `docs/design/01_CANON.md` — palette, typography, shapes, motion, symbolic constraints
+2. `TASKS.md` + `SPRINT_BRIEF.md` — active work and sprint scope
+3. `DECISIONS.md` — recorded tradeoffs and follow-ups
+4. `frontend/src/config/route-registry.ts` + `frontend/src/App.tsx` — live route truth
+5. `backend/app/api/endpoints/` — capability truth
+6. `frontend/src/design/tokens/tokens.json` — token source of truth
 
-Conflict rules:
+---
 
-- Design canon wins for palette, typography, shapes, motion, and symbolic constraints.
-- Figma task docs win for active handoff status like missing node IDs, token-name checks, and asset-slot annotation requirements.
-- The Figma Make site or approved donor export defines visual design truth for layout, copy hierarchy, route-family grouping, and alias intent when active docs explicitly use it as the donor baseline.
-- Figma-generated code is donor/reference material only unless deliberately promoted into repo-owned runtime surfaces; it must not be treated as implementation truth by default.
-- `mapping.json` plus paired wireframe plus paired screen component define the local design implementation contract for a surface.
-- Runtime truth decides what is actually exposed to users today.
-- Control JSON is coordination truth, not license to override runtime or design truth blindly.
-- Prototype `/kr/*` routes and harvest artifacts are reference-only unless explicitly promoted.
+## Planning & Task Rules
 
-## Figma Integration Workflow
+- Implementation plans → `docs/project/active/plans/`
+- Handovers → `docs/project/active/handovers/`
+- Reports → `.claude/reports/`
+- `TASKS.md` is the only active task board — no shadow trackers
+- `DECISIONS.md` for all tradeoff records: what, why, tradeoff, follow-up
 
-When a task involves a Figma design file, follow this sequence.
+---
 
-1. Identify the surface and locate its local authority:
-   - `frontend/src/screens/<screen-id>/mapping.json`
-   - paired `*.wireframe.xml`
-   - paired screen `*.tsx`
-2. Cross-check that surface against:
-   - `docs/project/active/frontend-source-of-truth-migration/control/route-matrix.json`
-   - `docs/design/screen-map.json`
-3. Check `docs/project/active/figma-sync-order.json` for a real `figma_node_id`.
-   - If the node ID is missing, treat the task as blocked on Figma-side work rather than inventing a mapping.
-   - If `canonical_form` marks a route as `mobile_reference_only` or `legacy_broken_archive`, use the recorded desktop canonical frame and code-target IDs for sync work instead of the older mobile frame.
-4. Keep Figma variable names aligned with code tokens:
-   - source of truth: `frontend/src/design/tokens/tokens.json`
-   - CSS usage: semantic `--kr-*` tokens only
-5. Translate Figma design intent into canonical repo artifacts:
-   - Figma Make site or approved donor export -> design/reference baseline
-   - generated Figma code -> selective donor fragments only
-   - wireframe -> mapping -> screen/component -> live route
-   - not raw screenshot copying and not ad hoc visual approximation
-   - not wholesale promotion of generated Figma route files into production code
-6. Replace prototype-era Figma asset bindings:
-   - remove or convert `figma:asset/*`
-   - use manifest-backed asset IDs or canonical local asset references
-   - never introduce new production code that depends on raw `figma:asset` imports
-7. Only touch `frontend/src/App.tsx` or `frontend/src/config/route-registry.ts` when the task is explicitly about route promotion, registry repair, or live exposure.
+## Blocker Protocol
 
-Blocked-state rules:
+- **Low-risk blocker** (style choice, minor implementation detail): decide the safer/simpler option, log to `DECISIONS.md`, keep moving
+- **High-risk blocker** (schema changes, route changes, deleting code, auth policy, migrations): stop and ask the user
 
-- Missing node IDs: stop and request/update the Figma-side artifact rather than fabricating IDs.
-- Token-name mismatch between Figma and code: update the token source of truth deliberately, then regenerate derived CSS.
-- Asset slots without manifest IDs: keep them reference-only until a canonical `kr-asset-id` exists.
-
-## Project Snapshot
-
-- Frontend: `frontend/` using React 18, TypeScript, Vite, Zustand, TanStack Query, Tailwind v4, MUI
-- Backend: `backend/` using FastAPI, SQLAlchemy, Postgres, async/await
-- AI orchestration: Genkit flows plus backend API wrappers
-- Design system: KR Solidarity v6.1, Material 3 Expressive foundation, dark-only "Solidarity Mode"
-
-Important directories:
-
-- `frontend/src/screens/` contains design-paired surfaces and mapping metadata
-- `frontend/src/features/` contains live feature implementations
-- `frontend/src/design/` contains token source and generated styles
-- `backend/app/api/endpoints/` contains mounted capability truth
-- `docs/project/active/` contains current orchestration, migration, and Figma coordination docs
-
-Planning/task file rules:
-
-- Save implementation plans to `docs/project/active/plans/`. **This overrides superpowers skill defaults** — do not use `.claude/plans/` or `docs/superpowers/plans/`.
-- Save session handover files to `docs/project/active/handovers/`.
-- Use `TASKS.md` as the only active task board.
-- If `TASKS.md` reports no open coordination items, do not create replacement tracking files or reopen completed Figma cleanup lanes without explicit user direction.
-- Treat `dashboard.html` as the status view over `TASKS.md`, not a second tracker.
-- Treat any extra dashboards or plan files outside `docs/project/active/` as reference/archive material unless the user explicitly designates them active.
-
-## Design System Rules
-
-Non-negotiables:
-
-- Use semantic `--kr-*` tokens for all new UI work. Do not introduce new `--sys-*` usage.
-- No hardcoded hex values in production UI.
-- No Australian flora/fauna motifs. Coconut palms and elephants are allowed where canon permits; gum leaves, wattle, and eucalyptus are not.
-- No default-safe typography drift. Do not introduce Inter, Roboto, Arial, Sora, or Plus Jakarta Sans.
-- Use KR Solidarity archetypes and current component names:
-  - `Strike`
-  - `Placard`
-  - `Scaffold`
-  - `March`
-  - `Megaphone`
-- Treat deprecated names like `Pebble`, `Stone`, `Slab`, `Jar`, `Cabinet`, `Lens`, `Signal`, and `HaloPulses` as compatibility residue, not new design vocabulary.
-
-## Backend and AI Rules
-
-- Prefer Genkit flow implementations and typed schemas over loose helper scripts.
-- Use Pydantic models for backend contracts and structured Genkit outputs.
-- Treat fallback AI models as disabled or unreliable unless the runtime config explicitly supports them.
-- Validate auth and user ownership at the backend boundary.
-- Keep agents single-purpose; do not create monolithic document-analysis-generation hybrids.
-
-## Frontend Rules
-
-- TypeScript strict mode is required.
-- Use the API layer for server communication; do not query data stores directly from React components.
-- Use `frontend/src/config/firebase.ts` for client Firebase config.
-- Prefer runtime-safe feature modules over prototype copies.
-- Keep screen-paired artifacts in sync when the task is a design-integration task:
-  - `mapping.json`
-  - local `*.wireframe.xml`
-  - paired `*.tsx`
+---
 
 ## Safe Commands
 
-Use repo-root-safe commands and keep them distilled.
-
 ```bash
-(cd frontend && yarn test)
-(cd backend && pytest)
-(cd frontend && yarn type-check)
-(cd backend && mypy .)
-(cd frontend && yarn lint)
-(cd backend && ruff check .)
-node frontend/scripts/validate-governance-artifacts.mjs
-python3 scripts/design-validation/validate-tokens.py
+# Frontend
+cd frontend && yarn dev
+cd frontend && yarn test
+cd frontend && yarn lint
+cd frontend && yarn tsc --noEmit
+cd frontend && yarn build
+python3 scripts/build-m3-tokens.py   # run from repo root
+
+# Backend
+cd backend && source venv/bin/activate
+uvicorn app.main:app --reload --port 8000
+pytest
+ruff check .
+mypy .
 ```
 
-## Ask First
+---
 
-Ask before:
+## Design System Rules (KR Solidarity v6.1)
 
-- installing or upgrading dependencies
-- changing database migrations or auth policy
-- changing model-selection policy
-- updating required environment variables
-- deleting user or artifact data
-- deploying to staging or production
-- making breaking API-contract changes
+- Dark-only: all backgrounds → `--kr-color-charcoal-background-*`
+- Semantic tokens only: `--kr-*` CSS variables, no hardcoded hex
+- No Australian flora/fauna. Coconut palms and elephants allowed where canon permits.
+- No typography drift: no Inter, Roboto, Arial, Sora, Plus Jakarta Sans
+- Archetypes: `Strike`, `Placard`, `ScaffoldInput`, `March`, `Megaphone`
+- Deprecated names (`Pebble`, `Stone`, `Slab`, `Jar`, `Cabinet`, `Lens`) are residue — do not use
+
+---
+
+## Backend & Frontend Rules
+
+- Pydantic models for all backend contracts
+- Validate auth + user ownership at the backend boundary
+- TypeScript strict mode required
+- All server communication via `frontend/src/api/` — no direct fetch/axios in feature components
+- Do not add calls to `frontend/src/services/` — legacy, being collapsed into `src/api/`
+
+---
+
+## Ask Before
+
+- Installing or upgrading dependencies
+- Changing database migrations or auth policy
+- Updating required environment variables
+- Deploying to staging or production
+- Breaking API contract changes
 
 ## Never
 
-Never:
+- Commit secrets, keys, or credentials
+- Bypass auth or ownership checks
+- Force-push protected branches
+- Introduce raw `figma:asset/*` imports in production code
+- Treat stale docs or archive artifacts as active authority
 
-- commit secrets, keys, or credentials
-- weaken `.gitignore` to permit secret files
-- bypass auth or ownership checks
-- force-push protected branches
-- reset or delete shared history
-- introduce new production code that depends on raw `figma:asset/*`
-- treat stale docs or archive artifacts as active authority
+---
 
 ## Verification Before Claiming Completion
 
-Before saying work is done:
-
-1. Run the narrowest relevant validation commands.
-2. Verify touched design-integration artifacts still agree:
-   - mapping metadata
-   - paired wireframe/component
-   - route/control docs if applicable
-3. If UI styling changed, confirm token hygiene and zero-flora compliance.
-4. If route exposure changed, confirm `App.tsx` and `route-registry.ts` intentionally agree.
-5. If backend contracts changed, confirm mounted endpoints and schemas agree.
-
-## Claude Model Ladder
-
-When you ask the human to run Claude Code, follow this model policy:
-
-- Use **Haiku** for:
-  - Inventory, classification, presence checks, PM/status reshaping.
-- Use **Sonnet** for:
-  - Most implementation work (multi-file token fixes, script edits, per-screen parity updates, validation scripts).
-- Use **Opus** only for:
-  - Architectural decisions, route-promotion decisions, and final go/no-go review.
-
-## MCP Health Check — flash-sidekick and vision-scorer-mcp
-
-Goal: Confirm that `flash-sidekick` and `vision-scorer-mcp` are available, behaving correctly, and actually saving Claude tokens.
-
-### Step 1 — Server Presence and Status
-- Run: `claude mcp list`
-- Expect an entry for `flash-sidekick` and `vision-scorer-mcp` with status ✓ or `Connected`.
-
-### Step 2 — flash-sidekick Functional Test (Text-Only)
-- Run `flash-sidekick.quick_summarize`. Validate the output is succinct.
-
-### Step 3 — flash-sidekick Batch Test (Context Savings)
-- Run `flash-sidekick.batch_file_analysis` on 5–10 representative files and inspect JSON size.
-
-### Step 4 — vision-scorer-mcp Functional Test (Scoped Vision)
-- Pick a single, known-good Figma frame and invoke `/vision-scorer-mcp` to get KR Solidarity score.
-
-### Step 5 — Token-Saving Behaviour Check
-- Compare tokens used per turn with and without MCP assistance.
-
-## Domain Context
-
-Product focus:
-
-- social work
-- community services
-- government and public sector applications
-- nonprofit and mission-aligned roles
-
-Common output expectations:
-
-- KSC responses
-- STAR-structured examples
-- trauma-informed and culturally competent language
-- nonprofit and community impact framing
-
-## Legacy Note
-
-`docs/guides/AGENTS.md` is a legacy entry point kept only as a redirect. Do not treat it as a second authority source.
+1. Run narrowest relevant validation commands
+2. If UI changed: confirm token hygiene (`--kr-*` only, no hex)
+3. If route changed: confirm `App.tsx` and `route-registry.ts` agree
+4. If backend contracts changed: confirm mounted endpoints and schemas agree

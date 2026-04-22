@@ -153,7 +153,7 @@ export const DocumentPreview: React.FC<DocumentPreviewProps> = ({
                   Zoom Controls
                 </h3>
                 <div className="flex flex-col gap-3 items-center">
-                  <div className="flex items-center gap-2 bg-[var(--sys-color-charcoalBackground-steps-2)] rounded-pebble p-1">
+                  <div className="flex items-center gap-2 bg-[var(--sys-color-charcoalBackground-steps-2)] rounded-march p-1">
                     <button
                       onClick={handleZoomOut}
                       disabled={zoomLevel <= 50}

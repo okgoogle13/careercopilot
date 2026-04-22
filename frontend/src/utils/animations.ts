@@ -338,7 +338,7 @@ export const buttonInteractions = {
   withGlow: {
     transition: shadowTransitions.hover,
     '&:hover': {
-      boxShadow: '0 0 16px rgba(168, 85, 247, 0.4)',
+      boxShadow: '0 0 16px color-mix(in srgb, var(--kr-color-ink-gold-base) 40%, transparent)',
     },
   },
 };
@@ -354,7 +354,7 @@ export const inputInteractions = {
   withFocus: {
     transition: shadowTransitions.focus,
     '&:focus': {
-      boxShadow: '0 0 0 3px rgba(168, 85, 247, 0.1)',
+      boxShadow: '0 0 0 3px color-mix(in srgb, var(--kr-color-ink-gold-base) 10%, transparent)',
     },
   },
 };

@@ -95,7 +95,7 @@ export const EditableField: React.FC<EditableFieldProps> = ({
 
   return (
     <div
-      className="group mb-4 p-4 rounded-pebble bg-white/5 border border-white/5 hover:border-[var(--color-ink-gold)]/30 hover:bg-white/10 transition-all duration-300 cursor-pointer"
+      className="group mb-4 p-4 rounded-march bg-white/5 border border-white/5 hover:border-[var(--color-ink-gold)]/30 hover:bg-white/10 transition-all duration-300 cursor-pointer"
       onClick={() => setIsEditing(true)}
     >
       <div className="flex justify-between items-start gap-4">

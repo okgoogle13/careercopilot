@@ -14,7 +14,7 @@ import { cn } from './utils';
  * - Colors: Kerala Rage kr-solidarity semantic palette (inkGold, solidarityRed, concreteGrey, worker-ash)
  * - Typography: Work Sans (field-note font family)
  * - Motion: Spring physics cubic-bezier(0.34, 1.56, 0.64, 1) with scale transforms
- * - Shape: Asymmetric border radius via rounded-pebble/rounded-megaphone utilities
+ * - Shape: Asymmetric border radius via rounded-march/rounded-megaphone utilities
  *
  * **Variants:**
  * - default: inkGold background (primary CTA)
@@ -47,9 +47,9 @@ const buttonVariants = cva(
         link: 'text-[var(--sys-color-inkGold-base)] underline-offset-4 hover:underline',
       },
       size: {
-        default: 'h-11 px-6 py-2 has-[>svg]:px-4 rounded-pebble',
+        default: 'h-11 px-6 py-2 has-[>svg]:px-4 rounded-march',
         sm: 'h-9 px-4 has-[>svg]:px-3 rounded-megaphone',
-        lg: 'h-14 px-8 has-[>svg]:px-6 text-base rounded-pebble',
+        lg: 'h-14 px-8 has-[>svg]:px-6 text-base rounded-march',
         icon: 'size-11 rounded-march', // Symmetric circular for icon buttons
       },
     },

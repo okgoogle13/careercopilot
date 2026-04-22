@@ -21,7 +21,7 @@ import { KrDarkSpring } from '@/design/tokens/motion-presets';
  * Built using Material Design 3 KeralaRage KrSolidarity design tokens.
  *
  * **M3 Design Token Usage:**
- * - Shape: `rounded-pebble` → `--sys-shape-pebble` (20px 20px 32px 32px) - [DEPRECATED_STYLE] asymmetric corners ✅
+ * - Shape: `rounded-march` → `--sys-shape-pebble` (20px 20px 32px 32px) - [DEPRECATED_STYLE] asymmetric corners ✅
  * - Elevation: `shadow-elevation-1` → `shadow-elevation-2` on hover (M3 depth levels)
  * - Spacing: `p-space-xl` (32px) for card padding
  * - Motion: `duration-medium-1` (250ms) with `ease-spring` (expressive cubic-bezier)
@@ -42,7 +42,7 @@ export function ApplicationCard({
 }: ApplicationCardProps) {
   return (
     <div
-      className={`bg-surface-container rounded-pebble p-space-xl border border-[var(--kr-color-concrete-grey-steps-0)] shadow-elevation-1 hover:shadow-elevation-2 transition-all duration-medium-1 ease-spring ${className}`}
+      className={`bg-surface-container rounded-march p-space-xl border border-[var(--kr-color-concrete-grey-steps-0)] shadow-elevation-1 hover:shadow-elevation-2 transition-all duration-medium-1 ease-spring ${className}`}
     >
       {/* Header Section */}
       <div className="flex items-start justify-between mb-12">

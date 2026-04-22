@@ -31,7 +31,7 @@ export function NotFound() {
 
           <Link
             to="/dashboard"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-pebble bg-primary-container text-on-primary-container font-bold text-lg hover:bg-surface-bright transition-all transform hover:scale-105 shadow-elevation-1 hover:shadow-elevation-2"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-march bg-primary-container text-on-primary-container font-bold text-lg hover:bg-surface-bright transition-all transform hover:scale-105 shadow-elevation-1 hover:shadow-elevation-2"
           >
             <Home className="w-5 h-5" /> Return Home
           </Link>

@@ -236,7 +236,7 @@ export function Analysis() {
           <Button
             onClick={handleDownloadAnalysis}
             variant="outlined"
-            className="rounded-pebble px-6"
+            className="rounded-march px-6"
           >
             <Download className="w-4 h-4 mr-2" />
             Export PDF
@@ -276,7 +276,7 @@ export function Analysis() {
                 <Button
                   onClick={handleAnalyzeJobUrl}
                   disabled={loadingJobUrl || !jobUrl}
-                  className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary rounded-pebble px-6 font-bold min-w-[180px]"
+                  className="bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary rounded-march px-6 font-bold min-w-[180px]"
                 >
                   {loadingJobUrl ? (
                     <>
@@ -337,7 +337,7 @@ export function Analysis() {
               <Button
                 onClick={handleAnalyze}
                 disabled={analyzing}
-                className="bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary rounded-pebble px-8 h-12 font-bold"
+                className="bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary rounded-march px-8 h-12 font-bold"
               >
                 <Sparkles className="w-5 h-5 mr-2" />
                 {analyzing ? 'Analyzing...' : 'Analyze with AI'}
@@ -555,7 +555,7 @@ export function Analysis() {
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-3">
               <span className="text-sm text-on-surface-variant">Matched</span>
-              <span className="text-xs text-on-secondary-container bg-secondary-container px-2 py-1 rounded-pebble uppercase tracking-wider font-mono font-bold">
+              <span className="text-xs text-on-secondary-container bg-secondary-container px-2 py-1 rounded-march uppercase tracking-wider font-mono font-bold">
                 {MATCHED_KEYWORDS.length}
               </span>
             </div>
@@ -617,7 +617,7 @@ export function Analysis() {
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
-                            <span className="px-2 py-1 rounded-pebble bg-primary-container text-on-primary-container text-label-small font-bold">
+                            <span className="px-2 py-1 rounded-march bg-primary-container text-on-primary-container text-label-small font-bold">
                               {source.uri.includes('seek.com.au')
                                 ? 'SEEK'
                                 : source.uri.includes('linkedin.com')
@@ -658,7 +658,7 @@ export function Analysis() {
 
             {/* Naarm Sector Insights */}
             {jobAnalysis.sectorInsights && (
-              <div className="mt-6 bg-tertiary-container/20 rounded-pebble p-4 border-l-4 border-tertiary">
+              <div className="mt-6 bg-tertiary-container/20 rounded-march p-4 border-l-4 border-tertiary">
                 <h4 className="text-label-large font-bold text-on-tertiary-container mb-3 flex items-center gap-2">
                   🇦🇺 Naarm Sector Intelligence
                 </h4>

@@ -30,7 +30,7 @@ export function ImpactEnhancements({ suggestions }: ImpactEnhancementsProps) {
         {suggestions.map((suggestion, index) => (
           <div
             key={index}
-            className="bg-charcoalBackground-steps-1 rounded-pebble p-6 border border-concreteGrey-steps-0"
+            className="bg-charcoalBackground-steps-1 rounded-march p-6 border border-concreteGrey-steps-0"
           >
             {/* Original Text */}
             <div className="mb-4">
@@ -59,7 +59,7 @@ export function ImpactEnhancements({ suggestions }: ImpactEnhancementsProps) {
 
             {/* Contextual Why */}
             {suggestion.contextualWhy && (
-              <div className="bg-concreteGrey-base/20 rounded-pebble p-4 border-l-4 border-concreteGrey-base">
+              <div className="bg-concreteGrey-base/20 rounded-march p-4 border-l-4 border-concreteGrey-base">
                 <span className="text-[10px] text-concreteGrey-steps-2 uppercase tracking-wider font-bold">
                   💡 Why This Works:
                 </span>

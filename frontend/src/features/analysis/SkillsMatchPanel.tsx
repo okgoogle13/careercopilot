@@ -32,7 +32,7 @@ function ChipList({ items, variant }: ChipListProps) {
       {items.map((item, i) => (
         <span
           key={i}
-          className={`inline-flex px-3 py-1 rounded-pebble text-label-small font-bold ${CHIP_STYLE[variant]}`}
+          className={`inline-flex px-3 py-1 rounded-march text-label-small font-bold ${CHIP_STYLE[variant]}`}
           data-testid={`chip-${variant}-${i}`}
         >
           {item}
@@ -82,7 +82,7 @@ export function SkillsMatchPanel({ skillsGap }: SkillsMatchPanelProps) {
       </div>
 
       {/* Score gauge */}
-      <div className="mb-6 bg-[var(--sys-color-charcoalBackground-steps-1)] rounded-pebble p-5 border border-[var(--sys-color-concreteGrey-steps-1)]">
+      <div className="mb-6 bg-[var(--sys-color-charcoalBackground-steps-1)] rounded-march p-5 border border-[var(--sys-color-concreteGrey-steps-1)]">
         <div className="flex items-center justify-between mb-2">
           <span className="text-label-medium font-bold text-[var(--sys-color-concreteGrey-base)] uppercase tracking-wider">
             Required Skills Match
@@ -115,7 +115,7 @@ export function SkillsMatchPanel({ skillsGap }: SkillsMatchPanelProps) {
             <span className="text-label-large font-bold text-[var(--sys-color-worker-ash-base)]">
               ✅ Matched
             </span>
-            <span className="text-xs bg-[var(--sys-color-kr-activistSmokeGreen-steps-0)] text-[var(--sys-color-worker-ash-base)] px-2 py-0.5 rounded-pebble font-mono font-bold">
+            <span className="text-xs bg-[var(--sys-color-kr-activistSmokeGreen-steps-0)] text-[var(--sys-color-worker-ash-base)] px-2 py-0.5 rounded-march font-mono font-bold">
               {matched.length}
             </span>
           </div>
@@ -131,7 +131,7 @@ export function SkillsMatchPanel({ skillsGap }: SkillsMatchPanelProps) {
             <span className="text-label-large font-bold text-[var(--sys-color-worker-ash-base)]">
               ❌ Missing
             </span>
-            <span className="text-xs bg-[var(--sys-color-kr-charcoalRed-steps-0)] text-[var(--sys-color-paperWhite-base)] px-2 py-0.5 rounded-pebble font-mono font-bold">
+            <span className="text-xs bg-[var(--sys-color-kr-charcoalRed-steps-0)] text-[var(--sys-color-paperWhite-base)] px-2 py-0.5 rounded-march font-mono font-bold">
               {missing.length}
             </span>
           </div>
@@ -147,7 +147,7 @@ export function SkillsMatchPanel({ skillsGap }: SkillsMatchPanelProps) {
             <span className="text-label-large font-bold text-[var(--sys-color-worker-ash-base)]">
               🔄 Adjacent
             </span>
-            <span className="text-xs bg-[var(--sys-color-solidaritySmokeOrange-steps-0)] text-[var(--sys-color-worker-ash-base)] px-2 py-0.5 rounded-pebble font-mono font-bold">
+            <span className="text-xs bg-[var(--sys-color-solidaritySmokeOrange-steps-0)] text-[var(--sys-color-worker-ash-base)] px-2 py-0.5 rounded-march font-mono font-bold">
               {adjacent.length}
             </span>
           </div>

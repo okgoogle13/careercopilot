@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title }}</title>
+  <style>
+    @page {
+      margin: {{ margins.top }}pt {{ margins.right }}pt {{ margins.bottom }}pt {{ margins.left }}pt;
+    }
+    body {
+      font-family: '{{ typography.fontFamily }}', sans-serif;
+      color: {{ colors.bodyText }};
+      background: {{ colors.backgroundColor }};
+      font-size: {{ typography.baseFontSizePt }}pt;
+      line-height: 1.55;
+      margin: 0;
+    }
+    .header {
+      margin-bottom: {{ section_gap }}pt;
+    }
+    .name {
+      color: {{ colors.nameColor }};
+      font-size: {{ typography.nameFontSizePt }}pt;
+      font-weight: 700;
+      margin-bottom: 4pt;
+    }
+    .contact {
+      font-size: {{ contact_font_size }}pt;
+    }
+    .recipient {
+      margin-bottom: {{ section_gap }}pt;
+    }
+    .greeting {
+      margin-bottom: 10pt;
+      color: {{ colors.headerText }};
+      font-weight: {{ typography.headingFontWeight }};
+    }
+    p {
+      margin: 0 0 10pt 0;
+    }
+    .signature {
+      margin-top: {{ section_gap }}pt;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="name">{{ sender_name }}</div>
+    {% if contact_line %}<div class="contact">{{ contact_line }}</div>{% endif %}
+  </div>
+  {% if recipient_block %}<div class="recipient">{{ recipient_block | safe }}</div>{% endif %}
+  {% if greeting %}<div class="greeting">{{ greeting }}</div>{% endif %}
+  {{ body_html | safe }}
+  {% if closing %}<p class="signature">{{ closing }}</p>{% endif %}
+  {% if signature_name %}<p>{{ signature_name }}</p>{% endif %}
+</body>
+</html>

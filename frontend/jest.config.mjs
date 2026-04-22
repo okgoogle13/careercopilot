@@ -17,11 +17,12 @@ export default {
     '^axios$': '<rootDir>/src/__mocks__/axios.ts',
     '^lucide-react$': '<rootDir>/src/__mocks__/lucide-react.ts',
     '^framer-motion$': '<rootDir>/src/__mocks__/framer-motion.ts',
-    '^html2canvas$': '<rootDir>/src/__mocks__/html2canvas.ts',
+    '^html2canvas$': '<rootDir>/src/__mocks__/html2canvas.cjs',
     '^jspdf$': '<rootDir>/src/__mocks__/jspdf.ts',
     '^docx$': '<rootDir>/src/__mocks__/docx.ts',
     '^file-saver$': '<rootDir>/src/__mocks__/file-saver.ts',
     '^tailwind-merge$': '<rootDir>/src/__mocks__/tailwind-merge.ts',
+    '^firebase/auth$': '<rootDir>/src/__mocks__/firebase-auth.ts',
   },
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   transform: {
@@ -61,7 +62,7 @@ export default {
     ],
   },
   transformIgnorePatterns: [
-    'node_modules/(?!((@mui|@babel|@emotion|@testing-library|@radix-ui|clsx|react-hook-form|uuid|ansi-regex|strip-ansi|ansi-styles|chalk|@mui/lab|firebase|@firebase|lucide-react|@lucide|zustand|tailwind-merge)/|.*\\.mjs$))',
+    'node_modules/(?!((@mui|@babel|@emotion|@testing-library|@radix-ui|clsx|react-hook-form|uuid|ansi-regex|strip-ansi|ansi-styles|chalk|@mui/lab|firebase|@firebase|lucide-react|@lucide|zustand|tailwind-merge|html2pdf)/|.*\\.mjs$))',
     '^.+\\.module\\.(css|sass|scss)$',
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],

@@ -95,7 +95,7 @@ export const KrDarkProfile: React.FC = () => {
                 whileHover={shouldReduceMotion ? {} : { y: -4, scale: 1.05 }}
                 className="aspect-square rounded-megaphone bg-[var(--kr-color-charcoal-background-steps-3)]/10 border border-[var(--kr-color-charcoal-background-steps-3)]/20 flex items-center justify-center hover:border-ink-gold/30 hover:shadow-ink-glow transition-all duration-500 cursor-pointer group"
               >
-                <div className="w-10 h-10 bg-[var(--kr-color-charcoal-background-steps-3)]/15 rounded-pebble group-hover:bg-ink-gold/20 transition-colors flex items-center justify-center">
+                <div className="w-10 h-10 bg-[var(--kr-color-charcoal-background-steps-3)]/15 rounded-march group-hover:bg-ink-gold/20 transition-colors flex items-center justify-center">
                   <div
                     className={`w-4 h-4 rounded-march ${i % 2 === 0 ? 'bg-ink-gold/40' : 'bg-solidarity-red/40'} border border-[var(--kr-color-charcoal-background-steps-3)]/25`}
                   />

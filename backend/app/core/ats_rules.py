@@ -16,21 +16,35 @@ def load_ats_rules() -> dict[str, Any]:
 ATS_RULES = load_ats_rules()
 
 
-def validate_template_schema(template: dict, doc_type: str) -> None:
+def validate_template_schema(
+    template: dict,
+    doc_type: str,
+    mode: str = "ats_strict",
+) -> None:
     """
     Validates a template configuration against ATS safety rules.
+
+    mode: 'ats_strict' enforces single-column, no-table, no-image constraints.
+          'visual' permits multi-column and sidebar structures.
     """
+    if mode not in ("ats_strict", "visual"):
+        raise ValueError(f"Invalid mode '{mode}'. Must be 'ats_strict' or 'visual'.")
+
     ats_profile = template.get("atsProfile", {})
 
-    # 1. Structural checks
-    if ats_profile.get("columns", 1) != 1:
-        raise ValueError("Multi-column layouts are not ATS-safe")
+    # 1. Structural checks — only enforced in ats_strict mode
+    if mode == "ats_strict":
+        if ats_profile.get("columns", 1) != 1:
+            raise ValueError("Multi-column layouts are not ATS-safe")
 
-    if ats_profile.get("allowsTables", False):
-        raise ValueError("Tables are disabled for ATS-safe templates")
+        if ats_profile.get("hasSidebar", False):
+            raise ValueError("Sidebar structures are not ATS-safe")
 
-    if ats_profile.get("allowsImages", False):
-        raise ValueError("Images are disabled for ATS-safe templates")
+        if ats_profile.get("allowsTables", False):
+            raise ValueError("Tables are disabled for ATS-safe templates")
+
+        if ats_profile.get("allowsImages", False):
+            raise ValueError("Images are disabled for ATS-safe templates")
 
     # 2. Heading and section checks
     rules_for_type = ATS_RULES.get(doc_type, {})
@@ -49,11 +63,12 @@ def validate_template_schema(template: dict, doc_type: str) -> None:
             f"Missing required ATS headings for {doc_type}: {missing}. Present: {present_headings}"
         )
 
-    # 3. Prevent prohibited elements defined in format_rules.json
-    prohibited_elements = rules_for_type.get("prohibited", [])
-    if "tables" in prohibited_elements and ats_profile.get("allowsTables", False):
-        raise ValueError(f"Tables are prohibited for {doc_type} by format rules")
-    if "columns" in prohibited_elements and ats_profile.get("columns", 1) > 1:
-        raise ValueError(f"Multiple columns are prohibited for {doc_type} by format rules")
-    if "images" in prohibited_elements and ats_profile.get("allowsImages", False):
-        raise ValueError(f"Images are prohibited for {doc_type} by format rules")
+    # 3. Prevent prohibited elements defined in format_rules.json (ats_strict only)
+    if mode == "ats_strict":
+        prohibited_elements = rules_for_type.get("prohibited", [])
+        if "tables" in prohibited_elements and ats_profile.get("allowsTables", False):
+            raise ValueError(f"Tables are prohibited for {doc_type} by format rules")
+        if "columns" in prohibited_elements and ats_profile.get("columns", 1) > 1:
+            raise ValueError(f"Multiple columns are prohibited for {doc_type} by format rules")
+        if "images" in prohibited_elements and ats_profile.get("allowsImages", False):
+            raise ValueError(f"Images are prohibited for {doc_type} by format rules")

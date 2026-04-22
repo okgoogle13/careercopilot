@@ -9,7 +9,7 @@ const DOCUMENTS = [
 
 export const DocumentStackAnchor: React.FC = () => {
   return (
-    <div className="flex flex-col h-full bg-[var(--kr-color-charcoal-background-steps-1)] border border-white/5 rounded-pebble p-4 backdrop-blur-sm">
+    <div className="flex flex-col h-full bg-[var(--kr-color-charcoal-background-steps-1)] border border-white/5 rounded-march p-4 backdrop-blur-sm">
       <div className="flex justify-between items-center mb-4 border-b border-white/5 pb-2">
         <h3 className="font-primary text-sm text-secondary-concrete-grey uppercase tracking-wider">
           Evidence Locker

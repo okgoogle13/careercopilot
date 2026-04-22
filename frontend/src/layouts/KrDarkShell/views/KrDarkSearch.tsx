@@ -28,7 +28,7 @@ export const KrDarkSearch: React.FC = () => {
           <input
             type="text"
             placeholder="PROBE THE COLLECTIVE ARCHIVE..."
-            className="w-full rounded-pebble border border-[var(--kr-color-charcoal-background-steps-3)]/20 bg-asphalt-black/40 px-8 py-5 font-mono text-sm text-paper-white shadow-viscous transition-all duration-500 focus:border-ink-gold/40 focus:outline-none focus:ring-1 focus:ring-ink-gold/20"
+            className="w-full rounded-march border border-[var(--kr-color-charcoal-background-steps-3)]/20 bg-asphalt-black/40 px-8 py-5 font-mono text-sm text-paper-white shadow-viscous transition-all duration-500 focus:border-ink-gold/40 focus:outline-none focus:ring-1 focus:ring-ink-gold/20"
           />
           <div className="absolute right-6 top-1/2 -translate-y-1/2 opacity-20 pointer-events-none">
             <span className="font-mono text-[10px] tracking-widest uppercase">CTRL_S</span>
@@ -56,7 +56,7 @@ export const KrDarkSearch: React.FC = () => {
                 {['Logistics', 'Defense', 'Extraction', 'Community'].map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-pebble border border-[var(--kr-color-charcoal-background-steps-3)]/20 bg-[var(--kr-color-charcoal-background-steps-3)]/10 px-3 py-1 text-[10px] font-mono font-bold uppercase text-paper-white/40 transition-colors cursor-pointer hover:border-ink-gold/20 hover:text-ink-gold"
+                    className="rounded-march border border-[var(--kr-color-charcoal-background-steps-3)]/20 bg-[var(--kr-color-charcoal-background-steps-3)]/10 px-3 py-1 text-[10px] font-mono font-bold uppercase text-paper-white/40 transition-colors cursor-pointer hover:border-ink-gold/20 hover:text-ink-gold"
                   >
                     {tag}
                   </span>

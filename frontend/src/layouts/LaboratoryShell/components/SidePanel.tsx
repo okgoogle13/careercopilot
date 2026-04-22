@@ -10,7 +10,7 @@ export const SidePanel: React.FC = () => {
         <div className="mb-6 relative">
           <div className="relative rounded-strike overflow-hidden shadow-lg border-2 border-[var(--kr-color-charcoal-background-steps-4)] bg-[var(--kr-color-charcoal-background-steps-1)] max-w-[120px] mx-auto"></div>
         </div>
-        <div className="p-4 border border-dashed border-secondary-flannel-dim rounded-pebble text-secondary-flannel-dim text-sm font-mono text-center opacity-60">
+        <div className="p-4 border border-dashed border-secondary-flannel-dim rounded-march text-secondary-flannel-dim text-sm font-mono text-center opacity-60">
           [Context Properties Panel]
         </div>
       </div>

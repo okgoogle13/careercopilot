@@ -64,7 +64,7 @@ export function BulletMetricsSuggestor({
         <Button
           onClick={onSuggestMetrics}
           disabled={loading}
-          className="rounded-pebble px-6 font-bold"
+          className="rounded-march px-6 font-bold"
           style={{
             background: 'var(--sys-color-solidarityRed-steps-0)',
             color: 'var(--sys-color-worker-ash-base)',
@@ -122,7 +122,7 @@ export function BulletMetricsSuggestor({
           {bullets.map((bullet, idx) => (
             <div
               key={idx}
-              className="rounded-pebble p-6 border"
+              className="rounded-march p-6 border"
               style={{
                 background: 'var(--sys-color-charcoalBackground-steps-1)',
                 borderColor: 'var(--sys-color-concreteGrey-steps-1)',
@@ -172,7 +172,7 @@ export function BulletMetricsSuggestor({
               {/* Rationale */}
               {bullet.rationale && (
                 <div
-                  className="rounded-pebble p-4 border-l-4 mb-4"
+                  className="rounded-march p-4 border-l-4 mb-4"
                   style={{
                     background:
                       'color-mix(in srgb, var(--sys-color-solidaritySmokeOrange-steps-0) 20%, transparent)',
@@ -196,7 +196,7 @@ export function BulletMetricsSuggestor({
 
               {/* Metric type badge */}
               <span
-                className={`inline-flex px-3 py-1 rounded-pebble text-label-small font-bold ${
+                className={`inline-flex px-3 py-1 rounded-march text-label-small font-bold ${
                   METRIC_BADGE[bullet.metric_type] ??
                   '[background:var(--sys-color-charcoalBackground-steps-2)] [color:var(--sys-color-worker-ash-base)]'
                 }`}

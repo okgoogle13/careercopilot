@@ -17,7 +17,7 @@ export const GlobalHeader: React.FC = () => {
           <img
             src={KR_LOGO_SRC}
             alt="Kerala Rage CareerCopilot"
-            className="h-auto max-h-10 w-auto rounded-pebble"
+            className="h-auto max-h-10 w-auto rounded-march"
           />
           <div className="flex flex-col">
             <h1 className="font-proclamation text-xl text-ink-gold tracking-tight">

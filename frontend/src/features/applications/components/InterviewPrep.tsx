@@ -277,7 +277,7 @@ export const InterviewPrep: React.FC<InterviewPrepProps> = ({ onBack }) => {
                       </Strike>
 
                       {showSampleAnswer && (
-                        <div className="bg-[var(--color-surface-container-low)] border border-[var(--color-leaf-base)] rounded-pebble p-4 animate-in fade-in slide-in-from-top-2">
+                        <div className="bg-[var(--color-surface-container-low)] border border-[var(--color-leaf-base)] rounded-march p-4 animate-in fade-in slide-in-from-top-2">
                           <span className="text-label-small font-bold text-[var(--color-leaf-base)] block mb-1">
                             SAMPLE ANSWER
                           </span>

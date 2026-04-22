@@ -80,7 +80,7 @@ export const AnalysisAnchor: React.FC = () => {
       </div>
 
       {/* Detailed Breakdown */}
-      <div className="flex-1 bg-[var(--kr-color-charcoal-background-steps-1)] border border-white/5 rounded-pebble p-6 backdrop-blur-sm flex flex-col gap-4">
+      <div className="flex-1 bg-[var(--kr-color-charcoal-background-steps-1)] border border-white/5 rounded-march p-6 backdrop-blur-sm flex flex-col gap-4">
         <div className="flex justify-between items-end border-b border-white/10 pb-2">
           <h3 className="font-primary text-lg text-ink-gold">Analysis Insights</h3>
           <span className="text-xs font-mono text-secondary-concrete-grey opacity-50">

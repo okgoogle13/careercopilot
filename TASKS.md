@@ -4,7 +4,22 @@ Figma site audit board re-audited against current runtime files on 2026-04-21. M
 
 ## Active
 
-- None.
+- [ ] **Sprint 3: Notion + Linear + Perplexity Automation** — 7-day sprint (2026-04-22 → 2026-04-28) to consolidate fragmented docs, build modular automation layer (DocumentStore + IssueTracker abstractions), integrate Perplexity reasoning with hallucination guards, enable Task→Linear→Notion sync, and provide self-hosted PostgreSQL migration path. Execution: subagent-driven via superpowers:executing-plans.
+  - [ ] **Phase 1 (Days 1-2):** Doc consolidation + sync infrastructure
+    - [ ] **Task 1:** Audit + inventory fragmented docs (scripts/doc-audit.py)
+    - [ ] **Task 2:** Consolidate fragmented docs into docs/ structure
+    - [ ] **Task 3:** Create doc sync infrastructure (git → Notion CI job)
+  - [ ] **Phase 2 (Days 3-5):** Notion + Linear automation + abstraction layer
+    - [ ] **Task 4:** Create abstraction layer interfaces (DocumentStore, IssueTracker)
+    - [ ] **Task 5:** Implement NotionDocumentStore with CRUD
+    - [ ] **Task 6:** Implement LinearIssueTracker with GraphQL
+  - [ ] **Phase 3 (Days 6-7):** Perplexity integration + self-hosted path
+    - [ ] **Task 7:** Implement hallucination guard (guardAgainstHallucinations)
+    - [ ] **Task 8:** Implement PerplexityDocumentStore decorator
+    - [ ] **Task 9:** Create Task → Linear → Notion sync automation
+    - [ ] **Task 10:** Create self-hosted PostgreSQL migration guide
+    - [ ] **Task 11:** Create execution prompts for all tools (IDE, Perplexity, Notion, Linear, CI)
+    - [ ] **Task 12:** Sprint handoff summary + final documentation
 
 ## Waiting On
 

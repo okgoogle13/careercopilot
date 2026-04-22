@@ -8,185 +8,10 @@ from collections.abc import Mapping, Sequence
 from html import escape
 from typing import Any
 
-from jinja2 import Template
-from weasyprint import HTML
-
+from app.core.template_loader import TemplateLoader
 from app.models.theme_config_schemas import CoverLetterThemeConfig, ResumeThemeConfig
 
-RESUME_TEMPLATE = Template(
-    """
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>{{ title }}</title>
-  <style>
-    @page {
-      margin: {{ margins.top }}pt {{ margins.right }}pt {{ margins.bottom }}pt {{ margins.left }}pt;
-    }
-    body {
-      font-family: '{{ typography.fontFamily }}', sans-serif;
-      color: {{ colors.bodyText }};
-      background: {{ colors.backgroundColor }};
-      font-size: {{ typography.baseFontSizePt }}pt;
-      line-height: 1.45;
-      margin: 0;
-    }
-    h1, h2, h3, p, ul {
-      margin: 0;
-    }
-    .page {
-      width: 100%;
-    }
-    .header {
-      margin-bottom: {{ section_gap }}pt;
-      border-bottom: 1px solid {{ colors.divider }};
-      padding-bottom: 10pt;
-    }
-    .name {
-      color: {{ colors.nameColor }};
-      font-size: {{ typography.nameFontSizePt }}pt;
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 4pt;
-    }
-    .headline {
-      color: {{ colors.headerText }};
-      font-size: {{ typography.headingFontSizePt }}pt;
-      font-weight: {{ typography.headingFontWeight }};
-      margin-bottom: 6pt;
-    }
-    .contact {
-      color: {{ colors.bodyText }};
-      font-size: {{ contact_font_size }}pt;
-    }
-    .layout {
-      display: {% if has_sidebar %}table{% else %}block{% endif %};
-      width: 100%;
-      table-layout: fixed;
-    }
-    .main {
-      display: {% if has_sidebar %}table-cell{% else %}block{% endif %};
-      width: {% if has_sidebar %}70%{% else %}100%{% endif %};
-      vertical-align: top;
-      padding-right: {% if has_sidebar %}16pt{% else %}0{% endif %};
-    }
-    .sidebar {
-      display: {% if has_sidebar %}table-cell{% else %}none{% endif %};
-      width: 30%;
-      vertical-align: top;
-      padding-left: 12pt;
-      border-left: 1px solid {{ colors.divider }};
-    }
-    .section {
-      margin-bottom: {{ section_gap }}pt;
-    }
-    .section-title {
-      color: {{ colors.headerText }};
-      font-size: {{ typography.headingFontSizePt }}pt;
-      font-weight: {{ typography.headingFontWeight }};
-      margin-bottom: 6pt;
-    }
-    .section-body p + p {
-      margin-top: 6pt;
-    }
-    .entry {
-      margin-bottom: 8pt;
-    }
-    .entry-title {
-      font-weight: 700;
-    }
-    .entry-meta {
-      color: {{ colors.accent }};
-      font-size: {{ meta_font_size }}pt;
-    }
-    ul {
-      padding-left: 16pt;
-      margin-top: 4pt;
-    }
-    li + li {
-      margin-top: 2pt;
-    }
-  </style>
-</head>
-<body>
-  <div class="page">
-    <div class="header">
-      <div class="name">{{ name }}</div>
-      {% if headline %}<div class="headline">{{ headline }}</div>{% endif %}
-      {% if contact_line %}<div class="contact">{{ contact_line }}</div>{% endif %}
-    </div>
-    <div class="layout">
-      <div class="main">{{ main_html | safe }}</div>
-      {% if has_sidebar %}<div class="sidebar">{{ sidebar_html | safe }}</div>{% endif %}
-    </div>
-  </div>
-</body>
-</html>
-"""
-)
-
-COVER_LETTER_TEMPLATE = Template(
-    """
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>{{ title }}</title>
-  <style>
-    @page {
-      margin: {{ margins.top }}pt {{ margins.right }}pt {{ margins.bottom }}pt {{ margins.left }}pt;
-    }
-    body {
-      font-family: '{{ typography.fontFamily }}', sans-serif;
-      color: {{ colors.bodyText }};
-      background: {{ colors.backgroundColor }};
-      font-size: {{ typography.baseFontSizePt }}pt;
-      line-height: 1.55;
-      margin: 0;
-    }
-    .header {
-      margin-bottom: {{ section_gap }}pt;
-    }
-    .name {
-      color: {{ colors.nameColor }};
-      font-size: {{ typography.nameFontSizePt }}pt;
-      font-weight: 700;
-      margin-bottom: 4pt;
-    }
-    .contact {
-      font-size: {{ contact_font_size }}pt;
-    }
-    .recipient {
-      margin-bottom: {{ section_gap }}pt;
-    }
-    .greeting {
-      margin-bottom: 10pt;
-      color: {{ colors.headerText }};
-      font-weight: {{ typography.headingFontWeight }};
-    }
-    p {
-      margin: 0 0 10pt 0;
-    }
-    .signature {
-      margin-top: {{ section_gap }}pt;
-    }
-  </style>
-</head>
-<body>
-  <div class="header">
-    <div class="name">{{ sender_name }}</div>
-    {% if contact_line %}<div class="contact">{{ contact_line }}</div>{% endif %}
-  </div>
-  {% if recipient_block %}<div class="recipient">{{ recipient_block | safe }}</div>{% endif %}
-  {% if greeting %}<div class="greeting">{{ greeting }}</div>{% endif %}
-  {{ body_html | safe }}
-  {% if closing %}<p class="signature">{{ closing }}</p>{% endif %}
-  {% if signature_name %}<p>{{ signature_name }}</p>{% endif %}
-</body>
-</html>
-"""
-)
+HTML: Any | None = None
 
 SECTION_TITLES = {
     "career_summary": "Professional Summary",
@@ -442,6 +267,15 @@ def _build_section(title: str, body_html: str) -> str:
     )
 
 
+def _get_weasyprint_html() -> Any:
+    global HTML
+    if HTML is None:
+        from weasyprint import HTML as WeasyPrintHTML
+
+        HTML = WeasyPrintHTML
+    return HTML
+
+
 def _collect_resume_sections(document: Mapping[str, Any]) -> dict[str, str]:
     """Normalize resume content into canonical section HTML blocks."""
 
@@ -490,6 +324,9 @@ def _collect_resume_sections(document: Mapping[str, Any]) -> dict[str, str]:
 class ThemedDocumentRenderer:
     """Render HTML and PDF documents using extracted theme configurations."""
 
+    def __init__(self, template_loader: TemplateLoader | None = None) -> None:
+        self._loader = template_loader or TemplateLoader()
+
     def render_resume_html(
         self,
         theme_config: ResumeThemeConfig | Mapping[str, Any],
@@ -521,7 +358,7 @@ class ThemedDocumentRenderer:
                 main_html_parts.append(html)
 
         section_gap = _spacing_to_gap(theme.layout.spacingScale)
-        return RESUME_TEMPLATE.render(
+        return self._loader.get("resume").render(
             title=title,
             margins=theme.layout.marginsPt,
             typography=theme.typography,
@@ -548,7 +385,7 @@ class ThemedDocumentRenderer:
         html = self.render_resume_html(
             theme_config=theme_config, resume_data=resume_data, title=title
         )
-        return HTML(string=html).write_pdf()
+        return _get_weasyprint_html()(string=html).write_pdf()
 
     def render_cover_letter_html(
         self,
@@ -584,7 +421,7 @@ class ThemedDocumentRenderer:
             paragraphs = _listify(document.get("paragraphs"))
             body_value = "\n\n".join(str(item) for item in paragraphs if str(item).strip())
 
-        return COVER_LETTER_TEMPLATE.render(
+        return self._loader.get("cover_letter").render(
             title=title,
             margins=margins,
             typography=theme.typography,
@@ -613,4 +450,4 @@ class ThemedDocumentRenderer:
             cover_letter_data=cover_letter_data,
             title=title,
         )
-        return HTML(string=html).write_pdf()
+        return _get_weasyprint_html()(string=html).write_pdf()

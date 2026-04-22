@@ -30,13 +30,13 @@ export const TokenTest = () => {
           <p>KrDark Mode: {isKrDarkMode ? '✅' : '❌'}</p>
         </div>
 
-        <div className="rounded-pebble border border-concrete-grey/30 bg-asphalt-black/25 p-4">
+        <div className="rounded-march border border-concrete-grey/30 bg-asphalt-black/25 p-4">
           <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-ink-gold mb-3">
             Pebble Action Pair
           </p>
           <div className="flex flex-wrap gap-3">
             <button
-              className="rounded-pebble px-5 py-2.5 font-primary font-semibold transition-all shadow-glow-gold"
+              className="rounded-march px-5 py-2.5 font-primary font-semibold transition-all shadow-glow-gold"
               style={{
                 backgroundColor: 'var(--sys-color-inkGold-base)',
                 color: 'var(--sys-color-charcoalBackground-base)',
@@ -46,7 +46,7 @@ export const TokenTest = () => {
             </button>
 
             <button
-              className="rounded-pebble px-4 py-2 font-primary font-medium transition-all"
+              className="rounded-march px-4 py-2 font-primary font-medium transition-all"
               style={{
                 backgroundColor: 'var(--sys-color-solidarityRed-base)',
                 color: 'var(--sys-color-worker-ash-base)',
@@ -66,10 +66,10 @@ export const TokenTest = () => {
           {colorTokens.map((token) => (
             <div
               key={token}
-              className="rounded-pebble border border-concrete-grey/20 p-3 bg-asphalt-black/40"
+              className="rounded-march border border-concrete-grey/20 p-3 bg-asphalt-black/40"
             >
               <div
-                className="h-10 rounded-pebble border border-concrete-grey/20 mb-2"
+                className="h-10 rounded-march border border-concrete-grey/20 mb-2"
                 style={{ backgroundColor: `var(${token})` }}
               />
               <p className="text-[10px] font-mono text-worker-ash break-all">{token}</p>
@@ -86,7 +86,7 @@ export const TokenTest = () => {
           {typeScale.map((item) => (
             <div
               key={item.label}
-              className="rounded-pebble border border-concrete-grey/20 p-3"
+              className="rounded-march border border-concrete-grey/20 p-3"
             >
               <p className="font-mono text-[10px] text-concrete-grey uppercase tracking-wider mb-1">
                 {item.label}
@@ -110,7 +110,7 @@ export const TokenTest = () => {
           {['Strike', 'March', 'Megaphone', 'Placard', 'Scaffold', 'Substrate'].map((name) => (
             <div
               key={name}
-              className="rounded-pebble border border-concrete-grey/20 p-4 bg-asphalt-black/40"
+              className="rounded-march border border-concrete-grey/20 p-4 bg-asphalt-black/40"
             >
               <p className="font-mono text-xs uppercase tracking-wider text-worker-ash">{name}</p>
             </div>

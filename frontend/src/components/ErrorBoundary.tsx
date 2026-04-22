@@ -76,7 +76,7 @@ class ErrorBoundary extends Component<Props, State> {
                 <summary className="cursor-pointer text-sm font-medium text-[var(--sys-color-worker-ash-base)] mb-2 hover:text-[var(--sys-color-inkGold-base)] transition-colors">
                   Error Details (Development Only)
                 </summary>
-                <div className="bg-[var(--sys-color-kr-charcoalRed-steps-0)]/20 border border-[var(--sys-color-kr-charcoalRed-steps-0)]/30 rounded-pebble p-3 text-xs font-mono">
+                <div className="bg-[var(--sys-color-kr-charcoalRed-steps-0)]/20 border border-[var(--sys-color-kr-charcoalRed-steps-0)]/30 rounded-march p-3 text-xs font-mono">
                   <p className="font-medium text-[var(--sys-color-kr-charcoalRed-base)] mb-1">
                     {this.state.error.name}: {this.state.error.message}
                   </p>

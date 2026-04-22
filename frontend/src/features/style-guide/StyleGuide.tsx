@@ -612,7 +612,7 @@ export function StyleGuide() {
                     }}
                     helperText="Valve controls narrative pressure with viscous spring logic."
                   />
-                  <div className="p-4 bg-surface-dim rounded-pebble border border-outline/10">
+                  <div className="p-4 bg-surface-dim rounded-march border border-outline/10">
                     <p className="text-xs font-mono opacity-60 uppercase mb-2">Current Stance</p>
                     <div className="text-xl font-black text-primary">
                       {valveEnabled ? 'COLLECTIVE PRESSURE ACTIVE' : 'SYSTEM VENTING'}
@@ -698,11 +698,11 @@ export function StyleGuide() {
                   {COLOR_TOKENS.map((item) => (
                     <motion.div
                       key={item.token}
-                      className="rounded-pebble border border-outline p-3 space-y-2 group relative overflow-hidden bg-surface-dim hover:border-primary/40 transition-colors"
+                      className="rounded-march border border-outline p-3 space-y-2 group relative overflow-hidden bg-surface-dim hover:border-primary/40 transition-colors"
                       whileHover={{ y: -2 }}
                     >
                       <div
-                        className="h-16 rounded-pebble border border-outline relative transition-shadow group-hover:shadow-lg"
+                        className="h-16 rounded-march border border-outline relative transition-shadow group-hover:shadow-lg"
                         style={{ backgroundColor: `var(${item.token})` }}
                       >
                         <button
@@ -738,7 +738,7 @@ export function StyleGuide() {
                     {SPACING_SCALE.map((s) => (
                       <div
                         key={s}
-                        className="bg-surface-dim border border-outline rounded-pebble p-4 text-xs font-mono group hover:bg-white/5 transition-colors"
+                        className="bg-surface-dim border border-outline rounded-march p-4 text-xs font-mono group hover:bg-white/5 transition-colors"
                       >
                         <div className="flex justify-between items-center mb-3">
                           <div className="text-primary font-bold">{`--kr-space-${s}`}</div>

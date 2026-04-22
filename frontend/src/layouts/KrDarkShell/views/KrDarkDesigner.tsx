@@ -79,7 +79,7 @@ export const KrDarkDesigner: React.FC = () => {
                 whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
                 className="aspect-square bg-[var(--kr-color-charcoal-background-steps-3)]/10 rounded-megaphone border border-[var(--kr-color-charcoal-background-steps-3)]/20 hover:border-ink-gold/30 flex items-center justify-center cursor-move transition-all duration-300 group shadow-viscous"
               >
-                <div className="w-10 h-10 bg-[var(--kr-color-charcoal-background-steps-3)]/15 rounded-pebble group-hover:bg-ink-gold/10 transition-colors flex items-center justify-center">
+                <div className="w-10 h-10 bg-[var(--kr-color-charcoal-background-steps-3)]/15 rounded-march group-hover:bg-ink-gold/10 transition-colors flex items-center justify-center">
                   <span className="font-mono text-[8px] text-paper-white/20 select-none">
                     M_0{i}
                   </span>

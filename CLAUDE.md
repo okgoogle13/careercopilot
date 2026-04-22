@@ -36,7 +36,7 @@ Four canonical surfaces. No others without explicit approval.
 - **Frontend**: React 18 + TS + Vite + Tailwind v4 + Zustand + TanStack Query
 - **Backend**: FastAPI + SQLAlchemy + Genkit + Python 3.10+
 - **Cloud**: GCP (us-central1) · Firebase · Cloud Run
-- **Design**: **KR Solidarity v6.0** (M3 Expressive)
+- **Design**: **KR Solidarity v6.1** (M3 Expressive)
 - **Tests**: Jest, Playwright (e2e), pytest
 
 ---
@@ -47,8 +47,10 @@ Four canonical surfaces. No others without explicit approval.
 # Frontend
 cd frontend && yarn dev        # dev server
 cd frontend && yarn test       # Jest
+cd frontend && yarn lint       # ESLint
+cd frontend && yarn tsc --noEmit  # type-check
 cd frontend && yarn build      # production build
-python3 scripts/build-m3-tokens.py  # rebuild CSS vars from tokens.json
+python3 scripts/build-m3-tokens.py  # rebuild CSS vars (run from repo root)
 
 # Backend
 cd backend && source venv/bin/activate
@@ -92,27 +94,18 @@ import { ComponentName as RouteName } from './features/feature/ComponentName';
 
 ---
 
-## Figma MCP Workflow
+## Active Phase
 
-**URL parsing** — extract `fileKey` and `nodeId`:
-```
-figma.com/design/:fileKey/:name?node-id=:nodeId   ← convert "-" to ":" in nodeId
-figma.com/board/:fileKey/:name                     ← FigJam, use get_figjam
-figma.com/design/:fileKey/branch/:branchKey/...   ← use branchKey as fileKey
-```
+Post-Figma. Three live workstreams (in priority order):
+1. **Templating refactor** — `DocumentPipeline` + `CareerProfile` contract (`backend/app/renderers/themed_document_renderer.py`)
+2. **Pipeline state wiring** — `analysisPipelineStore` (ingestion → ATS → export), retire client-side jsPDF
+3. **API consolidation** — collapse `src/services/` into `src/api/`, extend TanStack Query
 
-**Design-to-code steps**:
-1. `get_design_context(fileKey, nodeId)` — primary tool; returns code + screenshot + hints
-2. Adapt output to project stack (React + Tailwind v4 + KR Solidarity tokens)
-3. Map CSS vars from Figma into the repo’s canonical semantic KR token surface (`--kr-*`)
-4. Replace raw hex / absolute positioning with semantic tokens and KR archetypes
+## Go-Live Stages
 
-**Dev Mode**:
-- Use `get_design_context` with dev mode node IDs for spec-accurate measurements
-- Code Connect mappings: `get_code_connect_map` / `send_code_connect_mappings`
-- Design system search: `search_design_system` before creating new components
-
-**Never**: raw hex colours, white backgrounds, Australian native plants, generic shapes.
+- **Stage 1** (ship first): core path working end-to-end — ingest → score → generate → export, auth, CRUD tracker. Rough UI OK.
+- **Stage 2**: full tests, UI polish, production error handling.
+Always finish all Stage 1 tasks before Stage 2.
 
 ---
 
@@ -137,13 +130,29 @@ figma.com/design/:fileKey/branch/:branchKey/...   ← use branchKey as fileKey
 
 ---
 
-## Model Ladder
+## Agent Routing
 
-| Model | Use for |
-|---|---|
-| Haiku | Inventory, classification, presence checks, PM/status reshaping |
-| Sonnet | Most implementation (multi-file edits, validation scripts, per-screen parity) |
-| Opus | Architectural decisions, route-promotion decisions, final go/no-go |
+Full routing table and inter-CLI handoff rules: see `AGENTS.md`.
+
+### Intra-Claude model ladder
+
+| Task type | Model | Mode | Effort |
+|-----------|-------|------|--------|
+| Inventory, classification, grep sweeps, status reshaping | **Haiku** | normal | low |
+| Multi-file edits, validation scripts, test fixes, token sweeps | **Sonnet** | normal | medium |
+| New feature implementation, API wiring, refactors | **Sonnet** | normal | high |
+| Architecture decisions, schema design, go/no-go review | **Opus** | normal | high |
+| Cross-system design, ambiguous tradeoffs, spec writing | **Opus** | **plan first** | high |
+| Long agentic loops (Ralph, iterative UI, lint sweeps 10+ files) | **Haiku** | normal | low — offer Codex if token pressure |
+
+### When to use plan mode
+Use `/plan` when: task touches ≥ 3 files across layers, involves schema/route/auth changes, or approach is ambiguous. Skip for: single-file edits, test fixes, token hygiene, mechanical CRUD.
+
+### Extended thinking
+Use for: architectural decisions, novel algorithm design, complex tradeoffs. Skip for standard implementation — burns tokens without value.
+
+### Proactive Planning
+Detect exploratory requests ("what should we...", "suggest a strategy", "how do we approach", "what could we do about") and invoke `superpowers:brainstorming` immediately without asking. Flow brainstorm output directly to `superpowers:writing-plans`, then to `superpowers:executing-plans` after approval. Own the forward momentum — don't wait for user permission to start the workflow.
 
 ---
 
@@ -196,4 +205,3 @@ Jonas Dougall — solo founder, lead engineer + designer on CareerCopilot.
 ### Preferences
 - Terse, action-first. No preamble. Code first.
 - Plans → `docs/project/active/plans/` · Handovers → `docs/project/active/handovers/` · Reports → `.claude/reports/`
-- No broad Figma-to-code until sync-contract repair + shared shell anchors done

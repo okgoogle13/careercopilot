@@ -8,7 +8,7 @@ export function KeywordTag({ keyword, variant = 'matched', className = '' }: Key
   return (
     <span
       className={`
-        px-4 py-2 rounded-pebble text-xs uppercase tracking-wider font-mono font-bold
+        px-4 py-2 rounded-march text-xs uppercase tracking-wider font-mono font-bold
         ${
           variant === 'matched'
             ? 'bg-secondary-container text-on-secondary-container border border-secondary'
