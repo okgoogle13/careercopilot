@@ -100,13 +100,13 @@ Provide a concise summary of this document in 2-3 sentences. Focus on key insigh
     `.trim();
 
     // Call Perplexity API
-    return this.perplexityReasonings(prompt);
+    return this.perplexityReasonings(documentId, prompt);
   }
 
   /**
    * Call Perplexity API for reasoning.
    */
-  private async perplexityReasonings(prompt: string): Promise<string> {
+  private async perplexityReasonings(documentId: string, prompt: string): Promise<string> {
     try {
       const response = await fetch(this.apiUrl, {
         method: 'POST',
@@ -150,9 +150,7 @@ Provide a concise summary of this document in 2-3 sentences. Focus on key insigh
       console.warn(
         `Perplexity request failed: ${String(error)}, falling back to base store summary`
       );
-      // Note: documentId isn't in scope here, but we can't call baseStore.summarize without it
-      // In production, pass documentId as a parameter or store it as a field
-      return `Error getting summary: ${String(error)}`;
+      return this.baseStore.summarize(documentId);
     }
   }
 }

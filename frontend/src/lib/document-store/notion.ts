@@ -1,5 +1,8 @@
 import { Document, DocumentFilter, DocumentStore, DocumentStoreError } from './index';
 
+type DocumentCategory = Document['category'];
+type DocumentStatus = Document['status'];
+
 interface NotionPage {
   id: string;
   properties: Record<string, unknown>;
@@ -253,8 +256,8 @@ export class NotionDocumentStore implements DocumentStore {
       id: page.id,
       title: this.extractTitle(props.Name),
       content: this.extractText(props.Content),
-      category: this.extractSelect(props.Category, 'task'),
-      status: this.extractSelect(props.Status, 'draft'),
+      category: this.extractSelect<DocumentCategory>(props.Category, 'task'),
+      status: this.extractSelect<DocumentStatus>(props.Status, 'draft'),
       atsScore: props['ATS Score']?.number,
       createdAt: new Date(page.created_time),
       updatedAt: new Date(page.last_edited_time),
@@ -285,7 +288,7 @@ export class NotionDocumentStore implements DocumentStore {
   /**
    * Extract value from Notion Select property.
    */
-  private extractSelect(selectProp: any, defaultValue: string): string {
+  private extractSelect<T extends string>(selectProp: any, defaultValue: T): T {
     return selectProp?.select?.name || defaultValue;
   }
 
