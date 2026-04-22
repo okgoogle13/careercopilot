@@ -26,6 +26,13 @@
   - Did not cherry-pick the full commit because it contained older component edits.
   - Preserved the useful hygiene fix by unignoring and tracking the existing local `frontend/src/lib/composeHero.ts` and its test.
   - Commit: `702252f2`.
+- Observed commit `d549ef2c` on this branch:
+  - `refactor: Restructure Perplexity sync prompts with explicit scoping + search-first rules`
+  - Contains the prompt-file changes that were already dirty before this execution began.
+  - This appears to have been created by repo automation/post-commit behavior rather than manual branch-consolidation staging.
+- Fixed TypeScript errors in document sync helpers:
+  - Commit: `ffbd4770`.
+  - Files: `frontend/src/lib/document-store/notion.ts`, `frontend/src/lib/document-store/perplexity.ts`, `frontend/src/lib/issue-tracker/linear.ts`.
 
 ## Reviewed and Deferred
 
@@ -65,4 +72,15 @@ Not staged by this execution unless explicitly reviewed:
 
 - Pre-commit design drift check passed for `fb2c04cc`.
 - Pre-commit design drift check and ESLint passed for `702252f2`.
-- Full validation pending.
+- `node frontend/scripts/validate-governance-artifacts.mjs` passed.
+- `python3 scripts/design-validation/validate-tokens.py` passed.
+- `(cd frontend && yarn type-check)` passed after `ffbd4770`.
+- Focused tests passed:
+  - `src/lib/__tests__/composeHero.test.ts`
+  - `src/stores/__tests__/analysisPipelineStore.test.ts`
+  - `src/features/analysis/components/__tests__/ATSSignalBreakdown.test.tsx`
+- Focused tests with known residual failures:
+  - `src/lib/document-store/__tests__/notion.test.ts`
+  - `src/lib/issue-tracker/__tests__/linear.test.ts`
+  - These tests currently expect in-memory behavior, while the implementations call external APIs.
+  - `src/lib/document-store/__tests__/perplexity.test.ts` passed.
