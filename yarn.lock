@@ -3216,6 +3216,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@firebase/rules-unit-testing@npm:^3.0.3":
+  version: 3.0.4
+  resolution: "@firebase/rules-unit-testing@npm:3.0.4"
+  dependencies:
+    "@types/node-fetch": "npm:2.6.4"
+    node-fetch: "npm:2.6.7"
+  peerDependencies:
+    firebase: ^10.0.0
+  checksum: 10c0/1094d85148057c0a86c951f73eba44ad43d9a4f022f2fa2011061361123b11077fef19e4244f23b14ab6cc583360d1c275531e97bd2fb6deb42b2f7ab7f943cf
+  languageName: node
+  linkType: hard
+
 "@firebase/rules-unit-testing@npm:^5.0.0":
   version: 5.0.0
   resolution: "@firebase/rules-unit-testing@npm:5.0.0"
@@ -10541,6 +10553,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node-fetch@npm:2.6.4":
+  version: 2.6.4
+  resolution: "@types/node-fetch@npm:2.6.4"
+  dependencies:
+    "@types/node": "npm:*"
+    form-data: "npm:^3.0.0"
+  checksum: 10c0/e43e4670ed8b7693dbf660ac1450b14fcfcdd8efca1eb0f501b6ad95af2d1fa06f8541db03e9511e82a5fee510a238fe0913330c9a58f8ac6892b985f6dd993e
+  languageName: node
+  linkType: hard
+
 "@types/node-fetch@npm:^2.6.4":
   version: 2.6.13
   resolution: "@types/node-fetch@npm:2.6.13"
@@ -13135,6 +13157,17 @@ __metadata:
   checksum: 10c0/03ea5b69e97a4a476ef5fc8455d0da2718bd68cd8ace3e42718176bf4b7dfd80eb1d0eba47dcd04b34ed9a0c5c8ed849ead0f364dad0e35369254a45d5e098c4
   languageName: node
   linkType: hard
+
+"careercopilot-firestore-rules-tests@workspace:tests":
+  version: 0.0.0-use.local
+  resolution: "careercopilot-firestore-rules-tests@workspace:tests"
+  dependencies:
+    "@firebase/rules-unit-testing": "npm:^3.0.3"
+    firebase: "npm:^10.7.1"
+    jest: "npm:^29.7.0"
+    jest-environment-node: "npm:^29.7.0"
+  languageName: unknown
+  linkType: soft
 
 "careercopilot-frontend@workspace:frontend":
   version: 0.0.0-use.local
@@ -16986,7 +17019,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"firebase@npm:^10.14.0":
+"firebase@npm:^10.14.0, firebase@npm:^10.7.1":
   version: 10.14.1
   resolution: "firebase@npm:10.14.1"
   dependencies:
@@ -17150,6 +17183,19 @@ __metadata:
     mime-types: "npm:^2.1.35"
     safe-buffer: "npm:^5.2.1"
   checksum: 10c0/7fb70447849fc9bce4d01fe9a626f6587441f85779a2803b67f803e1ab52b0bd78db0a7acd80d944c665f68ca90936c327f1244b730719b638a0219e98b20488
+  languageName: node
+  linkType: hard
+
+"form-data@npm:^3.0.0":
+  version: 3.0.4
+  resolution: "form-data@npm:3.0.4"
+  dependencies:
+    asynckit: "npm:^0.4.0"
+    combined-stream: "npm:^1.0.8"
+    es-set-tostringtag: "npm:^2.1.0"
+    hasown: "npm:^2.0.2"
+    mime-types: "npm:^2.1.35"
+  checksum: 10c0/2451043b3e931653ce9690ba051b0bf1b5855a63029279bd7bdf8d02e4b5b42f4582b23ed3637df27a0d21bac2013c37d165ec9486e1af2470c13114aee83acc
   languageName: node
   linkType: hard
 
@@ -22863,6 +22909,20 @@ __metadata:
     object.entries: "npm:^1.1.9"
     semver: "npm:^6.3.1"
   checksum: 10c0/3613f21c60b047e66f168d3499a6be0060d89fb01ddceaa7032c2fb318aff12e4b9b111449c1a9aeb3b848bfdc1d4b6bc8fab327af692319597d21a1e7063692
+  languageName: node
+  linkType: hard
+
+"node-fetch@npm:2.6.7":
+  version: 2.6.7
+  resolution: "node-fetch@npm:2.6.7"
+  dependencies:
+    whatwg-url: "npm:^5.0.0"
+  peerDependencies:
+    encoding: ^0.1.0
+  peerDependenciesMeta:
+    encoding:
+      optional: true
+  checksum: 10c0/fcae80f5ac52fbf5012f5e19df2bd3915e67d3b3ad51cb5942943df2238d32ba15890fecabd0e166876a9f98a581ab50f3f10eb942b09405c49ef8da36b826c7
   languageName: node
   linkType: hard
 

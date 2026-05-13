@@ -50,7 +50,7 @@
     "docs:build": "yarn docs:clean && yarn docs",
     "kr:manifest": "node scripts/kr/generate-manifest.mjs",
     "kr:heroes": "node scripts/kr/generate-hero-registry.mjs",
-    "kr:sync": "npm run kr:manifest && npm run kr:heroes",
+    "kr:sync": "yarn kr:manifest && yarn kr:heroes",
     "kr:watch": "node scripts/kr/watch-assets.mjs",
     "kr:validate": "node scripts/kr/validate-manifest.mjs",
     "kr:replace-markers": "node ../scripts/kr/replace-asset-tokens.mjs",
@@ -236,14 +236,29 @@
     "vitest": "^4.0.16"
   },
   "eslintConfig": {
-    "extends": ["react-app"]
+    "extends": [
+      "react-app"
+    ]
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
-    "*.{json,md,yml,yaml}": ["prettier --write"]
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
   }
 }
