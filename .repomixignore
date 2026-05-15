@@ -1,0 +1,136 @@
+# Dependencies
+node_modules/
+.yarn/
+yarn.lock
+package-lock.json
+
+# Git
+.git/
+.worktrees/
+
+# Build and Caches
+dist/
+build/
+.cache/
+.next/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+__pycache__/
+*.py[cod]
+*$py.class
+.tox/
+.coverage
+.hypothesis/
+*.tsbuildinfo
+coverage.json
+
+# Virtual Environments
+.venv/
+venv/
+env/
+
+# Environment and Secrets
+.env*
+*-service-account-key.json
+service-account-*.json
+*_key.json
+*-key.json
+firebase-adminsdk-*.json
+firebase-prod-key.json
+firebase-staging-key.json
+*.secrets
+*credentials.txt
+
+# Repomix Outputs
+repomix-output*
+repomix-context.xml
+
+# IDE and System Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.bak
+*.bak.*
+
+# Large Binary/Media Files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.zip
+*.pdf
+*.make
+*.zip
+
+# Firebase and Other Tool Meta
+.firebase/
+.genkit/
+.idx/
+.agent/
+.agents/
+.claude/
+.codex/
+.codex-review/
+codex-skills/
+.windsurf/
+.playwright-mcp/
+.studio.json
+studio.lock
+
+# Test Results and Logs
+test-results/
+playwright-report/
+logs/
+*.log
+precommit_log.txt
+
+# Project Specific Archives/Noise
+/careercopilot/
+_archive_legacy/
+_archive/
+.archive_legacy/
+.ai_reports/
+.ai_batches/
+.backups/
+.temp_artifact_build/
+purge/
+_backup_*/
+cleanup_backup_*/
+docs/project/active/frontend-source-of-truth-migration/sources/
+docs/project/active/frontend-source-of-truth-migration/evidence/
+docs/archive*/
+docs/reports/archive/
+docs/other/LEGACY_AUDIT_REPORT.md
+archive/legacy_folders/
+archive_legacy_reports/
+archive-legacy-reports/
+**/archive_legacy/
+docs/design/Archive/
+docs/design/Archive_legacy/
+docs/design/hifi-legacy/
+
+# Large JSON Reports/Manifests (Contextual noise)
+*-report.json
+*-analysis.json
+*-catalog.json
+*-inventory.json
+orphans*.json
+manifest-entry.json
+visual-report.json
+
+# Legacy Root Files
+dashboard.html
+
+# Large CSVs and DBs
+*.csv
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Large auto-generated scripts
+get-pip.py
