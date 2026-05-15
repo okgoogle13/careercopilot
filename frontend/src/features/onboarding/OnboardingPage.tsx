@@ -78,7 +78,7 @@ export function OnboardingPage() {
     async function loadHero() {
       try {
         const [manifest, registry] = await Promise.all([
-          fetch('/assets/kerala-rage-kr-solidarity-manifest.json').then((r) => r.json()),
+          fetch('/assets/kr-solidarity-manifest.json').then((r) => r.json()),
           loadHeroRegistry(),
         ]);
 
@@ -107,7 +107,7 @@ export function OnboardingPage() {
     if (selected && segment) {
       track('onboarding_jtbd_segment_selected', { segment });
       setUserSegment(segment);
-      navigate('/career/ingest');
+      navigate('/profile');
     }
   };
 

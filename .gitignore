@@ -118,6 +118,8 @@ tools/scripts/workflow/run_northcote_workflow.py
 .claude*/
 !.claude/skills/
 .codex/
+.codex-review/
+codex-skills/
 .windsurf/
 .idx/
 .agent/
@@ -193,3 +195,16 @@ docs/project/active/frontend-source-of-truth-migration/evidence/KR SOLIDAIRTY FR
 docs/project/active/frontend-source-of-truth-migration/evidence/KR Solidarity CAREERCOPILOT.zip
 
 careercopilot_-_CLI_Quickstart-oauth-credentials.txt
+
+# Build artifacts (generated, never commit)
+frontend/dist-extension/
+frontend/dev-dist/
+frontend/coverage/
+frontend/playwright-report/
+frontend/test-results/
+backend/logs/
+.playwright-mcp/
+
+# Temp outputs
+frontend/component-inventory.json
+frontend/component-library.csv

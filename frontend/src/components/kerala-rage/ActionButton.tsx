@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, HTMLMotionProps, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 /**
  * ActionButtonProps
@@ -73,12 +74,7 @@ export const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProp
             scale: 0.98,
             borderRadius: 'var(--sys-shape-strikePuff01)', // 'Puff' morph on press
           },
-          transition: {
-            type: 'spring',
-            stiffness: 500,
-            damping: 30,
-            mass: 0.8,
-          },
+          transition: KrDarkSpring,
         };
 
     return (

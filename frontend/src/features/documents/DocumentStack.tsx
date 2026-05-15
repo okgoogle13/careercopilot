@@ -104,10 +104,23 @@ export const DocumentStack: React.FC = () => {
           return (
             <div
               key={doc.id}
-              className="p-4 flex items-center gap-6 rounded-[var(--radius-megaphone-base)] border border-outline-variant/30 bg-surface-KrDark-slate-smoke-low/20 group hover:bg-surface-KrDark-slate-smoke-low/50 transition-colors"
+              className="group flex items-center gap-6 p-4 rounded-megaphone transition-colors"
+              style={{
+                border:
+                  '1px solid color-mix(in srgb, var(--kr-color-concrete-grey-steps-0) 30%, transparent)',
+                backgroundColor:
+                  'color-mix(in srgb, var(--kr-color-charcoal-background-steps-1) 20%, transparent)',
+              }}
             >
               {/* Icon Container */}
-              <div className="w-12 h-12 rounded-[var(--radius-megaphone-base)] bg-surface-KrDark-slate-smoke-highest flex items-center justify-center border border-outline-variant/30">
+              <div
+                className="flex h-12 w-12 items-center justify-center rounded-megaphone"
+                style={{
+                  backgroundColor: 'var(--kr-color-charcoal-background-steps-3)',
+                  border:
+                    '1px solid color-mix(in srgb, var(--kr-color-concrete-grey-steps-0) 30%, transparent)',
+                }}
+              >
                 <Icon className="w-6 h-6 text-on-surface-paper-white opacity-70" />
               </div>
 
@@ -147,7 +160,7 @@ export const DocumentStack: React.FC = () => {
                 {/* Status Pill */}
                 <div
                   className={cn(
-                    'px-3 py-1 rounded-march border bg-surface-KrDark-slate-smoke-highest/30 text-xs font-bold uppercase tracking-wider flex items-center gap-2',
+                    'flex items-center gap-2 rounded-march border px-3 py-1 text-xs font-bold uppercase tracking-wider',
                     getStatusColor(doc.status),
                     doc.status === 'analyzed' && 'border-primary-ink-gold/20',
                     doc.status === 'pending' && 'border-secondary-flannel/20',
@@ -160,7 +173,10 @@ export const DocumentStack: React.FC = () => {
                 </div>
 
                 {/* Actions Menu */}
-                <button className="p-2 text-secondary-flannel-dim hover:text-on-surface-paper-white hover:bg-surface-KrDark-slate-smoke-highest rounded-march transition-colors">
+                <button
+                  className="rounded-march p-2 text-secondary-flannel-dim transition-colors hover:text-on-surface-paper-white"
+                  style={{ backgroundColor: 'var(--kr-color-charcoal-background-steps-3)' }}
+                >
                   <MoreVertical className="w-5 h-5" />
                 </button>
               </div>
@@ -169,13 +185,30 @@ export const DocumentStack: React.FC = () => {
         })}
       </div>
 
-      {/* Upload Drop Zone Placeholder */}
-      <div className="border-2 border-dashed border-outline-variant/20 rounded-[var(--radius-megaphone-base)] p-12 flex flex-col items-center justify-center text-secondary-flannel-dim hover:border-primary-ink-gold/30 hover:bg-surface-KrDark-slate-smoke-low/20 transition-all cursor-pointer">
-        <Upload className="w-12 h-12 mb-4 opacity-50" />
-        <p className="text-title-medium font-bold text-on-surface-paper-white">
+      {/* Upload Drop Zone — V-006 FIX: Laboratory tokens replace Gallery tokens */}
+      <div
+        className="p-12 flex flex-col items-center justify-center cursor-pointer transition-all rounded-megaphone hover:[border-color:var(--kr-color-ink-gold-steps-0)] hover:[background-color:var(--kr-color-charcoal-background-steps-2)]"
+        style={{
+          border: '2px dashed var(--kr-color-charcoal-background-steps-4)',
+          backgroundColor: 'var(--kr-color-charcoal-background-steps-1)',
+        }}
+      >
+        <Upload
+          className="w-12 h-12 mb-4"
+          style={{ color: 'var(--kr-color-concrete-grey-base)', opacity: 0.5 }}
+        />
+        <p
+          className="text-title-medium font-bold"
+          style={{ color: 'var(--kr-color-paper-white-base)' }}
+        >
           Drag and drop files here
         </p>
-        <p className="text-body-medium mt-2">Supports PDF, DOCX, TXT (Max 10MB)</p>
+        <p
+          className="text-body-medium mt-2"
+          style={{ color: 'var(--kr-color-concrete-grey-base)' }}
+        >
+          Supports PDF, DOCX, TXT (Max 10MB)
+        </p>
       </div>
     </div>
   );

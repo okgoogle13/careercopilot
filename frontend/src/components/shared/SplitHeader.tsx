@@ -32,9 +32,11 @@ const SplitHeader: React.FC<SplitHeaderProps> = ({
         <motion.h1
           className={cn(
             'font-proclamation font-black uppercase tracking-tighter leading-none',
-            mode === 'KrDark' ? 'text-6xl md:text-7xl' : 'text-5xl md:text-6xl',
-            'text-parchment'
+            mode === 'KrDark' ? 'text-6xl md:text-7xl' : 'text-5xl md:text-6xl'
           )}
+          style={{
+            color: 'var(--kr-color-paper-white-base)',
+          }} /* V-004 FIX: nocturnal canopy dark-mode text token; replaces banned Gallery parchment */
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.25, 0.4, 0.55, 1.4] }}

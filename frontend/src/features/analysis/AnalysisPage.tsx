@@ -1,5 +1,5 @@
 import { ScaffoldInput, Strike, Placard, ScaffoldArea } from '@/components/ui';
-import { EvidenceUploader } from '@/features/ingestion/components/EvidenceUploader';
+import { EvidenceUploader } from './components/EvidenceUploader';
 import { ATSScoreCard } from './components/ATSScoreCard';
 import { AuditDisplay } from './components/AuditDisplay';
 import type { ATSScoreResult, DocumentAudit } from '@/types/analysis';
@@ -43,7 +43,7 @@ export const AnalysisPage: React.FC = () => {
     async function loadHero() {
       try {
         const [manifest, registry] = await Promise.all([
-          fetch('/assets/kerala-rage-kr-solidarity-manifest.json').then((r) => r.json()),
+          fetch('/assets/kr-solidarity-manifest.json').then((r) => r.json()),
           loadHeroRegistry(),
         ]);
 
@@ -407,7 +407,7 @@ export const AnalysisPage: React.FC = () => {
                       Export Pack
                     </Strike>
                   </Link>
-                  <Link to="/apply/quick">
+                  <Link to="/apply">
                     <Strike>
                       <Sparkles className="h-4 w-4" />
                       Continue to Quick Apply

@@ -65,8 +65,10 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
           : 'var(--sys-color-surface-container)',
         border: isSelected
           ? `2px solid var(--sys-color-primary)`
-          : `1px solid var(--sys-color-outline-variant)`,
-        borderColor: isSelected ? 'var(--sys-color-primary)' : 'var(--sys-color-outline-variant)',
+          : `1px solid var(--kr-color-concrete-grey-steps-0)`,
+        borderColor: isSelected
+          ? 'var(--sys-color-primary)'
+          : 'var(--kr-color-concrete-grey-steps-0)',
         transitionDuration: 'var(--sys-motion-duration-medium-2)',
         transitionTimingFunction: 'var(--sys-motion-easing-standard)',
       }}
@@ -168,7 +170,7 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
             padding: 'var(--sys-space-3)',
             backgroundColor: 'var(--sys-color-surface-container-low)',
             borderRadius: 'var(--shape-blockRiot01)',
-            border: `1px solid var(--sys-color-outline-variant)`,
+            border: `1px solid var(--kr-color-concrete-grey-steps-0)`,
           }}
         >
           <div
@@ -215,7 +217,7 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
             padding: 'var(--sys-space-3)',
             backgroundColor: 'var(--sys-color-surface-container-low)',
             borderRadius: 'var(--shape-blockRiot01)',
-            border: `1px solid var(--sys-color-outline-variant)`,
+            border: `1px solid var(--kr-color-concrete-grey-steps-0)`,
           }}
         >
           <div
@@ -280,7 +282,7 @@ export const ProfileCardMUI: React.FC<ProfileCardMUIProps> = ({
         style={{
           gap: 'var(--sys-space-2)',
           paddingTop: 'var(--sys-space-3)',
-          borderTop: `1px solid var(--sys-color-outline-variant)`,
+          borderTop: `1px solid var(--kr-color-concrete-grey-steps-0)`,
         }}
       >
         <Button

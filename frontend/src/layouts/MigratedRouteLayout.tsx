@@ -5,7 +5,6 @@ import { Menu } from 'lucide-react';
 import { SolidaritySidebar } from './shared/SolidaritySidebar';
 import { Footer } from './shared/Footer';
 import { BannerTexture } from '@/components/kerala-rage/BannerTexture';
-import { ActionButton } from '@/components/kerala-rage/ActionButton';
 import { Logo } from '@/components/ui/Logo';
 
 /**

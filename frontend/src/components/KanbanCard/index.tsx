@@ -22,9 +22,9 @@ export interface KanbanCardProps {
 }
 
 const priorityColors: Record<string, string> = {
-  low: 'var(--sys-color-activistSmokeGreen-base, #48DA8B)',
-  medium: 'var(--sys-color-inkGold-base, #DAF674)',
-  high: 'var(--sys-color-solidarityRed-base, #F14714)',
+  low: 'var(--kr-color-kr-activist-smoke-green-base)',
+  medium: 'var(--kr-color-ink-gold-base)',
+  high: 'var(--kr-color-solidarity-red-base)',
 };
 
 export const KanbanCard: React.FC<KanbanCardProps> = ({
@@ -47,7 +47,7 @@ export const KanbanCard: React.FC<KanbanCardProps> = ({
       onClick={onSelect}
       className={cn(
         'relative rounded-[var(--sys-shape-placard01,8px)] border cursor-pointer select-none',
-        'bg-[var(--sys-color-charcoalBackground-base)] border-[var(--sys-color-outline-variant,rgba(163,155,143,0.2))]',
+        'bg-[var(--sys-color-charcoalBackground-base)] border-[var(--kr-color-concrete-grey-steps-0)]',
         'p-4 space-y-2 transition-all'
       )}
       style={{

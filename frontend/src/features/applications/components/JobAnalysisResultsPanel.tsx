@@ -8,6 +8,7 @@ import type { AnalyzeJobFromUrlResponse } from '@/types/masterResume';
 import { Link2, Copy, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 export interface JobAnalysisResultsPanelProps {
   result: AnalyzeJobFromUrlResponse;
@@ -41,7 +42,7 @@ function CopyButton({ text, label }: { text: string; label: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold uppercase tracking-widest border border-[var(--sys-color-outline-variant)] text-[var(--sys-color-worker-ash-base)] hover:text-[var(--sys-color-paperWhite-base)] transition-colors"
+      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold uppercase tracking-widest border border-[var(--kr-color-concrete-grey-steps-0)] text-[var(--sys-color-worker-ash-base)] hover:text-[var(--sys-color-paperWhite-base)] transition-colors"
       style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
     >
       {copied ? (
@@ -65,7 +66,7 @@ export function JobAnalysisResultsPanel({
     <motion.section
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ type: 'spring', stiffness: 220, damping: 24 }}
+      transition={KrDarkSpring}
       className="space-y-6"
     >
       {/* Row 1: ATS Score + Target job */}
@@ -83,7 +84,7 @@ export function JobAnalysisResultsPanel({
           </p>
         </div>
         <div
-          className="border border-[var(--sys-color-outline-variant)] bg-[var(--sys-color-charcoalBackground-steps-1)] p-5 md:col-span-2"
+          className="border border-[var(--kr-color-concrete-grey-steps-0)] bg-[var(--sys-color-charcoalBackground-steps-1)] p-5 md:col-span-2"
           style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
         >
           <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--sys-color-concreteGrey-base)]">
@@ -100,7 +101,7 @@ export function JobAnalysisResultsPanel({
 
       {/* Row 2: Chunk match visualization */}
       <div
-        className="border border-[var(--sys-color-outline-variant)]/18 bg-[var(--sys-color-charcoalBackground-steps-1)] p-6"
+        className="border border-[var(--kr-color-concrete-grey-steps-0)]/18 bg-[var(--sys-color-charcoalBackground-steps-1)] p-6"
         style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
       >
         <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--sys-color-inkGold-base)] mb-4">
@@ -110,7 +111,7 @@ export function JobAnalysisResultsPanel({
           {result.chunk_matches.map((match) => (
             <div
               key={match.chunk_id}
-              className="border border-[var(--sys-color-outline-variant)]/15 p-4"
+              className="border border-[var(--kr-color-concrete-grey-steps-0)]/15 p-4"
               style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
             >
               <div className="flex items-center justify-between gap-3 mb-1">
@@ -133,7 +134,7 @@ export function JobAnalysisResultsPanel({
               </div>
               {/* Score bar */}
               <div
-                className="h-1 w-full bg-[var(--sys-color-outline-variant)] mb-2"
+                className="h-1 w-full bg-[var(--kr-color-concrete-grey-steps-0)] mb-2"
                 style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
               >
                 <div
@@ -166,7 +167,7 @@ export function JobAnalysisResultsPanel({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Tailored Resume */}
           <div
-            className="border border-[var(--sys-color-outline-variant)] bg-[var(--sys-color-charcoalBackground-steps-1)] p-5 space-y-3"
+            className="border border-[var(--kr-color-concrete-grey-steps-0)] bg-[var(--sys-color-charcoalBackground-steps-1)] p-5 space-y-3"
             style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
           >
             <div className="flex items-center justify-between">
@@ -185,7 +186,7 @@ export function JobAnalysisResultsPanel({
 
           {/* Cover Letter */}
           <div
-            className="border border-[var(--sys-color-outline-variant)] bg-[var(--sys-color-charcoalBackground-steps-1)] p-5 space-y-3"
+            className="border border-[var(--kr-color-concrete-grey-steps-0)] bg-[var(--sys-color-charcoalBackground-steps-1)] p-5 space-y-3"
             style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
           >
             <div className="flex items-center justify-between">
@@ -204,7 +205,7 @@ export function JobAnalysisResultsPanel({
 
           {/* KSC Response */}
           <div
-            className="border border-[var(--sys-color-outline-variant)] bg-[var(--sys-color-charcoalBackground-steps-1)] p-5 space-y-3"
+            className="border border-[var(--kr-color-concrete-grey-steps-0)] bg-[var(--sys-color-charcoalBackground-steps-1)] p-5 space-y-3"
             style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
           >
             <div className="flex items-center justify-between">

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Placard } from '@/components/ui';
 import { useUserStore } from '@/stores/userStore';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 const STORAGE_KEY = 'cc_onboarding_checklist';
 /** Single key that stores both progress and dismissed flag. */
@@ -23,7 +24,7 @@ const CHECKLIST_ITEMS: ChecklistItem[] = [
     id: 'upload_resume',
     label: 'Upload your resume',
     description: 'AI extracts and organises your career history automatically.',
-    route: '/career/ingest',
+    route: '/profile',
     ctaLabel: 'Upload now →',
   },
   {
@@ -37,14 +38,14 @@ const CHECKLIST_ITEMS: ChecklistItem[] = [
     id: 'generate_cover_letter',
     label: 'Generate a tailored cover letter',
     description: 'Produce a personalised cover letter from any job URL in under a minute.',
-    route: '/cover-letter-generator',
+    route: '/generation',
     ctaLabel: 'Write letter →',
   },
   {
     id: 'create_ksc',
     label: 'Create your first KSC response',
     description: 'Nail Key Selection Criteria with guided STAR-method prompts.',
-    route: '/ksc-generator',
+    route: '/generation',
     ctaLabel: 'Write KSC →',
   },
 ];
@@ -146,7 +147,7 @@ export function OnboardingChecklist({ onDismiss }: OnboardingChecklistProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
-      transition={{ type: 'spring', stiffness: 260, damping: 28 }}
+      transition={KrDarkSpring}
     >
       <Placard
         elevation="raised"

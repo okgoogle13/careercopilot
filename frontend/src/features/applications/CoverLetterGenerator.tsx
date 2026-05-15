@@ -194,8 +194,8 @@ export function CoverLetterGenerator() {
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ type: 'spring', stiffness: 210, damping: 24 }}
-        className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1 relative overflow-hidden"
+        transition={KrDarkSpring}
+        className="bg-surface-container rounded-placard p-8 border border-[var(--kr-color-concrete-grey-steps-0)] shadow-elevation-1 relative overflow-hidden"
       >
         <AnimatePresence mode="wait">
           {/* Step 1: Job Details */}
@@ -246,7 +246,7 @@ export function CoverLetterGenerator() {
 
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t border-outline-variant" />
+                  <span className="w-full border-t border-[var(--kr-color-concrete-grey-steps-0)]" />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
                   <span className="bg-surface px-2 text-on-surface-variant">Or enter manually</span>
@@ -261,7 +261,7 @@ export function CoverLetterGenerator() {
                   value={jobDescription}
                   onChange={(e) => setJobDescription(e.target.value)}
                   placeholder="Paste the full job description here..."
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold resize-none h-64 focus:ring-primary focus:border-primary font-body text-body-medium"
+                  className="bg-surface-container-high border-[var(--kr-color-concrete-grey-steps-0)] text-on-surface rounded-scaffold resize-none h-64 focus:ring-primary focus:border-primary font-body text-body-medium"
                 />
               </div>
               <div className="flex justify-end">
@@ -309,7 +309,7 @@ export function CoverLetterGenerator() {
                     value={companyValues}
                     onChange={(e) => setCompanyValues(e.target.value)}
                     placeholder="e.g. Innovation, Sustainability, Customer Obsession..."
-                    className="bg-surface-container-high border-outline-variant h-32"
+                    className="bg-surface-container-high border-[var(--kr-color-concrete-grey-steps-0)] h-32"
                   />
                 </div>
               </div>
@@ -360,7 +360,7 @@ export function CoverLetterGenerator() {
                         className={`p-4 rounded-scaffold border-2 capitalize font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sys-color-inkGold-base)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--sys-color-charcoalBackground-base)] ${
                           style === s
                             ? 'border-primary bg-primary-container text-on-primary-container'
-                            : 'border-outline-variant hover:border-outline'
+                            : 'border-[var(--kr-color-concrete-grey-steps-0)] hover:border-outline'
                         }`}
                       >
                         {s}
@@ -377,7 +377,7 @@ export function CoverLetterGenerator() {
                     value={instructions}
                     onChange={(e) => setInstructions(e.target.value)}
                     placeholder="e.g. Emphasize stakeholder engagement and keep under 300 words."
-                    className="bg-surface-container-high border-outline-variant h-32 rounded-scaffold"
+                    className="bg-surface-container-high border-[var(--kr-color-concrete-grey-steps-0)] h-32 rounded-scaffold"
                   />
                 </div>
 
@@ -389,12 +389,12 @@ export function CoverLetterGenerator() {
                     value={strengths}
                     onChange={(e) => setStrengths(e.target.value)}
                     placeholder="e.g. 5 years in child protection, fluent in Vietnamese, strong crisis de-escalation skills..."
-                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-scaffold h-24 focus:ring-secondary focus:border-secondary font-body"
+                    className="bg-surface-container-high border-[var(--kr-color-concrete-grey-steps-0)] text-on-surface rounded-scaffold h-24 focus:ring-secondary focus:border-secondary font-body"
                   />
                 </div>
               </div>
 
-              <div className="flex justify-between pt-6 border-t border-outline-variant">
+              <div className="flex justify-between pt-6 border-t border-[var(--kr-color-concrete-grey-steps-0)]">
                 <Button
                   onClick={handleBack}
                   variant="text"
@@ -446,7 +446,7 @@ export function CoverLetterGenerator() {
                 transition={{ delay: 0.2 }}
                 id="cover-letter-content"
                 aria-live="polite"
-                className="bg-surface-container-low rounded-megaphone p-8 text-on-surface whitespace-pre-wrap border border-outline-variant shadow-inner font-body text-body-medium leading-relaxed min-h-[400px]"
+                className="bg-surface-container-low rounded-megaphone p-8 text-on-surface whitespace-pre-wrap border border-[var(--kr-color-concrete-grey-steps-0)] shadow-inner font-body text-body-medium leading-relaxed min-h-[400px]"
               >
                 {generatedLetter}
               </motion.div>
@@ -479,7 +479,7 @@ export function CoverLetterGenerator() {
                 </Button>
               </div>
 
-              <div className="rounded-scaffold border border-outline-variant bg-surface-container-high/40 p-4 mt-6">
+              <div className="rounded-scaffold border border-[var(--kr-color-concrete-grey-steps-0)] bg-surface-container-high/40 p-4 mt-6">
                 <p className="text-label-small font-mono uppercase tracking-wider text-on-surface-variant mb-2">
                   Recommended Next Steps
                 </p>

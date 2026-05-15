@@ -16,7 +16,7 @@ def sort_key(asset):
 
 def main():
     manifest_path = pathlib.Path(
-        "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json"
+        "frontend/public/assets/kr-solidarity-manifest.json"
     )
     if not manifest_path.is_file():
         print("Manifest not found", file=sys.stderr)

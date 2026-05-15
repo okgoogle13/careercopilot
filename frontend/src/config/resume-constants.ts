@@ -19,70 +19,70 @@ export const RESUME_TEMPLATES: TemplateStyle[] = [
     id: 'krs-charcoal-ash',
     name: 'Charcoal & Ash (ATS)',
     layout: 'single',
-    primaryColor: '#1A1714', // Charcoal
-    secondaryColor: '#A39B8F', // Concrete Grey
-    accentColor: '#DAF6B3', // Worker Ash
+    primaryColor: 'var(--kr-color-charcoal-background-base)', // Charcoal
+    secondaryColor: 'var(--kr-color-concrete-grey-base)', // Concrete Grey
+    accentColor: 'var(--kr-color-worker-ash-base)', // Worker Ash
     fontSans: "'Work Sans', sans-serif",
     fontSerif: "'Fraunces', serif",
-    headingColor: '#1A1714',
-    textColor: '#1A1714',
-    borderColor: '#A39B8F',
-    bgLight: '#DAF6B3',
+    headingColor: 'var(--kr-color-charcoal-background-base)',
+    textColor: 'var(--kr-color-charcoal-background-base)',
+    borderColor: 'var(--kr-color-concrete-grey-base)',
+    bgLight: 'var(--kr-color-worker-ash-base)',
   },
   {
     id: 'krs-crimson-strike',
     name: 'Crimson Strike (ATS)',
     layout: 'single',
-    primaryColor: '#F14714', // Solidarity Crimson
-    secondaryColor: '#A39B8F',
-    accentColor: '#1A1714',
+    primaryColor: 'var(--kr-color-solidarity-red-base)', // Solidarity Crimson
+    secondaryColor: 'var(--kr-color-concrete-grey-base)',
+    accentColor: 'var(--kr-color-charcoal-background-base)',
     fontSans: "'Work Sans', sans-serif",
     fontSerif: "'Libre Bodoni', serif",
-    headingColor: '#F14714',
-    textColor: '#DAF6B3', // Worker Ash for readability on dark
-    borderColor: '#F14714',
-    bgLight: '#1A1714', // Charcoal
+    headingColor: 'var(--kr-color-solidarity-red-base)',
+    textColor: 'var(--kr-color-worker-ash-base)', // Worker Ash for readability on dark
+    borderColor: 'var(--kr-color-solidarity-red-base)',
+    bgLight: 'var(--kr-color-charcoal-background-base)', // Charcoal
   },
   {
     id: 'krs-protest-blue',
     name: 'Protest Metal (ATS)',
     layout: 'single',
-    primaryColor: '#48B3DA', // Protest Metal Blue
-    secondaryColor: '#DAF6B3',
-    accentColor: '#F6E748', // Stencil Yellow
+    primaryColor: 'var(--kr-color-protest-metal-blue-base)', // Protest Metal Blue
+    secondaryColor: 'var(--kr-color-worker-ash-base)',
+    accentColor: 'var(--kr-color-stencil-yellow-base)', // Stencil Yellow
     fontSans: "'JetBrains Mono', monospace",
     fontSerif: "'Work Sans', sans-serif",
-    headingColor: '#48B3DA',
-    textColor: '#DAF6B3',
-    borderColor: '#A39B8F',
-    bgLight: '#1A1714',
+    headingColor: 'var(--kr-color-protest-metal-blue-base)',
+    textColor: 'var(--kr-color-worker-ash-base)',
+    borderColor: 'var(--kr-color-concrete-grey-base)',
+    bgLight: 'var(--kr-color-charcoal-background-base)',
   },
   {
     id: 'krs-ink-gold',
     name: 'Ink Gold (ATS)',
     layout: 'single',
-    primaryColor: '#DAF674', // Ink Gold
-    secondaryColor: '#A39B8F',
-    accentColor: '#1A1714',
+    primaryColor: 'var(--kr-color-ink-gold-base)', // Ink Gold
+    secondaryColor: 'var(--kr-color-concrete-grey-base)',
+    accentColor: 'var(--kr-color-charcoal-background-base)',
     fontSans: "'Work Sans', sans-serif",
     fontSerif: "'Fraunces', serif",
-    headingColor: '#DAF674',
-    textColor: '#DAF6B3',
-    borderColor: '#A39B8F',
-    bgLight: '#1A1714',
+    headingColor: 'var(--kr-color-ink-gold-base)',
+    textColor: 'var(--kr-color-worker-ash-base)',
+    borderColor: 'var(--kr-color-concrete-grey-base)',
+    bgLight: 'var(--kr-color-charcoal-background-base)',
   },
   {
     id: 'krs-activist-green',
     name: 'Activist Smoke (ATS)',
     layout: 'single',
-    primaryColor: '#48DA8B', // Activist Smoke Green
-    secondaryColor: '#A39B8F',
-    accentColor: '#1A1714',
+    primaryColor: 'var(--kr-color-kr-activist-smoke-green-base)', // Activist Smoke Green
+    secondaryColor: 'var(--kr-color-concrete-grey-base)',
+    accentColor: 'var(--kr-color-charcoal-background-base)',
     fontSans: "'Work Sans', sans-serif",
     fontSerif: "'Fraunces', serif",
-    headingColor: '#48DA8B',
-    textColor: '#DAF6B3',
-    borderColor: '#A39B8F',
-    bgLight: '#1A1714',
+    headingColor: 'var(--kr-color-kr-activist-smoke-green-base)',
+    textColor: 'var(--kr-color-worker-ash-base)',
+    borderColor: 'var(--kr-color-concrete-grey-base)',
+    bgLight: 'var(--kr-color-charcoal-background-base)',
   },
 ];

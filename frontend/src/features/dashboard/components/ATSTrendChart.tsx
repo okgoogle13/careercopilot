@@ -67,7 +67,7 @@ export function ATSTrendChart({ data = DEFAULT_DATA, height = HEIGHT }: ATSTrend
     <div
       style={{
         backgroundColor: 'var(--sys-color-charcoalBackground-steps-2)',
-        borderColor: 'var(--sys-color-outline-variant)',
+        borderColor: 'var(--kr-color-concrete-grey-steps-0)',
         borderRadius: 'var(--sys-shape-placardTorn01)',
       }}
       className="p-6 border"
@@ -116,7 +116,7 @@ export function ATSTrendChart({ data = DEFAULT_DATA, height = HEIGHT }: ATSTrend
               y1={y}
               x2={WIDTH - PADDING.right}
               y2={y}
-              stroke="var(--sys-color-outline-variant)"
+              stroke="var(--kr-color-concrete-grey-steps-0)"
               strokeOpacity={0.12}
               strokeWidth={1}
               strokeDasharray="4 4"
@@ -141,7 +141,7 @@ export function ATSTrendChart({ data = DEFAULT_DATA, height = HEIGHT }: ATSTrend
           y1={PADDING.top + innerH}
           x2={WIDTH - PADDING.right}
           y2={PADDING.top + innerH}
-          stroke="var(--sys-color-outline-variant)"
+          stroke="var(--kr-color-concrete-grey-steps-0)"
           strokeOpacity={0.2}
           strokeWidth={1}
         />

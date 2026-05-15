@@ -19,40 +19,41 @@ const config: Config = {
       'lab-wren-metal-blue': 'var(--kr-color-protest-metal-blue-base)',
 
       // Semantic Mappings (Kerala Rage KrSolidarity)
-      border: 'var(--color-concrete-grey)',
-      input: 'var(--color-concrete-grey)',
-      ring: 'var(--color-ink-gold)',
-      background: 'var(--color-asphalt-black)',
-      foreground: 'var(--color-paper-white)',
+      border: 'var(--kr-color-concrete-grey-usage)',
+      input: 'var(--kr-color-concrete-grey-usage)',
+      ring: 'var(--kr-color-ink-gold-usage)',
+      background: 'var(--kr-color-asphalt-black-usage)',
+      foreground: 'var(--kr-color-paper-white-usage)',
+      'surface-elevated': 'var(--kr-color-charcoal-background-steps-1)',
 
       primary: {
-        DEFAULT: 'var(--color-ink-gold)',
-        foreground: 'var(--color-asphalt-black)',
+        DEFAULT: 'var(--kr-color-ink-gold-usage)',
+        foreground: 'var(--kr-color-charcoal-background-base)',
         container: 'var(--kr-color-ink-gold-steps-2)',
       },
       secondary: {
-        DEFAULT: 'var(--color-concrete-grey)',
-        foreground: 'var(--color-asphalt-black)',
+        DEFAULT: 'var(--kr-color-concrete-grey-usage)',
+        foreground: 'var(--kr-color-charcoal-background-base)',
       },
       destructive: {
-        DEFAULT: 'var(--color-solidarity-red)',
-        foreground: 'var(--color-paper-white)',
+        DEFAULT: 'var(--kr-color-solidarity-red-usage)',
+        foreground: 'var(--kr-color-paper-white-usage)',
       },
       muted: {
-        DEFAULT: 'var(--color-concrete-grey-dark)',
-        foreground: 'var(--color-concrete-grey-lightest)',
+        DEFAULT: 'var(--kr-color-concrete-grey-steps-4)',
+        foreground: 'var(--kr-color-concrete-grey-steps-1)',
       },
       accent: {
-        DEFAULT: 'var(--color-solidarity-red)',
-        foreground: 'var(--color-paper-white)',
+        DEFAULT: 'var(--kr-color-solidarity-red-usage)',
+        foreground: 'var(--kr-color-paper-white-usage)',
       },
       popover: {
-        DEFAULT: 'var(--color-asphalt-black-light)',
-        foreground: 'var(--color-paper-white)',
+        DEFAULT: 'var(--kr-color-asphalt-black-steps-1)',
+        foreground: 'var(--kr-color-paper-white-usage)',
       },
       card: {
-        DEFAULT: 'var(--color-asphalt-black)',
-        foreground: 'var(--color-paper-white)',
+        DEFAULT: 'var(--kr-color-charcoal-background-base)',
+        foreground: 'var(--kr-color-paper-white-usage)',
       },
       transparent: 'transparent',
       current: 'currentColor',
@@ -98,12 +99,12 @@ const config: Config = {
       borderRadius: {
         // ─── v6.1 Archetype Aliases (use these in new code) ─────────────
         // Replace rounded-2xl → rounded-placard, rounded-xl → rounded-strike, etc.
-        strike: 'var(--shape-archetype-strike)', // = blockRiot03: 32px 2px 2px 2px
-        march: 'var(--shape-archetype-march)', // = pillMarch01:  9999px
-        scaffold: 'var(--shape-archetype-scaffold)', // = scaffoldFrame01: 8px 2px 8px 2px
-        placard: 'var(--shape-archetype-placard)', // = placardTorn01: 48% 52% 58% organic
-        megaphone: 'var(--shape-archetype-megaphone)', // = megaphoneCut01: 42% 58% 45% organic
-        substrate: 'var(--shape-archetype-substrate)', // = substrateTile02: 40% 60% 70%
+        strike: 'var(--kr-archetypes-strike-shape-base)',
+        march: 'var(--kr-archetypes-march-shape-base)',
+        scaffold: 'var(--kr-archetypes-scaffold-shape-base)',
+        placard: 'var(--kr-archetypes-placard-shape-base)',
+        megaphone: 'var(--kr-archetypes-megaphone-shape-base)',
+        substrate: 'var(--kr-archetypes-substrate-shape-base)',
         // Radius scale aliases
         shard: 'var(--shape-alertShard01)', // 32px 2px 2px 32px — error/selected
         sentry: 'var(--shape-sentryAvatar)', // 98% — avatar imperfect circle
@@ -116,9 +117,10 @@ const config: Config = {
         gem: 'var(--shape-marchSurge01)',
       },
       boxShadow: {
-        rest: 'var(--shadow-rest)',
-        hover: 'var(--shadow-hover)',
-        'glow-gold': 'var(--shadow-glow-gold)',
+        rest: 'var(--kr-shadow-elevation1-strike)',
+        hover: 'var(--kr-shadow-elevation3-hover-lift)',
+        'glow-gold': 'var(--kr-shadow-ink-offset)',
+        'ink-rest': 'var(--kr-shadow-ink-offset)',
       },
       keyframes: {
         'typography-bloom': {

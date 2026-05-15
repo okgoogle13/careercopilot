@@ -132,7 +132,7 @@
         "Cards grid: 'RECENT SYNTHESIS' section shows ATS score cards with numeric scores (92, 85, 78, 88)",
         "Score badges use distinct color tiers (green EXCELLENT vs red BLOCK visible)",
         "Minor: 'ANIMATE ARTIFACT' link text visible on cards — acceptable",
-        "No flora, no light mode, no bureaucratic motifs"
+        "No Australian native flora, no light mode, no bureaucratic motifs"
       ]
     },
     {
@@ -183,7 +183,7 @@
         "Status badges: 'ACTIVE', 'REVIEW' with color differentiation",
         "Cards: dark surface, monospace metadata, job titles with score indicators",
         "Column headers use asymmetric color/weight treatment",
-        "Minor: 'THE NURSERY' / 'THE TRANSPLANT' column names are botanical — note this does NOT violate Zero-Flora as these are metaphorical phase labels rather than decorative flora imagery",
+        "Minor: 'THE NURSERY' / 'THE TRANSPLANT' column names are botanical — note this does NOT violate the selective flora/fauna rule because these are metaphorical phase labels rather than decorative Australian native flora imagery",
         "No light contamination, strong protest copy visible in background"
       ]
     },
@@ -202,7 +202,7 @@
         "component_structure": 4
       },
       "critical_issues": [
-        "Unicorn logo/emoji visible in sidebar — violates Zero-Flora/No-Slop protocol (non-human mascot, stock aesthetic)",
+        "Unicorn logo/emoji visible in sidebar — violates the No-Slop protocol (stock mascot aesthetic)",
         "Heading 'YOUR DOCUMENTS' — generic admin vocabulary, no KR resistance framing",
         "Subheading 'Manage your career documents and generate tailored versions' — corporate SaaS copy, violates KR voice",
         "Tab bar: 'All', 'Resumes', 'Cover Letters', 'KSC Responses' — plain uniform rounded pill tabs, Institutional Squelch shape",
@@ -283,7 +283,7 @@
         "component_structure": 4
       },
       "critical_issues": [
-        "Unicorn logo/emoji in sidebar — same mascot violation as Documents screen",
+        "Unicorn logo/emoji in sidebar — same stock mascot violation as Documents screen",
         "Heading 'KSC GENERATOR WIZARD' — WIZARD is borderline generic tech vocabulary",
         "Card: 'Target Selection Criteria' uses plain Serif (looks like Georgia/Times) — not confirmed as Fraunces token usage, requires code verification",
         "Form card has very uniform rounded corners (near 8px equivalent) — Institutional Squelch",

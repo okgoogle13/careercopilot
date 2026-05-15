@@ -6,6 +6,7 @@
  */
 
 import type { Transition, Variants } from 'framer-motion';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 /**
  * PHYSICS 1: TACTILE PRESS
@@ -17,11 +18,7 @@ export const tactilePress: Variants = {
   },
   hover: {
     scale: 0.98, // Fallback if missing in tokens
-    transition: {
-      type: 'spring',
-      stiffness: 400,
-      damping: 25,
-    },
+    transition: KrDarkSpring,
   },
   tap: {
     scale: 0.95,
@@ -42,11 +39,7 @@ export const popOut: Variants = {
     y: -4,
     rotate: 1,
     scale: 1.02,
-    transition: {
-      type: 'spring',
-      stiffness: 300,
-      damping: 20,
-    },
+    transition: KrDarkSpring,
   },
 };
 
@@ -54,20 +47,7 @@ export const popOut: Variants = {
  * Spring Transition Presets using sys patterns if available
  */
 export const springs = {
-  tactile: {
-    type: 'spring' as const,
-    stiffness: 400,
-    damping: 25,
-  },
-  popOut: {
-    type: 'spring' as const,
-    stiffness: 300,
-    damping: 20,
-  },
-  m3Expressive: {
-    type: 'spring' as const,
-    stiffness: 500,
-    damping: 30,
-    mass: 1,
-  },
+  tactile: KrDarkSpring,
+  popOut: KrDarkSpring,
+  m3Expressive: KrDarkSpring,
 } satisfies Record<string, Transition>;

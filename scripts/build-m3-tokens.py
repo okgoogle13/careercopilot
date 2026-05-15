@@ -182,7 +182,7 @@ def generate_css_variables(tokens):
         f"{CSS_SELECTOR} {{"
     ]
 
-    categories = ['color', 'morphology', 'spacing', 'motion', 'shadow', 'type']
+    categories = ['color', 'shape', 'spacing', 'motion', 'shadow', 'type', 'archetypes']
     for cat in categories:
         cat_tokens = tokens.get(cat, {})
         if not cat_tokens: continue
@@ -192,7 +192,6 @@ def generate_css_variables(tokens):
 
         # Determine variable mapping based on category
         var_type = cat
-        if cat == 'morphology': var_type = 'shape'
         if cat == 'spacing': var_type = 'space'
 
         for name, value in flat:
@@ -249,7 +248,7 @@ def generate_tailwind_patch(tokens):
     # Populate groups
     mappings = [
         ('color', 'colors', 'color'),
-        ('morphology', 'borderRadius', 'shape'),
+        ('shape', 'borderRadius', 'shape'),
         ('shadow', 'boxShadow', 'shadow'),
     ]
 

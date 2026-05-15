@@ -30,7 +30,7 @@ const DesignSidekick: React.FC = () => {
       try {
         const [regData, manifestData] = await Promise.all([
           loadHeroRegistry(),
-          fetch('/assets/kerala-rage-kr-solidarity-manifest.json').then((r) => r.json()),
+          fetch('/assets/kr-solidarity-manifest.json').then((r) => r.json()),
         ]);
 
         setRegistry(regData);

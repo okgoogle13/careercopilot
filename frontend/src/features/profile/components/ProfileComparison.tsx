@@ -153,7 +153,7 @@ export function ProfileComparison({
           {leftProfile.experience.map((exp, index) => (
             <div
               key={index}
-              className="border-l-2 border-outline-variant pl-4"
+              className="border-l-2 border-[var(--kr-color-concrete-grey-steps-0)] pl-4"
             >
               <h5 className="text-hero text-sm font-medium text-on-surface">{exp.position}</h5>
               <p className="text-human text-xs text-on-surface-variant">

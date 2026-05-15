@@ -6,6 +6,7 @@
 import { motion } from 'framer-motion';
 import * as React from 'react';
 import { cn } from '../../../lib/cn';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 export interface Tab {
   id: string;
@@ -39,7 +40,7 @@ export const KeralaRageTabs: React.FC<KeralaRageTabsProps> = ({
   return (
     <div className={cn('w-full', className)}>
       {/* Tab List */}
-      <div className="flex gap-1 border-b border-outline-variant mb-6">
+      <div className="flex gap-1 border-b border-[var(--kr-color-concrete-grey-steps-0)] mb-6">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
 
@@ -61,11 +62,7 @@ export const KeralaRageTabs: React.FC<KeralaRageTabsProps> = ({
                 <motion.div
                   layoutId="active-pill"
                   className="absolute inset-0 bg-primary-container/20 rounded-t-button"
-                  transition={{
-                    type: 'spring',
-                    stiffness: 400,
-                    damping: 30,
-                  }}
+                  transition={KrDarkSpring}
                 />
               )}
 
@@ -77,11 +74,7 @@ export const KeralaRageTabs: React.FC<KeralaRageTabsProps> = ({
                 <motion.div
                   className="absolute bottom-0 left-0 right-0 h-0.5 bg-tertiary"
                   layoutId="active-indicator"
-                  transition={{
-                    type: 'spring',
-                    stiffness: 400,
-                    damping: 30,
-                  }}
+                  transition={KrDarkSpring}
                 />
               )}
             </button>

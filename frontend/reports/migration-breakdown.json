@@ -72,12 +72,8 @@
       "relativePath": "src/features/style-guide/StyleGuide.tsx",
       "category": "features",
       "usageCount": 1,
-      "importedBy": [
-        "/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"
-      ],
-      "exports": [
-        "StyleGuide"
-      ],
+      "importedBy": ["/Users/okgoogle13/Projects/careercopilot/frontend/src/App.tsx"],
+      "exports": ["StyleGuide"],
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,

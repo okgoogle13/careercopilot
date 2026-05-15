@@ -179,6 +179,11 @@ jobs:
             exit 1
           fi
           echo "✅ Legacy brand sweep passed"
+      - name: Design drift check
+        continue-on-error: true  # 421 pre-existing violations; hard-fail after backlog cleared
+        run: python3 scripts/design-validation/check-design-drift.py
+      - name: Governance artifacts validation
+        run: node frontend/scripts/validate-governance-artifacts.mjs
 
   docs-policy:
     name: Docs Policy Check

@@ -3,12 +3,13 @@ import { motion } from 'framer-motion';
 import { AlertTriangle, CheckCircle, Shapes, Type, Waves } from 'lucide-react';
 import { Strike } from '../../components/ui/Strike';
 import { cn } from '../../lib/utils';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 const MOTION_CONTRACTS = {
-  easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
-  strike: '600ms',
-  march: '800ms',
-  substrate: '3000ms',
+  easing: 'var(--kr-motion-easing-strike)',
+  strike: 'var(--kr-motion-duration-strike)',
+  march: 'var(--kr-motion-duration-march)',
+  substrate: 'var(--kr-motion-duration-placard)', // Using placard as slow substrate
 };
 
 export function ArchetypeMorphPreviewer({ onInteraction }: { onInteraction?: () => void }) {
@@ -24,16 +25,16 @@ export function ArchetypeMorphPreviewer({ onInteraction }: { onInteraction?: () 
 
   const shapes = {
     strike: {
-      base: 'var(--shape-blockRiot03)',
-      active: 'var(--shape-blockRiot02)',
+      base: 'var(--kr-archetypes-strike-shape-base)',
+      active: 'var(--kr-archetypes-strike-shape-active)',
     },
     march: {
-      base: 'var(--shape-pillMarch01)',
-      active: 'var(--shape-marchSurge01)',
+      base: 'var(--kr-archetypes-march-shape-base)',
+      active: 'var(--kr-archetypes-march-shape-active)',
     },
     placard: {
-      base: 'var(--shape-placardTorn01)',
-      active: 'var(--shape-placardTorn01-selected)',
+      base: 'var(--kr-archetypes-placard-shape-base)',
+      active: 'var(--kr-archetypes-placard-shape-base)', // Placards are currently immutable
     },
   };
 
@@ -43,7 +44,7 @@ export function ArchetypeMorphPreviewer({ onInteraction }: { onInteraction?: () 
     currentArchetype === 'march' ? MOTION_CONTRACTS.march : MOTION_CONTRACTS.strike;
 
   return (
-    <div className="p-8 bg-surface-container rounded-strike border border-outline-variant space-y-6">
+    <div className="p-8 bg-surface-container rounded-strike border border-[var(--kr-color-concrete-grey-steps-0)] space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h3 className="text-title-large font-bold flex items-center gap-2">
           <Shapes className="w-6 h-6 text-primary" />
@@ -65,7 +66,7 @@ export function ArchetypeMorphPreviewer({ onInteraction }: { onInteraction?: () 
               className="h-56 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border border-outline/30"
               style={{ borderRadius: clipPath }}
               animate={{ borderRadius: clipPath }}
-              transition={{ type: 'spring', stiffness: 120, damping: 20 }}
+              transition={KrDarkSpring}
             >
               <div className="text-center p-6 bg-charcoalBackground/40 backdrop-blur-sm rounded-lg border border-white/5">
                 <div className="text-3xl font-black uppercase tracking-tighter text-worker-ash">
@@ -132,7 +133,7 @@ export function TypographyAxisValidator({ onInteraction }: { onInteraction?: () 
   const settings = `'wght' ${axes.wght}, 'wdth' ${axes.wdth}, 'GRAD' ${axes.GRAD}`;
 
   return (
-    <div className="p-8 bg-surface-container rounded-strike border border-outline-variant space-y-6">
+    <div className="p-8 bg-surface-container rounded-strike border border-[var(--kr-color-concrete-grey-steps-0)] space-y-6">
       <h3 className="text-title-large font-bold flex items-center gap-2">
         <Type className="w-6 h-6 text-secondary" />
         Typography Axis Validator
@@ -146,11 +147,11 @@ export function TypographyAxisValidator({ onInteraction }: { onInteraction?: () 
           <motion.h2
             className="text-6xl text-center px-4"
             style={{
-              fontFamily: 'var(--sys-type-fontFamilies-primary)',
+              fontFamily: 'var(--kr-type-font-primary)',
               fontVariationSettings: settings,
             }}
             animate={{ fontVariationSettings: settings }}
-            transition={{ type: 'spring', stiffness: 200, damping: 25 }}
+            transition={KrDarkSpring}
           >
             KR Type
           </motion.h2>
@@ -175,7 +176,7 @@ export function TypographyAxisValidator({ onInteraction }: { onInteraction?: () 
                 step="1"
                 value={axes.wght}
                 onChange={(e) => handleAxisChange('wght', parseInt(e.target.value))}
-                className="w-full h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-secondary"
+                className="w-full h-1.5 bg-[var(--kr-color-concrete-grey-steps-0)] rounded-lg appearance-none cursor-pointer accent-secondary"
               />
             </div>
 
@@ -193,7 +194,7 @@ export function TypographyAxisValidator({ onInteraction }: { onInteraction?: () 
                 step="1"
                 value={axes.wdth}
                 onChange={(e) => handleAxisChange('wdth', parseInt(e.target.value))}
-                className="w-full h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-secondary"
+                className="w-full h-1.5 bg-[var(--kr-color-concrete-grey-steps-0)] rounded-lg appearance-none cursor-pointer accent-secondary"
               />
             </div>
 
@@ -211,7 +212,7 @@ export function TypographyAxisValidator({ onInteraction }: { onInteraction?: () 
                 step="1"
                 value={axes.GRAD}
                 onChange={(e) => handleAxisChange('GRAD', parseInt(e.target.value))}
-                className="w-full h-1.5 bg-outline-variant rounded-lg appearance-none cursor-pointer accent-secondary"
+                className="w-full h-1.5 bg-[var(--kr-color-concrete-grey-steps-0)] rounded-lg appearance-none cursor-pointer accent-secondary"
               />
             </div>
           </div>
@@ -280,7 +281,7 @@ export function LayoutSlopAuditor({ onInteraction }: { onInteraction?: () => voi
   };
 
   return (
-    <div className="p-8 bg-surface-container rounded-strike border border-outline-variant space-y-6 shadow-xl">
+    <div className="p-8 bg-surface-container rounded-strike border border-[var(--kr-color-concrete-grey-steps-0)] space-y-6 shadow-xl">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <h3 className="text-title-large font-bold flex items-center gap-2">
           <AlertTriangle className="w-6 h-6 text-warning" />
@@ -340,7 +341,7 @@ export function LayoutSlopAuditor({ onInteraction }: { onInteraction?: () => voi
                   ? "'wght' 400, 'GRAD' 150'"
                   : "'wght' 400, 'GRAD' 0'",
               }}
-              transition={{ type: 'spring', stiffness: 200, damping: 25 }}
+              transition={KrDarkSpring}
             >
               Stable Layout
             </motion.div>
@@ -350,7 +351,7 @@ export function LayoutSlopAuditor({ onInteraction }: { onInteraction?: () => voi
               className="text-2xl font-display text-solidarity-crimson cursor-help"
               initial={{ fontWeight: 400 }}
               animate={{ fontWeight: isHovered ? 800 : 400 }}
-              transition={{ type: 'spring', stiffness: 200, damping: 10 }}
+              transition={KrDarkSpring}
             >
               Reflow Risk
             </motion.div>
@@ -421,7 +422,7 @@ export function LayoutSlopAuditor({ onInteraction }: { onInteraction?: () => voi
 
 export function MotionContractPanel() {
   return (
-    <div className="p-8 bg-surface-container rounded-strike border border-outline-variant space-y-4">
+    <div className="p-8 bg-surface-container rounded-strike border border-[var(--kr-color-concrete-grey-steps-0)] space-y-4">
       <h3 className="text-title-large font-bold flex items-center gap-2">
         <Waves className="w-6 h-6 text-tertiary" />
         Canonical Motion Contracts
@@ -438,7 +439,7 @@ export function MotionContractPanel() {
         </div>
       </div>
       <div className="bg-surface-dim p-3 rounded-strike border border-outline text-xs font-mono">
-        easing: {MOTION_CONTRACTS.easing}
+        easing: var(--kr-motion-easing-strike)
       </div>
     </div>
   );

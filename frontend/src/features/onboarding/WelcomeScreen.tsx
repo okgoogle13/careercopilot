@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { OnboardingProgress } from './OnboardingProgress';
 import { useUserStore } from '@/stores/userStore';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 export function WelcomeScreen() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export function WelcomeScreen() {
         <motion.section
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ type: 'spring', stiffness: 210, damping: 22 }}
+          transition={KrDarkSpring}
           className="rounded-placard border border-inkGold-base/25 bg-charcoalBackground-base/65 p-8 md:p-12 shadow-[0_26px_64px_rgba(0,0,0,0.45)]"
         >
           <div className="mb-8">

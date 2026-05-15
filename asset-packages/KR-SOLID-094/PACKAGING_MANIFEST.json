@@ -66,7 +66,7 @@
     ]
   },
   "manifest_integration": {
-    "manifest_file": "frontend/public/assets/kerala-rage-kr-solidarity-manifest.json",
+    "manifest_file": "frontend/public/assets/kr-solidarity-manifest.json",
     "entry_ready": false,
     "entry_path_verified": true,
     "files_at_path": true,

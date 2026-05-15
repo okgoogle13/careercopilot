@@ -9,7 +9,7 @@ import shutil
 class AssetCurator:
     """
     Triage and curation engine for kr-solidarity assets.
-    Inherits and enhances logic from the legacy Northcote Cataloger.
+    Inherits and enhances logic from the deprecated Northcote Curio cataloger.
     """
 
     def __init__(self, manifest_path: str):

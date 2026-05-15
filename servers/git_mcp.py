@@ -57,13 +57,13 @@ def log(max_count: int = 20, path: Optional[str] = None) -> str:
     return _run_git(args, timeout_s=30)
 
 
-@mcp.tool()
+# @mcp.tool()
 def show(rev: str = "HEAD") -> str:
     """`git show <rev>`"""
     return _run_git(["show", rev], timeout_s=30)
 
 
-@mcp.tool()
+# @mcp.tool()
 def blame(path: str, rev: str = "HEAD") -> str:
     """`git blame <rev> -- <path>`"""
     return _run_git(["blame", rev, "--", path], timeout_s=30)

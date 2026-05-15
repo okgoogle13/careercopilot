@@ -10,7 +10,7 @@ TOKEN_SOURCE_FILE = 'frontend/src/design/tokens/tokens.json'
 
 def resolve_path(tokens: dict, path: str) -> tuple[bool, any, str]:
     """
-    Resolve dot-notation path like 'color.semantic.primary.wattleGold'
+    Resolve dot-notation path like 'color.semantic.primary.baruGold'
     Returns (success: bool, value: any, error_type: str)
     """
     keys = path.split('.')

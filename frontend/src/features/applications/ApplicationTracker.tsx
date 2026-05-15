@@ -39,7 +39,7 @@ export function ApplicationTracker() {
     async function loadHero() {
       try {
         const [manifest, registry] = await Promise.all([
-          fetch('/assets/kerala-rage-kr-solidarity-manifest.json').then((r) => r.json()),
+          fetch('/assets/kr-solidarity-manifest.json').then((r) => r.json()),
           loadHeroRegistry(),
         ]);
 
@@ -152,7 +152,7 @@ export function ApplicationTracker() {
             title="No applications yet"
             description="Track every role you apply to. Start by generating your first application pack."
             ctaLabel="Add your first application →"
-            ctaHref="/apply/quick"
+            ctaHref="/apply"
             className="border-concrete-grey/25 bg-asphalt-black/35"
           />
         ) : (
@@ -184,7 +184,7 @@ export function ApplicationTracker() {
               <Strike
                 iconLeft={<Plus className="w-4 h-4" />}
                 onClick={() => {
-                  window.location.assign('/apply/quick');
+                  window.location.assign('/apply');
                 }}
               >
                 Add Application

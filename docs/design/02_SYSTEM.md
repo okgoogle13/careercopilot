@@ -11,16 +11,16 @@ Our palette is limited, high-salience, and grounded in the screenprint ink-hit a
 
 | Token | CSS Variable | Hex | Usage |
 | :--- | :--- | :--- | :--- |
-| **Solidarity Charcoal** | `--sys-color-charcoalBackground-base` | `#1A1714` | **The Substrate** — Matte background. |
-| **Ink Gold** | `--sys-color-inkGold-base` | `#DAF674` | **The Radiance** — Focus, primary actions, halos. |
-| **Solidarity Crimson** | `--sys-color-solidarityRed-base` | `#F14714` | **The Resistance** — Critical alerts, navigation peaks. |
-| **Activist Smoke** | `--sys-color-kr-activistSmokeGreen-base` | `#48DA8B` | **The Life** — Growth metrics, secondary highlights. |
-| **Signal Green** | `--sys-color-signalGreen-base` | `#48F0E5` | **The Pulse** — Success states, technical links. |
-| **Worker Ash** | `--sys-color-worker-ash-base` | `#DAF6B3` | **The Ink** — High-contrast typography on dark. |
-| **Stencil Yellow** | `--sys-color-stencilYellow-base` | `#F6E748` | **The Attention** — Stencil phrases, key alerts. |
-| **Protest Metal Blue** | `--sys-color-protestMetalBlue-base` | `#48B3DA` | **The Cool Accent** — charts, metadata, water-ripple secondary accents. |
-| **Concrete Grey** | `--sys-color-concreteGrey-base` | `#A39B8F` | **The Grit** — Dividers, borders, urban context. |
-| **Paper White** | `--sys-color-paperWhite-base` | `#F5F0E8` | **The Poster Base** — high-contrast highlights and editorial poster moments. |
+| **Solidarity Charcoal** | `--kr-color-charcoalBackground-base` | `#1A1714` | **The Substrate** — Matte background. |
+| **Ink Gold** | `--kr-color-inkGold-base` | `#DAF674` | **The Radiance** — Focus, primary actions, halos. |
+| **Solidarity Crimson** | `--kr-color-solidarityRed-base` | `#F14714` | **The Resistance** — Critical alerts, navigation peaks. |
+| **Activist Smoke** | `--kr-color-kr-activistSmokeGreen-base` | `#48DA8B` | **The Life** — Growth metrics, secondary highlights. |
+| **Signal Green** | `--kr-color-signalGreen-base` | `#48F0E5` | **The Pulse** — Success states, technical links. |
+| **Worker Ash** | `--kr-color-worker-ash-base` | `#DAF6B3` | **The Ink** — High-contrast typography on dark. |
+| **Stencil Yellow** | `--kr-color-stencilYellow-base` | `#F6E748` | **The Attention** — Stencil phrases, key alerts. |
+| **Protest Metal Blue** | `--kr-color-protestMetalBlue-base` | `#48B3DA` | **The Cool Accent** — charts, metadata, water-ripple secondary accents. |
+| **Concrete Grey** | `--kr-color-concreteGrey-base` | `#A39B8F` | **The Grit** — Dividers, borders, urban context. |
+| **Paper White** | `--kr-color-paperWhite-base` | `#F5F0E8` | **The Poster Base** — high-contrast highlights and editorial poster moments. |
 
 ---
 

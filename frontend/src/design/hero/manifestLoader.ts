@@ -9,7 +9,7 @@ export async function loadManifest(forceReload: boolean = false): Promise<Solida
   }
 
   const base = (import.meta as any).env?.BASE_URL || '';
-  const url = `${base}/assets/kerala-rage-kr-solidarity-manifest.json`.replace(/\/\/+/g, '/');
+  const url = `${base}/assets/kr-solidarity-manifest.json`.replace(/\/\/+/g, '/');
 
   const response = await fetch(url, { cache: 'no-cache' });
   if (!response.ok) {

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { motion, type HTMLMotionProps } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useMode } from '@/hooks/use-mode';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 interface TechCardProps extends Omit<HTMLMotionProps<'div'>, 'ref'> {
   title: string;
@@ -59,7 +60,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
         }}
         whileHover={{
           y: -4,
-          transition: { type: 'spring', stiffness: 500, damping: 27, mass: 1 },
+          transition: KrDarkSpring,
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -88,7 +89,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
                 <motion.div
                   className="text-ink-gold"
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                  transition={KrDarkSpring}
                 >
                   {icon}
                 </motion.div>
@@ -134,7 +135,7 @@ const TechCard = React.forwardRef<HTMLDivElement, TechCardProps>(
                     borderRadius: mode === 'KrDark' ? 'var(--shape-marchSurge01)' : '2px',
                   }}
                   whileHover={{ scale: 1.05 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                  transition={KrDarkSpring}
                 >
                   {tag}
                 </motion.span>

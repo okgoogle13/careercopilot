@@ -10,6 +10,7 @@ import type { ExportableDocument } from './services/docxExport';
 import { DocumentWorkbench } from '../../screens/08_workbench/DocumentWorkbench';
 import { DocumentRedlineUploadPanel } from './components/DocumentRedlineUploadPanel';
 import { TrackedChangesWorkspace } from './components/TrackedChangesWorkspace';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -157,7 +158,7 @@ export function Documents() {
         />
 
         {/* Search Bar */}
-        <div className="bg-surface-container-high rounded-placard p-4 mb-8 flex items-center gap-3 border border-outline-variant focus-within:border-primary focus-within:ring-2 ring-primary/20 transition-all">
+        <div className="bg-surface-container-high rounded-placard p-4 mb-8 flex items-center gap-3 border border-[var(--kr-color-concrete-grey-steps-0)] focus-within:border-primary focus-within:ring-2 ring-primary/20 transition-all">
           <Search className="w-5 h-5 text-on-surface-variant" />
           <input
             type="text"
@@ -167,7 +168,7 @@ export function Documents() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-2 mb-8 bg-surface-container rounded-tech p-2 w-fit border border-outline-variant">
+        <div className="flex gap-2 mb-8 bg-surface-container rounded-tech p-2 w-fit border border-[var(--kr-color-concrete-grey-steps-0)]">
           <TabButton
             label="All Files"
             isActive={activeTab === 'all'}
@@ -208,7 +209,7 @@ export function Documents() {
             title="Your generated documents will appear here."
             description="Start with a tailored cover letter or KSC draft and we will archive it automatically."
             ctaLabel="Start with Cover Letter →"
-            ctaHref="/cover-letter-generator"
+            ctaHref="/generation"
           />
         )}
       </div>
@@ -222,12 +223,12 @@ export function Documents() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 16 }}
-            transition={{ type: 'spring', stiffness: 420, damping: 30 }}
+            transition={KrDarkSpring}
             style={{
               position: 'fixed',
               inset: 0,
               zIndex: 50,
-              backgroundColor: 'var(--sys-color-charcoalBackground-base)',
+              backgroundColor: 'var(--kr-color-charcoal-background-base)',
               opacity: 0.95,
               display: 'flex',
               alignItems: 'center',
@@ -251,7 +252,7 @@ export function Documents() {
                     background: 'none',
                     border: 'none',
                     cursor: 'pointer',
-                    color: 'var(--sys-color-worker-ash-base)',
+                    color: 'var(--kr-color-worker-ash-base)',
                     zIndex: 20,
                   }}
                   data-testid="redline-close-btn"
@@ -298,7 +299,7 @@ function TabButton({ label, isActive, onClick }: TabButtonProps) {
       onClick={onClick}
       className={`
         px-8 py-3 transition-all duration-short-2 ease-spring font-medium text-label-large
-        ${isActive ? 'rounded-strike bg-primary-container text-on-primary-container shadow-sm' : 'rounded-scaffold text-on-surface-variant hover:text-on-surface hover:bg-surface-dim'}
+        ${isActive ? 'rounded-strike bg-[var(--kr-color-charcoal-background-steps-3)] text-semantic-parchment shadow-sm border border-parchment-base/30' : 'rounded-scaffold text-worker-ash-base hover:text-semantic-parchment hover:bg-charcoalBackground-steps-2'}
       `}
     >
       {label}
@@ -345,7 +346,7 @@ function DocumentCard({ document, onRedline, onDocxExport }: DocumentCardProps) 
   return (
     <div
       id={`document-card-${document.id}`}
-      className={`bg-surface-container-low border border-outline-variant ${cardShapeClass} p-6 hover:bg-surface-container hover:border-primary hover:scale-[1.02] hover:shadow-elevation-2 transition-all duration-medium-1 ease-spring cursor-pointer group backdrop-blur-md relative`}
+      className={`bg-surface-container-low border border-[var(--kr-color-concrete-grey-steps-0)] ${cardShapeClass} p-6 hover:bg-surface-container hover:border-primary hover:scale-[1.02] hover:shadow-elevation-2 transition-all duration-medium-1 ease-spring cursor-pointer group backdrop-blur-md relative`}
     >
       <div className="w-12 h-12 bg-surface-container-high rounded-tech flex items-center justify-center mb-4 group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
         <Icon className={`w-5 h-5 ${typeBadge.iconClass}`} />
@@ -359,16 +360,16 @@ function DocumentCard({ document, onRedline, onDocxExport }: DocumentCardProps) 
           </span>
         </div>
         <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-          <span className="px-2 py-1 rounded-blockRiot01 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant border border-outline-variant">
+          <span className="px-2 py-1 rounded-blockRiot01 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant border border-[var(--kr-color-concrete-grey-steps-0)]">
             {typeBadge.label}
           </span>
           <button
             onClick={handleRedlineClick}
             className="px-2 py-1 rounded-blockRiot01 text-xs font-medium transition-all"
             style={{
-              backgroundColor: 'var(--sys-color-charcoalBackground-steps-3)',
-              color: 'var(--sys-color-inkGold-base)',
-              border: '1px solid var(--sys-color-inkGold-base)',
+              backgroundColor: 'var(--kr-color-charcoal-background-steps-3)',
+              color: 'var(--kr-color-ink-gold-base)',
+              border: '1px solid var(--kr-color-ink-gold-base)',
             }}
             title="Open Redline Workspace"
             data-testid={`redline-btn-${document.id}`}

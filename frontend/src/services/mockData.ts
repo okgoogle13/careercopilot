@@ -210,10 +210,10 @@ export const MOCK_ANALYSIS_DATA: AnalysisData = {
     { month: 'Jun', score: 87 },
   ],
   applicationStatus: [
-    { name: 'Applied', value: 40, color: '#D0BCFF' },
-    { name: 'Interviewing', value: 30, color: '#A8C5A3' },
-    { name: 'Rejected', value: 20, color: '#E07A5F' },
-    { name: 'Offered', value: 10, color: '#F4D06F' },
+    { name: 'Applied', value: 40, color: 'var(--kr-color-protest-metal-blue-base)' },
+    { name: 'Interviewing', value: 30, color: 'var(--kr-color-worker-ash-steps-1)' },
+    { name: 'Rejected', value: 20, color: 'var(--kr-color-solidarity-smoke-orange-base)' },
+    { name: 'Offered', value: 10, color: 'var(--kr-color-ink-gold-base)' },
   ],
   keywordMatch: [
     { keyword: 'React.js', rate: 5 },

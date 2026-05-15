@@ -31,7 +31,7 @@ export const MatchScoreHeader: React.FC<MatchScoreHeaderProps> = ({ analysis, jo
 
   return (
     <div
-      className="bg-[var(--sys-color-charcoalBackground-steps-1)] p-8 border border-[var(--sys-color-outline-variant)] flex items-center gap-8"
+      className="bg-[var(--sys-color-charcoalBackground-steps-1)] p-8 border border-[var(--kr-color-concrete-grey-steps-0)] flex items-center gap-8"
       style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
     >
       {/* Circular score gauge */}
@@ -45,7 +45,7 @@ export const MatchScoreHeader: React.FC<MatchScoreHeaderProps> = ({ analysis, jo
             cy="50"
             r="45"
             fill="none"
-            stroke="var(--sys-color-outline-variant)"
+            stroke="var(--kr-color-concrete-grey-steps-0)"
             strokeWidth="10"
           />
           <circle

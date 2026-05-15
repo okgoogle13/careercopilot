@@ -24,5 +24,5 @@
 ## Notes
 
 - **Playwright Headless Timeouts bypassed:** Re-ran visual snapshot audits for failed routes headlessly, mitigating timeout loops that plagued the standard `npm run visual:audit:3-pages` headless runner.
-- **Zero-Flora, Token & Brand Validation:** All compliance scripts exited with 0 returning no functional breaches to style guides, fonts, or assets. No actionable violations exist within the source code (logs refer to expected document commentary only).
+- **Selective Flora/Fauna, Token & Brand Validation:** All compliance scripts exited with 0 returning no functional breaches to style guides, fonts, or assets. No actionable violations exist within the source code (logs refer to expected document commentary only).
 - The KR Solidarity repository is cleared for the next merge and deployment stage.

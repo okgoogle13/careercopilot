@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect } from 'react';
-import AnimationTestPage from './pages/AnimationTest';
+import AnimationTestPage from './components/debug/AnimationTest';
 import {
   Navigate,
   Outlet,
@@ -11,7 +11,6 @@ import {
 } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { BannerTexture } from './components/kerala-rage/BannerTexture';
-import './design/styles/design-tokens.css';
 import { MigratedRouteLayout } from './layouts/MigratedRouteLayout';
 import { getModeForRoute } from './config/routeModeMap';
 import { useAuth } from './context/AuthContext';
@@ -22,8 +21,8 @@ import { useModeStore } from './stores/useModeStore';
 import { LandingPage } from './features/landing/LandingPage';
 import { OnboardingPage } from './features/onboarding/OnboardingPage';
 import { Dashboard as DashboardPage } from './features/dashboard/Dashboard';
-import { ProfileView as ProfilePage } from './features/profile/ProfileView';
-import { LookoutDiscovery as LookoutPage } from './screens/06_lookout/LookoutDiscovery';
+import { ProfilePage } from './features/profile/ProfilePage';
+import { OpportunitiesDiscovery as OpportunitiesPage } from './screens/06_opportunities/OpportunitiesDiscovery';
 import { ApplicationTracker as ApplicationsPage } from './features/applications/ApplicationTracker';
 import { AnalysisPage } from './features/analysis/AnalysisPage';
 import { Documents as DocsPage } from './features/documents/Documents';
@@ -80,7 +79,8 @@ export const RequireAuth = () => {
   const { user, loading } = useAuth();
   const location = useLocation();
 
-  // Check for demo/guest mode
+  // Check for demo/guest mode.
+  // NOTE: '?dev=bypass' override is handled centrally in AuthContext.tsx for dev simulation.
   const searchParams = new URLSearchParams(location.search);
   const isDemoMode = searchParams.get('demo') === 'true';
 
@@ -130,7 +130,6 @@ export const ProtectedLayout = () => {
     </Layout>
   );
 };
-
 // Public Layout (Login/Register/Landing)
 export const PublicLayout = () => {
   return (
@@ -169,24 +168,6 @@ export default function App() {
             path="/auth"
             element={<AuthPage />}
           />
-          <Route
-            path="/login"
-            element={
-              <Navigate
-                to="/auth?mode=login"
-                replace
-              />
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <Navigate
-                to="/auth?mode=register"
-                replace
-              />
-            }
-          />
 
           {/* Developer / Internal Routes */}
           <Route
@@ -219,8 +200,8 @@ export default function App() {
               element={<ProfilePage />}
             />
             <Route
-              path="/lookout"
-              element={<LookoutPage />}
+              path="/opportunities"
+              element={<OpportunitiesPage />}
             />
             <Route
               path="/applications"
@@ -229,10 +210,6 @@ export default function App() {
             <Route
               path="/analysis"
               element={<AnalysisPage />}
-            />
-            <Route
-              path="/docs"
-              element={<DocsPage />}
             />
             <Route
               path="/apply"
@@ -250,142 +227,9 @@ export default function App() {
               path="/onboarding"
               element={<OnboardingPage />}
             />
-
-            {/* Legacy Redirects */}
-            <Route
-              path="/tracker"
-              element={
-                <Navigate
-                  to="/applications"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/opportunities"
-              element={
-                <Navigate
-                  to="/lookout"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/career/ingest"
-              element={
-                <Navigate
-                  to="/profile"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/apply/quick"
-              element={
-                <Navigate
-                  to="/apply"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/ksc-generator"
-              element={
-                <Navigate
-                  to="/generation"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/cover-letter-generator"
-              element={
-                <Navigate
-                  to="/generation"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/job-queue"
-              element={
-                <Navigate
-                  to="/dashboard"
-                  replace
-                />
-              }
-            />
             <Route
               path="/documents"
-              element={
-                <Navigate
-                  to="/docs"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/dashboard-overview"
-              element={
-                <Navigate
-                  to="/dashboard"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/kanban"
-              element={
-                <Navigate
-                  to="/applications"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/ingestion"
-              element={
-                <Navigate
-                  to="/profile"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/feed"
-              element={
-                <Navigate
-                  to="/lookout"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/studio"
-              element={
-                <Navigate
-                  to="/generation"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/editor"
-              element={
-                <Navigate
-                  to="/docs"
-                  replace
-                />
-              }
-            />
-            <Route
-              path="/welcome"
-              element={
-                <Navigate
-                  to="/onboarding"
-                  replace
-                />
-              }
+              element={<DocsPage />}
             />
           </Route>
 

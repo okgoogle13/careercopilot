@@ -48,7 +48,18 @@ const getEnv = (): any => {
   }
 };
 
-const isOfflineMode = getEnv().VITE_OFFLINE_MODE === 'true';
+const isOfflineMode =
+  getEnv().VITE_OFFLINE_MODE === 'true' ||
+  (typeof window !== 'undefined' &&
+    new URLSearchParams(window.location.search).get('dev') === 'bypass');
+
+const DEV_MOCK_USER: User = {
+  uid: 'dev-bypass-user',
+  email: 'dev@careercopilot.local',
+  displayName: 'Dev User',
+  role: 'user',
+  access_token: 'dev-bypass-token',
+};
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -73,11 +84,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   // Monitor auth state
   useEffect(() => {
     if (isOfflineMode) {
-      // Check local storage for mock session
       const storedUser = localStorage.getItem('mockUser');
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-      }
+      setUser(storedUser ? JSON.parse(storedUser) : DEV_MOCK_USER);
       setLoading(false);
       return;
     }

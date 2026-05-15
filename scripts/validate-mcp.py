@@ -236,6 +236,11 @@ def main() -> int:
     failures = 0
 
     for name, server_def in servers.items():
+        if server_def.get("disabled", False):
+            print(f"{'─'*60}")
+            print(f"  Server: {_colorize('1', name)} {INFO} (Skipped: Disabled)")
+            continue
+
         print(f"{'─'*60}")
         print(f"  Server: {_colorize('1', name)}")
 

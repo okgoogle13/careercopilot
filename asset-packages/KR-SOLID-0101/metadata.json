@@ -1,7 +1,0 @@
-{
-  "id": "KR-SOLID-0101",
-  "title": "System Reserved Gap",
-  "description": "Intentionally reserved ID to preserve historical sequence. No asset associated with this ID.",
-  "status": "RESERVED",
-  "audit_date": "2026-02-23T18:51:36.790Z"
-}

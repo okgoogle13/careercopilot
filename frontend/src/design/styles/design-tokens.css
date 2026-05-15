@@ -147,6 +147,60 @@
   --kr-color-worker-ash-steps-6: #FBFFF2;
   --kr-color-worker-ash-usage: bodyText iconStrokes dividerLines secondaryText;
 
+  /* --- Shape --- */
+  --kr-shape-alert-shard01: 32px 2px 2px 32px;
+  --kr-shape-alert-shard01-pressed: 20px 2px 2px 20px;
+  --kr-shape-blob01: 60% 40% 30% 1.1666666666666667% 30% 70% 40%;
+  --kr-shape-blob02: 40% 60% 70% 0.75% 50% 60% 50%;
+  --kr-shape-block01: 8px 2px 8px 2px;
+  --kr-shape-block02: 20px 4px 12px 2px;
+  --kr-shape-block03: 32px 2px 2px 2px;
+  --kr-shape-block-riot01: 8px 2px 8px 2px;
+  --kr-shape-block-riot01-pressed: 12px 0 8px 20px;
+  --kr-shape-block-riot02: 20px 4px 12px 2px;
+  --kr-shape-block-riot03: 32px 4px 4px 32px;
+  --kr-shape-block-riot03-loading: 9999px;
+  --kr-shape-block-riot03-pressed: 16px 16px 16px 16px;
+  --kr-shape-brick-wall01: 0;
+  --kr-shape-march-open01: 20px 8px 12px 32px;
+  --kr-shape-march-organic01: 9999px 48px 4px 9999px;
+  --kr-shape-march-surge01: 48px 12px 12px 48px;
+  --kr-shape-march-surge01-expanded: 0px;
+  --kr-shape-mask-asymmetric01: 48% 52% 58% 1.05% 60% 50% 50%;
+  --kr-shape-megaphone-base01: 42% 58% 45% 1.1458333333333333% 62% 38% 52%;
+  --kr-shape-megaphone-cut01: 64px 0px 64px 0px;
+  --kr-shape-megaphone-cut01-loading: 32px 32px 32px 32px;
+  --kr-shape-pill01: 9999px;
+  --kr-shape-pill-march01: 9999px 8px 9999px 8px;
+  --kr-shape-pill-march01-pressed: 9999px 24px 9999px 24px;
+  --kr-shape-placard-base01: 48% 52% 58% 0.7636363636363637% 45% 60% 40%;
+  --kr-shape-placard-torn01: 48px 4px 48px 4px;
+  --kr-shape-placard-torn01-loading: 24px;
+  --kr-shape-placard-torn01-selected: 12px 32px 12px 32px;
+  --kr-shape-radius-full: 9999px;
+  --kr-shape-radius-lg: 12px;
+  --kr-shape-radius-md: 8px;
+  --kr-shape-radius-none: 0px;
+  --kr-shape-radius-sm: 4px;
+  --kr-shape-radius-xl: 20px;
+  --kr-shape-radius-xs: 2px;
+  --kr-shape-radius-xxl: 32px;
+  --kr-shape-radius-xxxl: 48px;
+  --kr-shape-radius-march-open: 20px 8px 12px 32px;
+  --kr-shape-radius-megaphone-base: 42% 58% 45% 1.1458333333333333% 62% 38% 52%;
+  --kr-shape-radius-placard-base: 48% 52% 58% 0.7636363636363637% 45% 60% 40%;
+  --kr-shape-scaffold-frame01: 8px 2px 8px 2px;
+  --kr-shape-scaffold-frame01-focus: 8px 2px 8px 2px;
+  --kr-shape-sentry-avatar: 98%;
+  --kr-shape-strike-puff01: 48px 12px 12px 48px;
+  --kr-shape-substrate-tile01: waveTectonic01;
+  --kr-shape-substrate-tile01-hover: 64px 64px 64px 64px;
+  --kr-shape-substrate-tile02: waveTectonic02;
+  --kr-shape-tear-banner01: 0 48px 0 0;
+  --kr-shape-toggle-slide01: 9999px 24px 9999px 24px;
+  --kr-shape-wave-tectonic01: 120px 8px 120px 8px;
+  --kr-shape-wave-tectonic02: 8px 120px 8px 120px;
+
   /* --- Spacing --- */
   --kr-space-lg: 16px;
   --kr-space-md: 12px;
@@ -274,11 +328,47 @@
   --kr-type-global-settings-font-optical-sizing: auto;
   --kr-type-scale-body: 16px;
   --kr-type-scale-display: 72px;
+  --kr-type-scale-display-hero: clamp(96px, 12vw, 180px);
   --kr-type-scale-headline: 48px;
   --kr-type-scale-hero: 144px;
   --kr-type-scale-micro: 8px;
+  --kr-type-scale-metric-display: clamp(32px, 4vw, 56px);
   --kr-type-scale-small: 12px;
   --kr-type-scale-subhead: 24px;
+
+  /* --- Archetypes --- */
+  --kr-archetypes-march-motion: {motion.dragSettle};
+  --kr-archetypes-march-motion-duration: 800ms;
+  --kr-archetypes-march-shape-base: 9999px 8px 9999px 8px;
+  --kr-archetypes-march-shape-expanded: 0px;
+  --kr-archetypes-march-shape-open: 48px 12px 12px 48px;
+  --kr-archetypes-march-shape-pressed: 9999px 24px 9999px 24px;
+  --kr-archetypes-megaphone-motion: {motion.typeSpringSlam};
+  --kr-archetypes-megaphone-motion-duration: 600ms;
+  --kr-archetypes-megaphone-shape-ambient: waveTectonic01;
+  --kr-archetypes-megaphone-shape-base: 64px 0px 64px 0px;
+  --kr-archetypes-megaphone-shape-loading: 32px 32px 32px 32px;
+  --kr-archetypes-placard-motion: {motion.dragSettle};
+  --kr-archetypes-placard-motion-duration: 800ms;
+  --kr-archetypes-placard-shape-base: 48px 4px 48px 4px;
+  --kr-archetypes-placard-shape-loading: 24px;
+  --kr-archetypes-placard-shape-selected: 12px 32px 12px 32px;
+  --kr-archetypes-scaffold-motion: {motion.none};
+  --kr-archetypes-scaffold-motion-duration: 0ms;
+  --kr-archetypes-scaffold-shape-base: 8px 2px 8px 2px;
+  --kr-archetypes-scaffold-shape-focus: 8px 2px 8px 2px;
+  --kr-archetypes-strike-motion: {motion.typeSpringSlam};
+  --kr-archetypes-strike-motion-duration: 600ms;
+  --kr-archetypes-strike-shape-active: 20px 4px 12px 2px;
+  --kr-archetypes-strike-shape-base: 32px 4px 4px 32px;
+  --kr-archetypes-strike-shape-loading: 9999px;
+  --kr-archetypes-strike-shape-pressed: 16px 16px 16px 16px;
+  --kr-archetypes-strike-shape-selected: 32px 2px 2px 32px;
+  --kr-archetypes-substrate-motion: {motion.waterRipple};
+  --kr-archetypes-substrate-motion-duration: 3000ms;
+  --kr-archetypes-substrate-shape-ambient: waveTectonic01;
+  --kr-archetypes-substrate-shape-base: waveTectonic02;
+  --kr-archetypes-substrate-shape-hover: 64px 64px 64px 64px;
 
 }
 

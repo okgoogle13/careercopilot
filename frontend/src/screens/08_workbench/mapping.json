@@ -3,7 +3,7 @@
   "wireframe_path": ".claude/wireframes/08_workbench.xml",
   "source_component_path": "frontend/src/_reference/migration/phase3/phase3-batch3/DocumentWorkbench.tsx",
   "screen_component_path": "frontend/src/screens/08_workbench/DocumentWorkbench.tsx",
-  "route": "/kr/workbench",
-  "notes": "Paired package for wireframe-to-TSX comparison. Canonical source remains source_component_path.",
+  "route": "/documents",
+  "notes": "Paired package for wireframe-to-TSX comparison. Runtime canonical route is /documents.",
   "local_wireframe_path": "frontend/src/screens/08_workbench/08_workbench.wireframe.xml"
 }

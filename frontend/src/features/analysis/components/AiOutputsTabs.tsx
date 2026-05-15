@@ -9,6 +9,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Placard, StatusBadge } from '@/components/ui';
 import { useAiOutputs, type AiCriterion } from '../hooks/useAiOutputs';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 export interface ResumeKeyword {
   label: string;
@@ -30,7 +31,7 @@ export function AiOutputsTabs({
 
   return (
     <div className="mt-12">
-      <div className="flex gap-4 mb-8 border-b border-[var(--sys-color-outline-variant)] pb-4 relative overflow-x-auto">
+      <div className="flex gap-4 mb-8 border-b border-[var(--kr-color-concrete-grey-steps-0)] pb-4 relative overflow-x-auto">
         <TabButton
           label="Resume"
           active={activeTab === 'resume'}
@@ -50,7 +51,7 @@ export function AiOutputsTabs({
 
       <Placard
         elevation="raised"
-        className="border-[var(--sys-color-outline-variant)] p-10"
+        className="border-[var(--kr-color-concrete-grey-steps-0)] p-10"
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -58,7 +59,7 @@ export function AiOutputsTabs({
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+            transition={KrDarkSpring}
           >
             {activeTab === 'ksc' && (
               <div className="space-y-6">
@@ -74,7 +75,7 @@ export function AiOutputsTabs({
                   {criteria.length > 0 && (
                     <button
                       onClick={() => handleCopy(criteria.map((c) => c.title).join('\n'))}
-                      className="px-6 py-3 border border-[var(--sys-color-outline-variant)] text-[var(--sys-color-paperWhite-base)] font-bold uppercase tracking-wider text-sm hover:bg-[var(--sys-color-charcoalBackground-steps-2)] transition-colors whitespace-nowrap"
+                      className="px-6 py-3 border border-[var(--kr-color-concrete-grey-steps-0)] text-[var(--sys-color-paperWhite-base)] font-bold uppercase tracking-wider text-sm hover:bg-[var(--sys-color-charcoalBackground-steps-2)] transition-colors whitespace-nowrap"
                       style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
                     >
                       Copy to Clipboard for ATS
@@ -88,7 +89,7 @@ export function AiOutputsTabs({
                       scale: 1.01,
                       rotate: ignoredCriteria.includes(c.id) ? 0 : c.id % 2 === 0 ? -0.5 : 0.5,
                     }}
-                    className={`p-6 border border-[var(--sys-color-outline-variant)] cursor-default transition-opacity ${
+                    className={`p-6 border border-[var(--kr-color-concrete-grey-steps-0)] cursor-default transition-opacity ${
                       ignoredCriteria.includes(c.id)
                         ? 'opacity-40 bg-[var(--sys-color-charcoalBackground-steps-1)]'
                         : 'bg-[var(--sys-color-charcoalBackground-steps-2)]'
@@ -115,7 +116,7 @@ export function AiOutputsTabs({
                           <motion.div
                             className="w-4 h-4 rounded-full bg-[var(--sys-color-paperWhite-base)] shadow-sm"
                             animate={{ x: !ignoredCriteria.includes(c.id) ? 24 : 0 }}
-                            transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                            transition={KrDarkSpring}
                           />
                         </div>
                       </div>
@@ -143,7 +144,7 @@ export function AiOutputsTabs({
                   {resumeKeywords.length > 0 && (
                     <button
                       onClick={() => handleCopy(resumeKeywords.map((k) => k.label).join('\n'))}
-                      className="px-6 py-3 border border-[var(--sys-color-outline-variant)] text-[var(--sys-color-paperWhite-base)] font-bold uppercase tracking-wider text-sm hover:bg-[var(--sys-color-charcoalBackground-steps-2)] transition-colors whitespace-nowrap"
+                      className="px-6 py-3 border border-[var(--kr-color-concrete-grey-steps-0)] text-[var(--sys-color-paperWhite-base)] font-bold uppercase tracking-wider text-sm hover:bg-[var(--sys-color-charcoalBackground-steps-2)] transition-colors whitespace-nowrap"
                       style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
                     >
                       Copy to Clipboard for ATS
@@ -154,7 +155,7 @@ export function AiOutputsTabs({
                   {resumeKeywords.map((kw, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center justify-between p-4 border border-[var(--sys-color-outline-variant)] bg-[var(--sys-color-charcoalBackground-steps-2)]"
+                      className="flex items-center justify-between p-4 border border-[var(--kr-color-concrete-grey-steps-0)] bg-[var(--sys-color-charcoalBackground-steps-2)]"
                       style={{ borderRadius: 'var(--sys-shape-blockRiot02)' }}
                     >
                       <span className="text-lg text-[var(--sys-color-paperWhite-base)] font-bold">
@@ -179,7 +180,7 @@ export function AiOutputsTabs({
                   {coverLetterDraft && (
                     <button
                       onClick={() => handleCopy(coverLetterDraft)}
-                      className="px-6 py-3 border border-[var(--sys-color-outline-variant)] text-[var(--sys-color-paperWhite-base)] font-bold uppercase tracking-wider text-sm hover:bg-[var(--sys-color-charcoalBackground-steps-2)] transition-colors whitespace-nowrap"
+                      className="px-6 py-3 border border-[var(--kr-color-concrete-grey-steps-0)] text-[var(--sys-color-paperWhite-base)] font-bold uppercase tracking-wider text-sm hover:bg-[var(--sys-color-charcoalBackground-steps-2)] transition-colors whitespace-nowrap"
                       style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
                     >
                       Copy to Clipboard for ATS
@@ -187,7 +188,7 @@ export function AiOutputsTabs({
                   )}
                 </div>
                 <div
-                  className="p-6 bg-[var(--sys-color-charcoalBackground-steps-2)] border border-[var(--sys-color-outline-variant)]"
+                  className="p-6 bg-[var(--sys-color-charcoalBackground-steps-2)] border border-[var(--kr-color-concrete-grey-steps-0)]"
                   style={{ borderRadius: 'var(--sys-shape-blockRiot03)' }}
                 >
                   <p className="type-melancholyLonging text-[var(--sys-color-worker-ash-base)] whitespace-pre-line">
@@ -226,7 +227,7 @@ function TabButton({
           layoutId="activeTabIndicator"
           className="absolute inset-0 bg-[var(--sys-color-solidarityRed-base)] border border-[var(--sys-color-solidarityRed-base)] -z-10"
           style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
-          transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+          transition={KrDarkSpring}
         />
       )}
       {label}

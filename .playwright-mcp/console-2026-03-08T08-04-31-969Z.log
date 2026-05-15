@@ -1,3 +1,0 @@
-[   76564ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:5174/src/components/kerala-rage/LayeredHero.tsx?t=1772957148376:0
-[   76569ms] [ERROR] [vite] Failed to reload /src/components/kerala-rage/LayeredHero.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5174/@vite/client:808
-[   79210ms] [ERROR] [vite] Failed to reload /src/features/landing/LandingPage.tsx. This could be due to syntax errors or importing non-existent modules. (see errors above) @ http://localhost:5174/@vite/client:808

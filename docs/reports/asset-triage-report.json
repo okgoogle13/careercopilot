@@ -111,56 +111,56 @@
       "file": "kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-icon-fossil-pod__v1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: fossil",
+      "reason": "Deprecated Northcote Curio pattern match: fossil",
       "size_bytes": 0
     },
     {
       "file": "kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-icon-fossil-spi__v1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: fossil",
+      "reason": "Deprecated Northcote Curio pattern match: fossil",
       "size_bytes": 0
     },
     {
       "file": "kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-icon-fossil-sta__v1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: fossil",
+      "reason": "Deprecated Northcote Curio pattern match: fossil",
       "size_bytes": 0
     },
     {
       "file": "kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-icon-haeckel-1-__v1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-icon-haeckel-2-__v1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-icon-haeckel-3-__v1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-icon-haeckel-4-__v1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-icon-haeckel-5-__v1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
@@ -244,7 +244,7 @@
       "file": "kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-kr-moti-kr-dark__v1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: kr-dark",
+      "reason": "Deprecated Northcote Curio pattern match: kr-dark",
       "size_bytes": 0
     },
     {
@@ -272,7 +272,7 @@
       "file": "kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-leaf-fern__v1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: fern",
+      "reason": "Deprecated Northcote Curio pattern match: fern",
       "size_bytes": 0
     },
     {
@@ -293,7 +293,7 @@
       "file": "kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-motif-kr-dark-c__v1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: kr-dark",
+      "reason": "Deprecated Northcote Curio pattern match: kr-dark",
       "size_bytes": 0
     },
     {
@@ -307,7 +307,7 @@
       "file": "kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-[DEPRECATED_STYLE]-labyrin__v1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: [DEPRECATED_STYLE]-labyr",
+      "reason": "Deprecated Northcote Curio pattern match: [DEPRECATED_STYLE]-labyr",
       "size_bytes": 0
     },
     {
@@ -335,7 +335,7 @@
       "file": "kr-solidarity/abstract/kr-solidarity__abstract__abstract---solidarity-starfish-cage__v1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: starfish",
+      "reason": "Deprecated Northcote Curio pattern match: starfish",
       "size_bytes": 0
     },
     {
@@ -475,7 +475,7 @@
       "file": "kr-solidarity/symbol/kr-solidarity__symbol__kr-solidarity--symbol--kerala-elephant--v1__v1.png",
       "category": "keep",
       "confidence": "HIGH",
-      "reason": "Kerala Rage pattern match: elephant",
+      "reason": "KR Solidarity cultural asset match: elephant",
       "size_bytes": 0
     },
     {
@@ -510,203 +510,203 @@
       "file": "ui/haeckel-grid/icon-fossil-pod.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-fossil-spine.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-fossil-star-med.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-1-1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-1-2.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-1-3.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-1-4.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-1-5.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-2-1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-2-2.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-2-3.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-2-4.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-2-5.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-3-1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-3-2.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-3-3.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-3-4.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-3-5.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-4-1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-4-2.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-4-3.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-4-4.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-4-5.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-5-1.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-5-2.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-5-3.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-5-4.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/haeckel-grid/icon-haeckel-5-5.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: haeckel",
+      "reason": "Deprecated Northcote Curio pattern match: haeckel",
       "size_bytes": 0
     },
     {
       "file": "ui/kerala-rage-kr-flower-spinner.png",
       "category": "legacy",
       "confidence": "HIGH",
-      "reason": "Northcote [DEPRECATED_STYLE] pattern match: kr-flower",
+      "reason": "Deprecated Northcote Curio pattern match: kr-flower",
       "size_bytes": 0
     },
     {

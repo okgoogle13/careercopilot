@@ -43,7 +43,7 @@ function M3Button({ children, variant, onClick, className }: any) {
     tonal:
       'bg-[var(--sys-color-charcoalBackground-steps-4)] text-[var(--sys-color-worker-ash-base)] hover:brightness-125',
     outlined:
-      'border border-[var(--sys-color-outline-variant)] text-[var(--sys-color-worker-ash-base)] hover:bg-white/5',
+      'border border-[var(--kr-color-concrete-grey-steps-0)] text-[var(--sys-color-worker-ash-base)] hover:bg-white/5',
     filled: 'bg-[var(--sys-color-solidarityRed-base)] text-white shadow-lg',
   };
   return (
@@ -79,7 +79,7 @@ export function VoiceProfileSection({
   };
 
   return (
-    <div className="bg-[var(--sys-color-charcoalBackground-steps-2)] p-8 rounded-[32px] border border-[var(--sys-color-outline-variant)] shadow-sm">
+    <div className="bg-[var(--sys-color-charcoalBackground-steps-2)] p-8 rounded-[32px] border border-[var(--kr-color-concrete-grey-steps-0)] shadow-sm">
       <div className="flex justify-between items-start mb-8">
         <div>
           <h3 className="text-[22px] leading-[28px] font-bold type-solidarityProtest text-[var(--sys-color-paperWhite-base)] mb-2">
@@ -140,7 +140,7 @@ export function VoiceProfileSection({
             </div>
           </div>
 
-          <div className="flex gap-4 pt-4 border-t border-[var(--sys-color-outline-variant)]">
+          <div className="flex gap-4 pt-4 border-t border-[var(--kr-color-concrete-grey-steps-0)]">
             <M3Button
               variant="tonal"
               onClick={() => setIsEditing(true)}
@@ -167,7 +167,7 @@ export function VoiceProfileSection({
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   placeholder="Paste a cover letter or professional summary. This sample defines your AI tone."
-                  className="w-full bg-[var(--sys-color-charcoalBackground-steps-3)] border border-[var(--sys-color-outline-variant)] text-[var(--sys-color-paperWhite-base)] p-4 rounded-xl font-medium text-sm focus:outline-none focus:border-[var(--sys-color-inkGold-base)] transition-all min-h-[150px]"
+                  className="w-full bg-[var(--sys-color-charcoalBackground-steps-3)] border border-[var(--kr-color-concrete-grey-steps-0)] text-[var(--sys-color-paperWhite-base)] p-4 rounded-xl font-medium text-sm focus:outline-none focus:border-[var(--sys-color-inkGold-base)] transition-all min-h-[150px]"
                 />
               </div>
               <Strike

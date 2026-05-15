@@ -34,7 +34,7 @@ export function Settings() {
         defaultValue="profile"
         className="w-full"
       >
-        <TabsList className="bg-surface-container border border-outline-variant mb-8 p-1 rounded-placard h-auto shadow-sm">
+        <TabsList className="bg-surface-container border border-[var(--kr-color-concrete-grey-steps-0)] mb-8 p-1 rounded-placard h-auto shadow-sm">
           {[
             { label: 'Identity', value: 'profile', shapeClass: 'rounded-blockRiot01' },
             { label: 'Rhythm', value: 'preferences', shapeClass: 'rounded-blockRiot02' },
@@ -53,7 +53,7 @@ export function Settings() {
 
         <TabsContent value="profile">
           <div
-            className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1"
+            className="bg-surface-container rounded-placard p-8 border border-[var(--kr-color-concrete-grey-steps-0)] shadow-elevation-1"
             style={cardStyle}
           >
             <h3 className="text-on-surface mb-6 text-headline-small font-bold">Profile Signals</h3>
@@ -66,7 +66,7 @@ export function Settings() {
                   <Input
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-blockRiot01 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                    className="bg-surface-container-high border-[var(--kr-color-concrete-grey-steps-0)] text-on-surface rounded-blockRiot01 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                   />
                 </div>
                 <div>
@@ -76,7 +76,7 @@ export function Settings() {
                   <Input
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="bg-surface-container-high border-outline-variant text-on-surface rounded-blockRiot02 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                    className="bg-surface-container-high border-[var(--kr-color-concrete-grey-steps-0)] text-on-surface rounded-blockRiot02 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                   />
                 </div>
               </div>
@@ -89,7 +89,7 @@ export function Settings() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-blockRiot03 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                  className="bg-surface-container-high border-[var(--kr-color-concrete-grey-steps-0)] text-on-surface rounded-blockRiot03 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                 />
               </div>
 
@@ -102,7 +102,7 @@ export function Settings() {
                   onChange={(e) => setBio(e.target.value)}
                   placeholder="Write the short line you want your work to carry..."
                   rows={4}
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-placardTorn01 focus:ring-primary focus:border-primary resize-none transition-all ease-spring"
+                  className="bg-surface-container-high border-[var(--kr-color-concrete-grey-steps-0)] text-on-surface rounded-placardTorn01 focus:ring-primary focus:border-primary resize-none transition-all ease-spring"
                 />
               </div>
 
@@ -115,12 +115,12 @@ export function Settings() {
 
         <TabsContent value="preferences">
           <div
-            className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1"
+            className="bg-surface-container rounded-placard p-8 border border-[var(--kr-color-concrete-grey-steps-0)] shadow-elevation-1"
             style={cardStyle}
           >
             <h3 className="text-on-surface mb-6 text-headline-small font-bold">Workbench Rhythm</h3>
             <div className="space-y-6">
-              <div className="flex items-center justify-between py-4 border-b border-outline-variant">
+              <div className="flex items-center justify-between py-4 border-b border-[var(--kr-color-concrete-grey-steps-0)]">
                 <div>
                   <p className="text-on-surface font-medium">Solidarity Mode</p>
                   <p className="text-sm text-on-surface-variant">
@@ -133,7 +133,7 @@ export function Settings() {
                 />
               </div>
 
-              <div className="flex items-center justify-between py-4 border-b border-outline-variant">
+              <div className="flex items-center justify-between py-4 border-b border-[var(--kr-color-concrete-grey-steps-0)]">
                 <div>
                   <p className="text-on-surface font-medium">Dispatch Notes</p>
                   <p className="text-sm text-on-surface-variant">
@@ -151,12 +151,12 @@ export function Settings() {
 
         <TabsContent value="notifications">
           <div
-            className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1"
+            className="bg-surface-container rounded-placard p-8 border border-[var(--kr-color-concrete-grey-steps-0)] shadow-elevation-1"
             style={cardStyle}
           >
             <h3 className="text-on-surface mb-6 text-headline-small font-bold">Dispatch Signals</h3>
             <div className="space-y-6">
-              <div className="flex items-center justify-between py-4 border-b border-outline-variant">
+              <div className="flex items-center justify-between py-4 border-b border-[var(--kr-color-concrete-grey-steps-0)]">
                 <div>
                   <p className="text-on-surface font-medium">Queue Updates</p>
                   <p className="text-sm text-on-surface-variant">
@@ -169,7 +169,7 @@ export function Settings() {
                 />
               </div>
 
-              <div className="flex items-center justify-between py-4 border-b border-outline-variant">
+              <div className="flex items-center justify-between py-4 border-b border-[var(--kr-color-concrete-grey-steps-0)]">
                 <div>
                   <p className="text-on-surface font-medium">Scout Alerts</p>
                   <p className="text-sm text-on-surface-variant">
@@ -187,7 +187,7 @@ export function Settings() {
 
         <TabsContent value="security">
           <div
-            className="bg-surface-container rounded-placard p-8 border border-outline-variant shadow-elevation-1"
+            className="bg-surface-container rounded-placard p-8 border border-[var(--kr-color-concrete-grey-steps-0)] shadow-elevation-1"
             style={cardStyle}
           >
             <h3 className="text-on-surface mb-6 text-headline-small font-bold">Access Line</h3>
@@ -199,7 +199,7 @@ export function Settings() {
                 <Input
                   type="password"
                   placeholder="••••••••"
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-blockRiot01 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                  className="bg-surface-container-high border-[var(--kr-color-concrete-grey-steps-0)] text-on-surface rounded-blockRiot01 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                 />
               </div>
 
@@ -210,7 +210,7 @@ export function Settings() {
                 <Input
                   type="password"
                   placeholder="••••••••"
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-blockRiot02 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                  className="bg-surface-container-high border-[var(--kr-color-concrete-grey-steps-0)] text-on-surface rounded-blockRiot02 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                 />
               </div>
 
@@ -221,7 +221,7 @@ export function Settings() {
                 <Input
                   type="password"
                   placeholder="••••••••"
-                  className="bg-surface-container-high border-outline-variant text-on-surface rounded-blockRiot03 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
+                  className="bg-surface-container-high border-[var(--kr-color-concrete-grey-steps-0)] text-on-surface rounded-blockRiot03 h-12 focus:ring-primary focus:border-primary transition-all ease-spring"
                 />
               </div>
 

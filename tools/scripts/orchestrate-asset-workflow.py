@@ -137,7 +137,7 @@ creating a "found" rather than "built" aesthetic.
 
 ## kr-motifs
 
-- Wattle (iconic Australian acacia)
+- Baru (iconic Australian acacia)
 - Leaf structures (native [DEPRECATED_STYLE] form)
 - [DEPRECATED_STYLE] density zones (theatrical void + [DEPRECATED_STYLE] central)
 
@@ -173,7 +173,7 @@ Use with opacity 0.65-0.85 (Solidarity Mode standard).
             "central": {"coverage": "65%", "density": "[DEPRECATED_STYLE]"},
             "lower_right": {"coverage": "20%", "empty_space": "150x150px"},
         },
-        "kr_motifs": ["wattle", "leaf", "endemic_flora"],
+        "kr_motifs": ["baru", "leaf", "endemic_flora"],
         "mode": "kr-dark",
         "compliance_score": score,
         "validation_timestamp": datetime.now().isoformat(),

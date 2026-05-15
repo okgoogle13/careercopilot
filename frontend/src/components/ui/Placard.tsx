@@ -25,10 +25,10 @@ export interface PlacardProps extends React.HTMLAttributes<HTMLDivElement> {
  * **THE PLACARD**
  *
  * Archetype: Placard — Content container and framing. Solidarity structure.
- * Shape palette: `shape.placardBase01` (base) → `shape.block02` (active/selected)
+ * Shape palette: `var(--kr-archetypes-placard-shape-base)` (base)
  * Motion coupling: `dragSettle` (800ms, viscous-breeze)
  *
- * KR Shape Token: `--sys-shape-placardBase01` (organic % radii: `48% 52% 58% 42% / 55% 45% 60% 40%`)
+ * KR Token: `--kr-archetypes-placard-shape-base` (organic % radii: `48% 52% 58% 42% / 55% 45% 60% 40%`)
  * A placard is held up in defiance. It contains a truth. It frames a demand.
  *
  * @example
@@ -40,8 +40,8 @@ export const Placard = React.forwardRef<HTMLDivElement, PlacardProps>(
   ({ className, elevation = 'raised', header, footer, children, ...props }, ref) => {
     const elevationShadows = {
       flat: 'none',
-      raised: 'var(--sys-shadow-elevation2Placard)',
-      floating: 'var(--sys-elevation4Float)',
+      raised: 'var(--kr-shadow-elevation2-placard)',
+      floating: 'var(--kr-shadow-elevation4-float)',
     };
 
     return (
@@ -49,15 +49,15 @@ export const Placard = React.forwardRef<HTMLDivElement, PlacardProps>(
         ref={ref}
         data-archetype="placard"
         style={{
-          backgroundColor: 'var(--sys-color-charcoalBackground-steps-2)',
-          borderRadius: 'var(--shape-placardTorn01)', // shape.placardTorn01
-          borderColor: 'var(--sys-color-concreteGrey-steps-2)',
+          backgroundColor: 'var(--kr-color-charcoal-background-steps-1)',
+          borderRadius: 'var(--kr-archetypes-placard-shape-base)',
+          borderColor: 'var(--kr-color-concrete-grey-usage)',
           borderWidth: '1px',
           borderStyle: 'solid',
           boxShadow: elevationShadows[elevation],
         }}
         className={cn(
-          'relative overflow-hidden transition-all duration-300 ease-viscous backdrop-blur-xl',
+          'relative overflow-hidden transition-all duration-medium1 ease-m3-expressive backdrop-blur-xl',
           className
         )}
         {...props}
@@ -65,8 +65,8 @@ export const Placard = React.forwardRef<HTMLDivElement, PlacardProps>(
         {header && (
           <div
             style={{
-              backgroundColor: 'var(--sys-color-charcoalBackground-steps-1)',
-              borderBottomColor: 'var(--sys-color-concreteGrey-steps-1)',
+              backgroundColor: 'var(--kr-color-charcoal-background-steps-2)',
+              borderBottomColor: 'var(--kr-color-concrete-grey-steps-2)',
             }}
             className="px-6 py-4 border-b"
           >
@@ -79,8 +79,8 @@ export const Placard = React.forwardRef<HTMLDivElement, PlacardProps>(
         {footer && (
           <div
             style={{
-              backgroundColor: 'var(--sys-color-charcoalBackground-steps-0)',
-              borderTopColor: 'var(--sys-color-concreteGrey-steps-1)',
+              backgroundColor: 'var(--kr-color-charcoal-background-steps-0)',
+              borderTopColor: 'var(--kr-color-concrete-grey-steps-2)',
             }}
             className="px-6 py-4 border-t"
           >

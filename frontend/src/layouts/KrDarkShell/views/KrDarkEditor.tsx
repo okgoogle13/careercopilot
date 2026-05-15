@@ -17,7 +17,7 @@ export const KrDarkEditor: React.FC = () => {
       <motion.div
         initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex justify-between items-center bg-asphalt-black border border-surface-KrDark-concrete-grey-high/20 p-4 rounded-megaphone shadow-viscous"
+        className="flex justify-between items-center bg-asphalt-black border border-[var(--kr-color-charcoal-background-steps-3)]/20 p-4 rounded-megaphone shadow-viscous"
       >
         <div className="flex items-center gap-6">
           <div className="flex gap-2">
@@ -55,7 +55,7 @@ export const KrDarkEditor: React.FC = () => {
           className="flex-1 overflow-hidden"
         >
           <SolidarityCard className="w-full h-full p-0 flex flex-col bg-asphalt-black overflow-hidden relative">
-            <div className="bg-surface-KrDark-concrete-grey-high/10 px-6 py-3 border-b border-surface-KrDark-concrete-grey-high/20 flex justify-between">
+            <div className="bg-[var(--kr-color-charcoal-background-steps-3)]/10 px-6 py-3 border-b border-[var(--kr-color-charcoal-background-steps-3)]/20 flex justify-between">
               <span className="font-mono text-[9px] uppercase tracking-widest text-paper-white/30">
                 Source Architecture
               </span>
@@ -95,7 +95,7 @@ governance:
           className="flex-1 overflow-hidden"
         >
           <SolidarityCard className="w-full h-full p-0 flex flex-col bg-asphalt-black overflow-hidden group">
-            <div className="bg-ink-gold/5 px-6 py-3 border-b border-surface-KrDark-concrete-grey-high/20 group-hover:bg-ink-gold/10 transition-colors flex justify-between">
+            <div className="bg-ink-gold/5 px-6 py-3 border-b border-[var(--kr-color-charcoal-background-steps-3)]/20 group-hover:bg-ink-gold/10 transition-colors flex justify-between">
               <span className="font-mono text-[9px] uppercase tracking-widest text-ink-gold/60">
                 Extracted Preview
               </span>
@@ -125,7 +125,7 @@ governance:
         <span className="font-mono text-[9px] uppercase tracking-tighter text-paper-white/40">
           BRANCH: feature/kerala-rage
         </span>
-        <div className="h-px w-32 bg-surface-KrDark-concrete-grey-high/20 mx-4 shrink" />
+        <div className="h-px w-32 bg-[var(--kr-color-charcoal-background-steps-3)]/20 mx-4 shrink" />
         <span className="font-mono text-[9px] uppercase tracking-tighter text-paper-white/40">
           LOC: 48 // CRC: 0xA4F2
         </span>

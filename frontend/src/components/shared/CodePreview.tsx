@@ -25,7 +25,7 @@ export function CodePreview({ code }: CodePreviewProps) {
           {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
         </button>
       </div>
-      <pre className="p-4 rounded-tech-edge bg-surface-container-highest overflow-x-auto border border-outline-variant">
+      <pre className="p-4 rounded-tech-edge bg-surface-container-highest overflow-x-auto border border-[var(--kr-color-concrete-grey-steps-0)]">
         <code className="text-xs font-mono text-on-surface-variant whitespace-pre-wrap">
           {code.trim()}
         </code>

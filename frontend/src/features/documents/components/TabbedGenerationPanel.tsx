@@ -4,18 +4,17 @@
  *
  * Steps + Tabbed Generation pattern harvested from:
  * sources/prototype_v2.0/src/pages/LibraryReferencePage.tsx
- * Route owner: /documents (AI Interaction harvest)
+ * Runtime owner: /generation
  *
  * Patterns extracted:
  * - Tab navigation (Resume, Cover Letter, KSC, Interview, Networking)
  * - 3-step progress header (Tailor → Generate → Review)
  * - AnimatePresence content transitions per tab+step
  *
- * KR Solidarity v6.1 compliance:
- * - --sys-color-* tokens only (no hex)
- * - --sys-shape-* for border geometry
- * - Zero-Flora: no botanical motifs
- * - No Firebase, no react-router-dom, no activeTab shell
+ * Current convergence note:
+ * - Runtime route is canonical at /generation
+ * - This harvested panel still carries older token usage and should be migrated
+ *   to semantic --kr-* tokens in a dedicated design-system cleanup pass.
  */
 
 import { useState } from 'react';
@@ -75,7 +74,7 @@ function StepIndicator({ current, step, label }: { current: number; step: number
     ? 'var(--sys-color-solidarityRed-base)'
     : isCompleted
       ? 'var(--sys-color-kr-activistSmokeGreen-base)'
-      : 'var(--sys-color-outline-variant)';
+      : 'var(--kr-color-concrete-grey-steps-0)';
 
   return (
     <div className="flex items-center gap-2">
@@ -211,7 +210,7 @@ function StepContent({
                   borderColor:
                     coverStyle === style
                       ? 'var(--sys-color-inkGold-base)'
-                      : 'var(--sys-color-outline-variant)',
+                      : 'var(--kr-color-concrete-grey-steps-0)',
                   backgroundColor:
                     coverStyle === style
                       ? 'color-mix(in srgb, var(--sys-color-inkGold-base) 10%, transparent)'
@@ -241,7 +240,7 @@ function StepContent({
         <div
           style={{
             backgroundColor: 'var(--sys-color-charcoalBackground-steps-2)',
-            borderColor: 'var(--sys-color-outline-variant)',
+            borderColor: 'var(--kr-color-concrete-grey-steps-0)',
             borderRadius: 'var(--sys-shape-placardTorn01)',
             borderWidth: 1,
             borderStyle: 'solid',
@@ -271,7 +270,7 @@ function StepContent({
         <div
           style={{
             backgroundColor: 'var(--sys-color-charcoalBackground-steps-2)',
-            borderColor: 'var(--sys-color-outline-variant)',
+            borderColor: 'var(--kr-color-concrete-grey-steps-0)',
             borderRadius: 'var(--sys-shape-placardTorn01)',
             borderWidth: 1,
             borderStyle: 'solid',
@@ -383,7 +382,7 @@ export function TabbedGenerationPanel({
     <div
       style={{
         backgroundColor: 'var(--sys-color-charcoalBackground-steps-1)',
-        borderColor: 'var(--sys-color-outline-variant)',
+        borderColor: 'var(--kr-color-concrete-grey-steps-0)',
         borderRadius: 'var(--sys-shape-placardTorn01)',
         borderWidth: 1,
         borderStyle: 'solid',
@@ -395,7 +394,7 @@ export function TabbedGenerationPanel({
         <div
           style={{
             backgroundColor: 'var(--sys-color-charcoalBackground-steps-2)',
-            borderRight: '1px solid var(--sys-color-outline-variant)',
+            borderRight: '1px solid var(--kr-color-concrete-grey-steps-0)',
             width: 240,
             flexShrink: 0,
             padding: 20,
@@ -423,7 +422,7 @@ export function TabbedGenerationPanel({
                     gap: 10,
                     padding: '10px 14px',
                     borderRadius: 'var(--sys-shape-blockRiot01)',
-                    border: isActive ? '1px solid var(--sys-color-outline-variant)' : 'none',
+                    border: isActive ? '1px solid var(--kr-color-concrete-grey-steps-0)' : 'none',
                     backgroundColor: isActive
                       ? 'var(--sys-color-charcoalBackground-steps-3)'
                       : 'transparent',
@@ -458,7 +457,7 @@ export function TabbedGenerationPanel({
           <div
             style={{
               backgroundColor: 'var(--sys-color-charcoalBackground-steps-2)',
-              borderBottom: '1px solid var(--sys-color-outline-variant)',
+              borderBottom: '1px solid var(--kr-color-concrete-grey-steps-0)',
               padding: '12px 24px',
               display: 'flex',
               alignItems: 'center',
@@ -473,7 +472,7 @@ export function TabbedGenerationPanel({
               />
               <ChevronRight
                 size={14}
-                style={{ color: 'var(--sys-color-outline-variant)' }}
+                style={{ color: 'var(--kr-color-concrete-grey-steps-0)' }}
               />
               <StepIndicator
                 current={step}
@@ -482,7 +481,7 @@ export function TabbedGenerationPanel({
               />
               <ChevronRight
                 size={14}
-                style={{ color: 'var(--sys-color-outline-variant)' }}
+                style={{ color: 'var(--kr-color-concrete-grey-steps-0)' }}
               />
               <StepIndicator
                 current={step}

@@ -1,3 +1,4 @@
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 import { memo, type ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import clsx, { type ClassValue } from 'clsx';
@@ -84,9 +85,9 @@ export interface SettingsControlProps {
   onSecondaryAction?: () => void;
 }
 
-const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springCard = { type: 'spring', stiffness: 300, damping: 35 } as const;
-const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+const springHero = KrDarkSpring;
+const springCard = KrDarkSpring;
+const springButton = KrDarkSpring;
 
 export const SettingsControl = memo(function SettingsControl({
   className,

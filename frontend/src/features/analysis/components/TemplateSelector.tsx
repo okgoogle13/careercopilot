@@ -21,7 +21,7 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
 }) => {
   return (
     <div
-      className="bg-[var(--sys-color-charcoalBackground-steps-1)] p-6 border border-[var(--sys-color-outline-variant)]"
+      className="bg-[var(--sys-color-charcoalBackground-steps-1)] p-6 border border-[var(--kr-color-concrete-grey-steps-0)]"
       style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
     >
       <div className="flex justify-between items-center mb-4">
@@ -33,7 +33,7 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
             Locale:
           </span>
           <div
-            className="flex bg-[var(--sys-color-charcoalBackground-base)] p-1 border border-[var(--sys-color-outline-variant)]"
+            className="flex bg-[var(--sys-color-charcoalBackground-base)] p-1 border border-[var(--kr-color-concrete-grey-steps-0)]"
             style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
           >
             <button
@@ -70,7 +70,7 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
             className={`group flex flex-col items-center gap-2 p-2 border transition-all ${
               selectedTemplate.id === t.id
                 ? 'bg-[var(--sys-color-solidarityRed-base)]/20 border-[var(--sys-color-inkGold-base)]'
-                : 'bg-[var(--sys-color-charcoalBackground-base)] border-[var(--sys-color-outline-variant)] hover:border-[var(--sys-color-concreteGrey-base)]'
+                : 'bg-[var(--sys-color-charcoalBackground-base)] border-[var(--kr-color-concrete-grey-steps-0)] hover:border-[var(--sys-color-concreteGrey-base)]'
             }`}
             style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
           >

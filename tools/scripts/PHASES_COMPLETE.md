@@ -25,7 +25,7 @@ Complete 4-phase pipeline for analyzing, validating, scoring, and packaging poli
 ## What Changed from v2.3.0 → v3.0.0
 
 ### ❌ DEPRECATED (v2.3.0 - [DEPRECATED_STYLE])
-- Australian endemic flora detection (wattle, [DEPRECATED_STYLE], echidna)
+- Australian endemic flora detection (baru, [DEPRECATED_STYLE], echidna)
 - Vision API [DEPRECATED_STYLE] analysis
 - [DEPRECATED_STYLE] aesthetic (plates, motifs, UI)
 - `vision_idf_extractor.py` (now archived)
@@ -332,7 +332,7 @@ cat asset-packages/*/manifest-entry.json > new-entries.json
 cp -r asset-packages/KR-SOLID-*/metadata.json frontend/public/assets/...
 
 # Update manifest version
-# Edit: frontend/public/assets/kerala-rage-kr-solidarity-manifest.json
+# Edit: frontend/public/assets/kr-solidarity-manifest.json
 ```
 
 ---
@@ -363,7 +363,7 @@ scripts/
 ## Integration Points
 
 ### Frontend Manifest
-**File:** `frontend/public/assets/kerala-rage-kr-solidarity-manifest.json`
+**File:** `frontend/public/assets/kr-solidarity-manifest.json`
 
 **Action:** Add each `manifest-entry.json` to assets array
 

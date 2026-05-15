@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { UploadIcon } from './icons/UploadIcon';
 import { FileIcon } from './icons/FileIcon';
 import { TrashIcon } from './icons/TrashIcon';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 interface DocumentInputProps {
   onProcess: (
@@ -140,7 +141,7 @@ export const DocumentInput: React.FC<DocumentInputProps> = ({
 
   return (
     <div
-      className="p-10 bg-[var(--sys-color-charcoalBackground-steps-2)] border-l-4 border-l-[var(--sys-color-solidarityRed-base)] border-y border-r border-y-[var(--sys-color-outline-variant)] border-r-[var(--sys-color-outline-variant)] shadow-[var(--sys-shadow-elevation2Placard)] my-8 mx-auto max-w-6xl"
+      className="p-10 bg-[var(--sys-color-charcoalBackground-steps-2)] border-l-4 border-l-[var(--sys-color-solidarityRed-base)] border-y border-r border-y-[var(--kr-color-concrete-grey-steps-0)] border-r-[var(--kr-color-concrete-grey-steps-0)] shadow-[var(--sys-shadow-elevation2Placard)] my-8 mx-auto max-w-6xl"
       style={{ borderRadius: 'var(--sys-shape-blockRiot02)' }}
     >
       {!hideTitle && (
@@ -149,10 +150,10 @@ export const DocumentInput: React.FC<DocumentInputProps> = ({
         </h2>
       )}
       <div className="flex gap-2 mb-8">
-        <span className="px-3 py-1 bg-[var(--sys-color-charcoalBackground-steps-2)] text-[var(--sys-color-worker-ash-base)] text-sm font-bold uppercase tracking-wider rounded-full border border-[var(--sys-color-outline-variant)]">
+        <span className="px-3 py-1 bg-[var(--sys-color-charcoalBackground-steps-2)] text-[var(--sys-color-worker-ash-base)] text-sm font-bold uppercase tracking-wider rounded-full border border-[var(--kr-color-concrete-grey-steps-0)]">
           Up to {MAX_FILES} documents
         </span>
-        <span className="px-3 py-1 bg-[var(--sys-color-charcoalBackground-steps-2)] text-[var(--sys-color-worker-ash-base)] text-sm font-bold uppercase tracking-wider rounded-full border border-[var(--sys-color-outline-variant)]">
+        <span className="px-3 py-1 bg-[var(--sys-color-charcoalBackground-steps-2)] text-[var(--sys-color-worker-ash-base)] text-sm font-bold uppercase tracking-wider rounded-full border border-[var(--kr-color-concrete-grey-steps-0)]">
           PDF · DOCX · TXT
         </span>
       </div>
@@ -160,7 +161,7 @@ export const DocumentInput: React.FC<DocumentInputProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div
             className={`relative border-2 border-dashed p-12 text-center transition-all cursor-pointer
-              ${isDragging ? 'border-[var(--sys-color-primary-base)] bg-[var(--sys-color-primaryContainer-base)]' : 'border-[var(--sys-color-outline-variant)] hover:border-[var(--sys-color-paperWhite-base)]'}`}
+              ${isDragging ? 'border-[var(--sys-color-primary-base)] bg-[var(--sys-color-primaryContainer-base)]' : 'border-[var(--kr-color-concrete-grey-steps-0)] hover:border-[var(--sys-color-paperWhite-base)]'}`}
             style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
             onDragEnter={handleDragEnter}
             onDragLeave={handleDragLeave}
@@ -180,7 +181,7 @@ export const DocumentInput: React.FC<DocumentInputProps> = ({
             <div className="flex flex-col items-center text-[var(--sys-color-paperWhite-base)]">
               <motion.div
                 animate={{ scale: isDragging ? 1.2 : 1 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                transition={KrDarkSpring}
               >
                 <UploadIcon className="w-16 h-16 mb-6 text-[var(--sys-color-solidarityRed-base)]" />
               </motion.div>
@@ -203,7 +204,7 @@ export const DocumentInput: React.FC<DocumentInputProps> = ({
               value={rawText}
               onChange={handleTextChange}
               placeholder="If your PDF fails to upload, paste your unformatted resume or job description here..."
-              className="flex-grow p-6 bg-[var(--sys-color-charcoalBackground-steps-2)] border border-[var(--sys-color-outline-variant)] text-[var(--sys-color-paperWhite-base)] focus:border-[var(--sys-color-primary-base)] focus:outline-none focus:shadow-[var(--sys-shadow-elevation2Placard)] transition-all resize-y"
+              className="flex-grow p-6 bg-[var(--sys-color-charcoalBackground-steps-2)] border border-[var(--kr-color-concrete-grey-steps-0)] text-[var(--sys-color-paperWhite-base)] focus:border-[var(--sys-color-primary-base)] focus:outline-none focus:shadow-[var(--sys-shadow-elevation2Placard)] transition-all resize-y"
               style={{ borderRadius: 'var(--sys-shape-blockRiot01)', minHeight: '200px' }}
               disabled={isLoading || isReading}
             />
@@ -225,7 +226,7 @@ export const DocumentInput: React.FC<DocumentInputProps> = ({
               {files.map((file, index) => (
                 <div
                   key={`${file.name}-${index}`}
-                  className="flex items-center justify-between bg-[var(--sys-color-charcoalBackground-steps-2)] border border-[var(--sys-color-outline-variant)] p-4 animate-fade-in"
+                  className="flex items-center justify-between bg-[var(--sys-color-charcoalBackground-steps-2)] border border-[var(--kr-color-concrete-grey-steps-0)] p-4 animate-fade-in"
                   style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
                 >
                   <div className="flex items-center gap-4 overflow-hidden">

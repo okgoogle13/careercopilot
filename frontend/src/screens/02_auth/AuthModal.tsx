@@ -1,12 +1,14 @@
-import { memo } from 'react';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
+import { memo, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import clsx, { type ClassValue } from 'clsx';
 import { useModeStore } from '../../stores/useModeStore';
+import { useAuth } from '../../context/AuthContext';
 
 type SlotDef = {
   name: string;
   zLayer: 'Z-0' | 'Z-1' | 'Z-2' | 'Z-3';
-  token: `--sys-${string}`;
+  token: `--kr-${string}`;
   assetCompat: `KR-${string}`;
 };
 
@@ -14,19 +16,19 @@ const SLOT_DEFS: SlotDef[] = [
   {
     name: 'background',
     zLayer: 'Z-0',
-    token: '--sys-color-charcoalBackground-base',
+    token: '--kr-color-charcoal-background-base',
     assetCompat: 'KR-SOLID-SUBSTRATE',
   },
   {
     name: 'background_accent',
     zLayer: 'Z-1',
-    token: '--sys-color-protestMetalBlue-base',
+    token: '--kr-color-protest-metal-blue-base',
     assetCompat: 'KR-SOLID-ATMOS',
   },
   {
     name: 'cta_icon',
     zLayer: 'Z-3',
-    token: '--sys-color-worker-ash-base',
+    token: '--kr-color-worker-ash-base',
     assetCompat: 'KR-SOLID-UIKIT',
   },
 ];
@@ -51,40 +53,31 @@ export type AuthModalMode = 'login' | 'register';
 
 export interface AuthModalProps {
   className?: ClassValue;
-  /** @default 'login' */
+  /** Initial tab. Defaults to 'login'. User can switch via the tab switcher. */
   mode?: AuthModalMode;
-  title?: string;
-  subtitle?: string;
-  primaryLabel?: string;
-  secondaryLabel?: string;
   slotAssets?: Partial<Record<string, string>>;
-  onPrimaryAction?: () => void;
-  onSecondaryAction?: () => void;
+  onPrimaryAction?: (email: string, password: string) => void;
 }
 
-const springHero = { type: 'spring', stiffness: 450, damping: 28 } as const;
-const springButton = { type: 'spring', stiffness: 450, damping: 28 } as const;
+const springHero = KrDarkSpring;
+const springButton = KrDarkSpring;
 
 export const AuthModal = memo(function AuthModal({
   className,
   mode = 'login',
-  title,
-  subtitle,
-  primaryLabel = 'Continue',
-  secondaryLabel = 'Use OAuth',
   slotAssets,
   onPrimaryAction,
-  onSecondaryAction,
 }: AuthModalProps) {
   const themeMode = useModeStore((state) => state.mode);
+  const { login, register } = useAuth();
   const resolvedSlotAssets = { ...DEFAULT_SLOT_ASSETS, ...slotAssets };
+  const [activeTab, setActiveTab] = useState<AuthModalMode>(mode);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const resolvedTitle = title ?? (mode === 'register' ? 'Create Account' : 'Sign In');
-  const resolvedSubtitle =
-    subtitle ??
-    (mode === 'register'
-      ? 'Join the vanguard and build your portfolio.'
-      : 'Secure access to your CareerCopilot workspace.');
+  useEffect(() => {
+    setActiveTab(mode);
+  }, [mode]);
 
   return (
     <motion.section
@@ -93,13 +86,12 @@ export const AuthModal = memo(function AuthModal({
       animate={{ opacity: 1, y: 0 }}
       transition={undefined}
       className={clsx(
-        'font-primary relative overflow-hidden rounded-[var(--sys-shape-blockRiot03)] p-8 text-base min-h-[75vh] flex flex-col justify-center',
+        'relative overflow-hidden rounded-[var(--kr-shape-block-riot03)] text-base min-h-screen flex flex-col items-center justify-center p-8 bg-solidarity-charcoal-base',
         className
       )}
       style={{
-        backgroundColor: 'var(--sys-color-charcoalBackground-base)',
-        color: 'var(--sys-color-worker-ash-base)',
-        border: '1px solid var(--sys-color-concreteGrey-base)',
+        color: 'var(--kr-color-semantic-parchment)',
+        border: '1px solid var(--kr-color-concrete-grey-steps-0)',
       }}
       data-mode={themeMode}
       data-testid="authmodal"
@@ -133,55 +125,186 @@ export const AuthModal = memo(function AuthModal({
         ))}
       </div>
 
-      <motion.header
-        initial={{ opacity: 0, y: 6 }}
+      {/* Centered auth card */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ ...springHero, delay: 0.04 }}
-        className="relative z-10 max-w-2xl"
+        className="relative z-10 w-full max-w-md overflow-hidden"
+        style={{
+          backgroundColor: 'var(--kr-color-charcoal-background-steps-1)',
+          border: '1px solid var(--kr-color-concrete-grey-steps-1)',
+          borderRadius: 'var(--kr-shape-march-open01)',
+        }}
       >
-        <h1
-          className="font-display text-5xl md:text-6xl font-black"
-          style={{ color: 'var(--sys-color-paperWhite)' }}
-        >
-          {resolvedTitle}
-        </h1>
-        <p
-          className="mt-4 max-w-2xl text-base md:text-xl"
-          style={{ color: 'var(--sys-color-worker-ash-base)' }}
-        >
-          {resolvedSubtitle}
-        </p>
-      </motion.header>
+        {/* Red top accent bar — Figma node 1:203 */}
+        <div
+          className="h-[3px] w-full"
+          style={{ backgroundColor: 'var(--kr-color-solidarity-red-base)' }}
+        />
 
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={undefined}
-        className="relative z-10 mt-8 flex flex-wrap gap-4 items-center"
-      >
-        <motion.button
-          type="button"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          transition={springButton}
-          onClick={onPrimaryAction}
-          className="rounded-[var(--sys-shape-blockRiot03)] px-8 py-4 font-semibold text-lg"
-          style={{
-            backgroundColor: 'var(--sys-color-inkGold-base)',
-            color: 'var(--sys-color-charcoalBackground-base)',
-          }}
-        >
-          {primaryLabel}
-        </motion.button>
+        <div className="p-10">
+          {/* Tab switcher — Figma node 1:168 */}
+          <div
+            className="flex items-center p-[4px] mb-6"
+            style={{
+              backgroundColor: 'var(--kr-color-charcoal-background-steps-2)',
+              border: '1px solid var(--kr-color-concrete-grey-steps-1)',
+              borderRadius: 'var(--kr-shape-march-open01)',
+            }}
+          >
+            {(['login', 'register'] as const).map((tab) => (
+              <button
+                key={tab}
+                type="button"
+                onClick={() => setActiveTab(tab)}
+                className="flex-1 py-2.5 font-['Work_Sans'] text-[13px] font-extrabold uppercase tracking-[0.03em] transition-colors"
+                style={{
+                  borderRadius: 'var(--kr-shape-march-open01)',
+                  backgroundColor:
+                    activeTab === tab
+                      ? 'var(--kr-color-charcoal-background-steps-3)'
+                      : 'transparent',
+                  color:
+                    activeTab === tab
+                      ? 'var(--kr-color-worker-ash-base)'
+                      : 'var(--kr-color-worker-ash-muted)',
+                }}
+              >
+                {tab === 'login' ? 'Sign In' : 'Create Account'}
+              </button>
+            ))}
+          </div>
 
-        <button
-          type="button"
-          onClick={onSecondaryAction}
-          className="font-mono text-sm opacity-80 px-2 py-1"
-          style={{ color: 'var(--sys-color-worker-ash-base)', backgroundColor: 'transparent' }}
-        >
-          {secondaryLabel}
-        </button>
+          {/* Context blurb — Figma node 1:173 */}
+          <p
+            className="text-sm leading-relaxed mb-6 px-1 opacity-80"
+            style={{ color: 'var(--kr-color-worker-ash-base)' }}
+          >
+            {activeTab === 'register'
+              ? 'Create an account to start building your evidence archive and find aligned opportunities.'
+              : 'Sign in to access your dashboard and continue your job search.'}
+          </p>
+
+          <form
+            className="flex flex-col gap-4"
+            onSubmit={async (e) => {
+              e.preventDefault();
+              if (activeTab === 'register') {
+                await register(email, password, '');
+              } else {
+                await login(email, password);
+              }
+              onPrimaryAction?.(email, password);
+            }}
+          >
+            <div className="flex flex-col gap-1.5">
+              <label
+                htmlFor="auth-email"
+                className="font-mono text-[10px] uppercase tracking-widest"
+                style={{ color: 'var(--kr-color-worker-ash-muted)' }}
+              >
+                Email Address
+              </label>
+              <input
+                id="auth-email"
+                type="email"
+                autoComplete="email"
+                placeholder="you@solidarity.org"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full px-4 py-3 text-sm outline-none transition-colors"
+                style={{
+                  backgroundColor: 'var(--kr-color-charcoal-background-steps-2)',
+                  border: '1px solid var(--kr-color-concrete-grey-steps-1)',
+                  borderRadius: 'var(--kr-shape-march-open01)',
+                  color: 'var(--kr-color-worker-ash-base)',
+                }}
+              />
+            </div>
+
+            <div className="flex flex-col gap-1.5">
+              <label
+                htmlFor="auth-password"
+                className="font-mono text-[10px] uppercase tracking-widest"
+                style={{ color: 'var(--kr-color-worker-ash-muted)' }}
+              >
+                Password
+              </label>
+              <input
+                id="auth-password"
+                type="password"
+                autoComplete={activeTab === 'register' ? 'new-password' : 'current-password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full px-4 py-3 text-sm outline-none transition-colors"
+                style={{
+                  backgroundColor: 'var(--kr-color-charcoal-background-steps-2)',
+                  border: '1px solid var(--kr-color-concrete-grey-steps-1)',
+                  borderRadius: 'var(--kr-shape-march-open01)',
+                  color: 'var(--kr-color-worker-ash-base)',
+                }}
+              />
+            </div>
+
+            <motion.button
+              type="submit"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={springButton}
+              className="mt-2 w-full px-8 py-4 font-['Work_Sans'] font-extrabold uppercase tracking-[0.04em] text-sm"
+              style={{
+                backgroundColor: 'var(--kr-color-solidarity-red-base)',
+                color: 'var(--kr-color-charcoal-background-base)',
+                borderRadius: 'var(--kr-shape-march-open01)',
+              }}
+            >
+              {activeTab === 'login' ? 'Sign In →' : 'Create Account →'}
+            </motion.button>
+          </form>
+
+          {/* Toggle link */}
+          <p
+            className="mt-5 text-center text-[13px]"
+            style={{ color: 'var(--kr-color-worker-ash-muted)' }}
+          >
+            {activeTab === 'login' ? (
+              <>
+                Do not have an account?{' '}
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('register')}
+                  className="font-bold transition-opacity hover:opacity-100"
+                  style={{ color: 'var(--kr-color-protest-metal-blue-base)' }}
+                >
+                  Register
+                </button>
+              </>
+            ) : (
+              <>
+                Already have an account?{' '}
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('login')}
+                  className="font-bold transition-opacity hover:opacity-100"
+                  style={{ color: 'var(--kr-color-protest-metal-blue-base)' }}
+                >
+                  Sign In
+                </button>
+              </>
+            )}
+          </p>
+
+          {/* Figma tagline — node 1:202 */}
+          <p
+            className="mt-6 text-center font-proclamation text-[16px] opacity-50 -rotate-1 uppercase tracking-[0.08em]"
+            style={{ color: 'var(--kr-color-stencil-yellow-base)' }}
+          >
+            no neutral canvas.
+          </p>
+        </div>
       </motion.div>
     </motion.section>
   );

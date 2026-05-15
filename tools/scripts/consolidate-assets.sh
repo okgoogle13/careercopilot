@@ -161,9 +161,9 @@ mv -n /Users/okgoogle13/Projects/careercopilot/frontend/public/assets/specimens/
 mkdir -p $(dirname /Users/okgoogle13/Projects/careercopilot/assets/ui/motif-reference-field-guide.png)
 echo "Moving motif-reference-field-guide.png..."
 mv -n /Users/okgoogle13/Projects/careercopilot/frontend/public/assets/specimens/motif-reference-field-guide.png /Users/okgoogle13/Projects/careercopilot/assets/ui/motif-reference-field-guide.png
-mkdir -p $(dirname /Users/okgoogle13/Projects/careercopilot/assets/specimens/northcote-eucalyptus-echidna.png)
-echo "Moving northcote-eucalyptus-echidna.png..."
-mv -n /Users/okgoogle13/Projects/careercopilot/frontend/public/assets/specimens/motif-gallery-eucalyptus-[DEPRECATED_STYLE].png /Users/okgoogle13/Projects/careercopilot/assets/specimens/northcote-eucalyptus-echidna.png
+mkdir -p $(dirname /Users/okgoogle13/Projects/careercopilot/assets/specimens/northcote-activist-echidna.png)
+echo "Moving northcote-activist-echidna.png..."
+mv -n /Users/okgoogle13/Projects/careercopilot/frontend/public/assets/specimens/motif-gallery-activist-[DEPRECATED_STYLE].png /Users/okgoogle13/Projects/careercopilot/assets/specimens/northcote-activist-echidna.png
 mkdir -p $(dirname /Users/okgoogle13/Projects/careercopilot/assets/uncategorized/motif-laboratory-anatomical-grid.png)
 echo "Moving motif-laboratory-anatomical-grid.png..."
 mv -n /Users/okgoogle13/Projects/careercopilot/frontend/public/assets/specimens/motif-laboratory-anatomical-grid.png /Users/okgoogle13/Projects/careercopilot/assets/uncategorized/motif-laboratory-anatomical-grid.png

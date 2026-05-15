@@ -12,6 +12,7 @@ import { ArrowRight, Loader2, Zap, Target, Sparkles, LayoutDashboard } from 'luc
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { workflowService } from '@/api/workflowService';
+import { KrDarkSpring } from '@/design/tokens/motion-presets';
 
 // ─── Step guide cards (shown before analysis) ─────────────────────────────────
 
@@ -25,7 +26,7 @@ interface StepCardProps {
 function StepCard({ number, Icon, label, desc }: StepCardProps) {
   return (
     <div
-      className="p-5 bg-[var(--sys-color-charcoalBackground-steps-2)] border border-[var(--sys-color-outline-variant)] flex items-start gap-4"
+      className="p-5 bg-[var(--sys-color-charcoalBackground-steps-2)] border border-[var(--kr-color-concrete-grey-steps-0)] flex items-start gap-4"
       style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
     >
       <div
@@ -110,7 +111,7 @@ export function ApplyQuick() {
             <button
               id="apply-quick-toggle-guide"
               onClick={() => setShowGuide((v) => !v)}
-              className="flex items-center gap-2 px-4 py-2 border border-[var(--sys-color-outline-variant)] text-[var(--sys-color-worker-ash-base)] font-bold uppercase tracking-widest text-[10px] hover:text-[var(--sys-color-paperWhite-base)] transition-colors"
+              className="flex items-center gap-2 px-4 py-2 border border-[var(--kr-color-concrete-grey-steps-0)] text-[var(--sys-color-worker-ash-base)] font-bold uppercase tracking-widest text-[10px] hover:text-[var(--sys-color-paperWhite-base)] transition-colors"
               style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
             >
               {showGuide ? (
@@ -166,8 +167,8 @@ export function ApplyQuick() {
           <motion.section
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ type: 'spring', stiffness: 220, damping: 22 }}
-            className="border border-[var(--sys-color-outline-variant)] bg-[var(--sys-color-charcoalBackground-steps-1)] p-6 space-y-5"
+            transition={KrDarkSpring}
+            className="border border-[var(--kr-color-concrete-grey-steps-0)] bg-[var(--sys-color-charcoalBackground-steps-1)] p-6 space-y-5"
             style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -235,7 +236,7 @@ export function ApplyQuick() {
                 value={jobDescription}
                 onChange={(e) => setJobDescription(e.target.value)}
                 placeholder="Paste the role description here…"
-                className="h-44 bg-[var(--sys-color-charcoalBackground-steps-2)] border-[var(--sys-color-outline-variant)]"
+                className="h-44 bg-[var(--sys-color-charcoalBackground-steps-2)] border-[var(--kr-color-concrete-grey-steps-0)]"
               />
             </div>
 
@@ -268,7 +269,7 @@ export function ApplyQuick() {
           <motion.section
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ type: 'spring', stiffness: 220, damping: 24, delay: 0.06 }}
+            transition={KrDarkSpring}
             className="border border-[var(--sys-color-inkGold-base)]/22 bg-[var(--sys-color-charcoalBackground-base)]/55 p-6"
             style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
           >
@@ -289,11 +290,11 @@ export function ApplyQuick() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 220, damping: 24 }}
+              transition={KrDarkSpring}
             >
               <JobAnalysisResultsPanel
                 result={result}
-                onNavigateToTracker={() => navigate('/tracker')}
+                onNavigateToTracker={() => navigate('/applications')}
               />
             </motion.div>
           )}

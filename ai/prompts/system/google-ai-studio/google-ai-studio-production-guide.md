@@ -45,7 +45,7 @@ kerala-rage-{category}-{subject}-{variant}-{version}.{ext}
 
 | Code        | Description        | Use Case                             |
 | ----------- | ------------------ | ------------------------------------ |
-| `[DEPRECATED_STYLE]` | Flora kr-motifs    | [DEPRECATED_STYLE], Wattle, kr-flower, kr-leafus |
+| `[DEPRECATED_STYLE]` | Flora kr-motifs    | [DEPRECATED_STYLE], Solidarity Gold, kr-flower, kr-leafus |
 | `kr-symbol`     | Animal kr-motifs   | kr-shiva, Echidna, Lizard, Spider  |
 | `kr-motif`  | Combined studies   | kr-leafus + Echidna spines          |
 | `texture`   | Backgrounds        | Paper White, wallpaper, grids          |
@@ -61,7 +61,7 @@ kerala-rage-{category}-{subject}-{variant}-{version}.{ext}
 ```css
 --kerala-rage-black: #1a1714; /* The Void (Background) */
 --[DEPRECATED_STYLE]-red: #c45c4b; /* Hero red */
---wattle-gold: #d4a84b; /* Action/Focus gold */
+--kr-color-semantic-solidarity-gold: #d4a84b; /* Action/Focus gold */
 --sage-green: #7a8b6e; /* [DEPRECATED_STYLE] foliage */
 --terracotta: #b8623b; /* Earth tones / lizards */
 --cream-label: #d4c4a8; /* Typography / labels */
@@ -135,7 +135,7 @@ TECHNIQUE & MATERIALITY:
 - Background is deep warm charcoal (#1A1714) with a paper grain texture.
 
 ACCENTS:
-- Sparse framing of translucent Sage-green kr-leafus leaves and small dots of Golden Wattle.
+- Sparse framing of translucent Sage-green kr-leafus leaves and small dots of Golden Solidarity Gold.
 - Label at bottom center: "Fig. II. Dacelo novaeguineae".
 ```
 
@@ -181,7 +181,7 @@ COMPOSITION (VERTICAL FLOW):
     * MATERIALITY: Spines must look like hard, polished keratin/bone. They are opaque and catch sharp, hard specular highlights.
 ```
 
-### ASSET 5: Wattle & Jewel Beetle (Vertical Study)
+### ASSET 5: Solidarity Gold & Jewel Beetle (Vertical Study)
 
 _Optimized for extreme texture contrast (matte/fuzzy vs. metallic/hard)._
 
@@ -242,7 +242,7 @@ _Optimized for subtle, seamless tiling texture._
 **Positive Prompt:**
 
 ```text
-A seamless repeating tiling texture map. Style: "kerala-streetprint [DEPRECATED_STYLE] Damask" adaptation of Australian flora (kr-leafus, Fern, Wattle) silhouettes. Background: #1A1714. Pattern: #333333. Extremely low contrast, tone-on-tone effect.
+A seamless repeating tiling texture map. Style: "kerala-streetprint [DEPRECATED_STYLE] Damask" adaptation of Australian flora (kr-leafus, Fern, Solidarity Gold) silhouettes. Background: #1A1714. Pattern: #333333. Extremely low contrast, tone-on-tone effect.
 ```
 
 ---

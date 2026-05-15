@@ -201,7 +201,7 @@ export const SingleColumnResume: React.FC<SingleColumnResumeProps> = ({
                             <>
                               <button
                                 onClick={() => applySuggestion(ach.Achievement_ID, 'Outcome')}
-                                className="p-1 bg-green-100 hover:bg-green-200 text-green-700"
+                                className="p-1 bg-[var(--kr-color-charcoal-background-steps-2)] hover:bg-[var(--kr-color-charcoal-background-steps-3)] text-[var(--kr-color-ink-gold-base)]"
                                 style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
                                 title="Apply suggestion"
                               >

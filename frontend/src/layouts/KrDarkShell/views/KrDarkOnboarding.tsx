@@ -46,12 +46,12 @@ export const KrDarkOnboarding: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 + idx * 0.2, duration: 0.8 }}
           >
-            <SolidarityCard className="p-8 h-full flex flex-col gap-6 relative group border-surface-KrDark-concrete-grey-high/20 hover:border-ink-gold/20 transition-colors">
+            <SolidarityCard className="p-8 h-full flex flex-col gap-6 relative group border-[var(--kr-color-charcoal-background-steps-3)]/20 hover:border-ink-gold/20 transition-colors">
               <div className="flex justify-between items-baseline">
                 <span className="font-mono text-[10px] text-paper-white/20">STEP_0{idx + 1}</span>
-                <div className="mx-4 h-px flex-1 bg-surface-KrDark-concrete-grey-high/20" />
+                <div className="mx-4 h-px flex-1 bg-[var(--kr-color-charcoal-background-steps-3)]/20" />
                 <div
-                  className={`w-2 h-2 rounded-march ${idx === 0 ? 'bg-ink-gold shadow-ink-glow' : 'bg-surface-KrDark-concrete-grey-high/30'}`}
+                  className={`w-2 h-2 rounded-march ${idx === 0 ? 'bg-ink-gold shadow-ink-glow' : 'bg-[var(--kr-color-charcoal-background-steps-3)]/30'}`}
                 />
               </div>
 
