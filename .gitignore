@@ -59,8 +59,8 @@ test-results/
 
 # Local Environments and Logs
 backend/venv/
-*.txt
-*.xml
+*.log
+repomix-output.xml
 playwright-report/
 test-results/
 
@@ -153,6 +153,8 @@ eggs/
 lib/
 !frontend/src/lib/
 !frontend/src/lib/**
+!frontend/packages/ui/src/lib/
+!frontend/packages/ui/src/lib/**
 lib64/
 parts/
 sdist/
