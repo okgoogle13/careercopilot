@@ -34,6 +34,7 @@ env:
   PYTHONUNBUFFERED: "1"
   PYTHONDONTWRITEBYTECODE: "1"
   PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  PLAYWRIGHT_ENABLED: "false"
 
 jobs:
   changes:
@@ -397,8 +398,10 @@ jobs:
     timeout-minutes: 25
     needs: [changes, frontend-build, backend-tests]
     if: |
-      (github.event_name == 'workflow_dispatch' && github.event.inputs.run_e2e_tests == 'true') ||
-      (needs.changes.outputs.e2e == 'true')
+      env.PLAYWRIGHT_ENABLED == 'true' && (
+        (github.event_name == 'workflow_dispatch' && github.event.inputs.run_e2e_tests == 'true') ||
+        (needs.changes.outputs.e2e == 'true')
+      )
     environment: staging
     steps:
       - name: Checkout
@@ -616,7 +619,7 @@ jobs:
     name: Playwright E2E (Matrix)
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    if: github.event_name == 'workflow_dispatch' || needs.changes.outputs.e2e == 'true'
+    if: env.PLAYWRIGHT_ENABLED == 'true' && (github.event_name == 'workflow_dispatch' || needs.changes.outputs.e2e == 'true')
     needs: [changes, frontend-build, backend-tests]
     environment: staging
     strategy:

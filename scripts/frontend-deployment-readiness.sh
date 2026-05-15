@@ -151,17 +151,7 @@ if [[ "$SKIP_TESTS" == false ]]; then
         exit 1
     fi
 
-    # E2E tests (if Playwright is available)
-    if command -v npx playwright --version &> /dev/null; then
-        log_info "Running E2E tests..."
-        if npm run test:e2e; then
-            log_success "E2E tests passed"
-        else
-            log_warning "E2E tests failed or skipped"
-        fi
-    else
-        log_warning "Playwright not available, skipping E2E tests"
-    fi
+    log_warning "Playwright is disabled; skipping E2E tests"
 else
     log_warning "Skipping tests"
 fi

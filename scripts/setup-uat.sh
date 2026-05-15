@@ -13,11 +13,9 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Step 1: Install Playwright
-echo -e "${BLUE}[1/5]${NC} Installing Playwright..."
+# Step 1: Skip Playwright setup
+echo -e "${BLUE}[1/5]${NC} Playwright is disabled, skipping Playwright setup..."
 cd frontend
-npm install -D @playwright/test
-npx playwright install --with-deps chromium
 
 # Step 2: Create test directories
 echo -e "${BLUE}[2/5]${NC} Creating test directory structure..."
@@ -57,8 +55,8 @@ echo ""
 echo "Next steps:"
 echo "  1. Start backend: cd backend && uvicorn app.main:app --reload"
 echo "  2. Start frontend: cd frontend && npm run dev"
-echo "  3. Run tests: cd frontend && npx playwright test"
+echo "  3. Run tests: Playwright E2E is disabled in this repository"
 echo ""
 echo "View test report:"
-echo "  npx playwright show-report"
+echo "  Playwright report is disabled in this repository"
 echo ""

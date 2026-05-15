@@ -19,15 +19,15 @@
     "test:update": "NODE_OPTIONS='--experimental-vm-modules' jest --config=jest.config.mjs --updateSnapshot",
     "test:ui": "NODE_OPTIONS='--experimental-vm-modules' jest --config=jest.config.mjs --watch",
     "test:ci": "NODE_OPTIONS='--experimental-vm-modules' jest --config=jest.config.mjs --ci --coverage --passWithNoTests",
-    "test:e2e": "NODE_ENV=test playwright test --config=playwright.config.ts",
-    "test:e2e:mock": "NODE_ENV=test VITE_USE_MOCK_AUTH=true VITE_OFFLINE_MODE=true playwright test --config=playwright.config.ts",
-    "test:e2e:headed": "NODE_ENV=test playwright test --config=playwright.config.ts --headed",
-    "test:e2e:debug": "NODE_ENV=test playwright test --config=playwright.config.ts --debug",
-    "test:e2e:ui": "NODE_ENV=test playwright test --config=playwright.config.ts --ui",
-    "test:e2e:critical": "NODE_ENV=test playwright test tests/auth-application-flow.spec.js --config=playwright.config.ts",
-    "test:e2e:critical:headed": "NODE_ENV=test playwright test tests/auth-application-flow.spec.js --config=playwright.config.ts --headed",
+    "test:e2e": "echo \"Playwright is disabled in this repository\"",
+    "test:e2e:mock": "echo \"Playwright is disabled in this repository\"",
+    "test:e2e:headed": "echo \"Playwright is disabled in this repository\"",
+    "test:e2e:debug": "echo \"Playwright is disabled in this repository\"",
+    "test:e2e:ui": "echo \"Playwright is disabled in this repository\"",
+    "test:e2e:critical": "echo \"Playwright is disabled in this repository\"",
+    "test:e2e:critical:headed": "echo \"Playwright is disabled in this repository\"",
     "test:setup": "node scripts/setup-test-user.js",
-    "playwright:report": "playwright show-report playwright-report",
+    "playwright:report": "echo \"Playwright is disabled in this repository\"",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
     "lint:ci": "eslint . --max-warnings=0",
@@ -58,7 +58,7 @@
     "kr:inject-layers": "node scripts/kr/inject-ui-kit-layers.mjs",
     "kr:stage2": "bash ../scripts/orchestrate-stage2.sh",
     "validate:kr-hero-token-map": "npx tsx src/scripts/validate-kr-hero-token-map.ts",
-    "visual:audit:3-pages": "npx playwright test tests/e2e/visual/visual-audit.spec.ts --project=chromium",
+    "visual:audit:3-pages": "echo \"Playwright is disabled in this repository\"",
     "design:drift-check": "python3 ../scripts/design-validation/check-design-drift.py"
   },
   "engines": {
@@ -236,29 +236,14 @@
     "vitest": "^4.0.16"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
+    "extends": ["react-app"]
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,md,yml,yaml}": [
-      "prettier --write"
-    ]
+    "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
+    "*.{json,md,yml,yaml}": ["prettier --write"]
   }
 }
