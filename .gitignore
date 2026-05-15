@@ -61,6 +61,12 @@ test-results/
 backend/venv/
 *.log
 repomix-output.xml
+repomix-output-careercopilot.xml
+repomix-context.xml
+targeted_mvp_context.xml
+precommit_log.txt
+backend/coverage_full_report.txt
+backend/pytest_output.txt
 playwright-report/
 test-results/
 
@@ -125,6 +131,7 @@ codex-skills/
 .idx/
 .agent/
 .agents/
+.ralphy/
 
 # Recovery and Emergency Backups (prevent "Corruption" death-spirals)
 .git_corrupt_backup/

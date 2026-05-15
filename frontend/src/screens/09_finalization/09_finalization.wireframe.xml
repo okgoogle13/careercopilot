@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wireframe version="6.0.0" screen_id="finalization" design_system="kr-solidarity" mode="solidarity-only">
+  <meta>
+    <title>Application Finalization &amp; Review</title>
+    <description>Final review screen before submitting job application. Structural checklist, document preview, and application customization. Minimal, clear UX.</description>
+    <user_story>As a user, I can review my complete application before submitting and customize content for specific jobs.</user_story>
+    <emotional_register>Refinement</emotional_register>
+    <viewport base_width="1440" base_height="900" />
+  </meta>
+
+  <layout><![CDATA[
++------------------------------------------------------------------+
+| [SCAFFOLD: TopNav with job title]                                |
++------------------------------------------------------------------+
+|  [PLACARD: Checklist Panel]                                      |
+|  ☑ Resume                                                        |
+|  ☑ Cover Letter                                                  |
+|  ☑ Contact Info                                                  |
+|  ☐ Custom Answers                                                |
+|                                                                  |
+|  [SCAFFOLD: Custom Questions (if any)]                           |
+|  [Text inputs for job-specific questions]                        |
+|                                                                  |
+|  [STRIKE: Submit Application] [STRIKE: Save Draft]               |
++------------------------------------------------------------------+
+  ]]></layout>
+
+  <elements>
+    <!-- Job Title / Context -->
+    <element id="finalization-job-title" element_type="text" archetype="March" role="heading" layout_role="context-title" x="80" y="160" width="1280" height="40">
+      <content content_type="dynamic" sample_text="Applying to: Senior Product Designer at TechCorp" i18n_label_key="finalization.job.title" />
+      <tokens color_token="--sys-color-worker-ash-base" typography_token="--sys-type-font-work-sans" z_layer="Z-3" />
+      <test_ids primary="finalization-job-title" />
+    </element>
+
+    <!-- Application Checklist -->
+    <element id="finalization-checklist" element_type="region" archetype="Placard" role="region" layout_role="checklist" x="80" y="230" width="560" height="280">
+      <content content_type="static" sample_text="[Checklist of required and optional application components]" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-placardTorn01" z_layer="Z-2" />
+      <test_ids primary="finalization-checklist" />
+    </element>
+
+    <!-- Custom Question Inputs -->
+    <element id="finalization-custom-questions" element_type="region" archetype="Scaffold" role="region" layout_role="custom-inputs" x="80" y="540" width="1280" height="240">
+      <content content_type="dynamic" sample_text="[Job-specific custom questions if required]" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-scaffoldSlab01" z_layer="Z-2" />
+      <test_ids primary="finalization-custom-questions" />
+    </element>
+
+    <!-- Submit Button -->
+    <element id="finalization-submit" element_type="button" archetype="Strike" role="button" layout_role="primary-cta" x="560" y="820" width="200" height="48">
+      <component_mapping design_system_component="KR/Button/Primary" code_component="Strike" variant="filled" size="lg" />
+      <content content_type="static" label="Submit Application" i18n_label_key="finalization.action.submit" />
+      <functionality intent="Submit complete job application." action="POST /applications, navigate to confirmation" />
+      <interaction patterns="click" states="default,hover,pressed,loading" />
+      <tokens color_token="--sys-color-inkGold-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot03" z_layer="Z-3" />
+      <test_ids primary="finalization-submit" />
+    </element>
+
+    <!-- Save Draft Button -->
+    <element id="finalization-save-draft" element_type="button" archetype="Strike" role="button" layout_role="secondary-cta" x="790" y="820" width="200" height="48">
+      <component_mapping design_system_component="KR/Button/Ghost" code_component="Strike" variant="ghost" size="lg" />
+      <content content_type="static" label="Save Draft" i18n_label_key="finalization.action.save-draft" />
+      <functionality intent="Save application without submitting." action="Save draft to profile, navigate back to lookout" />
+      <tokens color_token="--sys-color-worker-ash-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot03" z_layer="Z-3" />
+      <test_ids primary="finalization-save-draft" />
+    </element>
+  </elements>
+
+  <user_flow>
+    <primary_path><![CDATA[
+**Step 1: Review application**
+- User sees job title and company context
+- Checklist shows required and optional components
+- All required items marked as complete
+
+**Step 2: Answer custom questions (if any)**
+- Some jobs require additional questions
+- User fills in text inputs
+- Questions dynamically added based on job
+
+**Step 3: Final review**
+- User reviews all sections:
+  - Resume (with job-specific customization)
+  - Cover letter (customized for job)
+  - Contact info (auto-filled from profile)
+  - Custom answers
+
+**Step 4: Submit or save draft**
+- Click "Submit Application" → apply immediately
+- Click "Save Draft" → save for later editing
+- Success confirmation on submission
+    ]]></primary_path>
+  </user_flow>
+
+  <compliance_score>
+    <score value="375" max="400" percentage="93.75%" grade="A" status="PASS" />
+  </compliance_score>
+  <assets>
+      <slot name="auto_kr_solid_006" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-006;category=atmospheric;layer=atmospheric;aspect=1:1;priority=HIGH
+    </slot>
+    <slot name="auto_kr_solid_013" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-SOLID-013;category=spiritual;layer=spiritual;aspect=16:9;priority=CRITICAL
+    </slot>
+    <slot name="auto_kr_solid_028" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-028;category=resistance;layer=resistance;aspect=2:3;priority=CRITICAL
+    </slot>
+    <slot name="auto_kr_solid_033" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-033;category=cultural;layer=cultural;aspect=1:1;priority=HIGH
+    </slot>
+    <slot name="auto_kr_ui_002" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-002;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_018" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-018;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_028" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-028;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_solid_041" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-041;category=heroes;layer=resistance;aspect=16:9;priority=CRITICAL
+    </slot>
+</assets>
+
+</wireframe>

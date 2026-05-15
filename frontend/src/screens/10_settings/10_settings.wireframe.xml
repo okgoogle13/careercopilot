@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wireframe version="6.0.0" screen_id="settings" design_system="kr-solidarity" mode="solidarity-only">
+  <meta>
+    <title>Settings &amp; Profile Management</title>
+    <description>User preferences, account settings, and profile data management. Structural, minimal UX with grouped settings sections.</description>
+    <user_story>As a user, I can manage my account, preferences, and profile data with clear, organized settings.</user_story>
+    <emotional_register>Archive Vault</emotional_register>
+    <viewport base_width="1440" base_height="900" />
+  </meta>
+
+  <layout><![CDATA[
++------------------------------------------------------------------+
+| [SCAFFOLD: TopNav]                                               |
++------------------------------------------------------------------+
+|  [SCAFFOLD: Sidebar]    | [PLACARD: Settings Content]          |
+|  [MARCH: Settings menu] | [STRIKE: Section titles]             |
+|  - Profile              | [SCAFFOLD: Input fields]             |
+|  - Preferences          | [MARCH: Toggles / selects]           |
+|  - Integrations         | [STRIKE: Save / Reset buttons]       |
+|  - Billing              |                                      |
+|  - Security             |                                      |
++------------------------------------------------------------------+
+  ]]></layout>
+
+  <elements>
+    <!-- Settings Menu / Sidebar -->
+    <element id="settings-menu" element_type="navigation" archetype="March" role="navigation" layout_role="settings-menu" x="80" y="160" width="240" height="700">
+      <component_mapping design_system_component="KR/Menu/March" code_component="Menu" variant="settings" />
+      <content content_type="static" sample_text="Profile | Preferences | Integrations | Billing | Security | Privacy" i18n_label_key="settings.menu" />
+      <interaction patterns="click" states="default,active,hover" on_click="Switch to selected settings section" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot01" z_layer="Z-2" />
+      <test_ids primary="settings-menu" />
+    </element>
+
+    <!-- Profile Section Title -->
+    <element id="settings-profile-title" element_type="text" archetype="Strike" role="heading" layout_role="section-title" x="380" y="160" width="1000" height="40">
+      <content content_type="static" sample_text="Profile Information" i18n_label_key="settings.profile.title" />
+      <tokens color_token="--sys-color-paperWhite" typography_token="--sys-type-font-fraunces" z_layer="Z-3" />
+      <test_ids primary="settings-profile-title" />
+    </element>
+
+    <!-- Name Input -->
+    <element id="settings-name" element_type="input" archetype="Scaffold" role="textbox" layout_role="form-field" x="380" y="230" width="500" height="56">
+      <component_mapping design_system_component="KR/Input/Scaffold" code_component="ScaffoldInput" variant="default" />
+      <content content_type="form-field" label="Full Name" placeholder="Jane Smith" i18n_label_key="settings.profile.name" />
+      <interaction patterns="focus,change,blur" states="default,focus,filled" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-scaffoldSlab01" z_layer="Z-3" />
+      <test_ids primary="settings-name" />
+    </element>
+
+    <!-- Email Input -->
+    <element id="settings-email" element_type="input" archetype="Scaffold" role="textbox" layout_role="form-field" x="380" y="310" width="500" height="56">
+      <component_mapping design_system_component="KR/Input/Scaffold" code_component="ScaffoldInput" variant="default" />
+      <content content_type="form-field" label="Email Address" placeholder="jane@example.com" i18n_label_key="settings.profile.email" />
+      <interaction patterns="focus,change,blur" states="default,focus,filled" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-scaffoldSlab01" z_layer="Z-3" />
+      <test_ids primary="settings-email" />
+    </element>
+
+    <!-- Preferences Section -->
+    <element id="settings-pref-title" element_type="text" archetype="Strike" role="heading" layout_role="section-title" x="380" y="420" width="1000" height="40">
+      <content content_type="static" sample_text="Preferences" i18n_label_key="settings.preferences.title" />
+      <tokens color_token="--sys-color-paperWhite" typography_token="--sys-type-font-fraunces" z_layer="Z-3" />
+      <test_ids primary="settings-pref-title" />
+    </element>
+
+    <!-- Email Notifications Toggle -->
+    <element id="settings-notify-email" element_type="toggle" archetype="March" role="switch" layout_role="preference-toggle" x="380" y="490" width="500" height="40">
+      <component_mapping design_system_component="KR/Toggle/March" code_component="Toggle" variant="default" />
+      <content content_type="static" label="Email notifications" sample_text="Receive updates about new job matches and application status" i18n_label_key="settings.pref.email-notify" />
+      <interaction patterns="click" states="default,checked,unchecked" on_click="Toggle notification preference" />
+      <tokens color_token="--sys-color-worker-ash-base" typography_token="--sys-type-font-work-sans" z_layer="Z-3" />
+      <test_ids primary="settings-notify-email" />
+    </element>
+
+    <!-- Job Match Frequency Select -->
+    <element id="settings-match-frequency" element_type="select" archetype="March" role="combobox" layout_role="form-field" x="380" y="560" width="500" height="56">
+      <component_mapping design_system_component="KR/Select/March" code_component="March" variant="default" />
+      <content content_type="form-field" label="Job match frequency" placeholder="Daily digest" i18n_label_key="settings.pref.match-frequency" />
+      <interaction patterns="click" states="default,open,selected" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot01" z_layer="Z-3" />
+      <test_ids primary="settings-match-frequency" />
+    </element>
+
+    <!-- Save Button -->
+    <element id="settings-save" element_type="button" archetype="Strike" role="button" layout_role="primary-cta" x="380" y="680" width="180" height="48">
+      <component_mapping design_system_component="KR/Button/Primary" code_component="Strike" variant="filled" size="lg" />
+      <content content_type="static" label="Save Changes" i18n_label_key="settings.action.save" />
+      <functionality intent="Save settings changes." action="POST /settings/update, show success message" />
+      <interaction patterns="click" states="default,hover,pressed,loading" />
+      <tokens color_token="--sys-color-inkGold-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot03" z_layer="Z-3" />
+      <test_ids primary="settings-save" />
+    </element>
+
+    <!-- Reset Button -->
+    <element id="settings-reset" element_type="button" archetype="March" role="button" layout_role="secondary-cta" x="580" y="680" width="180" height="48">
+      <component_mapping design_system_component="KR/Button/Ghost" code_component="Strike" variant="ghost" size="lg" />
+      <content content_type="static" label="Reset" i18n_label_key="settings.action.reset" />
+      <functionality intent="Reset form to last saved state." action="Clear form changes, restore previous values" />
+      <tokens color_token="--sys-color-worker-ash-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot03" z_layer="Z-3" />
+      <test_ids primary="settings-reset" />
+    </element>
+  </elements>
+
+  <user_flow>
+    <primary_path><![CDATA[
+**Step 1: Navigate to settings**
+- User clicks settings from main navigation
+- Settings page loads with profile section active
+- Menu shows available sections (Profile, Preferences, etc.)
+
+**Step 2: Select section**
+- User clicks menu item to switch sections
+- Content area updates with relevant fields/settings
+
+**Step 3: Edit settings**
+- User modifies fields:
+  - Profile: name, email, phone
+  - Preferences: notification frequency, job match settings
+  - Security: password change, 2FA, session management
+  - Integrations: connected services
+  - Billing: payment methods, subscription
+
+**Step 4: Save changes**
+- Click "Save Changes" button
+- Settings submitted to backend
+- Success message shown
+- Settings persist across sessions
+
+**Step 5: Reset (optional)**
+- Click "Reset" to discard unsaved changes
+- Form reverts to last saved state
+    ]]></primary_path>
+  </user_flow>
+
+  <compliance_score>
+    <score value="380" max="400" percentage="95%" grade="A" status="PASS" />
+  </compliance_score>
+  <assets>
+      <slot name="auto_kr_solid_007" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-007;category=atmospheric;layer=atmospheric;aspect=1:1;priority=HIGH
+    </slot>
+    <slot name="auto_kr_solid_014" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-SOLID-014;category=spiritual;layer=spiritual;aspect=16:9;priority=CRITICAL
+    </slot>
+    <slot name="auto_kr_solid_029" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-029;category=resistance;layer=resistance;aspect=2:3;priority=CRITICAL
+    </slot>
+    <slot name="auto_kr_solid_034" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-034;category=cultural;layer=cultural;aspect=16:9;priority=HIGH
+    </slot>
+    <slot name="auto_kr_ui_003" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-003;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_019" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-019;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_029" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-029;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_solid_042" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-042;category=heroes;layer=resistance;aspect=16:9;priority=CRITICAL
+    </slot>
+</assets>
+
+</wireframe>

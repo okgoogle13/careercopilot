@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wireframe version="6.0.0" screen_id="analysis" design_system="kr-solidarity" mode="solidarity-only">
+  <meta>
+    <title>Resume Analysis Results</title>
+    <description>High-clarity technical review with ATS score, skills gap analysis, and actionable recommendations. Data-dense layout with visual hierarchy and detailed feedback.</description>
+    <user_story>As a user, I can see detailed analysis of my resume strengths and improvement areas with clear scoring and recommendations.</user_story>
+    <emotional_register>Revelation</emotional_register>
+    <viewport base_width="1440" base_height="900" />
+  </meta>
+
+  <layout><![CDATA[
++------------------------------------------------------------------+
+| [SCAFFOLD: TopNav with progress]                                 |
++------------------------------------------------------------------+
+|  [STRIKE: H1: Resume Analysis]                                   |
+|                                                                  |
+|  [PLACARD: Score Card Grid — 3 cols]                            |
+|  +-----+  +-----+  +-----+                                       |
+|  |ATS  |  |Skills|  |Format|                                    |
+|  |Score|  |Gap   |  |Check |                                    |
+|  +-----+  +-----+  +-----+                                       |
+|                                                                  |
+|  [PLACARD: Detailed Analysis — Tabs]                            |
+|  +------------------------------------------+                   |
+|  | [MARCH: Keyword Match] [MARCH: ATS]     |                   |
+|  | [Scaffold: Keywords table]               |                   |
+|  +------------------------------------------+                   |
+|                                                                  |
+|  [STRIKE: Action: View recommendations / Download report]       |
++------------------------------------------------------------------+
+  ]]></layout>
+
+  <elements>
+    <!-- Main Title -->
+    <element id="analysis-title" element_type="text" archetype="Strike" role="heading" layout_role="screen-title" x="80" y="160" width="1280" height="60">
+      <content content_type="static" sample_text="Resume Analysis" i18n_label_key="analysis.title" />
+      <tokens color_token="--sys-color-paperWhite" typography_token="--sys-type-font-fraunces" z_layer="Z-3" />
+      <accessibility heading_level="1" />
+      <test_ids primary="analysis-title" />
+    </element>
+
+    <!-- ATS Score Card -->
+    <element id="score-ats" element_type="card" archetype="Placard" role="article" layout_role="metric-card" x="80" y="260" width="280" height="160">
+      <component_mapping design_system_component="KR/Card/Placard" code_component="Placard" variant="metric" />
+      <content content_type="dynamic" label="ATS Compatibility" sample_text="ATS Score: 82/100" i18n_label_key="analysis.score.ats" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-placardTorn01" z_layer="Z-2" />
+      <test_ids primary="analysis-card-ats" />
+    </element>
+
+    <!-- Skills Gap Card -->
+    <element id="score-skills" element_type="card" archetype="Placard" role="article" layout_role="metric-card" x="400" y="260" width="280" height="160">
+      <component_mapping design_system_component="KR/Card/Placard" code_component="Placard" variant="metric" />
+      <content content_type="dynamic" label="In-Demand Skills" sample_text="5 skills missing" i18n_label_key="analysis.score.skills" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-placardTorn01" z_layer="Z-2" />
+      <test_ids primary="analysis-card-skills" />
+    </element>
+
+    <!-- Format Score Card -->
+    <element id="score-format" element_type="card" archetype="Placard" role="article" layout_role="metric-card" x="720" y="260" width="280" height="160">
+      <component_mapping design_system_component="KR/Card/Placard" code_component="Placard" variant="metric" />
+      <content content_type="dynamic" label="Format &amp; Structure" sample_text="Good: Clear sections" i18n_label_key="analysis.score.format" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-placardTorn01" z_layer="Z-2" />
+      <test_ids primary="analysis-card-format" />
+    </element>
+
+    <!-- Analysis Tabs -->
+    <element id="analysis-tabs" element_type="tablist" archetype="March" role="tablist" layout_role="tab-navigation" x="80" y="460" width="1280" height="40">
+      <component_mapping design_system_component="KR/Tabs/March" code_component="TabList" variant="default" />
+      <content content_type="static" sample_text="Keyword Match | ATS Analysis | Recommendations" />
+      <interaction patterns="click" states="default,selected,hover" on_click="Switch tab content" />
+      <tokens color_token="--sys-color-worker-ash-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot01" z_layer="Z-3" />
+      <test_ids primary="analysis-tabs" />
+    </element>
+
+    <!-- Keywords Table -->
+    <element id="analysis-keywords" element_type="table" archetype="Scaffold" role="table" layout_role="data-table" x="80" y="520" width="1280" height="280">
+      <component_mapping design_system_component="KR/Table/Scaffold" code_component="DataTable" variant="keyword-analysis" />
+      <content content_type="dynamic" sample_text="[Table: Keyword presence analysis with Found/Missing columns]" i18n_label_key="analysis.keywords" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-mono" shape_token="--sys-shape-scaffoldSlab01" z_layer="Z-2" />
+      <accessibility role="table" aria_label="Keyword analysis table" />
+      <test_ids primary="analysis-keywords" />
+    </element>
+
+    <!-- Action Buttons -->
+    <element id="action-recommend" element_type="button" archetype="Strike" role="button" layout_role="primary-cta" x="80" y="840" width="200" height="48">
+      <component_mapping design_system_component="KR/Button/Primary" code_component="Strike" variant="filled" size="lg" />
+      <content content_type="static" label="View Recommendations" i18n_label_key="analysis.action.recommend" />
+      <functionality intent="Navigate to personalized recommendations based on analysis." action="Show recommendations drawer or redirect to recommendations screen" />
+      <tokens color_token="--sys-color-inkGold-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot03" z_layer="Z-3" />
+      <test_ids primary="analysis-action-recommend" />
+    </element>
+
+    <!-- Download Report Button -->
+    <element id="action-download" element_type="button" archetype="Strike" role="button" layout_role="secondary-cta" x="310" y="840" width="200" height="48">
+      <component_mapping design_system_component="KR/Button/Ghost" code_component="Strike" variant="ghost" size="lg" />
+      <content content_type="static" label="Download Report" i18n_label_key="analysis.action.download" />
+      <functionality intent="Download analysis report as PDF." action="Generate PDF report, trigger download" />
+      <tokens color_token="--sys-color-worker-ash-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot03" z_layer="Z-3" />
+      <test_ids primary="analysis-action-download" />
+    </element>
+  </elements>
+
+  <user_flow>
+    <primary_path><![CDATA[
+**Step 1: Analysis loads**
+- User navigates from ingestion after resume parses
+- Three score cards display prominently (ATS, Skills, Format)
+- Visual indicators (green/yellow/red) show performance
+
+**Step 2: Review scores**
+- User reads headline scores
+- Clicks individual cards for detailed breakdown
+
+**Step 3: Explore details**
+- Tab between different analysis sections
+- Keyword Match tab: Shows found/missing keywords
+- ATS Analysis tab: Parsing details, format issues
+- Recommendations tab: Actionable improvements
+
+**Step 4: Take action**
+- Click "View Recommendations" → Navigate to recommendations screen
+- Click "Download Report" → PDF report generated and downloaded
+- Recommendations are prioritized by impact
+    ]]></primary_path>
+  </user_flow>
+
+  <states>
+    <loading><![CDATA[
+- Score cards show skeleton blocks (pulsing)
+- Table shows skeleton rows
+- Tabs disabled during load
+    ]]></loading>
+    <complete><![CDATA[
+- All scores and data visible
+- Tabs interactive and clickable
+- Action buttons enabled
+    ]]></complete>
+  </states>
+
+  <compliance_score>
+    <score value="385" max="400" percentage="96.25%" grade="A" status="PASS" />
+  </compliance_score>
+  <assets>
+      <slot name="auto_kr_solid_002" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-002;category=atmospheric;layer=atmospheric;aspect=1:1;priority=HIGH
+    </slot>
+    <slot name="auto_kr_solid_009" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-009;category=atmospheric;layer=atmospheric;aspect=1:1;priority=HIGH
+    </slot>
+    <slot name="auto_kr_solid_024" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-024;category=resistance;layer=resistance;aspect=1:1;priority=CRITICAL
+    </slot>
+    <slot name="auto_kr_solid_006" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-006;category=atmospheric;layer=atmospheric;aspect=1:1;priority=HIGH
+    </slot>
+    <slot name="auto_kr_solid_040" z_layer="Z-0" token="--sys-color-charcoalBackground-base">
+      TODO[asset] asset_id=KR-SOLID-040;category=substrate;layer=substrate;aspect=3:2;priority=HIGH
+    </slot>
+    <slot name="auto_kr_ui_012" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-012;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_011" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-011;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_024" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-024;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_035" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-035;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_solid_043" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-043;category=heroes;layer=cultural;aspect=16:9;priority=CRITICAL
+    </slot>
+</assets>
+
+</wireframe>

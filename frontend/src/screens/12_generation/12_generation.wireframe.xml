@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wireframe version="6.0.0" screen_id="generation" design_system="kr-solidarity" mode="solidarity-only">
+  <meta>
+    <title>AI Document Generation (KSC / Cover Letter)</title>
+    <description>Dedicated workbench for AI-assisted document generation. Captures user inputs, displays real-time generation progress, and presents the final generated output for refinement.</description>
+    <user_story>As a user, I can generate cover letters and selection criteria by providing context and watching the AI draft my document.</user_story>
+    <emotional_register>Empowerment</emotional_register>
+    <viewport base_width="1440" base_height="900" />
+  </meta>
+
+  <layout><![CDATA[
++------------------------------------------------------------------+
+| [SCAFFOLD: TopNav with generation context]                       |
++------------------------------------------------------------------+
+| [SCAFFOLD: Input Pane]  | [SUBSTRATE: Output Pane]            |
+| [Form inputs for Job]   | [Generation Progress/Status]        |
+| [Form inputs for User]  | [Live drafted document preview]     |
+|                         |                                     |
+| [STRIKE: Generate]      | [MARCH: Actions (Save/Export/Edit)] |
++------------------------------------------------------------------+
+  ]]></layout>
+
+  <elements>
+    <!-- Generation Title -->
+    <element id="generation-title" element_type="text" archetype="Strike" role="heading" layout_role="page-title" x="80" y="160" width="600" height="60">
+      <component_mapping design_system_component="KR/Typography/H2" code_component="Typography" variant="h2" />
+      <content content_type="dynamic" sample_text="Generate Cover Letter" i18n_label_key="generation.title" />
+      <tokens color_token="--sys-color-paperWhite" typography_token="--sys-type-font-fraunces" z_layer="Z-3" />
+      <test_ids primary="generation-title" />
+    </element>
+
+    <!-- Context Input Form -->
+    <element id="generation-input-form" element_type="form" archetype="Scaffold" role="form" layout_role="generation-inputs" x="80" y="240" width="640" height="600">
+      <component_mapping design_system_component="KR/Form/ScaffoldForm" code_component="ScaffoldForm" variant="generation-context" />
+      <content content_type="form-field" sample_text="[Job Description Link, Tone Selectors, Source Profiles]" i18n_label_key="generation.inputs" />
+      <functionality intent="Collect context required to prompt the Genkit flow." action="Trigger generation mutation" />
+      <interaction patterns="type,select" states="default,focus,disabled" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-scaffoldSlab01" z_layer="Z-2" />
+      <test_ids primary="generation-input-form" />
+    </element>
+
+    <!-- Generate Action -->
+    <element id="generation-action" element_type="button" archetype="Strike" role="button" layout_role="trigger-generation" x="80" y="860" width="640" height="60">
+      <component_mapping design_system_component="KR/Button/Strike" code_component="StrikeButton" variant="primary" />
+      <content content_type="static" sample_text="Generate Document" i18n_label_key="generation.action.generate" />
+      <interaction patterns="click" states="default,hover,active,disabled,loading" on_click="Start document generation" />
+      <tokens color_token="--sys-color-solidarityRed-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot03" z_layer="Z-3" />
+      <test_ids primary="generation-action" />
+    </element>
+
+    <!-- Output Region (Progress or Result) -->
+    <element id="generation-output" element_type="region" archetype="Substrate" role="region" layout_role="generation-results" x="780" y="240" width="600" height="600">
+      <component_mapping design_system_component="KR/Preview/GenerationResult" code_component="GenerationResult" variant="live-draft" />
+      <content content_type="dynamic" sample_text="[Loading spinner / Chunked text appearing / Final result]" i18n_label_key="generation.output" />
+      <interaction patterns="none" states="idle,generating,complete,error" />
+      <tokens color_token="--sys-color-paperWhite" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-substrateTile02" z_layer="Z-1" />
+      <test_ids primary="generation-output" />
+    </element>
+
+    <!-- Post-Generation Actions -->
+    <element id="generation-post-actions" element_type="button-group" archetype="March" role="group" layout_role="post-generation-actions" x="780" y="860" width="600" height="60">
+      <component_mapping design_system_component="KR/ButtonGroup/March" code_component="ButtonGroup" variant="generation-actions" />
+      <content content_type="static" sample_text="Refine | Open in Editor | Download" />
+      <interaction patterns="click" states="default,hidden" on_click="Handle post-generation flow" />
+      <tokens color_token="--sys-color-worker-ash-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-pebble01" z_layer="Z-3" />
+      <test_ids primary="generation-post-actions" />
+    </element>
+  </elements>
+
+  <user_flow>
+    <primary_path><![CDATA[
+**Step 1: Setup context**
+- User opens the generator (KSC or Cover Letter)
+- User fills in or confirms the target job details
+- User selects which profile/resume to use as source material
+
+**Step 2: Trigger generation**
+- User clicks 'Generate'
+- Input pane locks
+- Output pane transitions from idle to generating state
+
+**Step 3: Monitor progress**
+- Progress indicators show AI analyzing and drafting
+- Result pane populates with the constructed document
+
+**Step 4: Review and transition**
+- Generation completes
+- User can Refine (re-prompt), Open in Editor (transition to 08_workbench), or Download directly
+    ]]></primary_path>
+  </user_flow>
+
+  <compliance_score>
+    <score value="385" max="400" percentage="96.25%" grade="A+" status="PASS" />
+  </compliance_score>
+  <assets>
+    <slot name="auto_kr_solid_047" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-047;category=atmospheric;layer=atmospheric;aspect=16:9;priority=HIGH
+    </slot>
+  </assets>
+
+</wireframe>
