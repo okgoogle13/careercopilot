@@ -31,10 +31,8 @@ concurrency:
 env:
   NODE_VERSION: "20"
   PYTHON_VERSION: "3.13"
-  PYTHONUNBUFFERED: "1"
   PYTHONDONTWRITEBYTECODE: "1"
   PIP_DISABLE_PIP_VERSION_CHECK: "1"
-  GIT_LFS_SKIP_SMUDGE: "1"
 
 jobs:
   changes:
@@ -55,6 +53,7 @@ jobs:
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
           fetch-depth: 2
+          lfs: true
       - name: Calculate paths
         id: filter
         uses: dorny/paths-filter@v3 # v3.0.2
@@ -100,6 +99,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          lfs: true
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v4
         with:
@@ -120,6 +121,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4 # v4.1.7
+        with:
+          lfs: true
       - name: Enable Corepack for Yarn 4+
         run: corepack enable
       - name: Setup Node.js
@@ -141,6 +144,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4 # v4.1.7
+        with:
+          lfs: true
       - name: Enable Corepack for Yarn 4+
         run: corepack enable
       - name: Setup Node.js
@@ -168,6 +173,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          lfs: true
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -200,6 +207,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          lfs: true
       - name: Run docs policy check
         run: ./scripts/check-docs.sh
 
@@ -211,6 +220,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          lfs: true
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -356,6 +367,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          lfs: true
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -427,6 +440,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4 # v4.1.7
+        with:
+          lfs: true
       - name: Download frontend artifact
         uses: actions/download-artifact@v4
         with:
@@ -521,6 +536,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          lfs: true
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -586,6 +603,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          lfs: true
 
       - name: Setup Backend Environment
         uses: ./.github/actions/setup-backend
@@ -651,6 +670,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          lfs: true
 
       - name: Download frontend artifact
         if: needs.frontend-build.result == 'success'

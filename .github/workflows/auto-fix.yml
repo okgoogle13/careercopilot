@@ -37,7 +37,6 @@ concurrency:
 env:
   PYTHON_VERSION: "3.13"
   NODE_VERSION: "20"  # Standards established in CI.yml
-  GIT_LFS_SKIP_SMUDGE: "1"
 
 jobs:
   auto-fix-enhanced:
@@ -51,6 +50,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
+          lfs: true
 
       - name: Clean up stale git locks
         if: steps.git-check.outputs.changes_made == 'true'
