@@ -223,3 +223,10 @@ frontend/component-library.csv
 
 docs/PROJECT_INDEX.md
 docs/REPO_COMPLETE_FILELIST.txt
+
+# Developer screenshots - never commit to root
+/component_gallery_*.png
+/dashboard-canonical.png
+/landing-page-*.png
+/prototype-index.png
+/style_guide_*.png
