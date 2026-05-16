@@ -3,7 +3,7 @@
  * Handles job application tracking and management
  */
 
-import { axiosInstance } from '@/api/axiosConfig';
+import { BaseApiService } from '@/api/baseApiService';
 
 export type ApplicationStatus =
   | 'draft'
@@ -91,19 +91,17 @@ export interface BulkUpdate {
 
 const APPLICATIONS_BASE_PATH = '/applications';
 
-export const applicationService = {
+class ApplicationService extends BaseApiService {
+  constructor() {
+    super({ basePath: APPLICATIONS_BASE_PATH });
+  }
+
   /**
    * Create new application
    */
   async createApplication(data: ApplicationCreate): Promise<Application> {
-    try {
-      const response = await axiosInstance.post(`${APPLICATIONS_BASE_PATH}/`, data);
-      return response.data;
-    } catch (error) {
-      console.error('Create application error:', error);
-      throw error;
-    }
-  },
+    return this.post<Application, ApplicationCreate>('', data);
+  }
 
   /**
    * Get all applications for user
@@ -112,58 +110,31 @@ export const applicationService = {
     userId?: string,
     filters?: { status?: ApplicationStatus; company?: string }
   ): Promise<Application[]> {
-    try {
-      const response = await axiosInstance.get(`${APPLICATIONS_BASE_PATH}/`, {
-        params: { userId, ...filters },
-      });
-      return response.data;
-    } catch (error) {
-      console.error('List applications error:', error);
-      throw error;
-    }
-  },
+    return this.get<Application[]>('', {
+      params: { userId, ...filters },
+    });
+  }
 
   /**
    * Get specific application
    */
   async getApplication(applicationId: string): Promise<Application> {
-    try {
-      const response = await axiosInstance.get(`${APPLICATIONS_BASE_PATH}/${applicationId}`);
-      return response.data;
-    } catch (error) {
-      console.error('Get application error:', error);
-      throw error;
-    }
-  },
+    return this.get<Application>(applicationId);
+  }
 
   /**
    * Update application
    */
   async updateApplication(applicationId: string, updates: ApplicationUpdate): Promise<Application> {
-    try {
-      const response = await axiosInstance.put(
-        `${APPLICATIONS_BASE_PATH}/${applicationId}`,
-        updates
-      );
-      return response.data;
-    } catch (error) {
-      console.error('Update application error:', error);
-      throw error;
-    }
-  },
+    return this.put<Application, ApplicationUpdate>(applicationId, updates);
+  }
 
   /**
    * Delete application
    */
   async deleteApplication(applicationId: string): Promise<{ success: boolean }> {
-    try {
-      const response = await axiosInstance.delete(`${APPLICATIONS_BASE_PATH}/${applicationId}`);
-      return response.data;
-    } catch (error) {
-      console.error('Delete application error:', error);
-      throw error;
-    }
-  },
+    return this.delete<{ success: boolean }>(applicationId);
+  }
 
   /**
    * Bulk update applications
@@ -172,33 +143,18 @@ export const applicationService = {
     applicationIds: string[],
     updates: BulkUpdate
   ): Promise<{ updated: number; success: boolean }> {
-    try {
-      const response = await axiosInstance.post(`${APPLICATIONS_BASE_PATH}/bulk-update`, {
-        applicationIds,
-        updates,
-      });
-      return response.data;
-    } catch (error) {
-      console.error('Bulk update error:', error);
-      throw error;
-    }
-  },
+    return this.post<
+      { updated: number; success: boolean },
+      { applicationIds: string[]; updates: BulkUpdate }
+    >('bulk-update', { applicationIds, updates });
+  }
 
   /**
    * Add contact to application
    */
   async addContact(applicationId: string, contact: Contact): Promise<Application> {
-    try {
-      const response = await axiosInstance.post(
-        `${APPLICATIONS_BASE_PATH}/${applicationId}/contacts`,
-        contact
-      );
-      return response.data;
-    } catch (error) {
-      console.error('Add contact error:', error);
-      throw error;
-    }
-  },
+    return this.post<Application, Contact>(`${applicationId}/contacts`, contact);
+  }
 
   /**
    * Schedule interview
@@ -207,46 +163,28 @@ export const applicationService = {
     applicationId: string,
     interview: InterviewSchedule
   ): Promise<Application> {
-    try {
-      const response = await axiosInstance.post(
-        `${APPLICATIONS_BASE_PATH}/${applicationId}/interviews`,
-        interview
-      );
-      return response.data;
-    } catch (error) {
-      console.error('Schedule interview error:', error);
-      throw error;
-    }
-  },
+    return this.post<Application, InterviewSchedule>(`${applicationId}/interviews`, interview);
+  }
 
   /**
    * Get applications by status
    */
   async getApplicationsByStatus(userId: string, status: ApplicationStatus): Promise<Application[]> {
-    try {
-      const response = await axiosInstance.get(`${APPLICATIONS_BASE_PATH}/`, {
-        params: { userId, status },
-      });
-      return response.data.applications;
-    } catch (error) {
-      console.error('Get applications by status error:', error);
-      throw error;
-    }
-  },
+    const response = await this.get<{ applications: Application[] }>('', {
+      params: { userId, status },
+    });
+    return response.applications;
+  }
 
   /**
    * Export applications as CSV
    */
   async exportApplications(userId: string): Promise<Blob> {
-    try {
-      const response = await axiosInstance.get(`${APPLICATIONS_BASE_PATH}/export`, {
-        params: { userId },
-        responseType: 'blob',
-      });
-      return response.data;
-    } catch (error) {
-      console.error('Export applications error:', error);
-      throw error;
-    }
-  },
-};
+    return this.get<Blob>('export', {
+      params: { userId },
+      responseType: 'blob',
+    });
+  }
+}
+
+export const applicationService = new ApplicationService();
