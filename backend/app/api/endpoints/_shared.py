@@ -69,6 +69,36 @@ async def run_endpoint_operation(
         ) from exc
 
 
+async def run_endpoint(
+    operation: Callable[[], Awaitable[T]],
+    failure_message: str,
+    *,
+    bad_request_exceptions: tuple[type[Exception], ...] = (),
+    bad_request_detail: Callable[[Exception], str] | None = None,
+    logger: Any | None = None,
+    include_exception_detail: bool = False,
+) -> T:
+    """Run an endpoint operation with shared exception mapping and HTTPException passthrough."""
+    try:
+        return await operation()
+    except HTTPException:
+        raise
+    except bad_request_exceptions as exc:
+        detail = bad_request_detail(exc) if bad_request_detail else str(exc)
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=detail,
+        ) from exc
+    except Exception as exc:
+        if logger is not None:
+            logger.error("%s: %s", failure_message, exc, exc_info=True)
+        detail = f"{failure_message}: {exc!s}" if include_exception_detail else failure_message
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=detail,
+        ) from exc
+
+
 async def collect_uploaded_text(
     files: list[UploadFile],
     *,
