@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { BulletMetricsSuggestor } from '../BulletMetricsSuggestor';
-import type { ImprovedBullet } from '../../../services/aiInterface';
+import type { ImprovedBullet } from '../../../services/aiTextProcessing';
 
 const sampleBullets: ImprovedBullet[] = [
   {

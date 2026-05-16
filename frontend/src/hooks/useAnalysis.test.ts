@@ -5,7 +5,7 @@ const mockAnalyzeJobDescription = jest.fn();
 const mockAnalyzeJobFromUrl = jest.fn();
 const mockGenerateIntelligencePackage = jest.fn();
 
-(jest as any).unstable_mockModule('@/services/aiInterface', () => ({
+(jest as any).unstable_mockModule('@/services/aiTextProcessing', () => ({
   analyzeJobDescription: mockAnalyzeJobDescription,
   analyzeJobFromUrl: mockAnalyzeJobFromUrl,
   generateIntelligencePackage: mockGenerateIntelligencePackage,
