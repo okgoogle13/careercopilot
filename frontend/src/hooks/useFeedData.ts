@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { analyticsService } from '../api/analyticsService';
 
-export type GalleryFeedItemType = 'opportunity' | 'insight' | 'alert';
+export type FeedItemType = 'opportunity' | 'insight' | 'alert';
 
-export interface GalleryFeedItem {
+export interface FeedItemBase {
   id: string;
-  type: GalleryFeedItemType;
+  type: FeedItemType;
   title: string;
   timestamp: string;
   description: string;
@@ -15,37 +15,44 @@ export interface GalleryFeedItem {
   };
 }
 
-export function useGalleryData() {
-  const fallback = useMemo<GalleryFeedItem[]>(
-    () => [
-      {
-        id: 'feed-1',
-        type: 'opportunity',
-        title: 'Senior Product Designer',
-        timestamp: 'Just now',
-        description: 'New role aligned with your portfolio focus. Strong match for design systems.',
-        meta: { company: 'KeralaRage Labs', matchScore: 92 },
-      },
-      {
-        id: 'feed-2',
-        type: 'insight',
-        title: 'Portfolio signal improvement',
-        timestamp: '12 min ago',
-        description: 'Your system coverage increased by 8% after the last component update.',
-        meta: { matchScore: 88 },
-      },
-      {
-        id: 'feed-3',
-        type: 'alert',
-        title: 'ATS keyword drift',
-        timestamp: '1 hr ago',
-        description: 'Three of your core keywords were removed from the latest resume draft.',
-      },
-    ],
-    []
+interface UseFeedDataOptions<T extends FeedItemBase> {
+  endpoint: string;
+  fallback?: T[];
+}
+
+export function useFeedData<T extends FeedItemBase>({ endpoint, fallback: fallbackOverride }: UseFeedDataOptions<T>) {
+  const fallback = useMemo<T[]>(
+    () =>
+      fallbackOverride ??
+      ([
+        {
+          id: 'feed-1',
+          type: 'opportunity',
+          title: 'Senior Product Designer',
+          timestamp: 'Just now',
+          description: 'New role aligned with your portfolio focus. Strong match for design systems.',
+          meta: { company: 'KeralaRage Labs', matchScore: 92 },
+        },
+        {
+          id: 'feed-2',
+          type: 'insight',
+          title: 'Portfolio signal improvement',
+          timestamp: '12 min ago',
+          description: 'Your system coverage increased by 8% after the last component update.',
+          meta: { matchScore: 88 },
+        },
+        {
+          id: 'feed-3',
+          type: 'alert',
+          title: 'ATS keyword drift',
+          timestamp: '1 hr ago',
+          description: 'Three of your core keywords were removed from the latest resume draft.',
+        },
+      ] as T[]),
+    [fallbackOverride]
   );
 
-  const [feed, setFeed] = useState<GalleryFeedItem[]>(fallback);
+  const [feed, setFeed] = useState<T[]>(fallback);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -57,7 +64,7 @@ export function useGalleryData() {
         const stats = await analyticsService.getDashboardStats();
         if (!active) return;
 
-        const items: GalleryFeedItem[] = [];
+        const items: T[] = [];
 
         for (const job of stats.topMatchingJobs ?? []) {
           items.push({
@@ -67,7 +74,7 @@ export function useGalleryData() {
             timestamp: 'Recently',
             description: 'Top matching role based on your profile signals.',
             meta: { company: job.company, matchScore: job.matchScore },
-          });
+          } as T);
         }
 
         for (const app of stats.recentApplications ?? []) {
@@ -78,7 +85,7 @@ export function useGalleryData() {
             timestamp: app.date,
             description: `Recent application update: ${app.status}`,
             meta: { company: app.company },
-          });
+          } as T);
         }
 
         setFeed(items.length > 0 ? items : fallback);
@@ -97,7 +104,7 @@ export function useGalleryData() {
     return () => {
       active = false;
     };
-  }, [fallback]);
+  }, [endpoint, fallback]);
 
   return { feed, isLoading, error };
 }
