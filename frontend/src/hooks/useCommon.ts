@@ -97,7 +97,7 @@ export interface UseAsyncOptions<T> {
   onError?: (error: Error) => void;
 }
 
-export function useAsync<T = any>(options: UseAsyncOptions<T> = {}) {
+export function useAsync<T = unknown>(options: UseAsyncOptions<T> = {}) {
   const { onSuccess, onError } = options;
 
   const [isLoading, setIsLoading] = useState(false);
