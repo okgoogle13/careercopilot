@@ -20,7 +20,10 @@ interface UseFeedDataOptions<T extends FeedItemBase> {
   fallback?: T[];
 }
 
-export function useFeedData<T extends FeedItemBase>({ endpoint, fallback: fallbackOverride }: UseFeedDataOptions<T>) {
+export function useFeedData<T extends FeedItemBase>({
+  endpoint,
+  fallback: fallbackOverride,
+}: UseFeedDataOptions<T>) {
   const fallback = useMemo<T[]>(
     () =>
       fallbackOverride ??
@@ -30,7 +33,8 @@ export function useFeedData<T extends FeedItemBase>({ endpoint, fallback: fallba
           type: 'opportunity',
           title: 'Senior Product Designer',
           timestamp: 'Just now',
-          description: 'New role aligned with your portfolio focus. Strong match for design systems.',
+          description:
+            'New role aligned with your portfolio focus. Strong match for design systems.',
           meta: { company: 'KeralaRage Labs', matchScore: 92 },
         },
         {
