@@ -8,7 +8,7 @@ import logging
 
 from fastapi import APIRouter, HTTPException
 
-from app.api.endpoints._shared import run_endpoint_operation
+from app.api.endpoints._shared import run_endpoint
 
 logger = logging.getLogger(__name__)
 
@@ -44,16 +44,8 @@ async def get_firebase_config():
 
         return config
 
-    try:
-        return await run_endpoint_operation(
-            operation,
-            "Failed to retrieve Firebase configuration",
-            logger=logger,
-        )
-    except HTTPException as exc:
-        if exc.status_code == 500:
-            raise HTTPException(
-                status_code=500,
-                detail="Failed to retrieve Firebase configuration",
-            ) from exc
-        raise
+    return await run_endpoint(
+        operation,
+        "Failed to retrieve Firebase configuration",
+        logger=logger,
+    )

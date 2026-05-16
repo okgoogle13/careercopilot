@@ -9,7 +9,7 @@ from datetime import datetime
 
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 
-from app.api.endpoints._shared import collect_uploaded_text, run_endpoint_operation
+from app.api.endpoints._shared import collect_uploaded_text, run_endpoint
 from app.core.dependencies import get_current_user
 from app.core.firebase import get_firestore
 from app.genkit_flows.ingestion_flow import ingest_career_history
@@ -84,16 +84,8 @@ async def ingest_career_documents(
 
         return career_db
 
-    try:
-        return await run_endpoint_operation(
-            operation,
-            "Career ingestion failed",
-            logger=logger,
-        )
-    except HTTPException as exc:
-        if exc.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail="AI processing failed: Career ingestion failed",
-            ) from exc
-        raise
+    return await run_endpoint(
+        operation,
+        "AI processing failed: Career ingestion failed",
+        logger=logger,
+    )

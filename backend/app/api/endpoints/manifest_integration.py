@@ -10,6 +10,7 @@ from pathlib import Path
 
 from fastapi import APIRouter, File, HTTPException, UploadFile
 
+from app.api.endpoints._shared import run_endpoint
 from app.schemas.manifest_integration import (
     AssetIntegrationTestResult,
     BackfillAssetRequest,
@@ -364,7 +365,7 @@ async def run_integration_test(asset_id: str) -> AssetIntegrationTestResult:
 
     start_time = time.time()
 
-    try:
+    async def operation() -> AssetIntegrationTestResult:
         # Find asset in manifest
         manifest = load_manifest()
         asset = None
@@ -418,12 +419,18 @@ async def run_integration_test(asset_id: str) -> AssetIntegrationTestResult:
             execution_time_ms=(time.time() - start_time) * 1000,
         )
 
-    except Exception as e:
+    try:
+        return await run_endpoint(
+            operation,
+            "Integration test failed",
+            include_exception_detail=True,
+        )
+    except HTTPException as exc:
         return AssetIntegrationTestResult(
             asset_id=asset_id,
             test_name="component_integration",
             passed=False,
-            error_message=str(e),
+            error_message=exc.detail,
             execution_time_ms=(time.time() - start_time) * 1000,
         )
 
@@ -501,7 +508,7 @@ async def import_manifest(file: UploadFile = File(...)):
     """Import manifest from uploaded JSON file."""
     print(f"\n📥 Importing manifest from {file.filename}")
 
-    try:
+    async def operation() -> dict[str, object]:
         contents = await file.read()
         imported_manifest = json.loads(contents)
 
@@ -525,8 +532,11 @@ async def import_manifest(file: UploadFile = File(...)):
                 "message": "Manifest imported",
                 "asset_count": len(imported_manifest.get("assets", [])),
             }
-        else:
-            raise Exception("Failed to save imported manifest")
+        raise Exception("Failed to save imported manifest")
 
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Import failed: {e!s}")
+    return await run_endpoint(
+        operation,
+        "Import failed",
+        bad_request_exceptions=(Exception,),
+        bad_request_detail=lambda exc: f"Import failed: {exc!s}",
+    )

@@ -3,7 +3,7 @@ from typing import Any, Literal
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 
-from app.api.endpoints._shared import run_endpoint_operation
+from app.api.endpoints._shared import run_endpoint
 from app.core.dependencies import get_current_user
 from app.services.ingestion import IngestionService
 
@@ -35,14 +35,9 @@ async def upload_artifact(
 
         return {"message": f"Successfully ingested {file.filename} as {source_type}"}
 
-    try:
-        return await run_endpoint_operation(
-            operation,
-            "Internal server error during ingestion",
-            bad_request_exceptions=(ValueError,),
-            logger=logger,
-        )
-    except HTTPException as exc:
-        if exc.status_code == 500:
-            raise HTTPException(status_code=500, detail="Internal server error during ingestion")
-        raise
+    return await run_endpoint(
+        operation,
+        "Internal server error during ingestion",
+        bad_request_exceptions=(ValueError,),
+        logger=logger,
+    )
