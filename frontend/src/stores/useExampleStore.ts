@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { AIResponse } from '../types/ai';
-import apiClient from '../utils/apiClient';
+import { axiosInstance } from '../api/axiosConfig';
 
 interface ExampleState {
   data: AIResponse | null;
@@ -16,8 +16,8 @@ const useExampleStore = create<ExampleState>((set) => ({
   fetchExampleData: async () => {
     set({ isLoading: true, error: null });
     try {
-      const resp = await apiClient.get<AIResponse>('/api/v1/example-hello');
-      set({ data: resp, isLoading: false });
+      const resp = await axiosInstance.get<AIResponse>('/api/v1/example-hello');
+      set({ data: resp.data, isLoading: false });
     } catch (err: any) {
       const message = err?.response?.data?.detail || err.message || 'Unknown error';
       set({ error: String(message), isLoading: false });
