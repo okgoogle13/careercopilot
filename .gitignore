@@ -220,3 +220,6 @@ backend/logs/
 # Temp outputs
 frontend/component-inventory.json
 frontend/component-library.csv
+
+docs/PROJECT_INDEX.md
+docs/REPO_COMPLETE_FILELIST.txt
