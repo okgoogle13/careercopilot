@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wireframe
+  version="6.0.0"
+  screen_id="landing"
+  design_system="kr-solidarity"
+  mode="solidarity-only"
+>
+
+  <meta>
+    <title>Landing Page Hero</title>
+    <description>Primary marketing entry point with defiant hero statement, dual CTAs, and feature discovery strip. Establishes brand identity and value proposition.</description>
+    <user_story>As a job seeker, I immediately understand CareerCopilot's value and can register or learn more without friction.</user_story>
+    <emotional_register>Defiance</emotional_register>
+    <viewport base_width="1440" base_height="900" />
+    <breakpoints values="xs,sm,md,lg" />
+  </meta>
+
+  <layout>
+    <![CDATA[
++------------------------------------------------------------------+
+| [SCAFFOLD: TopNav divider]                                       |
+|  [STRIKE: Logo]        [MARCH: Nav links]  [STRIKE: Signup CTA] |
++------------------------------------------------------------------+
+|                                                                  |
+|  [PLACARD: Hero Grid — 2 col]                                   |
+|  +----------------------------+  +---------------------------+  |
+|  | [PLACARD: Hero Content]    |  | [SUBSTRATE: Hero Visual]  |  |
+|  |                            |  |                           |  |
+|  |  [MARCH: Eyebrow label]    |  |  KR asset hero (Z-0)      |  |
+|  |  [STRIKE: H1 Headline]     |  |  Atmospheric overlay(Z-1) |  |
+|  |  [MARCH: Subhead]          |  |  UI accent (Z-3)          |  |
+|  |                            |  |                           |  |
+|  |  [STRIKE: Primary CTA]     |  |                           |  |
+|  |  [STRIKE: Secondary CTA]   |  |                           |  |
+|  +----------------------------+  +---------------------------+  |
+|                                                                  |
++------------------------------------------------------------------+
+| [PLACARD: Feature strip — 3 cols]                               |
+|  [PLACARD: Feature 1]  [PLACARD: Feature 2]  [PLACARD: Feat 3]  |
++------------------------------------------------------------------+
+    ]]>
+  </layout>
+
+  <elements>
+
+    <!-- H1 Headline -->
+    <element
+      id="hero-headline"
+      element_type="text"
+      archetype="Strike"
+      role="heading"
+      layout_role="screen-title"
+      x="80" y="320" width="600" height="140"
+    >
+      <component_mapping
+        design_system_component="KR/Typography/H1"
+        code_component="Typography"
+        props_interface="TypographyProps"
+        variant="h1"
+      />
+      <content
+        content_type="static"
+        sample_text="Career Applications, Perfected"
+        i18n_label_key="landing.hero.headline"
+      />
+      <tokens
+        color_token="--sys-color-paperWhite"
+        typography_token="--sys-type-font-fraunces"
+        z_layer="Z-3"
+      />
+      <interaction
+        patterns="static"
+        states="default"
+      />
+      <accessibility
+        label_source="visible-text"
+        heading_level="1"
+      />
+      <ux_rationale>
+        Fraunces variable font (wght 900, SOFT 80, WONK 1) creates extreme M3 Expressive contrast. Hero statement anchors emotional defiance register.
+      </ux_rationale>
+    </element>
+
+    <!-- Hero Subheadline -->
+    <element
+      id="hero-subhead"
+      element_type="text"
+      archetype="March"
+      role="heading"
+      layout_role="subheading"
+      x="80" y="480" width="550" height="80"
+    >
+      <component_mapping
+        design_system_component="KR/Typography/Body"
+        code_component="Typography"
+        props_interface="TypographyProps"
+        variant="body-lg"
+      />
+      <content
+        content_type="static"
+        sample_text="ATS-optimized resumes, compelling cover letters, and strategic job discovery—all in one platform."
+        i18n_label_key="landing.hero.subhead"
+      />
+      <tokens
+        color_token="--sys-color-worker-ash-base"
+        typography_token="--sys-type-font-work-sans"
+        z_layer="Z-3"
+      />
+      <interaction
+        patterns="static"
+        states="default"
+      />
+      <accessibility
+        label_source="visible-text"
+      />
+      <ux_rationale>
+        March archetype for explanatory flow. Work Sans body text provides clarity against dark background.
+      </ux_rationale>
+    </element>
+
+    <!-- Primary CTA Button -->
+    <element
+      id="cta-primary"
+      element_type="button"
+      archetype="Strike"
+      role="button"
+      layout_role="primary-cta"
+      x="80" y="600" width="180" height="48"
+    >
+      <component_mapping
+        design_system_component="KR/Button/Primary"
+        code_component="Strike"
+        props_interface="StrikeProps"
+        variant="filled"
+        size="lg"
+      />
+      <content
+        content_type="static"
+        label="Get Started"
+        sample_text="Get Started"
+        i18n_label_key="landing.hero.cta.primary"
+      />
+      <functionality
+        intent="Primary CTA to navigate to registration flow."
+        action="Navigate to /register"
+        data_source="Client-side navigation"
+        success_state_description="Route to registration page."
+        error_handling="Fallback: show inline error message if navigation fails."
+      >
+        <validation_rules />
+        <error_messages>
+          <error key="nav">Navigation failed. Please try again.</error>
+        </error_messages>
+      </functionality>
+      <interaction
+        patterns="click,keyboard-activate"
+        states="default,hover,focus,pressed,disabled"
+        on_click="Navigate to /register"
+        transitions="hover:scale+shadow 200ms cubic-bezier(0.34,1.56,0.64,1)"
+      />
+      <layout_details
+        responsive_behavior="left-aligned-on-lg, full-width-on-xs"
+        constraints="top,left"
+        margin_top="24"
+        alignment="start"
+      />
+      <tokens
+        color_token="--sys-color-inkGold-base"
+        typography_token="--sys-type-font-work-sans"
+        shape_token="--sys-shape-blockRiot03"
+        z_layer="Z-3"
+      />
+      <accessibility
+        label_source="visible-text"
+        keyboard_shortcut="Enter"
+      />
+      <test_ids primary="landing-cta-primary" />
+      <motion_contract type="spring">
+        <spring trigger="hover" stiffness="--sys-motion-stiffness-hero" damping="--sys-motion-damping-hero" mass="1" properties="scale,box-shadow">
+          <fallback duration_ms="150" easing="linear" media="(prefers-reduced-motion: reduce)" />
+        </spring>
+      </motion_contract>
+      <ux_rationale>
+        Primary Strike archetype with high-contrast inkGold on charcoal. M3 Expressive spring physics on hover reinforces action confidence.
+      </ux_rationale>
+    </element>
+
+    <!-- Secondary CTA Button -->
+    <element
+      id="cta-secondary"
+      element_type="button"
+      archetype="Strike"
+      role="button"
+      layout_role="secondary-cta"
+      x="290" y="600" width="180" height="48"
+    >
+      <component_mapping
+        design_system_component="KR/Button/Ghost"
+        code_component="Strike"
+        props_interface="StrikeProps"
+        variant="ghost"
+        size="lg"
+      />
+      <content
+        content_type="static"
+        label="Learn More"
+        sample_text="Learn More"
+        i18n_label_key="landing.hero.cta.secondary"
+      />
+      <functionality
+        intent="Secondary CTA to navigate to about/features section."
+        action="Navigate to /about or scroll to features"
+        data_source="Client-side navigation"
+        success_state_description="Route to about page or scroll to feature cards."
+        error_handling="Fallback: show inline error message."
+      >
+        <validation_rules />
+        <error_messages>
+          <error key="nav">Navigation failed. Please try again.</error>
+        </error_messages>
+      </functionality>
+      <interaction
+        patterns="click,keyboard-activate"
+        states="default,hover,focus,pressed,disabled"
+        on_click="Navigate to /about or scroll to features"
+        transitions="hover:border-color 150ms ease-out"
+      />
+      <layout_details
+        responsive_behavior="left-aligned-on-lg, full-width-on-xs"
+        constraints="top,left"
+        margin_top="24"
+        margin_left="16"
+        alignment="start"
+      />
+      <tokens
+        color_token="--sys-color-worker-ash-base"
+        typography_token="--sys-type-font-work-sans"
+        shape_token="--sys-shape-blockRiot03"
+        z_layer="Z-3"
+      />
+      <accessibility
+        label_source="visible-text"
+        keyboard_shortcut="Enter"
+      />
+      <test_ids primary="landing-cta-secondary" />
+      <motion_contract type="spring">
+        <spring trigger="hover" stiffness="--sys-motion-stiffness-micro" damping="--sys-motion-damping-micro" mass="1" properties="border-color">
+          <fallback duration_ms="200" easing="linear" media="(prefers-reduced-motion: reduce)" />
+        </spring>
+      </motion_contract>
+      <ux_rationale>
+        Ghost variant provides lower-hierarchy alternative. Maintains M3 Expressive affordance without visual dominance.
+      </ux_rationale>
+    </element>
+
+    <!-- Feature Card 1 -->
+    <element
+      id="feature-card-1"
+      element_type="card"
+      archetype="Placard"
+      role="article"
+      layout_role="feature-item"
+      x="80" y="780" width="280" height="240"
+    >
+      <component_mapping
+        design_system_component="KR/Card/Placard"
+        code_component="Placard"
+        props_interface="PlacardProps"
+        variant="default"
+      />
+      <content
+        content_type="static"
+        label="ATS Optimization"
+        sample_text="Resumes optimized for applicant tracking systems to maximize interview callbacks."
+        i18n_label_key="landing.features.ats.title"
+      />
+      <tokens
+        color_token="--sys-color-charcoalBackground-base"
+        typography_token="--sys-type-font-work-sans"
+        shape_token="--sys-shape-placardTorn01"
+        z_layer="Z-2"
+      />
+      <interaction
+        patterns="click"
+        states="default,hover,focus"
+        on_click="Navigate to /features/ats"
+      />
+      <accessibility
+        label_source="visible-text"
+        heading_level="3"
+      />
+      <test_ids primary="feature-card-ats" />
+      <ux_rationale>
+        Placard archetype for content framing. Asymmetric torn shape establishes tactile brand presence.
+      </ux_rationale>
+    </element>
+
+    <!-- Feature Card 2 -->
+    <element
+      id="feature-card-2"
+      element_type="card"
+      archetype="Placard"
+      role="article"
+      layout_role="feature-item"
+      x="400" y="780" width="280" height="240"
+    >
+      <component_mapping
+        design_system_component="KR/Card/Placard"
+        code_component="Placard"
+        props_interface="PlacardProps"
+        variant="default"
+      />
+      <content
+        content_type="static"
+        label="Smart Job Matching"
+        sample_text="AI-powered job discovery aligned with your skills, values, and career goals."
+        i18n_label_key="landing.features.matching.title"
+      />
+      <tokens
+        color_token="--sys-color-charcoalBackground-base"
+        typography_token="--sys-type-font-work-sans"
+        shape_token="--sys-shape-placardTorn01"
+        z_layer="Z-2"
+      />
+      <interaction
+        patterns="click"
+        states="default,hover,focus"
+        on_click="Navigate to /features/matching"
+      />
+      <accessibility
+        label_source="visible-text"
+        heading_level="3"
+      />
+      <test_ids primary="feature-card-matching" />
+      <ux_rationale>
+        Consistent Placard treatment for discovery. User scans features horizontally.
+      </ux_rationale>
+    </element>
+
+    <!-- Feature Card 3 -->
+    <element
+      id="feature-card-3"
+      element_type="card"
+      archetype="Placard"
+      role="article"
+      layout_role="feature-item"
+      x="720" y="780" width="280" height="240"
+    >
+      <component_mapping
+        design_system_component="KR/Card/Placard"
+        code_component="Placard"
+        props_interface="PlacardProps"
+        variant="default"
+      />
+      <content
+        content_type="static"
+        label="Curated Documents"
+        sample_text="Craft compelling cover letters and application materials with AI guidance."
+        i18n_label_key="landing.features.documents.title"
+      />
+      <tokens
+        color_token="--sys-color-charcoalBackground-base"
+        typography_token="--sys-type-font-work-sans"
+        shape_token="--sys-shape-placardTorn01"
+        z_layer="Z-2"
+      />
+      <interaction
+        patterns="click"
+        states="default,hover,focus"
+        on_click="Navigate to /features/documents"
+      />
+      <accessibility
+        label_source="visible-text"
+        heading_level="3"
+      />
+      <test_ids primary="feature-card-documents" />
+      <ux_rationale>
+        Final feature card completes visual trio. Placard consistency establishes cohesive discovery flow.
+      </ux_rationale>
+    </element>
+
+  </elements>
+
+  <user_flow>
+    <primary_path><![CDATA[
+**Step 1: Land on page**
+- User arrives via marketing link or direct URL
+- Hero headline + subheadline visible above fold
+- Primary CTA "Get Started" prominent without scrolling
+- Substrate texture + atmospheric overlay establish brand impression
+
+**Step 2: Evaluate value proposition**
+- User reads hero subhead and evaluates features
+- Optional: scroll down to discover feature cards
+- Feature cards provide lightweight discovery of core benefits
+
+**Step 3: Engage with CTA**
+- Click "Get Started" → navigate to `/register` with referral source
+- Click "Learn More" → navigate to `/about` or scroll to features
+- Both paths remove friction for different user intents
+
+**Step 4: Next stage**
+- Registration flow (see `02_auth.xml`)
+- Or about/features page for additional context
+    ]]></primary_path>
+
+    <edge_cases><![CDATA[
+**Asset timeout (>3s):**
+- Fallback to charcoal background (--sys-color-charcoalBackground-base)
+- Disable asset animations
+- Show error banner: "Asset load failed. Refresh to retry."
+- CTAs remain functional—page is not blocked
+
+**No JS / SSR initial render:**
+- Hero panel renders with charcoal background (CSS-only fallback)
+- CTAs are standard `<a>` elements—navigable without JS
+- Feature cards show as plain text links
+
+**Slow network (3G):**
+- Hero text loads immediately
+- Skeleton shimmer on assets until loaded
+- CTAs remain clickable
+    ]]></edge_cases>
+  </user_flow>
+
+  <states>
+    <loading><![CDATA[
+- H1 replaced with Fraunces skeleton (pulsing --sys-color-worker-ash-40)
+- CTA buttons show spinner overlay, disabled state (opacity: 0.4)
+- Feature cards show grey skeleton blocks (200ms stagger)
+- Background asset loads with fade-in (300ms)
+    ]]></loading>
+
+    <empty><![CDATA[
+N/A for Landing—static content
+    ]]></empty>
+
+    <error><![CDATA[
+- If hero asset fails: fallback to --sys-color-charcoalBackground-base
+- If nav data fails: show cached nav links
+- MEGAPHONE error banner: "Asset load failed. Refresh to retry."
+- CTAs remain functional
+    ]]></error>
+
+    <disabled><![CDATA[
+- CTA buttons: opacity 0.4, cursor: not-allowed
+- color: --sys-color-concreteGrey
+    ]]></disabled>
+  </states>
+
+  <assets>
+    <slot name="hero_background" z_layer="Z-0" token="--sys-color-charcoalBackground-base">
+      TODO[asset] Select from KR-SOLID-021 to KR-SOLID-030 (devotional/16:9 aspect, career/elevation theme)
+    </slot>
+
+    <slot name="hero_overlay" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] Abstract motif overlay (opacity: 0.3, watermark effect)
+    </slot>
+
+    <slot name="hero_accent" z_layer="Z-3" token="--sys-color-inkGold-base">
+      KR-UI-016 (corner accent SVG, top-right placement, 120x120px)
+    </slot>
+      <slot name="auto_kr_solid_002" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-002;category=atmospheric;layer=atmospheric;aspect=1:1;priority=HIGH
+    </slot>
+    <slot name="auto_kr_solid_036" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-036;category=atmospheric;layer=atmospheric;aspect=1:1;priority=HIGH
+    </slot>
+    <slot name="auto_kr_ui_008" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-008;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_021" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-021;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_017" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-017;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_solid_030" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-030;category=resistance;layer=resistance;aspect=29:36;priority=CRITICAL
+    </slot>
+    <slot name="auto_kr_ui_031" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-031;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_icon_001" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-ICON-001;category=icons;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+</assets>
+
+  <breakpoints>
+    <mobile max_width="767"><![CDATA[
+- Hero panel: full-width, stacked layout
+- CTA buttons: stack vertically, full-width (100%)
+- H1 font-size: 36px
+- Padding: 16px
+- Feature cards: single-column stack, full-width
+- CSS: .hero-content-panel { width: 100%; padding: 24px 16px; }
+    ]]></mobile>
+
+    <tablet min_width="768" max_width="1023"><![CDATA[
+- Hero panel: max-width 600px, centered
+- CTA buttons: side-by-side, justify-start
+- H1 font-size: 48px
+- Padding: 24px
+- Feature cards: 2-column grid with full-width fallback
+- CSS: @media (min-width: 768px) { .hero-content-panel { max-width: 600px; padding: 32px 24px; } }
+    ]]></tablet>
+
+    <desktop min_width="1024"><![CDATA[
+- Hero panel: max-width 720px, left-aligned in 2-col grid
+- Visual area: right column with asset
+- CTA buttons: side-by-side
+- H1 font-size: 56px
+- Padding: 48px
+- Feature cards: 3-column grid, full-width
+- CSS: @media (min-width: 1024px) { .hero-content-panel { max-width: 720px; padding: 48px; } }
+    ]]></desktop>
+  </breakpoints>
+
+  <accessibility_overview>
+    <focus_order><![CDATA[
+1. Logo (skip-to-content link)
+2. Nav links (Tab through alphabetically)
+3. Primary CTA
+4. Secondary CTA
+5. Feature cards (Tab through, Enter to activate)
+6. Footer links
+
+Keyboard shortcuts:
+- Tab: moves focus forward
+- Shift+Tab: moves focus backward
+- Enter/Space: activates buttons
+- Esc: dismisses any open navigation menus
+    ]]></focus_order>
+
+    <landmarks><![CDATA[
+role="banner" → TopNav
+role="main" → Hero + Feature sections
+aria-label="Primary navigation" → Nav links
+aria-label="Get started with CareerCopilot" → Primary CTA
+aria-label="Learn more about CareerCopilot" → Secondary CTA
+    ]]></landmarks>
+  </accessibility_overview>
+
+  <storybook>
+    <stories>
+      <story name="Landing/Default" />
+      <story name="Landing/Loading" />
+      <story name="Landing/AssetLoadError" />
+    </stories>
+    <controls><![CDATA[isLoading, assetLoadError, headlineText]]></controls>
+  </storybook>
+
+  <compliance_score>
+    <score value="390" max="400" percentage="97.5%" grade="A" status="PASS" />
+    <rubric>
+      - ✅ All archetypes assigned (Strike, March, Placard, Substrate)
+      - ✅ All tokens canonical v6 (--sys-color-*, --sys-type-*, --sys-shape-*)
+      - ✅ All interactive elements have states + a11y
+      - ✅ M3 Expressive motion contract specified
+      - ⚠️ Fraunces variable settings partially specified (-5pt)
+      - ⚠️ Typographic scale less expressive than 144px hero max (-5pt)
+    </rubric>
+  </compliance_score>
+
+</wireframe>

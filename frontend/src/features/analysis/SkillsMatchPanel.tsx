@@ -1,5 +1,5 @@
 import { Shield } from 'lucide-react';
-import type { SkillsGap } from '../../services/aiInterface';
+import type { SkillsGap } from '../../services/aiTextProcessing';
 
 interface SkillsMatchPanelProps {
   skillsGap: SkillsGap;

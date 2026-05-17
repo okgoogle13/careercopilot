@@ -7,7 +7,7 @@ import logging
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, EmailStr
 
-from app.api.endpoints._shared import run_endpoint_operation
+from app.api.endpoints._shared import run_endpoint
 from app.core.auth import get_current_user
 from app.genkit_flows.smart_ingestion import voiceProfileExtractorFlow
 from app.models.database import User
@@ -139,16 +139,8 @@ async def create_voice_profile(
             "user_id": current_user.id,
         }
 
-    try:
-        return await run_endpoint_operation(
-            operation,
-            "Voice profile creation failed",
-            logger=logger,
-        )
-    except HTTPException as exc:
-        if exc.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail="Voice profile creation failed",
-            ) from exc
-        raise
+    return await run_endpoint(
+        operation,
+        "Voice profile creation failed",
+        logger=logger,
+    )

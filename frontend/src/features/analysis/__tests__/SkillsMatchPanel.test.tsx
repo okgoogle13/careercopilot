@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { SkillsMatchPanel } from '../SkillsMatchPanel';
-import type { SkillsGap } from '../../../services/aiInterface';
+import type { SkillsGap } from '../../../services/aiTextProcessing';
 
 const FULL_GAP: SkillsGap = {
   matched: ['Python', 'React', 'AWS'],

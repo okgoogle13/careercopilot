@@ -40,9 +40,9 @@
     "typescript-eslint": "^8.14.0"
   },
   "scripts": {
-    "serve": "npm run build && firebase emulators:start --only functions",
-    "shell": "npm run build && firebase functions:shell",
-    "start": "npm run shell",
+    "serve": "yarn build && firebase emulators:start --only functions",
+    "shell": "yarn build && firebase functions:shell",
+    "start": "yarn shell",
     "deploy": "firebase deploy --only functions",
     "build": "tsc",
     "build:watch": "tsc -p tsconfig.build.json --watch",

@@ -1,4 +1,4 @@
-now #!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 generate_workflow_diagram.py
 
@@ -35,19 +35,19 @@ flowchart TD
     F --> I[📝 Paste Resume Text]
     F --> JS[🔭 Job Scout / Email Scan]
 
-    G --> J[📥 POST /api/ingest/artifacts/upload]
+    G --> J[📥 POST /api/v1/ingest/artifacts/upload]
     J --> K[(IngestionService\nParse + Chunk)]
     K --> L[(VectorStore\npgvector Career Artifacts)]
 
-    G --> SI[🧠 POST /api/smart-ingestion/upload-and-tag\nAuto-tag + Extract Entities]
+    G --> SI[🧠 POST /api/v1/career-database\nAuto-tag + Extract Entities]
     SI --> L
 
-    H --> M[🤖 POST /api/genkit/job/analyze-url]
+    H --> M[🤖 POST /api/v1/flows/analyze-job-from-url]
     M --> N[📊 Unified Job Analysis\nRole + Requirements]
     N --> O[🏢 Company Context]
 
     JS --> JSA[POST /api/v1/job-scout/search\nDiscover Opportunities]
-    JS --> ESC[POST /api/workflows/scan-email-opportunities\nScan Gmail Inbox]
+    JS --> ESC[POST /api/v1/job-scout/queue\nScan Opportunities]
     JSA --> OPP[(Opportunities Store)]
     ESC --> OPP
 
@@ -56,21 +56,19 @@ flowchart TD
     L -. Reference prior artifacts .-> P
     OPP -. Opportunity data .-> P
 
-    P --> Q[✍️ POST /api/genkit/resume/optimize]
-    P --> R[🛠️ POST /api/analysis/optimize-resume]
-    P --> S[📝 POST /api/genkit/cover-letter/generate]
-    P --> T[🎯 POST /api/genkit/ksc/generate]
-    P --> U[🔎 POST /api/genkit/company/context]
-    P --> AUD[🩺 POST /api/resume-audit/evaluate\nATS + Gap Analysis]
-    P --> PKG[📦 POST /api/workflows/generate-application\nFull Application Package]
+    P --> Q[✍️ POST /api/v1/documents/optimize-content]
+    P --> S[📝 POST /api/v1/documents/generate-cover-letter]
+    P --> T[🎯 POST /api/v1/documents/generate-ksc-response]
+    P --> U[🔎 POST /api/v1/analysis/strategy]
+    P --> AUD[🩺 POST /api/v1/analysis/ats-score\n4-Quadrant ATS Analysis]
+    P --> PKG[📦 POST /api/v1/workflows/generate-application\nFull Application Package]
 
-    Q --> V[📄 Updated Resume Draft]
-    R --> V
-    S --> W[📨 Tailored Cover Letter]
-    T --> X[✅ STAR KSC Responses]
-    U --> Y[🏛️ Employer Research Notes]
+    Q --> V[📄 Updated Resume Draft (DocumentWorkbench)]
+    S --> W[📨 Tailored Cover Letter (DocumentWorkbench)]
+    T --> X[✅ STAR KSC Responses (DocumentWorkbench)]
+    U --> Y[🏛️ Employer Research Notes (AnalysisWorkbench)]
     O --> Y
-    AUD --> AUR[📋 Audit Report\nScore + Suggestions]
+    AUD --> AUR[📋 Audit Report\nScore + Suggestions (AnalysisWorkbench)]
     PKG --> FPKG[📦 Resume + Cover Letter + KSC]
 
     V --> Z[👀 Review · Edit · Reuse]
@@ -81,7 +79,7 @@ flowchart TD
     FPKG --> Z
 
     Z --> AA[📬 Submit Application]
-    AA --> AB[📋 Track Progress\nPOST /api/applications]
+    AA --> AB[📋 Track Progress\nPOST /api/v1/applications]
     AB --> AC([🎯 Interview Pipeline])
 
     style A fill:#D4A84B,color:#1A1714,stroke:#D4A84B

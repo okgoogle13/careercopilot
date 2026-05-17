@@ -1,0 +1,22 @@
+{
+  "output": {
+    "filePath": "repomix-output-careercopilot.xml",
+    "style": "xml",
+    "headerText": "CareerCopilot Consolidated Codebase",
+    "removeComments": false,
+    "removeEmptyLines": false,
+    "topFilesLength": 20,
+    "showLineNumbers": true
+  },
+  "include": [
+    "**/*"
+  ],
+  "ignore": {
+    "useGitignore": true,
+    "useDefaultPatterns": true,
+    "customPatterns": []
+  },
+  "security": {
+    "enableSecurityCheck": true
+  }
+}

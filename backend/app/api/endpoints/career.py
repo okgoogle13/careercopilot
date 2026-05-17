@@ -1,6 +1,6 @@
-from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
+from fastapi import APIRouter, Depends, File, UploadFile
 
-from app.api.endpoints._shared import collect_uploaded_text, run_endpoint_operation
+from app.api.endpoints._shared import collect_uploaded_text, run_endpoint
 from app.core.dependencies import get_current_user
 from app.genkit_flows.career_ingest import IngestInput, ingest_career_docs
 from app.models import User
@@ -30,12 +30,7 @@ async def ingest_documents_endpoint(
         )
         return result
 
-    try:
-        return await run_endpoint_operation(
-            operation,
-            "Career ingestion failed",
-        )
-    except HTTPException as exc:
-        if exc.status_code == 500:
-            raise HTTPException(status_code=500, detail="Career ingestion failed") from exc
-        raise
+    return await run_endpoint(
+        operation,
+        "Career ingestion failed",
+    )

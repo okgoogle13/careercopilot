@@ -1,45 +1,101 @@
 # Prompt: Sprint Close
 
-You are a project sync agent for CareerCopilot.
+**Purpose:** Create a sprint handover in Notion and close the Linear cycle at sprint end.
 
-## Your job
-Read the sprint close state and:
-1. Write a handover page to Notion
-2. Archive the Linear cycle for this sprint
+**Setup:** Enable filesystem, Linear, and Notion connectors before running.
 
-## Read these files
-- `/Users/okgoogle13/Projects/careercopilot/SPRINT_LOG.md` — the new row just added
-- `/Users/okgoogle13/Projects/careercopilot/TASKS.md` — done vs remaining tasks
-- `/Users/okgoogle13/Projects/careercopilot/DECISIONS.md` — decisions made this sprint
+**Trigger:** Change to SPRINT_LOG.md (user adds a new sprint summary row).
 
-## Notion: Create a handover page
-Structure:
+---
+
+## Step 1 — Read three canonical files
+
+Use filesystem connector to read:
 ```
-# Sprint [N] Handover — [date]
+/Users/okgoogle13/Projects/careercopilot/SPRINT_LOG.md
+/Users/okgoogle13/Projects/careercopilot/TASKS.md
+/Users/okgoogle13/Projects/careercopilot/DECISIONS.md
+```
 
-## Completed
-[tasks marked done in TASKS.md for this sprint]
+Extract:
+- The newest row added to SPRINT_LOG.md (sprint [N], dates, planned, done, notes)
+- All tasks from TASKS.md **Done** section for this sprint
+- All tasks from TASKS.md **Active** section that are still incomplete (marked `[ ]`)
+- All tasks from TASKS.md **Waiting On** section
+- DECISIONS.md entries from this sprint's date range
 
-## Not completed / deferred
-[tasks still open or moved to Someday]
+---
 
-## Decisions made
-[entries from DECISIONS.md dated within this sprint]
+## Step 2 — Create a Notion handover page
+
+**Search first:** Check Notion > CareerCopilot > Handovers for existing page matching the sprint/date.
+
+If not found, create a new page with this structure:
+
+```markdown
+# Sprint [N] Handover — [date from SPRINT_LOG.md]
 
 ## Velocity
-[the new SPRINT_LOG.md row: planned vs done + notes]
 
-## Next sprint seeds
-[tasks in "Waiting On" section of TASKS.md]
+**Planned:** [X tasks]
+**Done:** [Y tasks]
+**Ratio:** [Y/X]
+**Notes:** [notes from SPRINT_LOG.md]
+
+## Completed Tasks
+
+- [task 1 from TASKS.md Done section]
+- [task 2 from TASKS.md Done section]
+...
+
+## Not Completed / Deferred
+
+- [incomplete tasks from TASKS.md Active section]
+- [tasks from TASKS.md Waiting On]
+
+## Decisions Made
+
+[DECISIONS.md entries dated within this sprint]
+
+## Next Sprint Seeds
+
+[tasks from TASKS.md Waiting On that should start next]
 ```
 
-Place under the CareerCopilot > Handovers section in Notion.
+**Location:** Notion > CareerCopilot > Handovers
 
-## Linear: Close the cycle
-- Find the active cycle for this sprint
-- Mark it complete
-- Any incomplete issues: move to backlog (do not delete)
+---
 
-## Rules
-- Use exact dates and task counts from SPRINT_LOG.md — do not estimate
-- Do not mark Linear issues Done that are not marked `[x]` in TASKS.md
+## Step 3 — Close the Linear cycle
+
+**Find:** The active Linear cycle matching this sprint name (from SPRINT_LOG.md).
+
+**Actions:**
+1. Mark the cycle **Complete** (close it)
+2. For any incomplete issues in the cycle:
+   - Do NOT mark them Done
+   - Move them to the **Backlog** (unassign from cycle)
+   - Leave status as-is (Todo/In Progress)
+
+---
+
+## Step 4 — Report
+
+Print a summary:
+```
+✅ Sprint [N] closed
+- Notion handover created: Sprint [N] Handover — [date]
+- Linear cycle closed: [cycle name]
+- X tasks completed, Y deferred to backlog
+```
+
+---
+
+## Rules (Non-Negotiable)
+
+- **Use SPRINT_LOG.md as source of truth:** Dates, planned vs done, and notes come from the new row added
+- **Exact task names:** Copy task titles verbatim from TASKS.md
+- **Do not mark Linear issues Done:** Only move incomplete issues to backlog; the sync comes from TASKS.md changes
+- **Search before create:** Never duplicate a handover page in Notion
+- **Do not modify TASKS.md or SPRINT_LOG.md:** This prompt only writes to Notion and Linear
+- **Preserve structure:** Keep the markdown formatting from TASKS.md sections

@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wireframe version="6.0.0" screen_id="kanban" design_system="kr-solidarity" mode="solidarity-only">
+  <meta>
+    <title>Application Kanban Board</title>
+    <description>Drag-drop Kanban board for managing job applications across stages (Applied, Interviewing, Offered, Rejected, Archived). Placard-based cards with Strike CTAs for stage transitions.</description>
+    <user_story>As a user, I can visually track my applications across multiple stages and take action on each opportunity.</user_story>
+    <emotional_register>Control</emotional_register>
+    <viewport base_width="1440" base_height="900" />
+  </meta>
+
+  <layout><![CDATA[
++------------------------------------------------------------------+
+| [SCAFFOLD: TopNav — shared shell, not route-owned]               |
++------------------------------------------------------------------+
+| [Scaffold: Col 1] | [Scaffold: Col 2] | [Scaffold: Col 3]       |
+| Applied            | Interviewing       | Offered                |
+| +---+  +---+       | +---+  +---+       | +---+                  |
+| |Card| |Card|      | |Card| |Card|      | |Card|                 |
+| +---+  +---+       | +---+  +---+       | +---+                  |
+|                     |                    |                        |
+| [Scaffold: Col 4]  | [Scaffold: Col 5]  |                        |
+| Rejected            | Archived           |                        |
+| +---+               | +---+              |                        |
+| |Card|              | |Card|             |                        |
+| +---+               | +---+              |                        |
++------------------------------------------------------------------+
+| [Megaphone: Detail Modal — overlays board when card clicked]     |
+| +-------------------------------+  +---------------------------+ |
+| | ApplicationDetailPanel        |  | ApplicationStatusActions  | |
+| | [tabs: timeline|notes|details]|  | [Strike: Schedule]        | |
+| |                               |  | [Strike: Accept]          | |
+| | [Scaffold: ApplicationEdit    |  | [Strike: Reject]          | |
+| |  Form — notes, salary, meta]  |  | [Strike: Archive]         | |
+| +-------------------------------+  +---------------------------+ |
++------------------------------------------------------------------+
+  ]]></layout>
+
+  <layout_structure>
+    <grid type="kanban" columns="5" gap="16px" overflow="horizontal-scroll" />
+    <column_sizing min_width="280px" max_width="320px" height="calc(100vh - 160px)" />
+    <card_sizing width="100%" min_height="100px" max_height="160px" />
+  </layout_structure>
+
+  <layout_binding>
+    <binding element="kanban-topnav" layout_slot="page-header" sticky="true" />
+    <binding element="kanban-column-applied" layout_slot="grid-column-1" />
+    <binding element="kanban-column-interview" layout_slot="grid-column-2" />
+    <binding element="kanban-column-offered" layout_slot="grid-column-3" />
+    <binding element="kanban-column-rejected" layout_slot="grid-column-4" />
+    <binding element="kanban-column-archived" layout_slot="grid-column-5" />
+    <binding element="kanban-card-*" layout_slot="column-child" stack="vertical" gap="8px" />
+    <binding element="kanban-detail-panel" layout_slot="overlay" />
+    <binding element="kanban-edit-form" layout_slot="detail-panel-left" />
+    <binding element="kanban-status-actions" layout_slot="detail-panel-right" />
+    <binding element="kanban-archive-action" layout_slot="detail-panel-right-bottom" />
+  </layout_binding>
+
+  <responsive_rules>
+    <rule breakpoint="mobile" max_width="640px">
+      <change>Columns stack vertically, one visible at a time with horizontal swipe navigation</change>
+      <change>Cards expand to full width</change>
+      <change>Detail panel becomes full-screen bottom sheet</change>
+    </rule>
+    <rule breakpoint="tablet" min_width="641px" max_width="1024px">
+      <change>Show 2-3 columns at a time with horizontal scroll</change>
+      <change>Detail panel becomes side sheet at 50% viewport width</change>
+    </rule>
+    <rule breakpoint="desktop" min_width="1025px">
+      <change>All 5 columns visible simultaneously</change>
+      <change>Detail panel is centered modal overlay</change>
+    </rule>
+  </responsive_rules>
+
+  <elements>
+    <!-- TopNav: shared shell component, documented for layout completeness -->
+    <element id="kanban-topnav" element_type="navigation" archetype="Scaffold" role="navigation" layout_role="shared-shell-navigation" x="0" y="0" width="1440" height="64">
+      <component_mapping design_system_component="KR/Navigation/TopNav" code_component="TopNav" variant="default" />
+      <content content_type="static" label="Application Tracker" i18n_label_key="nav.tracker.title" />
+      <functionality intent="Route-level navigation and view mode switching." action="Toggle between kanban and list view. Navigate to other product routes." />
+      <interaction patterns="click" states="default" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-scaffoldSlab01" z_layer="Z-3" />
+      <accessibility label_source="aria-label" aria_role="navigation" />
+      <test_ids primary="kanban-topnav" />
+      <ownership_note>Shared shell component owned by App.tsx layout. Not route-owned by /tracker.</ownership_note>
+    </element>
+
+    <!-- Column: Applied -->
+    <element id="kanban-column-applied" element_type="region" archetype="Scaffold" role="region" layout_role="kanban-column" x="80" y="160" width="280" height="700">
+      <component_mapping design_system_component="KR/Kanban/Column" code_component="KanbanColumn" variant="default" />
+      <content content_type="static" label="Applied (8)" i18n_label_key="kanban.column.applied" />
+      <functionality intent="Display applications in the Applied stage." action="Accept card drops to move applications into this stage." data_source="applications_crud" />
+      <interaction patterns="drag-drop" states="default,active,over" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-scaffoldSlab01" z_layer="Z-1" />
+      <accessibility label_source="aria-label" aria_role="region" heading_level="h3" />
+      <test_ids primary="kanban-column-applied" />
+      <motion_contract trigger="dragOver" duration_ms="200" easing="spring(1, 80, 10, 0)" properties="border-color, background-color" />
+    </element>
+
+    <!-- Card in Applied Column -->
+    <element id="kanban-card-1" element_type="card" archetype="Placard" role="article" layout_role="application-card" x="100" y="220" width="240" height="120">
+      <component_mapping design_system_component="KR/Card/Placard" code_component="Placard" variant="kanban-item" />
+      <content content_type="dynamic" label="Senior Designer at TechCorp" sample_text="Applied 3 days ago · Match: 92%" i18n_label_key="kanban.card.title" domain_model_field="application.job_title, application.company, application.applied_date, application.match_score" />
+      <functionality intent="Display application summary card." action="Click opens detail modal. Drag to change stage." data_source="applications_crud" />
+      <interaction patterns="drag,click" states="default,dragging,hover" on_drag="Drag to other columns" on_click="Show card detail modal" transitions="dragging:opacity 0.6 200ms" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-placardTorn01" z_layer="Z-2" />
+      <accessibility label_source="aria-label" aria_role="article" aria_grabbed="false" />
+      <test_ids primary="kanban-card-1" />
+      <motion_contract trigger="dragStart" duration_ms="150" easing="spring(1, 100, 12, 0)" properties="opacity, transform, box-shadow" />
+    </element>
+
+    <!-- Column: Interviewing -->
+    <element id="kanban-column-interview" element_type="region" archetype="Scaffold" role="region" layout_role="kanban-column" x="410" y="160" width="280" height="700">
+      <component_mapping design_system_component="KR/Kanban/Column" code_component="KanbanColumn" variant="default" />
+      <content content_type="static" label="Interviewing (3)" i18n_label_key="kanban.column.interview" />
+      <functionality intent="Display applications in the Interviewing stage." action="Accept card drops." data_source="applications_crud" />
+      <interaction patterns="drag-drop" states="default,active,over" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-scaffoldSlab01" z_layer="Z-1" />
+      <accessibility label_source="aria-label" aria_role="region" heading_level="h3" />
+      <test_ids primary="kanban-column-interview" />
+      <motion_contract trigger="dragOver" duration_ms="200" easing="spring(1, 80, 10, 0)" properties="border-color, background-color" />
+    </element>
+
+    <!-- Card in Interview Column -->
+    <element id="kanban-card-2" element_type="card" archetype="Placard" role="article" layout_role="application-card" x="430" y="220" width="240" height="120">
+      <component_mapping design_system_component="KR/Card/Placard" code_component="Placard" variant="kanban-item" />
+      <content content_type="dynamic" label="UX Researcher at StartupLabs" sample_text="Interview scheduled: Mar 15" i18n_label_key="kanban.card.title" domain_model_field="application.job_title, application.company, application.next_event" />
+      <functionality intent="Display application summary card." action="Click opens detail modal. Drag to change stage." data_source="applications_crud" />
+      <interaction patterns="drag,click" states="default,dragging,hover" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-placardTorn01" z_layer="Z-2" />
+      <accessibility label_source="aria-label" aria_role="article" aria_grabbed="false" />
+      <test_ids primary="kanban-card-2" />
+      <motion_contract trigger="dragStart" duration_ms="150" easing="spring(1, 100, 12, 0)" properties="opacity, transform, box-shadow" />
+    </element>
+
+    <!-- Column: Offered -->
+    <element id="kanban-column-offered" element_type="region" archetype="Scaffold" role="region" layout_role="kanban-column" x="740" y="160" width="280" height="700">
+      <component_mapping design_system_component="KR/Kanban/Column" code_component="KanbanColumn" variant="default" />
+      <content content_type="static" label="Offered (1)" i18n_label_key="kanban.column.offered" />
+      <functionality intent="Display applications with active offers." action="Accept card drops." data_source="applications_crud" />
+      <interaction patterns="drag-drop" states="default,active,over" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-scaffoldSlab01" z_layer="Z-1" />
+      <accessibility label_source="aria-label" aria_role="region" heading_level="h3" />
+      <test_ids primary="kanban-column-offered" />
+      <motion_contract trigger="dragOver" duration_ms="200" easing="spring(1, 80, 10, 0)" properties="border-color, background-color" />
+    </element>
+
+    <!-- Card in Offered Column -->
+    <element id="kanban-card-3" element_type="card" archetype="Placard" role="article" layout_role="application-card" x="760" y="220" width="240" height="120">
+      <component_mapping design_system_component="KR/Card/Placard" code_component="Placard" variant="kanban-item" />
+      <content content_type="dynamic" label="Product Manager at DesignStudio" sample_text="Offer expires: Mar 20 · $150K" i18n_label_key="kanban.card.title" domain_model_field="application.job_title, application.company, application.offer_deadline, application.salary" />
+      <functionality intent="Display application summary card." action="Click opens detail modal. Drag to change stage." data_source="applications_crud" />
+      <interaction patterns="drag,click" states="default,dragging,hover" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-placardTorn01" z_layer="Z-2" />
+      <accessibility label_source="aria-label" aria_role="article" aria_grabbed="false" />
+      <test_ids primary="kanban-card-3" />
+      <motion_contract trigger="dragStart" duration_ms="150" easing="spring(1, 100, 12, 0)" properties="opacity, transform, box-shadow" />
+    </element>
+
+    <!-- Column: Rejected -->
+    <element id="kanban-column-rejected" element_type="region" archetype="Scaffold" role="region" layout_role="kanban-column" x="1070" y="160" width="280" height="700">
+      <component_mapping design_system_component="KR/Kanban/Column" code_component="KanbanColumn" variant="default" />
+      <content content_type="static" label="Rejected (2)" i18n_label_key="kanban.column.rejected" />
+      <functionality intent="Display rejected applications." action="Accept card drops." data_source="applications_crud" />
+      <interaction patterns="drag-drop" states="default,active,over" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-scaffoldSlab01" z_layer="Z-1" />
+      <accessibility label_source="aria-label" aria_role="region" heading_level="h3" />
+      <test_ids primary="kanban-column-rejected" />
+      <motion_contract trigger="dragOver" duration_ms="200" easing="spring(1, 80, 10, 0)" properties="border-color, background-color" />
+    </element>
+
+    <!-- Column: Archived -->
+    <element id="kanban-column-archived" element_type="region" archetype="Scaffold" role="region" layout_role="kanban-column" x="80" y="160" width="280" height="700">
+      <component_mapping design_system_component="KR/Kanban/Column" code_component="KanbanColumn" variant="archived" />
+      <content content_type="static" label="Archived" i18n_label_key="kanban.column.archived" />
+      <functionality intent="Display archived/closed applications that are no longer active." action="Cards can be restored from this column via ApplicationArchiveAction." data_source="applications_crud" />
+      <interaction patterns="click" states="default,collapsed,expanded" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-scaffoldSlab01" z_layer="Z-1" />
+      <accessibility label_source="aria-label" aria_role="region" heading_level="h3" />
+      <test_ids primary="kanban-column-archived" />
+      <motion_contract trigger="expand" duration_ms="300" easing="spring(1, 80, 12, 0)" properties="width, opacity" />
+    </element>
+
+    <!-- Detail Modal: ApplicationDetailPanel -->
+    <element id="kanban-detail-panel" element_type="dialog" archetype="Megaphone" role="dialog" layout_role="application-detail-modal" x="320" y="100" width="800" height="600">
+      <component_mapping design_system_component="KR/Modal/DetailPanel" code_component="ApplicationDetailPanel" variant="default" />
+      <content content_type="dynamic" label="Application Details" i18n_label_key="kanban.detail.title" domain_model_field="application.job_title, application.company, application.timeline, application.notes, application.salary_details" />
+      <functionality intent="Display full application details with timeline, notes, and action capabilities." action="Tabbed interface: timeline, notes, job details. Hosts edit form and status action sub-components." data_source="applications_crud" />
+      <interaction patterns="click,keyboard,escape" states="closed,open,loading,error" on_click="Tab navigation, delegate to child actions" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-megaphoneCut01" z_layer="Z-4" />
+      <accessibility label_source="aria-labelledby" aria_role="dialog" aria_modal="true" keyboard_shortcut="Escape to close" />
+      <test_ids primary="kanban-detail-panel" />
+      <motion_contract trigger="open" duration_ms="250" easing="spring(1, 100, 14, 0)" properties="opacity, transform" />
+    </element>
+
+    <!-- Edit Form inside Detail Modal: ApplicationEditForm -->
+    <element id="kanban-edit-form" element_type="form" archetype="Scaffold" role="form" layout_role="application-edit-form" x="340" y="200" width="440" height="400">
+      <component_mapping design_system_component="KR/Form/ApplicationEdit" code_component="ApplicationEditForm" variant="default" />
+      <content content_type="dynamic" label="Edit Application" i18n_label_key="kanban.edit.title" domain_model_field="application.notes, application.salary_offered, application.contact_name, application.next_steps" />
+      <functionality intent="Add or edit notes, salary info, contact details, and application metadata." action="Form submission triggers useMutation to applications_crud API." data_source="applications_crud" validation_rules="required:notes when submitting" error_messages="Notes field cannot be empty" success_state="Inline save confirmation" />
+      <interaction patterns="input,submit" states="default,editing,submitting,saved,error" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-scaffoldSlab01" z_layer="Z-4" />
+      <accessibility label_source="aria-label" aria_role="form" />
+      <test_ids primary="kanban-edit-form" />
+    </element>
+
+    <!-- Status Actions inside Detail Modal: ApplicationStatusActions -->
+    <element id="kanban-status-actions" element_type="toolbar" archetype="Strike" role="toolbar" layout_role="application-status-actions" x="580" y="200" width="220" height="340">
+      <component_mapping design_system_component="KR/ActionBar/StatusActions" code_component="ApplicationStatusActions" variant="default" />
+      <content content_type="dynamic" label="Application Actions" i18n_label_key="kanban.actions.title" />
+      <functionality intent="Execute status transitions: schedule interview, accept offer, mark rejected, add notes, download offer letter." action="Each button triggers useMutation to applications_crud API with confirmation step." data_source="applications_crud" />
+      <interaction patterns="click" states="default,confirming,submitting,success,error" on_click="Show confirmation, then execute status mutation" />
+      <tokens color_token="--sys-color-inkGold-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot03" z_layer="Z-4" />
+      <accessibility label_source="aria-label" aria_role="toolbar" />
+      <test_ids primary="kanban-status-actions" />
+    </element>
+
+    <!-- Archive Action inside Detail Modal: ApplicationArchiveAction -->
+    <element id="kanban-archive-action" element_type="button" archetype="Strike" role="button" layout_role="application-archive-action" x="580" y="560" width="220" height="40">
+      <component_mapping design_system_component="KR/Button/ArchiveAction" code_component="ApplicationArchiveAction" variant="destructive" />
+      <content content_type="static" label="Archive Application" i18n_label_key="kanban.archive.label" />
+      <functionality intent="Archive a closed/rejected application or restore a previously archived one." action="useMutation to applications_crud archive endpoint. Card moves to/from archived column." success_state="Card removed from active board or restored to previous stage" />
+      <interaction patterns="click" states="default,confirming,archiving,restored" on_click="Confirm archive, then execute mutation" />
+      <tokens color_token="--sys-color-protestMetalBlue-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot03" z_layer="Z-4" />
+      <accessibility label_source="aria-label" />
+      <test_ids primary="kanban-archive-action" />
+    </element>
+  </elements>
+
+  <user_flow>
+    <primary_path><![CDATA[
+**Step 1: View kanban board**
+- User sees application cards organized by stage
+- Column counts updated in real-time
+- Visual indicators for urgent items (expiring offers, upcoming interviews)
+
+**Step 2: Interact with cards**
+- Hover over card shows action menu (view details, move, delete)
+- Click card opens detail modal with:
+  - Full job description
+  - Timeline of communications
+  - Action buttons (schedule interview, accept offer, etc.)
+
+**Step 3: Move cards**
+- Drag card between columns to update application stage
+- System confirms status change
+- Timeline updated in card detail
+
+**Step 4: Take action**
+- From card detail modal:
+  - Schedule interview (ApplicationStatusActions)
+  - Accept offer (ApplicationStatusActions)
+  - Mark as rejected (ApplicationStatusActions)
+  - Add notes (ApplicationEditForm)
+  - Download offer letter (ApplicationStatusActions)
+
+**Step 5: Archive**
+- Move rejected or closed applications to archived column (ApplicationArchiveAction)
+- Can restore later if needed
+    ]]></primary_path>
+  </user_flow>
+
+  <states>
+    <default><![CDATA[
+- All columns visible (5 columns: Applied, Interviewing, Offered, Rejected, Archived)
+- Cards organized by application stage
+- Hover states active
+- Detail modal closed
+    ]]></default>
+    <dragging><![CDATA[
+- Dragged card shows opacity 0.6 with spring transform
+- Target column highlights in inkGold via spring border-color transition
+- Drop zones visible
+    ]]></dragging>
+    <modal_open><![CDATA[
+- Background dims (Megaphone backdrop)
+- Detail modal appears with spring opacity+transform animation
+- Tabbed content: timeline | notes | details
+- ApplicationEditForm visible in left pane
+- ApplicationStatusActions visible in right pane
+- ApplicationArchiveAction at bottom right
+- Focus trapped in modal
+    ]]></modal_open>
+    <empty><![CDATA[
+- No applications yet
+- Scaffold empty state with prompt to add first application
+- Strike CTA: "Add your first application"
+    ]]></empty>
+    <loading><![CDATA[
+- Skeleton placards in each column
+- Column headers visible with count = 0
+    ]]></loading>
+    <error><![CDATA[
+- Error banner at top of board
+- Retry Strike CTA
+- Last-known board state preserved if available
+    ]]></error>
+  </states>
+
+  <assets>
+    <slot name="auto_kr_solid_004" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-004;category=atmospheric;layer=atmospheric;aspect=3:4;priority=HIGH
+    </slot>
+    <slot name="auto_kr_solid_011" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-SOLID-011;category=spiritual;layer=spiritual;aspect=16:9;priority=CRITICAL
+    </slot>
+    <slot name="auto_kr_solid_026" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-026;category=resistance;layer=resistance;aspect=1:1;priority=CRITICAL
+    </slot>
+    <slot name="auto_kr_solid_009" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-009;category=atmospheric;layer=atmospheric;aspect=1:1;priority=HIGH
+    </slot>
+    <slot name="auto_kr_ui_017" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-017;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_014" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-014;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_026" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-026;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_037" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-037;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_solid_045" z_layer="Z-0" token="--sys-color-charcoalBackground-base">
+      TODO[asset] asset_id=KR-SOLID-045;category=heroes;layer=substrate;aspect=16:9;priority=CRITICAL
+    </slot>
+    <asset_resolution_note>All 9 asset slots remain TODO pending asset-placement-strategy and manifest-reconciler pipeline execution. Asset resolution is a prerequisite for implementation but does not block the build contract.</asset_resolution_note>
+  </assets>
+
+  <breakpoints>
+    <mobile max_width="640px"><![CDATA[
+.kanban-board { flex-direction: column; overflow-x: auto; scroll-snap-type: x mandatory; }
+.kanban-column { min-width: 100vw; scroll-snap-align: start; }
+.detail-panel { position: fixed; inset: 0; }
+    ]]></mobile>
+    <tablet min_width="641px" max_width="1024px"><![CDATA[
+.kanban-board { display: flex; overflow-x: auto; gap: var(--sys-spacing-md); }
+.kanban-column { min-width: 280px; flex-shrink: 0; }
+.detail-panel { position: fixed; right: 0; width: 50%; height: 100vh; }
+    ]]></tablet>
+    <desktop min_width="1025px"><![CDATA[
+.kanban-board { display: flex; gap: var(--sys-spacing-lg); justify-content: center; }
+.kanban-column { width: 280px; flex-shrink: 0; }
+.detail-panel { position: fixed; inset: 10vh 20vw; }
+    ]]></desktop>
+  </breakpoints>
+
+  <accessibility_overview>
+    <focus_order>
+      <step>TopNav (shared shell — not route-owned)</step>
+      <step>Column headers: Applied, Interviewing, Offered, Rejected, Archived</step>
+      <step>Cards within each column, top to bottom</step>
+      <step>Detail modal when open (focus trap active)</step>
+      <step>Tab bar within detail modal</step>
+      <step>ApplicationEditForm fields</step>
+      <step>ApplicationStatusActions toolbar buttons</step>
+      <step>ApplicationArchiveAction button</step>
+    </focus_order>
+    <landmarks>
+      <landmark role="navigation" label="Application tracker navigation" />
+      <landmark role="main" label="Kanban board" />
+      <landmark role="region" label="Applied applications" />
+      <landmark role="region" label="Interviewing applications" />
+      <landmark role="region" label="Offered applications" />
+      <landmark role="region" label="Rejected applications" />
+      <landmark role="region" label="Archived applications" />
+      <landmark role="dialog" label="Application details" conditional="when modal is open" />
+    </landmarks>
+  </accessibility_overview>
+
+  <storybook>
+    <stories>
+      <story name="Default Board" description="Kanban board with cards in all stages" />
+      <story name="Empty Board" description="No applications yet, shows empty state" />
+      <story name="Loading Board" description="Skeleton placards while fetching" />
+      <story name="Error State" description="Failed to load applications" />
+      <story name="Dragging Card" description="Card being dragged between columns" />
+      <story name="Detail Modal Open" description="Card detail modal with all sub-components" />
+      <story name="Archived Column Expanded" description="Archived column showing restored cards" />
+    </stories>
+  </storybook>
+
+  <compliance_score>
+    <score value="382" max="400" percentage="95.5%" grade="A" status="PASS" />
+  </compliance_score>
+
+</wireframe>

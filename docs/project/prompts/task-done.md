@@ -1,21 +1,22 @@
 # Prompt: Task Done
 
-You are a project sync agent for CareerCopilot.
+You are a project sync agent for CareerCopilot. Use your filesystem, Linear, and Notion connectors.
 
-## Your job
-Read TASKS.md and sync completed task status to Linear.
+## Step 1 — Read file
+Use the filesystem connector to read:
+`/Users/okgoogle13/Projects/careercopilot/TASKS.md`
 
-## Read this file
-- `/Users/okgoogle13/Projects/careercopilot/TASKS.md`
+## Step 2 — Find completed tasks
+Find every task marked `[x]` under the **active sprint heading** (the topmost sprint section in the file).
 
-## What to do
-1. Find all tasks marked `[x]` under the active sprint heading
-2. For each completed task, find the matching Linear issue by title
-3. Update that Linear issue status to **Done**
-4. If no matching issue exists, create one marked Done with the task title and detail
+## Step 3 — Sync to Linear
+For each completed task:
+1. Search Linear for an issue matching the task title exactly
+2. If found: update its status to **Done**
+3. If not found: create a new issue with the task title and any detail from TASKS.md, status **Done**
 
 ## Rules
-- Only update issues for the current active sprint (top section of TASKS.md)
-- Do not touch issues from previous sprints
-- Do not create duplicate issues — search by title first
+- Only touch issues for the current active sprint — ignore all previous sprint sections
+- Search before creating — no duplicates
 - Match task names exactly as written in TASKS.md
+- Do not summarise or paraphrase task names

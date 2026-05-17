@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Loader2, Sparkles, ArrowRight } from 'lucide-react';
 import { Button } from '@careercopilot/ui';
-import type { ImprovedBullet } from '../../services/aiInterface';
+import type { ImprovedBullet } from '../../services/aiTextProcessing';
 
 interface BulletMetricsSuggestorProps {
   /** Bullet rewrites returned by the backend. Empty list shows the CTA. */

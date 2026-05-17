@@ -243,7 +243,9 @@ export class LinearIssueTracker implements IssueTracker {
         limit: filters.limit || 50,
       });
 
-      const issues = response.data.issues.nodes.map((node: any) => this.linearToIssue(node));
+      const issues: Issue[] = response.data.issues.nodes.map((node: any) =>
+        this.linearToIssue(node)
+      );
 
       // Cache all results
       issues.forEach((issue) => this.issueCache.set(issue.id, issue));

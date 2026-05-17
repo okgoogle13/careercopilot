@@ -124,21 +124,14 @@ def start_backend():
     try:
         backend = subprocess.Popen(
             [python_exe, "-m", "uvicorn", "app.main:app", "--reload", "--port", "8000"],
-            cwd="backend",
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True
+            cwd="backend"
         )
 
         # Give it a moment to start
         time.sleep(2)
 
-        # Check if it's still running
         if backend.poll() is not None:
-            # Process died, get error output
-            _, stderr = backend.communicate()
             print(f"{Colors.RED}❌ Backend failed to start!{Colors.END}")
-            print(f"{Colors.RED}Error: {stderr[:500]}{Colors.END}")
             return False
 
         print(f"{Colors.GREEN}   ✅ Backend running on http://localhost:8000{Colors.END}")
@@ -164,8 +157,6 @@ def start_frontend():
         frontend = subprocess.Popen(
             ["yarn", "dev"],
             cwd="frontend",
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
             shell=(os.name == 'nt')  # Windows compatibility
         )
 
@@ -175,9 +166,7 @@ def start_frontend():
 
         # Check if it's still running
         if frontend.poll() is not None:
-            _, stderr = frontend.communicate()
             print(f"{Colors.RED}❌ Frontend failed to start!{Colors.END}")
-            print(f"{Colors.RED}Error: {stderr[:500]}{Colors.END}")
             return False
 
         print(f"{Colors.GREEN}   ✅ Frontend running on http://localhost:5173{Colors.END}")

@@ -37,6 +37,7 @@ concurrency:
 env:
   PYTHON_VERSION: "3.13"
   NODE_VERSION: "20"  # Standards established in CI.yml
+  GIT_LFS_SKIP_SMUDGE: "1"
 
 jobs:
   auto-fix-enhanced:

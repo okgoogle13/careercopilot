@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wireframe version="6.0.0" screen_id="workbench" design_system="kr-solidarity" mode="solidarity-only">
+  <meta>
+    <title>Document Workbench (Resume / Cover Letter Editor)</title>
+    <description>Rich text editor for customizing resume and cover letter documents. Split-pane layout with editor on left, preview on right. Minimal, craft-focused UX.</description>
+    <user_story>As a user, I can customize my resume and cover letters with AI-assisted editing and real-time preview.</user_story>
+    <emotional_register>Craft</emotional_register>
+    <viewport base_width="1440" base_height="900" />
+  </meta>
+
+  <layout><![CDATA[
++------------------------------------------------------------------+
+| [SCAFFOLD: TopNav with document selector]                        |
++------------------------------------------------------------------+
+| [SCAFFOLD: Editor Pane] | [SUBSTRATE: Preview Pane]           |
+| [Text input/textarea]   | [Live document preview]             |
+| [STRIKE: Format tools]  | [MARCH: Download options]           |
+|                         |                                     |
+| [SCAFFOLD: Toolbar]     | [PLACARD: Export]                   |
+| Undo/Redo, Formatting   | PDF / DOCX / TXT buttons            |
++------------------------------------------------------------------+
+  ]]></layout>
+
+  <elements>
+    <!-- Document Title / Selector -->
+    <element id="workbench-title" element_type="text" archetype="Strike" role="heading" layout_role="document-title" x="80" y="160" width="600" height="60">
+      <component_mapping design_system_component="KR/Typography/H2" code_component="Typography" variant="h2" />
+      <content content_type="dynamic" sample_text="Resume — Jane Smith" i18n_label_key="workbench.title" />
+      <tokens color_token="--sys-color-paperWhite" typography_token="--sys-type-font-fraunces" z_layer="Z-3" />
+      <test_ids primary="workbench-title" />
+    </element>
+
+    <!-- Editor Textarea -->
+    <element id="workbench-editor" element_type="textarea" archetype="Scaffold" role="textbox" layout_role="document-editor" x="80" y="240" width="640" height="600">
+      <component_mapping design_system_component="KR/Input/ScaffoldArea" code_component="ScaffoldArea" variant="rich-text" />
+      <content content_type="form-field" sample_text="[Full document text with formatting controls]" i18n_label_key="workbench.editor" />
+      <functionality intent="Edit document content with formatting and AI suggestions." action="Update document state, trigger preview refresh" />
+      <interaction patterns="type,paste,format" states="default,focus,editing" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-scaffoldSlab01" z_layer="Z-2" />
+      <test_ids primary="workbench-editor" />
+    </element>
+
+    <!-- Format Toolbar -->
+    <element id="workbench-toolbar" element_type="toolbar" archetype="Scaffold" role="toolbar" layout_role="format-controls" x="80" y="860" width="640" height="40">
+      <component_mapping design_system_component="KR/Toolbar/Scaffold" code_component="Toolbar" variant="document-format" />
+      <content content_type="static" sample_text="Bold, Italic, Underline, H1, H2, Bullet List, Undo, Redo" i18n_label_key="workbench.toolbar" />
+      <interaction patterns="click" states="default,active" on_click="Apply formatting to selected text" />
+      <tokens color_token="--sys-color-worker-ash-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-scaffoldSlab01" z_layer="Z-2" />
+      <test_ids primary="workbench-toolbar" />
+    </element>
+
+    <!-- Preview Pane -->
+    <element id="workbench-preview" element_type="region" archetype="Substrate" role="region" layout_role="document-preview" x="780" y="240" width="600" height="600">
+      <component_mapping design_system_component="KR/Preview/DocumentPreview" code_component="DocumentPreview" variant="full-page" />
+      <content content_type="dynamic" sample_text="[Live preview of formatted document]" i18n_label_key="workbench.preview" />
+      <interaction patterns="none" states="default" />
+      <tokens color_token="--sys-color-paperWhite" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-substrateTile02" z_layer="Z-1" />
+      <test_ids primary="workbench-preview" />
+    </element>
+
+    <!-- Export Button Group -->
+    <element id="workbench-export" element_type="button-group" archetype="Strike" role="group" layout_role="export-actions" x="780" y="860" width="600" height="40">
+      <component_mapping design_system_component="KR/ButtonGroup/Strike" code_component="ButtonGroup" variant="export-options" />
+      <content content_type="static" sample_text="Download as PDF | Download as DOCX | Download as TXT" />
+      <interaction patterns="click" states="default,hover,disabled" on_click="Export document in selected format" />
+      <tokens color_token="--sys-color-inkGold-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot03" z_layer="Z-3" />
+      <test_ids primary="workbench-export" />
+    </element>
+  </elements>
+
+  <user_flow>
+    <primary_path><![CDATA[
+**Step 1: Open document editor**
+- User navigates to workbench
+- Document title shows current document (Resume or Cover Letter)
+- Editor pane shows document text
+- Preview pane shows live formatting
+
+**Step 2: Edit content**
+- User types or pastes text in editor
+- AI suggestions appear as they type (inline hints)
+- Format toolbar provides quick formatting options
+
+**Step 3: Apply formatting**
+- Select text and use toolbar buttons
+- Bold, italic, headings, bullets supported
+- Preview updates in real-time
+
+**Step 4: Review and refine**
+- User checks preview for final layout
+- Makes adjustments as needed
+- Undo/Redo for quick corrections
+
+**Step 5: Export**
+- Click export button (PDF / DOCX / TXT)
+- Document downloads to user's device
+- Format preserved based on selection
+    ]]></primary_path>
+  </user_flow>
+
+  <compliance_score>
+    <score value="378" max="400" percentage="94.5%" grade="A" status="PASS" />
+  </compliance_score>
+  <assets>
+      <slot name="auto_kr_solid_005" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-005;category=atmospheric;layer=atmospheric;aspect=2:3;priority=HIGH
+    </slot>
+    <slot name="auto_kr_solid_012" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-SOLID-012;category=spiritual;layer=spiritual;aspect=1:1;priority=CRITICAL
+    </slot>
+    <slot name="auto_kr_solid_027" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-027;category=resistance;layer=resistance;aspect=2:3;priority=CRITICAL
+    </slot>
+    <slot name="auto_kr_solid_022" z_layer="Z-0" token="--sys-color-charcoalBackground-base">
+      TODO[asset] asset_id=KR-SOLID-022;category=substrate;layer=substrate;aspect=1:1;priority=HIGH
+    </slot>
+    <slot name="auto_kr_ui_001" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-001;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_015" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-015;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_027" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-027;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_038" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-038;category=ui-kit;layer=ui-kit;aspect=20:3;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_solid_046" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-046;category=heroes;layer=atmospheric;aspect=16:9;priority=HIGH
+    </slot>
+</assets>
+
+</wireframe>

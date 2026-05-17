@@ -1,10 +1,10 @@
 import logging
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from pydantic import BaseModel
 
 from app.agents.job_scout import JobScoutAgent
-from app.api.endpoints._shared import run_endpoint_operation
+from app.api.endpoints._shared import run_endpoint
 
 logger = logging.getLogger(__name__)
 
@@ -42,13 +42,8 @@ async def search_jobs(request: JobSearchRequest):
             found_links=links, message=f"Successfully found {len(links)} potential job links."
         )
 
-    try:
-        return await run_endpoint_operation(
-            operation,
-            "Job search failed",
-            logger=logger,
-        )
-    except HTTPException as exc:
-        if exc.status_code == 500:
-            raise HTTPException(status_code=500, detail="Job search failed") from exc
-        raise
+    return await run_endpoint(
+        operation,
+        "Job search failed",
+        logger=logger,
+    )

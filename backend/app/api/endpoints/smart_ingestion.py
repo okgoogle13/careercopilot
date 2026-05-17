@@ -5,7 +5,7 @@ import logging
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 from fastapi.responses import JSONResponse
 
-from app.api.endpoints._shared import run_endpoint_operation
+from app.api.endpoints._shared import run_endpoint
 from app.core.auth import get_current_user
 from app.core.file_upload_decorators import FileUploadConfig, require_valid_file_upload
 from app.genkit_flows.smart_ingestion import (
@@ -73,19 +73,11 @@ async def upload_and_tag(
             fileSizeBytes=file_size,
         )
 
-    try:
-        return await run_endpoint_operation(
-            operation,
-            "Upload-and-tag failed",
-            logger=logger,
-        )
-    except HTTPException as exc:
-        if exc.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail="Failed to process document",
-            ) from exc
-        raise
+    return await run_endpoint(
+        operation,
+        "Failed to process document",
+        logger=logger,
+    )
 
 
 @router.post(
@@ -122,19 +114,11 @@ async def extract_and_save(
             message=f"{label} successfully extracted and saved to your asset library",
         )
 
-    try:
-        return await run_endpoint_operation(
-            operation,
-            "Extract-and-save failed",
-            logger=logger,
-        )
-    except HTTPException as exc:
-        if exc.status_code == status.HTTP_500_INTERNAL_SERVER_ERROR:
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail="Failed to extract and save document",
-            ) from exc
-        raise
+    return await run_endpoint(
+        operation,
+        "Failed to extract and save document",
+        logger=logger,
+    )
 
 
 @router.get(

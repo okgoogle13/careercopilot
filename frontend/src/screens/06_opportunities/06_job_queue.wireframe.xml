@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wireframe version="6.0.0" screen_id="job_queue" design_system="kr-solidarity" mode="solidarity-only">
+  <meta>
+    <title>Job Queue: Job Discovery (Opportunities)</title>
+    <description>Job search and discovery with filtering, smart matching, and application tracking. Placard-based feed with Strike CTAs and March filters.</description>
+    <user_story>As a user, I can discover curated job opportunities aligned with my skills and apply with one click.</user_story>
+    <emotional_register>Discovery</emotional_register>
+    <viewport base_width="1440" base_height="900" />
+  </meta>
+
+  <layout><![CDATA[
++------------------------------------------------------------------+
+| [SCAFFOLD: TopNav]                                               |
++------------------------------------------------------------------+
+|  [SCAFFOLD: Sidebar filters]  | [PLACARD: Job feed]             |
+|  [MARCH: Category filters]    | [PLACARD: Job card 1 — Apply]  |
+|  [MARCH: Location filter]     | [PLACARD: Job card 2 — Apply]  |
+|  [MARCH: Salary filter]       | [PLACARD: Job card 3 — Apply]  |
+|  [MARCH: Experience level]    | [MARCH: Pagination]             |
+|                               |                                 |
++------------------------------------------------------------------+
+  ]]></layout>
+
+  <elements>
+    <!-- Sidebar Filters -->
+    <element id="filters-category" element_type="select" archetype="March" role="combobox" layout_role="filter" x="80" y="160" width="280" height="56">
+      <component_mapping design_system_component="KR/Select/March" code_component="March" variant="filter" />
+      <content content_type="form-field" label="Category" placeholder="All roles" i18n_label_key="lookout.filter.category" />
+      <functionality intent="Filter jobs by category / role type." action="Update job feed based on selection" />
+      <interaction patterns="click" states="default,open,selected" on_click="Open dropdown, apply filter" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot01" z_layer="Z-3" />
+      <test_ids primary="lookout-filter-category" />
+    </element>
+
+    <!-- Location Filter -->
+    <element id="filters-location" element_type="select" archetype="March" role="combobox" layout_role="filter" x="80" y="240" width="280" height="56">
+      <component_mapping design_system_component="KR/Select/March" code_component="March" variant="filter" />
+      <content content_type="form-field" label="Location" placeholder="All locations" i18n_label_key="lookout.filter.location" />
+      <functionality intent="Filter jobs by location / remote status." action="Update job feed based on selection" />
+      <interaction patterns="click" states="default,open,selected" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot01" z_layer="Z-3" />
+      <test_ids primary="lookout-filter-location" />
+    </element>
+
+    <!-- Job Card 1 -->
+    <element id="job-card-1" element_type="card" archetype="Placard" role="article" layout_role="job-item" x="420" y="160" width="1000" height="160">
+      <component_mapping design_system_component="KR/Card/Placard" code_component="Placard" variant="job-listing" />
+      <content content_type="dynamic" label="Senior Product Designer" sample_text="TechCorp · San Francisco, CA · $130K-$160K · Design, Leadership" i18n_label_key="lookout.job.title" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-placardTorn01" z_layer="Z-2" />
+      <test_ids primary="lookout-job-1" />
+    </element>
+
+    <!-- Job Card 1 Apply Button -->
+    <element id="job-card-1-apply" element_type="button" archetype="Strike" role="button" layout_role="apply-cta" x="1320" y="200" width="100" height="40">
+      <component_mapping design_system_component="KR/Button/Chip" code_component="Strike" variant="compact" />
+      <content content_type="static" label="Apply" i18n_label_key="lookout.job.apply" />
+      <functionality intent="Apply to job listing." action="Show application modal or navigate to application form" />
+      <interaction patterns="click" states="default,hover,pressed,loading" />
+      <tokens color_token="--sys-color-inkGold-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot03" z_layer="Z-3" />
+      <test_ids primary="lookout-job-1-apply" />
+    </element>
+
+    <!-- Job Card 2 -->
+    <element id="job-card-2" element_type="card" archetype="Placard" role="article" layout_role="job-item" x="420" y="340" width="1000" height="160">
+      <component_mapping design_system_component="KR/Card/Placard" code_component="Placard" variant="job-listing" />
+      <content content_type="dynamic" label="UX Researcher" sample_text="StartupLabs · Remote · $100K-$125K · Research, User Testing" i18n_label_key="lookout.job.title" />
+      <tokens color_token="--sys-color-charcoalBackground-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-placardTorn01" z_layer="Z-2" />
+      <test_ids primary="lookout-job-2" />
+    </element>
+
+    <!-- Job Card 2 Apply Button -->
+    <element id="job-card-2-apply" element_type="button" archetype="Strike" role="button" layout_role="apply-cta" x="1320" y="380" width="100" height="40">
+      <component_mapping design_system_component="KR/Button/Chip" code_component="Strike" variant="compact" />
+      <content content_type="static" label="Apply" i18n_label_key="lookout.job.apply" />
+      <functionality intent="Apply to job listing." action="Show application modal or navigate to application form" />
+      <tokens color_token="--sys-color-inkGold-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot03" z_layer="Z-3" />
+      <test_ids primary="lookout-job-2-apply" />
+    </element>
+
+    <!-- Pagination -->
+    <element id="pagination" element_type="navigation" archetype="March" role="navigation" layout_role="pagination" x="420" y="740" width="1000" height="40">
+      <component_mapping design_system_component="KR/Pagination/March" code_component="Pagination" variant="default" />
+      <content content_type="dynamic" sample_text="Page 1 of 25 · Next / Previous" i18n_label_key="lookout.pagination" />
+      <interaction patterns="click" states="default,active,disabled" on_click="Navigate to page" />
+      <tokens color_token="--sys-color-worker-ash-base" typography_token="--sys-type-font-work-sans" shape_token="--sys-shape-blockRiot01" z_layer="Z-3" />
+      <test_ids primary="lookout-pagination" />
+    </element>
+  </elements>
+
+  <user_flow>
+    <primary_path><![CDATA[
+**Step 1: Land on job discovery**
+- Sidebar shows filter options
+- Job feed loads with default recommendations
+- Jobs are ranked by relevance to user profile
+
+**Step 2: Filter (optional)**
+- User adjusts filters: category, location, salary, experience level
+- Job feed updates in real-time
+- Matching count updates
+
+**Step 3: Browse jobs**
+- User scrolls through job cards
+- Each card shows title, company, location, salary range
+- Visual indicators for match quality (star rating, badge)
+
+**Step 4: Apply**
+- Click "Apply" button on job card
+- Modal or form appears for quick application
+- User can customize application or use pre-filled resume/cover letter
+- Confirmation on successful application
+
+**Step 5: Pagination**
+- User navigates to next page of results
+- Feed updates with new jobs
+    ]]></primary_path>
+  </user_flow>
+
+  <compliance_score>
+    <score value="380" max="400" percentage="95%" grade="A" status="PASS" />
+  </compliance_score>
+  <assets>
+      <slot name="auto_kr_solid_003" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-003;category=atmospheric;layer=atmospheric;aspect=1:1;priority=HIGH
+    </slot>
+    <slot name="auto_kr_solid_010" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-SOLID-010;category=spiritual;layer=spiritual;aspect=1:1;priority=CRITICAL
+    </slot>
+    <slot name="auto_kr_solid_025" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-025;category=resistance;layer=resistance;aspect=3:2;priority=CRITICAL
+    </slot>
+    <slot name="auto_kr_solid_007" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-007;category=atmospheric;layer=atmospheric;aspect=1:1;priority=HIGH
+    </slot>
+    <slot name="auto_kr_brutalist_mask_001" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-BRUTALIST-MASK-001;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_013" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-013;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_025" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-025;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_ui_036" z_layer="Z-3" token="--sys-color-inkGold-base">
+      TODO[asset] asset_id=KR-UI-036;category=ui-kit;layer=ui-kit;aspect=1:1;priority=MEDIUM
+    </slot>
+    <slot name="auto_kr_solid_044" z_layer="Z-1" token="--sys-color-protestMetalBlue-base">
+      TODO[asset] asset_id=KR-SOLID-044;category=heroes;layer=resistance;aspect=16:9;priority=CRITICAL
+    </slot>
+</assets>
+
+</wireframe>

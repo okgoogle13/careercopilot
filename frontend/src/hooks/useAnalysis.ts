@@ -4,7 +4,7 @@ import {
   analyzeJobDescription,
   analyzeJobFromUrl,
   generateIntelligencePackage,
-} from '../services/aiInterface';
+} from '../services/aiTextProcessing';
 import { EXPERT_RESUME_AUDITOR_PROMPT } from '../services/prompts';
 
 /**
