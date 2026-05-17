@@ -16,12 +16,10 @@ export interface FeedItemBase {
 }
 
 interface UseFeedDataOptions<T extends FeedItemBase> {
-  endpoint: string;
   fallback?: T[];
 }
 
 export function useFeedData<T extends FeedItemBase>({
-  endpoint,
   fallback: fallbackOverride,
 }: UseFeedDataOptions<T>) {
   const fallback = useMemo<T[]>(
@@ -108,7 +106,7 @@ export function useFeedData<T extends FeedItemBase>({
     return () => {
       active = false;
     };
-  }, [endpoint, fallback]);
+  }, [fallback]);
 
   return { feed, isLoading, error };
 }

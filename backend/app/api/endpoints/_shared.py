@@ -50,23 +50,14 @@ async def run_endpoint_operation(
     bad_request_exceptions: tuple[type[Exception], ...] = (),
     logger: Any | None = None,
 ) -> T:
-    """Run a non-Genkit endpoint operation with consistent exception mapping."""
-    try:
-        return await operation()
-    except HTTPException:
-        raise
-    except bad_request_exceptions as exc:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=str(exc),
-        ) from exc
-    except Exception as exc:
-        if logger is not None:
-            logger.error("%s: %s", failure_message, exc, exc_info=True)
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"{failure_message}: {exc!s}",
-        ) from exc
+    """Deprecated: use run_endpoint for new endpoint wrappers."""
+    return await run_endpoint(
+        operation,
+        failure_message,
+        bad_request_exceptions=bad_request_exceptions,
+        logger=logger,
+        include_exception_detail=True,
+    )
 
 
 async def run_endpoint(
