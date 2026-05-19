@@ -1,0 +1,606 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+--dark:#0f0f0f;--dark2:#161616;--dark3:#1e1e1e;--dark4:#252525;--dark5:#2e2e2e;
+--border:#333;--border2:#3f3f3f;
+--text:#e8e8e8;--text2:#a0a0a0;--text3:#666;
+--accent:#c9a96e;--accent2:#e0c48a;
+--paper:#ffffff;--paper2:#f7f6f4;
+--red:#e24b4a;--green:#639922;
+}
+body{background:var(--dark);color:var(--text);font-family:'Georgia',serif;min-height:100vh}
+h2,h3,h4{font-family:'Georgia',serif;font-weight:400;color:var(--text)}
+button{cursor:pointer;border:none;background:none;font-family:inherit;color:var(--text)}
+textarea,input,select{font-family:inherit;color:var(--text);background:var(--dark3);border:0.5px solid var(--border);border-radius:4px;font-size:13px;outline:none;transition:border-color .15s}
+textarea:focus,input:focus,select:focus{border-color:var(--accent)}
+label{font-size:12px;color:var(--text2);letter-spacing:.05em;text-transform:uppercase;display:block;margin-bottom:5px}
+
+#app{max-width:900px;margin:0 auto;padding:24px 16px 60px}
+
+.cc-header{display:flex;align-items:center;gap:12px;margin-bottom:28px;padding-bottom:18px;border-bottom:0.5px solid var(--border)}
+.cc-logo{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:0.5px solid var(--accent);padding:4px 8px;border-radius:3px;white-space:nowrap}
+.cc-title{font-size:15px;color:var(--text2);font-family:'Georgia',serif;font-style:italic}
+
+.step-indicator{display:flex;align-items:center;gap:0;margin-bottom:24px}
+.step-pip{display:flex;align-items:center;gap:8px;flex:1}
+.step-num{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:monospace;border:0.5px solid var(--border2);color:var(--text3);flex-shrink:0;transition:all .2s}
+.step-num.active{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.08)}
+.step-num.done{border-color:var(--green);color:var(--green);background:rgba(99,153,34,.08)}
+.step-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;transition:color .2s}
+.step-label.active{color:var(--accent)}
+.step-label.done{color:var(--green)}
+.step-line{height:0.5px;background:var(--border);flex:1;margin:0 8px}
+
+.wizard-card{background:var(--dark2);border:0.5px solid var(--border);border-radius:8px;padding:24px}
+.wizard-title{font-size:18px;color:var(--text);margin-bottom:4px}
+.wizard-sub{font-size:13px;color:var(--text2);margin-bottom:22px;font-style:italic}
+.field-group{margin-bottom:18px}
+.field-group textarea{width:100%;resize:vertical;padding:10px;border-radius:4px;line-height:1.55}
+.field-group input{width:100%;padding:8px 10px;border-radius:4px}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.row-2 .field-group{margin-bottom:0}
+
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:22px}
+.btn-nav{font-size:13px;padding:8px 18px;border-radius:4px;border:0.5px solid var(--border2);color:var(--text2);background:var(--dark3);transition:all .15s;letter-spacing:.04em}
+.btn-nav:hover{border-color:var(--accent);color:var(--accent)}
+.btn-nav.primary{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.07)}
+.btn-nav.primary:hover{background:rgba(201,169,110,.14)}
+.btn-nav:disabled{opacity:.3;pointer-events:none}
+
+.step3-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.gen-col{display:flex;flex-direction:column;gap:10px}
+.gen-section-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:2px}
+.gen-card{background:var(--dark3);border:0.5px solid var(--border2);border-radius:6px;padding:14px}
+select{width:100%;padding:8px 10px;border-radius:4px;background:var(--dark3);border:0.5px solid var(--border);color:var(--text)}
+.btn-gen{width:100%;padding:10px;border-radius:4px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;border:0.5px solid;transition:all .15s;margin-top:10px}
+.btn-gen.resume{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.07)}
+.btn-gen.resume:hover{background:rgba(201,169,110,.16)}
+.btn-gen.cover{border-color:#7eb3d4;color:#7eb3d4;background:rgba(126,179,212,.07)}
+.btn-gen.cover:hover{background:rgba(126,179,212,.16)}
+.btn-gen:disabled{opacity:.3;pointer-events:none}
+
+.output-section{margin-top:28px;border-top:0.5px solid var(--border);padding-top:24px}
+.output-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px}
+.output-tabs{display:flex;gap:0;border:0.5px solid var(--border);border-radius:5px;overflow:hidden}
+.tab-btn{padding:7px 16px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;border:none;background:var(--dark3);color:var(--text3);transition:all .15s;border-right:0.5px solid var(--border)}
+.tab-btn:last-child{border-right:none}
+.tab-btn.active{background:var(--dark5);color:var(--text)}
+.export-row{display:flex;gap:8px;flex-wrap:wrap}
+.btn-export{font-size:11px;padding:6px 12px;border-radius:3px;border:0.5px solid var(--border2);color:var(--text2);background:var(--dark3);letter-spacing:.05em;transition:all .12s}
+.btn-export:hover{border-color:var(--accent);color:var(--accent)}
+
+.doc-wrapper{background:var(--dark2);border:0.5px solid var(--border);border-radius:6px;padding:16px}
+.doc-status{font-size:11px;color:var(--text3);margin-bottom:10px;font-style:italic;text-align:center}
+.paper-frame{background:var(--paper);border-radius:3px;overflow:hidden}
+.paper-inner{min-height:400px;padding:0}
+[contenteditable]{outline:none}
+
+.blank-toggle{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);margin-top:12px}
+.blank-toggle input[type=checkbox]{accent-color:var(--accent);width:14px;height:14px}
+
+.notif{position:fixed;bottom:20px;right:20px;background:var(--dark4);border:0.5px solid var(--border2);border-radius:5px;padding:10px 16px;font-size:12px;color:var(--text2);transition:opacity .3s;pointer-events:none;z-index:99}
+</style>
+
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden">CareerCopilot Document Builder — wizard for tailoring ATS-safe resumes and cover letters</h2>
+
+<div id="app">
+  <div class="cc-header">
+    <div class="cc-logo">CareerCopilot</div>
+    <div class="cc-title">Document Builder</div>
+  </div>
+
+  <div class="step-indicator" id="stepIndicator"></div>
+
+  <div id="wizardWrap"></div>
+  <div id="outputSection" style="display:none"></div>
+</div>
+
+<div class="notif" id="notif" style="opacity:0"></div>
+
+<script>
+const STEPS = ['Source Material','Job Target','Preferences & Generate'];
+
+const state = {
+  step: 0,
+  sourceResume: '',
+  sourceCoverLetter: '',
+  jobTitle: '',
+  employer: '',
+  positionDesc: '',
+  rolesResp: '',
+  ksc: '',
+  userNotes: '',
+  template: 'community-warm',
+  tone: 'professional',
+  resumeOutput: null,
+  coverOutput: null,
+  activeTab: 'resume'
+};
+
+const TEMPLATES = {
+  'ats-classic': {
+    label: 'ATS Classic',
+    fontStack: '"Times New Roman", Georgia, serif',
+    headingTransform: 'uppercase',
+    headingSize: '11px',
+    headingWeight: '700',
+    headingRule: true,
+    headingSpacing: '.12em',
+    sectionGap: '14px',
+    lineHeight: '1.3',
+    nameSize: '22px',
+    headlineSize: '13px',
+    dateStyle: 'normal',
+    bulletChar: '•'
+  },
+  'community-warm': {
+    label: 'Community Warm',
+    fontStack: 'Georgia, "Times New Roman", serif',
+    headingTransform: 'none',
+    headingSize: '12.5px',
+    headingWeight: '600',
+    headingRule: true,
+    headingRuleStyle: 'hairline',
+    headingSpacing: '.02em',
+    sectionGap: '20px',
+    lineHeight: '1.3',
+    nameSize: '26px',
+    headlineSize: '14px',
+    dateStyle: 'italic',
+    bulletChar: '•'
+  },
+  'modern-clean': {
+    label: 'Modern Clean',
+    fontStack: 'Arial, Helvetica, Calibri, sans-serif',
+    headingTransform: 'uppercase',
+    headingSize: '10px',
+    headingWeight: '600',
+    headingRule: false,
+    headingSpacing: '.18em',
+    sectionGap: '18px',
+    lineHeight: '1.25',
+    nameSize: '24px',
+    headlineSize: '12px',
+    dateStyle: 'normal',
+    bulletChar: '–',
+    smallCaps: true
+  },
+  'compact-one-page': {
+    label: 'Compact One-Page',
+    fontStack: 'Tahoma, Verdana, Arial, sans-serif',
+    headingTransform: 'none',
+    headingSize: '11px',
+    headingWeight: '700',
+    headingRule: false,
+    headingSpacing: '.04em',
+    sectionGap: '10px',
+    lineHeight: '1.12',
+    nameSize: '18px',
+    headlineSize: '11px',
+    dateStyle: 'normal',
+    bulletChar: '–'
+  }
+};
+
+const TONES = {
+  professional: 'Professional',
+  warm: 'Warm / conversational',
+  formal: 'Formal',
+  concise: 'Concise / direct'
+};
+
+function getTemplateCSS(t, forPrint) {
+  return `
+    font-family:${t.fontStack};
+    font-size:${forPrint ? '10pt' : '13px'};
+    line-height:${t.lineHeight};
+    color:#111;
+    padding:${forPrint ? '0' : '32px 36px'};
+    background:white;
+    max-width:680px;
+    margin:0 auto;
+  `;
+}
+
+function sectionHeading(t, text) {
+  let style = `
+    font-family:${t.fontStack};
+    font-size:${t.headingSize};
+    font-weight:${t.headingWeight};
+    letter-spacing:${t.headingSpacing};
+    text-transform:${t.headingTransform};
+    margin:0 0 6px 0;
+    color:#111;
+  `;
+  if(t.headingRule) {
+    if(t.headingRuleStyle === 'hairline') {
+      style += 'border-bottom:0.5px solid #ccc;padding-bottom:3px;';
+    } else {
+      style += 'border-bottom:1.5px solid #111;padding-bottom:3px;';
+    }
+  }
+  if(t.smallCaps) style += 'font-variant:small-caps;';
+  return `<div style="${style}">${text}</div>`;
+}
+
+function bulletLine(t, text) {
+  return `<div style="display:flex;gap:8px;line-height:${t.lineHeight};margin-bottom:3px;"><span style="flex-shrink:0;margin-top:1px">${t.bulletChar}</span><span>${text}</span></div>`;
+}
+
+function buildResume(s, blank) {
+  const t = TEMPLATES[s.template];
+  const v = (field, placeholder) => blank ? placeholder : (field && field.trim() ? field.trim() : placeholder);
+
+  const name = v('', '[Full Name]');
+  const phone = '[Phone]';
+  const email = '[Email]';
+  const location = '[City, State]';
+  const linkedin = '[LinkedIn URL]';
+  const headline = v('', '[Professional Headline — one line, tailored to role]');
+  const summary = v('', '[Professional summary — 2–4 sentences tailored to position, drawing from your experience and the job requirements.]');
+
+  const jobT = v(s.jobTitle, '[Target Job Title]');
+  const emp = v(s.employer, '[Employer Name]');
+
+  let nameStyle = `font-family:${t.fontStack};font-size:${t.nameSize};font-weight:700;color:#111;margin-bottom:4px;`;
+  let headlineStyle = `font-family:${t.fontStack};font-size:${t.headlineSize};color:#333;margin-bottom:6px;${t.headingWeight === '600' && t.headingRuleStyle ? 'font-weight:500;' : ''}`;
+  let contactStyle = `font-size:11px;color:#555;margin-bottom:0px;`;
+
+  let html = `<div style="${getTemplateCSS(t,false)}">`;
+
+  html += `<div style="margin-bottom:18px">`;
+  html += `<div style="${nameStyle}">${name}</div>`;
+  if(t.fontStack.includes('Georgia') || t.fontStack.includes('Times')) {
+    html += `<div style="${headlineStyle}font-style:italic;">${headline}</div>`;
+  } else {
+    html += `<div style="${headlineStyle}">${headline}</div>`;
+  }
+  html += `<div style="${contactStyle}">${phone} &nbsp;|&nbsp; ${email} &nbsp;|&nbsp; ${location} &nbsp;|&nbsp; ${linkedin}</div>`;
+  html += `</div>`;
+
+  html += `<div style="margin-bottom:${t.sectionGap}">`;
+  html += sectionHeading(t, 'Professional Summary');
+  html += `<p style="margin-top:6px;line-height:${t.lineHeight}">${summary}</p>`;
+  html += `</div>`;
+
+  html += `<div style="margin-bottom:${t.sectionGap}">`;
+  html += sectionHeading(t, 'Work Experience');
+  for(let i=0;i<3;i++){
+    const ji = i===0 ? jobT : '[Job Title]';
+    const ei = i===0 ? emp : '[Employer Name]';
+    html += `<div style="margin-top:${i===0?'8px':'14px'}">`;
+    html += `<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap">`;
+    html += `<span style="font-weight:600;font-size:13px">${ji}</span>`;
+    html += `<span style="font-size:11px;color:#666;${t.dateStyle==='italic'?'font-style:italic':''}">[Month Year] – [Month Year]</span>`;
+    html += `</div>`;
+    html += `<div style="font-size:12px;color:#555;margin-bottom:5px">${ei} &nbsp;· &nbsp;[City, State]</div>`;
+    html += bulletLine(t, '[Responsibility or achievement — use quantifiable outcomes where possible.]');
+    html += bulletLine(t, '[Responsibility or achievement.]');
+    html += bulletLine(t, '[Responsibility or achievement.]');
+    html += `</div>`;
+  }
+  html += `</div>`;
+
+  html += `<div style="margin-bottom:${t.sectionGap}">`;
+  html += sectionHeading(t, 'Education');
+  html += `<div style="margin-top:8px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap">`;
+  html += `<span style="font-weight:600">[Degree]</span>`;
+  html += `<span style="font-size:11px;color:#666;${t.dateStyle==='italic'?'font-style:italic':''}">[Year]</span>`;
+  html += `</div>`;
+  html += `<div style="font-size:12px;color:#555">[Institution]</div>`;
+  html += `</div>`;
+
+  html += `<div style="margin-bottom:${t.sectionGap}">`;
+  html += sectionHeading(t, 'Skills');
+  html += `<div style="margin-top:8px;line-height:1.6;font-size:12px">[Skill] &nbsp;·&nbsp; [Skill] &nbsp;·&nbsp; [Skill] &nbsp;·&nbsp; [Skill] &nbsp;·&nbsp; [Skill] &nbsp;·&nbsp; [Skill]</div>`;
+  html += `</div>`;
+
+  if(s.ksc && s.ksc.trim()) {
+    html += `<div style="margin-bottom:${t.sectionGap}">`;
+    html += sectionHeading(t, 'Key Selection Criteria');
+    const criteria = s.ksc.split('\n').filter(l=>l.trim());
+    criteria.forEach((c,i)=>{
+      html += `<div style="margin-top:10px">`;
+      html += `<div style="font-weight:600;font-size:13px;margin-bottom:4px">${c.trim()}</div>`;
+      html += `<p style="line-height:${t.lineHeight};font-size:13px">[Criterion ${i+1} response — Situation: [context]. Task: [your responsibility]. Action: [specific steps taken]. Result: [measurable outcome].]</p>`;
+      html += `</div>`;
+    });
+    html += `</div>`;
+  }
+
+  html += `</div>`;
+  return html;
+}
+
+function buildCoverLetter(s, blank) {
+  const t = TEMPLATES[s.template];
+  const v = (field, placeholder) => blank ? placeholder : (field && field.trim() ? field.trim() : placeholder);
+
+  const jobT = v(s.jobTitle, '[Position Title]');
+  const emp = v(s.employer, '[Employer Name]');
+
+  const toneNote = {
+    professional: 'clear and professional',
+    warm: 'warm and conversational',
+    formal: 'formal and respectful',
+    concise: 'concise and direct'
+  }[s.tone] || 'professional';
+
+  let html = `<div style="${getTemplateCSS(t,false)}">`;
+  html += `<div style="font-size:12px;color:#555;margin-bottom:20px">[Date]</div>`;
+  html += `<div style="font-size:13px;margin-bottom:18px;line-height:1.6">[Recipient Name]<br>[Recipient Title]<br>${emp}<br>[Address]</div>`;
+  html += `<div style="font-size:13px;margin-bottom:14px">Dear [Salutation],</div>`;
+
+  html += `<p style="line-height:${t.lineHeight};margin-bottom:14px;font-size:13px">[Opening paragraph — state the role you are applying for, where you found it, and a brief reason you are a strong candidate. Tone: ${toneNote}.]</p>`;
+  html += `<p style="line-height:${t.lineHeight};margin-bottom:14px;font-size:13px">[Second paragraph — connect your key experience and skills to the core requirements of the role. Reference specific aspects of the position description.]</p>`;
+  html += `<p style="line-height:${t.lineHeight};margin-bottom:14px;font-size:13px">[Third paragraph — speak to why you are drawn to ${emp} specifically. Demonstrate knowledge of the organisation and alignment with its values or mission.]</p>`;
+  html += `<p style="line-height:${t.lineHeight};margin-bottom:20px;font-size:13px">[Closing paragraph — express enthusiasm for the opportunity, invite further discussion, and thank the reader.]</p>`;
+
+  html += `<div style="font-size:13px">Yours sincerely,<br><br><br>[Full Name]<br>[Phone] &nbsp;|&nbsp; [Email]</div>`;
+  html += `</div>`;
+  return html;
+}
+
+function toPlainText(html) {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  return tmp.innerText;
+}
+
+function toMarkdown(html) {
+  let t = html
+    .replace(/<div[^>]*style="[^"]*font-size:\s*(22|26|24|18)px[^"]*"[^>]*>(.*?)<\/div>/gi, '# $2')
+    .replace(/<div[^>]*style="[^"]*font-variant:small-caps[^"]*"[^>]*>(.*?)<\/div>/gi, '## $1')
+    .replace(/<div[^>]*border-bottom[^>]*>(.*?)<\/div>/gi, '## $1')
+    .replace(/<div[^>]*font-weight:\s*[67]00[^>]*>(.*?)<\/div>/gi, '**$1**')
+    .replace(/<p[^>]*>(.*?)<\/p>/gi, '$1\n\n')
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<span[^>]*>([•–])<\/span>\s*<span[^>]*>(.*?)<\/span>/gi, '$1 $2')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/\n{3,}/g, '\n\n');
+  return t.trim();
+}
+
+function notify(msg) {
+  const el = document.getElementById('notif');
+  el.textContent = msg;
+  el.style.opacity = '1';
+  setTimeout(()=>el.style.opacity='0', 2000);
+}
+
+function renderStepIndicator() {
+  const el = document.getElementById('stepIndicator');
+  el.innerHTML = STEPS.map((s,i)=>{
+    const done = i < state.step;
+    const active = i === state.step;
+    const nc = done?'done':active?'active':'';
+    const lc = done?'done':active?'active':'';
+    return `
+      ${i>0?'<div class="step-line"></div>':''}
+      <div class="step-pip">
+        <div class="step-num ${nc}">${done?'✓':i+1}</div>
+        <div class="step-label ${lc}">${s}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderStep() {
+  renderStepIndicator();
+  const wrap = document.getElementById('wizardWrap');
+  if(state.step === 0) {
+    wrap.innerHTML = `
+      <div class="wizard-card">
+        <div class="wizard-title">Source Material</div>
+        <div class="wizard-sub">Paste existing documents as raw material for generation. Leave blank to use placeholder scaffolds only.</div>
+        <div class="field-group">
+          <label>Past Resume(s)</label>
+          <textarea id="sourceResume" rows="6" placeholder="Paste one or more past resumes here…">${state.sourceResume}</textarea>
+        </div>
+        <div class="field-group">
+          <label>Past Cover Letter(s)</label>
+          <textarea id="sourceCoverLetter" rows="4" placeholder="Paste past cover letters here…">${state.sourceCoverLetter}</textarea>
+        </div>
+        <div class="nav-row">
+          <span></span>
+          <button class="btn-nav primary" onclick="advance(1)">Job Target →</button>
+        </div>
+      </div>
+    `;
+    document.getElementById('sourceResume').oninput = e => state.sourceResume = e.target.value;
+    document.getElementById('sourceCoverLetter').oninput = e => state.sourceCoverLetter = e.target.value;
+  } else if(state.step === 1) {
+    wrap.innerHTML = `
+      <div class="wizard-card">
+        <div class="wizard-title">Job Target</div>
+        <div class="wizard-sub">Describe the role you are applying for.</div>
+        <div class="row-2">
+          <div class="field-group">
+            <label>Job Title</label>
+            <input id="jobTitle" type="text" value="${state.jobTitle}">
+          </div>
+          <div class="field-group">
+            <label>Employer Name</label>
+            <input id="employer" type="text" value="${state.employer}">
+          </div>
+        </div>
+        <div class="field-group" style="margin-top:14px">
+          <label>Position Description</label>
+          <textarea id="positionDesc" rows="5" placeholder="Paste the full position description…">${state.positionDesc}</textarea>
+        </div>
+        <div class="field-group">
+          <label>Roles &amp; Responsibilities</label>
+          <textarea id="rolesResp" rows="4" placeholder="List key responsibilities from the ad…">${state.rolesResp}</textarea>
+        </div>
+        <div class="field-group">
+          <label>Key Selection Criteria</label>
+          <textarea id="ksc" rows="4" placeholder="One criterion per line…">${state.ksc}</textarea>
+        </div>
+        <div class="nav-row">
+          <button class="btn-nav" onclick="advance(-1)">← Back</button>
+          <button class="btn-nav primary" onclick="advance(1)">Preferences →</button>
+        </div>
+      </div>
+    `;
+    ['jobTitle','employer','positionDesc','rolesResp','ksc'].forEach(id=>{
+      document.getElementById(id).oninput = e => state[id] = e.target.value;
+    });
+  } else if(state.step === 2) {
+    const tmplOptions = Object.entries(TEMPLATES).map(([k,v])=>`<option value="${k}" ${state.template===k?'selected':''}>${v.label}</option>`).join('');
+    const toneOptions = Object.entries(TONES).map(([k,v])=>`<option value="${k}" ${state.tone===k?'selected':''}>${v}</option>`).join('');
+    wrap.innerHTML = `
+      <div class="wizard-card">
+        <div class="wizard-title">Preferences &amp; Generate</div>
+        <div class="wizard-sub">Set options then generate each document independently.</div>
+        <div class="field-group" style="margin-bottom:20px">
+          <label>User Notes</label>
+          <textarea id="userNotes" rows="3" placeholder="Additional instructions, things to emphasise, things to avoid…">${state.userNotes}</textarea>
+        </div>
+        <div class="step3-grid">
+          <div class="gen-card">
+            <div class="gen-section-label">Resume</div>
+            <div class="field-group" style="margin-bottom:10px;margin-top:10px">
+              <label>Template</label>
+              <select id="tmplSel">${tmplOptions}</select>
+            </div>
+            <div class="blank-toggle">
+              <input type="checkbox" id="blankResume">
+              <label for="blankResume" style="text-transform:none;margin-bottom:0;letter-spacing:normal;font-size:12px">Blank template (placeholders only)</label>
+            </div>
+            <button class="btn-gen resume" onclick="doGenResume()">Generate Resume</button>
+          </div>
+          <div class="gen-card">
+            <div class="gen-section-label">Cover Letter</div>
+            <div class="field-group" style="margin-bottom:10px;margin-top:10px">
+              <label>Tone</label>
+              <select id="toneSel">${toneOptions}</select>
+            </div>
+            <div class="blank-toggle">
+              <input type="checkbox" id="blankCover">
+              <label for="blankCover" style="text-transform:none;margin-bottom:0;letter-spacing:normal;font-size:12px">Blank template (placeholders only)</label>
+            </div>
+            <button class="btn-gen cover" onclick="doGenCover()">Generate Cover Letter</button>
+          </div>
+        </div>
+        <div class="nav-row">
+          <button class="btn-nav" onclick="advance(-1)">← Back</button>
+          <span></span>
+        </div>
+      </div>
+    `;
+    document.getElementById('userNotes').oninput = e => state.userNotes = e.target.value;
+    document.getElementById('tmplSel').onchange = e => { state.template = e.target.value; };
+    document.getElementById('toneSel').onchange = e => { state.tone = e.target.value; };
+  }
+}
+
+function advance(dir) {
+  state.step = Math.max(0, Math.min(2, state.step + dir));
+  renderStep();
+}
+
+function doGenResume() {
+  const blank = document.getElementById('blankResume')?.checked;
+  state.resumeOutput = buildResume(state, blank);
+  renderOutput();
+  state.activeTab = 'resume';
+  updateOutput();
+}
+
+function doGenCover() {
+  const blank = document.getElementById('blankCover')?.checked;
+  state.coverOutput = buildCoverLetter(state, blank);
+  renderOutput();
+  state.activeTab = 'cover';
+  updateOutput();
+}
+
+function renderOutput() {
+  const sec = document.getElementById('outputSection');
+  if(sec.innerHTML) { updateOutput(); return; }
+  sec.style.display = 'block';
+  sec.innerHTML = `
+    <div class="output-header">
+      <div class="output-tabs">
+        <button class="tab-btn" id="tabResume" onclick="switchTab('resume')">Tailored Resume</button>
+        <button class="tab-btn" id="tabCover" onclick="switchTab('cover')">Cover Letter</button>
+      </div>
+      <div class="export-row">
+        <button class="btn-export" onclick="doExport('text')"><i class="ti ti-copy" aria-hidden="true"></i> Copy Text</button>
+        <button class="btn-export" onclick="doExport('md')"><i class="ti ti-file" aria-hidden="true"></i> Copy Markdown</button>
+        <button class="btn-export" onclick="doExport('print')"><i class="ti ti-printer" aria-hidden="true"></i> Print</button>
+      </div>
+    </div>
+    <div class="doc-wrapper">
+      <div class="doc-status" id="docStatus"></div>
+      <div class="paper-frame">
+        <div id="docContent" contenteditable="true" spellcheck="true"></div>
+      </div>
+    </div>
+  `;
+  updateOutput();
+  sec.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function switchTab(tab) {
+  state.activeTab = tab;
+  updateOutput();
+}
+
+function updateOutput() {
+  const tabR = document.getElementById('tabResume');
+  const tabC = document.getElementById('tabCover');
+  const content = document.getElementById('docContent');
+  const status = document.getElementById('docStatus');
+  if(!tabR) return;
+
+  tabR.className = 'tab-btn' + (state.activeTab==='resume'?' active':'');
+  tabC.className = 'tab-btn' + (state.activeTab==='cover'?' active':'');
+
+  if(state.activeTab==='resume') {
+    if(state.resumeOutput) {
+      content.innerHTML = state.resumeOutput;
+      status.textContent = '';
+    } else {
+      content.innerHTML = '';
+      status.textContent = 'Resume not yet generated — use the Generate Resume button above.';
+    }
+  } else {
+    if(state.coverOutput) {
+      content.innerHTML = state.coverOutput;
+      status.textContent = '';
+    } else {
+      content.innerHTML = '';
+      status.textContent = 'Cover letter not yet generated — use the Generate Cover Letter button above.';
+    }
+  }
+}
+
+function doExport(type) {
+  const html = state.activeTab==='resume' ? state.resumeOutput : state.coverOutput;
+  if(!html) { notify('Nothing to export — generate a document first.'); return; }
+  if(type==='text') {
+    navigator.clipboard.writeText(toPlainText(html)).then(()=>notify('Plain text copied.'));
+  } else if(type==='md') {
+    navigator.clipboard.writeText(toMarkdown(html)).then(()=>notify('Markdown copied.'));
+  } else if(type==='print') {
+    const w = window.open('','_blank');
+    const t = TEMPLATES[state.template];
+    w.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Document</title><style>
+      *{box-sizing:border-box;margin:0;padding:0}
+      body{font-family:${t.fontStack};font-size:10pt;line-height:${t.lineHeight};color:#111;padding:25mm 20mm;max-width:none}
+      @media print{body{padding:0}}
+    </style></head><body>${html}</body></html>`);
+    w.document.close();
+    w.focus();
+    setTimeout(()=>w.print(), 400);
+  }
+}
+
+renderStep();
+</script>

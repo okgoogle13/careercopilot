@@ -13,8 +13,19 @@ export interface AuthResponse {
   token: string;
 }
 
+export interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+export interface RegisterPayload {
+  email: string;
+  password: string;
+  name: string;
+}
+
 // 1. LOGIN
-export const login = async (credentials: any): Promise<AuthResponse> => {
+export const login = async (credentials: LoginCredentials): Promise<AuthResponse> => {
   const response = await axiosInstance.post('/auth/login', credentials);
   const data = response.data;
   // Map backend response to frontend shape
@@ -28,7 +39,7 @@ export const login = async (credentials: any): Promise<AuthResponse> => {
 };
 
 // 2. REGISTER
-export const register = async (userData: any): Promise<AuthResponse> => {
+export const register = async (userData: RegisterPayload): Promise<AuthResponse> => {
   const response = await axiosInstance.post('/auth/register', userData);
   const data = response.data;
   const user: User = {

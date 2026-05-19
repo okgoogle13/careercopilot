@@ -93,7 +93,8 @@ export const useUserStore = create<UserState>()(
           });
           localStorage.setItem('cc_master_status', data.has_master ? 'true' : 'false');
           return Boolean(data.has_master);
-        } catch {
+        } catch (e) {
+          console.error('[userStore] checkMaster failed:', e);
           const cached = localStorage.getItem('cc_master_status') === 'true';
           set({
             hasMaster: cached,

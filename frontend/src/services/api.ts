@@ -205,7 +205,7 @@ export const realApi = {
   },
 
   async getUserStats(): Promise<UserStats> {
-    // Fallback to mock for now
+    // TODO: backend /api/users/stats endpoint not yet implemented — returns mock intentionally
     return mockApi.getUserStats();
   },
 

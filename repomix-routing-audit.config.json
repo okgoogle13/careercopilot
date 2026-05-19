@@ -1,0 +1,44 @@
+{
+  "output": {
+    "filePath": "repomix-routing-audit.xml",
+    "style": "xml",
+    "headerText": "CareerCopilot Routing Audit Context",
+    "removeComments": false,
+    "removeEmptyLines": false,
+    "topFilesLength": 20,
+    "showLineNumbers": true
+  },
+  "include": [
+    "frontend/src/config/route-registry.ts",
+    "frontend/src/config/route-registry.types.ts",
+    "frontend/src/config/routeModeMap.ts",
+    "frontend/src/App.tsx",
+    "frontend/src/config/navigation.tsx",
+    "frontend/src/config/navigation.schema.ts",
+    "frontend/src/layouts/**/*.tsx",
+    "frontend/src/layouts/**/*.ts",
+    "frontend/src/screens/**/*.ts",
+    "frontend/src/screens/**/*.tsx",
+    "frontend/src/screens/mapping.schema.json",
+    "frontend/src/features/**/*.tsx",
+    "frontend/src/features/**/*.ts",
+    "tools/ci/check-route-integrity.ts",
+    "tools/ci/check-screen-pairs.ts",
+    "tools/ci/check-all.ts",
+    "tools/ci/check-capability-alignment.ts"
+  ],
+  "ignore": {
+    "useGitignore": true,
+    "useDefaultPatterns": true,
+    "customPatterns": [
+      "**/*.test.ts",
+      "**/*.test.tsx",
+      "**/*.stories.tsx",
+      "**/__tests__/**",
+      "**/__mocks__/**"
+    ]
+  },
+  "security": {
+    "enableSecurityCheck": true
+  }
+}
