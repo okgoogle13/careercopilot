@@ -11,6 +11,13 @@ except ImportError as exc:  # pragma: no cover - environment-dependent optional 
     app = None  # type: ignore[assignment]
     _APP_IMPORT_ERROR = str(exc)
 
+_VALID_JOB_PAYLOAD = {
+    "title": "Senior Python Engineer",
+    "company": "Acme Corp",
+    "description": "Python and FastAPI role",
+    "url": "https://example.com/jobs/123",
+}
+
 
 @pytest.fixture
 def client() -> TestClient:
@@ -20,29 +27,12 @@ def client() -> TestClient:
 
 
 def _analyze_route_is_available(client: TestClient) -> bool:
-    response = client.post(
-        "/api/chrome-extension/analyze",
-        json={
-            "title": "Senior Python Engineer",
-            "company": "Acme Corp",
-            "description": "Python and FastAPI role",
-            "url": "https://example.com/jobs/123",
-        },
-    )
-    return response.status_code != 404
+    return any(route.path == "/api/chrome-extension/analyze" for route in client.app.routes)
 
 
 def test_chrome_extension_analyze_requires_auth_when_available(client: TestClient) -> None:
     if not _analyze_route_is_available(client):
         pytest.skip("Chrome extension analyze endpoint is not mounted on develop")
 
-    response = client.post(
-        "/api/chrome-extension/analyze",
-        json={
-            "title": "Senior Python Engineer",
-            "company": "Acme Corp",
-            "description": "Python and FastAPI role",
-            "url": "https://example.com/jobs/123",
-        },
-    )
+    response = client.post("/api/chrome-extension/analyze", json=_VALID_JOB_PAYLOAD)
     assert response.status_code in (401, 403)
