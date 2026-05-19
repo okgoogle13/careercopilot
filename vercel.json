@@ -1,7 +1,8 @@
 {
   "$schema": "https://vercel.com/static/schema.json",
   "version": 2,
-  "buildCommand": "cd frontend && yarn install --frozen-lockfile && yarn build",
+  "installCommand": "corepack enable && yarn install --immutable",
+  "buildCommand": "yarn build:frontend",
   "outputDirectory": "frontend/dist",
   "framework": null,
   "routes": [
