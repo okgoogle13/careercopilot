@@ -42,7 +42,6 @@ jobs:
         run: |
           echo "⏱️  Benchmarking Flash-Sidekick startup time ($BENCHMARK_RUNS runs)..."
 
-          cd servers
           total_time=0
 
           for i in $(seq 1 $BENCHMARK_RUNS); do
@@ -51,7 +50,7 @@ jobs:
 
             timeout 30s python3 -c "
           import sys
-          sys.path.insert(0, '.')
+          sys.path.insert(0, 'servers')
           try:
               import flash_sidekick
               print('Import successful')
@@ -139,7 +138,6 @@ jobs:
         run: |
           echo "⏱️  Benchmarking Cloud Ops startup time ($BENCHMARK_RUNS runs)..."
 
-          cd servers
           total_time=0
 
           for i in $(seq 1 $BENCHMARK_RUNS); do
@@ -148,7 +146,7 @@ jobs:
 
             python3 -c "
           import sys
-          sys.path.insert(0, '.')
+          sys.path.insert(0, 'servers')
           try:
               import cloud_ops
           except Exception as e:

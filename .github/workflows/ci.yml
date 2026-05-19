@@ -40,21 +40,22 @@ jobs:
     name: Detect Code Changes
     runs-on: ubuntu-latest
     outputs:
-      frontend: ${{ steps.filter.outputs.frontend }}
-      backend: ${{ steps.filter.outputs.backend }}
-      functions: ${{ steps.filter.outputs.functions }}
-      firestore_rules: ${{ steps.filter.outputs.firestore_rules }}
-      e2e: ${{ steps.filter.outputs.e2e }}
-      performance: ${{ steps.filter.outputs.performance }}
-      extension: ${{ steps.filter.outputs.extension }}
-      governance: ${{ steps.filter.outputs.governance }}
-    if: github.event_name != 'workflow_dispatch'
+      frontend: ${{ github.event_name == 'workflow_dispatch' && 'true' || steps.filter.outputs.frontend }}
+      backend: ${{ github.event_name == 'workflow_dispatch' && 'true' || steps.filter.outputs.backend }}
+      functions: ${{ github.event_name == 'workflow_dispatch' && 'true' || steps.filter.outputs.functions }}
+      firestore_rules: ${{ github.event_name == 'workflow_dispatch' && 'true' || steps.filter.outputs.firestore_rules }}
+      e2e: ${{ github.event_name == 'workflow_dispatch' && 'true' || steps.filter.outputs.e2e }}
+      performance: ${{ github.event_name == 'workflow_dispatch' && 'true' || steps.filter.outputs.performance }}
+      extension: ${{ github.event_name == 'workflow_dispatch' && 'true' || steps.filter.outputs.extension }}
+      governance: ${{ github.event_name == 'workflow_dispatch' && 'true' || steps.filter.outputs.governance }}
     steps:
       - name: Checkout
+        if: github.event_name != 'workflow_dispatch'
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
           fetch-depth: 2
       - name: Calculate paths
+        if: github.event_name != 'workflow_dispatch'
         id: filter
         uses: dorny/paths-filter@v3 # v3.0.2
         with:
@@ -337,19 +338,19 @@ jobs:
           fail_ci_if_error: false
 
   governance-tests:
-    name: Governance Tests
+    name: Governance Consistency Tests
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch' || needs.changes.outputs.governance == 'true'
     needs: [changes]
     steps:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
       - name: Install pytest
-        run: pip install "pytest>=7.0.0"
+        run: python -m pip install pytest
       - name: Run governance tests
         run: python -m pytest tests/plans/ -v --tb=short
 
@@ -754,7 +755,8 @@ jobs:
         extension-build,
         mcp-integration-tests,
         genkit-model-tests,
-        playwright-matrix
+        playwright-matrix,
+        governance-tests
       ]
     timeout-minutes: 5
     permissions:
@@ -777,6 +779,7 @@ jobs:
           if [[ "${{ needs.mcp-integration-tests.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.genkit-model-tests.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.playwright-matrix.result }}" == "failure" ]]; then exit 1; fi
+          if [[ "${{ needs.governance-tests.result }}" == "failure" ]]; then exit 1; fi
           echo " All required quality checks passed (or were skipped)!"
       - name: PR comment on failure
         if: failure() && github.event_name == 'pull_request'
@@ -798,6 +801,7 @@ jobs:
             if ('${{ needs.mcp-integration-tests.result }}' === 'failure') failedJobs.push('MCP Integration Tests');
             if ('${{ needs.genkit-model-tests.result }}' === 'failure') failedJobs.push('Genkit Model Tests');
             if ('${{ needs.playwright-matrix.result }}' === 'failure') failedJobs.push('Playwright Matrix Tests');
+            if ('${{ needs.governance-tests.result }}' === 'failure') failedJobs.push('Governance Consistency Tests');
             const failedList = failedJobs.map(job => `-  ${job}`).join('\n');
             const comment = `**Quality Gate Failed**\n\nThe following test suites failed:\n\n${failedList}\n\nPlease review the [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) and fix the issues.`;
             github.rest.issues.createComment({
