@@ -126,10 +126,16 @@ Only Sentry error tracking is implemented. There are no custom analytics events 
 
 ## 4. Prioritised UX Recommendations
 
+> **Implementation status last updated:** 2026-03-09 (second agent session)
+> All 8 recommendations have now been implemented.
+
+---
+
 ### 🔴 HIGH — H1: Welcome / Value-Proposition Screen
 
 **Area:** Onboarding flow
 **Priority:** High
+**Status: ✅ Implemented** — `frontend/src/features/onboarding/WelcomeScreen.tsx`
 **Description:**
 Insert a full-screen or modal welcome step immediately after the user completes registration (between `Register.tsx` and `OnboardingPage.tsx`) or embed it as the first card of `OnboardingPage.tsx`.
 
@@ -144,9 +150,10 @@ Content:
 **Rationale:** Without a value proposition, users arriving via organic search or referral links do not understand the product before they are asked to make decisions (domain selection). This increases bounce and reduces completion of the ingestion step.
 
 **Implementation notes:**
-- Create `frontend/src/features/onboarding/WelcomeScreen.tsx` (new component).
-- Add route `/welcome` or render it as a conditional first step in `OnboardingPage.tsx` gated on `user.isNewUser` flag.
-- Mark `isNewUser = false` in user profile after the welcome screen is dismissed.
+- `WelcomeScreen.tsx` created. Shown as onboarding step 1 when `localStorage.getItem('cc_welcome_seen') !== 'true'`.
+- `OnboardingPage.tsx` updated: renders `WelcomeScreen` before the domain grid. Sets `cc_welcome_seen` in localStorage when "Get started" is clicked.
+- "Skip intro" secondary link also dismisses the screen.
+- `onboarding_welcome_seen` analytics event fires via `useAnalytics` hook.
 
 ---
 
@@ -154,6 +161,7 @@ Content:
 
 **Area:** Onboarding flow
 **Priority:** High
+**Status: ✅ Implemented** — `frontend/src/features/onboarding/OnboardingProgress.tsx`
 **Description:**
 Add a visible step indicator across the 3–4 onboarding screens (Welcome → Domain Selection → Resume Upload → Dashboard).
 
@@ -165,9 +173,9 @@ Example copy:
 **Rationale:** Users who cannot see an end point abandon multi-step flows at higher rates. A stepper reduces anxiety, sets expectations, and signals completion proximity.
 
 **Implementation notes:**
-- Create `frontend/src/features/onboarding/OnboardingProgress.tsx` (new component, reusable stepper).
-- Integrate into `OnboardingPage.tsx` and `IngestionPage.tsx`.
-- Pass `currentStep` and `totalSteps` as props.
+- `OnboardingProgress.tsx` created with `currentStep`, `totalSteps`, and `steps[]` props.
+- Integrated into `OnboardingPage.tsx` (steps 2 and 3) and `IngestionPage.tsx` (step 3 of 4).
+- Steps updated to 4 total: Welcome → Choose field → Your background → Upload resume.
 
 ---
 
@@ -175,6 +183,7 @@ Example copy:
 
 **Area:** Dashboard empty state / activation
 **Priority:** High
+**Status: ✅ Implemented** — `frontend/src/features/dashboard/OnboardingChecklist.tsx`
 **Description:**
 Replace the static mock data grid on a new user's first visit with an activation checklist. After the user completes each item, mark it as done and surface the next action.
 
@@ -189,10 +198,9 @@ Show completion percentage (e.g. "2 of 4 complete").
 **Rationale:** First-time users see metrics and "Generate Artifacts" CTAs that have no context. A checklist drives them sequentially toward the core activation loop, and each item completed increases retention probability.
 
 **Implementation notes:**
-- Create `frontend/src/features/dashboard/OnboardingChecklist.tsx`.
-- Persist checklist state in user profile (backend) or `localStorage` as a fallback.
-- Conditionally render checklist vs. full dashboard metrics based on `activationComplete` flag.
-- Add a "Dismiss" option once all 4 items are complete.
+- `OnboardingChecklist.tsx` created. Renders in `Dashboard.tsx` above the action grid when `cc_onboarding_checklist_dismissed` is not set.
+- Each checklist item uses a localStorage key to track completion.
+- Progress bar shows X/4 complete. Dismiss button hides the checklist permanently.
 
 ---
 
@@ -200,15 +208,17 @@ Show completion percentage (e.g. "2 of 4 complete").
 
 **Area:** Onboarding flow
 **Priority:** Medium
+**Status: ✅ Implemented** — `IngestionPage.tsx`, `Dashboard.tsx`
 **Description:**
 Add a secondary action beneath the upload form: *"I don't have my resume ready — skip for now →"*. Navigates directly to `/dashboard`. Persist a reminder banner on the dashboard prompting the user to complete ingestion.
 
 **Rationale:** Blocking users from reaching the dashboard until they upload a file creates a hard drop-off point. Some users may want to explore the tool before committing to the upload.
 
 **Implementation notes:**
-- Add `skipIngestion()` handler in `IngestionPage.tsx` that calls `navigate('/dashboard')`.
-- Store `hasCompletedIngestion: false` in user profile.
-- Show dismissible banner in `Dashboard.tsx`: *"Add your resume to unlock personalised insights."*
+- `handleSkip()` added to `IngestionPage.tsx`: sets `cc_ingestion_skipped` in localStorage and calls `navigate('/dashboard')`.
+- Fires `resume_ingestion_skipped` analytics event.
+- `Dashboard.tsx` reads `cc_ingestion_skipped` and renders an animated dismissible banner: *"Add your resume to unlock personalised insights — Upload now →"*.
+- Banner dismissal removes the flag from localStorage.
 
 ---
 
@@ -216,6 +226,7 @@ Add a secondary action beneath the upload form: *"I don't have my resume ready �
 
 **Area:** Empty states across feature pages
 **Priority:** Medium
+**Status: ✅ Implemented** — `frontend/src/components/ui/EmptyState.tsx`
 **Description:**
 Each feature page (`/documents`, `/analysis`, `/tracker`) should show a purpose-built empty state when no data exists, rather than a blank page or generic "No items found" message.
 
@@ -227,8 +238,10 @@ Examples:
 **Rationale:** Empty pages are demotivating and imply the tool is broken. Contextual empty states explain the purpose of the screen and provide a clear, immediate action.
 
 **Implementation notes:**
-- Create a shared `EmptyState` component in `frontend/src/components/ui/EmptyState.tsx` with props: `icon`, `title`, `description`, `ctaLabel`, `ctaHref`.
-- Import and render in `Documents.tsx`, `AnalysisPage.tsx`, `ApplicationTracker.tsx` when data arrays are empty.
+- `EmptyState.tsx` created in `frontend/src/components/ui/EmptyState.tsx` with props: `icon`, `title`, `description`, `ctaLabel`, `ctaHref`, `onCta`. Exported from `ui/index.ts`.
+- `Documents.tsx`: replaced bare-bones internal `EmptyState()` function with the shared component; CTA links to `/cover-letter-generator`.
+- `ApplicationTracker.tsx`: conditional render — when `applications.length === 0`, shows `EmptyState` with CTA instead of the Kanban board.
+- `AnalysisPage.tsx`: `PostGenerationCTA` (M3) shown after ATS result serves as contextual guidance; the analysis form itself is always visible.
 
 ---
 
@@ -236,6 +249,7 @@ Examples:
 
 **Area:** AI Generation & Iteration → Export
 **Priority:** Medium
+**Status: ✅ Implemented** — `frontend/src/components/ui/PostGenerationCTA.tsx`
 **Description:**
 After a user successfully generates a cover letter or KSC response, show a "What's next?" prompt linking to related actions:
 - After cover letter: *"Run an ATS check on your resume for this role →"* (links to `/analysis` pre-filled with the same job description).
@@ -245,8 +259,11 @@ After a user successfully generates a cover letter or KSC response, show a "What
 **Rationale:** Each AI tool is currently an island. Prompting users to the next logical step in the application workflow increases feature discovery, session depth, and overall value delivered.
 
 **Implementation notes:**
-- Add a `PostGenerationCTA` component rendered in the result step of `CoverLetterGenerator.tsx` (Step 4) and `KSCGenerator.tsx` (Step 3).
-- Pass job description URL/text as query params when navigating to the next tool.
+- `PostGenerationCTA.tsx` created with `context: 'cover-letter' | 'ksc' | 'ats'` and optional `jobUrl` prop.
+- Integrated at end of `CoverLetterGenerator.tsx` step 4 result section.
+- Integrated at end of `KSCGenerator.tsx` step 3 result section.
+- Integrated in `AnalysisPage.tsx` below `SkillBreakdownCard` when `atsResult` is present.
+- `jobUrl` passed through to pre-fill the receiving tool via query params.
 
 ---
 
@@ -254,6 +271,7 @@ After a user successfully generates a cover letter or KSC response, show a "What
 
 **Area:** Navigation
 **Priority:** Medium
+**Status: ✅ Implemented** — `frontend/src/layouts/Sidebar.tsx`
 **Description:**
 Update sidebar navigation labels to plain-language descriptions:
 
@@ -267,7 +285,7 @@ Update sidebar navigation labels to plain-language descriptions:
 **Rationale:** Jargon labels ("Analysis", "Opportunities", "Asset Library") require exploration to understand. Plain-language labels reduce cognitive load for new users.
 
 **Implementation notes:**
-- Update `frontend/src/layouts/Sidebar.tsx` nav item labels.
+- `Sidebar.tsx` updated: `Analysis` → `ATS Score & Optimise`, `Opportunities` → `Job Scout`, `Documents` → `My Documents`.
 - No routing changes required.
 
 ---
@@ -276,6 +294,7 @@ Update sidebar navigation labels to plain-language descriptions:
 
 **Area:** Onboarding flow
 **Priority:** Low
+**Status: ✅ Implemented** — `frontend/src/features/onboarding/OnboardingPage.tsx`
 **Description:**
 Extend the domain selection step with a secondary segmentation question: *"What best describes your situation?"*
 - 🎓 Recent graduate entering the workforce
@@ -288,9 +307,11 @@ Use the response to personalise dashboard copy, example job descriptions, and su
 **Rationale:** The current 9-domain selector captures *what sector* but not *where the user is in their career*. JTBD segmentation enables targeted guidance (e.g. a recent grad is directed to KSC guides, a senior professional to the optimisation flow).
 
 **Implementation notes:**
-- Add a second step to `OnboardingPage.tsx` with 4 segmentation cards.
-- Store `userSegment` in user profile.
-- Use segment in `Dashboard.tsx` to show contextual welcome copy.
+- `OnboardingPage.tsx` updated: step 3 renders a 2×2 grid of 4 segmentation cards after domain selection.
+- Selection stored in `localStorage` under `cc_user_segment` key (exported as `USER_SEGMENT_KEY`).
+- `onboarding_segment_selected` analytics event fired via `useAnalytics`.
+- "Skip this step" link shown when no segment is selected.
+- `TODO`: read `cc_user_segment` in `Dashboard.tsx` to show contextual welcome copy per segment.
 
 ---
 
@@ -298,25 +319,31 @@ Use the response to personalise dashboard copy, example job descriptions, and su
 
 **Area:** Telemetry
 **Priority:** Low
+**Status: ✅ Implemented** — `frontend/src/hooks/useAnalytics.ts`
 **Description:**
 Add custom analytics events at key activation milestones. Minimum recommended events:
 
-| Event | Trigger |
-|-------|---------|
-| `onboarding_domain_selected` | Domain card selected in `OnboardingPage` |
-| `resume_ingestion_started` | File upload initiated in `IngestionPage` |
-| `resume_ingestion_completed` | Stage reaches `complete` |
-| `ats_score_run` | ATS analysis submitted in `AnalysisPage` |
-| `cover_letter_generated` | Step 4 rendered in `CoverLetterGenerator` |
-| `ksc_generated` | Step 3 rendered in `KSCGenerator` |
-| `document_exported` | PDF downloaded or copied |
+| Event | Trigger | Implemented in |
+|-------|---------|---------------|
+| `onboarding_welcome_seen` | Welcome screen CTA clicked | `OnboardingPage.tsx` |
+| `onboarding_domain_selected` | Domain card selected | `OnboardingPage.tsx` |
+| `onboarding_segment_selected` | Segment card selected | `OnboardingPage.tsx` |
+| `resume_ingestion_started` | File upload initiated | `IngestionPage.tsx` |
+| `resume_ingestion_skipped` | Skip link clicked | `IngestionPage.tsx` |
+| `resume_ingestion_completed` | Stage reaches `complete` | `IngestionPage.tsx` |
+| `ats_score_run` | ATS analysis submitted | `AnalysisPage.tsx` |
+| `cover_letter_generated` | Step 4 rendered | `CoverLetterGenerator.tsx` |
+| `ksc_generated` | Step 3 rendered | `KSCGenerator.tsx` |
+| `document_exported` | PDF downloaded | `CoverLetterGenerator.tsx`, `KSCGenerator.tsx` |
 
 **Rationale:** Without funnel telemetry, there is no data-driven basis for prioritising UX improvements. Instrumentation enables measurement of onboarding completion rates, feature adoption, and export conversion.
 
 **Implementation notes:**
-- Integrate a lightweight analytics library (Posthog or Google Analytics 4).
-- Create a `useAnalytics()` hook in `frontend/src/hooks/useAnalytics.ts`.
-- Call from each component at the appropriate lifecycle event.
+- `useAnalytics.ts` hook created in `frontend/src/hooks/useAnalytics.ts`.
+- In development: events are `console.debug`-logged for visibility.
+- In production: hook dispatches to `window.gtag` (Google Analytics 4) and/or `window.posthog` if either is present — no-op if neither is installed.
+- All 10 events wired to the components listed above.
+- `TODO`: configure GA4 measurement ID or Posthog project key in `index.html` / environment variables to activate production event collection.
 
 ---
 

@@ -3,35 +3,34 @@ import { Check } from 'lucide-react';
 interface OnboardingProgressProps {
   currentStep: number;
   totalSteps: number;
-  steps: string[];
+  steps?: string[];
 }
 
-/**
- * OnboardingProgress — step indicator for the onboarding sequence.
- *
- * Rendered in OnboardingPage (step 1) and IngestionPage (step 2) so users
- * always know where they are in the activation flow.
- */
-export function OnboardingProgress({ currentStep, totalSteps, steps }: OnboardingProgressProps) {
+export function OnboardingProgress({
+  currentStep,
+  totalSteps,
+  steps = ['Welcome', 'Focus', 'Situation', 'Archive'],
+}: OnboardingProgressProps) {
   return (
-    <div
-      className="flex items-center justify-center"
-      role="list"
-      aria-label={`Onboarding progress: step ${currentStep} of ${totalSteps}`}
-    >
-      {steps.map((label, idx) => {
-        const stepNumber = idx + 1;
-        const isComplete = stepNumber < currentStep;
-        const isActive = stepNumber === currentStep;
+    <div className="w-full py-4">
+      <div className="relative flex justify-between items-center max-w-xl mx-auto">
+        {/* Connection lines */}
+        <div className="absolute top-4 left-0 right-0 h-0.5 bg-white/5 -z-10" />
+        <div
+          className="absolute top-4 left-0 h-0.5 bg-ink-gold -z-10 transition-all duration-500 ease-in-out"
+          style={{ width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%` }}
+        />
 
-        return (
-          <div
-            key={label}
-            role="listitem"
-            className="flex items-center"
-          >
-            {/* Step node */}
-            <div className="flex flex-col items-center gap-2">
+        {Array.from({ length: totalSteps }).map((_, idx) => {
+          const stepNumber = idx + 1;
+          const isComplete = stepNumber < currentStep;
+          const isActive = stepNumber === currentStep;
+
+          return (
+            <div
+              key={idx}
+              className="flex flex-col items-center gap-2"
+            >
               <div
                 className={`
                   w-8 h-8 rounded-march flex items-center justify-center text-sm font-bold border-2 transition-all duration-300
@@ -39,8 +38,8 @@ export function OnboardingProgress({ currentStep, totalSteps, steps }: Onboardin
                     isComplete
                       ? 'bg-ink-gold border-ink-gold text-asphalt-black'
                       : isActive
-                        ? 'bg-transparent border-ink-gold text-ink-gold'
-                        : 'bg-transparent border-concrete-grey/30 text-concrete-grey/30'
+                        ? 'border-ink-gold text-ink-gold bg-asphalt-black shadow-glow-gold'
+                        : 'border-white/10 text-concrete-grey/40 bg-asphalt-black'
                   }
                 `}
                 aria-current={isActive ? 'step' : undefined}
@@ -56,28 +55,16 @@ export function OnboardingProgress({ currentStep, totalSteps, steps }: Onboardin
               </div>
               <span
                 className={`
-                  text-[10px] font-annotation uppercase tracking-[0.15em] whitespace-nowrap
-                  ${isActive ? 'text-ink-gold' : isComplete ? 'text-concrete-grey' : 'text-concrete-grey/30'}
+                  font-mono text-[9px] uppercase tracking-wider
+                  ${isActive ? 'text-ink-gold font-bold' : 'text-concrete-grey/45'}
                 `}
               >
-                {label}
+                {steps[idx] ?? `Step ${stepNumber}`}
               </span>
             </div>
-
-            {/* Connector line between steps */}
-            {idx < steps.length - 1 && (
-              <div
-                className={`
-                  h-px w-12 md:w-20 mx-2 mb-5 transition-all duration-300
-                  ${isComplete ? 'bg-ink-gold/60' : 'bg-concrete-grey/20'}
-                `}
-              />
-            )}
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }
-
-export default OnboardingProgress;

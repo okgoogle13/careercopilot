@@ -57,5 +57,3 @@ export function WelcomeScreen() {
     </div>
   );
 }
-
-export default WelcomeScreen;

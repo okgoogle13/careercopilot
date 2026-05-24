@@ -1,8 +1,18 @@
 import { Strike, Placard } from '@/components/ui';
-import { motion } from 'framer-motion';
-import { FileText, Layout, Plus, Rocket, Sparkles, Target, Zap } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  FileText,
+  Layout,
+  Plus,
+  Rocket,
+  Sparkles,
+  Target,
+  UploadCloud,
+  X,
+  Zap,
+} from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LayeredHero } from '../../components/kerala-rage/LayeredHero';
 import { loadHeroRegistry } from '../../design/hero/heroRegistry';
 import { composeHero } from '../../lib/composeHero';
@@ -43,6 +53,7 @@ const PROFILES: Profile[] = [
  * ✓ 2x2 KrMotif Grid with Expressive Synthesis effects
  */
 export function Dashboard() {
+  const navigate = useNavigate();
   const [heroData, setHeroData] = useState<{
     layers: any[];
     typography: any;
@@ -57,6 +68,7 @@ export function Dashboard() {
       return true;
     }
   });
+
   const { hasMaster, hasCompletedIngestion, userSegment, checkMaster } = useUserStore();
   const [showIngestionReminder, setShowIngestionReminder] = useState(
     () => localStorage.getItem('cc_ingestion_skipped') === 'true'
@@ -378,6 +390,7 @@ export function Dashboard() {
               <Strike
                 variant="primary"
                 size="lg"
+                onClick={() => navigate('/apply')}
                 className="h-16 px-10 font-bold uppercase tracking-wider shadow-glow-gold"
               >
                 <Plus className="w-5 h-5 mr-3" /> Add Application
@@ -385,6 +398,7 @@ export function Dashboard() {
               <Strike
                 variant="secondary"
                 size="lg"
+                onClick={() => navigate('/applications')}
                 className="h-16 px-10 font-bold uppercase tracking-wider backdrop-blur-md"
               >
                 <Layout className="w-5 h-5 mr-3" /> View Archive
@@ -392,6 +406,7 @@ export function Dashboard() {
               <Strike
                 variant="ghost"
                 size="lg"
+                onClick={() => navigate('/analysis')}
                 className="h-16 px-10 font-bold uppercase tracking-wider border-concrete-grey/20 hover:bg-concrete-grey/5"
               >
                 <Sparkles className="w-5 h-5 mr-3 text-ink-gold" /> Smart Suggestions

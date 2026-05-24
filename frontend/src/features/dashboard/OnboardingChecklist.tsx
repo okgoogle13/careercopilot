@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
 import { CheckCircle2, Circle, X } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Placard } from '@/components/ui';
@@ -29,10 +29,10 @@ const CHECKLIST_ITEMS: ChecklistItem[] = [
   },
   {
     id: 'run_ats',
-    label: 'Run your first ATS score',
-    description: 'Paste any job ad to see how well your resume matches in seconds.',
+    label: 'Run your first ATS check',
+    description: 'See how well your resume matches a target role with real feedback.',
     route: '/analysis',
-    ctaLabel: 'Score resume →',
+    ctaLabel: 'Run check →',
   },
   {
     id: 'generate_cover_letter',
@@ -52,40 +52,33 @@ const CHECKLIST_ITEMS: ChecklistItem[] = [
 
 function loadProgress(): Record<string, boolean> {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return {};
-    const parsed: unknown = JSON.parse(raw);
-    if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) return {};
-    // Keep only boolean values to match Record<string, boolean>
-    return Object.fromEntries(
-      Object.entries(parsed).filter(([, v]) => typeof v === 'boolean')
-    ) as Record<string, boolean>;
+    const val = localStorage.getItem(STORAGE_KEY);
+    if (val) {
+      return JSON.parse(val) as Record<string, boolean>;
+    }
   } catch {
-    return {};
+    // ignore
   }
+  return {
+    upload_resume: false,
+    run_ats: false,
+    generate_cover_letter: false,
+    create_ksc: false,
+  };
 }
 
-function saveProgress(progress: Record<string, boolean>) {
+function saveProgress(prog: Record<string, boolean>) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(prog));
   } catch {
-    // silently ignore storage errors
+    // ignore
   }
 }
 
 interface OnboardingChecklistProps {
-  /** Called when the user manually dismisses the checklist. */
-  onDismiss?: () => void;
+  onDismiss: () => void;
 }
 
-/**
- * OnboardingChecklist — activation checklist shown on the Dashboard for new users.
- *
- * Tracks completion in localStorage. Hides automatically once all items are done,
- * or when the user explicitly dismisses it.
- *
- * H3 recommendation from docs/analysis/user-journey-analysis.md
- */
 export function OnboardingChecklist({ onDismiss }: OnboardingChecklistProps) {
   const [progress, setProgress] = useState<Record<string, boolean>>(loadProgress);
   const [dismissed, setDismissed] = useState(false);
@@ -122,25 +115,11 @@ export function OnboardingChecklist({ onDismiss }: OnboardingChecklistProps) {
   };
 
   const handleCta = (item: ChecklistItem) => {
-    markComplete(item.id);
+    // Navigate to target route
     navigate(item.route);
   };
 
-  const handleDismiss = () => {
-    setDismissed(true);
-    onDismiss?.();
-  };
-
   if (dismissed) return null;
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -10 },
-    show: (i: number) => ({
-      opacity: 1,
-      x: 0,
-      transition: { delay: i * 0.08, type: 'spring' as const, stiffness: 300, damping: 30 },
-    }),
-  };
 
   return (
     <motion.div
@@ -151,20 +130,18 @@ export function OnboardingChecklist({ onDismiss }: OnboardingChecklistProps) {
     >
       <Placard
         elevation="raised"
-        className="p-8 md:p-10 border-ink-gold/20 bg-asphalt-black/40 relative overflow-hidden"
+        className="p-6 md:p-8 bg-asphalt-black/45 border-ink-gold/25 relative overflow-hidden"
       >
-        {/* Subtle gold glow */}
-        <div className="absolute inset-0 bg-gradient-to-br from-ink-gold/5 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-ink-gold/[0.03] via-transparent to-transparent pointer-events-none" />
 
         <div className="relative z-10">
-          {/* Header */}
-          <div className="flex items-start justify-between mb-6 gap-4">
+          <div className="flex justify-between items-start mb-6">
             <div>
-              <p className="font-annotation text-[10px] text-ink-gold uppercase tracking-[0.4em] opacity-70 mb-1">
-                [ ACTIVATION.PROTOCOL ]
+              <p className="font-mono text-[9px] text-ink-gold uppercase tracking-[0.3em]">
+                System Ingest Activation
               </p>
-              <h2 className="font-display text-2xl font-black text-paper-white uppercase tracking-tight">
-                Get started
+              <h2 className="font-display text-2xl font-bold text-paper-white uppercase tracking-tight mt-1">
+                Your Guided Path
               </h2>
               <p className="font-primary text-sm text-concrete-grey opacity-70 mt-1">
                 {allComplete
@@ -173,9 +150,9 @@ export function OnboardingChecklist({ onDismiss }: OnboardingChecklistProps) {
               </p>
             </div>
             <button
-              onClick={handleDismiss}
-              className="text-concrete-grey/40 hover:text-concrete-grey transition-colors p-1 flex-shrink-0"
-              aria-label="Dismiss getting started checklist"
+              onClick={onDismiss}
+              className="text-concrete-grey/40 hover:text-ink-gold transition-colors"
+              aria-label="Dismiss checklist"
             >
               <X className="w-5 h-5" />
             </button>
@@ -186,64 +163,60 @@ export function OnboardingChecklist({ onDismiss }: OnboardingChecklistProps) {
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${(completedCount / CHECKLIST_ITEMS.length) * 100}%` }}
-              transition={{ duration: 0.6, ease: 'circOut' }}
-              className="h-full bg-ink-gold"
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className="h-full bg-ink-gold shadow-glow-gold"
             />
           </div>
 
-          {/* Checklist items */}
-          <ul className="space-y-4">
-            {CHECKLIST_ITEMS.map((item, idx) => {
-              const done = Boolean(progress[item.id]);
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {CHECKLIST_ITEMS.map((item) => {
+              const isDone = progress[item.id];
               return (
-                <motion.li
+                <div
                   key={item.id}
-                  custom={idx}
-                  variants={itemVariants}
-                  initial="hidden"
-                  animate="show"
-                  className={`flex items-start gap-4 p-4 rounded-[8px] border transition-all duration-300 ${
-                    done
-                      ? 'border-ink-gold/10 bg-ink-gold/5 opacity-60'
-                      : 'border-concrete-grey/10 bg-transparent hover:border-ink-gold/20 hover:bg-ink-gold/5'
+                  className={`flex gap-4 p-4 rounded-placard border transition-all duration-300 ${
+                    isDone
+                      ? 'border-concrete-grey/10 bg-asphalt-black/20 opacity-60'
+                      : 'border-concrete-grey/20 bg-asphalt-black/40 hover:border-ink-gold/20'
                   }`}
                 >
-                  {/* Icon */}
-                  <div className="flex-shrink-0 mt-0.5">
-                    {done ? (
+                  <button
+                    onClick={() => markComplete(item.id)}
+                    className="mt-0.5 shrink-0 focus:outline-none"
+                    aria-label={isDone ? 'Completed' : 'Mark as complete'}
+                  >
+                    {isDone ? (
                       <CheckCircle2 className="w-5 h-5 text-ink-gold" />
                     ) : (
-                      <Circle className="w-5 h-5 text-concrete-grey/30" />
+                      <Circle className="w-5 h-5 text-concrete-grey/30 hover:text-ink-gold transition-colors" />
                     )}
-                  </div>
+                  </button>
 
-                  {/* Content */}
-                  <div className="flex-1 min-w-0">
-                    <p
-                      className={`font-primary text-sm font-semibold ${done ? 'text-concrete-grey line-through' : 'text-paper-white'}`}
+                  <div className="space-y-1 flex-1">
+                    <h3
+                      className={`font-primary text-sm font-semibold transition-colors ${
+                        isDone ? 'text-concrete-grey/80 line-through' : 'text-paper-white'
+                      }`}
                     >
                       {item.label}
+                    </h3>
+                    <p className="font-primary text-xs text-concrete-grey/60 leading-relaxed">
+                      {item.description}
                     </p>
-                    {!done && (
-                      <p className="font-primary text-xs text-concrete-grey/60 mt-0.5">
-                        {item.description}
-                      </p>
+
+                    {!isDone && (
+                      <button
+                        onClick={() => handleCta(item)}
+                        className="inline-block mt-3 text-[10px] font-mono text-ink-gold hover:text-paper-white uppercase tracking-widest transition-colors font-bold"
+                      >
+                        {item.ctaLabel}
+                      </button>
                     )}
                   </div>
-
-                  {/* CTA */}
-                  {!done && (
-                    <button
-                      onClick={() => handleCta(item)}
-                      className="flex-shrink-0 font-annotation text-[10px] text-ink-gold uppercase tracking-widest hover:text-paper-white transition-colors whitespace-nowrap"
-                    >
-                      {item.ctaLabel}
-                    </button>
-                  )}
-                </motion.li>
+                </div>
               );
             })}
-          </ul>
+          </div>
         </div>
       </Placard>
     </motion.div>

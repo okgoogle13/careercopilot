@@ -22,6 +22,7 @@ import { exportToPdf } from '@/utils/exportEngine';
 import { KrDarkSpring } from '@/design/tokens/motion-presets';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import { useDocumentExport } from '@/features/documents/hooks/useDocumentExport';
+import { PostGenerationCTA } from '@/components/ui/PostGenerationCTA';
 
 const stepMotionProps = {
   initial: { opacity: 0, x: 24 },
@@ -104,6 +105,7 @@ export function CoverLetterGenerator() {
 
       setGeneratedLetter(result.letter_content);
       setStep(4);
+      track('cover_letter_generated');
       toast.success('Cover Letter generated successfully!');
     } catch (error) {
       console.error('Cover Letter Generation Error:', error);
@@ -479,9 +481,15 @@ export function CoverLetterGenerator() {
                 </Button>
               </div>
 
+              {/* M3: Post-generation next step prompt */}
+              <PostGenerationCTA
+                context="cover-letter"
+                jobUrl={jobUrl}
+              />
+
               <div className="rounded-scaffold border border-[var(--kr-color-concrete-grey-steps-0)] bg-surface-container-high/40 p-4 mt-6">
                 <p className="text-label-small font-mono uppercase tracking-wider text-on-surface-variant mb-2">
-                  Recommended Next Steps
+                  Other Actions
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link
