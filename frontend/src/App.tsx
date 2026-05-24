@@ -16,6 +16,7 @@ import { getModeForRoute } from './config/routeModeMap';
 import { useAuth } from './context/AuthContext';
 import { Layout } from './layouts/Layout';
 import { useModeStore } from './stores/useModeStore';
+import { useUserStore } from './stores/userStore';
 
 // Canonical Pages (Migrated to Features)
 import { LandingPage } from './features/landing/LandingPage';
@@ -31,6 +32,10 @@ import { TabbedGenerationPanel as GenerationPage } from './features/documents/co
 import { Settings as SettingsPage } from './features/settings/Settings';
 import AuthModal from './screens/02_auth/AuthModal';
 import { Scaffold } from './components/archetypes';
+
+// New page components
+import { JobDetailPage } from './features/jobs/JobDetailPage';
+import { ApplicationDetailPage } from './features/applications/ApplicationDetailPage';
 
 // Preserved non-canonical / utility
 import { NotFound } from './features/not-found/NotFound';
@@ -94,9 +99,31 @@ export const RequireAuth = () => {
 
   // Allow access if authenticated OR in demo mode
   if (!user && !isDemoMode) {
+    const returnTo = encodeURIComponent(location.pathname + location.search + location.hash);
     return (
       <Navigate
-        to="/auth"
+        to={`/auth?returnTo=${returnTo}`}
+        replace
+      />
+    );
+  }
+
+  return <Outlet />;
+};
+
+/**
+ * RequireOnboarding — sits inside RequireAuth.
+ * Redirects to /onboarding if the user has not yet set their segment,
+ * except when they are already on /onboarding itself.
+ */
+export const RequireOnboarding = () => {
+  const location = useLocation();
+  const userSegment = useUserStore((state) => state.userSegment);
+
+  if (userSegment === null && location.pathname !== '/onboarding') {
+    return (
+      <Navigate
+        to="/onboarding"
         replace
       />
     );
@@ -190,47 +217,66 @@ export default function App() {
 
         {/* Protected Canonical Routes */}
         <Route element={<RequireAuth />}>
-          <Route element={<MigratedRouteLayout />}>
-            <Route
-              path="/dashboard"
-              element={<DashboardPage />}
-            />
-            <Route
-              path="/profile"
-              element={<ProfilePage />}
-            />
-            <Route
-              path="/opportunities"
-              element={<OpportunitiesPage />}
-            />
-            <Route
-              path="/applications"
-              element={<ApplicationsPage />}
-            />
-            <Route
-              path="/analysis"
-              element={<AnalysisPage />}
-            />
-            <Route
-              path="/apply"
-              element={<ApplyPage />}
-            />
-            <Route
-              path="/generation"
-              element={<GenerationPage />}
-            />
-            <Route
-              path="/settings"
-              element={<SettingsPage />}
-            />
-            <Route
-              path="/onboarding"
-              element={<OnboardingPage />}
-            />
-            <Route
-              path="/documents"
-              element={<DocsPage />}
-            />
+          <Route element={<RequireOnboarding />}>
+            <Route element={<MigratedRouteLayout />}>
+              <Route
+                path="/dashboard"
+                element={<DashboardPage />}
+              />
+              <Route
+                path="/profile"
+                element={<ProfilePage />}
+              />
+              <Route
+                path="/opportunities"
+                element={<OpportunitiesPage />}
+              />
+              <Route
+                path="/job/:id"
+                element={<JobDetailPage />}
+              />
+              <Route
+                path="/applications"
+                element={<ApplicationsPage />}
+              />
+              <Route
+                path="/applications/:id"
+                element={<ApplicationDetailPage />}
+              />
+              <Route
+                path="/analysis"
+                element={<AnalysisPage />}
+              />
+              <Route
+                path="/apply"
+                element={<ApplyPage />}
+              />
+              <Route
+                path="/apply/standard"
+                element={
+                  <Navigate
+                    to="/apply?mode=standard"
+                    replace
+                  />
+                }
+              />
+              <Route
+                path="/generation"
+                element={<GenerationPage />}
+              />
+              <Route
+                path="/settings"
+                element={<SettingsPage />}
+              />
+              <Route
+                path="/onboarding"
+                element={<OnboardingPage />}
+              />
+              <Route
+                path="/documents"
+                element={<DocsPage />}
+              />
+            </Route>
           </Route>
 
           {/* ProtectedLayout: support-only surfaces that intentionally remain on the legacy shell. */}

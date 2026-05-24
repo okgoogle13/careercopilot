@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { MapPin, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { NexusInput } from '../../components/kerala-rage/NexusInput';
+import { useNavigate } from 'react-router-dom';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -202,7 +203,13 @@ const SavedBadge = () => (
   </span>
 );
 
-const InterceptCard = ({ intercept }: { intercept: Intercept }) => {
+const InterceptCard = ({
+  intercept,
+  onDecrypt,
+}: {
+  intercept: Intercept;
+  onDecrypt: (id: string) => void;
+}) => {
   const scoreColor = getScoreColor(intercept.score);
   const titleColor =
     intercept.score >= 92
@@ -311,6 +318,7 @@ const InterceptCard = ({ intercept }: { intercept: Intercept }) => {
               </span>
             </div>
             <button
+              onClick={() => onDecrypt(intercept.id)}
               className={cn(
                 'px-4 py-[7px] text-[9px] font-mono font-extrabold tracking-[0.1em] uppercase',
                 'text-[var(--kr-color-charcoal-background-steps-0)]',
@@ -334,6 +342,7 @@ const InterceptCard = ({ intercept }: { intercept: Intercept }) => {
 export const OpportunitiesDiscovery = memo(function OpportunitiesDiscovery() {
   const [activeFilter, setActiveFilter] = useState<FilterTab>('ALL INTERCEPTS');
   const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
   const filtered =
     activeFilter === 'ALL INTERCEPTS'
@@ -448,7 +457,10 @@ export const OpportunitiesDiscovery = memo(function OpportunitiesDiscovery() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.06 }}
           >
-            <InterceptCard intercept={intercept} />
+            <InterceptCard
+              intercept={intercept}
+              onDecrypt={(id) => navigate(`/job/${id}`)}
+            />
           </motion.div>
         ))}
 

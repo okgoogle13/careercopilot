@@ -9,10 +9,11 @@ import type { AnalyzeJobFromUrlResponse } from '@/types/masterResume';
 import { JobAnalysisResultsPanel } from '@/features/applications/components/JobAnalysisResultsPanel';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Loader2, Zap, Target, Sparkles, LayoutDashboard } from 'lucide-react';
-import { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { workflowService } from '@/api/workflowService';
 import { KrDarkSpring } from '@/design/tokens/motion-presets';
+import { jobService } from '@/api/jobService';
 
 // ─── Step guide cards (shown before analysis) ─────────────────────────────────
 
@@ -55,14 +56,42 @@ function StepCard({ number, Icon, label, desc }: StepCardProps) {
 
 export function ApplyQuick() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [jobUrl, setJobUrl] = useState('');
   const [jobTitle, setJobTitle] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [jobDescription, setJobDescription] = useState('');
   const [loading, setLoading] = useState(false);
+  const [prefilled, setPrefilled] = useState(false);
   const [result, setResult] = useState<AnalyzeJobFromUrlResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showGuide, setShowGuide] = useState(false);
+
+  // Pre-fill form fields when ?jobId is present in URL
+  useEffect(() => {
+    const jobId = searchParams.get('jobId');
+    if (!jobId) return;
+
+    let cancelled = false;
+    jobService
+      .getJob(jobId)
+      .then((job) => {
+        if (cancelled) return;
+        if (job.title) setJobTitle(job.title);
+        if (job.company) setCompanyName(job.company);
+        if (job.description) setJobDescription(job.description);
+        if (job.url) setJobUrl(job.url);
+        setError(null);
+        setPrefilled(true);
+      })
+      .catch(() => {
+        // Pre-fill failure is non-fatal — user can still fill manually
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [searchParams]);
 
   const jdPreview = useMemo(() => {
     const text = jobDescription.trim();
@@ -126,6 +155,17 @@ export function ApplyQuick() {
             </button>
           </div>
         </header>
+
+        {/* Pre-fill confirmation banner */}
+        {prefilled && (
+          <div
+            className="flex items-center gap-2 px-4 py-2 text-[11px] font-mono uppercase tracking-widest border border-[var(--sys-color-inkGold-base)]/40 bg-[var(--sys-color-inkGold-base)]/8 text-[var(--sys-color-inkGold-base)]"
+            style={{ borderRadius: 'var(--sys-shape-blockRiot01)' }}
+          >
+            <Sparkles size={11} /> Job details pre-filled from intercept — review and adjust as
+            needed.
+          </div>
+        )}
 
         {/* Step guide (expandable) */}
         <AnimatePresence>
