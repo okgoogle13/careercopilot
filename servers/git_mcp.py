@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import os
 import subprocess
 from pathlib import Path
 from typing import Optional
@@ -8,17 +9,27 @@ from typing import Optional
 from mcp.server.fastmcp import FastMCP
 
 
-_ROOT_DIR = Path(__file__).resolve().parent.parent
+def _workspace_root() -> Path:
+    env_root = os.environ.get("MCP_WORKSPACE_ROOT")
+    if env_root:
+        return Path(env_root).expanduser().resolve()
+    cwd = Path.cwd().resolve()
+    if cwd != Path(__file__).resolve().parent:
+        return cwd
+    return Path(__file__).resolve().parent.parent
+
+
 mcp = FastMCP("git")
 
 
 def _run_git(args: list[str], timeout_s: int = 20) -> str:
-    if not (_ROOT_DIR / ".git").exists():
-        raise RuntimeError("not a git repository (missing .git)")
+    root = _workspace_root()
+    if not (root / ".git").exists():
+        raise RuntimeError(f"not a git repository (missing .git in {root})")
 
     proc = subprocess.run(
         ["git"] + args,
-        cwd=str(_ROOT_DIR),
+        cwd=str(root),
         capture_output=True,
         text=True,
         timeout=timeout_s,
